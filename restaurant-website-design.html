@@ -1,0 +1,4149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurant Website Design | Conversion-Focused - Button Up Media</title>
+  <meta name="description" content="Restaurant website design that converts visitors into customers. Mobile-first, menu-optimized, reservation-ready. Built by Button Up Media in Florida." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Epilogue:wght@400;500;600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+  <!-- Pixel Canvas -->
+  <script src="pixel-canvas.js"></script>
+
+  <!-- Base styles -->
+  <link rel="stylesheet" href="shared.css" />
+
+  <!-- Schema: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://buttonupmedia.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Restaurant Website Design", "item": "https://buttonupmedia.com/restaurant-website-design/" }
+    ]
+  }
+  </script>
+
+  <!-- Schema: Service -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Restaurant Website Design",
+    "description": "Custom restaurant website design that converts visitors into customers. Mobile-first, menu-optimized, reservation-ready, and SEO-built from day one.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Button Up Media",
+      "url": "https://buttonupmedia.com"
+    },
+    "areaServed": "United States",
+    "serviceType": "Web Design"
+  }
+  </script>
+
+  <!-- Schema: HowTo (5-step website process) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How We Build Your Restaurant Website",
+    "step": [
+      { "@type": "HowToStep", "position": 1, "name": "Discovery and Audit", "text": "We understand your restaurant concept, audit your current website performance, analyze competitors, and identify integration requirements." },
+      { "@type": "HowToStep", "position": 2, "name": "Strategy and Wireframing", "text": "We map the sitemap and page structure based on customer journey, create wireframes, plan keyword strategy, and outline content needs." },
+      { "@type": "HowToStep", "position": 3, "name": "Design", "text": "Custom mobile-first responsive design with professional food photography, brand-consistent typography and visual system." },
+      { "@type": "HowToStep", "position": 4, "name": "Development and Integration", "text": "High-performance development with reservation and ordering platform integration, SEO setup, analytics, and CMS for easy updates." },
+      { "@type": "HowToStep", "position": 5, "name": "Launch and Optimize", "text": "QA testing across devices, speed optimization, Google Search Console setup, and ongoing support for menu updates and seasonal changes." }
+    ]
+  }
+  </script>
+
+  <!-- Schema: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why do restaurants need a website?",
+        "acceptedAnswer": { "@type": "Answer", "text": "77% of diners visit a restaurant's website before deciding where to eat. It's where Google sends people who search for your cuisine and location, the landing page for all advertising and social media traffic, and the platform for online reservations and ordering. Without a website, you're relying entirely on third-party platforms to represent your brand." }
+      },
+      {
+        "@type": "Question",
+        "name": "What should a restaurant website include?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Every restaurant website should have a mobile-optimized HTML menu with photos and pricing, reservation or online ordering integration, location and hours with Google Maps, professional food photography, an about page, SEO fundamentals including schema markup, fast load speed under 3 seconds on mobile, and contact information on every page." }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does a restaurant website cost?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Single-location restaurants typically invest $3,000 to $8,000 for a custom, conversion-focused website. Multi-location restaurants invest $8,000 to $20,000+ depending on complexity. Ongoing management runs $300 to $800 per month for updates, hosting, and support." }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take to build a restaurant website?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Single-location websites typically take 4-6 weeks from kickoff to launch. Multi-location websites take 6-10 weeks depending on complexity. The biggest variable is content — if professional photography and copywriting are needed, that adds time." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you integrate with OpenTable, Resy, and Toast?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. We integrate with all major restaurant technology platforms including OpenTable, Resy, and Yelp Reservations for bookings; Toast, ChowNow, Square, and DoorDash Storefront for online ordering; and Toast, Square, and Clover for POS systems." }
+      },
+      {
+        "@type": "Question",
+        "name": "Will my restaurant website be optimized for Google?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Every website we build includes SEO from day one: title tags and meta descriptions on every page, Restaurant and LocalBusiness schema markup, location-targeted keyword strategy, HTML menus that Google can index, Core Web Vitals optimization, and Google Search Console setup." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you redesign my existing restaurant website?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Most of our projects are redesigns. We audit your current site's performance, preserve existing SEO equity with proper redirects, migrate and improve content, and launch with zero downtime." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need professional photography for my website?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Strongly recommended. Restaurants with professional food photography see significantly higher engagement and conversion rates. If you're working with Button Up Media for social media content creation, your professional photo shoots are already happening and those same photos go directly into your website." }
+      }
+    ]
+  }
+  </script>
+
+  <!-- RESTAURANT WEBSITE DESIGN - ALL CSS SELF-CONTAINED -->
+  <style>
+    /* -- Global body text 17px -- */
+    .card-overlay p,
+    .card-overlay li,
+    .card-overlay .rw-callout,
+    .rw-hscroll-copy p,
+    .lib-section-sub,
+    .rw-fit-item p,
+    .rw-risk-card p,
+    .rw-crosssell-bullets li,
+    .rw-compare-row span {
+      font-size: 17px !important;
+      line-height: 1.75;
+    }
+
+    /* -- Nav: fixed -- */
+    .lib-nav {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+    }
+
+    /* ============================
+       1. HERO - 2-col split
+       ============================ */
+    .rw-hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: #050608;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+    }
+    .rw-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 50%, rgba(202,138,4,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 80% at 80% 30%, rgba(202,138,4,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .rw-hero-inner {
+      position: relative;
+      z-index: 2;
+      width: min(1200px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 140px 0 100px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .rw-hero-copy { padding-bottom: 32px; }
+    .rw-hero-copy .hero-badge {
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+    .rw-hero-copy h1 {
+      font-family: var(--font-hero);
+      font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+      line-height: 1.08;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 24px;
+    }
+    .rw-hero-copy h1 .accent-serif {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-weight: 500;
+      color: var(--gold);
+    }
+    .rw-hero-copy > p {
+      font-size: 1.02rem;
+      color: var(--text-dim);
+      max-width: 50ch;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .rw-hero-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .rw-hero-cta .flex-row { gap: 12px; }
+    .rw-hero-trust {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .rw-hero-trust span {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* Hero gauge dashboard */
+    .rw-hero-dashboard {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .rw-gauge-card {
+      padding: 24px 16px 20px;
+      background: rgba(10,10,10,0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,248,235,0.06);
+      border-radius: 16px;
+      text-align: center;
+      transition: border-color 0.3s, transform 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .rw-gauge-card:hover {
+      border-color: rgba(226,168,77,0.2);
+      transform: translateY(-2px);
+    }
+    .rw-gauge-wrap {
+      position: relative;
+      width: 90px;
+      height: 90px;
+      margin-bottom: 10px;
+    }
+    .rw-gauge-svg {
+      width: 90px;
+      height: 90px;
+      transform: rotate(-90deg);
+    }
+    .rw-gauge-bg {
+      fill: none;
+      stroke: rgba(255,255,255,0.06);
+      stroke-width: 6;
+    }
+    .rw-gauge-fill {
+      fill: none;
+      stroke-width: 6;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1.5s cubic-bezier(0.22,1,0.36,1);
+    }
+    .rw-gauge-fill.--red { stroke: #D06A50; }
+    .rw-gauge-fill.--yellow { stroke: #E2A84D; }
+    .rw-gauge-fill.--green { stroke: #45B08C; }
+    .rw-gauge-value {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .rw-gauge-value.--red { color: #D06A50; }
+    .rw-gauge-value.--yellow { color: #E2A84D; }
+    .rw-gauge-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      line-height: 1.3;
+    }
+
+    /* Word-reveal */
+    .rw-word {
+      overflow: hidden;
+      display: inline-flex;
+      vertical-align: bottom;
+    }
+    .rw-word-inner {
+      display: inline-block;
+    }
+
+    /* ============================
+       2. TRUST RIBBON
+       ============================ */
+    .rw-trust {
+      margin-top: -40px;
+      padding: 64px calc(50vw - 50%) 80px;
+      z-index: 2;
+      border-top: 1px solid rgba(255,248,235,0.04);
+      border-bottom: 1px solid rgba(255,248,235,0.04);
+      background: var(--bg-0);
+      border-radius: 40px 40px 0 0;
+      box-shadow: 0 -20px 60px rgba(0,0,0,0.5);
+    }
+    .rw-trust-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .rw-trust-stat {
+      text-align: center;
+      position: relative;
+    }
+    .rw-trust-stat::after {
+      content: "";
+      position: absolute;
+      right: -24px;
+      top: 20%;
+      bottom: 20%;
+      width: 1px;
+      background: rgba(255,248,235,0.06);
+    }
+    .rw-trust-stat:last-child::after { display: none; }
+    .rw-trust-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .rw-trust-label {
+      font-size: 0.64rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-soft);
+    }
+
+    /* ============================
+       3. YOUR WEBSITE IS YOUR FRONT DOOR
+       ============================ */
+    .rw-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin: 40px 0;
+    }
+    .rw-stat-card {
+      padding: 28px 20px;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid var(--line-soft);
+      border-radius: var(--r-lg);
+      text-align: center;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .rw-stat-card:hover {
+      border-color: rgba(226,168,77,0.15);
+      transform: translateY(-3px);
+    }
+    .rw-stat-num {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .rw-stat-label {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      line-height: 1.4;
+    }
+    .rw-callout {
+      padding: 32px;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid var(--line-soft);
+      border-left: 3px solid var(--gold);
+      border-radius: var(--r-lg);
+      margin: 40px 0;
+    }
+    .rw-callout h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+    .rw-action-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .rw-action-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border: 1px solid var(--line-soft);
+      border-radius: var(--r-sm);
+      color: var(--text-dim);
+      transition: border-color 0.3s;
+    }
+    .rw-action-item:hover { border-color: rgba(226,168,77,0.15); }
+    .rw-action-icon {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(226,168,77,0.08);
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+    }
+    .rw-action-icon svg {
+      width: 16px;
+      height: 16px;
+      stroke-width: 1.5;
+    }
+    .rw-pull-quote {
+      margin: 40px 0 0;
+      padding: 24px 28px;
+      border-radius: var(--r-lg);
+      background: rgba(226,168,77,0.03);
+      border: 1px solid rgba(226,168,77,0.1);
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--gold);
+      line-height: 1.6;
+    }
+
+    /* ============================
+       4. WHY MOST WEBSITES FAIL - TABS
+       ============================ */
+    .rw-problem-tabs { margin: 40px 0 0; }
+    .rw-problem-tabs-nav {
+      display: flex;
+      gap: 0;
+      border-bottom: 2px solid rgba(255,248,235,0.06);
+      margin-bottom: 40px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .rw-problem-tabs-nav::-webkit-scrollbar { display: none; }
+    .rw-problem-tab-btn {
+      flex: 1;
+      min-width: 130px;
+      padding: 16px 16px;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      color: var(--text-soft);
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: color 0.3s, border-color 0.3s, background 0.3s;
+      white-space: nowrap;
+    }
+    .rw-problem-tab-btn:hover {
+      color: var(--text);
+      background: rgba(226,168,77,0.03);
+    }
+    .rw-problem-tab-btn.--active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+    .rw-problem-tab-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 1.5;
+    }
+    .rw-problem-tab-panel {
+      display: none;
+      animation: rwFadeIn 0.35s ease;
+    }
+    .rw-problem-tab-panel.--active {
+      display: block;
+    }
+    @keyframes rwFadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .rw-problem-tab-content h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .rw-problem-tab-content > p {
+      color: var(--text-dim);
+      max-width: 60ch;
+      margin-bottom: 20px;
+    }
+    .rw-problem-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .rw-problem-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: var(--text-dim);
+      padding: 10px 12px;
+      border: 1px solid var(--line-soft);
+      border-radius: var(--r-sm);
+    }
+    .rw-problem-bullet-icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: rgba(208,106,80,0.08);
+      display: grid;
+      place-items: center;
+      color: var(--coral);
+      margin-top: 1px;
+    }
+    .rw-problem-bullet-icon svg {
+      width: 14px;
+      height: 14px;
+      stroke-width: 1.5;
+    }
+    .rw-problem-solution {
+      padding: 18px 20px;
+      background: rgba(69,176,140,0.06);
+      border: 1px solid rgba(69,176,140,0.12);
+      border-radius: var(--r-sm);
+      margin-top: 8px;
+    }
+    .rw-problem-solution strong {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--teal);
+      margin-bottom: 6px;
+    }
+    .rw-problem-solution p {
+      color: var(--text-dim);
+    }
+
+    /* ============================
+       5. AUDIT TOOL PLACEHOLDER
+       ============================ */
+    .rw-audit-tool {
+      max-width: 640px;
+      margin: 48px auto 0;
+      padding: 40px 36px;
+      background: rgba(10,10,10,0.5);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(226,168,77,0.12);
+      border-radius: var(--r-xl);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .rw-audit-tool::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(226,168,77,0.2), transparent 50%, rgba(226,168,77,0.1));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      animation: rwAuditPulse 3s ease-in-out infinite alternate;
+    }
+    @keyframes rwAuditPulse {
+      0% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+    .rw-audit-tool h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .rw-audit-tool > p {
+      color: var(--text-dim);
+      margin-bottom: 24px;
+    }
+    .rw-audit-form {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .rw-audit-input {
+      flex: 1;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,248,235,0.1);
+      border-radius: var(--r-sm);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .rw-audit-input::placeholder {
+      color: var(--text-soft);
+    }
+    .rw-audit-input:focus {
+      border-color: var(--gold);
+    }
+    .rw-audit-submit {
+      padding: 14px 24px;
+      background: var(--gold);
+      color: var(--bg-0);
+      font-family: var(--font-display);
+      font-size: 0.88rem;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .rw-audit-submit:hover {
+      background: #d4a94e;
+      transform: translateY(-1px);
+    }
+    .rw-audit-note {
+      font-size: 0.76rem;
+      color: var(--text-soft);
+    }
+    .rw-audit-message {
+      display: none;
+      margin-top: 16px;
+      padding: 16px;
+      background: rgba(226,168,77,0.06);
+      border: 1px solid rgba(226,168,77,0.15);
+      border-radius: var(--r-sm);
+      font-size: 0.88rem;
+      color: var(--text-dim);
+    }
+    .rw-audit-message a {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ============================
+       6. CUSTOMER DECISION JOURNEY
+       ============================ */
+    .rw-journey {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      margin: 40px 0 16px;
+      position: relative;
+      width: 100%;
+    }
+    .rw-journey-step {
+      flex: 1;
+      text-align: center;
+      position: relative;
+      padding: 24px 16px;
+    }
+    .rw-journey-num {
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 14px;
+      border-radius: 50%;
+      background: rgba(226,168,77,0.1);
+      border: 2px solid rgba(226,168,77,0.25);
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--gold);
+    }
+    .rw-journey-icon {
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .rw-journey-icon svg {
+      width: 34px;
+      height: 34px;
+      stroke-width: 1.5;
+    }
+    .rw-journey-label {
+      font-weight: 700;
+      font-size: 0.92rem;
+      margin-bottom: 6px;
+    }
+    .rw-journey-text {
+      color: var(--text-dim);
+      font-size: 0.82rem;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .rw-journey-connector {
+      position: absolute;
+      top: 50px;
+      left: calc(50% + 26px);
+      right: -50%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(226,168,77,0.25), rgba(226,168,77,0.08));
+      z-index: 0;
+    }
+    .rw-journey-step:last-child .rw-journey-connector { display: none; }
+
+    /* Priority list */
+    .rw-priority-list {
+      margin: 48px 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .rw-priority-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(255,248,235,0.04);
+      transition: background 0.3s;
+    }
+    .rw-priority-item:first-child {
+      border-top: 1px solid rgba(255,248,235,0.04);
+    }
+    .rw-priority-item:hover {
+      background: rgba(226,168,77,0.02);
+    }
+    .rw-priority-num {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(226,168,77,0.06);
+      border: 1px solid rgba(226,168,77,0.15);
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--gold);
+    }
+    .rw-priority-content strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 2px;
+    }
+    .rw-priority-content span {
+      color: var(--text-dim);
+      font-size: 0.88rem;
+    }
+
+    /* ============================
+       7. SERVICES - HORIZONTAL SCROLL
+       ============================ */
+    .rw-hscroll-section {
+      position: relative;
+      padding: 0;
+      z-index: 4;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      background: var(--bg-0);
+    }
+    .rw-hscroll-intro {
+      padding: 100px 0 40px;
+      position: relative;
+      z-index: 2;
+      background: var(--bg-0);
+      width: min(calc(100% - 48px), 1200px);
+      margin: 0 auto;
+    }
+    .rw-hscroll-entry { height: 10vh; background: var(--bg-0); }
+    .rw-hscroll-exit { height: 10vh; background: var(--bg-0); }
+    .rw-hscroll-pin {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      z-index: 4;
+      background: var(--bg-0);
+    }
+    .rw-hscroll-track {
+      display: flex;
+      height: 100%;
+      will-change: transform;
+    }
+    .rw-hscroll-panel {
+      flex: 0 0 100vw;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .rw-hscroll-panel:nth-child(odd) { background: var(--bg-0); }
+    .rw-hscroll-panel:nth-child(even) { background: #090b0e; }
+    .rw-hscroll-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 0%, transparent 28%, rgba(255,248,235,0.035) 40%, rgba(255,248,235,0.07) 50%, rgba(255,248,235,0.035) 60%, transparent 72%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .rw-hscroll-panel:nth-child(even)::before {
+      background: linear-gradient(135deg, transparent 0%, transparent 38%, rgba(255,248,235,0.028) 48%, rgba(255,248,235,0.055) 55%, rgba(255,248,235,0.028) 62%, transparent 74%, transparent 100%);
+    }
+    .rw-hscroll-particle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+      animation: rwParticleDrift 10s ease-in-out infinite alternate;
+    }
+    @keyframes rwParticleDrift {
+      0%   { transform: translateY(0) translateX(0); opacity: 0; }
+      15%  { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { transform: translateY(-60px) translateX(30px); opacity: 0; }
+    }
+    .rw-hscroll-num {
+      position: absolute;
+      top: 40px;
+      left: 40px;
+      font-family: var(--font-display);
+      font-size: 7rem;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      line-height: 1;
+      background: linear-gradient(180deg, rgba(202,138,4,0.12) 0%, rgba(202,138,4,0.04) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      z-index: 0;
+      will-change: transform;
+    }
+    .rw-hscroll-inner {
+      width: min(1100px, calc(100% - 80px));
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .rw-hscroll-copy { will-change: transform, opacity; }
+    .rw-hscroll-copy .label {
+      font-size: 0.64rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .rw-hscroll-copy .label::before {
+      content: "";
+      width: 20px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .rw-hscroll-copy h2 {
+      font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+    .rw-hscroll-copy p {
+      color: var(--text-dim);
+      max-width: 40ch;
+      margin-bottom: 20px;
+    }
+    .rw-hscroll-deliverables {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .rw-deliverable {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: background 0.3s;
+      will-change: transform, opacity;
+    }
+    .rw-deliverable:last-child { border-bottom: none; }
+    .rw-deliverable:hover { background: rgba(226,168,77,0.04); }
+    .rw-deliverable-icon {
+      flex-shrink: 0;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: rgba(226,168,77,0.06);
+      border: 1px solid rgba(226,168,77,0.12);
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .rw-deliverable:hover .rw-deliverable-icon {
+      background: rgba(226,168,77,0.1);
+      border-color: rgba(226,168,77,0.25);
+    }
+    .rw-deliverable-icon svg {
+      width: 16px;
+      height: 16px;
+      stroke-width: 1.5;
+    }
+    .rw-deliverable span {
+      font-size: 0.88rem;
+      color: var(--text-soft);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .rw-hscroll-divider {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: -1px;
+      width: 3px;
+      z-index: 100;
+    }
+    .rw-hscroll-divider::before {
+      content: "";
+      position: absolute;
+      top: 15%;
+      bottom: 15%;
+      left: 0;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(202,138,4,0.2) 30%, rgba(202,138,4,0.3) 50%, rgba(202,138,4,0.2) 70%, transparent);
+    }
+    .rw-hscroll-progress {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 2px;
+      background: rgba(255,248,235,0.08);
+      border-radius: 2px;
+      z-index: 10;
+      overflow: hidden;
+    }
+    .rw-hscroll-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold), var(--coral));
+      border-radius: 2px;
+      will-change: width;
+    }
+    .rw-hscroll-dots {
+      position: absolute;
+      bottom: 44px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+    .rw-hscroll-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,248,235,0.15);
+      transition: background 0.3s, transform 0.3s;
+    }
+    .rw-hscroll-dot.--active {
+      background: var(--gold);
+      transform: scale(1.4);
+      box-shadow: 0 0 8px rgba(226,168,77,0.4);
+    }
+    .rw-hscroll-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(202,138,4,0.14) 0%, rgba(202,138,4,0.04) 40%, transparent 70%);
+      filter: blur(40px);
+      z-index: 1;
+      pointer-events: none;
+      will-change: transform;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* ============================
+       8. COMPARISON TABLE
+       ============================ */
+    .rw-compare-table {
+      margin-top: 40px;
+      border: 1px solid var(--line-soft);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+    .rw-compare-header {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .rw-compare-header span {
+      padding: 16px 20px;
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    .rw-compare-header span:first-child { color: var(--text-soft); }
+    .rw-compare-header span:nth-child(2) {
+      color: var(--text-soft);
+      border-left: 1px solid var(--line-soft);
+    }
+    .rw-compare-header span:nth-child(3) {
+      color: var(--gold);
+      border-left: 1px solid var(--line-soft);
+      background: rgba(226,168,77,0.04);
+    }
+    .rw-compare-row {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      border-bottom: 1px solid var(--line-soft);
+      transition: background 0.2s;
+    }
+    .rw-compare-row:last-child { border-bottom: none; }
+    .rw-compare-row:hover { background: rgba(226,168,77,0.02); }
+    .rw-compare-row span {
+      padding: 14px 20px;
+      color: var(--text-dim);
+      line-height: 1.5;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .rw-compare-row span:first-child {
+      font-weight: 600;
+      color: var(--text);
+    }
+    .rw-compare-row span:nth-child(2) {
+      border-left: 1px solid var(--line-soft);
+    }
+    .rw-compare-row span:nth-child(3) {
+      border-left: 3px solid rgba(226,168,77,0.2);
+      background: rgba(226,168,77,0.02);
+    }
+    .rw-compare-icon {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+    }
+    .rw-compare-icon.--check { color: var(--teal); }
+    .rw-compare-icon.--x { color: var(--text-soft); opacity: 0.5; }
+    .rw-testimonial {
+      margin: 48px auto 0;
+      max-width: 720px;
+      text-align: center;
+      position: relative;
+      padding: 36px 44px;
+      border: 1px solid rgba(226,168,77,0.08);
+      border-radius: var(--r-lg);
+      background: rgba(226,168,77,0.02);
+    }
+    .rw-testimonial::before {
+      content: "\201C";
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-accent);
+      font-size: 5rem;
+      color: rgba(226,168,77,0.15);
+      line-height: 1;
+    }
+    .rw-testimonial blockquote {
+      font-family: var(--font-body);
+      font-style: normal;
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+    .rw-testimonial cite {
+      font-style: normal;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    /* ============================
+       9. WHAT EVERY WEBSITE INCLUDES (TIERS)
+       ============================ */
+    .rw-tiers {
+      margin-top: 56px;
+      display: grid;
+      grid-template-columns: 1fr 1.3fr 1fr;
+      gap: 0;
+      align-items: stretch;
+      position: relative;
+    }
+    /* Ambient glow behind featured card */
+    .rw-tiers::before {
+      content: "";
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(226,168,77,0.07), transparent 65%);
+      pointer-events: none;
+      filter: blur(60px);
+      z-index: 0;
+    }
+    .rw-tier-card {
+      padding: 36px 28px 32px;
+      border: 1px solid rgba(255,248,235,0.06);
+      background: linear-gradient(170deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.005) 100%);
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s;
+    }
+    .rw-tier-card:first-child {
+      border-radius: var(--r-xl) 0 0 var(--r-xl);
+      border-right: none;
+    }
+    .rw-tier-card:last-child {
+      border-radius: 0 var(--r-xl) var(--r-xl) 0;
+      border-left: none;
+    }
+    .rw-tier-card:hover {
+      border-color: rgba(226,168,77,0.15);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    /* Featured center card */
+    .rw-tier-card.--featured {
+      border: 1px solid rgba(226,168,77,0.2);
+      border-radius: var(--r-xl);
+      background: linear-gradient(170deg, rgba(226,168,77,0.06) 0%, rgba(226,168,77,0.01) 40%, rgba(255,255,255,0.01) 100%);
+      z-index: 2;
+      transform: scale(1.03);
+      box-shadow:
+        0 0 0 1px rgba(226,168,77,0.08),
+        0 24px 80px rgba(0,0,0,0.4),
+        0 0 120px rgba(226,168,77,0.06);
+      padding: 44px 32px 36px;
+    }
+    .rw-tier-card.--featured::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      border-radius: var(--r-xl) var(--r-xl) 0 0;
+    }
+    .rw-tier-card.--featured:hover {
+      transform: scale(1.03) translateY(-4px);
+      box-shadow:
+        0 0 0 1px rgba(226,168,77,0.12),
+        0 30px 100px rgba(0,0,0,0.5),
+        0 0 140px rgba(226,168,77,0.1);
+    }
+    /* Gold accent line for side cards */
+    .rw-tier-card.--gold::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 24px;
+      right: 24px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(226,168,77,0.35), transparent);
+    }
+    .rw-tier-card.--teal::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 24px;
+      right: 24px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(69,176,140,0.4), transparent);
+    }
+    .rw-tier-header {
+      margin-bottom: 20px;
+    }
+    .rw-tier-num {
+      font-family: var(--font-display);
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+    .rw-tier-card.--featured .rw-tier-num { color: var(--gold); }
+    .rw-tier-card.--teal .rw-tier-num { color: var(--teal); }
+    .rw-tier-header h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+    .rw-tier-card.--featured .rw-tier-header h3 {
+      font-size: 1.2rem;
+    }
+    .rw-tier-header p {
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      line-height: 1.4;
+    }
+    .rw-tier-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border-top: 1px solid rgba(255,248,235,0.05);
+      padding-top: 16px;
+      flex: 1;
+    }
+    .rw-tier-card.--featured .rw-tier-items {
+      border-top-color: rgba(226,168,77,0.1);
+    }
+    .rw-tier-items li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      color: var(--text-dim);
+      font-size: 0.86rem;
+      line-height: 1.5;
+      border-bottom: 1px solid rgba(255,248,235,0.03);
+      transition: color 0.3s;
+    }
+    .rw-tier-items li:last-child { border-bottom: none; }
+    .rw-tier-items li:hover { color: var(--text); }
+    .rw-tier-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      margin-top: 1px;
+    }
+    .rw-tier-card.--gold .rw-tier-icon {
+      background: rgba(226,168,77,0.08);
+      border: 1px solid rgba(226,168,77,0.15);
+      color: var(--gold);
+    }
+    .rw-tier-card.--featured .rw-tier-icon {
+      background: rgba(226,168,77,0.1);
+      border: 1px solid rgba(226,168,77,0.2);
+      color: var(--gold);
+    }
+    .rw-tier-card.--teal .rw-tier-icon {
+      background: rgba(69,176,140,0.06);
+      border: 1px solid rgba(69,176,140,0.15);
+      color: var(--teal);
+    }
+    .rw-tier-icon svg {
+      width: 15px;
+      height: 15px;
+      stroke-width: 1.5;
+    }
+
+    /* ============================
+       10. PROCESS TIMELINE
+       ============================ */
+    .rw-timeline {
+      display: grid;
+      grid-template-columns: 0.45fr 0.55fr;
+      gap: 48px;
+      margin-top: 48px;
+      align-items: start;
+    }
+    .rw-timeline-track {
+      position: relative;
+      padding-left: 40px;
+    }
+    .rw-timeline-line {
+      position: absolute;
+      left: 14px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(255,248,235,0.06);
+      border-radius: 2px;
+    }
+    .rw-timeline-line-fill {
+      width: 100%;
+      height: 0%;
+      background: linear-gradient(180deg, var(--gold), var(--coral));
+      border-radius: 2px;
+    }
+    .rw-timeline-step {
+      position: relative;
+      padding-bottom: 48px;
+    }
+    .rw-timeline-step:last-child { padding-bottom: 0; }
+    .rw-timeline-marker {
+      position: absolute;
+      left: -40px;
+      top: 0;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(226,168,77,0.1);
+      border: 2px solid rgba(226,168,77,0.25);
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--gold);
+      z-index: 2;
+      transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .rw-timeline-step.--active .rw-timeline-marker {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #050608;
+      box-shadow: 0 0 16px rgba(226,168,77,0.4);
+    }
+    .rw-timeline-step h4 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .rw-timeline-step ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .rw-timeline-step ul li {
+      font-size: 0.84rem;
+      color: var(--text-dim);
+      padding: 4px 0 4px 18px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .rw-timeline-step ul li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+    .rw-timeline-sticky { position: relative; }
+    .rw-timeline-progress-card {
+      padding: 32px 28px;
+      border: 1px solid var(--line-soft);
+      border-radius: var(--r-xl);
+      background: rgba(255,255,255,0.015);
+      text-align: center;
+    }
+    .rw-progress-ring {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 20px;
+      position: relative;
+    }
+    .rw-progress-ring svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+    .rw-progress-ring-bg {
+      fill: none;
+      stroke: rgba(255,248,235,0.06);
+      stroke-width: 6;
+    }
+    .rw-progress-ring-fill {
+      fill: none;
+      stroke: var(--gold);
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-dasharray: 377;
+      stroke-dashoffset: 377;
+    }
+    .rw-progress-ring-text {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--gold);
+    }
+    .rw-timeline-progress-card h4 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .rw-timeline-progress-card p {
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
+
+    /* ============================
+       11. TESTIMONIAL MARQUEE
+       ============================ */
+    /* Uses shared.css proof-marquee + proof-card classes */
+
+    /* ============================
+       12. PRICING
+       ============================ */
+    .rw-pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 56px;
+      align-items: stretch;
+      position: relative;
+    }
+    /* Ambient glow behind featured card */
+    .rw-pricing-grid::before {
+      content: "";
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(226,168,77,0.08), transparent 65%);
+      pointer-events: none;
+      filter: blur(60px);
+      z-index: 0;
+    }
+    .rw-pricing-card {
+      padding: 40px 32px 36px;
+      border: 1px solid rgba(255,248,235,0.06);
+      background: linear-gradient(170deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.005) 100%);
+      position: relative;
+      transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .rw-pricing-card:first-child {
+      border-radius: var(--r-xl) 0 0 var(--r-xl);
+      border-right: none;
+    }
+    .rw-pricing-card:last-child {
+      border-radius: 0 var(--r-xl) var(--r-xl) 0;
+      border-left: none;
+    }
+    .rw-pricing-card:hover {
+      border-color: rgba(226,168,77,0.15);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    /* Featured / center card — elevated */
+    .rw-pricing-card.--featured {
+      border: 1px solid rgba(226,168,77,0.2);
+      border-radius: var(--r-xl);
+      background: linear-gradient(170deg, rgba(226,168,77,0.06) 0%, rgba(226,168,77,0.01) 40%, rgba(255,255,255,0.01) 100%);
+      z-index: 2;
+      transform: scale(1.04);
+      box-shadow:
+        0 0 0 1px rgba(226,168,77,0.08),
+        0 24px 80px rgba(0,0,0,0.4),
+        0 0 120px rgba(226,168,77,0.06);
+      padding: 48px 36px 40px;
+    }
+    .rw-pricing-card.--featured::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      border-radius: var(--r-xl) var(--r-xl) 0 0;
+    }
+    .rw-pricing-card.--featured:hover {
+      transform: scale(1.04) translateY(-4px);
+      box-shadow:
+        0 0 0 1px rgba(226,168,77,0.12),
+        0 30px 100px rgba(0,0,0,0.5),
+        0 0 140px rgba(226,168,77,0.1);
+    }
+    /* Gold accent line for side cards */
+    .rw-pricing-card.--gold::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 24px;
+      right: 24px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(226,168,77,0.35), transparent);
+    }
+    .rw-pricing-card.--teal::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 24px;
+      right: 24px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(69,176,140,0.4), transparent);
+    }
+    /* Badge */
+    .rw-pricing-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #D4A744, #E2A84D, #F2D688);
+      color: #0a0a0c;
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 6px 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 16px rgba(226,168,77,0.3), 0 0 40px rgba(226,168,77,0.1);
+      white-space: nowrap;
+    }
+    /* Tier label */
+    .rw-pricing-tier {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+    .rw-pricing-card.--featured .rw-pricing-tier { color: var(--gold); }
+    .rw-pricing-card.--teal .rw-pricing-tier { color: var(--teal); }
+    /* Header */
+    .rw-pricing-header h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+    .rw-pricing-card.--featured .rw-pricing-header h3 {
+      font-size: 1.3rem;
+    }
+    /* Price */
+    .rw-pricing-price {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 6px;
+      line-height: 1.1;
+      background: linear-gradient(115deg, #C6943A 0%, #F2D688 35%, #ffef9d 50%, #F2D688 65%, #C6943A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .rw-pricing-card.--featured .rw-pricing-price {
+      font-size: 2.3rem;
+    }
+    .rw-pricing-card.--teal .rw-pricing-price {
+      background: linear-gradient(115deg, #3A9E7E 0%, #45B08C 35%, #6DD5B0 50%, #45B08C 65%, #3A9E7E 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .rw-pricing-timeline {
+      font-size: 0.76rem;
+      color: var(--text-soft);
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255,248,235,0.05);
+    }
+    .rw-pricing-card.--featured .rw-pricing-timeline {
+      border-bottom-color: rgba(226,168,77,0.1);
+    }
+    /* Includes list */
+    .rw-pricing-includes {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex: 1;
+    }
+    .rw-pricing-includes li {
+      font-size: 0.86rem;
+      color: var(--text-dim);
+      padding: 8px 0 8px 28px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .rw-pricing-includes li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 13px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: rgba(226,168,77,0.1);
+      border: 1px solid rgba(226,168,77,0.2);
+    }
+    .rw-pricing-includes li::after {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 17px;
+      width: 8px;
+      height: 5px;
+      border-left: 1.5px solid var(--gold);
+      border-bottom: 1.5px solid var(--gold);
+      transform: rotate(-45deg);
+    }
+    .rw-pricing-card.--teal .rw-pricing-includes li::before {
+      background: rgba(69,176,140,0.08);
+      border-color: rgba(69,176,140,0.2);
+    }
+    .rw-pricing-card.--teal .rw-pricing-includes li::after {
+      border-color: var(--teal);
+    }
+    /* CTA inside each card */
+    .rw-pricing-card-cta {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,248,235,0.05);
+    }
+    .rw-pricing-card.--featured .rw-pricing-card-cta {
+      border-top-color: rgba(226,168,77,0.1);
+    }
+    .rw-pricing-card-cta .btn {
+      width: 100%;
+      justify-content: center;
+    }
+    .rw-pricing-card.--gold .rw-pricing-card-cta .btn,
+    .rw-pricing-card.--teal .rw-pricing-card-cta .btn {
+      background: transparent;
+      border: 1px solid rgba(226,168,77,0.25);
+      color: var(--gold);
+    }
+    .rw-pricing-card.--teal .rw-pricing-card-cta .btn {
+      border-color: rgba(69,176,140,0.25);
+      color: var(--teal);
+    }
+    .rw-pricing-card.--gold .rw-pricing-card-cta .btn:hover,
+    .rw-pricing-card.--teal .rw-pricing-card-cta .btn:hover {
+      background: rgba(226,168,77,0.08);
+    }
+    .rw-pricing-card.--teal .rw-pricing-card-cta .btn:hover {
+      background: rgba(69,176,140,0.08);
+    }
+    /* Factors */
+    .rw-pricing-factors {
+      margin-top: 64px;
+      position: relative;
+    }
+    .rw-pricing-factors h3 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-soft);
+    }
+    .rw-pricing-factors-grid {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .rw-pricing-factor {
+      text-align: center;
+      padding: 16px 20px;
+      border: 1px solid rgba(255,248,235,0.04);
+      border-radius: var(--r-lg);
+      background: rgba(255,255,255,0.01);
+      transition: border-color 0.3s, background 0.3s;
+      min-width: 140px;
+    }
+    .rw-pricing-factor:hover {
+      border-color: rgba(226,168,77,0.15);
+      background: rgba(226,168,77,0.02);
+    }
+    .rw-pricing-factor i {
+      width: 20px;
+      height: 20px;
+      color: rgba(226,168,77,0.5);
+      margin-bottom: 8px;
+      stroke-width: 1.5;
+    }
+    .rw-pricing-factor span {
+      display: block;
+      font-size: 0.76rem;
+      color: var(--text-soft);
+      line-height: 1.4;
+    }
+    .rw-pricing-cta {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .rw-pricing-cta p {
+      font-size: 0.88rem;
+      color: var(--text-soft);
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+
+    /* ============================
+       13. CROSS-SELL
+       ============================ */
+    .rw-crosssell {
+      position: relative;
+      padding: 56px 48px;
+      border-radius: var(--r-xl);
+      border: 1px solid rgba(226,168,77,0.15);
+      background: rgba(226,168,77,0.03);
+      overflow: hidden;
+      margin: 0;
+    }
+    .rw-crosssell::before {
+      content: "";
+      position: absolute;
+      top: -30%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(226,168,77,0.08), transparent 70%);
+      pointer-events: none;
+      filter: blur(40px);
+    }
+    .rw-crosssell h2 {
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      font-weight: 800;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+    }
+    .rw-crosssell > p {
+      font-size: 0.92rem;
+      color: var(--text-dim);
+      line-height: 1.65;
+      max-width: 56ch;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+    .rw-crosssell-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+    .rw-crosssell-bullets li {
+      padding: 4px 0 4px 18px;
+      font-size: 0.86rem;
+      color: var(--text-dim);
+      position: relative;
+      line-height: 1.5;
+    }
+    .rw-crosssell-bullets li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+    .rw-crosssell-ctas {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ============================
+       14. BY THE NUMBERS (STATS)
+       ============================ */
+    .rw-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 48px;
+    }
+    .rw-stat-counter {
+      padding: 28px 20px;
+      border: 1px solid var(--line-soft);
+      border-radius: var(--r-lg);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .rw-stat-counter::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,248,235,0.08), transparent);
+    }
+    .rw-stat-counter:hover {
+      border-color: rgba(226,168,77,0.25);
+      transform: translateY(-2px);
+    }
+    .rw-stat-counter-num {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .rw-stat-counter p {
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      line-height: 1.4;
+    }
+    .rw-scorecard-cta {
+      margin-top: 48px;
+      padding: 36px;
+      border: 1px solid var(--line-soft);
+      border-radius: var(--r-lg);
+      background: rgba(255,255,255,0.015);
+      text-align: center;
+    }
+    .rw-scorecard-cta h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .rw-scorecard-cta p {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      margin-bottom: 20px;
+    }
+    .rw-scorecard-form {
+      display: flex;
+      gap: 10px;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+    .rw-scorecard-form .input { flex: 1; }
+
+    /* ============================
+       15. WHO THIS IS FOR
+       ============================ */
+    .rw-fit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 48px;
+      align-items: start;
+    }
+    .rw-fit-card {
+      padding: 36px 32px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,248,235,0.06);
+    }
+    .rw-fit-card.--yes {
+      background: linear-gradient(180deg, rgba(226,168,77,0.04) 0%, rgba(23,23,23,0.5) 100%);
+      border-color: rgba(226,168,77,0.12);
+    }
+    .rw-fit-card.--no {
+      background: linear-gradient(180deg, rgba(23,23,23,0.4) 0%, rgba(15,15,15,0.6) 100%);
+    }
+    .rw-fit-card h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,248,235,0.06);
+    }
+    .rw-fit-card.--yes h3 { color: var(--gold); border-bottom-color: rgba(226,168,77,0.15); }
+    .rw-fit-card.--no h3 { color: rgba(255,255,255,0.8); }
+    .rw-fit-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .rw-fit-item:last-child { margin-bottom: 0; }
+    .rw-fit-icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      font-size: 0.88rem;
+      margin-top: 1px;
+    }
+    .rw-fit-card.--yes .rw-fit-icon { color: var(--gold); }
+    .rw-fit-card.--no .rw-fit-icon { color: rgba(255,255,255,0.5); }
+    .rw-fit-item p {
+      color: rgba(255,255,255,0.88);
+      line-height: 1.6;
+    }
+    .rw-fit-card.--no .rw-fit-item p { color: rgba(255,255,255,0.75); }
+
+    /* ============================
+       16. RISK REVERSAL
+       ============================ */
+    .rw-risk-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 40px 0;
+    }
+    .rw-risk-card {
+      padding: 24px 20px;
+      border: 1px solid var(--line-soft);
+      border-radius: var(--r-lg);
+      text-align: center;
+      transition: border-color 0.3s, transform 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .rw-risk-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at top, rgba(226,168,77,0.04), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .rw-risk-card:hover {
+      border-color: rgba(226,168,77,0.25);
+      transform: translateY(-3px);
+    }
+    .rw-risk-card:hover::before { opacity: 1; }
+    .rw-risk-card-icon {
+      width: 44px;
+      height: 44px;
+      margin: 0 auto 12px;
+      border-radius: 12px;
+      background: rgba(226,168,77,0.08);
+      border: 1px solid rgba(226,168,77,0.15);
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      position: relative;
+      z-index: 1;
+    }
+    .rw-risk-card-icon svg {
+      width: 22px;
+      height: 22px;
+      stroke-width: 1.5;
+    }
+    .rw-risk-card h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      position: relative;
+      z-index: 1;
+    }
+    .rw-risk-card p {
+      font-size: 0.76rem;
+      color: var(--text-soft);
+      line-height: 1.5;
+      position: relative;
+      z-index: 1;
+    }
+    .rw-keep-card {
+      padding: 32px 28px;
+      border: 1px solid rgba(226,168,77,0.15);
+      border-radius: var(--r-lg);
+      background: rgba(226,168,77,0.03);
+      margin-top: 32px;
+    }
+    .rw-keep-card h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .rw-keep-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .rw-keep-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.86rem;
+      color: var(--text-dim);
+      padding: 6px 0;
+    }
+    .rw-keep-list li svg {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      color: var(--gold);
+      stroke-width: 2;
+    }
+    .rw-keep-bold {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .rw-limited-banner {
+      margin-top: 32px;
+      padding: 20px 28px;
+      border-radius: var(--r-lg);
+      border: 1px solid rgba(226,168,77,0.15);
+      background: rgba(226,168,77,0.04);
+      text-align: center;
+    }
+    .rw-limited-banner h4 {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .rw-limited-banner p {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+
+    /* ============================
+       17. FAQ
+       ============================ */
+    .rw-faq-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .rw-faq-hero-heading {
+      font-family: var(--font-accent);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      padding: 4px 0;
+      background: linear-gradient(135deg, var(--gold) 0%, #fff8eb 40%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .rw-faq-subtitle {
+      font-size: 1rem;
+      color: var(--text-dim);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .rw-faq-grid {
+      display: block;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .rw-faq-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .rw-faq-item {
+      border: none;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-radius: 0;
+      overflow: hidden;
+      transition: background 0.4s ease;
+      background: transparent;
+      position: relative;
+    }
+    .rw-faq-item:first-child {
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .rw-faq-item:hover {
+      background: rgba(226,168,77,0.02);
+    }
+    .rw-faq-item[open] {
+      background: rgba(226,168,77,0.03);
+      border-color: rgba(226,168,77,0.15);
+    }
+    .rw-faq-item::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--gold);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    .rw-faq-item[open]::before {
+      transform: scaleY(1);
+    }
+    .rw-faq-item summary {
+      list-style: none;
+      padding: 28px 32px 28px 24px;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      transition: color 0.3s, padding-left 0.3s;
+      letter-spacing: -0.01em;
+    }
+    .rw-faq-item[open] summary {
+      padding-left: 32px;
+      color: #fff;
+    }
+    .rw-faq-item summary::-webkit-details-marker { display: none; }
+    .rw-faq-item summary::after {
+      content: "";
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(226,168,77,0.3);
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='M7 1v12M1 7h12' stroke='%23E2A84D' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center;
+      flex-shrink: 0;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), background-color 0.3s, border-color 0.3s;
+    }
+    .rw-faq-item[open] summary::after {
+      transform: rotate(45deg);
+      background-color: rgba(226,168,77,0.1);
+      border-color: var(--gold);
+    }
+    .rw-faq-item .rw-faq-answer {
+      padding: 0 32px 28px 24px;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+    .rw-faq-item[open] .rw-faq-answer {
+      padding-left: 32px;
+    }
+    .rw-faq-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      color: rgba(226,168,77,0.5);
+      font-family: var(--font-accent);
+      font-size: 0.82rem;
+      font-style: italic;
+      font-weight: 400;
+      margin-right: 16px;
+      flex-shrink: 0;
+    }
+    .rw-faq-item[open] .rw-faq-count {
+      color: var(--gold);
+    }
+
+    /* ============================
+       18. FOOTER CTA
+       ============================ */
+    .rw-cta-scene {
+      position: relative;
+      padding: 100px 48px;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      text-align: center;
+      background: var(--bg-0);
+      border: 1px solid rgba(202,138,4,0.2);
+      margin-bottom: 80px;
+    }
+    .rw-cta-orb {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(80px);
+      will-change: transform;
+    }
+    .rw-cta-orb:nth-child(1) {
+      width: 500px; height: 500px;
+      top: -20%; left: -10%;
+      background: radial-gradient(circle, rgba(202,138,4,0.25), transparent 70%);
+      animation: rwCtaOrb1 8s ease-in-out infinite alternate;
+    }
+    .rw-cta-orb:nth-child(2) {
+      width: 400px; height: 400px;
+      bottom: -15%; right: -5%;
+      background: radial-gradient(circle, rgba(242,214,136,0.2), transparent 70%);
+      animation: rwCtaOrb2 10s ease-in-out infinite alternate;
+    }
+    .rw-cta-orb:nth-child(3) {
+      width: 350px; height: 350px;
+      top: 30%; left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(208,106,80,0.12), transparent 70%);
+      animation: rwCtaOrb3 12s ease-in-out infinite alternate;
+    }
+    @keyframes rwCtaOrb1 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(60px, 40px) scale(1.2); }
+    }
+    @keyframes rwCtaOrb2 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-50px, -30px) scale(1.15); }
+    }
+    @keyframes rwCtaOrb3 {
+      0% { transform: translateX(-50%) scale(0.9); opacity: 0.5; }
+      100% { transform: translateX(-30%) scale(1.3); opacity: 1; }
+    }
+    .rw-cta-scene pixel-canvas {
+      position: absolute; inset: 0; z-index: 0; border-radius: var(--r-xl);
+    }
+    .rw-cta-scene::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.4) 100%);
+      pointer-events: none; z-index: 1;
+    }
+    .rw-cta-scene h2 {
+      position: relative; z-index: 2;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+    .rw-cta-scene > p {
+      font-size: 1rem;
+      color: var(--text-dim);
+      max-width: 48ch;
+      margin: 0 auto 24px;
+      line-height: 1.6;
+      position: relative;
+      z-index: 2;
+    }
+    .rw-cta-audit-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto 32px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px 24px;
+      position: relative;
+      z-index: 2;
+    }
+    .rw-cta-audit-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+    .rw-cta-audit-list li svg {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      color: var(--gold);
+      stroke-width: 2;
+    }
+    .rw-cta-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 20px;
+    }
+    .rw-cta-scene .btn-primary {
+      box-shadow: 0 0 30px rgba(226,168,77,0.2), 0 0 60px rgba(226,168,77,0.08);
+      animation: rwBtnGlow 3s ease-in-out infinite alternate;
+    }
+    @keyframes rwBtnGlow {
+      0% { box-shadow: 0 0 20px rgba(226,168,77,0.15), 0 0 40px rgba(226,168,77,0.06); }
+      100% { box-shadow: 0 0 35px rgba(226,168,77,0.25), 0 0 70px rgba(226,168,77,0.1); }
+    }
+    .rw-cta-meta {
+      position: relative;
+      z-index: 2;
+    }
+    .rw-cta-meta p {
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      margin-bottom: 4px;
+    }
+    .rw-cta-meta a {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ============================
+       RESPONSIVE
+       ============================ */
+    @media (max-width: 900px) {
+      .rw-hero-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 120px 0 60px;
+      }
+      .rw-hero-dashboard {
+        max-width: 360px;
+      }
+      .rw-stat-grid { grid-template-columns: repeat(3, 1fr); }
+      .rw-action-list { grid-template-columns: 1fr; }
+      .rw-problem-bullets { grid-template-columns: 1fr; }
+      .rw-journey { flex-wrap: wrap; }
+      .rw-journey-step { flex: 0 0 50%; }
+      .rw-journey-connector { display: none; }
+      .rw-compare-table { font-size: 0.82rem; overflow-x: auto; }
+      .rw-tiers { grid-template-columns: 1fr; gap: 20px; }
+      .rw-tier-card:first-child { border-radius: var(--r-xl); border-right: 1px solid rgba(255,248,235,0.06); }
+      .rw-tier-card:last-child { border-radius: var(--r-xl); border-left: 1px solid rgba(255,248,235,0.06); }
+      .rw-tier-card.--featured { transform: none; }
+      .rw-tier-card.--featured:hover { transform: translateY(-4px); }
+      .rw-timeline { grid-template-columns: 1fr; }
+      .rw-pricing-grid { grid-template-columns: 1fr; gap: 20px; }
+      .rw-pricing-card:first-child { border-radius: var(--r-xl); border-right: 1px solid rgba(255,248,235,0.06); }
+      .rw-pricing-card:last-child { border-radius: var(--r-xl); border-left: 1px solid rgba(255,248,235,0.06); }
+      .rw-pricing-card.--featured { transform: none; }
+      .rw-pricing-card.--featured:hover { transform: translateY(-4px); }
+      .rw-pricing-factors-grid { gap: 8px; }
+      .rw-crosssell { padding: 40px 28px; }
+      .rw-crosssell-ctas { flex-direction: column; }
+      .rw-stats-grid { grid-template-columns: 1fr 1fr; }
+      .rw-fit-grid { grid-template-columns: 1fr; }
+      .rw-risk-grid { grid-template-columns: 1fr; }
+      .rw-keep-list { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .rw-hero-copy h1 { font-size: clamp(1.8rem, 8vw, 2.4rem); }
+      .rw-hero-dashboard { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .rw-hero-cta .flex-row { flex-direction: column; }
+      .rw-trust-inner { gap: 32px; }
+      .rw-trust-stat::after { display: none; }
+      .rw-stat-grid { grid-template-columns: 1fr 1fr; }
+      .rw-audit-form { flex-direction: column; }
+      .rw-stats-grid { grid-template-columns: 1fr; }
+      .rw-scorecard-form { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="lib-nav">
+    <a class="lib-nav-brand" href="index.html">Button Up Media <span>Website Design</span></a>
+    <div class="lib-nav-links">
+      <a href="#why-it-matters">Why It Matters</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#website-audit" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Free Website Audit</a>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- 1. HERO -->
+    <section class="rw-hero" id="hero">
+      <div class="rw-hero-inner">
+        <div class="rw-hero-copy">
+          <div class="hero-badge">Restaurant Website Design</div>
+          <h1>Restaurant Website Design That <span class="accent-serif">Turns Visitors Into Customers.</span></h1>
+          <p>That decision takes under 10 seconds. In those 10 seconds, they need to see the food, find the menu, know how to book &mdash; and trust that your restaurant is worth their time. If your website can&rsquo;t do that, you&rsquo;re losing customers.</p>
+          <div class="rw-hero-cta">
+            <div class="flex-row" style="gap: 12px;">
+              <a href="#website-audit" class="btn btn-primary">Run Your Free Website Audit</a>
+              <a href="#services" class="btn btn-ghost">See How We Build</a>
+            </div>
+            <div class="rw-hero-trust">
+              <span>No contracts</span>
+              <span>&bull;</span>
+              <span>No obligation</span>
+              <span>&bull;</span>
+              <span>Instant audit results</span>
+            </div>
+          </div>
+        </div>
+        <div class="rw-hero-dashboard">
+          <!-- Speed Score -->
+          <div class="rw-gauge-card">
+            <div class="rw-gauge-wrap">
+              <svg class="rw-gauge-svg" viewBox="0 0 100 100">
+                <circle class="rw-gauge-bg" cx="50" cy="50" r="42" />
+                <circle class="rw-gauge-fill --red" cx="50" cy="50" r="42"
+                  stroke-dasharray="263.9"
+                  stroke-dashoffset="263.9"
+                  data-gauge-target="171.5" />
+              </svg>
+              <div class="rw-gauge-value --red" data-gauge-count="35">0</div>
+            </div>
+            <div class="rw-gauge-label">Speed Score</div>
+          </div>
+          <!-- Mobile Score -->
+          <div class="rw-gauge-card">
+            <div class="rw-gauge-wrap">
+              <svg class="rw-gauge-svg" viewBox="0 0 100 100">
+                <circle class="rw-gauge-bg" cx="50" cy="50" r="42" />
+                <circle class="rw-gauge-fill --yellow" cx="50" cy="50" r="42"
+                  stroke-dasharray="263.9"
+                  stroke-dashoffset="263.9"
+                  data-gauge-target="126.7" />
+              </svg>
+              <div class="rw-gauge-value --yellow" data-gauge-count="52">0</div>
+            </div>
+            <div class="rw-gauge-label">Mobile Score</div>
+          </div>
+          <!-- SEO Health -->
+          <div class="rw-gauge-card">
+            <div class="rw-gauge-wrap">
+              <svg class="rw-gauge-svg" viewBox="0 0 100 100">
+                <circle class="rw-gauge-bg" cx="50" cy="50" r="42" />
+                <circle class="rw-gauge-fill --red" cx="50" cy="50" r="42"
+                  stroke-dasharray="263.9"
+                  stroke-dashoffset="263.9"
+                  data-gauge-target="190.0" />
+              </svg>
+              <div class="rw-gauge-value --red" data-gauge-count="28">0</div>
+            </div>
+            <div class="rw-gauge-label">SEO Health</div>
+          </div>
+          <!-- Conversion Score -->
+          <div class="rw-gauge-card">
+            <div class="rw-gauge-wrap">
+              <svg class="rw-gauge-svg" viewBox="0 0 100 100">
+                <circle class="rw-gauge-bg" cx="50" cy="50" r="42" />
+                <circle class="rw-gauge-fill --yellow" cx="50" cy="50" r="42"
+                  stroke-dasharray="263.9"
+                  stroke-dashoffset="263.9"
+                  data-gauge-target="147.8" />
+              </svg>
+              <div class="rw-gauge-value --yellow" data-gauge-count="44">0</div>
+            </div>
+            <div class="rw-gauge-label">Conversion Score</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. TRUST RIBBON -->
+    <div class="rw-trust">
+      <div class="rw-trust-inner">
+        <div class="rw-trust-stat">
+          <div class="rw-trust-num" data-count-to="77" data-suffix="%">0%</div>
+          <div class="rw-trust-label">Check Your Website First</div>
+        </div>
+        <div class="rw-trust-stat">
+          <div class="rw-trust-num" data-count-to="70" data-suffix="%">0%</div>
+          <div class="rw-trust-label">Turned Off by Bad Websites</div>
+        </div>
+        <div class="rw-trust-stat">
+          <div class="rw-trust-num">10s</div>
+          <div class="rw-trust-label">To Decide If They&rsquo;re Staying</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. YOUR WEBSITE IS YOUR FRONT DOOR -->
+    <section class="card-overlay lib-section" id="why-it-matters">
+      <div class="lib-section-label">Why It Matters</div>
+      <h2 class="lib-section-title">Your Website Is Your Restaurant&rsquo;s Front Door Online</h2>
+      <p class="lib-section-sub">Before a customer walks through your door, they visit your website. Every single time. Here&rsquo;s what the data shows:</p>
+
+      <div class="rw-stat-grid">
+        <div class="rw-stat-card">
+          <div class="rw-stat-num" data-count-to="77" data-suffix="%">0%</div>
+          <div class="rw-stat-label">of diners visit a restaurant&rsquo;s website before deciding</div>
+        </div>
+        <div class="rw-stat-card">
+          <div class="rw-stat-num" data-count-to="70" data-suffix="%">0%</div>
+          <div class="rw-stat-label">of customers turned off by a restaurant&rsquo;s website</div>
+        </div>
+        <div class="rw-stat-card">
+          <div class="rw-stat-num" data-count-to="57" data-suffix="%">0%</div>
+          <div class="rw-stat-label">won&rsquo;t recommend a business with a bad mobile site</div>
+        </div>
+        <div class="rw-stat-card">
+          <div class="rw-stat-num" data-count-to="88" data-suffix="%">0%</div>
+          <div class="rw-stat-label">of visitors won&rsquo;t return after a bad experience</div>
+        </div>
+        <div class="rw-stat-card">
+          <div class="rw-stat-num" data-count-to="53" data-suffix="%">0%</div>
+          <div class="rw-stat-label">of mobile users abandon pages over 3 seconds</div>
+        </div>
+      </div>
+
+      <div class="rw-callout">
+        <h3>Your Website Is Not a Brochure</h3>
+        <p style="margin-bottom: 20px;">Your website is a decision point. It&rsquo;s where a customer goes from &ldquo;maybe&rdquo; to &ldquo;let&rsquo;s go.&rdquo; A great restaurant website doesn&rsquo;t just display information. It <strong>drives action:</strong></p>
+        <div class="rw-action-list">
+          <div class="rw-action-item">
+            <div class="rw-action-icon"><i data-lucide="calendar-check"></i></div>
+            <span>Reservations booked</span>
+          </div>
+          <div class="rw-action-item">
+            <div class="rw-action-icon"><i data-lucide="shopping-bag"></i></div>
+            <span>Orders placed</span>
+          </div>
+          <div class="rw-action-item">
+            <div class="rw-action-icon"><i data-lucide="phone"></i></div>
+            <span>Phone calls made</span>
+          </div>
+          <div class="rw-action-item">
+            <div class="rw-action-icon"><i data-lucide="map-pin"></i></div>
+            <span>Directions requested</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rw-pull-quote">&ldquo;Every element on the page should move the customer closer to one of those actions. If it doesn&rsquo;t, it&rsquo;s in the way.&rdquo;</div>
+    </section>
+
+    <!-- 4. WHY MOST WEBSITES FAIL -->
+    <section class="card-overlay --dark lib-section" id="the-problem">
+      <div class="lib-section-label">The Problem</div>
+      <h2 class="lib-section-title">Why Most Restaurant Websites Don&rsquo;t Convert</h2>
+      <p class="lib-section-sub">We&rsquo;ve audited hundreds of restaurant websites. The same problems show up again and again:</p>
+
+      <div class="rw-problem-tabs">
+        <nav class="rw-problem-tabs-nav" role="tablist">
+          <button class="rw-problem-tab-btn --active" data-problem-tab="menu" role="tab"><i data-lucide="utensils"></i> Menu Hidden</button>
+          <button class="rw-problem-tab-btn" data-problem-tab="mobile" role="tab"><i data-lucide="smartphone"></i> Mobile Broken</button>
+          <button class="rw-problem-tab-btn" data-problem-tab="cta" role="tab"><i data-lucide="mouse-pointer-click"></i> No CTA</button>
+          <button class="rw-problem-tab-btn" data-problem-tab="design" role="tab"><i data-lucide="palette"></i> Outdated</button>
+          <button class="rw-problem-tab-btn" data-problem-tab="seo" role="tab"><i data-lucide="search-x"></i> No SEO</button>
+          <button class="rw-problem-tab-btn" data-problem-tab="speed" role="tab"><i data-lucide="gauge"></i> Slow</button>
+        </nav>
+
+        <!-- Menu Hidden -->
+        <div class="rw-problem-tab-panel --active" data-problem-panel="menu">
+          <div class="rw-problem-tab-content">
+            <h3>The Menu Is Impossible to Find</h3>
+            <p>The most visited page on your website is buried, broken, or invisible to Google.</p>
+            <ul class="rw-problem-bullets">
+              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Buried behind 3 clicks or hidden in a hamburger menu</li>
+              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Uploaded as a blurry PDF that can&rsquo;t be read on mobile</li>
+              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Not optimized for Google &mdash; Google can&rsquo;t read PDFs</li>
+            </ul>
+            <div class="rw-problem-solution">
+              <strong>What should happen:</strong>
+              <p>Menu visible in one tap. HTML-formatted so Google can index every item. Mobile-readable without pinching and zooming.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Broken -->
+        <div class="rw-problem-tab-panel" data-problem-panel="mobile">
+          <div class="rw-problem-tab-content">
+            <h3>The Mobile Experience Is Broken</h3>
+            <p>Over 75% of restaurant website traffic comes from mobile devices. Most restaurants were designed desktop-first.</p>
+            <ul class="rw-problem-bullets">
+              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Tiny text and slow load times on phones</li>
+              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Buttons too small to tap accurately</li>
+              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Forms that don&rsquo;t work on mobile browsers</li>
+            </ul>
+            <div class="rw-problem-solution">
+              <strong>What should happen:</strong>
+              <p>Mobile-first design where every element is built for thumbs, not mouse clicks. Fast load on cellular networks.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- No CTA -->
+        <div class="rw-problem-tab-panel" data-problem-panel="cta">
+          <div class="rw-problem-tab-content">
+            <h3>There&rsquo;s No Clear Call to Action</h3>
+            <p>Customers land on the site and have no idea what to do next.</p>
+            <ul class="rw-problem-bullets">
+              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> No reservation button above the fold</li>
+              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> No &ldquo;Order Online&rdquo; link without scrolling</li>
+              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> No clickable phone number on mobile</li>
+              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> No clear path from interested to committed</li>
+            </ul>
+            <div class="rw-problem-solution">
+              <strong>What should happen:</strong>
+              <p>Primary CTA (reserve, order, call) visible within 2 seconds of landing on any page. No scrolling required.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Outdated Design -->
+        <div class="rw-problem-tab-panel" data-problem-panel="design">
+          <div class="rw-problem-tab-content">
+            <h3>The Design Is Outdated</h3>
+            <p>Your website looks like it was built in 2017. Customers notice.</p>
+            <ul class="rw-problem-bullets">
+              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Stock photos instead of real food photography</li>
+              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Inconsistent branding across pages</li>
+              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Walls of text with no visual hierarchy</li>
+            </ul>
+            <div class="rw-problem-solution">
+              <strong>What should happen:</strong>
+              <p>A modern, visually driven design that showcases your actual food, your actual space, and your actual brand.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- No SEO -->
+        <div class="rw-problem-tab-panel" data-problem-panel="seo">
+          <div class="rw-problem-tab-content">
+            <h3>No SEO &mdash; Google Can&rsquo;t Find You</h3>
+            <p>Your website exists but Google doesn&rsquo;t know what to do with it.</p>
+            <ul class="rw-problem-bullets">
+              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> No title tags or meta descriptions</li>
+              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> No schema markup telling Google &ldquo;this is a restaurant&rdquo;</li>
+              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> No keyword targeting for cuisine + location</li>
+              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> No structured data for menu items, hours, or reviews</li>
+            </ul>
+            <div class="rw-problem-solution">
+              <strong>What should happen:</strong>
+              <p>Every page built with SEO fundamentals so Google knows what you serve, where you are, and why you should rank.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slow -->
+        <div class="rw-problem-tab-panel" data-problem-panel="speed">
+          <div class="rw-problem-tab-content">
+            <h3>It&rsquo;s Slow</h3>
+            <p>The average restaurant website takes over 5 seconds to load. Every second costs you customers.</p>
+            <ul class="rw-problem-bullets">
+              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Every second over 3s loses 7% of visitors</li>
+              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Slow sites rank lower on Google</li>
+              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Bloated code and uncompressed images</li>
+            </ul>
+            <div class="rw-problem-solution">
+              <strong>What should happen:</strong>
+              <p>Page load under 3 seconds on mobile. Core Web Vitals optimized. Images compressed. No bloated code.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p style="margin-top: 40px; text-align: center; font-weight: 700; font-size: 1.15rem;">How Many of These Problems Does Your Website Have?</p>
+
+      <!-- 5. AUDIT TOOL PLACEHOLDER -->
+      <div class="rw-audit-tool" id="website-audit">
+        <h3>Find Out in Under 2 Minutes</h3>
+        <p>Run our free website audit. Just enter your URL and our tool analyzes your site&rsquo;s speed, mobile experience, SEO health, and conversion readiness &mdash; instantly.</p>
+        <div class="rw-audit-form">
+          <input type="url" class="rw-audit-input" placeholder="Enter your restaurant website URL" />
+          <button class="rw-audit-submit" onclick="document.querySelector('.rw-audit-message').style.display='block'">Run Free Audit &rarr;</button>
+        </div>
+        <p class="rw-audit-note">No email required. No phone call. Just instant clarity.</p>
+        <div class="rw-audit-message">
+          Our automated audit tool is launching soon. In the meantime, <a href="contact.html">get a free manual audit</a> from our team &mdash; we&rsquo;ll analyze your site personally and send you a full report.
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. CUSTOMER DECISION JOURNEY -->
+    <section class="card-overlay lib-section" id="journey">
+      <div class="lib-section-label">How They Decide</div>
+      <h2 class="lib-section-title">How Restaurant Customers Use Your Website</h2>
+      <p class="lib-section-sub">Understanding the customer decision journey is the foundation of everything we design. Here&rsquo;s how restaurant customers actually behave online:</p>
+
+      <h3 style="margin-top: 40px; font-size: 1.15rem; font-weight: 800;">The 60-Second Decision</h3>
+
+      <div class="rw-journey">
+        <div class="rw-journey-step">
+          <div class="rw-journey-num">1</div>
+          <div class="rw-journey-icon"><i data-lucide="search"></i></div>
+          <div class="rw-journey-label">Search</div>
+          <div class="rw-journey-text">&ldquo;Italian restaurant near me&rdquo;</div>
+          <div class="rw-journey-connector"></div>
+        </div>
+        <div class="rw-journey-step">
+          <div class="rw-journey-num">2</div>
+          <div class="rw-journey-icon"><i data-lucide="mouse-pointer"></i></div>
+          <div class="rw-journey-label">Click</div>
+          <div class="rw-journey-text">Tap the top result or map listing</div>
+          <div class="rw-journey-connector"></div>
+        </div>
+        <div class="rw-journey-step">
+          <div class="rw-journey-num">3</div>
+          <div class="rw-journey-icon"><i data-lucide="globe"></i></div>
+          <div class="rw-journey-label">Land</div>
+          <div class="rw-journey-text">Hit your website or GBP</div>
+          <div class="rw-journey-connector"></div>
+        </div>
+        <div class="rw-journey-step">
+          <div class="rw-journey-num">4</div>
+          <div class="rw-journey-icon"><i data-lucide="eye"></i></div>
+          <div class="rw-journey-label">Scan</div>
+          <div class="rw-journey-text">Food photos, menu, vibe, price</div>
+          <div class="rw-journey-connector"></div>
+        </div>
+        <div class="rw-journey-step">
+          <div class="rw-journey-num">5</div>
+          <div class="rw-journey-icon"><i data-lucide="check-circle"></i></div>
+          <div class="rw-journey-label">Decide</div>
+          <div class="rw-journey-text">Book, order, call &mdash; or leave</div>
+        </div>
+      </div>
+
+      <div class="rw-pull-quote" style="margin-bottom: 48px;">&ldquo;The entire process takes under 60 seconds. Your website either captures that customer or loses them. There is no middle ground.&rdquo;</div>
+
+      <h3 style="font-size: 1.15rem; font-weight: 800;">What Customers Are Looking For (In Order)</h3>
+
+      <div class="rw-priority-list">
+        <div class="rw-priority-item">
+          <div class="rw-priority-num">1</div>
+          <div class="rw-priority-content">
+            <strong>Menu</strong>
+            <span>What do you serve and what does it cost?</span>
+          </div>
+        </div>
+        <div class="rw-priority-item">
+          <div class="rw-priority-num">2</div>
+          <div class="rw-priority-content">
+            <strong>Photos</strong>
+            <span>What does the food actually look like?</span>
+          </div>
+        </div>
+        <div class="rw-priority-item">
+          <div class="rw-priority-num">3</div>
+          <div class="rw-priority-content">
+            <strong>Location &amp; Hours</strong>
+            <span>Where are you and are you open right now?</span>
+          </div>
+        </div>
+        <div class="rw-priority-item">
+          <div class="rw-priority-num">4</div>
+          <div class="rw-priority-content">
+            <strong>Reservation or Ordering</strong>
+            <span>How do I take action right now?</span>
+          </div>
+        </div>
+        <div class="rw-priority-item">
+          <div class="rw-priority-num">5</div>
+          <div class="rw-priority-content">
+            <strong>Reviews &amp; Social Proof</strong>
+            <span>What do other people say about you?</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rw-pull-quote">&ldquo;Every restaurant website we design is structured around this exact priority order. The most important information is the most accessible.&rdquo;</div>
+    </section>
+
+    <!-- 7. SERVICES - HORIZONTAL SCROLL -->
+    <div class="rw-hscroll-section" id="services">
+      <div class="rw-hscroll-intro">
+        <div class="lib-section-label">What We Build</div>
+        <h2 class="lib-section-title">Restaurant Website Design Services</h2>
+        <p class="lib-section-sub">Button Up Media designs and builds restaurant websites that work for both customers and search engines.</p>
+      </div>
+
+      <div class="rw-hscroll-entry"></div>
+
+      <div class="rw-hscroll-pin">
+        <div class="rw-hscroll-track">
+
+          <!-- Panel 1: Mobile-First -->
+          <div class="rw-hscroll-panel">
+            <div class="rw-hscroll-num">01</div>
+            <div class="rw-hscroll-glow"></div>
+            <div class="rw-hscroll-inner">
+              <div class="rw-hscroll-copy">
+                <div class="label">Service 01</div>
+                <h2>Mobile-First Restaurant Design</h2>
+                <p>Over 75% of your visitors are on phones. We design for mobile first, then scale up to desktop. Every element is built for thumbs, not mouse clicks.</p>
+              </div>
+              <div class="rw-hscroll-deliverables">
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="hand"></i></div>
+                  <span>Touch-friendly navigation and buttons</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="layout"></i></div>
+                  <span>Thumb-optimized menu layouts</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="phone"></i></div>
+                  <span>One-tap calling, directions &amp; reservations</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="zap"></i></div>
+                  <span>Fast load times on cellular networks</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="check"></i></div>
+                  <span>No horizontal scrolling or pinch-zooming</span>
+                </div>
+              </div>
+            </div>
+            <div class="rw-hscroll-divider"></div>
+          </div>
+
+          <!-- Panel 2: Menu Optimization -->
+          <div class="rw-hscroll-panel">
+            <div class="rw-hscroll-num">02</div>
+            <div class="rw-hscroll-glow"></div>
+            <div class="rw-hscroll-inner">
+              <div class="rw-hscroll-copy">
+                <div class="label">Service 02</div>
+                <h2>Online Menu Optimization</h2>
+                <p>Your menu is the most visited page on your restaurant website. We build it in HTML so Google can read and rank every item &mdash; not as a PDF that&rsquo;s invisible to search.</p>
+              </div>
+              <div class="rw-hscroll-deliverables">
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="code"></i></div>
+                  <span>HTML-formatted menus Google can index</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="smartphone"></i></div>
+                  <span>Mobile-optimized layout with categories</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="camera"></i></div>
+                  <span>Menu photography integration</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="filter"></i></div>
+                  <span>Dietary &amp; allergen filtering (GF, vegan)</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="calendar"></i></div>
+                  <span>Seasonal menu update system</span>
+                </div>
+              </div>
+            </div>
+            <div class="rw-hscroll-divider"></div>
+          </div>
+
+          <!-- Panel 3: Reservation & Ordering -->
+          <div class="rw-hscroll-panel">
+            <div class="rw-hscroll-num">03</div>
+            <div class="rw-hscroll-glow"></div>
+            <div class="rw-hscroll-inner">
+              <div class="rw-hscroll-copy">
+                <div class="label">Service 03</div>
+                <h2>Reservation &amp; Online Ordering Integration</h2>
+                <p>We integrate with the platforms your customers already use. Reservation and ordering CTAs are above the fold on every page &mdash; never more than one tap away.</p>
+              </div>
+              <div class="rw-hscroll-deliverables">
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="calendar-check"></i></div>
+                  <span>OpenTable &amp; Resy reservation widgets</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="shopping-bag"></i></div>
+                  <span>Toast &amp; ChowNow online ordering</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="credit-card"></i></div>
+                  <span>Square ordering &amp; payment integration</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="settings"></i></div>
+                  <span>Custom platform integration</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="mouse-pointer-click"></i></div>
+                  <span>CTAs above the fold on every page</span>
+                </div>
+              </div>
+            </div>
+            <div class="rw-hscroll-divider"></div>
+          </div>
+
+          <!-- Panel 4: SEO Built-In -->
+          <div class="rw-hscroll-panel">
+            <div class="rw-hscroll-num">04</div>
+            <div class="rw-hscroll-glow"></div>
+            <div class="rw-hscroll-inner">
+              <div class="rw-hscroll-copy">
+                <div class="label">Service 04</div>
+                <h2>Restaurant SEO Built Into Every Page</h2>
+                <p>Every website we build comes SEO-ready from day one. We don&rsquo;t build a pretty website then tell you to hire someone else for SEO. It&rsquo;s built in.</p>
+              </div>
+              <div class="rw-hscroll-deliverables">
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="file-text"></i></div>
+                  <span>Title tags &amp; meta descriptions for every page</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="braces"></i></div>
+                  <span>Restaurant schema markup (LocalBusiness, Menu)</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="target"></i></div>
+                  <span>Location-targeted keywords in headings</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="link"></i></div>
+                  <span>Internal linking architecture</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="map-pin"></i></div>
+                  <span>Google Business Profile integration</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="gauge"></i></div>
+                  <span>Page speed &amp; Core Web Vitals optimization</span>
+                </div>
+              </div>
+            </div>
+            <div class="rw-hscroll-divider"></div>
+          </div>
+
+          <!-- Panel 5: Photography & Visual Design -->
+          <div class="rw-hscroll-panel">
+            <div class="rw-hscroll-num">05</div>
+            <div class="rw-hscroll-glow"></div>
+            <div class="rw-hscroll-inner">
+              <div class="rw-hscroll-copy">
+                <div class="label">Service 05</div>
+                <h2>Professional Photography &amp; Visual Design</h2>
+                <p>Your website should look like your restaurant at its best. We use professional food photography &mdash; shot during your content shoots with our in-house team.</p>
+              </div>
+              <div class="rw-hscroll-deliverables">
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="image"></i></div>
+                  <span>Hero imagery of signature dishes &amp; ambiance</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="images"></i></div>
+                  <span>Gallery pages with professional photography</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="utensils"></i></div>
+                  <span>Visual menu presentations that drive cravings</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="palette"></i></div>
+                  <span>Consistent brand design across every page</span>
+                </div>
+              </div>
+            </div>
+            <div class="rw-hscroll-divider"></div>
+          </div>
+
+          <!-- Panel 6: Multi-Location -->
+          <div class="rw-hscroll-panel">
+            <div class="rw-hscroll-num">06</div>
+            <div class="rw-hscroll-glow"></div>
+            <div class="rw-hscroll-inner">
+              <div class="rw-hscroll-copy">
+                <div class="label">Service 06</div>
+                <h2>Location Pages for Multi-Location Restaurants</h2>
+                <p>If you operate more than one location, each one needs its own page. A single &ldquo;Locations&rdquo; page with a list of addresses won&rsquo;t rank. Individual, optimized pages will.</p>
+              </div>
+              <div class="rw-hscroll-deliverables">
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="link-2"></i></div>
+                  <span>Unique URL for each location</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="file-text"></i></div>
+                  <span>Location-specific content, hours &amp; menus</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="braces"></i></div>
+                  <span>Individual schema markup per address</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="target"></i></div>
+                  <span>Local keyword targeting per market</span>
+                </div>
+                <div class="rw-deliverable">
+                  <div class="rw-deliverable-icon"><i data-lucide="map"></i></div>
+                  <span>Google Maps integration per location</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /.rw-hscroll-track -->
+
+        <!-- Progress indicators -->
+        <div class="rw-hscroll-dots">
+          <div class="rw-hscroll-dot --active"></div>
+          <div class="rw-hscroll-dot"></div>
+          <div class="rw-hscroll-dot"></div>
+          <div class="rw-hscroll-dot"></div>
+          <div class="rw-hscroll-dot"></div>
+          <div class="rw-hscroll-dot"></div>
+        </div>
+        <div class="rw-hscroll-progress">
+          <div class="rw-hscroll-progress-fill"></div>
+        </div>
+      </div><!-- /.rw-hscroll-pin -->
+
+      <div class="rw-hscroll-exit"></div>
+    </div>
+
+    <!-- 8. COMPARISON TABLE -->
+    <section class="card-overlay --dark lib-section" id="comparison">
+      <div class="lib-section-label">The Difference</div>
+      <h2 class="lib-section-title">Restaurant Website Design vs. Generic Web Design</h2>
+      <p class="lib-section-sub">Most web design agencies use the same framework for restaurants that they use for accountants, contractors, and SaaS companies. Restaurant websites are fundamentally different.</p>
+
+      <div class="rw-compare-table">
+        <div class="rw-compare-header">
+          <span>Factor</span>
+          <span>Generic Web Agency</span>
+          <span>Button Up Media</span>
+        </div>
+        <div class="rw-compare-row">
+          <span>Design priority</span>
+          <span><i data-lucide="x" class="rw-compare-icon --x"></i> Brand aesthetics, lead generation</span>
+          <span><i data-lucide="check" class="rw-compare-icon --check"></i> Customer decision journey &mdash; menu, book, order</span>
+        </div>
+        <div class="rw-compare-row">
+          <span>Mobile approach</span>
+          <span><i data-lucide="x" class="rw-compare-icon --x"></i> Responsive (desktop-first scaled down)</span>
+          <span><i data-lucide="check" class="rw-compare-icon --check"></i> Mobile-first (designed for phones, scaled up)</span>
+        </div>
+        <div class="rw-compare-row">
+          <span>Menu handling</span>
+          <span><i data-lucide="x" class="rw-compare-icon --x"></i> PDF upload or basic text list</span>
+          <span><i data-lucide="check" class="rw-compare-icon --check"></i> HTML-optimized, Google-indexable, filterable</span>
+        </div>
+        <div class="rw-compare-row">
+          <span>Photography</span>
+          <span><i data-lucide="x" class="rw-compare-icon --x"></i> Stock photos or client-provided</span>
+          <span><i data-lucide="check" class="rw-compare-icon --check"></i> Professional in-house food photography</span>
+        </div>
+        <div class="rw-compare-row">
+          <span>Reservation integration</span>
+          <span><i data-lucide="x" class="rw-compare-icon --x"></i> Basic form or link</span>
+          <span><i data-lucide="check" class="rw-compare-icon --check"></i> OpenTable, Resy, Toast, ChowNow embedded</span>
+        </div>
+        <div class="rw-compare-row">
+          <span>SEO</span>
+          <span><i data-lucide="x" class="rw-compare-icon --x"></i> Generic on-page basics</span>
+          <span><i data-lucide="check" class="rw-compare-icon --check"></i> Restaurant-specific schema, local keywords, AEO</span>
+        </div>
+        <div class="rw-compare-row">
+          <span>Page speed</span>
+          <span><i data-lucide="x" class="rw-compare-icon --x"></i> &ldquo;Good enough&rdquo;</span>
+          <span><i data-lucide="check" class="rw-compare-icon --check"></i> Under 3 seconds, Core Web Vitals optimized</span>
+        </div>
+        <div class="rw-compare-row">
+          <span>Conversion focus</span>
+          <span><i data-lucide="x" class="rw-compare-icon --x"></i> Lead forms and contact pages</span>
+          <span><i data-lucide="check" class="rw-compare-icon --check"></i> Reservations, orders, calls, directions</span>
+        </div>
+        <div class="rw-compare-row">
+          <span>Content updates</span>
+          <span><i data-lucide="x" class="rw-compare-icon --x"></i> Requires developer for changes</span>
+          <span><i data-lucide="check" class="rw-compare-icon --check"></i> Easy menu updates, seasonal changes</span>
+        </div>
+        <div class="rw-compare-row">
+          <span>Industry knowledge</span>
+          <span><i data-lucide="x" class="rw-compare-icon --x"></i> Learning your business as they go</span>
+          <span><i data-lucide="check" class="rw-compare-icon --check"></i> Already knows restaurant customer behavior</span>
+        </div>
+      </div>
+
+      <p style="margin-top: 32px; text-align: center; font-weight: 700; font-size: 1.05rem;">A generic agency will build you a beautiful website. We build you a website that <em style="color: var(--gold); font-family: var(--font-accent);">fills seats.</em></p>
+
+      <div class="rw-testimonial">
+        <blockquote>&ldquo;We went through two web designers before finding Button Up Media. The first built us something pretty that nobody could find on Google. The second was cheap and looked like it. Button Up Media built us a website that actually works &mdash; our online reservations tripled in the first 60 days.&rdquo;</blockquote>
+        <cite>&mdash; Restaurant Client, South Florida</cite>
+      </div>
+    </section>
+
+    <!-- 9. WHAT EVERY WEBSITE INCLUDES -->
+    <section class="card-overlay lib-section" id="blueprint">
+      <div class="lib-section-label">The Blueprint</div>
+      <h2 class="lib-section-title">What Every Restaurant Website Must Include</h2>
+      <p class="lib-section-sub">Based on our experience building restaurant websites and analyzing what drives the most conversions:</p>
+
+      <div class="rw-tiers">
+        <!-- Tier 1: Above the Fold -->
+        <div class="rw-tier-card --gold">
+          <div class="rw-tier-header">
+            <div class="rw-tier-num">Tier 01 &mdash; Critical</div>
+            <h3>Above the Fold</h3>
+            <p>What visitors see before scrolling</p>
+          </div>
+          <ul class="rw-tier-items">
+            <li><div class="rw-tier-icon"><i data-lucide="image"></i></div> Hero image or video of your food and atmosphere</li>
+            <li><div class="rw-tier-icon"><i data-lucide="type"></i></div> Clear H1 &mdash; what you are and where</li>
+            <li><div class="rw-tier-icon"><i data-lucide="mouse-pointer-click"></i></div> Primary CTA visible immediately</li>
+            <li><div class="rw-tier-icon"><i data-lucide="menu"></i></div> Menu, Reservations, Location nav</li>
+          </ul>
+        </div>
+
+        <!-- Tier 2: Essential Pages -->
+        <div class="rw-tier-card --featured">
+          <div class="rw-tier-header">
+            <div class="rw-tier-num">Tier 02 &mdash; Essential</div>
+            <h3>Core Pages</h3>
+            <p>The pages every restaurant website needs</p>
+          </div>
+          <ul class="rw-tier-items">
+            <li><div class="rw-tier-icon"><i data-lucide="home"></i></div> Homepage &mdash; hero, value prop, key CTAs</li>
+            <li><div class="rw-tier-icon"><i data-lucide="utensils"></i></div> Menu &mdash; HTML, mobile-optimized, photos</li>
+            <li><div class="rw-tier-icon"><i data-lucide="book-open"></i></div> About &mdash; your story, team, philosophy</li>
+            <li><div class="rw-tier-icon"><i data-lucide="map-pin"></i></div> Location &amp; Hours &mdash; Maps, clickable</li>
+            <li><div class="rw-tier-icon"><i data-lucide="calendar-check"></i></div> Reservations / Order Online</li>
+            <li><div class="rw-tier-icon"><i data-lucide="users"></i></div> Private Events &mdash; inquiry form</li>
+            <li><div class="rw-tier-icon"><i data-lucide="images"></i></div> Gallery &mdash; professional photography</li>
+            <li><div class="rw-tier-icon"><i data-lucide="mail"></i></div> Contact &mdash; form, phone, socials</li>
+          </ul>
+        </div>
+
+        <!-- Tier 3: Technical Requirements -->
+        <div class="rw-tier-card --teal">
+          <div class="rw-tier-header">
+            <div class="rw-tier-num">Tier 03 &mdash; Technical</div>
+            <h3>Under the Hood</h3>
+            <p>Performance and infrastructure</p>
+          </div>
+          <ul class="rw-tier-items">
+            <li><div class="rw-tier-icon"><i data-lucide="gauge"></i></div> Page speed under 3 seconds on mobile</li>
+            <li><div class="rw-tier-icon"><i data-lucide="activity"></i></div> Core Web Vitals passing</li>
+            <li><div class="rw-tier-icon"><i data-lucide="shield-check"></i></div> SSL/HTTPS security</li>
+            <li><div class="rw-tier-icon"><i data-lucide="accessibility"></i></div> ADA accessibility compliance</li>
+            <li><div class="rw-tier-icon"><i data-lucide="braces"></i></div> Schema markup for rich results</li>
+            <li><div class="rw-tier-icon"><i data-lucide="sitemap"></i></div> XML sitemap, clean URLs</li>
+            <li><div class="rw-tier-icon"><i data-lucide="bar-chart-2"></i></div> Analytics and conversion tracking</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. OUR PROCESS - TIMELINE -->
+    <section class="card-overlay --dark lib-section" id="process">
+      <div class="lib-section-label">Our Process</div>
+      <h2 class="lib-section-title">How We Build Your Restaurant Website</h2>
+
+      <div class="rw-timeline">
+        <div class="rw-timeline-track">
+          <div class="rw-timeline-line">
+            <div class="rw-timeline-line-fill"></div>
+          </div>
+
+          <div class="rw-timeline-step">
+            <div class="rw-timeline-marker">1</div>
+            <h4>Discovery &amp; Audit</h4>
+            <ul>
+              <li>Your concept, cuisine, target customer, competitive landscape</li>
+              <li>Current website performance (speed, mobile, SEO, conversions)</li>
+              <li>Competitor website analysis</li>
+              <li>Integration requirements (reservation, ordering, POS)</li>
+              <li>Content needs &mdash; do we need to shoot photography?</li>
+            </ul>
+          </div>
+
+          <div class="rw-timeline-step">
+            <div class="rw-timeline-marker">2</div>
+            <h4>Strategy &amp; Wireframing</h4>
+            <ul>
+              <li>Sitemap and page structure based on customer journey</li>
+              <li>Wireframes showing layout, hierarchy, and CTA placement</li>
+              <li>Keyword strategy for on-page SEO</li>
+              <li>Integration plan for ordering, reservations, analytics</li>
+              <li>Content plan (photography shoots, copywriting, menus)</li>
+            </ul>
+          </div>
+
+          <div class="rw-timeline-step">
+            <div class="rw-timeline-marker">3</div>
+            <h4>Design</h4>
+            <ul>
+              <li>Custom design &mdash; no templates, no cookie-cutter layouts</li>
+              <li>Mobile-first responsive design</li>
+              <li>Professional food photography integrated into every page</li>
+              <li>Brand-consistent typography, colors, and visual system</li>
+              <li>Client review and revision process</li>
+            </ul>
+          </div>
+
+          <div class="rw-timeline-step">
+            <div class="rw-timeline-marker">4</div>
+            <h4>Development &amp; Integration</h4>
+            <ul>
+              <li>High-performance development (fast load, clean code)</li>
+              <li>Reservation and ordering platform integration</li>
+              <li>SEO setup (schema, meta tags, internal linking, sitemap)</li>
+              <li>Analytics and conversion tracking implementation</li>
+              <li>Content management system for easy updates</li>
+            </ul>
+          </div>
+
+          <div class="rw-timeline-step">
+            <div class="rw-timeline-marker">5</div>
+            <h4>Launch &amp; Optimize</h4>
+            <ul>
+              <li>Quality assurance testing across devices and browsers</li>
+              <li>Speed optimization and Core Web Vitals verification</li>
+              <li>Google Search Console and Analytics setup</li>
+              <li>Post-launch monitoring and performance tracking</li>
+              <li>Ongoing support for menu updates and seasonal changes</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="rw-timeline-sticky">
+          <div class="rw-timeline-progress-card">
+            <div class="rw-progress-ring">
+              <svg viewBox="0 0 140 140">
+                <circle class="rw-progress-ring-bg" cx="70" cy="70" r="60" />
+                <circle class="rw-progress-ring-fill" cx="70" cy="70" r="60" />
+              </svg>
+              <div class="rw-progress-ring-text">0/5</div>
+            </div>
+            <h4 class="rw-progress-step-name">Ready</h4>
+            <p class="rw-progress-step-desc">Scroll to begin</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. TESTIMONIAL MARQUEE -->
+    <section class="card-overlay lib-section" id="testimonial" style="overflow: hidden;">
+      <div class="lib-section-label" style="text-align:center;">Client Stories</div>
+      <h2 class="lib-section-title" style="text-align:center;">Restaurants That Made the Switch</h2>
+      <p class="lib-section-sub" style="text-align:center; margin-left:auto; margin-right:auto;">Real feedback from restaurant owners who invested in a website that works.</p>
+
+      <div class="proof-marquee-wrap" style="margin-top: 40px;">
+        <div class="proof-marquee-track --left">
+          <!-- Card 1 -->
+          <div class="proof-card">
+            <div class="proof-card-header">
+              <div class="proof-card-photo-placeholder">JM</div>
+              <div class="proof-card-info">
+                <h4>Client Name</h4>
+                <span>Owner, <span class="restaurant-name">Restaurant Name</span></span>
+              </div>
+            </div>
+            <div class="proof-card-quote">"Our old website was embarrassing. The menu was a blurry PDF, nothing worked on mobile, and we had no idea if anyone even visited it. Button Up Media built us a website that looks incredible, loads fast, and actually drives reservations."</div>
+            <div class="proof-card-result">
+              <div class="proof-card-metric"><strong>3X</strong><span>Online Bookings</span></div>
+              <div class="proof-card-metric"><strong>2 sec</strong><span>Load Time</span></div>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="proof-card">
+            <div class="proof-card-header">
+              <div class="proof-card-photo-placeholder">SK</div>
+              <div class="proof-card-info">
+                <h4>Client Name</h4>
+                <span>GM, <span class="restaurant-name">Restaurant Name</span></span>
+              </div>
+            </div>
+            <div class="proof-card-quote">"I was nervous about the investment, but Button Up Media showed us exactly what we'd get before we committed a dollar. The website paid for itself within the first two months from online ordering alone."</div>
+            <div class="proof-card-result">
+              <div class="proof-card-metric"><strong>2 mo</strong><span>ROI Payback</span></div>
+              <div class="proof-card-metric"><strong>40%</strong><span>More Orders</span></div>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="proof-card">
+            <div class="proof-card-header">
+              <div class="proof-card-photo-placeholder">MC</div>
+              <div class="proof-card-info">
+                <h4>Client Name</h4>
+                <span>Director, <span class="restaurant-name">Restaurant Group</span></span>
+              </div>
+            </div>
+            <div class="proof-card-quote">"Five locations, one system. Button Up built individual pages for each location with location-specific SEO. Our reservations are up 60% across the board and each location ranks on page one."</div>
+            <div class="proof-card-result">
+              <div class="proof-card-metric"><strong>5</strong><span>Locations</span></div>
+              <div class="proof-card-metric"><strong>60%</strong><span>More Reservations</span></div>
+            </div>
+          </div>
+          <!-- Card 4 -->
+          <div class="proof-card">
+            <div class="proof-card-header">
+              <div class="proof-card-photo-placeholder">AR</div>
+              <div class="proof-card-info">
+                <h4>Client Name</h4>
+                <span>Owner, <span class="restaurant-name">Restaurant Name</span></span>
+              </div>
+            </div>
+            <div class="proof-card-quote">"We went through two web designers before finding Button Up Media. The first built us something pretty that nobody could find on Google. The second was cheap and looked like it. Button Up built a website that actually works."</div>
+            <div class="proof-card-result">
+              <div class="proof-card-metric"><strong>Page 1</strong><span>Google Rank</span></div>
+              <div class="proof-card-metric"><strong>3X</strong><span>Reservations</span></div>
+            </div>
+          </div>
+          <!-- Duplicate set for seamless loop -->
+          <div class="proof-card">
+            <div class="proof-card-header">
+              <div class="proof-card-photo-placeholder">JM</div>
+              <div class="proof-card-info">
+                <h4>Client Name</h4>
+                <span>Owner, <span class="restaurant-name">Restaurant Name</span></span>
+              </div>
+            </div>
+            <div class="proof-card-quote">"Our old website was embarrassing. The menu was a blurry PDF, nothing worked on mobile, and we had no idea if anyone even visited it. Button Up Media built us a website that looks incredible, loads fast, and actually drives reservations."</div>
+            <div class="proof-card-result">
+              <div class="proof-card-metric"><strong>3X</strong><span>Online Bookings</span></div>
+              <div class="proof-card-metric"><strong>2 sec</strong><span>Load Time</span></div>
+            </div>
+          </div>
+          <div class="proof-card">
+            <div class="proof-card-header">
+              <div class="proof-card-photo-placeholder">SK</div>
+              <div class="proof-card-info">
+                <h4>Client Name</h4>
+                <span>GM, <span class="restaurant-name">Restaurant Name</span></span>
+              </div>
+            </div>
+            <div class="proof-card-quote">"I was nervous about the investment, but Button Up Media showed us exactly what we'd get before we committed a dollar. The website paid for itself within the first two months from online ordering alone."</div>
+            <div class="proof-card-result">
+              <div class="proof-card-metric"><strong>2 mo</strong><span>ROI Payback</span></div>
+              <div class="proof-card-metric"><strong>40%</strong><span>More Orders</span></div>
+            </div>
+          </div>
+          <div class="proof-card">
+            <div class="proof-card-header">
+              <div class="proof-card-photo-placeholder">MC</div>
+              <div class="proof-card-info">
+                <h4>Client Name</h4>
+                <span>Director, <span class="restaurant-name">Restaurant Group</span></span>
+              </div>
+            </div>
+            <div class="proof-card-quote">"Five locations, one system. Button Up built individual pages for each location with location-specific SEO. Our reservations are up 60% across the board and each location ranks on page one."</div>
+            <div class="proof-card-result">
+              <div class="proof-card-metric"><strong>5</strong><span>Locations</span></div>
+              <div class="proof-card-metric"><strong>60%</strong><span>More Reservations</span></div>
+            </div>
+          </div>
+          <div class="proof-card">
+            <div class="proof-card-header">
+              <div class="proof-card-photo-placeholder">AR</div>
+              <div class="proof-card-info">
+                <h4>Client Name</h4>
+                <span>Owner, <span class="restaurant-name">Restaurant Name</span></span>
+              </div>
+            </div>
+            <div class="proof-card-quote">"We went through two web designers before finding Button Up Media. The first built us something pretty that nobody could find on Google. The second was cheap and looked like it. Button Up built a website that actually works."</div>
+            <div class="proof-card-result">
+              <div class="proof-card-metric"><strong>Page 1</strong><span>Google Rank</span></div>
+              <div class="proof-card-metric"><strong>3X</strong><span>Reservations</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. PRICING -->
+    <section class="card-overlay --dark lib-section" id="pricing">
+      <div class="lib-section-label">Transparent Pricing</div>
+      <h2 class="lib-section-title">How Much Does a Restaurant Website Cost?</h2>
+      <p class="lib-section-sub">We believe in transparency. Here&rsquo;s what restaurant website investment typically looks like:</p>
+
+      <div class="rw-pricing-grid">
+        <!-- Single-Location -->
+        <div class="rw-pricing-card --gold">
+          <div class="rw-pricing-tier">Starting</div>
+          <div class="rw-pricing-header">
+            <h3>Single-Location Restaurant</h3>
+            <div class="rw-pricing-price">$3,000 &ndash; $8,000</div>
+            <div class="rw-pricing-timeline">4&ndash;6 weeks from kickoff to launch</div>
+          </div>
+          <ul class="rw-pricing-includes">
+            <li>Custom design, no templates</li>
+            <li>Mobile-first optimization</li>
+            <li>Menu pages (HTML, not PDF)</li>
+            <li>Reservation integration</li>
+            <li>SEO setup &amp; analytics</li>
+          </ul>
+          <div class="rw-pricing-card-cta">
+            <a href="contact.html" class="btn btn-primary">Get a Quote</a>
+          </div>
+        </div>
+
+        <!-- Multi-Location -->
+        <div class="rw-pricing-card --featured">
+          <span class="rw-pricing-badge">Recommended</span>
+          <div class="rw-pricing-tier">Growth</div>
+          <div class="rw-pricing-header">
+            <h3>Multi-Location Restaurant</h3>
+            <div class="rw-pricing-price">$8,000 &ndash; $20,000+</div>
+            <div class="rw-pricing-timeline">6&ndash;10 weeks depending on locations</div>
+          </div>
+          <ul class="rw-pricing-includes">
+            <li>Everything in single-location</li>
+            <li>Individual location pages</li>
+            <li>Location-specific SEO</li>
+            <li>Multi-location menu management</li>
+            <li>Centralized admin dashboard</li>
+          </ul>
+          <div class="rw-pricing-card-cta">
+            <a href="contact.html" class="btn btn-primary">Get a Quote</a>
+          </div>
+        </div>
+
+        <!-- Ongoing -->
+        <div class="rw-pricing-card --teal">
+          <div class="rw-pricing-tier">Ongoing</div>
+          <div class="rw-pricing-header">
+            <h3>Website Management</h3>
+            <div class="rw-pricing-price">$300 &ndash; $800/mo</div>
+            <div class="rw-pricing-timeline">Month-to-month, no contracts</div>
+          </div>
+          <ul class="rw-pricing-includes">
+            <li>Menu updates &amp; seasonal changes</li>
+            <li>Security updates &amp; monitoring</li>
+            <li>Performance optimization</li>
+            <li>Hosting &amp; technical support</li>
+            <li>Content updates as needed</li>
+          </ul>
+          <div class="rw-pricing-card-cta">
+            <a href="contact.html" class="btn btn-primary">Get Started</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- What affects price -->
+      <div class="rw-pricing-factors">
+        <h3>What Affects the Price</h3>
+        <div class="rw-pricing-factors-grid">
+          <div class="rw-pricing-factor">
+            <i data-lucide="layers"></i>
+            <span>Number of pages &amp; locations</span>
+          </div>
+          <div class="rw-pricing-factor">
+            <i data-lucide="settings"></i>
+            <span>Custom functionality</span>
+          </div>
+          <div class="rw-pricing-factor">
+            <i data-lucide="camera"></i>
+            <span>Photography needs</span>
+          </div>
+          <div class="rw-pricing-factor">
+            <i data-lucide="shopping-cart"></i>
+            <span>E-commerce / ordering</span>
+          </div>
+          <div class="rw-pricing-factor">
+            <i data-lucide="pen-tool"></i>
+            <span>Content creation</span>
+          </div>
+        </div>
+
+        <div class="rw-pricing-cta">
+          <p>Run the free website audit above to see where you stand, then get a custom quote. No surprises. No hidden fees. No deposit until you&rsquo;ve approved the strategy.</p>
+          <a href="contact.html" class="btn btn-primary">Get a Custom Website Quote</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 13. CROSS-SELL -->
+    <section class="card-overlay lib-section" id="crosssell">
+      <div class="rw-crosssell">
+        <h2>Your Website Is the Center of Everything</h2>
+        <p>A great website amplifies every other marketing channel. Without a strong website, every other marketing dollar works harder for less return.</p>
+        <ul class="rw-crosssell-bullets">
+          <li><strong style="color: var(--text);">Social media</strong> drives traffic to your website, where visitors become customers</li>
+          <li><strong style="color: var(--text);">SEO</strong> brings organic search traffic to your website, where they find your menu and book</li>
+          <li><strong style="color: var(--text);">Google Ads</strong> sends high-intent clicks to your website, where they convert into reservations</li>
+          <li><strong style="color: var(--text);">Email marketing</strong> links back to your website for events, specials, and online ordering</li>
+        </ul>
+        <div class="rw-crosssell-ctas">
+          <a href="restaurant-seo.html" class="btn btn-primary">Explore Restaurant SEO</a>
+          <a href="restaurant-advertising.html" class="btn btn-ghost">Explore Restaurant Advertising</a>
+          <a href="social-media-marketing.html" class="btn btn-ghost">Explore Social Media Marketing</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14. BY THE NUMBERS -->
+    <section class="card-overlay --dark lib-section" id="by-the-numbers">
+      <div class="lib-section-label">The Data</div>
+      <h2 class="lib-section-title">Restaurant Website Design by the Numbers</h2>
+
+      <div class="rw-stats-grid">
+        <div class="rw-stat-counter">
+          <div class="rw-stat-counter-num" data-count-to="77" data-suffix="%">0%</div>
+          <p>of diners visit a restaurant&rsquo;s website before deciding where to eat</p>
+        </div>
+        <div class="rw-stat-counter">
+          <div class="rw-stat-counter-num">75%+</div>
+          <p>of restaurant website traffic comes from mobile devices</p>
+        </div>
+        <div class="rw-stat-counter">
+          <div class="rw-stat-counter-num" data-count-to="53" data-suffix="%">0%</div>
+          <p>of mobile users abandon a page that takes over 3 seconds to load</p>
+        </div>
+        <div class="rw-stat-counter">
+          <div class="rw-stat-counter-num" data-count-to="70" data-suffix="%">0%</div>
+          <p>of customers say they&rsquo;ve been turned off by a restaurant&rsquo;s website</p>
+        </div>
+        <div class="rw-stat-counter">
+          <div class="rw-stat-counter-num" data-count-to="88" data-suffix="%">0%</div>
+          <p>of visitors won&rsquo;t return after a bad website experience</p>
+        </div>
+        <div class="rw-stat-counter">
+          <div class="rw-stat-counter-num">3 sec</div>
+          <p>is the maximum load time before you start losing significant traffic</p>
+        </div>
+        <div class="rw-stat-counter">
+          <div class="rw-stat-counter-num">1 tap</div>
+          <p>is the maximum distance your menu should be from any page</p>
+        </div>
+        <div class="rw-stat-counter">
+          <div class="rw-stat-counter-num">10 sec</div>
+          <p>is how long a customer takes to decide if they&rsquo;re staying on your site</p>
+        </div>
+      </div>
+
+      <p style="text-align: center; margin-top: 32px; font-size: 0.92rem; font-weight: 700; color: var(--text);">Your website is either your best salesperson or your worst first impression. There&rsquo;s no in-between.</p>
+
+      <div class="rw-scorecard-cta">
+        <h3>Not Ready for a Full Redesign? Start Here.</h3>
+        <p>Download our free Restaurant Website Scorecard &mdash; a quick self-assessment that shows you exactly how your website stacks up.</p>
+        <div class="rw-scorecard-form">
+          <input type="email" class="input" placeholder="Your email address" />
+          <a href="contact.html" class="btn btn-primary">Download Scorecard</a>
+        </div>
+        <p style="font-size: 0.74rem; color: var(--text-soft); margin-top: 10px; margin-bottom: 0;">Takes 3 minutes. No sales pitch. Just clarity on whether your website is helping or hurting.</p>
+      </div>
+    </section>
+
+    <!-- 15. WHO THIS IS FOR -->
+    <section class="card-overlay lib-section" id="who-its-for">
+      <div class="lib-section-label">Is This Right For You</div>
+      <h2 class="lib-section-title">Is a New Restaurant Website Right for You?</h2>
+
+      <div class="rw-fit-grid">
+        <div class="rw-fit-card --yes">
+          <h3>This is built for you if:</h3>
+          <div class="rw-fit-item"><span class="rw-fit-icon">&#10003;</span><p>Your website is more than 3 years old and looks like it</p></div>
+          <div class="rw-fit-item"><span class="rw-fit-icon">&#10003;</span><p>Your menu is a PDF that customers can&rsquo;t read on their phones</p></div>
+          <div class="rw-fit-item"><span class="rw-fit-icon">&#10003;</span><p>You&rsquo;ve never had anyone optimize your site for Google</p></div>
+          <div class="rw-fit-item"><span class="rw-fit-icon">&#10003;</span><p>Customers tell you they couldn&rsquo;t find your menu, hours, or reservation link</p></div>
+          <div class="rw-fit-item"><span class="rw-fit-icon">&#10003;</span><p>Your website looks nothing like the experience you deliver in person</p></div>
+          <div class="rw-fit-item"><span class="rw-fit-icon">&#10003;</span><p>You&rsquo;re opening a new restaurant and need a site that converts from day one</p></div>
+          <div class="rw-fit-item"><span class="rw-fit-icon">&#10003;</span><p>You&rsquo;re a multi-location restaurant that needs location-specific pages</p></div>
+          <div class="rw-fit-item"><span class="rw-fit-icon">&#10003;</span><p>You want a website that actually drives reservations and orders, not just exists</p></div>
+        </div>
+        <div class="rw-fit-card --no">
+          <h3>This is probably not for you if:</h3>
+          <div class="rw-fit-item"><span class="rw-fit-icon">&#10007;</span><p>You just need a single landing page (we build full restaurant websites)</p></div>
+          <div class="rw-fit-item"><span class="rw-fit-icon">&#10007;</span><p>You want the cheapest option available (we build for quality and conversion, not lowest price)</p></div>
+          <div class="rw-fit-item"><span class="rw-fit-icon">&#10007;</span><p>You&rsquo;re not willing to invest in professional photography (great websites need great visuals)</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 16. RISK REVERSAL -->
+    <section class="card-overlay --dark lib-section" id="risk-reversal">
+      <div class="lib-section-label">Zero Risk</div>
+      <h2 class="lib-section-title">What You Get When You Work With Us</h2>
+
+      <div class="rw-risk-grid">
+        <div class="rw-risk-card">
+          <div class="rw-risk-card-icon"><i data-lucide="ban"></i></div>
+          <h4>No Templates</h4>
+          <p>Every restaurant website is custom-designed for your brand, your food, and your customers.</p>
+        </div>
+        <div class="rw-risk-card">
+          <div class="rw-risk-card-icon"><i data-lucide="credit-card"></i></div>
+          <h4>No Deposit Until Approved</h4>
+          <p>We don&rsquo;t ask for money before you&rsquo;ve seen the plan and agreed it&rsquo;s right.</p>
+        </div>
+        <div class="rw-risk-card">
+          <div class="rw-risk-card-icon"><i data-lucide="search"></i></div>
+          <h4>SEO Included</h4>
+          <p>We don&rsquo;t build a pretty website then tell you to hire someone else for SEO. It&rsquo;s built in.</p>
+        </div>
+        <div class="rw-risk-card">
+          <div class="rw-risk-card-icon"><i data-lucide="camera"></i></div>
+          <h4>Photography Integrated</h4>
+          <p>If you&rsquo;re on a content retainer, your professional food photography goes directly into your website.</p>
+        </div>
+        <div class="rw-risk-card">
+          <div class="rw-risk-card-icon"><i data-lucide="headphones"></i></div>
+          <h4>Ongoing Support</h4>
+          <p>Menu changes, seasonal updates, new pages &mdash; we handle it so you don&rsquo;t have to learn a CMS.</p>
+        </div>
+        <div class="rw-risk-card">
+          <div class="rw-risk-card-icon"><i data-lucide="file-x"></i></div>
+          <h4>No Long-Term Contracts</h4>
+          <p>For ongoing management, it&rsquo;s month-to-month. We earn your trust with the work.</p>
+        </div>
+      </div>
+
+      <div class="rw-keep-card">
+        <h3>What You Keep If You Ever Leave</h3>
+        <ul class="rw-keep-list">
+          <li><i data-lucide="check"></i> Your website code and design &mdash; fully yours, no platform lock-in</li>
+          <li><i data-lucide="check"></i> Your domain name &mdash; registered in your name, not ours</li>
+          <li><i data-lucide="check"></i> Your content &mdash; every photo, every page, every word of copy</li>
+          <li><i data-lucide="check"></i> Your SEO optimizations &mdash; title tags, schema, internal linking stay in place</li>
+          <li><i data-lucide="check"></i> Your analytics data &mdash; full access to Google Analytics and Search Console</li>
+          <li><i data-lucide="check"></i> Your integrations &mdash; reservation and ordering systems stay connected</li>
+        </ul>
+        <p class="rw-keep-bold">We don&rsquo;t hold websites hostage. If you leave, everything goes with you.</p>
+      </div>
+
+      <div class="rw-limited-banner">
+        <h4>We Only Take On a Limited Number of New Website Projects Per Month</h4>
+        <p>Every website we build is custom. We physically shoot your food. We write your content. We design for your specific brand and customer.</p>
+        <a href="contact.html" class="btn btn-primary">Check Availability for This Month</a>
+      </div>
+    </section>
+
+    <!-- 17. FAQ -->
+    <section class="card-overlay --dark lib-section" id="faq">
+      <div class="rw-faq-header">
+        <div class="lib-section-label">FAQ</div>
+        <h2 class="rw-faq-hero-heading">Frequently Asked Questions</h2>
+        <p class="rw-faq-subtitle">Everything you need to know about restaurant website design and working with Button Up Media.</p>
+      </div>
+      <div class="rw-faq-grid">
+        <div class="rw-faq-list">
+          <details class="rw-faq-item">
+            <summary><span><span class="rw-faq-count">01</span>Why do restaurants need a website?</span></summary>
+            <div class="rw-faq-answer">
+              <p><strong style="color: var(--text);">77% of diners</strong> visit a restaurant&rsquo;s website before deciding where to eat. It&rsquo;s where Google sends people who search for your cuisine, where your advertising traffic lands, and the platform for online reservations and ordering.</p>
+              <p style="margin-top: 8px;">Without a website, you&rsquo;re relying entirely on third-party platforms to represent your brand. A website gives you control over the customer experience and the conversion path.</p>
+            </div>
+          </details>
+          <details class="rw-faq-item">
+            <summary><span><span class="rw-faq-count">02</span>What should a restaurant website include?</span></summary>
+            <div class="rw-faq-answer">
+              <p>At minimum: a <strong style="color: var(--text);">mobile-optimized HTML menu</strong> (not PDF) with photos and pricing, reservation or online ordering integration, location and hours with Google Maps, professional food photography, an about page, SEO fundamentals, fast load speed (under 3 seconds), and contact information on every page.</p>
+            </div>
+          </details>
+          <details class="rw-faq-item">
+            <summary><span><span class="rw-faq-count">03</span>How much does a restaurant website cost?</span></summary>
+            <div class="rw-faq-answer">
+              <p><strong style="color: var(--text);">Single-location:</strong> $3,000 &ndash; $8,000. <strong style="color: var(--text);">Multi-location:</strong> $8,000 &ndash; $20,000+. <strong style="color: var(--text);">Ongoing management:</strong> $300 &ndash; $800/month.</p>
+              <p style="margin-top: 8px;">Cost depends on number of pages, custom functionality, photography needs, and integration requirements. Run the free website audit on this page to see where your current site stands, then contact us for a custom quote.</p>
+            </div>
+          </details>
+          <details class="rw-faq-item">
+            <summary><span><span class="rw-faq-count">04</span>How long does it take to build a restaurant website?</span></summary>
+            <div class="rw-faq-answer">
+              <p><strong style="color: var(--text);">Single-location:</strong> 4&ndash;6 weeks. <strong style="color: var(--text);">Multi-location:</strong> 6&ndash;10 weeks depending on complexity. Rush projects can be expedited with advance planning.</p>
+              <p style="margin-top: 8px;">The biggest variable is content &mdash; if professional photography and copywriting are needed, that adds time.</p>
+            </div>
+          </details>
+          <details class="rw-faq-item">
+            <summary><span><span class="rw-faq-count">05</span>Do you integrate with OpenTable, Resy, and Toast?</span></summary>
+            <div class="rw-faq-answer">
+              <p><strong style="color: var(--text);">Yes.</strong> We integrate with all major restaurant technology platforms: OpenTable, Resy, Yelp Reservations, Toast, ChowNow, Square, DoorDash Storefront, Clover, Mailchimp, Klaviyo, and more. If you use a platform not listed, we&rsquo;ll make it work.</p>
+            </div>
+          </details>
+          <details class="rw-faq-item">
+            <summary><span><span class="rw-faq-count">06</span>Will my restaurant website be optimized for Google?</span></summary>
+            <div class="rw-faq-answer">
+              <p><strong style="color: var(--text);">Every website we build includes SEO from day one:</strong> title tags and meta descriptions on every page, restaurant schema markup, location-targeted keyword strategy, HTML menus that Google can index, Core Web Vitals optimization, and Google Search Console setup.</p>
+              <p style="margin-top: 8px;">For a comprehensive SEO strategy beyond on-page optimization, explore our <a href="restaurant-seo.html" style="color: var(--gold); font-weight: 600;">restaurant SEO services</a>.</p>
+            </div>
+          </details>
+          <details class="rw-faq-item">
+            <summary><span><span class="rw-faq-count">07</span>Can you redesign my existing restaurant website?</span></summary>
+            <div class="rw-faq-answer">
+              <p><strong style="color: var(--text);">Yes.</strong> Most of our projects are redesigns. We audit your current site&rsquo;s performance, preserve existing SEO equity with proper redirects, migrate and improve your content, and launch with zero downtime.</p>
+            </div>
+          </details>
+          <details class="rw-faq-item">
+            <summary><span><span class="rw-faq-count">08</span>Do I need professional photography for my website?</span></summary>
+            <div class="rw-faq-answer">
+              <p><strong style="color: var(--text);">Strongly recommended.</strong> Restaurants with professional food photography see significantly higher engagement and conversion rates.</p>
+              <p style="margin-top: 8px;"><strong style="color: var(--text);">Good news:</strong> If you&rsquo;re working with Button Up Media for <a href="social-media-marketing.html" style="color: var(--gold); font-weight: 600;">social media content creation</a>, your professional photo shoots are already happening. We use those same photos on your website &mdash; no extra shoot needed.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 18. FOOTER CTA -->
+    <section class="card-overlay lib-section" id="cta">
+      <div class="rw-cta-scene">
+        <div class="rw-cta-orb"></div>
+        <div class="rw-cta-orb"></div>
+        <div class="rw-cta-orb"></div>
+        <pixel-canvas data-gap="10" data-speed="20" data-colors="#CA8A04, #A16207, #F2D688" data-no-focus></pixel-canvas>
+
+        <h2>Your Website Should Be Your Hardest-Working Employee</h2>
+        <p>It works 24/7. It never calls in sick. And it&rsquo;s the first thing most customers see before deciding whether your restaurant is worth their time.</p>
+
+        <ul class="rw-cta-audit-list">
+          <li><i data-lucide="check-circle"></i> Run the free website audit to see where you stand</li>
+          <li><i data-lucide="check-circle"></i> Get a custom strategy for your restaurant</li>
+          <li><i data-lucide="check-circle"></i> No deposit until you approve the plan</li>
+          <li><i data-lucide="check-circle"></i> No contracts, no hidden fees</li>
+        </ul>
+
+        <div class="rw-cta-actions">
+          <a href="#website-audit" class="btn btn-primary">Run Your Free Website Audit</a>
+          <a href="contact.html" class="btn btn-ghost">Skip to a Strategy Call</a>
+        </div>
+
+        <div class="rw-cta-meta">
+          <p>Or call us directly: <a href="tel:+17867409498">(786) 740-9498</a></p>
+          <p>No contracts. No obligation. No deposit until you approve the plan.</p>
+          <p style="color: var(--gold); font-size: 0.76rem; margin-top: 8px;">Limited project slots available each month.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 19. FOOTER -->
+    <footer class="lib-section footer-demo">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <strong style="font-family: var(--font-display); font-size: 1rem;">Button Up Media</strong>
+          <p>Button Up Media is a restaurant marketing agency in Florida. We help restaurants grow with social media, website design, SEO, and advertising.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="social-media-marketing.html">Social Media Marketing</a>
+          <a href="restaurant-seo.html">Restaurant SEO</a>
+          <a href="restaurant-advertising.html">Restaurant Advertising</a>
+          <a href="restaurant-website-design.html">Website Design</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="about.html">About</a>
+          <a href="case-studies.html">Case Studies</a>
+          <a href="#faq">FAQ</a>
+          <a href="contact.html">Free Consultation</a>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="mailto:contact@buttonupmedia.com">contact@buttonupmedia.com</a>
+          <a href="tel:+17867409498">(786) 740-9498</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Button Up Media. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="mailto:contact@buttonupmedia.com">contact@buttonupmedia.com</a>
+          <a href="tel:+17867409498">(786) 740-9498</a>
+        </div>
+      </div>
+    </footer>
+
+  </div><!-- .page -->
+
+  <!-- GSAP + Animations -->
+  <script src="shared.js"></script>
+  <script>
+  (function() {
+    "use strict";
+    gsap.registerPlugin(ScrollTrigger);
+
+    /* ── Hero gauge animations ── */
+    document.querySelectorAll('.rw-gauge-fill[data-gauge-target]').forEach(circle => {
+      const target = parseFloat(circle.getAttribute('data-gauge-target'));
+      gsap.to(circle, {
+        strokeDashoffset: target,
+        duration: 1.8,
+        delay: 0.5,
+        ease: "power2.out"
+      });
+    });
+
+    document.querySelectorAll('.rw-gauge-value[data-gauge-count]').forEach(el => {
+      const target = parseInt(el.getAttribute('data-gauge-count'));
+      gsap.to(el, {
+        innerText: target,
+        duration: 1.8,
+        delay: 0.5,
+        ease: "power2.out",
+        snap: { innerText: 1 },
+        onUpdate: function() {
+          el.textContent = Math.round(parseFloat(el.innerText));
+        }
+      });
+    });
+
+    /* ── Hero word reveal ── */
+    document.querySelectorAll('.rw-word-inner').forEach((word, i) => {
+      gsap.from(word, {
+        yPercent: 110,
+        duration: 0.8,
+        delay: 0.1 + i * 0.06,
+        ease: "power3.out"
+      });
+    });
+
+    /* ── Hero dashboard stagger ── */
+    gsap.from('.rw-gauge-card', {
+      y: 40,
+      opacity: 0,
+      duration: 0.7,
+      stagger: 0.12,
+      delay: 0.3,
+      ease: "power2.out"
+    });
+
+    /* ── Trust ribbon counters ── */
+    document.querySelectorAll('.rw-trust-num[data-count-to]').forEach(el => {
+      const target = parseInt(el.getAttribute('data-count-to'));
+      const suffix = el.getAttribute('data-suffix') || '';
+      ScrollTrigger.create({
+        trigger: el,
+        start: "top 85%",
+        once: true,
+        onEnter: () => {
+          gsap.to(el, {
+            innerText: target,
+            duration: 1.5,
+            ease: "power2.out",
+            snap: { innerText: 1 },
+            onUpdate() {
+              el.textContent = Math.round(parseFloat(el.innerText)) + suffix;
+            }
+          });
+        }
+      });
+    });
+
+    /* ── Trust ribbon fade up ── */
+    gsap.from('.rw-trust', {
+      y: 30,
+      opacity: 0,
+      duration: 0.8,
+      delay: 0.8,
+      ease: "power2.out"
+    });
+
+    /* ── Stat card counters ── */
+    document.querySelectorAll('.rw-stat-num[data-count-to]').forEach(el => {
+      const target = parseInt(el.getAttribute('data-count-to'));
+      const suffix = el.getAttribute('data-suffix') || '';
+      ScrollTrigger.create({
+        trigger: el,
+        start: "top 85%",
+        once: true,
+        onEnter: () => {
+          gsap.to(el, {
+            innerText: target,
+            duration: 1.5,
+            ease: "power2.out",
+            snap: { innerText: 1 },
+            onUpdate() {
+              el.textContent = Math.round(parseFloat(el.innerText)) + suffix;
+            }
+          });
+        }
+      });
+    });
+
+    /* ── Stat cards + action items stagger ── */
+    gsap.utils.toArray('.rw-stat-card, .rw-action-item, .rw-pull-quote, .rw-callout').forEach(el => {
+      gsap.from(el, {
+        y: 30,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+        scrollTrigger: { trigger: el, start: "top 88%" }
+      });
+    });
+
+    /* ── Problem tabs ── */
+    document.querySelectorAll('.rw-problem-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tab = btn.getAttribute('data-problem-tab');
+        document.querySelectorAll('.rw-problem-tab-btn').forEach(b => b.classList.remove('--active'));
+        document.querySelectorAll('.rw-problem-tab-panel').forEach(p => p.classList.remove('--active'));
+        btn.classList.add('--active');
+        const panel = document.querySelector(`[data-problem-panel="${tab}"]`);
+        if (panel) {
+          panel.classList.add('--active');
+          lucide.createIcons();
+        }
+      });
+    });
+
+    /* ── Journey steps stagger ── */
+    gsap.from('.rw-journey-step', {
+      y: 30,
+      opacity: 0,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: "power2.out",
+      scrollTrigger: { trigger: '.rw-journey', start: "top 80%" }
+    });
+
+    gsap.utils.toArray('.rw-priority-item').forEach(el => {
+      gsap.from(el, {
+        y: 20,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out",
+        scrollTrigger: { trigger: el, start: "top 90%" }
+      });
+    });
+
+    /* ── Reduced motion check ── */
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    /* ── HORIZONTAL SCROLL (Services) ── */
+    const hscrollPin = document.querySelector(".rw-hscroll-pin");
+    const hscrollTrack = document.querySelector(".rw-hscroll-track");
+    const hscrollPanels = gsap.utils.toArray(".rw-hscroll-panel");
+    const hscrollDots = gsap.utils.toArray(".rw-hscroll-dot");
+    const hscrollFill = document.querySelector(".rw-hscroll-progress-fill");
+
+    if (hscrollPin && hscrollTrack && hscrollPanels.length > 1) {
+      const totalPanels = hscrollPanels.length;
+      const getScrollDistance = () => (totalPanels - 1) * window.innerWidth;
+
+      const hscrollTL = gsap.to(hscrollTrack, {
+        x: () => -getScrollDistance(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: hscrollPin,
+          pin: true,
+          anticipatePin: 1,
+          scrub: 1.5,
+          end: () => "+=" + getScrollDistance(),
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            if (hscrollFill) gsap.set(hscrollFill, { width: (self.progress * 100) + "%" });
+            const activeIndex = Math.round(self.progress * (totalPanels - 1));
+            hscrollDots.forEach((dot, i) => dot.classList.toggle("--active", i === activeIndex));
+          },
+        },
+      });
+
+      // Per-panel parallax animations
+      hscrollPanels.forEach((panel, i) => {
+        const copy = panel.querySelector(".rw-hscroll-copy");
+        const deliverables = panel.querySelector(".rw-hscroll-deliverables");
+        const num = panel.querySelector(".rw-hscroll-num");
+        const items = panel.querySelectorAll(".rw-deliverable");
+
+        if (copy && i > 0) {
+          gsap.fromTo(copy,
+            { x: 80, opacity: 0 },
+            { x: 0, opacity: 1, ease: "power3.out", immediateRender: false,
+              scrollTrigger: { trigger: panel, containerAnimation: hscrollTL, start: "left 80%", end: "left 30%", scrub: 1 }
+            }
+          );
+        }
+        if (copy) {
+          gsap.fromTo(copy,
+            { x: 0, opacity: 1 },
+            { x: -60, opacity: 0, ease: "power2.in", immediateRender: false,
+              scrollTrigger: { trigger: panel, containerAnimation: hscrollTL, start: "right 60%", end: "right 20%", scrub: 1 }
+            }
+          );
+        }
+        if (deliverables && i > 0) {
+          gsap.fromTo(deliverables,
+            { scale: 0.88, opacity: 0 },
+            { scale: 1, opacity: 1, ease: "power3.out", immediateRender: false,
+              scrollTrigger: { trigger: panel, containerAnimation: hscrollTL, start: "left 75%", end: "left 25%", scrub: 1 }
+            }
+          );
+        }
+        if (items.length && i > 0) {
+          gsap.fromTo(items,
+            { y: 20, opacity: 0 },
+            { y: 0, opacity: 1, stagger: 0.06, ease: "power2.out", immediateRender: false,
+              scrollTrigger: { trigger: panel, containerAnimation: hscrollTL, start: "left 70%", end: "left 30%", scrub: 1 }
+            }
+          );
+        }
+        if (num) {
+          gsap.fromTo(num,
+            { x: -60, opacity: i === 0 ? 1 : 0 },
+            { x: 60, opacity: 1, ease: "none", immediateRender: false,
+              scrollTrigger: { trigger: panel, containerAnimation: hscrollTL, start: "left right", end: "right left", scrub: 1 }
+            }
+          );
+        }
+      });
+
+      // Gold dust particles
+      if (!prefersReducedMotion) {
+        hscrollPanels.forEach(panel => {
+          for (let j = 0; j < 20; j++) {
+            const p = document.createElement("div");
+            p.className = "rw-hscroll-particle";
+            const size = Math.random() * 3 + 1.5;
+            const gold = Math.random() > 0.4
+              ? "rgba(202,138,4," + (0.3 + Math.random() * 0.4) + ")"
+              : "rgba(242,214,136," + (0.2 + Math.random() * 0.3) + ")";
+            p.style.width = size + "px";
+            p.style.height = size + "px";
+            p.style.left = (5 + Math.random() * 90) + "%";
+            p.style.top = (10 + Math.random() * 80) + "%";
+            p.style.animationDelay = -(Math.random() * 14) + "s";
+            p.style.animationDuration = (8 + Math.random() * 12) + "s";
+            p.style.background = gold;
+            p.style.boxShadow = "0 0 " + (size * 4) + "px " + gold;
+            panel.appendChild(p);
+          }
+        });
+      }
+
+      // Drift glow orbs
+      hscrollPanels.forEach(panel => {
+        const glow = panel.querySelector(".rw-hscroll-glow");
+        if (glow) {
+          gsap.fromTo(glow,
+            { x: "-60%", y: "-50%", scale: 0.8 },
+            { x: "-40%", y: "-50%", scale: 1.2, ease: "none", immediateRender: false,
+              scrollTrigger: { trigger: panel, containerAnimation: hscrollTL, start: "left right", end: "right left", scrub: 1 }
+            }
+          );
+        }
+      });
+    }
+
+    /* ── Comparison rows, tier cards, testimonial, pricing stagger ── */
+    gsap.utils.toArray('.rw-compare-row, .rw-tier-card, .rw-testimonial, .rw-pricing-card, .rw-pricing-factor, .rw-crosssell, .rw-stat-counter, .rw-fit-card, .rw-risk-card, .rw-keep-card, .rw-limited-banner, .rw-faq-item, .rw-cta-scene, .rw-scorecard-cta').forEach(el => {
+      gsap.from(el, {
+        y: 25,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out",
+        scrollTrigger: { trigger: el, start: "top 88%" }
+      });
+    });
+
+    /* ── TIMELINE: Scroll-driven progress (bidirectional) ── */
+    const timelineSteps = document.querySelectorAll(".rw-timeline-step");
+    const timelineFill = document.querySelector(".rw-timeline-line-fill");
+    const progressRingFill = document.querySelector(".rw-progress-ring-fill");
+    const progressText = document.querySelector(".rw-progress-ring-text");
+    const progressName = document.querySelector(".rw-progress-step-name");
+    const progressDesc = document.querySelector(".rw-progress-step-desc");
+    const timelineSticky = document.querySelector(".rw-timeline-sticky");
+    const timelineSection = document.querySelector("#process .rw-timeline");
+    const stepNames = ["Discovery & Audit", "Strategy & Wireframing", "Design", "Development & Integration", "Launch & Optimize"];
+    const stepDescs = ["Understanding your restaurant", "Mapping the strategy", "Custom design for your brand", "Building fast & clean", "Live and growing"];
+    const circumference = 2 * Math.PI * 60;
+
+    if (timelineSteps.length && timelineFill) {
+      if (timelineSticky && timelineSection && window.innerWidth > 900) {
+        ScrollTrigger.create({
+          trigger: timelineSection,
+          start: "top 100px",
+          end: "bottom bottom",
+          pin: timelineSticky,
+          pinSpacing: false,
+        });
+      }
+
+      let lastActive = 0;
+      function updateProgress(activeIndex) {
+        if (activeIndex === lastActive) return;
+        lastActive = activeIndex;
+        const total = timelineSteps.length;
+        const pct = (activeIndex / total) * 100;
+
+        gsap.to(timelineFill, { height: pct + "%", duration: 0.4, ease: "power2.out" });
+
+        if (progressRingFill) {
+          gsap.to(progressRingFill, {
+            strokeDashoffset: circumference - (circumference * activeIndex / total),
+            duration: 0.5,
+            ease: "power2.out",
+          });
+        }
+
+        if (progressText) progressText.textContent = activeIndex + "/5";
+        if (progressName) progressName.textContent = stepNames[activeIndex - 1] || "Ready";
+        if (progressDesc) progressDesc.textContent = stepDescs[activeIndex - 1] || "Scroll to begin";
+
+        timelineSteps.forEach((s, i) => {
+          s.classList.toggle("--active", i < activeIndex);
+        });
+      }
+
+      timelineSteps.forEach((step, i) => {
+        ScrollTrigger.create({
+          trigger: step,
+          start: "top 65%",
+          end: "bottom 35%",
+          onEnter: () => updateProgress(i + 1),
+          onLeaveBack: () => updateProgress(i),
+        });
+      });
+    }
+
+    /* ── By The Numbers stat counters ── */
+    document.querySelectorAll('.rw-stat-counter-num[data-count-to]').forEach(el => {
+      const target = parseInt(el.getAttribute('data-count-to'));
+      const suffix = el.getAttribute('data-suffix') || '';
+      ScrollTrigger.create({
+        trigger: el,
+        start: "top 85%",
+        once: true,
+        onEnter: () => {
+          gsap.to(el, {
+            innerText: target,
+            duration: 1.6,
+            ease: "power2.out",
+            snap: { innerText: 1 },
+            onUpdate() {
+              el.textContent = Math.round(parseFloat(el.innerText)) + suffix;
+            }
+          });
+        }
+      });
+    });
+
+    /* ── Init Lucide ── */
+    lucide.createIcons();
+  })();
+  </script>
+</body>
+</html>

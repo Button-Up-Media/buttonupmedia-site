@@ -1,0 +1,2334 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurant Advertising | Google Ads & Facebook Ads - Button Up Media</title>
+  <meta name="description" content="Restaurant advertising that drives real customers. Google Ads, Facebook Ads & local targeting designed for restaurants. Measurable ROI with Button Up Media." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Epilogue:wght@400;500;600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+  <!-- Pixel Canvas -->
+  <script src="pixel-canvas.js"></script>
+
+  <!-- Base styles -->
+  <link rel="stylesheet" href="shared.css" />
+
+  <!-- Schema: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://buttonupmedia.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Restaurant Advertising", "item": "https://buttonupmedia.com/restaurant-advertising/" }
+    ]
+  }
+  </script>
+
+  <!-- Schema: Service -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Restaurant Advertising",
+    "description": "Google Ads, Facebook Ads & local targeting campaigns designed specifically for restaurants. Measurable ROI with full conversion tracking.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Button Up Media",
+      "url": "https://buttonupmedia.com"
+    },
+    "areaServed": "United States",
+    "serviceType": "Digital Advertising"
+  }
+  </script>
+
+  <!-- Schema: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do Google Ads work for restaurants?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Google Ads is one of the most effective advertising channels for restaurants because it captures customers with immediate intent. In 2025, Button Up Media's Google Ads campaigns across five restaurant properties generated over $3.5 million in tracked revenue — a portfolio-wide return of approximately 12X." }
+      },
+      {
+        "@type": "Question",
+        "name": "How much should a restaurant spend on advertising?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Most independent restaurants see strong results investing between $1,000 and $3,000 per month in digital advertising. Multi-location groups typically invest $3,000 to $15,000 or more per month. The most important factor is not the total budget but the return on that budget." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best way to advertise a restaurant?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The most effective restaurant advertising strategy combines Google Ads to capture high-intent search traffic with Facebook and Instagram ads to build awareness and retarget interested customers. Adding seasonal and event-specific campaigns creates predictable revenue spikes." }
+      },
+      {
+        "@type": "Question",
+        "name": "Should restaurants use Facebook Ads or Google Ads?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Both serve different purposes and work best together. Google Ads captures demand — people who are already searching for a restaurant. Facebook and Instagram Ads create demand — putting your restaurant in front of people who match your ideal customer profile." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you track restaurant advertising ROI?",
+        "acceptedAnswer": { "@type": "Answer", "text": "We implement full conversion tracking on every campaign. This includes tracking reservation submissions, private event inquiry forms, phone calls from ads, direction requests on Google Maps, and online ordering clicks. Each conversion is assigned a value allowing us to calculate cost per conversion and ROAS." }
+      },
+      {
+        "@type": "Question",
+        "name": "What makes restaurant advertising different from other industries?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Restaurant advertising operates on shorter decision cycles, hyper-local targeting, and highly seasonal demand patterns. Ad copy, landing pages, and calls to action need to match the urgency of a customer deciding where to eat in minutes, not weeks." }
+      },
+      {
+        "@type": "Question",
+        "name": "How quickly will I see results from restaurant advertising?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Google Ads campaigns typically begin generating impressions and clicks within 24-48 hours. Meaningful conversion data usually builds within the first 2-4 weeks. Most restaurants see consistent, scalable results within 60-90 days of campaign launch." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you manage advertising for multiple restaurant locations?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Button Up Media currently manages Google Ads campaigns across multiple restaurant properties simultaneously. Each location gets its own campaign structure with location-specific targeting, keywords, and budget allocation." }
+      }
+    ]
+  }
+  </script>
+
+  <!-- ═══ RESTAURANT ADVERTISING — ALL CSS SELF-CONTAINED ═══ -->
+  <style>
+    /* ── Global body text 17px ── */
+    .ra-body-text,
+    .ra-split-copy p,
+    .ra-case-takeaway,
+    #why-ads p,
+    #approach p,
+    #budget p,
+    #paid-vs-organic p,
+    #who-its-for p {
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    /* ── Nav: fixed ── */
+    .lib-nav {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+    }
+
+    /* ══════════════════════════════════════
+       1. HERO — 2-col split
+       ══════════════════════════════════════ */
+    .ra-hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: #050608;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+    }
+    .ra-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 50%, rgba(202,138,4,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 80% at 80% 30%, rgba(202,138,4,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .ra-hero-inner {
+      position: relative;
+      z-index: 2;
+      width: min(1200px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 140px 0 100px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .ra-hero-copy { padding-bottom: 32px; }
+    .ra-hero-copy .hero-badge {
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+    .ra-hero-copy h1 {
+      font-family: var(--font-hero);
+      font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+      line-height: 1.08;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 24px;
+    }
+    .ra-hero-copy h1 .accent-serif {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-weight: 500;
+      color: var(--gold);
+    }
+    .ra-hero-copy > p {
+      font-size: 1.02rem;
+      color: var(--text-dim);
+      max-width: 50ch;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .ra-hero-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .ra-hero-cta .flex-row { gap: 12px; }
+    .ra-hero-trust {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .ra-hero-trust span {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* Hero stat dashboard */
+    .ra-hero-dashboard {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .ra-dash-card {
+      padding: 24px;
+      background: rgba(10,10,10,0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,248,235,0.06);
+      border-radius: 16px;
+      text-align: center;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .ra-dash-card:hover {
+      border-color: rgba(226,168,77,0.2);
+      transform: translateY(-2px);
+    }
+    .ra-dash-num {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .ra-dash-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-soft);
+      line-height: 1.3;
+    }
+    .ra-dash-card.--wide {
+      grid-column: 1 / -1;
+      padding: 20px 24px;
+    }
+    .ra-dash-card.--wide p {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+      margin-top: 4px;
+    }
+
+    /* ══════════════════════════════════════
+       2. WHY ADS — 2-Col Split (text ↔ image alternating)
+       ══════════════════════════════════════ */
+    .ra-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+      margin-top: 56px;
+    }
+    .ra-split.--reverse { direction: rtl; }
+    .ra-split.--reverse > * { direction: ltr; }
+    .ra-split-copy h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-top: 32px;
+      margin-bottom: 12px;
+    }
+    .ra-split-copy p,
+    .ra-split-copy .ra-bullets li {
+      font-size: 17px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.9);
+    }
+    .ra-split-copy p strong { color: var(--text); }
+    .ra-pull-quote {
+      margin: 32px 0;
+      padding: 28px 32px;
+      border-left: 3px solid var(--gold);
+      background: rgba(226,168,77,0.03);
+      border-radius: 0 16px 16px 0;
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--text);
+      line-height: 1.6;
+    }
+    /* Bullet lists */
+    .ra-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0;
+    }
+    .ra-bullets li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.92);
+    }
+    .ra-bullets li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+    .ra-bullets li strong {
+      color: var(--text, #fff);
+    }
+    .ra-bullets.--compact {
+      margin: 12px 0;
+    }
+    .ra-bullets.--compact li {
+      margin-bottom: 6px;
+      font-size: 0.88rem;
+    }
+    /* Image placeholder */
+    .ra-img-placeholder {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 20px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(23,23,23,0.8) 0%, rgba(10,10,10,0.95) 100%);
+      border: 1px solid rgba(255,248,235,0.06);
+      display: grid;
+      place-items: center;
+    }
+    .ra-img-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .ra-img-placeholder.--empty::after {
+      content: attr(data-label);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-soft);
+      opacity: 0.5;
+    }
+    .ra-img-placeholder.--empty::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 30% 40%, rgba(202,138,4,0.06) 0%, transparent 50%),
+        radial-gradient(circle at 70% 60%, rgba(202,138,4,0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* ══════════════════════════════════════
+       3. WHY ADS FAIL — 3 glass cards
+       ══════════════════════════════════════ */
+    .ra-fail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .ra-fail-card {
+      padding: 36px 28px;
+      background: linear-gradient(180deg, rgba(23,23,23,0.65) 0%, rgba(17,17,17,0.82) 50%);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,248,235,0.08);
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), border-color 0.4s ease;
+      box-shadow:
+        inset 0 1px 1px 0 rgba(202,138,4,0.12),
+        inset 0 -1px 1px 0 rgba(0,0,0,0.15);
+    }
+    .ra-fail-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(202,138,4,0.18);
+    }
+    .ra-fail-card .glass-toplight {
+      position: absolute;
+      top: -2px;
+      left: 20%;
+      right: 20%;
+      height: 3px;
+      border-radius: 10px;
+      background: rgba(255,252,240,0.8);
+      box-shadow:
+        0 0 1px 0 rgba(202,138,4,0.4),
+        0 1px 4px 0 rgba(202,138,4,0.25),
+        0 4px 16px 0 rgba(202,138,4,0.12);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .ra-fail-card:hover .glass-toplight { opacity: 1; }
+    .ra-fail-card .glass-accents {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .ra-fail-card .glass-acc {
+      position: absolute;
+      inset: -3px;
+      background: rgba(255,248,235,0.015);
+      border-radius: 20px;
+      border: 1px solid rgba(255,248,235,0.06);
+      transform-origin: 20% 80%;
+      opacity: 0.5;
+    }
+    .ra-fail-card .glass-acc:nth-child(1) { animation: glassWobble 20s ease-in-out infinite; }
+    .ra-fail-card .glass-acc:nth-child(2) { animation: glassWobble 26s ease-in-out -8s infinite reverse; }
+    @keyframes glassWobble {
+      0%   { transform: translateX(3px) translateY(6px) rotate(-1.5deg); }
+      25%  { transform: translateX(-10px) translateY(-3px) rotate(2deg); }
+      50%  { transform: translateX(8px) translateY(5px) rotate(-2.5deg); }
+      75%  { transform: translateX(-8px) translateY(-6px) rotate(3deg); }
+      100% { transform: translateX(3px) translateY(6px) rotate(-1.5deg); }
+    }
+    .ra-fail-card i {
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: block;
+      position: relative;
+      z-index: 2;
+    }
+    .ra-fail-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 2;
+    }
+    .ra-fail-card p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.65;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ══════════════════════════════════════
+       4. APPROACH — 3 dramatic glass columns
+       ══════════════════════════════════════ */
+    .ra-approach-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 56px;
+      border: 1px solid rgba(255,248,235,0.06);
+      border-radius: 24px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.01);
+    }
+    .ra-approach-block {
+      padding: 52px 36px 48px;
+      position: relative;
+      border-right: 1px solid rgba(255,248,235,0.04);
+      transition: background 0.4s;
+    }
+    .ra-approach-block:last-child { border-right: none; }
+    .ra-approach-block:hover { background: rgba(226,168,77,0.03); }
+    /* Gold top accent on hover */
+    .ra-approach-block::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), rgba(202,138,4,0.4));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
+    }
+    .ra-approach-block:hover::before { transform: scaleX(1); }
+    .ra-approach-num {
+      font-family: var(--font-display);
+      font-size: 4.5rem;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+    .ra-approach-block h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+    .ra-approach-block p,
+    .ra-approach-block .ra-bullets li {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.7;
+      max-width: 32ch;
+    }
+
+    /* ══════════════════════════════════════
+       5. SERVICES — Alternating split panels
+       ══════════════════════════════════════ */
+    .ra-services-panels {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 56px;
+    }
+    .ra-svc-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      min-height: 440px;
+      border-top: 1px solid rgba(255,248,235,0.04);
+      position: relative;
+    }
+    .ra-svc-panel:last-child {
+      border-bottom: 1px solid rgba(255,248,235,0.04);
+    }
+    .ra-svc-panel.--reverse { direction: rtl; }
+    .ra-svc-panel.--reverse > * { direction: ltr; }
+    .ra-svc-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 56px 48px;
+      position: relative;
+    }
+    .ra-svc-num {
+      font-family: var(--font-display);
+      font-size: 6rem;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      background: linear-gradient(115deg, rgba(198,148,58,0.12) 0%, rgba(242,214,136,0.08) 50%, rgba(198,148,58,0.05) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      position: absolute;
+      top: 32px;
+      right: 40px;
+      user-select: none;
+      pointer-events: none;
+    }
+    .ra-svc-panel.--reverse .ra-svc-num {
+      right: auto;
+      left: 40px;
+    }
+    .ra-svc-copy i {
+      color: var(--gold);
+      margin-bottom: 28px;
+      display: block;
+    }
+    .ra-svc-copy h3 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+    .ra-svc-copy > p {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.7;
+      max-width: 42ch;
+      margin-bottom: 20px;
+    }
+    .ra-svc-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .ra-svc-feat {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--text-soft);
+      background: rgba(226,168,77,0.04);
+      border: 1px solid rgba(226,168,77,0.1);
+      border-radius: 100px;
+      letter-spacing: 0.02em;
+    }
+    .ra-svc-feat::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0.6;
+    }
+    .ra-svc-visual {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(15,15,15,1) 0%, rgba(10,10,10,1) 100%);
+    }
+    .ra-svc-visual .ra-img-placeholder {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: auto;
+      border-radius: 0;
+    }
+    /* Divider glow between panels */
+    .ra-svc-panel::after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 20%;
+      right: 20%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(202,138,4,0.15), transparent);
+      z-index: 1;
+    }
+
+    /* ══════════════════════════════════════
+       7. RESULTS — Hero stat block
+       ══════════════════════════════════════ */
+    .ra-results-card {
+      padding: 64px 48px;
+      background: linear-gradient(180deg, rgba(23,23,23,0.65) 0%, rgba(10,10,10,0.9) 100%);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(202,138,4,0.2);
+      border-radius: 24px;
+      text-align: center;
+      margin-top: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .ra-results-card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(202,138,4,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .ra-results-card .ra-results-subtitle {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      margin-bottom: 24px;
+      position: relative;
+    }
+    .ra-results-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .ra-results-stat .ra-stat-num {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .ra-results-stat .ra-stat-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-soft);
+    }
+    .ra-results-card .ra-results-tagline {
+      font-size: 1.05rem;
+      color: var(--text-dim);
+      max-width: 60ch;
+      margin: 0 auto;
+      line-height: 1.65;
+      position: relative;
+    }
+    .ra-results-card .ra-results-tagline strong {
+      color: var(--text);
+    }
+
+    /* ══════════════════════════════════════
+       8-12. CASE STUDIES — Featured + Grid
+       ══════════════════════════════════════ */
+
+    /* ── Featured case studies (top performers) ── */
+    .ra-cases-featured {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 56px;
+    }
+    .ra-case-featured {
+      position: relative;
+      padding: 44px 36px;
+      background: linear-gradient(180deg, rgba(23,23,23,0.6) 0%, rgba(13,13,13,0.85) 100%);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,248,235,0.06);
+      border-radius: 24px;
+      overflow: hidden;
+      isolation: isolate;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), border-color 0.4s;
+      box-shadow:
+        inset 0 1px 1px 0 rgba(202,138,4,0.1),
+        inset 0 -1px 1px 0 rgba(0,0,0,0.15);
+    }
+    .ra-case-featured:hover {
+      transform: translateY(-4px);
+      border-color: rgba(202,138,4,0.2);
+    }
+    /* Wobble accents */
+    .ra-case-featured .glass-accents {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .ra-case-featured .glass-acc {
+      position: absolute;
+      inset: -3px;
+      background: rgba(255,248,235,0.01);
+      border-radius: 24px;
+      border: 1px solid rgba(255,248,235,0.04);
+      transform-origin: 20% 80%;
+      opacity: 0.5;
+    }
+    .ra-case-featured .glass-acc:nth-child(1) { animation: glassWobble 20s ease-in-out infinite; }
+    .ra-case-featured .glass-acc:nth-child(2) { animation: glassWobble 26s ease-in-out -8s infinite reverse; }
+    /* Toplight */
+    .ra-case-featured .glass-toplight {
+      position: absolute;
+      top: -2px;
+      left: 20%;
+      right: 20%;
+      height: 3px;
+      border-radius: 10px;
+      background: rgba(255,252,240,0.8);
+      box-shadow:
+        0 0 1px 0 rgba(202,138,4,0.4),
+        0 1px 4px 0 rgba(202,138,4,0.25),
+        0 4px 16px 0 rgba(202,138,4,0.12);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      z-index: 3;
+    }
+    .ra-case-featured:hover .glass-toplight { opacity: 1; }
+    /* Giant ROAS watermark */
+    .ra-case-roas-bg {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      font-family: var(--font-display);
+      font-size: 8rem;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      background: linear-gradient(135deg, rgba(198,148,58,0.07) 0%, rgba(242,214,136,0.03) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      user-select: none;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ra-case-featured-header {
+      position: relative;
+      z-index: 2;
+      margin-bottom: 8px;
+    }
+    .ra-case-featured-header h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      line-height: 1.15;
+    }
+    .ra-case-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .ra-case-pill {
+      display: inline-flex;
+      padding: 3px 10px;
+      font-size: 0.62rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: rgba(226,168,77,0.06);
+      border: 1px solid rgba(226,168,77,0.12);
+      border-radius: 100px;
+      color: var(--gold);
+    }
+    .ra-case-meta {
+      font-size: 0.7rem;
+      color: var(--text-soft);
+      line-height: 1.4;
+      margin-bottom: 24px;
+    }
+    /* Featured stat grid — 2x2 */
+    .ra-case-stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(255,248,235,0.04);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 2;
+    }
+    .ra-case-stat {
+      text-align: center;
+      padding: 20px 12px;
+      background: rgba(10,10,10,0.5);
+    }
+    .ra-case-stat-num {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+    .ra-case-stat-label {
+      font-size: 0.6rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-soft);
+    }
+    .ra-case-takeaway {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+      position: relative;
+      z-index: 2;
+    }
+    .ra-case-takeaway strong { color: var(--text); }
+    /* Featured ROAS callout */
+    .ra-case-roas-callout {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 2;
+    }
+    .ra-case-roas-callout .ra-roas-num {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .ra-case-roas-callout .ra-roas-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-soft);
+    }
+
+    /* ── Supporting case studies (compact row) ── */
+    .ra-cases-supporting {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 24px;
+      border: 1px solid rgba(255,248,235,0.06);
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.01);
+    }
+    .ra-case-compact {
+      padding: 36px 28px;
+      border-right: 1px solid rgba(255,248,235,0.04);
+      position: relative;
+      transition: background 0.4s;
+    }
+    .ra-case-compact:last-child { border-right: none; }
+    .ra-case-compact:hover { background: rgba(226,168,77,0.02); }
+    .ra-case-compact::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), rgba(202,138,4,0.4));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
+    }
+    .ra-case-compact:hover::before { transform: scaleX(1); }
+    .ra-case-compact h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .ra-case-compact .ra-case-meta {
+      margin-bottom: 20px;
+    }
+    .ra-case-compact .ra-case-stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .ra-case-compact .ra-case-stat {
+      padding: 0;
+      background: none;
+      text-align: left;
+    }
+    .ra-case-compact .ra-case-stat-num {
+      font-size: 1.2rem;
+    }
+    .ra-case-compact .ra-case-takeaway {
+      font-size: 0.78rem;
+      line-height: 1.55;
+    }
+
+    /* ══════════════════════════════════════
+       13. BUDGET — 3 tier cards
+       ══════════════════════════════════════ */
+    .ra-budget-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .ra-budget-card {
+      padding: 36px 28px;
+      background: linear-gradient(180deg, rgba(23,23,23,0.55) 0%, rgba(17,17,17,0.72) 50%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,248,235,0.06);
+      border-radius: 20px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .ra-budget-card:hover {
+      border-color: rgba(226,168,77,0.15);
+      transform: translateY(-2px);
+    }
+    .ra-budget-card h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .ra-budget-range {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .ra-budget-card p {
+      font-size: 0.86rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    /* ══════════════════════════════════════
+       14. PAID VS ORGANIC — 2-col table
+       ══════════════════════════════════════ */
+    .ra-compare-table {
+      margin-top: 48px;
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border: 1px solid rgba(255,248,235,0.06);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .ra-compare-table th {
+      padding: 20px 24px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-align: left;
+      background: rgba(226,168,77,0.06);
+      border-bottom: 1px solid rgba(255,248,235,0.06);
+    }
+    .ra-compare-table th:first-child {
+      color: var(--gold);
+    }
+    .ra-compare-table td {
+      padding: 16px 24px;
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+      border-bottom: 1px solid rgba(255,248,235,0.04);
+      vertical-align: top;
+    }
+    .ra-compare-table tr:last-child td {
+      border-bottom: none;
+    }
+    .ra-compare-table td:first-child {
+      font-weight: 600;
+      color: var(--text-soft);
+      width: 120px;
+    }
+
+    /* ══════════════════════════════════════
+       15. WHO ITS FOR — 2-col check/x
+       ══════════════════════════════════════ */
+    .ra-fit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 48px;
+      align-items: start;
+    }
+    .ra-fit-col {
+      padding: 36px 32px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,248,235,0.06);
+    }
+    .ra-fit-col.--yes {
+      background: linear-gradient(180deg, rgba(226,168,77,0.04) 0%, rgba(23,23,23,0.5) 100%);
+      border-color: rgba(226,168,77,0.12);
+    }
+    .ra-fit-col.--no {
+      background: linear-gradient(180deg, rgba(23,23,23,0.4) 0%, rgba(15,15,15,0.6) 100%);
+    }
+    .ra-fit-col h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,248,235,0.06);
+    }
+    .ra-fit-col.--yes h3 { color: var(--gold); border-bottom-color: rgba(226,168,77,0.15); }
+    .ra-fit-col.--no h3 { color: rgba(255,255,255,0.8); }
+    .ra-fit-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .ra-fit-item:last-child { margin-bottom: 0; }
+    .ra-fit-icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      font-size: 0.88rem;
+      margin-top: 1px;
+    }
+    .ra-fit-col.--yes .ra-fit-icon { color: var(--gold); }
+    .ra-fit-col.--no .ra-fit-icon { color: rgba(255,255,255,0.5); }
+    .ra-fit-item p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.6;
+    }
+    .ra-fit-col.--no .ra-fit-item p { color: rgba(255,255,255,0.75); }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+       ══════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .ra-hero-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 120px 0 60px;
+      }
+      .ra-hero-dashboard {
+        max-width: 400px;
+      }
+      .ra-split { grid-template-columns: 1fr; gap: 32px; }
+      .ra-split.--reverse { direction: ltr; }
+      .ra-fail-grid { grid-template-columns: 1fr; }
+      .ra-approach-grid { grid-template-columns: 1fr; }
+      .ra-approach-block { border-right: none; border-bottom: 1px solid rgba(255,248,235,0.04); }
+      .ra-approach-block:last-child { border-bottom: none; }
+      .ra-approach-num { font-size: 3.2rem; }
+      .ra-svc-panel { grid-template-columns: 1fr; min-height: auto; }
+      .ra-svc-panel.--reverse { direction: ltr; }
+      .ra-svc-copy { padding: 36px 24px; }
+      .ra-svc-num { font-size: 4rem; top: 20px; right: 20px; }
+      .ra-svc-panel.--reverse .ra-svc-num { left: 20px; }
+      .ra-svc-visual { min-height: 260px; }
+      .ra-results-stats { grid-template-columns: 1fr 1fr; }
+      .ra-cases-featured { grid-template-columns: 1fr; }
+      .ra-case-roas-bg { font-size: 5rem; }
+      .ra-cases-supporting { grid-template-columns: 1fr; }
+      .ra-case-compact { border-right: none; border-bottom: 1px solid rgba(255,248,235,0.04); }
+      .ra-case-compact:last-child { border-bottom: none; }
+      .ra-budget-grid { grid-template-columns: 1fr; }
+      .ra-compare-table { font-size: 0.82rem; }
+      .ra-fit-grid { grid-template-columns: 1fr; }
+      .hp2-process-grid, .hp2-process-grid[style] { grid-template-columns: 1fr !important; }
+      .hp2-process-step { border-right: none; border-bottom: 1px solid var(--line-soft); }
+      .hp2-process-step:last-child { border-bottom: none; }
+      .hp2-faq-hero-heading { font-size: clamp(1.8rem, 6vw, 2.4rem); }
+      .hp2-faq-item summary { padding: 22px 16px; font-size: 0.95rem; }
+      .hp2-faq-item .hp2-faq-answer { padding: 0 16px 22px 16px; }
+      .hp2-faq-item[open] summary { padding-left: 20px; }
+      .hp2-faq-item[open] .hp2-faq-answer { padding-left: 20px; }
+    }
+
+    @media (max-width: 600px) {
+      .ra-hero-copy h1 { font-size: clamp(1.8rem, 8vw, 2.4rem); }
+      .ra-hero-dashboard { grid-template-columns: 1fr 1fr; }
+      .ra-results-stats { grid-template-columns: 1fr 1fr; }
+      .ra-case-roas-bg { font-size: 4rem; }
+      .hp2-process-step { padding: 32px 24px; }
+      .ra-compare-table td,
+      .ra-compare-table th { padding: 12px 14px; }
+    }
+
+    /* ══════════════════════════════════════
+       PREFERS-REDUCED-MOTION
+       ══════════════════════════════════════ */
+    @media (prefers-reduced-motion: reduce) {
+      .ra-dash-card,
+      .ra-fail-card,
+      .ra-svc-panel,
+      .ra-split,
+      .ra-case-featured,
+      .ra-case-compact,
+      .ra-budget-card,
+      .ra-approach-block,
+      .ra-results-card,
+      .hp2-process-step,
+      .hp2-faq-item,
+      .ra-fit-item {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .ra-fail-card .glass-acc { animation: none !important; }
+      .hp2-cta-orb { animation: none !important; }
+    }
+
+    /* Reuse homepage patterns (FAQ, process, CTA) */
+    .hp2-faq-header { text-align: center; margin-bottom: 64px; }
+    .hp2-faq-header .lib-section-title { margin-bottom: 12px; }
+    .hp2-faq-hero-heading {
+      font-family: var(--font-accent);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--gold) 0%, #fff8eb 40%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hp2-faq-subtitle {
+      font-size: 1rem;
+      color: var(--text-dim);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .hp2-faq-grid { display: block; max-width: 780px; margin: 0 auto; }
+    .hp2-faq-list { display: flex; flex-direction: column; gap: 0; }
+    .hp2-faq-item {
+      border: none;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-radius: 0;
+      overflow: hidden;
+      transition: background 0.4s ease;
+      background: transparent;
+      position: relative;
+    }
+    .hp2-faq-item:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+    .hp2-faq-item:hover { background: rgba(226,168,77,0.02); }
+    .hp2-faq-item[open] { background: rgba(226,168,77,0.03); border-color: rgba(226,168,77,0.15); }
+    .hp2-faq-item::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--gold);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    .hp2-faq-item[open]::before { transform: scaleY(1); }
+    .hp2-faq-item summary {
+      list-style: none;
+      padding: 28px 32px 28px 24px;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      transition: color 0.3s, padding-left 0.3s;
+      letter-spacing: -0.01em;
+    }
+    .hp2-faq-item[open] summary { padding-left: 32px; color: #fff; }
+    .hp2-faq-item summary::-webkit-details-marker { display: none; }
+    .hp2-faq-item summary::after {
+      content: "";
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(226,168,77,0.3);
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='M7 1v12M1 7h12' stroke='%23E2A84D' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center;
+      flex-shrink: 0;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), background-color 0.3s, border-color 0.3s;
+    }
+    .hp2-faq-item[open] summary::after {
+      transform: rotate(45deg);
+      background-color: rgba(226,168,77,0.1);
+      border-color: var(--gold);
+    }
+    .hp2-faq-item .hp2-faq-answer {
+      padding: 0 32px 28px 24px;
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.7;
+    }
+    .hp2-faq-item[open] .hp2-faq-answer { padding-left: 32px; }
+    .hp2-faq-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      color: rgba(226,168,77,0.5);
+      font-family: var(--font-accent);
+      font-size: 0.82rem;
+      font-style: italic;
+      font-weight: 400;
+      margin-right: 16px;
+      flex-shrink: 0;
+    }
+    .hp2-faq-item[open] .hp2-faq-count { color: var(--gold); }
+    .hp2-faq-bottom-cta { text-align: center; margin-top: 56px; }
+    .hp2-faq-bottom-cta p { font-size: 0.88rem; color: var(--text-dim); margin-bottom: 20px; }
+
+    /* Process (from homepage) */
+    .hp2-process { position: relative; }
+    .hp2-process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 48px;
+      border: 1px solid var(--line-soft);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      background: rgba(255,255,255,0.01);
+    }
+    .hp2-process-step {
+      padding: 48px 36px;
+      position: relative;
+      border-right: 1px solid var(--line-soft);
+      transition: background 0.4s;
+    }
+    .hp2-process-step:last-child { border-right: none; }
+    .hp2-process-step:hover { background: rgba(226,168,77,0.03); }
+    .hp2-process-step::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), rgba(202,138,4,0.5));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
+    }
+    .hp2-process-step:hover::before { transform: scaleX(1); }
+    .hp2-process-num {
+      font-family: var(--font-display);
+      font-size: 3.2rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .hp2-process-icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      background: rgba(226,168,77,0.08);
+      border: 1px solid rgba(226,168,77,0.15);
+      display: grid;
+      place-items: center;
+      margin-bottom: 20px;
+    }
+    .hp2-process-icon svg {
+      width: 24px; height: 24px;
+      fill: none;
+      stroke: var(--gold);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .hp2-process-step h3 { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .hp2-process-step p { font-size: 0.86rem; color: var(--text-dim); line-height: 1.6; max-width: 30ch; }
+    .hp2-process-connector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 32px;
+      padding: 18px 24px;
+      background: rgba(226,168,77,0.04);
+      border: 1px solid rgba(226,168,77,0.1);
+      border-radius: var(--r-lg);
+      text-align: center;
+    }
+
+    /* CTA scene */
+    .hp2-cta-scene {
+      position: relative;
+      padding: 120px 48px;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      text-align: center;
+      background: var(--bg-0);
+      border: 1px solid rgba(202,138,4,0.2);
+    }
+    .hp2-cta-orb {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(80px);
+      will-change: transform;
+    }
+    .hp2-cta-orb:nth-child(1) {
+      width: 500px; height: 500px;
+      top: -20%; left: -10%;
+      background: radial-gradient(circle, rgba(202,138,4,0.25), transparent 70%);
+      animation: ctaOrb1 8s ease-in-out infinite alternate;
+    }
+    .hp2-cta-orb:nth-child(2) {
+      width: 400px; height: 400px;
+      bottom: -15%; right: -5%;
+      background: radial-gradient(circle, rgba(242,214,136,0.2), transparent 70%);
+      animation: ctaOrb2 10s ease-in-out infinite alternate;
+    }
+    .hp2-cta-orb:nth-child(3) {
+      width: 350px; height: 350px;
+      top: 30%; left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(202,138,4,0.08), transparent 70%);
+      animation: ctaOrb3 12s ease-in-out infinite alternate;
+    }
+    @keyframes ctaOrb1 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(60px,40px) scale(1.2); } }
+    @keyframes ctaOrb2 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-50px,-30px) scale(1.15); } }
+    @keyframes ctaOrb3 { 0% { transform: translateX(-50%) scale(0.9); opacity:0.5; } 100% { transform: translateX(-30%) scale(1.3); opacity:1; } }
+    .hp2-cta-scene pixel-canvas {
+      position: absolute; inset: 0; z-index: 0; border-radius: var(--r-xl);
+    }
+    .hp2-cta-scene::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.4) 100%);
+      pointer-events: none; z-index: 1;
+    }
+    .hp2-cta-scene h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+      position: relative; z-index: 2;
+    }
+    .hp2-cta-scene > p {
+      font-size: 1rem;
+      color: var(--text-dim);
+      max-width: 52ch;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+      position: relative; z-index: 2;
+    }
+    .hp2-cta-actions {
+      display: flex; gap: 14px; justify-content: center;
+      position: relative; z-index: 2;
+    }
+    .hp2-cta-trust {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+      margin-bottom: 32px;
+      position: relative;
+      z-index: 2;
+    }
+    .hp2-cta-trust span {
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .hp2-cta-scene .btn-primary {
+      box-shadow: 0 0 30px rgba(226,168,77,0.2), 0 0 60px rgba(226,168,77,0.08);
+      animation: hp2-btn-glow 3s ease-in-out infinite alternate;
+    }
+    @keyframes hp2-btn-glow {
+      0% { box-shadow: 0 0 20px rgba(226,168,77,0.15), 0 0 40px rgba(226,168,77,0.06); }
+      100% { box-shadow: 0 0 35px rgba(226,168,77,0.25), 0 0 70px rgba(226,168,77,0.1); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ NAV ═══ -->
+  <nav class="lib-nav">
+    <a class="lib-nav-brand" href="index.html">Button Up Media <span>Restaurant Advertising</span></a>
+    <div class="lib-nav-links">
+      <a href="#services">Services</a>
+      <a href="#results">Results</a>
+      <a href="#process">Process</a>
+      <a href="#faq">FAQ</a>
+      <a href="contact.html" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Free Ads Audit</a>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- ═══ 1. HERO ═══ -->
+    <section class="ra-hero" id="hero">
+      <div class="ra-hero-inner">
+        <div class="ra-hero-copy">
+          <div class="hero-badge">Google Ads &bull; Facebook Ads &bull; Instagram Ads</div>
+          <h1>Restaurant Advertising That Drives Customers Through Your <span class="accent-serif">Door.</span></h1>
+          <p>Social media builds your brand. SEO gets you found. But when you need customers this week, this weekend, tonight &mdash; advertising is the fastest lever you have. We run restaurant ad campaigns built to capture people actively looking for a place to eat and put your restaurant in front of them at the exact moment they're making a decision.</p>
+          <div class="ra-hero-cta">
+            <div class="flex-row" style="gap: 12px;">
+              <a href="contact.html" class="btn btn-primary">Get Your Free Ads Audit</a>
+              <a href="#results" class="btn btn-ghost">See $1M+ in Results</a>
+            </div>
+            <div class="ra-hero-trust">
+              <span>No contracts</span>
+              <span>&bull;</span>
+              <span>No minimum spend</span>
+              <span>&bull;</span>
+              <span>Just results you can measure</span>
+            </div>
+          </div>
+        </div>
+        <div class="ra-hero-dashboard">
+          <div class="ra-dash-card">
+            <div class="ra-dash-num" data-count-to="3.5" data-prefix="$" data-suffix="M" data-decimal="1">$0</div>
+            <div class="ra-dash-label">Revenue Generated</div>
+          </div>
+          <div class="ra-dash-card">
+            <div class="ra-dash-num" data-count-to="45000" data-suffix="+">0</div>
+            <div class="ra-dash-label">Total Reservations</div>
+          </div>
+          <div class="ra-dash-card">
+            <div class="ra-dash-num" data-count-to="12" data-suffix="X">0</div>
+            <div class="ra-dash-label">Average ROAS</div>
+          </div>
+          <div class="ra-dash-card">
+            <div class="ra-dash-num" data-count-to="8" data-prefix="$">$0</div>
+            <div class="ra-dash-label">Avg. CPA</div>
+          </div>
+          <div class="ra-dash-card --wide">
+            <p style="font-size:0.78rem; color:var(--text-soft); text-align:center;">2025 Google Ads &bull; 5 Restaurant Properties &bull; &lt;$46K Total Spend</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 2. WHY RESTAURANTS NEED ADS ═══ -->
+    <section class="card-overlay --dark lib-section" id="why-ads">
+      <div class="lib-section-label">The Opportunity</div>
+      <h2 class="lib-section-title">Why Restaurants Need Digital Advertising in 2026</h2>
+
+      <!-- Split 1: Text left, Image right -->
+      <div class="ra-split">
+        <div class="ra-split-copy">
+          <p>There are two types of restaurant customers:</p>
+          <ul class="ra-bullets">
+            <li><strong>Browsers</strong> &mdash; scrolling Instagram, watching TikToks, seeing your brand in passing. They might come in eventually.</li>
+            <li><strong>Ready-right-now buyers</strong> &mdash; just typed &ldquo;Italian restaurant near me&rdquo; into Google. Looking at Maps. Deciding between you and two competitors within a mile.</li>
+          </ul>
+          <p>That second customer has intent, urgency, and is eating somewhere in the next hour.</p>
+          <div class="ra-pull-quote">Restaurant advertising captures that customer before your competitor does.</div>
+        </div>
+        <div class="ra-img-placeholder --empty" data-label="Google Ads Screenshot">
+          <!-- Replace with: <img src="images/google-ads-screenshot.jpg" alt="Google Ads restaurant search results"> -->
+        </div>
+      </div>
+
+      <!-- Split 2: Image left, Text right -->
+      <div class="ra-split --reverse">
+        <div class="ra-split-copy">
+          <h3>The Shift From Traditional to Digital</h3>
+          <p>Newspapers, radio, and billboards can't tell you if a single customer walked in. Digital advertising tracks everything:</p>
+          <ul class="ra-bullets">
+            <li>Exactly how much you spent</li>
+            <li>How many people saw your ad</li>
+            <li>How many clicked</li>
+            <li>How many booked a reservation</li>
+          </ul>
+          <p><strong>That's not marketing you hope works. That's marketing you know works.</strong></p>
+        </div>
+        <div class="ra-img-placeholder --empty" data-label="Google Maps Ad Placement">
+          <!-- Replace with: <img src="images/google-maps-ad.jpg" alt="Google Maps restaurant advertising placement"> -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 3. WHY MOST ADS FAIL ═══ -->
+    <section class="card-overlay lib-section" id="why-ads-fail">
+      <div class="lib-section-label">The Problem</div>
+      <h2 class="lib-section-title">Why Most Restaurant Advertising Fails</h2>
+      <p class="lib-section-sub">You've probably tried advertising before. Maybe you boosted a post, set up a Google Ads campaign, or spent a few hundred dollars and saw nothing happen. That's not because advertising doesn't work for restaurants. It's because most restaurant advertising is set up wrong from the start.</p>
+      <div class="ra-fail-grid">
+        <div class="ra-fail-card">
+          <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
+          <div class="glass-toplight"></div>
+          <i data-lucide="thumbs-down" style="width:28px; height:28px;"></i>
+          <h3>The Boosted Post Trap</h3>
+          <ul class="ra-bullets --compact">
+            <li>No targeting precision</li>
+            <li>No conversion tracking</li>
+            <li>No optimization</li>
+          </ul>
+          <p>It's the platform taking your money to show a post to a slightly wider audience.</p>
+        </div>
+        <div class="ra-fail-card">
+          <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
+          <div class="glass-toplight"></div>
+          <i data-lucide="clock" style="width:28px; height:28px;"></i>
+          <h3>The Set-It-and-Forget-It Problem</h3>
+          <ul class="ra-bullets --compact">
+            <li>Keywords too broad</li>
+            <li>Targeting radius too wide</li>
+            <li>Ad copy generic</li>
+            <li>No conversion tracking</li>
+          </ul>
+          <p>Money drains out daily and nobody knows if it's working.</p>
+        </div>
+        <div class="ra-fail-card">
+          <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
+          <div class="glass-toplight"></div>
+          <i data-lucide="building-2" style="width:28px; height:28px;"></i>
+          <h3>The Wrong Agency Problem</h3>
+          <p>General agencies run your ads the same way they run ads for roofing companies and med spas.</p>
+          <ul class="ra-bullets --compact">
+            <li>Don't understand dining search behavior</li>
+            <li>Can't optimize around reservation demand</li>
+            <li>No seasonal or event strategy</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 4. OUR APPROACH ═══ -->
+    <section class="card-overlay --dark lib-section" id="approach">
+      <div class="lib-section-label">Our Approach</div>
+      <h2 class="lib-section-title">How We Run Restaurant Advertising Differently</h2>
+      <p class="lib-section-sub">We don't run generic ad campaigns and hope for the best. Every campaign starts with three questions:</p>
+      <div class="ra-approach-grid">
+        <div class="ra-approach-block">
+          <div class="ra-approach-num">01</div>
+          <h3>Who is the customer?</h3>
+          <ul class="ra-bullets --compact">
+            <li>Date-night couples</li>
+            <li>Corporate event planners</li>
+            <li>Tourists searching &ldquo;best seafood near me&rdquo;</li>
+          </ul>
+          <p>Each type gets a different campaign, different keywords, different creative.</p>
+        </div>
+        <div class="ra-approach-block">
+          <div class="ra-approach-num">02</div>
+          <h3>What action do we want them to take?</h3>
+          <ul class="ra-bullets --compact">
+            <li>Book a reservation</li>
+            <li>Submit a private event inquiry</li>
+            <li>Call the restaurant</li>
+          </ul>
+          <p>Every campaign is built around one conversion action &mdash; tracked so we know exactly what's working.</p>
+        </div>
+        <div class="ra-approach-block">
+          <div class="ra-approach-num">03</div>
+          <h3>What does success look like in dollars?</h3>
+          <p>We don't measure impressions. We measure revenue.</p>
+          <ul class="ra-bullets --compact">
+            <li>Actual dollars generated vs. dollars spent</li>
+            <li>ROAS reporting every month</li>
+            <li>Full visibility into what's producing results</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 5. SERVICES BREAKDOWN — Alternating Split Panels ═══ -->
+    <section class="card-overlay lib-section" id="services">
+      <div class="lib-section-label">What We Do</div>
+      <h2 class="lib-section-title">Restaurant Advertising Services</h2>
+      <p class="lib-section-sub">Five ad channels. One unified system. Every dollar tracked.</p>
+
+      <div class="ra-services-panels">
+        <!-- Panel 1: Google Ads — text left, image right -->
+        <div class="ra-svc-panel">
+          <div class="ra-svc-copy">
+            <div class="ra-svc-num">01</div>
+            <i data-lucide="search" style="width:28px; height:28px;"></i>
+            <h3>Google Ads for Restaurants</h3>
+            <p>Captures people with immediate intent. Someone searching &ldquo;restaurants near me&rdquo; is deciding where to eat <em>right now</em>. We put you at the top of that search.</p>
+            <div class="ra-svc-features">
+              <span class="ra-svc-feat">Cuisine Keywords</span>
+              <span class="ra-svc-feat">Occasion Targeting</span>
+              <span class="ra-svc-feat">Geo-Fencing</span>
+              <span class="ra-svc-feat">Brand Protection</span>
+            </div>
+          </div>
+          <div class="ra-svc-visual">
+            <div class="ra-img-placeholder">
+              <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80" alt="Dimly lit upscale restaurant interior" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 2: FB/IG — image left, text right -->
+        <div class="ra-svc-panel --reverse">
+          <div class="ra-svc-copy">
+            <div class="ra-svc-num">02</div>
+            <i data-lucide="instagram" style="width:28px; height:28px;"></i>
+            <h3>Facebook &amp; Instagram Ads</h3>
+            <p>Social ads don't capture demand &mdash; they create it. We target local audiences by location, dining interests, age, and behavior before they've started searching.</p>
+            <div class="ra-svc-features">
+              <span class="ra-svc-feat">Local Awareness</span>
+              <span class="ra-svc-feat">Event Promos</span>
+              <span class="ra-svc-feat">Retargeting</span>
+              <span class="ra-svc-feat">Lead Gen</span>
+            </div>
+          </div>
+          <div class="ra-svc-visual">
+            <div class="ra-img-placeholder">
+              <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80" alt="Elegant plated food with dark moody lighting" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 3: Maps — text left, image right -->
+        <div class="ra-svc-panel">
+          <div class="ra-svc-copy">
+            <div class="ra-svc-num">03</div>
+            <i data-lucide="map-pin" style="width:28px; height:28px;"></i>
+            <h3>Local Discovery &amp; Maps Advertising</h3>
+            <p>Puts your restaurant at the top of Maps results. For venues that depend on foot traffic, this is one of the highest-ROI channels available.</p>
+            <div class="ra-svc-features">
+              <span class="ra-svc-feat">Maps Placement</span>
+              <span class="ra-svc-feat">Local Pack</span>
+              <span class="ra-svc-feat">Foot Traffic</span>
+            </div>
+          </div>
+          <div class="ra-svc-visual">
+            <div class="ra-img-placeholder">
+              <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80" alt="Restaurant exterior illuminated at night" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 4: Retargeting — image left, text right -->
+        <div class="ra-svc-panel --reverse">
+          <div class="ra-svc-copy">
+            <div class="ra-svc-num">04</div>
+            <i data-lucide="repeat" style="width:28px; height:28px;"></i>
+            <h3>Retargeting Campaigns</h3>
+            <p>Most people don't convert the first time. Retargeting keeps you visible to people who already showed interest &mdash; reminding them to come back and book.</p>
+            <div class="ra-svc-features">
+              <span class="ra-svc-feat">Website Visitors</span>
+              <span class="ra-svc-feat">Video Viewers</span>
+              <span class="ra-svc-feat">Ad Engagers</span>
+            </div>
+          </div>
+          <div class="ra-svc-visual">
+            <div class="ra-img-placeholder">
+              <img src="https://images.unsplash.com/photo-1530062845289-9109b2c9c868?w=800&q=80" alt="Couple enjoying fine dining experience" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 5: Events — text left, image right -->
+        <div class="ra-svc-panel">
+          <div class="ra-svc-copy">
+            <div class="ra-svc-num">05</div>
+            <i data-lucide="calendar" style="width:28px; height:28px;"></i>
+            <h3>Promotion &amp; Event Campaigns</h3>
+            <p>Seasonal events drive the highest conversion rates. We build dedicated campaigns launched with enough lead time to capture early demand.</p>
+            <div class="ra-svc-features">
+              <span class="ra-svc-feat">Holiday Campaigns</span>
+              <span class="ra-svc-feat">Special Menus</span>
+              <span class="ra-svc-feat">Private Events</span>
+            </div>
+          </div>
+          <div class="ra-svc-visual">
+            <div class="ra-img-placeholder">
+              <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=800&q=80" alt="Elegant private dining table setup for special event" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top:48px;">
+        <a href="contact.html" class="btn btn-primary">Get a Custom Advertising Strategy &rarr;</a>
+      </div>
+    </section>
+
+    <!-- ═══ 6. PROCESS ═══ -->
+    <section class="card-overlay --dark lib-section hp2-process" id="process">
+      <div class="lib-section-label">How We Work</div>
+      <h2 class="lib-section-title">How Restaurant Advertising Works With Button Up Media</h2>
+      <div class="hp2-process-grid" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="hp2-process-step">
+          <div class="hp2-process-num">01</div>
+          <div class="hp2-process-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <h3>Audit &amp; Strategy</h3>
+          <p>We understand your goals, audit existing campaigns, and build a custom advertising strategy around the campaigns that will drive the most revenue.</p>
+        </div>
+        <div class="hp2-process-step">
+          <div class="hp2-process-num">02</div>
+          <div class="hp2-process-icon">
+            <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 12h6M12 9v6"/></svg>
+          </div>
+          <h3>Campaign Build</h3>
+          <p>Keyword research, audience targeting, ad copy, creative assets, conversion tracking setup, and landing page alignment. Nothing launches until tracking is verified.</p>
+        </div>
+        <div class="hp2-process-step">
+          <div class="hp2-process-num">03</div>
+          <div class="hp2-process-icon">
+            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3>Optimization</h3>
+          <p>We monitor daily, adjusting bids, pausing underperformers, testing new ad variations, and shifting budget toward the campaigns generating the best return.</p>
+        </div>
+        <div class="hp2-process-step">
+          <div class="hp2-process-num">04</div>
+          <div class="hp2-process-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 20l5-7 3.5 4.5L20 6"/><circle cx="20" cy="6" r="2"/></svg>
+          </div>
+          <h3>ROI Reporting</h3>
+          <p>Monthly reports showing impressions, clicks, conversions, cost per conversion, conversion value, and ROAS. No vanity metrics. Just the numbers that matter.</p>
+        </div>
+      </div>
+      <div class="hp2-process-connector">
+        <p><a href="contact.html" class="btn btn-primary">Book Your Free Ads Audit &rarr;</a></p>
+      </div>
+    </section>
+
+    <!-- ═══ 7-12. RESULTS + CASE STUDIES — Unified Proof Wall ═══ -->
+    <section class="card-overlay lib-section" id="results">
+      <div class="lib-section-label">Proof</div>
+      <h2 class="lib-section-title">Restaurant Advertising Results &mdash; Real Campaigns, Real Numbers</h2>
+      <p class="lib-section-sub">This isn't hypothetical. These are real results from restaurant advertising campaigns managed by Button Up Media in 2025.</p>
+
+      <!-- Hero stats banner -->
+      <div class="ra-results-card">
+        <div class="ra-results-subtitle">2025 Results Across 5 Restaurant Properties</div>
+        <div class="ra-results-stats">
+          <div class="ra-results-stat">
+            <div class="ra-stat-num" data-count-to="3.5" data-prefix="$" data-suffix="M+" data-decimal="1">$0</div>
+            <div class="ra-stat-label">Revenue</div>
+          </div>
+          <div class="ra-results-stat">
+            <div class="ra-stat-num" data-count-to="45000" data-suffix="+">0</div>
+            <div class="ra-stat-label">Total Reservations</div>
+          </div>
+          <div class="ra-results-stat">
+            <div class="ra-stat-num" data-count-to="12" data-suffix="X">0</div>
+            <div class="ra-stat-label">Average ROAS</div>
+          </div>
+          <div class="ra-results-stat">
+            <div class="ra-stat-num" data-count-to="8" data-prefix="$">$0</div>
+            <div class="ra-stat-label">Avg. CPA</div>
+          </div>
+        </div>
+        <p class="ra-results-tagline"><strong>For every $1 spent on advertising, our restaurant clients saw an average return of 12X on ad spend.</strong></p>
+      </div>
+
+      <!-- ── Featured case studies: Top 2 performers ── -->
+      <div class="ra-cases-featured" id="case-studies">
+
+        <!-- The Boathouse — 72:1 ROAS -->
+        <div class="ra-case-featured" id="boathouse">
+          <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
+          <div class="glass-toplight"></div>
+          <div class="ra-case-roas-bg" aria-hidden="true">72:1</div>
+          <div class="ra-case-featured-header">
+            <h3>The Boathouse</h3>
+            <div class="ra-case-pills">
+              <span class="ra-case-pill">Private Events</span>
+              <span class="ra-case-pill">Branded Search</span>
+            </div>
+            <div class="ra-case-meta">May &ndash; Dec 2025</div>
+          </div>
+          <div class="ra-case-roas-callout">
+            <span class="ra-roas-num" data-count-to="72" data-suffix=":1">0</span>
+            <span class="ra-roas-label">Return on Ad Spend</span>
+          </div>
+          <div class="ra-case-stats-grid">
+            <div class="ra-case-stat">
+              <div class="ra-case-stat-num" data-count-to="234">0</div>
+              <div class="ra-case-stat-label">Conversions</div>
+            </div>
+            <div class="ra-case-stat">
+              <div class="ra-case-stat-num" data-count-to="520" data-prefix="$" data-suffix="K">$0</div>
+              <div class="ra-case-stat-label">Conv. Value</div>
+            </div>
+            <div class="ra-case-stat">
+              <div class="ra-case-stat-num" data-count-to="7157" data-prefix="$">$0</div>
+              <div class="ra-case-stat-label">Ad Spend</div>
+            </div>
+            <div class="ra-case-stat">
+              <div class="ra-case-stat-num" data-count-to="30" data-prefix="$" data-suffix=".58">$0</div>
+              <div class="ra-case-stat-label">Cost/Conv.</div>
+            </div>
+          </div>
+          <p class="ra-case-takeaway">Highest ROAS in the portfolio. $30.58 per private event lead is exceptional when each converted event generates thousands in revenue.</p>
+        </div>
+
+        <!-- The Odyssey — 49:1 ROAS -->
+        <div class="ra-case-featured" id="odyssey">
+          <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
+          <div class="glass-toplight"></div>
+          <div class="ra-case-roas-bg" aria-hidden="true">49:1</div>
+          <div class="ra-case-featured-header">
+            <h3>The Odyssey</h3>
+            <div class="ra-case-pills">
+              <span class="ra-case-pill">Dinner Reservations</span>
+              <span class="ra-case-pill">Private Events</span>
+            </div>
+            <div class="ra-case-meta">Jun &ndash; Dec 2025</div>
+          </div>
+          <div class="ra-case-roas-callout">
+            <span class="ra-roas-num" data-count-to="49" data-suffix=":1">0</span>
+            <span class="ra-roas-label">Return on Ad Spend</span>
+          </div>
+          <div class="ra-case-stats-grid">
+            <div class="ra-case-stat">
+              <div class="ra-case-stat-num" data-count-to="951">0</div>
+              <div class="ra-case-stat-label">Conversions</div>
+            </div>
+            <div class="ra-case-stat">
+              <div class="ra-case-stat-num" data-count-to="337" data-prefix="$" data-suffix="K">$0</div>
+              <div class="ra-case-stat-label">Conv. Value</div>
+            </div>
+            <div class="ra-case-stat">
+              <div class="ra-case-stat-num" data-count-to="6802" data-prefix="$">$0</div>
+              <div class="ra-case-stat-label">Ad Spend</div>
+            </div>
+            <div class="ra-case-stat">
+              <div class="ra-case-stat-num" data-count-to="7" data-prefix="$" data-suffix=".15">$0</div>
+              <div class="ra-case-stat-label">Cost/Conv.</div>
+            </div>
+          </div>
+          <p class="ra-case-takeaway">$7.15 per conversion. Fully scalable &mdash; increasing budget proportionally increases conversions. Targeting and optimization dialed in.</p>
+        </div>
+      </div>
+
+      <!-- ── Supporting case studies: 3 compact columns ── -->
+      <div class="ra-cases-supporting">
+
+        <!-- Rusty Pelican Miami -->
+        <div class="ra-case-compact" id="rusty-pelican-miami">
+          <h3>The Rusty Pelican Miami</h3>
+          <div class="ra-case-pills">
+            <span class="ra-case-pill">Reservations</span>
+            <span class="ra-case-pill">Private Events</span>
+            <span class="ra-case-pill">Seasonal</span>
+          </div>
+          <div class="ra-case-meta">Jan &ndash; Dec 2025 &bull; Full Year</div>
+          <div class="ra-case-stats-row">
+            <div class="ra-case-stat">
+              <div class="ra-case-stat-num" data-count-to="1007">0</div>
+              <div class="ra-case-stat-label">Conversions</div>
+            </div>
+            <div class="ra-case-stat">
+              <div class="ra-case-stat-num" data-count-to="135" data-prefix="$" data-suffix="K">$0</div>
+              <div class="ra-case-stat-label">Conv. Value</div>
+            </div>
+            <div class="ra-case-stat">
+              <div class="ra-case-stat-num" data-count-to="18" data-prefix="$" data-suffix=".95">$0</div>
+              <div class="ra-case-stat-label">Cost/Conv.</div>
+            </div>
+            <div class="ra-case-stat">
+              <div class="ra-case-stat-num" data-count-to="7" data-suffix=":1">0</div>
+              <div class="ra-case-stat-label">ROAS</div>
+            </div>
+          </div>
+          <p class="ra-case-takeaway"><strong>Standout:</strong> Mother's Day &mdash; 155 conversions at $3.06. Thanksgiving &mdash; 252 at $3.70. Seasonal campaigns crushed it.</p>
+        </div>
+
+        <!-- Rusty Pelican Tampa -->
+        <div class="ra-case-compact" id="rusty-pelican-tampa">
+          <h3>The Rusty Pelican Tampa</h3>
+          <div class="ra-case-pills">
+            <span class="ra-case-pill">Reservations</span>
+            <span class="ra-case-pill">Private Events</span>
+            <span class="ra-case-pill">Seasonal</span>
+          </div>
+          <div class="ra-case-meta">Aug &ndash; Dec 2025</div>
+          <div class="ra-case-stats-row">
+            <div class="ra-case-stat">
+              <div class="ra-case-stat-num" data-count-to="287">0</div>
+              <div class="ra-case-stat-label">Conversions</div>
+            </div>
+            <div class="ra-case-stat">
+              <div class="ra-case-stat-num" data-count-to="87" data-prefix="$" data-suffix="K">$0</div>
+              <div class="ra-case-stat-label">Conv. Value</div>
+            </div>
+            <div class="ra-case-stat">
+              <div class="ra-case-stat-num" data-count-to="23" data-prefix="$" data-suffix=".64">$0</div>
+              <div class="ra-case-stat-label">Cost/Conv.</div>
+            </div>
+            <div class="ra-case-stat">
+              <div class="ra-case-stat-num" data-count-to="27" data-suffix=":1">0</div>
+              <div class="ra-case-stat-label">Priv. Events ROAS</div>
+            </div>
+          </div>
+          <p class="ra-case-takeaway"><strong>Standout:</strong> Christmas and Thanksgiving top performers. Steady reservation bookings throughout.</p>
+        </div>
+
+        <!-- Castaway -->
+        <div class="ra-case-compact" id="castaway">
+          <h3>Castaway</h3>
+          <div class="ra-case-pills">
+            <span class="ra-case-pill">Reservations</span>
+            <span class="ra-case-pill">Private Events</span>
+          </div>
+          <div class="ra-case-meta">Mar &ndash; Dec 2025</div>
+          <div class="ra-case-stats-row">
+            <div class="ra-case-stat">
+              <div class="ra-case-stat-num" data-count-to="140">0</div>
+              <div class="ra-case-stat-label">Conversions</div>
+            </div>
+            <div class="ra-case-stat">
+              <div class="ra-case-stat-num" data-count-to="17" data-prefix="$" data-suffix="K">$0</div>
+              <div class="ra-case-stat-label">Conv. Value</div>
+            </div>
+            <div class="ra-case-stat">
+              <div class="ra-case-stat-num" data-count-to="5926" data-prefix="$">$0</div>
+              <div class="ra-case-stat-label">Ad Spend</div>
+            </div>
+            <div class="ra-case-stat">
+              <div class="ra-case-stat-num" data-count-to="42" data-prefix="$" data-suffix=".34">$0</div>
+              <div class="ra-case-stat-label">Cost/Conv.</div>
+            </div>
+          </div>
+          <p class="ra-case-takeaway">Positive ROAS on both campaigns. Private Events primed for scaling. Clear optimization path ahead.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 13. BUDGET GUIDANCE ═══ -->
+    <section class="card-overlay lib-section" id="budget">
+      <div class="lib-section-label">Investment</div>
+      <h2 class="lib-section-title">How Much Should a Restaurant Spend on Advertising?</h2>
+      <p class="lib-section-sub">Budget determines volume. But efficiency determines return. A poorly managed $5,000 campaign will lose money. A well-optimized $1,500 campaign can generate significant ROI.</p>
+      <div class="ra-budget-grid">
+        <div class="ra-budget-card">
+          <h3>Independent / Single Location</h3>
+          <div class="ra-budget-range">$1,000 &ndash; $3,000/mo</div>
+          <p>Steady reservation flow, local visibility, and event inquiries. Start here, scale with results.</p>
+        </div>
+        <div class="ra-budget-card">
+          <h3>Multi-Location Group</h3>
+          <div class="ra-budget-range">$3,000 &ndash; $8,000/mo</div>
+          <p>Per-location campaigns, scaled event marketing, and branded search protection across properties.</p>
+        </div>
+        <div class="ra-budget-card">
+          <h3>High-Volume / Fine Dining</h3>
+          <div class="ra-budget-range">$5,000 &ndash; $15,000+/mo</div>
+          <p>Aggressive market capture, seasonal campaign calendars, and multi-platform strategy.</p>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:40px;">
+        <a href="contact.html" class="btn btn-primary">Get Your Free Restaurant Ads Audit &rarr;</a>
+        <p style="font-size:0.82rem; color:var(--text-soft); margin-top:14px;">We'll analyze your market, estimate your keyword costs, and project your ROI before you spend a single dollar.</p>
+      </div>
+    </section>
+
+    <!-- ═══ 14. PAID VS ORGANIC ═══ -->
+    <section class="card-overlay --dark lib-section" id="paid-vs-organic">
+      <div class="lib-section-label">Strategy</div>
+      <h2 class="lib-section-title">Restaurant Advertising vs. Organic Marketing</h2>
+      <p class="lib-section-sub">The smartest restaurant marketing strategy uses advertising to drive immediate revenue while organic channels build the foundation for long-term growth.</p>
+      <table class="ra-compare-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Advertising (Paid)</th>
+            <th>Organic (SEO + Social)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Speed</td>
+            <td>Immediate results &mdash; traffic starts the day campaigns launch</td>
+            <td>Builds over time &mdash; typically 3&ndash;6 months for meaningful SEO results</td>
+          </tr>
+          <tr>
+            <td>Intent</td>
+            <td>Captures high-intent customers actively searching</td>
+            <td>Builds brand awareness and long-term discovery</td>
+          </tr>
+          <tr>
+            <td>Cost</td>
+            <td>Ongoing investment &mdash; stops when you stop spending</td>
+            <td>Compounds over time &mdash; content and SEO continue working</td>
+          </tr>
+          <tr>
+            <td>Control</td>
+            <td>Full control over targeting, messaging, and budget</td>
+            <td>Algorithm-dependent &mdash; platform changes affect reach</td>
+          </tr>
+          <tr>
+            <td>Best For</td>
+            <td>Filling seats now, seasonal events, new openings, private events</td>
+            <td>Building brand equity, community, and long-term visibility</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="text-align:center; margin-top:32px;">
+        <a href="social-media-marketing.html" class="btn btn-ghost" style="margin-right:12px;">Explore Social Media Marketing</a>
+        <a href="restaurant-seo.html" class="btn btn-ghost">Explore Restaurant SEO</a>
+      </div>
+    </section>
+
+    <!-- ═══ 15. WHO THIS IS FOR ═══ -->
+    <section class="card-overlay lib-section" id="who-its-for">
+      <div class="lib-section-label">Fit Check</div>
+      <h2 class="lib-section-title">Is Restaurant Advertising Right for Your Business?</h2>
+      <div class="ra-fit-grid">
+        <div class="ra-fit-col --yes">
+          <h3>This is built for you if:</h3>
+          <div class="ra-fit-item"><span class="ra-fit-icon">&#10003;</span><p>You want more reservations, event inquiries, or online orders &mdash; and you want them soon</p></div>
+          <div class="ra-fit-item"><span class="ra-fit-icon">&#10003;</span><p>You've tried boosting posts or running ads yourself and the results were disappointing</p></div>
+          <div class="ra-fit-item"><span class="ra-fit-icon">&#10003;</span><p>You're spending money on advertising but have no idea whether it's generating return</p></div>
+          <div class="ra-fit-item"><span class="ra-fit-icon">&#10003;</span><p>You want a dedicated team who understands restaurant search behavior</p></div>
+          <div class="ra-fit-item"><span class="ra-fit-icon">&#10003;</span><p>You have seasonal events, private dining, or special promotions that need targeted campaigns</p></div>
+          <div class="ra-fit-item"><span class="ra-fit-icon">&#10003;</span><p>You're an independent restaurant, multi-location group, or upscale venue</p></div>
+        </div>
+        <div class="ra-fit-col --no">
+          <h3>This is probably not for you if:</h3>
+          <div class="ra-fit-item"><span class="ra-fit-icon">&#10007;</span><p>You have no budget for advertising and aren't willing to invest at least $1,000/month</p></div>
+          <div class="ra-fit-item"><span class="ra-fit-icon">&#10007;</span><p>You expect results without conversion tracking or performance measurement</p></div>
+          <div class="ra-fit-item"><span class="ra-fit-icon">&#10007;</span><p>You want to manage campaigns yourself and just need someone to &ldquo;set it up&rdquo;</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 16. FAQ ═══ -->
+    <section class="card-overlay --dark lib-section" id="faq">
+      <div class="hp2-faq-header">
+        <div class="lib-section-label">FAQ</div>
+        <h2 class="hp2-faq-hero-heading">Frequently Asked Questions</h2>
+        <p class="hp2-faq-subtitle">Everything you need to know about restaurant advertising and working with Button Up Media.</p>
+      </div>
+      <div class="hp2-faq-grid">
+        <div class="hp2-faq-list">
+          <details class="hp2-faq-item">
+            <summary><span><span class="hp2-faq-count">01</span>Do Google Ads work for restaurants?</span></summary>
+            <div class="hp2-faq-answer">Yes &mdash; Google Ads captures customers with immediate intent. Someone searching &ldquo;Italian restaurant near me&rdquo; is deciding where to eat <em>right now</em>.<br><br>In 2025, our Google Ads campaigns across five restaurant properties generated <strong>$3.5M+ in tracked revenue</strong> &mdash; a portfolio-wide return of approximately <strong>12X</strong>.</div>
+          </details>
+          <details class="hp2-faq-item">
+            <summary><span><span class="hp2-faq-count">02</span>How much should a restaurant spend on advertising?</span></summary>
+            <div class="hp2-faq-answer"><strong>Independent:</strong> $1,000&ndash;$3,000/mo<br><strong>Multi-location:</strong> $3,000&ndash;$15,000+/mo<br><br>The total budget matters less than the return on that budget. A well-optimized $1,500 campaign can outperform a poorly managed $5,000 one.</div>
+          </details>
+          <details class="hp2-faq-item">
+            <summary><span><span class="hp2-faq-count">03</span>What is the best way to advertise a restaurant?</span></summary>
+            <div class="hp2-faq-answer">The most effective strategy combines:<br><br>&bull; <strong>Google Ads</strong> &mdash; captures high-intent search traffic<br>&bull; <strong>Facebook &amp; Instagram</strong> &mdash; builds awareness + retargets interested customers<br>&bull; <strong>Seasonal campaigns</strong> &mdash; creates predictable revenue spikes around holidays and events<br><br>The key: proper conversion tracking on everything so you know exactly what's working.</div>
+          </details>
+          <details class="hp2-faq-item">
+            <summary><span><span class="hp2-faq-count">04</span>Should restaurants use Facebook Ads or Google Ads?</span></summary>
+            <div class="hp2-faq-answer">Both &mdash; they serve different purposes:<br><br>&bull; <strong>Google Ads</strong> captures demand (people already searching)<br>&bull; <strong>Facebook/Instagram</strong> creates demand (targeting your ideal customer)<br><br>Google drives the most direct conversions. Social is strongest for awareness, retargeting, and event promos. Together they cover the full funnel.</div>
+          </details>
+          <details class="hp2-faq-item">
+            <summary><span><span class="hp2-faq-count">05</span>How do you track restaurant advertising ROI?</span></summary>
+            <div class="hp2-faq-answer">We track every conversion type:<br><br>&bull; Reservation submissions<br>&bull; Private event inquiry forms<br>&bull; Phone calls from ads<br>&bull; Direction requests on Maps<br>&bull; Online ordering clicks<br><br>Each conversion is assigned a dollar value based on your average transaction. You get monthly reporting showing spend, conversions, and revenue return.</div>
+          </details>
+          <details class="hp2-faq-item">
+            <summary><span><span class="hp2-faq-count">06</span>What makes restaurant advertising different from other industries?</span></summary>
+            <div class="hp2-faq-answer">Restaurants operate on shorter decision cycles than any other industry. Someone searching &ldquo;Italian restaurant near me&rdquo; decides in <em>minutes</em>, not weeks.<br><br>That means your ads need:<br>&bull; Cuisine-specific keywords<br>&bull; Occasion-based targeting (date night, private dining, brunch)<br>&bull; Peak day/time bid adjustments<br>&bull; Seasonal campaign calendars</div>
+          </details>
+          <details class="hp2-faq-item">
+            <summary><span><span class="hp2-faq-count">07</span>How quickly will I see results from restaurant advertising?</span></summary>
+            <div class="hp2-faq-answer">&bull; <strong>24&ndash;48 hours:</strong> Impressions and clicks begin<br>&bull; <strong>2&ndash;4 weeks:</strong> Meaningful conversion data builds<br>&bull; <strong>60&ndash;90 days:</strong> Consistent, scalable results<br><br>Unlike SEO which builds over months, advertising delivers measurable conversions almost immediately.</div>
+          </details>
+          <details class="hp2-faq-item">
+            <summary><span><span class="hp2-faq-count">08</span>Can you manage advertising for multiple restaurant locations?</span></summary>
+            <div class="hp2-faq-answer">Yes &mdash; we currently manage campaigns across multiple properties simultaneously. Each location gets:<br><br>&bull; Its own campaign structure<br>&bull; Location-specific targeting and keywords<br>&bull; Individual budget allocation<br>&bull; Per-property performance reporting</div>
+          </details>
+        </div>
+        <div class="hp2-faq-bottom-cta">
+          <p>Have a question we didn't cover?</p>
+          <a href="contact.html" class="btn btn-primary">Ask Us Directly</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 17. CTA ═══ -->
+    <section class="card-overlay lib-section" id="cta">
+      <div class="hp2-cta-scene">
+        <div class="hp2-cta-orb"></div>
+        <div class="hp2-cta-orb"></div>
+        <div class="hp2-cta-orb"></div>
+        <pixel-canvas data-gap="10" data-speed="20" data-colors="#CA8A04, #A16207, #F2D688" data-no-focus></pixel-canvas>
+        <div class="hp2-cta-trust">
+          <span>No contracts</span>
+          <span>Full conversion tracking from day one</span>
+          <span>Your campaigns, your data</span>
+          <span>Restaurant-only team</span>
+        </div>
+        <h2 style="position:relative; z-index:2;">Ready to Stop Wasting Money on Ads?</h2>
+        <p style="position:relative; z-index:2;">Our 2025 portfolio generated over $3.5 million in revenue across five properties. Schedule a free ads audit and we'll show you exactly where the opportunities are.</p>
+        <div class="hp2-cta-actions" style="position:relative; z-index:2;">
+          <a href="contact.html" class="btn btn-primary">Get Your Free Restaurant Ads Audit &rarr;</a>
+          <a href="tel:+17867409498" class="btn btn-ghost">Call (786) 740-9498</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="lib-section footer-demo">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <strong style="font-family: var(--font-display); font-size: 1rem;">Button Up Media</strong>
+          <p>Button Up Media is a restaurant marketing agency in Florida. We help restaurants grow with social media, website design, SEO, and advertising.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="social-media-marketing.html">Social Media Marketing</a>
+          <a href="restaurant-seo.html">Restaurant SEO</a>
+          <a href="restaurant-advertising.html">Restaurant Advertising</a>
+          <a href="restaurant-website-design.html">Website Design</a>
+        </div>
+        <div class="footer-col">
+          <h4>Case Studies</h4>
+          <a href="#rusty-pelican-miami">Rusty Pelican Miami</a>
+          <a href="#odyssey">The Odyssey</a>
+          <a href="#boathouse">The Boathouse</a>
+          <a href="#castaway">Castaway</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="about.html">About</a>
+          <a href="case-studies.html">Case Studies</a>
+          <a href="#faq">FAQ</a>
+          <a href="contact.html">Free Consultation</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Button Up Media. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="mailto:contact@buttonupmedia.com">contact@buttonupmedia.com</a>
+          <a href="tel:+17867409498">(786) 740-9498</a>
+        </div>
+      </div>
+    </footer>
+
+  </div><!-- /.page -->
+
+  <!-- Base shared.js for nav, card-overlay stacking, etc. -->
+  <script src="shared.js"></script>
+
+  <!-- ═══ RESTAURANT ADVERTISING — ALL ANIMATION JS ═══ -->
+  <script>
+  (function() {
+    "use strict";
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // ── SCROLL-DRIVEN COUNTERS (data-count-to) ──
+    document.querySelectorAll("[data-count-to]").forEach(el => {
+      const target = parseFloat(el.dataset.countTo);
+      const suffix = el.dataset.suffix || "";
+      const prefix = el.dataset.prefix || "";
+      const isDecimal = el.dataset.decimal === "1";
+      const counter = { val: 0 };
+
+      if (prefersReducedMotion) {
+        el.textContent = prefix + (isDecimal ? target.toFixed(1) : Math.round(target).toLocaleString()) + suffix;
+        return;
+      }
+
+      gsap.to(counter, {
+        val: target,
+        duration: 2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+        onUpdate: () => {
+          el.textContent = prefix + (isDecimal ? counter.val.toFixed(1) : Math.round(counter.val).toLocaleString()) + suffix;
+        },
+      });
+    });
+
+    if (prefersReducedMotion) {
+      if (typeof lucide !== "undefined") lucide.createIcons();
+      return;
+    }
+
+    // ── HERO — Load animation ──
+    document.fonts.ready.then(() => {
+      gsap.fromTo(".ra-hero-copy .hero-badge, .ra-hero-copy h1, .ra-hero-copy > p, .ra-hero-cta",
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.12, delay: 0.3 }
+      );
+
+      gsap.fromTo(".ra-dash-card",
+        { y: 30, opacity: 0, scale: 0.95 },
+        { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "power3.out", stagger: 0.1, delay: 0.8 }
+      );
+
+      ScrollTrigger.refresh();
+    });
+
+    // ── Section fade-ups ──
+    const fadeUpSections = [
+      ".ra-split",
+      ".ra-pull-quote",
+      ".ra-fail-card",
+      ".ra-approach-block",
+      ".ra-svc-panel",
+      ".hp2-process-step",
+      ".ra-results-card",
+      ".ra-case-featured",
+      ".ra-case-compact",
+      ".ra-budget-card",
+      ".ra-compare-table",
+      ".ra-fit-col",
+      ".hp2-faq-item",
+    ];
+
+    fadeUpSections.forEach(selector => {
+      gsap.fromTo(selector,
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          ease: "power3.out",
+          stagger: 0.08,
+          scrollTrigger: {
+            trigger: selector.split(",")[0],
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    });
+
+    // ── Section labels + titles ──
+    document.querySelectorAll(".lib-section-label, .lib-section-title, .lib-section-sub").forEach(el => {
+      gsap.fromTo(el,
+        { y: 20, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 88%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    });
+
+    // ── CTA scene ──
+    gsap.fromTo(".hp2-cta-scene h2, .hp2-cta-scene > p, .hp2-cta-actions, .hp2-cta-trust",
+      { y: 30, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.7,
+        ease: "power3.out",
+        stagger: 0.12,
+        scrollTrigger: {
+          trigger: ".hp2-cta-scene",
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+
+    // Lucide icons
+    if (typeof lucide !== "undefined") lucide.createIcons();
+
+  })();
+  </script>
+</body>
+</html>
