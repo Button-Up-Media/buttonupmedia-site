@@ -1,0 +1,4546 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurant Marketing Agency | Button Up Media - Florida</title>
+  <meta name="description" content="Button Up Media is a restaurant marketing agency in Florida. We help restaurants grow with social media, website design, SEO & advertising. Get a free consultation." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital, wght@0,500;0,600;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Epilogue:wght@400;500;600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+  <!-- Pixel Canvas -->
+  <script src="pixel-canvas.js"></script>
+
+  <!-- Base styles (nav, footer, cards, etc.) -->
+  <link rel="stylesheet" href="shared.css" />
+
+  <!-- ═══ HOMEPAGE 2.0, ALL CSS SELF-CONTAINED ═══ -->
+  <style>
+    /* ── Global: body text 17px on desktop ── */
+    .lib-section-sub,
+    .hp2-split-copy p,
+    .hp2-industry-body,
+    .hp2-aeo-block p,
+    .hp2-aeo-copy p,
+    .hp2-why-card p,
+    .hp2-case-body > p,
+    .hp2-hscroll-copy p,
+    .hp2-faq-item .faq-body,
+    .hp2-faq-item p,
+    #pain .pain-item p,
+    #pain > .lib-section-sub,
+    #florida p,
+    .hp2-pull-quote p,
+    .hp2-hero-copy > p {
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    /* ── Nav: fixed on homepage ── */
+    .lib-nav {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+    }
+
+    /* ══════════════════════════════════════
+       1. HERO, Full-Bleed Cinematic + Word Reveal
+       ══════════════════════════════════════ */
+    .hp2-hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      overflow: visible;
+      padding: 0;
+      border-radius: 0;
+      background: #050608;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+    }
+    .hp2-hero-media {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .hp2-hero-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+      transform: scale(1.08);
+    }
+    .hp2-hero-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.1) 40%, rgba(10,10,10,0.7) 70%, rgba(10,10,10,0.95) 100%),
+        linear-gradient(90deg, rgba(10,10,10,0.6) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hp2-hero-inner {
+      position: relative;
+      z-index: 2;
+      width: min(1200px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 0 0 120px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 56px;
+      align-items: end;
+    }
+    .hp2-hero-copy { padding-bottom: 32px; }
+    .hp2-hero-copy h1 {
+      font-family: var(--font-hero);
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      line-height: 1.05;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      margin-bottom: 24px;
+      margin-top: 24px;
+    }
+    .hp2-hero-copy h1 .accent-serif {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-weight: 500;
+      color: var(--gold);
+    }
+    .hp2-hero-copy > p {
+      font-size: 1.02rem;
+      color: var(--text-dim);
+      max-width: 44ch;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    /* Word-reveal system */
+    .hp2-word {
+      overflow: hidden;
+      display: inline-flex;
+      vertical-align: bottom;
+    }
+    .hp2-word-inner {
+      display: inline-block;
+    }
+
+    /* Proof pills */
+    .hp2-proof-fragments {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: flex-end;
+      padding-bottom: 24px;
+    }
+    .hp2-proof-pill {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 22px;
+      background: rgba(10,10,10,0.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,248,235,0.06);
+      border-radius: 16px;
+      min-width: 260px;
+      transition: border-color 0.3s, transform 0.3s;
+      cursor: default;
+    }
+    .hp2-proof-pill:hover {
+      border-color: rgba(226,168,77,0.2);
+      transform: translateY(-2px);
+    }
+    .hp2-proof-pill-num {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.25;
+      padding: 2px 0;
+    }
+    .hp2-proof-pill-text {
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      line-height: 1.3;
+    }
+
+    /* Hero CTA */
+    .hp2-hero-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .hp2-hero-cta .flex-row { gap: 12px; }
+    .hp2-hero-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    /* ══════════════════════════════════════
+       2. TRUST RIBBON
+       ══════════════════════════════════════ */
+    .hp2-trust {
+      margin-top: -40px;
+      padding: 64px calc(50vw - 50%) 120px;
+      z-index: 2;
+      border-top: 1px solid rgba(255,248,235,0.04);
+      border-bottom: 1px solid rgba(255,248,235,0.04);
+      background: var(--bg-0);
+      border-radius: 40px 40px 0 0;
+      box-shadow: 0 -20px 60px rgba(0,0,0,0.5);
+    }
+    .hp2-trust-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hp2-trust-stat {
+      text-align: center;
+      position: relative;
+    }
+    .hp2-trust-stat::after {
+      content: "";
+      position: absolute;
+      right: -24px;
+      top: 20%;
+      bottom: 20%;
+      width: 1px;
+      background: rgba(255,248,235,0.06);
+    }
+    .hp2-trust-stat:last-child::after { display: none; }
+    .hp2-trust-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .hp2-trust-label {
+      font-size: 0.64rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-soft);
+    }
+
+    /* ══════════════════════════════════════
+       3. PROBLEM SECTION
+       ══════════════════════════════════════ */
+    .hp2-problem-headline {
+      font-size: clamp(1.6rem, 3vw, 2.6rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      max-width: 22ch;
+      margin-bottom: 12px;
+    }
+    .hp2-problem-headline em {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-weight: 500;
+      color: var(--coral);
+    }
+
+    /* ══════════════════════════════════════
+       4. IMMERSIVE IMAGE, Clip-Path Curtain + Full-Width Zoom
+       ══════════════════════════════════════ */
+    .hp2-curtain-wrap {
+      position: relative;
+      width: 72%;
+      margin: 60px auto;
+      border-radius: 28px;
+      overflow: hidden;
+    }
+    .hp2-curtain-wrap.--expanded {
+      width: 100vw !important;
+      margin-left: calc(50% - 50vw) !important;
+      margin-right: calc(50% - 50vw) !important;
+      border-radius: 0 !important;
+    }
+    .hp2-curtain-img {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-radius: inherit;
+      clip-path: inset(100% 0 0 0);
+    }
+    .hp2-curtain-img img {
+      width: 100%;
+      height: 60vh;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.18);
+    }
+    .hp2-curtain-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 30%, rgba(10,10,10,0.85) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .hp2-curtain-copy {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      padding: 40px 40px 10%;
+      display: flex;
+      justify-content: center;
+    }
+    .hp2-curtain-glass-wrap {
+      position: relative;
+      max-width: 520px;
+      width: 100%;
+      display: flex;
+      align-items: stretch;
+      opacity: 0;
+      transform: translateY(30px);
+      filter: blur(12px);
+    }
+    .hp2-curtain-glass-wrap .glass-accents {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      user-select: none;
+    }
+    .hp2-curtain-glass-wrap .glass-acc {
+      position: absolute;
+      inset: -3px;
+      background: rgba(255,248,235,0.015);
+      border-radius: 20px;
+      border: 1px solid rgba(255,248,235,0.06);
+      transform-origin: 20% 80%;
+      opacity: 0.5;
+    }
+    .hp2-curtain-glass-wrap .glass-acc:nth-child(1) { animation: glassWobble 20s ease-in-out infinite; }
+    .hp2-curtain-glass-wrap .glass-acc:nth-child(2) { animation: glassWobble 26s ease-in-out -8s infinite reverse; }
+    @keyframes glassWobble {
+      0%   { transform: translateX(3px) translateY(6px) rotate(-1.5deg); }
+      25%  { transform: translateX(-10px) translateY(-3px) rotate(2deg); }
+      50%  { transform: translateX(8px) translateY(5px) rotate(-2.5deg); }
+      75%  { transform: translateX(-8px) translateY(-6px) rotate(3deg); }
+      100% { transform: translateX(3px) translateY(6px) rotate(-1.5deg); }
+    }
+    .hp2-curtain-glass-wrap .glass-toplight {
+      position: absolute;
+      top: -2px;
+      left: 20%;
+      right: 20%;
+      height: 3px;
+      border-radius: 10px;
+      background: rgba(255,252,240,0.8);
+      box-shadow:
+        0 0 1px 0 rgba(202,138,4,0.4),
+        0 1px 4px 0 rgba(202,138,4,0.25),
+        0 4px 16px 0 rgba(202,138,4,0.12);
+      z-index: 3;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .hp2-curtain-glass-wrap:hover .glass-toplight { opacity: 1; }
+    .hp2-curtain-glass {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding: 28px 36px;
+      background: linear-gradient(180deg, rgba(23,23,23,0.65) 0%, rgba(17,17,17,0.82) 50%);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,248,235,0.08);
+      border-radius: 20px;
+      overflow: hidden;
+      isolation: isolate;
+      box-shadow:
+        inset 0 1px 1px 0 rgba(202,138,4,0.18),
+        inset 0 -1px 1px 0 rgba(0,0,0,0.15);
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+    .hp2-curtain-glass-wrap:hover .hp2-curtain-glass {
+      transform: translateY(-4px);
+      border-color: rgba(202,138,4,0.18);
+      box-shadow:
+        inset 0 1px 1px 0 rgba(202,138,4,0.25),
+        inset 0 -1px 1px 0 rgba(0,0,0,0.15),
+        0 20px 50px rgba(0,0,0,0.25);
+    }
+    .hp2-curtain-glass pixel-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      border-radius: 20px;
+    }
+    .hp2-curtain-glass h3 {
+      position: relative;
+      z-index: 2;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .hp2-curtain-glass p {
+      position: relative;
+      z-index: 2;
+      font-size: 0.86rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .hp2-curtain-glass .btn {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ══════════════════════════════════════
+       5. SYSTEM SHOWCASE, Pin & Scrub (FIXED)
+       ══════════════════════════════════════ */
+    .hp2-system-pin {
+      position: relative;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      background: var(--bg-1);
+      border-top: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .hp2-system-inner {
+      display: grid;
+      grid-template-columns: 0.45fr 0.55fr;
+      gap: 48px;
+      height: 100vh;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      align-items: center;
+    }
+    .hp2-system-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+      padding: 40px 0;
+      position: relative;
+    }
+    /* Section label + title inside the left panel now */
+    .hp2-system-left-header {
+      margin-bottom: 40px;
+    }
+    .hp2-system-left-header .lib-section-label {
+      margin-bottom: 10px;
+    }
+    .hp2-system-left-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 8px;
+    }
+    .hp2-system-left-header p {
+      font-size: 0.84rem;
+      color: var(--text-soft);
+      max-width: 36ch;
+      line-height: 1.5;
+    }
+    .hp2-system-panels-wrap {
+      display: flex;
+      gap: 24px;
+    }
+    .hp2-system-progress {
+      position: relative;
+      width: 3px;
+      background: rgba(255,248,235,0.06);
+      border-radius: 2px;
+      flex-shrink: 0;
+      min-height: 200px;
+      align-self: stretch;
+    }
+    .hp2-system-progress-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(180deg, var(--gold), var(--coral));
+      border-radius: 2px;
+      transform-origin: top;
+      transform: scaleY(0);
+      will-change: transform;
+      height: 100%;
+    }
+    .hp2-system-dots {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 4px 0;
+    }
+    .hp2-system-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,248,235,0.1);
+      border: 2px solid rgba(255,248,235,0.15);
+      transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .hp2-system-dot.--active {
+      background: var(--gold);
+      border-color: var(--gold);
+      box-shadow: 0 0 12px rgba(226,168,77,0.5);
+    }
+    .hp2-system-panels {
+      position: relative;
+      min-height: 200px;
+      flex: 1;
+    }
+    .hp2-system-panel {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+      opacity: 0;
+    }
+    .hp2-system-panel.--active {
+      opacity: 1;
+    }
+    .hp2-system-panel-num {
+      font-family: var(--font-display);
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+    .hp2-system-panel h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+    .hp2-system-panel p {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+      max-width: 36ch;
+    }
+    .hp2-system-right {
+      position: relative;
+      height: 70vh;
+      max-height: 600px;
+      overflow: hidden;
+      border-radius: var(--r-xl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hp2-system-visual {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hp2-system-visual.--active {
+      opacity: 1;
+    }
+    /* When visual contains a plain image (no phone frame) */
+    .hp2-system-visual > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--r-xl);
+    }
+    .hp2-system-visual-label {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      right: 24px;
+      padding: 16px 20px;
+      background: rgba(10,10,10,0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,248,235,0.06);
+      border-radius: 12px;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+      z-index: 2;
+    }
+    .hp2-system-visual-label strong {
+      display: block;
+      color: var(--text);
+      font-size: 0.88rem;
+      margin-bottom: 4px;
+    }
+
+    /* ══════════════════════════════════════
+       IPHONE FRAME, Pure CSS Device Bezel
+       ══════════════════════════════════════ */
+    .hp2-iphone {
+      position: relative;
+      width: 280px;
+      aspect-ratio: 9 / 19.5;
+      border-radius: 44px;
+      background: #1a1a1a;
+      padding: 12px;
+      box-shadow:
+        0 0 0 2px #333,
+        0 0 0 4px #111,
+        0 20px 60px rgba(0,0,0,0.5),
+        0 8px 24px rgba(0,0,0,0.3);
+      flex-shrink: 0;
+    }
+    /* Dynamic Island */
+    .hp2-iphone::before {
+      content: "";
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 28px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 3;
+    }
+    /* Screen area */
+    .hp2-iphone-screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 34px;
+      overflow: hidden;
+      background: #000;
+      position: relative;
+    }
+    .hp2-iphone-screen img,
+    .hp2-iphone-screen video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* Side button hints */
+    .hp2-iphone::after {
+      content: "";
+      position: absolute;
+      right: -3px;
+      top: 25%;
+      width: 3px;
+      height: 48px;
+      background: #333;
+      border-radius: 0 2px 2px 0;
+    }
+    /* Larger phone variant */
+    .hp2-iphone.--lg {
+      width: 320px;
+    }
+    /* Phone centered in a visual panel */
+    .hp2-system-visual.--has-phone {
+      background: radial-gradient(ellipse at 50% 50%, rgba(226,168,77,0.06) 0%, var(--bg-1) 70%);
+      border-radius: var(--r-xl);
+    }
+
+    /* System panel metric chips */
+    .hp2-system-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .hp2-system-chip {
+      display: inline-flex;
+      align-items: center;
+      height: 30px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(226,168,77,0.2);
+      background: rgba(226,168,77,0.06);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.02em;
+    }
+
+    /* Background glow orb that shifts per stage */
+    .hp2-system-glow {
+      position: absolute;
+      top: 50%;
+      left: 30%;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(226,168,77,0.06), transparent 60%);
+      filter: blur(60px);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+    }
+    /* Stage counter */
+    .hp2-system-stage-count {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--text-soft);
+      z-index: 2;
+    }
+    .hp2-system-stage-count strong {
+      color: var(--gold);
+    }
+
+    /* ══════════════════════════════════════
+       5b. HORIZONTAL SCROLL GROWTH SYSTEM
+       ══════════════════════════════════════ */
+    .hp2-hscroll-section {
+      position: relative;
+      padding: 0;
+      z-index: 4;
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      background: var(--bg-0);
+    }
+    .hp2-hscroll-intro {
+      padding: 100px 0 40px;
+      position: relative;
+      z-index: 2;
+      background: var(--bg-0);
+      width: min(calc(100% - 48px), 1200px);
+      margin: 0 auto;
+    }
+    .hp2-hscroll-entry { height: 10vh; background: var(--bg-0); }
+    .hp2-hscroll-exit { height: 10vh; background: var(--bg-0); }
+    .hp2-hscroll-pin {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      z-index: 4;
+      background: var(--bg-0);
+    }
+    .hp2-hscroll-track {
+      display: flex;
+      height: 100%;
+      will-change: transform;
+    }
+    .hp2-hscroll-panel {
+      flex: 0 0 100vw;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hp2-hscroll-panel:nth-child(odd) { background: var(--bg-0); }
+    .hp2-hscroll-panel:nth-child(even) { background: #090b0e; }
+    .hp2-hscroll-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 0%, transparent 28%, rgba(255,248,235,0.035) 40%, rgba(255,248,235,0.07) 50%, rgba(255,248,235,0.035) 60%, transparent 72%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hp2-hscroll-panel:nth-child(even)::before {
+      background: linear-gradient(135deg, transparent 0%, transparent 38%, rgba(255,248,235,0.028) 48%, rgba(255,248,235,0.055) 55%, rgba(255,248,235,0.028) 62%, transparent 74%, transparent 100%);
+    }
+    .hp2-hscroll-num {
+      position: absolute;
+      top: 40px;
+      left: 40px;
+      font-family: var(--font-display);
+      font-size: 7rem;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      line-height: 1;
+      background: linear-gradient(180deg, rgba(202,138,4,0.09) 0%, rgba(202,138,4,0.03) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      z-index: 0;
+      will-change: transform;
+    }
+    .hp2-hscroll-inner {
+      width: min(1100px, calc(100% - 80px));
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .hp2-hscroll-inner.--reverse { direction: rtl; }
+    .hp2-hscroll-inner.--reverse > * { direction: ltr; }
+    .hp2-hscroll-copy { will-change: transform, opacity; }
+    .hp2-hscroll-copy .label {
+      font-size: 0.64rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .hp2-hscroll-copy h2 {
+      font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+    .hp2-hscroll-stat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      margin-bottom: 20px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.88);
+      background: rgba(226,168,77,0.06);
+      border: 1px solid rgba(226,168,77,0.15);
+      border-radius: 100px;
+      letter-spacing: 0.01em;
+    }
+    .hp2-hscroll-stat-pill strong {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 800;
+      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hp2-hscroll-copy p {
+      font-size: 0.92rem;
+      color: var(--text-dim);
+      line-height: 1.65;
+      max-width: 40ch;
+      margin-bottom: 16px;
+    }
+    .hp2-hscroll-copy ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px;
+    }
+    .hp2-hscroll-copy ul li {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      padding: 5px 0;
+      padding-left: 18px;
+      position: relative;
+    }
+    .hp2-hscroll-copy ul li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+    .hp2-hscroll-visual {
+      position: relative;
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      border: 1px solid var(--line-soft);
+      aspect-ratio: 4/3;
+      will-change: transform, opacity;
+    }
+    .hp2-hscroll-visual-inner {
+      width: 100%;
+      height: 100%;
+      will-change: transform;
+    }
+    .hp2-hscroll-visual video,
+    .hp2-hscroll-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    /* Divider between panels */
+    .hp2-hscroll-divider {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: -1px;
+      width: 3px;
+      z-index: 100;
+    }
+    .hp2-hscroll-divider::before {
+      content: "";
+      position: absolute;
+      top: 15%;
+      bottom: 15%;
+      left: 0;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(202,138,4,0.2) 30%, rgba(202,138,4,0.3) 50%, rgba(202,138,4,0.2) 70%, transparent);
+    }
+    /* Progress + dots */
+    .hp2-hscroll-progress {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 2px;
+      background: rgba(255,248,235,0.08);
+      border-radius: 2px;
+      z-index: 10;
+      overflow: hidden;
+    }
+    .hp2-hscroll-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold), var(--coral));
+      border-radius: 2px;
+      will-change: width;
+    }
+    .hp2-hscroll-dots {
+      position: absolute;
+      bottom: 44px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+    .hp2-hscroll-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,248,235,0.15);
+      transition: background 0.3s, transform 0.3s;
+    }
+    .hp2-hscroll-dot.--active {
+      background: var(--gold);
+      transform: scale(1.4);
+      box-shadow: 0 0 8px rgba(202,138,4,0.4);
+    }
+    .hp2-hscroll-cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--gold);
+      transition: gap 0.2s;
+    }
+    .hp2-hscroll-cta-link:hover { gap: 12px; }
+    .hp2-hscroll-cta-link::after { content: "→"; }
+
+    /* ── H-scroll ambient: gold dust + warm glow ── */
+
+    /* Gold dust particles */
+    .hp2-hscroll-particle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+      will-change: transform, opacity;
+      animation: hscrollDust linear infinite alternate;
+    }
+    @keyframes hscrollDust {
+      0%   { transform: translateY(0) scale(1); opacity: 0.3; }
+      50%  { opacity: 0.7; }
+      100% { transform: translateY(-80px) scale(0.6); opacity: 0; }
+    }
+
+    /* Single warm radial glow, centered, gold only */
+    .hp2-hscroll-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(202,138,4,0.14) 0%, rgba(202,138,4,0.04) 40%, transparent 70%);
+      filter: blur(40px);
+      z-index: 1;
+      pointer-events: none;
+      will-change: transform;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    @media (max-width: 900px) {
+      .hp2-hscroll-inner { grid-template-columns: 1fr; gap: 32px; width: calc(100% - 48px); }
+      .hp2-hscroll-inner.--reverse { direction: ltr; }
+      .hp2-hscroll-visual { aspect-ratio: 16/10; }
+      .hp2-hscroll-num { font-size: 4rem; top: 24px; left: 24px; }
+      .hp2-hscroll-copy h2 { font-size: 1.4rem; }
+      .hp2-hscroll-glow { width: 350px; height: 350px; filter: blur(30px); }
+    }
+
+    /* ══════════════════════════════════════
+       6. CASE STUDIES, Editorial with Scrub Counters
+       ══════════════════════════════════════ */
+    .hp2-case-spread { display: grid; grid-template-columns: 1fr; gap: 32px; margin-top: 48px; }
+    .hp2-case-editorial {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--line-soft);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+      cursor: pointer;
+      background: rgba(255,255,255,0.015);
+    }
+    .hp2-case-editorial:hover {
+      border-color: rgba(226,168,77,0.2);
+      transform: translateY(-4px);
+    }
+    .hp2-case-editorial:nth-child(even) { direction: rtl; }
+    .hp2-case-editorial:nth-child(even) > * { direction: ltr; }
+    .hp2-case-img {
+      position: relative;
+      min-height: 320px;
+      overflow: hidden;
+    }
+    .hp2-case-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.12);
+      transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
+    }
+    .hp2-case-editorial:hover .hp2-case-img img { transform: scale(1.06); }
+    .hp2-case-img::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(10,10,10,0.3), transparent 60%);
+      pointer-events: none;
+    }
+    .hp2-case-body {
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hp2-case-body .case-tag { margin-bottom: 14px; }
+    .hp2-case-body h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 10px; }
+    .hp2-case-body > p { font-size: 0.86rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 20px; max-width: 38ch; }
+    .hp2-case-metrics {
+      display: flex;
+      gap: 24px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line-soft);
+    }
+    .hp2-case-metric strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .hp2-case-metric span {
+      font-size: 0.6rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-soft);
+    }
+    .hp2-case-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-top: 18px;
+      transition: gap 0.2s;
+    }
+    .hp2-case-link::after { content: "→"; }
+    .hp2-case-editorial:hover .hp2-case-link { gap: 12px; }
+
+    /* ══════════════════════════════════════
+       7. KITCHEN IMMERSIVE, Warm Color Grade
+       ══════════════════════════════════════ */
+    .hp2-warm-img img {
+      filter: saturate(0.4) brightness(0.8);
+    }
+
+    /* ══════════════════════════════════════
+       8. SERVICES, Glass Cards with Curtain Reveal
+       ══════════════════════════════════════ */
+    .hp2-services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 16px;
+      padding: 48px 0 0;
+    }
+    .hp2-services-grid .glass-card-wrap {
+      min-height: auto;
+    }
+    .hp2-services-grid .glass-card {
+      padding: 28px 24px;
+      align-items: center;
+      justify-content: center;
+    }
+    .hp2-services-grid .glass-card-icon {
+      width: auto;
+      height: auto;
+      border-radius: 0;
+      background: none;
+      border: none;
+      margin-bottom: 12px;
+      color: var(--gold);
+    }
+    .hp2-services-grid .glass-card-icon svg {
+      width: 44px;
+      height: 44px;
+    }
+    .hp2-services-grid pixel-canvas {
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .hp2-services-grid .glass-card:hover pixel-canvas {
+      opacity: 1;
+    }
+    .hp2-services-grid .glass-btn {
+      justify-content: center;
+    }
+    .hp2-service-reveal {
+      clip-path: inset(0 0 100% 0);
+    }
+
+    /* ══════════════════════════════════════
+       9. TESTIMONIAL, Dollar-Figure Proof Marquee
+       ══════════════════════════════════════ */
+    .hp2-theater {
+      position: relative;
+      padding: 100px 0;
+      overflow: hidden;
+    }
+    .hp2-theater::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 30%, rgba(226,168,77,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hp2-proof-hero-stat {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+    .hp2-proof-hero-stat-label {
+      font-size: 0.64rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-soft);
+      margin-bottom: 16px;
+    }
+
+    /* ══════════════════════════════════════
+       10. PACKED HOUSE IMMERSIVE, Brightness
+       ══════════════════════════════════════ */
+    .hp2-bright-img img {
+      filter: brightness(0.6);
+    }
+
+    /* ══════════════════════════════════════
+       13. CTA, Word Reveal + Gold Pulse
+       ══════════════════════════════════════ */
+    .hp2-cta-scene {
+      position: relative;
+      padding: 120px 48px;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      text-align: center;
+      background: var(--bg-0);
+      border: 1px solid rgba(202,138,4,0.2);
+    }
+    /* Animated gold gradient mesh,3 layered orbs */
+    .hp2-cta-orb {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(80px);
+      will-change: transform;
+    }
+    .hp2-cta-orb:nth-child(1) {
+      width: 500px; height: 500px;
+      top: -20%; left: -10%;
+      background: radial-gradient(circle, rgba(202,138,4,0.25), transparent 70%);
+      animation: ctaOrb1 8s ease-in-out infinite alternate;
+    }
+    .hp2-cta-orb:nth-child(2) {
+      width: 400px; height: 400px;
+      bottom: -15%; right: -5%;
+      background: radial-gradient(circle, rgba(242,214,136,0.2), transparent 70%);
+      animation: ctaOrb2 10s ease-in-out infinite alternate;
+    }
+    .hp2-cta-orb:nth-child(3) {
+      width: 350px; height: 350px;
+      top: 30%; left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(208,106,80,0.12), transparent 70%);
+      animation: ctaOrb3 12s ease-in-out infinite alternate;
+    }
+    @keyframes ctaOrb1 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(60px, 40px) scale(1.2); }
+    }
+    @keyframes ctaOrb2 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-50px, -30px) scale(1.15); }
+    }
+    @keyframes ctaOrb3 {
+      0% { transform: translateX(-50%) scale(0.9); opacity: 0.5; }
+      100% { transform: translateX(-30%) scale(1.3); opacity: 1; }
+    }
+    .hp2-cta-scene pixel-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      border-radius: var(--r-xl);
+    }
+    .hp2-cta-scene::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.4) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .hp2-cta-scene h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+    }
+    .hp2-cta-scene > p {
+      font-size: 1rem;
+      color: var(--text-dim);
+      max-width: 48ch;
+      margin: 0 auto 32px;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+    .hp2-cta-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+    .hp2-cta-scene .btn-primary {
+      box-shadow: 0 0 30px rgba(226,168,77,0.2), 0 0 60px rgba(226,168,77,0.08);
+      animation: hp2-btn-glow 3s ease-in-out infinite alternate;
+    }
+    @keyframes hp2-btn-glow {
+      0% { box-shadow: 0 0 20px rgba(226,168,77,0.15), 0 0 40px rgba(226,168,77,0.06); }
+      100% { box-shadow: 0 0 35px rgba(226,168,77,0.25), 0 0 70px rgba(226,168,77,0.1); }
+    }
+
+    /* ══════════════════════════════════════
+       11. PROCESS, Cinematic Redesign
+       ══════════════════════════════════════ */
+    .hp2-process {
+      position: relative;
+    }
+    .hp2-process-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 48px;
+      border: 1px solid var(--line-soft);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      background: rgba(255,255,255,0.01);
+    }
+    .hp2-process-step {
+      padding: 48px 36px;
+      position: relative;
+      border-right: 1px solid var(--line-soft);
+      transition: background 0.4s;
+    }
+    .hp2-process-step:last-child { border-right: none; }
+    .hp2-process-step:hover {
+      background: rgba(226,168,77,0.03);
+    }
+    .hp2-process-step::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--coral));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
+    }
+    .hp2-process-step:hover::before { transform: scaleX(1); }
+    .hp2-process-num {
+      font-family: var(--font-display);
+      font-size: 3.2rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .hp2-process-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(226,168,77,0.08);
+      border: 1px solid rgba(226,168,77,0.15);
+      display: grid;
+      place-items: center;
+      margin-bottom: 20px;
+    }
+    .hp2-process-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: none;
+      stroke: var(--gold);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .hp2-process-step h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .hp2-process-step p {
+      font-size: 0.86rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+      max-width: 30ch;
+    }
+    .hp2-process-connector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 32px;
+      padding: 18px 24px;
+      background: rgba(226,168,77,0.04);
+      border: 1px solid rgba(226,168,77,0.1);
+      border-radius: var(--r-lg);
+      text-align: center;
+    }
+    .hp2-process-connector p {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .hp2-process-connector strong {
+      color: var(--gold);
+    }
+
+    /* ══════════════════════════════════════
+       12. FAQ, Premium Redesign
+       ══════════════════════════════════════ */
+    /* ── FAQ, Editorial Accordion ── */
+    .hp2-faq-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .hp2-faq-header .lib-section-title {
+      margin-bottom: 12px;
+    }
+    .hp2-faq-hero-heading {
+      font-family: var(--font-accent);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      padding: 4px 0;
+      background: linear-gradient(135deg, var(--gold) 0%, #fff8eb 40%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hp2-faq-subtitle {
+      font-size: 1rem;
+      color: var(--text-dim);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .hp2-faq-grid {
+      display: block;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .hp2-faq-sidebar { display: none; }
+    .hp2-faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .hp2-faq-item {
+      border: none;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-radius: 0;
+      overflow: hidden;
+      transition: background 0.4s ease;
+      background: transparent;
+      position: relative;
+    }
+    .hp2-faq-item:first-child {
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .hp2-faq-item:hover {
+      background: rgba(226,168,77,0.02);
+    }
+    .hp2-faq-item[open] {
+      background: rgba(226,168,77,0.03);
+      border-color: rgba(226,168,77,0.15);
+    }
+    /* Gold left accent bar on open */
+    .hp2-faq-item::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--gold);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    .hp2-faq-item[open]::before {
+      transform: scaleY(1);
+    }
+    .hp2-faq-item summary {
+      list-style: none;
+      padding: 28px 32px 28px 24px;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      transition: color 0.3s, padding-left 0.3s;
+      letter-spacing: -0.01em;
+    }
+    .hp2-faq-item[open] summary {
+      padding-left: 32px;
+      color: #fff;
+    }
+    .hp2-faq-item summary::-webkit-details-marker { display: none; }
+    .hp2-faq-item summary::after {
+      content: "";
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(226,168,77,0.3);
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='M7 1v12M1 7h12' stroke='%23E2A84D' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center;
+      flex-shrink: 0;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), background-color 0.3s, border-color 0.3s;
+    }
+    .hp2-faq-item[open] summary::after {
+      transform: rotate(45deg);
+      background-color: rgba(226,168,77,0.1);
+      border-color: var(--gold);
+    }
+    .hp2-faq-item .hp2-faq-answer {
+      padding: 0 32px 28px 24px;
+      font-size: 0.92rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+    .hp2-faq-item[open] .hp2-faq-answer {
+      padding-left: 32px;
+    }
+    .hp2-faq-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      color: rgba(226,168,77,0.5);
+      font-family: var(--font-accent);
+      font-size: 0.82rem;
+      font-style: italic;
+      font-weight: 400;
+      margin-right: 16px;
+      flex-shrink: 0;
+    }
+    .hp2-faq-item[open] .hp2-faq-count {
+      color: var(--gold);
+    }
+    /* FAQ bottom CTA */
+    .hp2-faq-bottom-cta {
+      text-align: center;
+      margin-top: 56px;
+    }
+    .hp2-faq-bottom-cta p {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      margin-bottom: 20px;
+    }
+
+    /* ══════════════════════════════════════
+       3b. PAIN SECTION, CRO Showstopper Overrides
+       ══════════════════════════════════════ */
+    #pain {
+      position: relative;
+      margin-top: -60px;
+      padding-top: 140px;
+      padding-bottom: 140px;
+    }
+    /* Dramatic radial glow, use a dedicated element since ::before is blocked by card-overlay */
+    .hp2-pain-glow {
+      position: absolute;
+      top: -10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(circle, rgba(208,106,80,0.07) 0%, rgba(226,168,77,0.03) 30%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    #pain > .lib-section-label,
+    #pain > .hp2-problem-headline,
+    #pain > .lib-section-sub,
+    #pain > .pain-grid { position: relative; z-index: 1; }
+
+    /* Bigger, bolder headline */
+    .hp2-problem-headline {
+      font-size: clamp(1.8rem, 3.5vw, 3rem) !important;
+      max-width: 24ch !important;
+      margin-bottom: 16px !important;
+    }
+    /* Larger sub text */
+    #pain .lib-section-sub {
+      font-size: 1.05rem;
+      max-width: 56ch;
+      line-height: 1.65;
+      color: var(--text-dim);
+    }
+
+    /* Pain column headers, bigger */
+    #pain .pain-col-head h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    #pain .pain-col-head span {
+      font-size: 0.68rem;
+    }
+
+    /* "What Goes Wrong" column, red/danger accent */
+    /* "Problem" column, muted white/grey */
+    #pain .pain-col-head:not(.--active) {
+      border-left-color: rgba(255,255,255,0.25);
+    }
+    #pain .pain-col-head:not(.--active) span {
+      color: rgba(255,255,255,0.5);
+    }
+    #pain .pain-item:not(.--active) {
+      border-color: rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+    }
+    #pain .pain-item:not(.--active):hover {
+      border-color: rgba(255,255,255,0.12);
+      transform: translateX(4px);
+    }
+    #pain .pain-icon:not(.--active) {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.5);
+    }
+    #pain .pain-item:not(.--active) h4 {
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* "What We Build" column, gold accent */
+    #pain .pain-col-head.--active { border-left-color: var(--gold); }
+    #pain .pain-col-head.--active span { color: var(--gold); }
+    #pain .pain-item.--active {
+      border-color: transparent;
+      box-shadow: 0 2px 16px rgba(202,138,4,0.08);
+      background:
+        linear-gradient(180deg, rgba(10,10,10,0.94), rgba(10,10,10,0.97)) padding-box,
+        linear-gradient(160deg, rgba(202,138,4,0.2) 0%, rgba(202,138,4,0.04) 50%, transparent 100%) border-box;
+    }
+    #pain .pain-item.--active:hover {
+      box-shadow: 0 4px 24px rgba(202,138,4,0.12);
+      transform: translateX(4px);
+      background:
+        linear-gradient(180deg, rgba(10,10,10,0.9), rgba(10,10,10,0.95)) padding-box,
+        linear-gradient(160deg, rgba(202,138,4,0.3) 0%, rgba(202,138,4,0.08) 50%, transparent 100%) border-box;
+    }
+    #pain .pain-icon.--active {
+      width: 36px;
+      height: 36px;
+      flex: 0 0 36px;
+      background: linear-gradient(135deg, rgba(202,138,4,0.16), rgba(202,138,4,0.08));
+      border-color: rgba(202,138,4,0.25);
+      color: var(--gold);
+    }
+    #pain .card-overlay .pain-item.--active {
+      border-left-color: var(--gold);
+    }
+    #pain .pain-item.--active + .pain-item.--active {
+      border-top-color: rgba(202,138,4,0.1);
+    }
+    #pain .pain-item h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+    #pain .pain-item p {
+      font-size: 0.8rem;
+    }
+
+    /* Bigger pain grid gap */
+    #pain .pain-grid {
+      gap: 48px;
+      margin-top: 56px !important;
+    }
+
+    /* Center arrow between columns, pulse glow */
+    #pain .pain-grid::after {
+      width: 44px;
+      height: 44px;
+      font-size: 20px;
+      background: var(--bg-0);
+      border-color: rgba(202,138,4,0.35);
+      box-shadow: 0 0 24px rgba(202,138,4,0.12);
+      animation: hp2-arrow-pulse 2.5s ease-in-out infinite alternate;
+    }
+    @keyframes hp2-arrow-pulse {
+      0% { box-shadow: 0 0 16px rgba(202,138,4,0.08); }
+      100% { box-shadow: 0 0 32px rgba(202,138,4,0.2); }
+    }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+       ══════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .hp2-hero-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding-bottom: 80px;
+      }
+      .hp2-proof-fragments {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: stretch;
+      }
+      .hp2-proof-pill { min-width: auto; flex: 1; }
+      .hp2-system-inner { grid-template-columns: 1fr; height: auto; min-height: 0; gap: 24px; padding: 48px 24px; }
+      .hp2-system-left { padding: 0; }
+      .hp2-system-right { height: auto; min-height: 300px; max-height: none; }
+      .hp2-system-pin { width: 100%; margin-left: 0; }
+      .hp2-iphone { width: 200px; }
+      .hp2-iphone.--lg { width: 220px; }
+      .hp2-case-editorial { grid-template-columns: 1fr; }
+      .hp2-case-editorial:nth-child(even) { direction: ltr; }
+      .hp2-case-img { min-height: 220px; }
+      .hp2-trust-inner { gap: 28px; }
+      .hp2-services-grid { grid-template-columns: 1fr 1fr; }
+      .hp2-curtain-wrap { width: 92%; }
+      .hp2-curtain-img img { height: 45vh; }
+      .hp2-process-grid, .hp2-process-grid[style] { grid-template-columns: 1fr !important; }
+      .hp2-process-step { border-right: none; border-bottom: 1px solid var(--line-soft); }
+      .hp2-process-step:last-child { border-bottom: none; }
+      .hp2-faq-hero-heading { font-size: clamp(1.8rem, 6vw, 2.4rem); }
+      .hp2-faq-item summary { padding: 22px 16px 22px 16px; font-size: 0.95rem; }
+      .hp2-faq-item .hp2-faq-answer { padding: 0 16px 22px 16px; }
+      .hp2-faq-item[open] summary { padding-left: 20px; }
+      .hp2-faq-item[open] .hp2-faq-answer { padding-left: 20px; }
+
+      /* Mobile: system panels stacked, no pin */
+      .hp2-system-panels { min-height: auto; }
+      .hp2-system-panel {
+        position: relative;
+        top: auto;
+        transform: none;
+        opacity: 1;
+        margin-bottom: 48px;
+        padding-bottom: 48px;
+        border-bottom: 1px solid var(--line-soft);
+      }
+      .hp2-system-panel:last-child { border-bottom: none; }
+      .hp2-system-progress { display: none; }
+      .hp2-system-visual {
+        position: relative;
+        opacity: 1;
+        margin-bottom: 24px;
+        min-height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .hp2-system-visual > img { height: 200px; }
+      .hp2-system-panels-wrap { flex-direction: column; gap: 16px; }
+    }
+
+    @media (max-width: 600px) {
+      .hp2-hero-copy h1 { font-size: clamp(1.8rem, 8vw, 2.6rem); }
+      .hp2-curtain-wrap { width: 100%; border-radius: 16px; }
+      .hp2-curtain-img { border-radius: 16px; }
+      .hp2-curtain-img img { height: 40vh; }
+      .hp2-curtain-glass { padding: 20px 24px; }
+      .hp2-process-step { padding: 32px 24px; }
+      .hp2-services-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ══════════════════════════════════════
+       PREFERS-REDUCED-MOTION
+       ══════════════════════════════════════ */
+    @media (prefers-reduced-motion: reduce) {
+      .hp2-word-inner,
+      .hp2-curtain-img,
+      .hp2-curtain-glass-wrap,
+      .hp2-system-panel,
+      .hp2-system-visual,
+      .hp2-service-reveal,
+      .hp2-hscroll-panel,
+      .hp2-hscroll-copy,
+      .hp2-hscroll-visual {
+        opacity: 1 !important;
+        transform: none !important;
+        clip-path: none !important;
+        filter: none !important;
+      }
+      .hp2-hscroll-particle { animation: none !important; opacity: 0 !important; }
+      .hp2-hscroll-glow { opacity: 0 !important; }
+      .hp2-curtain-img img {
+        transform: none !important;
+      }
+      .hp2-curtain-wrap {
+        width: 100% !important;
+        border-radius: 0 !important;
+      }
+      .hp2-warm-img img,
+      .hp2-bright-img img {
+        filter: none !important;
+      }
+      .hp2-cta-scene .btn-primary {
+        animation: none !important;
+      }
+      .hp2-cta-scene::before {
+        animation: none !important;
+      }
+    }
+
+    /* ══════════════════════════════════════
+       TASK 2: Film Grain Overlay
+       ══════════════════════════════════════ */
+    .page::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.035;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+    }
+
+    /* ══════════════════════════════════════
+       TASK 3: Client Logo Strip
+       ══════════════════════════════════════ */
+    .hp2-trust-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 28px auto 0;
+      padding-bottom: 8px;
+    }
+    .hp2-trust-logos span {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--text);
+      opacity: 0.4;
+      filter: grayscale(1);
+      transition: opacity 0.3s, filter 0.3s;
+      white-space: nowrap;
+      cursor: default;
+    }
+    .hp2-trust-logos span:hover {
+      opacity: 0.85;
+      filter: grayscale(0);
+    }
+
+    /* ══════════════════════════════════════
+       TASK 5: Impact Wall
+       ══════════════════════════════════════ */
+    .hp2-impact-wall {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 900px;
+      margin: 48px auto 64px;
+      text-align: center;
+    }
+    .hp2-impact-stat {
+      padding-top: 24px;
+      border-top: 2px solid rgba(226,168,77,0.25);
+    }
+    .hp2-impact-num {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.15;
+      margin-bottom: 8px;
+      padding: 4px 0;
+    }
+    .hp2-impact-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-soft);
+    }
+    @media (max-width: 900px) {
+      .hp2-impact-wall { grid-template-columns: 1fr; max-width: 400px; gap: 24px; }
+      .hp2-trust-logos { gap: 20px; }
+      .hp2-trust-logos span { font-size: 0.95rem; }
+    }
+
+    /* ══════════════════════════════════════
+       TASK 6: Custom Cursor
+       ══════════════════════════════════════ */
+    /* ══════════════════════════════════════
+       EDITORIAL 2-COL LAYOUT SYSTEM
+       ══════════════════════════════════════ */
+    .hp2-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      margin-top: 48px;
+    }
+    .hp2-split.--reverse { direction: rtl; }
+    .hp2-split.--reverse > * { direction: ltr; }
+    .hp2-split-media {
+      position: relative;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+    .hp2-split-media img,
+    .hp2-split-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hp2-split-media.--portrait { aspect-ratio: 9/16; max-width: 320px; margin: 0 auto; }
+    .hp2-split-media.--video-stack {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      aspect-ratio: auto;
+    }
+    .hp2-split-media.--video-stack .hp2-mini-vid {
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 9/16;
+    }
+    .hp2-split-media.--video-stack .hp2-mini-vid video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hp2-split-copy h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .hp2-split-copy p {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+    /* ══════════════════════════════════════
+       VIDEO SHOWCASE, Cinematic client stories
+       ══════════════════════════════════════ */
+    .hp2-vid-showcase {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 56px;
+    }
+    .hp2-vid-card {
+      background: linear-gradient(180deg, rgba(23,23,23,0.6) 0%, rgba(13,13,13,0.85) 100%);
+      border: 1px solid rgba(255,248,235,0.06);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), border-color 0.4s;
+    }
+    .hp2-vid-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(202,138,4,0.2);
+    }
+    .hp2-vid-card-frame {
+      position: relative;
+      aspect-ratio: 9/16;
+      overflow: hidden;
+      cursor: pointer;
+      background: #0A0A0A;
+    }
+    .hp2-vid-card-frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hp2-vid-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(10,10,10,0.85) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .hp2-vid-card.--playing .hp2-vid-card-overlay { opacity: 0; }
+    .hp2-vid-card-info h4 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .hp2-vid-card-info span {
+      font-size: 0.68rem;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+    }
+    .hp2-vid-card-play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(226,168,77,0.9);
+      display: grid;
+      place-items: center;
+      transition: transform 0.3s, opacity 0.3s;
+      pointer-events: none;
+      box-shadow: 0 8px 32px rgba(202,138,4,0.3);
+    }
+    .hp2-vid-card-play::after {
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 16px solid #050608;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      margin-left: 3px;
+    }
+    .hp2-vid-card:hover .hp2-vid-card-play { transform: translate(-50%, -50%) scale(1.1); }
+    .hp2-vid-card.--playing .hp2-vid-card-play { opacity: 0; }
+    .hp2-vid-card-meta {
+      padding: 20px 24px 24px;
+    }
+    .hp2-vid-card-quote {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.55;
+      margin-bottom: 16px;
+    }
+    .hp2-vid-card-stats {
+      display: flex;
+      gap: 24px;
+    }
+    .hp2-vid-card-stats div {
+      display: flex;
+      flex-direction: column;
+    }
+    .hp2-vid-card-stats strong {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 800;
+      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hp2-vid-card-stats span {
+      font-size: 0.62rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-soft);
+    }
+    @media (max-width: 900px) {
+      .hp2-vid-showcase { grid-template-columns: 1fr; max-width: 360px; margin-left: auto; margin-right: auto; }
+    }
+
+    /* Legacy video testimonial card (kept for marquee section) */
+    .hp2-testimonial-video {
+      position: relative;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      cursor: pointer;
+    }
+    .hp2-testimonial-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hp2-testimonial-video .hp2-vid-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(10,10,10,0.8) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .hp2-testimonial-video.--playing .hp2-vid-overlay { opacity: 0; }
+    .hp2-vid-play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(226,168,77,0.9);
+      display: grid;
+      place-items: center;
+      transition: transform 0.3s, opacity 0.3s;
+      pointer-events: none;
+    }
+    .hp2-vid-play::after {
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 18px solid #050608;
+      border-top: 11px solid transparent;
+      border-bottom: 11px solid transparent;
+      margin-left: 3px;
+    }
+    .hp2-testimonial-video:hover .hp2-vid-play { transform: translate(-50%, -50%) scale(1.1); }
+    .hp2-testimonial-video.--playing .hp2-vid-play { opacity: 0; }
+    .hp2-vid-info h4 { font-size: 0.92rem; font-weight: 700; margin-bottom: 2px; }
+    .hp2-vid-info span { font-size: 0.72rem; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+
+    /* Testimonial video grid, iPhone portrait frames */
+    .hp2-testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 48px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      justify-items: center;
+    }
+    .hp2-testimonial-grid .hp2-testimonial-video {
+      aspect-ratio: 9/16;
+      max-width: 260px;
+      width: 100%;
+      border-radius: 36px;
+      border: 4px solid #1a1a1a;
+      box-shadow: 0 0 0 2px #333, 0 20px 60px rgba(0,0,0,0.5);
+      position: relative;
+    }
+    .hp2-testimonial-grid .hp2-testimonial-video::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 22px;
+      background: #000;
+      border-radius: 16px;
+      z-index: 5;
+    }
+    .hp2-testimonial-grid .hp2-testimonial-video video {
+      aspect-ratio: 9/16;
+      border-radius: 32px;
+    }
+    .hp2-testimonial-grid .hp2-vid-overlay {
+      border-radius: 32px;
+    }
+    .hp2-testimonial-grid .hp2-vid-play {
+      width: 52px;
+      height: 52px;
+    }
+    .hp2-testimonial-grid .hp2-vid-play::after {
+      border-left-width: 14px;
+      border-top-width: 9px;
+      border-bottom-width: 9px;
+    }
+
+    @media (max-width: 900px) {
+      .hp2-split { grid-template-columns: 1fr; gap: 32px; }
+      .hp2-split.--reverse { direction: ltr; }
+      .hp2-split-media.--portrait { max-width: 240px; }
+      .hp2-testimonial-grid { grid-template-columns: repeat(3, 1fr); max-width: 700px; }
+      .hp2-testimonial-grid .hp2-testimonial-video { max-width: 200px; border-radius: 28px; border-width: 3px; }
+      .hp2-testimonial-grid .hp2-testimonial-video::before { width: 50px; height: 16px; top: 8px; border-radius: 12px; }
+      .hp2-testimonial-grid .hp2-testimonial-video video,
+      .hp2-testimonial-grid .hp2-vid-overlay { border-radius: 24px; }
+    }
+
+    /* ══════════════════════════════════════
+       NEW: Industry Competition Section
+       ══════════════════════════════════════ */
+    /* Industry section 2-col split */
+    .hp2-industry-split {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .hp2-industry-copy {
+      padding-right: 0;
+    }
+    .hp2-industry-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 16px;
+      text-align: left;
+    }
+    .hp2-industry-body {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      max-width: 50ch;
+      margin-bottom: 12px;
+    }
+    .hp2-industry-video {
+      position: relative;
+      aspect-ratio: 9/16;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      cursor: pointer;
+      max-width: 340px;
+      margin: 0 auto;
+      border: 1px solid var(--line-soft);
+    }
+    .hp2-industry-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hp2-industry-stat {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      padding: 4px 0;
+    }
+    .hp2-industry-stats-row {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+    }
+    .hp2-industry-stats-row .hp2-inline-stat {
+      flex: 1;
+      min-width: 160px;
+      padding: 20px 0;
+      border-top: 2px solid rgba(226,168,77,0.25);
+    }
+    .hp2-inline-stat strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 4px;
+    }
+    .hp2-inline-stat span {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-soft);
+    }
+    .hp2-pull-quote {
+      margin-top: 40px;
+      padding: 24px 28px;
+      border-left: 3px solid var(--gold);
+      background: rgba(226,168,77,0.03);
+      border-radius: 0 12px 12px 0;
+    }
+    .hp2-pull-quote p {
+      font-family: var(--font-accent);
+      font-style: italic;
+      font-size: 1.15rem;
+      line-height: 1.5;
+      color: var(--text);
+    }
+
+    /* ══════════════════════════════════════
+       NEW: AI/AEO Future-Proof Section
+       ══════════════════════════════════════ */
+    .hp2-aeo-split {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .hp2-aeo-copy p {
+      color: var(--text-dim);
+      max-width: 50ch;
+    }
+    .hp2-aeo-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .hp2-aeo-compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .hp2-aeo-block {
+      padding: 28px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,248,235,0.06);
+    }
+    .hp2-aeo-block.--traditional {
+      background: rgba(255,255,255,0.02);
+    }
+    .hp2-aeo-block.--aeo {
+      background: rgba(69,176,140,0.05);
+      border-color: rgba(69,176,140,0.2);
+    }
+    .hp2-aeo-block h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .hp2-aeo-block.--aeo h4 {
+      color: var(--teal);
+    }
+    .hp2-aeo-block p {
+      font-size: 0.86rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+    .hp2-aeo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 40px;
+    }
+    .hp2-aeo-item {
+      padding: 20px;
+      border-radius: 14px;
+      border: 1px solid rgba(69,176,140,0.15);
+      background: rgba(69,176,140,0.03);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .hp2-aeo-item:hover {
+      border-color: rgba(69,176,140,0.3);
+      transform: translateY(-2px);
+    }
+    .hp2-aeo-item-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(69,176,140,0.1);
+      border: 1px solid rgba(69,176,140,0.2);
+      display: grid;
+      place-items: center;
+      margin-bottom: 12px;
+    }
+    .hp2-aeo-item-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: var(--teal);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .hp2-aeo-item h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    /* ══════════════════════════════════════
+       NEW: Why Us Section
+       ══════════════════════════════════════ */
+    .hp2-why-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .hp2-why-card {
+      padding: 40px 32px;
+      border: 1px solid var(--line-soft);
+      border-radius: var(--r-xl);
+      background: rgba(255,255,255,0.015);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .hp2-why-card:hover {
+      border-color: rgba(226,168,77,0.2);
+      transform: translateY(-4px);
+    }
+    .hp2-why-card-num {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 20px;
+      opacity: 0.3;
+    }
+    .hp2-why-card h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .hp2-why-card p {
+      font-size: 0.86rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    /* ══════════════════════════════════════
+       NEW: Stats by the Numbers
+       ══════════════════════════════════════ */
+    .hp2-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .hp2-stat-cell {
+      padding: 28px 20px;
+      border: 1px solid var(--line-soft);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.015);
+      text-align: center;
+    }
+    .hp2-stat-cell-num {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.15;
+      margin-bottom: 8px;
+      padding: 4px 0;
+    }
+    .hp2-stat-cell-desc {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    /* ══════════════════════════════════════
+       NEW: Florida Markets Section
+       ══════════════════════════════════════ */
+    .hp2-florida-markets {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .hp2-market-group h4 {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+    .hp2-market-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .hp2-market-pill {
+      display: inline-flex;
+      align-items: center;
+      height: 28px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(226,168,77,0.15);
+      background: rgba(226,168,77,0.04);
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-soft);
+      letter-spacing: 0.02em;
+      transition: border-color 0.3s, color 0.3s;
+    }
+    .hp2-market-pill:hover {
+      border-color: rgba(226,168,77,0.3);
+      color: var(--gold);
+    }
+
+    @media (max-width: 900px) {
+      .hp2-aeo-split { grid-template-columns: 1fr; gap: 32px; }
+      .hp2-aeo-compare { grid-template-columns: 1fr; }
+      .hp2-aeo-grid { grid-template-columns: 1fr 1fr; }
+      .hp2-why-cards { grid-template-columns: 1fr; }
+      .hp2-stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .hp2-florida-markets { grid-template-columns: 1fr 1fr; }
+      .hp2-industry-split { grid-template-columns: 1fr; gap: 32px; }
+      .hp2-industry-video { max-width: 280px; }
+      .hp2-industry-stats-row { gap: 20px; }
+    }
+    @media (max-width: 600px) {
+      .hp2-aeo-grid { grid-template-columns: 1fr; }
+      .hp2-stats-grid { grid-template-columns: 1fr 1fr; }
+      .hp2-florida-markets { grid-template-columns: 1fr; }
+    }
+
+    a, button, [role="button"], .btn, .glass-card, .hp2-case-editorial, .hp2-faq-item summary {
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='10' cy='10' r='8' fill='%23E2A84D' opacity='0.85'/%3E%3C/svg%3E") 10 10, pointer;
+    }
+    a:active, button:active, .btn:active, .glass-card:active, .hp2-case-editorial:active, .hp2-faq-item summary:active {
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Ccircle cx='8' cy='8' r='6' fill='%23E2A84D' opacity='0.9'/%3E%3C/svg%3E") 8 8, pointer;
+    }
+
+    /* ══════════════════════════════════════
+       TASK 7: Scroll Progress Indicator
+       ══════════════════════════════════════ */
+    .hp2-scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #C6943A, #F2D688, #E2A84D);
+      transform-origin: left;
+      transform: scaleX(0);
+      z-index: 10000;
+      pointer-events: none;
+    }
+
+    /* ══════════════════════════════════════
+       TASK 8: Section Transition Gradient Dividers
+       ══════════════════════════════════════ */
+    .hp2-section-divider {
+      position: relative;
+    }
+    .hp2-section-divider::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--coral), var(--teal), transparent);
+      opacity: 0.4;
+      box-shadow: 0 0 20px rgba(226,168,77,0.15);
+      pointer-events: none;
+    }
+  </style>
+
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "Button Up Media",
+        "url": "https://buttonupmedia.com",
+        "email": "contact@buttonupmedia.com",
+        "telephone": "(786) 740-9498",
+        "areaServed": ["Miami", "Fort Lauderdale", "West Palm Beach", "Orlando", "Tampa", "Jacksonville", "Naples", "Florida"],
+        "description": "Button Up Media is a restaurant marketing agency in Florida. We help restaurants grow with social media, website design, SEO, and advertising."
+      },
+      {
+        "@type": "ProfessionalService",
+        "name": "Button Up Media",
+        "serviceType": ["Restaurant SEO", "Google Business Profile Optimization", "Social Media Marketing", "Google Ads Management", "Restaurant Website Design"],
+        "areaServed": ["Miami", "Fort Lauderdale", "West Palm Beach", "South Florida"]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "What does a restaurant marketing agency do?", "acceptedAnswer": { "@type": "Answer", "text": "A restaurant marketing agency specializes in helping restaurants increase their visibility, attract more customers, and grow revenue through digital marketing. This typically includes social media management and content creation, website design and optimization, search engine optimization (SEO), and paid advertising on platforms like Google and Facebook. Unlike general marketing agencies, a restaurant marketing agency understands the unique challenges of the hospitality industry - thin margins, high competition, and the constant need to keep seats filled." } },
+          { "@type": "Question", "name": "How much does restaurant marketing cost?", "acceptedAnswer": { "@type": "Answer", "text": "Restaurant marketing costs vary depending on the services you need and the size of your operation. At Button Up Media, we build custom strategies tailored to each restaurant's goals and budget. Most restaurant owners invest between $1,500 and $5,000 per month for a coordinated marketing strategy that includes multiple channels. The best way to get a clear picture is to schedule a free consultation so we can understand your specific situation and recommend the right approach." } },
+          { "@type": "Question", "name": "What is the best marketing strategy for a restaurant?", "acceptedAnswer": { "@type": "Answer", "text": "The most effective restaurant marketing strategy is an integrated one - not just social media or just a website, but all channels working together. At a minimum, a strong restaurant marketing strategy should include an active social media presence with professional food content, a mobile-optimized website that makes it easy to view menus and book reservations, local SEO so you appear when customers search for restaurants nearby, and targeted advertising to capture high-intent customers." } },
+          { "@type": "Question", "name": "How to get more customers to my restaurant?", "acceptedAnswer": { "@type": "Answer", "text": "Getting more customers starts with making sure people can find you online. Over 97% of diners use Google to find restaurants, and social media platforms like Instagram and TikTok directly influence where people choose to eat. To get more customers, you need to be visible when they search, look compelling when they find you, and make it effortless to book or order." } },
+          { "@type": "Question", "name": "Why hire a restaurant-specific marketing agency?", "acceptedAnswer": { "@type": "Answer", "text": "General marketing agencies apply the same playbook to restaurants that they use for dentists, gyms, and law firms. Restaurant marketing is fundamentally different - the customer journey is shorter, the decision is emotional and visual, and the competition is hyper-local. A restaurant-specific agency understands food photography, menu psychology, reservation behavior, seasonal demand patterns, and what drives someone to choose one restaurant over another on a Friday night." } },
+          { "@type": "Question", "name": "What is Answer Engine Optimization (AEO) for restaurants?", "acceptedAnswer": { "@type": "Answer", "text": "Answer Engine Optimization is the practice of optimizing your restaurant's digital presence to appear in AI-powered search results - including Google AI Overviews, ChatGPT, Perplexity, and voice assistants like Siri and Alexa. As more customers use conversational AI to find dining recommendations, AEO ensures your restaurant is cited and recommended in those answers." } },
+          { "@type": "Question", "name": "Do you work with restaurants outside of Florida?", "acceptedAnswer": { "@type": "Answer", "text": "Button Up Media is headquartered in South Florida and serves restaurants across the state, from Miami and Fort Lauderdale to Orlando, Tampa, Jacksonville, Naples, and beyond. While our deepest expertise is in the Florida market, we also work with restaurant brands in other states. If you're interested in working together, the best first step is to schedule a free consultation." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="hp2-scroll-progress" aria-hidden="true"></div>
+  <!-- Mesh gradient background -->
+  <div class="depth-canvas" aria-hidden="true">
+    <div class="mesh-orb" style="--orb-color: var(--gold); width: 600px; height: 600px; top: -10%; left: -5%;"></div>
+    <div class="mesh-orb" style="--orb-color: var(--coral); width: 500px; height: 500px; top: 20%; right: -8%;"></div>
+    <div class="mesh-orb" style="--orb-color: var(--teal); width: 450px; height: 450px; bottom: 10%; left: 15%;"></div>
+  </div>
+
+  <!-- Golden flash load overlay -->
+  <div class="load-flash" aria-hidden="true"></div>
+
+  <!-- ═══ NAV ═══ -->
+  <nav class="lib-nav">
+    <a class="lib-nav-brand" href="#">Button Up Media <span>Restaurant Growth</span></a>
+    <div class="lib-nav-links">
+      <a href="#services">Services</a>
+      <a href="#case-studies">Case Studies</a>
+      <a href="#process">Process</a>
+      <a href="#faq">FAQ</a>
+      <a href="#cta" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Contact Us</a>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- ═══ 1. HERO, Full-Bleed Cinematic + Word Reveal ═══ -->
+    <section class="hp2-hero" id="hero">
+      <div class="hp2-hero-media">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1800&h=1000&fit=crop" alt="Dimly lit upscale restaurant interior with warm ambient lighting" />
+      </div>
+      <div class="hp2-hero-inner">
+        <div class="hp2-hero-copy">
+          <div class="hero-badge">Florida &bull; Restaurant-Only Growth Team</div>
+          <h1 class="hp2-word-reveal">
+            Restaurant Marketing Agency That Grows Your <span class="accent-serif">Business.</span>
+          </h1>
+          <p>
+            <strong>Your restaurant deserves to be packed.</strong> We make it happen. Button Up Media is a restaurant marketing agency built for one thing, helping restaurants get discovered, get busy, and grow. We combine social media storytelling, high-converting websites, local SEO, and targeted advertising into one growth system designed specifically for the restaurant industry.
+          </p>
+          <div class="hp2-hero-cta">
+            <div class="flex-row" style="gap: 12px;">
+              <a href="contact.html" class="btn btn-primary hp2-cta-btn">Get a Free Consultation</a>
+              <a href="#system" class="btn btn-ghost">See How It Works</a>
+            </div>
+            <div class="hp2-hero-chips flex-row" style="gap: 8px;">
+              <span class="chip">Restaurant SEO + GBP</span>
+              <span class="chip">Organic Social</span>
+              <span class="chip">Google Ads</span>
+              <span class="chip">Websites</span>
+            </div>
+          </div>
+        </div>
+        <div class="hp2-proof-fragments">
+          <div class="hp2-proof-pill">
+            <div class="hp2-proof-pill-num" data-count-to="80" data-suffix="M+">0</div>
+            <div class="hp2-proof-pill-text">Video views<br>generated</div>
+          </div>
+          <div class="hp2-proof-pill">
+            <div class="hp2-proof-pill-num" data-count-to="7" data-suffix="%" data-decimal="1">0</div>
+            <div class="hp2-proof-pill-text">Average<br>engagement rate</div>
+          </div>
+          <div class="hp2-proof-pill">
+            <div class="hp2-proof-pill-num" data-count-to="90" data-suffix=" Days">0</div>
+            <div class="hp2-proof-pill-text">To measurable<br>results</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 2. TRUST RIBBON ═══ -->
+    <section class="card-overlay --dark hp2-trust">
+      <p style="text-align:center; font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-soft); margin-bottom:24px;">Trusted by restaurants across Florida</p>
+      <div class="hp2-trust-inner">
+        <div class="hp2-trust-stat">
+          <div class="hp2-trust-num" data-count-to="50" data-suffix="+">0</div>
+          <div class="hp2-trust-label">Restaurants served</div>
+        </div>
+        <div class="hp2-trust-stat">
+          <div class="hp2-trust-num" data-count-to="80" data-suffix="M+">0</div>
+          <div class="hp2-trust-label">Video views</div>
+        </div>
+        <div class="hp2-trust-stat">
+          <div class="hp2-trust-num" data-count-to="12" data-suffix="X">0</div>
+          <div class="hp2-trust-label">Average ROAS</div>
+        </div>
+        <div class="hp2-trust-stat">
+          <div class="hp2-trust-num" data-count-to="90" data-suffix="%">0</div>
+          <div class="hp2-trust-label">Client retention</div>
+        </div>
+      </div>
+      <div class="hp2-trust-logos">
+        <span>The Fatty Crab</span>
+        <span>Shimuja Ramen</span>
+        <span>Rusty Pelican</span>
+        <span>SRC Hospitality</span>
+        <span>Casa Madera</span>
+        <span>Patio Isola</span>
+      </div>
+    </section>
+
+    <!-- ═══ NEW: INDUSTRY COMPETITION ═══ -->
+    <section class="card-overlay --dark lib-section" id="industry">
+
+      <div class="hp2-industry-split">
+        <div class="hp2-industry-copy">
+          <div class="lib-section-label" style="text-align:left;">The Challenge</div>
+          <h2 class="hp2-industry-headline">The Restaurant Industry<br>Has a Visibility Problem</h2>
+          <p class="hp2-industry-body">The U.S. restaurant industry generates over $1.2 trillion in annual revenue. There are more than 1 million restaurant locations across the country, and over 67,000 in Florida alone.</p>
+          <p class="hp2-industry-body">Customers no longer drive around looking for a place to eat. They search. <strong style="color:var(--text);">90% of diners research a restaurant online before visiting.</strong> They check Google. They scroll Instagram. They watch TikTok. They read reviews. And they decide in seconds.</p>
+          <p class="hp2-industry-body">If your restaurant isn't showing up in those moments, you're losing customers to the restaurants that are.</p>
+        </div>
+        <div class="hp2-industry-video hp2-click-to-play" onclick="var v=this.querySelector('video'), o=this.querySelector('.hp2-vid-play');if(v.paused){v.muted=false;v.play();o.style.opacity='0';this.dataset.playing='1';}else{v.pause();o.style.opacity='1';delete this.dataset.playing;}">
+          <video src="videos/influencer-reel.mp4" muted loop playsinline preload="metadata" loading="lazy"></video>
+          <div class="hp2-vid-play" style="z-index:2;"></div>
+        </div>
+      </div>
+
+      <div class="hp2-industry-stats-row">
+        <div class="hp2-inline-stat">
+          <strong data-count-to="90" data-suffix="%">0</strong>
+          <span>Research online before visiting</span>
+        </div>
+        <div class="hp2-inline-stat">
+          <strong>1M+</strong>
+          <span>Restaurant locations in the U.S.</span>
+        </div>
+        <div class="hp2-inline-stat">
+          <strong>67K+</strong>
+          <span>Restaurants in Florida</span>
+        </div>
+      </div>
+      <div class="hp2-pull-quote">
+        <p>This isn't about being a better restaurant. It's about being a more visible one.</p>
+      </div>
+    </section>
+
+    <!-- ═══ 3. PROBLEM ═══ -->
+    <section class="card-overlay lib-section" id="pain">
+      <div class="hp2-pain-glow" aria-hidden="true"></div>
+      <div class="lib-section-label">The Reality</div>
+      <h2 class="hp2-problem-headline hp2-word-reveal">Sound Familiar?</h2>
+      <p class="lib-section-sub">You opened a restaurant because you're passionate about food and hospitality, not because you wanted to become a marketing expert. But somewhere between running the kitchen, managing staff, and keeping the lights on, marketing became another problem on the pile.</p>
+
+      <div class="pain-grid" style="margin-top: 48px;">
+        <div>
+          <div class="pain-col-head">
+            <span>The Problem</span>
+            <h3>Where Restaurants Get Stuck</h3>
+          </div>
+          <div class="stack">
+            <div class="pain-item">
+              <div class="pain-icon"><i data-lucide="calendar-minus" class="icon-sm"></i></div>
+              <div>
+                <h4>Empty tables during off-peak hours</h4>
+                <p>No system to fill them, demand spikes on weekends but soft shifts stay empty.</p>
+              </div>
+            </div>
+            <div class="pain-item">
+              <div class="pain-icon"><i data-lucide="eye-off" class="icon-sm"></i></div>
+              <div>
+                <h4>Social media feels like a chore</h4>
+                <p>Inconsistent posts, low engagement, zero strategy, and no time to fix it.</p>
+              </div>
+            </div>
+            <div class="pain-item">
+              <div class="pain-icon"><i data-lucide="monitor-x" class="icon-sm"></i></div>
+              <div>
+                <h4>A website that looks like 2018</h4>
+                <p>Slow on mobile, impossible to find the menu, doing nothing to drive reservations.</p>
+              </div>
+            </div>
+            <div class="pain-item">
+              <div class="pain-icon"><i data-lucide="banknote" class="icon-sm"></i></div>
+              <div>
+                <h4>Money wasted on advertising</h4>
+                <p>No idea whether ads actually brought anyone through the door.</p>
+              </div>
+            </div>
+            <div class="pain-item">
+              <div class="pain-icon"><i data-lucide="unplug" class="icon-sm"></i></div>
+              <div>
+                <h4>No marketing plan</h4>
+                <p>Just scattered efforts that never seem to add up to real growth.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="pain-col-head --active">
+            <span>What We Build Instead</span>
+            <h3>One System. Real Growth.</h3>
+          </div>
+          <div class="stack">
+            <div class="pain-item --active">
+              <div class="pain-icon --active"><i data-lucide="calendar-check" class="icon-sm"></i></div>
+              <div>
+                <h4>Off-peak demand system</h4>
+                <p>Targeted promotions, local SEO, and strategic content to fill every shift.</p>
+              </div>
+            </div>
+            <div class="pain-item --active">
+              <div class="pain-icon --active"><i data-lucide="video" class="icon-sm"></i></div>
+              <div>
+                <h4>Done-for-you content engine</h4>
+                <p>Professional photography, video, and strategy, we show up with cameras.</p>
+              </div>
+            </div>
+            <div class="pain-item --active">
+              <div class="pain-icon --active"><i data-lucide="globe" class="icon-sm"></i></div>
+              <div>
+                <h4>Website that converts visitors</h4>
+                <p>Mobile-first, fast-loading, menu visible in one tap, reservation in two clicks.</p>
+              </div>
+            </div>
+            <div class="pain-item --active">
+              <div class="pain-icon --active"><i data-lucide="target" class="icon-sm"></i></div>
+              <div>
+                <h4>Data-driven ad campaigns</h4>
+                <p>Every dollar tracked, every campaign optimized for real return on investment.</p>
+              </div>
+            </div>
+            <div class="pain-item --active">
+              <div class="pain-icon --active"><i data-lucide="map-pin" class="icon-sm"></i></div>
+              <div>
+                <h4>Complete marketing strategy</h4>
+                <p>All channels working together, coordinated, measured, growing.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 4. IMMERSIVE #1, Clip-Path Curtain Reveal (Empty Restaurant) ═══ -->
+    <div class="hp2-curtain-wrap" id="immersive-1">
+      <div class="hp2-curtain-img">
+        <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=1600&h=900&fit=crop" alt="Stunning plated dish in a fine dining restaurant with dramatic lighting" />
+        <div class="hp2-curtain-overlay"></div>
+        <div class="hp2-curtain-copy" style="justify-content:flex-start;">
+          <div class="hp2-curtain-glass-wrap">
+            <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
+            <div class="glass-toplight"></div>
+            <div class="hp2-curtain-glass">
+              <pixel-canvas data-gap="6" data-speed="30" data-colors="#CA8A04, #A16207, #EAB308" data-no-focus></pixel-canvas>
+              <h3>90% of diners decide where to eat before they leave the house.</h3>
+              <p>They search. They scroll. They decide in seconds. If your restaurant isn't in that moment, you don't exist.</p>
+              <a href="#system" class="btn btn-primary">See the Growth System</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ 5. GROWTH SYSTEM, Horizontal Scroll ═══ -->
+    <section class="hp2-hscroll-section" id="system">
+      <div class="hp2-hscroll-intro">
+        <div class="lib-section-label">The Growth System</div>
+        <div class="lib-section-title">The Restaurant Growth System</div>
+        <p class="lib-section-sub">Restaurant growth doesn't come from posting more or spending more on ads. It comes from a system, four pillars working together to turn digital attention into real customers sitting in your seats.</p>
+      </div>
+
+      <div class="hp2-hscroll-entry"></div>
+
+      <div class="hp2-hscroll-pin">
+        <div class="hp2-hscroll-track">
+
+          <!-- Panel 1: Social Media -->
+          <div class="hp2-hscroll-panel">
+            <div class="hp2-hscroll-glow"></div>
+            <div class="hp2-hscroll-num">01</div>
+            <div class="hp2-hscroll-inner">
+              <div class="hp2-hscroll-copy">
+                <div class="label">01, Social Media</div>
+                <h2>Social Media That Fills Seats</h2>
+                <div class="hp2-hscroll-stat-pill"><strong>75%</strong> of diners say Instagram influences where they eat</div>
+                <p>We create <strong>scroll-stopping food content</strong>, professional photography, cinematic video, and authentic storytelling that highlights your signature dishes and your vibe. We physically show up at your restaurant with cameras and build a content library from scratch.</p>
+                <p>This isn't a generic agency recycling stock photos. Every piece of content is made inside your restaurant, for your audience, on a strategy built around your goals.</p>
+                <ul>
+                  <li><strong>Professional food photography</strong> and short-form video production</li>
+                  <li><strong>Monthly content calendars</strong> aligned to your menu, events, and seasonal rhythm</li>
+                  <li><strong>Daily community management</strong>, comment responses, DMs, and local engagement</li>
+                  <li><strong>Platform-specific strategy</strong> for Instagram, TikTok, and Facebook</li>
+                  <li><strong>Paid social campaigns</strong> to accelerate reach and fill slow nights</li>
+                </ul>
+                <a href="social-media-marketing.html" class="hp2-hscroll-cta-link">Explore Restaurant Social Media</a>
+              </div>
+              <div class="hp2-hscroll-visual">
+                <div class="hp2-hscroll-visual-inner">
+                  <video src="videos/fatty-crab-nola-flavors.mp4" autoplay muted loop playsinline></video>
+                </div>
+              </div>
+            </div>
+            <div class="hp2-hscroll-divider"></div>
+          </div>
+
+          <!-- Panel 2: Websites -->
+          <div class="hp2-hscroll-panel">
+            <div class="hp2-hscroll-glow"></div>
+            <div class="hp2-hscroll-num">02</div>
+            <div class="hp2-hscroll-inner --reverse">
+              <div class="hp2-hscroll-copy">
+                <div class="label">02, Websites</div>
+                <h2>Websites That Convert Visitors to Customers</h2>
+                <div class="hp2-hscroll-stat-pill"><strong>88%</strong> of diners research a restaurant online before visiting</div>
+                <p>Your website is a <strong>decision point</strong>. When a potential customer lands on your site, they decide in seconds whether to make a reservation or keep scrolling. We build restaurant websites designed around that moment, mobile-first, fast-loading, and built to convert.</p>
+                <p>Every site we build integrates directly with your reservation system, online ordering, and private events funnel, so no customer falls through the cracks.</p>
+                <ul>
+                  <li><strong>Mobile-first restaurant design</strong> optimized for the way customers actually browse</li>
+                  <li><strong>Menu pages that sell</strong>, with photography, descriptions, and ordering integration</li>
+                  <li><strong>Reservation integration</strong> with OpenTable, Resy, Toast, and Yelp</li>
+                  <li><strong>Private events and catering</strong> inquiry forms that convert</li>
+                  <li><strong>Built-in SEO foundation</strong> so Google indexes every page correctly</li>
+                </ul>
+                <a href="restaurant-website-design.html" class="hp2-hscroll-cta-link">Explore Restaurant Website Design</a>
+              </div>
+              <div class="hp2-hscroll-visual">
+                <div class="hp2-hscroll-visual-inner">
+                  <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=800&h=600&fit=crop" alt="Restaurant website on laptop showing reservation flow" loading="lazy" />
+                </div>
+              </div>
+            </div>
+            <div class="hp2-hscroll-divider"></div>
+          </div>
+
+          <!-- Panel 3: SEO -->
+          <div class="hp2-hscroll-panel">
+            <div class="hp2-hscroll-glow"></div>
+            <div class="hp2-hscroll-num">03</div>
+            <div class="hp2-hscroll-inner">
+              <div class="hp2-hscroll-copy">
+                <div class="label">03, SEO</div>
+                <h2>SEO That Gets You Found</h2>
+                <div class="hp2-hscroll-stat-pill"><strong>97%</strong> of diners use search engines to find restaurants</div>
+                <p>When someone searches "best Italian restaurant near me" or "brunch in Brickell," your restaurant needs to be in the top results. We build <strong>local SEO strategies</strong> designed specifically for how restaurant customers search, not generic SEO playbooks borrowed from other industries.</p>
+                <p>We also future-proof your visibility for AI-powered search, making sure your restaurant gets cited by ChatGPT, Google AI Overviews, and Perplexity when customers ask for dining recommendations.</p>
+                <ul>
+                  <li><strong>Google Business Profile optimization</strong> for Maps and local pack dominance</li>
+                  <li><strong>Cuisine and location keyword strategy</strong> targeting how diners actually search</li>
+                  <li><strong>On-page SEO and technical optimization</strong> across your entire site</li>
+                  <li><strong>Citation building</strong> and review management across 60+ directories</li>
+                  <li><strong>AI visibility (AEO)</strong>, structured data so AI platforms recommend you</li>
+                </ul>
+                <a href="restaurant-seo.html" class="hp2-hscroll-cta-link">Explore Local SEO for Restaurants</a>
+              </div>
+              <div class="hp2-hscroll-visual">
+                <div class="hp2-hscroll-visual-inner">
+                  <img src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=800&h=600&fit=crop" alt="Restaurant front with bustling street, local search visibility" loading="lazy" />
+                </div>
+              </div>
+            </div>
+            <div class="hp2-hscroll-divider"></div>
+          </div>
+
+          <!-- Panel 4: Advertising -->
+          <div class="hp2-hscroll-panel">
+            <div class="hp2-hscroll-glow"></div>
+            <div class="hp2-hscroll-num">04</div>
+            <div class="hp2-hscroll-inner --reverse">
+              <div class="hp2-hscroll-copy">
+                <div class="label">04, Advertising</div>
+                <h2>Advertising That Drives Measurable ROI</h2>
+                <div class="hp2-hscroll-stat-pill"><strong>12X</strong> average ROAS across our restaurant ad portfolio</div>
+                <p>When you need customers this week, this weekend, tonight, advertising is the fastest lever you have. We run <strong>data-driven restaurant ad campaigns</strong> on Google, Instagram, and Facebook designed to capture people actively searching for a place to eat and put your restaurant in front of them at the exact moment they're deciding.</p>
+                <p>Our 2025 portfolio generated over $3.5M in tracked revenue across five restaurant properties on less than $46K in total ad spend. Every dollar is tracked, every conversion is measured.</p>
+                <ul>
+                  <li><strong>Google Ads</strong> targeting high-intent restaurant search terms in your area</li>
+                  <li><strong>Facebook and Instagram ad campaigns</strong> for awareness, events, and promotions</li>
+                  <li><strong>Local targeting and geo-fencing</strong> to reach diners within your radius</li>
+                  <li><strong>Retargeting campaigns</strong> for website visitors and engaged followers</li>
+                  <li><strong>Full conversion tracking</strong> and monthly ROI reporting</li>
+                </ul>
+                <a href="restaurant-advertising.html" class="hp2-hscroll-cta-link">Explore Restaurant Advertising</a>
+              </div>
+              <div class="hp2-hscroll-visual">
+                <div class="hp2-hscroll-visual-inner">
+                  <video src="videos/fatty-crab-seafood-boil.mp4" autoplay muted loop playsinline></video>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Progress + dots -->
+        <div class="hp2-hscroll-progress">
+          <div class="hp2-hscroll-progress-fill"></div>
+        </div>
+        <div class="hp2-hscroll-dots">
+          <div class="hp2-hscroll-dot --active"></div>
+          <div class="hp2-hscroll-dot"></div>
+          <div class="hp2-hscroll-dot"></div>
+          <div class="hp2-hscroll-dot"></div>
+        </div>
+      </div>
+
+      <div class="hp2-hscroll-exit"></div>
+    </section>
+
+    <!-- ═══ 6. CASE STUDIES, Editorial Spreads with Scrub Counters ═══ -->
+    <section class="card-overlay lib-section" id="case-studies">
+      <div class="lib-section-label">Proof</div>
+      <h2 class="lib-section-title">The results speak for themselves.</h2>
+      <p class="lib-section-sub">Real restaurants. Real numbers. Real revenue impact.</p>
+
+      <div class="hp2-case-spread">
+        <article class="hp2-case-editorial">
+          <div class="hp2-case-img">
+            <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800&h=500&fit=crop" alt="The Fatty Crab crab dish closeup" />
+          </div>
+          <div class="hp2-case-body">
+            <div class="case-tag">Organic Social</div>
+            <h3>The Fatty Crab</h3>
+            <p>High-frequency content system + restaurant storytelling that turned social attention into a packed dining room every night of the week.</p>
+            <div class="hp2-case-metrics">
+              <div class="hp2-case-metric"><strong data-scrub-to="21" data-suffix="M">0</strong><span>Views</span></div>
+              <div class="hp2-case-metric"><strong data-scrub-to="110" data-suffix="K">0</strong><span>Followers</span></div>
+              <div class="hp2-case-metric"><strong data-scrub-to="6.5" data-suffix="%" data-decimal="1">0</strong><span>Engagement</span></div>
+            </div>
+            <a href="case-studies.html" class="hp2-case-link">Read the full case study</a>
+          </div>
+        </article>
+
+        <article class="hp2-case-editorial">
+          <div class="hp2-case-img">
+            <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800&h=500&fit=crop" alt="Shimuja Ramen content strategy results" />
+          </div>
+          <div class="hp2-case-body">
+            <div class="case-tag">Social Growth</div>
+            <h3>Shimuja Ramen</h3>
+            <p>Content hooks + repeatable formats engineered for saves, shares, and local discovery, turning a neighborhood spot into a destination.</p>
+            <div class="hp2-case-metrics">
+              <div class="hp2-case-metric"><strong data-scrub-to="10.5" data-suffix="M" data-decimal="1">0</strong><span>Views</span></div>
+              <div class="hp2-case-metric"><strong data-scrub-to="36.5" data-suffix="K" data-decimal="1">0</strong><span>Followers</span></div>
+              <div class="hp2-case-metric"><strong data-scrub-to="7.5" data-suffix="%" data-decimal="1">0</strong><span>Engagement</span></div>
+            </div>
+            <a href="case-studies.html" class="hp2-case-link">Read the full case study</a>
+          </div>
+        </article>
+
+        <article class="hp2-case-editorial">
+          <div class="hp2-case-img">
+            <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&h=500&fit=crop" alt="Rusty Pelican upscale restaurant terrace" />
+          </div>
+          <div class="hp2-case-body">
+            <div class="case-tag">Google Ads</div>
+            <h3>Rusty Pelican Miami</h3>
+            <p>Search campaigns optimized for high-intent diners with clean tracking, landing page alignment, and a direct line from ad spend to reservation revenue.</p>
+            <div class="hp2-case-metrics">
+              <div class="hp2-case-metric"><strong data-scrub-to="9" data-suffix="%">0</strong><span>CTR</span></div>
+              <div class="hp2-case-metric"><strong data-scrub-to="12" data-suffix="X">0</strong><span>ROAS</span></div>
+              <div class="hp2-case-metric"><strong data-scrub-to="42" data-suffix="%">0</strong><span>More Bookings</span></div>
+            </div>
+            <a href="case-studies.html" class="hp2-case-link">Read the full case study</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ═══ 7. IMMERSIVE #2, Kitchen / Warm Color Grade ═══ -->
+    <div class="hp2-curtain-wrap hp2-warm-img" id="immersive-2">
+      <div class="hp2-curtain-img">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600&h=900&fit=crop" alt="Beautifully plated gourmet dish with vibrant colors and professional food styling" />
+        <div class="hp2-curtain-overlay" style="background:linear-gradient(180deg, rgba(10,10,10,0.3) 0%, transparent 30%, transparent 50%, rgba(10,10,10,0.85) 100%);"></div>
+        <div class="hp2-curtain-copy" style="justify-content:flex-end;">
+          <div class="hp2-curtain-glass-wrap">
+            <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
+            <div class="glass-toplight"></div>
+            <div class="hp2-curtain-glass">
+              <pixel-canvas data-gap="5" data-speed="25" data-colors="#D06A50, #B85540, #E88A72" data-no-focus></pixel-canvas>
+              <h3>We show up with cameras. You get content that converts.</h3>
+              <p>Professional shoots, cinematic reels, scroll-stopping video, all produced on-site at your restaurant.</p>
+              <a href="case-studies.html" class="btn btn-primary">See Real Results</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ NEW: AI/AEO FUTURE-PROOF ═══ -->
+    <section class="card-overlay --dark lib-section" id="ai-visibility">
+
+      <div class="hp2-aeo-split">
+        <div class="hp2-aeo-copy">
+          <div class="lib-section-label" style="text-align:left;">Future-Proof</div>
+          <h2 class="lib-section-title" style="text-align:left; margin-bottom:20px;">Your Restaurant Needs to Show Up Where Customers Are Searching Next</h2>
+          <p>Google is still the biggest driver of restaurant discovery. But the way people search is changing fast. Customers are now asking ChatGPT "what's the best Italian restaurant near me?" They're using Google AI Overviews, searching on Perplexity, using Siri, and scrolling AI-curated recommendations on TikTok and Instagram.</p>
+          <p style="margin-top:12px;">Most restaurant marketing agencies are still stuck optimizing for 2019 Google. <strong style="color:var(--text);">Button Up Media builds for where search is going</strong>, not just where it's been.</p>
+        </div>
+        <div class="hp2-aeo-stack">
+          <div class="hp2-aeo-block --traditional">
+            <h4>Traditional SEO</h4>
+            <p>Gets you ranked on Google Search and Maps. That still matters, and we do it well.</p>
+          </div>
+          <div class="hp2-aeo-block --aeo">
+            <h4>Answer Engine Optimization (AEO)</h4>
+            <p>Gets your restaurant cited and recommended when customers ask AI-powered platforms for dining suggestions. This is the next battleground, and most of your competitors aren't even on it yet.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hp2-aeo-compare" style="display:none;">
+        <div class="hp2-aeo-block --traditional">
+          <h4>Traditional SEO</h4>
+          <p>Gets you ranked on Google Search and Maps. That still matters, and we do it well.</p>
+        </div>
+        <div class="hp2-aeo-block --aeo">
+          <h4>Answer Engine Optimization (AEO)</h4>
+          <p>Gets your restaurant cited and recommended when customers ask AI-powered platforms for dining suggestions. This is the next battleground, and most of your competitors aren't even on it yet.</p>
+        </div>
+      </div>
+
+      <h3 style="font-size:1.1rem; font-weight:800; margin-top:36px; margin-bottom:16px;">How We Future-Proof Your Restaurant's Visibility</h3>
+      <div class="hp2-aeo-grid">
+        <div class="hp2-aeo-item">
+          <div class="hp2-aeo-item-icon"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg></div>
+          <h4>Structured Data &amp; Schema</h4>
+        </div>
+        <div class="hp2-aeo-item">
+          <div class="hp2-aeo-item-icon"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div>
+          <h4>Content for AI Extraction</h4>
+        </div>
+        <div class="hp2-aeo-item">
+          <div class="hp2-aeo-item-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <h4>Entity Optimization</h4>
+        </div>
+        <div class="hp2-aeo-item">
+          <div class="hp2-aeo-item-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+          <h4>Review &amp; Reputation Signals</h4>
+        </div>
+        <div class="hp2-aeo-item">
+          <div class="hp2-aeo-item-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <h4>Multi-Platform Visibility</h4>
+        </div>
+      </div>
+
+      <div style="margin-top:32px;">
+        <a href="restaurant-seo.html" class="btn btn-primary">Learn About Restaurant SEO and AI Visibility &rarr;</a>
+      </div>
+    </section>
+
+    <!-- ═══ NEW: WHY BUTTON UP ═══ -->
+    <section class="card-overlay lib-section" id="why-us">
+      <div class="lib-section-label">Why Us</div>
+      <h2 class="lib-section-title">Why Restaurants Choose Button Up Media</h2>
+      <p class="lib-section-sub">Three things set us apart from every other marketing agency.</p>
+
+      <div class="hp2-why-cards">
+        <div class="hp2-why-card">
+          <div class="hp2-why-card-num">01</div>
+          <h3>Built Exclusively for Restaurants</h3>
+          <p>We don't work with dentists, plumbers, or law firms. We work with restaurants. That's it. We understand thin margins, seasonal swings, the Tuesday night slump, the Friday rush.</p>
+        </div>
+        <div class="hp2-why-card">
+          <div class="hp2-why-card-num">02</div>
+          <h3>We Create the Content,<br>Not Just the Strategy</h3>
+          <p>Button Up Media shows up with cameras. We shoot the food. We capture the atmosphere. We produce the videos. You get a full content engine without adding another task to your day.</p>
+        </div>
+        <div class="hp2-why-card">
+          <div class="hp2-why-card-num">03</div>
+          <h3>Results You Can Actually Measure</h3>
+          <p>We focus on the numbers that matter, reservations, orders, and revenue. Every client gets clear reporting tied to real business outcomes. Not impressions. Customers.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ VIDEO TESTIMONIALS, Cinematic Client Stories ═══ -->
+    <section class="card-overlay --dark lib-section" id="client-videos">
+      <div class="lib-section-label" style="text-align:center;">In Their Own Words</div>
+      <h2 class="lib-section-title" style="text-align:center;">Hear It Directly From Our Clients</h2>
+      <p class="lib-section-sub" style="text-align:center; margin-left:auto; margin-right:auto;">Real restaurant owners. Real results. No scripts.</p>
+
+      <div class="hp2-vid-showcase">
+        <!-- Video 1 -->
+        <div class="hp2-vid-card" onclick="this.classList.toggle('--playing'); var v=this.querySelector('video'); v.paused?v.play():v.pause();">
+          <div class="hp2-vid-card-frame">
+            <video src="videos/testimonial-ifc.mp4" playsinline preload="metadata"></video>
+            <div class="hp2-vid-card-play"></div>
+            <div class="hp2-vid-card-overlay">
+              <div class="hp2-vid-card-info">
+                <h4>IFC Restaurant</h4>
+                <span>Miami, FL</span>
+              </div>
+            </div>
+          </div>
+          <div class="hp2-vid-card-meta">
+            <p class="hp2-vid-card-quote">&ldquo;They completely changed how we approach marketing. The results speak for themselves.&rdquo;</p>
+            <div class="hp2-vid-card-stats">
+              <div><strong>340%</strong><span>Social Growth</span></div>
+              <div><strong>2.1M</strong><span>Video Views</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video 2 -->
+        <div class="hp2-vid-card" onclick="this.classList.toggle('--playing'); var v=this.querySelector('video'); v.paused?v.play():v.pause();">
+          <div class="hp2-vid-card-frame">
+            <video src="videos/testimonial-brewing-buddha.mp4" playsinline preload="metadata"></video>
+            <div class="hp2-vid-card-play"></div>
+            <div class="hp2-vid-card-overlay">
+              <div class="hp2-vid-card-info">
+                <h4>Brewing Buddha</h4>
+                <span>Pinecrest, FL</span>
+              </div>
+            </div>
+          </div>
+          <div class="hp2-vid-card-meta">
+            <p class="hp2-vid-card-quote">&ldquo;They show up with cameras and actually understand what makes a restaurant special.&rdquo;</p>
+            <div class="hp2-vid-card-stats">
+              <div><strong>5x</strong><span>ROI</span></div>
+              <div><strong>12K</strong><span>New Followers</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video 3 -->
+        <div class="hp2-vid-card" onclick="this.classList.toggle('--playing'); var v=this.querySelector('video'); v.paused?v.play():v.pause();">
+          <div class="hp2-vid-card-frame">
+            <video src="videos/testimonial-shimuja-short.mp4" playsinline preload="metadata"></video>
+            <div class="hp2-vid-card-play"></div>
+            <div class="hp2-vid-card-overlay">
+              <div class="hp2-vid-card-info">
+                <h4>Chef Kei, Shimuja</h4>
+                <span>Miami, FL</span>
+              </div>
+            </div>
+          </div>
+          <div class="hp2-vid-card-meta">
+            <p class="hp2-vid-card-quote">&ldquo;Button Up Media helped us reach customers we never would have found on our own.&rdquo;</p>
+            <div class="hp2-vid-card-stats">
+              <div><strong>20K+</strong><span>Events Booked</span></div>
+              <div><strong>Top 3</strong><span>Local SEO</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 8. SERVICES, Glass Cards with Curtain Reveal ═══ -->
+    <section class="card-overlay lib-section" id="services">
+      <div class="lib-section-label">Services</div>
+      <h2 class="lib-section-title">Every lever a restaurant needs to grow.</h2>
+      <p class="lib-section-sub">Modular services unified by one goal: measurable growth in reservations, orders, and foot traffic.</p>
+
+      <div class="hp2-services-grid">
+        <div class="glass-card-wrap hp2-service-reveal">
+          <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
+          <div class="glass-toplight"></div>
+          <div class="glass-card" style="text-align:center;" data-brand="instagram" data-hover-colors="#E4405F, #C13584, #F77737">
+            <pixel-canvas data-gap="6" data-speed="30" data-colors="#D06A50, #C05A42, #E08068" data-no-focus></pixel-canvas>
+            <div class="glass-card-icon" style="margin-left:auto;margin-right:auto;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" stroke="none"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.668 1.0745-1.3364 1.3802-2.1272.2957-.7642.4957-1.6362.552-2.9137.0564-1.2778.0689-1.6882.0626-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.8981-1.3783-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.8988.4227-.1645 1.0573-.3624 2.2271-.4171 1.2655-.0595 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.8988 1.3783.1645.4233.3624 1.0576.4171 2.2278.0602 1.2645.0739 1.6438.0804 4.8468.0065 3.203-.0048 3.5831-.0607 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.8988-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg>
+            </div>
+            <h3>Organic Social &amp; Content</h3>
+            <p>Short-form content built for reach, saves, and real conversions, not vanity metrics.</p>
+            <div class="glass-btn"><a href="social-media-marketing.html">Learn More <i data-lucide="arrow-right" style="width:14px;height:14px"></i></a></div>
+          </div>
+        </div>
+
+        <div class="glass-card-wrap hp2-service-reveal">
+          <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
+          <div class="glass-toplight"></div>
+          <div class="glass-card" style="text-align:center;" data-brand="googlemaps" data-hover-colors="#34A853, #4285F4, #0F9D58">
+            <pixel-canvas data-gap="6" data-speed="30" data-colors="#E2A84D, #C9923A, #F0C06A" data-no-focus></pixel-canvas>
+            <div class="glass-card-icon" style="margin-left:auto;margin-right:auto;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" stroke="none"><path d="M19.527 4.799c1.212 2.608.937 5.678-.405 8.173-1.101 2.047-2.744 3.74-4.098 5.614-.619.858-1.244 1.75-1.669 2.727-.141.325-.263.658-.383.992-.121.333-.224.673-.34 1.008-.109.314-.236.684-.627.687h-.007c-.466-.001-.579-.53-.695-.887-.284-.874-.581-1.713-1.044-2.525-1.376-2.417-3.681-4.399-4.727-6.964C4.191 10.631 4.855 7.07 7.11 4.777 9.694 2.143 14.158 1.552 17.28 3.2c.778.413 1.51.965 2.12 1.597l.128.002zm-7.532 8.209a2.99 2.99 0 0 0 2.996-2.984A2.99 2.99 0 0 0 11.995 7.04a2.99 2.99 0 0 0-2.995 2.984 2.99 2.99 0 0 0 2.995 2.984z"/></svg>
+            </div>
+            <h3>SEO &amp; Google Business</h3>
+            <p>Win the local pack for cuisine + "near me" searches across Miami and South Florida.</p>
+            <div class="glass-btn"><a href="restaurant-seo.html">Learn More <i data-lucide="arrow-right" style="width:14px;height:14px"></i></a></div>
+          </div>
+        </div>
+
+        <div class="glass-card-wrap hp2-service-reveal">
+          <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
+          <div class="glass-toplight"></div>
+          <div class="glass-card" style="text-align:center;" data-brand="googleads" data-hover-colors="#4285F4, #FBBC04, #34A853">
+            <pixel-canvas data-gap="6" data-speed="30" data-colors="#45B08C, #3A9A78, #5CC4A0" data-no-focus></pixel-canvas>
+            <div class="glass-card-icon" style="margin-left:auto;margin-right:auto;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" stroke="none"><path d="M3.9998 12.0002a3.6 3.6 0 1 1-3.6 3.6002c0-.0367.0055-.072.0068-.1084l.0006-.0309c.0123-.353.0644-.7005.1534-1.038l6.4666-16.0538c.4943-1.2282 1.9181-1.8236 3.1463-1.3293a2.4001 2.4001 0 0 1 1.3293 1.3293zM15.4267 16.5839l-3.4654-8.6066c-.4734-1.176-.4734-2.4895 0-3.6654l2.0657-5.1315c.4943-1.2282 1.9181-1.8236 3.1463-1.3293a2.4001 2.4001 0 0 1 1.3293 1.3293l4.8 11.9282c.4943 1.2282-.1011 2.6519-1.3293 3.1463a2.4001 2.4001 0 0 1-3.1463-1.3293l-.0002-.0002zm4.9725-1.3836a2.4 2.4 0 1 0-4.7988.0002 2.4 2.4 0 0 0 4.7988-.0002z"/></svg>
+            </div>
+            <h3>Google Ads for Restaurants</h3>
+            <p>Capture demand when people are actively searching where to eat tonight.</p>
+            <div class="glass-btn"><a href="restaurant-advertising.html">Learn More <i data-lucide="arrow-right" style="width:14px;height:14px"></i></a></div>
+          </div>
+        </div>
+
+        <div class="glass-card-wrap hp2-service-reveal">
+          <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
+          <div class="glass-toplight"></div>
+          <div class="glass-card" style="text-align:center;" data-brand="webflow" data-hover-colors="#4353FF, #2D3BE0, #6E7AFF">
+            <pixel-canvas data-gap="6" data-speed="30" data-colors="#E2A84D, #C9923A, #F0C06A" data-no-focus></pixel-canvas>
+            <div class="glass-card-icon" style="margin-left:auto;margin-right:auto;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" stroke="none"><path d="M21.469 6.825c.84 1.537 1.318 3.3 1.318 5.175 0 3.979-2.156 7.456-5.363 9.325l3.295-9.527c.615-1.54.82-2.771.82-3.864 0-.405-.027-.78-.07-1.109m-7.981.105c.647-.034 1.233-.1 1.233-.1.58-.068.512-.924-.068-.892 0 0-1.744.138-2.869.138-1.057 0-2.835-.138-2.835-.138-.58-.032-.648.858-.068.892 0 0 .555.066 1.133.1l1.683 4.613-2.366 7.088L6.116 6.93c.649-.034 1.234-.1 1.234-.1.585-.068.516-.924-.064-.892 0 0-1.745.138-2.871.138-.202 0-.44-.005-.69-.014C5.494 3.086 8.514 1.18 12 1.18c2.6 0 4.966.989 6.748 2.612-.043-.003-.085-.008-.128-.008-1.058 0-1.812.924-1.812 1.914 0 .89.513 1.643 1.06 2.531.411.72.89 1.643.89 2.977 0 .924-.354 1.994-.821 3.49l-1.075 3.597-3.894-11.581.001.001zM12 22.784c-1.592 0-3.1-.341-4.46-.953l4.735-13.76 4.849 13.281c.035.085.076.164.12.238A10.617 10.617 0 0 1 12 22.784M1.213 12c0-1.724.413-3.353 1.145-4.792l6.3 17.265C4.056 22.534 1.213 17.647 1.213 12M12 0C5.385 0 0 5.385 0 12s5.385 12 12 12 12-5.385 12-12S18.615 0 12 0"/></svg>
+            </div>
+            <h3>Restaurant Website Design</h3>
+            <p>Fast, mobile-first websites that make it effortless to book, order, and visit.</p>
+            <div class="glass-btn"><a href="#cta">Learn More <i data-lucide="arrow-right" style="width:14px;height:14px"></i></a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 9. TESTIMONIAL, Dollar-Figure Proof Marquee ═══ -->
+    <section class="card-overlay --dark hp2-theater lib-section" id="testimonials">
+      <div class="lib-section-label" style="text-align:center;">Client Stories</div>
+      <h2 class="lib-section-title" style="text-align:center;">Restaurant owners talk. We listen.</h2>
+      <p class="lib-section-sub" style="text-align:center; margin-left:auto; margin-right:auto;">Real feedback from South Florida's top hospitality operators.</p>
+
+      <div class="hp2-impact-wall">
+        <div class="hp2-impact-stat">
+          <div class="hp2-impact-num" data-count-to="6" data-suffix="M+" data-prefix="$">$0</div>
+          <div class="hp2-impact-label">Revenue Generated</div>
+        </div>
+        <div class="hp2-impact-stat">
+          <div class="hp2-impact-num" data-count-to="80" data-suffix="M+">0</div>
+          <div class="hp2-impact-label">Video Views</div>
+        </div>
+        <div class="hp2-impact-stat">
+          <div class="hp2-impact-num" data-count-to="20" data-suffix="K+">0</div>
+          <div class="hp2-impact-label">Events Booked</div>
+        </div>
+      </div>
+
+      <div class="proof-marquee-wrap">
+        <div class="proof-marquee-track --left">
+          <!-- Card 1: Revenue + Full-Service -->
+          <div class="proof-card">
+            <div class="hp2-proof-hero-stat">$6M+</div>
+            <div class="hp2-proof-hero-stat-label">revenue generated for clients</div>
+            <div class="proof-card-header">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="James Martinez" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" />
+              <div class="proof-card-info">
+                <h4>James Martinez</h4>
+                <span>Owner, <span class="restaurant-name">The Fatty Crab</span></span>
+              </div>
+            </div>
+            <div class="proof-card-quote">"Button Up Media handles everything, our website, our SEO, our social, our ads. Revenue is up 40% year over year and we finally have a marketing system that actually works."</div>
+            <div class="proof-card-result">
+              <div class="proof-card-metric"><strong>40%</strong><span>Revenue Growth</span></div>
+              <div class="proof-card-metric"><strong>Page 1</strong><span>Google Rank</span></div>
+            </div>
+          </div>
+          <!-- Card 2: Ads + Events + SEO -->
+          <div class="proof-card">
+            <div class="hp2-proof-hero-stat">12X ROAS</div>
+            <div class="hp2-proof-hero-stat-label">across ads &amp; SEO campaigns</div>
+            <div class="proof-card-header">
+              <img src="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?w=80&h=80&fit=crop&crop=face" alt="Sarah Kim" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" />
+              <div class="proof-card-info">
+                <h4>Sarah Kim</h4>
+                <span>GM, <span class="restaurant-name">Shimuja Ramen</span></span>
+              </div>
+            </div>
+            <div class="proof-card-quote">"Our Google Ads and SEO work together now. We're ranking top 3 for every 'ramen near me' search, events are booked months out, and ad spend finally makes sense."</div>
+            <div class="proof-card-result">
+              <div class="proof-card-metric"><strong>20K+</strong><span>Events Booked</span></div>
+              <div class="proof-card-metric"><strong>Top 3</strong><span>Local SEO</span></div>
+            </div>
+          </div>
+          <!-- Card 3: Multi-Location Growth -->
+          <div class="proof-card">
+            <div class="hp2-proof-hero-stat">80M+ Views</div>
+            <div class="hp2-proof-hero-stat-label">across all client channels</div>
+            <div class="proof-card-header">
+              <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=80&h=80&fit=crop&crop=face" alt="Michael Chen" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" />
+              <div class="proof-card-info">
+                <h4>Michael Chen</h4>
+                <span>Director, <span class="restaurant-name">SRC Hospitality</span></span>
+              </div>
+            </div>
+            <div class="proof-card-quote">"Five locations, one system. Button Up built our websites, manages all our social, runs our ads, and handles local SEO for each location. Our reservations are up 60% across the board."</div>
+            <div class="proof-card-result">
+              <div class="proof-card-metric"><strong>5</strong><span>Locations</span></div>
+              <div class="proof-card-metric"><strong>60%</strong><span>More Reservations</span></div>
+            </div>
+          </div>
+          <!-- Duplicate set for seamless loop -->
+          <div class="proof-card">
+            <div class="hp2-proof-hero-stat">$6M+</div>
+            <div class="hp2-proof-hero-stat-label">revenue generated for clients</div>
+            <div class="proof-card-header">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="James Martinez" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" />
+              <div class="proof-card-info">
+                <h4>James Martinez</h4>
+                <span>Owner, <span class="restaurant-name">The Fatty Crab</span></span>
+              </div>
+            </div>
+            <div class="proof-card-quote">"Button Up Media handles everything, our website, our SEO, our social, our ads. Revenue is up 40% year over year and we finally have a marketing system that actually works."</div>
+            <div class="proof-card-result">
+              <div class="proof-card-metric"><strong>40%</strong><span>Revenue Growth</span></div>
+              <div class="proof-card-metric"><strong>Page 1</strong><span>Google Rank</span></div>
+            </div>
+          </div>
+          <div class="proof-card">
+            <div class="hp2-proof-hero-stat">12X ROAS</div>
+            <div class="hp2-proof-hero-stat-label">across ads &amp; SEO campaigns</div>
+            <div class="proof-card-header">
+              <img src="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?w=80&h=80&fit=crop&crop=face" alt="Sarah Kim" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" />
+              <div class="proof-card-info">
+                <h4>Sarah Kim</h4>
+                <span>GM, <span class="restaurant-name">Shimuja Ramen</span></span>
+              </div>
+            </div>
+            <div class="proof-card-quote">"Our Google Ads and SEO work together now. We're ranking top 3 for every 'ramen near me' search, events are booked months out, and ad spend finally makes sense."</div>
+            <div class="proof-card-result">
+              <div class="proof-card-metric"><strong>20K+</strong><span>Events Booked</span></div>
+              <div class="proof-card-metric"><strong>Top 3</strong><span>Local SEO</span></div>
+            </div>
+          </div>
+          <div class="proof-card">
+            <div class="hp2-proof-hero-stat">80M+ Views</div>
+            <div class="hp2-proof-hero-stat-label">across all client channels</div>
+            <div class="proof-card-header">
+              <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=80&h=80&fit=crop&crop=face" alt="Michael Chen" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" />
+              <div class="proof-card-info">
+                <h4>Michael Chen</h4>
+                <span>Director, <span class="restaurant-name">SRC Hospitality</span></span>
+              </div>
+            </div>
+            <div class="proof-card-quote">"Five locations, one system. Button Up built our websites, manages all our social, runs our ads, and handles local SEO for each location. Our reservations are up 60% across the board."</div>
+            <div class="proof-card-result">
+              <div class="proof-card-metric"><strong>5</strong><span>Locations</span></div>
+              <div class="proof-card-metric"><strong>60%</strong><span>More Reservations</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══ 10. IMMERSIVE #3, Packed House / Brightness Increase ═══ -->
+    <div class="hp2-curtain-wrap hp2-bright-img" id="immersive-3">
+      <div class="hp2-curtain-img">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600&h=900&fit=crop" alt="Busy upscale restaurant interior packed with happy diners and warm ambient lighting" />
+        <div class="hp2-curtain-overlay"></div>
+        <div class="hp2-curtain-copy">
+          <div class="hp2-curtain-glass-wrap" style="max-width:600px;">
+            <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
+            <div class="glass-toplight"></div>
+            <div class="hp2-curtain-glass">
+              <pixel-canvas data-gap="7" data-speed="35" data-colors="#45B08C, #3A9474, #6DC4A6" data-no-focus></pixel-canvas>
+              <h3 style="font-size:1.35rem;">More covers. More orders. More revenue.</h3>
+              <p>Our clients don't measure success in likes. They measure it in reservations, orders, and revenue growth.</p>
+              <a href="contact.html" class="btn btn-primary">Get Your Free Consultation</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ NEW: STATS BY THE NUMBERS ═══ -->
+    <section class="card-overlay --dark lib-section" id="stats">
+      <div class="lib-section-label">The Data</div>
+      <h2 class="lib-section-title">Restaurant Marketing by the Numbers</h2>
+
+      <div class="hp2-split --reverse">
+        <div class="hp2-split-copy">
+          <p>The data behind why digital marketing isn't optional for restaurants, it's the difference between growth and getting left behind.</p>
+          <p>These aren't abstract marketing stats. They describe how your next customer is going to find their next meal.</p>
+          <p><strong style="color:var(--text);">Button Up Media builds marketing systems designed to put your restaurant on the winning side of every one of these numbers.</strong></p>
+        </div>
+        <div class="hp2-split-media">
+          <img src="https://images.unsplash.com/photo-1428515613728-6b4607e44363?w=800&h=600&fit=crop" alt="Busy restaurant kitchen with chefs preparing dishes, the operations behind the scenes" />
+        </div>
+      </div>
+
+      <div class="hp2-stats-grid">
+        <div class="hp2-stat-cell">
+          <div class="hp2-stat-cell-num" data-count-to="90" data-suffix="%">0</div>
+          <div class="hp2-stat-cell-desc">of diners research a restaurant online before visiting</div>
+        </div>
+        <div class="hp2-stat-cell">
+          <div class="hp2-stat-cell-num" data-count-to="97" data-suffix="%">0</div>
+          <div class="hp2-stat-cell-desc">of customers use search engines to find local restaurants</div>
+        </div>
+        <div class="hp2-stat-cell">
+          <div class="hp2-stat-cell-num" data-count-to="75" data-suffix="%">0</div>
+          <div class="hp2-stat-cell-desc">of diners say Instagram directly influences where they eat</div>
+        </div>
+        <div class="hp2-stat-cell">
+          <div class="hp2-stat-cell-num" data-count-to="72" data-suffix="%">0</div>
+          <div class="hp2-stat-cell-desc">of restaurant searches include "near me" or a specific location</div>
+        </div>
+        <div class="hp2-stat-cell">
+          <div class="hp2-stat-cell-num" data-count-to="88" data-suffix="%">0</div>
+          <div class="hp2-stat-cell-desc">of consumers trust online reviews as much as personal recommendations</div>
+        </div>
+        <div class="hp2-stat-cell">
+          <div class="hp2-stat-cell-num">3x</div>
+          <div class="hp2-stat-cell-desc">the engagement rate with professional video content vs. static images</div>
+        </div>
+        <div class="hp2-stat-cell">
+          <div class="hp2-stat-cell-num">15-20%</div>
+          <div class="hp2-stat-cell-desc">average annual sales increase for restaurants that invest in SEO</div>
+        </div>
+        <div class="hp2-stat-cell">
+          <div class="hp2-stat-cell-num" data-count-to="46" data-suffix="%">0</div>
+          <div class="hp2-stat-cell-desc">of all Google searches are looking for local information</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ NEW: FLORIDA MARKETS ═══ -->
+    <section class="card-overlay lib-section" id="florida">
+
+      <div class="hp2-split" style="align-items:start; margin-top:0;">
+        <div class="hp2-split-copy">
+          <div class="lib-section-label" style="text-align:left;">Coverage</div>
+          <h2 class="lib-section-title" style="text-align:left; margin-bottom:20px;">Florida's Restaurant Marketing Agency</h2>
+          <p>Button Up Media is headquartered in South Florida and built to serve restaurants across the entire state.</p>
+          <p>We know Florida's dining landscape because we live in it, the snowbird surge every winter, the tourist-heavy summers on the coast, and the fierce local competition in neighborhoods from Brickell to Wynwood, South Beach to downtown Fort Lauderdale.</p>
+        </div>
+        <div class="hp2-split-media">
+          <img src="https://images.unsplash.com/photo-1535498730771-e735b998cd64?w=800&h=600&fit=crop" alt="South Florida dining scene with outdoor restaurant patio and palm trees" />
+        </div>
+      </div>
+
+      <div class="hp2-florida-markets" style="margin-top:36px;">
+        <div class="hp2-market-group">
+          <h4>South Florida</h4>
+          <div class="hp2-market-pills">
+            <span class="hp2-market-pill">Miami</span>
+            <span class="hp2-market-pill">Fort Lauderdale</span>
+            <span class="hp2-market-pill">Boca Raton</span>
+            <span class="hp2-market-pill">West Palm Beach</span>
+            <span class="hp2-market-pill">Delray Beach</span>
+            <span class="hp2-market-pill">Hollywood</span>
+          </div>
+        </div>
+        <div class="hp2-market-group">
+          <h4>Central Florida</h4>
+          <div class="hp2-market-pills">
+            <span class="hp2-market-pill">Orlando</span>
+            <span class="hp2-market-pill">Winter Park</span>
+            <span class="hp2-market-pill">Kissimmee</span>
+            <span class="hp2-market-pill">Lakeland</span>
+            <span class="hp2-market-pill">Daytona Beach</span>
+          </div>
+        </div>
+        <div class="hp2-market-group">
+          <h4>Tampa Bay</h4>
+          <div class="hp2-market-pills">
+            <span class="hp2-market-pill">Tampa</span>
+            <span class="hp2-market-pill">St. Petersburg</span>
+            <span class="hp2-market-pill">Clearwater</span>
+            <span class="hp2-market-pill">Sarasota</span>
+            <span class="hp2-market-pill">Bradenton</span>
+          </div>
+        </div>
+        <div class="hp2-market-group">
+          <h4>Northeast Florida</h4>
+          <div class="hp2-market-pills">
+            <span class="hp2-market-pill">Jacksonville</span>
+            <span class="hp2-market-pill">St. Augustine</span>
+            <span class="hp2-market-pill">Ponte Vedra</span>
+          </div>
+        </div>
+        <div class="hp2-market-group">
+          <h4>Southwest Florida</h4>
+          <div class="hp2-market-pills">
+            <span class="hp2-market-pill">Naples</span>
+            <span class="hp2-market-pill">Fort Myers</span>
+            <span class="hp2-market-pill">Cape Coral</span>
+            <span class="hp2-market-pill">Bonita Springs</span>
+          </div>
+        </div>
+        <div class="hp2-market-group">
+          <h4>The Keys &amp; Beyond</h4>
+          <div class="hp2-market-pills">
+            <span class="hp2-market-pill">Key West</span>
+            <span class="hp2-market-pill">Key Largo</span>
+            <span class="hp2-market-pill">Everywhere in Between</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="lib-section-sub" style="margin-top:28px; max-width:60ch;">Every Florida market has its own dining culture, seasonal patterns, and competitive dynamics. We build restaurant marketing strategies that account for those differences, not cookie-cutter campaigns that ignore where you actually operate.</p>
+      <div style="margin-top:20px;">
+        <a href="services.html" class="btn btn-primary">See Our Full Restaurant Marketing Services &rarr;</a>
+      </div>
+    </section>
+
+    <!-- ═══ 11. PROCESS, Cinematic Redesign ═══ -->
+    <section class="card-overlay lib-section hp2-process" id="process">
+      <div class="lib-section-label">How We Work</div>
+      <h2 class="lib-section-title">How It Works,<br>From First Call to Full Tables</h2>
+      <p class="lib-section-sub">Getting started is simple. No long contracts. No confusing proposals full of jargon. Just a clear path from where you are now to where you want to be.</p>
+
+      <div class="hp2-process-grid" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="hp2-process-step">
+          <div class="hp2-process-num">01</div>
+          <div class="hp2-process-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <h3>Discovery</h3>
+          <p>We learn your restaurant, your concept, customers, market, and goals. We audit your digital presence and identify exactly where the gaps and biggest growth opportunities are.</p>
+        </div>
+        <div class="hp2-process-step">
+          <div class="hp2-process-num">02</div>
+          <div class="hp2-process-icon">
+            <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 12h6M12 9v6"/></svg>
+          </div>
+          <h3>Strategy</h3>
+          <p>We build a custom restaurant marketing strategy tailored to your specific situation. Not a template. Not a generic package. Built around your restaurant's strengths and local market.</p>
+        </div>
+        <div class="hp2-process-step">
+          <div class="hp2-process-num">03</div>
+          <div class="hp2-process-icon">
+            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3>Execution</h3>
+          <p>Content gets produced. Your website gets built or optimized. SEO campaigns launch. Ads go live. Your restaurant starts showing up where customers are looking.</p>
+        </div>
+        <div class="hp2-process-step">
+          <div class="hp2-process-num">04</div>
+          <div class="hp2-process-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 20l5-7 3.5 4.5L20 6"/><circle cx="20" cy="6" r="2"/></svg>
+          </div>
+          <h3>Growth</h3>
+          <p>As results come in, we optimize. We double down on what's working, adjust what needs tuning, and keep building momentum. Clear monthly reporting shows exactly what's happening.</p>
+        </div>
+      </div>
+
+      <div class="hp2-process-connector">
+        <p><a href="contact.html" class="btn btn-primary">Book Your Free Discovery Call &rarr;</a></p>
+      </div>
+    </section>
+
+    <!-- ═══ 12. FAQ, Premium Redesign ═══ -->
+    <section class="card-overlay --dark lib-section" id="faq">
+      <div class="hp2-faq-header">
+        <div class="lib-section-label">FAQ</div>
+        <h2 class="hp2-faq-hero-heading">Frequently Asked Questions</h2>
+        <p class="hp2-faq-subtitle">Everything you need to know about restaurant marketing and working with Button Up Media.</p>
+      </div>
+      <div class="hp2-faq-grid">
+        <div class="hp2-faq-list">
+          <details class="hp2-faq-item">
+            <summary><span><span class="hp2-faq-count">01</span>What does a restaurant marketing agency do?</span></summary>
+            <div class="hp2-faq-answer">A restaurant marketing agency specializes in helping restaurants increase their visibility, attract more customers, and grow revenue through digital marketing. This typically includes social media management and content creation, website design and optimization, search engine optimization (SEO), and paid advertising on platforms like Google and Facebook. Unlike general marketing agencies, a restaurant marketing agency understands the unique challenges of the hospitality industry, thin margins, high competition, and the constant need to keep seats filled.</div>
+          </details>
+          <details class="hp2-faq-item">
+            <summary><span><span class="hp2-faq-count">02</span>How much does restaurant marketing cost?</span></summary>
+            <div class="hp2-faq-answer">Restaurant marketing costs vary depending on the services you need and the size of your operation. At Button Up Media, we build custom strategies tailored to each restaurant's goals and budget. Most restaurant owners invest between $1,500 and $5,000 per month for a coordinated marketing strategy that includes multiple channels. The best way to get a clear picture is to schedule a free consultation so we can understand your specific situation and recommend the right approach.</div>
+          </details>
+          <details class="hp2-faq-item">
+            <summary><span><span class="hp2-faq-count">03</span>What is the best marketing strategy for a restaurant?</span></summary>
+            <div class="hp2-faq-answer">The most effective restaurant marketing strategy is an integrated one, not just social media or just a website, but all channels working together. At a minimum, a strong restaurant marketing strategy should include an active social media presence with professional food content, a mobile-optimized website that makes it easy to view menus and book reservations, local SEO so you appear when customers search for restaurants nearby, and targeted advertising to capture high-intent customers. The restaurants that grow fastest are the ones that coordinate these channels into one unified system.</div>
+          </details>
+          <details class="hp2-faq-item">
+            <summary><span><span class="hp2-faq-count">04</span>How to get more customers to my restaurant?</span></summary>
+            <div class="hp2-faq-answer">Getting more customers starts with making sure people can find you online. Over 97% of diners use Google to find restaurants, and social media platforms like Instagram and TikTok directly influence where people choose to eat. To get more customers, you need to be visible when they search, look compelling when they find you, and make it effortless to book or order. That means optimizing your Google Business Profile, posting engaging food content consistently, running targeted local ads, and having a fast, mobile-friendly website with clear calls to action.</div>
+          </details>
+          <details class="hp2-faq-item">
+            <summary><span><span class="hp2-faq-count">05</span>Why hire a restaurant-specific marketing agency?</span></summary>
+            <div class="hp2-faq-answer">General marketing agencies apply the same playbook to restaurants that they use for dentists, gyms, and law firms. Restaurant marketing is fundamentally different, the customer journey is shorter, the decision is emotional and visual, and the competition is hyper-local. A restaurant-specific agency understands food photography, menu psychology, reservation behavior, seasonal demand patterns, and what drives someone to choose one restaurant over another on a Friday night. That specialized knowledge translates directly into better content, smarter strategy, and faster results.</div>
+          </details>
+          <details class="hp2-faq-item">
+            <summary><span><span class="hp2-faq-count">06</span>What is Answer Engine Optimization (AEO) for restaurants?</span></summary>
+            <div class="hp2-faq-answer">Answer Engine Optimization is the practice of optimizing your restaurant's digital presence to appear in AI-powered search results, including Google AI Overviews, ChatGPT, Perplexity, and voice assistants like Siri and Alexa. As more customers use conversational AI to find dining recommendations, AEO ensures your restaurant is cited and recommended in those answers. This involves structured data, entity optimization, review signals, and creating authoritative content that AI models recognize and surface. Button Up Media integrates AEO into every restaurant marketing strategy we build.</div>
+          </details>
+          <details class="hp2-faq-item">
+            <summary><span><span class="hp2-faq-count">07</span>Do you work with restaurants outside of Florida?</span></summary>
+            <div class="hp2-faq-answer">Button Up Media is headquartered in South Florida and serves restaurants across the state, from Miami and Fort Lauderdale to Orlando, Tampa, Jacksonville, Naples, and beyond. While our deepest expertise is in the Florida market, we also work with restaurant brands in other states. If you're interested in working together, the best first step is to schedule a free consultation so we can discuss your needs and see if we're the right fit.</div>
+          </details>
+        </div>
+        <div class="hp2-faq-bottom-cta">
+          <p>Can't find what you're looking for?</p>
+          <a href="contact.html" class="btn btn-primary">Ask Us Directly</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ 13. CTA, Word Reveal + Gold Pulse ═══ -->
+    <section class="card-overlay lib-section" id="cta">
+      <div class="hp2-cta-scene">
+        <div class="hp2-cta-orb"></div>
+        <div class="hp2-cta-orb"></div>
+        <div class="hp2-cta-orb"></div>
+        <pixel-canvas data-gap="10" data-speed="20" data-colors="#CA8A04, #A16207, #F2D688" data-no-focus></pixel-canvas>
+        <h2 class="hp2-word-reveal" style="position:relative; z-index:2;">Ready to Grow Your <span class="accent-serif">Restaurant?</span></h2>
+        <p style="position:relative; z-index:2;">Stop guessing. Start growing. Schedule a free consultation and let's build a marketing strategy that fills your restaurant with the customers you deserve.</p>
+        <div class="hp2-cta-actions" style="position:relative; z-index:2;">
+          <a href="contact.html" class="btn btn-primary">Get Your Free Consultation &rarr;</a>
+          <a href="#services" class="btn btn-ghost">Explore Services</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="lib-section footer-demo">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <strong style="font-family: var(--font-display); font-size: 1rem;">Button Up Media</strong>
+          <p>Button Up Media is a restaurant marketing agency in Florida. We help restaurants grow with social media, website design, SEO, and advertising.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="social-media-marketing.html">Social Media Marketing</a>
+          <a href="restaurant-seo.html">Restaurant SEO</a>
+          <a href="restaurant-advertising.html">Restaurant Advertising</a>
+          <a href="restaurant-website-design.html">Website Design</a>
+        </div>
+        <div class="footer-col">
+          <h4>Locations</h4>
+          <a href="#florida">Miami</a>
+          <a href="#florida">Fort Lauderdale</a>
+          <a href="#florida">Orlando</a>
+          <a href="#florida">Tampa</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="about.html">About</a>
+          <a href="case-studies.html">Case Studies</a>
+          <a href="#faq">FAQ</a>
+          <a href="contact.html">Free Consultation</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Button Up Media. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="mailto:contact@buttonupmedia.com">contact@buttonupmedia.com</a>
+          <a href="tel:+17867409498">(786) 740-9498</a>
+        </div>
+      </div>
+    </footer>
+
+  </div><!-- /.page -->
+
+  <!-- Base shared.js for nav, card-overlay stacking, immersive expand, etc. -->
+  <script src="shared.js"></script>
+
+  <!-- ═══ HOMEPAGE 2.0, ALL ANIMATION JS SELF-CONTAINED ═══ -->
+  <script>
+  (function() {
+    "use strict";
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // ── UTILITY: Pure JS Word Splitting ──
+    function splitWords(el) {
+      // Preserve child elements like <em>, <span class="accent-serif">, <br>
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+      const textNodes = [];
+      while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+      textNodes.forEach(node => {
+        const words = node.textContent.split(/(\s+)/);
+        const frag = document.createDocumentFragment();
+        words.forEach(word => {
+          if (/^\s+$/.test(word)) {
+            frag.appendChild(document.createTextNode(word));
+          } else if (word.length > 0) {
+            const outer = document.createElement("span");
+            outer.className = "hp2-word";
+            const inner = document.createElement("span");
+            inner.className = "hp2-word-inner";
+            inner.textContent = word;
+            outer.appendChild(inner);
+            frag.appendChild(outer);
+          }
+        });
+        node.parentNode.replaceChild(frag, node);
+      });
+
+      return el.querySelectorAll(".hp2-word-inner");
+    }
+
+    // ── SCROLL-DRIVEN COUNTERS (data-count-to, time-based, fires once) ──
+    document.querySelectorAll("[data-count-to]").forEach(el => {
+      const target = parseFloat(el.dataset.countTo);
+      const suffix = el.dataset.suffix || "";
+      const prefix = el.dataset.prefix || "";
+      const isDecimal = el.dataset.decimal === "1";
+      const counter = { val: 0 };
+
+      if (prefersReducedMotion) {
+        el.textContent = prefix + (isDecimal ? target.toFixed(1) : Math.round(target)) + suffix;
+        return;
+      }
+
+      gsap.to(counter, {
+        val: target,
+        duration: 2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+        onUpdate: () => {
+          el.textContent = prefix + (isDecimal ? counter.val.toFixed(1) : Math.round(counter.val)) + suffix;
+        },
+      });
+    });
+
+    // ── SCRUB-DRIVEN COUNTERS (data-scrub-to, tied to scroll position) ──
+    document.querySelectorAll("[data-scrub-to]").forEach(el => {
+      const target = parseFloat(el.dataset.scrubTo);
+      const suffix = el.dataset.suffix || "";
+      const isDecimal = el.dataset.decimal === "1";
+      const counter = { val: 0 };
+
+      if (prefersReducedMotion) {
+        el.textContent = (isDecimal ? target.toFixed(1) : Math.round(target)) + suffix;
+        return;
+      }
+
+      gsap.to(counter, {
+        val: target,
+        ease: "none",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 75%",
+          end: "top 40%",
+          scrub: true,
+        },
+        onUpdate: () => {
+          el.textContent = (isDecimal ? counter.val.toFixed(1) : Math.round(counter.val)) + suffix;
+        },
+      });
+    });
+
+    if (prefersReducedMotion) {
+      // Make all word-reveal text visible immediately
+      document.querySelectorAll(".hp2-word-reveal").forEach(el => {
+        // Don't split, leave text as-is
+      });
+      // Make all curtain images visible
+      document.querySelectorAll(".hp2-curtain-img").forEach(el => {
+        el.style.clipPath = "inset(0% 0 0 0)";
+      });
+      document.querySelectorAll(".hp2-curtain-glass-wrap").forEach(el => {
+        el.style.opacity = "1";
+        el.style.transform = "none";
+        el.style.filter = "none";
+      });
+      // Make h-scroll panels visible (no animation)
+      document.querySelectorAll(".hp2-hscroll-panel").forEach(p => {
+        p.style.flex = "0 0 auto";
+        p.style.width = "100%";
+        p.style.height = "auto";
+        p.style.minHeight = "80vh";
+      });
+      const hTrack = document.querySelector(".hp2-hscroll-track");
+      if (hTrack) { hTrack.style.flexDirection = "column"; hTrack.style.height = "auto"; }
+      const hPin = document.querySelector(".hp2-hscroll-pin");
+      if (hPin) { hPin.style.height = "auto"; hPin.style.overflow = "visible"; }
+      // Services visible
+      document.querySelectorAll(".hp2-service-reveal").forEach(el => {
+        el.style.clipPath = "none";
+      });
+      // Lucide icons
+      if (typeof lucide !== "undefined") lucide.createIcons();
+      return; // Exit early, no animations
+    }
+
+    // ════════════════════════════════════════
+    // 1. HERO, Word Reveal + Parallax + Load Sequence
+    // ════════════════════════════════════════
+
+    // Wait for fonts before running hero animation
+    document.fonts.ready.then(() => {
+      // Word reveal on hero headline
+      const heroH1 = document.querySelector(".hp2-hero-copy .hp2-word-reveal");
+      if (heroH1) {
+        const wordInners = splitWords(heroH1);
+        gsap.fromTo(wordInners,
+          { y: "110%" },
+          {
+            y: "0%",
+            duration: 0.7,
+            ease: "power3.out",
+            stagger: 0.08,
+            delay: 0.6,
+          }
+        );
+      }
+
+      // Hero copy children stagger (badge, paragraph, CTA)
+      const heroCopy = document.querySelector(".hp2-hero-copy");
+      if (heroCopy) {
+        const children = heroCopy.querySelectorAll(".hero-badge, .hp2-hero-copy > p, .hp2-hero-cta");
+        gsap.fromTo(children,
+          { y: 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.7,
+            ease: "power3.out",
+            stagger: 0.12,
+            delay: 0.3,
+          }
+        );
+      }
+
+      // CTA buttons: scale overshoot
+      gsap.fromTo(".hp2-hero-cta .btn",
+        { scale: 0, opacity: 0 },
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 0.5,
+          ease: "back.out(1.7)",
+          stagger: 0.1,
+          delay: 1.0,
+        }
+      );
+
+      // Proof pills: stagger from right
+      gsap.fromTo(".hp2-proof-pill",
+        { x: 40, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.6,
+          ease: "power3.out",
+          stagger: 0.15,
+          delay: 1.2,
+        }
+      );
+
+      // Refresh ScrollTrigger after fonts
+      ScrollTrigger.refresh();
+    });
+
+    // Hero parallax
+    const heroMedia = document.querySelector(".hp2-hero-media img");
+    if (heroMedia) {
+      gsap.to(heroMedia, {
+        y: 120,
+        scale: 1.0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".hp2-hero",
+          start: "top top",
+          end: "bottom top",
+          scrub: 1.5,
+        },
+      });
+    }
+
+    // ════════════════════════════════════════
+    // 2. TRUST RIBBON, Fade up stats
+    // ════════════════════════════════════════
+    gsap.fromTo(".hp2-trust-stat",
+      { y: 20, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: "power3.out",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: ".hp2-trust",
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+
+    // ════════════════════════════════════════
+    // 3. PROBLEM, Word reveal + pain/solution batch
+    // ════════════════════════════════════════
+    const problemH2 = document.querySelector(".hp2-problem-headline.hp2-word-reveal");
+    if (problemH2) {
+      document.fonts.ready.then(() => {
+        const wordInners = splitWords(problemH2);
+        gsap.fromTo(wordInners,
+          { y: "110%" },
+          {
+            y: "0%",
+            duration: 0.6,
+            ease: "power3.out",
+            stagger: 0.06,
+            scrollTrigger: {
+              trigger: problemH2,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      });
+    }
+
+    // Pain section, dramatic staggered entrance
+    // "What Goes Wrong" items slide in from left
+    gsap.fromTo("#pain .pain-item:not(.--active)",
+      { x: -50, opacity: 0, scale: 0.95 },
+      {
+        x: 0, opacity: 1, scale: 1,
+        duration: 0.7,
+        ease: "power3.out",
+        stagger: 0.12,
+        scrollTrigger: {
+          trigger: "#pain .pain-grid",
+          start: "top 78%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+    // "What We Build" items slide in from right with slight delay
+    gsap.fromTo("#pain .pain-item.--active",
+      { x: 50, opacity: 0, scale: 0.95 },
+      {
+        x: 0, opacity: 1, scale: 1,
+        duration: 0.7,
+        ease: "power3.out",
+        stagger: 0.12,
+        delay: 0.3,
+        scrollTrigger: {
+          trigger: "#pain .pain-grid",
+          start: "top 78%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+    // Column headers entrance
+    gsap.fromTo("#pain .pain-col-head",
+      { y: 30, opacity: 0 },
+      {
+        y: 0, opacity: 1,
+        duration: 0.6,
+        ease: "power3.out",
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: "#pain .pain-grid",
+          start: "top 82%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+
+    // ════════════════════════════════════════
+    // 4. IMMERSIVE IMAGES, Curtain + Full-Width Zoom
+    // ════════════════════════════════════════
+    document.querySelectorAll(".hp2-curtain-wrap").forEach(wrap => {
+      const curtain = wrap.querySelector(".hp2-curtain-img");
+      if (!curtain) return;
+
+      // Determine reveal technique per immersive section
+      let clipFrom, clipTo;
+      if (wrap.classList.contains("hp2-warm-img")) {
+        // Immersive #2: Horizontal wipe left-to-right
+        clipFrom = "inset(0 100% 0 0)";
+        clipTo = "inset(0 0% 0 0)";
+      } else if (wrap.classList.contains("hp2-bright-img")) {
+        // Immersive #3: Radial reveal from center
+        clipFrom = "circle(0% at 50% 50%)";
+        clipTo = "circle(75% at 50% 50%)";
+      } else {
+        // Immersive #1: Default curtain from bottom
+        clipFrom = "inset(100% 0 0 0)";
+        clipTo = "inset(0% 0 0 0)";
+      }
+
+      // Phase 1: Reveal + counter-zoom (first scroll range)
+      gsap.fromTo(curtain,
+        { clipPath: clipFrom },
+        {
+          clipPath: clipTo,
+          ease: "none",
+          scrollTrigger: {
+            trigger: wrap,
+            start: "top 85%",
+            end: "top 35%",
+            scrub: 1,
+          },
+        }
+      );
+
+      // Counter-zoom on inner image
+      const img = curtain.querySelector("img");
+      if (img) {
+        gsap.fromTo(img,
+          { scale: 1.18 },
+          {
+            scale: 1.0,
+            ease: "none",
+            scrollTrigger: {
+              trigger: wrap,
+              start: "top 85%",
+              end: "top -20%",
+              scrub: 1,
+            },
+          }
+        );
+      }
+
+      // Phase 2: Full-width expansion (72% → 100vw, border-radius → 0)
+      gsap.to(wrap, {
+        width: "100vw",
+        marginLeft: "calc(50% - 50vw)",
+        marginRight: "calc(50% - 50vw)",
+        borderRadius: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: wrap,
+          start: "top 30%",
+          end: "top -10%",
+          scrub: 1,
+        },
+      });
+
+      // Glass card: blur clear + slide up (after image mostly revealed)
+      const glass = curtain.querySelector(".hp2-curtain-glass-wrap");
+      if (glass) {
+        gsap.to(glass, {
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: wrap,
+            start: "top 35%",
+            toggleActions: "play none none none",
+          },
+        });
+      }
+    });
+
+    // ════════════════════════════════════════
+    // 7. KITCHEN IMMERSIVE, Warm Color Grade Shift
+    // ════════════════════════════════════════
+    const warmImg = document.querySelector(".hp2-warm-img .hp2-curtain-img img");
+    if (warmImg) {
+      gsap.fromTo(warmImg,
+        { filter: "saturate(0.4) brightness(0.8)" },
+        {
+          filter: "saturate(1.2) brightness(1.05)",
+          scrollTrigger: {
+            trigger: ".hp2-warm-img",
+            start: "top 60%",
+            end: "top 10%",
+            scrub: 1,
+          },
+        }
+      );
+    }
+
+    // ════════════════════════════════════════
+    // 10. PACKED HOUSE, Brightness Increase
+    // ════════════════════════════════════════
+    const brightImg = document.querySelector(".hp2-bright-img .hp2-curtain-img img");
+    if (brightImg) {
+      gsap.fromTo(brightImg,
+        { filter: "brightness(0.6)" },
+        {
+          filter: "brightness(1.1)",
+          scrollTrigger: {
+            trigger: ".hp2-bright-img",
+            start: "top 60%",
+            end: "top 10%",
+            scrub: 1,
+          },
+        }
+      );
+    }
+
+    // ════════════════════════════════════════
+    // 5. GROWTH SYSTEM, Horizontal Scroll
+    // ════════════════════════════════════════
+    const hscrollPin = document.querySelector(".hp2-hscroll-pin");
+    const hscrollTrack = document.querySelector(".hp2-hscroll-track");
+    const hscrollPanels = gsap.utils.toArray(".hp2-hscroll-panel");
+    const hscrollDots = gsap.utils.toArray(".hp2-hscroll-dot");
+    const hscrollFill = document.querySelector(".hp2-hscroll-progress-fill");
+
+    if (hscrollPin && hscrollTrack && hscrollPanels.length > 1) {
+      const totalPanels = hscrollPanels.length;
+      const getScrollDistance = () => (totalPanels - 1) * window.innerWidth;
+
+      const hscrollTL = gsap.to(hscrollTrack, {
+        x: () => -getScrollDistance(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: hscrollPin,
+          pin: true,
+          anticipatePin: 1,
+          scrub: 1.5,
+          end: () => "+=" + getScrollDistance(),
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            if (hscrollFill) gsap.set(hscrollFill, { width: (self.progress * 100) + "%" });
+            const activeIndex = Math.round(self.progress * (totalPanels - 1));
+            hscrollDots.forEach((dot, i) => dot.classList.toggle("--active", i === activeIndex));
+          },
+        },
+      });
+
+      // Per-panel parallax animations
+      hscrollPanels.forEach((panel, i) => {
+        const copy = panel.querySelector(".hp2-hscroll-copy");
+        const visual = panel.querySelector(".hp2-hscroll-visual");
+        const visualInner = panel.querySelector(".hp2-hscroll-visual-inner");
+        const num = panel.querySelector(".hp2-hscroll-num");
+
+        if (copy && i > 0) {
+          gsap.fromTo(copy,
+            { x: 80, opacity: 0 },
+            { x: 0, opacity: 1, ease: "power3.out", immediateRender: false,
+              scrollTrigger: { trigger: panel, containerAnimation: hscrollTL, start: "left 80%", end: "left 30%", scrub: 1 }
+            }
+          );
+        }
+        if (copy) {
+          gsap.fromTo(copy,
+            { x: 0, opacity: 1 },
+            { x: -60, opacity: 0, ease: "power2.in", immediateRender: false,
+              scrollTrigger: { trigger: panel, containerAnimation: hscrollTL, start: "right 60%", end: "right 20%", scrub: 1 }
+            }
+          );
+        }
+        if (visual && i > 0) {
+          gsap.fromTo(visual,
+            { scale: 0.88, opacity: 0 },
+            { scale: 1, opacity: 1, ease: "power3.out", immediateRender: false,
+              scrollTrigger: { trigger: panel, containerAnimation: hscrollTL, start: "left 75%", end: "left 25%", scrub: 1 }
+            }
+          );
+        }
+        if (visualInner) {
+          gsap.fromTo(visualInner,
+            { x: 40 },
+            { x: -40, ease: "none", immediateRender: false,
+              scrollTrigger: { trigger: panel, containerAnimation: hscrollTL, start: "left right", end: "right left", scrub: 1 }
+            }
+          );
+        }
+        if (num) {
+          gsap.fromTo(num,
+            { x: -60, opacity: i === 0 ? 1 : 0 },
+            { x: 60, opacity: 1, ease: "none", immediateRender: false,
+              scrollTrigger: { trigger: panel, containerAnimation: hscrollTL, start: "left right", end: "right left", scrub: 1 }
+            }
+          );
+        }
+      });
+
+      // Gold dust particles, same warm palette across all panels
+      hscrollPanels.forEach(panel => {
+        for (let i = 0; i < 25; i++) {
+          const p = document.createElement("div");
+          p.className = "hp2-hscroll-particle";
+          const size = Math.random() * 3 + 1.5;
+          const gold = Math.random() > 0.4
+            ? "rgba(202,138,4," + (0.3 + Math.random() * 0.4) + ")"
+            : "rgba(242,214,136," + (0.2 + Math.random() * 0.3) + ")";
+          p.style.width = size + "px";
+          p.style.height = size + "px";
+          p.style.left = (5 + Math.random() * 90) + "%";
+          p.style.top = (10 + Math.random() * 80) + "%";
+          p.style.animationDelay = -(Math.random() * 14) + "s";
+          p.style.animationDuration = (8 + Math.random() * 12) + "s";
+          p.style.background = gold;
+          p.style.boxShadow = "0 0 " + (size * 4) + "px " + gold;
+          panel.appendChild(p);
+        }
+
+        // Drift the single warm glow with scroll
+        const glow = panel.querySelector(".hp2-hscroll-glow");
+        if (glow) {
+          gsap.fromTo(glow,
+            { x: "-60%", y: "-50%", scale: 0.8 },
+            { x: "-40%", y: "-50%", scale: 1.2, ease: "none", immediateRender: false,
+              scrollTrigger: { trigger: panel, containerAnimation: hscrollTL, start: "left right", end: "right left", scrub: 1 }
+            }
+          );
+        }
+      });
+    }
+
+    // ════════════════════════════════════════
+    // 6. CASE STUDIES, Editorial entrance + Ken Burns
+    // ════════════════════════════════════════
+    gsap.fromTo(".hp2-case-editorial",
+      { y: 80, opacity: 0, scale: 0.97 },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        ease: "power3.out",
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: ".hp2-case-spread",
+          start: "top 75%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+
+    // Ken Burns on case study images
+    document.querySelectorAll(".hp2-case-img img").forEach(img => {
+      gsap.fromTo(img,
+        { scale: 1.12 },
+        {
+          scale: 1.0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: img.closest(".hp2-case-editorial"),
+            start: "top 85%",
+            end: "bottom 20%",
+            scrub: 1.5,
+          },
+        }
+      );
+    });
+
+    // ════════════════════════════════════════
+    // 8. SERVICES, Curtain reveal from top
+    // ════════════════════════════════════════
+    document.querySelectorAll(".hp2-service-reveal").forEach((card, i) => {
+      gsap.fromTo(card,
+        { clipPath: "inset(0 0 100% 0)" },
+        {
+          clipPath: "inset(0 0 0% 0)",
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+          delay: i * 0.1,
+        }
+      );
+    });
+
+    // Service cards, brand color hover on pixel-canvas
+    document.querySelectorAll('.glass-card[data-hover-colors]').forEach(card => {
+      const canvas = card.querySelector('pixel-canvas');
+      if (!canvas) return;
+      const origColors = canvas.getAttribute('data-colors');
+      const hoverColors = card.dataset.hoverColors;
+      card.addEventListener('mouseenter', () => { canvas.dataset.colors = hoverColors; canvas.init(); canvas.handleAnimation('appear'); });
+      card.addEventListener('mouseleave', () => { canvas.dataset.colors = origColors; canvas.init(); canvas.handleAnimation('disappear'); });
+    });
+
+    // ════════════════════════════════════════
+    // 13. CTA, Word Reveal + Scene Entrance
+    // ════════════════════════════════════════
+    const ctaH2 = document.querySelector(".hp2-cta-scene .hp2-word-reveal");
+    if (ctaH2) {
+      document.fonts.ready.then(() => {
+        const wordInners = splitWords(ctaH2);
+        gsap.fromTo(wordInners,
+          { y: "110%" },
+          {
+            y: "0%",
+            duration: 0.6,
+            ease: "power3.out",
+            stagger: 0.06,
+            scrollTrigger: {
+              trigger: ".hp2-cta-scene",
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      });
+    }
+
+    const ctaScene = document.querySelector(".hp2-cta-scene");
+    if (ctaScene) {
+      gsap.fromTo(ctaScene,
+        { y: 40, opacity: 0, scale: 0.97 },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ctaScene,
+            start: "top 80%",
+            toggleActions: "play none none none",
+            onEnter: () => {
+              const ctaCanvas = ctaScene.querySelector("pixel-canvas");
+              if (ctaCanvas && ctaCanvas.handleAnimation) ctaCanvas.handleAnimation("appear");
+            },
+          },
+        }
+      );
+    }
+
+    // ════════════════════════════════════════
+    // 11. PROCESS, Staggered entrance with gold line sweep
+    // ════════════════════════════════════════
+    gsap.fromTo(".hp2-process-step",
+      { y: 60, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.7,
+        ease: "power3.out",
+        stagger: 0.15,
+        scrollTrigger: {
+          trigger: ".hp2-process-grid",
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+    // Connector bar
+    gsap.fromTo(".hp2-process-connector",
+      { y: 20, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".hp2-process-connector",
+          start: "top 90%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+
+    // ════════════════════════════════════════
+    // 12. FAQ, Staggered entrance
+    // ════════════════════════════════════════
+    gsap.fromTo(".hp2-faq-hero-heading",
+      { y: 40, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: "power3.out",
+        scrollTrigger: { trigger: "#faq", start: "top 80%", toggleActions: "play none none none" }
+      }
+    );
+    gsap.fromTo(".hp2-faq-subtitle",
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6, delay: 0.15, ease: "power3.out",
+        scrollTrigger: { trigger: "#faq", start: "top 80%", toggleActions: "play none none none" }
+      }
+    );
+    gsap.fromTo(".hp2-faq-item",
+      { x: -20, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.5, ease: "power3.out", stagger: 0.1,
+        scrollTrigger: { trigger: ".hp2-faq-list", start: "top 85%", toggleActions: "play none none none" }
+      }
+    );
+    gsap.fromTo(".hp2-faq-bottom-cta",
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.5, ease: "power3.out",
+        scrollTrigger: { trigger: ".hp2-faq-bottom-cta", start: "top 90%", toggleActions: "play none none none" }
+      }
+    );
+
+    // ════════════════════════════════════════
+    // SPLIT SECTIONS, Staggered entrance
+    // ════════════════════════════════════════
+    document.querySelectorAll(".hp2-split").forEach(split => {
+      const children = split.children;
+      gsap.fromTo(children,
+        { y: 40, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.2,
+          scrollTrigger: { trigger: split, start: "top 80%", toggleActions: "play none none none" },
+        }
+      );
+    });
+
+    // Video Testimonials, stagger entrance
+    gsap.fromTo(".hp2-vid-card",
+      { y: 40, opacity: 0, scale: 0.96 },
+      {
+        y: 0, opacity: 1, scale: 1,
+        duration: 0.7, ease: "power3.out", stagger: 0.12,
+        scrollTrigger: { trigger: ".hp2-vid-showcase", start: "top 80%", toggleActions: "play none none none" },
+      }
+    );
+
+    gsap.fromTo(".hp2-testimonial-video",
+      { y: 50, opacity: 0, scale: 0.95 },
+      {
+        y: 0, opacity: 1, scale: 1, duration: 0.7, ease: "power3.out", stagger: 0.15,
+        scrollTrigger: { trigger: ".hp2-testimonial-grid", start: "top 80%", toggleActions: "play none none none" },
+      }
+    );
+
+    // ════════════════════════════════════════
+    // NEW: Industry Section, stat + text fade
+    // ════════════════════════════════════════
+    gsap.fromTo("#industry .hp2-industry-stat",
+      { y: 40, opacity: 0, scale: 0.9 },
+      { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "power3.out",
+        scrollTrigger: { trigger: "#industry", start: "top 80%", toggleActions: "play none none none" }
+      }
+    );
+    gsap.fromTo("#industry .lib-section-title, #industry .lib-section-sub",
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.1,
+        scrollTrigger: { trigger: "#industry", start: "top 75%", toggleActions: "play none none none" }
+      }
+    );
+    gsap.fromTo(".hp2-inline-stat",
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.12,
+        scrollTrigger: { trigger: ".hp2-industry-stats-row", start: "top 85%", toggleActions: "play none none none" }
+      }
+    );
+    gsap.fromTo(".hp2-pull-quote",
+      { x: -30, opacity: 0 },
+      { x: 0, opacity: 1, duration: 0.7, ease: "power3.out",
+        scrollTrigger: { trigger: ".hp2-pull-quote", start: "top 85%", toggleActions: "play none none none" }
+      }
+    );
+
+    // ════════════════════════════════════════
+    // NEW: AI/AEO Section, stagger items
+    // ════════════════════════════════════════
+    gsap.fromTo("#ai-visibility .hp2-aeo-block",
+      { y: 40, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.15,
+        scrollTrigger: { trigger: ".hp2-aeo-compare", start: "top 80%", toggleActions: "play none none none" }
+      }
+    );
+    gsap.fromTo(".hp2-aeo-item",
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.5, ease: "power3.out", stagger: 0.08,
+        scrollTrigger: { trigger: ".hp2-aeo-grid", start: "top 85%", toggleActions: "play none none none" }
+      }
+    );
+
+    // ════════════════════════════════════════
+    // NEW: Why Us, cards stagger from bottom
+    // ════════════════════════════════════════
+    gsap.fromTo(".hp2-why-card",
+      { y: 60, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.12,
+        scrollTrigger: { trigger: ".hp2-why-cards", start: "top 80%", toggleActions: "play none none none" }
+      }
+    );
+
+    // ════════════════════════════════════════
+    // NEW: Stats, grid reveal stagger
+    // ════════════════════════════════════════
+    gsap.fromTo(".hp2-stat-cell",
+      { y: 40, opacity: 0, scale: 0.95 },
+      { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "power3.out", stagger: 0.08,
+        scrollTrigger: { trigger: ".hp2-stats-grid", start: "top 80%", toggleActions: "play none none none" }
+      }
+    );
+
+    // ════════════════════════════════════════
+    // NEW: Florida, market pills stagger
+    // ════════════════════════════════════════
+    gsap.fromTo(".hp2-market-group",
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.5, ease: "power3.out", stagger: 0.1,
+        scrollTrigger: { trigger: ".hp2-florida-markets", start: "top 82%", toggleActions: "play none none none" }
+      }
+    );
+
+    // ════════════════════════════════════════
+    // TASK 7: Scroll Progress Bar
+    // ════════════════════════════════════════
+    gsap.to(".hp2-scroll-progress", {
+      scaleX: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "body",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 0.3,
+      },
+    });
+
+    // ════════════════════════════════════════
+    // Lucide Icons
+    // ════════════════════════════════════════
+    if (typeof lucide !== "undefined") {
+      lucide.createIcons();
+    }
+
+  })();
+  </script>
+</body>
+</html>
