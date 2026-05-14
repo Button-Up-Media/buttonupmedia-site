@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Us — Button Up Media | Restaurant-Only Growth Agency</title>
   <meta name="description" content="Button Up Media is a restaurant-only growth agency in South Florida. We help hospitality brands get found, get chosen, and get repeat business through SEO, social media, Google Ads, and websites." />
+  <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg">
+  <link rel="canonical" href="https://buttonupmedia-site-one.vercel.app/about.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Epilogue:wght@400;500;600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -35,13 +37,44 @@
   <div class="load-flash" aria-hidden="true"></div>
 
   <nav class="lib-nav">
-    <a class="lib-nav-brand" href="index.html">Button Up Media <span>Restaurant Growth</span></a>
+    <a class="lib-nav-brand" href="index.html" aria-label="Button Up Media home">
+      <img src="/images/full-logo.svg" alt="Button Up Media" />
+    </a>
     <div class="lib-nav-links">
-      <a href="index.html#services">Services</a>
+      <details class="lib-nav-dropdown">
+        <summary class="lib-nav-dropdown-trigger">
+          Services
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="lib-nav-dropdown-menu" role="menu" aria-label="Services">
+          <div class="lib-desktop-services">
+            <a href="social-media-marketing.html">Social Media Marketing</a>
+            <a href="restaurant-advertising.html">Paid Marketing</a>
+            <a href="restaurant-website-design.html">Website Design</a>
+            <a href="restaurant-seo.html">Search &amp; Answer Engine Optimization</a>
+          </div>
+          <details class="lib-mobile-services lib-mobile-menu-only">
+            <summary class="lib-mobile-services-trigger">
+              Services
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="lib-mobile-services-menu" role="menu" aria-label="Services">
+              <a href="restaurant-website-design.html">Website Design</a>
+              <a href="restaurant-advertising.html">Paid Marketing</a>
+              <a href="social-media-marketing.html">Social Media Marketing</a>
+              <a href="restaurant-seo.html">Search &amp; Answer Engine Optimization</a>
+            </div>
+          </details>
+          <a href="case-studies.html" class="lib-mobile-menu-only">Case Studies</a>
+          <a href="about.html" class="lib-mobile-menu-only">About Us</a>
+          <a href="tel:+17867409498" class="lib-mobile-menu-only lib-mobile-action --ghost">Call Us</a>
+          <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="lib-mobile-menu-only lib-mobile-action --primary">Book Free Strategy Call</a>
+        </div>
+      </details>
       <a href="case-studies.html">Case Studies</a>
-      <a href="index.html#process">Process</a>
-      <a href="index.html#faq">FAQ</a>
-      <a href="contact.html" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Contact Us</a>
+      <a href="about.html">About Us</a>
+      <a class="lib-nav-phone" href="tel:+17867409498">Call Us</a>
+      <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Book Free Strategy Call</a>
     </div>
   </nav>
 
@@ -207,7 +240,7 @@
           <p>Book a free 15-minute audit. You'll walk away with quick wins and a 90-day plan tailored to your concept.</p>
         </div>
         <div class="cta-actions">
-          <a href="contact.html" class="btn btn-primary">Book My Free Audit</a>
+          <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary">Get Your Free Strategy Call</a>
           <a href="index.html#services" class="btn">Explore Services</a>
         </div>
       </div>

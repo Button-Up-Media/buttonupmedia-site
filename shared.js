@@ -1489,3 +1489,19 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
 
 // Re-init Lucide for dynamically referenced icons
 lucide.createIcons();
+
+// Restrict pixel-canvas auto-play to hover only (prevents scroll-triggered auto-fire on CTA)
+document.addEventListener('DOMContentLoaded', () => {
+  const ctaScene = document.querySelector('.hp2-cta-scene');
+  if (!ctaScene) return;
+  const canvas = ctaScene.querySelector('pixel-canvas');
+  if (!canvas) return;
+  let hovered = false;
+  ctaScene.addEventListener('mouseenter', () => { hovered = true; }, true);
+  ctaScene.addEventListener('mouseleave', () => { hovered = false; }, true);
+  const orig = canvas.handleAnimation.bind(canvas);
+  canvas.handleAnimation = (state) => {
+    if (state === 'appear' && !hovered) return;
+    orig(state);
+  };
+});

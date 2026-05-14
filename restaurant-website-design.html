@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Restaurant Website Design | Conversion-Focused - Button Up Media</title>
+  <title>Website Design | Conversion-Focused - Button Up Media</title>
   <meta name="description" content="Restaurant website design that converts visitors into customers. Mobile-first, menu-optimized, reservation-ready. Built by Button Up Media in Florida." />
+  <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg">
+  <link rel="canonical" href="https://buttonupmedia-site-one.vercel.app/restaurant-website-design.html" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -29,7 +31,7 @@
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://buttonupmedia.com/" },
-      { "@type": "ListItem", "position": 2, "name": "Restaurant Website Design", "item": "https://buttonupmedia.com/restaurant-website-design/" }
+      { "@type": "ListItem", "position": 2, "name": "Website Design", "item": "https://buttonupmedia.com/restaurant-website-design/" }
     ]
   }
   </script>
@@ -39,7 +41,7 @@
   {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Restaurant Website Design",
+    "name": "Website Design",
     "description": "Custom restaurant website design that converts visitors into customers. Mobile-first, menu-optimized, reservation-ready, and SEO-built from day one.",
     "provider": {
       "@type": "Organization",
@@ -2391,14 +2393,44 @@
 <body>
 
   <nav class="lib-nav">
-    <a class="lib-nav-brand" href="index.html">Button Up Media <span>Website Design</span></a>
+    <a class="lib-nav-brand" href="index.html" aria-label="Button Up Media home">
+      <img src="/images/full-logo.svg" alt="Button Up Media" />
+    </a>
     <div class="lib-nav-links">
-      <a href="#why-it-matters">Why It Matters</a>
-      <a href="#services">Services</a>
-      <a href="#process">Process</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#faq">FAQ</a>
-      <a href="#website-audit" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Free Website Audit</a>
+      <details class="lib-nav-dropdown">
+        <summary class="lib-nav-dropdown-trigger">
+          Services
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="lib-nav-dropdown-menu" role="menu" aria-label="Services">
+          <div class="lib-desktop-services">
+            <a href="social-media-marketing.html">Social Media Marketing</a>
+            <a href="restaurant-advertising.html">Paid Marketing</a>
+            <a href="restaurant-website-design.html">Website Design</a>
+            <a href="restaurant-seo.html">Search &amp; Answer Engine Optimization</a>
+          </div>
+          <details class="lib-mobile-services lib-mobile-menu-only">
+            <summary class="lib-mobile-services-trigger">
+              Services
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="lib-mobile-services-menu" role="menu" aria-label="Services">
+              <a href="restaurant-website-design.html">Website Design</a>
+              <a href="restaurant-advertising.html">Paid Marketing</a>
+              <a href="social-media-marketing.html">Social Media Marketing</a>
+              <a href="restaurant-seo.html">Search &amp; Answer Engine Optimization</a>
+            </div>
+          </details>
+          <a href="case-studies.html" class="lib-mobile-menu-only">Case Studies</a>
+          <a href="about.html" class="lib-mobile-menu-only">About Us</a>
+          <a href="tel:+17867409498" class="lib-mobile-menu-only lib-mobile-action --ghost">Call Us</a>
+          <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="lib-mobile-menu-only lib-mobile-action --primary">Book Free Strategy Call</a>
+        </div>
+      </details>
+      <a href="case-studies.html">Case Studies</a>
+      <a href="about.html">About Us</a>
+      <a class="lib-nav-phone" href="tel:+17867409498">Call Us</a>
+      <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Book Free Strategy Call</a>
     </div>
   </nav>
 
@@ -2408,12 +2440,12 @@
     <section class="rw-hero" id="hero">
       <div class="rw-hero-inner">
         <div class="rw-hero-copy">
-          <div class="hero-badge">Restaurant Website Design</div>
-          <h1>Restaurant Website Design That <span class="accent-serif">Turns Visitors Into Customers.</span></h1>
+          <div class="hero-badge">Website Design</div>
+          <h1>Website Design That <span class="accent-serif">Turns Visitors Into Customers.</span></h1>
           <p>That decision takes under 10 seconds. In those 10 seconds, they need to see the food, find the menu, know how to book &mdash; and trust that your restaurant is worth their time. If your website can&rsquo;t do that, you&rsquo;re losing customers.</p>
           <div class="rw-hero-cta">
             <div class="flex-row" style="gap: 12px;">
-              <a href="#website-audit" class="btn btn-primary">Run Your Free Website Audit</a>
+              <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary">Run Your Free Website Audit</a>
               <a href="#services" class="btn btn-ghost">See How We Build</a>
             </div>
             <div class="rw-hero-trust">
@@ -2680,20 +2712,11 @@
         </div>
       </div>
 
-      <p style="margin-top: 40px; text-align: center; font-weight: 700; font-size: 1.15rem;">How Many of These Problems Does Your Website Have?</p>
+      <p style="margin-top: 40px; text-align: center; font-weight: 700; font-size: 1.15rem;">If your website has any of these problems, we can fix them.</p>
 
-      <!-- 5. AUDIT TOOL PLACEHOLDER -->
-      <div class="rw-audit-tool" id="website-audit">
-        <h3>Find Out in Under 2 Minutes</h3>
-        <p>Run our free website audit. Just enter your URL and our tool analyzes your site&rsquo;s speed, mobile experience, SEO health, and conversion readiness &mdash; instantly.</p>
-        <div class="rw-audit-form">
-          <input type="url" class="rw-audit-input" placeholder="Enter your restaurant website URL" />
-          <button class="rw-audit-submit" onclick="document.querySelector('.rw-audit-message').style.display='block'">Run Free Audit &rarr;</button>
-        </div>
-        <p class="rw-audit-note">No email required. No phone call. Just instant clarity.</p>
-        <div class="rw-audit-message">
-          Our automated audit tool is launching soon. In the meantime, <a href="contact.html">get a free manual audit</a> from our team &mdash; we&rsquo;ll analyze your site personally and send you a full report.
-        </div>
+      <div style="margin-top: 32px; text-align: center;">
+        <p style="color: var(--text-dim); font-size: 0.92rem; max-width: 44ch; margin: 0 auto 20px;">Book a free strategy call and we&rsquo;ll review your website live &mdash; speed, mobile experience, SEO health, and conversion gaps &mdash; in 30 minutes.</p>
+        <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary">Get Your Free Strategy Call</a>
       </div>
     </section>
 
@@ -2791,7 +2814,7 @@
     <div class="rw-hscroll-section" id="services">
       <div class="rw-hscroll-intro">
         <div class="lib-section-label">What We Build</div>
-        <h2 class="lib-section-title">Restaurant Website Design Services</h2>
+        <h2 class="lib-section-title">Website Design Services</h2>
         <p class="lib-section-sub">Button Up Media designs and builds restaurant websites that work for both customers and search engines.</p>
       </div>
 
@@ -3407,7 +3430,7 @@
             <li>SEO setup &amp; analytics</li>
           </ul>
           <div class="rw-pricing-card-cta">
-            <a href="contact.html" class="btn btn-primary">Get a Quote</a>
+            <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary">Get Your Free Strategy Call</a>
           </div>
         </div>
 
@@ -3428,7 +3451,7 @@
             <li>Centralized admin dashboard</li>
           </ul>
           <div class="rw-pricing-card-cta">
-            <a href="contact.html" class="btn btn-primary">Get a Quote</a>
+            <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary">Get Your Free Strategy Call</a>
           </div>
         </div>
 
@@ -3448,7 +3471,7 @@
             <li>Content updates as needed</li>
           </ul>
           <div class="rw-pricing-card-cta">
-            <a href="contact.html" class="btn btn-primary">Get Started</a>
+            <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary">Get Your Free Strategy Call</a>
           </div>
         </div>
       </div>
@@ -3481,7 +3504,7 @@
 
         <div class="rw-pricing-cta">
           <p>Run the free website audit above to see where you stand, then get a custom quote. No surprises. No hidden fees. No deposit until you&rsquo;ve approved the strategy.</p>
-          <a href="contact.html" class="btn btn-primary">Get a Custom Website Quote</a>
+          <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary">Get Your Free Strategy Call</a>
         </div>
 
       </div>
@@ -3553,7 +3576,7 @@
         <p>Download our free Restaurant Website Scorecard &mdash; a quick self-assessment that shows you exactly how your website stacks up.</p>
         <div class="rw-scorecard-form">
           <input type="email" class="input" placeholder="Your email address" />
-          <a href="contact.html" class="btn btn-primary">Download Scorecard</a>
+          <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary">Get Your Free Strategy Call</a>
         </div>
         <p style="font-size: 0.74rem; color: var(--text-soft); margin-top: 10px; margin-bottom: 0;">Takes 3 minutes. No sales pitch. Just clarity on whether your website is helping or hurting.</p>
       </div>
@@ -3639,7 +3662,7 @@
       <div class="rw-limited-banner">
         <h4>We Only Take On a Limited Number of New Website Projects Per Month</h4>
         <p>Every website we build is custom. We physically shoot your food. We write your content. We design for your specific brand and customer.</p>
-        <a href="contact.html" class="btn btn-primary">Check Availability for This Month</a>
+        <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary">Get Your Free Strategy Call</a>
       </div>
     </section>
 
@@ -3728,7 +3751,7 @@
         </ul>
 
         <div class="rw-cta-actions">
-          <a href="#website-audit" class="btn btn-primary">Run Your Free Website Audit</a>
+          <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary">Run Your Free Website Audit</a>
           <a href="contact.html" class="btn btn-ghost">Skip to a Strategy Call</a>
         </div>
 
@@ -3750,16 +3773,16 @@
         <div class="footer-col">
           <h4>Services</h4>
           <a href="social-media-marketing.html">Social Media Marketing</a>
-          <a href="restaurant-seo.html">Restaurant SEO</a>
-          <a href="restaurant-advertising.html">Restaurant Advertising</a>
+          <a href="restaurant-advertising.html">Paid Marketing</a>
           <a href="restaurant-website-design.html">Website Design</a>
+          <a href="restaurant-seo.html">Search &amp; Answer Engine Optimization</a>
         </div>
         <div class="footer-col">
           <h4>Company</h4>
           <a href="about.html">About</a>
           <a href="case-studies.html">Case Studies</a>
           <a href="#faq">FAQ</a>
-          <a href="contact.html">Free Consultation</a>
+          <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank">Get Your Free Strategy Call</a>
         </div>
         <div class="footer-col">
           <h4>Contact</h4>

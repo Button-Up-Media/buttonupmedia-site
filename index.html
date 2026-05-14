@@ -6,11 +6,22 @@
   <title>Restaurant Marketing Agency | Button Up Media - Florida</title>
   <meta name="description" content="Button Up Media is a restaurant marketing agency in Florida. We help restaurants grow with social media, website design, SEO & advertising. Get a free consultation." />
   <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg">
+  <link rel="canonical" href="https://buttonupmedia-site.vercel.app/" />
+  <meta name="theme-color" content="#0b0d10" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Restaurant Marketing Agency | Button Up Media - Florida" />
+  <meta property="og:description" content="Button Up Media is a restaurant marketing agency in Florida. We help restaurants grow with social media, website design, SEO & advertising. Get a free consultation." />
+  <meta property="og:url" content="https://buttonupmedia-site.vercel.app/" />
+  <meta property="og:image" content="https://buttonupmedia-site.vercel.app/images/bts-shoot.jpeg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Restaurant Marketing Agency | Button Up Media - Florida" />
+  <meta name="twitter:description" content="Button Up Media is a restaurant marketing agency in Florida. We help restaurants grow with social media, website design, SEO & advertising. Get a free consultation." />
+  <meta name="twitter:image" content="https://buttonupmedia-site.vercel.app/images/bts-shoot.jpeg" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital, wght@0,500;0,600;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Epilogue:wght@400;500;600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Epilogue:wght@400;500;600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
@@ -52,6 +63,298 @@
       left: 50%;
       transform: translateX(-50%);
       z-index: 999;
+    }
+    .lib-nav-brand {
+      display: inline-flex;
+      align-items: center;
+      min-width: 230px;
+    }
+    .lib-nav-brand img {
+      display: block;
+      width: 145px;
+      height: auto;
+      max-width: 145px;
+    }
+    .lib-nav-phone {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 36px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+      margin-left: 24px;
+    }
+    .lib-nav-phone:hover {
+      border-color: rgba(226,168,77,0.38);
+      background: rgba(226,168,77,0.08);
+      color: var(--gold);
+    }
+    .lib-nav-links {
+      gap: 8px;
+    }
+    .lib-nav-links .btn-primary {
+      margin-left: 14px;
+    }
+    .lib-nav-dropdown {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .lib-nav-dropdown > summary {
+      list-style: none;
+    }
+    .lib-nav-dropdown > summary::-webkit-details-marker {
+      display: none;
+    }
+    .lib-nav-dropdown-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 36px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.02);
+      color: var(--text);
+      font-size: 0.76rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+      white-space: nowrap;
+    }
+    .lib-nav-dropdown-trigger:hover,
+    .lib-nav-dropdown[open] .lib-nav-dropdown-trigger,
+    .lib-nav-dropdown:focus-within .lib-nav-dropdown-trigger {
+      border-color: rgba(226,168,77,0.38);
+      background: rgba(226,168,77,0.08);
+      color: var(--gold);
+    }
+    .lib-nav-dropdown-trigger svg {
+      width: 14px;
+      height: 14px;
+      stroke-width: 2.25;
+      transition: transform 0.2s ease;
+    }
+    .lib-nav-dropdown[open] .lib-nav-dropdown-trigger svg {
+      transform: rotate(180deg);
+    }
+    .lib-nav-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 0;
+      min-width: 320px;
+      padding: 10px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(6,8,11,0.96);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 24px 50px rgba(0,0,0,0.38);
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      z-index: 1200;
+    }
+    .lib-nav-dropdown:hover .lib-nav-dropdown-menu,
+    .lib-nav-dropdown:focus-within .lib-nav-dropdown-menu,
+    .lib-nav-dropdown[open] .lib-nav-dropdown-menu {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .lib-nav-dropdown-menu a {
+      display: flex;
+      align-items: center;
+      min-height: 46px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .lib-nav-dropdown-menu a:hover {
+      background: rgba(226,168,77,0.08);
+      color: var(--gold);
+    }
+    .lib-desktop-services {
+      display: flex;
+      flex-direction: column;
+    }
+    @media (max-width: 900px) {
+      .lib-nav-brand { min-width: 0; }
+      .lib-nav-brand img {
+        width: 132px;
+        max-width: 132px;
+        height: auto;
+      }
+      .lib-nav-dropdown-menu {
+        left: 50%;
+        transform: translateX(-50%) translateY(-8px);
+        min-width: min(320px, calc(100vw - 32px));
+      }
+      .lib-nav-dropdown[open] .lib-nav-dropdown-menu {
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+    @media (max-width: 700px) {
+      .page {
+        width: min(calc(100% - 32px), var(--max));
+        padding-top: 74px;
+      }
+      .lib-nav {
+        top: 8px;
+        width: min(calc(100% - 20px), var(--max));
+        min-height: 54px;
+        margin: 0 auto;
+        padding: 8px 10px;
+        border-radius: 14px;
+        gap: 8px;
+      }
+      .lib-nav-brand img {
+        width: 86px;
+        max-width: 86px;
+      }
+      .lib-nav-links {
+        justify-content: flex-end;
+        gap: 8px;
+        overflow: visible;
+        min-width: 0;
+      }
+      .lib-nav-links > a,
+      .lib-nav-links > .btn-primary,
+      .lib-nav-phone {
+        display: none;
+      }
+      .lib-desktop-services {
+        display: none;
+      }
+      .lib-nav-dropdown-trigger {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        border-radius: 999px;
+        justify-content: center;
+        font-size: 0;
+      }
+      .lib-mobile-menu-only {
+        display: flex !important;
+      }
+      .lib-nav-dropdown-trigger::before {
+        content: "";
+        width: 16px;
+        height: 12px;
+        display: block;
+        background:
+          linear-gradient(currentColor, currentColor) 0 0 / 100% 2px no-repeat,
+          linear-gradient(currentColor, currentColor) 0 50% / 100% 2px no-repeat,
+          linear-gradient(currentColor, currentColor) 0 100% / 100% 2px no-repeat;
+      }
+      .lib-nav-dropdown-trigger svg {
+        display: none;
+      }
+      .lib-nav-dropdown-menu {
+        position: fixed;
+        top: 62px;
+        left: 10px;
+        right: 10px;
+        width: auto;
+        min-width: 0;
+        max-height: calc(100vh - 92px);
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px;
+        transform: translateY(-6px);
+      }
+      .lib-nav-dropdown[open] .lib-nav-dropdown-menu {
+        transform: translateY(0);
+      }
+      .lib-mobile-services {
+        display: block !important;
+        width: 100%;
+      }
+      .lib-mobile-services-trigger {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        width: 100%;
+        min-height: 46px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,0.08);
+        background: rgba(255,255,255,0.03);
+        color: var(--text);
+        font-size: 0.92rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .lib-mobile-services-trigger svg {
+        width: 14px;
+        height: 14px;
+        transition: transform 0.18s ease;
+      }
+      .lib-mobile-services[open] .lib-mobile-services-trigger svg {
+        transform: rotate(180deg);
+      }
+      .lib-mobile-services-menu {
+        display: none;
+        width: 100%;
+        padding: 8px 0 0;
+      }
+      .lib-mobile-services[open] .lib-mobile-services-menu {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .lib-mobile-services-menu a {
+        width: 100%;
+        text-align: left;
+        min-height: 40px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        color: var(--text);
+        font-size: 0.88rem;
+        font-weight: 600;
+      }
+      .lib-mobile-services-menu a:hover {
+        background: rgba(226,168,77,0.08);
+        color: var(--gold);
+      }
+      .lib-mobile-action {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-height: 44px;
+        padding: 12px 14px !important;
+        margin-top: 8px;
+        border-radius: 14px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        text-align: center;
+      }
+      .lib-mobile-action.--ghost {
+        border: 1px solid rgba(255,255,255,0.12);
+        background: rgba(255,255,255,0.04);
+        color: var(--text);
+      }
+      .lib-mobile-action.--primary {
+        border: 1px solid rgba(226,168,77,0.35);
+        background: rgba(226,168,77,0.14);
+        color: var(--gold);
+      }
     }
 
     /* ══════════════════════════════════════
@@ -190,7 +493,20 @@
       gap: 20px;
     }
     .hp2-hero-cta .flex-row { gap: 12px; }
-    .hp2-hero-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .hp2-hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .hp2-hero-chips .chip {
+      text-decoration: none;
+      color: var(--text-dim);
+    }
+    .hp2-hero-chips .chip:hover {
+      color: var(--text);
+      border-color: rgba(226,168,77,0.28);
+      background: rgba(255,255,255,0.04);
+    }
 
     /* ══════════════════════════════════════
        2. TRUST RIBBON
@@ -1726,13 +2042,415 @@
       .hp2-system-panels-wrap { flex-direction: column; gap: 16px; }
     }
 
+    @media (max-width: 700px) {
+      .hp2-hero {
+        min-height: auto;
+      }
+      .hp2-hero-inner {
+        width: calc(100% - 24px);
+        padding: 78px 0 32px;
+        gap: 16px;
+      }
+      .hp2-hero-copy {
+        padding-bottom: 0;
+      }
+      .hp2-hero-copy h1 {
+        font-size: clamp(1.75rem, 7.4vw, 2.3rem);
+        margin-top: 16px;
+        margin-bottom: 16px;
+      }
+      .hp2-hero-copy > p {
+        font-size: 0.95rem;
+        max-width: 32ch;
+        margin-bottom: 18px;
+      }
+      .hp2-hero-cta {
+        gap: 14px;
+      }
+      .hp2-hero-cta .flex-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .hp2-hero-cta .btn {
+        width: 100%;
+      }
+      .hp2-hero-chips {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 6px;
+        width: 100%;
+      }
+      .hp2-hero-chips .chip {
+        width: 100%;
+        justify-content: center;
+        padding: 0 8px;
+        height: 30px;
+        font-size: 0.64rem;
+        letter-spacing: 0.01em;
+      }
+      .hp2-proof-fragments {
+        width: 100%;
+        gap: 10px;
+        padding-bottom: 0;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .hp2-proof-pill {
+        width: 100%;
+        min-width: 0;
+        padding: 10px 14px;
+      }
+      .hp2-proof-pill-num {
+        font-size: 1.3rem;
+      }
+      .hp2-proof-pill-text {
+        font-size: 0.66rem;
+      }
+      .hp2-trust {
+        margin-top: -24px;
+        padding: 30px 0 72px;
+        border-radius: 28px 28px 0 0;
+      }
+      .hp2-trust-inner {
+        gap: 12px;
+      }
+      .hp2-trust-stat {
+        width: calc(50% - 6px);
+      }
+      .hp2-trust-stat::after {
+        display: none;
+      }
+      .hp2-trust-num {
+        font-size: 1.65rem;
+      }
+      .hp2-trust-label {
+        font-size: 0.58rem;
+        letter-spacing: 0.08em;
+      }
+      .hp2-trust-logos {
+        gap: 14px;
+        margin-top: 18px;
+      }
+      .hp2-trust-logos span {
+        font-size: 0.88rem;
+      }
+      .card-overlay {
+        margin-top: -72px;
+        padding-top: 100px;
+        padding-bottom: 136px;
+        border-radius: 36px 36px 0 0;
+      }
+      .card-overlay::after {
+        height: 124px;
+        border-radius: 36px 36px 0 0;
+      }
+      .card-overlay-spacer {
+        padding-bottom: 128px !important;
+      }
+      #industry {
+        padding-top: 92px;
+        padding-bottom: 104px;
+      }
+      #industry .hp2-industry-split {
+        gap: 18px;
+      }
+      #industry .hp2-industry-copy {
+        gap: 12px;
+      }
+      #industry .hp2-industry-headline {
+        font-size: clamp(1.85rem, 7.2vw, 2.3rem);
+      }
+      #industry .hp2-industry-body {
+        font-size: 0.93rem;
+        line-height: 1.62;
+      }
+      #industry .hp2-industry-video {
+        max-width: 100%;
+        width: min(100%, 300px);
+      }
+      #industry .hp2-industry-stats-row {
+        gap: 12px;
+        margin-top: 16px;
+      }
+      #industry .hp2-inline-stat {
+        padding: 12px 14px;
+      }
+      #pain {
+        padding-top: 88px;
+        padding-bottom: 108px;
+      }
+      #pain .lib-section-sub {
+        font-size: 0.94rem;
+        line-height: 1.62;
+      }
+      #pain .pain-grid {
+        margin-top: 28px !important;
+        gap: 14px;
+      }
+      #pain .pain-col-head {
+        margin-bottom: 14px;
+      }
+      #pain .pain-col-head h3 {
+        font-size: 1.18rem;
+      }
+      #pain .pain-item {
+        padding: 14px 14px;
+      }
+      #pain .pain-item h4 {
+        font-size: 0.9rem;
+      }
+      #pain .pain-item p {
+        font-size: 0.78rem;
+        line-height: 1.45;
+      }
+      #pain .pain-icon {
+        width: 32px;
+        height: 32px;
+      }
+      .hp2-hscroll-section {
+        overflow: hidden;
+      }
+      .hp2-hscroll-pin {
+        height: auto;
+        overflow: visible;
+        padding-top: 8px;
+      }
+      .hp2-hscroll-track {
+        display: flex;
+        gap: 14px;
+        height: auto;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 8px 16px 12px;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: 16px;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-x;
+        overscroll-behavior-x: contain;
+        scrollbar-width: none;
+      }
+      .hp2-hscroll-panel {
+        flex: 0 0 min(84vw, 320px);
+        width: min(84vw, 320px);
+        margin: 0;
+        height: auto;
+        min-height: 0;
+        padding: 20px 16px 30px;
+        display: block;
+        gap: 12px;
+        overflow: visible;
+        border-radius: 28px;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+      }
+      .hp2-hscroll-panel::before {
+        background: linear-gradient(135deg, transparent 0%, transparent 38%, rgba(255,248,235,0.018) 48%, rgba(255,248,235,0.032) 55%, rgba(255,248,235,0.018) 62%, transparent 74%, transparent 100%);
+      }
+      .hp2-hscroll-inner {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .hp2-hscroll-inner.--reverse {
+        direction: ltr;
+      }
+      .hp2-hscroll-copy {
+        display: contents;
+      }
+      .hp2-hscroll-copy .label {
+        order: 1;
+        margin-bottom: 4px;
+      }
+      .hp2-hscroll-copy h2 {
+        order: 2;
+      }
+      .hp2-hscroll-copy .hp2-hscroll-stat-pill {
+        order: 3;
+      }
+      .hp2-hscroll-copy p {
+        order: 4;
+      }
+      .hp2-hscroll-copy ul {
+        order: 5;
+      }
+      .hp2-hscroll-num {
+        position: relative;
+        top: auto;
+        left: auto;
+        display: inline-block;
+        margin-bottom: 2px;
+        font-size: 2rem;
+      }
+      .hp2-hscroll-copy {
+        order: 2;
+      }
+      .hp2-hscroll-copy h2 {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+      }
+      .hp2-hscroll-copy p,
+      .hp2-hscroll-copy li {
+        font-size: 0.85rem;
+        line-height: 1.46;
+      }
+      .hp2-hscroll-stat-pill {
+        font-size: 0.74rem;
+        margin-bottom: 14px;
+      }
+      .hp2-hscroll-copy p {
+        max-width: none;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+      }
+      .hp2-hscroll-panel:nth-child(1) .hp2-hscroll-copy p:nth-of-type(2),
+      .hp2-hscroll-panel:nth-child(1) .hp2-hscroll-copy ul,
+      .hp2-hscroll-panel:nth-child(4) .hp2-hscroll-copy p:nth-of-type(2),
+      .hp2-hscroll-panel:nth-child(4) .hp2-hscroll-copy ul {
+        display: none;
+      }
+      .hp2-hscroll-panel:nth-child(2) .hp2-hscroll-copy p:nth-of-type(2),
+      .hp2-hscroll-panel:nth-child(3) .hp2-hscroll-copy p:nth-of-type(2) {
+        display: block;
+        -webkit-line-clamp: 4;
+      }
+      .hp2-hscroll-panel:nth-child(2) .hp2-hscroll-copy ul,
+      .hp2-hscroll-panel:nth-child(3) .hp2-hscroll-copy ul {
+        display: block;
+        margin-bottom: 10px;
+      }
+      .hp2-hscroll-panel:nth-child(2) .hp2-hscroll-copy ul li:nth-child(n+4),
+      .hp2-hscroll-panel:nth-child(3) .hp2-hscroll-copy ul li:nth-child(n+4) {
+        display: none;
+      }
+      .hp2-hscroll-visual {
+        order: 6;
+        aspect-ratio: 16 / 10;
+        max-width: 100%;
+        margin-top: 0;
+      }
+      .hp2-hscroll-panel:nth-child(1) .hp2-hscroll-visual,
+      .hp2-hscroll-panel:nth-child(4) .hp2-hscroll-visual {
+        max-width: 220px;
+        width: min(100%, 220px);
+        margin-inline: auto;
+        aspect-ratio: 9 / 16;
+      }
+      .hp2-hscroll-panel:nth-child(2) .hp2-hscroll-visual,
+      .hp2-hscroll-panel:nth-child(3) .hp2-hscroll-visual {
+        max-width: 100%;
+        width: 100%;
+        aspect-ratio: 16 / 10;
+      }
+      .hp2-hscroll-cta-link {
+        order: 7;
+        margin-top: 4px;
+        padding-bottom: 2px;
+      }
+      .hp2-hscroll-progress,
+      .hp2-hscroll-dots,
+      .hp2-hscroll-divider,
+      .hp2-hscroll-particle,
+      .hp2-hscroll-glow {
+        display: none !important;
+      }
+      .hp2-hscroll-exit {
+        height: 0;
+      }
+      .hp2-case-editorial {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+      .hp2-case-img {
+        min-height: 190px;
+      }
+      .hp2-case-body {
+        padding: 18px 18px 22px;
+      }
+      .hp2-case-body .case-tag {
+        margin-bottom: 10px;
+      }
+      .hp2-case-body h3 {
+        font-size: 1.2rem;
+      }
+      .hp2-case-body > p {
+        max-width: none;
+        margin-bottom: 14px;
+      }
+      .hp2-case-metrics {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .hp2-case-metric strong {
+        font-size: 1.5rem;
+      }
+      .hp2-vid-showcase {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-top: 24px;
+        max-width: 100%;
+      }
+      .hp2-vid-card {
+        max-width: 280px;
+        margin: 0 auto;
+      }
+      .hp2-vid-card-frame {
+        aspect-ratio: 4 / 5;
+      }
+      .hp2-vid-card-overlay {
+        padding: 14px;
+      }
+      .hp2-services-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding-top: 28px;
+      }
+      .hp2-services-grid .glass-card {
+        padding: 22px 18px;
+      }
+      .hp2-services-grid .glass-card-icon svg {
+        width: 36px;
+        height: 36px;
+      }
+      .hp2-process-step {
+        padding: 28px 18px;
+      }
+      .hp2-faq-hero-heading {
+        font-size: clamp(1.6rem, 8vw, 2.2rem);
+      }
+      .hp2-faq-item summary {
+        padding: 18px 14px;
+      }
+      .hp2-faq-item .hp2-faq-answer {
+        padding: 0 14px 18px;
+      }
+      .hp2-cta-scene {
+        padding: 40px 20px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+      .footer-links {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+
     @media (max-width: 600px) {
-      .hp2-hero-copy h1 { font-size: clamp(1.8rem, 8vw, 2.6rem); }
+      .hp2-hero-copy h1 { font-size: clamp(1.6rem, 7.2vw, 2.1rem); }
       .hp2-curtain-wrap { width: 100%; border-radius: 16px; }
       .hp2-curtain-img { border-radius: 16px; }
-      .hp2-curtain-img img { height: 40vh; }
-      .hp2-curtain-glass { padding: 20px 24px; }
-      .hp2-process-step { padding: 32px 24px; }
+      .hp2-curtain-img img { height: 36vh; }
+      .hp2-curtain-glass { padding: 18px 18px; }
+      .hp2-process-step { padding: 28px 18px; }
       .hp2-services-grid { grid-template-columns: 1fr; }
     }
 
@@ -2530,8 +3248,8 @@
     }
     /* Task 4: prevent mask-image from clipping nav CTA button */
     .lib-nav .lib-nav-links {
-      mask-image: linear-gradient(90deg, transparent 0, #000 3%, #000 100%);
-      -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 3%, #000 100%);
+      mask-image: none;
+      -webkit-mask-image: none;
     }
   </style>
 
@@ -2560,9 +3278,9 @@
         "mainEntity": [
           { "@type": "Question", "name": "What does a restaurant marketing agency do?", "acceptedAnswer": { "@type": "Answer", "text": "A restaurant marketing agency specializes in helping restaurants increase their visibility, attract more customers, and grow revenue through digital marketing. This typically includes social media management and content creation, website design and optimization, search engine optimization (SEO), and paid advertising on platforms like Google and Facebook. Unlike general marketing agencies, a restaurant marketing agency understands the unique challenges of the hospitality industry - thin margins, high competition, and the constant need to keep seats filled." } },
           { "@type": "Question", "name": "How much does restaurant marketing cost?", "acceptedAnswer": { "@type": "Answer", "text": "Restaurant marketing costs vary depending on the services you need and the size of your operation. At Button Up Media, we build custom strategies tailored to each restaurant's goals and budget. Most restaurant owners invest between $1,500 and $5,000 per month for a coordinated marketing strategy that includes multiple channels. The best way to get a clear picture is to schedule a free consultation so we can understand your specific situation and recommend the right approach." } },
-          { "@type": "Question", "name": "What is the best marketing strategy for a restaurant?", "acceptedAnswer": { "@type": "Answer", "text": "The most effective restaurant marketing strategy is an integrated one - not just social media or just a website, but all channels working together. At a minimum, a strong restaurant marketing strategy should include an active social media presence with professional food content, a mobile-optimized website that makes it easy to view menus and book reservations, local SEO so you appear when customers search for restaurants nearby, and targeted advertising to capture high-intent customers." } },
+          { "@type": "Question", "name": "What is the best marketing strategy for a restaurant?", "acceptedAnswer": { "@type": "Answer", "text": "The most effective restaurant marketing strategy is an integrated one - not just social media or just a website, but all channels working together. At a minimum, a strong restaurant marketing strategy should include an active social media presence with professional video content, a mobile-optimized website that makes it easy to view menus and book reservations, local SEO so you appear when customers search for restaurants nearby, and targeted advertising to capture high-intent customers." } },
           { "@type": "Question", "name": "How to get more customers to my restaurant?", "acceptedAnswer": { "@type": "Answer", "text": "Getting more customers starts with making sure people can find you online. Over 97% of diners use Google to find restaurants, and social media platforms like Instagram and TikTok directly influence where people choose to eat. To get more customers, you need to be visible when they search, look compelling when they find you, and make it effortless to book or order." } },
-          { "@type": "Question", "name": "Why hire a restaurant-specific marketing agency?", "acceptedAnswer": { "@type": "Answer", "text": "General marketing agencies apply the same playbook to restaurants that they use for dentists, gyms, and law firms. Restaurant marketing is fundamentally different - the customer journey is shorter, the decision is emotional and visual, and the competition is hyper-local. A restaurant-specific agency understands food photography, menu psychology, reservation behavior, seasonal demand patterns, and what drives someone to choose one restaurant over another on a Friday night." } },
+          { "@type": "Question", "name": "Why hire a restaurant-specific marketing agency?", "acceptedAnswer": { "@type": "Answer", "text": "General marketing agencies apply the same playbook to restaurants that they use for dentists, gyms, and law firms. Restaurant marketing is fundamentally different - the customer journey is shorter, the decision is emotional and visual, and the competition is hyper-local. A restaurant-specific agency understands menu psychology, reservation behavior, seasonal demand patterns, and what drives someone to choose one restaurant over another on a Friday night." } },
           { "@type": "Question", "name": "What is Answer Engine Optimization (AEO) for restaurants?", "acceptedAnswer": { "@type": "Answer", "text": "Answer Engine Optimization is the practice of optimizing your restaurant's digital presence to appear in AI-powered search results - including Google AI Overviews, ChatGPT, Perplexity, and voice assistants like Siri and Alexa. As more customers use conversational AI to find dining recommendations, AEO ensures your restaurant is cited and recommended in those answers." } },
           { "@type": "Question", "name": "Do you work with restaurants outside of Florida?", "acceptedAnswer": { "@type": "Answer", "text": "Button Up Media is headquartered in South Florida and serves restaurants across the state, from Miami and Fort Lauderdale to Orlando, Tampa, Jacksonville, Naples, and beyond. While our deepest expertise is in the Florida market, we also work with restaurant brands in other states. If you're interested in working together, the best first step is to schedule a free consultation." } }
         ]
@@ -2585,13 +3303,44 @@
 
   <!-- ═══ NAV ═══ -->
   <nav class="lib-nav">
-    <a class="lib-nav-brand" href="#">Button Up Media</a>
+    <a class="lib-nav-brand" href="index.html" aria-label="Button Up Media home">
+      <img src="/images/full-logo.svg" alt="Button Up Media" />
+    </a>
     <div class="lib-nav-links">
-      <a href="#services">Services</a>
-      <a href="#case-studies">Case Studies</a>
-      <a href="#process">Process</a>
-      <a href="#faq">FAQ</a>
-      <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Get Your Free Strategy Call</a>
+      <details class="lib-nav-dropdown">
+        <summary class="lib-nav-dropdown-trigger">
+          Services
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="lib-nav-dropdown-menu" role="menu" aria-label="Services">
+          <div class="lib-desktop-services">
+            <a href="social-media-marketing.html">Social Media Marketing</a>
+            <a href="restaurant-advertising.html">Paid Marketing</a>
+            <a href="restaurant-website-design.html">Website Design</a>
+            <a href="restaurant-seo.html">Search &amp; Answer Engine Optimization</a>
+          </div>
+          <details class="lib-mobile-services lib-mobile-menu-only">
+            <summary class="lib-mobile-services-trigger">
+              Services
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="lib-mobile-services-menu" role="menu" aria-label="Services">
+              <a href="restaurant-website-design.html">Website Design</a>
+              <a href="restaurant-advertising.html">Paid Marketing</a>
+              <a href="social-media-marketing.html">Social Media Marketing</a>
+              <a href="restaurant-seo.html">Search &amp; Answer Engine Optimization</a>
+            </div>
+          </details>
+          <a href="case-studies.html" class="lib-mobile-menu-only">Case Studies</a>
+          <a href="about.html" class="lib-mobile-menu-only">About Us</a>
+          <a href="tel:+17867409498" class="lib-mobile-menu-only lib-mobile-action --ghost">Call Us</a>
+          <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="lib-mobile-menu-only lib-mobile-action --primary">Book Free Strategy Call</a>
+        </div>
+      </details>
+      <a href="case-studies.html">Case Studies</a>
+      <a href="about.html">About Us</a>
+      <a class="lib-nav-phone" href="tel:+17867409498">Call Us</a>
+      <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Book Free Strategy Call</a>
     </div>
   </nav>
 
@@ -2614,26 +3363,26 @@
           <div class="hp2-hero-cta">
             <div class="flex-row" style="gap: 12px;">
               <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary hp2-cta-btn">Get Your Free Strategy Call</a>
-              <a href="#system" class="btn btn-ghost">See How It Works</a>
+              <a href="#why-us" class="btn btn-ghost">See Why Us</a>
             </div>
             <div class="hp2-hero-chips flex-row" style="gap: 8px;">
-              <span class="chip">Organic Social</span>
-              <span class="chip">Google Ads</span>
-              <span class="chip">Websites</span>
+              <a class="chip" href="social-media-marketing.html">Organic Social</a>
+              <a class="chip" href="restaurant-advertising.html">Google Ads</a>
+              <a class="chip" href="restaurant-website-design.html">Websites</a>
             </div>
           </div>
         </div>
         <div class="hp2-proof-fragments">
           <div class="hp2-proof-pill">
-            <div class="hp2-proof-pill-num" data-count-to="50" data-suffix="+">0</div>
+            <div class="hp2-proof-pill-num" data-count-to="50" data-suffix="+">50+</div>
             <div class="hp2-proof-pill-text">Restaurants<br>Served</div>
           </div>
           <div class="hp2-proof-pill">
-            <div class="hp2-proof-pill-num" data-count-to="80" data-suffix="M+">0</div>
+            <div class="hp2-proof-pill-num" data-count-to="80" data-suffix="M+">80M+</div>
             <div class="hp2-proof-pill-text">Total Social<br>Media Views</div>
           </div>
           <div class="hp2-proof-pill">
-            <div class="hp2-proof-pill-num" data-count-to="12" data-suffix="X">0</div>
+            <div class="hp2-proof-pill-num" data-count-to="12" data-suffix="X">12X</div>
             <div class="hp2-proof-pill-text">Average Google<br>Ads ROAS</div>
           </div>
         </div>
@@ -2645,20 +3394,16 @@
       <p style="text-align:center; font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-soft); margin-bottom:24px;">Trusted by restaurants across Florida</p>
       <div class="hp2-trust-inner">
         <div class="hp2-trust-stat">
-          <div class="hp2-trust-num" data-count-to="50" data-suffix="+">0</div>
+          <div class="hp2-trust-num" data-count-to="50" data-suffix="+">50+</div>
           <div class="hp2-trust-label">Restaurants served</div>
         </div>
         <div class="hp2-trust-stat">
-          <div class="hp2-trust-num" data-count-to="80" data-suffix="M+">0</div>
+          <div class="hp2-trust-num" data-count-to="80" data-suffix="M+">80M+</div>
           <div class="hp2-trust-label">Video views</div>
         </div>
         <div class="hp2-trust-stat">
-          <div class="hp2-trust-num" data-count-to="12" data-suffix="X">0</div>
+          <div class="hp2-trust-num" data-count-to="12" data-suffix="X">12X</div>
           <div class="hp2-trust-label">Average ROAS</div>
-        </div>
-        <div class="hp2-trust-stat">
-          <div class="hp2-trust-num" data-count-to="90" data-suffix="%">0</div>
-          <div class="hp2-trust-label">Client retention</div>
         </div>
       </div>
       <div class="hp2-trust-logos">
@@ -2667,7 +3412,6 @@
         <span>Rusty Pelican</span>
         <span>Gyu-Kaku</span>
         <span>Toni's Sushi Bar</span>
-        <span>Patio Isola</span>
       </div>
     </section>
 
@@ -2690,7 +3434,7 @@
 
       <div class="hp2-industry-stats-row">
         <div class="hp2-inline-stat">
-          <strong data-count-to="90" data-suffix="%">0</strong>
+          <strong data-count-to="90" data-suffix="%">90%</strong>
           <span>Research online before visiting</span>
         </div>
         <div class="hp2-inline-stat">
@@ -2701,9 +3445,6 @@
           <strong>67K+</strong>
           <span>Restaurants in Florida</span>
         </div>
-      </div>
-      <div class="hp2-pull-quote">
-        <p>This isn't about being a better restaurant. It's about being a more visible one.</p>
       </div>
     </section>
 
@@ -2775,7 +3516,7 @@
               <div class="pain-icon --active"><i data-lucide="video" class="icon-sm"></i></div>
               <div>
                 <h4>Done-for-you content engine</h4>
-                <p>Professional photography, video, and strategy, we show up with cameras.</p>
+                <p>Professional videography and strategy, we show up with cameras.</p>
               </div>
             </div>
             <div class="pain-item --active">
@@ -2804,35 +3545,8 @@
       </div>
     </section>
 
-    <!-- ═══ 4. IMMERSIVE #1, Clip-Path Curtain Reveal (Empty Restaurant) ═══ -->
-    <div class="hp2-curtain-wrap" id="immersive-1">
-      <div class="hp2-curtain-img">
-        <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=1600&h=900&fit=crop" alt="Stunning plated dish in a fine dining restaurant with dramatic lighting" />
-        <div class="hp2-curtain-overlay"></div>
-        <div class="hp2-curtain-copy" style="justify-content:flex-start;">
-          <div class="hp2-curtain-glass-wrap">
-            <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
-            <div class="glass-toplight"></div>
-            <div class="hp2-curtain-glass" onclick="window.open('https://calendly.com/juanh-buttonupmedia/freeconsultation','_blank')" style="cursor:pointer">
-              <pixel-canvas data-gap="6" data-speed="30" data-colors="#CA8A04, #A16207, #EAB308" data-no-focus></pixel-canvas>
-              <h3>90% of diners decide where to eat before they leave the house.</h3>
-              <p>They search. They scroll. They decide in seconds. If your restaurant isn't in that moment, you don't exist.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ 5. GROWTH SYSTEM, Horizontal Scroll ═══ -->
+    <!-- ═══ 5b. HORIZONTAL SCROLL GROWTH SYSTEM ═══ -->
     <section class="hp2-hscroll-section" id="system">
-      <div class="hp2-hscroll-intro">
-        <div class="lib-section-label">The Growth System</div>
-        <div class="lib-section-title">The Restaurant Growth System</div>
-        <p class="lib-section-sub">Restaurant growth doesn't come from posting more or spending more on ads. It comes from a system, four pillars working together to turn digital attention into real customers sitting in your seats.</p>
-      </div>
-
-      <div class="hp2-hscroll-entry"></div>
-
       <div class="hp2-hscroll-pin">
         <div class="hp2-hscroll-track">
 
@@ -2885,9 +3599,9 @@
                 </ul>
                 <a href="restaurant-website-design.html" class="hp2-hscroll-cta-link">Explore Restaurant Website Design</a>
               </div>
-              <div class="hp2-hscroll-visual">
+              <div class="hp2-hscroll-visual" style="aspect-ratio: 1080 / 746;">
                 <div class="hp2-hscroll-visual-inner">
-                  <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=800&h=600&fit=crop" alt="Restaurant website on laptop showing reservation flow" loading="lazy" />
+                  <img src="images/rusty-pelican-device-mockup-transparent.webp" alt="Restaurant website mockup shown on a phone and computer" loading="lazy" style="object-fit:contain; background:transparent;" />
                 </div>
               </div>
             </div>
@@ -2914,9 +3628,9 @@
                 </ul>
                 <a href="restaurant-seo.html" class="hp2-hscroll-cta-link">Explore Local SEO for Restaurants</a>
               </div>
-              <div class="hp2-hscroll-visual">
+              <div class="hp2-hscroll-visual" style="aspect-ratio: 1200 / 1068;">
                 <div class="hp2-hscroll-visual-inner">
-                  <img src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=800&h=600&fit=crop" alt="Restaurant front with bustling street, local search visibility" loading="lazy" />
+                  <img src="images/seo-ranking-graphic-standard.webp" alt="SEO ranking graphic showing search visibility" loading="lazy" style="object-fit:contain; background:transparent;" />
                 </div>
               </div>
             </div>
@@ -2984,9 +3698,9 @@
             <h3>The Fatty Crab</h3>
             <p>High-frequency content system + restaurant storytelling that turned social attention into a packed dining room every night of the week.</p>
             <div class="hp2-case-metrics">
-              <div class="hp2-case-metric"><strong data-scrub-to="21" data-suffix="M">0</strong><span>Views</span></div>
-              <div class="hp2-case-metric"><strong data-scrub-to="110" data-suffix="K">0</strong><span>Followers</span></div>
-              <div class="hp2-case-metric"><strong data-scrub-to="6.5" data-suffix="%" data-decimal="1">0</strong><span>Engagement</span></div>
+              <div class="hp2-case-metric"><strong data-scrub-to="21" data-suffix="M">21M</strong><span>Views</span></div>
+              <div class="hp2-case-metric"><strong data-scrub-to="110" data-suffix="K">110K</strong><span>Followers</span></div>
+              <div class="hp2-case-metric"><strong data-scrub-to="6.5" data-suffix="%" data-decimal="1">6.5%</strong><span>Engagement</span></div>
             </div>
             <a href="case-studies.html" class="hp2-case-link">Read the full case study</a>
           </div>
@@ -3001,9 +3715,9 @@
             <h3>Rusty Pelican Miami</h3>
             <p>Search campaigns optimized for high-intent diners with clean tracking, landing page alignment, and a direct line from ad spend to reservation revenue.</p>
             <div class="hp2-case-metrics">
-              <div class="hp2-case-metric"><strong data-scrub-to="9" data-suffix="%">0</strong><span>CTR</span></div>
-              <div class="hp2-case-metric"><strong data-scrub-to="12" data-suffix="X">0</strong><span>ROAS</span></div>
-              <div class="hp2-case-metric"><strong data-scrub-to="42" data-suffix="%">0</strong><span>More Bookings</span></div>
+              <div class="hp2-case-metric"><strong data-scrub-to="9" data-suffix="%">9%</strong><span>CTR</span></div>
+              <div class="hp2-case-metric"><strong data-scrub-to="12" data-suffix="X">12X</strong><span>ROAS</span></div>
+              <div class="hp2-case-metric"><strong data-scrub-to="42" data-suffix="%">42%</strong><span>More Bookings</span></div>
             </div>
             <a href="case-studies.html" class="hp2-case-link">Read the full case study</a>
           </div>
@@ -3020,7 +3734,7 @@
           <div class="hp2-curtain-glass-wrap">
             <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
             <div class="glass-toplight"></div>
-            <div class="hp2-curtain-glass" onclick="window.open('https://calendly.com/juanh-buttonupmedia/freeconsultation','_blank')" style="cursor:pointer">
+            <div class="hp2-curtain-glass">
               <pixel-canvas data-gap="5" data-speed="25" data-colors="#D06A50, #B85540, #E88A72" data-no-focus></pixel-canvas>
               <h3>We show up with cameras. You get content that converts.</h3>
               <p>Professional shoots, cinematic reels, scroll-stopping video, all produced on-site at your restaurant.</p>
@@ -3107,7 +3821,7 @@
         <div class="hp2-why-card">
           <div class="hp2-why-card-num">02</div>
           <h3>We Create the Content,<br>Not Just the Strategy</h3>
-          <p>Button Up Media shows up with cameras. We shoot the food. We capture the atmosphere. We produce the videos. You get a full content engine without adding another task to your day.</p>
+          <p>Button Up Media shows up with cameras. We capture the atmosphere. We produce short-form video. You get a full video content engine without adding another task to your day.</p>
         </div>
         <div class="hp2-why-card">
           <div class="hp2-why-card-num">03</div>
@@ -3117,7 +3831,7 @@
       </div>
     </section>
 
-    <!-- ═══ VIDEO TESTIMONIALS, Cinematic Client Stories ═══ -->
+    <!-- ═══ VIDEO TESTIMONIALS ═══ -->
     <section class="card-overlay --dark lib-section" id="client-videos">
       <div class="lib-section-label" style="text-align:center;">In Their Own Words</div>
       <h2 class="lib-section-title" style="text-align:center;">Hear It Directly From Our Clients</h2>
@@ -3131,16 +3845,9 @@
             <div class="hp2-vid-card-play"></div>
             <div class="hp2-vid-card-overlay">
               <div class="hp2-vid-card-info">
-                <h4>IFC Restaurant</h4>
+                <h4>Isis, Italian Food Company</h4>
                 <span>Miami, FL</span>
               </div>
-            </div>
-          </div>
-          <div class="hp2-vid-card-meta">
-            <p class="hp2-vid-card-quote">&ldquo;They completely changed how we approach marketing. The results speak for themselves.&rdquo;</p>
-            <div class="hp2-vid-card-stats">
-              <div><strong>340%</strong><span>Social Growth</span></div>
-              <div><strong>2.1M</strong><span>Video Views</span></div>
             </div>
           </div>
         </div>
@@ -3152,16 +3859,9 @@
             <div class="hp2-vid-card-play"></div>
             <div class="hp2-vid-card-overlay">
               <div class="hp2-vid-card-info">
-                <h4>Brewing Buddha</h4>
+                <h4>Jordan, Brewing Buddha</h4>
                 <span>Pinecrest, FL</span>
               </div>
-            </div>
-          </div>
-          <div class="hp2-vid-card-meta">
-            <p class="hp2-vid-card-quote">&ldquo;They show up with cameras and actually understand what makes a restaurant special.&rdquo;</p>
-            <div class="hp2-vid-card-stats">
-              <div><strong>5x</strong><span>ROI</span></div>
-              <div><strong>12K</strong><span>New Followers</span></div>
             </div>
           </div>
         </div>
@@ -3178,13 +3878,6 @@
               </div>
             </div>
           </div>
-          <div class="hp2-vid-card-meta">
-            <p class="hp2-vid-card-quote">&ldquo;Button Up Media helped us reach customers we never would have found on our own.&rdquo;</p>
-            <div class="hp2-vid-card-stats">
-              <div><strong>20K+</strong><span>Events Booked</span></div>
-              <div><strong>Top 3</strong><span>Local SEO</span></div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -3199,12 +3892,12 @@
         <div class="glass-card-wrap hp2-service-reveal">
           <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
           <div class="glass-toplight"></div>
-          <div class="glass-card" style="text-align:center; cursor:pointer;" data-brand="instagram" data-hover-colors="#E4405F, #C13584, #F77737" onclick="window.open('https://calendly.com/juanh-buttonupmedia/freeconsultation','_blank')">
+          <div class="glass-card" style="text-align:center; cursor:pointer;" data-brand="instagram" data-hover-colors="#E4405F, #C13584, #F77737" onclick="window.location.href='social-media-marketing.html'">
             <pixel-canvas data-gap="6" data-speed="30" data-colors="#D06A50, #C05A42, #E08068" data-no-focus></pixel-canvas>
             <div class="glass-card-icon" style="margin-left:auto;margin-right:auto;">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" stroke="none"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.668 1.0745-1.3364 1.3802-2.1272.2957-.7642.4957-1.6362.552-2.9137.0564-1.2778.0689-1.6882.0626-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.8981-1.3783-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.8988.4227-.1645 1.0573-.3624 2.2271-.4171 1.2655-.0595 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.8988 1.3783.1645.4233.3624 1.0576.4171 2.2278.0602 1.2645.0739 1.6438.0804 4.8468.0065 3.203-.0048 3.5831-.0607 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.8988-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg>
             </div>
-            <h3>Organic Social &amp; Content</h3>
+            <h3>Social Media Marketing</h3>
             <p>Short-form content built for reach, saves, and real conversions, not vanity metrics.</p>
           </div>
         </div>
@@ -3212,12 +3905,12 @@
         <div class="glass-card-wrap hp2-service-reveal">
           <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
           <div class="glass-toplight"></div>
-          <div class="glass-card" style="text-align:center; cursor:pointer;" data-brand="googlemaps" data-hover-colors="#34A853, #4285F4, #0F9D58" onclick="window.open('https://calendly.com/juanh-buttonupmedia/freeconsultation','_blank')">
+          <div class="glass-card" style="text-align:center; cursor:pointer;" data-brand="googlemaps" data-hover-colors="#34A853, #4285F4, #0F9D58" onclick="window.location.href='restaurant-seo.html'">
             <pixel-canvas data-gap="6" data-speed="30" data-colors="#E2A84D, #C9923A, #F0C06A" data-no-focus></pixel-canvas>
             <div class="glass-card-icon" style="margin-left:auto;margin-right:auto;">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" stroke="none"><path d="M19.527 4.799c1.212 2.608.937 5.678-.405 8.173-1.101 2.047-2.744 3.74-4.098 5.614-.619.858-1.244 1.75-1.669 2.727-.141.325-.263.658-.383.992-.121.333-.224.673-.34 1.008-.109.314-.236.684-.627.687h-.007c-.466-.001-.579-.53-.695-.887-.284-.874-.581-1.713-1.044-2.525-1.376-2.417-3.681-4.399-4.727-6.964C4.191 10.631 4.855 7.07 7.11 4.777 9.694 2.143 14.158 1.552 17.28 3.2c.778.413 1.51.965 2.12 1.597l.128.002zm-7.532 8.209a2.99 2.99 0 0 0 2.996-2.984A2.99 2.99 0 0 0 11.995 7.04a2.99 2.99 0 0 0-2.995 2.984 2.99 2.99 0 0 0 2.995 2.984z"/></svg>
             </div>
-            <h3>SEO &amp; Google Business</h3>
+            <h3>Search &amp; Answer Engine Optimization</h3>
             <p>Win the local pack for cuisine + "near me" searches across Miami and South Florida.</p>
           </div>
         </div>
@@ -3225,12 +3918,12 @@
         <div class="glass-card-wrap hp2-service-reveal">
           <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
           <div class="glass-toplight"></div>
-          <div class="glass-card" style="text-align:center; cursor:pointer;" data-brand="googleads" data-hover-colors="#4285F4, #FBBC04, #34A853" onclick="window.open('https://calendly.com/juanh-buttonupmedia/freeconsultation','_blank')">
+          <div class="glass-card" style="text-align:center; cursor:pointer;" data-brand="googleads" data-hover-colors="#4285F4, #FBBC04, #34A853" onclick="window.location.href='restaurant-advertising.html'">
             <pixel-canvas data-gap="6" data-speed="30" data-colors="#45B08C, #3A9A78, #5CC4A0" data-no-focus></pixel-canvas>
             <div class="glass-card-icon" style="margin-left:auto;margin-right:auto;">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" stroke="none"><path d="M3.9998 12.0002a3.6 3.6 0 1 1-3.6 3.6002c0-.0367.0055-.072.0068-.1084l.0006-.0309c.0123-.353.0644-.7005.1534-1.038l6.4666-16.0538c.4943-1.2282 1.9181-1.8236 3.1463-1.3293a2.4001 2.4001 0 0 1 1.3293 1.3293zM15.4267 16.5839l-3.4654-8.6066c-.4734-1.176-.4734-2.4895 0-3.6654l2.0657-5.1315c.4943-1.2282 1.9181-1.8236 3.1463-1.3293a2.4001 2.4001 0 0 1 1.3293 1.3293l4.8 11.9282c.4943 1.2282-.1011 2.6519-1.3293 3.1463a2.4001 2.4001 0 0 1-3.1463-1.3293l-.0002-.0002zm4.9725-1.3836a2.4 2.4 0 1 0-4.7988.0002 2.4 2.4 0 0 0 4.7988-.0002z"/></svg>
             </div>
-            <h3>Google Ads for Restaurants</h3>
+            <h3>Paid Marketing</h3>
             <p>Capture demand when people are actively searching where to eat tonight.</p>
           </div>
         </div>
@@ -3238,164 +3931,17 @@
         <div class="glass-card-wrap hp2-service-reveal">
           <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
           <div class="glass-toplight"></div>
-          <div class="glass-card" style="text-align:center; cursor:pointer;" data-brand="webflow" data-hover-colors="#4353FF, #2D3BE0, #6E7AFF" onclick="window.open('https://calendly.com/juanh-buttonupmedia/freeconsultation','_blank')">
+          <div class="glass-card" style="text-align:center; cursor:pointer;" data-brand="webflow" data-hover-colors="#4353FF, #2D3BE0, #6E7AFF" onclick="window.location.href='restaurant-website-design.html'">
             <pixel-canvas data-gap="6" data-speed="30" data-colors="#E2A84D, #C9923A, #F0C06A" data-no-focus></pixel-canvas>
             <div class="glass-card-icon" style="margin-left:auto;margin-right:auto;">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" stroke="none"><path d="M21.469 6.825c.84 1.537 1.318 3.3 1.318 5.175 0 3.979-2.156 7.456-5.363 9.325l3.295-9.527c.615-1.54.82-2.771.82-3.864 0-.405-.027-.78-.07-1.109m-7.981.105c.647-.034 1.233-.1 1.233-.1.58-.068.512-.924-.068-.892 0 0-1.744.138-2.869.138-1.057 0-2.835-.138-2.835-.138-.58-.032-.648.858-.068.892 0 0 .555.066 1.133.1l1.683 4.613-2.366 7.088L6.116 6.93c.649-.034 1.234-.1 1.234-.1.585-.068.516-.924-.064-.892 0 0-1.745.138-2.871.138-.202 0-.44-.005-.69-.014C5.494 3.086 8.514 1.18 12 1.18c2.6 0 4.966.989 6.748 2.612-.043-.003-.085-.008-.128-.008-1.058 0-1.812.924-1.812 1.914 0 .89.513 1.643 1.06 2.531.411.72.89 1.643.89 2.977 0 .924-.354 1.994-.821 3.49l-1.075 3.597-3.894-11.581.001.001zM12 22.784c-1.592 0-3.1-.341-4.46-.953l4.735-13.76 4.849 13.281c.035.085.076.164.12.238A10.617 10.617 0 0 1 12 22.784M1.213 12c0-1.724.413-3.353 1.145-4.792l6.3 17.265C4.056 22.534 1.213 17.647 1.213 12M12 0C5.385 0 0 5.385 0 12s5.385 12 12 12 12-5.385 12-12S18.615 0 12 0"/></svg>
             </div>
-            <h3>Restaurant Website Design</h3>
+            <h3>Website Design</h3>
             <p>Fast, mobile-first websites that make it effortless to book, order, and visit.</p>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- ═══ 9. TESTIMONIAL, Dollar-Figure Proof Marquee ═══ -->
-    <section class="card-overlay --dark hp2-theater lib-section" id="testimonials">
-      <div class="lib-section-label" style="text-align:center;">Client Stories</div>
-      <h2 class="lib-section-title" style="text-align:center;">Restaurant owners talk. We listen.</h2>
-      <p class="lib-section-sub" style="text-align:center; margin-left:auto; margin-right:auto;">Real feedback from South Florida's top hospitality operators.</p>
-
-      <div class="hp2-impact-wall">
-        <div class="hp2-impact-stat">
-          <div class="hp2-impact-num" data-count-to="6" data-suffix="M+" data-prefix="$">$0</div>
-          <div class="hp2-impact-label">Revenue Generated</div>
-        </div>
-        <div class="hp2-impact-stat">
-          <div class="hp2-impact-num" data-count-to="80" data-suffix="M+">0</div>
-          <div class="hp2-impact-label">Video Views</div>
-        </div>
-        <div class="hp2-impact-stat">
-          <div class="hp2-impact-num" data-count-to="20" data-suffix="K+">0</div>
-          <div class="hp2-impact-label">Events Booked</div>
-        </div>
-      </div>
-
-      <div class="proof-marquee-wrap">
-        <div class="proof-marquee-track --left">
-          <!-- Card 1: Revenue + Full-Service -->
-          <div class="proof-card">
-            <div class="hp2-proof-hero-stat">$6M+</div>
-            <div class="hp2-proof-hero-stat-label">revenue generated for clients</div>
-            <div class="proof-card-header">
-              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="James Martinez" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" />
-              <div class="proof-card-info">
-                <h4>James Martinez</h4>
-                <span>Owner, <span class="restaurant-name">The Fatty Crab</span></span>
-              </div>
-            </div>
-            <div class="proof-card-quote">"Button Up Media handles everything, our website, our SEO, our social, our ads. Revenue is up 40% year over year and we finally have a marketing system that actually works."</div>
-            <div class="proof-card-result">
-              <div class="proof-card-metric"><strong>40%</strong><span>Revenue Growth</span></div>
-              <div class="proof-card-metric"><strong>Page 1</strong><span>Google Rank</span></div>
-            </div>
-          </div>
-          <!-- Card 2: Ads + Events + SEO -->
-          <div class="proof-card">
-            <div class="hp2-proof-hero-stat">12X ROAS</div>
-            <div class="hp2-proof-hero-stat-label">across ads &amp; SEO campaigns</div>
-            <div class="proof-card-header">
-              <img src="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?w=80&h=80&fit=crop&crop=face" alt="Sarah Kim" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" />
-              <div class="proof-card-info">
-                <h4>Sarah Kim</h4>
-                <span>GM, <span class="restaurant-name">Shimuja Ramen</span></span>
-              </div>
-            </div>
-            <div class="proof-card-quote">"Our Google Ads and SEO work together now. We're ranking top 3 for every 'ramen near me' search, events are booked months out, and ad spend finally makes sense."</div>
-            <div class="proof-card-result">
-              <div class="proof-card-metric"><strong>20K+</strong><span>Events Booked</span></div>
-              <div class="proof-card-metric"><strong>Top 3</strong><span>Local SEO</span></div>
-            </div>
-          </div>
-          <!-- Card 3: Multi-Location Growth -->
-          <div class="proof-card">
-            <div class="hp2-proof-hero-stat">80M+ Views</div>
-            <div class="hp2-proof-hero-stat-label">across all client channels</div>
-            <div class="proof-card-header">
-              <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=80&h=80&fit=crop&crop=face" alt="Michael Chen" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" />
-              <div class="proof-card-info">
-                <h4>Michael Chen</h4>
-                <span>Director, <span class="restaurant-name">SRC Hospitality</span></span>
-              </div>
-            </div>
-            <div class="proof-card-quote">"Five locations, one system. Button Up built our websites, manages all our social, runs our ads, and handles local SEO for each location. Our reservations are up 60% across the board."</div>
-            <div class="proof-card-result">
-              <div class="proof-card-metric"><strong>5</strong><span>Locations</span></div>
-              <div class="proof-card-metric"><strong>60%</strong><span>More Reservations</span></div>
-            </div>
-          </div>
-          <!-- Duplicate set for seamless loop -->
-          <div class="proof-card">
-            <div class="hp2-proof-hero-stat">$6M+</div>
-            <div class="hp2-proof-hero-stat-label">revenue generated for clients</div>
-            <div class="proof-card-header">
-              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="James Martinez" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" />
-              <div class="proof-card-info">
-                <h4>James Martinez</h4>
-                <span>Owner, <span class="restaurant-name">The Fatty Crab</span></span>
-              </div>
-            </div>
-            <div class="proof-card-quote">"Button Up Media handles everything, our website, our SEO, our social, our ads. Revenue is up 40% year over year and we finally have a marketing system that actually works."</div>
-            <div class="proof-card-result">
-              <div class="proof-card-metric"><strong>40%</strong><span>Revenue Growth</span></div>
-              <div class="proof-card-metric"><strong>Page 1</strong><span>Google Rank</span></div>
-            </div>
-          </div>
-          <div class="proof-card">
-            <div class="hp2-proof-hero-stat">12X ROAS</div>
-            <div class="hp2-proof-hero-stat-label">across ads &amp; SEO campaigns</div>
-            <div class="proof-card-header">
-              <img src="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?w=80&h=80&fit=crop&crop=face" alt="Sarah Kim" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" />
-              <div class="proof-card-info">
-                <h4>Sarah Kim</h4>
-                <span>GM, <span class="restaurant-name">Shimuja Ramen</span></span>
-              </div>
-            </div>
-            <div class="proof-card-quote">"Our Google Ads and SEO work together now. We're ranking top 3 for every 'ramen near me' search, events are booked months out, and ad spend finally makes sense."</div>
-            <div class="proof-card-result">
-              <div class="proof-card-metric"><strong>20K+</strong><span>Events Booked</span></div>
-              <div class="proof-card-metric"><strong>Top 3</strong><span>Local SEO</span></div>
-            </div>
-          </div>
-          <div class="proof-card">
-            <div class="hp2-proof-hero-stat">80M+ Views</div>
-            <div class="hp2-proof-hero-stat-label">across all client channels</div>
-            <div class="proof-card-header">
-              <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=80&h=80&fit=crop&crop=face" alt="Michael Chen" style="width:40px;height:40px;border-radius:50%;object-fit:cover;" />
-              <div class="proof-card-info">
-                <h4>Michael Chen</h4>
-                <span>Director, <span class="restaurant-name">SRC Hospitality</span></span>
-              </div>
-            </div>
-            <div class="proof-card-quote">"Five locations, one system. Button Up built our websites, manages all our social, runs our ads, and handles local SEO for each location. Our reservations are up 60% across the board."</div>
-            <div class="proof-card-result">
-              <div class="proof-card-metric"><strong>5</strong><span>Locations</span></div>
-              <div class="proof-card-metric"><strong>60%</strong><span>More Reservations</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- ═══ 10. IMMERSIVE #3, Packed House / Brightness Increase ═══ -->
-    <div class="hp2-curtain-wrap hp2-bright-img" id="immersive-3">
-      <div class="hp2-curtain-img">
-        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600&h=900&fit=crop" alt="Busy upscale restaurant interior packed with happy diners and warm ambient lighting" />
-        <div class="hp2-curtain-overlay"></div>
-        <div class="hp2-curtain-copy">
-          <div class="hp2-curtain-glass-wrap" style="max-width:600px;">
-            <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
-            <div class="glass-toplight"></div>
-            <div class="hp2-curtain-glass" onclick="window.open('https://calendly.com/juanh-buttonupmedia/freeconsultation','_blank')" style="cursor:pointer">
-              <pixel-canvas data-gap="7" data-speed="35" data-colors="#45B08C, #3A9474, #6DC4A6" data-no-focus></pixel-canvas>
-              <h3 style="font-size:1.35rem;">More covers. More orders. More revenue.</h3>
-              <p>Our clients don't measure success in likes. They measure it in reservations, orders, and revenue growth.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- ═══ NEW: STATS BY THE NUMBERS ═══ -->
     <section class="card-overlay --dark lib-section" id="stats" style="display:none;">
@@ -3415,23 +3961,23 @@
 
       <div class="hp2-stats-grid">
         <div class="hp2-stat-cell">
-          <div class="hp2-stat-cell-num" data-count-to="90" data-suffix="%">0</div>
+          <div class="hp2-stat-cell-num" data-count-to="90" data-suffix="%">90%</div>
           <div class="hp2-stat-cell-desc">of diners research a restaurant online before visiting</div>
         </div>
         <div class="hp2-stat-cell">
-          <div class="hp2-stat-cell-num" data-count-to="97" data-suffix="%">0</div>
+          <div class="hp2-stat-cell-num" data-count-to="97" data-suffix="%">97%</div>
           <div class="hp2-stat-cell-desc">of customers use search engines to find local restaurants</div>
         </div>
         <div class="hp2-stat-cell">
-          <div class="hp2-stat-cell-num" data-count-to="75" data-suffix="%">0</div>
+          <div class="hp2-stat-cell-num" data-count-to="75" data-suffix="%">75%</div>
           <div class="hp2-stat-cell-desc">of diners say Instagram directly influences where they eat</div>
         </div>
         <div class="hp2-stat-cell">
-          <div class="hp2-stat-cell-num" data-count-to="72" data-suffix="%">0</div>
+          <div class="hp2-stat-cell-num" data-count-to="72" data-suffix="%">72%</div>
           <div class="hp2-stat-cell-desc">of restaurant searches include "near me" or a specific location</div>
         </div>
         <div class="hp2-stat-cell">
-          <div class="hp2-stat-cell-num" data-count-to="88" data-suffix="%">0</div>
+          <div class="hp2-stat-cell-num" data-count-to="88" data-suffix="%">88%</div>
           <div class="hp2-stat-cell-desc">of consumers trust online reviews as much as personal recommendations</div>
         </div>
         <div class="hp2-stat-cell">
@@ -3443,7 +3989,7 @@
           <div class="hp2-stat-cell-desc">average annual sales increase for restaurants that invest in SEO</div>
         </div>
         <div class="hp2-stat-cell">
-          <div class="hp2-stat-cell-num" data-count-to="46" data-suffix="%">0</div>
+          <div class="hp2-stat-cell-num" data-count-to="46" data-suffix="%">46%</div>
           <div class="hp2-stat-cell-desc">of all Google searches are looking for local information</div>
         </div>
       </div>
@@ -3594,15 +4140,15 @@
           </details>
           <details class="hp2-faq-item">
             <summary><span><span class="hp2-faq-count">03</span>What is the best marketing strategy for a restaurant?</span></summary>
-            <div class="hp2-faq-answer">The most effective restaurant marketing strategy is an integrated one, not just social media or just a website, but all channels working together. At a minimum, a strong restaurant marketing strategy should include an active social media presence with professional food content, a mobile-optimized website that makes it easy to view menus and book reservations, local SEO so you appear when customers search for restaurants nearby, and targeted advertising to capture high-intent customers. The restaurants that grow fastest are the ones that coordinate these channels into one unified system.</div>
+            <div class="hp2-faq-answer">The most effective restaurant marketing strategy is an integrated one, not just social media or just a website, but all channels working together. At a minimum, a strong restaurant marketing strategy should include an active social media presence with professional video content, a mobile-optimized website that makes it easy to view menus and book reservations, local SEO so you appear when customers search for restaurants nearby, and targeted advertising to capture high-intent customers. The restaurants that grow fastest are the ones that coordinate these channels into one unified system.</div>
           </details>
           <details class="hp2-faq-item">
             <summary><span><span class="hp2-faq-count">04</span>How to get more customers to my restaurant?</span></summary>
-            <div class="hp2-faq-answer">Getting more customers starts with making sure people can find you online. Over 97% of diners use Google to find restaurants, and social media platforms like Instagram and TikTok directly influence where people choose to eat. To get more customers, you need to be visible when they search, look compelling when they find you, and make it effortless to book or order. That means optimizing your Google Business Profile, posting engaging food content consistently, running targeted local ads, and having a fast, mobile-friendly website with clear calls to action.</div>
+            <div class="hp2-faq-answer">Getting more customers starts with making sure people can find you online. Over 97% of diners use Google to find restaurants, and social media platforms like Instagram and TikTok directly influence where people choose to eat. To get more customers, you need to be visible when they search, look compelling when they find you, and make it effortless to book or order. That means optimizing your Google Business Profile, posting engaging video content consistently, running targeted local ads, and having a fast, mobile-friendly website with clear calls to action.</div>
           </details>
           <details class="hp2-faq-item">
             <summary><span><span class="hp2-faq-count">05</span>Why hire a restaurant-specific marketing agency?</span></summary>
-            <div class="hp2-faq-answer">General marketing agencies apply the same playbook to restaurants that they use for dentists, gyms, and law firms. Restaurant marketing is fundamentally different, the customer journey is shorter, the decision is emotional and visual, and the competition is hyper-local. A restaurant-specific agency understands food photography, menu psychology, reservation behavior, seasonal demand patterns, and what drives someone to choose one restaurant over another on a Friday night. That specialized knowledge translates directly into better content, smarter strategy, and faster results.</div>
+            <div class="hp2-faq-answer">General marketing agencies apply the same playbook to restaurants that they use for dentists, gyms, and law firms. Restaurant marketing is fundamentally different, the customer journey is shorter, the decision is emotional and visual, and the competition is hyper-local. A restaurant-specific agency understands menu psychology, reservation behavior, seasonal demand patterns, and what drives someone to choose one restaurant over another on a Friday night. That specialized knowledge translates directly into better content, smarter strategy, and faster results.</div>
           </details>
           <details class="hp2-faq-item">
             <summary><span><span class="hp2-faq-count">06</span>What is Answer Engine Optimization (AEO) for restaurants?</span></summary>
@@ -3642,9 +4188,9 @@
         <div class="footer-col">
           <h4>Services</h4>
           <a href="social-media-marketing.html">Social Media Marketing</a>
-          <a href="restaurant-seo.html">Restaurant SEO</a>
-          <a href="restaurant-advertising.html">Restaurant Advertising</a>
+          <a href="restaurant-advertising.html">Paid Marketing</a>
           <a href="restaurant-website-design.html">Website Design</a>
+          <a href="restaurant-seo.html">Search &amp; Answer Engine Optimization</a>
         </div>
         <div class="footer-col">
           <h4>Locations</h4>
@@ -3713,6 +4259,9 @@
 
     // ── SCROLL-DRIVEN COUNTERS (data-count-to, time-based, fires once) ──
     document.querySelectorAll("[data-count-to]").forEach(el => {
+      // Keep already-correct homepage stats visible for users and crawlers.
+      if (/[1-9]/.test(el.textContent)) return;
+
       const target = parseFloat(el.dataset.countTo);
       const suffix = el.dataset.suffix || "";
       const prefix = el.dataset.prefix || "";
@@ -3741,6 +4290,9 @@
 
     // ── SCRUB-DRIVEN COUNTERS (data-scrub-to, tied to scroll position) ──
     document.querySelectorAll("[data-scrub-to]").forEach(el => {
+      // Preserve the truthful starting value when the metric is already displayed.
+      if (/[1-9]/.test(el.textContent)) return;
+
       const target = parseFloat(el.dataset.scrubTo);
       const suffix = el.dataset.suffix || "";
       const isDecimal = el.dataset.decimal === "1";
@@ -4041,8 +4593,8 @@
         ease: "none",
         scrollTrigger: {
           trigger: wrap,
-          start: "top 30%",
-          end: "top -10%",
+          start: "top 85%",
+          end: "top 50%",
           scrub: 1,
         },
       });
@@ -4111,8 +4663,9 @@
     const hscrollPanels = gsap.utils.toArray(".hp2-hscroll-panel");
     const hscrollDots = gsap.utils.toArray(".hp2-hscroll-dot");
     const hscrollFill = document.querySelector(".hp2-hscroll-progress-fill");
+    const isCompactHscroll = window.matchMedia("(max-width: 700px)").matches;
 
-    if (hscrollPin && hscrollTrack && hscrollPanels.length > 1) {
+    if (hscrollPin && hscrollTrack && hscrollPanels.length > 1 && !isCompactHscroll) {
       const totalPanels = hscrollPanels.length;
       const getScrollDistance = () => (totalPanels - 1) * window.innerWidth;
 
@@ -4282,6 +4835,36 @@
       card.addEventListener('mouseenter', () => { canvas.dataset.colors = hoverColors; canvas.init(); canvas.handleAnimation('appear'); });
       card.addEventListener('mouseleave', () => { canvas.dataset.colors = origColors; canvas.init(); canvas.handleAnimation('disappear'); });
     });
+
+    const navDropdown = document.querySelector(".lib-nav-dropdown");
+    if (navDropdown) {
+      const navDropdownTrigger = navDropdown.querySelector(".lib-nav-dropdown-trigger");
+      if (navDropdownTrigger && !navDropdown.dataset.enhanced) {
+        navDropdown.dataset.enhanced = "1";
+        navDropdownTrigger.addEventListener("click", event => {
+          event.preventDefault();
+          const shouldOpen = !navDropdown.hasAttribute("open");
+          document.querySelectorAll(".lib-nav-dropdown[open]").forEach(openDropdown => {
+            if (openDropdown !== navDropdown) openDropdown.removeAttribute("open");
+          });
+          if (shouldOpen) {
+            navDropdown.setAttribute("open", "");
+          } else {
+            navDropdown.removeAttribute("open");
+          }
+        });
+      }
+      document.addEventListener("click", event => {
+        if (!navDropdown.contains(event.target)) {
+          navDropdown.removeAttribute("open");
+        }
+      });
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape") {
+          navDropdown.removeAttribute("open");
+        }
+      });
+    }
 
     // ════════════════════════════════════════
     // 13. CTA, Word Reveal + Scene Entrance

@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact Us — Button Up Media | Free Restaurant Growth Audit</title>
-  <meta name="description" content="Book a free 15-minute growth audit with Button Up Media. We help South Florida restaurants drive reservations, online orders, and foot traffic." />
+  <title>Get Your Free Strategy Call — Button Up Media | Restaurant Marketing</title>
+  <meta name="description" content="Book a free strategy call with Button Up Media. We help South Florida restaurants drive reservations, online orders, and foot traffic. Schedule in seconds." />
+  <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg">
+  <link rel="canonical" href="https://buttonupmedia-site-one.vercel.app/contact.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Epilogue:wght@400;500;600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -13,21 +15,15 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
   <script src="pixel-canvas.js"></script>
   <link rel="stylesheet" href="shared.css" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
   <style>
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
-    .contact-form { display: flex; flex-direction: column; gap: 16px; }
-    .contact-form label { font-size: 0.78rem; font-weight: 600; color: var(--text-dim); margin-bottom: -10px; }
-    .contact-form textarea {
-      height: 120px; padding: 14px; border-radius: var(--r-sm);
-      border: 1px solid var(--line-soft); background: rgba(255,255,255,0.025);
-      color: var(--text); font: inherit; font-size: 0.88rem; resize: vertical;
-    }
-    .contact-form textarea::placeholder { color: var(--text-soft); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px; align-items: start; }
     .contact-info-card { padding: 28px; margin-bottom: 16px; }
     .contact-info-card h4 { font-size: 0.92rem; font-weight: 700; margin-bottom: 8px; }
     .contact-info-card p { font-size: 0.84rem; color: var(--text-dim); line-height: 1.6; }
     .contact-info-card a { color: var(--gold); transition: opacity 0.2s; }
     .contact-info-card a:hover { opacity: 0.8; }
+    .calendly-inline-widget { border-radius: var(--r-lg); overflow: hidden; }
     @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
@@ -39,13 +35,44 @@
   <div class="load-flash" aria-hidden="true"></div>
 
   <nav class="lib-nav">
-    <a class="lib-nav-brand" href="index.html">Button Up Media <span>Restaurant Growth</span></a>
+    <a class="lib-nav-brand" href="index.html" aria-label="Button Up Media home">
+      <img src="/images/full-logo.svg" alt="Button Up Media" />
+    </a>
     <div class="lib-nav-links">
-      <a href="index.html#services">Services</a>
+      <details class="lib-nav-dropdown">
+        <summary class="lib-nav-dropdown-trigger">
+          Services
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="lib-nav-dropdown-menu" role="menu" aria-label="Services">
+          <div class="lib-desktop-services">
+            <a href="social-media-marketing.html">Social Media Marketing</a>
+            <a href="restaurant-advertising.html">Paid Marketing</a>
+            <a href="restaurant-website-design.html">Website Design</a>
+            <a href="restaurant-seo.html">Search &amp; Answer Engine Optimization</a>
+          </div>
+          <details class="lib-mobile-services lib-mobile-menu-only">
+            <summary class="lib-mobile-services-trigger">
+              Services
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="lib-mobile-services-menu" role="menu" aria-label="Services">
+              <a href="restaurant-website-design.html">Website Design</a>
+              <a href="restaurant-advertising.html">Paid Marketing</a>
+              <a href="social-media-marketing.html">Social Media Marketing</a>
+              <a href="restaurant-seo.html">Search &amp; Answer Engine Optimization</a>
+            </div>
+          </details>
+          <a href="case-studies.html" class="lib-mobile-menu-only">Case Studies</a>
+          <a href="about.html" class="lib-mobile-menu-only">About Us</a>
+          <a href="tel:+17867409498" class="lib-mobile-menu-only lib-mobile-action --ghost">Call Us</a>
+          <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="lib-mobile-menu-only lib-mobile-action --primary">Book Free Strategy Call</a>
+        </div>
+      </details>
       <a href="case-studies.html">Case Studies</a>
-      <a href="index.html#process">Process</a>
-      <a href="index.html#faq">FAQ</a>
-      <a href="contact.html" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Contact Us</a>
+      <a href="about.html">About Us</a>
+      <a class="lib-nav-phone" href="tel:+17867409498">Call Us</a>
+      <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Book Free Strategy Call</a>
     </div>
   </nav>
 
@@ -78,42 +105,14 @@
             </div>
           </div>
 
-          <div style="margin: 24px 0; border-radius: 16px; overflow: hidden;">
-            <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&h=400&fit=crop" alt="Business consultation meeting over restaurant growth strategy" style="width:100%;height:auto;display:block;" />
-          </div>
         </div>
 
         <div>
-          <div>
-            <h2 class="display-md" style="margin-bottom: 8px;">Book Your Free Audit</h2>
-            <p class="body-text" style="margin-bottom: 24px; font-size: 0.86rem;">No pressure. Just clarity on what's holding your restaurant back.</p>
-            <form class="contact-form" action="#" method="POST">
-              <label for="name">Your Name</label>
-              <input class="input" type="text" id="name" name="name" placeholder="Full name" required />
-
-              <label for="restaurant">Restaurant Name</label>
-              <input class="input" type="text" id="restaurant" name="restaurant" placeholder="Restaurant or group name" required />
-
-              <label for="email">Email</label>
-              <input class="input" type="email" id="email" name="email" placeholder="you@restaurant.com" required />
-
-              <label for="phone">Phone (optional)</label>
-              <input class="input" type="tel" id="phone" name="phone" placeholder="(xxx) xxx-xxxx" />
-
-              <label for="services">Services You're Interested In</label>
-              <div class="flex-row" style="gap: 6px; margin-bottom: 4px;">
-                <span class="chip" style="cursor: pointer; font-size: 0.72rem; height: 32px;">SEO &amp; GBP</span>
-                <span class="chip" style="cursor: pointer; font-size: 0.72rem; height: 32px;">Social Media</span>
-                <span class="chip" style="cursor: pointer; font-size: 0.72rem; height: 32px;">Google Ads</span>
-                <span class="chip" style="cursor: pointer; font-size: 0.72rem; height: 32px;">Website</span>
-              </div>
-
-              <label for="message">Tell Us About Your Goals</label>
-              <textarea id="message" name="message" placeholder="What's your biggest growth challenge right now?"></textarea>
-
-              <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">Submit &mdash; Get My Free Audit</button>
-            </form>
-          </div>
+          <h2 class="display-md" style="margin-bottom: 8px;">Get Your Free Strategy Call</h2>
+          <p class="body-text" style="margin-bottom: 20px; font-size: 0.86rem;">Pick a time that works for you. 30 minutes. No pressure. Just a clear plan.</p>
+          <div class="calendly-inline-widget"
+               data-url="https://calendly.com/juanh-buttonupmedia/freeconsultation?hide_gdpr_banner=1&background_color=111111&text_color=f6f0e6&primary_color=e2a84d"
+               style="min-width:320px;height:700px;"></div>
         </div>
       </div>
     </section>
