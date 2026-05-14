@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Restaurant Advertising | Google Ads & Facebook Ads - Button Up Media</title>
+  <title>Paid Marketing | Google Ads & Facebook Ads - Button Up Media</title>
   <meta name="description" content="Restaurant advertising that drives real customers. Google Ads, Facebook Ads & local targeting designed for restaurants. Measurable ROI with Button Up Media." />
+  <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg">
+  <link rel="canonical" href="https://buttonupmedia-site-one.vercel.app/restaurant-advertising.html" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -29,7 +31,7 @@
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://buttonupmedia.com/" },
-      { "@type": "ListItem", "position": 2, "name": "Restaurant Advertising", "item": "https://buttonupmedia.com/restaurant-advertising/" }
+      { "@type": "ListItem", "position": 2, "name": "Paid Marketing", "item": "https://buttonupmedia.com/restaurant-advertising/" }
     ]
   }
   </script>
@@ -39,7 +41,7 @@
   {
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "Restaurant Advertising",
+    "name": "Paid Marketing",
     "description": "Google Ads, Facebook Ads & local targeting campaigns designed specifically for restaurants. Measurable ROI with full conversion tracking.",
     "provider": {
       "@type": "Organization",
@@ -1444,13 +1446,44 @@
 
   <!-- ═══ NAV ═══ -->
   <nav class="lib-nav">
-    <a class="lib-nav-brand" href="index.html">Button Up Media <span>Restaurant Advertising</span></a>
+    <a class="lib-nav-brand" href="index.html" aria-label="Button Up Media home">
+      <img src="/images/full-logo.svg" alt="Button Up Media" />
+    </a>
     <div class="lib-nav-links">
-      <a href="#services">Services</a>
-      <a href="#results">Results</a>
-      <a href="#process">Process</a>
-      <a href="#faq">FAQ</a>
-      <a href="contact.html" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Free Ads Audit</a>
+      <details class="lib-nav-dropdown">
+        <summary class="lib-nav-dropdown-trigger">
+          Services
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="lib-nav-dropdown-menu" role="menu" aria-label="Services">
+          <div class="lib-desktop-services">
+            <a href="social-media-marketing.html">Social Media Marketing</a>
+            <a href="restaurant-advertising.html">Paid Marketing</a>
+            <a href="restaurant-website-design.html">Website Design</a>
+            <a href="restaurant-seo.html">Search &amp; Answer Engine Optimization</a>
+          </div>
+          <details class="lib-mobile-services lib-mobile-menu-only">
+            <summary class="lib-mobile-services-trigger">
+              Services
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="lib-mobile-services-menu" role="menu" aria-label="Services">
+              <a href="restaurant-website-design.html">Website Design</a>
+              <a href="restaurant-advertising.html">Paid Marketing</a>
+              <a href="social-media-marketing.html">Social Media Marketing</a>
+              <a href="restaurant-seo.html">Search &amp; Answer Engine Optimization</a>
+            </div>
+          </details>
+          <a href="case-studies.html" class="lib-mobile-menu-only">Case Studies</a>
+          <a href="about.html" class="lib-mobile-menu-only">About Us</a>
+          <a href="tel:+17867409498" class="lib-mobile-menu-only lib-mobile-action --ghost">Call Us</a>
+          <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="lib-mobile-menu-only lib-mobile-action --primary">Book Free Strategy Call</a>
+        </div>
+      </details>
+      <a href="case-studies.html">Case Studies</a>
+      <a href="about.html">About Us</a>
+      <a class="lib-nav-phone" href="tel:+17867409498">Call Us</a>
+      <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Book Free Strategy Call</a>
     </div>
   </nav>
 
@@ -1460,12 +1493,12 @@
     <section class="ra-hero" id="hero">
       <div class="ra-hero-inner">
         <div class="ra-hero-copy">
-          <div class="hero-badge">Google Ads &bull; Facebook Ads &bull; Instagram Ads</div>
-          <h1>Restaurant Advertising That Drives Customers Through Your <span class="accent-serif">Door.</span></h1>
+          <div class="hero-badge">Paid Marketing</div>
+          <h1>Paid Marketing That Drives Customers Through Your <span class="accent-serif">Door.</span></h1>
           <p>Social media builds your brand. SEO gets you found. But when you need customers this week, this weekend, tonight &mdash; advertising is the fastest lever you have. We run restaurant ad campaigns built to capture people actively looking for a place to eat and put your restaurant in front of them at the exact moment they're making a decision.</p>
           <div class="ra-hero-cta">
             <div class="flex-row" style="gap: 12px;">
-              <a href="contact.html" class="btn btn-primary">Get Your Free Ads Audit</a>
+              <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary">Get Your Free Strategy Call</a>
               <a href="#results" class="btn btn-ghost">See $1M+ in Results</a>
             </div>
             <div class="ra-hero-trust">
@@ -1517,9 +1550,6 @@
           <p>That second customer has intent, urgency, and is eating somewhere in the next hour.</p>
           <div class="ra-pull-quote">Restaurant advertising captures that customer before your competitor does.</div>
         </div>
-        <div class="ra-img-placeholder --empty" data-label="Google Ads Screenshot">
-          <!-- Replace with: <img src="images/google-ads-screenshot.jpg" alt="Google Ads restaurant search results"> -->
-        </div>
       </div>
 
       <!-- Split 2: Image left, Text right -->
@@ -1534,9 +1564,6 @@
             <li>How many booked a reservation</li>
           </ul>
           <p><strong>That's not marketing you hope works. That's marketing you know works.</strong></p>
-        </div>
-        <div class="ra-img-placeholder --empty" data-label="Google Maps Ad Placement">
-          <!-- Replace with: <img src="images/google-maps-ad.jpg" alt="Google Maps restaurant advertising placement"> -->
         </div>
       </div>
     </section>
@@ -1629,7 +1656,7 @@
     <!-- ═══ 5. SERVICES BREAKDOWN — Alternating Split Panels ═══ -->
     <section class="card-overlay lib-section" id="services">
       <div class="lib-section-label">What We Do</div>
-      <h2 class="lib-section-title">Restaurant Advertising Services</h2>
+      <h2 class="lib-section-title">Paid Marketing Services</h2>
       <p class="lib-section-sub">Five ad channels. One unified system. Every dollar tracked.</p>
 
       <div class="ra-services-panels">
@@ -1737,7 +1764,7 @@
       </div>
 
       <div style="text-align:center; margin-top:48px;">
-        <a href="contact.html" class="btn btn-primary">Get a Custom Advertising Strategy &rarr;</a>
+        <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary">Get Your Free Strategy Call</a>
       </div>
     </section>
 
@@ -1780,7 +1807,7 @@
         </div>
       </div>
       <div class="hp2-process-connector">
-        <p><a href="contact.html" class="btn btn-primary">Book Your Free Ads Audit &rarr;</a></p>
+        <p><a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary">Get Your Free Strategy Call</a></p>
       </div>
     </section>
 
@@ -2011,7 +2038,7 @@
         </div>
       </div>
       <div style="text-align:center; margin-top:40px;">
-        <a href="contact.html" class="btn btn-primary">Get Your Free Restaurant Ads Audit &rarr;</a>
+        <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary">Get Your Free Strategy Call</a>
         <p style="font-size:0.82rem; color:var(--text-soft); margin-top:14px;">We'll analyze your market, estimate your keyword costs, and project your ROI before you spend a single dollar.</p>
       </div>
     </section>
@@ -2130,7 +2157,7 @@
         </div>
         <div class="hp2-faq-bottom-cta">
           <p>Have a question we didn't cover?</p>
-          <a href="contact.html" class="btn btn-primary">Ask Us Directly</a>
+          <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary">Get Your Free Strategy Call</a>
         </div>
       </div>
     </section>
@@ -2151,7 +2178,7 @@
         <h2 style="position:relative; z-index:2;">Ready to Stop Wasting Money on Ads?</h2>
         <p style="position:relative; z-index:2;">Our 2025 portfolio generated over $3.5 million in revenue across five properties. Schedule a free ads audit and we'll show you exactly where the opportunities are.</p>
         <div class="hp2-cta-actions" style="position:relative; z-index:2;">
-          <a href="contact.html" class="btn btn-primary">Get Your Free Restaurant Ads Audit &rarr;</a>
+          <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary">Get Your Free Strategy Call</a>
           <a href="tel:+17867409498" class="btn btn-ghost">Call (786) 740-9498</a>
         </div>
       </div>
@@ -2167,9 +2194,9 @@
         <div class="footer-col">
           <h4>Services</h4>
           <a href="social-media-marketing.html">Social Media Marketing</a>
-          <a href="restaurant-seo.html">Restaurant SEO</a>
-          <a href="restaurant-advertising.html">Restaurant Advertising</a>
+          <a href="restaurant-advertising.html">Paid Marketing</a>
           <a href="restaurant-website-design.html">Website Design</a>
+          <a href="restaurant-seo.html">Search &amp; Answer Engine Optimization</a>
         </div>
         <div class="footer-col">
           <h4>Case Studies</h4>
@@ -2183,7 +2210,7 @@
           <a href="about.html">About</a>
           <a href="case-studies.html">Case Studies</a>
           <a href="#faq">FAQ</a>
-          <a href="contact.html">Free Consultation</a>
+          <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank">Get Your Free Strategy Call</a>
         </div>
       </div>
       <div class="footer-bottom">
