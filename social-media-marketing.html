@@ -239,6 +239,47 @@
     }
 
     /* ── Stacked Portrait Videos ── */
+    .v-stack-wrap {
+      position: relative;
+    }
+    .sm-audio-hint {
+      position: absolute;
+      top: -48px;
+      left: 50%;
+      z-index: 20;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: max-content;
+      max-width: calc(100vw - 48px);
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(226,168,77,0.35);
+      background: rgba(8,10,14,0.72);
+      color: rgba(255,248,235,0.88);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.08);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      transform: translateX(-50%);
+      transition: opacity 0.45s ease, transform 0.45s ease, visibility 0.45s ease;
+      pointer-events: none;
+    }
+    .sm-audio-hint.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-50%) translateY(-8px);
+    }
+    .sm-audio-hint i {
+      width: 15px;
+      height: 15px;
+      color: var(--gold);
+      flex: 0 0 auto;
+    }
+    .sm-audio-hint-mobile { display: none; }
     .v-stack {
       position: relative;
       height: 460px;
@@ -1353,6 +1394,12 @@
         grid-template-columns: 1fr;
         gap: 32px;
       }
+      .sm-audio-hint {
+        top: -40px;
+        font-size: 0.68rem;
+      }
+      .sm-audio-hint-desktop { display: none; }
+      .sm-audio-hint-mobile { display: inline; }
       .v-stack { height: 360px; }
       .v-stack-card { width: 170px; height: 300px; }
       .v-stack-card:nth-child(2) { margin-left: -85px; }
@@ -1495,27 +1542,34 @@
             </div>
           </div>
         </div>
-        <div class="v-stack">
-          <div class="v-stack-card" data-autoplay-hover>
-            <video muted loop playsinline preload="metadata" poster="images/sm-miami-local-poster.jpg">
-              <source src="videos/sm-miami-local.mp4" type="video/mp4" />
-            </video>
-            <div class="v-stack-play"><i data-lucide="play" style="width:20px;height:20px"></i></div>
-            <div class="v-stack-label"><strong>Influencer Content</strong>Scroll-stopping food reels</div>
+        <div class="v-stack-wrap">
+          <div class="sm-audio-hint" data-audio-hint>
+            <i data-lucide="volume-2" aria-hidden="true"></i>
+            <span class="sm-audio-hint-desktop">Hover any video to hear it</span>
+            <span class="sm-audio-hint-mobile">Tap any video to hear it</span>
           </div>
-          <div class="v-stack-card" data-autoplay-hover>
-            <video muted loop playsinline preload="metadata" poster="images/sm-1m-views-poster.jpg">
-              <source src="videos/sm-1m-views.mp4" type="video/mp4" />
-            </video>
-            <div class="v-stack-play"><i data-lucide="play" style="width:20px;height:20px"></i></div>
-            <div class="v-stack-label"><strong>Brand Storytelling</strong>Brewing Buddha Wine Bar</div>
-          </div>
-          <div class="v-stack-card" data-autoplay-hover>
-            <video muted loop playsinline preload="metadata" poster="images/sm-500k-views-poster.jpg">
-              <source src="videos/sm-500k-views.mp4" type="video/mp4" />
-            </video>
-            <div class="v-stack-play"><i data-lucide="play" style="width:20px;height:20px"></i></div>
-            <div class="v-stack-label"><strong>Community Content</strong>Building loyal regulars</div>
+          <div class="v-stack">
+            <div class="v-stack-card" data-autoplay-hover>
+              <video muted loop playsinline preload="metadata" poster="images/sm-miami-local-poster.jpg">
+                <source src="videos/sm-miami-local.mp4" type="video/mp4" />
+              </video>
+              <div class="v-stack-play"><i data-lucide="play" style="width:20px;height:20px"></i></div>
+              <div class="v-stack-label"><strong>Influencer Content</strong>Scroll-stopping food reels</div>
+            </div>
+            <div class="v-stack-card" data-autoplay-hover>
+              <video muted loop playsinline preload="metadata" poster="images/sm-1m-views-poster.jpg">
+                <source src="videos/sm-1m-views.mp4" type="video/mp4" />
+              </video>
+              <div class="v-stack-play"><i data-lucide="play" style="width:20px;height:20px"></i></div>
+              <div class="v-stack-label"><strong>Brand Storytelling</strong>Brewing Buddha Wine Bar</div>
+            </div>
+            <div class="v-stack-card" data-autoplay-hover>
+              <video muted loop playsinline preload="metadata" poster="images/sm-500k-views-poster.jpg">
+                <source src="videos/sm-500k-views.mp4" type="video/mp4" />
+              </video>
+              <div class="v-stack-play"><i data-lucide="play" style="width:20px;height:20px"></i></div>
+              <div class="v-stack-label"><strong>Community Content</strong>Building loyal regulars</div>
+            </div>
           </div>
         </div>
       </div>
@@ -1989,13 +2043,54 @@
         }
       );
 
-      // Autoplay videos on hover
+      // Autoplay videos on hover/tap, with audio enabled only during interaction.
+      const audioHint = document.querySelector("[data-audio-hint]");
+      const hideAudioHint = () => audioHint?.classList.add("is-hidden");
+      const muteVideo = video => {
+        video.muted = true;
+        video.pause();
+        video.currentTime = 0;
+      };
+      let activeTouchCard = null;
+
+      setTimeout(hideAudioHint, 6000);
+
       document.querySelectorAll("[data-autoplay-hover]").forEach(card => {
         const video = card.querySelector("video");
         if (!video) return;
-        card.addEventListener("mouseenter", () => video.play().catch(() => {}));
-        card.addEventListener("mouseleave", () => { video.pause(); video.currentTime = 0; });
+        card.addEventListener("mouseenter", () => {
+          hideAudioHint();
+          video.muted = false;
+          video.volume = 0.8;
+          video.play().catch(() => {});
+        });
+        card.addEventListener("mouseleave", () => {
+          muteVideo(video);
+          if (activeTouchCard === card) activeTouchCard = null;
+        });
+        card.addEventListener("touchstart", event => {
+          event.stopPropagation();
+          hideAudioHint();
+          document.querySelectorAll("[data-autoplay-hover] video").forEach(otherVideo => {
+            if (otherVideo !== video) muteVideo(otherVideo);
+          });
+          activeTouchCard = activeTouchCard === card ? null : card;
+          if (activeTouchCard) {
+            video.muted = false;
+            video.volume = 0.8;
+            video.play().catch(() => {});
+          } else {
+            muteVideo(video);
+          }
+        }, { passive: true });
       });
+
+      document.addEventListener("touchstart", event => {
+        if (!activeTouchCard || activeTouchCard.contains(event.target)) return;
+        const video = activeTouchCard.querySelector("video");
+        if (video) muteVideo(video);
+        activeTouchCard = null;
+      }, { passive: true });
 
       ScrollTrigger.refresh();
     });
