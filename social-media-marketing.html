@@ -411,11 +411,13 @@
        ══════════════════════════════════════ */
     .sm-problem-head {
       display: grid;
-      grid-template-columns: 1fr 220px;
-      gap: 48px;
+      grid-template-columns: minmax(0, 1fr) 240px;
+      gap: 56px;
       align-items: center;
       margin-bottom: 8px;
     }
+    .sm-problem-head-copy { max-width: 38ch; }
+    .sm-problem-head-copy .lib-section-title { font-size: clamp(2rem, 3.8vw, 3rem); line-height: 1.15; }
     .sm-problem-accent {
       position: relative;
       width: 220px;
