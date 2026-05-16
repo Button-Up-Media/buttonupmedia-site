@@ -2051,6 +2051,15 @@
         video.pause();
         video.currentTime = 0;
       };
+      const playWithAudio = video => {
+        video.volume = 0.8;
+        video.play()
+          .then(() => { video.muted = false; })
+          .catch(() => {
+            video.muted = true;
+            video.play().catch(() => {});
+          });
+      };
       let activeTouchCard = null;
 
       setTimeout(hideAudioHint, 6000);
@@ -2060,9 +2069,7 @@
         if (!video) return;
         card.addEventListener("mouseenter", () => {
           hideAudioHint();
-          video.muted = false;
-          video.volume = 0.8;
-          video.play().catch(() => {});
+          playWithAudio(video);
         });
         card.addEventListener("mouseleave", () => {
           muteVideo(video);
@@ -2076,9 +2083,7 @@
           });
           activeTouchCard = activeTouchCard === card ? null : card;
           if (activeTouchCard) {
-            video.muted = false;
-            video.volume = 0.8;
-            video.play().catch(() => {});
+            playWithAudio(video);
           } else {
             muteVideo(video);
           }
