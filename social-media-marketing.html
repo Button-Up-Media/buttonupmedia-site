@@ -409,6 +409,36 @@
     /* ══════════════════════════════════════
        3. THE PROBLEM — 4 glass cards 2x2
        ══════════════════════════════════════ */
+    .sm-problem-head {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 48px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .sm-problem-accent {
+      position: relative;
+      width: 220px;
+      aspect-ratio: 9 / 16;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,248,235,0.06);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.45);
+      cursor: pointer;
+      justify-self: end;
+      transition: transform 0.45s cubic-bezier(0.22,1,0.36,1), box-shadow 0.45s ease, border-color 0.45s ease;
+    }
+    .sm-problem-accent:hover {
+      transform: translateY(-4px) scale(1.02);
+      border-color: rgba(202,138,4,0.25);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 0 24px rgba(202,138,4,0.08);
+    }
+    .sm-problem-accent video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
     .sm-problem-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -1325,6 +1355,18 @@
       .v-stack-card { width: 170px; height: 300px; }
       .v-stack-card:nth-child(2) { margin-left: -85px; }
       .sm-stat-grid { grid-template-columns: 1fr 1fr; }
+      .sm-problem-head {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        justify-items: center;
+        text-align: center;
+      }
+      .sm-problem-head-copy { order: 1; }
+      .sm-problem-accent {
+        order: 0;
+        width: 180px;
+        justify-self: center;
+      }
       .sm-problem-grid { grid-template-columns: 1fr; }
       .sm-approach-layout { grid-template-columns: 1fr; }
       .sm-approach-video { max-height: 400px; max-width: 300px; position: static; }
@@ -1453,22 +1495,22 @@
         </div>
         <div class="v-stack">
           <div class="v-stack-card" data-autoplay-hover>
-            <video muted loop playsinline preload="metadata">
-              <source src="../website_assests/2.12.26 BUM &quot;15 Sec Influencer Video&quot;/SnapInsta.to_AQNSRc5MJOmiLKTh3hhu5YcJaXj8j0_HIy3a6ef2oEwHnxrGNV-SEqv5erlqkTmySzmGHvMrO4trY7qauFaA7T64uKXBMfMbgXM2QMg.mp4" type="video/mp4" />
+            <video muted loop playsinline preload="metadata" poster="images/sm-miami-local-poster.jpg">
+              <source src="videos/sm-miami-local.mp4" type="video/mp4" />
             </video>
             <div class="v-stack-play"><i data-lucide="play" style="width:20px;height:20px"></i></div>
             <div class="v-stack-label"><strong>Influencer Content</strong>Scroll-stopping food reels</div>
           </div>
           <div class="v-stack-card" data-autoplay-hover>
-            <video muted loop playsinline preload="metadata">
-              <source src="../website_assests/2.12.26 BUM &quot;15 Sec Influencer Video&quot;/Brewing Buddha in Pinecrest recently opened @brewingbuddhaswinebar right next door 🍷 A fantasti.mp4" type="video/mp4" />
+            <video muted loop playsinline preload="metadata" poster="images/sm-1m-views-poster.jpg">
+              <source src="videos/sm-1m-views.mp4" type="video/mp4" />
             </video>
             <div class="v-stack-play"><i data-lucide="play" style="width:20px;height:20px"></i></div>
             <div class="v-stack-label"><strong>Brand Storytelling</strong>Brewing Buddha Wine Bar</div>
           </div>
           <div class="v-stack-card" data-autoplay-hover>
-            <video muted loop playsinline preload="metadata">
-              <source src="../website_assests/2.12.26 BUM &quot;15 Sec Influencer Video&quot;/Favorite coffee orders, first visits turning into daily stops, and a place where friends meet, s.mp4" type="video/mp4" />
+            <video muted loop playsinline preload="metadata" poster="images/sm-500k-views-poster.jpg">
+              <source src="videos/sm-500k-views.mp4" type="video/mp4" />
             </video>
             <div class="v-stack-play"><i data-lucide="play" style="width:20px;height:20px"></i></div>
             <div class="v-stack-label"><strong>Community Content</strong>Building loyal regulars</div>
@@ -1483,45 +1525,25 @@
       <h2 class="lib-section-title">Social Media Is How Restaurants Get Chosen in 2026</h2>
       <p class="lib-section-sub">The restaurant discovery journey has fundamentally changed. Today, customers find restaurants on their phones &mdash; often before they&rsquo;ve even decided they&rsquo;re hungry.</p>
 
-      <div class="sm-stat-grid">
-        <div class="sm-stat-card">
-          <div class="sm-stat-num" data-count-to="75" data-suffix="%">0</div>
-          <div class="sm-stat-label">Diners say Instagram influences where they eat</div>
-        </div>
-        <div class="sm-stat-card">
-          <div class="sm-stat-num" data-count-to="86" data-suffix="%">0</div>
-          <div class="sm-stat-label">Millennials try new restaurants from food content</div>
-        </div>
-        <div class="sm-stat-card">
-          <div class="sm-stat-num" data-count-to="60" data-suffix="%+">0</div>
-          <div class="sm-stat-label">Gen Z uses TikTok &amp; IG to find restaurants</div>
-        </div>
-        <div class="sm-stat-card">
-          <div class="sm-stat-num" data-count-to="3" data-suffix="X">0</div>
-          <div class="sm-stat-label">More engagement with consistent quality content</div>
-        </div>
-        <div class="sm-stat-card">
-          <div class="sm-stat-num" data-count-to="2.5" data-suffix="X" data-decimal="1">0</div>
-          <div class="sm-stat-label">More reach from short-form video vs. static</div>
-        </div>
-        <div class="sm-stat-card">
-          <div class="sm-stat-num" data-count-to="48" data-suffix="%">0</div>
-          <div class="sm-stat-label">Visited a restaurant after seeing it on social</div>
-        </div>
-        <div class="sm-stat-card">
-          <div class="sm-stat-num" data-count-to="70" data-suffix="%">0</div>
-          <div class="sm-stat-label">Of our revenue &mdash; social is our core expertise</div>
-        </div>
-      </div>
+      <!-- TODO: replace with single hero stat callout (see Opus handoff) -->
 
       <p style="font-size:17px; line-height:1.75; color:rgba(255,255,255,0.9); max-width:65ch;">The restaurants winning on social media aren&rsquo;t winning because they have bigger budgets. They&rsquo;re winning because they have <strong>better content, posted consistently, with a strategy behind it.</strong> That&rsquo;s exactly what Button Up Media delivers.</p>
     </section>
 
     <!-- ═══ 3. THE PROBLEM ═══ -->
     <section class="card-overlay lib-section" id="the-problem">
-      <div class="lib-section-label">The Problem</div>
-      <h2 class="lib-section-title">Why Your Restaurant&rsquo;s Social Media Isn&rsquo;t Working</h2>
-      <p class="lib-section-sub">You know social media matters. You&rsquo;ve tried. But none of the usual approaches actually work.</p>
+      <div class="sm-problem-head">
+        <div class="sm-problem-head-copy">
+          <div class="lib-section-label">The Problem</div>
+          <h2 class="lib-section-title">Why Your Restaurant&rsquo;s Social Media Isn&rsquo;t Working</h2>
+          <p class="lib-section-sub">You know social media matters. You&rsquo;ve tried. But none of the usual approaches actually work.</p>
+        </div>
+        <div class="sm-problem-accent" data-autoplay-hover>
+          <video muted loop playsinline preload="metadata" poster="images/sm-problem-accent-poster.jpg">
+            <source src="videos/sm-problem-accent.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
 
       <div class="sm-problem-grid">
         <!-- Card 1: DIY Trap -->
@@ -1584,8 +1606,8 @@
         </div>
       </div>
       <div class="sm-approach-video" data-autoplay-hover>
-        <video muted loop playsinline preload="metadata">
-          <source src="../website_assests/2.12.26 BUM &quot;15 Sec Influencer Video&quot;/SnapInsta.to_AQNIfTmCgIgUQPvLEXK0v8a8glufyWE1bvcY3wm8Sva6Izy4x6Pobz-X9ukmAMNVErP8YlOtQmL-HqM_SjE8cjoxuXsUBw2MBUiXvVY.mp4" type="video/mp4" />
+        <video muted loop playsinline preload="metadata" poster="images/sm-how-we-work-poster.jpg">
+          <source src="videos/sm-how-we-work.mp4" type="video/mp4" />
         </video>
       </div>
       </div><!-- /.sm-approach-layout -->
@@ -1657,25 +1679,6 @@
           </div>
         </div>
 
-        <!-- Panel 4: Paid Social (reversed) -->
-        <div class="sm-svc-panel --reverse">
-          <div class="sm-svc-copy">
-            <span class="sm-svc-num">04</span>
-            <i data-lucide="megaphone" width="28" height="28"></i>
-            <h3>Paid Social Media Advertising</h3>
-            <p>Organic reach builds your brand over time. Paid social media accelerates it. We run targeted ad campaigns on Instagram and Facebook designed specifically for restaurant goals.</p>
-            <ul class="sm-bullets --compact">
-              <li><strong>Instagram &amp; Facebook</strong> ad campaign management</li>
-              <li><strong>Audience targeting</strong> by location, interest, behavior</li>
-              <li><strong>Ad creative production</strong> using your content library</li>
-              <li><strong>Retargeting campaigns</strong> for website visitors</li>
-              <li><strong>Performance tracking</strong> and ROI reporting</li>
-            </ul>
-          </div>
-          <div class="sm-svc-visual">
-            <img src="https://images.unsplash.com/photo-1530062845289-9109b2c9c868?auto=format&fit=crop&w=800&q=80" alt="Couple dining at restaurant" loading="lazy" />
-          </div>
-        </div>
       </div>
 
       <!-- Limited Availability Callout -->
@@ -1683,61 +1686,6 @@
         <h3>We Only Take On a Limited Number of New Clients Each Month</h3>
         <p>We produce all content in-house &mdash; we physically come to your restaurant, shoot your food, and build your content library from scratch. That level of hands-on service means limited availability.</p>
         <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary">Get Your Free Strategy Call</a>
-      </div>
-    </section>
-
-    <!-- ═══ 6. PLATFORMS ═══ -->
-    <section class="card-overlay --dark lib-section" id="platforms">
-      <div class="lib-section-label">Platform Strategy</div>
-      <h2 class="lib-section-title">Where Your Customers Actually Are</h2>
-      <p class="lib-section-sub">Not every platform works the same way for restaurants. We build platform-specific strategies so your restaurant shows up the right way in the right places.</p>
-
-      <div class="sm-platform-grid">
-        <!-- Instagram -->
-        <div class="sm-platform-card">
-          <div class="glass-toplight"></div>
-          <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
-          <i data-lucide="instagram" width="28" height="28"></i>
-          <h3>Instagram Marketing</h3>
-          <p>Instagram remains the most influential platform for restaurant discovery. Your feed is your digital storefront.</p>
-          <ul class="sm-bullets --compact" style="position:relative; z-index:2;">
-            <li>Visual brand identity</li>
-            <li>Reels for reach</li>
-            <li>Stories for engagement</li>
-            <li>Feed for credibility</li>
-          </ul>
-          <div class="sm-platform-focus">Key: Visual brand identity &amp; Reels</div>
-        </div>
-        <!-- TikTok -->
-        <div class="sm-platform-card">
-          <div class="glass-toplight"></div>
-          <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
-          <i data-lucide="clapperboard" width="28" height="28"></i>
-          <h3>TikTok Marketing</h3>
-          <p>The fastest-growing discovery platform for restaurants, especially among younger diners. Over 60% of Gen Z uses TikTok to discover restaurants.</p>
-          <ul class="sm-bullets --compact" style="position:relative; z-index:2;">
-            <li>Trend-driven video</li>
-            <li>Authentic kitchen content</li>
-            <li>Viral food moments</li>
-            <li>Local discovery</li>
-          </ul>
-          <div class="sm-platform-focus">Key: Trend-driven &amp; authentic</div>
-        </div>
-        <!-- Facebook -->
-        <div class="sm-platform-card">
-          <div class="glass-toplight"></div>
-          <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
-          <i data-lucide="target" width="28" height="28"></i>
-          <h3>Facebook Advertising</h3>
-          <p>Facebook&rsquo;s organic reach has declined, but its advertising platform remains one of the most powerful tools for restaurant marketing.</p>
-          <ul class="sm-bullets --compact" style="position:relative; z-index:2;">
-            <li>Paid campaigns</li>
-            <li>Local targeting</li>
-            <li>Event promotion</li>
-            <li>Retargeting &amp; reservations</li>
-          </ul>
-          <div class="sm-platform-focus">Key: Paid campaigns &amp; local targeting</div>
-        </div>
       </div>
     </section>
 
@@ -1802,47 +1750,6 @@
 
       <div style="text-align:center; margin-top:40px;">
         <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary">Get Your Free Strategy Call</a>
-      </div>
-    </section>
-
-    <!-- ═══ 9. BY THE NUMBERS ═══ -->
-    <section class="card-overlay lib-section" id="stats">
-      <div class="lib-section-label">The Data</div>
-      <h2 class="lib-section-title">Restaurant Social Media Marketing by the Numbers</h2>
-
-      <div class="sm-stats-card">
-        <div class="sm-stats-subtitle">Why restaurants can&rsquo;t afford to ignore social media</div>
-        <div class="sm-stats-grid --seven">
-          <div class="sm-stat-block">
-            <div class="sm-stat-big" data-count-to="75" data-suffix="%">0</div>
-            <div class="sm-stat-desc">Instagram influences dining</div>
-          </div>
-          <div class="sm-stat-block">
-            <div class="sm-stat-big" data-count-to="60" data-suffix="%+">0</div>
-            <div class="sm-stat-desc">Gen Z uses social to find food</div>
-          </div>
-          <div class="sm-stat-block">
-            <div class="sm-stat-big" data-count-to="86" data-suffix="%">0</div>
-            <div class="sm-stat-desc">Millennials try new spots online</div>
-          </div>
-          <div class="sm-stat-block">
-            <div class="sm-stat-big" data-count-to="3" data-suffix="X">0</div>
-            <div class="sm-stat-desc">Engagement with pro video</div>
-          </div>
-          <div class="sm-stat-block">
-            <div class="sm-stat-big" data-count-to="2.5" data-suffix="X" data-decimal="1">0</div>
-            <div class="sm-stat-desc">Reach from short-form video</div>
-          </div>
-          <div class="sm-stat-block">
-            <div class="sm-stat-big" data-count-to="48" data-suffix="%">0</div>
-            <div class="sm-stat-desc">Visited after seeing on social</div>
-          </div>
-          <div class="sm-stat-block">
-            <div class="sm-stat-big" data-count-to="70" data-suffix="%">0</div>
-            <div class="sm-stat-desc">Our revenue &mdash; this is our core</div>
-          </div>
-        </div>
-        <p class="sm-stats-tagline"><strong>Button Up Media exists because we believe no restaurant should lose a customer simply because no one showed them what they were missing.</strong></p>
       </div>
     </section>
 
