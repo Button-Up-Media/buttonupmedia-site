@@ -6,7 +6,7 @@
   <title>Restaurant Marketing Agency | Button Up Media - Florida</title>
   <meta name="description" content="Button Up Media is a restaurant marketing agency in Florida. We help restaurants grow with social media, website design, SEO & advertising. Get a free consultation." />
   <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg">
-  <link rel="canonical" href="https://buttonupmedia-site.vercel.app/" />
+  <link rel="canonical" href="https://buttonupmedia.com/" />
   <meta name="theme-color" content="#0b0d10" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Restaurant Marketing Agency | Button Up Media - Florida" />
@@ -21,7 +21,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Epilogue:wght@400;500;600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Epilogue:wght@400;500;600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
@@ -32,7 +32,7 @@
   <script src="pixel-canvas.js"></script>
 
   <!-- Base styles (nav, footer, cards, etc.) -->
-  <link rel="stylesheet" href="shared.css" />
+  <link rel="stylesheet" href="shared.css?v=nav-mobile-1" />
 
   <!-- ═══ HOMEPAGE 2.0, ALL CSS SELF-CONTAINED ═══ -->
   <style>
@@ -382,16 +382,35 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.35;
+      opacity: 0;
       transform: scale(1.08);
+    }
+    .hp2-hero-bg-video {
+      position: absolute;
+      top: 50%;
+      right: clamp(-80px, -4vw, -34px);
+      bottom: auto;
+      left: auto;
+      width: clamp(620px, 52vw, 900px);
+      height: 118vh;
+      object-fit: cover;
+      opacity: 0;
+      transform: translateY(-50%);
+      transition: opacity 0.7s ease;
+      pointer-events: none;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.45) 8%, #000 20%);
+      mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.45) 8%, #000 20%);
+    }
+    .hp2-hero-bg-video.is-loaded {
+      opacity: 0.64;
     }
     .hp2-hero-media::after {
       content: "";
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.1) 40%, rgba(10,10,10,0.7) 70%, rgba(10,10,10,0.95) 100%),
-        linear-gradient(90deg, rgba(10,10,10,0.6) 0%, transparent 50%);
+        linear-gradient(180deg, rgba(5,6,8,0.26) 0%, rgba(5,6,8,0.08) 38%, rgba(5,6,8,0.68) 72%, rgba(5,6,8,0.96) 100%),
+        linear-gradient(90deg, rgba(5,6,8,0.98) 0%, rgba(5,6,8,0.94) 34%, rgba(5,6,8,0.62) 50%, rgba(5,6,8,0.14) 66%, rgba(5,6,8,0.34) 100%);
       pointer-events: none;
     }
     .hp2-hero-inner {
@@ -416,9 +435,9 @@
       margin-top: 24px;
     }
     .hp2-hero-copy h1 .accent-serif {
-      font-family: var(--font-accent);
-      font-style: italic;
-      font-weight: 500;
+      font-family: var(--font-hero);
+      font-style: normal;
+      font-weight: 800;
       color: var(--gold);
     }
     .hp2-hero-copy > p {
@@ -428,12 +447,19 @@
       line-height: 1.6;
       margin-bottom: 28px;
     }
+    .hp2-cta-scene .accent-serif {
+      font-family: var(--font-hero);
+      font-style: normal;
+      font-weight: 800;
+    }
 
     /* Word-reveal system */
     .hp2-word {
       overflow: hidden;
       display: inline-flex;
       vertical-align: bottom;
+      padding-bottom: 0.08em;
+      margin-bottom: -0.08em;
     }
     .hp2-word-inner {
       display: inline-block;
@@ -576,9 +602,9 @@
       margin-bottom: 12px;
     }
     .hp2-problem-headline em {
-      font-family: var(--font-accent);
-      font-style: italic;
-      font-weight: 500;
+      font-family: var(--font-hero);
+      font-style: normal;
+      font-weight: 800;
       color: var(--coral);
     }
 
@@ -604,6 +630,9 @@
       overflow: hidden;
       border-radius: inherit;
       clip-path: inset(100% 0 0 0);
+    }
+    .hp2-warm-img .hp2-curtain-img {
+      clip-path: inset(0 0 0 0);
     }
     .hp2-curtain-img img {
       width: 100%;
@@ -1708,10 +1737,10 @@
       margin-bottom: 12px;
     }
     .hp2-faq-hero-heading {
-      font-family: var(--font-accent);
+      font-family: var(--font-hero);
       font-size: clamp(2.2rem, 5vw, 3.8rem);
-      font-weight: 400;
-      font-style: italic;
+      font-weight: 800;
+      font-style: normal;
       letter-spacing: -0.02em;
       line-height: 1.15;
       margin-bottom: 16px;
@@ -1823,10 +1852,10 @@
       justify-content: center;
       width: 24px;
       color: rgba(226,168,77,0.5);
-      font-family: var(--font-accent);
+      font-family: var(--font-display);
       font-size: 0.82rem;
-      font-style: italic;
-      font-weight: 400;
+      font-style: normal;
+      font-weight: 700;
       margin-right: 16px;
       flex-shrink: 0;
     }
@@ -1983,6 +2012,19 @@
        RESPONSIVE
        ══════════════════════════════════════ */
     @media (max-width: 900px) {
+      .hp2-hero-bg-video {
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        transform: scale(1.08);
+        -webkit-mask-image: none;
+        mask-image: none;
+      }
+      .hp2-hero-media::after {
+        background:
+          linear-gradient(180deg, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.1) 40%, rgba(10,10,10,0.7) 70%, rgba(10,10,10,0.95) 100%),
+          linear-gradient(90deg, rgba(10,10,10,0.6) 0%, transparent 50%);
+      }
       .hp2-hero-inner {
         grid-template-columns: 1fr;
         gap: 32px;
@@ -2048,21 +2090,27 @@
       }
       .hp2-hero-inner {
         width: calc(100% - 24px);
-        padding: 78px 0 32px;
-        gap: 16px;
+        padding: 68px 0 34px;
+        gap: 20px;
       }
       .hp2-hero-copy {
         padding-bottom: 0;
       }
       .hp2-hero-copy h1 {
-        font-size: clamp(1.75rem, 7.4vw, 2.3rem);
-        margin-top: 16px;
-        margin-bottom: 16px;
+        font-size: clamp(2.7rem, 11vw, 4.05rem);
+        line-height: 1.02;
+        max-width: 9.5ch;
+        margin-top: 8px;
+        margin-bottom: 18px;
       }
       .hp2-hero-copy > p {
-        font-size: 0.95rem;
-        max-width: 32ch;
-        margin-bottom: 18px;
+        font-size: 0.96rem;
+        line-height: 1.62;
+        max-width: 36ch;
+        margin-bottom: 22px;
+      }
+      .hp2-hero-bg-video.is-loaded {
+        opacity: 0.46;
       }
       .hp2-hero-cta {
         gap: 14px;
@@ -2443,9 +2491,8 @@
         flex-wrap: wrap;
       }
     }
-
     @media (max-width: 600px) {
-      .hp2-hero-copy h1 { font-size: clamp(1.6rem, 7.2vw, 2.1rem); }
+      .hp2-hero-copy h1 { font-size: clamp(2.75rem, 12vw, 4.1rem); }
       .hp2-curtain-wrap { width: 100%; border-radius: 16px; }
       .hp2-curtain-img { border-radius: 16px; }
       .hp2-curtain-img img { height: 36vh; }
@@ -2521,10 +2568,10 @@
       padding-bottom: 8px;
     }
     .hp2-trust-logos span {
-      font-family: var(--font-accent);
-      font-style: italic;
+      font-family: var(--font-display);
+      font-style: normal;
       font-size: 1.1rem;
-      font-weight: 500;
+      font-weight: 700;
       color: var(--text);
       opacity: 0.4;
       filter: grayscale(1);
@@ -2722,8 +2769,8 @@
       padding: 20px 24px 24px;
     }
     .hp2-vid-card-quote {
-      font-family: var(--font-accent);
-      font-style: italic;
+      font-family: var(--font-body);
+      font-style: normal;
       font-size: 0.92rem;
       color: rgba(255,255,255,0.88);
       line-height: 1.55;
@@ -2905,7 +2952,6 @@
       aspect-ratio: 9/16;
       border-radius: var(--r-xl);
       overflow: hidden;
-      cursor: pointer;
       max-width: 340px;
       margin: 0 auto;
       border: 1px solid var(--line-soft);
@@ -2969,9 +3015,10 @@
       border-radius: 0 12px 12px 0;
     }
     .hp2-pull-quote p {
-      font-family: var(--font-accent);
-      font-style: italic;
+      font-family: var(--font-hero);
+      font-style: normal;
       font-size: 1.15rem;
+      font-weight: 700;
       line-height: 1.5;
       color: var(--text);
     }
@@ -3198,7 +3245,35 @@
       .hp2-industry-stats-row { gap: 20px; }
     }
     @media (max-width: 600px) {
-      .hp2-aeo-grid { grid-template-columns: 1fr; }
+      .hp2-aeo-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 28px;
+      }
+      .hp2-aeo-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-height: 0;
+        padding: 14px 16px;
+        border-radius: 18px;
+      }
+      .hp2-aeo-item-icon {
+        width: 46px;
+        height: 46px;
+        margin-bottom: 0;
+        border-radius: 14px;
+        flex: 0 0 46px;
+      }
+      .hp2-aeo-item-icon svg {
+        width: 21px;
+        height: 21px;
+      }
+      .hp2-aeo-item h4 {
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.18;
+      }
       .hp2-stats-grid { grid-template-columns: 1fr 1fr; }
       .hp2-florida-markets { grid-template-columns: 1fr; }
     }
@@ -3304,7 +3379,7 @@
   <!-- ═══ NAV ═══ -->
   <nav class="lib-nav">
     <a class="lib-nav-brand" href="index.html" aria-label="Button Up Media home">
-      <img src="/images/full-logo.svg" alt="Button Up Media" />
+      <img src="images/full-logo.svg" alt="Button Up Media" />
     </a>
     <div class="lib-nav-links">
       <details class="lib-nav-dropdown">
@@ -3315,9 +3390,6 @@
         <div class="lib-nav-dropdown-menu" role="menu" aria-label="Services">
           <div class="lib-desktop-services">
             <a href="social-media-marketing.html">Social Media Marketing</a>
-            <a href="restaurant-advertising.html">Paid Marketing</a>
-            <a href="restaurant-website-design.html">Website Design</a>
-            <a href="restaurant-seo.html">Search &amp; Answer Engine Optimization</a>
           </div>
           <details class="lib-mobile-services lib-mobile-menu-only">
             <summary class="lib-mobile-services-trigger">
@@ -3325,22 +3397,17 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </summary>
             <div class="lib-mobile-services-menu" role="menu" aria-label="Services">
-              <a href="restaurant-website-design.html">Website Design</a>
-              <a href="restaurant-advertising.html">Paid Marketing</a>
               <a href="social-media-marketing.html">Social Media Marketing</a>
-              <a href="restaurant-seo.html">Search &amp; Answer Engine Optimization</a>
             </div>
           </details>
           <a href="case-studies.html" class="lib-mobile-menu-only">Case Studies</a>
-          <a href="about.html" class="lib-mobile-menu-only">About Us</a>
           <a href="tel:+17867409498" class="lib-mobile-menu-only lib-mobile-action --ghost">Call Us</a>
-          <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="lib-mobile-menu-only lib-mobile-action --primary">Book Free Strategy Call</a>
+          <a href="contact.html" class="lib-mobile-menu-only lib-mobile-action --primary">Book Free Strategy Call</a>
         </div>
       </details>
       <a href="case-studies.html">Case Studies</a>
-      <a href="about.html">About Us</a>
       <a class="lib-nav-phone" href="tel:+17867409498">Call Us</a>
-      <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Book Free Strategy Call</a>
+      <a href="contact.html" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Book Free Strategy Call</a>
     </div>
   </nav>
 
@@ -3350,25 +3417,26 @@
     <section class="hp2-hero" id="hero">
       <div class="hp2-hero-media">
         <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1800&h=1000&fit=crop" alt="Dimly lit upscale restaurant interior with warm ambient lighting" />
+        <!-- Hero video experiment: remove this video and the matching JS block to revert to the static image. -->
+        <video class="hp2-hero-bg-video" data-video-src="videos/compilation-best-shots.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
       </div>
       <div class="hp2-hero-inner">
         <div class="hp2-hero-copy">
           <div class="hero-badge" style="display:none;" aria-hidden="true">Florida &bull; Restaurant-Only Growth Team</div>
           <h1 class="hp2-word-reveal">
-            Restaurant Marketing Agency That Grows Your <span class="accent-serif">Business.</span>
+            Restaurant Marketing That Fills <span class="accent-serif">Seats.</span>
           </h1>
           <p>
-            <strong>Your restaurant deserves to be packed.</strong> We make it happen. Button Up Media is a restaurant marketing agency built for one thing, helping restaurants get discovered, get busy, and grow. We combine social media storytelling, high-converting websites, local SEO, and targeted advertising into one growth system designed specifically for the restaurant industry.
+            <strong>Your food is strong. Your restaurant should be busy.</strong> We help restaurants get discovered, get chosen, and grow with social media, websites, SEO, and paid marketing built to work together.
           </p>
           <div class="hp2-hero-cta">
             <div class="flex-row" style="gap: 12px;">
-              <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary hp2-cta-btn">Get Your Free Strategy Call</a>
-              <a href="#why-us" class="btn btn-ghost">See Why Us</a>
+              <a href="contact.html" class="btn btn-primary hp2-cta-btn">Get Your Free Strategy Call</a>
             </div>
             <div class="hp2-hero-chips flex-row" style="gap: 8px;">
               <a class="chip" href="social-media-marketing.html">Organic Social</a>
-              <a class="chip" href="restaurant-advertising.html">Google Ads</a>
-              <a class="chip" href="restaurant-website-design.html">Websites</a>
+              <a class="chip" href="case-studies.html">Case Studies</a>
+              <a class="chip" href="contact.html">Strategy Call</a>
             </div>
           </div>
         </div>
@@ -3426,9 +3494,8 @@
           <p class="hp2-industry-body">Customers no longer drive around looking for a place to eat. They search. <strong style="color:var(--text);">90% of diners research a restaurant online before visiting.</strong> They check Google. They scroll Instagram. They watch TikTok. They read reviews. And they decide in seconds.</p>
           <p class="hp2-industry-body">If your restaurant isn't showing up in those moments, you're losing customers to the restaurants that are.</p>
         </div>
-        <div class="hp2-industry-video hp2-click-to-play" onclick="var v=this.querySelector('video'), o=this.querySelector('.hp2-vid-play');if(v.paused){v.muted=false;v.play();o.style.opacity='0';this.dataset.playing='1';}else{v.pause();o.style.opacity='1';delete this.dataset.playing;}">
-          <video src="videos/influencer-reel.mp4" muted loop playsinline preload="metadata" loading="lazy"></video>
-          <div class="hp2-vid-play" style="z-index:2;"></div>
+        <div class="hp2-industry-video">
+          <video src="videos/2.12.26%20BUM%2015%20Sec%20Quality%20Shots_1080p.mp4" autoplay muted loop playsinline preload="metadata" loading="lazy" aria-label="Button Up Media restaurant quality shots montage"></video>
         </div>
       </div>
 
@@ -3597,7 +3664,7 @@
                   <li><strong>Private events and catering</strong> inquiry forms that convert</li>
                   <li><strong>Built-in SEO foundation</strong> so Google indexes every page correctly</li>
                 </ul>
-                <a href="restaurant-website-design.html" class="hp2-hscroll-cta-link">Explore Restaurant Website Design</a>
+                <a href="contact.html" class="hp2-hscroll-cta-link">Ask About Website Design</a>
               </div>
               <div class="hp2-hscroll-visual" style="aspect-ratio: 1080 / 746;">
                 <div class="hp2-hscroll-visual-inner">
@@ -3626,7 +3693,7 @@
                   <li><strong>Citation building</strong> and review management across 60+ directories</li>
                   <li><strong>AI visibility (AEO)</strong>, structured data so AI platforms recommend you</li>
                 </ul>
-                <a href="restaurant-seo.html" class="hp2-hscroll-cta-link">Explore Local SEO for Restaurants</a>
+                <a href="contact.html" class="hp2-hscroll-cta-link">Ask About Local SEO</a>
               </div>
               <div class="hp2-hscroll-visual" style="aspect-ratio: 1200 / 1068;">
                 <div class="hp2-hscroll-visual-inner">
@@ -3655,7 +3722,7 @@
                   <li><strong>Retargeting campaigns</strong> for website visitors and engaged followers</li>
                   <li><strong>Full conversion tracking</strong> and monthly ROI reporting</li>
                 </ul>
-                <a href="restaurant-advertising.html" class="hp2-hscroll-cta-link">Explore Restaurant Advertising</a>
+                <a href="contact.html" class="hp2-hscroll-cta-link">Ask About Restaurant Advertising</a>
               </div>
               <div class="hp2-hscroll-visual" style="aspect-ratio: 9/16; max-width: 360px; margin: 0 auto;">
                 <div class="hp2-hscroll-visual-inner">
@@ -3728,17 +3795,17 @@
     <!-- ═══ 7. IMMERSIVE #2, Kitchen / Warm Color Grade ═══ -->
     <div class="hp2-curtain-wrap hp2-warm-img" id="immersive-2">
       <div class="hp2-curtain-img">
-        <img src="/images/bts-shoot.jpeg" alt="Button Up Media videographer filming a couple dining at a Miami waterfront restaurant" />
+        <img src="images/bts-shoot.jpeg" alt="Button Up Media videographer filming a couple dining at a Miami waterfront restaurant" />
         <div class="hp2-curtain-overlay" style="background:linear-gradient(180deg, rgba(10,10,10,0.3) 0%, transparent 30%, transparent 50%, rgba(10,10,10,0.85) 100%);"></div>
         <div class="hp2-curtain-copy" style="justify-content:flex-end;">
           <div class="hp2-curtain-glass-wrap">
             <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
             <div class="glass-toplight"></div>
-            <div class="hp2-curtain-glass">
+            <a class="hp2-curtain-glass" href="social-media-marketing.html" aria-label="Explore restaurant social media marketing">
               <pixel-canvas data-gap="5" data-speed="25" data-colors="#D06A50, #B85540, #E88A72" data-no-focus></pixel-canvas>
               <h3>We show up with cameras. You get content that converts.</h3>
               <p>Professional shoots, cinematic reels, scroll-stopping video, all produced on-site at your restaurant.</p>
-            </div>
+            </a>
           </div>
         </div>
       </div>
@@ -3802,7 +3869,7 @@
       </div>
 
       <div style="margin-top:32px;">
-        <a href="restaurant-seo.html" class="btn btn-primary">Learn About Restaurant SEO and AI Visibility &rarr;</a>
+        <a href="contact.html" class="btn btn-primary">Ask About SEO and AI Visibility &rarr;</a>
       </div>
     </section>
 
@@ -3905,7 +3972,7 @@
         <div class="glass-card-wrap hp2-service-reveal">
           <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
           <div class="glass-toplight"></div>
-          <div class="glass-card" style="text-align:center; cursor:pointer;" data-brand="googlemaps" data-hover-colors="#34A853, #4285F4, #0F9D58" onclick="window.location.href='restaurant-seo.html'">
+          <div class="glass-card" style="text-align:center; cursor:pointer;" data-brand="googlemaps" data-hover-colors="#34A853, #4285F4, #0F9D58" onclick="window.location.href='contact.html'">
             <pixel-canvas data-gap="6" data-speed="30" data-colors="#E2A84D, #C9923A, #F0C06A" data-no-focus></pixel-canvas>
             <div class="glass-card-icon" style="margin-left:auto;margin-right:auto;">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" stroke="none"><path d="M19.527 4.799c1.212 2.608.937 5.678-.405 8.173-1.101 2.047-2.744 3.74-4.098 5.614-.619.858-1.244 1.75-1.669 2.727-.141.325-.263.658-.383.992-.121.333-.224.673-.34 1.008-.109.314-.236.684-.627.687h-.007c-.466-.001-.579-.53-.695-.887-.284-.874-.581-1.713-1.044-2.525-1.376-2.417-3.681-4.399-4.727-6.964C4.191 10.631 4.855 7.07 7.11 4.777 9.694 2.143 14.158 1.552 17.28 3.2c.778.413 1.51.965 2.12 1.597l.128.002zm-7.532 8.209a2.99 2.99 0 0 0 2.996-2.984A2.99 2.99 0 0 0 11.995 7.04a2.99 2.99 0 0 0-2.995 2.984 2.99 2.99 0 0 0 2.995 2.984z"/></svg>
@@ -3918,7 +3985,7 @@
         <div class="glass-card-wrap hp2-service-reveal">
           <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
           <div class="glass-toplight"></div>
-          <div class="glass-card" style="text-align:center; cursor:pointer;" data-brand="googleads" data-hover-colors="#4285F4, #FBBC04, #34A853" onclick="window.location.href='restaurant-advertising.html'">
+          <div class="glass-card" style="text-align:center; cursor:pointer;" data-brand="googleads" data-hover-colors="#4285F4, #FBBC04, #34A853" onclick="window.location.href='contact.html'">
             <pixel-canvas data-gap="6" data-speed="30" data-colors="#45B08C, #3A9A78, #5CC4A0" data-no-focus></pixel-canvas>
             <div class="glass-card-icon" style="margin-left:auto;margin-right:auto;">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" stroke="none"><path d="M3.9998 12.0002a3.6 3.6 0 1 1-3.6 3.6002c0-.0367.0055-.072.0068-.1084l.0006-.0309c.0123-.353.0644-.7005.1534-1.038l6.4666-16.0538c.4943-1.2282 1.9181-1.8236 3.1463-1.3293a2.4001 2.4001 0 0 1 1.3293 1.3293zM15.4267 16.5839l-3.4654-8.6066c-.4734-1.176-.4734-2.4895 0-3.6654l2.0657-5.1315c.4943-1.2282 1.9181-1.8236 3.1463-1.3293a2.4001 2.4001 0 0 1 1.3293 1.3293l4.8 11.9282c.4943 1.2282-.1011 2.6519-1.3293 3.1463a2.4001 2.4001 0 0 1-3.1463-1.3293l-.0002-.0002zm4.9725-1.3836a2.4 2.4 0 1 0-4.7988.0002 2.4 2.4 0 0 0 4.7988-.0002z"/></svg>
@@ -3931,7 +3998,7 @@
         <div class="glass-card-wrap hp2-service-reveal">
           <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
           <div class="glass-toplight"></div>
-          <div class="glass-card" style="text-align:center; cursor:pointer;" data-brand="webflow" data-hover-colors="#4353FF, #2D3BE0, #6E7AFF" onclick="window.location.href='restaurant-website-design.html'">
+          <div class="glass-card" style="text-align:center; cursor:pointer;" data-brand="webflow" data-hover-colors="#4353FF, #2D3BE0, #6E7AFF" onclick="window.location.href='contact.html'">
             <pixel-canvas data-gap="6" data-speed="30" data-colors="#E2A84D, #C9923A, #F0C06A" data-no-focus></pixel-canvas>
             <div class="glass-card-icon" style="margin-left:auto;margin-right:auto;">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" stroke="none"><path d="M21.469 6.825c.84 1.537 1.318 3.3 1.318 5.175 0 3.979-2.156 7.456-5.363 9.325l3.295-9.527c.615-1.54.82-2.771.82-3.864 0-.405-.027-.78-.07-1.109m-7.981.105c.647-.034 1.233-.1 1.233-.1.58-.068.512-.924-.068-.892 0 0-1.744.138-2.869.138-1.057 0-2.835-.138-2.835-.138-.58-.032-.648.858-.068.892 0 0 .555.066 1.133.1l1.683 4.613-2.366 7.088L6.116 6.93c.649-.034 1.234-.1 1.234-.1.585-.068.516-.924-.064-.892 0 0-1.745.138-2.871.138-.202 0-.44-.005-.69-.014C5.494 3.086 8.514 1.18 12 1.18c2.6 0 4.966.989 6.748 2.612-.043-.003-.085-.008-.128-.008-1.058 0-1.812.924-1.812 1.914 0 .89.513 1.643 1.06 2.531.411.72.89 1.643.89 2.977 0 .924-.354 1.994-.821 3.49l-1.075 3.597-3.894-11.581.001.001zM12 22.784c-1.592 0-3.1-.341-4.46-.953l4.735-13.76 4.849 13.281c.035.085.076.164.12.238A10.617 10.617 0 0 1 12 22.784M1.213 12c0-1.724.413-3.353 1.145-4.792l6.3 17.265C4.056 22.534 1.213 17.647 1.213 12M12 0C5.385 0 0 5.385 0 12s5.385 12 12 12 12-5.385 12-12S18.615 0 12 0"/></svg>
@@ -4071,7 +4138,7 @@
 
       <p class="lib-section-sub" style="margin-top:28px; max-width:60ch;">Every Florida market has its own dining culture, seasonal patterns, and competitive dynamics. We build restaurant marketing strategies that account for those differences, not cookie-cutter campaigns that ignore where you actually operate.</p>
       <div style="margin-top:20px;">
-        <a href="services.html" class="btn btn-primary">See Our Full Restaurant Marketing Services &rarr;</a>
+        <a href="contact.html" class="btn btn-primary">Ask About Our Full Restaurant Marketing Services &rarr;</a>
       </div>
     </section>
 
@@ -4117,7 +4184,7 @@
       </div>
 
       <div class="hp2-process-connector">
-        <p><a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary">Get Your Free Strategy Call &rarr;</a></p>
+        <p><a href="contact.html" class="btn btn-primary">Get Your Free Strategy Call &rarr;</a></p>
       </div>
     </section>
 
@@ -4161,14 +4228,14 @@
         </div>
         <div class="hp2-faq-bottom-cta">
           <p>Can't find what you're looking for?</p>
-          <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary">Get Your Free Strategy Call</a>
+          <a href="contact.html" class="btn btn-primary">Get Your Free Strategy Call</a>
         </div>
       </div>
     </section>
 
     <!-- ═══ 13. CTA, Word Reveal + Gold Pulse ═══ -->
     <section class="card-overlay lib-section" id="cta">
-      <div class="hp2-cta-scene" onclick="window.open('https://calendly.com/juanh-buttonupmedia/freeconsultation','_blank')" style="cursor:pointer">
+      <div class="hp2-cta-scene" onclick="window.location.href='contact.html'" style="cursor:pointer">
         <div class="hp2-cta-orb"></div>
         <div class="hp2-cta-orb"></div>
         <div class="hp2-cta-orb"></div>
@@ -4188,9 +4255,6 @@
         <div class="footer-col">
           <h4>Services</h4>
           <a href="social-media-marketing.html">Social Media Marketing</a>
-          <a href="restaurant-advertising.html">Paid Marketing</a>
-          <a href="restaurant-website-design.html">Website Design</a>
-          <a href="restaurant-seo.html">Search &amp; Answer Engine Optimization</a>
         </div>
         <div class="footer-col">
           <h4>Locations</h4>
@@ -4201,10 +4265,9 @@
         </div>
         <div class="footer-col">
           <h4>Company</h4>
-          <a href="about.html">About</a>
           <a href="case-studies.html">Case Studies</a>
           <a href="#faq">FAQ</a>
-          <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank">Free Strategy Call</a>
+          <a href="contact.html">Free Strategy Call</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -4219,7 +4282,7 @@
   </div><!-- /.page -->
 
   <!-- Base shared.js for nav, card-overlay stacking, immersive expand, etc. -->
-  <script src="shared.js"></script>
+  <script src="shared.js?v=nav-mobile-1"></script>
 
   <!-- ═══ HOMEPAGE 2.0, ALL ANIMATION JS SELF-CONTAINED ═══ -->
   <script>
@@ -4227,6 +4290,33 @@
     "use strict";
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Hero video experiment: remove this block and the .hp2-hero-bg-video element to revert.
+    const heroBgVideo = document.querySelector(".hp2-hero-bg-video");
+    if (heroBgVideo) {
+      const mobileHeroVideo = window.matchMedia("(max-width: 700px)");
+      const revealHeroVideo = () => {
+        heroBgVideo.classList.add("is-loaded");
+        heroBgVideo.style.opacity = mobileHeroVideo.matches ? "0.46" : "0.64";
+        if (!prefersReducedMotion) {
+          heroBgVideo.play().catch(() => {});
+        }
+      };
+      const enableHeroVideo = () => {
+        if (prefersReducedMotion) return;
+        if (!heroBgVideo.src) {
+          heroBgVideo.src = heroBgVideo.dataset.videoSrc;
+          heroBgVideo.load();
+        }
+        heroBgVideo.play().catch(() => {});
+        if (heroBgVideo.readyState >= 2) revealHeroVideo();
+      };
+      heroBgVideo.addEventListener("loadeddata", revealHeroVideo);
+      mobileHeroVideo.addEventListener("change", () => {
+        if (heroBgVideo.classList.contains("is-loaded")) revealHeroVideo();
+      });
+      enableHeroVideo();
+    }
 
     // ── UTILITY: Pure JS Word Splitting ──
     function splitWords(el) {
@@ -4538,8 +4628,8 @@
       // Determine reveal technique per immersive section
       let clipFrom, clipTo;
       if (wrap.classList.contains("hp2-warm-img")) {
-        // Immersive #2: Horizontal wipe left-to-right
-        clipFrom = "inset(0 100% 0 0)";
+        // Immersive #2: Keep the behind-the-scenes photo visible immediately.
+        clipFrom = "inset(0 0% 0 0)";
         clipTo = "inset(0 0% 0 0)";
       } else if (wrap.classList.contains("hp2-bright-img")) {
         // Immersive #3: Radial reveal from center
