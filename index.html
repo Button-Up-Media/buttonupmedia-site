@@ -6,17 +6,17 @@
   <title>Restaurant Marketing Agency | Button Up Media - Florida</title>
   <meta name="description" content="Button Up Media is a restaurant marketing agency in Florida. We help restaurants grow with social media, website design, SEO & advertising. Get a free consultation." />
   <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg">
-  <link rel="canonical" href="https://buttonupmedia.com/" />
+  <link rel="canonical" href="https://www.buttonupmedia.com/" />
   <meta name="theme-color" content="#0b0d10" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Restaurant Marketing Agency | Button Up Media - Florida" />
   <meta property="og:description" content="Button Up Media is a restaurant marketing agency in Florida. We help restaurants grow with social media, website design, SEO & advertising. Get a free consultation." />
-  <meta property="og:url" content="https://buttonupmedia-site.vercel.app/" />
-  <meta property="og:image" content="https://buttonupmedia-site.vercel.app/images/bts-shoot.jpeg" />
+  <meta property="og:url" content="https://www.buttonupmedia.com/" />
+  <meta property="og:image" content="https://www.buttonupmedia.com/images/sm-videography-hero.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Restaurant Marketing Agency | Button Up Media - Florida" />
   <meta name="twitter:description" content="Button Up Media is a restaurant marketing agency in Florida. We help restaurants grow with social media, website design, SEO & advertising. Get a free consultation." />
-  <meta name="twitter:image" content="https://buttonupmedia-site.vercel.app/images/bts-shoot.jpeg" />
+  <meta name="twitter:image" content="https://www.buttonupmedia.com/images/sm-videography-hero.jpg" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -54,6 +54,11 @@
     .hp2-hero-copy > p {
       font-size: 17px;
       line-height: 1.75;
+    }
+
+    [data-shared-animations="off"] {
+      content-visibility: auto;
+      contain-intrinsic-size: 1200px;
     }
 
     /* ── Nav: fixed on homepage ── */
@@ -633,6 +638,12 @@
     }
     .hp2-warm-img .hp2-curtain-img {
       clip-path: inset(0 0 0 0);
+    }
+    .hp2-curtain-wrap.hp2-warm-img {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      border-radius: 0;
     }
     .hp2-curtain-img img {
       width: 100%;
@@ -1434,7 +1445,13 @@
        7. KITCHEN IMMERSIVE, Warm Color Grade
        ══════════════════════════════════════ */
     .hp2-warm-img img {
-      filter: saturate(0.4) brightness(0.8);
+      filter: none;
+      transform: none;
+    }
+    .hp2-warm-img .hp2-curtain-glass-wrap {
+      opacity: 1;
+      transform: none;
+      filter: none;
     }
 
     /* ══════════════════════════════════════
@@ -1478,7 +1495,7 @@
       justify-content: center;
     }
     .hp2-service-reveal {
-      clip-path: inset(0 0 100% 0);
+      transform: translateY(0);
     }
 
     /* ══════════════════════════════════════
@@ -1521,7 +1538,7 @@
        10. PACKED HOUSE IMMERSIVE, Brightness
        ══════════════════════════════════════ */
     .hp2-bright-img img {
-      filter: brightness(0.6);
+      filter: none;
     }
 
     /* ══════════════════════════════════════
@@ -2085,13 +2102,21 @@
     }
 
     @media (max-width: 700px) {
+      .page {
+        padding-top: 0;
+      }
       .hp2-hero {
-        min-height: auto;
+        min-height: 108svh;
+        align-items: flex-end;
+        overflow: hidden;
+      }
+      .hp2-hero-media {
+        inset: 0;
       }
       .hp2-hero-inner {
         width: calc(100% - 24px);
-        padding: 68px 0 34px;
-        gap: 20px;
+        padding: clamp(138px, 20svh, 176px) 0 132px;
+        gap: 0;
       }
       .hp2-hero-copy {
         padding-bottom: 0;
@@ -2107,13 +2132,14 @@
         font-size: 0.96rem;
         line-height: 1.62;
         max-width: 36ch;
-        margin-bottom: 22px;
+        margin-bottom: 0;
       }
       .hp2-hero-bg-video.is-loaded {
         opacity: 0.46;
       }
       .hp2-hero-cta {
-        gap: 14px;
+        gap: 18px;
+        margin-top: 54px;
       }
       .hp2-hero-cta .flex-row {
         flex-direction: column;
@@ -2123,25 +2149,21 @@
         width: 100%;
       }
       .hp2-hero-chips {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 6px;
+        display: flex;
+        justify-content: center;
+        gap: 8px;
         width: 100%;
       }
       .hp2-hero-chips .chip {
-        width: 100%;
+        min-width: min(220px, 100%);
         justify-content: center;
-        padding: 0 8px;
-        height: 30px;
-        font-size: 0.64rem;
+        padding: 0 18px;
+        height: 34px;
+        font-size: 0.7rem;
         letter-spacing: 0.01em;
       }
       .hp2-proof-fragments {
-        width: 100%;
-        gap: 10px;
-        padding-bottom: 0;
-        flex-direction: column;
-        align-items: stretch;
+        display: none;
       }
       .hp2-proof-pill {
         width: 100%;
@@ -2155,8 +2177,8 @@
         font-size: 0.66rem;
       }
       .hp2-trust {
-        margin-top: -24px;
-        padding: 30px 0 72px;
+        margin-top: 0;
+        padding: 56px 0 72px;
         border-radius: 28px 28px 0 0;
       }
       .hp2-trust-inner {
@@ -3335,21 +3357,103 @@
     "@graph": [
       {
         "@type": "Organization",
+        "@id": "https://www.buttonupmedia.com/#organization",
         "name": "Button Up Media",
-        "url": "https://buttonupmedia.com",
+        "url": "https://www.buttonupmedia.com/",
+        "logo": "https://www.buttonupmedia.com/favicon-bum.svg",
+        "image": "https://www.buttonupmedia.com/images/sm-videography-hero.jpg",
         "email": "contact@buttonupmedia.com",
-        "telephone": "(786) 740-9498",
-        "areaServed": ["Miami", "Fort Lauderdale", "West Palm Beach", "Orlando", "Tampa", "Jacksonville", "Naples", "Florida"],
-        "description": "Button Up Media is a restaurant marketing agency in Florida. We help restaurants grow with social media, website design, SEO, and advertising."
+        "telephone": "+17867409498",
+        "description": "Button Up Media is a restaurant marketing agency in Florida. We help restaurants grow with social media, website design, SEO, and advertising.",
+        "slogan": "Restaurant marketing that fills seats.",
+        "areaServed": [
+          { "@type": "State", "name": "Florida" },
+          { "@type": "City", "name": "Miami" },
+          { "@type": "City", "name": "Fort Lauderdale" },
+          { "@type": "City", "name": "West Palm Beach" },
+          { "@type": "City", "name": "Orlando" },
+          { "@type": "City", "name": "Tampa" },
+          { "@type": "City", "name": "Jacksonville" },
+          { "@type": "City", "name": "Naples" }
+        ],
+        "knowsAbout": [
+          "restaurant marketing",
+          "restaurant social media marketing",
+          "restaurant content creation",
+          "restaurant SEO",
+          "Google Business Profile optimization for restaurants",
+          "restaurant website design",
+          "Google Ads for restaurants",
+          "Answer Engine Optimization for restaurants"
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Restaurant Marketing Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "@id": "https://www.buttonupmedia.com/socialmediamarketing#service",
+                "name": "Restaurant Social Media Marketing",
+                "url": "https://www.buttonupmedia.com/socialmediamarketing",
+                "serviceType": "Social Media Marketing",
+                "audience": { "@type": "BusinessAudience", "audienceType": "Restaurant owners and restaurant groups" }
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Restaurant SEO and Answer Engine Optimization",
+                "serviceType": "Restaurant SEO",
+                "audience": { "@type": "BusinessAudience", "audienceType": "Restaurant owners and restaurant groups" }
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Restaurant Website Design",
+                "serviceType": "Website Design",
+                "audience": { "@type": "BusinessAudience", "audienceType": "Restaurant owners and restaurant groups" }
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Restaurant Google Ads Management",
+                "serviceType": "Paid Search Advertising",
+                "audience": { "@type": "BusinessAudience", "audienceType": "Restaurant owners and restaurant groups" }
+              }
+            }
+          ]
+        }
       },
       {
-        "@type": "ProfessionalService",
+        "@type": "WebSite",
+        "@id": "https://www.buttonupmedia.com/#website",
+        "url": "https://www.buttonupmedia.com/",
         "name": "Button Up Media",
-        "serviceType": ["Restaurant SEO", "Google Business Profile Optimization", "Social Media Marketing", "Google Ads Management", "Restaurant Website Design"],
-        "areaServed": ["Miami", "Fort Lauderdale", "West Palm Beach", "South Florida"]
+        "publisher": { "@id": "https://www.buttonupmedia.com/#organization" },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.buttonupmedia.com/#webpage",
+        "url": "https://www.buttonupmedia.com/",
+        "name": "Restaurant Marketing Agency | Button Up Media - Florida",
+        "description": "Button Up Media is a restaurant marketing agency in Florida helping restaurants grow through social media, websites, SEO, and paid advertising.",
+        "isPartOf": { "@id": "https://www.buttonupmedia.com/#website" },
+        "about": { "@id": "https://www.buttonupmedia.com/#organization" },
+        "primaryImageOfPage": { "@type": "ImageObject", "url": "https://www.buttonupmedia.com/images/sm-videography-hero.jpg" },
+        "inLanguage": "en-US"
       },
       {
         "@type": "FAQPage",
+        "@id": "https://www.buttonupmedia.com/#faq",
+        "isPartOf": { "@id": "https://www.buttonupmedia.com/#webpage" },
         "mainEntity": [
           { "@type": "Question", "name": "What does a restaurant marketing agency do?", "acceptedAnswer": { "@type": "Answer", "text": "A restaurant marketing agency specializes in helping restaurants increase their visibility, attract more customers, and grow revenue through digital marketing. This typically includes social media management and content creation, website design and optimization, search engine optimization (SEO), and paid advertising on platforms like Google and Facebook. Unlike general marketing agencies, a restaurant marketing agency understands the unique challenges of the hospitality industry - thin margins, high competition, and the constant need to keep seats filled." } },
           { "@type": "Question", "name": "How much does restaurant marketing cost?", "acceptedAnswer": { "@type": "Answer", "text": "Restaurant marketing costs vary depending on the services you need and the size of your operation. At Button Up Media, we build custom strategies tailored to each restaurant's goals and budget. Most restaurant owners invest between $1,500 and $5,000 per month for a coordinated marketing strategy that includes multiple channels. The best way to get a clear picture is to schedule a free consultation so we can understand your specific situation and recommend the right approach." } },
@@ -3400,12 +3504,11 @@
               <a href="social-media-marketing.html">Social Media Marketing</a>
             </div>
           </details>
-          <a href="case-studies.html" class="lib-mobile-menu-only">Case Studies</a>
           <a href="tel:+17867409498" class="lib-mobile-menu-only lib-mobile-action --ghost">Call Us</a>
           <a href="contact.html" class="lib-mobile-menu-only lib-mobile-action --primary">Book Free Strategy Call</a>
         </div>
       </details>
-      <a href="case-studies.html">Case Studies</a>
+      <a href="index.html">Home</a>
       <a class="lib-nav-phone" href="tel:+17867409498">Call Us</a>
       <a href="contact.html" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Book Free Strategy Call</a>
     </div>
@@ -3417,7 +3520,7 @@
     <section class="hp2-hero" id="hero">
       <div class="hp2-hero-media">
         <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1800&h=1000&fit=crop" alt="Dimly lit upscale restaurant interior with warm ambient lighting" />
-        <!-- Hero video experiment: remove this video and the matching JS block to revert to the static image. -->
+        <!-- Hero video is lazy-loaded and paused offscreen by shared.js. -->
         <video class="hp2-hero-bg-video" data-video-src="videos/compilation-best-shots.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
       </div>
       <div class="hp2-hero-inner">
@@ -3435,8 +3538,6 @@
             </div>
             <div class="hp2-hero-chips flex-row" style="gap: 8px;">
               <a class="chip" href="social-media-marketing.html">Organic Social</a>
-              <a class="chip" href="case-studies.html">Case Studies</a>
-              <a class="chip" href="contact.html">Strategy Call</a>
             </div>
           </div>
         </div>
@@ -3484,18 +3585,18 @@
     </section>
 
     <!-- ═══ NEW: INDUSTRY COMPETITION ═══ -->
-    <section class="card-overlay --dark lib-section" id="industry">
+    <section class="card-overlay --dark lib-section" id="industry" data-shared-animations="off">
 
       <div class="hp2-industry-split">
         <div class="hp2-industry-copy">
           <div class="lib-section-label" style="text-align:left;">The Challenge</div>
-          <h2 class="hp2-industry-headline">The Restaurant Industry<br>Has a Visibility Problem</h2>
-          <p class="hp2-industry-body">The U.S. restaurant industry generates over $1.2 trillion in annual revenue. There are more than 1 million restaurant locations across the country, and over 67,000 in Florida alone.</p>
-          <p class="hp2-industry-body">Customers no longer drive around looking for a place to eat. They search. <strong style="color:var(--text);">90% of diners research a restaurant online before visiting.</strong> They check Google. They scroll Instagram. They watch TikTok. They read reviews. And they decide in seconds.</p>
-          <p class="hp2-industry-body">If your restaurant isn't showing up in those moments, you're losing customers to the restaurants that are.</p>
+          <h2 class="hp2-industry-headline">If people can't find your restaurant online,<br>they eat somewhere else.</h2>
+          <p class="hp2-industry-body">There are over 67,000 restaurants in Florida alone. Diners aren't driving around hoping to find a good spot anymore. They search.</p>
+          <p class="hp2-industry-body"><strong style="color:var(--text);">90% of diners look up a restaurant online before they visit.</strong> They check Google. They scroll Instagram. They watch TikTok. They read reviews. And they decide in seconds.</p>
+          <p class="hp2-industry-body">If you're not showing up in those moments, the restaurant down the street is.</p>
         </div>
         <div class="hp2-industry-video">
-          <video src="videos/2.12.26%20BUM%2015%20Sec%20Quality%20Shots_1080p.mp4" autoplay muted loop playsinline preload="metadata" loading="lazy" aria-label="Button Up Media restaurant quality shots montage"></video>
+          <video data-video-src="videos/2.12.26%20BUM%2015%20Sec%20Quality%20Shots_1080p.mp4" data-autoplay-on-view muted loop playsinline preload="none" aria-label="Button Up Media restaurant quality shots montage"></video>
         </div>
       </div>
 
@@ -3612,6 +3713,236 @@
       </div>
     </section>
 
+    <!-- ═══ 4. ECOSYSTEM ═══ -->
+    <section class="card-overlay lib-section eco-section" id="ecosystem" data-shared-animations="off">
+      <div class="eco-wrap">
+        <div class="eco-head">
+          <div class="lib-section-label">The Ecosystem</div>
+          <h2 class="lib-section-title">Your website, your social media, your ads. <span style="color:var(--gold);">One ecosystem.</span></h2>
+          <p class="lib-section-sub">These three pieces aren't separate jobs. They feed each other. Your social makes people curious. Your ads bring them in. Your website turns them into bookings. Break one and the other two start working harder for less. Try it below.</p>
+        </div>
+
+        <div class="eco-diagram" id="ecoDiagram">
+          <svg class="eco-svg" viewBox="0 0 400 400" aria-hidden="true">
+            <defs>
+              <linearGradient id="ecoRingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#e2a84d" stop-opacity="0.4"/>
+                <stop offset="50%" stop-color="#d06a50" stop-opacity="0.4"/>
+                <stop offset="100%" stop-color="#45b08c" stop-opacity="0.4"/>
+              </linearGradient>
+              <marker id="ecoArrowGold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#e2a84d"/>
+              </marker>
+              <marker id="ecoArrowDim" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#9a6f2e" opacity="0.4"/>
+              </marker>
+            </defs>
+            <circle class="eco-ring eco-ring--spinning" id="ecoRing" cx="200" cy="200" r="160" fill="none" stroke="url(#ecoRingGradient)" stroke-width="1.5" stroke-dasharray="3 7"/>
+            <g id="ecoArcs"></g>
+            <g id="ecoInward"></g>
+          </svg>
+
+          <div class="eco-center">
+            <div class="eco-eyebrow">The Ecosystem</div>
+            <div class="eco-tag">everything points to <em>conversion</em></div>
+          </div>
+
+          <div class="eco-node" data-node="website">
+            <div class="eco-orb"><i data-lucide="monitor"></i></div>
+            <div class="eco-label">
+              <div class="eco-title">Website</div>
+              <div class="eco-sub">The conversion point</div>
+            </div>
+          </div>
+          <div class="eco-node" data-node="organic">
+            <div class="eco-orb"><i data-lucide="camera"></i></div>
+            <div class="eco-label">
+              <div class="eco-title">Organic Social</div>
+              <div class="eco-sub">The brand builder</div>
+            </div>
+          </div>
+          <div class="eco-node" data-node="paid">
+            <div class="eco-orb"><i data-lucide="megaphone"></i></div>
+            <div class="eco-label">
+              <div class="eco-title">Paid Advertising</div>
+              <div class="eco-sub">The fast-lane converter</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="eco-controls">
+          <span class="eco-try">Try this</span>
+          <div class="eco-break-row">
+            <button class="eco-break" data-break="website">Break Website</button>
+            <button class="eco-break" data-break="organic">Break Organic Social</button>
+            <button class="eco-break" data-break="paid">Break Paid Advertising</button>
+          </div>
+          <button class="eco-reset" id="ecoReset" hidden>Reset</button>
+        </div>
+
+        <div class="eco-detail" id="ecoDetail" aria-live="polite"></div>
+
+        <div class="eco-footer">
+          <div class="eco-footer-icon"><i data-lucide="sparkles"></i></div>
+          <div>
+            <h3>Strong website. Strong social. Strong ads. They build each other up.</h3>
+            <p>When all three are working, your social makes people curious about your restaurant, your ads catch them when they're hungry, and your website turns them into a reservation. When one is weak, the other two pick up the slack until they burn out. That's why we run all three together as one program, not three separate bills.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+    (function() {
+      const diagram = document.getElementById("ecoDiagram");
+      const arcsGroup = document.getElementById("ecoArcs");
+      const inwardGroup = document.getElementById("ecoInward");
+      const ring = document.getElementById("ecoRing");
+      const detail = document.getElementById("ecoDetail");
+      const resetBtn = document.getElementById("ecoReset");
+      if (!diagram || !arcsGroup || !inwardGroup || !ring || !detail || !resetBtn) return;
+
+      const nodes = {
+        website: {
+          title: "Website",
+          shortBreak: "Web",
+          angle: 0,
+          failure: "If the website is weak, every ad click and every social follower lands in a leaking bucket. The traffic shows up, but no one books."
+        },
+        organic: {
+          title: "Organic Social",
+          shortBreak: "Social",
+          angle: 240,
+          failure: "If organic is weak, no one knows your name when an ad shows up. Ads then cost more to get the same result because you're starting from zero every time."
+        },
+        paid: {
+          title: "Paid Advertising",
+          shortBreak: "Ads",
+          angle: 120,
+          failure: "If paid is weak, the slow burn of social never reaches dollars fast enough. Cash flow lags behind brand momentum, and you can't see the marketing actually paying off."
+        }
+      };
+      const order = ["website", "organic", "paid"];
+      let brokenKey = null;
+
+      function positionNodes() {
+        order.forEach(key => {
+          const node = diagram.querySelector(`.eco-node[data-node="${key}"]`);
+          if (!node) return;
+          const angle = (nodes[key].angle - 90) * (Math.PI / 180);
+          node.style.left = (50 + Math.cos(angle) * 40) + "%";
+          node.style.top = (50 + Math.sin(angle) * 40) + "%";
+        });
+      }
+
+      function buildArrows() {
+        arcsGroup.innerHTML = "";
+        inwardGroup.innerHTML = "";
+        const r = 130;
+        const cx = 200;
+        const cy = 200;
+        const offset = 0.35;
+
+        order.forEach((key, index) => {
+          const next = order[(index + 1) % order.length];
+          const a1 = (nodes[key].angle - 90) * (Math.PI / 180);
+          const a2 = (nodes[next].angle - 90) * (Math.PI / 180);
+          const dimmed = brokenKey === key || brokenKey === next;
+          const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          path.setAttribute("d", `M ${cx + Math.cos(a1 + offset) * r} ${cy + Math.sin(a1 + offset) * r} A ${r} ${r} 0 0 1 ${cx + Math.cos(a2 - offset) * r} ${cy + Math.sin(a2 - offset) * r}`);
+          path.setAttribute("fill", "none");
+          path.setAttribute("stroke", dimmed ? "#9a6f2e" : "#e2a84d");
+          path.setAttribute("stroke-opacity", dimmed ? "0.3" : "0.7");
+          path.setAttribute("stroke-width", "2");
+          path.setAttribute("marker-end", dimmed ? "url(#ecoArrowDim)" : "url(#ecoArrowGold)");
+          if (dimmed) path.setAttribute("stroke-dasharray", "4 6");
+          arcsGroup.appendChild(path);
+        });
+
+        ["organic", "paid"].forEach(key => {
+          const from = (nodes[key].angle - 90) * (Math.PI / 180);
+          const to = (nodes.website.angle - 90) * (Math.PI / 180);
+          const dimmed = brokenKey === key || brokenKey === "website";
+          const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+          line.setAttribute("x1", cx + Math.cos(from) * (r - 28));
+          line.setAttribute("y1", cy + Math.sin(from) * (r - 28));
+          line.setAttribute("x2", cx + Math.cos(to) * (r - 28));
+          line.setAttribute("y2", cy + Math.sin(to) * (r - 28));
+          line.setAttribute("stroke", dimmed ? "#9a6f2e" : "#e8b65e");
+          line.setAttribute("stroke-opacity", dimmed ? "0.3" : "0.55");
+          line.setAttribute("stroke-width", "1.5");
+          line.setAttribute("stroke-dasharray", dimmed ? "3 5" : "5 5");
+          line.setAttribute("marker-end", dimmed ? "url(#ecoArrowDim)" : "url(#ecoArrowGold)");
+          inwardGroup.appendChild(line);
+        });
+      }
+
+      function renderDetail() {
+        if (!brokenKey) {
+          detail.classList.remove("--show");
+          setTimeout(() => { if (!brokenKey) detail.innerHTML = ""; }, 350);
+          resetBtn.hidden = true;
+          return;
+        }
+        const node = nodes[brokenKey];
+        resetBtn.hidden = false;
+        detail.innerHTML = `
+          <div class="eco-break-warn">
+            <div class="eco-warn-icon"><i data-lucide="alert-triangle"></i></div>
+            <div>
+              <div class="eco-warn-eye">What happens when ${node.title} breaks</div>
+              <p>${node.failure}</p>
+            </div>
+          </div>`;
+        if (window.lucide) window.lucide.createIcons();
+        requestAnimationFrame(() => detail.classList.add("--show"));
+      }
+
+      function updateAll() {
+        order.forEach(key => {
+          const node = diagram.querySelector(`.eco-node[data-node="${key}"]`);
+          if (!node) return;
+          node.classList.toggle("eco-node--broken", brokenKey === key);
+          let tag = node.querySelector(".eco-broken-tag");
+          if (brokenKey === key && !tag) {
+            tag = document.createElement("div");
+            tag.className = "eco-broken-tag";
+            tag.textContent = "Broken";
+            node.appendChild(tag);
+          } else if (brokenKey !== key && tag) {
+            tag.remove();
+          }
+        });
+
+        document.querySelectorAll(".eco-break").forEach(button => {
+          const key = button.dataset.break;
+          button.classList.toggle("--active", brokenKey === key);
+          const prefix = brokenKey === key ? "x " : "";
+          button.innerHTML = prefix + 'Break <span class="eco-break-long">' + nodes[key].title + '</span><span class="eco-break-short">' + nodes[key].shortBreak + '</span>';
+        });
+
+        ring.classList.toggle("eco-ring--spinning", !brokenKey);
+        buildArrows();
+        renderDetail();
+      }
+
+      document.querySelectorAll(".eco-break").forEach(button => {
+        button.addEventListener("click", () => {
+          brokenKey = brokenKey === button.dataset.break ? null : button.dataset.break;
+          updateAll();
+        });
+      });
+      resetBtn.addEventListener("click", () => {
+        brokenKey = null;
+        updateAll();
+      });
+
+      positionNodes();
+      buildArrows();
+      updateAll();
+    })();
+    </script>
+
     <!-- ═══ 5b. HORIZONTAL SCROLL GROWTH SYSTEM ═══ -->
     <section class="hp2-hscroll-section" id="system">
       <div class="hp2-hscroll-pin">
@@ -3626,20 +3957,20 @@
                 <div class="label">01, Social Media</div>
                 <h2>Social Media That Fills Seats</h2>
                 <div class="hp2-hscroll-stat-pill"><strong>75%</strong> of diners say Instagram influences where they eat</div>
-                <p>We create <strong>scroll-stopping food content</strong>, professional photography, cinematic video, and authentic storytelling that highlights your signature dishes and your vibe. We physically show up at your restaurant with cameras and build a content library from scratch.</p>
-                <p>This isn't a generic agency recycling stock photos. Every piece of content is made inside your restaurant, for your audience, on a strategy built around your goals.</p>
+                <p>We show up at your restaurant with cameras and shoot the photos and videos that make people stop scrolling, your signature dishes, your team, your room, your vibe.</p>
+                <p>This isn't an agency recycling stock photos. Every post is made inside your restaurant, for your audience, on a plan built around your goals.</p>
                 <ul>
-                  <li><strong>Professional food photography</strong> and short-form video production</li>
-                  <li><strong>Monthly content calendars</strong> aligned to your menu, events, and seasonal rhythm</li>
-                  <li><strong>Daily community management</strong>, comment responses, DMs, and local engagement</li>
-                  <li><strong>Platform-specific strategy</strong> for Instagram, TikTok, and Facebook</li>
-                  <li><strong>Paid social campaigns</strong> to accelerate reach and fill slow nights</li>
+                  <li><strong>Professional food photography</strong> and short-form video, shot on-site</li>
+                  <li><strong>A monthly content plan</strong> built around your menu, events, and busy and slow seasons</li>
+                  <li><strong>Daily comment, DM, and local interaction management</strong> so your page stays active</li>
+                  <li><strong>A different approach for each platform</strong>, Instagram, TikTok, and Facebook each work differently</li>
+                  <li><strong>Boosted posts to fill slow nights</strong>, paid social done right</li>
                 </ul>
                 <a href="social-media-marketing.html" class="hp2-hscroll-cta-link">Explore Restaurant Social Media</a>
               </div>
               <div class="hp2-hscroll-visual" style="aspect-ratio: 9/16; max-width: 360px; margin: 0 auto;">
                 <div class="hp2-hscroll-visual-inner">
-                  <video src="videos/fatty-crab-nola-flavors.mp4" autoplay muted loop playsinline></video>
+                  <video data-video-src="videos/fatty-crab-nola-flavors.mp4" data-autoplay-on-view muted loop playsinline preload="none"></video>
                 </div>
               </div>
             </div>
@@ -3654,15 +3985,15 @@
               <div class="hp2-hscroll-copy">
                 <div class="label">02, Websites</div>
                 <h2>Websites That Convert Visitors to Customers</h2>
-                <div class="hp2-hscroll-stat-pill"><strong>88%</strong> of diners research a restaurant online before visiting</div>
-                <p>Your website is a <strong>decision point</strong>. When a potential customer lands on your site, they decide in seconds whether to make a reservation or keep scrolling. We build restaurant websites designed around that moment, mobile-first, fast-loading, and built to convert.</p>
-                <p>Every site we build integrates directly with your reservation system, online ordering, and private events funnel, so no customer falls through the cracks.</p>
+                <div class="hp2-hscroll-stat-pill"><strong>88%</strong> of diners look up a restaurant online before visiting</div>
+                <p>Once someone lands on your site, you have a few seconds. Either they book a table or they keep scrolling to the next restaurant. We build sites that win that moment, fast on phones, easy to use, with a clear path to a reservation.</p>
+                <p>Every site we build is wired straight into your reservation system, online ordering, and private events form, so no customer falls through the cracks.</p>
                 <ul>
-                  <li><strong>Mobile-first restaurant design</strong> optimized for the way customers actually browse</li>
-                  <li><strong>Menu pages that sell</strong>, with photography, descriptions, and ordering integration</li>
-                  <li><strong>Reservation integration</strong> with OpenTable, Resy, Toast, and Yelp</li>
-                  <li><strong>Private events and catering</strong> inquiry forms that convert</li>
-                  <li><strong>Built-in SEO foundation</strong> so Google indexes every page correctly</li>
+                  <li><strong>Designed for phones first</strong>, the way most diners actually browse</li>
+                  <li><strong>Menu pages that sell</strong>, with real photos and one-tap ordering</li>
+                  <li><strong>Connected to OpenTable, Resy, Toast, and Yelp</strong>, so reservations flow straight in</li>
+                  <li><strong>Private events and catering forms</strong> that actually get filled out</li>
+                  <li><strong>Built so Google understands it</strong> from day one</li>
                 </ul>
                 <a href="contact.html" class="hp2-hscroll-cta-link">Ask About Website Design</a>
               </div>
@@ -3682,18 +4013,18 @@
             <div class="hp2-hscroll-inner">
               <div class="hp2-hscroll-copy">
                 <div class="label">03, SEO</div>
-                <h2>SEO That Gets You Found</h2>
-                <div class="hp2-hscroll-stat-pill"><strong>97%</strong> of diners use search engines to find restaurants</div>
-                <p>When someone searches "best Italian restaurant near me" or "brunch in Brickell," your restaurant needs to be in the top results. We build <strong>local SEO strategies</strong> designed specifically for how restaurant customers search, not generic SEO playbooks borrowed from other industries.</p>
-                <p>We also future-proof your visibility for AI-powered search, making sure your restaurant gets cited by ChatGPT, Google AI Overviews, and Perplexity when customers ask for dining recommendations.</p>
+                <h2>Show up first when people search.</h2>
+                <div class="hp2-hscroll-stat-pill"><strong>97%</strong> of diners use search engines to find a restaurant</div>
+                <p>When someone types "best Italian near me" or "brunch in Brickell," you need to be in the top results, not buried on page two. We get your restaurant where diners are actually looking, on Google, on Maps, and inside the AI tools customers are starting to use instead of Google.</p>
+                <p>This is built for how diners actually search for a place to eat, not a generic playbook borrowed from law firms and dentists.</p>
                 <ul>
-                  <li><strong>Google Business Profile optimization</strong> for Maps and local pack dominance</li>
-                  <li><strong>Cuisine and location keyword strategy</strong> targeting how diners actually search</li>
-                  <li><strong>On-page SEO and technical optimization</strong> across your entire site</li>
-                  <li><strong>Citation building</strong> and review management across 60+ directories</li>
-                  <li><strong>AI visibility (AEO)</strong>, structured data so AI platforms recommend you</li>
+                  <li><strong>Google Business Profile optimization</strong>, so you show up first on Google Maps for "near me" searches</li>
+                  <li><strong>Local SEO keyword strategy</strong> built around the way real diners actually search in your area</li>
+                  <li><strong>On-page SEO</strong>, every page of your site tuned so Google understands and ranks it</li>
+                  <li><strong>Citation building</strong> across 60+ directories like Yelp, TripAdvisor, OpenTable, and more</li>
+                  <li><strong>AEO (Answer Engine Optimization)</strong> so ChatGPT and Google AI recommend you by name</li>
                 </ul>
-                <a href="contact.html" class="hp2-hscroll-cta-link">Ask About Local SEO</a>
+                <a href="contact.html" class="hp2-hscroll-cta-link">Ask About Getting Found on Google</a>
               </div>
               <div class="hp2-hscroll-visual" style="aspect-ratio: 1200 / 1068;">
                 <div class="hp2-hscroll-visual-inner">
@@ -3711,22 +4042,22 @@
             <div class="hp2-hscroll-inner --reverse">
               <div class="hp2-hscroll-copy">
                 <div class="label">04, Advertising</div>
-                <h2>Advertising That Drives Measurable ROI</h2>
-                <div class="hp2-hscroll-stat-pill"><strong>12X</strong> average ROAS across our restaurant ad portfolio</div>
-                <p>When you need customers this week, this weekend, tonight, advertising is the fastest lever you have. We run <strong>data-driven restaurant ad campaigns</strong> on Google, Instagram, and Facebook designed to capture people actively searching for a place to eat and put your restaurant in front of them at the exact moment they're deciding.</p>
-                <p>Our 2025 portfolio generated over $3.5M in tracked revenue across five restaurant properties on less than $46K in total ad spend. Every dollar is tracked, every conversion is measured.</p>
+                <h2>Ads that bring people through the door.</h2>
+                <div class="hp2-hscroll-stat-pill"><strong>12X</strong> average return, $12 in revenue for every $1 we spend on ads</div>
+                <p>When you need customers <em>this</em> week, this weekend, or tonight, ads are the fastest way there. We run campaigns on Google, Instagram, and Facebook that catch people right when they're deciding where to eat.</p>
+                <p>In 2025 we generated over $3.5M in tracked revenue across five restaurants on less than $46K in ad spend. Every dollar is tracked, every booking is counted.</p>
                 <ul>
-                  <li><strong>Google Ads</strong> targeting high-intent restaurant search terms in your area</li>
-                  <li><strong>Facebook and Instagram ad campaigns</strong> for awareness, events, and promotions</li>
-                  <li><strong>Local targeting and geo-fencing</strong> to reach diners within your radius</li>
-                  <li><strong>Retargeting campaigns</strong> for website visitors and engaged followers</li>
-                  <li><strong>Full conversion tracking</strong> and monthly ROI reporting</li>
+                  <li><strong>Google ads</strong> that show up when someone searches for a place to eat near you</li>
+                  <li><strong>Instagram and Facebook ads</strong> for events, promos, and slow nights</li>
+                  <li><strong>Tightly targeted</strong> to diners within a few miles of your restaurant</li>
+                  <li><strong>Follow-up ads</strong> for people who visited your site or your social</li>
+                  <li><strong>Clear monthly reports</strong> showing exactly what every dollar brought back</li>
                 </ul>
-                <a href="contact.html" class="hp2-hscroll-cta-link">Ask About Restaurant Advertising</a>
+                <a href="contact.html" class="hp2-hscroll-cta-link">Ask About Restaurant Ads</a>
               </div>
               <div class="hp2-hscroll-visual" style="aspect-ratio: 9/16; max-width: 360px; margin: 0 auto;">
                 <div class="hp2-hscroll-visual-inner">
-                  <video src="videos/fatty-crab-seafood-boil.mp4" autoplay muted loop playsinline></video>
+                  <video data-video-src="videos/fatty-crab-seafood-boil.mp4" data-autoplay-on-view muted loop playsinline preload="none"></video>
                 </div>
               </div>
             </div>
@@ -3750,7 +4081,7 @@
     </section>
 
     <!-- ═══ 6. CASE STUDIES, Editorial Spreads with Scrub Counters ═══ -->
-    <section class="card-overlay lib-section" id="case-studies">
+    <section class="card-overlay lib-section" id="case-studies" data-shared-animations="off">
       <div class="lib-section-label">Proof</div>
       <h2 class="lib-section-title">The results speak for themselves.</h2>
       <p class="lib-section-sub">Real restaurants. Real numbers. Real revenue impact.</p>
@@ -3758,44 +4089,44 @@
       <div class="hp2-case-spread">
         <article class="hp2-case-editorial" style="padding-left: 2rem; padding-right: 2rem;">
           <div class="hp2-case-img">
-            <img src="images/fatty-crab-thumbnail-ayce.png" alt="The Fatty Crab all-you-can-eat crab feast" style="max-height: 420px; width: 100%; object-fit: cover; object-position: center 30%;" />
+            <img src="images/fatty-crab-thumbnail-ayce.png" alt="The Fatty Crab all-you-can-eat crab feast" loading="lazy" decoding="async" style="max-height: 420px; width: 100%; object-fit: cover; object-position: center 30%;" />
           </div>
           <div class="hp2-case-body">
             <div class="case-tag">Organic Social</div>
             <h3>The Fatty Crab</h3>
-            <p>High-frequency content system + restaurant storytelling that turned social attention into a packed dining room every night of the week.</p>
+            <p>Daily content shot on-site, restaurant storytelling, and a relentless posting schedule. We turned social media attention into a packed dining room every night of the week.</p>
             <div class="hp2-case-metrics">
               <div class="hp2-case-metric"><strong data-scrub-to="21" data-suffix="M">21M</strong><span>Views</span></div>
               <div class="hp2-case-metric"><strong data-scrub-to="110" data-suffix="K">110K</strong><span>Followers</span></div>
               <div class="hp2-case-metric"><strong data-scrub-to="6.5" data-suffix="%" data-decimal="1">6.5%</strong><span>Engagement</span></div>
             </div>
-            <a href="case-studies.html" class="hp2-case-link">Read the full case study</a>
+            <a href="case-studies.html" class="hp2-case-link hidden-until-launch">Read the full case study</a>
           </div>
         </article>
 
         <article class="hp2-case-editorial" style="padding-left: 2rem; padding-right: 2rem;">
           <div class="hp2-case-img">
-            <img src="images/rusty-pelican-bar.png" alt="Rusty Pelican Miami restaurant bar interior" style="max-height: 420px; width: 100%; object-fit: cover; object-position: center center;" />
+            <img src="images/rusty-pelican-bar.png" alt="Rusty Pelican Miami restaurant bar interior" loading="lazy" decoding="async" style="max-height: 420px; width: 100%; object-fit: cover; object-position: center center;" />
           </div>
           <div class="hp2-case-body">
             <div class="case-tag">Google Ads</div>
             <h3>Rusty Pelican Miami</h3>
-            <p>Search campaigns optimized for high-intent diners with clean tracking, landing page alignment, and a direct line from ad spend to reservation revenue.</p>
+            <p>Google search ads aimed at diners who are already looking for a place to eat, with every click tracked all the way to the reservation. A clear line from ad spend to real revenue.</p>
             <div class="hp2-case-metrics">
               <div class="hp2-case-metric"><strong data-scrub-to="9" data-suffix="%">9%</strong><span>CTR</span></div>
               <div class="hp2-case-metric"><strong data-scrub-to="12" data-suffix="X">12X</strong><span>ROAS</span></div>
               <div class="hp2-case-metric"><strong data-scrub-to="42" data-suffix="%">42%</strong><span>More Bookings</span></div>
             </div>
-            <a href="case-studies.html" class="hp2-case-link">Read the full case study</a>
+            <a href="case-studies.html" class="hp2-case-link hidden-until-launch">Read the full case study</a>
           </div>
         </article>
       </div>
     </section>
 
     <!-- ═══ 7. IMMERSIVE #2, Kitchen / Warm Color Grade ═══ -->
-    <div class="hp2-curtain-wrap hp2-warm-img" id="immersive-2">
+    <div class="hp2-curtain-wrap hp2-warm-img" id="immersive-2" data-shared-animations="off">
       <div class="hp2-curtain-img">
-        <img src="images/bts-shoot.jpeg" alt="Button Up Media videographer filming a couple dining at a Miami waterfront restaurant" />
+        <img src="images/bts-shoot.jpeg" alt="Button Up Media videographer filming a couple dining at a Miami waterfront restaurant" loading="lazy" decoding="async" />
         <div class="hp2-curtain-overlay" style="background:linear-gradient(180deg, rgba(10,10,10,0.3) 0%, transparent 30%, transparent 50%, rgba(10,10,10,0.85) 100%);"></div>
         <div class="hp2-curtain-copy" style="justify-content:flex-end;">
           <div class="hp2-curtain-glass-wrap">
@@ -3812,39 +4143,39 @@
     </div>
 
     <!-- ═══ NEW: AI/AEO FUTURE-PROOF ═══ -->
-    <section class="card-overlay --dark lib-section" id="ai-visibility">
+    <section class="card-overlay --dark lib-section" id="ai-visibility" data-shared-animations="off">
 
       <div class="hp2-aeo-split">
         <div class="hp2-aeo-copy">
-          <div class="lib-section-label" style="text-align:left;">Future-Proof</div>
-          <h2 class="lib-section-title" style="text-align:left; margin-bottom:20px;">Your Restaurant Needs to Show Up Where Customers Are Searching Next</h2>
-          <p>Google is still the biggest driver of restaurant discovery. But the way people search is changing fast. Customers are now asking ChatGPT "what's the best Italian restaurant near me?" They're using Google AI Overviews, searching on Perplexity, using Siri, and scrolling AI-curated recommendations on TikTok and Instagram.</p>
-          <p style="margin-top:12px;">Most restaurant marketing agencies are still stuck optimizing for 2019 Google. <strong style="color:var(--text);">Button Up Media builds for where search is going</strong>, not just where it's been.</p>
+          <div class="lib-section-label" style="text-align:left;">What's Changing</div>
+          <h2 class="lib-section-title" style="text-align:left; margin-bottom:20px;">Customers don't just Google anymore.</h2>
+          <p>Google still matters. A lot. But the way people search is shifting fast. Diners are now asking ChatGPT "where should I eat tonight?" and reading Google's AI-written answers before they ever click a link.</p>
+          <p style="margin-top:12px;">Most agencies are still playing yesterday's game. <strong style="color:var(--text);">We get you found in all the places people are actually looking</strong>, today and as it keeps changing.</p>
         </div>
         <div class="hp2-aeo-stack">
           <div class="hp2-aeo-block --traditional">
-            <h4>Traditional SEO</h4>
-            <p>Gets you ranked on Google Search and Maps. That still matters, and we do it well.</p>
+            <h4>Google &amp; Google Maps</h4>
+            <p>Still the biggest source of new diners. We get you on page one of Google and at the top of Maps for searches like "best brunch near me."</p>
           </div>
           <div class="hp2-aeo-block --aeo">
             <h4>Answer Engine Optimization (AEO)</h4>
-            <p>Gets your restaurant cited and recommended when customers ask AI-powered platforms for dining suggestions. This is the next battleground, and most of your competitors aren't even on it yet.</p>
+            <p>When someone asks ChatGPT or Google AI "where should I eat tonight?", your restaurant should be in the answer. Most of your competitors aren't doing this yet. We get you there first.</p>
           </div>
         </div>
       </div>
 
       <div class="hp2-aeo-compare" style="display:none;">
         <div class="hp2-aeo-block --traditional">
-          <h4>Traditional SEO</h4>
-          <p>Gets you ranked on Google Search and Maps. That still matters, and we do it well.</p>
+          <h4>Google &amp; Google Maps</h4>
+          <p>Still the biggest source of new diners. We get you on page one of Google and at the top of Maps for searches like "best brunch near me."</p>
         </div>
         <div class="hp2-aeo-block --aeo">
           <h4>Answer Engine Optimization (AEO)</h4>
-          <p>Gets your restaurant cited and recommended when customers ask AI-powered platforms for dining suggestions. This is the next battleground, and most of your competitors aren't even on it yet.</p>
+          <p>When someone asks an AI assistant where to eat, your restaurant should be in the answer. Most of your competitors aren't doing this yet. We get you there first.</p>
         </div>
       </div>
 
-      <h3 style="font-size:1.1rem; font-weight:800; margin-top:36px; margin-bottom:16px;">How We Future-Proof Your Restaurant's Visibility</h3>
+      <h3 style="font-size:1.1rem; font-weight:800; margin-top:36px; margin-bottom:16px;">How we get you found, everywhere it matters</h3>
       <div class="hp2-aeo-grid">
         <div class="hp2-aeo-item">
           <div class="hp2-aeo-item-icon"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg></div>
@@ -3852,7 +4183,7 @@
         </div>
         <div class="hp2-aeo-item">
           <div class="hp2-aeo-item-icon"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div>
-          <h4>Content for AI Extraction</h4>
+          <h4>AI-Readable Content</h4>
         </div>
         <div class="hp2-aeo-item">
           <div class="hp2-aeo-item-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
@@ -3869,12 +4200,12 @@
       </div>
 
       <div style="margin-top:32px;">
-        <a href="contact.html" class="btn btn-primary">Ask About SEO and AI Visibility &rarr;</a>
+        <a href="contact.html" class="btn btn-primary">Ask About Getting Found &rarr;</a>
       </div>
     </section>
 
     <!-- ═══ NEW: WHY BUTTON UP ═══ -->
-    <section class="card-overlay lib-section" id="why-us">
+    <section class="card-overlay lib-section" id="why-us" data-shared-animations="off">
       <div class="lib-section-label">Why Us</div>
       <h2 class="lib-section-title">Why Restaurants Choose Button Up Media</h2>
       <p class="lib-section-sub">Three things set us apart from every other marketing agency.</p>
@@ -3899,7 +4230,7 @@
     </section>
 
     <!-- ═══ VIDEO TESTIMONIALS ═══ -->
-    <section class="card-overlay --dark lib-section" id="client-videos">
+    <section class="card-overlay --dark lib-section" id="client-videos" data-shared-animations="off">
       <div class="lib-section-label" style="text-align:center;">In Their Own Words</div>
       <h2 class="lib-section-title" style="text-align:center;">Hear It Directly From Our Clients</h2>
       <p class="lib-section-sub" style="text-align:center; margin-left:auto; margin-right:auto;">Real restaurant owners. Real results. No scripts.</p>
@@ -3950,10 +4281,10 @@
     </section>
 
     <!-- ═══ 8. SERVICES, Glass Cards with Curtain Reveal ═══ -->
-    <section class="card-overlay lib-section" id="services">
+    <section class="card-overlay lib-section" id="services" data-shared-animations="off">
       <div class="lib-section-label">Services</div>
-      <h2 class="lib-section-title">Every lever a restaurant needs to grow.</h2>
-      <p class="lib-section-sub">Modular services unified by one goal: measurable growth in reservations, orders, and foot traffic.</p>
+      <h2 class="lib-section-title">Everything your restaurant needs to grow.</h2>
+      <p class="lib-section-sub">Different services. One goal: more reservations, more orders, more guests through the door.</p>
 
       <div class="hp2-services-grid">
         <div class="glass-card-wrap hp2-service-reveal">
@@ -3965,7 +4296,7 @@
               <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" stroke="none"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.668 1.0745-1.3364 1.3802-2.1272.2957-.7642.4957-1.6362.552-2.9137.0564-1.2778.0689-1.6882.0626-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.8981-1.3783-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.8988.4227-.1645 1.0573-.3624 2.2271-.4171 1.2655-.0595 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.8988 1.3783.1645.4233.3624 1.0576.4171 2.2278.0602 1.2645.0739 1.6438.0804 4.8468.0065 3.203-.0048 3.5831-.0607 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.8988-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg>
             </div>
             <h3>Social Media Marketing</h3>
-            <p>Short-form content built for reach, saves, and real conversions, not vanity metrics.</p>
+            <p>Short-form video and photos that get your restaurant discovered, followed, and chosen.</p>
           </div>
         </div>
 
@@ -3978,7 +4309,7 @@
               <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" stroke="none"><path d="M19.527 4.799c1.212 2.608.937 5.678-.405 8.173-1.101 2.047-2.744 3.74-4.098 5.614-.619.858-1.244 1.75-1.669 2.727-.141.325-.263.658-.383.992-.121.333-.224.673-.34 1.008-.109.314-.236.684-.627.687h-.007c-.466-.001-.579-.53-.695-.887-.284-.874-.581-1.713-1.044-2.525-1.376-2.417-3.681-4.399-4.727-6.964C4.191 10.631 4.855 7.07 7.11 4.777 9.694 2.143 14.158 1.552 17.28 3.2c.778.413 1.51.965 2.12 1.597l.128.002zm-7.532 8.209a2.99 2.99 0 0 0 2.996-2.984A2.99 2.99 0 0 0 11.995 7.04a2.99 2.99 0 0 0-2.995 2.984 2.99 2.99 0 0 0 2.995 2.984z"/></svg>
             </div>
             <h3>Search &amp; Answer Engine Optimization</h3>
-            <p>Win the local pack for cuisine + "near me" searches across Miami and South Florida.</p>
+            <p>Show up first on Google and AI search when diners search for restaurants near them.</p>
           </div>
         </div>
 
@@ -4011,7 +4342,7 @@
     </section>
 
     <!-- ═══ NEW: STATS BY THE NUMBERS ═══ -->
-    <section class="card-overlay --dark lib-section" id="stats" style="display:none;">
+    <section class="card-overlay --dark lib-section" id="stats" style="display:none;" data-shared-animations="off">
       <div class="lib-section-label">The Data</div>
       <h2 class="lib-section-title">Restaurant Marketing by the Numbers</h2>
 
@@ -4063,7 +4394,7 @@
     </section>
 
     <!-- ═══ NEW: FLORIDA MARKETS ═══ -->
-    <section class="card-overlay lib-section" id="florida">
+    <section class="card-overlay lib-section" id="florida" data-shared-animations="off">
 
       <div class="hp2-split" style="align-items:start; margin-top:0;">
         <div class="hp2-split-copy">
@@ -4073,7 +4404,7 @@
           <p>We know Florida's dining landscape because we live in it, the snowbird surge every winter, the tourist-heavy summers on the coast, and the fierce local competition in neighborhoods from Brickell to Wynwood, South Beach to downtown Fort Lauderdale.</p>
         </div>
         <div class="hp2-split-media">
-          <img src="https://images.unsplash.com/photo-1535498730771-e735b998cd64?w=800&h=600&fit=crop" alt="South Florida dining scene with outdoor restaurant patio and palm trees" />
+          <img src="https://images.unsplash.com/photo-1535498730771-e735b998cd64?w=800&h=600&fit=crop" alt="South Florida dining scene with outdoor restaurant patio and palm trees" loading="lazy" decoding="async" />
         </div>
       </div>
 
@@ -4136,14 +4467,14 @@
         </div>
       </div>
 
-      <p class="lib-section-sub" style="margin-top:28px; max-width:60ch;">Every Florida market has its own dining culture, seasonal patterns, and competitive dynamics. We build restaurant marketing strategies that account for those differences, not cookie-cutter campaigns that ignore where you actually operate.</p>
+      <p class="lib-section-sub" style="margin-top:28px; max-width:60ch;">Every Florida market has its own dining culture, its own busy and slow seasons, and its own kind of local competition. We build strategies that fit where you actually operate, not cookie-cutter campaigns that treat every restaurant the same.</p>
       <div style="margin-top:20px;">
         <a href="contact.html" class="btn btn-primary">Ask About Our Full Restaurant Marketing Services &rarr;</a>
       </div>
     </section>
 
     <!-- ═══ 11. PROCESS, Cinematic Redesign ═══ -->
-    <section class="card-overlay lib-section hp2-process" id="process">
+    <section class="card-overlay lib-section hp2-process" id="process" data-shared-animations="off">
       <div class="lib-section-label">How We Work</div>
       <h2 class="lib-section-title">How It Works,<br>From First Call to Full Tables</h2>
       <p class="lib-section-sub">Getting started is simple. No long contracts. No confusing proposals full of jargon. Just a clear path from where you are now to where you want to be.</p>
@@ -4155,7 +4486,7 @@
             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
           </div>
           <h3>Discovery</h3>
-          <p>We learn your restaurant, your concept, customers, market, and goals. We audit your digital presence and identify exactly where the gaps and biggest growth opportunities are.</p>
+          <p>We learn your restaurant. Your concept, your customers, your market, your goals. Then we take a hard look at how you currently show up online and where the biggest opportunities to grow are hiding.</p>
         </div>
         <div class="hp2-process-step">
           <div class="hp2-process-num">02</div>
@@ -4189,7 +4520,7 @@
     </section>
 
     <!-- ═══ 12. FAQ, Premium Redesign ═══ -->
-    <section class="card-overlay --dark lib-section" id="faq">
+    <section class="card-overlay --dark lib-section" id="faq" data-shared-animations="off">
       <div class="hp2-faq-header">
         <div class="lib-section-label">FAQ</div>
         <h2 class="hp2-faq-hero-heading">Frequently Asked Questions</h2>
@@ -4215,11 +4546,11 @@
           </details>
           <details class="hp2-faq-item">
             <summary><span><span class="hp2-faq-count">05</span>Why hire a restaurant-specific marketing agency?</span></summary>
-            <div class="hp2-faq-answer">General marketing agencies apply the same playbook to restaurants that they use for dentists, gyms, and law firms. Restaurant marketing is fundamentally different, the customer journey is shorter, the decision is emotional and visual, and the competition is hyper-local. A restaurant-specific agency understands menu psychology, reservation behavior, seasonal demand patterns, and what drives someone to choose one restaurant over another on a Friday night. That specialized knowledge translates directly into better content, smarter strategy, and faster results.</div>
+            <div class="hp2-faq-answer">Most marketing agencies use the same playbook for restaurants that they use for dentists, gyms, and law firms. Restaurants are different. The decision happens in seconds, it's driven by photos and reviews, and the competition is the restaurant down the street. A restaurant-only agency knows how menus actually sell, why people pick one spot over another on a Friday night, and how to plan around the slow and busy seasons in your market. That knowledge shows up directly in better content, smarter strategy, and faster results.</div>
           </details>
           <details class="hp2-faq-item">
             <summary><span><span class="hp2-faq-count">06</span>What is Answer Engine Optimization (AEO) for restaurants?</span></summary>
-            <div class="hp2-faq-answer">Answer Engine Optimization is the practice of optimizing your restaurant's digital presence to appear in AI-powered search results, including Google AI Overviews, ChatGPT, Perplexity, and voice assistants like Siri and Alexa. As more customers use conversational AI to find dining recommendations, AEO ensures your restaurant is cited and recommended in those answers. This involves structured data, entity optimization, review signals, and creating authoritative content that AI models recognize and surface. Button Up Media integrates AEO into every restaurant marketing strategy we build.</div>
+            <div class="hp2-faq-answer">Answer Engine Optimization (AEO) is the practice of setting up your restaurant's online presence so it shows up in AI search results, including Google AI Overviews and ChatGPT. When someone asks an AI tool "where should I eat tonight?", AEO is what gets your restaurant in the answer. This involves structured data, entity optimization, strong review signals, and writing content AI tools can actually read and cite. Button Up Media builds AEO into every restaurant marketing plan from day one.</div>
           </details>
           <details class="hp2-faq-item">
             <summary><span><span class="hp2-faq-count">07</span>Do you work with restaurants outside of Florida?</span></summary>
@@ -4234,13 +4565,13 @@
     </section>
 
     <!-- ═══ 13. CTA, Word Reveal + Gold Pulse ═══ -->
-    <section class="card-overlay lib-section" id="cta">
+    <section class="card-overlay lib-section" id="cta" data-shared-animations="off">
       <div class="hp2-cta-scene" onclick="window.location.href='contact.html'" style="cursor:pointer">
         <div class="hp2-cta-orb"></div>
         <div class="hp2-cta-orb"></div>
         <div class="hp2-cta-orb"></div>
         <pixel-canvas data-gap="10" data-speed="20" data-colors="#CA8A04, #A16207, #F2D688" data-no-focus></pixel-canvas>
-        <h2 class="hp2-word-reveal" style="position:relative; z-index:2;">Ready to Grow Your <span class="accent-serif">Restaurant?</span></h2>
+        <h2 style="position:relative; z-index:2;">Ready to Grow Your <span class="accent-serif">Restaurant?</span></h2>
         <p style="position:relative; z-index:2;">Stop guessing. Start growing. Schedule a free consultation and let's build a marketing strategy that fills your restaurant with the customers you deserve.</p>
       </div>
     </section>
@@ -4265,7 +4596,8 @@
         </div>
         <div class="footer-col">
           <h4>Company</h4>
-          <a href="case-studies.html">Case Studies</a>
+          <a href="index.html">Home</a>
+          <a href="contact.html">Contact</a>
           <a href="#faq">FAQ</a>
           <a href="contact.html">Free Strategy Call</a>
         </div>
@@ -4290,33 +4622,16 @@
     "use strict";
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const hasAnimationRuntime = !!(window.gsap && window.ScrollTrigger);
 
-    // Hero video experiment: remove this block and the .hp2-hero-bg-video element to revert.
-    const heroBgVideo = document.querySelector(".hp2-hero-bg-video");
-    if (heroBgVideo) {
-      const mobileHeroVideo = window.matchMedia("(max-width: 700px)");
-      const revealHeroVideo = () => {
-        heroBgVideo.classList.add("is-loaded");
-        heroBgVideo.style.opacity = mobileHeroVideo.matches ? "0.46" : "0.64";
-        if (!prefersReducedMotion) {
-          heroBgVideo.play().catch(() => {});
-        }
-      };
-      const enableHeroVideo = () => {
-        if (prefersReducedMotion) return;
-        if (!heroBgVideo.src) {
-          heroBgVideo.src = heroBgVideo.dataset.videoSrc;
-          heroBgVideo.load();
-        }
-        heroBgVideo.play().catch(() => {});
-        if (heroBgVideo.readyState >= 2) revealHeroVideo();
-      };
-      heroBgVideo.addEventListener("loadeddata", revealHeroVideo);
-      mobileHeroVideo.addEventListener("change", () => {
-        if (heroBgVideo.classList.contains("is-loaded")) revealHeroVideo();
-      });
-      enableHeroVideo();
+    if (!hasAnimationRuntime) {
+      document.documentElement.classList.add("hp2-animation-fallback");
+      if (typeof lucide !== "undefined") lucide.createIcons();
+      return;
     }
+
+    gsap.registerPlugin(ScrollTrigger);
+    document.body.classList.add("js-animations-ready");
 
     // ── UTILITY: Pure JS Word Splitting ──
     function splitWords(el) {
@@ -4624,6 +4939,13 @@
     document.querySelectorAll(".hp2-curtain-wrap").forEach(wrap => {
       const curtain = wrap.querySelector(".hp2-curtain-img");
       if (!curtain) return;
+      const isStaticWarmImage = wrap.classList.contains("hp2-warm-img");
+
+      if (isStaticWarmImage) {
+        const glass = curtain.querySelector(".hp2-curtain-glass-wrap");
+        if (glass) gsap.set(glass, { opacity: 1, y: 0, filter: "none", clearProps: "transform" });
+        return;
+      }
 
       // Determine reveal technique per immersive section
       let clipFrom, clipTo;
@@ -4710,40 +5032,12 @@
     // ════════════════════════════════════════
     // 7. KITCHEN IMMERSIVE, Warm Color Grade Shift
     // ════════════════════════════════════════
-    const warmImg = document.querySelector(".hp2-warm-img .hp2-curtain-img img");
-    if (warmImg) {
-      gsap.fromTo(warmImg,
-        { filter: "saturate(0.4) brightness(0.8)" },
-        {
-          filter: "saturate(1.2) brightness(1.05)",
-          scrollTrigger: {
-            trigger: ".hp2-warm-img",
-            start: "top 60%",
-            end: "top 10%",
-            scrub: 1,
-          },
-        }
-      );
-    }
+    // Keep the image grade static here. Scrubbed CSS filters were causing scroll jank on laptops.
 
     // ════════════════════════════════════════
     // 10. PACKED HOUSE, Brightness Increase
     // ════════════════════════════════════════
-    const brightImg = document.querySelector(".hp2-bright-img .hp2-curtain-img img");
-    if (brightImg) {
-      gsap.fromTo(brightImg,
-        { filter: "brightness(0.6)" },
-        {
-          filter: "brightness(1.1)",
-          scrollTrigger: {
-            trigger: ".hp2-bright-img",
-            start: "top 60%",
-            end: "top 10%",
-            scrub: 1,
-          },
-        }
-      );
-    }
+    // Keep this image grade static for the same reason as the kitchen immersive section.
 
     // ════════════════════════════════════════
     // 5. GROWTH SYSTEM, Horizontal Scroll
@@ -4758,6 +5052,17 @@
     if (hscrollPin && hscrollTrack && hscrollPanels.length > 1 && !isCompactHscroll) {
       const totalPanels = hscrollPanels.length;
       const getScrollDistance = () => (totalPanels - 1) * window.innerWidth;
+      const setActiveHscrollPanel = (activeIndex) => {
+        hscrollPanels.forEach((panel, i) => {
+          const isActive = i === activeIndex;
+          panel.classList.toggle("--active", isActive);
+          panel.querySelectorAll("video").forEach(video => {
+            if (!isActive && !video.paused) video.pause();
+          });
+        });
+      };
+
+      setActiveHscrollPanel(0);
 
       const hscrollTL = gsap.to(hscrollTrack, {
         x: () => -getScrollDistance(),
@@ -4773,6 +5078,7 @@
             if (hscrollFill) gsap.set(hscrollFill, { width: (self.progress * 100) + "%" });
             const activeIndex = Math.round(self.progress * (totalPanels - 1));
             hscrollDots.forEach((dot, i) => dot.classList.toggle("--active", i === activeIndex));
+            setActiveHscrollPanel(activeIndex);
           },
         },
       });
@@ -4828,7 +5134,7 @@
 
       // Gold dust particles, same warm palette across all panels
       hscrollPanels.forEach(panel => {
-        for (let i = 0; i < 25; i++) {
+        for (let i = 0; i < 4; i++) {
           const p = document.createElement("div");
           p.className = "hp2-hscroll-particle";
           const size = Math.random() * 3 + 1.5;
@@ -4897,15 +5203,16 @@
     });
 
     // ════════════════════════════════════════
-    // 8. SERVICES, Curtain reveal from top
+    // 8. SERVICES, light entrance
     // ════════════════════════════════════════
     document.querySelectorAll(".hp2-service-reveal").forEach((card, i) => {
       gsap.fromTo(card,
-        { clipPath: "inset(0 0 100% 0)" },
+        { y: 18 },
         {
-          clipPath: "inset(0 0 0% 0)",
+          y: 0,
           duration: 0.8,
           ease: "power3.out",
+          clearProps: "transform",
           scrollTrigger: {
             trigger: card,
             start: "top 85%",
@@ -4957,39 +5264,19 @@
     }
 
     // ════════════════════════════════════════
-    // 13. CTA, Word Reveal + Scene Entrance
+    // 13. CTA, Scene Entrance
     // ════════════════════════════════════════
-    const ctaH2 = document.querySelector(".hp2-cta-scene .hp2-word-reveal");
-    if (ctaH2) {
-      document.fonts.ready.then(() => {
-        const wordInners = splitWords(ctaH2);
-        gsap.fromTo(wordInners,
-          { y: "110%" },
-          {
-            y: "0%",
-            duration: 0.6,
-            ease: "power3.out",
-            stagger: 0.06,
-            scrollTrigger: {
-              trigger: ".hp2-cta-scene",
-              start: "top 80%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      });
-    }
 
     const ctaScene = document.querySelector(".hp2-cta-scene");
     if (ctaScene) {
       gsap.fromTo(ctaScene,
-        { y: 40, opacity: 0, scale: 0.97 },
+        { y: 40, scale: 0.97 },
         {
           y: 0,
-          opacity: 1,
           scale: 1,
           duration: 0.8,
           ease: "power3.out",
+          clearProps: "transform",
           scrollTrigger: {
             trigger: ctaScene,
             start: "top 80%",
@@ -5007,13 +5294,13 @@
     // 11. PROCESS, Staggered entrance with gold line sweep
     // ════════════════════════════════════════
     gsap.fromTo(".hp2-process-step",
-      { y: 60, opacity: 0 },
+      { y: 60 },
       {
         y: 0,
-        opacity: 1,
         duration: 0.7,
         ease: "power3.out",
         stagger: 0.15,
+        clearProps: "transform",
         scrollTrigger: {
           trigger: ".hp2-process-grid",
           start: "top 80%",
@@ -5023,12 +5310,12 @@
     );
     // Connector bar
     gsap.fromTo(".hp2-process-connector",
-      { y: 20, opacity: 0 },
+      { y: 20 },
       {
         y: 0,
-        opacity: 1,
         duration: 0.6,
         ease: "power2.out",
+        clearProps: "transform",
         scrollTrigger: {
           trigger: ".hp2-process-connector",
           start: "top 90%",
@@ -5041,26 +5328,26 @@
     // 12. FAQ, Staggered entrance
     // ════════════════════════════════════════
     gsap.fromTo(".hp2-faq-hero-heading",
-      { y: 40, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, ease: "power3.out",
+      { y: 40 },
+      { y: 0, duration: 0.8, ease: "power3.out", clearProps: "transform",
         scrollTrigger: { trigger: "#faq", start: "top 80%", toggleActions: "play none none none" }
       }
     );
     gsap.fromTo(".hp2-faq-subtitle",
-      { y: 20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.6, delay: 0.15, ease: "power3.out",
+      { y: 20 },
+      { y: 0, duration: 0.6, delay: 0.15, ease: "power3.out", clearProps: "transform",
         scrollTrigger: { trigger: "#faq", start: "top 80%", toggleActions: "play none none none" }
       }
     );
     gsap.fromTo(".hp2-faq-item",
-      { x: -20, opacity: 0 },
-      { x: 0, opacity: 1, duration: 0.5, ease: "power3.out", stagger: 0.1,
+      { x: -20 },
+      { x: 0, duration: 0.5, ease: "power3.out", stagger: 0.1, clearProps: "transform",
         scrollTrigger: { trigger: ".hp2-faq-list", start: "top 85%", toggleActions: "play none none none" }
       }
     );
     gsap.fromTo(".hp2-faq-bottom-cta",
-      { y: 20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.5, ease: "power3.out",
+      { y: 20 },
+      { y: 0, duration: 0.5, ease: "power3.out", clearProps: "transform",
         scrollTrigger: { trigger: ".hp2-faq-bottom-cta", start: "top 90%", toggleActions: "play none none none" }
       }
     );
@@ -5071,9 +5358,9 @@
     document.querySelectorAll(".hp2-split").forEach(split => {
       const children = split.children;
       gsap.fromTo(children,
-        { y: 40, opacity: 0 },
+        { y: 40 },
         {
-          y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.2,
+          y: 0, duration: 0.7, ease: "power3.out", stagger: 0.2, clearProps: "transform",
           scrollTrigger: { trigger: split, start: "top 80%", toggleActions: "play none none none" },
         }
       );
@@ -5081,18 +5368,20 @@
 
     // Video Testimonials, stagger entrance
     gsap.fromTo(".hp2-vid-card",
-      { y: 40, opacity: 0, scale: 0.96 },
+      { y: 40, scale: 0.96 },
       {
-        y: 0, opacity: 1, scale: 1,
+        y: 0, scale: 1,
         duration: 0.7, ease: "power3.out", stagger: 0.12,
+        clearProps: "transform",
         scrollTrigger: { trigger: ".hp2-vid-showcase", start: "top 80%", toggleActions: "play none none none" },
       }
     );
 
     gsap.fromTo(".hp2-testimonial-video",
-      { y: 50, opacity: 0, scale: 0.95 },
+      { y: 50, scale: 0.95 },
       {
-        y: 0, opacity: 1, scale: 1, duration: 0.7, ease: "power3.out", stagger: 0.15,
+        y: 0, scale: 1, duration: 0.7, ease: "power3.out", stagger: 0.15,
+        clearProps: "transform",
         scrollTrigger: { trigger: ".hp2-testimonial-grid", start: "top 80%", toggleActions: "play none none none" },
       }
     );
@@ -5128,16 +5417,18 @@
     // ════════════════════════════════════════
     // NEW: AI/AEO Section, stagger items
     // ════════════════════════════════════════
-    gsap.fromTo("#ai-visibility .hp2-aeo-block",
-      { y: 40, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.15,
-        scrollTrigger: { trigger: ".hp2-aeo-compare", start: "top 80%", toggleActions: "play none none none" }
+    gsap.fromTo("#ai-visibility .hp2-aeo-stack .hp2-aeo-block",
+      { y: 40 },
+      { y: 0, duration: 0.7, ease: "power3.out", stagger: 0.15,
+        clearProps: "transform",
+        scrollTrigger: { trigger: "#ai-visibility .hp2-aeo-stack", start: "top 85%", toggleActions: "play none none none" }
       }
     );
-    gsap.fromTo(".hp2-aeo-item",
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.5, ease: "power3.out", stagger: 0.08,
-        scrollTrigger: { trigger: ".hp2-aeo-grid", start: "top 85%", toggleActions: "play none none none" }
+    gsap.fromTo("#ai-visibility .hp2-aeo-item",
+      { y: 30 },
+      { y: 0, duration: 0.5, ease: "power3.out", stagger: 0.08,
+        clearProps: "transform",
+        scrollTrigger: { trigger: "#ai-visibility .hp2-aeo-grid", start: "top 85%", toggleActions: "play none none none" }
       }
     );
 
@@ -5145,8 +5436,9 @@
     // NEW: Why Us, cards stagger from bottom
     // ════════════════════════════════════════
     gsap.fromTo(".hp2-why-card",
-      { y: 60, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.12,
+      { y: 60 },
+      { y: 0, duration: 0.7, ease: "power3.out", stagger: 0.12,
+        clearProps: "transform",
         scrollTrigger: { trigger: ".hp2-why-cards", start: "top 80%", toggleActions: "play none none none" }
       }
     );
@@ -5155,8 +5447,9 @@
     // NEW: Stats, grid reveal stagger
     // ════════════════════════════════════════
     gsap.fromTo(".hp2-stat-cell",
-      { y: 40, opacity: 0, scale: 0.95 },
-      { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "power3.out", stagger: 0.08,
+      { y: 40, scale: 0.95 },
+      { y: 0, scale: 1, duration: 0.6, ease: "power3.out", stagger: 0.08,
+        clearProps: "transform",
         scrollTrigger: { trigger: ".hp2-stats-grid", start: "top 80%", toggleActions: "play none none none" }
       }
     );
@@ -5165,8 +5458,9 @@
     // NEW: Florida, market pills stagger
     // ════════════════════════════════════════
     gsap.fromTo(".hp2-market-group",
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.5, ease: "power3.out", stagger: 0.1,
+      { y: 30 },
+      { y: 0, duration: 0.5, ease: "power3.out", stagger: 0.1,
+        clearProps: "transform",
         scrollTrigger: { trigger: ".hp2-florida-markets", start: "top 82%", toggleActions: "play none none none" }
       }
     );

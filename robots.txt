@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Unfinished pages are excluded from the sitemap, noindexed in-page,
+# and routed away from public launch URLs by Vercel redirects.
+
+Sitemap: https://www.buttonupmedia.com/sitemap.xml

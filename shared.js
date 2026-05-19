@@ -1,16 +1,77 @@
 // ─── Initialize Lucide Icons ───
-lucide.createIcons();
+if (window.lucide && typeof lucide.createIcons === "function") {
+  lucide.createIcons();
+}
+
+// ─── Mobile nav: tap outside to close ───
+(() => {
+  const navDropdowns = document.querySelectorAll(".lib-nav-dropdown");
+  if (!navDropdowns.length) return;
+
+  const isMobileNav = window.matchMedia("(max-width: 700px)");
+
+  const closeDropdown = dropdown => {
+    dropdown.removeAttribute("open");
+    dropdown.querySelectorAll("details[open]").forEach(childDropdown => {
+      childDropdown.removeAttribute("open");
+    });
+  };
+
+  navDropdowns.forEach(dropdown => {
+    const trigger = dropdown.querySelector(".lib-nav-dropdown-trigger");
+
+    if (trigger && !dropdown.dataset.enhanced) {
+      dropdown.dataset.enhanced = "1";
+      trigger.addEventListener("click", event => {
+        event.preventDefault();
+        const shouldOpen = !dropdown.hasAttribute("open");
+
+        navDropdowns.forEach(openDropdown => {
+          if (openDropdown !== dropdown) closeDropdown(openDropdown);
+        });
+
+        if (shouldOpen) {
+          dropdown.setAttribute("open", "");
+        } else {
+          closeDropdown(dropdown);
+        }
+      });
+    }
+  });
+
+  const closeOnOutsideInteraction = event => {
+    if (!isMobileNav.matches) return;
+    navDropdowns.forEach(dropdown => {
+      if (dropdown.hasAttribute("open") && !dropdown.contains(event.target)) {
+        closeDropdown(dropdown);
+      }
+    });
+  };
+
+  document.addEventListener("pointerdown", closeOnOutsideInteraction, { passive: true });
+  document.addEventListener("click", closeOnOutsideInteraction, { passive: true });
+
+  document.addEventListener("keydown", event => {
+    if (event.key !== "Escape") return;
+    navDropdowns.forEach(closeDropdown);
+  });
+})();
 
 // ─── GSAP Animations ───
-gsap.registerPlugin(ScrollTrigger);
+const hasGsap = window.gsap && window.ScrollTrigger;
 
-// Respect reduced motion
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (hasGsap) {
+  gsap.registerPlugin(ScrollTrigger);
 
-if (!prefersReducedMotion) {
+  // Respect reduced motion
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isSharedMotionDisabled = (el) => !!el?.closest?.('[data-shared-animations="off"]');
+
+  if (!prefersReducedMotion) {
 
   // ── Section entrance: fade up with stagger ──
   document.querySelectorAll(".lib-section").forEach((section) => {
+    if (section.matches('[data-shared-animations="off"]')) return;
     const heading = section.querySelector(".lib-section-title, .display-lg, .display-xl");
     const sub = section.querySelector(".lib-section-sub, .body-text");
     const children = section.querySelectorAll(
@@ -232,6 +293,7 @@ if (!prefersReducedMotion) {
   // ── Card overlay sections — layered stacking with overtake/recede ──
   const overlays = document.querySelectorAll(".card-overlay");
   overlays.forEach((section, i) => {
+    if (section.matches('[data-shared-animations="off"]')) return;
     // Each section gets a higher z-index so it stacks above the previous
     section.style.zIndex = 10 + i;
 
@@ -303,7 +365,7 @@ if (!prefersReducedMotion) {
 
   // ── Overview entrance ──
   const overviewSection = document.querySelector(".lib-section");
-  if (overviewSection) {
+  if (overviewSection && !overviewSection.matches('[data-shared-animations="off"]')) {
     gsap.fromTo(overviewSection.children,
       { y: 30, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.1, delay: 0.4 }
@@ -928,6 +990,7 @@ if (!prefersReducedMotion) {
 
   // Images: clip-reveal + subtle zoom
   document.querySelectorAll(".card-overlay img, .lib-section img").forEach((img) => {
+    if (isSharedMotionDisabled(img)) return;
     gsap.set(img, { scale: 1.08, opacity: 0 });
     gsap.to(img, {
       scale: 1,
@@ -955,6 +1018,7 @@ if (!prefersReducedMotion) {
 
   // Grid children: staggered fade-up (for grid-2, grid-3, grid-4 layouts)
   document.querySelectorAll(".grid-2, .grid-3, .grid-4").forEach((grid) => {
+    if (isSharedMotionDisabled(grid)) return;
     gsap.fromTo(grid.children,
       { y: 50, opacity: 0 },
       {
@@ -974,6 +1038,7 @@ if (!prefersReducedMotion) {
 
   // Section labels: slide in from left with gold line
   document.querySelectorAll(".lib-section-label").forEach((label) => {
+    if (isSharedMotionDisabled(label)) return;
     gsap.fromTo(label,
       { x: -30, opacity: 0 },
       {
@@ -992,6 +1057,7 @@ if (!prefersReducedMotion) {
 
   // Body text paragraphs: soft fade up
   document.querySelectorAll(".card-overlay .body-text, .card-overlay .lib-section-sub").forEach((p) => {
+    if (isSharedMotionDisabled(p)) return;
     gsap.fromTo(p,
       { y: 20, opacity: 0 },
       {
@@ -1010,6 +1076,7 @@ if (!prefersReducedMotion) {
 
   // Buttons & CTAs: fade up with slight scale
   document.querySelectorAll(".cta-banner").forEach((cta) => {
+    if (isSharedMotionDisabled(cta)) return;
     gsap.fromTo(cta,
       { y: 40, opacity: 0, scale: 0.97 },
       {
@@ -1153,6 +1220,7 @@ if (!prefersReducedMotion) {
   // ── Two-tone section background crossfade ──
   // Even sections get a subtle parallax-fade entrance on their bg
   document.querySelectorAll(".lib-section:nth-child(even)").forEach((section) => {
+    if (section.matches('[data-shared-animations="off"]')) return;
     gsap.fromTo(section,
       { "--bg-fade": 0 },
       {
@@ -1195,6 +1263,7 @@ if (!prefersReducedMotion) {
     `;
     section.append(bottomEdge);
   });
+  }
 }
 
 // ══════════════════════════════════════════
@@ -1487,8 +1556,77 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
   });
 });
 
+// ── Viewport-managed autoplay videos ──
+(() => {
+  const managedVideos = Array.from(document.querySelectorAll("video[data-video-src], video[data-autoplay-on-view], .hp2-hero-bg-video"));
+  if (!managedVideos.length) return;
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const inViewThreshold = 0.2;
+
+  const ensureSource = (video) => {
+    const dataSrc = video.dataset.videoSrc || video.dataset.src;
+    if (dataSrc && !video.src) {
+      video.src = dataSrc;
+      video.load();
+    }
+  };
+
+  const startVideo = (video) => {
+    if (prefersReducedMotion) return;
+    const hscrollPanel = video.closest(".hp2-hscroll-panel");
+    if (hscrollPanel && !hscrollPanel.classList.contains("--active")) {
+      stopVideo(video);
+      return;
+    }
+    ensureSource(video);
+    if (video.readyState >= 2) {
+      video.play().catch(() => {});
+    } else {
+      const onReady = () => video.play().catch(() => {});
+      video.addEventListener("loadeddata", onReady, { once: true });
+    }
+  };
+
+  const stopVideo = (video) => {
+    if (!video.paused) video.pause();
+  };
+
+  if (!("IntersectionObserver" in window)) {
+    managedVideos.forEach(startVideo);
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const video = entry.target;
+      if (entry.isIntersecting && entry.intersectionRatio >= inViewThreshold) {
+        startVideo(video);
+        if (video.classList.contains("hp2-hero-bg-video")) {
+          video.classList.add("is-loaded");
+        }
+      } else {
+        stopVideo(video);
+      }
+    });
+  }, {
+    root: null,
+    rootMargin: "250px 0px",
+    threshold: [0, inViewThreshold],
+  });
+
+  managedVideos.forEach((video) => {
+    if (video.classList.contains("hp2-hero-bg-video")) {
+      video.addEventListener("loadeddata", () => video.classList.add("is-loaded"), { once: true });
+    }
+    observer.observe(video);
+  });
+})();
+
 // Re-init Lucide for dynamically referenced icons
-lucide.createIcons();
+if (window.lucide && typeof lucide.createIcons === "function") {
+  lucide.createIcons();
+}
 
 // Restrict pixel-canvas auto-play to hover only (prevents scroll-triggered auto-fire on CTA)
 document.addEventListener('DOMContentLoaded', () => {

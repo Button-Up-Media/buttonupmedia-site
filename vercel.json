@@ -1,0 +1,195 @@
+{
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/social-media-marketing",
+      "destination": "/socialmediamarketing",
+      "permanent": true
+    },
+    {
+      "source": "/social-media-marketing/",
+      "destination": "/socialmediamarketing",
+      "permanent": true
+    },
+    {
+      "source": "/social-media-marketing.html",
+      "destination": "/socialmediamarketing",
+      "permanent": true
+    },
+    {
+      "source": "/socialmediamarketing/",
+      "destination": "/socialmediamarketing",
+      "permanent": true
+    },
+    {
+      "source": "/contact/",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us/",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/about/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/about.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/services",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/services/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/services.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/googleads",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/googleads/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/google-ads",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/google-ads/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/websitedesign",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/websitedesign/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/website",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/website/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-advertising",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-advertising/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-advertising.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-seo",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-seo/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-seo.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-website-design",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-website-design/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-website-design.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/thank-you",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/thank-you/",
+      "destination": "/contact",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/socialmediamarketing",
+      "destination": "/social-media-marketing.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact.html"
+    }
+  ]
+}
