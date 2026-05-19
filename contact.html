@@ -9,6 +9,8 @@
   <link rel="canonical" href="https://buttonupmedia.com/contact.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://assets.calendly.com" />
+  <link rel="preconnect" href="https://calendly.com" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Epilogue:wght@400;500;600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
@@ -38,6 +40,32 @@
     }
     .contact-scheduler h2 {
       color: var(--text-head);
+    }
+    .contact-book-direct {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(226,168,77,0.28);
+      background: rgba(226,168,77,0.12);
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      margin-bottom: 16px;
+    }
+    .contact-book-direct:hover {
+      transform: translateY(-1px);
+      background: rgba(226,168,77,0.18);
+      border-color: rgba(226,168,77,0.4);
+    }
+    .contact-book-hint {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      margin-bottom: 14px;
     }
     .contact-details {
       margin-top: 32px;
@@ -169,6 +197,8 @@
         <div class="contact-scheduler">
           <h2 class="display-md" style="margin-bottom: 8px;">Get Your Free Strategy Call</h2>
           <p class="body-text" style="margin-bottom: 20px; font-size: 0.86rem;">Pick a time that works for you. 30 minutes. No pressure. Just a clear plan.</p>
+          <a class="contact-book-direct" href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" rel="noreferrer">Open booking calendar instantly</a>
+          <div class="contact-book-hint">If the embed is still loading, use the button above and book right away.</div>
           <div class="calendly-inline-widget"
                data-url="https://calendly.com/juanh-buttonupmedia/freeconsultation?hide_gdpr_banner=1&background_color=111111&text_color=f6f0e6&primary_color=e2a84d"
                style="min-width:320px;height:700px;"></div>
@@ -219,28 +249,16 @@
       const widget = document.querySelector(".calendly-inline-widget");
       if (!widget) return;
 
-      let loaded = false;
       const loadCalendly = () => {
-        if (loaded) return;
-        loaded = true;
+        if (document.querySelector('script[data-calendly-loader]')) return;
         const script = document.createElement("script");
         script.src = "https://assets.calendly.com/assets/external/widget.js";
         script.async = true;
+        script.dataset.calendlyLoader = "1";
         document.head.appendChild(script);
       };
 
-      if ("IntersectionObserver" in window) {
-        const observer = new IntersectionObserver((entries) => {
-          if (entries.some(entry => entry.isIntersecting)) {
-            observer.disconnect();
-            loadCalendly();
-          }
-        }, { rootMargin: "200px 0px" });
-
-        observer.observe(widget);
-      } else {
-        window.addEventListener("load", loadCalendly, { once: true });
-      }
+      loadCalendly();
     })();
   </script>
 </body>
