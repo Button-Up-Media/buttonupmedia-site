@@ -92,6 +92,29 @@
       gap: 12px;
       margin-bottom: 8px;
     }
+    .contact-calendly-skel-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--text-soft);
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+    }
+    .contact-calendly-skel-status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 0 rgba(226,168,77,0.45);
+      animation: calendlyPulse 1.5s ease-in-out infinite;
+    }
+    @keyframes calendlyPulse {
+      0%, 100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(226,168,77,0.35); }
+      50% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(226,168,77,0); }
+    }
     .contact-calendly-skel-pill {
       height: 18px;
       width: 88px;
@@ -313,7 +336,7 @@
               <div class="contact-calendly-skeleton" aria-hidden="true">
                 <div class="contact-calendly-skeleton-inner">
                   <div class="contact-calendly-skel-top">
-                    <div class="contact-calendly-skel-pill"></div>
+                    <div class="contact-calendly-skel-status">Loading calendar</div>
                     <div class="contact-calendly-skel-pill" style="width: 64px;"></div>
                   </div>
                   <div class="contact-calendly-skel-line --long"></div>
