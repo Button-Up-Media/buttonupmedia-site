@@ -1483,7 +1483,7 @@
       justify-content: center;
     }
     .hp2-service-reveal {
-      clip-path: inset(0 0 100% 0);
+      transform: translateY(0);
     }
 
     /* ══════════════════════════════════════
@@ -4294,6 +4294,16 @@
     "use strict";
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const hasAnimationRuntime = !!(window.gsap && window.ScrollTrigger);
+
+    if (!hasAnimationRuntime) {
+      document.documentElement.classList.add("hp2-animation-fallback");
+      if (typeof lucide !== "undefined") lucide.createIcons();
+      return;
+    }
+
+    gsap.registerPlugin(ScrollTrigger);
+    document.body.classList.add("js-animations-ready");
 
     // ── UTILITY: Pure JS Word Splitting ──
     function splitWords(el) {
@@ -4687,40 +4697,12 @@
     // ════════════════════════════════════════
     // 7. KITCHEN IMMERSIVE, Warm Color Grade Shift
     // ════════════════════════════════════════
-    const warmImg = document.querySelector(".hp2-warm-img .hp2-curtain-img img");
-    if (warmImg) {
-      gsap.fromTo(warmImg,
-        { filter: "saturate(0.4) brightness(0.8)" },
-        {
-          filter: "saturate(1.2) brightness(1.05)",
-          scrollTrigger: {
-            trigger: ".hp2-warm-img",
-            start: "top 60%",
-            end: "top 10%",
-            scrub: 1,
-          },
-        }
-      );
-    }
+    // Keep the image grade static here. Scrubbed CSS filters were causing scroll jank on laptops.
 
     // ════════════════════════════════════════
     // 10. PACKED HOUSE, Brightness Increase
     // ════════════════════════════════════════
-    const brightImg = document.querySelector(".hp2-bright-img .hp2-curtain-img img");
-    if (brightImg) {
-      gsap.fromTo(brightImg,
-        { filter: "brightness(0.6)" },
-        {
-          filter: "brightness(1.1)",
-          scrollTrigger: {
-            trigger: ".hp2-bright-img",
-            start: "top 60%",
-            end: "top 10%",
-            scrub: 1,
-          },
-        }
-      );
-    }
+    // Keep this image grade static for the same reason as the kitchen immersive section.
 
     // ════════════════════════════════════════
     // 5. GROWTH SYSTEM, Horizontal Scroll
@@ -4735,6 +4717,17 @@
     if (hscrollPin && hscrollTrack && hscrollPanels.length > 1 && !isCompactHscroll) {
       const totalPanels = hscrollPanels.length;
       const getScrollDistance = () => (totalPanels - 1) * window.innerWidth;
+      const setActiveHscrollPanel = (activeIndex) => {
+        hscrollPanels.forEach((panel, i) => {
+          const isActive = i === activeIndex;
+          panel.classList.toggle("--active", isActive);
+          panel.querySelectorAll("video").forEach(video => {
+            if (!isActive && !video.paused) video.pause();
+          });
+        });
+      };
+
+      setActiveHscrollPanel(0);
 
       const hscrollTL = gsap.to(hscrollTrack, {
         x: () => -getScrollDistance(),
@@ -4750,6 +4743,7 @@
             if (hscrollFill) gsap.set(hscrollFill, { width: (self.progress * 100) + "%" });
             const activeIndex = Math.round(self.progress * (totalPanels - 1));
             hscrollDots.forEach((dot, i) => dot.classList.toggle("--active", i === activeIndex));
+            setActiveHscrollPanel(activeIndex);
           },
         },
       });
@@ -4805,7 +4799,7 @@
 
       // Gold dust particles, same warm palette across all panels
       hscrollPanels.forEach(panel => {
-        for (let i = 0; i < 25; i++) {
+        for (let i = 0; i < 4; i++) {
           const p = document.createElement("div");
           p.className = "hp2-hscroll-particle";
           const size = Math.random() * 3 + 1.5;
@@ -4874,15 +4868,16 @@
     });
 
     // ════════════════════════════════════════
-    // 8. SERVICES, Curtain reveal from top
+    // 8. SERVICES, light entrance
     // ════════════════════════════════════════
     document.querySelectorAll(".hp2-service-reveal").forEach((card, i) => {
       gsap.fromTo(card,
-        { clipPath: "inset(0 0 100% 0)" },
+        { y: 18 },
         {
-          clipPath: "inset(0 0 0% 0)",
+          y: 0,
           duration: 0.8,
           ease: "power3.out",
+          clearProps: "transform",
           scrollTrigger: {
             trigger: card,
             start: "top 85%",
@@ -5058,18 +5053,20 @@
 
     // Video Testimonials, stagger entrance
     gsap.fromTo(".hp2-vid-card",
-      { y: 40, opacity: 0, scale: 0.96 },
+      { y: 40, scale: 0.96 },
       {
-        y: 0, opacity: 1, scale: 1,
+        y: 0, scale: 1,
         duration: 0.7, ease: "power3.out", stagger: 0.12,
+        clearProps: "transform",
         scrollTrigger: { trigger: ".hp2-vid-showcase", start: "top 80%", toggleActions: "play none none none" },
       }
     );
 
     gsap.fromTo(".hp2-testimonial-video",
-      { y: 50, opacity: 0, scale: 0.95 },
+      { y: 50, scale: 0.95 },
       {
-        y: 0, opacity: 1, scale: 1, duration: 0.7, ease: "power3.out", stagger: 0.15,
+        y: 0, scale: 1, duration: 0.7, ease: "power3.out", stagger: 0.15,
+        clearProps: "transform",
         scrollTrigger: { trigger: ".hp2-testimonial-grid", start: "top 80%", toggleActions: "play none none none" },
       }
     );
@@ -5105,16 +5102,18 @@
     // ════════════════════════════════════════
     // NEW: AI/AEO Section, stagger items
     // ════════════════════════════════════════
-    gsap.fromTo("#ai-visibility .hp2-aeo-block",
-      { y: 40, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.15,
-        scrollTrigger: { trigger: ".hp2-aeo-compare", start: "top 80%", toggleActions: "play none none none" }
+    gsap.fromTo("#ai-visibility .hp2-aeo-stack .hp2-aeo-block",
+      { y: 40 },
+      { y: 0, duration: 0.7, ease: "power3.out", stagger: 0.15,
+        clearProps: "transform",
+        scrollTrigger: { trigger: "#ai-visibility .hp2-aeo-stack", start: "top 85%", toggleActions: "play none none none" }
       }
     );
-    gsap.fromTo(".hp2-aeo-item",
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.5, ease: "power3.out", stagger: 0.08,
-        scrollTrigger: { trigger: ".hp2-aeo-grid", start: "top 85%", toggleActions: "play none none none" }
+    gsap.fromTo("#ai-visibility .hp2-aeo-item",
+      { y: 30 },
+      { y: 0, duration: 0.5, ease: "power3.out", stagger: 0.08,
+        clearProps: "transform",
+        scrollTrigger: { trigger: "#ai-visibility .hp2-aeo-grid", start: "top 85%", toggleActions: "play none none none" }
       }
     );
 
@@ -5122,8 +5121,9 @@
     // NEW: Why Us, cards stagger from bottom
     // ════════════════════════════════════════
     gsap.fromTo(".hp2-why-card",
-      { y: 60, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.12,
+      { y: 60 },
+      { y: 0, duration: 0.7, ease: "power3.out", stagger: 0.12,
+        clearProps: "transform",
         scrollTrigger: { trigger: ".hp2-why-cards", start: "top 80%", toggleActions: "play none none none" }
       }
     );
@@ -5132,8 +5132,9 @@
     // NEW: Stats, grid reveal stagger
     // ════════════════════════════════════════
     gsap.fromTo(".hp2-stat-cell",
-      { y: 40, opacity: 0, scale: 0.95 },
-      { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "power3.out", stagger: 0.08,
+      { y: 40, scale: 0.95 },
+      { y: 0, scale: 1, duration: 0.6, ease: "power3.out", stagger: 0.08,
+        clearProps: "transform",
         scrollTrigger: { trigger: ".hp2-stats-grid", start: "top 80%", toggleActions: "play none none none" }
       }
     );
@@ -5142,8 +5143,9 @@
     // NEW: Florida, market pills stagger
     // ════════════════════════════════════════
     gsap.fromTo(".hp2-market-group",
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.5, ease: "power3.out", stagger: 0.1,
+      { y: 30 },
+      { y: 0, duration: 0.5, ease: "power3.out", stagger: 0.1,
+        clearProps: "transform",
         scrollTrigger: { trigger: ".hp2-florida-markets", start: "top 82%", toggleActions: "play none none none" }
       }
     );

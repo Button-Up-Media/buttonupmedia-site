@@ -1574,6 +1574,11 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
 
   const startVideo = (video) => {
     if (prefersReducedMotion) return;
+    const hscrollPanel = video.closest(".hp2-hscroll-panel");
+    if (hscrollPanel && !hscrollPanel.classList.contains("--active")) {
+      stopVideo(video);
+      return;
+    }
     ensureSource(video);
     if (video.readyState >= 2) {
       video.play().catch(() => {});
