@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://buttonupmedia.com/sitemap.xml

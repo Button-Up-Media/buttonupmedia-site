@@ -1,6 +1,60 @@
 // ─── Initialize Lucide Icons ───
 lucide.createIcons();
 
+// ─── Mobile nav: tap outside to close ───
+(() => {
+  const navDropdowns = document.querySelectorAll(".lib-nav-dropdown");
+  if (!navDropdowns.length) return;
+
+  const isMobileNav = window.matchMedia("(max-width: 700px)");
+
+  const closeDropdown = dropdown => {
+    dropdown.removeAttribute("open");
+    dropdown.querySelectorAll("details[open]").forEach(childDropdown => {
+      childDropdown.removeAttribute("open");
+    });
+  };
+
+  navDropdowns.forEach(dropdown => {
+    const trigger = dropdown.querySelector(".lib-nav-dropdown-trigger");
+
+    if (trigger && !dropdown.dataset.enhanced) {
+      dropdown.dataset.enhanced = "1";
+      trigger.addEventListener("click", event => {
+        event.preventDefault();
+        const shouldOpen = !dropdown.hasAttribute("open");
+
+        navDropdowns.forEach(openDropdown => {
+          if (openDropdown !== dropdown) closeDropdown(openDropdown);
+        });
+
+        if (shouldOpen) {
+          dropdown.setAttribute("open", "");
+        } else {
+          closeDropdown(dropdown);
+        }
+      });
+    }
+  });
+
+  const closeOnOutsideInteraction = event => {
+    if (!isMobileNav.matches) return;
+    navDropdowns.forEach(dropdown => {
+      if (dropdown.hasAttribute("open") && !dropdown.contains(event.target)) {
+        closeDropdown(dropdown);
+      }
+    });
+  };
+
+  document.addEventListener("pointerdown", closeOnOutsideInteraction, { passive: true });
+  document.addEventListener("click", closeOnOutsideInteraction, { passive: true });
+
+  document.addEventListener("keydown", event => {
+    if (event.key !== "Escape") return;
+    navDropdowns.forEach(closeDropdown);
+  });
+})();
+
 // ─── GSAP Animations ───
 gsap.registerPlugin(ScrollTrigger);
 
