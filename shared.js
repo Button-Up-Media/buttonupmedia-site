@@ -1556,6 +1556,68 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
   });
 });
 
+// ── Viewport-managed autoplay videos ──
+(() => {
+  const managedVideos = Array.from(document.querySelectorAll("video[data-video-src], video[data-autoplay-on-view], .hp2-hero-bg-video"));
+  if (!managedVideos.length) return;
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const inViewThreshold = 0.2;
+
+  const ensureSource = (video) => {
+    const dataSrc = video.dataset.videoSrc || video.dataset.src;
+    if (dataSrc && !video.src) {
+      video.src = dataSrc;
+      video.load();
+    }
+  };
+
+  const startVideo = (video) => {
+    if (prefersReducedMotion) return;
+    ensureSource(video);
+    if (video.readyState >= 2) {
+      video.play().catch(() => {});
+    } else {
+      const onReady = () => video.play().catch(() => {});
+      video.addEventListener("loadeddata", onReady, { once: true });
+    }
+  };
+
+  const stopVideo = (video) => {
+    if (!video.paused) video.pause();
+  };
+
+  if (!("IntersectionObserver" in window)) {
+    managedVideos.forEach(startVideo);
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const video = entry.target;
+      if (entry.isIntersecting && entry.intersectionRatio >= inViewThreshold) {
+        startVideo(video);
+        if (video.classList.contains("hp2-hero-bg-video")) {
+          video.classList.add("is-loaded");
+        }
+      } else {
+        stopVideo(video);
+      }
+    });
+  }, {
+    root: null,
+    rootMargin: "250px 0px",
+    threshold: [0, inViewThreshold],
+  });
+
+  managedVideos.forEach((video) => {
+    if (video.classList.contains("hp2-hero-bg-video")) {
+      video.addEventListener("loadeddata", () => video.classList.add("is-loaded"), { once: true });
+    }
+    observer.observe(video);
+  });
+})();
+
 // Re-init Lucide for dynamically referenced icons
 if (window.lucide && typeof lucide.createIcons === "function") {
   lucide.createIcons();

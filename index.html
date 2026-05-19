@@ -3421,7 +3421,7 @@
     <section class="hp2-hero" id="hero">
       <div class="hp2-hero-media">
         <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1800&h=1000&fit=crop" alt="Dimly lit upscale restaurant interior with warm ambient lighting" />
-        <!-- Hero video experiment: remove this video and the matching JS block to revert to the static image. -->
+        <!-- Hero video is lazy-loaded and paused offscreen by shared.js. -->
         <video class="hp2-hero-bg-video" data-video-src="videos/compilation-best-shots.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
       </div>
       <div class="hp2-hero-inner">
@@ -3498,7 +3498,7 @@
           <p class="hp2-industry-body">If your restaurant isn't showing up in those moments, you're losing customers to the restaurants that are.</p>
         </div>
         <div class="hp2-industry-video">
-          <video src="videos/2.12.26%20BUM%2015%20Sec%20Quality%20Shots_1080p.mp4" autoplay muted loop playsinline preload="metadata" loading="lazy" aria-label="Button Up Media restaurant quality shots montage"></video>
+          <video data-video-src="videos/2.12.26%20BUM%2015%20Sec%20Quality%20Shots_1080p.mp4" data-autoplay-on-view muted loop playsinline preload="none" aria-label="Button Up Media restaurant quality shots montage"></video>
         </div>
       </div>
 
@@ -3642,7 +3642,7 @@
               </div>
               <div class="hp2-hscroll-visual" style="aspect-ratio: 9/16; max-width: 360px; margin: 0 auto;">
                 <div class="hp2-hscroll-visual-inner">
-                  <video src="videos/fatty-crab-nola-flavors.mp4" autoplay muted loop playsinline></video>
+                  <video data-video-src="videos/fatty-crab-nola-flavors.mp4" data-autoplay-on-view muted loop playsinline preload="none"></video>
                 </div>
               </div>
             </div>
@@ -3729,7 +3729,7 @@
               </div>
               <div class="hp2-hscroll-visual" style="aspect-ratio: 9/16; max-width: 360px; margin: 0 auto;">
                 <div class="hp2-hscroll-visual-inner">
-                  <video src="videos/fatty-crab-seafood-boil.mp4" autoplay muted loop playsinline></video>
+                  <video data-video-src="videos/fatty-crab-seafood-boil.mp4" data-autoplay-on-view muted loop playsinline preload="none"></video>
                 </div>
               </div>
             </div>
@@ -4294,33 +4294,6 @@
     "use strict";
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    // Hero video experiment: remove this block and the .hp2-hero-bg-video element to revert.
-    const heroBgVideo = document.querySelector(".hp2-hero-bg-video");
-    if (heroBgVideo) {
-      const mobileHeroVideo = window.matchMedia("(max-width: 700px)");
-      const revealHeroVideo = () => {
-        heroBgVideo.classList.add("is-loaded");
-        heroBgVideo.style.opacity = mobileHeroVideo.matches ? "0.46" : "0.64";
-        if (!prefersReducedMotion) {
-          heroBgVideo.play().catch(() => {});
-        }
-      };
-      const enableHeroVideo = () => {
-        if (prefersReducedMotion) return;
-        if (!heroBgVideo.src) {
-          heroBgVideo.src = heroBgVideo.dataset.videoSrc;
-          heroBgVideo.load();
-        }
-        heroBgVideo.play().catch(() => {});
-        if (heroBgVideo.readyState >= 2) revealHeroVideo();
-      };
-      heroBgVideo.addEventListener("loadeddata", revealHeroVideo);
-      mobileHeroVideo.addEventListener("change", () => {
-        if (heroBgVideo.classList.contains("is-loaded")) revealHeroVideo();
-      });
-      enableHeroVideo();
-    }
 
     // ── UTILITY: Pure JS Word Splitting ──
     function splitWords(el) {
