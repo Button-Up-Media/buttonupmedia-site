@@ -65,11 +65,13 @@ if (hasGsap) {
 
   // Respect reduced motion
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isSharedMotionDisabled = (el) => !!el?.closest?.('[data-shared-animations="off"]');
 
   if (!prefersReducedMotion) {
 
   // ── Section entrance: fade up with stagger ──
   document.querySelectorAll(".lib-section").forEach((section) => {
+    if (section.matches('[data-shared-animations="off"]')) return;
     const heading = section.querySelector(".lib-section-title, .display-lg, .display-xl");
     const sub = section.querySelector(".lib-section-sub, .body-text");
     const children = section.querySelectorAll(
@@ -291,6 +293,7 @@ if (hasGsap) {
   // ── Card overlay sections — layered stacking with overtake/recede ──
   const overlays = document.querySelectorAll(".card-overlay");
   overlays.forEach((section, i) => {
+    if (section.matches('[data-shared-animations="off"]')) return;
     // Each section gets a higher z-index so it stacks above the previous
     section.style.zIndex = 10 + i;
 
@@ -362,7 +365,7 @@ if (hasGsap) {
 
   // ── Overview entrance ──
   const overviewSection = document.querySelector(".lib-section");
-  if (overviewSection) {
+  if (overviewSection && !overviewSection.matches('[data-shared-animations="off"]')) {
     gsap.fromTo(overviewSection.children,
       { y: 30, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.1, delay: 0.4 }
@@ -987,6 +990,7 @@ if (hasGsap) {
 
   // Images: clip-reveal + subtle zoom
   document.querySelectorAll(".card-overlay img, .lib-section img").forEach((img) => {
+    if (isSharedMotionDisabled(img)) return;
     gsap.set(img, { scale: 1.08, opacity: 0 });
     gsap.to(img, {
       scale: 1,
@@ -1014,6 +1018,7 @@ if (hasGsap) {
 
   // Grid children: staggered fade-up (for grid-2, grid-3, grid-4 layouts)
   document.querySelectorAll(".grid-2, .grid-3, .grid-4").forEach((grid) => {
+    if (isSharedMotionDisabled(grid)) return;
     gsap.fromTo(grid.children,
       { y: 50, opacity: 0 },
       {
@@ -1033,6 +1038,7 @@ if (hasGsap) {
 
   // Section labels: slide in from left with gold line
   document.querySelectorAll(".lib-section-label").forEach((label) => {
+    if (isSharedMotionDisabled(label)) return;
     gsap.fromTo(label,
       { x: -30, opacity: 0 },
       {
@@ -1051,6 +1057,7 @@ if (hasGsap) {
 
   // Body text paragraphs: soft fade up
   document.querySelectorAll(".card-overlay .body-text, .card-overlay .lib-section-sub").forEach((p) => {
+    if (isSharedMotionDisabled(p)) return;
     gsap.fromTo(p,
       { y: 20, opacity: 0 },
       {
@@ -1069,6 +1076,7 @@ if (hasGsap) {
 
   // Buttons & CTAs: fade up with slight scale
   document.querySelectorAll(".cta-banner").forEach((cta) => {
+    if (isSharedMotionDisabled(cta)) return;
     gsap.fromTo(cta,
       { y: 40, opacity: 0, scale: 0.97 },
       {
@@ -1212,6 +1220,7 @@ if (hasGsap) {
   // ── Two-tone section background crossfade ──
   // Even sections get a subtle parallax-fade entrance on their bg
   document.querySelectorAll(".lib-section:nth-child(even)").forEach((section) => {
+    if (section.matches('[data-shared-animations="off"]')) return;
     gsap.fromTo(section,
       { "--bg-fade": 0 },
       {

@@ -56,6 +56,11 @@
       line-height: 1.75;
     }
 
+    [data-shared-animations="off"] {
+      content-visibility: auto;
+      contain-intrinsic-size: 1200px;
+    }
+
     /* ── Nav: fixed on homepage ── */
     .lib-nav {
       position: fixed;
@@ -3482,7 +3487,7 @@
     </section>
 
     <!-- ═══ NEW: INDUSTRY COMPETITION ═══ -->
-    <section class="card-overlay --dark lib-section" id="industry">
+    <section class="card-overlay --dark lib-section" id="industry" data-shared-animations="off">
 
       <div class="hp2-industry-split">
         <div class="hp2-industry-copy">
@@ -3748,7 +3753,7 @@
     </section>
 
     <!-- ═══ 6. CASE STUDIES, Editorial Spreads with Scrub Counters ═══ -->
-    <section class="card-overlay lib-section" id="case-studies">
+    <section class="card-overlay lib-section" id="case-studies" data-shared-animations="off">
       <div class="lib-section-label">Proof</div>
       <h2 class="lib-section-title">The results speak for themselves.</h2>
       <p class="lib-section-sub">Real restaurants. Real numbers. Real revenue impact.</p>
@@ -3756,7 +3761,7 @@
       <div class="hp2-case-spread">
         <article class="hp2-case-editorial" style="padding-left: 2rem; padding-right: 2rem;">
           <div class="hp2-case-img">
-            <img src="images/fatty-crab-thumbnail-ayce.png" alt="The Fatty Crab all-you-can-eat crab feast" style="max-height: 420px; width: 100%; object-fit: cover; object-position: center 30%;" />
+            <img src="images/fatty-crab-thumbnail-ayce.png" alt="The Fatty Crab all-you-can-eat crab feast" loading="lazy" decoding="async" style="max-height: 420px; width: 100%; object-fit: cover; object-position: center 30%;" />
           </div>
           <div class="hp2-case-body">
             <div class="case-tag">Organic Social</div>
@@ -3773,7 +3778,7 @@
 
         <article class="hp2-case-editorial" style="padding-left: 2rem; padding-right: 2rem;">
           <div class="hp2-case-img">
-            <img src="images/rusty-pelican-bar.png" alt="Rusty Pelican Miami restaurant bar interior" style="max-height: 420px; width: 100%; object-fit: cover; object-position: center center;" />
+            <img src="images/rusty-pelican-bar.png" alt="Rusty Pelican Miami restaurant bar interior" loading="lazy" decoding="async" style="max-height: 420px; width: 100%; object-fit: cover; object-position: center center;" />
           </div>
           <div class="hp2-case-body">
             <div class="case-tag">Google Ads</div>
@@ -3791,9 +3796,9 @@
     </section>
 
     <!-- ═══ 7. IMMERSIVE #2, Kitchen / Warm Color Grade ═══ -->
-    <div class="hp2-curtain-wrap hp2-warm-img" id="immersive-2">
+    <div class="hp2-curtain-wrap hp2-warm-img" id="immersive-2" data-shared-animations="off">
       <div class="hp2-curtain-img">
-        <img src="images/bts-shoot.jpeg" alt="Button Up Media videographer filming a couple dining at a Miami waterfront restaurant" />
+        <img src="images/bts-shoot.jpeg" alt="Button Up Media videographer filming a couple dining at a Miami waterfront restaurant" loading="lazy" decoding="async" />
         <div class="hp2-curtain-overlay" style="background:linear-gradient(180deg, rgba(10,10,10,0.3) 0%, transparent 30%, transparent 50%, rgba(10,10,10,0.85) 100%);"></div>
         <div class="hp2-curtain-copy" style="justify-content:flex-end;">
           <div class="hp2-curtain-glass-wrap">
@@ -3810,7 +3815,7 @@
     </div>
 
     <!-- ═══ NEW: AI/AEO FUTURE-PROOF ═══ -->
-    <section class="card-overlay --dark lib-section" id="ai-visibility">
+    <section class="card-overlay --dark lib-section" id="ai-visibility" data-shared-animations="off">
 
       <div class="hp2-aeo-split">
         <div class="hp2-aeo-copy">
@@ -3872,7 +3877,7 @@
     </section>
 
     <!-- ═══ NEW: WHY BUTTON UP ═══ -->
-    <section class="card-overlay lib-section" id="why-us">
+    <section class="card-overlay lib-section" id="why-us" data-shared-animations="off">
       <div class="lib-section-label">Why Us</div>
       <h2 class="lib-section-title">Why Restaurants Choose Button Up Media</h2>
       <p class="lib-section-sub">Three things set us apart from every other marketing agency.</p>
@@ -3897,7 +3902,7 @@
     </section>
 
     <!-- ═══ VIDEO TESTIMONIALS ═══ -->
-    <section class="card-overlay --dark lib-section" id="client-videos">
+    <section class="card-overlay --dark lib-section" id="client-videos" data-shared-animations="off">
       <div class="lib-section-label" style="text-align:center;">In Their Own Words</div>
       <h2 class="lib-section-title" style="text-align:center;">Hear It Directly From Our Clients</h2>
       <p class="lib-section-sub" style="text-align:center; margin-left:auto; margin-right:auto;">Real restaurant owners. Real results. No scripts.</p>
@@ -3948,7 +3953,7 @@
     </section>
 
     <!-- ═══ 8. SERVICES, Glass Cards with Curtain Reveal ═══ -->
-    <section class="card-overlay lib-section" id="services">
+    <section class="card-overlay lib-section" id="services" data-shared-animations="off">
       <div class="lib-section-label">Services</div>
       <h2 class="lib-section-title">Every lever a restaurant needs to grow.</h2>
       <p class="lib-section-sub">Modular services unified by one goal: measurable growth in reservations, orders, and foot traffic.</p>
@@ -4009,7 +4014,7 @@
     </section>
 
     <!-- ═══ NEW: STATS BY THE NUMBERS ═══ -->
-    <section class="card-overlay --dark lib-section" id="stats" style="display:none;">
+    <section class="card-overlay --dark lib-section" id="stats" style="display:none;" data-shared-animations="off">
       <div class="lib-section-label">The Data</div>
       <h2 class="lib-section-title">Restaurant Marketing by the Numbers</h2>
 
@@ -4061,7 +4066,7 @@
     </section>
 
     <!-- ═══ NEW: FLORIDA MARKETS ═══ -->
-    <section class="card-overlay lib-section" id="florida">
+    <section class="card-overlay lib-section" id="florida" data-shared-animations="off">
 
       <div class="hp2-split" style="align-items:start; margin-top:0;">
         <div class="hp2-split-copy">
@@ -4071,7 +4076,7 @@
           <p>We know Florida's dining landscape because we live in it, the snowbird surge every winter, the tourist-heavy summers on the coast, and the fierce local competition in neighborhoods from Brickell to Wynwood, South Beach to downtown Fort Lauderdale.</p>
         </div>
         <div class="hp2-split-media">
-          <img src="https://images.unsplash.com/photo-1535498730771-e735b998cd64?w=800&h=600&fit=crop" alt="South Florida dining scene with outdoor restaurant patio and palm trees" />
+          <img src="https://images.unsplash.com/photo-1535498730771-e735b998cd64?w=800&h=600&fit=crop" alt="South Florida dining scene with outdoor restaurant patio and palm trees" loading="lazy" decoding="async" />
         </div>
       </div>
 
@@ -4141,7 +4146,7 @@
     </section>
 
     <!-- ═══ 11. PROCESS, Cinematic Redesign ═══ -->
-    <section class="card-overlay lib-section hp2-process" id="process">
+    <section class="card-overlay lib-section hp2-process" id="process" data-shared-animations="off">
       <div class="lib-section-label">How We Work</div>
       <h2 class="lib-section-title">How It Works,<br>From First Call to Full Tables</h2>
       <p class="lib-section-sub">Getting started is simple. No long contracts. No confusing proposals full of jargon. Just a clear path from where you are now to where you want to be.</p>
@@ -4187,7 +4192,7 @@
     </section>
 
     <!-- ═══ 12. FAQ, Premium Redesign ═══ -->
-    <section class="card-overlay --dark lib-section" id="faq">
+    <section class="card-overlay --dark lib-section" id="faq" data-shared-animations="off">
       <div class="hp2-faq-header">
         <div class="lib-section-label">FAQ</div>
         <h2 class="hp2-faq-hero-heading">Frequently Asked Questions</h2>
@@ -4232,7 +4237,7 @@
     </section>
 
     <!-- ═══ 13. CTA, Word Reveal + Gold Pulse ═══ -->
-    <section class="card-overlay lib-section" id="cta">
+    <section class="card-overlay lib-section" id="cta" data-shared-animations="off">
       <div class="hp2-cta-scene" onclick="window.location.href='contact.html'" style="cursor:pointer">
         <div class="hp2-cta-orb"></div>
         <div class="hp2-cta-orb"></div>
