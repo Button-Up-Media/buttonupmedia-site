@@ -6,3 +6,4 @@
 .env.local
 node_modules/
 .claude/worktrees/
+.vercel
