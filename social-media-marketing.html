@@ -47,7 +47,7 @@
         "logo": "https://www.buttonupmedia.com/favicon-bum.svg",
         "image": "https://www.buttonupmedia.com/images/sm-videography-hero.jpg",
         "email": "contact@buttonupmedia.com",
-        "telephone": "+17867409498",
+        "telephone": "+17867409499",
         "description": "Button Up Media is a restaurant marketing agency in Florida specializing in restaurant social media marketing, content creation, websites, SEO, and advertising.",
         "areaServed": [
           { "@type": "State", "name": "Florida" },
@@ -2447,12 +2447,12 @@
               <a href="social-media-marketing.html">Social Media Marketing</a>
             </div>
           </details>
-          <a href="tel:+17867409498" class="lib-mobile-menu-only lib-mobile-action --ghost">Call Us</a>
+          <a href="tel:+17867409499" class="lib-mobile-menu-only lib-mobile-action --ghost">Call Us</a>
           <a href="contact.html" class="lib-mobile-menu-only lib-mobile-action --primary">Book Free Strategy Call</a>
         </div>
       </details>
       <a href="index.html">Home</a>
-      <a class="lib-nav-phone" href="tel:+17867409498">Call Us</a>
+      <a class="lib-nav-phone" href="tel:+17867409499">Call Us</a>
       <a href="contact.html" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Book Free Strategy Call</a>
     </div>
   </nav>
@@ -2578,8 +2578,8 @@
         </summary>
         <div class="sm-it-copy">
           <p>Most restaurants run the same playbook when bookings slow down. They pay an influencer $500 to $2,000 to come in. The influencer posts a story, maybe a reel. For a week the room is packed. Then the influencer moves on to the next spot, and so does their audience.</p>
-          <p>That audience is the real problem. They follow influencers <em>because</em> they want to know the next best place to eat. Even if they loved your food, your social page isn&rsquo;t strong enough to give them a reason to follow you. So they don&rsquo;t. They forget you. When they want to go out again, they&rsquo;re back on the same influencer&rsquo;s feed waiting for the next recommendation. The only way back into their orbit is to pay another influencer. The cycle starts over.</p>
-          <p>Now picture the opposite. Your own social account, posting consistently, growing a following of people who actually want to hear what you have to say. When business slows, you don&rsquo;t write a check and hope. You post a story, run a promotion, fill the room. Paid ads and influencers still have a place. They work <em>with</em> a real social presence, not in place of one.</p>
+          <p>That audience is the real problem. They follow influencers because they want to know the next best place to eat. Even if they loved your food, your social page isn&rsquo;t strong enough to give them a reason to follow you. So they don&rsquo;t. They forget you. When they want to go out again, they&rsquo;re back on the same influencer&rsquo;s feed waiting for the next recommendation. The only way back into their orbit is to pay another influencer. The cycle starts over.</p>
+          <p>Now picture the opposite. Your own social account, posting consistently, growing a following of people who actually want to hear what you have to say. When business slows, you don&rsquo;t write a check and hope. You post a story, run a promotion, fill the room. Paid ads and influencers still have a place. They work with a real social presence, not in place of one.</p>
         </div>
       </details>
 
@@ -2953,7 +2953,7 @@
         <p>&copy; 2026 Button Up Media. All rights reserved.</p>
         <div class="footer-links">
           <a href="mailto:contact@buttonupmedia.com">contact@buttonupmedia.com</a>
-          <a href="tel:+17867409498">(786) 740-9498</a>
+          <a href="tel:+17867409499">(786) 740-9499</a>
         </div>
       </div>
     </footer>
@@ -3085,6 +3085,27 @@
         activeTouchCard = null;
       });
     })();
+
+    // Keep touch-play videos from continuing once they leave the viewport.
+    if ("IntersectionObserver" in window) {
+      const activeVideoCards = Array.from(document.querySelectorAll("[data-autoplay-hover]"));
+      const activeVideoObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.35) return;
+          const card = entry.target;
+          const video = card.querySelector("video");
+          if (!video) return;
+          video.pause();
+          try { video.currentTime = 0; } catch (err) {}
+          card.classList.remove("is-active");
+        });
+      }, {
+        root: null,
+        rootMargin: "120px 0px",
+        threshold: [0, 0.35],
+      });
+      activeVideoCards.forEach(card => activeVideoObserver.observe(card));
+    }
 
     if (prefersReducedMotion) {
       if (typeof lucide !== "undefined") lucide.createIcons();

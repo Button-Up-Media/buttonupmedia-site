@@ -313,7 +313,7 @@ if (hasGsap) {
       );
     } else {
       // RECEDE — this section stays put while the NEXT one covers it
-      // Give it a subtle scale-down + fade as the next section approaches
+      // Give it a subtle scale-down as the next section approaches
       gsap.fromTo(section,
         { boxShadow: "0 -5px 20px rgba(0,0,0,0.1)", y: 40 },
         {
@@ -326,8 +326,7 @@ if (hasGsap) {
       // Scale down slightly as the next section overtakes
       if (overlays[i + 1]) {
         gsap.to(section, {
-          scale: 0.97,
-          opacity: 0.7,
+          scale: 0.985,
           ease: "none",
           scrollTrigger: {
             trigger: overlays[i + 1],
@@ -1558,7 +1557,7 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
 
 // ── Viewport-managed autoplay videos ──
 (() => {
-  const managedVideos = Array.from(document.querySelectorAll("video[data-video-src], video[data-autoplay-on-view], .hp2-hero-bg-video"));
+  const managedVideos = Array.from(document.querySelectorAll("video[data-video-src], video[data-autoplay-on-view], .hp2-hero-bg-video, .hp2-vid-card video"));
   if (!managedVideos.length) return;
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1590,6 +1589,9 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
 
   const stopVideo = (video) => {
     if (!video.paused) video.pause();
+    try { video.currentTime = 0; } catch (err) {}
+    const vidCard = video.closest(".hp2-vid-card");
+    if (vidCard) vidCard.classList.remove("--playing");
   };
 
   if (!("IntersectionObserver" in window)) {
