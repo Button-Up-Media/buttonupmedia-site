@@ -6,16 +6,14 @@
   <title>Get Your Free Strategy Call — Button Up Media | Restaurant Marketing</title>
   <meta name="description" content="Book a free strategy call with Button Up Media. We help South Florida restaurants drive reservations, online orders, and foot traffic. Schedule in seconds." />
   <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg">
-  <link rel="canonical" href="https://buttonupmedia-site-one.vercel.app/contact.html" />
+  <link rel="canonical" href="https://buttonupmedia.com/contact.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Epilogue:wght@400;500;600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Epilogue:wght@400;500;600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
-  <script src="pixel-canvas.js"></script>
-  <link rel="stylesheet" href="shared.css" />
-  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+  <link rel="stylesheet" href="shared.css?v=nav-mobile-1" />
   <style>
     .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px; align-items: start; }
     .contact-info-card { padding: 28px; margin-bottom: 16px; }
@@ -23,8 +21,76 @@
     .contact-info-card p { font-size: 0.84rem; color: var(--text-dim); line-height: 1.6; }
     .contact-info-card a { color: var(--gold); transition: opacity 0.2s; }
     .contact-info-card a:hover { opacity: 0.8; }
+    .contact-hero-title,
+    .contact-hero-title .accent-serif {
+      color: var(--text-head);
+      background: none;
+      -webkit-background-clip: initial;
+      background-clip: initial;
+      -webkit-text-fill-color: currentColor;
+      text-shadow: none;
+    }
+    .contact-hero-title .accent-serif {
+      color: var(--gold);
+    }
+    .contact-scheduler {
+      padding-top: 58px;
+    }
+    .contact-scheduler h2 {
+      color: var(--text-head);
+    }
+    .contact-details {
+      margin-top: 32px;
+      gap: 12px;
+    }
     .calendly-inline-widget { border-radius: var(--r-lg); overflow: hidden; }
-    @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
+    .contact-footer.lib-section {
+      margin-left: 0;
+      margin-right: 0;
+      padding: 40px 0 36px;
+      background: transparent;
+    }
+    .contact-footer.lib-section::before {
+      display: none;
+    }
+    @media (max-width: 900px) {
+      .contact-page .card-overlay-spacer {
+        padding-top: 26px;
+        padding-bottom: 76px !important;
+      }
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 26px;
+      }
+      .contact-intro {
+        display: contents;
+      }
+      .contact-intro-copy {
+        order: 1;
+      }
+      .contact-scheduler {
+        order: 2;
+        padding-top: 0;
+      }
+      .contact-details {
+        order: 3;
+        margin-top: 0;
+        gap: 10px !important;
+      }
+      .contact-info-card {
+        padding: 16px 0;
+        margin-bottom: 0;
+      }
+      .contact-info-card h4 {
+        margin-bottom: 6px;
+      }
+      .contact-info-card p {
+        line-height: 1.45;
+      }
+      .calendly-inline-widget {
+        height: 660px !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -47,9 +113,6 @@
         <div class="lib-nav-dropdown-menu" role="menu" aria-label="Services">
           <div class="lib-desktop-services">
             <a href="social-media-marketing.html">Social Media Marketing</a>
-            <a href="restaurant-advertising.html">Paid Marketing</a>
-            <a href="restaurant-website-design.html">Website Design</a>
-            <a href="restaurant-seo.html">Search &amp; Answer Engine Optimization</a>
           </div>
           <details class="lib-mobile-services lib-mobile-menu-only">
             <summary class="lib-mobile-services-trigger">
@@ -57,40 +120,36 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </summary>
             <div class="lib-mobile-services-menu" role="menu" aria-label="Services">
-              <a href="restaurant-website-design.html">Website Design</a>
-              <a href="restaurant-advertising.html">Paid Marketing</a>
               <a href="social-media-marketing.html">Social Media Marketing</a>
-              <a href="restaurant-seo.html">Search &amp; Answer Engine Optimization</a>
             </div>
           </details>
-          <a href="case-studies.html" class="lib-mobile-menu-only">Case Studies</a>
-          <a href="about.html" class="lib-mobile-menu-only">About Us</a>
           <a href="tel:+17867409498" class="lib-mobile-menu-only lib-mobile-action --ghost">Call Us</a>
-          <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="lib-mobile-menu-only lib-mobile-action --primary">Book Free Strategy Call</a>
+          <a href="contact.html" class="lib-mobile-menu-only lib-mobile-action --primary">Book Free Strategy Call</a>
         </div>
       </details>
-      <a href="case-studies.html">Case Studies</a>
-      <a href="about.html">About Us</a>
+      <a href="index.html">Home</a>
       <a class="lib-nav-phone" href="tel:+17867409498">Call Us</a>
-      <a href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Book Free Strategy Call</a>
+      <a href="contact.html" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Book Free Strategy Call</a>
     </div>
   </nav>
 
-  <div class="page">
+  <div class="page contact-page">
 
     <!-- HERO + FORM -->
     <section class="lib-section card-overlay-spacer">
       <div class="contact-grid">
-        <div>
-          <div class="hero-badge">Free Restaurant Growth Audit</div>
-          <h1 class="display-xl text-glow" style="margin-top: 20px;">
-            If your restaurant is better than the one outranking you, <span class="accent-serif">fix that now.</span>
-          </h1>
-          <p class="body-text" style="margin-top: 16px; max-width: 44ch;">
-            Book a free 15-minute audit. You'll walk away with quick wins and a 90-day plan tailored to your concept.
-          </p>
+        <div class="contact-intro">
+          <div class="contact-intro-copy">
+            <div class="hero-badge">Free Restaurant Growth Audit</div>
+            <h1 class="display-xl contact-hero-title" style="margin-top: 20px;">
+              If your restaurant is better than the one outranking you, <span class="accent-serif">fix that now.</span>
+            </h1>
+            <p class="body-text" style="margin-top: 16px; max-width: 44ch;">
+              Book a free 15-minute audit. You'll walk away with quick wins and a 90-day plan tailored to your concept.
+            </p>
+          </div>
 
-          <div class="stack" style="margin-top: 32px; gap: 12px;">
+          <div class="stack contact-details">
             <div class="contact-info-card">
               <h4><i data-lucide="mail" class="icon-sm" style="vertical-align: -2px; margin-right: 8px;"></i> Email</h4>
               <p><a href="mailto:contact@buttonupmedia.com">contact@buttonupmedia.com</a></p>
@@ -101,13 +160,13 @@
             </div>
             <div class="contact-info-card">
               <h4><i data-lucide="map-pin" class="icon-sm" style="vertical-align: -2px; margin-right: 8px;"></i> Service Area</h4>
-              <p>Miami &bull; Fort Lauderdale &bull; West Palm Beach &bull; South Florida</p>
+              <p>South Florida: Miami, Brickell, Coral Gables, Doral, Fort Lauderdale, Hollywood, Boca Raton, Delray Beach, West Palm Beach, and nearby coastal markets. Nationwide support is available for corporate and enterprise restaurant groups.</p>
             </div>
           </div>
 
         </div>
 
-        <div>
+        <div class="contact-scheduler">
           <h2 class="display-md" style="margin-bottom: 8px;">Get Your Free Strategy Call</h2>
           <p class="body-text" style="margin-bottom: 20px; font-size: 0.86rem;">Pick a time that works for you. 30 minutes. No pressure. Just a clear plan.</p>
           <div class="calendly-inline-widget"
@@ -118,7 +177,7 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="lib-section footer-demo">
+    <footer class="lib-section footer-demo contact-footer">
       <div class="footer-grid">
         <div class="footer-brand">
           <strong style="font-family: var(--font-display); font-size: 1rem;">Button Up Media</strong>
@@ -127,9 +186,6 @@
         <div class="footer-col">
           <h4>Services</h4>
           <a href="social-media-marketing.html">Organic Social &amp; Content</a>
-          <a href="restaurant-seo.html">Restaurant SEO &amp; GBP</a>
-          <a href="restaurant-advertising.html">Google Ads</a>
-          <a href="#">Website Design</a>
         </div>
         <div class="footer-col">
           <h4>Locations</h4>
@@ -140,7 +196,8 @@
         </div>
         <div class="footer-col">
           <h4>Company</h4>
-          <a href="case-studies.html">Case Studies</a>
+          <a href="index.html">Home</a>
+          <a href="social-media-marketing.html">Social Media Marketing</a>
           <a href="index.html#process">Process</a>
           <a href="index.html#faq">FAQ</a>
           <a href="contact.html">Free Growth Audit</a>
@@ -156,6 +213,35 @@
     </footer>
   </div>
 
-  <script src="shared.js"></script>
+  <script src="shared.js?v=nav-mobile-1"></script>
+  <script>
+    (() => {
+      const widget = document.querySelector(".calendly-inline-widget");
+      if (!widget) return;
+
+      let loaded = false;
+      const loadCalendly = () => {
+        if (loaded) return;
+        loaded = true;
+        const script = document.createElement("script");
+        script.src = "https://assets.calendly.com/assets/external/widget.js";
+        script.async = true;
+        document.head.appendChild(script);
+      };
+
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries) => {
+          if (entries.some(entry => entry.isIntersecting)) {
+            observer.disconnect();
+            loadCalendly();
+          }
+        }, { rootMargin: "200px 0px" });
+
+        observer.observe(widget);
+      } else {
+        window.addEventListener("load", loadCalendly, { once: true });
+      }
+    })();
+  </script>
 </body>
 </html>
