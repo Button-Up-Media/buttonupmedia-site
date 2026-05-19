@@ -43,6 +43,7 @@ em {
 }
 
 a { color: inherit; text-decoration: none; }
+.hidden-until-launch.hidden-until-launch { display: none !important; }
 
 /* ─── LAYOUT ─── */
 .page { width: min(calc(100% - 48px), var(--max)); margin: 0 auto; }
