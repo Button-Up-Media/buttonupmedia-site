@@ -4255,7 +4255,7 @@
         <div class="hp2-cta-orb"></div>
         <div class="hp2-cta-orb"></div>
         <pixel-canvas data-gap="10" data-speed="20" data-colors="#CA8A04, #A16207, #F2D688" data-no-focus></pixel-canvas>
-        <h2 class="hp2-word-reveal" style="position:relative; z-index:2;">Ready to Grow Your <span class="accent-serif">Restaurant?</span></h2>
+        <h2 style="position:relative; z-index:2;">Ready to Grow Your <span class="accent-serif">Restaurant?</span></h2>
         <p style="position:relative; z-index:2;">Stop guessing. Start growing. Schedule a free consultation and let's build a marketing strategy that fills your restaurant with the customers you deserve.</p>
       </div>
     </section>
@@ -4948,28 +4948,8 @@
     }
 
     // ════════════════════════════════════════
-    // 13. CTA, Word Reveal + Scene Entrance
+    // 13. CTA, Scene Entrance
     // ════════════════════════════════════════
-    const ctaH2 = document.querySelector(".hp2-cta-scene .hp2-word-reveal");
-    if (ctaH2) {
-      document.fonts.ready.then(() => {
-        const wordInners = splitWords(ctaH2);
-        gsap.fromTo(wordInners,
-          { y: "110%" },
-          {
-            y: "0%",
-            duration: 0.6,
-            ease: "power3.out",
-            stagger: 0.06,
-            scrollTrigger: {
-              trigger: ".hp2-cta-scene",
-              start: "top 80%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      });
-    }
 
     const ctaScene = document.querySelector(".hp2-cta-scene");
     if (ctaScene) {
