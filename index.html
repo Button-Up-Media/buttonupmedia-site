@@ -3357,21 +3357,103 @@
     "@graph": [
       {
         "@type": "Organization",
+        "@id": "https://www.buttonupmedia.com/#organization",
         "name": "Button Up Media",
-        "url": "https://www.buttonupmedia.com",
+        "url": "https://www.buttonupmedia.com/",
+        "logo": "https://www.buttonupmedia.com/favicon-bum.svg",
+        "image": "https://www.buttonupmedia.com/images/sm-videography-hero.jpg",
         "email": "contact@buttonupmedia.com",
-        "telephone": "(786) 740-9498",
-        "areaServed": ["Miami", "Fort Lauderdale", "West Palm Beach", "Orlando", "Tampa", "Jacksonville", "Naples", "Florida"],
-        "description": "Button Up Media is a restaurant marketing agency in Florida. We help restaurants grow with social media, website design, SEO, and advertising."
+        "telephone": "+17867409498",
+        "description": "Button Up Media is a restaurant marketing agency in Florida. We help restaurants grow with social media, website design, SEO, and advertising.",
+        "slogan": "Restaurant marketing that fills seats.",
+        "areaServed": [
+          { "@type": "State", "name": "Florida" },
+          { "@type": "City", "name": "Miami" },
+          { "@type": "City", "name": "Fort Lauderdale" },
+          { "@type": "City", "name": "West Palm Beach" },
+          { "@type": "City", "name": "Orlando" },
+          { "@type": "City", "name": "Tampa" },
+          { "@type": "City", "name": "Jacksonville" },
+          { "@type": "City", "name": "Naples" }
+        ],
+        "knowsAbout": [
+          "restaurant marketing",
+          "restaurant social media marketing",
+          "restaurant content creation",
+          "restaurant SEO",
+          "Google Business Profile optimization for restaurants",
+          "restaurant website design",
+          "Google Ads for restaurants",
+          "Answer Engine Optimization for restaurants"
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Restaurant Marketing Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "@id": "https://www.buttonupmedia.com/socialmediamarketing#service",
+                "name": "Restaurant Social Media Marketing",
+                "url": "https://www.buttonupmedia.com/socialmediamarketing",
+                "serviceType": "Social Media Marketing",
+                "audience": { "@type": "BusinessAudience", "audienceType": "Restaurant owners and restaurant groups" }
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Restaurant SEO and Answer Engine Optimization",
+                "serviceType": "Restaurant SEO",
+                "audience": { "@type": "BusinessAudience", "audienceType": "Restaurant owners and restaurant groups" }
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Restaurant Website Design",
+                "serviceType": "Website Design",
+                "audience": { "@type": "BusinessAudience", "audienceType": "Restaurant owners and restaurant groups" }
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Restaurant Google Ads Management",
+                "serviceType": "Paid Search Advertising",
+                "audience": { "@type": "BusinessAudience", "audienceType": "Restaurant owners and restaurant groups" }
+              }
+            }
+          ]
+        }
       },
       {
-        "@type": "ProfessionalService",
+        "@type": "WebSite",
+        "@id": "https://www.buttonupmedia.com/#website",
+        "url": "https://www.buttonupmedia.com/",
         "name": "Button Up Media",
-        "serviceType": ["Restaurant SEO", "Google Business Profile Optimization", "Social Media Marketing", "Google Ads Management", "Restaurant Website Design"],
-        "areaServed": ["Miami", "Fort Lauderdale", "West Palm Beach", "South Florida"]
+        "publisher": { "@id": "https://www.buttonupmedia.com/#organization" },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.buttonupmedia.com/#webpage",
+        "url": "https://www.buttonupmedia.com/",
+        "name": "Restaurant Marketing Agency | Button Up Media - Florida",
+        "description": "Button Up Media is a restaurant marketing agency in Florida helping restaurants grow through social media, websites, SEO, and paid advertising.",
+        "isPartOf": { "@id": "https://www.buttonupmedia.com/#website" },
+        "about": { "@id": "https://www.buttonupmedia.com/#organization" },
+        "primaryImageOfPage": { "@type": "ImageObject", "url": "https://www.buttonupmedia.com/images/sm-videography-hero.jpg" },
+        "inLanguage": "en-US"
       },
       {
         "@type": "FAQPage",
+        "@id": "https://www.buttonupmedia.com/#faq",
+        "isPartOf": { "@id": "https://www.buttonupmedia.com/#webpage" },
         "mainEntity": [
           { "@type": "Question", "name": "What does a restaurant marketing agency do?", "acceptedAnswer": { "@type": "Answer", "text": "A restaurant marketing agency specializes in helping restaurants increase their visibility, attract more customers, and grow revenue through digital marketing. This typically includes social media management and content creation, website design and optimization, search engine optimization (SEO), and paid advertising on platforms like Google and Facebook. Unlike general marketing agencies, a restaurant marketing agency understands the unique challenges of the hospitality industry - thin margins, high competition, and the constant need to keep seats filled." } },
           { "@type": "Question", "name": "How much does restaurant marketing cost?", "acceptedAnswer": { "@type": "Answer", "text": "Restaurant marketing costs vary depending on the services you need and the size of your operation. At Button Up Media, we build custom strategies tailored to each restaurant's goals and budget. Most restaurant owners invest between $1,500 and $5,000 per month for a coordinated marketing strategy that includes multiple channels. The best way to get a clear picture is to schedule a free consultation so we can understand your specific situation and recommend the right approach." } },

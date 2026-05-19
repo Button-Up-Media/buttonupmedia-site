@@ -34,116 +34,174 @@
   <!-- Base styles -->
   <link rel="stylesheet" href="shared.css?v=nav-mobile-1" />
 
-  <!-- Schema: BreadcrumbList -->
+  <!-- JSON-LD Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.buttonupmedia.com/" },
-      { "@type": "ListItem", "position": 2, "name": "Restaurant Social Media Marketing", "item": "https://www.buttonupmedia.com/socialmediamarketing" }
-    ]
-  }
-  </script>
-
-  <!-- Schema: Service -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Restaurant Social Media Marketing",
-    "description": "Full-service restaurant social media marketing including professional food photography, videography, content strategy, community management, and paid social advertising.",
-    "provider": {
-      "@type": "Organization",
-      "name": "Button Up Media",
-      "url": "https://www.buttonupmedia.com"
-    },
-    "areaServed": "United States",
-    "serviceType": "Social Media Marketing"
-  }
-  </script>
-
-  <!-- Schema: FAQPage -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
+    "@graph": [
       {
-        "@type": "Question",
-        "name": "How often should a restaurant post on social media?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Most restaurants see the best results posting between 3 and 5 times per week on Instagram and 3 to 7 times per week on TikTok. Consistency matters more than frequency. A restaurant that posts 3 high-quality posts per week on a reliable schedule will outperform one that posts 10 times in one week and then goes dark for two weeks." }
+        "@type": "Organization",
+        "@id": "https://www.buttonupmedia.com/#organization",
+        "name": "Button Up Media",
+        "url": "https://www.buttonupmedia.com/",
+        "logo": "https://www.buttonupmedia.com/favicon-bum.svg",
+        "image": "https://www.buttonupmedia.com/images/sm-videography-hero.jpg",
+        "email": "contact@buttonupmedia.com",
+        "telephone": "+17867409498",
+        "description": "Button Up Media is a restaurant marketing agency in Florida specializing in restaurant social media marketing, content creation, websites, SEO, and advertising.",
+        "areaServed": [
+          { "@type": "State", "name": "Florida" },
+          { "@type": "City", "name": "Miami" },
+          { "@type": "City", "name": "Fort Lauderdale" },
+          { "@type": "City", "name": "West Palm Beach" },
+          { "@type": "City", "name": "Orlando" },
+          { "@type": "City", "name": "Tampa" },
+          { "@type": "City", "name": "Jacksonville" },
+          { "@type": "City", "name": "Naples" }
+        ],
+        "knowsAbout": [
+          "restaurant social media marketing",
+          "restaurant content creation",
+          "restaurant videography",
+          "restaurant photography",
+          "TikTok marketing for restaurants",
+          "Instagram Reels for restaurants",
+          "paid social advertising for restaurants",
+          "Florida restaurant marketing"
+        ]
       },
       {
-        "@type": "Question",
-        "name": "What social media platforms are best for restaurants?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Instagram and TikTok are the two most important platforms for restaurant marketing in 2026. Instagram is where customers evaluate your restaurant visually before deciding to visit. TikTok is the fastest-growing discovery platform, especially among younger diners. Facebook remains valuable primarily as a paid advertising platform for local restaurant targeting." }
+        "@type": "WebSite",
+        "@id": "https://www.buttonupmedia.com/#website",
+        "url": "https://www.buttonupmedia.com/",
+        "name": "Button Up Media",
+        "publisher": { "@id": "https://www.buttonupmedia.com/#organization" },
+        "inLanguage": "en-US"
       },
       {
-        "@type": "Question",
-        "name": "How much does restaurant social media management cost?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Restaurant social media management costs vary depending on scope. Basic posting and management without content creation typically ranges from $800 to $1,500 per month. Full-service management that includes professional content production, strategy, daily management, and paid advertising support typically ranges from $2,000 to $5,000 per month." }
+        "@type": "WebPage",
+        "@id": "https://www.buttonupmedia.com/socialmediamarketing#webpage",
+        "url": "https://www.buttonupmedia.com/socialmediamarketing",
+        "name": "Restaurant Social Media Marketing | Content Creation - Button Up Media",
+        "description": "Restaurant social media marketing that drives real customers. Button Up Media creates scroll-stopping food content, manages your accounts, and grows your brand.",
+        "isPartOf": { "@id": "https://www.buttonupmedia.com/#website" },
+        "about": { "@id": "https://www.buttonupmedia.com/socialmediamarketing#service" },
+        "primaryImageOfPage": { "@type": "ImageObject", "url": "https://www.buttonupmedia.com/images/sm-videography-hero.jpg" },
+        "inLanguage": "en-US"
       },
       {
-        "@type": "Question",
-        "name": "What type of content works best for restaurant social media?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Short-form video consistently outperforms every other content type for restaurants. This includes Reels, TikToks, and YouTube Shorts showing food preparation, dish close-ups, plating, cocktail making, and behind-the-scenes kitchen action. The key is that content must be visually compelling and feel authentic to your specific restaurant." }
+        "@type": "BreadcrumbList",
+        "@id": "https://www.buttonupmedia.com/socialmediamarketing#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.buttonupmedia.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Restaurant Social Media Marketing", "item": "https://www.buttonupmedia.com/socialmediamarketing" }
+        ]
       },
       {
-        "@type": "Question",
-        "name": "Should restaurants use TikTok?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. TikTok is now one of the most powerful discovery tools for restaurants, especially for reaching customers under 35. Over 60% of Gen Z uses TikTok and Instagram as their primary search engine for local businesses, including restaurants." }
+        "@type": "Service",
+        "@id": "https://www.buttonupmedia.com/socialmediamarketing#service",
+        "name": "Restaurant Social Media Marketing",
+        "alternateName": [
+          "Restaurant content creation",
+          "Social media marketing for restaurants",
+          "Restaurant Instagram and TikTok marketing"
+        ],
+        "url": "https://www.buttonupmedia.com/socialmediamarketing",
+        "description": "Full-service restaurant social media marketing including professional food photography, videography, content strategy, account management, community engagement, and paid social advertising.",
+        "provider": { "@id": "https://www.buttonupmedia.com/#organization" },
+        "serviceType": "Social Media Marketing",
+        "category": "Restaurant Marketing",
+        "audience": { "@type": "BusinessAudience", "audienceType": "Restaurant owners, restaurant operators, and restaurant groups" },
+        "areaServed": [
+          { "@type": "State", "name": "Florida" },
+          { "@type": "Country", "name": "United States" }
+        ],
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "url": "https://www.buttonupmedia.com/contact",
+          "description": "Book a free strategy call to review your restaurant's social media presence and growth opportunities."
+        }
       },
       {
-        "@type": "Question",
-        "name": "Can you handle social media for multiple restaurant locations?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Button Up Media works with both independent restaurants and multi-location groups. For multi-location restaurants, we create a centralized content strategy that maintains brand consistency while allowing for location-specific content, promotions, and community engagement." }
+        "@type": "FAQPage",
+        "@id": "https://www.buttonupmedia.com/socialmediamarketing#faq",
+        "isPartOf": { "@id": "https://www.buttonupmedia.com/socialmediamarketing#webpage" },
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How often should a restaurant post on social media?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Most restaurants see the best results posting between 3 and 5 times per week on Instagram and 3 to 7 times per week on TikTok. Consistency matters more than frequency. A restaurant that posts 3 high-quality posts per week on a reliable schedule will outperform one that posts 10 times in one week and then goes dark for two weeks." }
+          },
+          {
+            "@type": "Question",
+            "name": "What social media platforms are best for restaurants?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Instagram and TikTok are the two most important platforms for restaurant marketing in 2026. Instagram is where customers evaluate your restaurant visually before deciding to visit. TikTok is the fastest-growing discovery platform, especially among younger diners. Facebook remains valuable primarily as a paid advertising platform for local restaurant targeting." }
+          },
+          {
+            "@type": "Question",
+            "name": "How much does restaurant social media management cost?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Restaurant social media management costs vary depending on scope. Basic posting and management without content creation typically ranges from $800 to $1,500 per month. Full-service management that includes professional content production, strategy, daily management, and paid advertising support typically ranges from $2,000 to $5,000 per month." }
+          },
+          {
+            "@type": "Question",
+            "name": "What type of content works best for restaurant social media?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Short-form video consistently outperforms every other content type for restaurants. This includes Reels, TikToks, and YouTube Shorts showing food preparation, dish close-ups, plating, cocktail making, and behind-the-scenes kitchen action. The key is that content must be visually compelling and feel authentic to your specific restaurant." }
+          },
+          {
+            "@type": "Question",
+            "name": "Should restaurants use TikTok?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. TikTok is now one of the most powerful discovery tools for restaurants, especially for reaching customers under 35. Over 60% of Gen Z uses TikTok and Instagram as their primary search engine for local businesses, including restaurants." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can you handle social media for multiple restaurant locations?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. Button Up Media works with both independent restaurants and multi-location groups. For multi-location restaurants, we create a centralized content strategy that maintains brand consistency while allowing for location-specific content, promotions, and community engagement." }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between organic social media and paid social media for restaurants?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Organic social media is the content you post on your restaurant's profiles. It builds your brand, engages your community, and creates long-term visibility. Paid social media is advertising: targeted campaigns that put your restaurant in front of specific audiences based on location, interests, and behavior. Both are essential for restaurant growth." }
+          },
+          {
+            "@type": "Question",
+            "name": "How is Button Up Media different from other social media agencies?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Most social media agencies manage accounts but don't make the content. Button Up Media physically produces the content at your restaurant. We show up with cameras, capture your food, your atmosphere, and your team, and build your entire social media presence around real, authentic content that could only come from your restaurant." }
+          }
+        ]
       },
       {
-        "@type": "Question",
-        "name": "What is the difference between organic social media and paid social media for restaurants?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Organic social media is the content you post on your restaurant's profiles. It builds your brand, engages your community, and creates long-term visibility. Paid social media is advertising: targeted campaigns that put your restaurant in front of specific audiences based on location, interests, and behavior. Both are essential for restaurant growth." }
-      },
-      {
-        "@type": "Question",
-        "name": "How is Button Up Media different from other social media agencies?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Most social media agencies manage accounts but don't make the content. Button Up Media physically produces the content at your restaurant. We show up with cameras, capture your food, your atmosphere, and your team, and build your entire social media presence around real, authentic content that could only come from your restaurant." }
-      }
-    ]
-  }
-  </script>
-
-  <!-- Schema: HowTo -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    "name": "How to Promote a Restaurant on Social Media",
-    "description": "A 4-step framework for promoting your restaurant on social media, from defining your visual identity to leveraging paid ads.",
-    "step": [
-      {
-        "@type": "HowToStep",
-        "position": 1,
-        "name": "Define Your Restaurant's Visual Identity",
-        "text": "Before you post anything, define what your restaurant looks and feels like online. This includes your color palette, photography style, video tone, and overall mood of your feed."
-      },
-      {
-        "@type": "HowToStep",
-        "position": 2,
-        "name": "Create a Consistent Content Calendar",
-        "text": "Build content calendars that account for your restaurant's weekly rhythm, seasonal shifts, menu changes, events, and promotional goals. Consistency beats volume."
-      },
-      {
-        "@type": "HowToStep",
-        "position": 3,
-        "name": "Engage Your Local Community",
-        "text": "Respond to every comment, join local food conversations, collaborate with complementary businesses, and treat followers like an extension of your dining room."
-      },
-      {
-        "@type": "HowToStep",
-        "position": 4,
-        "name": "Leverage Paid Ads for Targeted Reach",
-        "text": "Run highly targeted Instagram and Facebook ad campaigns designed around restaurant-specific goals to accelerate customer acquisition and fill seats."
+        "@type": "HowTo",
+        "@id": "https://www.buttonupmedia.com/socialmediamarketing#howto",
+        "name": "How to Promote a Restaurant on Social Media",
+        "description": "A 4-step framework for promoting your restaurant on social media, from defining your visual identity to leveraging paid ads.",
+        "isPartOf": { "@id": "https://www.buttonupmedia.com/socialmediamarketing#webpage" },
+        "step": [
+          {
+            "@type": "HowToStep",
+            "position": 1,
+            "name": "Define Your Restaurant's Visual Identity",
+            "text": "Before you post anything, define what your restaurant looks and feels like online. This includes your color palette, photography style, video tone, and overall mood of your feed."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 2,
+            "name": "Create a Consistent Content Calendar",
+            "text": "Build content calendars that account for your restaurant's weekly rhythm, seasonal shifts, menu changes, events, and promotional goals. Consistency beats volume."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 3,
+            "name": "Engage Your Local Community",
+            "text": "Respond to every comment, join local food conversations, collaborate with complementary businesses, and treat followers like an extension of your dining room."
+          },
+          {
+            "@type": "HowToStep",
+            "position": 4,
+            "name": "Leverage Paid Ads for Targeted Reach",
+            "text": "Run highly targeted Instagram and Facebook ad campaigns designed around restaurant-specific goals to accelerate customer acquisition and fill seats."
+          }
+        ]
       }
     ]
   }

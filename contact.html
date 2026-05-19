@@ -26,6 +26,77 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
   <link rel="stylesheet" href="shared.css?v=nav-mobile-1" />
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.buttonupmedia.com/#organization",
+        "name": "Button Up Media",
+        "url": "https://www.buttonupmedia.com/",
+        "logo": "https://www.buttonupmedia.com/favicon-bum.svg",
+        "image": "https://www.buttonupmedia.com/images/sm-videography-hero.jpg",
+        "email": "contact@buttonupmedia.com",
+        "telephone": "+17867409498",
+        "description": "Button Up Media is a restaurant marketing agency in Florida helping restaurants grow with social media, website design, SEO, and advertising.",
+        "areaServed": [
+          { "@type": "State", "name": "Florida" },
+          { "@type": "City", "name": "Miami" },
+          { "@type": "City", "name": "Fort Lauderdale" },
+          { "@type": "City", "name": "West Palm Beach" },
+          { "@type": "City", "name": "Orlando" },
+          { "@type": "City", "name": "Tampa" },
+          { "@type": "City", "name": "Jacksonville" },
+          { "@type": "City", "name": "Naples" }
+        ],
+        "knowsAbout": [
+          "restaurant marketing",
+          "restaurant social media marketing",
+          "restaurant SEO",
+          "restaurant website design",
+          "Google Ads for restaurants",
+          "restaurant content creation"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.buttonupmedia.com/#website",
+        "url": "https://www.buttonupmedia.com/",
+        "name": "Button Up Media",
+        "publisher": { "@id": "https://www.buttonupmedia.com/#organization" },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "ContactPage",
+        "@id": "https://www.buttonupmedia.com/contact#webpage",
+        "url": "https://www.buttonupmedia.com/contact",
+        "name": "Get Your Free Strategy Call - Button Up Media",
+        "description": "Book a free strategy call with Button Up Media for restaurant social media marketing, SEO, websites, and advertising.",
+        "isPartOf": { "@id": "https://www.buttonupmedia.com/#website" },
+        "about": { "@id": "https://www.buttonupmedia.com/#organization" },
+        "inLanguage": "en-US",
+        "potentialAction": {
+          "@type": "ScheduleAction",
+          "name": "Book a free restaurant marketing strategy call",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://calendly.com/juanh-buttonupmedia/freeconsultation"
+          }
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.buttonupmedia.com/contact#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.buttonupmedia.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://www.buttonupmedia.com/contact" }
+        ]
+      }
+    ]
+  }
+  </script>
   <style>
     .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px; align-items: start; }
     .contact-info-card { padding: 28px; margin-bottom: 16px; }
