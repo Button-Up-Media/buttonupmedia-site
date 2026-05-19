@@ -1,12 +1,7 @@
 User-agent: *
 Allow: /
 
-# Pages under construction - do not index or crawl until launched
-Disallow: /about.html
-Disallow: /case-studies.html
-Disallow: /services.html
-Disallow: /restaurant-advertising.html
-Disallow: /restaurant-seo.html
-Disallow: /restaurant-website-design.html
+# Unfinished pages are excluded from the sitemap, noindexed in-page,
+# and routed away from public launch URLs by Vercel redirects.
 
-Sitemap: https://buttonupmedia.com/sitemap.xml
+Sitemap: https://www.buttonupmedia.com/sitemap.xml
