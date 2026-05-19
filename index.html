@@ -639,6 +639,12 @@
     .hp2-warm-img .hp2-curtain-img {
       clip-path: inset(0 0 0 0);
     }
+    .hp2-curtain-wrap.hp2-warm-img {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      border-radius: 0;
+    }
     .hp2-curtain-img img {
       width: 100%;
       height: 60vh;
@@ -1439,7 +1445,13 @@
        7. KITCHEN IMMERSIVE, Warm Color Grade
        ══════════════════════════════════════ */
     .hp2-warm-img img {
-      filter: saturate(0.4) brightness(0.8);
+      filter: none;
+      transform: none;
+    }
+    .hp2-warm-img .hp2-curtain-glass-wrap {
+      opacity: 1;
+      transform: none;
+      filter: none;
     }
 
     /* ══════════════════════════════════════
@@ -1526,7 +1538,7 @@
        10. PACKED HOUSE IMMERSIVE, Brightness
        ══════════════════════════════════════ */
     .hp2-bright-img img {
-      filter: brightness(0.6);
+      filter: none;
     }
 
     /* ══════════════════════════════════════
@@ -4611,6 +4623,13 @@
     document.querySelectorAll(".hp2-curtain-wrap").forEach(wrap => {
       const curtain = wrap.querySelector(".hp2-curtain-img");
       if (!curtain) return;
+      const isStaticWarmImage = wrap.classList.contains("hp2-warm-img");
+
+      if (isStaticWarmImage) {
+        const glass = curtain.querySelector(".hp2-curtain-glass-wrap");
+        if (glass) gsap.set(glass, { opacity: 1, y: 0, filter: "none", clearProps: "transform" });
+        return;
+      }
 
       // Determine reveal technique per immersive section
       let clipFrom, clipTo;
@@ -4955,13 +4974,13 @@
     const ctaScene = document.querySelector(".hp2-cta-scene");
     if (ctaScene) {
       gsap.fromTo(ctaScene,
-        { y: 40, opacity: 0, scale: 0.97 },
+        { y: 40, scale: 0.97 },
         {
           y: 0,
-          opacity: 1,
           scale: 1,
           duration: 0.8,
           ease: "power3.out",
+          clearProps: "transform",
           scrollTrigger: {
             trigger: ctaScene,
             start: "top 80%",
@@ -4979,13 +4998,13 @@
     // 11. PROCESS, Staggered entrance with gold line sweep
     // ════════════════════════════════════════
     gsap.fromTo(".hp2-process-step",
-      { y: 60, opacity: 0 },
+      { y: 60 },
       {
         y: 0,
-        opacity: 1,
         duration: 0.7,
         ease: "power3.out",
         stagger: 0.15,
+        clearProps: "transform",
         scrollTrigger: {
           trigger: ".hp2-process-grid",
           start: "top 80%",
@@ -4995,12 +5014,12 @@
     );
     // Connector bar
     gsap.fromTo(".hp2-process-connector",
-      { y: 20, opacity: 0 },
+      { y: 20 },
       {
         y: 0,
-        opacity: 1,
         duration: 0.6,
         ease: "power2.out",
+        clearProps: "transform",
         scrollTrigger: {
           trigger: ".hp2-process-connector",
           start: "top 90%",
@@ -5013,26 +5032,26 @@
     // 12. FAQ, Staggered entrance
     // ════════════════════════════════════════
     gsap.fromTo(".hp2-faq-hero-heading",
-      { y: 40, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, ease: "power3.out",
+      { y: 40 },
+      { y: 0, duration: 0.8, ease: "power3.out", clearProps: "transform",
         scrollTrigger: { trigger: "#faq", start: "top 80%", toggleActions: "play none none none" }
       }
     );
     gsap.fromTo(".hp2-faq-subtitle",
-      { y: 20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.6, delay: 0.15, ease: "power3.out",
+      { y: 20 },
+      { y: 0, duration: 0.6, delay: 0.15, ease: "power3.out", clearProps: "transform",
         scrollTrigger: { trigger: "#faq", start: "top 80%", toggleActions: "play none none none" }
       }
     );
     gsap.fromTo(".hp2-faq-item",
-      { x: -20, opacity: 0 },
-      { x: 0, opacity: 1, duration: 0.5, ease: "power3.out", stagger: 0.1,
+      { x: -20 },
+      { x: 0, duration: 0.5, ease: "power3.out", stagger: 0.1, clearProps: "transform",
         scrollTrigger: { trigger: ".hp2-faq-list", start: "top 85%", toggleActions: "play none none none" }
       }
     );
     gsap.fromTo(".hp2-faq-bottom-cta",
-      { y: 20, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.5, ease: "power3.out",
+      { y: 20 },
+      { y: 0, duration: 0.5, ease: "power3.out", clearProps: "transform",
         scrollTrigger: { trigger: ".hp2-faq-bottom-cta", start: "top 90%", toggleActions: "play none none none" }
       }
     );
@@ -5043,9 +5062,9 @@
     document.querySelectorAll(".hp2-split").forEach(split => {
       const children = split.children;
       gsap.fromTo(children,
-        { y: 40, opacity: 0 },
+        { y: 40 },
         {
-          y: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.2,
+          y: 0, duration: 0.7, ease: "power3.out", stagger: 0.2, clearProps: "transform",
           scrollTrigger: { trigger: split, start: "top 80%", toggleActions: "play none none none" },
         }
       );
