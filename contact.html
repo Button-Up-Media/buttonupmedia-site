@@ -304,8 +304,14 @@
       .contact-calendly-loaded .calendly-inline-widget iframe {
         pointer-events: none;
       }
+      .contact-calendly-loaded {
+        pointer-events: none;
+      }
+      .contact-book-direct {
+        pointer-events: auto;
+      }
       .contact-calendly-stage {
-        touch-action: pan-y;
+        touch-action: pan-y pinch-zoom;
         overscroll-behavior: auto;
       }
       .contact-grid {
@@ -337,10 +343,7 @@
       .contact-info-card p {
         line-height: 1.45;
       }
-      .contact-book-direct {
-        display: flex;
-        width: 100%;
-      }
+      .contact-book-direct { display: flex; width: 100%; }
       .calendly-inline-widget {
         height: 660px !important;
       }

@@ -1656,7 +1656,7 @@
       background: rgba(255,255,255,0.01);
     }
     .hp2-process-step {
-      padding: 48px 36px;
+      padding: 48px 36px 60px;
       position: relative;
       border-right: 1px solid var(--line-soft);
       transition: background 0.4s;
@@ -2286,23 +2286,22 @@
         padding-top: 8px;
       }
       .hp2-hscroll-track {
-        display: flex;
-        gap: 14px;
+        display: block;
+        gap: 0;
         height: auto;
-        overflow-x: auto;
-        overflow-y: hidden;
+        overflow: visible;
         padding: 8px 16px 12px;
-        scroll-snap-type: x mandatory;
-        scroll-padding-inline: 16px;
-        -webkit-overflow-scrolling: touch;
-        touch-action: auto;
+        scroll-snap-type: none;
+        scroll-padding-inline: 0;
+        -webkit-overflow-scrolling: auto;
+        touch-action: pan-y;
         overscroll-behavior: auto;
         scrollbar-width: none;
       }
       .hp2-hscroll-panel {
-        flex: 0 0 min(84vw, 320px);
-        width: min(84vw, 320px);
-        margin: 0;
+        flex: none;
+        width: 100%;
+        margin: 0 0 14px;
         height: auto;
         min-height: 0;
         padding: 20px 16px 30px;
@@ -2310,8 +2309,8 @@
         gap: 12px;
         overflow: visible;
         border-radius: 28px;
-        scroll-snap-align: start;
-        scroll-snap-stop: always;
+        scroll-snap-align: unset;
+        scroll-snap-stop: unset;
       }
       .hp2-hscroll-panel::before {
         background: linear-gradient(135deg, transparent 0%, transparent 38%, rgba(255,248,235,0.018) 48%, rgba(255,248,235,0.032) 55%, rgba(255,248,235,0.018) 62%, transparent 74%, transparent 100%);
@@ -2326,7 +2325,7 @@
         direction: ltr;
       }
       .hp2-hscroll-copy {
-        display: contents;
+        display: block;
       }
       .hp2-hscroll-copy .label {
         order: 1;
@@ -2370,30 +2369,10 @@
       }
       .hp2-hscroll-copy p {
         max-width: none;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
-        overflow: hidden;
-      }
-      .hp2-hscroll-panel:nth-child(1) .hp2-hscroll-copy p:nth-of-type(2),
-      .hp2-hscroll-panel:nth-child(1) .hp2-hscroll-copy ul,
-      .hp2-hscroll-panel:nth-child(4) .hp2-hscroll-copy p:nth-of-type(2),
-      .hp2-hscroll-panel:nth-child(4) .hp2-hscroll-copy ul {
-        display: none;
-      }
-      .hp2-hscroll-panel:nth-child(2) .hp2-hscroll-copy p:nth-of-type(2),
-      .hp2-hscroll-panel:nth-child(3) .hp2-hscroll-copy p:nth-of-type(2) {
         display: block;
-        -webkit-line-clamp: 4;
-      }
-      .hp2-hscroll-panel:nth-child(2) .hp2-hscroll-copy ul,
-      .hp2-hscroll-panel:nth-child(3) .hp2-hscroll-copy ul {
-        display: block;
-        margin-bottom: 10px;
-      }
-      .hp2-hscroll-panel:nth-child(2) .hp2-hscroll-copy ul li:nth-child(n+4),
-      .hp2-hscroll-panel:nth-child(3) .hp2-hscroll-copy ul li:nth-child(n+4) {
-        display: none;
+        -webkit-box-orient: initial;
+        -webkit-line-clamp: unset;
+        overflow: visible;
       }
       .hp2-hscroll-visual {
         order: 6;
@@ -2403,10 +2382,10 @@
       }
       .hp2-hscroll-panel:nth-child(1) .hp2-hscroll-visual,
       .hp2-hscroll-panel:nth-child(4) .hp2-hscroll-visual {
-        max-width: 220px;
-        width: min(100%, 220px);
-        margin-inline: auto;
-        aspect-ratio: 9 / 16;
+        max-width: 100%;
+        width: 100%;
+        margin-inline: 0;
+        aspect-ratio: 16 / 10;
       }
       .hp2-hscroll-panel:nth-child(2) .hp2-hscroll-visual,
       .hp2-hscroll-panel:nth-child(3) .hp2-hscroll-visual {
