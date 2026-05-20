@@ -1,5 +1,32 @@
 {
   "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self' https://calendly.com; script-src 'self' 'unsafe-inline' https://unpkg.com https://cdn.jsdelivr.net https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com; img-src 'self' data: blob: https://images.unsplash.com https://*.calendly.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://calendly.com https://*.calendly.com https://assets.calendly.com; frame-src https://calendly.com https://*.calendly.com; media-src 'self' blob:; worker-src 'self' blob:; upgrade-insecure-requests"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), accelerometer=(), gyroscope=(), magnetometer=(), clipboard-read=(), clipboard-write=(self)"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
+      ]
+    }
+  ],
   "redirects": [
     {
       "source": "/social-media-marketing",
