@@ -2282,26 +2282,47 @@
       }
       .hp2-hscroll-pin {
         height: auto;
-        overflow: visible;
+        overflow: hidden;
         padding-top: 8px;
       }
+      .hp2-hscroll-pin::after {
+        content: "›";
+        position: absolute;
+        right: 11px;
+        top: 50%;
+        z-index: 8;
+        width: 34px;
+        height: 58px;
+        display: grid;
+        place-items: center;
+        color: var(--gold);
+        font-size: 2.2rem;
+        line-height: 1;
+        border: 1px solid rgba(226,168,77,0.22);
+        border-radius: 999px;
+        background: linear-gradient(180deg, rgba(11,12,14,0.86), rgba(11,12,14,0.48));
+        box-shadow: 0 12px 30px rgba(0,0,0,0.32);
+        transform: translateY(-50%);
+        pointer-events: none;
+      }
       .hp2-hscroll-track {
-        display: block;
-        gap: 0;
+        display: flex;
+        gap: 16px;
         height: auto;
-        overflow: visible;
+        overflow-x: auto;
+        overflow-y: hidden;
         padding: 8px 16px 12px;
-        scroll-snap-type: none;
-        scroll-padding-inline: 0;
-        -webkit-overflow-scrolling: auto;
-        touch-action: pan-y;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: 16px;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-x pan-y;
         overscroll-behavior: auto;
         scrollbar-width: none;
       }
       .hp2-hscroll-panel {
-        flex: none;
-        width: 100%;
-        margin: 0 0 14px;
+        flex: 0 0 calc(100vw - 32px);
+        width: calc(100vw - 32px);
+        margin: 0;
         height: auto;
         min-height: 0;
         padding: 20px 16px 30px;
@@ -2309,8 +2330,8 @@
         gap: 12px;
         overflow: visible;
         border-radius: 28px;
-        scroll-snap-align: unset;
-        scroll-snap-stop: unset;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
       }
       .hp2-hscroll-panel::before {
         background: linear-gradient(135deg, transparent 0%, transparent 38%, rgba(255,248,235,0.018) 48%, rgba(255,248,235,0.032) 55%, rgba(255,248,235,0.018) 62%, transparent 74%, transparent 100%);
@@ -2369,10 +2390,30 @@
       }
       .hp2-hscroll-copy p {
         max-width: none;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+      }
+      .hp2-hscroll-panel:nth-child(1) .hp2-hscroll-copy p:nth-of-type(2),
+      .hp2-hscroll-panel:nth-child(1) .hp2-hscroll-copy ul,
+      .hp2-hscroll-panel:nth-child(4) .hp2-hscroll-copy p:nth-of-type(2),
+      .hp2-hscroll-panel:nth-child(4) .hp2-hscroll-copy ul {
+        display: none;
+      }
+      .hp2-hscroll-panel:nth-child(2) .hp2-hscroll-copy p:nth-of-type(2),
+      .hp2-hscroll-panel:nth-child(3) .hp2-hscroll-copy p:nth-of-type(2) {
         display: block;
-        -webkit-box-orient: initial;
-        -webkit-line-clamp: unset;
-        overflow: visible;
+        -webkit-line-clamp: 4;
+      }
+      .hp2-hscroll-panel:nth-child(2) .hp2-hscroll-copy ul,
+      .hp2-hscroll-panel:nth-child(3) .hp2-hscroll-copy ul {
+        display: block;
+        margin-bottom: 10px;
+      }
+      .hp2-hscroll-panel:nth-child(2) .hp2-hscroll-copy ul li:nth-child(n+4),
+      .hp2-hscroll-panel:nth-child(3) .hp2-hscroll-copy ul li:nth-child(n+4) {
+        display: none;
       }
       .hp2-hscroll-visual {
         order: 6;
@@ -2382,10 +2423,10 @@
       }
       .hp2-hscroll-panel:nth-child(1) .hp2-hscroll-visual,
       .hp2-hscroll-panel:nth-child(4) .hp2-hscroll-visual {
-        max-width: 100%;
-        width: 100%;
-        margin-inline: 0;
-        aspect-ratio: 16 / 10;
+        max-width: 220px;
+        width: min(100%, 220px);
+        margin-inline: auto;
+        aspect-ratio: 9 / 16;
       }
       .hp2-hscroll-panel:nth-child(2) .hp2-hscroll-visual,
       .hp2-hscroll-panel:nth-child(3) .hp2-hscroll-visual {
@@ -2399,11 +2440,28 @@
         padding-bottom: 2px;
       }
       .hp2-hscroll-progress,
-      .hp2-hscroll-dots,
       .hp2-hscroll-divider,
       .hp2-hscroll-particle,
       .hp2-hscroll-glow {
         display: none !important;
+      }
+      .hp2-hscroll-progress {
+        display: block !important;
+        position: relative;
+        bottom: auto;
+        left: auto;
+        width: calc(100% - 32px);
+        margin: 0 auto 8px;
+        opacity: 0.78;
+      }
+      .hp2-hscroll-dots {
+        display: flex !important;
+        position: relative;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        justify-content: center;
+        margin: 4px 0 16px;
       }
       .hp2-hscroll-exit {
         height: 0;
@@ -4105,7 +4163,7 @@
     <!-- ═══ 7. IMMERSIVE #2, Kitchen / Warm Color Grade ═══ -->
     <div class="hp2-curtain-wrap hp2-warm-img" id="immersive-2" data-shared-animations="off">
       <div class="hp2-curtain-img">
-        <img src="images/bts-shoot.jpeg" alt="Button Up Media videographer filming a couple dining at a Miami waterfront restaurant" loading="lazy" decoding="async" />
+        <img src="images/bts-shoot-optimized.jpg" alt="Button Up Media videographer filming a couple dining at a Miami waterfront restaurant" loading="lazy" decoding="async" />
         <div class="hp2-curtain-overlay" style="background:linear-gradient(180deg, rgba(10,10,10,0.3) 0%, transparent 30%, transparent 50%, rgba(10,10,10,0.85) 100%);"></div>
         <div class="hp2-curtain-copy" style="justify-content:flex-end;">
           <div class="hp2-curtain-glass-wrap">
@@ -4216,7 +4274,7 @@
 
       <div class="hp2-vid-showcase">
         <!-- Video 1 -->
-        <div class="hp2-vid-card" onclick="this.classList.toggle('--playing'); var v=this.querySelector('video'); v.paused?v.play():v.pause();">
+        <div class="hp2-vid-card">
           <div class="hp2-vid-card-frame">
             <video src="videos/testimonial-ifc.mp4" playsinline preload="metadata"></video>
             <div class="hp2-vid-card-play"></div>
@@ -4230,7 +4288,7 @@
         </div>
 
         <!-- Video 2 -->
-        <div class="hp2-vid-card" onclick="this.classList.toggle('--playing'); var v=this.querySelector('video'); v.paused?v.play():v.pause();">
+        <div class="hp2-vid-card">
           <div class="hp2-vid-card-frame">
             <video src="videos/testimonial-brewing-buddha-v2.mp4" playsinline preload="metadata"></video>
             <div class="hp2-vid-card-play"></div>
@@ -4244,7 +4302,7 @@
         </div>
 
         <!-- Video 3 -->
-        <div class="hp2-vid-card" onclick="this.classList.toggle('--playing'); var v=this.querySelector('video'); v.paused?v.play():v.pause();">
+        <div class="hp2-vid-card">
           <div class="hp2-vid-card-frame">
             <video src="videos/testimonial-shimuja-short.mp4" playsinline preload="metadata"></video>
             <div class="hp2-vid-card-play"></div>
@@ -4611,6 +4669,29 @@
 
     gsap.registerPlugin(ScrollTrigger);
     document.body.classList.add("js-animations-ready");
+
+    const compactHscroll = window.matchMedia("(max-width: 700px)");
+    const setupCompactHscroll = () => {
+      const track = document.querySelector(".hp2-hscroll-track");
+      const panels = Array.from(document.querySelectorAll(".hp2-hscroll-panel"));
+      const dots = Array.from(document.querySelectorAll(".hp2-hscroll-dot"));
+      const fill = document.querySelector(".hp2-hscroll-progress-fill");
+      if (!compactHscroll.matches || !track || panels.length < 2) return;
+
+      const update = () => {
+        const maxScroll = Math.max(1, track.scrollWidth - track.clientWidth);
+        const progress = Math.min(1, Math.max(0, track.scrollLeft / maxScroll));
+        const activeIndex = Math.round(progress * (panels.length - 1));
+        if (fill) fill.style.width = (progress * 100) + "%";
+        dots.forEach((dot, i) => dot.classList.toggle("--active", i === activeIndex));
+        panels.forEach((panel, i) => panel.classList.toggle("--active", i === activeIndex));
+      };
+
+      track.addEventListener("scroll", update, { passive: true });
+      window.addEventListener("resize", update, { passive: true });
+      update();
+    };
+    setupCompactHscroll();
 
     // ── UTILITY: Pure JS Word Splitting ──
     function splitWords(el) {

@@ -1555,9 +1555,82 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
   });
 });
 
+// ── Testimonial cards: explicit hover/tap playback, one audio source at a time ──
+(() => {
+  const cards = Array.from(document.querySelectorAll(".hp2-vid-card"));
+  if (!cards.length) return;
+
+  const useTapVideo = window.matchMedia("(hover: none), (pointer: coarse)");
+
+  const stopCard = (card) => {
+    const video = card.querySelector("video");
+    if (!video) return;
+    video.pause();
+    try { video.currentTime = 0; } catch (err) {}
+    card.classList.remove("--playing");
+  };
+
+  const stopOtherCards = (activeCard) => {
+    cards.forEach((card) => {
+      if (card !== activeCard) stopCard(card);
+    });
+  };
+
+  const playCard = (card) => {
+    const video = card.querySelector("video");
+    if (!video) return;
+    stopOtherCards(card);
+    video.muted = true;
+    video.volume = 0.85;
+    video.play()
+      .then(() => {
+        video.muted = false;
+        card.classList.add("--playing");
+      })
+      .catch(() => {
+        video.muted = true;
+        video.play()
+          .then(() => card.classList.add("--playing"))
+          .catch(() => stopCard(card));
+      });
+  };
+
+  cards.forEach((card) => {
+    const video = card.querySelector("video");
+    if (!video) return;
+
+    card.addEventListener("mouseenter", () => {
+      if (useTapVideo.matches) return;
+      playCard(card);
+    });
+
+    card.addEventListener("mouseleave", () => {
+      if (useTapVideo.matches) return;
+      stopCard(card);
+    });
+
+    card.addEventListener("click", (event) => {
+      if (!useTapVideo.matches) return;
+      event.preventDefault();
+      event.stopPropagation();
+      if (card.classList.contains("--playing")) {
+        stopCard(card);
+      } else {
+        playCard(card);
+      }
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!useTapVideo.matches) return;
+    if (cards.some((card) => card.contains(event.target))) return;
+    cards.forEach(stopCard);
+  });
+})();
+
 // ── Viewport-managed autoplay videos ──
 (() => {
-  const managedVideos = Array.from(document.querySelectorAll("video[data-video-src], video[data-autoplay-on-view], .hp2-hero-bg-video, .hp2-vid-card video"));
+  const managedVideos = Array.from(document.querySelectorAll("video[data-video-src], video[data-autoplay-on-view], .hp2-hero-bg-video"));
   if (!managedVideos.length) return;
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1574,7 +1647,8 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
   const startVideo = (video) => {
     if (prefersReducedMotion) return;
     const hscrollPanel = video.closest(".hp2-hscroll-panel");
-    if (hscrollPanel && !hscrollPanel.classList.contains("--active")) {
+    const isCompactHscroll = hscrollPanel && window.matchMedia("(max-width: 700px)").matches;
+    if (hscrollPanel && !isCompactHscroll && !hscrollPanel.classList.contains("--active")) {
       stopVideo(video);
       return;
     }

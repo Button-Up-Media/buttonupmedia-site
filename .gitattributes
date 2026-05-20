@@ -1,1 +1,17 @@
 *.mp4 filter=lfs diff=lfs merge=lfs -text
+
+# Public, referenced site videos must deploy as real files. Vercel serves Git LFS
+# pointers as tiny text files, which makes the homepage/social videos unplayable.
+videos/2.12.26[[:space:]]BUM[[:space:]]15[[:space:]]Sec[[:space:]]Quality[[:space:]]Shots_1080p.mp4 -filter -diff -merge -text
+videos/bts-behind-counter.mp4 -filter -diff -merge -text
+videos/compilation-best-shots.mp4 -filter -diff -merge -text
+videos/fatty-crab-nola-flavors.mp4 -filter -diff -merge -text
+videos/fatty-crab-seafood-boil.mp4 -filter -diff -merge -text
+videos/sm-fattycrab-zackdfilms.mp4 -filter -diff -merge -text
+videos/sm-how-we-work.mp4 -filter -diff -merge -text
+videos/sm-miami-local.mp4 -filter -diff -merge -text
+videos/sm-problem-accent.mp4 -filter -diff -merge -text
+videos/sm-rainy-days-sophisticated.mp4 -filter -diff -merge -text
+videos/testimonial-brewing-buddha-v2.mp4 -filter -diff -merge -text
+videos/testimonial-ifc.mp4 -filter -diff -merge -text
+videos/testimonial-shimuja-short.mp4 -filter -diff -merge -text
