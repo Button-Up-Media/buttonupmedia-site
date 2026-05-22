@@ -3,6 +3,224 @@ if (window.lucide && typeof lucide.createIcons === "function") {
   lucide.createIcons();
 }
 
+// ─── Cookie / Ads Consent ───
+(() => {
+  const storageKey = "bum-cookie-consent-v1";
+  const bannerId = "bum-consent-banner";
+  const hasGlobalPrivacyControl = typeof navigator !== "undefined" && navigator.globalPrivacyControl === true;
+
+  const readState = () => {
+    try {
+      const raw = localStorage.getItem(storageKey);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      if (!parsed || typeof parsed !== "object") return null;
+      return {
+        analytics: !!parsed.analytics,
+        marketing: !!parsed.marketing,
+      };
+    } catch (error) {
+      return null;
+    }
+  };
+
+  const stateToConsent = (state) => ({
+    ad_storage: state.marketing ? "granted" : "denied",
+    ad_user_data: state.marketing ? "granted" : "denied",
+    ad_personalization: state.marketing ? "granted" : "denied",
+    analytics_storage: state.analytics ? "granted" : "denied",
+    functionality_storage: "granted",
+    personalization_storage: state.marketing ? "granted" : "denied",
+    security_storage: "granted",
+    wait_for_update: 500,
+  });
+
+  const pushConsent = (state) => {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+    window.gtag("consent", "update", stateToConsent(state));
+    window.dataLayer.push({
+      event: "bum_consent_update",
+      analytics_consent: state.analytics ? "granted" : "denied",
+      marketing_consent: state.marketing ? "granted" : "denied",
+    });
+  };
+
+  const saveState = (state) => {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(state));
+    } catch (error) {
+      // localStorage can be unavailable in hardened browsers; consent still updates in-session.
+    }
+    pushConsent(state);
+    window.dispatchEvent(new CustomEvent("bum:consent-change", { detail: state }));
+  };
+
+  const showBanner = () => {
+    if (document.getElementById(bannerId)) return;
+
+    const banner = document.createElement("div");
+    banner.id = bannerId;
+    banner.className = "bum-consent";
+    banner.setAttribute("role", "dialog");
+    banner.setAttribute("aria-labelledby", "bum-consent-title");
+    banner.setAttribute("aria-describedby", "bum-consent-copy");
+
+    banner.innerHTML = `
+      <div class="bum-consent__launcher-wrap">
+        <button type="button" class="bum-consent__launcher" aria-expanded="false" aria-controls="bum-consent-panel" data-bum-consent-action="toggle">
+          <span class="bum-consent__launcher-glyph" aria-hidden="true">🍪</span>
+          <span class="sr-only">Open cookie preferences</span>
+        </button>
+        <div class="bum-consent__sheet" id="bum-consent-panel" hidden>
+          <div class="bum-consent__sheet-head">
+            <div class="bum-consent__sheet-headcopy">
+              <div class="bum-consent__eyebrow">Privacy & cookies</div>
+              <h2 class="bum-consent__title" id="bum-consent-title">Cookie preferences</h2>
+            </div>
+            <div class="bum-consent__chip">
+              <span class="bum-consent__chip-dot" aria-hidden="true"></span>
+              US on by default
+            </div>
+            <button type="button" class="bum-consent__close" data-bum-consent-action="toggle" aria-label="Close cookie preferences">×</button>
+          </div>
+          <p class="bum-consent__copy" id="bum-consent-copy">
+            Essential cookies stay on. Optional cookies can be adjusted below.
+          </p>
+          <div class="bum-consent__settings">
+            <label class="bum-consent__toggle">
+              <div>
+                <strong>Analytics</strong>
+                <span>Visits, forms, bookings.</span>
+              </div>
+              <input class="bum-consent__switch" type="checkbox" data-bum-consent="analytics" checked />
+            </label>
+            <label class="bum-consent__toggle">
+              <div>
+                <strong>Ads</strong>
+                <span>Conversion tracking and audiences.</span>
+              </div>
+              <input class="bum-consent__switch" type="checkbox" data-bum-consent="marketing" checked />
+            </label>
+            <div class="bum-consent__actions">
+              <button type="button" class="bum-consent__button --ghost" data-bum-consent-action="reject">Reject optional</button>
+              <button type="button" class="bum-consent__button" data-bum-consent-action="save">Save choices</button>
+              <button type="button" class="bum-consent__button --primary" data-bum-consent-action="accept">Allow all</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(banner);
+    if (window.lucide && typeof lucide.createIcons === "function") {
+      lucide.createIcons();
+    }
+
+    const analyticsToggle = banner.querySelector('[data-bum-consent="analytics"]');
+    const marketingToggle = banner.querySelector('[data-bum-consent="marketing"]');
+    const launcher = banner.querySelector(".bum-consent__launcher");
+    const sheet = banner.querySelector(".bum-consent__sheet");
+    const syncToggles = (state) => {
+      analyticsToggle.checked = state.analytics;
+      marketingToggle.checked = state.marketing;
+    };
+    if (hasGlobalPrivacyControl) {
+      marketingToggle.disabled = true;
+      marketingToggle.checked = false;
+      marketingToggle.parentElement.classList.add("is-disabled");
+    }
+    const initialState = readState() || {
+      analytics: true,
+      marketing: !hasGlobalPrivacyControl,
+    };
+    const appliedState = {
+      analytics: !!initialState.analytics,
+      marketing: hasGlobalPrivacyControl ? false : !!initialState.marketing,
+    };
+    syncToggles(appliedState);
+    pushConsent(appliedState);
+
+    let isOpen = false;
+    const setOpen = (nextOpen) => {
+      isOpen = nextOpen;
+      sheet.hidden = !nextOpen;
+      launcher.setAttribute("aria-expanded", String(nextOpen));
+      banner.dataset.open = nextOpen ? "true" : "false";
+    };
+    const closeOnOutsideClick = (event) => {
+      if (!isOpen) return;
+      if (banner.contains(event.target)) return;
+      setOpen(false);
+    };
+    document.addEventListener("mousedown", closeOnOutsideClick, true);
+    document.addEventListener("touchstart", closeOnOutsideClick, true);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setOpen(false);
+    });
+    setOpen(false);
+
+    banner.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-bum-consent-action]");
+      if (!button) return;
+
+      const action = button.getAttribute("data-bum-consent-action");
+      if (action === "toggle") {
+        setOpen(!isOpen);
+        return;
+      }
+      if (action === "accept") {
+        const state = { analytics: true, marketing: hasGlobalPrivacyControl ? false : true };
+        saveState(state);
+        setOpen(false);
+        window.location.reload();
+        return;
+      }
+
+      if (action === "reject") {
+        const state = { analytics: false, marketing: false };
+        syncToggles(state);
+        saveState(state);
+        setOpen(false);
+        window.location.reload();
+        return;
+      }
+
+      const state = {
+        analytics: analyticsToggle.checked,
+        marketing: hasGlobalPrivacyControl ? false : marketingToggle.checked,
+      };
+      saveState(state);
+      setOpen(false);
+      window.location.reload();
+    });
+  };
+
+  const initConsent = () => {
+    const state = readState();
+    if (state) {
+      pushConsent({
+        analytics: state.analytics,
+        marketing: hasGlobalPrivacyControl ? false : state.marketing,
+      });
+    }
+    const defaultState = {
+      analytics: true,
+      marketing: !hasGlobalPrivacyControl,
+    };
+    if (!state) {
+      pushConsent(defaultState);
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", showBanner, { once: true });
+    } else {
+      showBanner();
+    }
+  };
+
+  initConsent();
+})();
+
 // ─── Mobile nav: tap outside to close ───
 (() => {
   const navDropdowns = document.querySelectorAll(".lib-nav-dropdown");

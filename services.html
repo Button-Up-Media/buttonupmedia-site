@@ -3,6 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      var key = "bum-cookie-consent-v1";
+      var consent = {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: "denied",
+        functionality_storage: "granted",
+        personalization_storage: "denied",
+        security_storage: "granted",
+        wait_for_update: 500
+      };
+      try {
+        var saved = localStorage.getItem(key);
+        if (saved) {
+          var parsed = JSON.parse(saved);
+          if (parsed && parsed.analytics) consent.analytics_storage = "granted";
+          if (parsed && parsed.marketing && !(navigator && navigator.globalPrivacyControl)) {
+            consent.ad_storage = "granted";
+            consent.ad_user_data = "granted";
+            consent.ad_personalization = "granted";
+            consent.personalization_storage = "granted";
+          }
+        }
+      } catch (err) {}
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+      window.gtag("consent", "default", consent);
+    })();
+  </script>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
