@@ -1,8 +1,8 @@
 (function () {
-  const stage = document.querySelector('[data-hero-parallax]');
-  if (!stage) return;
+  const hero = document.querySelector('.rw-parallax-hero');
+  if (!hero) return;
 
-  const layers = Array.from(stage.querySelectorAll('[data-depth]'));
+  const layers = Array.from(hero.querySelectorAll('[data-depth]'));
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function setTransforms(x, y) {
@@ -37,8 +37,8 @@
     raf = window.requestAnimationFrame(tick);
   }
 
-  stage.addEventListener('mousemove', (event) => {
-    const rect = stage.getBoundingClientRect();
+  hero.addEventListener('mousemove', (event) => {
+    const rect = hero.getBoundingClientRect();
     const px = (event.clientX - rect.left) / rect.width;
     const py = (event.clientY - rect.top) / rect.height;
     targetX = Math.max(-1, Math.min(1, (px - 0.5) * 2));
@@ -46,7 +46,7 @@
     schedule();
   });
 
-  stage.addEventListener('mouseleave', () => {
+  hero.addEventListener('mouseleave', () => {
     targetX = 0;
     targetY = 0;
     schedule();
