@@ -33,6 +33,7 @@ Last updated:
   - `http://127.0.0.1:8000/.tmp-restaurant-website-design-preview.html`
 - The live hidden page remains non-indexable and is treated as the source page for the preview copy.
 - Hero parallax currently responds across the full hero section, not just the image stage.
+- The hero has been simplified by removing the small "Website Services" badge and the bottom trust-chip row so the first screen is cleaner.
 - The Pricing and Add-Ons content has been combined into one section.
 - The Process section has been optimized for desktop scroll and hides the sticky card on mobile.
 - The Problem section no longer shows the green “What should happen” solution callouts.
@@ -198,4 +199,3 @@ When a task finishes, append:
 - Any important decisions made
 - Any new git commit hashes
 - Any open risks or follow-up work
-
