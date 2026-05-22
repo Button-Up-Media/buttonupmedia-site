@@ -1310,18 +1310,18 @@
        ============================ */
     .rw-timeline {
       display: grid;
-      grid-template-columns: 0.45fr 0.55fr;
-      gap: 48px;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+      gap: 56px;
       margin-top: 48px;
       align-items: start;
     }
     .rw-timeline-track {
       position: relative;
-      padding-left: 40px;
+      padding-left: 52px;
     }
     .rw-timeline-line {
       position: absolute;
-      left: 14px;
+      left: 18px;
       top: 0;
       bottom: 0;
       width: 2px;
@@ -1336,12 +1336,12 @@
     }
     .rw-timeline-step {
       position: relative;
-      padding-bottom: 48px;
+      padding-bottom: 56px;
     }
     .rw-timeline-step:last-child { padding-bottom: 0; }
     .rw-timeline-marker {
       position: absolute;
-      left: -40px;
+      left: -52px;
       top: 0;
       width: 30px;
       height: 30px;
@@ -1390,18 +1390,29 @@
       border-radius: 50%;
       background: var(--gold);
     }
-    .rw-timeline-sticky { position: relative; }
+    .rw-timeline-sticky {
+      position: sticky;
+      top: 120px;
+      align-self: start;
+      justify-self: end;
+      width: 100%;
+      max-width: 460px;
+    }
     .rw-timeline-progress-card {
-      padding: 32px 28px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 26px 24px;
       border: 1px solid var(--line-soft);
       border-radius: var(--r-xl);
       background: rgba(255,255,255,0.015);
-      text-align: center;
+      text-align: left;
     }
     .rw-progress-ring {
-      width: 140px;
-      height: 140px;
-      margin: 0 auto 20px;
+      width: 108px;
+      height: 108px;
+      flex: 0 0 108px;
+      margin: 0;
       position: relative;
     }
     .rw-progress-ring svg {
@@ -1428,18 +1439,26 @@
       display: grid;
       place-items: center;
       font-family: var(--font-display);
-      font-size: 1.6rem;
+      font-size: 1.35rem;
       font-weight: 800;
       color: var(--gold);
     }
+    .rw-timeline-progress-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
     .rw-timeline-progress-card h4 {
-      font-size: 0.92rem;
+      font-size: 1rem;
       font-weight: 700;
-      margin-bottom: 4px;
+      margin-bottom: 0;
     }
     .rw-timeline-progress-card p {
-      font-size: 0.78rem;
+      font-size: 0.88rem;
       color: var(--text-soft);
+      line-height: 1.5;
+      margin: 0;
     }
 
     /* ============================
@@ -2354,6 +2373,7 @@
       .rw-tier-card.--featured { transform: none; }
       .rw-tier-card.--featured:hover { transform: translateY(-4px); }
       .rw-timeline { grid-template-columns: 1fr; }
+      .rw-timeline-sticky { display: none; }
       .rw-pricing-grid { grid-template-columns: 1fr; gap: 20px; }
       .rw-pricing-card:first-child { border-radius: var(--r-xl); border-right: 1px solid rgba(255,248,235,0.06); }
       .rw-pricing-card:last-child { border-radius: var(--r-xl); border-left: 1px solid rgba(255,248,235,0.06); }
@@ -2783,8 +2803,10 @@
               </svg>
               <div class="rw-progress-ring-text">0/4</div>
             </div>
-            <h4 class="rw-progress-step-name">Ready</h4>
-            <p class="rw-progress-step-desc">Scroll to begin</p>
+            <div class="rw-timeline-progress-copy">
+              <h4 class="rw-progress-step-name">Ready</h4>
+              <p class="rw-progress-step-desc">Scroll to begin</p>
+            </div>
           </div>
         </div>
       </div>
@@ -3253,16 +3275,6 @@
     const circumference = 2 * Math.PI * 60;
 
     if (timelineSteps.length && timelineFill) {
-      if (timelineSticky && timelineSection && window.innerWidth > 900) {
-        ScrollTrigger.create({
-          trigger: timelineSection,
-          start: "top 100px",
-          end: "bottom bottom",
-          pin: timelineSticky,
-          pinSpacing: false,
-        });
-      }
-
       let lastActive = 0;
       function updateProgress(activeIndex) {
         if (activeIndex === lastActive) return;
