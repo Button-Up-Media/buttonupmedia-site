@@ -1,0 +1,655 @@
+/* Website design redesign layer
+   New hero + imported section system layered on top of the existing page. */
+
+.rw-parallax-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background:
+    radial-gradient(ellipse 70% 60% at 18% 18%, rgba(226,168,77,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 50% at 82% 32%, rgba(69,176,140,0.08) 0%, transparent 62%),
+    linear-gradient(180deg, #060708 0%, #050608 100%);
+}
+
+.rw-parallax-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.02), transparent 18%),
+    radial-gradient(circle at top right, rgba(226,168,77,0.08), transparent 30%),
+    radial-gradient(circle at bottom left, rgba(69,176,140,0.06), transparent 28%);
+  pointer-events: none;
+}
+
+.rw-parallax-hero .rw-hero-inner {
+  position: relative;
+  z-index: 2;
+  width: min(1200px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 140px 0 96px;
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 54px;
+  align-items: center;
+}
+
+.rw-parallax-hero .rw-hero-copy {
+  max-width: 560px;
+}
+
+.rw-parallax-hero .hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.rw-parallax-hero h1 {
+  font-family: var(--font-hero);
+  font-size: clamp(2.45rem, 4.6vw, 4.4rem);
+  line-height: 1.03;
+  letter-spacing: -0.055em;
+  margin-bottom: 22px;
+}
+
+.rw-parallax-hero h1 .accent-serif {
+  color: var(--gold);
+  font-family: var(--font-hero);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.rw-parallax-hero .rw-hero-copy > p {
+  max-width: 54ch;
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: var(--text-dim);
+  margin-bottom: 28px;
+}
+
+.rw-parallax-stage {
+  position: relative;
+  min-height: 680px;
+  display: grid;
+  place-items: center;
+  perspective: 1800px;
+  isolation: isolate;
+}
+
+.rw-parallax-stage::after {
+  content: "";
+  position: absolute;
+  inset: 10% 8% 6% 8%;
+  border-radius: 32px;
+  background: radial-gradient(circle at center, rgba(226,168,77,0.08), transparent 62%);
+  filter: blur(20px);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.rw-parallax-credit {
+  position: absolute;
+  top: 4%;
+  left: 6%;
+  z-index: 8;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(7,8,10,0.84);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+  backdrop-filter: blur(18px);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.rw-parallax-credit .rw-credit-label {
+  color: var(--text-soft);
+  font-weight: 600;
+}
+
+.rw-parallax-credit .rw-credit-divider {
+  width: 1px;
+  height: 12px;
+  background: rgba(255,255,255,0.18);
+}
+
+.rw-parallax-credit .rw-credit-name {
+  color: var(--gold);
+}
+
+.rw-parallax-layer {
+  position: absolute;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.rw-parallax-layer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+.rw-parallax-laptop {
+  width: min(88%, 820px);
+  aspect-ratio: 2940 / 1664;
+  right: 2%;
+  top: 14%;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow:
+    0 32px 64px rgba(0,0,0,0.55),
+    0 0 0 1px rgba(255,255,255,0.08);
+}
+
+.rw-parallax-phone {
+  width: min(30%, 260px);
+  aspect-ratio: 678 / 1466;
+  right: 3%;
+  bottom: 4%;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow:
+    0 28px 50px rgba(0,0,0,0.58),
+    0 0 0 1px rgba(255,255,255,0.08);
+}
+
+.rw-parallax-card {
+  min-width: 224px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(7,8,10,0.9);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 16px 38px rgba(0,0,0,0.42);
+  backdrop-filter: blur(16px);
+  color: var(--text);
+}
+
+.rw-parallax-card .rw-parallax-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: rgba(69,176,140,0.12);
+  color: var(--teal);
+  margin-bottom: 10px;
+}
+
+.rw-parallax-card .rw-parallax-card-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.rw-parallax-card .rw-parallax-card-label {
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.rw-parallax-card.--top {
+  left: 2%;
+  top: 12%;
+}
+
+.rw-parallax-card.--bottom {
+  left: 0%;
+  bottom: 8%;
+}
+
+.rw-parallax-card .rw-parallax-card-sub {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-soft);
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+
+.rw-parallax-hero .rw-hero-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rw-parallax-hero .rw-hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.rw-parallax-hero .rw-hero-trust span {
+  color: var(--text-soft);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.wd-system-grid,
+.wd-packages-grid,
+.wd-addons-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.wd-system-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 36px;
+}
+
+.wd-system-card,
+.wd-package-card,
+.wd-addon-card {
+  position: relative;
+  padding: 26px 24px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+.wd-system-card:hover,
+.wd-package-card:hover,
+.wd-addon-card:hover {
+  border-color: rgba(226,168,77,0.22);
+}
+
+.wd-system-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.wd-system-num {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(226,168,77,0.08);
+  border: 1px solid rgba(226,168,77,0.2);
+  color: var(--gold);
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.wd-system-card h3,
+.wd-addon-card h3,
+.wd-package-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: -0.03em;
+  margin-bottom: 10px;
+}
+
+.wd-system-card p,
+.wd-addon-card p,
+.wd-package-tag {
+  color: var(--text-dim);
+  line-height: 1.7;
+  font-size: 0.94rem;
+}
+
+.wd-system-diagram {
+  margin-top: 22px;
+  height: 160px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+  border: 1px solid rgba(255,255,255,0.06);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.wd-system-diagram.--device {
+  position: relative;
+}
+
+.wd-system-diagram.--device::before,
+.wd-system-diagram.--device::after {
+  content: "";
+  position: absolute;
+  inset: auto;
+  border-radius: 999px;
+  background: rgba(226,168,77,0.16);
+}
+
+.wd-system-diagram.--device::before {
+  width: 80px;
+  height: 110px;
+  left: 22px;
+  top: 20px;
+  box-shadow:
+    110px 20px 0 0 rgba(255,255,255,0.02),
+    196px 54px 0 0 rgba(69,176,140,0.08);
+  transform: rotate(-8deg);
+}
+
+.wd-system-diagram.--search {
+  display: block;
+  padding: 18px 16px;
+}
+
+.wd-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.wd-search-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(226,168,77,0.08);
+  color: var(--gold);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.wd-funnel {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.wd-funnel-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.03);
+  color: var(--text);
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.wd-funnel-row span:last-child {
+  color: var(--gold);
+}
+
+.wd-system-strip {
+  margin-top: 20px;
+  padding: 14px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.02);
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.wd-packages-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 36px;
+}
+
+.wd-package-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.wd-package-card.--featured {
+  transform: translateY(-8px);
+  background: linear-gradient(180deg, rgba(226,168,77,0.08), rgba(255,255,255,0.03));
+  border-color: rgba(226,168,77,0.18);
+}
+
+.wd-package-badge {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(226,168,77,0.12);
+  color: var(--gold);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.wd-package-price {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.wd-package-price .wd-price {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 1;
+  color: var(--gold);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+.wd-package-price .wd-price-note {
+  color: var(--text-soft);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.wd-package-features {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.wd-package-features li {
+  position: relative;
+  padding-left: 20px;
+  color: rgba(246,240,230,0.92);
+  line-height: 1.6;
+}
+
+.wd-package-features li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--gold);
+}
+
+.wd-package-cta {
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.wd-addon-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 36px;
+}
+
+.wd-addon-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.wd-addon-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(69,176,140,0.1);
+  color: var(--teal);
+  border: 1px solid rgba(69,176,140,0.22);
+  flex-shrink: 0;
+}
+
+.wd-addon-price {
+  text-align: right;
+}
+
+.wd-addon-price .wd-addon-num {
+  display: block;
+  font-family: var(--font-display);
+  color: var(--gold);
+  font-size: 1.55rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.wd-addon-price .wd-addon-denom {
+  display: block;
+  margin-top: 2px;
+  color: var(--text-soft);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.wd-addon-list {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.wd-addon-list li {
+  position: relative;
+  padding-left: 20px;
+  color: rgba(246,240,230,0.92);
+  line-height: 1.6;
+}
+
+.wd-addon-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--teal);
+}
+
+@media (max-width: 1100px) {
+  .rw-parallax-hero .rw-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .rw-parallax-stage {
+    min-height: 620px;
+  }
+
+  .wd-system-grid,
+  .wd-packages-grid,
+  .wd-addon-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .rw-parallax-hero {
+    min-height: auto;
+  }
+
+  .rw-parallax-hero .rw-hero-inner {
+    width: min(100% - 32px, 1200px);
+    padding: 108px 0 72px;
+  }
+
+  .rw-parallax-hero h1 {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .rw-parallax-stage {
+    min-height: 520px;
+  }
+
+  .rw-parallax-credit {
+    left: 4%;
+    right: 4%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .rw-parallax-laptop {
+    width: min(94%, 690px);
+    right: 2%;
+    top: 16%;
+  }
+
+  .rw-parallax-phone {
+    width: min(36%, 230px);
+    right: 2%;
+    bottom: 4%;
+  }
+
+  .rw-parallax-card {
+    min-width: 0;
+    width: min(50vw, 220px);
+    padding: 12px 14px;
+  }
+
+  .rw-parallax-card.--top {
+    left: 2%;
+    top: 10%;
+  }
+
+  .rw-parallax-card.--bottom {
+    left: 2%;
+    bottom: 8%;
+  }
+
+  .wd-system-grid,
+  .wd-packages-grid,
+  .wd-addon-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wd-package-card.--featured {
+    transform: none;
+  }
+}
