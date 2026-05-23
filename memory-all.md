@@ -37,6 +37,7 @@ Last updated:
 - On mobile, the hero graphic stack no longer uses parallax, hides the client pill, and now uses an overlapping left-phone / right-desktop composition so the desktop screenshot keeps its aspect ratio and reads better in the first viewport.
 - The mobile result pills are smaller, stacked vertically, and overlap the device cards without wrapping body copy.
 - The site-wide cookie consent UI is now a bottom-sheet popup instead of the corner launcher icon. Accept All persists in localStorage across pages; Reject All is remembered for the current browser session and can reappear on a new session.
+- The cookie banner was later reduced to a much tighter bottom sheet: 180px tall on desktop and 160px tall on mobile.
 - The Pricing and Add-Ons content has been combined into one section.
 - The Process section has been optimized for desktop scroll and hides the sticky card on mobile.
 - The Problem section no longer shows the green “What should happen” solution callouts.
