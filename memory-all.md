@@ -37,6 +37,7 @@ Last updated:
 - On mobile, the hero graphic stack no longer uses parallax, hides the client pill, and now uses an overlapping left-phone / right-desktop composition so the desktop screenshot keeps its aspect ratio and reads better in the first viewport.
 - On smaller screens, the hero graphic leads the section before the copy, keeps the phone the primary visual, and preserves the desktop screenshot as a smaller overlapping companion so the stack stays readable above the cookie banner.
 - The hero graphic now uses a fixed artboard mindset: the desktop screenshot, phone screenshot, and Reservations / Orders pills keep locked positions and aspect ratios, then the entire composition scales down for smaller screens.
+- On mobile, the hero graphic now sits below the headline, body copy, and CTA buttons so the page reads in a normal top-to-bottom flow before the graphic appears.
 - The mobile result pills are smaller, stacked vertically, and overlap the device cards without wrapping body copy.
 - The site-wide cookie consent UI is now a bottom-sheet popup instead of the corner launcher icon. Accept All persists in localStorage across pages; Reject All is remembered for the current browser session and can reappear on a new session.
 - The cookie banner was later reduced to a much tighter bottom sheet: 180px tall on desktop and 160px tall on mobile.

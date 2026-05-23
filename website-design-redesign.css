@@ -559,13 +559,13 @@
   }
 
   .rw-parallax-hero .rw-hero-copy {
-    order: 2;
+    order: 1;
     max-width: 620px;
     padding-bottom: 0;
   }
 
   .rw-parallax-stage {
-    order: 1;
+    order: 2;
     --rw-stage-scale: 0.86;
   }
 
@@ -590,7 +590,7 @@
   }
 
   .rw-parallax-hero .rw-hero-copy {
-    order: 2;
+    order: 1;
     padding-bottom: 0;
   }
 
@@ -599,7 +599,7 @@
   }
 
   .rw-parallax-stage {
-    order: 1;
+    order: 2;
     --rw-stage-scale: 0.56;
   }
 
@@ -629,12 +629,12 @@
   }
 
   .rw-parallax-hero .rw-hero-copy {
-    order: 2;
+    order: 1;
     padding-bottom: 0;
   }
 
   .rw-parallax-stage {
-    order: 1;
+    order: 2;
     --rw-stage-scale: 0.48;
   }
 
