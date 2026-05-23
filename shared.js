@@ -6,10 +6,11 @@ if (window.lucide && typeof lucide.createIcons === "function") {
 // ─── Cookie / Ads Consent ───
 (() => {
   const storageKey = "bum-cookie-consent-v1";
+  const rejectSessionKey = "bum-cookie-reject-session-v1";
   const bannerId = "bum-consent-banner";
   const hasGlobalPrivacyControl = typeof navigator !== "undefined" && navigator.globalPrivacyControl === true;
 
-  const readState = () => {
+  const readPersistedState = () => {
     try {
       const raw = localStorage.getItem(storageKey);
       if (!raw) return null;
@@ -22,6 +23,36 @@ if (window.lucide && typeof lucide.createIcons === "function") {
     } catch (error) {
       return null;
     }
+  };
+
+  const readSessionReject = () => {
+    try {
+      return sessionStorage.getItem(rejectSessionKey) === "1";
+    } catch (error) {
+      return false;
+    }
+  };
+
+  const readDecision = () => {
+    const persisted = readPersistedState();
+    if (persisted) {
+      return {
+        mode: "accept",
+        state: {
+          analytics: !!persisted.analytics,
+          marketing: hasGlobalPrivacyControl ? false : !!persisted.marketing,
+        },
+      };
+    }
+
+    if (readSessionReject()) {
+      return {
+        mode: "reject",
+        state: { analytics: false, marketing: false },
+      };
+    }
+
+    return null;
   };
 
   const stateToConsent = (state) => ({
@@ -46,17 +77,38 @@ if (window.lucide && typeof lucide.createIcons === "function") {
     });
   };
 
-  const saveState = (state) => {
+  const saveDecision = (mode) => {
+    const acceptedState = {
+      analytics: true,
+      marketing: hasGlobalPrivacyControl ? false : true,
+    };
+    const rejectedState = {
+      analytics: false,
+      marketing: false,
+    };
+    const nextState = mode === "accept" ? acceptedState : rejectedState;
+
     try {
-      localStorage.setItem(storageKey, JSON.stringify(state));
+      if (mode === "accept") {
+        localStorage.setItem(storageKey, JSON.stringify({
+          analytics: true,
+          marketing: !hasGlobalPrivacyControl,
+        }));
+        sessionStorage.removeItem(rejectSessionKey);
+      } else {
+        localStorage.removeItem(storageKey);
+        sessionStorage.setItem(rejectSessionKey, "1");
+      }
     } catch (error) {
-      // localStorage can be unavailable in hardened browsers; consent still updates in-session.
+      // Storage can be unavailable in hardened browsers; consent still updates in-session.
     }
-    pushConsent(state);
-    window.dispatchEvent(new CustomEvent("bum:consent-change", { detail: state }));
+
+    pushConsent(nextState);
+    window.dispatchEvent(new CustomEvent("bum:consent-choice", { detail: { mode, state: nextState } }));
+    window.location.reload();
   };
 
-  const showBanner = () => {
+  const renderBanner = () => {
     if (document.getElementById(bannerId)) return;
 
     const banner = document.createElement("div");
@@ -67,47 +119,16 @@ if (window.lucide && typeof lucide.createIcons === "function") {
     banner.setAttribute("aria-describedby", "bum-consent-copy");
 
     banner.innerHTML = `
-      <div class="bum-consent__launcher-wrap">
-        <button type="button" class="bum-consent__launcher" aria-expanded="false" aria-controls="bum-consent-panel" data-bum-consent-action="toggle">
-          <span class="bum-consent__launcher-glyph" aria-hidden="true">🍪</span>
-          <span class="sr-only">Open cookie preferences</span>
-        </button>
-        <div class="bum-consent__sheet" id="bum-consent-panel" hidden>
-          <div class="bum-consent__sheet-head">
-            <div class="bum-consent__sheet-headcopy">
-              <div class="bum-consent__eyebrow">Privacy & cookies</div>
-              <h2 class="bum-consent__title" id="bum-consent-title">Cookie preferences</h2>
-            </div>
-            <div class="bum-consent__chip">
-              <span class="bum-consent__chip-dot" aria-hidden="true"></span>
-              US on by default
-            </div>
-            <button type="button" class="bum-consent__close" data-bum-consent-action="toggle" aria-label="Close cookie preferences">×</button>
-          </div>
+      <div class="bum-consent__sheet" id="bum-consent-panel">
+        <div class="bum-consent__sheet-copy">
+          <h2 class="bum-consent__title" id="bum-consent-title">We value your privacy</h2>
           <p class="bum-consent__copy" id="bum-consent-copy">
-            Essential cookies stay on. Optional cookies can be adjusted below.
+            We use cookies to enhance your browsing experience, serve personalized ads, and analyze our traffic. By clicking "accept all", you consent to the use of cookies.
           </p>
-          <div class="bum-consent__settings">
-            <label class="bum-consent__toggle">
-              <div>
-                <strong>Analytics</strong>
-                <span>Visits, forms, bookings.</span>
-              </div>
-              <input class="bum-consent__switch" type="checkbox" data-bum-consent="analytics" checked />
-            </label>
-            <label class="bum-consent__toggle">
-              <div>
-                <strong>Ads</strong>
-                <span>Conversion tracking and audiences.</span>
-              </div>
-              <input class="bum-consent__switch" type="checkbox" data-bum-consent="marketing" checked />
-            </label>
-            <div class="bum-consent__actions">
-              <button type="button" class="bum-consent__button --ghost" data-bum-consent-action="reject">Reject optional</button>
-              <button type="button" class="bum-consent__button" data-bum-consent-action="save">Save choices</button>
-              <button type="button" class="bum-consent__button --primary" data-bum-consent-action="accept">Allow all</button>
-            </div>
-          </div>
+        </div>
+        <div class="bum-consent__actions" aria-label="Cookie consent actions">
+          <button type="button" class="bum-consent__button --ghost" data-bum-consent-action="reject">Reject All</button>
+          <button type="button" class="bum-consent__button --primary" data-bum-consent-action="accept">Accept All</button>
         </div>
       </div>
     `;
@@ -117,104 +138,36 @@ if (window.lucide && typeof lucide.createIcons === "function") {
       lucide.createIcons();
     }
 
-    const analyticsToggle = banner.querySelector('[data-bum-consent="analytics"]');
-    const marketingToggle = banner.querySelector('[data-bum-consent="marketing"]');
-    const launcher = banner.querySelector(".bum-consent__launcher");
-    const sheet = banner.querySelector(".bum-consent__sheet");
-    const syncToggles = (state) => {
-      analyticsToggle.checked = state.analytics;
-      marketingToggle.checked = state.marketing;
-    };
-    if (hasGlobalPrivacyControl) {
-      marketingToggle.disabled = true;
-      marketingToggle.checked = false;
-      marketingToggle.parentElement.classList.add("is-disabled");
-    }
-    const initialState = readState() || {
-      analytics: true,
-      marketing: !hasGlobalPrivacyControl,
-    };
-    const appliedState = {
-      analytics: !!initialState.analytics,
-      marketing: hasGlobalPrivacyControl ? false : !!initialState.marketing,
-    };
-    syncToggles(appliedState);
-    pushConsent(appliedState);
-
-    let isOpen = false;
-    const setOpen = (nextOpen) => {
-      isOpen = nextOpen;
-      sheet.hidden = !nextOpen;
-      launcher.setAttribute("aria-expanded", String(nextOpen));
-      banner.dataset.open = nextOpen ? "true" : "false";
-    };
-    const closeOnOutsideClick = (event) => {
-      if (!isOpen) return;
-      if (banner.contains(event.target)) return;
-      setOpen(false);
-    };
-    document.addEventListener("mousedown", closeOnOutsideClick, true);
-    document.addEventListener("touchstart", closeOnOutsideClick, true);
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") setOpen(false);
-    });
-    setOpen(false);
-
     banner.addEventListener("click", (event) => {
       const button = event.target.closest("[data-bum-consent-action]");
       if (!button) return;
 
       const action = button.getAttribute("data-bum-consent-action");
-      if (action === "toggle") {
-        setOpen(!isOpen);
-        return;
-      }
       if (action === "accept") {
-        const state = { analytics: true, marketing: hasGlobalPrivacyControl ? false : true };
-        saveState(state);
-        setOpen(false);
-        window.location.reload();
+        saveDecision("accept");
         return;
       }
-
       if (action === "reject") {
-        const state = { analytics: false, marketing: false };
-        syncToggles(state);
-        saveState(state);
-        setOpen(false);
-        window.location.reload();
-        return;
+        saveDecision("reject");
       }
-
-      const state = {
-        analytics: analyticsToggle.checked,
-        marketing: hasGlobalPrivacyControl ? false : marketingToggle.checked,
-      };
-      saveState(state);
-      setOpen(false);
-      window.location.reload();
     });
   };
 
   const initConsent = () => {
-    const state = readState();
-    if (state) {
-      pushConsent({
-        analytics: state.analytics,
-        marketing: hasGlobalPrivacyControl ? false : state.marketing,
-      });
-    }
+    const decision = readDecision();
     const defaultState = {
-      analytics: true,
-      marketing: !hasGlobalPrivacyControl,
+      analytics: false,
+      marketing: false,
     };
-    if (!state) {
-      pushConsent(defaultState);
+    if (decision) {
+      pushConsent(decision.state);
+      return;
     }
+    pushConsent(defaultState);
     if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", showBanner, { once: true });
+      document.addEventListener("DOMContentLoaded", renderBanner, { once: true });
     } else {
-      showBanner();
+      renderBanner();
     }
   };
 

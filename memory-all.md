@@ -36,6 +36,7 @@ Last updated:
 - The hero has been simplified by removing the small "Website Services" badge and the bottom trust-chip row so the first screen is cleaner.
 - On mobile, the hero graphic stack no longer uses parallax, hides the client pill, and now uses an overlapping left-phone / right-desktop composition so the desktop screenshot keeps its aspect ratio and reads better in the first viewport.
 - The mobile result pills are smaller, stacked vertically, and overlap the device cards without wrapping body copy.
+- The site-wide cookie consent UI is now a bottom-sheet popup instead of the corner launcher icon. Accept All persists in localStorage across pages; Reject All is remembered for the current browser session and can reappear on a new session.
 - The Pricing and Add-Ons content has been combined into one section.
 - The Process section has been optimized for desktop scroll and hides the sticky card on mobile.
 - The Problem section no longer shows the green “What should happen” solution callouts.
@@ -48,6 +49,7 @@ Last updated:
 - Optimize the process timeline for desktop scrolling and simplify it on mobile.
 - Keep the site visually bold but reduce clutter in sections that read better when simplified.
 - Keep mobile as the primary design lens, with desktop as the enhancement layer.
+- Prefer bottom-sheet consent experiences over floating corner icons when a privacy banner is needed.
 
 ## Repo Structure Index
 
