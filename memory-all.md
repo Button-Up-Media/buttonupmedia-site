@@ -34,7 +34,8 @@ Last updated:
 - The live hidden page remains non-indexable and is treated as the source page for the preview copy.
 - Hero parallax currently responds across the full hero section, not just the image stage.
 - The hero has been simplified by removing the small "Website Services" badge and the bottom trust-chip row so the first screen is cleaner.
-- On mobile, the hero graphic stack no longer uses parallax, hides the client pill, places the desktop and phone screenshots side by side, and simplifies the green result pills to one-line icon + label rows.
+- On mobile, the hero graphic stack no longer uses parallax, hides the client pill, and now uses an overlapping left-phone / right-desktop composition so the desktop screenshot keeps its aspect ratio and reads better in the first viewport.
+- The mobile result pills are smaller, stacked vertically, and overlap the device cards without wrapping body copy.
 - The Pricing and Add-Ons content has been combined into one section.
 - The Process section has been optimized for desktop scroll and hides the sticky card on mobile.
 - The Problem section no longer shows the green “What should happen” solution callouts.
