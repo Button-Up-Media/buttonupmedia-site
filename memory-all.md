@@ -9,7 +9,7 @@ Purpose:
 - Be updated at the end of each task so the repo has a single source of truth for continuity.
 
 Last updated:
-- 2026-05-22
+- 2026-05-23
 
 ## How To Use
 
@@ -34,6 +34,7 @@ Last updated:
 - The live hidden page remains non-indexable and is treated as the source page for the preview copy.
 - Hero parallax currently responds across the full hero section, not just the image stage.
 - The hero has been simplified by removing the small "Website Services" badge and the bottom trust-chip row so the first screen is cleaner.
+- On mobile, the hero graphic stack no longer uses parallax, hides the client pill, places the desktop and phone screenshots side by side, and simplifies the green result pills to one-line icon + label rows.
 - The Pricing and Add-Ons content has been combined into one section.
 - The Process section has been optimized for desktop scroll and hides the sticky card on mobile.
 - The Problem section no longer shows the green “What should happen” solution callouts.
@@ -45,6 +46,7 @@ Last updated:
 - Merge related pricing content into one section instead of splitting it across multiple blocks.
 - Optimize the process timeline for desktop scrolling and simplify it on mobile.
 - Keep the site visually bold but reduce clutter in sections that read better when simplified.
+- Keep mobile as the primary design lens, with desktop as the enhancement layer.
 
 ## Repo Structure Index
 

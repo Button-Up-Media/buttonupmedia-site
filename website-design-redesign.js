@@ -4,6 +4,7 @@
 
   const layers = Array.from(hero.querySelectorAll('[data-depth]'));
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobileLayout = window.matchMedia('(max-width: 760px)').matches || window.matchMedia('(pointer: coarse)').matches;
 
   function setTransforms(x, y) {
     for (const el of layers) {
@@ -18,7 +19,7 @@
     }
   }
 
-  if (prefersReducedMotion) {
+  if (prefersReducedMotion || isMobileLayout) {
     setTransforms(0, 0);
     return;
   }

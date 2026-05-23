@@ -40,22 +40,6 @@
   max-width: 560px;
 }
 
-.rw-parallax-hero .hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  color: var(--gold);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 18px;
-}
-
 .rw-parallax-hero h1 {
   font-family: var(--font-hero);
   font-size: clamp(2.45rem, 4.6vw, 4.4rem);
@@ -183,6 +167,9 @@
   box-shadow: 0 16px 38px rgba(0,0,0,0.42);
   backdrop-filter: blur(16px);
   color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .rw-parallax-card .rw-parallax-card-icon {
@@ -194,7 +181,7 @@
   border-radius: 999px;
   background: rgba(69,176,140,0.12);
   color: var(--teal);
-  margin-bottom: 10px;
+  flex: 0 0 32px;
 }
 
 .rw-parallax-card .rw-parallax-card-icon svg {
@@ -204,10 +191,11 @@
 
 .rw-parallax-card .rw-parallax-card-label {
   display: block;
-  font-size: 0.76rem;
+  font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  line-height: 1.15;
 }
 
 .rw-parallax-card.--top {
@@ -220,33 +208,10 @@
   bottom: 8%;
 }
 
-.rw-parallax-card .rw-parallax-card-sub {
-  display: block;
-  margin-top: 4px;
-  color: var(--text-soft);
-  font-size: 0.74rem;
-  font-weight: 600;
-}
-
 .rw-parallax-hero .rw-hero-cta {
   display: flex;
   flex-direction: column;
   gap: 16px;
-}
-
-.rw-parallax-hero .rw-hero-trust {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: center;
-}
-
-.rw-parallax-hero .rw-hero-trust span {
-  color: var(--text-soft);
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
 }
 
 .wd-system-grid,
@@ -596,8 +561,9 @@
   }
 
   .rw-parallax-hero .rw-hero-inner {
-    width: min(100% - 32px, 1200px);
-    padding: 108px 0 72px;
+    width: min(100% - 24px, 1200px);
+    padding: 104px 0 64px;
+    gap: 24px;
   }
 
   .rw-parallax-hero h1 {
@@ -605,42 +571,59 @@
   }
 
   .rw-parallax-stage {
-    min-height: 520px;
+    min-height: 0;
+    grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.95fr);
+    gap: 10px;
+    align-items: end;
+    place-items: stretch;
+    perspective: none;
   }
 
   .rw-parallax-credit {
-    left: 4%;
-    right: 4%;
-    justify-content: center;
-    text-align: center;
+    display: none;
   }
 
   .rw-parallax-laptop {
-    width: min(94%, 690px);
-    right: 2%;
-    top: 16%;
+    width: 100%;
+    position: relative;
+    right: auto;
+    top: auto;
+    left: auto;
+    bottom: auto;
+    grid-column: 1;
+    grid-row: 1;
   }
 
   .rw-parallax-phone {
-    width: min(36%, 230px);
-    right: 2%;
-    bottom: 4%;
+    width: 100%;
+    position: relative;
+    right: auto;
+    top: auto;
+    left: auto;
+    bottom: auto;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: end;
   }
 
   .rw-parallax-card {
     min-width: 0;
-    width: min(50vw, 220px);
+    width: 100%;
     padding: 12px 14px;
+    position: relative;
+    left: auto;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    grid-column: 1 / -1;
   }
 
   .rw-parallax-card.--top {
-    left: 2%;
-    top: 10%;
+    grid-row: 2;
   }
 
   .rw-parallax-card.--bottom {
-    left: 2%;
-    bottom: 8%;
+    grid-row: 3;
   }
 
   .wd-system-grid,
