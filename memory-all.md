@@ -35,9 +35,11 @@ Last updated:
 - Hero parallax currently responds across the full hero section, not just the image stage.
 - The hero has been simplified by removing the small "Website Services" badge and the bottom trust-chip row so the first screen is cleaner.
 - On mobile, the hero graphic stack no longer uses parallax, hides the client pill, and now uses an overlapping left-phone / right-desktop composition so the desktop screenshot keeps its aspect ratio and reads better in the first viewport.
+- On smaller screens, the hero graphic leads the section before the copy, keeps the phone the primary visual, and preserves the desktop screenshot as a smaller overlapping companion so the stack stays readable above the cookie banner.
 - The mobile result pills are smaller, stacked vertically, and overlap the device cards without wrapping body copy.
 - The site-wide cookie consent UI is now a bottom-sheet popup instead of the corner launcher icon. Accept All persists in localStorage across pages; Reject All is remembered for the current browser session and can reappear on a new session.
 - The cookie banner was later reduced to a much tighter bottom sheet: 180px tall on desktop and 160px tall on mobile.
+- Hero graphics should always preserve readable aspect ratio and clear overlap logic across breakpoints so the image stack remains visually understandable on mobile and smaller screens.
 - The Pricing and Add-Ons content has been combined into one section.
 - The Process section has been optimized for desktop scroll and hides the sticky card on mobile.
 - The Problem section no longer shows the green “What should happen” solution callouts.
@@ -51,6 +53,7 @@ Last updated:
 - Keep the site visually bold but reduce clutter in sections that read better when simplified.
 - Keep mobile as the primary design lens, with desktop as the enhancement layer.
 - Prefer bottom-sheet consent experiences over floating corner icons when a privacy banner is needed.
+- When a graphic stack appears in a hero, optimize it for scale, overlap, and legibility first, then embellish for larger screens. On mobile, prefer the graphic-first composition if it keeps the stack readable and visible above any persistent UI like consent banners.
 
 ## Repo Structure Index
 

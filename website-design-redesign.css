@@ -540,12 +540,113 @@
 
 @media (max-width: 1100px) {
   .rw-parallax-hero .rw-hero-inner {
-    grid-template-columns: 1fr;
-    gap: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding: 120px 0 72px;
+  }
+
+  .rw-parallax-hero .rw-hero-copy {
+    order: 2;
+    max-width: 620px;
+    padding-bottom: 0;
   }
 
   .rw-parallax-stage {
-    min-height: 620px;
+    order: 1;
+    width: min(100%, 720px);
+    margin: 0 auto;
+    min-height: clamp(420px, 58vw, 560px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    grid-template-rows: auto 1fr;
+    align-items: end;
+    justify-items: stretch;
+    perspective: none;
+  }
+
+  .rw-parallax-stage::after {
+    inset: 12% 4% 8% 4%;
+  }
+
+  .rw-parallax-credit {
+    display: none;
+  }
+
+  .rw-parallax-laptop {
+    position: relative;
+    width: clamp(150px, 22vw, 210px);
+    right: auto;
+    top: auto;
+    left: auto;
+    bottom: auto;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    align-self: start;
+    transform: translate(-8px, 10px);
+    z-index: 1;
+  }
+
+  .rw-parallax-phone {
+    position: relative;
+    width: clamp(220px, 32vw, 250px);
+    right: auto;
+    top: auto;
+    left: auto;
+    bottom: auto;
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    justify-self: start;
+    align-self: end;
+    transform: translate(14px, 18px);
+    z-index: 2;
+  }
+
+  .rw-parallax-card {
+    position: relative;
+    min-width: 0;
+    width: clamp(148px, 26vw, 180px);
+    padding: 11px 13px;
+    gap: 10px;
+    border-radius: 16px;
+  }
+
+  .rw-parallax-card .rw-parallax-card-icon {
+    width: 28px;
+    height: 28px;
+    flex-basis: 28px;
+  }
+
+  .rw-parallax-card .rw-parallax-card-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .rw-parallax-card .rw-parallax-card-label {
+    font-size: 0.72rem;
+  }
+
+  .rw-parallax-card.--top {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    align-self: start;
+    left: auto;
+    top: auto;
+    transform: translate(8px, 14px);
+    z-index: 3;
+  }
+
+  .rw-parallax-card.--bottom {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: start;
+    align-self: start;
+    left: auto;
+    bottom: auto;
+    transform: translate(18px, -6px);
+    z-index: 4;
   }
 
   .wd-system-grid,
@@ -562,19 +663,37 @@
 
   .rw-parallax-hero .rw-hero-inner {
     width: min(100% - 24px, 1200px);
-    padding: 104px 0 64px;
-    gap: 24px;
+    padding: 92px 0 40px;
+    gap: 18px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rw-parallax-hero .rw-hero-copy {
+    order: 2;
+    padding-bottom: 0;
   }
 
   .rw-parallax-hero h1 {
-    font-size: clamp(2rem, 10vw, 3rem);
+    font-size: clamp(1.9rem, 9.2vw, 2.8rem);
   }
 
   .rw-parallax-stage {
-    display: block;
-    min-height: 560px;
-    margin-top: -140px;
+    order: 1;
+    width: min(100%, 460px);
+    min-height: clamp(320px, 88vw, 420px);
+    margin-top: -42px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    grid-template-rows: auto 1fr;
+    align-items: end;
+    justify-items: stretch;
     perspective: none;
+  }
+
+  .rw-parallax-stage::after {
+    inset: 10% 2% 8% 2%;
+    filter: blur(16px);
   }
 
   .rw-parallax-credit {
@@ -582,60 +701,75 @@
   }
 
   .rw-parallax-laptop {
-    width: min(52vw, 196px);
-    position: absolute;
-    right: 0;
-    bottom: 44px;
+    width: clamp(128px, 38vw, 168px);
+    position: relative;
+    right: auto;
+    bottom: auto;
     left: auto;
     top: auto;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    align-self: start;
+    transform: translate(-10px, 10px);
     z-index: 1;
   }
 
   .rw-parallax-phone {
-    width: min(60vw, 224px);
-    position: absolute;
-    left: 0;
-    bottom: 26px;
+    width: clamp(176px, 54vw, 220px);
+    position: relative;
+    left: auto;
+    bottom: auto;
     right: auto;
     top: auto;
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    justify-self: start;
+    align-self: end;
+    transform: translate(10px, 16px);
     z-index: 2;
   }
 
   .rw-parallax-card {
     min-width: 0;
-    width: min(43vw, 154px);
-    padding: 10px 12px;
-    position: absolute;
-    left: 0;
+    width: clamp(140px, 40vw, 168px);
+    padding: 9px 11px;
+    position: relative;
+    left: auto;
     right: auto;
     bottom: auto;
     top: auto;
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    align-self: start;
     z-index: 3;
-    gap: 10px;
+    gap: 8px;
+    border-radius: 15px;
   }
 
   .rw-parallax-card .rw-parallax-card-icon {
-    width: 28px;
-    height: 28px;
-    flex-basis: 28px;
+    width: 26px;
+    height: 26px;
+    flex-basis: 26px;
   }
 
   .rw-parallax-card .rw-parallax-card-icon svg {
-    width: 14px;
-    height: 14px;
+    width: 13px;
+    height: 13px;
   }
 
   .rw-parallax-card .rw-parallax-card-label {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
   }
 
   .rw-parallax-card.--top {
-    top: 0;
+    transform: translate(8px, 10px);
   }
 
   .rw-parallax-card.--bottom {
-    top: 68px;
-    left: 12px;
+    grid-row: 2;
+    transform: translate(16px, -4px);
     z-index: 4;
   }
 
@@ -647,5 +781,43 @@
 
   .wd-package-card.--featured {
     transform: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .rw-parallax-hero .rw-hero-inner {
+    width: min(100% - 16px, 1200px);
+    padding: 88px 0 34px;
+    gap: 14px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rw-parallax-hero .rw-hero-copy {
+    order: 2;
+    padding-bottom: 0;
+  }
+
+  .rw-parallax-stage {
+    order: 1;
+    width: min(100%, 380px);
+    min-height: clamp(300px, 94vw, 360px);
+    margin-top: -34px;
+    grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
+  }
+
+  .rw-parallax-laptop {
+    width: clamp(120px, 34vw, 150px);
+    transform: translate(-8px, 8px);
+  }
+
+  .rw-parallax-phone {
+    width: clamp(168px, 56vw, 198px);
+    transform: translate(8px, 12px);
+  }
+
+  .rw-parallax-card {
+    width: clamp(128px, 39vw, 150px);
+    padding: 8px 10px;
   }
 }
