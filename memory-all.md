@@ -56,6 +56,7 @@ Last updated:
 - Keep the pricing section compact: Standard and Premium should read quickly in one screen view, and add-ons should stay visually integrated and text-light.
 - Keep only one primary CTA inside the pricing section; use a single section-level button instead of repeating package-level `Get Started` buttons.
 - The Our Process section no longer uses the sticky progress card; instead, the section uses a lightly darkened optimized background image with the timeline layered over it.
+- The SEO section should read like a fast-glance set of info cards on mobile first: left-aligned, compact, and not button-like.
 - Optimize the process timeline for desktop scrolling and simplify it on mobile.
 - Keep the site visually bold but reduce clutter in sections that read better when simplified.
 - Keep mobile as the primary design lens, with desktop as the enhancement layer.
