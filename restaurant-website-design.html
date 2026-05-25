@@ -1344,6 +1344,27 @@
       position: relative;
       padding-left: 52px;
     }
+    #process {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    #process::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(9, 8, 10, 0.86), rgba(9, 8, 10, 0.96)),
+        url("images/bts-shoot-optimized.jpg") center/cover no-repeat;
+      opacity: 0.24;
+      filter: saturate(0.72) brightness(0.44) contrast(1.02);
+      pointer-events: none;
+      z-index: 0;
+    }
+    #process > * {
+      position: relative;
+      z-index: 1;
+    }
     .rw-timeline-line {
       position: absolute;
       left: 18px;
@@ -1415,77 +1436,6 @@
       border-radius: 50%;
       background: var(--gold);
     }
-    .rw-timeline-sticky {
-      position: sticky;
-      top: 120px;
-      align-self: start;
-      justify-self: end;
-      width: 100%;
-      max-width: 460px;
-    }
-    .rw-timeline-progress-card {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      padding: 26px 24px;
-      border: 1px solid var(--line-soft);
-      border-radius: var(--r-xl);
-      background: rgba(255,255,255,0.015);
-      text-align: left;
-    }
-    .rw-progress-ring {
-      width: 108px;
-      height: 108px;
-      flex: 0 0 108px;
-      margin: 0;
-      position: relative;
-    }
-    .rw-progress-ring svg {
-      width: 100%;
-      height: 100%;
-      transform: rotate(-90deg);
-    }
-    .rw-progress-ring-bg {
-      fill: none;
-      stroke: rgba(255,248,235,0.06);
-      stroke-width: 6;
-    }
-    .rw-progress-ring-fill {
-      fill: none;
-      stroke: var(--gold);
-      stroke-width: 6;
-      stroke-linecap: round;
-      stroke-dasharray: 377;
-      stroke-dashoffset: 377;
-    }
-    .rw-progress-ring-text {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      font-family: var(--font-display);
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: var(--gold);
-    }
-    .rw-timeline-progress-copy {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      min-width: 0;
-    }
-    .rw-timeline-progress-card h4 {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0;
-    }
-    .rw-timeline-progress-card p {
-      font-size: 0.88rem;
-      color: var(--text-soft);
-      line-height: 1.5;
-      margin: 0;
-    }
-
     /* ============================
        11. TESTIMONIAL MARQUEE
        ============================ */
@@ -2398,7 +2348,6 @@
       .rw-tier-card.--featured { transform: none; }
       .rw-tier-card.--featured:hover { transform: translateY(-4px); }
       .rw-timeline { grid-template-columns: 1fr; }
-      .rw-timeline-sticky { display: none; }
       .rw-pricing-grid { grid-template-columns: 1fr; gap: 20px; }
       .rw-pricing-card:first-child { border-radius: var(--r-xl); border-right: 1px solid rgba(255,248,235,0.06); }
       .rw-pricing-card:last-child { border-radius: var(--r-xl); border-left: 1px solid rgba(255,248,235,0.06); }
@@ -2806,21 +2755,6 @@
           </div>
         </div>
 
-        <div class="rw-timeline-sticky">
-          <div class="rw-timeline-progress-card">
-            <div class="rw-progress-ring">
-              <svg viewBox="0 0 140 140">
-                <circle class="rw-progress-ring-bg" cx="70" cy="70" r="60" />
-                <circle class="rw-progress-ring-fill" cx="70" cy="70" r="60" />
-              </svg>
-              <div class="rw-progress-ring-text">0/4</div>
-            </div>
-            <div class="rw-timeline-progress-copy">
-              <h4 class="rw-progress-step-name">Ready</h4>
-              <p class="rw-progress-step-desc">Scroll to begin</p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -3276,15 +3210,7 @@
     /* ── TIMELINE: Scroll-driven progress (bidirectional) ── */
     const timelineSteps = document.querySelectorAll(".rw-timeline-step");
     const timelineFill = document.querySelector(".rw-timeline-line-fill");
-    const progressRingFill = document.querySelector(".rw-progress-ring-fill");
-    const progressText = document.querySelector(".rw-progress-ring-text");
-    const progressName = document.querySelector(".rw-progress-step-name");
-    const progressDesc = document.querySelector(".rw-progress-step-desc");
-    const timelineSticky = document.querySelector(".rw-timeline-sticky");
     const timelineSection = document.querySelector("#process .rw-timeline");
-    const stepNames = ["Kickoff Call", "Design & Copy", "Build & Integrate", "Launch"];
-    const stepDescs = ["Aligning on goals", "Designing and writing", "Coding and connecting", "Going live"];
-    const circumference = 2 * Math.PI * 60;
 
     if (timelineSteps.length && timelineFill) {
       let lastActive = 0;
@@ -3295,18 +3221,6 @@
         const pct = (activeIndex / total) * 100;
 
         gsap.to(timelineFill, { height: pct + "%", duration: 0.4, ease: "power2.out" });
-
-        if (progressRingFill) {
-          gsap.to(progressRingFill, {
-            strokeDashoffset: circumference - (circumference * activeIndex / total),
-            duration: 0.5,
-            ease: "power2.out",
-          });
-        }
-
-        if (progressText) progressText.textContent = activeIndex + "/4";
-        if (progressName) progressName.textContent = stepNames[activeIndex - 1] || "Ready";
-        if (progressDesc) progressDesc.textContent = stepDescs[activeIndex - 1] || "Scroll to begin";
 
         timelineSteps.forEach((s, i) => {
           s.classList.toggle("--active", i < activeIndex);
