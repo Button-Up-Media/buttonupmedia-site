@@ -230,7 +230,7 @@
 .wd-packages-grid,
 .wd-addons-grid {
   display: grid;
-  gap: 20px;
+  gap: 16px;
 }
 
 .wd-system-grid {
@@ -242,7 +242,7 @@
 .wd-package-card,
 .wd-addon-card {
   position: relative;
-  padding: 26px 24px;
+  padding: 22px 20px;
   border-radius: 22px;
   background: rgba(255,255,255,0.02);
   border: 1px solid rgba(255,255,255,0.08);
@@ -280,17 +280,17 @@
 .wd-addon-card h3,
 .wd-package-card h3 {
   font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-size: 1rem;
   letter-spacing: -0.03em;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .wd-system-card p,
 .wd-addon-card p,
 .wd-package-tag {
   color: var(--text-dim);
-  line-height: 1.7;
-  font-size: 0.94rem;
+  line-height: 1.55;
+  font-size: 0.9rem;
 }
 
 .wd-system-diagram {
@@ -395,30 +395,30 @@
 
 .wd-packages-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin-top: 36px;
+  margin-top: 24px;
 }
 
 .wd-package-card {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
 }
 
 .wd-package-card.--featured {
-  transform: translateY(-8px);
+  transform: translateY(-4px);
   background: linear-gradient(180deg, rgba(226,168,77,0.08), rgba(255,255,255,0.03));
   border-color: rgba(226,168,77,0.18);
 }
 
 .wd-package-badge {
   position: absolute;
-  top: 18px;
-  right: 18px;
-  padding: 8px 10px;
+  top: 14px;
+  right: 14px;
+  padding: 6px 9px;
   border-radius: 999px;
   background: rgba(226,168,77,0.12);
   color: var(--gold);
-  font-size: 0.66rem;
+  font-size: 0.58rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -433,7 +433,7 @@
 
 .wd-package-price .wd-price {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-size: clamp(1.7rem, 2.6vw, 2.3rem);
   line-height: 1;
   color: var(--gold);
   font-weight: 900;
@@ -442,7 +442,7 @@
 
 .wd-package-price .wd-price-note {
   color: var(--text-soft);
-  font-size: 0.82rem;
+  font-size: 0.74rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -451,49 +451,50 @@
 .wd-package-features {
   list-style: none;
   display: grid;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 8px;
+  margin-top: 8px;
 }
 
 .wd-package-features li {
   position: relative;
-  padding-left: 20px;
+  padding-left: 18px;
   color: rgba(246,240,230,0.92);
-  line-height: 1.6;
+  line-height: 1.45;
+  font-size: 0.86rem;
 }
 
 .wd-package-features li::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 10px;
-  width: 7px;
-  height: 7px;
+  top: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: 999px;
   background: var(--gold);
 }
 
 .wd-package-cta {
   margin-top: auto;
-  padding-top: 6px;
+  padding-top: 2px;
 }
 
 .wd-addon-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin-top: 36px;
+  margin-top: 18px;
 }
 
 .wd-addon-head {
   display: flex;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
   align-items: flex-start;
 }
 
 .wd-addon-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
   display: grid;
   place-items: center;
   background: rgba(69,176,140,0.1);
@@ -510,7 +511,7 @@
   display: block;
   font-family: var(--font-display);
   color: var(--gold);
-  font-size: 1.55rem;
+  font-size: 1.22rem;
   font-weight: 900;
   letter-spacing: -0.04em;
 }
@@ -519,7 +520,7 @@
   display: block;
   margin-top: 2px;
   color: var(--text-soft);
-  font-size: 0.66rem;
+  font-size: 0.58rem;
   font-weight: 800;
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -528,26 +529,45 @@
 .wd-addon-list {
   list-style: none;
   display: grid;
-  gap: 10px;
-  margin-top: 14px;
+  gap: 8px;
+  margin-top: 10px;
 }
 
 .wd-addon-list li {
   position: relative;
-  padding-left: 20px;
+  padding-left: 18px;
   color: rgba(246,240,230,0.92);
-  line-height: 1.6;
+  line-height: 1.45;
+  font-size: 0.86rem;
 }
 
 .wd-addon-list li::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 10px;
-  width: 7px;
-  height: 7px;
+  top: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: 999px;
   background: var(--teal);
+}
+
+.wd-pricing-inline-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+
+.wd-pricing-inline-head .lib-section-label {
+  margin-bottom: 0;
+}
+
+.wd-pricing-inline-head p {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 0.88rem;
 }
 
 @media (max-width: 1100px) {
@@ -617,6 +637,84 @@
   .wd-package-card.--featured {
     transform: none;
   }
+
+  #pricing .lib-section-title {
+    font-size: clamp(1.5rem, 6.8vw, 2.05rem);
+    line-height: 1.05;
+    margin-bottom: 8px;
+  }
+
+  #pricing .lib-section-sub {
+    font-size: 0.86rem;
+    line-height: 1.42;
+    max-width: 38ch;
+    margin-bottom: 0;
+  }
+
+  .wd-packages-grid,
+  .wd-addon-grid {
+    gap: 12px;
+  }
+
+  .wd-package-card,
+  .wd-addon-card {
+    padding: 16px 14px;
+    border-radius: 18px;
+  }
+
+  .wd-package-card h3,
+  .wd-addon-card h3 {
+    font-size: 0.94rem;
+    margin-bottom: 6px;
+  }
+
+  .wd-package-tag,
+  .wd-addon-card p {
+    font-size: 0.82rem;
+    line-height: 1.38;
+  }
+
+  .wd-package-price .wd-price {
+    font-size: 1.42rem;
+  }
+
+  .wd-package-price .wd-price-note {
+    font-size: 0.54rem;
+  }
+
+  .wd-package-features,
+  .wd-addon-list {
+    gap: 5px;
+    margin-top: 7px;
+  }
+
+  .wd-package-features li,
+  .wd-addon-list li {
+    font-size: 0.77rem;
+    line-height: 1.32;
+    padding-left: 15px;
+  }
+
+  .wd-package-features li::before,
+  .wd-addon-list li::before {
+    top: 6px;
+    width: 5px;
+    height: 5px;
+  }
+
+  .wd-addon-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .wd-pricing-inline-head {
+    margin-top: 16px;
+    gap: 8px;
+  }
+
+  .wd-pricing-inline-head p {
+    display: none;
+  }
 }
 
 @media (max-width: 420px) {
@@ -651,6 +749,38 @@
   .rw-parallax-card {
     width: 224px;
     padding: 16px 18px;
+  }
+
+  .wd-package-card,
+  .wd-addon-card {
+    padding: 14px 12px;
+  }
+
+  .wd-package-badge {
+    top: 12px;
+    right: 12px;
+  }
+
+  .wd-package-price {
+    gap: 8px;
+  }
+
+  .wd-package-price .wd-price {
+    font-size: 1.34rem;
+  }
+
+  .wd-package-price .wd-price-note,
+  .wd-addon-price .wd-addon-denom {
+    font-size: 0.52rem;
+  }
+
+  .wd-package-features li,
+  .wd-addon-list li {
+    font-size: 0.74rem;
+  }
+
+  .wd-pricing-inline-head p {
+    display: none;
   }
 }
 
