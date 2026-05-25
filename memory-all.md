@@ -46,6 +46,7 @@ Last updated:
 - The Pricing and Add-Ons content has been combined into one section.
 - The Process section has been optimized for desktop scroll and hides the sticky card on mobile.
 - The Problem section no longer shows the green “What should happen” solution callouts.
+- The Problem tab strip is horizontal-only now: it keeps `overflow-x: auto` for the pills but blocks vertical overflow so the tab row itself does not scroll vertically.
 
 ## Recent Decisions
 
