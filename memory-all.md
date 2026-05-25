@@ -41,6 +41,7 @@ Last updated:
 - The mobile result pills are smaller, stacked vertically, and overlap the device cards without wrapping body copy.
 - The site-wide cookie consent UI is now a bottom-sheet popup instead of the corner launcher icon. Accept All persists in localStorage across pages; Reject All is remembered for the current browser session and can reappear on a new session.
 - The cookie banner was later reduced to a much tighter bottom sheet: 148px tall on desktop and 160px tall on mobile, with Reject All placed to the left of Accept All on desktop to reduce visual weight.
+- The cookie banner now follows the homepage button language more closely: the primary button uses the same warm gold/coral gradient feel as site CTAs, the ghost button stays subdued, and the banner typography uses the same site font stack.
 - Hero graphics should always preserve readable aspect ratio and clear overlap logic across breakpoints so the image stack remains visually understandable on mobile and smaller screens.
 - The Pricing and Add-Ons content has been combined into one section.
 - The Process section has been optimized for desktop scroll and hides the sticky card on mobile.
