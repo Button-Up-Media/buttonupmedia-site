@@ -31,6 +31,8 @@ Last updated:
 - The restaurant website design page is actively being refined.
 - Current preview URL:
   - `http://127.0.0.1:8000/.tmp-restaurant-website-design-preview.html`
+- Cache-busted preview backup:
+  - `http://127.0.0.1:8000/.tmp-restaurant-website-design-preview-v2.html`
 - The live hidden page remains non-indexable and is treated as the source page for the preview copy.
 - Hero parallax currently responds across the full hero section, not just the image stage.
 - The hero has been simplified by removing the small "Website Services" badge and the bottom trust-chip row so the first screen is cleaner.
