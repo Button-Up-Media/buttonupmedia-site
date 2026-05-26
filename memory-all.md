@@ -9,7 +9,7 @@ Purpose:
 - Be updated at the end of each task so the repo has a single source of truth for continuity.
 
 Last updated:
-- 2026-05-23
+- 2026-05-26
 
 ## How To Use
 
@@ -34,21 +34,16 @@ Last updated:
 - Cache-busted preview backup:
   - `http://127.0.0.1:8000/.tmp-restaurant-website-design-preview-v2.html`
 - The live hidden page remains non-indexable and is treated as the source page for the preview copy.
-- Hero parallax currently responds across the full hero section, not just the image stage.
-- The hero has been simplified by removing the small "Website Services" badge and the bottom trust-chip row so the first screen is cleaner.
-- On mobile, the hero graphic stack no longer uses parallax, hides the client pill, and now uses an overlapping left-phone / right-desktop composition so the desktop screenshot keeps its aspect ratio and reads better in the first viewport.
-- On smaller screens, the hero graphic leads the section before the copy, keeps the phone the primary visual, and preserves the desktop screenshot as a smaller overlapping companion so the stack stays readable above the cookie banner.
-- The hero graphic now uses a fixed artboard mindset: the desktop screenshot, phone screenshot, and Reservations / Orders pills keep locked positions and aspect ratios, then the entire composition scales down for smaller screens.
-- On mobile, the hero graphic now sits below the headline, body copy, and CTA buttons so the page reads in a normal top-to-bottom flow before the graphic appears.
-- The mobile result pills are smaller, stacked vertically, and overlap the device cards without wrapping body copy.
-- The site-wide cookie consent UI is now a bottom-sheet popup instead of the corner launcher icon. Accept All persists in localStorage across pages; Reject All is remembered for the current browser session and can reappear on a new session.
-- The cookie banner was later reduced to a much tighter bottom sheet: 148px tall on desktop and 160px tall on mobile, with Reject All placed to the left of Accept All on desktop to reduce visual weight.
-- The cookie banner now follows the homepage button language more closely: the primary button uses the same warm gold/coral gradient feel as site CTAs, the ghost button stays subdued, and the banner typography uses the same site font stack.
-- Hero graphics should always preserve readable aspect ratio and clear overlap logic across breakpoints so the image stack remains visually understandable on mobile and smaller screens.
+- The restaurant website design page now has mobile-only hero copy: `Restaurant Website Design`, `A better website for your restaurant.`, and a concise menu/reservations/orders/search support line.
+- The desktop hero keeps the original headline, supporting copy, and `See Package Options` CTA label; mobile swaps the secondary CTA label to `View Packages`.
+- On mobile, the hero proof artboard keeps the desktop stack positions, scales the full composition down, hides the `Client | Rusty Pelican` pill, disables parallax transforms, and removes the mobile kicker dot so the category line reads cleaner.
+- On mobile, the hero background now fades in more smoothly behind the fixed header and the hero gets a bit more bottom breathing room so the next section does not crowd the graphic stack.
+- The current preview files remain usable as local preview surfaces and do not need to carry the live-page redirect.
 - The Pricing and Add-Ons content has been combined into one section.
 - The Process section has been optimized for desktop scroll and hides the sticky card on mobile.
 - The Problem section no longer shows the green “What should happen” solution callouts.
 - The Problem tab strip is horizontal-only now: it keeps `overflow-x: auto` for the pills but blocks vertical overflow so the tab row itself does not scroll vertically.
+- The cookie consent banner wording now says `Got it` and `Opt out` instead of `Accept All` and `Reject All`, while keeping the existing consent storage behavior unchanged.
 
 ## Recent Decisions
 

@@ -1,0 +1,237 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - link "Button Up Media home" [ref=e3] [cursor=pointer]:
+      - /url: index.html
+      - img "Button Up Media" [ref=e4]
+    - generic [ref=e5]:
+      - group [ref=e6]:
+        - generic "Services" [ref=e7] [cursor=pointer]:
+          - text: Services
+          - img [ref=e8]
+      - link "Home" [ref=e10] [cursor=pointer]:
+        - /url: index.html
+      - link "Call Us" [ref=e11] [cursor=pointer]:
+        - /url: tel:+17867409499
+      - link "Book Free Strategy Call" [ref=e12] [cursor=pointer]:
+        - /url: contact.html
+  - generic [ref=e13]:
+    - generic [ref=e15]:
+      - generic [ref=e16]:
+        - generic [ref=e17]:
+          - generic [ref=e18]: Free Restaurant Growth Audit
+          - heading "Get Your Free Strategy Call" [level=1] [ref=e19]
+          - paragraph [ref=e20]: Pick a time that works for you. 30 minutes. No pressure. Just a clear plan.
+        - generic [ref=e21]:
+          - generic [ref=e22]:
+            - heading "Email" [level=4] [ref=e23]:
+              - img [ref=e24]
+              - text: Email
+            - paragraph [ref=e27]:
+              - link "contact@buttonupmedia.com" [ref=e28] [cursor=pointer]:
+                - /url: mailto:contact@buttonupmedia.com
+          - generic [ref=e29]:
+            - heading "Phone" [level=4] [ref=e30]:
+              - img [ref=e31]
+              - text: Phone
+            - paragraph [ref=e33]:
+              - link "(786) 740-9499" [ref=e34] [cursor=pointer]:
+                - /url: tel:+17867409499
+          - generic [ref=e35]:
+            - heading "Service Area" [level=4] [ref=e36]:
+              - img [ref=e37]
+              - text: Service Area
+            - paragraph [ref=e40]: "South Florida: Miami, Brickell, Coral Gables, Doral, Fort Lauderdale, Hollywood, Boca Raton, Delray Beach, West Palm Beach, and nearby coastal markets. Nationwide support is available for corporate and enterprise restaurant groups."
+      - generic [ref=e42]:
+        - generic [ref=e43]:
+          - generic:
+            - generic:
+              - generic:
+                - generic: Loading calendar
+          - iframe [ref=e46]:
+            - generic [ref=f1e6]:
+              - link "powered by Calendly":
+                - /url: https://calendly.com/?utm_campaign=sign_up&utm_medium=badge&utm_source=invitee
+                - generic [ref=f1e7] [cursor=pointer]:
+                  - generic [ref=f1e8]: powered by
+                  - generic [ref=f1e9]: Calendly
+              - generic [ref=f1e18]:
+                - generic [ref=f1e19]:
+                  - generic [ref=f1e20]: Juan Hernandez
+                  - heading "Free Food & Beverage Marketing Consultation" [level=1] [ref=f1e21]
+                - generic [ref=f1e24]:
+                  - img [ref=f1e27]
+                  - text: 30 min
+                - paragraph [ref=f1e33]: This is your free one-on-one consultation where we learn a little more about your concept, understand exactly what you are looking for, and what you need to achieve your marketing goals while staying within your budget.
+              - generic [ref=f1e39]:
+                - heading "Select a Day" [level=2] [ref=f1e40]
+                - generic [ref=f1e41]:
+                  - generic [ref=f1e42]:
+                    - generic [ref=f1e43]:
+                      - generic [ref=f1e44]:
+                        - button "Go to previous month" [disabled]:
+                          - generic:
+                            - img
+                      - generic [ref=f1e45]: May 2026
+                      - button "Go to next month" [ref=f1e47] [cursor=pointer]:
+                        - img [ref=f1e49]
+                      - status [ref=f1e51]: May is now displayed
+                    - generic [ref=f1e52]:
+                      - table "Select a Day" [ref=f1e53]:
+                        - rowgroup [ref=f1e54]:
+                          - row "Sun Mon Tue Wed Thu Fri Sat" [ref=f1e55]:
+                            - columnheader "Sun" [ref=f1e56]
+                            - columnheader "Mon" [ref=f1e57]
+                            - columnheader "Tue" [ref=f1e58]
+                            - columnheader "Wed" [ref=f1e59]
+                            - columnheader "Thu" [ref=f1e60]
+                            - columnheader "Fri" [ref=f1e61]
+                            - columnheader "Sat" [ref=f1e62]
+                        - rowgroup [ref=f1e63]:
+                          - row "Friday, May 1 - No times available Saturday, May 2 - No times available" [ref=f1e64]:
+                            - gridcell [ref=f1e65]
+                            - gridcell [ref=f1e66]
+                            - gridcell [ref=f1e67]
+                            - gridcell [ref=f1e68]
+                            - gridcell [ref=f1e69]
+                            - gridcell "Friday, May 1 - No times available" [ref=f1e70]:
+                              - button "Friday, May 1 - No times available" [disabled]: "1"
+                            - gridcell "Saturday, May 2 - No times available" [ref=f1e71]:
+                              - button "Saturday, May 2 - No times available" [disabled]: "2"
+                          - row "Sunday, May 3 - No times available Monday, May 4 - No times available Tuesday, May 5 - No times available Wednesday, May 6 - No times available Thursday, May 7 - No times available Friday, May 8 - No times available Saturday, May 9 - No times available" [ref=f1e72]:
+                            - gridcell "Sunday, May 3 - No times available" [ref=f1e73]:
+                              - button "Sunday, May 3 - No times available" [disabled]: "3"
+                            - gridcell "Monday, May 4 - No times available" [ref=f1e74]:
+                              - button "Monday, May 4 - No times available" [disabled]: "4"
+                            - gridcell "Tuesday, May 5 - No times available" [ref=f1e75]:
+                              - button "Tuesday, May 5 - No times available" [disabled]: "5"
+                            - gridcell "Wednesday, May 6 - No times available" [ref=f1e76]:
+                              - button "Wednesday, May 6 - No times available" [disabled]: "6"
+                            - gridcell "Thursday, May 7 - No times available" [ref=f1e77]:
+                              - button "Thursday, May 7 - No times available" [disabled]: "7"
+                            - gridcell "Friday, May 8 - No times available" [ref=f1e78]:
+                              - button "Friday, May 8 - No times available" [disabled]: "8"
+                            - gridcell "Saturday, May 9 - No times available" [ref=f1e79]:
+                              - button "Saturday, May 9 - No times available" [disabled]: "9"
+                          - row "Sunday, May 10 - No times available Monday, May 11 - No times available Tuesday, May 12 - No times available Wednesday, May 13 - No times available Thursday, May 14 - No times available Friday, May 15 - No times available Saturday, May 16 - No times available" [ref=f1e80]:
+                            - gridcell "Sunday, May 10 - No times available" [ref=f1e81]:
+                              - button "Sunday, May 10 - No times available" [disabled]: "10"
+                            - gridcell "Monday, May 11 - No times available" [ref=f1e82]:
+                              - button "Monday, May 11 - No times available" [disabled]: "11"
+                            - gridcell "Tuesday, May 12 - No times available" [ref=f1e83]:
+                              - button "Tuesday, May 12 - No times available" [disabled]: "12"
+                            - gridcell "Wednesday, May 13 - No times available" [ref=f1e84]:
+                              - button "Wednesday, May 13 - No times available" [disabled]: "13"
+                            - gridcell "Thursday, May 14 - No times available" [ref=f1e85]:
+                              - button "Thursday, May 14 - No times available" [disabled]: "14"
+                            - gridcell "Friday, May 15 - No times available" [ref=f1e86]:
+                              - button "Friday, May 15 - No times available" [disabled]: "15"
+                            - gridcell "Saturday, May 16 - No times available" [ref=f1e87]:
+                              - button "Saturday, May 16 - No times available" [disabled]: "16"
+                          - row "Sunday, May 17 - No times available Monday, May 18 - No times available Tuesday, May 19 - No times available Wednesday, May 20 - No times available Thursday, May 21 - No times available Friday, May 22 - No times available Saturday, May 23 - No times available" [ref=f1e88]:
+                            - gridcell "Sunday, May 17 - No times available" [ref=f1e89]:
+                              - button "Sunday, May 17 - No times available" [disabled]: "17"
+                            - gridcell "Monday, May 18 - No times available" [ref=f1e90]:
+                              - button "Monday, May 18 - No times available" [disabled]: "18"
+                            - gridcell "Tuesday, May 19 - No times available" [ref=f1e91]:
+                              - button "Tuesday, May 19 - No times available" [disabled]: "19"
+                            - gridcell "Wednesday, May 20 - No times available" [ref=f1e92]:
+                              - button "Wednesday, May 20 - No times available" [disabled]: "20"
+                            - gridcell "Thursday, May 21 - No times available" [ref=f1e93]:
+                              - button "Thursday, May 21 - No times available" [disabled]: "21"
+                            - gridcell "Friday, May 22 - No times available" [ref=f1e94]:
+                              - button "Friday, May 22 - No times available" [disabled]: "22"
+                            - gridcell "Saturday, May 23 - No times available" [ref=f1e95]:
+                              - button "Saturday, May 23 - No times available" [disabled]: "23"
+                          - row "Sunday, May 24 - No times available Monday, May 25 - Times available Tuesday, May 26 - Times available Wednesday, May 27 - Times available Thursday, May 28 - Times available Friday, May 29 - Times available Saturday, May 30 - No times available" [ref=f1e96]:
+                            - gridcell "Sunday, May 24 - No times available" [ref=f1e97]:
+                              - button "Sunday, May 24 - No times available" [disabled]: "24"
+                            - gridcell "Monday, May 25 - Times available" [ref=f1e98]:
+                              - button "Monday, May 25 - Times available" [ref=f1e99] [cursor=pointer]: "25"
+                            - gridcell "Tuesday, May 26 - Times available" [ref=f1e100]:
+                              - button "Tuesday, May 26 - Times available" [ref=f1e101] [cursor=pointer]: "26"
+                            - gridcell "Wednesday, May 27 - Times available" [ref=f1e102]:
+                              - button "Wednesday, May 27 - Times available" [ref=f1e103] [cursor=pointer]: "27"
+                            - gridcell "Thursday, May 28 - Times available" [ref=f1e104]:
+                              - button "Thursday, May 28 - Times available" [ref=f1e105] [cursor=pointer]: "28"
+                            - gridcell "Friday, May 29 - Times available" [ref=f1e106]:
+                              - button "Friday, May 29 - Times available" [ref=f1e107] [cursor=pointer]: "29"
+                            - gridcell "Saturday, May 30 - No times available" [ref=f1e108]:
+                              - button "Saturday, May 30 - No times available" [disabled]: "30"
+                          - row "Sunday, May 31 - No times available" [ref=f1e109]:
+                            - gridcell "Sunday, May 31 - No times available" [ref=f1e110]:
+                              - button "Sunday, May 31 - No times available" [disabled]: "31"
+                            - gridcell [ref=f1e111]
+                            - gridcell [ref=f1e112]
+                            - gridcell [ref=f1e113]
+                            - gridcell [ref=f1e114]
+                            - gridcell [ref=f1e115]
+                            - gridcell [ref=f1e116]
+                      - status [ref=f1e117]
+                  - generic [ref=f1e119]:
+                    - paragraph [ref=f1e120]: Time zone
+                    - button "Time zone  Eastern Time - US & Canada (5:54pm) " [ref=f1e122] [cursor=pointer]:
+                      - generic [ref=f1e123]: 
+                      - generic [ref=f1e124]: Eastern Time - US & Canada
+                      - generic [ref=f1e125]: (5:54pm)
+                      - generic [ref=f1e126]: 
+        - link "Open booking calendar in a new tab" [ref=e47] [cursor=pointer]:
+          - /url: https://calendly.com/juanh-buttonupmedia/freeconsultation
+    - contentinfo [ref=e48]:
+      - generic [ref=e49]:
+        - generic [ref=e50]:
+          - strong [ref=e51]: Button Up Media
+          - paragraph [ref=e52]: We help Florida restaurants grow with restaurant SEO, Google Business Profile, organic social, Google Ads, and high-converting websites.
+        - generic [ref=e53]:
+          - heading "Services" [level=4] [ref=e54]
+          - link "Organic Social & Content" [ref=e55] [cursor=pointer]:
+            - /url: social-media-marketing.html
+        - generic [ref=e56]:
+          - heading "Locations" [level=4] [ref=e57]
+          - link "Miami" [ref=e58] [cursor=pointer]:
+            - /url: "#"
+          - link "Fort Lauderdale" [ref=e59] [cursor=pointer]:
+            - /url: "#"
+          - link "West Palm Beach" [ref=e60] [cursor=pointer]:
+            - /url: "#"
+          - link "South Florida" [ref=e61] [cursor=pointer]:
+            - /url: "#"
+        - generic [ref=e62]:
+          - heading "Company" [level=4] [ref=e63]
+          - link "Home" [ref=e64] [cursor=pointer]:
+            - /url: index.html
+          - link "Social Media Marketing" [ref=e65] [cursor=pointer]:
+            - /url: social-media-marketing.html
+          - link "Process" [ref=e66] [cursor=pointer]:
+            - /url: index.html#process
+          - link "FAQ" [ref=e67] [cursor=pointer]:
+            - /url: index.html#faq
+          - link "Free Growth Audit" [ref=e68] [cursor=pointer]:
+            - /url: contact.html
+      - generic [ref=e69]:
+        - paragraph [ref=e70]: © 2025 Button Up Media. All rights reserved.
+        - generic [ref=e71]:
+          - link "contact@buttonupmedia.com" [ref=e72] [cursor=pointer]:
+            - /url: mailto:contact@buttonupmedia.com
+          - link "(786) 740-9499" [ref=e73] [cursor=pointer]:
+            - /url: tel:+17867409499
+  - dialog "Choose how we measure traffic and ads.":
+    - generic [ref=e74]:
+      - generic [ref=e75]:
+        - generic [ref=e76]: Privacy & cookies
+        - heading "Choose how we measure traffic and ads." [level=2] [ref=e77]
+        - paragraph [ref=e78]: We use necessary cookies to keep the site working. Optional analytics cookies help us understand page performance, and optional marketing cookies help us measure Google Ads and remarketing. If you’re visiting from the U.S., this is the right consent experience for the site; GDPR is generally relevant only when we collect data from EU/EEA visitors.
+      - generic [ref=e79]:
+        - generic [ref=e80]:
+          - generic [ref=e81]:
+            - strong [ref=e82]: Analytics cookies
+            - generic [ref=e83]: Measure visits, form starts, and booking behavior.
+          - checkbox "Analytics cookies Measure visits, form starts, and booking behavior." [checked] [ref=e84] [cursor=pointer]
+        - generic [ref=e85]:
+          - generic [ref=e86]:
+            - strong [ref=e87]: Ads & remarketing cookies
+            - generic [ref=e88]: Support Google Ads conversion tracking and audiences.
+          - checkbox "Ads & remarketing cookies Support Google Ads conversion tracking and audiences." [checked] [ref=e89] [cursor=pointer]
+        - generic [ref=e90]:
+          - button "Reject optional" [ref=e91] [cursor=pointer]
+          - button "Save choices" [ref=e92] [cursor=pointer]
+          - button "Allow all" [ref=e93] [cursor=pointer]

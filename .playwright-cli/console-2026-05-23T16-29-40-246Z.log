@@ -1,0 +1,4 @@
+[     534ms] TypeError: Cannot read properties of undefined (reading 'addEventListener')
+    at https://www.didomi.io/blog/cookie-banners-creative-examples:216:24
+[     535ms] [LOG] Script is running @ https://www.didomi.io/blog/cookie-banners-creative-examples:198
+[     535ms] [LOG] DE locale found: JSHandle@node @ https://www.didomi.io/blog/cookie-banners-creative-examples:204

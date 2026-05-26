@@ -123,12 +123,12 @@ if (window.lucide && typeof lucide.createIcons === "function") {
         <div class="bum-consent__sheet-copy">
           <h2 class="bum-consent__title" id="bum-consent-title">We value your privacy</h2>
           <p class="bum-consent__copy" id="bum-consent-copy">
-            We use cookies to enhance your browsing experience, serve personalized ads, and analyze our traffic. By clicking "accept all", you consent to the use of cookies.
+            We use cookies to enhance your browsing experience, serve personalized ads, and analyze our traffic. By clicking "Got it", you consent to the use of cookies.
           </p>
         </div>
         <div class="bum-consent__actions" aria-label="Cookie consent actions">
-          <button type="button" class="bum-consent__button --ghost" data-bum-consent-action="reject">Reject All</button>
-          <button type="button" class="bum-consent__button --primary" data-bum-consent-action="accept">Accept All</button>
+          <button type="button" class="bum-consent__button --ghost" data-bum-consent-action="reject">Opt out</button>
+          <button type="button" class="bum-consent__button --primary" data-bum-consent-action="accept">Got it</button>
         </div>
       </div>
     `;
