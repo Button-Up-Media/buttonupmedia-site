@@ -59,6 +59,7 @@ Last updated:
 - Keep only one primary CTA inside the pricing section; use a single section-level button instead of repeating package-level `Get Started` buttons.
 - Bottom-of-page CTA cards should match the homepage bottom CTA treatment exactly: the same centered gold-on-black card language, dotted/mesh background treatment, button styling, and hierarchy.
 - The restaurant website design page footer CTA now mirrors the homepage CTA pattern directly using the same `hp2-cta-scene` structure and scroll entrance animation.
+- Preview copies of the restaurant website design page should not include the meta refresh redirect to `index.html`; that redirect belongs only in the hidden live source if needed.
 - The Our Process section no longer uses the sticky progress card; instead, the section uses a lightly darkened optimized background image with the timeline layered over it.
 - The SEO section should read like a fast-glance set of info cards on mobile first: left-aligned, compact, and not button-like.
 - The SEO section is now implemented as compact left-aligned info rows with shorter copy so it reads like a quick-glance mobile-first checklist instead of centered button-like cards.
