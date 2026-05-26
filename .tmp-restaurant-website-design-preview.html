@@ -3159,7 +3159,7 @@
     }
 
     /* ── Comparison rows, tier cards, testimonial, pricing stagger ── */
-    gsap.utils.toArray('.rw-compare-row, .rw-tier-card, .rw-testimonial, .rw-pricing-card, .rw-pricing-factor, .rw-crosssell, .rw-stat-counter, .rw-fit-card, .rw-risk-card, .rw-keep-card, .rw-limited-banner, .rw-faq-item, .rw-cta-scene, .rw-scorecard-cta').forEach(el => {
+    gsap.utils.toArray('.rw-compare-row, .rw-tier-card, .rw-testimonial, .rw-pricing-card, .rw-pricing-factor, .rw-crosssell, .rw-stat-counter, .rw-fit-card, .rw-risk-card, .rw-keep-card, .rw-limited-banner, .rw-faq-item, .rw-scorecard-cta, .hp2-cta-scene').forEach(el => {
       gsap.from(el, {
         y: 25,
         opacity: 0,
@@ -3168,6 +3168,29 @@
         scrollTrigger: { trigger: el, start: "top 88%" }
       });
     });
+
+    const ctaScene = document.querySelector(".hp2-cta-scene");
+    if (ctaScene) {
+      gsap.fromTo(ctaScene,
+        { y: 40, scale: 0.97 },
+        {
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          clearProps: "transform",
+          scrollTrigger: {
+            trigger: ctaScene,
+            start: "top 80%",
+            toggleActions: "play none none none",
+            onEnter: () => {
+              const ctaCanvas = ctaScene.querySelector("pixel-canvas");
+              if (ctaCanvas && ctaCanvas.handleAnimation) ctaCanvas.handleAnimation("appear");
+            },
+          },
+        }
+      );
+    }
 
     /* ── TIMELINE: Scroll-driven progress (bidirectional) ── */
     const timelineSteps = document.querySelectorAll(".rw-timeline-step");
