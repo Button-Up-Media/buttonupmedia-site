@@ -108,6 +108,7 @@ async function transcodeVideo(sourcePath, targetPath) {
   );
 
   if (result.status !== 0) {
-    throw new Error(`Failed to transcode video: ${sourcePath}`);
+    console.warn(`Falling back to copy for video: ${sourcePath}`);
+    await cp(sourcePath, targetPath);
   }
 }
