@@ -18,7 +18,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: url("photos/Service/Web Development/hero-background.webp") center center / cover no-repeat;
+  background: url("images/website-design/hero-background.webp") center center / cover no-repeat;
   filter: brightness(0.48) contrast(0.98) saturate(0.76);
   opacity: 0.95;
   pointer-events: none;

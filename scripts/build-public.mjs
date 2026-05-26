@@ -26,7 +26,7 @@ const filesToCopy = [
   'favicon-bum.svg',
 ];
 
-const dirsToCopy = ['images', 'photos', 'videos'];
+const dirsToCopy = ['images', 'videos'];
 
 await rm(outDir, { recursive: true, force: true });
 await mkdir(outDir, { recursive: true });
