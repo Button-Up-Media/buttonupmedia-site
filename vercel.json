@@ -1,5 +1,5 @@
 {
-  "outputDirectory": ".",
+  "outputDirectory": "public",
   "trailingSlash": false,
   "headers": [
     {

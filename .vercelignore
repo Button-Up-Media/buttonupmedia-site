@@ -2,9 +2,6 @@
 .DS_Store
 **/.DS_Store
 
-# Raw source media not referenced by the three launch pages.
-photos/
-
 # Local visual QA artifacts.
 header-check.png
 logo-check.png

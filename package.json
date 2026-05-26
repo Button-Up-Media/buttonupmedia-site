@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "vercel dev",
-    "build": "echo 'Static site - no build step required'",
+    "build": "node scripts/build-public.mjs",
     "test:meta": "node api/meta/test-connection.js"
   },
   "dependencies": {
