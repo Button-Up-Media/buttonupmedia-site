@@ -120,6 +120,9 @@ if (window.lucide && typeof lucide.createIcons === "function") {
 
     banner.innerHTML = `
       <div class="bum-consent__sheet" id="bum-consent-panel">
+        <button type="button" class="bum-consent__close" data-bum-consent-action="accept" aria-label="Close cookie banner">
+          <i data-lucide="x" aria-hidden="true"></i>
+        </button>
         <div class="bum-consent__sheet-copy">
           <h2 class="bum-consent__title" id="bum-consent-title">We value your privacy</h2>
           <p class="bum-consent__copy" id="bum-consent-copy">
@@ -127,7 +130,10 @@ if (window.lucide && typeof lucide.createIcons === "function") {
           </p>
         </div>
         <div class="bum-consent__actions" aria-label="Cookie consent actions">
-          <button type="button" class="bum-consent__button --ghost" data-bum-consent-action="reject">Opt out</button>
+          <div class="bum-consent__actions-group">
+            <a href="privacy.html" class="bum-consent__policy">Privacy Policy</a>
+            <button type="button" class="bum-consent__link" data-bum-consent-action="reject">Opt out</button>
+          </div>
           <button type="button" class="bum-consent__button --primary" data-bum-consent-action="accept">Got it</button>
         </div>
       </div>

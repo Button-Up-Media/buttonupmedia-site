@@ -38,12 +38,17 @@ Last updated:
 - The desktop hero keeps the original headline, supporting copy, and `See Package Options` CTA label; mobile swaps the secondary CTA label to `View Packages`.
 - On mobile, the hero proof artboard keeps the desktop stack positions, scales the full composition down, hides the `Client | Rusty Pelican` pill, disables parallax transforms, and removes the mobile kicker dot so the category line reads cleaner.
 - On mobile, the hero background now fades in more smoothly behind the fixed header and the hero gets a bit more bottom breathing room so the next section does not crowd the graphic stack.
+- On mobile, the website services hero now uses a softened proof-image background layer behind the fixed header so the nav sits in front of the hero instead of over a flat black band.
+- When increasing the mobile hero proof stack size, preserve the desktop card positions and composition exactly; only scale the whole artboard slightly so readability improves without redesigning the graphic.
+- The mobile website services hero now uses the same side gutter as the section content below it, so the kicker, headline, and CTA all align with the page rhythm instead of sitting too close to the edges.
+- Both bottom CTA cards now include a simple underlined `Click here for consultation` helper line inside the card, with no separate click behavior because the whole card already links to the consultation flow.
 - The current preview files remain usable as local preview surfaces and do not need to carry the live-page redirect.
 - The Pricing and Add-Ons content has been combined into one section.
 - The Process section has been optimized for desktop scroll and hides the sticky card on mobile.
 - The Problem section no longer shows the green “What should happen” solution callouts.
 - The Problem tab strip is horizontal-only now: it keeps `overflow-x: auto` for the pills but blocks vertical overflow so the tab row itself does not scroll vertically.
 - The cookie consent banner wording now says `Got it` and `Opt out` instead of `Accept All` and `Reject All`, while keeping the existing consent storage behavior unchanged.
+- The cookie consent banner now uses a plain underlined `Opt out` text link and a close `X` icon that both act like `Got it`, while preserving the same consent logic.
 
 ## Recent Decisions
 
@@ -54,6 +59,9 @@ Last updated:
 - Keep only one primary CTA inside the pricing section; use a single section-level button instead of repeating package-level `Get Started` buttons.
 - Bottom-of-page CTA cards should match the homepage bottom CTA treatment exactly: the same centered gold-on-black card language, dotted/mesh background treatment, button styling, and hierarchy.
 - The restaurant website design page footer CTA now mirrors the homepage CTA pattern directly using the same `hp2-cta-scene` structure and scroll entrance animation.
+- The site now has a hidden `privacy.html` page with `noindex, nofollow`; the only user-facing links to it are the footer `Privacy Policy` link and the new `Privacy Policy` link in the cookie banner next to `Opt out`.
+- The restaurant website design hero now uses the optimized darkened WebP asset at `photos/Service/Web Development/hero-background.webp` on both mobile and desktop, with the overlay handling the extra contrast so the image never competes with the copy or proof stack.
+- The privacy page now uses the exact homepage-style fixed nav and footer shell, with extra top spacing so the page title clears the header instead of tucking underneath it.
 - Preview copies of the restaurant website design page should not include the meta refresh redirect to `index.html`; that redirect belongs only in the hidden live source if needed.
 - The Our Process section no longer uses the sticky progress card; instead, the section uses a lightly darkened optimized background image with the timeline layered over it.
 - The SEO section should read like a fast-glance set of info cards on mobile first: left-aligned, compact, and not button-like.
