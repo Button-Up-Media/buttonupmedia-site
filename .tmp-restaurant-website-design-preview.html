@@ -3,11 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      var key = "bum-cookie-consent-v1";
+      var consent = {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: "denied",
+        functionality_storage: "granted",
+        personalization_storage: "denied",
+        security_storage: "granted",
+        wait_for_update: 500
+      };
+      try {
+        var saved = localStorage.getItem(key);
+        if (saved) {
+          var parsed = JSON.parse(saved);
+          if (parsed && parsed.analytics) consent.analytics_storage = "granted";
+          if (parsed && parsed.marketing && !(navigator && navigator.globalPrivacyControl)) {
+            consent.ad_storage = "granted";
+            consent.ad_user_data = "granted";
+            consent.ad_personalization = "granted";
+            consent.personalization_storage = "granted";
+          }
+        }
+      } catch (err) {}
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+      window.gtag("consent", "default", consent);
+    })();
+  </script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WR9TZHT');</script>
+  <!-- End Google Tag Manager -->
   <title>Website Services — Button Up Media</title>
   <meta name="description" content="Custom restaurant website services with SEO, integrations, and conversion tools built from scratch by Button Up Media." />
   <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg">
   <link rel="canonical" href="https://buttonupmedia.com/restaurant-website-design.html" />
   <meta name="robots" content="noindex, nofollow" />
+  <meta http-equiv="refresh" content="0; url=index.html" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -440,7 +479,11 @@
       border-bottom: 2px solid rgba(255,248,235,0.06);
       margin-bottom: 40px;
       overflow-x: auto;
+      overflow-y: hidden;
       scrollbar-width: none;
+      overscroll-behavior-x: contain;
+      overscroll-behavior-y: none;
+      touch-action: pan-x;
     }
     .rw-problem-tabs-nav::-webkit-scrollbar { display: none; }
     .rw-problem-tab-btn {
@@ -1405,7 +1448,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 0;
-      margin-top: 56px;
+      margin-top: 32px;
       align-items: stretch;
       position: relative;
     }
@@ -1424,7 +1467,7 @@
       z-index: 0;
     }
     .rw-pricing-card {
-      padding: 40px 32px 36px;
+      padding: 28px 22px 24px;
       border: 1px solid rgba(255,248,235,0.06);
       background: linear-gradient(170deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.005) 100%);
       position: relative;
@@ -1452,12 +1495,12 @@
       border-radius: var(--r-xl);
       background: linear-gradient(170deg, rgba(226,168,77,0.06) 0%, rgba(226,168,77,0.01) 40%, rgba(255,255,255,0.01) 100%);
       z-index: 2;
-      transform: scale(1.04);
+      transform: scale(1.015);
       box-shadow:
         0 0 0 1px rgba(226,168,77,0.08),
         0 24px 80px rgba(0,0,0,0.4),
-        0 0 120px rgba(226,168,77,0.06);
-      padding: 48px 36px 40px;
+        0 0 90px rgba(226,168,77,0.05);
+      padding: 28px 22px 24px;
     }
     .rw-pricing-card.--featured::before {
       content: "";
@@ -1470,7 +1513,7 @@
       border-radius: var(--r-xl) var(--r-xl) 0 0;
     }
     .rw-pricing-card.--featured:hover {
-      transform: scale(1.04) translateY(-4px);
+      transform: scale(1.015) translateY(-4px);
       box-shadow:
         0 0 0 1px rgba(226,168,77,0.12),
         0 30px 100px rgba(0,0,0,0.5),
@@ -1498,48 +1541,48 @@
     /* Badge */
     .rw-pricing-badge {
       position: absolute;
-      top: -14px;
+      top: -11px;
       left: 50%;
       transform: translateX(-50%);
       background: linear-gradient(135deg, #D4A744, #E2A84D, #F2D688);
       color: #0a0a0c;
-      font-size: 0.65rem;
+      font-size: 0.58rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      padding: 6px 20px;
-      border-radius: 20px;
+      padding: 5px 14px;
+      border-radius: 999px;
       box-shadow: 0 4px 16px rgba(226,168,77,0.3), 0 0 40px rgba(226,168,77,0.1);
       white-space: nowrap;
     }
     /* Tier label */
     .rw-pricing-tier {
-      font-size: 0.7rem;
+      font-size: 0.64rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: var(--text-soft);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .rw-pricing-card.--featured .rw-pricing-tier { color: var(--gold); }
     .rw-pricing-card.--teal .rw-pricing-tier { color: var(--teal); }
     /* Header */
     .rw-pricing-header h3 {
-      font-size: 1.2rem;
+      font-size: 1.03rem;
       font-weight: 800;
-      margin-bottom: 16px;
+      margin-bottom: 10px;
       letter-spacing: -0.01em;
     }
     .rw-pricing-card.--featured .rw-pricing-header h3 {
-      font-size: 1.3rem;
+      font-size: 1.08rem;
     }
     /* Price */
     .rw-pricing-price {
       font-family: var(--font-display);
-      font-size: 2rem;
+      font-size: 1.7rem;
       font-weight: 800;
       letter-spacing: -0.03em;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       line-height: 1.1;
       background: linear-gradient(115deg, #C6943A 0%, #F2D688 35%, #ffef9d 50%, #F2D688 65%, #C6943A 100%);
       -webkit-background-clip: text;
@@ -1547,7 +1590,7 @@
       background-clip: text;
     }
     .rw-pricing-card.--featured .rw-pricing-price {
-      font-size: 2.3rem;
+      font-size: 1.95rem;
     }
     .rw-pricing-card.--teal .rw-pricing-price {
       background: linear-gradient(115deg, #3A9E7E 0%, #45B08C 35%, #6DD5B0 50%, #45B08C 65%, #3A9E7E 100%);
@@ -1556,10 +1599,10 @@
       background-clip: text;
     }
     .rw-pricing-timeline {
-      font-size: 0.76rem;
+      font-size: 0.7rem;
       color: var(--text-soft);
-      margin-bottom: 24px;
-      padding-bottom: 24px;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
       border-bottom: 1px solid rgba(255,248,235,0.05);
     }
     .rw-pricing-card.--featured .rw-pricing-timeline {
@@ -1573,19 +1616,19 @@
       flex: 1;
     }
     .rw-pricing-includes li {
-      font-size: 0.86rem;
+      font-size: 0.77rem;
       color: var(--text-dim);
-      padding: 8px 0 8px 28px;
+      padding: 6px 0 6px 22px;
       position: relative;
-      line-height: 1.5;
+      line-height: 1.42;
     }
     .rw-pricing-includes li::before {
       content: "";
       position: absolute;
       left: 0;
-      top: 13px;
-      width: 16px;
-      height: 16px;
+      top: 10px;
+      width: 13px;
+      height: 13px;
       border-radius: 50%;
       background: rgba(226,168,77,0.1);
       border: 1px solid rgba(226,168,77,0.2);
@@ -1593,10 +1636,10 @@
     .rw-pricing-includes li::after {
       content: "";
       position: absolute;
-      left: 4px;
-      top: 17px;
-      width: 8px;
-      height: 5px;
+      left: 3px;
+      top: 14px;
+      width: 6px;
+      height: 4px;
       border-left: 1.5px solid var(--gold);
       border-bottom: 1.5px solid var(--gold);
       transform: rotate(-45deg);
@@ -1610,8 +1653,8 @@
     }
     /* CTA inside each card */
     .rw-pricing-card-cta {
-      margin-top: 24px;
-      padding-top: 20px;
+      margin-top: 16px;
+      padding-top: 14px;
       border-top: 1px solid rgba(255,248,235,0.05);
     }
     .rw-pricing-card.--featured .rw-pricing-card-cta {
@@ -1640,13 +1683,13 @@
     }
     /* Factors */
     .rw-pricing-factors {
-      margin-top: 64px;
+      margin-top: 30px;
       position: relative;
     }
     .rw-pricing-factors h3 {
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       font-weight: 700;
-      margin-bottom: 20px;
+      margin-bottom: 14px;
       text-align: center;
       text-transform: uppercase;
       letter-spacing: 0.12em;
@@ -1655,44 +1698,44 @@
     .rw-pricing-factors-grid {
       display: flex;
       justify-content: center;
-      gap: 12px;
-      margin-bottom: 40px;
+      gap: 10px;
+      margin-bottom: 28px;
       flex-wrap: wrap;
     }
     .rw-pricing-factor {
       text-align: center;
-      padding: 16px 20px;
+      padding: 12px 14px;
       border: 1px solid rgba(255,248,235,0.04);
       border-radius: var(--r-lg);
       background: rgba(255,255,255,0.01);
       transition: border-color 0.3s, background 0.3s;
-      min-width: 140px;
+      min-width: 120px;
     }
     .rw-pricing-factor:hover {
       border-color: rgba(226,168,77,0.15);
       background: rgba(226,168,77,0.02);
     }
     .rw-pricing-factor i {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       color: rgba(226,168,77,0.5);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       stroke-width: 1.5;
     }
     .rw-pricing-factor span {
       display: block;
-      font-size: 0.76rem;
+      font-size: 0.71rem;
       color: var(--text-soft);
-      line-height: 1.4;
+      line-height: 1.35;
     }
     .rw-pricing-cta {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 18px;
     }
     .rw-pricing-cta p {
-      font-size: 0.88rem;
+      font-size: 0.8rem;
       color: var(--text-soft);
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       font-style: normal;
     }
 
@@ -1899,22 +1942,23 @@
        ============================ */
     .rw-risk-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin: 40px 0;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 30px 0 20px;
     }
     .rw-risk-card {
-      padding: 20px 18px 18px;
+      padding: 16px 16px 16px 14px;
       border: 1px solid var(--line-soft);
       border-radius: 18px;
       text-align: left;
       transition: border-color 0.2s ease, background 0.2s ease;
       position: relative;
       overflow: hidden;
-      background: rgba(255,255,255,0.015);
+      background: rgba(255,255,255,0.012);
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: flex-start;
+      gap: 12px;
     }
     .rw-risk-card::before {
       content: "";
@@ -1925,14 +1969,14 @@
       transition: opacity 0.3s;
     }
     .rw-risk-card:hover {
-      border-color: rgba(226,168,77,0.18);
-      background: rgba(255,255,255,0.02);
+      border-color: rgba(226,168,77,0.14);
+      background: rgba(255,255,255,0.014);
     }
     .rw-risk-card:hover::before { opacity: 1; }
     .rw-risk-card-icon {
-      width: 36px;
-      height: 36px;
-      margin: 0 0 10px;
+      width: 34px;
+      height: 34px;
+      margin: 1px 0 0;
       border-radius: 10px;
       background: rgba(226,168,77,0.08);
       border: 1px solid rgba(226,168,77,0.15);
@@ -1943,23 +1987,24 @@
       z-index: 1;
     }
     .rw-risk-card-icon svg {
-      width: 18px;
-      height: 18px;
+      width: 17px;
+      height: 17px;
       stroke-width: 1.5;
     }
-    .rw-risk-card h4 {
-      font-size: 0.9rem;
-      font-weight: 700;
-      margin-bottom: 6px;
+    .rw-risk-copy {
       position: relative;
       z-index: 1;
+      min-width: 0;
+    }
+    .rw-risk-card h4 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 3px;
     }
     .rw-risk-card p {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--text-soft);
-      line-height: 1.5;
-      position: relative;
-      z-index: 1;
+      line-height: 1.45;
     }
     .rw-keep-card {
       padding: 32px 28px;
@@ -2297,6 +2342,12 @@
       .hp2-cta-scene > p { margin-bottom: 20px; }
       .hp2-cta-scene .hp2-cta-actions { flex-direction: column; align-items: center; }
       .hp2-cta-scene .btn { width: min(100%, 320px); }
+      .rw-risk-grid { grid-template-columns: 1fr; gap: 10px; margin: 24px 0 18px; }
+      .rw-risk-card { padding: 14px 14px 14px 12px; }
+      .rw-risk-card-icon { width: 32px; height: 32px; }
+      .rw-risk-card-icon svg { width: 16px; height: 16px; }
+      .rw-risk-card h4 { font-size: 0.88rem; }
+      .rw-risk-card p { font-size: 0.78rem; line-height: 1.4; }
     }
   @media (max-width: 600px) {
       .rw-hero-copy h1 { font-size: clamp(1.8rem, 8vw, 2.4rem); }
@@ -2309,13 +2360,17 @@
       .rw-stats-grid { grid-template-columns: 1fr; }
       .rw-scorecard-form { flex-direction: column; }
       .rw-risk-grid { gap: 8px; }
-      .rw-risk-card { padding: 14px 12px 12px; }
-      .rw-risk-card p { font-size: 0.74rem; }
+      .rw-risk-card { padding: 13px 12px; }
+      .rw-risk-card p { font-size: 0.75rem; }
     }
   </style>
   <link rel="stylesheet" href="website-design-redesign.css" />
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WR9TZHT"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
   <nav class="lib-nav">
     <a class="lib-nav-brand" href="index.html" aria-label="Button Up Media home">
@@ -2702,33 +2757,45 @@
       <div class="rw-risk-grid">
         <div class="rw-risk-card">
           <div class="rw-risk-card-icon"><i data-lucide="search"></i></div>
-          <h4>Found by Google</h4>
-          <p>A beautiful website that nobody finds doesn't book tables. We build every site to be discoverable from day one.</p>
+          <div class="rw-risk-copy">
+            <h4>Found by Google</h4>
+            <p>Built to show up when diners search locally.</p>
+          </div>
         </div>
         <div class="rw-risk-card">
           <div class="rw-risk-card-icon"><i data-lucide="sparkles"></i></div>
-          <h4>Found by AI</h4>
-          <p>We structure content so ChatGPT, Claude, and Google AI Overviews can understand your business and cite it correctly.</p>
+          <div class="rw-risk-copy">
+            <h4>Found by AI</h4>
+            <p>Structured so ChatGPT and AI Overviews can read it.</p>
+          </div>
         </div>
         <div class="rw-risk-card">
           <div class="rw-risk-card-icon"><i data-lucide="map-pinned"></i></div>
-          <h4>Location-targeted pages</h4>
-          <p>We help you show up for searches like "best brunch in [neighborhood]" instead of getting buried under larger chains.</p>
+          <div class="rw-risk-copy">
+            <h4>Location pages</h4>
+            <p>Targets neighborhood searches instead of broad competition.</p>
+          </div>
         </div>
         <div class="rw-risk-card">
           <div class="rw-risk-card-icon"><i data-lucide="file-cog"></i></div>
-          <h4>Schema markup</h4>
-          <p>We give Google the local business signals it needs: what you serve, where you are, and what hours you're open.</p>
+          <div class="rw-risk-copy">
+            <h4>Schema markup</h4>
+            <p>Gives search engines the business signals they need.</p>
+          </div>
         </div>
         <div class="rw-risk-card">
           <div class="rw-risk-card-icon"><i data-lucide="gauge"></i></div>
-          <h4>Fast load times</h4>
-          <p>Clean URLs, compressed assets, and faster performance keep the experience usable for both people and search engines.</p>
+          <div class="rw-risk-copy">
+            <h4>Fast load times</h4>
+            <p>Lean code and compressed assets keep it usable.</p>
+          </div>
         </div>
         <div class="rw-risk-card">
           <div class="rw-risk-card-icon"><i data-lucide="file-text"></i></div>
-          <h4>AI-readable content</h4>
-          <p>We write the site in a clear structure so AI assistants can parse the offer, the menu, and the next step.</p>
+          <div class="rw-risk-copy">
+            <h4>AI-readable content</h4>
+            <p>Clear structure for humans, search, and AI assistants.</p>
+          </div>
         </div>
       </div>
 

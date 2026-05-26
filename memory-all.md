@@ -61,6 +61,7 @@ Last updated:
 - The restaurant website design page footer CTA now mirrors the homepage CTA pattern directly using the same `hp2-cta-scene` structure and scroll entrance animation.
 - The Our Process section no longer uses the sticky progress card; instead, the section uses a lightly darkened optimized background image with the timeline layered over it.
 - The SEO section should read like a fast-glance set of info cards on mobile first: left-aligned, compact, and not button-like.
+- The SEO section is now implemented as compact left-aligned info rows with shorter copy so it reads like a quick-glance mobile-first checklist instead of centered button-like cards.
 - Optimize the process timeline for desktop scrolling and simplify it on mobile.
 - Keep the site visually bold but reduce clutter in sections that read better when simplified.
 - Keep mobile as the primary design lens, with desktop as the enhancement layer.

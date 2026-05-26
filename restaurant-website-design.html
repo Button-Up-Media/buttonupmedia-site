@@ -1942,22 +1942,23 @@
        ============================ */
     .rw-risk-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin: 40px 0;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 30px 0 20px;
     }
     .rw-risk-card {
-      padding: 20px 18px 18px;
+      padding: 16px 16px 16px 14px;
       border: 1px solid var(--line-soft);
       border-radius: 18px;
       text-align: left;
       transition: border-color 0.2s ease, background 0.2s ease;
       position: relative;
       overflow: hidden;
-      background: rgba(255,255,255,0.015);
+      background: rgba(255,255,255,0.012);
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: flex-start;
+      gap: 12px;
     }
     .rw-risk-card::before {
       content: "";
@@ -1968,14 +1969,14 @@
       transition: opacity 0.3s;
     }
     .rw-risk-card:hover {
-      border-color: rgba(226,168,77,0.18);
-      background: rgba(255,255,255,0.02);
+      border-color: rgba(226,168,77,0.14);
+      background: rgba(255,255,255,0.014);
     }
     .rw-risk-card:hover::before { opacity: 1; }
     .rw-risk-card-icon {
-      width: 36px;
-      height: 36px;
-      margin: 0 0 10px;
+      width: 34px;
+      height: 34px;
+      margin: 1px 0 0;
       border-radius: 10px;
       background: rgba(226,168,77,0.08);
       border: 1px solid rgba(226,168,77,0.15);
@@ -1986,23 +1987,24 @@
       z-index: 1;
     }
     .rw-risk-card-icon svg {
-      width: 18px;
-      height: 18px;
+      width: 17px;
+      height: 17px;
       stroke-width: 1.5;
     }
-    .rw-risk-card h4 {
-      font-size: 0.9rem;
-      font-weight: 700;
-      margin-bottom: 6px;
+    .rw-risk-copy {
       position: relative;
       z-index: 1;
+      min-width: 0;
+    }
+    .rw-risk-card h4 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 3px;
     }
     .rw-risk-card p {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--text-soft);
-      line-height: 1.5;
-      position: relative;
-      z-index: 1;
+      line-height: 1.45;
     }
     .rw-keep-card {
       padding: 32px 28px;
@@ -2340,6 +2342,12 @@
       .hp2-cta-scene > p { margin-bottom: 20px; }
       .hp2-cta-scene .hp2-cta-actions { flex-direction: column; align-items: center; }
       .hp2-cta-scene .btn { width: min(100%, 320px); }
+      .rw-risk-grid { grid-template-columns: 1fr; gap: 10px; margin: 24px 0 18px; }
+      .rw-risk-card { padding: 14px 14px 14px 12px; }
+      .rw-risk-card-icon { width: 32px; height: 32px; }
+      .rw-risk-card-icon svg { width: 16px; height: 16px; }
+      .rw-risk-card h4 { font-size: 0.88rem; }
+      .rw-risk-card p { font-size: 0.78rem; line-height: 1.4; }
     }
   @media (max-width: 600px) {
       .rw-hero-copy h1 { font-size: clamp(1.8rem, 8vw, 2.4rem); }
@@ -2352,8 +2360,8 @@
       .rw-stats-grid { grid-template-columns: 1fr; }
       .rw-scorecard-form { flex-direction: column; }
       .rw-risk-grid { gap: 8px; }
-      .rw-risk-card { padding: 14px 12px 12px; }
-      .rw-risk-card p { font-size: 0.74rem; }
+      .rw-risk-card { padding: 13px 12px; }
+      .rw-risk-card p { font-size: 0.75rem; }
     }
   </style>
   <link rel="stylesheet" href="website-design-redesign.css" />
@@ -2749,33 +2757,45 @@
       <div class="rw-risk-grid">
         <div class="rw-risk-card">
           <div class="rw-risk-card-icon"><i data-lucide="search"></i></div>
-          <h4>Found by Google</h4>
-          <p>A beautiful website that nobody finds doesn't book tables. We build every site to be discoverable from day one.</p>
+          <div class="rw-risk-copy">
+            <h4>Found by Google</h4>
+            <p>Built to show up when diners search locally.</p>
+          </div>
         </div>
         <div class="rw-risk-card">
           <div class="rw-risk-card-icon"><i data-lucide="sparkles"></i></div>
-          <h4>Found by AI</h4>
-          <p>We structure content so ChatGPT, Claude, and Google AI Overviews can understand your business and cite it correctly.</p>
+          <div class="rw-risk-copy">
+            <h4>Found by AI</h4>
+            <p>Structured so ChatGPT and AI Overviews can read it.</p>
+          </div>
         </div>
         <div class="rw-risk-card">
           <div class="rw-risk-card-icon"><i data-lucide="map-pinned"></i></div>
-          <h4>Location-targeted pages</h4>
-          <p>We help you show up for searches like "best brunch in [neighborhood]" instead of getting buried under larger chains.</p>
+          <div class="rw-risk-copy">
+            <h4>Location pages</h4>
+            <p>Targets neighborhood searches instead of broad competition.</p>
+          </div>
         </div>
         <div class="rw-risk-card">
           <div class="rw-risk-card-icon"><i data-lucide="file-cog"></i></div>
-          <h4>Schema markup</h4>
-          <p>We give Google the local business signals it needs: what you serve, where you are, and what hours you're open.</p>
+          <div class="rw-risk-copy">
+            <h4>Schema markup</h4>
+            <p>Gives search engines the business signals they need.</p>
+          </div>
         </div>
         <div class="rw-risk-card">
           <div class="rw-risk-card-icon"><i data-lucide="gauge"></i></div>
-          <h4>Fast load times</h4>
-          <p>Clean URLs, compressed assets, and faster performance keep the experience usable for both people and search engines.</p>
+          <div class="rw-risk-copy">
+            <h4>Fast load times</h4>
+            <p>Lean code and compressed assets keep it usable.</p>
+          </div>
         </div>
         <div class="rw-risk-card">
           <div class="rw-risk-card-icon"><i data-lucide="file-text"></i></div>
-          <h4>AI-readable content</h4>
-          <p>We write the site in a clear structure so AI assistants can parse the offer, the menu, and the next step.</p>
+          <div class="rw-risk-copy">
+            <h4>AI-readable content</h4>
+            <p>Clear structure for humans, search, and AI assistants.</p>
+          </div>
         </div>
       </div>
 
