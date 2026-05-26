@@ -63,6 +63,8 @@ Last updated:
 - The Our Process section no longer uses the sticky progress card; instead, the section uses a lightly darkened optimized background image with the timeline layered over it.
 - The SEO section should read like a fast-glance set of info cards on mobile first: left-aligned, compact, and not button-like.
 - The SEO section is now implemented as compact left-aligned info rows with shorter copy so it reads like a quick-glance mobile-first checklist instead of centered button-like cards.
+- On mobile, tighten the transition between the "How They Decide" quote and the Pricing section so there is no excessive blank space.
+- On mobile, the Premium / Most Popular pricing card should appear before Standard so the featured option is seen first in the stack.
 - Optimize the process timeline for desktop scrolling and simplify it on mobile.
 - Keep the site visually bold but reduce clutter in sections that read better when simplified.
 - Keep mobile as the primary design lens, with desktop as the enhancement layer.

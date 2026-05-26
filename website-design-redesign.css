@@ -640,6 +640,18 @@
     grid-template-columns: 1fr;
   }
 
+  .wd-packages-grid {
+    gap: 12px;
+  }
+
+  .wd-package-card {
+    order: 2;
+  }
+
+  .wd-package-card.--featured {
+    order: 1;
+  }
+
   .wd-package-card.--featured {
     transform: none;
   }
