@@ -60,6 +60,19 @@ Last updated:
 - Bottom-of-page CTA cards should match the homepage bottom CTA treatment exactly: the same centered gold-on-black card language, dotted/mesh background treatment, button styling, and hierarchy.
 - The restaurant website design page footer CTA now mirrors the homepage CTA pattern directly using the same `hp2-cta-scene` structure and scroll entrance animation.
 - The site now has a hidden `privacy.html` page with `noindex, nofollow`; the only user-facing links to it are the footer `Privacy Policy` link and the new `Privacy Policy` link in the cookie banner next to `Opt out`.
+- All site pages now use the homepage as the canonical header/footer shell: the footer locations are plain text, FAQ is removed from the footer, and the shared nav matches across every HTML page.
+- The shared header glass effect was softened slightly by reducing the nav background opacity so the blur feels lighter and the page behind it reads more clearly on scroll, while keeping the rest of the header treatment the same.
+- The restaurant website design page is now indexable and linked site-wide from the Services dropdown and footer Services column on every page.
+- The restaurant website design page no longer has the meta refresh redirect back to `index.html`, so clicking `Website` in the header now lands on the service page instead of bouncing home.
+- The older pages that still had `meta refresh` redirects to `index.html` had those redirects removed so the site-wide `Website` links and footer links now stay on their actual destination pages.
+- The shared Services label for the restaurant website design page is now just `Website` in the header dropdown and footer across the site, while the page hero/title can still say `Restaurant Website Design`.
+- The restaurant website design page copy was rewritten to lean harder into search intent and conversions, using phrases like `restaurant website design`, `restaurant website development`, `restaurant website developer`, and `restaurant website redesign` while keeping the page structure the same.
+- The mobile hero headline on the restaurant website design page now reads `Restaurant website design that books tables.` so `that` stays with the first line and the second line is cleaner.
+- On mobile, the first section after the restaurant website design hero has a slightly smaller overlap so it no longer covers the proof stack underneath the hero.
+- The website services hero background overlays were neutralized to remove the yellow cast while keeping the same dark mood, layout, and proof stack presentation.
+- The restaurant website design page now uses one semantic H1, adds indexable robots and social preview metadata, and includes additional JSON-LD for Organization and WebPage alongside the existing Service, HowTo, BreadcrumbList, and FAQ schema.
+- The mobile cookie consent sheet is intentionally a little taller than before so the title and copy have more vertical breathing room without changing the overall banner structure.
+- The homepage scroll-progress bar at the very top was removed entirely because it was unnecessary and distracted from the page.
 - The restaurant website design hero now uses the optimized darkened WebP asset at `photos/Service/Web Development/hero-background.webp` on both mobile and desktop, with the overlay handling the extra contrast so the image never competes with the copy or proof stack.
 - The privacy page now uses the exact homepage-style fixed nav and footer shell, with extra top spacing so the page title clears the header instead of tucking underneath it.
 - Preview copies of the restaurant website design page should not include the meta refresh redirect to `index.html`; that redirect belongs only in the hidden live source if needed.

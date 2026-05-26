@@ -1,0 +1,20 @@
+{
+  "name": "gmcp-meta-integration",
+  "version": "1.0.0",
+  "description": "Button Up Media - GMCP with Meta API Integration for Pages, Instagram & Ads",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build step required'",
+    "test:meta": "node api/meta/test-connection.js"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "vercel": "^39.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
