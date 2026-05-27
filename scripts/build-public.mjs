@@ -11,6 +11,8 @@ const filesToCopy = [
   'case-studies.html',
   'contact.html',
   'privacy.html',
+  'terms.html',
+  'gmcp.html',
   'restaurant-advertising.html',
   'restaurant-seo.html',
   'restaurant-website-design.html',

@@ -1718,11 +1718,83 @@ document.querySelectorAll('[data-icon-anim="heart"]').forEach((cell) => {
 });
 
 // ── Hover-to-autoplay videos ──
+const VIDEO_CDN_BASE = window.location.hostname === "www.buttonupmedia.com"
+  ? "https://buttonupmedia.b-cdn.net/"
+  : "";
+
+const isRemoteAsset = (value) => /^(?:https?:)?\/\//i.test(value) || value.startsWith("data:") || value.startsWith("blob:");
+
+const resolveVideoAsset = (value, useCdn = true) => {
+  if (!value || isRemoteAsset(value)) return value;
+  const cleanValue = value.replace(/^\/+/, "");
+  if (useCdn && VIDEO_CDN_BASE) {
+    return `${VIDEO_CDN_BASE}${cleanValue}`;
+  }
+  return cleanValue;
+};
+
+const prepareLazyVideo = (video) => {
+  if (!video || video.dataset.lazyPrepared) return;
+
+  const directSrc = video.getAttribute("src");
+  if (directSrc) {
+    if (!video.dataset.videoSrc) video.dataset.videoSrc = directSrc;
+    video.removeAttribute("src");
+  }
+
+  Array.from(video.querySelectorAll("source")).forEach((source) => {
+    const sourceSrc = source.getAttribute("src");
+    if (sourceSrc) {
+      if (!source.dataset.src) source.dataset.src = sourceSrc;
+      source.removeAttribute("src");
+    }
+  });
+
+  video.setAttribute("preload", "none");
+  video.dataset.lazyPrepared = "true";
+};
+
+const ensureLazyVideoSource = (video, useCdn = true) => {
+  if (!video) return;
+  if (!video.dataset.lazyPrepared) prepareLazyVideo(video);
+
+  const dataSrc = video.dataset.videoSrc || video.dataset.src;
+  if (dataSrc && !video.getAttribute("src")) {
+    video.src = resolveVideoAsset(dataSrc, useCdn);
+    video.load();
+    return;
+  }
+
+  const sources = Array.from(video.querySelectorAll("source"));
+  if (sources.length) {
+    let anySource = false;
+    sources.forEach((source) => {
+      const src = source.dataset.src || source.getAttribute("data-src");
+      if (src && !source.getAttribute("src")) {
+        source.src = resolveVideoAsset(src, useCdn);
+        anySource = true;
+      }
+    });
+    if (anySource) video.load();
+  }
+};
+
+const fallbackLazyVideoToLocal = (video) => {
+  if (!video || video.dataset.videoFallbackLocal === "true") return;
+  const hasCdn = !!VIDEO_CDN_BASE;
+  const currentSrc = video.currentSrc || video.getAttribute("src") || "";
+  if (!hasCdn || !currentSrc.startsWith(VIDEO_CDN_BASE)) return;
+
+  video.dataset.videoFallbackLocal = "true";
+  ensureLazyVideoSource(video, false);
+};
+
 document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
   const video = container.querySelector("video");
   if (!video) return;
 
   container.addEventListener("mouseenter", () => {
+    ensureLazyVideoSource(video);
     video.play().catch(() => {});
   });
 
@@ -1807,19 +1879,11 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
 
 // ── Viewport-managed autoplay videos ──
 (() => {
-  const managedVideos = Array.from(document.querySelectorAll("video[data-video-src], video[data-autoplay-on-view], .hp2-hero-bg-video"));
+  const managedVideos = Array.from(document.querySelectorAll("video"));
   if (!managedVideos.length) return;
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const inViewThreshold = 0.2;
-
-  const ensureSource = (video) => {
-    const dataSrc = video.dataset.videoSrc || video.dataset.src;
-    if (dataSrc && !video.src) {
-      video.src = dataSrc;
-      video.load();
-    }
-  };
 
   const startVideo = (video) => {
     if (prefersReducedMotion) return;
@@ -1829,7 +1893,7 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
       stopVideo(video);
       return;
     }
-    ensureSource(video);
+    ensureLazyVideoSource(video);
     if (video.readyState >= 2) {
       video.play().catch(() => {});
     } else {
@@ -1866,11 +1930,13 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
     });
   }, {
     root: null,
-    rootMargin: "250px 0px",
+    rootMargin: "120px 0px",
     threshold: [0, inViewThreshold],
   });
 
   managedVideos.forEach((video) => {
+    prepareLazyVideo(video);
+    video.addEventListener("error", () => fallbackLazyVideoToLocal(video));
     if (video.classList.contains("hp2-hero-bg-video")) {
       video.addEventListener("loadeddata", () => {
         video.classList.add("is-loaded");
