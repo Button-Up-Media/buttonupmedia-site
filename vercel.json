@@ -57,6 +57,17 @@
   ],
   "redirects": [
     {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "buttonupmedia.com"
+        }
+      ],
+      "destination": "https://www.buttonupmedia.com/:path*",
+      "permanent": true
+    },
+    {
       "source": "/social-media-marketing",
       "destination": "/socialmediamarketing",
       "permanent": true

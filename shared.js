@@ -1857,6 +1857,8 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
         startVideo(video);
         if (video.classList.contains("hp2-hero-bg-video")) {
           video.classList.add("is-loaded");
+          const heroMedia = video.closest(".hp2-hero-media");
+          if (heroMedia) heroMedia.classList.add("is-video-loaded");
         }
       } else {
         stopVideo(video);
@@ -1870,7 +1872,11 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
 
   managedVideos.forEach((video) => {
     if (video.classList.contains("hp2-hero-bg-video")) {
-      video.addEventListener("loadeddata", () => video.classList.add("is-loaded"), { once: true });
+      video.addEventListener("loadeddata", () => {
+        video.classList.add("is-loaded");
+        const heroMedia = video.closest(".hp2-hero-media");
+        if (heroMedia) heroMedia.classList.add("is-video-loaded");
+      }, { once: true });
     }
     observer.observe(video);
   });

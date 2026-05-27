@@ -55,6 +55,16 @@
   <meta name="twitter:title" content="Restaurant Marketing Agency for Florida Restaurants | Button Up Media" />
   <meta name="twitter:description" content="Restaurant marketing for Florida restaurants: social media content, websites, SEO, and Google Ads built to drive reservations, online orders, and foot traffic." />
   <meta name="twitter:image" content="https://www.buttonupmedia.com/images/sm-videography-hero.jpg" />
+  <script>
+    (function () {
+      document.documentElement.classList.add("js");
+      window.__hp2HeroRevealTimer = window.setTimeout(function () {
+        if (!document.documentElement.classList.contains("hp2-hero-animated")) {
+          document.documentElement.classList.add("hp2-hero-force-visible");
+        }
+      }, 2200);
+    })();
+  </script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -92,6 +102,25 @@
     .hp2-hero-copy > p {
       font-size: 17px;
       line-height: 1.75;
+    }
+
+    html.js .hp2-hero-copy .hp2-word-reveal {
+      visibility: hidden;
+    }
+    html.js .hp2-hero-copy > p,
+    html.js .hp2-hero-cta,
+    html.js .hp2-proof-fragments {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    html.js.hp2-hero-force-visible .hp2-hero-copy .hp2-word-reveal {
+      visibility: visible;
+    }
+    html.js.hp2-hero-force-visible .hp2-hero-copy > p,
+    html.js.hp2-hero-force-visible .hp2-hero-cta,
+    html.js.hp2-hero-force-visible .hp2-proof-fragments {
+      opacity: 1;
+      transform: none;
     }
 
     [data-shared-animations="off"] {
@@ -421,12 +450,16 @@
       z-index: 0;
       overflow: hidden;
     }
+    .hp2-hero-media.is-video-loaded img {
+      opacity: 0;
+    }
     .hp2-hero-media img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0;
+      opacity: 1;
       transform: scale(1.08);
+      will-change: transform;
     }
     .hp2-hero-bg-video {
       position: absolute;
@@ -439,13 +472,13 @@
       object-fit: cover;
       opacity: 0;
       transform: translateY(-50%);
-      transition: opacity 0.7s ease;
+      transition: none;
       pointer-events: none;
       -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.45) 8%, #000 20%);
       mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.45) 8%, #000 20%);
     }
     .hp2-hero-bg-video.is-loaded {
-      opacity: 0.64;
+      opacity: 1;
     }
     .hp2-hero-media::after {
       content: "";
@@ -2173,7 +2206,7 @@
         margin-bottom: 0;
       }
       .hp2-hero-bg-video.is-loaded {
-        opacity: 0.46;
+        opacity: 1;
       }
       .hp2-hero-cta {
         gap: 18px;
@@ -3597,9 +3630,19 @@
     <!-- ═══ 1. HERO, Full-Bleed Cinematic + Word Reveal ═══ -->
     <section class="hp2-hero" id="hero">
       <div class="hp2-hero-media">
-        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1800&h=1000&fit=crop" alt="Dimly lit upscale restaurant interior with warm ambient lighting" />
+        <img
+          src="images/homepage-hero-bg-1800.webp"
+          srcset="images/homepage-hero-bg-1200.webp 1200w, images/homepage-hero-bg-1800.webp 1800w"
+          sizes="100vw"
+          width="1800"
+          height="1000"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          alt="Dimly lit upscale restaurant interior with warm ambient lighting"
+        />
         <!-- Hero video is lazy-loaded and paused offscreen by shared.js. -->
-        <video class="hp2-hero-bg-video" data-video-src="videos/compilation-best-shots.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+        <video class="hp2-hero-bg-video" data-video-src="videos/compilation-best-shots.optimized.mp4" poster="images/homepage-hero-bg-1200.webp" muted loop playsinline preload="none" aria-hidden="true"></video>
       </div>
       <div class="hp2-hero-inner">
         <div class="hp2-hero-copy">
@@ -4828,8 +4871,14 @@
 
     if (prefersReducedMotion) {
       // Make all word-reveal text visible immediately
+      clearTimeout(window.__hp2HeroRevealTimer);
+      document.documentElement.classList.add("hp2-hero-force-visible", "hp2-hero-animated");
       document.querySelectorAll(".hp2-word-reveal").forEach(el => {
-        // Don't split, leave text as-is
+        el.style.visibility = "visible";
+      });
+      document.querySelectorAll(".hp2-hero-copy > p, .hp2-hero-cta, .hp2-proof-fragments").forEach(el => {
+        el.style.opacity = "1";
+        el.style.transform = "none";
       });
       // Make all curtain images visible
       document.querySelectorAll(".hp2-curtain-img").forEach(el => {
@@ -4866,10 +4915,14 @@
 
     // Wait for fonts before running hero animation
     document.fonts.ready.then(() => {
+      clearTimeout(window.__hp2HeroRevealTimer);
+      document.documentElement.classList.add("hp2-hero-animated");
+
       // Word reveal on hero headline
       const heroH1 = document.querySelector(".hp2-hero-copy .hp2-word-reveal");
       if (heroH1) {
         const wordInners = splitWords(heroH1);
+        heroH1.style.visibility = "visible";
         gsap.fromTo(wordInners,
           { y: "110%" },
           {

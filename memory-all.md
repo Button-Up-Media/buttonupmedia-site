@@ -73,6 +73,12 @@ Last updated:
 - The restaurant website design page now uses one semantic H1, adds indexable robots and social preview metadata, and includes additional JSON-LD for Organization and WebPage alongside the existing Service, HowTo, BreadcrumbList, and FAQ schema.
 - The mobile cookie consent sheet is intentionally a little taller than before so the title and copy have more vertical breathing room without changing the overall banner structure.
 - The homepage scroll-progress bar at the very top was removed entirely because it was unnecessary and distracted from the page.
+- The homepage hero now uses local responsive WebP fallbacks for the background image, with eager/high-priority loading and the existing background video kept in place as an enhancement layer.
+- The homepage hero video was conservatively re-encoded into `videos/compilation-best-shots.optimized.mp4` with the same framing and duration but no audio track, so the visual feel stays the same while the load weight drops.
+- The homepage hero video is now also trimmed shorter by roughly five seconds while keeping the same framing, so the loop is lighter without changing the hero look and feel.
+- The homepage hero video now swaps in fully opaque and hides the fallback image only after the video is ready, so the image/video layers do not blend or crossfade visually.
+- The homepage hero video source has been darkened slightly at the file level and saved back into `videos/compilation-best-shots.optimized.mp4`, keeping the same framing but improving text contrast against the motion background.
+- The homepage hero video was further optimized by downscaling to `960x1706` while keeping the same 10.5s duration, no audio, and the same look/feel baseline, reducing the file size to about `4.4 MB`.
 - The restaurant website design hero now uses the optimized darkened WebP asset at `photos/Service/Web Development/hero-background.webp` on both mobile and desktop, with the overlay handling the extra contrast so the image never competes with the copy or proof stack.
 - The privacy page now uses the exact homepage-style fixed nav and footer shell, with extra top spacing so the page title clears the header instead of tucking underneath it.
 - Preview copies of the restaurant website design page should not include the meta refresh redirect to `index.html`; that redirect belongs only in the hidden live source if needed.
