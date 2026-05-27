@@ -1781,6 +1781,8 @@ const ensureLazyVideoSource = (video, useCdn = true) => {
   }
 };
 
+window.ensureLazyVideoSource = ensureLazyVideoSource;
+
 const fallbackLazyVideoToLocal = (video) => {
   if (!video || video.dataset.videoFallbackLocal === "true") return;
   const hasCdn = !!VIDEO_CDN_BASE;
@@ -1832,6 +1834,7 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
     const video = card.querySelector("video");
     if (!video) return;
     stopOtherCards(card);
+    ensureLazyVideoSource(video);
     video.muted = false;
     video.volume = 0.85;
     video.play()
@@ -1881,7 +1884,7 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
 
 // ── Viewport-managed autoplay videos ──
 (() => {
-  const managedVideos = Array.from(document.querySelectorAll("video")).filter((video) => !isAudioManagedVideo(video));
+  const managedVideos = Array.from(document.querySelectorAll("video"));
   if (!managedVideos.length) return;
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

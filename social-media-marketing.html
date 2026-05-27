@@ -3073,6 +3073,7 @@
         });
       };
       const playWithAudio = video => {
+        window.ensureLazyVideoSource?.(video);
         video.muted = false;
         video.volume = 0.8;
         video.play()
