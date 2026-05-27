@@ -5,9 +5,9 @@
  * GET /api/meta/status - Returns current configuration status
  */
 
-const { META_CONFIG, REQUIRED_PERMISSIONS } = require('./lib/config');
-const { MetaApiClient } = require('./lib/client');
-const { withErrorHandling } = require('./lib/middleware');
+const { META_CONFIG, REQUIRED_PERMISSIONS } = require('../../meta-lib/config');
+const { MetaApiClient } = require('../../meta-lib/client');
+const { withErrorHandling } = require('../../meta-lib/middleware');
 
 module.exports = withErrorHandling(async (req, res) => {
   if (req.method !== 'GET') {

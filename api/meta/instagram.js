@@ -13,8 +13,8 @@
  * POST /api/meta/instagram?action=carousel     - Publish a carousel
  */
 
-const { InstagramService } = require('./lib/instagram');
-const { withErrorHandling, validateRequired, getAccessToken } = require('./lib/middleware');
+const { InstagramService } = require('../../meta-lib/instagram');
+const { withErrorHandling, validateRequired, getAccessToken } = require('../../meta-lib/middleware');
 
 module.exports = withErrorHandling(async (req, res) => {
   const token = getAccessToken(req);

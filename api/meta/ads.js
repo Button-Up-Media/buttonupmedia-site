@@ -19,8 +19,8 @@
  * DELETE /api/meta/ads                      - Delete campaign/adset/ad
  */
 
-const { AdsService } = require('./lib/ads');
-const { withErrorHandling, validateRequired, getAccessToken } = require('./lib/middleware');
+const { AdsService } = require('../../meta-lib/ads');
+const { withErrorHandling, validateRequired, getAccessToken } = require('../../meta-lib/middleware');
 
 module.exports = withErrorHandling(async (req, res) => {
   const token = getAccessToken(req);

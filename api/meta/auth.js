@@ -10,9 +10,9 @@
  * POST /api/meta/auth?action=page_token    - Get Page access token from user token
  */
 
-const { MetaApiClient } = require('./lib/client');
-const { META_CONFIG, REQUIRED_PERMISSIONS } = require('./lib/config');
-const { withErrorHandling, validateRequired } = require('./lib/middleware');
+const { MetaApiClient } = require('../../meta-lib/client');
+const { META_CONFIG, REQUIRED_PERMISSIONS } = require('../../meta-lib/config');
+const { withErrorHandling, validateRequired } = require('../../meta-lib/middleware');
 
 module.exports = withErrorHandling(async (req, res) => {
   const { action } = req.query || {};

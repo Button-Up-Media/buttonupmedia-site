@@ -25,8 +25,8 @@ if (fs.existsSync(envPath)) {
   });
 }
 
-const { META_CONFIG, REQUIRED_PERMISSIONS } = require('./lib/config');
-const { MetaApiClient } = require('./lib/client');
+const { META_CONFIG, REQUIRED_PERMISSIONS } = require('../../meta-lib/config');
+const { MetaApiClient } = require('../../meta-lib/client');
 
 async function testConnection() {
   console.log('\n╔══════════════════════════════════════════════════════════════╗');

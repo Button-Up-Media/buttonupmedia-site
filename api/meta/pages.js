@@ -11,8 +11,8 @@
  * DELETE /api/meta/pages            - Delete a post
  */
 
-const { PagesService } = require('./lib/pages');
-const { withErrorHandling, validateRequired, getAccessToken } = require('./lib/middleware');
+const { PagesService } = require('../../meta-lib/pages');
+const { withErrorHandling, validateRequired, getAccessToken } = require('../../meta-lib/middleware');
 
 module.exports = withErrorHandling(async (req, res) => {
   const token = getAccessToken(req);

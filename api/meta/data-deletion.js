@@ -10,8 +10,8 @@
  */
 
 const crypto = require('crypto');
-const { META_CONFIG } = require('./lib/config');
-const { CORS_HEADERS } = require('./lib/middleware');
+const { META_CONFIG } = require('../../meta-lib/config');
+const { CORS_HEADERS } = require('../../meta-lib/middleware');
 
 module.exports = async (req, res) => {
   Object.entries(CORS_HEADERS).forEach(([key, value]) => {
