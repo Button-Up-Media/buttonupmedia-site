@@ -82,6 +82,8 @@ Last updated:
 - Site-wide video loading now uses the lazy `data-video-src` path more consistently, and the social media marketing page videos were moved off eager `preload="metadata"` requests so they only attach real sources when they are near view or hovered.
 - The shared video loader now prefers a Bunny CDN base on `www.buttonupmedia.com` and falls back to the local file path if the CDN source is unavailable, so the hero and other site videos can benefit from edge caching without risking a broken page.
 - The live CSP now allows `https://buttonupmedia.b-cdn.net` in `media-src`, which is required for the Bunny-hosted hero and other site videos to load instead of staying on the poster fallback image.
+- The homepage, social, and website-design pages now use AVIF versions of the larger photos and poster frames, and the main non-hero MP4s were re-encoded smaller with H.264 to reduce page weight without changing the layout or interactions.
+- The static build step now copies the optimized MP4 files into `public/` as-is instead of re-encoding them again, so the source video optimizations survive the deploy exactly.
 - The restaurant website design hero now uses the optimized darkened WebP asset at `photos/Service/Web Development/hero-background.webp` on both mobile and desktop, with the overlay handling the extra contrast so the image never competes with the copy or proof stack.
 - The privacy page now uses the exact homepage-style fixed nav and footer shell, with extra top spacing so the page title clears the header instead of tucking underneath it.
 - Preview copies of the restaurant website design page should not include the meta refresh redirect to `index.html`; that redirect belongs only in the hidden live source if needed.

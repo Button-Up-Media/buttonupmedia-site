@@ -1,5 +1,4 @@
 import { cp, mkdir, readdir, rm } from 'fs/promises';
-import { spawnSync } from 'child_process';
 import path from 'path';
 
 const root = process.cwd();
@@ -72,45 +71,6 @@ async function walkAndProcess(currentSourceDir, currentTargetDir) {
       continue;
     }
 
-    if (path.extname(entry.name).toLowerCase() === '.mp4') {
-      await transcodeVideo(sourcePath, targetPath);
-      continue;
-    }
-
-    await cp(sourcePath, targetPath);
-  }
-}
-
-async function transcodeVideo(sourcePath, targetPath) {
-  const result = spawnSync(
-    'ffmpeg',
-    [
-      '-y',
-      '-i',
-      sourcePath,
-      '-vf',
-      "scale='min(960,iw)':-2",
-      '-c:v',
-      'libx264',
-      '-preset',
-      'veryfast',
-      '-crf',
-      '34',
-      '-pix_fmt',
-      'yuv420p',
-      '-c:a',
-      'aac',
-      '-b:a',
-      '96k',
-      '-movflags',
-      '+faststart',
-      targetPath,
-    ],
-    { stdio: 'inherit' }
-  );
-
-  if (result.status !== 0) {
-    console.warn(`Falling back to copy for video: ${sourcePath}`);
     await cp(sourcePath, targetPath);
   }
 }
