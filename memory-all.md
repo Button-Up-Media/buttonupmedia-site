@@ -9,7 +9,7 @@ Purpose:
 - Be updated at the end of each task so the repo has a single source of truth for continuity.
 
 Last updated:
-- 2026-05-26
+- 2026-05-27
 
 ## How To Use
 
@@ -81,6 +81,7 @@ Last updated:
 - The homepage hero video was further optimized by downscaling to `960x1706` while keeping the same 10.5s duration, no audio, and the same look/feel baseline, reducing the file size to about `4.4 MB`.
 - Site-wide video loading now uses the lazy `data-video-src` path more consistently, and the social media marketing page videos were moved off eager `preload="metadata"` requests so they only attach real sources when they are near view or hovered.
 - The shared video loader now prefers a Bunny CDN base on `www.buttonupmedia.com` and falls back to the local file path if the CDN source is unavailable, so the hero and other site videos can benefit from edge caching without risking a broken page.
+- The live CSP now allows `https://buttonupmedia.b-cdn.net` in `media-src`, which is required for the Bunny-hosted hero and other site videos to load instead of staying on the poster fallback image.
 - The restaurant website design hero now uses the optimized darkened WebP asset at `photos/Service/Web Development/hero-background.webp` on both mobile and desktop, with the overlay handling the extra contrast so the image never competes with the copy or proof stack.
 - The privacy page now uses the exact homepage-style fixed nav and footer shell, with extra top spacing so the page title clears the header instead of tucking underneath it.
 - Preview copies of the restaurant website design page should not include the meta refresh redirect to `index.html`; that redirect belongs only in the hidden live source if needed.
