@@ -3,6 +3,33 @@
   "trailingSlash": false,
   "headers": [
     {
+      "source": "/about",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    },
+    {
+      "source": "/about/",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    },
+    {
+      "source": "/about.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {
@@ -116,26 +143,6 @@
     },
     {
       "source": "/google-ads/",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/websitedesign",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/websitedesign/",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/website",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/website/",
       "destination": "/",
       "permanent": true
     },

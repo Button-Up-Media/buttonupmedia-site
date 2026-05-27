@@ -225,6 +225,14 @@ Important implementation notes:
 - `9650cb8` - Optimize process timeline layout
 - `0e1a183` - Expand hero parallax to full section
 
+## Navigation And SEO State
+
+- The canonical website service page is `restaurant-website-design.html`.
+- The live `Website` header/footer links should resolve to the website page, not bounce to the homepage.
+- `/website`, `/websitedesign`, and `/restaurant-website-design` should rewrite to `restaurant-website-design.html`.
+- `about.html` is intentionally unfinished and suppressed with `noindex` plus an `X-Robots-Tag` header.
+- The sitemap should include the website page alongside home, social media marketing, and contact.
+
 ## Open Watchouts
 
 - The site still contains legacy CSS and JS helpers from older sections that may no longer be visible on the page.
