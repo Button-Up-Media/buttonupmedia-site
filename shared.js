@@ -1884,7 +1884,7 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
 
 // ── Viewport-managed autoplay videos ──
 (() => {
-  const managedVideos = Array.from(document.querySelectorAll("video"));
+  const managedVideos = Array.from(document.querySelectorAll("video")).filter((video) => !isAudioManagedVideo(video));
   if (!managedVideos.length) return;
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

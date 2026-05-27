@@ -256,7 +256,7 @@ Important implementation notes:
 - Sound-enabled hover/testimonial videos are now marked with `data-audio-managed="true"` so the shared autoplay loader skips them.
 - The audio-capable cards on `social-media-marketing.html` and the homepage testimonial cards now rely on their page-specific hover/tap handlers to request unmuted playback.
 - The shared loader still handles the muted autoplay/viewport videos elsewhere on the site.
-- Those same audio-managed cards still need the shared source-prep path, so the viewport observer remains responsible for loading them before hover/tap playback.
+- Those same audio-managed cards should stay out of scroll autoplay entirely and only call the shared source-prep helper when hover/tap playback actually begins.
 
 ## Suggested Update Template
 
