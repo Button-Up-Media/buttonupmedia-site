@@ -5,6 +5,7 @@
 videos/2.12.26[[:space:]]BUM[[:space:]]15[[:space:]]Sec[[:space:]]Quality[[:space:]]Shots_1080p.mp4 -filter -diff -merge -text
 videos/bts-behind-counter.mp4 -filter -diff -merge -text
 videos/compilation-best-shots.mp4 -filter -diff -merge -text
+videos/compilation-best-shots.optimized.mp4 -filter -diff -merge -text
 videos/fatty-crab-nola-flavors.mp4 -filter -diff -merge -text
 videos/fatty-crab-seafood-boil.mp4 -filter -diff -merge -text
 videos/sm-fattycrab-zackdfilms.mp4 -filter -diff -merge -text
