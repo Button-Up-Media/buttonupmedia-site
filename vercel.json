@@ -185,21 +185,6 @@
       "permanent": true
     },
     {
-      "source": "/restaurant-website-design",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/restaurant-website-design/",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/restaurant-website-design.html",
-      "destination": "/",
-      "permanent": true
-    },
-    {
       "source": "/thank-you",
       "destination": "/contact",
       "permanent": true
@@ -218,6 +203,30 @@
     {
       "source": "/contact",
       "destination": "/contact.html"
+    },
+    {
+      "source": "/websitedesign",
+      "destination": "/restaurant-website-design.html"
+    },
+    {
+      "source": "/websitedesign/",
+      "destination": "/restaurant-website-design.html"
+    },
+    {
+      "source": "/website",
+      "destination": "/restaurant-website-design.html"
+    },
+    {
+      "source": "/website/",
+      "destination": "/restaurant-website-design.html"
+    },
+    {
+      "source": "/restaurant-website-design",
+      "destination": "/restaurant-website-design.html"
+    },
+    {
+      "source": "/restaurant-website-design/",
+      "destination": "/restaurant-website-design.html"
     },
     {
       "source": "/privacy",
