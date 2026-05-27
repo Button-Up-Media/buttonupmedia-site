@@ -1733,6 +1733,8 @@ const resolveVideoAsset = (value, useCdn = true) => {
   return cleanValue;
 };
 
+const isAudioManagedVideo = (video) => !!video?.closest?.("[data-audio-managed='true']");
+
 const prepareLazyVideo = (video) => {
   if (!video || video.dataset.lazyPrepared) return;
 
@@ -1790,6 +1792,7 @@ const fallbackLazyVideoToLocal = (video) => {
 };
 
 document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
+  if (container.matches("[data-audio-managed='true']")) return;
   const video = container.querySelector("video");
   if (!video) return;
 
@@ -1829,11 +1832,10 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
     const video = card.querySelector("video");
     if (!video) return;
     stopOtherCards(card);
-    video.muted = true;
+    video.muted = false;
     video.volume = 0.85;
     video.play()
       .then(() => {
-        video.muted = false;
         card.classList.add("--playing");
       })
       .catch(() => {
@@ -1879,7 +1881,7 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
 
 // ── Viewport-managed autoplay videos ──
 (() => {
-  const managedVideos = Array.from(document.querySelectorAll("video"));
+  const managedVideos = Array.from(document.querySelectorAll("video")).filter((video) => !isAudioManagedVideo(video));
   if (!managedVideos.length) return;
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

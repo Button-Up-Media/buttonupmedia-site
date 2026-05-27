@@ -251,6 +251,12 @@ Important implementation notes:
 - Review `shared.js` and page-specific scripts carefully before deleting any old helpers, because some are still used on other pages.
 - Keep hidden pages non-indexable unless explicitly asked to publish them.
 
+## Media Playback Notes
+
+- Sound-enabled hover/testimonial videos are now marked with `data-audio-managed="true"` so the shared autoplay loader skips them.
+- The audio-capable cards on `social-media-marketing.html` and the homepage testimonial cards now rely on their page-specific hover/tap handlers to request unmuted playback.
+- The shared loader still handles the muted autoplay/viewport videos elsewhere on the site.
+
 ## Suggested Update Template
 
 When a task finishes, append:
