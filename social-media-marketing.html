@@ -3072,6 +3072,12 @@
           if (activeCard !== exceptCard) activeCard.classList.remove("is-active");
         });
       };
+      const stopOtherVideos = currentVideo => {
+        document.querySelectorAll("[data-autoplay-hover]").forEach(otherCard => {
+          const otherVideo = otherCard.querySelector("video");
+          if (otherVideo && otherVideo !== currentVideo) muteVideo(otherVideo);
+        });
+      };
       const playWithAudio = video => {
         window.ensureLazyVideoSource?.(video);
         video.muted = false;
@@ -3079,8 +3085,8 @@
         video.play()
           .then(() => { video.muted = false; })
           .catch(() => {
-            video.muted = true;
-            video.play().catch(() => {});
+            try { video.pause(); } catch (err) {}
+            try { video.currentTime = 0; } catch (err) {}
           });
       };
       let activeTouchCard = null;
@@ -3110,6 +3116,7 @@
         card.addEventListener("mouseenter", () => {
           if (useTapVideo.matches) return;
           hideAudioHint();
+          stopOtherVideos(video);
           deactivateCards(card);
           card.classList.add("is-active");
           playWithAudio(video);

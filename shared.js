@@ -1809,6 +1809,35 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
   });
 });
 
+// ── Audio-managed videos: preload only, no autoplay ──
+(() => {
+  const audioManagedVideos = Array.from(document.querySelectorAll("video")).filter(isAudioManagedVideo);
+  if (!audioManagedVideos.length) return;
+
+  const warmVideo = (video) => {
+    ensureLazyVideoSource(video);
+  };
+
+  if (!("IntersectionObserver" in window)) {
+    audioManagedVideos.forEach(warmVideo);
+    return;
+  }
+
+  const warmObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      warmVideo(entry.target);
+      observer.unobserve(entry.target);
+    });
+  }, {
+    root: null,
+    rootMargin: "180px 0px",
+    threshold: 0.01,
+  });
+
+  audioManagedVideos.forEach((video) => warmObserver.observe(video));
+})();
+
 // ── Testimonial cards: explicit hover/tap playback, one audio source at a time ──
 (() => {
   const cards = Array.from(document.querySelectorAll(".hp2-vid-card"));
@@ -1841,12 +1870,7 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
       .then(() => {
         card.classList.add("--playing");
       })
-      .catch(() => {
-        video.muted = true;
-        video.play()
-          .then(() => card.classList.add("--playing"))
-          .catch(() => stopCard(card));
-      });
+      .catch(() => stopCard(card));
   };
 
   cards.forEach((card) => {
