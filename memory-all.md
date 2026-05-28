@@ -258,6 +258,7 @@ Important implementation notes:
 - The shared loader still handles the muted autoplay/viewport videos elsewhere on the site.
 - Those same audio-managed cards stay out of scroll autoplay, but they now get source-prepped near the viewport so hover/tap playback can start immediately with audio.
 - Hover/tap playback for the audio-managed cards now uses a shared audio helper that tries audible play first and falls back to a muted start followed by unmute if the browser blocks direct audio autoplay.
+- The shared script URL is versioned with `?v=nav-mobile-3` to force browsers to fetch the latest video interaction code instead of holding onto older cached behavior.
 
 ## Suggested Update Template
 
