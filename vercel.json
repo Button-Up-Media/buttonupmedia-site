@@ -242,19 +242,19 @@
     },
     {
       "source": "/websitedesign",
-      "destination": "/restaurant-website-design.html"
+      "destination": "/restaurant-website-design"
     },
     {
       "source": "/websitedesign/",
-      "destination": "/restaurant-website-design.html"
+      "destination": "/restaurant-website-design"
     },
     {
       "source": "/website",
-      "destination": "/restaurant-website-design.html"
+      "destination": "/restaurant-website-design"
     },
     {
       "source": "/website/",
-      "destination": "/restaurant-website-design.html"
+      "destination": "/restaurant-website-design"
     },
     {
       "source": "/restaurant-website-design",
@@ -262,7 +262,12 @@
     },
     {
       "source": "/restaurant-website-design/",
-      "destination": "/restaurant-website-design.html"
+      "destination": "/restaurant-website-design"
+    },
+    {
+      "source": "/restaurant-website-design.html",
+      "destination": "/restaurant-website-design",
+      "permanent": true
     },
     {
       "source": "/privacy",
