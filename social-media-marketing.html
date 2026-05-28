@@ -3079,15 +3079,13 @@
         });
       };
       const playWithAudio = video => {
-        window.ensureLazyVideoSource?.(video);
-        video.muted = false;
-        video.volume = 0.8;
-        video.play()
-          .then(() => { video.muted = false; })
-          .catch(() => {
-            try { video.pause(); } catch (err) {}
-            try { video.currentTime = 0; } catch (err) {}
-          });
+        const promise = window.playLazyVideoWithAudio?.(video, 0.8);
+        if (!promise) return;
+        promise.then((played) => {
+          if (played) return;
+          try { video.pause(); } catch (err) {}
+          try { video.currentTime = 0; } catch (err) {}
+        });
       };
       let activeTouchCard = null;
       let lastPointerTap = 0;

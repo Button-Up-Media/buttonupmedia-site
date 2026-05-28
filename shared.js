@@ -1783,6 +1783,37 @@ const ensureLazyVideoSource = (video, useCdn = true) => {
 
 window.ensureLazyVideoSource = ensureLazyVideoSource;
 
+const playLazyVideoWithAudio = async (video, volume = 0.8) => {
+  if (!video) return false;
+  ensureLazyVideoSource(video);
+  video.defaultMuted = false;
+  video.removeAttribute("muted");
+  video.volume = volume;
+  video.muted = false;
+
+  try {
+    await video.play();
+    video.muted = false;
+    return true;
+  } catch (error) {
+    try {
+      video.muted = true;
+      const unmute = () => {
+        video.defaultMuted = false;
+        video.removeAttribute("muted");
+        video.muted = false;
+      };
+      video.addEventListener("playing", unmute, { once: true });
+      await video.play();
+      return true;
+    } catch (fallbackError) {
+      return false;
+    }
+  }
+};
+
+window.playLazyVideoWithAudio = playLazyVideoWithAudio;
+
 const fallbackLazyVideoToLocal = (video) => {
   if (!video || video.dataset.videoFallbackLocal === "true") return;
   const hasCdn = !!VIDEO_CDN_BASE;
@@ -1863,14 +1894,11 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
     const video = card.querySelector("video");
     if (!video) return;
     stopOtherCards(card);
-    ensureLazyVideoSource(video);
-    video.muted = false;
-    video.volume = 0.85;
-    video.play()
-      .then(() => {
-        card.classList.add("--playing");
-      })
-      .catch(() => stopCard(card));
+    playLazyVideoWithAudio(video, 0.85)
+      .then((played) => {
+        if (played) card.classList.add("--playing");
+        else stopCard(card);
+      });
   };
 
   cards.forEach((card) => {
