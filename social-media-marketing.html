@@ -3062,6 +3062,25 @@
       const audioHint = document.querySelector("[data-audio-hint]");
       const useTapVideo = window.matchMedia("(hover: none), (pointer: coarse)");
       const hideAudioHint = () => audioHint?.classList.add("is-hidden");
+      const resolveVideoSrc = (value) => {
+        if (!value) return "";
+        return value.startsWith("http") || value.startsWith("/") ? value : value;
+      };
+      const ensureVideoSource = (video) => {
+        if (!video) return;
+        const dataSrc = video.dataset.videoSrc || video.dataset.src;
+        if (dataSrc && !video.getAttribute("src")) {
+          video.src = resolveVideoSrc(dataSrc);
+        }
+        const sources = Array.from(video.querySelectorAll("source"));
+        if (sources.length) {
+          sources.forEach(source => {
+            const src = source.dataset.src || source.getAttribute("data-src");
+            if (src && !source.getAttribute("src")) source.src = resolveVideoSrc(src);
+          });
+        }
+        try { video.load(); } catch (err) {}
+      };
       const muteVideo = video => {
         video.muted = true;
         video.pause();
@@ -3079,13 +3098,31 @@
         });
       };
       const playWithAudio = video => {
-        const promise = window.playLazyVideoWithAudio?.(video, 0.8);
-        if (!promise) return;
-        promise.then((played) => {
-          if (played) return;
-          try { video.pause(); } catch (err) {}
-          try { video.currentTime = 0; } catch (err) {}
-        });
+        ensureVideoSource(video);
+        video.defaultMuted = false;
+        video.removeAttribute("muted");
+        video.muted = false;
+        video.volume = 0.8;
+        video.play()
+          .then(() => {
+            video.muted = false;
+          })
+          .catch(() => {
+            video.muted = true;
+            video.play()
+              .then(() => {
+                const unmute = () => {
+                  video.defaultMuted = false;
+                  video.removeAttribute("muted");
+                  video.muted = false;
+                };
+                video.addEventListener("playing", unmute, { once: true });
+              })
+              .catch(() => {
+                try { video.pause(); } catch (err) {}
+                try { video.currentTime = 0; } catch (err) {}
+              });
+          });
       };
       let activeTouchCard = null;
       let lastPointerTap = 0;
