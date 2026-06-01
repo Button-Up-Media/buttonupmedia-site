@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>
     (function () {
+      document.documentElement.classList.add("js", "hp2-hero-force-visible", "hp2-hero-animated");
+
       var key = "bum-cookie-consent-v1";
       var consent = {
         ad_storage: "denied",
@@ -32,15 +34,120 @@
       window.dataLayer = window.dataLayer || [];
       window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
       window.gtag("consent", "default", consent);
+
+      function queueIdle(callback, timeout) {
+        if ("requestIdleCallback" in window) {
+          requestIdleCallback(callback, { timeout: timeout || 1200 });
+          return;
+        }
+        setTimeout(callback, Math.min(timeout || 1200, 600));
+      }
+
+      function loadScript(src, keyName) {
+        var scriptKey = keyName || src;
+        window.__bumScriptPromises = window.__bumScriptPromises || {};
+        if (window.__bumScriptPromises[scriptKey]) return window.__bumScriptPromises[scriptKey];
+
+        window.__bumScriptPromises[scriptKey] = new Promise(function (resolve, reject) {
+          var existing = document.querySelector('script[data-bum-script="' + scriptKey + '"]');
+          if (existing) {
+            if (existing.dataset.loaded === "1") {
+              resolve(existing);
+              return;
+            }
+            existing.addEventListener("load", function () { resolve(existing); }, { once: true });
+            existing.addEventListener("error", reject, { once: true });
+            return;
+          }
+
+          var script = document.createElement("script");
+          script.src = src;
+          script.async = true;
+          script.defer = true;
+          script.dataset.bumScript = scriptKey;
+          script.addEventListener("load", function () {
+            script.dataset.loaded = "1";
+            resolve(script);
+          }, { once: true });
+          script.addEventListener("error", reject, { once: true });
+          document.head.appendChild(script);
+        });
+
+        return window.__bumScriptPromises[scriptKey];
+      }
+
+      function readMarketingConsent() {
+        try {
+          var savedState = localStorage.getItem(key);
+          if (!savedState) return false;
+          var parsedState = JSON.parse(savedState);
+          return !!(parsedState && parsedState.marketing && !(navigator && navigator.globalPrivacyControl));
+        } catch (error) {
+          return false;
+        }
+      }
+
+      window.__bumQueueIdle = queueIdle;
+      window.__bumLoadScript = loadScript;
+      window.__bumLoadHomepageRuntime = function () {
+        if (window.__bumHomepageRuntimePromise) return window.__bumHomepageRuntimePromise;
+        window.__bumHomepageRuntimePromise = new Promise(function (resolve) {
+          var startRuntime = function () {
+            Promise.all([
+              loadScript("https://unpkg.com/lucide@latest/dist/umd/lucide.min.js", "lucide"),
+              loadScript("https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js", "gsap"),
+              loadScript("https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js", "scrolltrigger"),
+              loadScript("pixel-canvas.js", "pixel-canvas")
+            ]).then(function () {
+              if (window.lucide && typeof window.lucide.createIcons === "function") {
+                window.lucide.createIcons();
+              }
+              resolve();
+            }).catch(function () {
+              resolve();
+            });
+          };
+
+          var scheduleRuntime = function () {
+            queueIdle(startRuntime, 1500);
+          };
+
+          if (document.readyState === "complete") {
+            scheduleRuntime();
+          } else {
+            window.addEventListener("load", scheduleRuntime, { once: true });
+          }
+        });
+        return window.__bumHomepageRuntimePromise;
+      };
+
+      window.__bumLoadGtm = function () {
+        if (window.__bumGtmLoaded) return;
+        window.__bumGtmLoaded = true;
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        loadScript("https://www.googletagmanager.com/gtm.js?id=GTM-WR9TZHT", "gtm");
+      };
+
+      var maybeLoadGtm = function () {
+        if (!readMarketingConsent()) return;
+        if (document.readyState === "complete") {
+          queueIdle(window.__bumLoadGtm, 2000);
+        } else {
+          window.addEventListener("load", function () {
+            queueIdle(window.__bumLoadGtm, 2000);
+          }, { once: true });
+        }
+      };
+
+      maybeLoadGtm();
+      window.addEventListener("bum:consent-choice", function (event) {
+        if (event && event.detail && event.detail.state && event.detail.state.marketing) {
+          window.__bumLoadGtm();
+        }
+      });
     })();
   </script>
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-WR9TZHT');</script>
-  <!-- End Google Tag Manager -->
   <title>Restaurant Marketing Agency for Florida Restaurants | Button Up Media</title>
   <meta name="description" content="Restaurant marketing for Florida restaurants: social media content, websites, SEO, and Google Ads built to drive reservations, online orders, and foot traffic." />
   <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg">
@@ -55,29 +162,12 @@
   <meta name="twitter:title" content="Restaurant Marketing Agency for Florida Restaurants | Button Up Media" />
   <meta name="twitter:description" content="Restaurant marketing for Florida restaurants: social media content, websites, SEO, and Google Ads built to drive reservations, online orders, and foot traffic." />
   <meta name="twitter:image" content="https://www.buttonupmedia.com/images/sm-videography-hero.jpg" />
-  <script>
-    (function () {
-      document.documentElement.classList.add("js");
-      window.__hp2HeroRevealTimer = window.setTimeout(function () {
-        if (!document.documentElement.classList.contains("hp2-hero-animated")) {
-          document.documentElement.classList.add("hp2-hero-force-visible");
-        }
-      }, 2200);
-    })();
-  </script>
-
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Epilogue:wght@400;500;600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <!-- GSAP + ScrollTrigger -->
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
-  <!-- Pixel Canvas -->
-  <script src="pixel-canvas.js"></script>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Epilogue:wght@400;500;600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Epilogue:wght@400;500;600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Epilogue:wght@400;500;600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" /></noscript>
 
   <!-- Base styles (nav, footer, cards, etc.) -->
   <link rel="stylesheet" href="shared.css?v=nav-mobile-2" />
@@ -102,25 +192,6 @@
     .hp2-hero-copy > p {
       font-size: 17px;
       line-height: 1.75;
-    }
-
-    html.js .hp2-hero-copy .hp2-word-reveal {
-      visibility: hidden;
-    }
-    html.js .hp2-hero-copy > p,
-    html.js .hp2-hero-cta,
-    html.js .hp2-proof-fragments {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    html.js.hp2-hero-force-visible .hp2-hero-copy .hp2-word-reveal {
-      visibility: visible;
-    }
-    html.js.hp2-hero-force-visible .hp2-hero-copy > p,
-    html.js.hp2-hero-force-visible .hp2-hero-cta,
-    html.js.hp2-hero-force-visible .hp2-proof-fragments {
-      opacity: 1;
-      transform: none;
     }
 
     [data-shared-animations="off"] {
@@ -3575,10 +3646,6 @@
   </script>
 </head>
 <body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WR9TZHT"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
   <!-- Mesh gradient background -->
   <div class="depth-canvas" aria-hidden="true">
     <div class="mesh-orb" style="--orb-color: var(--gold); width: 600px; height: 600px; top: -10%; left: -5%;"></div>
@@ -3592,7 +3659,7 @@
   <!-- ═══ NAV ═══ -->
   <nav class="lib-nav">
     <a class="lib-nav-brand" href="/" aria-label="Button Up Media home">
-      <img src="images/full-logo.svg" alt="Button Up Media" />
+      <img src="images/full-logo.svg" alt="Button Up Media" width="145" height="45" />
     </a>
     <div class="lib-nav-links">
       <details class="lib-nav-dropdown">
@@ -3633,7 +3700,7 @@
         <img
           src="images/homepage-hero-bg-1800.avif"
           srcset="images/homepage-hero-bg-1200.avif 1200w, images/homepage-hero-bg-1800.avif 1800w"
-          sizes="100vw"
+          sizes="(max-width: 900px) 100vw, 54vw"
           width="1800"
           height="1000"
           loading="eager"
@@ -4210,7 +4277,7 @@
       <div class="hp2-case-spread">
         <article class="hp2-case-editorial" style="padding-left: 2rem; padding-right: 2rem;">
           <div class="hp2-case-img">
-                  <img src="images/fatty-crab-thumbnail-ayce.avif" alt="The Fatty Crab all-you-can-eat crab feast" loading="lazy" decoding="async" style="max-height: 420px; width: 100%; object-fit: cover; object-position: center 30%;" />
+                  <img src="images/fatty-crab-thumbnail-ayce.avif" alt="The Fatty Crab all-you-can-eat crab feast" loading="lazy" decoding="async" width="540" height="960" sizes="(max-width: 900px) 100vw, 420px" style="max-height: 420px; width: 100%; object-fit: cover; object-position: center 30%;" />
           </div>
           <div class="hp2-case-body">
             <div class="case-tag">Organic Social</div>
@@ -4357,21 +4424,6 @@
       <p class="lib-section-sub" style="text-align:center; margin-left:auto; margin-right:auto;">Real restaurant owners. Real results. No scripts.</p>
 
       <div class="hp2-vid-showcase">
-        <!-- Video 1 -->
-        <div class="hp2-vid-card" data-audio-managed="true">
-          <div class="hp2-vid-card-frame">
-            <video data-video-src="videos/testimonial-ifc-hq.mp4" playsinline preload="none"></video>
-            <div class="hp2-vid-card-play"></div>
-            <div class="hp2-vid-card-overlay">
-              <div class="hp2-vid-card-info">
-                <h4>Isis, Italian Food Company</h4>
-                <span>Miami, FL</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Video 2 -->
         <div class="hp2-vid-card" data-audio-managed="true">
           <div class="hp2-vid-card-frame">
             <video data-video-src="videos/testimonial-brewing-buddha-v2.mp4" playsinline preload="none"></video>
@@ -4474,7 +4526,7 @@
           <p><strong style="color:var(--text);">Button Up Media builds marketing systems designed to put your restaurant on the winning side of every one of these numbers.</strong></p>
         </div>
         <div class="hp2-split-media">
-          <img src="https://images.unsplash.com/photo-1428515613728-6b4607e44363?w=800&h=600&fit=crop" alt="Busy restaurant kitchen with chefs preparing dishes, the operations behind the scenes" />
+          <img src="https://images.unsplash.com/photo-1428515613728-6b4607e44363?w=800&h=600&fit=crop" alt="Busy restaurant kitchen with chefs preparing dishes, the operations behind the scenes" loading="lazy" decoding="async" width="800" height="600" />
         </div>
       </div>
 
@@ -4745,259 +4797,183 @@
   (function() {
     "use strict";
 
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const hasAnimationRuntime = !!(window.gsap && window.ScrollTrigger);
+    const startHomepageMotion = () => {
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const hasAnimationRuntime = !!(window.gsap && window.ScrollTrigger);
+      const queueIdle = window.__bumQueueIdle || ((callback, timeout) => setTimeout(callback, Math.min(timeout || 1200, 600)));
 
-    if (!hasAnimationRuntime) {
-      document.documentElement.classList.add("hp2-animation-fallback");
-      if (typeof lucide !== "undefined") lucide.createIcons();
-      return;
-    }
+      if (!hasAnimationRuntime) {
+        document.documentElement.classList.add("hp2-animation-fallback");
+        if (typeof lucide !== "undefined") lucide.createIcons();
+        return;
+      }
 
-    gsap.registerPlugin(ScrollTrigger);
-    document.body.classList.add("js-animations-ready");
-
-    const compactHscroll = window.matchMedia("(max-width: 700px)");
-    const setupCompactHscroll = () => {
-      const track = document.querySelector(".hp2-hscroll-track");
-      const panels = Array.from(document.querySelectorAll(".hp2-hscroll-panel"));
-      const dots = Array.from(document.querySelectorAll(".hp2-hscroll-dot"));
-      const fill = document.querySelector(".hp2-hscroll-progress-fill");
-      if (!compactHscroll.matches || !track || panels.length < 2) return;
-
-      const update = () => {
-        const maxScroll = Math.max(1, track.scrollWidth - track.clientWidth);
-        const progress = Math.min(1, Math.max(0, track.scrollLeft / maxScroll));
-        const activeIndex = Math.round(progress * (panels.length - 1));
-        if (fill) fill.style.width = (progress * 100) + "%";
-        dots.forEach((dot, i) => dot.classList.toggle("--active", i === activeIndex));
-        panels.forEach((panel, i) => panel.classList.toggle("--active", i === activeIndex));
+      const scheduleNonCritical = (callback, timeout) => {
+        const schedule = () => queueIdle(callback, timeout || 1400);
+        if (document.readyState === "complete") {
+          schedule();
+        } else {
+          window.addEventListener("load", schedule, { once: true });
+        }
       };
 
-      track.addEventListener("scroll", update, { passive: true });
-      window.addEventListener("resize", update, { passive: true });
-      update();
-    };
-    setupCompactHscroll();
-
-    // ── UTILITY: Pure JS Word Splitting ──
-    function splitWords(el) {
-      // Preserve child elements like <em>, <span class="accent-serif">, <br>
-      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
-      const textNodes = [];
-      while (walker.nextNode()) textNodes.push(walker.currentNode);
-
-      textNodes.forEach(node => {
-        const words = node.textContent.split(/(\s+)/);
-        const frag = document.createDocumentFragment();
-        words.forEach(word => {
-          if (/^\s+$/.test(word)) {
-            frag.appendChild(document.createTextNode(word));
-          } else if (word.length > 0) {
-            const outer = document.createElement("span");
-            outer.className = "hp2-word";
-            const inner = document.createElement("span");
-            inner.className = "hp2-word-inner";
-            inner.textContent = word;
-            outer.appendChild(inner);
-            frag.appendChild(outer);
-          }
-        });
-        node.parentNode.replaceChild(frag, node);
-      });
-
-      return el.querySelectorAll(".hp2-word-inner");
-    }
-
-    // ── SCROLL-DRIVEN COUNTERS (data-count-to, time-based, fires once) ──
-    document.querySelectorAll("[data-count-to]").forEach(el => {
-      // Keep already-correct homepage stats visible for users and crawlers.
-      if (/[1-9]/.test(el.textContent)) return;
-
-      const target = parseFloat(el.dataset.countTo);
-      const suffix = el.dataset.suffix || "";
-      const prefix = el.dataset.prefix || "";
-      const isDecimal = el.dataset.decimal === "1";
-      const counter = { val: 0 };
-
-      if (prefersReducedMotion) {
-        el.textContent = prefix + (isDecimal ? target.toFixed(1) : Math.round(target)) + suffix;
-        return;
-      }
-
-      gsap.to(counter, {
-        val: target,
-        duration: 2,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%",
-          toggleActions: "play none none none",
-        },
-        onUpdate: () => {
-          el.textContent = prefix + (isDecimal ? counter.val.toFixed(1) : Math.round(counter.val)) + suffix;
-        },
-      });
-    });
-
-    // ── SCRUB-DRIVEN COUNTERS (data-scrub-to, tied to scroll position) ──
-    document.querySelectorAll("[data-scrub-to]").forEach(el => {
-      // Preserve the truthful starting value when the metric is already displayed.
-      if (/[1-9]/.test(el.textContent)) return;
-
-      const target = parseFloat(el.dataset.scrubTo);
-      const suffix = el.dataset.suffix || "";
-      const isDecimal = el.dataset.decimal === "1";
-      const counter = { val: 0 };
-
-      if (prefersReducedMotion) {
-        el.textContent = (isDecimal ? target.toFixed(1) : Math.round(target)) + suffix;
-        return;
-      }
-
-      gsap.to(counter, {
-        val: target,
-        ease: "none",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 75%",
-          end: "top 40%",
-          scrub: true,
-        },
-        onUpdate: () => {
-          el.textContent = (isDecimal ? counter.val.toFixed(1) : Math.round(counter.val)) + suffix;
-        },
-      });
-    });
-
-    if (prefersReducedMotion) {
-      // Make all word-reveal text visible immediately
-      clearTimeout(window.__hp2HeroRevealTimer);
+      gsap.registerPlugin(ScrollTrigger);
+      document.body.classList.add("js-animations-ready");
       document.documentElement.classList.add("hp2-hero-force-visible", "hp2-hero-animated");
-      document.querySelectorAll(".hp2-word-reveal").forEach(el => {
-        el.style.visibility = "visible";
-      });
-      document.querySelectorAll(".hp2-hero-copy > p, .hp2-hero-cta, .hp2-proof-fragments").forEach(el => {
-        el.style.opacity = "1";
-        el.style.transform = "none";
-      });
-      // Make all curtain images visible
-      document.querySelectorAll(".hp2-curtain-img").forEach(el => {
-        el.style.clipPath = "inset(0% 0 0 0)";
-      });
-      document.querySelectorAll(".hp2-curtain-glass-wrap").forEach(el => {
-        el.style.opacity = "1";
-        el.style.transform = "none";
-        el.style.filter = "none";
-      });
-      // Make h-scroll panels visible (no animation)
-      document.querySelectorAll(".hp2-hscroll-panel").forEach(p => {
-        p.style.flex = "0 0 auto";
-        p.style.width = "100%";
-        p.style.height = "auto";
-        p.style.minHeight = "80vh";
-      });
-      const hTrack = document.querySelector(".hp2-hscroll-track");
-      if (hTrack) { hTrack.style.flexDirection = "column"; hTrack.style.height = "auto"; }
-      const hPin = document.querySelector(".hp2-hscroll-pin");
-      if (hPin) { hPin.style.height = "auto"; hPin.style.overflow = "visible"; }
-      // Services visible
-      document.querySelectorAll(".hp2-service-reveal").forEach(el => {
-        el.style.clipPath = "none";
-      });
-      // Lucide icons
-      if (typeof lucide !== "undefined") lucide.createIcons();
-      return; // Exit early, no animations
-    }
 
-    // ════════════════════════════════════════
-    // 1. HERO, Word Reveal + Parallax + Load Sequence
-    // ════════════════════════════════════════
+      const compactHscroll = window.matchMedia("(max-width: 700px)");
+      const setupCompactHscroll = () => {
+        const track = document.querySelector(".hp2-hscroll-track");
+        const panels = Array.from(document.querySelectorAll(".hp2-hscroll-panel"));
+        const dots = Array.from(document.querySelectorAll(".hp2-hscroll-dot"));
+        const fill = document.querySelector(".hp2-hscroll-progress-fill");
+        if (!compactHscroll.matches || !track || panels.length < 2) return;
 
-    // Wait for fonts before running hero animation
-    document.fonts.ready.then(() => {
-      clearTimeout(window.__hp2HeroRevealTimer);
-      document.documentElement.classList.add("hp2-hero-animated");
+        const update = () => {
+          const maxScroll = Math.max(1, track.scrollWidth - track.clientWidth);
+          const progress = Math.min(1, Math.max(0, track.scrollLeft / maxScroll));
+          const activeIndex = Math.round(progress * (panels.length - 1));
+          if (fill) fill.style.width = (progress * 100) + "%";
+          dots.forEach((dot, i) => dot.classList.toggle("--active", i === activeIndex));
+          panels.forEach((panel, i) => panel.classList.toggle("--active", i === activeIndex));
+        };
 
-      // Word reveal on hero headline
-      const heroH1 = document.querySelector(".hp2-hero-copy .hp2-word-reveal");
-      if (heroH1) {
-        const wordInners = splitWords(heroH1);
-        heroH1.style.visibility = "visible";
-        gsap.fromTo(wordInners,
-          { y: "110%" },
-          {
-            y: "0%",
-            duration: 0.7,
-            ease: "power3.out",
-            stagger: 0.08,
-            delay: 0.6,
-          }
-        );
+        track.addEventListener("scroll", update, { passive: true });
+        window.addEventListener("resize", update, { passive: true });
+        update();
+      };
+      setupCompactHscroll();
+
+      // ── UTILITY: Pure JS Word Splitting ──
+      function splitWords(el) {
+        const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+        const textNodes = [];
+        while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+        textNodes.forEach(node => {
+          const words = node.textContent.split(/(\s+)/);
+          const frag = document.createDocumentFragment();
+          words.forEach(word => {
+            if (/^\s+$/.test(word)) {
+              frag.appendChild(document.createTextNode(word));
+            } else if (word.length > 0) {
+              const outer = document.createElement("span");
+              outer.className = "hp2-word";
+              const inner = document.createElement("span");
+              inner.className = "hp2-word-inner";
+              inner.textContent = word;
+              outer.appendChild(inner);
+              frag.appendChild(outer);
+            }
+          });
+          node.parentNode.replaceChild(frag, node);
+        });
+
+        return el.querySelectorAll(".hp2-word-inner");
       }
 
-      // Hero copy children stagger (badge, paragraph, CTA)
-      const heroCopy = document.querySelector(".hp2-hero-copy");
-      if (heroCopy) {
-        const children = heroCopy.querySelectorAll(".hero-badge, .hp2-hero-copy > p, .hp2-hero-cta");
-        gsap.fromTo(children,
-          { y: 30, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.7,
-            ease: "power3.out",
-            stagger: 0.12,
-            delay: 0.3,
-          }
-        );
+      // ── SCROLL-DRIVEN COUNTERS (data-count-to, time-based, fires once) ──
+      document.querySelectorAll("[data-count-to]").forEach(el => {
+        if (/[1-9]/.test(el.textContent)) return;
+
+        const target = parseFloat(el.dataset.countTo);
+        const suffix = el.dataset.suffix || "";
+        const prefix = el.dataset.prefix || "";
+        const isDecimal = el.dataset.decimal === "1";
+        const counter = { val: 0 };
+
+        if (prefersReducedMotion) {
+          el.textContent = prefix + (isDecimal ? target.toFixed(1) : Math.round(target)) + suffix;
+          return;
+        }
+
+        gsap.to(counter, {
+          val: target,
+          duration: 2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+          onUpdate: () => {
+            el.textContent = prefix + (isDecimal ? counter.val.toFixed(1) : Math.round(counter.val)) + suffix;
+          },
+        });
+      });
+
+      // ── SCRUB-DRIVEN COUNTERS (data-scrub-to, tied to scroll position) ──
+      document.querySelectorAll("[data-scrub-to]").forEach(el => {
+        if (/[1-9]/.test(el.textContent)) return;
+
+        const target = parseFloat(el.dataset.scrubTo);
+        const suffix = el.dataset.suffix || "";
+        const isDecimal = el.dataset.decimal === "1";
+        const counter = { val: 0 };
+
+        if (prefersReducedMotion) {
+          el.textContent = (isDecimal ? target.toFixed(1) : Math.round(target)) + suffix;
+          return;
+        }
+
+        gsap.to(counter, {
+          val: target,
+          ease: "none",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 75%",
+            end: "top 40%",
+            scrub: true,
+          },
+          onUpdate: () => {
+            el.textContent = (isDecimal ? counter.val.toFixed(1) : Math.round(counter.val)) + suffix;
+          },
+        });
+      });
+
+      if (prefersReducedMotion) {
+        document.querySelectorAll(".hp2-curtain-img").forEach(el => {
+          el.style.clipPath = "inset(0% 0 0 0)";
+        });
+        document.querySelectorAll(".hp2-curtain-glass-wrap").forEach(el => {
+          el.style.opacity = "1";
+          el.style.transform = "none";
+          el.style.filter = "none";
+        });
+        document.querySelectorAll(".hp2-hscroll-panel").forEach(p => {
+          p.style.flex = "0 0 auto";
+          p.style.width = "100%";
+          p.style.height = "auto";
+          p.style.minHeight = "80vh";
+        });
+        const hTrack = document.querySelector(".hp2-hscroll-track");
+        if (hTrack) { hTrack.style.flexDirection = "column"; hTrack.style.height = "auto"; }
+        const hPin = document.querySelector(".hp2-hscroll-pin");
+        if (hPin) { hPin.style.height = "auto"; hPin.style.overflow = "visible"; }
+        document.querySelectorAll(".hp2-service-reveal").forEach(el => {
+          el.style.clipPath = "none";
+        });
+        if (typeof lucide !== "undefined") lucide.createIcons();
+        return;
       }
 
-      // CTA buttons: scale overshoot
-      gsap.fromTo(".hp2-hero-cta .btn",
-        { scale: 0, opacity: 0 },
-        {
-          scale: 1,
-          opacity: 1,
-          duration: 0.5,
-          ease: "back.out(1.7)",
-          stagger: 0.1,
-          delay: 1.0,
-        }
-      );
+      // Keep the LCP copy visible immediately and reserve motion for non-critical work.
+      const heroMedia = document.querySelector(".hp2-hero-media img");
+      if (heroMedia) {
+        gsap.to(heroMedia, {
+          y: 120,
+          scale: 1.0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".hp2-hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: 1.2,
+          },
+        });
+      }
 
-      // Proof pills: stagger from right
-      gsap.fromTo(".hp2-proof-pill",
-        { x: 40, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power3.out",
-          stagger: 0.15,
-          delay: 1.2,
-        }
-      );
-
-      // Refresh ScrollTrigger after fonts
-      ScrollTrigger.refresh();
-    });
-
-    // Hero parallax
-    const heroMedia = document.querySelector(".hp2-hero-media img");
-    if (heroMedia) {
-      gsap.to(heroMedia, {
-        y: 120,
-        scale: 1.0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".hp2-hero",
-          start: "top top",
-          end: "bottom top",
-          scrub: 1.5,
-        },
-      });
-    }
+      const initDeferredHomepageMotion = () => {
 
     // ════════════════════════════════════════
     // 2. TRUST RIBBON, Fade up stats
@@ -5628,7 +5604,25 @@
     if (typeof lucide !== "undefined") {
       lucide.createIcons();
     }
+        ScrollTrigger.refresh();
+      };
 
+      scheduleNonCritical(initDeferredHomepageMotion, 1800);
+    };
+
+    const bootHomepageMotion = () => {
+      const runtimePromise = window.__bumLoadHomepageRuntime
+        ? window.__bumLoadHomepageRuntime()
+        : Promise.resolve();
+
+      runtimePromise.then(startHomepageMotion);
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", bootHomepageMotion, { once: true });
+    } else {
+      bootHomepageMotion();
+    }
   })();
   </script>
 </body>

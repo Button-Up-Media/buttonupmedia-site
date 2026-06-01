@@ -131,7 +131,7 @@ if (window.lucide && typeof lucide.createIcons === "function") {
         </div>
         <div class="bum-consent__actions" aria-label="Cookie consent actions">
           <div class="bum-consent__actions-group">
-            <a href="privacy.html" class="bum-consent__policy">Privacy Policy</a>
+            <a href="/privacy" class="bum-consent__policy">Privacy Policy</a>
             <button type="button" class="bum-consent__link" data-bum-consent-action="reject">Opt out</button>
           </div>
           <button type="button" class="bum-consent__button --primary" data-bum-consent-action="accept">Got it</button>
@@ -2011,11 +2011,13 @@ if (window.lucide && typeof lucide.createIcons === "function") {
 }
 
 // Restrict pixel-canvas auto-play to hover only (prevents scroll-triggered auto-fire on CTA)
-document.addEventListener('DOMContentLoaded', () => {
+const initCtaPixelCanvasHoverGuard = () => {
   const ctaScene = document.querySelector('.hp2-cta-scene');
   if (!ctaScene) return;
   const canvas = ctaScene.querySelector('pixel-canvas');
   if (!canvas) return;
+  if (canvas.dataset.hoverGuardReady === "1" || typeof canvas.handleAnimation !== "function") return;
+  canvas.dataset.hoverGuardReady = "1";
   let hovered = false;
   ctaScene.addEventListener('mouseenter', () => { hovered = true; }, true);
   ctaScene.addEventListener('mouseleave', () => { hovered = false; }, true);
@@ -2024,4 +2026,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (state === 'appear' && !hovered) return;
     orig(state);
   };
-});
+};
+
+const bindCtaPixelCanvasHoverGuard = () => {
+  if (window.customElements && typeof window.customElements.whenDefined === "function") {
+    window.customElements.whenDefined("pixel-canvas").then(initCtaPixelCanvasHoverGuard).catch(() => {});
+    return;
+  }
+  initCtaPixelCanvasHoverGuard();
+};
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", bindCtaPixelCanvasHoverGuard, { once: true });
+} else {
+  bindCtaPixelCanvasHoverGuard();
+}
