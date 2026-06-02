@@ -349,21 +349,28 @@
       flex-direction: column;
       gap: 16px;
     }
-    /* Hero entrance is CSS-driven so the LCP headline paints immediately and
-       never waits on GSAP. Mirrors the prior GSAP fade + 30px slide-up. */
+    /* Hero entrance is CSS-driven so it never waits on GSAP. The headline stays
+       fully opaque (LCP-eligible, paints immediately) and only slides up; the
+       surrounding elements fade + slide. Mirrors the prior GSAP entrance feel. */
     @keyframes smHeroIn {
       from { opacity: 0; transform: translateY(30px); }
       to   { opacity: 1; transform: translateY(0); }
     }
+    @keyframes smHeroSlide {
+      from { transform: translateY(30px); }
+      to   { transform: translateY(0); }
+    }
+    .js .sm-hero-copy h1 {
+      animation: smHeroSlide 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+      animation-delay: 0.42s;
+    }
     .js .sm-hero-copy .hero-badge,
-    .js .sm-hero-copy h1,
     .js .sm-hero-copy > p,
     .js .sm-hero-cta {
       opacity: 0;
       animation: smHeroIn 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
     }
     .js .sm-hero-copy .hero-badge { animation-delay: 0.30s; }
-    .js .sm-hero-copy h1          { animation-delay: 0.42s; }
     .js .sm-hero-copy > p         { animation-delay: 0.54s; }
     .js .sm-hero-cta              { animation-delay: 0.66s; }
     /* v-stack cards keep their GSAP entrance (which restores the CSS fan
