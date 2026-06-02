@@ -1,5 +1,6 @@
-import { cp, mkdir, readdir, rm } from 'fs/promises';
+import { cp, mkdir, readdir, readFile, rm, writeFile } from 'fs/promises';
 import path from 'path';
+import { transform } from 'esbuild';
 
 const root = process.cwd();
 const outDir = path.join(root, 'public');
@@ -17,24 +18,34 @@ const filesToCopy = [
   'restaurant-website-design.html',
   'services.html',
   'social-media-marketing.html',
-  'shared.css',
-  'shared.js',
-  'website-design-redesign.css',
-  'website-design-redesign.js',
-  'pixel-canvas.js',
   'robots.txt',
   'sitemap.xml',
   'llms.txt',
   'favicon-bum.svg',
 ];
 
-const dirsToCopy = ['images', 'videos'];
+// Assets minified through esbuild on the way into public/.
+const filesToMinify = [
+  { file: 'shared.css', loader: 'css' },
+  { file: 'website-design-redesign.css', loader: 'css' },
+  { file: 'shared.js', loader: 'js' },
+  { file: 'website-design-redesign.js', loader: 'js' },
+  { file: 'pixel-canvas.js', loader: 'js' },
+];
+
+const dirsToCopy = ['images', 'videos', 'fonts'];
 
 await rm(outDir, { recursive: true, force: true });
 await mkdir(outDir, { recursive: true });
 
 for (const file of filesToCopy) {
   await cp(path.join(root, file), path.join(outDir, file));
+}
+
+for (const { file, loader } of filesToMinify) {
+  const source = await readFile(path.join(root, file), 'utf8');
+  const result = await transform(source, { loader, minify: true, legalComments: 'none' });
+  await writeFile(path.join(outDir, file), result.code);
 }
 
 for (const dir of dirsToCopy) {

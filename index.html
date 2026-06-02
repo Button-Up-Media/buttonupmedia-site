@@ -8,29 +8,38 @@
       document.documentElement.classList.add("js", "hp2-hero-force-visible", "hp2-hero-animated");
 
       var key = "bum-cookie-consent-v1";
-      var consent = {
-        ad_storage: "denied",
-        ad_user_data: "denied",
-        ad_personalization: "denied",
-        analytics_storage: "denied",
-        functionality_storage: "granted",
-        personalization_storage: "denied",
-        security_storage: "granted",
-        wait_for_update: 500
-      };
+      var rejectKey = "bum-cookie-reject-session-v1";
+      var gpc = !!(navigator && navigator.globalPrivacyControl);
+      // Implied-consent (opt-out) model: visitors are tracked on arrival unless
+      // they have opted out, or unless their browser signals Global Privacy Control.
+      var optedOut = false;
+      try {
+        if (sessionStorage.getItem(rejectKey) === "1") optedOut = true;
+      } catch (err) {}
+
+      var grantAnalytics = !optedOut;
+      var grantMarketing = !optedOut && !gpc;
       try {
         var saved = localStorage.getItem(key);
         if (saved) {
           var parsed = JSON.parse(saved);
-          if (parsed && parsed.analytics) consent.analytics_storage = "granted";
-          if (parsed && parsed.marketing && !(navigator && navigator.globalPrivacyControl)) {
-            consent.ad_storage = "granted";
-            consent.ad_user_data = "granted";
-            consent.ad_personalization = "granted";
-            consent.personalization_storage = "granted";
+          if (parsed && typeof parsed === "object") {
+            grantAnalytics = !!parsed.analytics;
+            grantMarketing = !!parsed.marketing && !gpc;
           }
         }
       } catch (err) {}
+
+      var consent = {
+        ad_storage: grantMarketing ? "granted" : "denied",
+        ad_user_data: grantMarketing ? "granted" : "denied",
+        ad_personalization: grantMarketing ? "granted" : "denied",
+        analytics_storage: grantAnalytics ? "granted" : "denied",
+        functionality_storage: "granted",
+        personalization_storage: grantMarketing ? "granted" : "denied",
+        security_storage: "granted",
+        wait_for_update: 500
+      };
       window.dataLayer = window.dataLayer || [];
       window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
       window.gtag("consent", "default", consent);
@@ -76,15 +85,22 @@
         return window.__bumScriptPromises[scriptKey];
       }
 
-      function readMarketingConsent() {
+      function shouldLoadGtm() {
+        // Opt-out model: load GTM for every visitor unless they have opted out.
+        // Consent Mode (set above) governs what GTM/GA may store.
+        try {
+          if (sessionStorage.getItem(rejectKey) === "1") return false;
+        } catch (error) {}
         try {
           var savedState = localStorage.getItem(key);
-          if (!savedState) return false;
-          var parsedState = JSON.parse(savedState);
-          return !!(parsedState && parsedState.marketing && !(navigator && navigator.globalPrivacyControl));
-        } catch (error) {
-          return false;
-        }
+          if (savedState) {
+            var parsedState = JSON.parse(savedState);
+            if (parsedState && typeof parsedState === "object") {
+              return !!(parsedState.analytics || parsedState.marketing);
+            }
+          }
+        } catch (error) {}
+        return true;
       }
 
       window.__bumQueueIdle = queueIdle;
@@ -130,7 +146,7 @@
       };
 
       var maybeLoadGtm = function () {
-        if (!readMarketingConsent()) return;
+        if (!shouldLoadGtm()) return;
         if (document.readyState === "complete") {
           queueIdle(window.__bumLoadGtm, 2000);
         } else {
@@ -142,7 +158,8 @@
 
       maybeLoadGtm();
       window.addEventListener("bum:consent-choice", function (event) {
-        if (event && event.detail && event.detail.state && event.detail.state.marketing) {
+        if (event && event.detail && event.detail.state &&
+            (event.detail.state.analytics || event.detail.state.marketing)) {
           window.__bumLoadGtm();
         }
       });
@@ -162,12 +179,9 @@
   <meta name="twitter:title" content="Restaurant Marketing Agency for Florida Restaurants | Button Up Media" />
   <meta name="twitter:description" content="Restaurant marketing for Florida restaurants: social media content, websites, SEO, and Google Ads built to drive reservations, online orders, and foot traffic." />
   <meta name="twitter:image" content="https://www.buttonupmedia.com/images/sm-videography-hero.jpg" />
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Epilogue:wght@400;500;600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Epilogue:wght@400;500;600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Epilogue:wght@400;500;600;700;800;900&family=Figtree:wght@400;500;600;700&display=swap" /></noscript>
+  <!-- Fonts (self-hosted, latin subset). Preload above-the-fold faces. -->
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-variable.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
 
   <!-- Base styles (nav, footer, cards, etc.) -->
   <link rel="stylesheet" href="shared.css?v=nav-mobile-2" />
@@ -531,6 +545,7 @@
       opacity: 1;
       transform: scale(1.08);
       will-change: transform;
+      transition: opacity 0.7s ease;
     }
     .hp2-hero-bg-video {
       position: absolute;
@@ -543,7 +558,7 @@
       object-fit: cover;
       opacity: 0;
       transform: translateY(-50%);
-      transition: none;
+      transition: opacity 0.7s ease;
       pointer-events: none;
       -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.45) 8%, #000 20%);
       mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.45) 8%, #000 20%);

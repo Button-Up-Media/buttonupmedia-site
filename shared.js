@@ -126,7 +126,7 @@ if (window.lucide && typeof lucide.createIcons === "function") {
         <div class="bum-consent__sheet-copy">
           <h2 class="bum-consent__title" id="bum-consent-title">We value your privacy</h2>
           <p class="bum-consent__copy" id="bum-consent-copy">
-            We use cookies to enhance your browsing experience, serve personalized ads, and analyze our traffic. By clicking "Got it", you consent to the use of cookies.
+            We use cookies to enhance your browsing experience, serve personalized ads, and analyze our traffic. By continuing to browse, you consent to the use of cookies. Choose "Opt out" to disable them.
           </p>
         </div>
         <div class="bum-consent__actions" aria-label="Cookie consent actions">
@@ -161,9 +161,12 @@ if (window.lucide && typeof lucide.createIcons === "function") {
 
   const initConsent = () => {
     const decision = readDecision();
+    // Implied-consent (opt-out) default: a first-time visitor is tracked on
+    // arrival. The banner still appears so they can opt out. Global Privacy
+    // Control still forces marketing off.
     const defaultState = {
-      analytics: false,
-      marketing: false,
+      analytics: true,
+      marketing: !hasGlobalPrivacyControl,
     };
     if (decision) {
       pushConsent(decision.state);
@@ -1936,7 +1939,16 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
 
 // ── Viewport-managed autoplay videos ──
 (() => {
-  const managedVideos = Array.from(document.querySelectorAll("video")).filter((video) => !isAudioManagedVideo(video));
+  // On mobile the hero background video is handled by the deferred loader
+  // below (poster-first, loaded after the page settles) so it never competes
+  // with LCP. Exclude it here so the IntersectionObserver doesn't pull it
+  // eagerly at the top of the page. Desktop keeps the in-view behavior.
+  const isMobileViewport = window.matchMedia("(max-width: 900px)").matches;
+  const managedVideos = Array.from(document.querySelectorAll("video")).filter((video) => {
+    if (isAudioManagedVideo(video)) return false;
+    if (isMobileViewport && video.classList.contains("hp2-hero-bg-video")) return false;
+    return true;
+  });
   if (!managedVideos.length) return;
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -2003,6 +2015,46 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
     }
     observer.observe(video);
   });
+})();
+
+// ── Deferred mobile hero video (poster-first, load after LCP) ──
+(() => {
+  if (!window.matchMedia("(max-width: 900px)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const video = document.querySelector("video.hp2-hero-bg-video");
+  if (!video) return;
+
+  // Stay on the poster image for data-saver users and very slow connections.
+  const conn = navigator.connection || navigator.webkitConnection;
+  if (conn && (conn.saveData || /^(slow-2g|2g)$/.test(conn.effectiveType || ""))) return;
+
+  // Use the lighter mobile rendition instead of the desktop encode.
+  video.dataset.videoSrc = "videos/compilation-best-shots.mobile.mp4";
+
+  const markLoaded = () => {
+    video.classList.add("is-loaded");
+    const heroMedia = video.closest(".hp2-hero-media");
+    if (heroMedia) heroMedia.classList.add("is-video-loaded");
+  };
+
+  const start = () => {
+    prepareLazyVideo(video);
+    video.addEventListener("error", () => fallbackLazyVideoToLocal(video), { once: true });
+    video.addEventListener("canplay", markLoaded, { once: true });
+    ensureLazyVideoSource(video);
+    const tryPlay = () => video.play().catch(() => {});
+    if (video.readyState >= 2) tryPlay();
+    else video.addEventListener("loadeddata", tryPlay, { once: true });
+  };
+
+  const defer = () => {
+    if ("requestIdleCallback" in window) requestIdleCallback(start, { timeout: 2500 });
+    else setTimeout(start, 1200);
+  };
+
+  if (document.readyState === "complete") defer();
+  else window.addEventListener("load", defer, { once: true });
 })();
 
 // Re-init Lucide for dynamically referenced icons

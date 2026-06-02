@@ -4,7 +4,7 @@
     {
       "name": "buttonupmedia-preview",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["serve", "-p", "3000", "/Users/christianbusiness/buttonupmedia-site"],
+      "runtimeArgs": ["serve", "-p", "3000", "/Users/christianbusiness/buttonupmedia-site/public"],
       "port": 3000
     }
   ]
