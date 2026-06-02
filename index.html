@@ -110,7 +110,7 @@
         window.__bumHomepageRuntimePromise = new Promise(function (resolve) {
           var startRuntime = function () {
             Promise.all([
-              loadScript("https://unpkg.com/lucide@latest/dist/umd/lucide.min.js", "lucide"),
+              loadScript("https://unpkg.com/lucide@1.17.0/dist/umd/lucide.min.js", "lucide"),
               loadScript("https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js", "gsap"),
               loadScript("https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js", "scrolltrigger"),
               loadScript("pixel-canvas.js", "pixel-canvas")
@@ -2903,9 +2903,12 @@
        ══════════════════════════════════════ */
     .hp2-vid-showcase {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 28px;
       margin-top: 56px;
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .hp2-vid-card {
       background: linear-gradient(180deg, rgba(23,23,23,0.6) 0%, rgba(13,13,13,0.85) 100%);
@@ -3257,12 +3260,6 @@
       flex-direction: column;
       gap: 16px;
     }
-    .hp2-aeo-compare {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-top: 40px;
-    }
     .hp2-aeo-block {
       padding: 28px;
       border-radius: 16px;
@@ -3376,41 +3373,6 @@
     }
 
     /* ══════════════════════════════════════
-       NEW: Stats by the Numbers
-       ══════════════════════════════════════ */
-    .hp2-stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      margin-top: 48px;
-    }
-    .hp2-stat-cell {
-      padding: 28px 20px;
-      border: 1px solid var(--line-soft);
-      border-radius: 16px;
-      background: rgba(255,255,255,0.015);
-      text-align: center;
-    }
-    .hp2-stat-cell-num {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 900;
-      letter-spacing: -0.03em;
-      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.15;
-      margin-bottom: 8px;
-      padding: 4px 0;
-    }
-    .hp2-stat-cell-desc {
-      font-size: 0.78rem;
-      color: var(--text-dim);
-      line-height: 1.5;
-    }
-
-    /* ══════════════════════════════════════
        NEW: Florida Markets Section
        ══════════════════════════════════════ */
     .hp2-florida-markets {
@@ -3451,10 +3413,8 @@
 
     @media (max-width: 900px) {
       .hp2-aeo-split { grid-template-columns: 1fr; gap: 32px; }
-      .hp2-aeo-compare { grid-template-columns: 1fr; }
       .hp2-aeo-grid { grid-template-columns: 1fr 1fr; }
       .hp2-why-cards { grid-template-columns: 1fr; }
-      .hp2-stats-grid { grid-template-columns: repeat(2, 1fr); }
       .hp2-florida-markets { grid-template-columns: 1fr 1fr; }
       .hp2-industry-split { grid-template-columns: 1fr; gap: 32px; }
       .hp2-industry-video { max-width: 280px; }
@@ -3490,7 +3450,6 @@
         font-size: 0.95rem;
         line-height: 1.18;
       }
-      .hp2-stats-grid { grid-template-columns: 1fr 1fr; }
       .hp2-florida-markets { grid-template-columns: 1fr; }
     }
 
@@ -4367,17 +4326,6 @@
         </div>
       </div>
 
-      <div class="hp2-aeo-compare" style="display:none;">
-        <div class="hp2-aeo-block --traditional">
-          <h4>Google &amp; Google Maps</h4>
-          <p>Still the biggest source of new diners. We get you on page one of Google and at the top of Maps for searches like "best brunch near me."</p>
-        </div>
-        <div class="hp2-aeo-block --aeo">
-          <h4>Answer Engine Optimization (AEO)</h4>
-          <p>When someone asks an AI assistant where to eat, your restaurant should be in the answer. Most of your competitors aren't doing this yet. We get you there first.</p>
-        </div>
-      </div>
-
       <h3 style="font-size:1.1rem; font-weight:800; margin-top:36px; margin-bottom:16px;">How we get you found, everywhere it matters</h3>
       <div class="hp2-aeo-grid">
         <div class="hp2-aeo-item">
@@ -4525,58 +4473,6 @@
             <h3>Website Design</h3>
             <p>Fast, mobile-first websites that make it effortless to book, order, and visit.</p>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ NEW: STATS BY THE NUMBERS ═══ -->
-    <section class="card-overlay --dark lib-section" id="stats" style="display:none;" data-shared-animations="off">
-      <div class="lib-section-label">The Data</div>
-      <h2 class="lib-section-title">Restaurant Marketing by the Numbers</h2>
-
-      <div class="hp2-split --reverse">
-        <div class="hp2-split-copy">
-          <p>The data behind why digital marketing isn't optional for restaurants, it's the difference between growth and getting left behind.</p>
-          <p>These aren't abstract marketing stats. They describe how your next customer is going to find their next meal.</p>
-          <p><strong style="color:var(--text);">Button Up Media builds marketing systems designed to put your restaurant on the winning side of every one of these numbers.</strong></p>
-        </div>
-        <div class="hp2-split-media">
-          <img src="https://images.unsplash.com/photo-1428515613728-6b4607e44363?w=800&h=600&fit=crop" alt="Busy restaurant kitchen with chefs preparing dishes, the operations behind the scenes" loading="lazy" decoding="async" width="800" height="600" />
-        </div>
-      </div>
-
-      <div class="hp2-stats-grid">
-        <div class="hp2-stat-cell">
-          <div class="hp2-stat-cell-num" data-count-to="90" data-suffix="%">90%</div>
-          <div class="hp2-stat-cell-desc">of diners research a restaurant online before visiting</div>
-        </div>
-        <div class="hp2-stat-cell">
-          <div class="hp2-stat-cell-num" data-count-to="97" data-suffix="%">97%</div>
-          <div class="hp2-stat-cell-desc">of customers use search engines to find local restaurants</div>
-        </div>
-        <div class="hp2-stat-cell">
-          <div class="hp2-stat-cell-num" data-count-to="75" data-suffix="%">75%</div>
-          <div class="hp2-stat-cell-desc">of diners say Instagram directly influences where they eat</div>
-        </div>
-        <div class="hp2-stat-cell">
-          <div class="hp2-stat-cell-num" data-count-to="72" data-suffix="%">72%</div>
-          <div class="hp2-stat-cell-desc">of restaurant searches include "near me" or a specific location</div>
-        </div>
-        <div class="hp2-stat-cell">
-          <div class="hp2-stat-cell-num" data-count-to="88" data-suffix="%">88%</div>
-          <div class="hp2-stat-cell-desc">of consumers trust online reviews as much as personal recommendations</div>
-        </div>
-        <div class="hp2-stat-cell">
-          <div class="hp2-stat-cell-num">3x</div>
-          <div class="hp2-stat-cell-desc">the engagement rate with professional video content vs. static images</div>
-        </div>
-        <div class="hp2-stat-cell">
-          <div class="hp2-stat-cell-num">15-20%</div>
-          <div class="hp2-stat-cell-desc">average annual sales increase for restaurants that invest in SEO</div>
-        </div>
-        <div class="hp2-stat-cell">
-          <div class="hp2-stat-cell-num" data-count-to="46" data-suffix="%">46%</div>
-          <div class="hp2-stat-cell-desc">of all Google searches are looking for local information</div>
         </div>
       </div>
     </section>
@@ -4761,7 +4657,7 @@
         <pixel-canvas data-gap="10" data-speed="20" data-colors="#CA8A04, #A16207, #F2D688" data-no-focus></pixel-canvas>
         <h2 style="position:relative; z-index:2;">Ready to Grow Your <span class="accent-serif">Restaurant?</span></h2>
         <p style="position:relative; z-index:2;">Stop guessing. Start growing. Schedule a free consultation and let's build a marketing strategy that fills your restaurant with the customers you deserve.</p>
-        <p style="position:relative; z-index:2; margin: 2px 0 0; font-size: 0.9rem; line-height: 1.4; color: rgba(255,248,235,0.74); text-decoration: underline; text-underline-offset: 0.2em;">Click here for consultation</p>
+        <p style="position:relative; z-index:2; margin: 2px auto 0; font-size: 0.9rem; line-height: 1.4; color: rgba(255,248,235,0.74); text-decoration: underline; text-underline-offset: 0.2em;">Click here for consultation</p>
       </div>
     </section>
 
@@ -5525,43 +5421,15 @@
       }
     );
 
-    gsap.fromTo(".hp2-testimonial-video",
-      { y: 50, scale: 0.95 },
-      {
-        y: 0, scale: 1, duration: 0.7, ease: "power3.out", stagger: 0.15,
-        clearProps: "transform",
-        scrollTrigger: { trigger: ".hp2-testimonial-grid", start: "top 80%", toggleActions: "play none none none" },
-      }
-    );
-
     // ════════════════════════════════════════
     // NEW: Industry Section, stat + text fade
     // ════════════════════════════════════════
-    gsap.fromTo("#industry .hp2-industry-stat",
-      { y: 40, opacity: 0, scale: 0.9 },
-      { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "power3.out",
-        scrollTrigger: { trigger: "#industry", start: "top 80%", toggleActions: "play none none none" }
-      }
-    );
-    gsap.fromTo("#industry .lib-section-title, #industry .lib-section-sub",
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.1,
-        scrollTrigger: { trigger: "#industry", start: "top 75%", toggleActions: "play none none none" }
-      }
-    );
     gsap.fromTo(".hp2-inline-stat",
       { y: 30, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", stagger: 0.12,
         scrollTrigger: { trigger: ".hp2-industry-stats-row", start: "top 85%", toggleActions: "play none none none" }
       }
     );
-    gsap.fromTo(".hp2-pull-quote",
-      { x: -30, opacity: 0 },
-      { x: 0, opacity: 1, duration: 0.7, ease: "power3.out",
-        scrollTrigger: { trigger: ".hp2-pull-quote", start: "top 85%", toggleActions: "play none none none" }
-      }
-    );
-
     // ════════════════════════════════════════
     // NEW: AI/AEO Section, stagger items
     // ════════════════════════════════════════
@@ -5588,17 +5456,6 @@
       { y: 0, duration: 0.7, ease: "power3.out", stagger: 0.12,
         clearProps: "transform",
         scrollTrigger: { trigger: ".hp2-why-cards", start: "top 80%", toggleActions: "play none none none" }
-      }
-    );
-
-    // ════════════════════════════════════════
-    // NEW: Stats, grid reveal stagger
-    // ════════════════════════════════════════
-    gsap.fromTo(".hp2-stat-cell",
-      { y: 40, scale: 0.95 },
-      { y: 0, scale: 1, duration: 0.6, ease: "power3.out", stagger: 0.08,
-        clearProps: "transform",
-        scrollTrigger: { trigger: ".hp2-stats-grid", start: "top 80%", toggleActions: "play none none none" }
       }
     );
 
