@@ -56,20 +56,60 @@
   <meta name="twitter:description" content="Restaurant website design and development for owners who need more bookings, orders, and calls. SEO, menu pages, reservations, and mobile-first conversion tools built from scratch by Button Up Media." />
   <meta name="twitter:image" content="https://www.buttonupmedia.com/images/website-design/rusty-pelican-desktop.png" />
 
+  <!-- Resource hints -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://unpkg.com" crossorigin />
+
   <!-- Fonts -->
   <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-variable.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
 
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <!-- GSAP + ScrollTrigger -->
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
-  <!-- Pixel Canvas -->
-  <script src="pixel-canvas.js"></script>
-
   <!-- Base styles -->
   <link rel="stylesheet" href="shared.css?v=nav-mobile-2" />
+
+  <!-- Animation runtime (Lucide, GSAP, ScrollTrigger, pixel-canvas) loads after
+       the page is interactive so it never blocks the hero paint. The hero is
+       static text plus eager images and does not depend on it. Mirrors the
+       homepage deferred-runtime pattern. -->
+  <script>
+    (function () {
+      function queueIdle(cb, timeout) {
+        if ("requestIdleCallback" in window) { requestIdleCallback(cb, { timeout: timeout || 1500 }); return; }
+        setTimeout(cb, Math.min(timeout || 1500, 600));
+      }
+      function loadScript(src, key) {
+        window.__bumScriptPromises = window.__bumScriptPromises || {};
+        if (window.__bumScriptPromises[key]) return window.__bumScriptPromises[key];
+        window.__bumScriptPromises[key] = new Promise(function (resolve, reject) {
+          var s = document.createElement("script");
+          s.src = src; s.async = true; s.defer = true;
+          s.addEventListener("load", function () { resolve(s); }, { once: true });
+          s.addEventListener("error", reject, { once: true });
+          document.head.appendChild(s);
+        });
+        return window.__bumScriptPromises[key];
+      }
+      window.__bumLoadRwdRuntime = function () {
+        if (window.__bumRwdRuntimePromise) return window.__bumRwdRuntimePromise;
+        window.__bumRwdRuntimePromise = new Promise(function (resolve) {
+          var start = function () {
+            Promise.all([
+              loadScript("https://unpkg.com/lucide@1.17.0/dist/umd/lucide.min.js", "lucide"),
+              loadScript("https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js", "gsap"),
+              loadScript("https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js", "scrolltrigger"),
+              loadScript("pixel-canvas.js", "pixel-canvas")
+            ]).then(function () {
+              if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
+              resolve();
+            }).catch(function () { resolve(); });
+          };
+          if (document.readyState === "complete") { queueIdle(start, 1500); }
+          else { window.addEventListener("load", function () { queueIdle(start, 1500); }, { once: true }); }
+        });
+        return window.__bumRwdRuntimePromise;
+      };
+    })();
+  </script>
 
   <!-- Schema: BreadcrumbList -->
   <script type="application/ld+json">
@@ -2965,8 +3005,12 @@
   <script src="shared.js?v=nav-mobile-3"></script>
   <script src="website-design-redesign.js"></script>
   <script>
-  (function() {
+  function initRwDesign() {
     "use strict";
+    if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+      if (typeof lucide !== "undefined" && lucide.createIcons) lucide.createIcons();
+      return;
+    }
     gsap.registerPlugin(ScrollTrigger);
 
     /* ── Hero gauge animations ── */
@@ -3319,8 +3363,16 @@
     });
 
     /* ── Init Lucide ── */
-    lucide.createIcons();
-  })();
+    if (typeof lucide !== "undefined" && lucide.createIcons) lucide.createIcons();
+  }
+
+  if (window.__bumLoadRwdRuntime) {
+    window.__bumLoadRwdRuntime().then(initRwDesign);
+  } else if (document.readyState === "complete") {
+    initRwDesign();
+  } else {
+    window.addEventListener("load", initRwDesign, { once: true });
+  }
   </script>
 </body>
 </html>
