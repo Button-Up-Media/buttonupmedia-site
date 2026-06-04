@@ -57,11 +57,11 @@
   <meta name="twitter:image" content="https://www.buttonupmedia.com/images/sm-videography-hero.jpg" />
   <link rel="preconnect" href="https://assets.calendly.com" />
   <link rel="preconnect" href="https://calendly.com" />
-  <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-variable.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-variable.woff2" crossorigin fetchpriority="high" />
   <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+  <script defer src="https://unpkg.com/lucide@1.17.0/dist/umd/lucide.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
   <link rel="stylesheet" href="shared.css?v=nav-mobile-2" />
   <!-- JSON-LD Schema -->
   <script type="application/ld+json">
@@ -557,7 +557,7 @@
     </footer>
   </div>
 
-  <script src="shared.js?v=nav-mobile-3"></script>
+  <script defer src="shared.js?v=nav-mobile-3"></script>
   <script>
     (() => {
       const shell = document.querySelector("#contact-calendly-shell");
@@ -572,8 +572,6 @@
         script.dataset.calendlyLoader = "1";
         document.head.appendChild(script);
       };
-
-      loadCalendly();
 
       let fallbackLoaded;
       const markLoaded = () => {
@@ -595,6 +593,23 @@
           markLoaded();
         }
       }, 250);
+
+      // Defer the heavy Calendly embed until the page is interactive so it does
+      // not compete with the initial paint. The skeleton stays visible until the
+      // calendar iframe appears, so the visitor experience is unchanged.
+      const scheduleCalendly = () => {
+        if ("requestIdleCallback" in window) {
+          requestIdleCallback(loadCalendly, { timeout: 2500 });
+        } else {
+          setTimeout(loadCalendly, 800);
+        }
+      };
+
+      if (document.readyState === "complete") {
+        scheduleCalendly();
+      } else {
+        window.addEventListener("load", scheduleCalendly, { once: true });
+      }
     })();
   </script>
 </body>
