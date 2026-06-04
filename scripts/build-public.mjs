@@ -27,7 +27,6 @@ const filesToCopy = [
 // Assets minified through esbuild on the way into public/.
 const filesToMinify = [
   { file: 'shared.css', loader: 'css' },
-  { file: 'website-design-redesign.css', loader: 'css' },
   { file: 'shared.js', loader: 'js' },
   { file: 'website-design-redesign.js', loader: 'js' },
   { file: 'pixel-canvas.js', loader: 'js' },
@@ -46,6 +45,23 @@ for (const { file, loader } of filesToMinify) {
   const source = await readFile(path.join(root, file), 'utf8');
   const result = await transform(source, { loader, minify: true, legalComments: 'none' });
   await writeFile(path.join(outDir, file), result.code);
+}
+
+// Inline the page-specific redesign CSS into the restaurant page so it is not a
+// render-blocking request that stalls the hero paint. The source of truth stays
+// in website-design-redesign.css and the raw/dev HTML keeps its <link>; only the
+// production build swaps that <link> for an inline <style> at the same position,
+// so the cascade is unchanged.
+{
+  const cssSource = await readFile(path.join(root, 'website-design-redesign.css'), 'utf8');
+  const { code: inlinedCss } = await transform(cssSource, { loader: 'css', minify: true, legalComments: 'none' });
+  const pagePath = path.join(outDir, 'restaurant-website-design.html');
+  const pageHtml = await readFile(pagePath, 'utf8');
+  const linkTag = '<link rel="stylesheet" href="website-design-redesign.css" />';
+  if (!pageHtml.includes(linkTag)) {
+    throw new Error('Expected redesign CSS <link> not found in restaurant-website-design.html');
+  }
+  await writeFile(pagePath, pageHtml.replace(linkTag, `<style>${inlinedCss}</style>`));
 }
 
 for (const dir of dirsToCopy) {
