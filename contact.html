@@ -401,13 +401,19 @@
       }
     }
     /* Hero + nav entrance run on the compositor so first paint never waits on
-       the main thread. These mirror the GSAP fade-up that shared.js applies
-       elsewhere (opacity 0 to 1, a small rise, power3.out / easeOutQuart), so
-       the visible motion stays identical while staying jank-proof under load. */
+       the main thread. The headline (h1) is the Largest Contentful Paint
+       element, and Chrome defers LCP until any opacity/transform animation on
+       that element finishes. So the headline paints immediately and stays
+       static, while everything around it keeps the same fade-up. The page
+       still feels alive (opacity 0 to 1, a small rise, power3.out / easeOutQuart)
+       and LCP lands at first paint instead of at the end of the animation. */
     .lib-nav[data-shared-animations="off"] {
       animation: contactNavIn 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.2s backwards;
     }
-    .contact-page .contact-grid {
+    .contact-page .hero-badge,
+    .contact-page .contact-intro-copy > .body-text,
+    .contact-page .contact-details,
+    .contact-page .contact-scheduler {
       animation: contactHeroIn 0.7s cubic-bezier(0.25, 1, 0.5, 1) 0.4s backwards;
     }
     @keyframes contactNavIn {
@@ -422,7 +428,10 @@
     }
     @media (prefers-reduced-motion: reduce) {
       .lib-nav[data-shared-animations="off"],
-      .contact-page .contact-grid {
+      .contact-page .hero-badge,
+      .contact-page .contact-intro-copy > .body-text,
+      .contact-page .contact-details,
+      .contact-page .contact-scheduler {
         animation: none;
       }
     }
