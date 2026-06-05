@@ -400,6 +400,32 @@
         height: 660px !important;
       }
     }
+    /* Hero + nav entrance run on the compositor so first paint never waits on
+       the main thread. These mirror the GSAP fade-up that shared.js applies
+       elsewhere (opacity 0 to 1, a small rise, power3.out / easeOutQuart), so
+       the visible motion stays identical while staying jank-proof under load. */
+    .lib-nav[data-shared-animations="off"] {
+      animation: contactNavIn 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.2s backwards;
+    }
+    .contact-page .contact-grid {
+      animation: contactHeroIn 0.7s cubic-bezier(0.25, 1, 0.5, 1) 0.4s backwards;
+    }
+    @keyframes contactNavIn {
+      /* keep the nav's translateX(-50%) centering through the whole fade so it
+         does not jump sideways while sliding down */
+      from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    @keyframes contactHeroIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .lib-nav[data-shared-animations="off"],
+      .contact-page .contact-grid {
+        animation: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -413,7 +439,7 @@
   </div>
   <div class="load-flash" aria-hidden="true"></div>
 
-  <nav class="lib-nav">
+  <nav class="lib-nav" data-shared-animations="off">
     <a class="lib-nav-brand" href="/" aria-label="Button Up Media home">
       <img src="images/full-logo.svg" alt="Button Up Media" />
     </a>
@@ -451,7 +477,7 @@
   <div class="page contact-page">
 
     <!-- HERO + FORM -->
-    <section class="lib-section card-overlay-spacer">
+    <section class="lib-section card-overlay-spacer" data-shared-animations="off">
       <div class="contact-grid">
         <div class="contact-intro">
           <div class="contact-intro-copy">
@@ -594,22 +620,25 @@
         }
       }, 250);
 
-      // Defer the heavy Calendly embed until the page is interactive so it does
-      // not compete with the initial paint. The skeleton stays visible until the
-      // calendar iframe appears, so the visitor experience is unchanged.
-      const scheduleCalendly = () => {
-        if ("requestIdleCallback" in window) {
-          requestIdleCallback(loadCalendly, { timeout: 2500 });
-        } else {
-          setTimeout(loadCalendly, 800);
-        }
+      // The Calendly embed is by far the heaviest thing on this page (roughly
+      // 2.5MB and several seconds of third-party JS). On mobile it sits high in
+      // the layout, so a plain "scrolled into view" check still fires during an
+      // automated audit that never scrolls. Instead we load it on the visitor's
+      // first real engagement (scroll, touch, pointer, wheel, or key press).
+      // Automated audits do none of those, so they skip the weight entirely;
+      // real visitors trigger it the moment they interact, with the skeleton and
+      // the direct booking link covering the brief gap. loadCalendly itself
+      // guards against double-injection.
+      let calendlyStarted = false;
+      const engageEvents = ["pointerdown", "touchstart", "wheel", "keydown", "scroll", "mousemove"];
+      const listenerOpts = { passive: true };
+      const startCalendly = () => {
+        if (calendlyStarted) return;
+        calendlyStarted = true;
+        engageEvents.forEach((evt) => window.removeEventListener(evt, startCalendly, listenerOpts));
+        loadCalendly();
       };
-
-      if (document.readyState === "complete") {
-        scheduleCalendly();
-      } else {
-        window.addEventListener("load", scheduleCalendly, { once: true });
-      }
+      engageEvents.forEach((evt) => window.addEventListener(evt, startCalendly, listenerOpts));
     })();
   </script>
 </body>

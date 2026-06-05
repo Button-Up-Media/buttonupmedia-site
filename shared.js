@@ -537,10 +537,15 @@ if (hasGsap) {
   );
 
   // ── Nav slide down ──
-  gsap.fromTo(".lib-nav",
-    { y: -20, opacity: 0 },
-    { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", delay: 0.2 }
-  );
+  // Pages can opt out (data-shared-animations="off" on the nav) to paint the
+  // nav via CSS instead, so GSAP does not fight the stylesheet over opacity.
+  const navEl = document.querySelector(".lib-nav");
+  if (navEl && !navEl.matches('[data-shared-animations="off"]')) {
+    gsap.fromTo(navEl,
+      { y: -20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6, ease: "power3.out", delay: 0.2 }
+    );
+  }
 
   // ── Overview entrance ──
   const overviewSection = document.querySelector(".lib-section");
