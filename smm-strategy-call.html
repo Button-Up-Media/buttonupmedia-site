@@ -1421,26 +1421,25 @@
        when the visitor taps a reel — keeps video weight out of the critical path. */
     (() => {
       const reels = document.querySelectorAll(".smm-reel");
-      let current = null;
+      const videos = [];
       reels.forEach((reel) => {
         reel.addEventListener("click", () => {
-          // Stop any other playing reel.
-          if (current && current !== reel) {
-            const v = current.querySelector("video");
-            if (v) v.pause();
-            current.classList.remove("is-playing");
-          }
-          let video = reel.querySelector("video");
-          if (!video) {
-            video = document.createElement("video");
-            video.src = reel.dataset.reel;
-            video.setAttribute("playsinline", "");
-            video.controls = true;
-            video.preload = "auto";
-            reel.appendChild(video);
-          }
+          // Once a reel has its video, the native controls own play/pause.
+          // Returning here stops a bubbled control click (e.g. tapping the
+          // native pause button) from being read as a reel tap that restarts it.
+          if (reel.querySelector("video")) return;
+          const video = document.createElement("video");
+          video.src = reel.dataset.reel;
+          video.setAttribute("playsinline", "");
+          video.controls = true;
+          video.preload = "auto";
+          // Only one reel plays at a time: when this one starts, pause the rest.
+          video.addEventListener("play", () => {
+            videos.forEach((other) => { if (other !== video) other.pause(); });
+          });
+          reel.appendChild(video);
           reel.classList.add("is-playing");
-          current = reel;
+          videos.push(video);
           const p = video.play();
           if (p && p.catch) p.catch(() => {});
         });
