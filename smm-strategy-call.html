@@ -172,7 +172,9 @@
     /* GTM's noscript iframe is already 0x0/hidden; this also keeps its markup
        from ever painting as raw text in scripting-enabled preview contexts. */
     noscript { display: none; }
-    .smm-lp { overflow-x: clip; }
+    /* No overflow-x: clip on .smm-lp so the hero backdrop can be full-bleed
+       (100vw). Page horizontal overflow stays contained by the shared
+       body { overflow-x: hidden }. */
     /* This page has an in-flow .smm-nav, not the site's fixed nav, so drop the
        mobile top padding shared.css reserves on .page to clear that fixed nav. */
     @media (max-width: 700px) { .page.smm-lp { padding-top: 0; } }
@@ -224,7 +226,7 @@
       transform: translateX(-50%);
       pointer-events: none;
       background-image:
-        linear-gradient(180deg, rgba(251,248,242,0.62) 0%, rgba(251,248,242,0.55) 33%, rgba(251,248,242,0.82) 78%, #FBF8F2 100%),
+        linear-gradient(180deg, rgba(14,11,8,0.62) 0%, rgba(14,11,8,0.5) 44%, rgba(14,11,8,0.58) 86%, rgba(14,11,8,0.74) 100%),
         url("images/smm-hero-bg.avif");
       background-size: cover, cover;
       background-position: center, center;
@@ -566,7 +568,7 @@
     .smm-how { max-width: 1080px; margin: 0 auto; padding: 8px clamp(20px, 5vw, 40px) clamp(40px, 6vw, 60px); }
     .smm-how-head { text-align: center; max-width: 60ch; margin: 0 auto 38px; }
     .smm-how-head h2 {
-      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      font-size: clamp(2rem, 5.6vw, 2.95rem);
       color: var(--text-head);
       line-height: 1.08;
     }
@@ -993,7 +995,7 @@
          short copy underneath — far shorter to scroll than stacked blocks. */
       .smm-how { padding-bottom: clamp(28px, 6vw, 40px); }
       .smm-how-head { margin-bottom: 20px; }
-      .smm-how-head h2 { font-size: 1.55rem; }
+      .smm-how-head h2 { font-size: 1.8rem; }
       .smm-how-head p { margin-top: 11px; font-size: 0.95rem; line-height: 1.5; }
       /* Three compact bubbles in a single row, number + title only. */
       .smm-step-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
@@ -1054,6 +1056,16 @@
       .smm-reel-views b { font-size: 1.16rem; }
       .smm-reel-views { top: 12px; left: 12px; padding: 8px 13px 8px 11px; }
     }
+
+    /* Dark hero treatment: the dark overlay needs light text + logo to stay legible */
+    .smm-hero h1.display-xl { color: #f8f4ec; }
+    .smm-hero h1 .hero-gold { color: #E2A84D; }
+    .smm-hero-sub { color: rgba(248,244,236,0.88); }
+    .smm-hero-sub .smm-es { color: rgba(248,244,236,0.6); }
+    .smm-hero .smm-cta-note { color: rgba(248,244,236,0.74); }
+    .smm-nav-logo { filter: brightness(0) invert(1); }
+    .smm-nav-phone { color: rgba(248,244,236,0.82); }
+    .smm-nav-phone:hover { color: #ffffff; }
 
     /* Mobile polish: bolder hero + stat, a play affordance, tighter bottom */
     @media (max-width: 760px) {
