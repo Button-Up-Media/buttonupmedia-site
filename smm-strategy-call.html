@@ -35,10 +35,22 @@
     })();
   </script>
   <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  <script>(function(w,d,s,l,i){
+    var loaded=false;
+    function loadGTM(){
+      if(loaded)return;loaded=true;
+      es.forEach(function(e){w.removeEventListener(e,loadGTM)});
+      w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    }
+    var es=['pointerdown','touchstart','keydown','scroll','mousemove'];
+    es.forEach(function(e){w.addEventListener(e,loadGTM,{passive:true})});
+    // Load GTM on first interaction, or shortly after the page finishes loading
+    // for visitors who do not interact, so it stays off the first-paint path.
+    function arm(){setTimeout(loadGTM,2000);}
+    if(d.readyState==='complete')arm();else w.addEventListener('load',arm);
   })(window,document,'script','dataLayer','GTM-WR9TZHT');</script>
   <!-- End Google Tag Manager -->
   <title>Restaurant Social Media Marketing That Fills Seats | Button Up Media</title>
