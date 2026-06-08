@@ -212,6 +212,25 @@
       padding: clamp(48px, 9vw, 92px) clamp(20px, 5vw, 40px) clamp(40px, 7vw, 64px);
       text-align: center;
     }
+    /* Subtle restaurant backdrop behind the hero, faded into the page so the
+       dark headline stays crisp. Swap the .smm-hero-bg <img> src for a new photo. */
+    .smm-hero-bg {
+      position: absolute;
+      z-index: 0;
+      top: -120px;
+      left: 50%;
+      bottom: 0;
+      width: 100vw;
+      transform: translateX(-50%);
+      pointer-events: none;
+      background-image:
+        linear-gradient(180deg, rgba(251,248,242,0.62) 0%, rgba(251,248,242,0.55) 33%, rgba(251,248,242,0.82) 78%, #FBF8F2 100%),
+        url("images/sm-restaurant-interior.avif");
+      background-size: cover, cover;
+      background-position: center, center;
+      background-repeat: no-repeat, no-repeat;
+    }
+    .smm-hero > *:not(.smm-hero-bg) { position: relative; z-index: 1; }
     .smm-hero h1.display-xl {
       font-size: clamp(2.5rem, 7.2vw, 4.4rem);
       margin-top: 22px;
@@ -1099,6 +1118,7 @@
 
     <!-- HERO: text LCP, no video, single primary action -->
     <header class="smm-hero">
+      <div class="smm-hero-bg" aria-hidden="true"></div>
       <h1 class="display-xl">Restaurant Social Media Marketing <span class="hero-gold">That Fills Seats.</span></h1>
       <p class="smm-hero-sub">
         We turn South Florida restaurants into must-visit spots with scroll-stopping Reels, TikToks, and food content that drive reservations, orders, and repeat regulars. Book a free 30-minute strategy call and leave with a clear plan.
