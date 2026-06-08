@@ -2,6 +2,7 @@
 
 # Public, referenced site videos must deploy as real files. Vercel serves Git LFS
 # pointers as tiny text files, which makes the homepage/social videos unplayable.
+media/*.mp4 -filter -diff -merge -text
 videos/2.12.26[[:space:]]BUM[[:space:]]15[[:space:]]Sec[[:space:]]Quality[[:space:]]Shots_1080p.mp4 -filter -diff -merge -text
 videos/bts-behind-counter.mp4 -filter -diff -merge -text
 videos/compilation-best-shots.mp4 -filter -diff -merge -text

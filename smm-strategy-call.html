@@ -173,6 +173,9 @@
        from ever painting as raw text in scripting-enabled preview contexts. */
     noscript { display: none; }
     .smm-lp { overflow-x: clip; }
+    /* This page has an in-flow .smm-nav, not the site's fixed nav, so drop the
+       mobile top padding shared.css reserves on .page to clear that fixed nav. */
+    @media (max-width: 700px) { .page.smm-lp { padding-top: 0; } }
 
     /* Minimal nav: brand + a single demoted phone link. No menu of options. */
     .smm-nav {
