@@ -18,6 +18,7 @@ const filesToCopy = [
   'restaurant-website-design.html',
   'services.html',
   'social-media-marketing.html',
+  'smm-strategy-call.html',
   'robots.txt',
   'sitemap.xml',
   'llms.txt',
@@ -32,7 +33,7 @@ const filesToMinify = [
   { file: 'pixel-canvas.js', loader: 'js' },
 ];
 
-const dirsToCopy = ['images', 'videos', 'fonts'];
+const dirsToCopy = ['images', 'videos', 'fonts', 'media'];
 
 await rm(outDir, { recursive: true, force: true });
 await mkdir(outDir, { recursive: true });
