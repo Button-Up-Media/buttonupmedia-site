@@ -414,6 +414,7 @@
     .smm-host-name { font-size: 0.86rem; font-weight: 700; color: var(--text-head); }
     .smm-host-role { font-weight: 600; color: var(--gold); }
     .smm-host-sep { color: var(--text-soft); margin: 0 2px; }
+    .smm-host-es { font-size: 0.74rem; font-weight: 600; color: var(--gold); margin-top: 3px; letter-spacing: 0.01em; }
 
     .smm-cal-shell { position: relative; }
     .smm-cal-stage {
@@ -1044,10 +1045,10 @@
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
-        padding: 2px 2px 14px;
-        margin: 0 calc(-1 * clamp(20px, 5vw, 40px));
-        padding-left: clamp(20px, 5vw, 40px);
-        padding-right: clamp(20px, 5vw, 40px);
+        /* Full-bleed carousel: span the whole viewport, no edge gap */
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        padding: 2px 16px 14px;
       }
       .smm-reels::-webkit-scrollbar { display: none; }
       .smm-reel { scroll-snap-align: center; }
@@ -1067,10 +1068,20 @@
     .smm-nav-phone { color: rgba(248,244,236,0.82); }
     .smm-nav-phone:hover { color: #ffffff; }
 
+    /* Scroll-reveal: subtle fade-up as sections enter view. Opt-in via .js-anim
+       (added by JS) so content is always visible if scripts do not run. */
+    .js-anim .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1), transform 0.7s cubic-bezier(0.25, 1, 0.5, 1); }
+    .js-anim .reveal.is-visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .js-anim .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
     /* Mobile polish: bolder hero + stat, a play affordance, tighter bottom */
     @media (max-width: 760px) {
       /* Header: bigger type, less side padding so the words carry more weight */
       .smm-hero { padding-left: 14px; padding-right: 14px; }
+      /* A little more breathing room between the hero and the proof band */
+      .smm-proof { padding-top: 32px; }
       .smm-hero h1.display-xl { font-size: clamp(3rem, 13.5vw, 3.7rem); }
 
       /* 62% stat: large and impossible to miss */
@@ -1106,6 +1117,7 @@
   </style>
 </head>
 <body>
+  <script>document.documentElement.classList.add('js-anim')</script>
   <!-- GTM loads via the head script. The standard <noscript> iframe fallback is
        intentionally omitted on this JS-required booking page (no-JS visitors
        cannot complete a Calendly booking), so nothing third-party can paint. -->
@@ -1146,7 +1158,7 @@
     </header>
 
     <!-- PROOF: real result numbers + named-client trust row -->
-    <section class="smm-proof" aria-label="Results">
+    <section class="smm-proof reveal" aria-label="Results">
       <div class="smm-eyebrow">Real results for real restaurants</div>
       <div class="smm-stat-row">
         <div class="smm-stat">
@@ -1178,7 +1190,7 @@
 
     <!-- SEE THE WORK: real content reels, click-to-play (no autoplay weight) -->
     <section class="smm-work" aria-label="See the work">
-      <div class="smm-work-head">
+      <div class="smm-work-head reveal">
         <h2>See the kind of content we make</h2>
         <p>Real reels we shot and posted for South Florida restaurants. Tap to play.</p>
       </div>
@@ -1211,20 +1223,20 @@
 
     <!-- HOW: what we actually do — the differentiator, in plain English -->
     <section class="smm-how" aria-label="How it works">
-      <div class="smm-how-head">
+      <div class="smm-how-head reveal">
         <h2>We don&rsquo;t just manage your social. <span class="accent-serif">We make it.</span></h2>
-        <p>Most agencies post stock photos from a desk. <strong>We show up with cameras</strong>, build your content from scratch, and run it, so your feed actually looks like your food.</p>
+        <p>Most agencies outsource a freelance videographer who barely knows your restaurant, so the content costs more and rarely matches your vision. <strong>We bring our own in-house team into your strategy</strong> and film it ourselves, so every post is on brand and consistent.</p>
       </div>
       <div class="smm-step-grid">
         <div class="smm-step">
           <div class="smm-step-num">1</div>
           <h3>We film it</h3>
-          <p>We come to your restaurant and shoot. One session yields 4&ndash;6 weeks of food video, photos, and BTS content.</p>
+          <p>Our in-house team comes to you for a fresh shoot every month, so you never recycle the same few clips. New food, new angles, new promotions.</p>
         </div>
         <div class="smm-step">
           <div class="smm-step-num">2</div>
           <h3>We run it</h3>
-          <p>We build your content calendar and post consistently, with every caption written to drive engagement.</p>
+          <p>We build your calendar around your goals and the promotions you want to push, posting consistently with captions written to drive action.</p>
         </div>
         <div class="smm-step">
           <div class="smm-step-num">3</div>
@@ -1243,7 +1255,7 @@
                 <span class="smm-process-step-n">1</span>
                 <div>
                   <h3>Content Production</h3>
-                  <p>We schedule a content shoot at your restaurant. Our team captures professional food photography, short-form video, atmosphere shots, behind-the-scenes footage, and staff moments. One shoot typically produces 4 to 6 weeks of content across all platforms.</p>
+                  <p>Our own in-house team comes to your restaurant for the shoot, never an outsourced freelancer who barely knows your brand. We capture food, atmosphere, behind-the-scenes, and staff moments, and we come back every month so your content stays fresh instead of recycled.</p>
                 </div>
               </li>
               <li class="smm-process-step">
@@ -1270,12 +1282,12 @@
         </div>
       </section>
 
-      <div class="smm-bts">
+      <div class="smm-bts reveal">
         <img class="smm-bts-img" src="media/bts-shoot-optimized.jpg" alt="The Button Up Media team filming a content shoot on location at a South Florida restaurant" loading="lazy" width="1366" height="1024" />
         <div class="smm-bts-copy">
           <div class="smm-bts-eyebrow">On location, every shoot</div>
-          <h3>We&rsquo;re in your dining room, not behind a stock-photo library.</h3>
-          <p>Our videographers and editors come to you, capture your food and your atmosphere, and build a content library that&rsquo;s unmistakably yours. That&rsquo;s the difference customers feel when they scroll.</p>
+          <h3>Our own team in your dining room, not an outsourced stranger with a camera.</h3>
+          <p>The same in-house team gets to know your restaurant, your staff, and your goals, then captures content that is unmistakably yours. That&rsquo;s the difference customers feel when they scroll.</p>
         </div>
       </div>
       <div class="smm-how-cta">
@@ -1287,7 +1299,7 @@
     </section>
 
     <!-- TESTIMONIALS: real owner quotes -->
-    <section class="smm-quotes" aria-label="What restaurant owners say">
+    <section class="smm-quotes reveal" aria-label="What restaurant owners say">
       <div class="smm-quote-grid">
         <figure class="smm-quote">
           <div class="smm-quote-mark" aria-hidden="true">&ldquo;</div>
@@ -1320,15 +1332,15 @@
         </div>
         <div class="smm-fit-item">
           <span class="smm-fit-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-          <p>You&rsquo;ve tried managing it yourself and results have been inconsistent.</p>
+          <p>You&rsquo;re a chef and an owner, not a social media marketer, and doing it yourself never gets real results.</p>
         </div>
         <div class="smm-fit-item">
           <span class="smm-fit-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-          <p>A generic agency gave you stock photos and content that felt disconnected.</p>
+          <p>An agency sent an outsourced videographer who barely knew your restaurant, so the content felt generic.</p>
         </div>
         <div class="smm-fit-item">
           <span class="smm-fit-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-          <p>You want a partner who actually shows up and captures your restaurant.</p>
+          <p>You want a partner who knows your restaurant, your staff, and what makes you different.</p>
         </div>
       </div>
     </section>
@@ -1343,6 +1355,7 @@
           <div class="smm-host-copy">
             <span class="smm-host-label">You&rsquo;ll be meeting with</span>
             <span class="smm-host-name">Juan Hernández <span class="smm-host-sep">&middot;</span> <span class="smm-host-role">Button Up Media</span></span>
+            <span class="smm-host-es">Hablamos español</span>
           </div>
         </div>
       </div>
@@ -1515,6 +1528,19 @@
           if (p && p.catch) p.catch(() => {});
         });
       });
+    })();
+  </script>
+  <script>
+    /* Subtle scroll reveal: fade a few sections up as they enter view. */
+    (() => {
+      const els = document.querySelectorAll('.reveal');
+      if (!els.length) return;
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('is-visible')); return; }
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
+      els.forEach(el => io.observe(el));
     })();
   </script>
 </body>
