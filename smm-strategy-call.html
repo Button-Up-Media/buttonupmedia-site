@@ -61,6 +61,8 @@
   <!-- Self-hosted font preloads (production). -->
   <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-variable.woff2" crossorigin fetchpriority="high" />
   <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
+  <!-- Preload the hero backdrop: it is the LCP element, so fetch it early at high priority. -->
+  <link rel="preload" as="image" href="images/smm-hero-bg.avif" type="image/avif" fetchpriority="high" />
   <link rel="stylesheet" href="shared.css?v=nav-mobile-2" />
   <!-- JSON-LD Schema -->
   <script type="application/ld+json">
@@ -451,12 +453,12 @@
     }
     .smm-cal-skel-status::before {
       content: ""; width: 8px; height: 8px; border-radius: 50%;
-      background: var(--gold); box-shadow: 0 0 0 0 rgba(226,168,77,0.45);
+      background: var(--gold);
       animation: smmCalPulse 1.5s ease-in-out infinite;
     }
     @keyframes smmCalPulse {
-      0%, 100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(226,168,77,0.35); }
-      50% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(226,168,77,0); }
+      0%, 100% { transform: scale(0.85); opacity: 0.55; }
+      50% { transform: scale(1.1); opacity: 1; }
     }
     .smm-cal-skel-pill { height: 18px; width: 88px; border-radius: 999px; background: rgba(255,255,255,0.08); }
     .smm-cal-skel-line { height: 14px; border-radius: 999px; background: rgba(255,255,255,0.07); }
@@ -1196,7 +1198,7 @@
       </div>
       <div class="smm-reels">
         <div class="smm-reel" data-reel="media/sm-fattycrab-seafood-boil.mp4">
-          <img src="media/sm-fattycrab-seafood-boil-poster.jpg" alt="The Fatty Crab reel" loading="lazy" />
+          <img src="media/sm-fattycrab-seafood-boil-poster.avif" alt="The Fatty Crab reel" loading="lazy" />
           <div class="smm-reel-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
           <div class="smm-reel-overlay"><div class="smm-reel-views"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><b>1.2M</b><span>views</span></div><div class="smm-reel-label"><strong>The Fatty Crab</strong>Scroll-stop hook</div></div>
         </div>
@@ -1275,7 +1277,7 @@
             </ol>
           </div>
           <div class="smm-process-video smm-reel" data-reel="media/sm-how-we-work.mp4">
-            <img src="media/sm-how-we-work-poster.jpg" alt="How Button Up Media works" loading="lazy" />
+            <img src="media/sm-how-we-work-poster.avif" alt="How Button Up Media works" loading="lazy" />
             <div class="smm-reel-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
             <div class="smm-reel-overlay"><div class="smm-reel-label"><strong>How we work</strong>Research &rarr; shoot &rarr; post</div></div>
           </div>
@@ -1283,7 +1285,7 @@
       </section>
 
       <div class="smm-bts reveal">
-        <img class="smm-bts-img" src="media/bts-shoot-optimized.jpg" alt="The Button Up Media team filming a content shoot on location at a South Florida restaurant" loading="lazy" width="1366" height="1024" />
+        <img class="smm-bts-img" src="media/bts-shoot-optimized.avif" alt="The Button Up Media team filming a content shoot on location at a South Florida restaurant" loading="lazy" width="1080" height="1440" />
         <div class="smm-bts-copy">
           <div class="smm-bts-eyebrow">On location, every shoot</div>
           <h3>Our own team in your dining room, not an outsourced stranger with a camera.</h3>
