@@ -65,21 +65,23 @@ for (const { file, loader } of filesToMinify) {
   await writeFile(pagePath, pageHtml.replace(linkTag, `<style>${inlinedCss}</style>`));
 }
 
-// Inline shared.css into the contact page so first paint never waits on a
-// render-blocking stylesheet request. The source of truth stays in shared.css
-// (every other page keeps the cached <link>); only the production build of the
-// contact page swaps that one <link> for an inline <style> at the same position,
-// so the cascade is unchanged.
+// Inline shared.css into pages where it is the only render-blocking stylesheet,
+// so first paint never waits on that request. The source of truth stays in
+// shared.css and every other page keeps the cached <link>; only these production
+// builds swap that one <link> for an inline <style> at the same position, so the
+// cascade is unchanged.
 {
   const cssSource = await readFile(path.join(root, 'shared.css'), 'utf8');
   const { code: inlinedCss } = await transform(cssSource, { loader: 'css', minify: true, legalComments: 'none' });
-  const pagePath = path.join(outDir, 'contact.html');
-  const pageHtml = await readFile(pagePath, 'utf8');
   const linkTag = '<link rel="stylesheet" href="shared.css?v=nav-mobile-2" />';
-  if (!pageHtml.includes(linkTag)) {
-    throw new Error('Expected shared.css <link> not found in contact.html');
+  for (const page of ['contact.html', 'smm-strategy-call.html']) {
+    const pagePath = path.join(outDir, page);
+    const pageHtml = await readFile(pagePath, 'utf8');
+    if (!pageHtml.includes(linkTag)) {
+      throw new Error(`Expected shared.css <link> not found in ${page}`);
+    }
+    await writeFile(pagePath, pageHtml.replace(linkTag, `<style>${inlinedCss}</style>`));
   }
-  await writeFile(pagePath, pageHtml.replace(linkTag, `<style>${inlinedCss}</style>`));
 }
 
 for (const dir of dirsToCopy) {
