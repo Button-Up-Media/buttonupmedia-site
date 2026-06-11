@@ -57,6 +57,24 @@
       ]
     },
     {
+      "source": "/smm-strategy-call-es",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/smm-strategy-call-es.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
       "source": "/terms.html",
       "headers": [
         {
@@ -284,6 +302,16 @@
       "permanent": true
     },
     {
+      "source": "/smm-strategy-call-es/",
+      "destination": "/smm-strategy-call-es",
+      "permanent": true
+    },
+    {
+      "source": "/smm-strategy-call-es.html",
+      "destination": "/smm-strategy-call-es",
+      "permanent": true
+    },
+    {
       "source": "/thank-you",
       "destination": "/contact",
       "permanent": true
@@ -302,6 +330,10 @@
     {
       "source": "/smm-strategy-call",
       "destination": "/smm-strategy-call.html"
+    },
+    {
+      "source": "/smm-strategy-call-es",
+      "destination": "/smm-strategy-call-es.html"
     },
     {
       "source": "/contact",

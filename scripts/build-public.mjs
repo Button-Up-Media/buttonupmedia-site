@@ -19,6 +19,7 @@ const filesToCopy = [
   'services.html',
   'social-media-marketing.html',
   'smm-strategy-call.html',
+  'smm-strategy-call-es.html',
   'robots.txt',
   'sitemap.xml',
   'llms.txt',
@@ -74,7 +75,7 @@ for (const { file, loader } of filesToMinify) {
   const cssSource = await readFile(path.join(root, 'shared.css'), 'utf8');
   const { code: inlinedCss } = await transform(cssSource, { loader: 'css', minify: true, legalComments: 'none' });
   const linkTag = '<link rel="stylesheet" href="shared.css?v=nav-mobile-2" />';
-  for (const page of ['contact.html', 'smm-strategy-call.html']) {
+  for (const page of ['contact.html', 'smm-strategy-call.html', 'smm-strategy-call-es.html']) {
     const pagePath = path.join(outDir, page);
     const pageHtml = await readFile(pagePath, 'utf8');
     if (!pageHtml.includes(linkTag)) {

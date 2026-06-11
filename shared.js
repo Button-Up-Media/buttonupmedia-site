@@ -118,23 +118,46 @@ if (window.lucide && typeof lucide.createIcons === "function") {
     banner.setAttribute("aria-labelledby", "bum-consent-title");
     banner.setAttribute("aria-describedby", "bum-consent-copy");
 
+    // Locale-aware copy: pages set <html lang>. Spanish pages (lang="es")
+    // get translated strings; every other page keeps the original English.
+    const isEs = (document.documentElement.lang || "").toLowerCase().indexOf("es") === 0;
+    const t = isEs
+      ? {
+          close: "Cerrar el aviso de cookies",
+          title: "Tu privacidad nos importa",
+          copy: 'Usamos cookies para mejorar tu experiencia de navegación, mostrar anuncios personalizados y analizar nuestro tráfico. Al seguir navegando, aceptas el uso de cookies. Elige "Rechazar" para desactivarlas.',
+          actions: "Acciones de consentimiento de cookies",
+          policy: "Política de Privacidad",
+          reject: "Rechazar",
+          accept: "Entendido",
+        }
+      : {
+          close: "Close cookie banner",
+          title: "We value your privacy",
+          copy: 'We use cookies to enhance your browsing experience, serve personalized ads, and analyze our traffic. By continuing to browse, you consent to the use of cookies. Choose "Opt out" to disable them.',
+          actions: "Cookie consent actions",
+          policy: "Privacy Policy",
+          reject: "Opt out",
+          accept: "Got it",
+        };
+
     banner.innerHTML = `
       <div class="bum-consent__sheet" id="bum-consent-panel">
-        <button type="button" class="bum-consent__close" data-bum-consent-action="accept" aria-label="Close cookie banner">
+        <button type="button" class="bum-consent__close" data-bum-consent-action="accept" aria-label="${t.close}">
           <i data-lucide="x" aria-hidden="true"></i>
         </button>
         <div class="bum-consent__sheet-copy">
-          <h2 class="bum-consent__title" id="bum-consent-title">We value your privacy</h2>
+          <h2 class="bum-consent__title" id="bum-consent-title">${t.title}</h2>
           <p class="bum-consent__copy" id="bum-consent-copy">
-            We use cookies to enhance your browsing experience, serve personalized ads, and analyze our traffic. By continuing to browse, you consent to the use of cookies. Choose "Opt out" to disable them.
+            ${t.copy}
           </p>
         </div>
-        <div class="bum-consent__actions" aria-label="Cookie consent actions">
+        <div class="bum-consent__actions" aria-label="${t.actions}">
           <div class="bum-consent__actions-group">
-            <a href="/privacy" class="bum-consent__policy">Privacy Policy</a>
-            <button type="button" class="bum-consent__link" data-bum-consent-action="reject">Opt out</button>
+            <a href="/privacy" class="bum-consent__policy">${t.policy}</a>
+            <button type="button" class="bum-consent__link" data-bum-consent-action="reject">${t.reject}</button>
           </div>
-          <button type="button" class="bum-consent__button --primary" data-bum-consent-action="accept">Got it</button>
+          <button type="button" class="bum-consent__button --primary" data-bum-consent-action="accept">${t.accept}</button>
         </div>
       </div>
     `;
