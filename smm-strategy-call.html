@@ -186,6 +186,14 @@
     /* GTM's noscript iframe is already 0x0/hidden; this also keeps its markup
        from ever painting as raw text in scripting-enabled preview contexts. */
     noscript { display: none; }
+
+    /* Deep-link anchors for Google Ads sitelinks (#results, #why-restaurants,
+       #what-you-get, #book). Additive only: scroll-margin keeps the target off
+       the very top edge when reached via a URL hash; in-page smooth scroll is
+       disabled under reduced-motion. Does not affect layout, LCP, or CLS. */
+    #results, #why-restaurants, #what-you-get, #book { scroll-margin-top: 24px; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     /* No overflow-x: clip on .smm-lp so the hero backdrop can be full-bleed
        (100vw). Page horizontal overflow stays contained by the shared
        body { overflow-x: hidden }. */
@@ -1172,7 +1180,7 @@
     </header>
 
     <!-- PROOF: real result numbers + named-client trust row -->
-    <section class="smm-proof reveal" aria-label="Results">
+    <section id="results" class="smm-proof reveal" aria-label="Results">
       <div class="smm-eyebrow">Real results for real restaurants</div>
       <div class="smm-stat-row">
         <div class="smm-stat">
@@ -1236,7 +1244,7 @@
     </section>
 
     <!-- HOW: what we actually do — the differentiator, in plain English -->
-    <section class="smm-how" aria-label="How it works">
+    <section id="what-you-get" class="smm-how" aria-label="How it works">
       <div class="smm-how-head reveal">
         <h2>We don&rsquo;t just manage your social. <span class="accent-serif">We make it.</span></h2>
         <p>Most agencies outsource a freelance videographer who barely knows your restaurant, so the content costs more and rarely matches your vision. <strong>We bring our own in-house team into your strategy</strong> and film it ourselves, so every post is on brand and consistent.</p>
@@ -1335,7 +1343,7 @@
     </section>
 
     <!-- FIT: quick qualifier — self-select before booking -->
-    <section class="smm-fit" aria-label="Is this right for you">
+    <section id="why-restaurants" class="smm-fit" aria-label="Is this right for you">
       <div class="smm-fit-head">
         <h2>Built for restaurants like yours</h2>
       </div>

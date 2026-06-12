@@ -190,6 +190,14 @@
     /* GTM's noscript iframe is already 0x0/hidden; this also keeps its markup
        from ever painting as raw text in scripting-enabled preview contexts. */
     noscript { display: none; }
+
+    /* Deep-link anchors for Google Ads sitelinks (#results, #why-restaurants,
+       #what-you-get, #book). Additive only: scroll-margin keeps the target off
+       the very top edge when reached via a URL hash; in-page smooth scroll is
+       disabled under reduced-motion. Does not affect layout, LCP, or CLS. */
+    #results, #why-restaurants, #what-you-get, #book { scroll-margin-top: 24px; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     /* No overflow-x: clip on .smm-lp so the hero backdrop can be full-bleed
        (100vw). Page horizontal overflow stays contained by the shared
        body { overflow-x: hidden }. */
@@ -1175,7 +1183,7 @@
     </header>
 
     <!-- PROOF: real result numbers + named-client trust row -->
-    <section class="smm-proof reveal" aria-label="Resultados">
+    <section id="results" class="smm-proof reveal" aria-label="Resultados">
       <div class="smm-eyebrow">Resultados reales para restaurantes reales</div>
       <div class="smm-stat-row">
         <div class="smm-stat">
@@ -1239,7 +1247,7 @@
     </section>
 
     <!-- HOW: what we actually do — the differentiator, in plain English -->
-    <section class="smm-how" aria-label="Cómo funciona">
+    <section id="what-you-get" class="smm-how" aria-label="Cómo funciona">
       <div class="smm-how-head reveal">
         <h2>No solo manejamos tus redes. <span class="accent-serif">Las creamos.</span></h2>
         <p>La mayoría de las agencias subcontrata a un videógrafo freelance que apenas conoce tu restaurante, así que el contenido sale más caro y casi nunca refleja tu visión. <strong>Sumamos nuestro propio equipo interno a tu estrategia</strong> y lo grabamos nosotros mismos, para que cada publicación sea fiel a tu marca y consistente.</p>
@@ -1338,7 +1346,7 @@
     </section>
 
     <!-- FIT: quick qualifier — self-select before booking -->
-    <section class="smm-fit" aria-label="¿Es para ti?">
+    <section id="why-restaurants" class="smm-fit" aria-label="¿Es para ti?">
       <div class="smm-fit-head">
         <h2>Hecho para restaurantes como el tuyo</h2>
       </div>
