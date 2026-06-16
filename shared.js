@@ -1749,14 +1749,9 @@ document.querySelectorAll('[data-icon-anim="heart"]').forEach((cell) => {
 });
 
 // ── Hover-to-autoplay videos ──
-// Bunny video CDN is disabled: the buttonupmedia.b-cdn.net pull zone began
-// returning HTTP 403 "Domain suspended or not configured", which broke every
-// video site-wide. Videos now load from the self-hosted Vercel copies (all
-// return 200 video/mp4). To re-enable the CDN once the Bunny zone is restored,
-// set this back to:
-//   window.location.hostname === "www.buttonupmedia.com"
-//     ? "https://buttonupmedia.b-cdn.net/" : ""
-const VIDEO_CDN_BASE = "";
+const VIDEO_CDN_BASE = window.location.hostname === "www.buttonupmedia.com"
+  ? "https://buttonupmedia.b-cdn.net/"
+  : "";
 
 const isRemoteAsset = (value) => /^(?:https?:)?\/\//i.test(value) || value.startsWith("data:") || value.startsWith("blob:");
 
