@@ -28,6 +28,7 @@ const filesToCopy = [
   'sitemap.xml',
   'llms.txt',
   'favicon-bum.svg',
+  'google1836ba38076ac9c6.html',
 ];
 
 // Assets minified through esbuild on the way into public/.
