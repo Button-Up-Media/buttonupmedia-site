@@ -2124,10 +2124,11 @@ if (document.readyState === "loading") {
 
 /* ── Language switcher ───────────────────────────────────────────────────────
    Pages that declare an alternate-language version via <link rel="alternate"
-   hreflang> get a compact EN/ES toggle injected into the nav: a desktop link in
-   .lib-nav-links plus a mobile item in the dropdown menu (mirroring the existing
-   Call Us / Book actions). Self-gating: pages with no hreflang alternate are
-   left untouched, so the rest of the site is unaffected. */
+   hreflang> get an EN/ES toggle injected into the nav: a full-text link in
+   .lib-nav-links on desktop, plus a compact pill (globe + ES/EN) shown directly
+   beside the hamburger on mobile. Both link to the current page's counterpart
+   (from its hreflang href), never the home page. Self-gating: pages with no
+   hreflang alternate are left untouched, so the rest of the site is unaffected. */
 (function () {
   function buildLangSwitch() {
     var links = document.querySelector(".lib-nav .lib-nav-links");
@@ -2156,17 +2157,17 @@ if (document.readyState === "loading") {
     var phone = links.querySelector(".lib-nav-phone");
     if (phone) links.insertBefore(desktop, phone); else links.appendChild(desktop);
 
-    var menu = document.querySelector(".lib-nav-dropdown-menu");
-    if (menu && !menu.querySelector(".lib-lang-switch")) {
-      var mobile = document.createElement("a");
-      mobile.className = "lib-mobile-menu-only lib-mobile-action --ghost lib-lang-switch";
-      mobile.href = target;
-      mobile.setAttribute("hreflang", targetLang);
-      mobile.setAttribute("lang", targetLang);
-      mobile.setAttribute("aria-label", aria);
-      mobile.innerHTML = globe + label;
-      menu.appendChild(mobile);
-    }
+    // Compact pill shown beside the hamburger on mobile (hidden on desktop via
+    // CSS). Same destination as the desktop link: the current page's counterpart.
+    var compact = document.createElement("a");
+    compact.className = "lib-lang-switch-mobile";
+    compact.href = target;
+    compact.setAttribute("hreflang", targetLang);
+    compact.setAttribute("lang", targetLang);
+    compact.setAttribute("aria-label", aria);
+    compact.innerHTML = globe + targetLang.toUpperCase();
+    var dropdown = links.querySelector(".lib-nav-dropdown");
+    if (dropdown) links.insertBefore(compact, dropdown); else links.insertBefore(compact, links.firstChild);
   }
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", buildLangSwitch, { once: true });
