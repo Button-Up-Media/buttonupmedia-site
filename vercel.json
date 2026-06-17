@@ -312,6 +312,31 @@
       "permanent": true
     },
     {
+      "source": "/index-es.html",
+      "destination": "/es",
+      "permanent": true
+    },
+    {
+      "source": "/social-media-marketing-es.html",
+      "destination": "/es/marketing-redes-sociales",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-website-design-es.html",
+      "destination": "/es/diseno-web-restaurantes",
+      "permanent": true
+    },
+    {
+      "source": "/contact-es.html",
+      "destination": "/es/contacto",
+      "permanent": true
+    },
+    {
+      "source": "/es/casos-de-estudio",
+      "destination": "/es",
+      "permanent": true
+    },
+    {
       "source": "/thank-you",
       "destination": "/contact",
       "permanent": true
@@ -334,6 +359,22 @@
     {
       "source": "/smm-strategy-call-es",
       "destination": "/smm-strategy-call-es.html"
+    },
+    {
+      "source": "/es",
+      "destination": "/index-es.html"
+    },
+    {
+      "source": "/es/marketing-redes-sociales",
+      "destination": "/social-media-marketing-es.html"
+    },
+    {
+      "source": "/es/diseno-web-restaurantes",
+      "destination": "/restaurant-website-design-es.html"
+    },
+    {
+      "source": "/es/contacto",
+      "destination": "/contact-es.html"
     },
     {
       "source": "/contact",

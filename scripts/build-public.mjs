@@ -20,6 +20,10 @@ const filesToCopy = [
   'social-media-marketing.html',
   'smm-strategy-call.html',
   'smm-strategy-call-es.html',
+  'index-es.html',
+  'social-media-marketing-es.html',
+  'restaurant-website-design-es.html',
+  'contact-es.html',
   'robots.txt',
   'sitemap.xml',
   'llms.txt',
@@ -57,13 +61,15 @@ for (const { file, loader } of filesToMinify) {
 {
   const cssSource = await readFile(path.join(root, 'website-design-redesign.css'), 'utf8');
   const { code: inlinedCss } = await transform(cssSource, { loader: 'css', minify: true, legalComments: 'none' });
-  const pagePath = path.join(outDir, 'restaurant-website-design.html');
-  const pageHtml = await readFile(pagePath, 'utf8');
   const linkTag = '<link rel="stylesheet" href="website-design-redesign.css" />';
-  if (!pageHtml.includes(linkTag)) {
-    throw new Error('Expected redesign CSS <link> not found in restaurant-website-design.html');
+  for (const page of ['restaurant-website-design.html', 'restaurant-website-design-es.html']) {
+    const pagePath = path.join(outDir, page);
+    const pageHtml = await readFile(pagePath, 'utf8');
+    if (!pageHtml.includes(linkTag)) {
+      throw new Error(`Expected redesign CSS <link> not found in ${page}`);
+    }
+    await writeFile(pagePath, pageHtml.replace(linkTag, `<style>${inlinedCss}</style>`));
   }
-  await writeFile(pagePath, pageHtml.replace(linkTag, `<style>${inlinedCss}</style>`));
 }
 
 // Inline shared.css into pages where it is the only render-blocking stylesheet,
@@ -75,7 +81,7 @@ for (const { file, loader } of filesToMinify) {
   const cssSource = await readFile(path.join(root, 'shared.css'), 'utf8');
   const { code: inlinedCss } = await transform(cssSource, { loader: 'css', minify: true, legalComments: 'none' });
   const linkTag = '<link rel="stylesheet" href="shared.css?v=nav-mobile-2" />';
-  for (const page of ['contact.html', 'smm-strategy-call.html', 'smm-strategy-call-es.html']) {
+  for (const page of ['contact.html', 'contact-es.html', 'smm-strategy-call.html', 'smm-strategy-call-es.html']) {
     const pagePath = path.join(outDir, page);
     const pageHtml = await readFile(pagePath, 'utf8');
     if (!pageHtml.includes(linkTag)) {

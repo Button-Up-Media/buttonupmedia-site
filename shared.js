@@ -2121,3 +2121,56 @@ if (document.readyState === "loading") {
 } else {
   bindCtaPixelCanvasHoverGuard();
 }
+
+/* ── Language switcher ───────────────────────────────────────────────────────
+   Pages that declare an alternate-language version via <link rel="alternate"
+   hreflang> get a compact EN/ES toggle injected into the nav: a desktop link in
+   .lib-nav-links plus a mobile item in the dropdown menu (mirroring the existing
+   Call Us / Book actions). Self-gating: pages with no hreflang alternate are
+   left untouched, so the rest of the site is unaffected. */
+(function () {
+  function buildLangSwitch() {
+    var links = document.querySelector(".lib-nav .lib-nav-links");
+    if (!links || document.querySelector(".lib-lang-switch")) return;
+    var current = (document.documentElement.lang || "en").toLowerCase().slice(0, 2);
+    var alts = document.querySelectorAll('link[rel="alternate"][hreflang]');
+    var target = null, targetLang = null;
+    for (var i = 0; i < alts.length; i++) {
+      var hl = (alts[i].getAttribute("hreflang") || "").toLowerCase();
+      if (hl === "x-default") continue;
+      var lang2 = hl.slice(0, 2);
+      if (lang2 && lang2 !== current) { target = alts[i].getAttribute("href"); targetLang = lang2; break; }
+    }
+    if (!target) return;
+    var label = targetLang === "es" ? "Español" : "English";
+    var aria = targetLang === "es" ? "Ver esta página en español" : "View this page in English";
+    var globe = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="vertical-align:-2px;margin-right:5px;"><circle cx="12" cy="12" r="9"/><path d="M3 12h18" stroke-linecap="round"/><path d="M12 3c2.6 2.8 2.6 15.2 0 18M12 3c-2.6 2.8-2.6 15.2 0 18" stroke-linecap="round"/></svg>';
+
+    var desktop = document.createElement("a");
+    desktop.className = "lib-lang-switch";
+    desktop.href = target;
+    desktop.setAttribute("hreflang", targetLang);
+    desktop.setAttribute("lang", targetLang);
+    desktop.setAttribute("aria-label", aria);
+    desktop.innerHTML = globe + label;
+    var phone = links.querySelector(".lib-nav-phone");
+    if (phone) links.insertBefore(desktop, phone); else links.appendChild(desktop);
+
+    var menu = document.querySelector(".lib-nav-dropdown-menu");
+    if (menu && !menu.querySelector(".lib-lang-switch")) {
+      var mobile = document.createElement("a");
+      mobile.className = "lib-mobile-menu-only lib-mobile-action --ghost lib-lang-switch";
+      mobile.href = target;
+      mobile.setAttribute("hreflang", targetLang);
+      mobile.setAttribute("lang", targetLang);
+      mobile.setAttribute("aria-label", aria);
+      mobile.innerHTML = globe + label;
+      menu.appendChild(mobile);
+    }
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", buildLangSwitch, { once: true });
+  } else {
+    buildLangSwitch();
+  }
+})();
