@@ -218,22 +218,22 @@
     },
     {
       "source": "/googleads",
-      "destination": "/",
+      "destination": "/restaurant-advertising",
       "permanent": true
     },
     {
       "source": "/googleads/",
-      "destination": "/",
+      "destination": "/restaurant-advertising",
       "permanent": true
     },
     {
       "source": "/google-ads",
-      "destination": "/",
+      "destination": "/restaurant-advertising",
       "permanent": true
     },
     {
       "source": "/google-ads/",
-      "destination": "/",
+      "destination": "/restaurant-advertising",
       "permanent": true
     },
     {
@@ -252,18 +252,13 @@
       "permanent": true
     },
     {
-      "source": "/restaurant-advertising",
-      "destination": "/",
-      "permanent": true
-    },
-    {
       "source": "/restaurant-advertising/",
-      "destination": "/",
+      "destination": "/restaurant-advertising",
       "permanent": true
     },
     {
       "source": "/restaurant-advertising.html",
-      "destination": "/",
+      "destination": "/restaurant-advertising",
       "permanent": true
     },
     {
@@ -399,6 +394,10 @@
     {
       "source": "/restaurant-website-design",
       "destination": "/restaurant-website-design.html"
+    },
+    {
+      "source": "/restaurant-advertising",
+      "destination": "/restaurant-advertising.html"
     },
     {
       "source": "/privacy",
