@@ -81,14 +81,15 @@ for (const { file, loader } of filesToMinify) {
 {
   const cssSource = await readFile(path.join(root, 'shared.css'), 'utf8');
   const { code: inlinedCss } = await transform(cssSource, { loader: 'css', minify: true, legalComments: 'none' });
-  const linkTag = '<link rel="stylesheet" href="shared.css?v=nav-mobile-2" />';
+  // Match any cache-busting version (?v=...) so bumping it never breaks the build.
+  const linkRe = /<link rel="stylesheet" href="shared\.css(?:\?v=[^"]*)?" \/>/;
   for (const page of ['contact.html', 'contact-es.html', 'smm-strategy-call.html', 'smm-strategy-call-es.html']) {
     const pagePath = path.join(outDir, page);
     const pageHtml = await readFile(pagePath, 'utf8');
-    if (!pageHtml.includes(linkTag)) {
+    if (!linkRe.test(pageHtml)) {
       throw new Error(`Expected shared.css <link> not found in ${page}`);
     }
-    await writeFile(pagePath, pageHtml.replace(linkTag, `<style>${inlinedCss}</style>`));
+    await writeFile(pagePath, pageHtml.replace(linkRe, () => `<style>${inlinedCss}</style>`));
   }
 }
 
