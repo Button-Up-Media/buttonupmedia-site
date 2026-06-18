@@ -68,7 +68,7 @@
   <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
 
   <!-- Base styles -->
-  <link rel="stylesheet" href="shared.css?v=nav-mobile-2" />
+  <link rel="stylesheet" href="shared.css?v=nav-mobile-4" />
 
   <!-- Animation runtime (Lucide, GSAP, ScrollTrigger, pixel-canvas) loads after
        the page is interactive so it never blocks the hero paint. The hero is
@@ -250,8 +250,8 @@
     .lib-nav {
       position: fixed;
       top: 16px;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 0;
+      right: 0;
       z-index: 999;
     }
 
@@ -3005,7 +3005,7 @@
   </div><!-- .page -->
 
   <!-- GSAP + Animations -->
-  <script src="shared.js?v=nav-mobile-3"></script>
+  <script src="shared.js?v=nav-mobile-4"></script>
   <script src="website-design-redesign.js"></script>
   <script>
   function initRwDesign() {

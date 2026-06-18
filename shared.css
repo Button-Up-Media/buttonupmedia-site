@@ -79,8 +79,12 @@ a { color: inherit; text-decoration: none; }
 .lib-nav {
   position: fixed;
   top: 16px;
-  left: 50%;
-  transform: translateX(-50%);
+  /* Center via left/right:0 + auto margins instead of translateX(-50%).
+     left:50% lands the box origin on a half-pixel at odd viewport widths,
+     and because backdrop-filter puts the nav on its own compositing layer,
+     that sub-pixel offset blurs the layer's contents (the logo) on mobile. */
+  left: 0;
+  right: 0;
   z-index: 999;
   width: min(calc(100% - 48px), var(--max));
   margin: 16px auto 0;
@@ -185,12 +189,20 @@ a { color: inherit; text-decoration: none; }
   transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
   white-space: nowrap;
 }
-.lib-nav-dropdown-trigger:hover,
-.lib-nav-dropdown[open] .lib-nav-dropdown-trigger,
-.lib-nav-dropdown:focus-within .lib-nav-dropdown-trigger {
+.lib-nav-dropdown[open] .lib-nav-dropdown-trigger {
   border-color: rgba(226,168,77,0.38);
   background: rgba(226,168,77,0.08);
   color: var(--gold);
+}
+/* Hover/focus highlight only on pointer (mouse) devices. On touch this
+   triggers iOS "sticky hover", which swallows the first tap. */
+@media (hover: hover) {
+  .lib-nav-dropdown-trigger:hover,
+  .lib-nav-dropdown:focus-within .lib-nav-dropdown-trigger {
+    border-color: rgba(226,168,77,0.38);
+    background: rgba(226,168,77,0.08);
+    color: var(--gold);
+  }
 }
 .lib-nav-dropdown-trigger svg {
   width: 14px;
@@ -218,12 +230,20 @@ a { color: inherit; text-decoration: none; }
   transition: opacity 0.18s ease, transform 0.18s ease;
   z-index: 1200;
 }
-.lib-nav-dropdown:hover .lib-nav-dropdown-menu,
-.lib-nav-dropdown:focus-within .lib-nav-dropdown-menu,
 .lib-nav-dropdown[open] .lib-nav-dropdown-menu {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+}
+/* Hover/focus open only on pointer devices; touch uses the [open] toggle
+   driven by JS so it opens and closes in a single tap. */
+@media (hover: hover) {
+  .lib-nav-dropdown:hover .lib-nav-dropdown-menu,
+  .lib-nav-dropdown:focus-within .lib-nav-dropdown-menu {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
 }
 .lib-nav-dropdown-menu a {
   display: flex;
@@ -248,12 +268,15 @@ a { color: inherit; text-decoration: none; }
 .lib-mobile-menu-only {
   display: none !important;
 }
-/* Compact mobile language switcher: a small pill (globe + ES/EN) shown beside
-   the hamburger on mobile. The full-text .lib-lang-switch shows on desktop
-   instead. Injected by shared.js only on pages with an hreflang alternate. */
-.lib-lang-switch-mobile { display: none; }
+/* Compact mobile pills shown beside the hamburger on mobile: the language
+   switcher (globe + ES/EN) and the call button (phone + Call/Llamar). Both
+   share this pill styling and are injected by shared.js. The full-text
+   .lib-lang-switch / .lib-nav-phone show on desktop instead. */
+.lib-lang-switch-mobile,
+.lib-nav-call-mobile { display: none; }
 @media (max-width: 700px) {
-  .lib-nav-links > .lib-lang-switch-mobile {
+  .lib-nav-links > .lib-lang-switch-mobile,
+  .lib-nav-links > .lib-nav-call-mobile {
     display: inline-flex;
     align-items: center;
     height: 40px;
@@ -270,7 +293,9 @@ a { color: inherit; text-decoration: none; }
     transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
   }
   .lib-nav-links > .lib-lang-switch-mobile:hover,
-  .lib-nav-links > .lib-lang-switch-mobile:focus-visible {
+  .lib-nav-links > .lib-lang-switch-mobile:focus-visible,
+  .lib-nav-links > .lib-nav-call-mobile:hover,
+  .lib-nav-links > .lib-nav-call-mobile:focus-visible {
     border-color: rgba(226,168,77,0.38);
     background: rgba(226,168,77,0.08);
     color: var(--gold);

@@ -187,7 +187,7 @@
   <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
 
   <!-- Base styles (nav, footer, cards, etc.) -->
-  <link rel="stylesheet" href="shared.css?v=nav-mobile-2" />
+  <link rel="stylesheet" href="shared.css?v=nav-mobile-4" />
 
   <!-- ═══ HOMEPAGE 2.0, ALL CSS SELF-CONTAINED ═══ -->
   <style>
@@ -220,8 +220,8 @@
     .lib-nav {
       position: fixed;
       top: 16px;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 0;
+      right: 0;
       z-index: 999;
     }
     .lib-nav-brand {
@@ -290,12 +290,18 @@
       transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
       white-space: nowrap;
     }
-    .lib-nav-dropdown-trigger:hover,
-    .lib-nav-dropdown[open] .lib-nav-dropdown-trigger,
-    .lib-nav-dropdown:focus-within .lib-nav-dropdown-trigger {
+    .lib-nav-dropdown[open] .lib-nav-dropdown-trigger {
       border-color: rgba(226,168,77,0.38);
       background: rgba(226,168,77,0.08);
       color: var(--gold);
+    }
+    @media (hover: hover) {
+      .lib-nav-dropdown-trigger:hover,
+      .lib-nav-dropdown:focus-within .lib-nav-dropdown-trigger {
+        border-color: rgba(226,168,77,0.38);
+        background: rgba(226,168,77,0.08);
+        color: var(--gold);
+      }
     }
     .lib-nav-dropdown-trigger svg {
       width: 14px;
@@ -323,12 +329,18 @@
       transition: opacity 0.18s ease, transform 0.18s ease;
       z-index: 1200;
     }
-    .lib-nav-dropdown:hover .lib-nav-dropdown-menu,
-    .lib-nav-dropdown:focus-within .lib-nav-dropdown-menu,
     .lib-nav-dropdown[open] .lib-nav-dropdown-menu {
       opacity: 1;
       transform: translateY(0);
       pointer-events: auto;
+    }
+    @media (hover: hover) {
+      .lib-nav-dropdown:hover .lib-nav-dropdown-menu,
+      .lib-nav-dropdown:focus-within .lib-nav-dropdown-menu {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
     }
     .lib-nav-dropdown-menu a {
       display: flex;
@@ -4704,7 +4716,7 @@
   </div><!-- /.page -->
 
   <!-- Base shared.js for nav, card-overlay stacking, immersive expand, etc. -->
-  <script src="shared.js?v=nav-mobile-3"></script>
+  <script src="shared.js?v=nav-mobile-4"></script>
 
   <!-- ═══ HOMEPAGE 2.0, ALL ANIMATION JS SELF-CONTAINED ═══ -->
   <script>

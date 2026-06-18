@@ -68,7 +68,7 @@
   <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
 
   <!-- Base styles -->
-  <link rel="stylesheet" href="shared.css?v=nav-mobile-2" />
+  <link rel="stylesheet" href="shared.css?v=nav-mobile-4" />
 
   <!-- Animation runtime (Lucide, GSAP, ScrollTrigger, pixel-canvas) loads after
        the page is interactive so it never blocks the hero paint. The hero is
@@ -251,8 +251,8 @@
     .lib-nav {
       position: fixed;
       top: 16px;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 0;
+      right: 0;
       z-index: 999;
     }
 
@@ -2499,7 +2499,7 @@
           <div class="rw-mobile-hero-kicker">Diseño Web para Restaurantes</div>
           <h1 class="rw-hero-title">Diseño web para restaurantes hecho para atraer clientes.</h1>
           <p class="rw-desktop-hero-sub">Desarrollo de páginas web a la medida para tu restaurante, con SEO, páginas de menú, reservas, pedidos en línea y textos enfocados en convertir las búsquedas locales en llamadas y reservas.</p>
-          <p class="rw-mobile-hero-sub">¿Necesitas un desarrollador de páginas web para tu restaurante? Creamos sitios rápidos y mobile-first que muestran tu menú, toman reservas, captan pedidos y ayudan a que los comensales de tu zona te encuentren.</p>
+          <p class="rw-mobile-hero-sub">¿Necesitas un desarrollador de páginas web para tu restaurante? Creamos sitios rápidos y mobile-first que muestran tu menú, toman reservas, captan pedidos y ayudan a que los clientes de tu zona te encuentren.</p>
           <div class="rw-hero-cta">
             <div class="flex-row" style="gap: 12px;">
               <a href="/es/contacto" class="btn btn-primary">Agende una consulta gratis</a>
@@ -2551,7 +2551,7 @@
     <section class="card-overlay --dark lib-section" id="the-problem">
       <div class="lib-section-label">El Problema</div>
       <h2 class="lib-section-title">Por qué la mayoría de las páginas web de restaurantes no convierten</h2>
-      <p class="lib-section-sub">Si los comensales no encuentran el menú, no pueden reservar una mesa, no logran pedir en línea o no entienden por qué tu restaurante es la mejor opción, se van.</p>
+      <p class="lib-section-sub">Si los clientes no encuentran el menú, no pueden reservar una mesa, no logran pedir en línea o no entienden por qué tu restaurante es la mejor opción, se van.</p>
 
       <div class="rw-problem-tabs">
         <nav class="rw-problem-tabs-nav" role="tablist">
@@ -2580,7 +2580,7 @@
         <div class="rw-problem-tab-panel" data-problem-panel="mobile">
           <div class="rw-problem-tab-content">
             <h3>La experiencia móvil está dañada</h3>
-            <p>El rediseño de la página web de un restaurante debe empezar por el móvil, porque la mayoría de los comensales deciden desde el teléfono.</p>
+            <p>El rediseño de la página web de un restaurante debe empezar por el móvil, porque la mayoría de los clientes deciden desde el teléfono.</p>
             <ul class="rw-problem-bullets">
               <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Texto diminuto y carga lenta en los teléfonos</li>
               <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Botones demasiado pequeños para tocarlos bien</li>
@@ -2846,7 +2846,7 @@
           <div class="rw-risk-card-icon"><i data-lucide="search"></i></div>
           <div class="rw-risk-copy">
             <h4>Te encuentra Google</h4>
-            <p>Hecho para aparecer cuando los comensales buscan páginas web de restaurantes, menús y lugares para comer cerca.</p>
+            <p>Hecho para aparecer cuando los clientes buscan páginas web de restaurantes, menús y lugares para comer cerca.</p>
           </div>
         </div>
         <div class="rw-risk-card">
@@ -3006,7 +3006,7 @@
   </div><!-- .page -->
 
   <!-- GSAP + Animations -->
-  <script src="shared.js?v=nav-mobile-3"></script>
+  <script src="shared.js?v=nav-mobile-4"></script>
   <script src="website-design-redesign.js"></script>
   <script>
   function initRwDesign() {

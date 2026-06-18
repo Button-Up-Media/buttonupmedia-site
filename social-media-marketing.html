@@ -70,7 +70,7 @@
   <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
 
   <!-- Base styles -->
-  <link rel="stylesheet" href="shared.css?v=nav-mobile-2" />
+  <link rel="stylesheet" href="shared.css?v=nav-mobile-4" />
 
   <!-- Animation runtime (Lucide, GSAP, ScrollTrigger, pixel-canvas) loads after
        the page is interactive so it never blocks the hero paint. The hero
@@ -320,8 +320,8 @@
     .lib-nav {
       position: fixed;
       top: 16px;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 0;
+      right: 0;
       z-index: 999;
     }
 
@@ -3114,7 +3114,7 @@
   </div><!-- /.page -->
 
   <!-- Base shared.js for nav, card-overlay stacking, etc. -->
-  <script defer src="shared.js?v=nav-mobile-3"></script>
+  <script defer src="shared.js?v=nav-mobile-4"></script>
 
   <!-- ═══ SOCIAL MEDIA MARKETING — ALL ANIMATION JS ═══ -->
   <script>

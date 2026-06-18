@@ -187,7 +187,7 @@
   <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
 
   <!-- Base styles (nav, footer, cards, etc.) -->
-  <link rel="stylesheet" href="shared.css?v=nav-mobile-2" />
+  <link rel="stylesheet" href="shared.css?v=nav-mobile-4" />
 
   <!-- ═══ HOMEPAGE 2.0, ALL CSS SELF-CONTAINED ═══ -->
   <style>
@@ -220,8 +220,8 @@
     .lib-nav {
       position: fixed;
       top: 16px;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 0;
+      right: 0;
       z-index: 999;
     }
     .lib-nav-brand {
@@ -290,12 +290,18 @@
       transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
       white-space: nowrap;
     }
-    .lib-nav-dropdown-trigger:hover,
-    .lib-nav-dropdown[open] .lib-nav-dropdown-trigger,
-    .lib-nav-dropdown:focus-within .lib-nav-dropdown-trigger {
+    .lib-nav-dropdown[open] .lib-nav-dropdown-trigger {
       border-color: rgba(226,168,77,0.38);
       background: rgba(226,168,77,0.08);
       color: var(--gold);
+    }
+    @media (hover: hover) {
+      .lib-nav-dropdown-trigger:hover,
+      .lib-nav-dropdown:focus-within .lib-nav-dropdown-trigger {
+        border-color: rgba(226,168,77,0.38);
+        background: rgba(226,168,77,0.08);
+        color: var(--gold);
+      }
     }
     .lib-nav-dropdown-trigger svg {
       width: 14px;
@@ -323,12 +329,18 @@
       transition: opacity 0.18s ease, transform 0.18s ease;
       z-index: 1200;
     }
-    .lib-nav-dropdown:hover .lib-nav-dropdown-menu,
-    .lib-nav-dropdown:focus-within .lib-nav-dropdown-menu,
     .lib-nav-dropdown[open] .lib-nav-dropdown-menu {
       opacity: 1;
       transform: translateY(0);
       pointer-events: auto;
+    }
+    @media (hover: hover) {
+      .lib-nav-dropdown:hover .lib-nav-dropdown-menu,
+      .lib-nav-dropdown:focus-within .lib-nav-dropdown-menu {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
     }
     .lib-nav-dropdown-menu a {
       display: flex;
@@ -3612,7 +3624,7 @@
           { "@type": "Question", "name": "¿Qué hace una agencia de marketing para restaurantes?", "acceptedAnswer": { "@type": "Answer", "text": "Una agencia de marketing para restaurantes se especializa en ayudar a los restaurantes a aumentar su visibilidad, atraer más clientes y crecer en ingresos a través del marketing digital. Por lo general esto incluye gestión de redes sociales y creación de contenido, diseño y optimización de páginas web, optimización para motores de búsqueda (SEO) y publicidad pagada en plataformas como Google y Facebook. A diferencia de las agencias generales, una agencia de marketing para restaurantes entiende los retos propios del sector de la hospitalidad: márgenes ajustados, mucha competencia y la necesidad constante de llenar mesas." } },
           { "@type": "Question", "name": "¿Cuánto cuesta el marketing para restaurantes?", "acceptedAnswer": { "@type": "Answer", "text": "El costo del marketing para restaurantes varía según los servicios que necesites y el tamaño de tu operación. En Button Up Media creamos estrategias a la medida de las metas y el presupuesto de cada restaurante. La mayoría de los dueños de restaurantes invierten entre $1,500 y $5,000 al mes en una estrategia de marketing coordinada que incluye varios canales. La mejor manera de tener un panorama claro es agendar una consulta gratis para que podamos entender tu situación específica y recomendarte el enfoque correcto." } },
           { "@type": "Question", "name": "¿Cuál es la mejor estrategia de marketing para un restaurante?", "acceptedAnswer": { "@type": "Answer", "text": "La estrategia de marketing para restaurantes más efectiva es la que está integrada: no solo redes sociales o solo una página web, sino todos los canales trabajando juntos. Como mínimo, una estrategia de marketing sólida para un restaurante debe incluir una presencia activa en redes sociales con contenido de video profesional, una página web optimizada para móvil que facilite ver los menús y hacer reservas, SEO local para que aparezcas cuando los clientes buscan restaurantes cerca, y publicidad segmentada para captar clientes con alta intención." } },
-          { "@type": "Question", "name": "¿Cómo conseguir más clientes para mi restaurante?", "acceptedAnswer": { "@type": "Answer", "text": "Conseguir más clientes empieza por asegurarte de que la gente pueda encontrarte en línea. Más del 97% de los comensales usan Google para buscar restaurantes, y plataformas como Instagram y TikTok influyen directamente en dónde decide comer la gente. Para conseguir más clientes necesitas ser visible cuando buscan, lucir atractivo cuando te encuentran y hacer que reservar o pedir sea muy fácil." } },
+          { "@type": "Question", "name": "¿Cómo conseguir más clientes para mi restaurante?", "acceptedAnswer": { "@type": "Answer", "text": "Conseguir más clientes empieza por asegurarte de que la gente pueda encontrarte en línea. Más del 97% de los clientes usan Google para buscar restaurantes, y plataformas como Instagram y TikTok influyen directamente en dónde decide comer la gente. Para conseguir más clientes necesitas ser visible cuando buscan, lucir atractivo cuando te encuentran y hacer que reservar o pedir sea muy fácil." } },
           { "@type": "Question", "name": "¿Por qué contratar una agencia de marketing especializada en restaurantes?", "acceptedAnswer": { "@type": "Answer", "text": "Las agencias de marketing generales aplican a los restaurantes el mismo manual que usan para dentistas, gimnasios y bufetes de abogados. El marketing para restaurantes es fundamentalmente distinto: el recorrido del cliente es más corto, la decisión es emocional y visual, y la competencia es hiperlocal. Una agencia especializada en restaurantes entiende la psicología del menú, el comportamiento de las reservas, los patrones de demanda por temporada y qué lleva a una persona a elegir un restaurante en lugar de otro un viernes por la noche." } },
           { "@type": "Question", "name": "¿Qué es la Optimización para Motores de Respuesta (AEO) para restaurantes?", "acceptedAnswer": { "@type": "Answer", "text": "La Optimización para Motores de Respuesta es la práctica de optimizar la presencia digital de tu restaurante para que aparezca en resultados de búsqueda impulsados por IA, incluyendo los resúmenes de IA de Google, ChatGPT, Perplexity y asistentes de voz como Siri y Alexa. A medida que más clientes usan IA conversacional para encontrar recomendaciones de dónde comer, el AEO asegura que tu restaurante sea citado y recomendado en esas respuestas." } },
           { "@type": "Question", "name": "¿Trabajan con restaurantes fuera de la Florida?", "acceptedAnswer": { "@type": "Answer", "text": "Button Up Media tiene su sede en el sur de la Florida y atiende restaurantes en todo el estado, desde Miami y Fort Lauderdale hasta Orlando, Tampa, Jacksonville, Naples y más allá. Aunque nuestra mayor experiencia está en el mercado de la Florida, también trabajamos con marcas de restaurantes en otros estados. Si te interesa trabajar juntos, el mejor primer paso es agendar una consulta gratis." } }
@@ -3702,7 +3714,7 @@
               <a href="/es/contacto" class="btn btn-primary hp2-cta-btn">Agende su llamada de estrategia gratis</a>
             </div>
             <div class="hp2-hero-chips flex-row" style="gap: 8px;">
-              <a class="chip" href="/es/marketing-redes-sociales">Social Orgánico</a>
+              <a class="chip" href="/es/marketing-redes-sociales">Contenido Orgánico</a>
             </div>
           </div>
         </div>
@@ -3756,8 +3768,8 @@
         <div class="hp2-industry-copy">
           <div class="lib-section-label" style="text-align:left;">El Reto</div>
           <h2 class="hp2-industry-headline">Si la gente no encuentra tu restaurante en línea,<br>come en otro lado.</h2>
-          <p class="hp2-industry-body">Solo en la Florida hay más de 67.000 restaurantes. Los comensales ya no andan dando vueltas con la esperanza de encontrar un buen lugar. Buscan.</p>
-          <p class="hp2-industry-body"><strong style="color:var(--text);">El 90% de los comensales busca un restaurante en línea antes de visitarlo.</strong> Revisan Google. Hacen scroll en Instagram. Ven TikTok. Leen reseñas. Y deciden en segundos.</p>
+          <p class="hp2-industry-body">Solo en la Florida hay más de 67.000 restaurantes. Los clientes ya no andan dando vueltas con la esperanza de encontrar un buen lugar. Buscan.</p>
+          <p class="hp2-industry-body"><strong style="color:var(--text);">El 90% de los clientes busca un restaurante en línea antes de visitarlo.</strong> Revisan Google. Hacen scroll en Instagram. Ven TikTok. Leen reseñas. Y deciden en segundos.</p>
           <p class="hp2-industry-body">Si no apareces en esos momentos, el restaurante de la otra cuadra sí lo hace.</p>
         </div>
         <div class="hp2-industry-video">
@@ -3922,7 +3934,7 @@
           <div class="eco-node" data-node="organic">
             <div class="eco-orb"><i data-lucide="camera"></i></div>
             <div class="eco-label">
-              <div class="eco-title">Social Orgánico</div>
+              <div class="eco-title">Contenido Orgánico</div>
               <div class="eco-sub">El que construye la marca</div>
             </div>
           </div>
@@ -3939,7 +3951,7 @@
           <span class="eco-try">Prueba esto</span>
           <div class="eco-break-row">
             <button class="eco-break" data-break="website">Romper Página Web</button>
-            <button class="eco-break" data-break="organic">Romper Social Orgánico</button>
+            <button class="eco-break" data-break="organic">Romper Contenido Orgánico</button>
             <button class="eco-break" data-break="paid">Romper Publicidad Pagada</button>
           </div>
           <button class="eco-reset" id="ecoReset" hidden>Reiniciar</button>
@@ -3975,10 +3987,10 @@
           failure: "Si la página web está débil, cada clic en un anuncio y cada seguidor de redes cae en un balde con fugas. El tráfico llega, pero nadie reserva."
         },
         organic: {
-          title: "Social Orgánico",
-          shortBreak: "Social",
+          title: "Contenido Orgánico",
+          shortBreak: "Contenido",
           angle: 240,
-          failure: "Si el social orgánico está débil, nadie conoce tu nombre cuando aparece un anuncio. Entonces los anuncios cuestan más para lograr el mismo resultado, porque empiezas desde cero cada vez."
+          failure: "Si el contenido orgánico está débil, nadie conoce tu nombre cuando aparece un anuncio. Entonces los anuncios cuestan más para lograr el mismo resultado, porque empiezas desde cero cada vez."
         },
         paid: {
           title: "Publicidad Pagada",
@@ -4121,7 +4133,7 @@
               <div class="hp2-hscroll-copy">
                 <div class="label">01, Redes Sociales</div>
                 <h2>Redes Sociales que Llenan Mesas</h2>
-                <div class="hp2-hscroll-stat-pill"><strong>75%</strong> de los comensales dice que Instagram influye en dónde comen</div>
+                <div class="hp2-hscroll-stat-pill"><strong>75%</strong> de los clientes dice que Instagram influye en dónde comen</div>
                 <p>Llegamos a tu restaurante con cámaras y grabamos las fotos y videos que hacen que la gente deje de hacer scroll: tus platos estrella, tu equipo, tu salón, tu ambiente.</p>
                 <p>Esto no es una agencia reciclando fotos de banco. Cada publicación se hace dentro de tu restaurante, para tu audiencia, con un plan creado alrededor de tus metas.</p>
                 <ul>
@@ -4150,11 +4162,11 @@
               <div class="hp2-hscroll-copy">
                 <div class="label">02, Páginas Web</div>
                 <h2>Páginas Web que Convierten Visitantes en Clientes</h2>
-                <div class="hp2-hscroll-stat-pill"><strong>88%</strong> de los comensales busca un restaurante en línea antes de visitarlo</div>
+                <div class="hp2-hscroll-stat-pill"><strong>88%</strong> de los clientes busca un restaurante en línea antes de visitarlo</div>
                 <p>En cuanto alguien llega a tu sitio, tienes unos pocos segundos. O reserva una mesa, o sigue haciendo scroll hasta el próximo restaurante. Creamos sitios que ganan ese momento: rápidos en el celular, fáciles de usar y con un camino claro hacia la reserva.</p>
                 <p>Cada sitio que creamos está conectado directamente con tu sistema de reservas, los pedidos en línea y el formulario de eventos privados, para que ningún cliente se quede en el camino.</p>
                 <ul>
-                  <li><strong>Diseñadas primero para el celular</strong>, que es como navega la mayoría de los comensales</li>
+                  <li><strong>Diseñadas primero para el celular</strong>, que es como navega la mayoría de los clientes</li>
                   <li><strong>Páginas de menú que venden</strong>, con fotos reales y pedidos en un solo toque</li>
                   <li><strong>Conectadas a OpenTable, Resy, Toast y Yelp</strong>, para que las reservas entren directo</li>
                   <li><strong>Formularios de eventos privados y catering</strong> que de verdad se llenan</li>
@@ -4179,12 +4191,12 @@
               <div class="hp2-hscroll-copy">
                 <div class="label">03, SEO</div>
                 <h2>Aparece de primero cuando la gente busca.</h2>
-                <div class="hp2-hscroll-stat-pill"><strong>97%</strong> de los comensales usa motores de búsqueda para encontrar un restaurante</div>
-                <p>Cuando alguien escribe "mejor italiano cerca de mí" o "brunch en Brickell", necesitas estar en los primeros resultados, no enterrado en la segunda página. Llevamos tu restaurante a donde los comensales de verdad están buscando: en Google, en Maps y dentro de las herramientas de IA que los clientes empiezan a usar en lugar de Google.</p>
-                <p>Esto está hecho según cómo los comensales realmente buscan un lugar para comer, no un manual genérico prestado de bufetes de abogados y dentistas.</p>
+                <div class="hp2-hscroll-stat-pill"><strong>97%</strong> de los clientes usa motores de búsqueda para encontrar un restaurante</div>
+                <p>Cuando alguien escribe "mejor italiano cerca de mí" o "brunch en Brickell", necesitas estar en los primeros resultados, no enterrado en la segunda página. Llevamos tu restaurante a donde los clientes de verdad están buscando: en Google, en Maps y dentro de las herramientas de IA que los clientes empiezan a usar en lugar de Google.</p>
+                <p>Esto está hecho según cómo los clientes realmente buscan un lugar para comer, no un manual genérico prestado de bufetes de abogados y dentistas.</p>
                 <ul>
                   <li><strong>Optimización del Perfil de Empresa de Google</strong>, para que aparezcas de primero en Google Maps en las búsquedas "cerca de mí"</li>
-                  <li><strong>Estrategia de palabras clave de SEO local</strong> creada alrededor de cómo buscan de verdad los comensales en tu zona</li>
+                  <li><strong>Estrategia de palabras clave de SEO local</strong> creada alrededor de cómo buscan de verdad los clientes en tu zona</li>
                   <li><strong>SEO on-page</strong>: cada página de tu sitio ajustada para que Google la entienda y la posicione</li>
                   <li><strong>Construcción de citas</strong> en más de 60 directorios como Yelp, TripAdvisor, OpenTable y más</li>
                   <li><strong>AEO (Optimización para Motores de Respuesta)</strong> para que ChatGPT y la IA de Google te recomienden por tu nombre</li>
@@ -4214,7 +4226,7 @@
                 <ul>
                   <li><strong>Anuncios de Google</strong> que aparecen cuando alguien busca un lugar para comer cerca de ti</li>
                   <li><strong>Anuncios de Instagram y Facebook</strong> para eventos, promociones y noches flojas</li>
-                  <li><strong>Segmentación precisa</strong> a comensales que están a pocas millas de tu restaurante</li>
+                  <li><strong>Segmentación precisa</strong> a clientes que están a pocas millas de tu restaurante</li>
                   <li><strong>Anuncios de seguimiento</strong> para quienes visitaron tu sitio o tus redes</li>
                   <li><strong>Reportes mensuales claros</strong> que muestran exactamente lo que devolvió cada dólar</li>
                 </ul>
@@ -4257,7 +4269,7 @@
                   <img src="images/fatty-crab-thumbnail-ayce.avif" alt="Festín de cangrejo a voluntad en The Fatty Crab" loading="lazy" decoding="async" width="540" height="960" sizes="(max-width: 900px) 100vw, 420px" style="max-height: 420px; width: 100%; object-fit: cover; object-position: center 30%;" />
           </div>
           <div class="hp2-case-body">
-            <div class="case-tag">Social Orgánico</div>
+            <div class="case-tag">Contenido Orgánico</div>
             <h3>The Fatty Crab</h3>
             <p>Contenido diario grabado en el lugar, storytelling del restaurante y un calendario de publicaciones sin tregua. Convertimos la atención de las redes sociales en un salón lleno todas las noches de la semana.</p>
             <div class="hp2-case-metrics">
@@ -4276,7 +4288,7 @@
           <div class="hp2-case-body">
             <div class="case-tag">Google Ads</div>
             <h3>Rusty Pelican Miami</h3>
-            <p>Anuncios de búsqueda de Google dirigidos a comensales que ya están buscando un lugar para comer, con cada clic medido hasta la reserva. Una línea clara desde la inversión en anuncios hasta los ingresos reales.</p>
+            <p>Anuncios de búsqueda de Google dirigidos a clientes que ya están buscando un lugar para comer, con cada clic medido hasta la reserva. Una línea clara desde la inversión en anuncios hasta los ingresos reales.</p>
             <div class="hp2-case-metrics">
               <div class="hp2-case-metric"><strong data-scrub-to="9" data-suffix="%">9%</strong><span>CTR</span></div>
               <div class="hp2-case-metric"><strong data-scrub-to="12" data-suffix="X">12X</strong><span>ROAS</span></div>
@@ -4314,13 +4326,13 @@
         <div class="hp2-aeo-copy">
           <div class="lib-section-label" style="text-align:left;">Lo que Está Cambiando</div>
           <h2 class="lib-section-title" style="text-align:left; margin-bottom:20px;">Los clientes ya no solo googlean.</h2>
-          <p>Google sigue importando. Mucho. Pero la forma en que la gente busca está cambiando rápido. Ahora los comensales le preguntan a ChatGPT "¿dónde debería comer esta noche?" y leen las respuestas escritas por la IA de Google antes de hacer clic en cualquier enlace.</p>
+          <p>Google sigue importando. Mucho. Pero la forma en que la gente busca está cambiando rápido. Ahora los clientes le preguntan a ChatGPT "¿dónde debería comer esta noche?" y leen las respuestas escritas por la IA de Google antes de hacer clic en cualquier enlace.</p>
           <p style="margin-top:12px;">La mayoría de las agencias todavía juega el partido de ayer. <strong style="color:var(--text);">Hacemos que te encuentren en todos los lugares donde la gente de verdad está buscando</strong>, hoy y a medida que todo sigue cambiando.</p>
         </div>
         <div class="hp2-aeo-stack">
           <div class="hp2-aeo-block --traditional">
             <h4>Google y Google Maps</h4>
-            <p>Sigue siendo la mayor fuente de nuevos comensales. Te ponemos en la primera página de Google y en lo más alto de Maps para búsquedas como "mejor brunch cerca de mí".</p>
+            <p>Sigue siendo la mayor fuente de nuevos clientes. Te ponemos en la primera página de Google y en lo más alto de Maps para búsquedas como "mejor brunch cerca de mí".</p>
           </div>
           <div class="hp2-aeo-block --aeo">
             <h4>Optimización para Motores de Respuesta (AEO)</h4>
@@ -4448,7 +4460,7 @@
               <i data-lucide="search" width="22" height="22"></i>
             </div>
             <h3>Optimización para Búsqueda y Motores de Respuesta</h3>
-            <p>Aparece de primero en Google y en la búsqueda con IA cuando los comensales buscan restaurantes cerca de ellos.</p>
+            <p>Aparece de primero en Google y en la búsqueda con IA cuando los clientes buscan restaurantes cerca de ellos.</p>
           </div>
         </div>
 
@@ -4629,7 +4641,7 @@
           </details>
           <details class="hp2-faq-item">
             <summary><span><span class="hp2-faq-count">04</span>¿Cómo conseguir más clientes para mi restaurante?</span></summary>
-            <div class="hp2-faq-answer">Conseguir más clientes empieza por asegurarte de que la gente pueda encontrarte en línea. Más del 97% de los comensales usan Google para buscar restaurantes, y plataformas como Instagram y TikTok influyen directamente en dónde decide comer la gente. Para conseguir más clientes necesitas ser visible cuando buscan, lucir atractivo cuando te encuentran y hacer que reservar o pedir sea muy fácil. Eso significa optimizar tu Perfil de Empresa de Google, publicar contenido de video atractivo de forma constante, manejar anuncios locales segmentados y tener una página web rápida y amigable con el móvil, con llamados a la acción claros.</div>
+            <div class="hp2-faq-answer">Conseguir más clientes empieza por asegurarte de que la gente pueda encontrarte en línea. Más del 97% de los clientes usan Google para buscar restaurantes, y plataformas como Instagram y TikTok influyen directamente en dónde decide comer la gente. Para conseguir más clientes necesitas ser visible cuando buscan, lucir atractivo cuando te encuentran y hacer que reservar o pedir sea muy fácil. Eso significa optimizar tu Perfil de Empresa de Google, publicar contenido de video atractivo de forma constante, manejar anuncios locales segmentados y tener una página web rápida y amigable con el móvil, con llamados a la acción claros.</div>
           </details>
           <details class="hp2-faq-item">
             <summary><span><span class="hp2-faq-count">05</span>¿Por qué contratar una agencia de marketing especializada en restaurantes?</span></summary>
@@ -4704,7 +4716,7 @@
   </div><!-- /.page -->
 
   <!-- Base shared.js for nav, card-overlay stacking, immersive expand, etc. -->
-  <script src="shared.js?v=nav-mobile-3"></script>
+  <script src="shared.js?v=nav-mobile-4"></script>
 
   <!-- ═══ HOMEPAGE 2.0, ALL ANIMATION JS SELF-CONTAINED ═══ -->
   <script>

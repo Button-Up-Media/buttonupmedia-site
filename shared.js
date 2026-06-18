@@ -2175,3 +2175,37 @@ if (document.readyState === "loading") {
     buildLangSwitch();
   }
 })();
+
+/* ── Mobile call button ───────────────────────────────────────────────────────
+   A compact "Call" pill (phone glyph + label) injected beside the hamburger on
+   mobile so visitors can dial in a single tap. Reuses the nav's existing tel:
+   number so it stays correct per page, and is localized (Call / Llamar). Hidden
+   on desktop, where the full-text Call Us link already shows. Self-gating: a
+   page with no tel: link in its nav is left untouched. */
+(function () {
+  function buildCallButton() {
+    var links = document.querySelector(".lib-nav .lib-nav-links");
+    if (!links || links.querySelector(".lib-nav-call-mobile")) return;
+    var phone = links.querySelector('a[href^="tel:"]') || document.querySelector('.lib-nav a[href^="tel:"]');
+    if (!phone) return;
+    var isEs = (document.documentElement.lang || "en").toLowerCase().slice(0, 2) === "es";
+    var label = isEs ? "Llamar" : "Call";
+    var aria = isEs ? "Llámenos" : "Call us";
+    var icon = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="vertical-align:-2px;margin-right:5px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.7 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.27a2 2 0 0 1 2.11-.45c.74.34 1.53.57 2.34.7A2 2 0 0 1 22 16.92z" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+    var btn = document.createElement("a");
+    btn.className = "lib-nav-call-mobile";
+    btn.href = phone.getAttribute("href");
+    btn.setAttribute("aria-label", aria);
+    btn.innerHTML = icon + label;
+
+    // Sit to the left of the language pill (or the hamburger when there is none).
+    var anchor = links.querySelector(".lib-lang-switch-mobile") || links.querySelector(".lib-nav-dropdown");
+    if (anchor) links.insertBefore(btn, anchor); else links.appendChild(btn);
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", buildCallButton, { once: true });
+  } else {
+    buildCallButton();
+  }
+})();

@@ -63,7 +63,7 @@
   <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-variable.woff2" crossorigin fetchpriority="high" />
   <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
   <script defer src="https://unpkg.com/lucide@1.17.0/dist/umd/lucide.min.js"></script>
-  <link rel="stylesheet" href="shared.css?v=nav-mobile-2" />
+  <link rel="stylesheet" href="shared.css?v=nav-mobile-4" />
   <!-- JSON-LD Schema -->
   <script type="application/ld+json">
   {
@@ -418,10 +418,10 @@
       animation: contactHeroIn 0.7s cubic-bezier(0.25, 1, 0.5, 1) 0.4s backwards;
     }
     @keyframes contactNavIn {
-      /* keep the nav's translateX(-50%) centering through the whole fade so it
-         does not jump sideways while sliding down */
-      from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+      /* nav now centers via auto margins (no translateX), so the entrance is
+         a pure vertical slide */
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
     @keyframes contactHeroIn {
       from { opacity: 0; transform: translateY(30px); }
@@ -593,7 +593,7 @@
     </footer>
   </div>
 
-  <script defer src="shared.js?v=nav-mobile-3"></script>
+  <script defer src="shared.js?v=nav-mobile-4"></script>
   <script>
     (() => {
       const shell = document.querySelector("#contact-calendly-shell");
