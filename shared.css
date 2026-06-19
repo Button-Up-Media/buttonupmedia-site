@@ -102,6 +102,7 @@ a { color: inherit; text-decoration: none; }
   display: inline-flex;
   align-items: center;
   min-width: 0;
+  flex-shrink: 0;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 0.88rem;
@@ -115,6 +116,115 @@ a { color: inherit; text-decoration: none; }
   height: auto;
 }
 .lib-nav-brand span { color: var(--text-soft); font-weight: 500; margin-left: 8px; font-size: 0.75rem; letter-spacing: 0; }
+/* The Spanish nav copy is longer than the English (e.g. "Agende su llamada de
+   estrategia gratis"), so the horizontal desktop nav does not fit until a wider
+   viewport and the logo gets squeezed. Collapse the Spanish nav to the hamburger
+   up to 960px (English fits, so it is left on its desktop nav). Mirrors the
+   <=700px mobile nav, scoped to Spanish pages in the 701-960px gap. */
+@media (min-width: 701px) and (max-width: 960px) {
+  html[lang="es"] .lib-nav-links { justify-content: flex-end; gap: 8px; min-width: 0; }
+  html[lang="es"] .lib-nav-links > a,
+  html[lang="es"] .lib-nav-links > .btn-primary,
+  html[lang="es"] .lib-nav-phone { display: none; }
+  html[lang="es"] .lib-desktop-services { display: none; }
+  html[lang="es"] .lib-mobile-menu-only { display: flex !important; }
+  html[lang="es"] .lib-nav-links > .lib-lang-switch-mobile {
+    display: inline-flex;
+    align-items: center;
+    height: 40px;
+    padding: 0 13px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.02);
+    color: var(--text);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  html[lang="es"] .lib-nav-dropdown-trigger {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 999px;
+    justify-content: center;
+    font-size: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  html[lang="es"] .lib-nav-dropdown-trigger::before {
+    content: "";
+    width: 16px;
+    height: 12px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background:
+      linear-gradient(currentColor, currentColor) 0 0 / 100% 2px no-repeat,
+      linear-gradient(currentColor, currentColor) 0 50% / 100% 2px no-repeat,
+      linear-gradient(currentColor, currentColor) 0 100% / 100% 2px no-repeat;
+    transform: translate(-50%, -50%);
+  }
+  html[lang="es"] .lib-nav-dropdown-trigger svg { display: none; }
+  html[lang="es"] .lib-nav-dropdown-menu {
+    position: fixed;
+    top: 94px;
+    left: 10px;
+    right: 10px;
+    width: auto;
+    min-width: 0;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+  }
+  html[lang="es"] .lib-mobile-services { display: block !important; width: 100%; }
+  html[lang="es"] .lib-mobile-services-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03);
+    color: var(--text);
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  html[lang="es"] .lib-mobile-services-trigger svg { width: 14px; height: 14px; transition: transform 0.18s ease; }
+  html[lang="es"] .lib-mobile-services[open] .lib-mobile-services-trigger svg { transform: rotate(180deg); }
+  html[lang="es"] .lib-mobile-services-menu { display: none; width: 100%; padding: 8px 0 0; }
+  html[lang="es"] .lib-mobile-services[open] .lib-mobile-services-menu { display: flex; flex-direction: column; gap: 6px; }
+  html[lang="es"] .lib-mobile-services-menu a {
+    width: 100%;
+    text-align: left;
+    min-height: 40px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    color: var(--text);
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+  html[lang="es"] .lib-mobile-action {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 44px;
+    padding: 12px 14px !important;
+    margin-top: 8px;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-align: center;
+  }
+  html[lang="es"] .lib-mobile-action.--ghost { border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); color: var(--text); }
+  html[lang="es"] .lib-mobile-action.--primary { border: 1px solid rgba(226,168,77,0.35); background: rgba(226,168,77,0.14); color: var(--gold); }
+}
 .lib-nav-links {
   display: flex;
   flex-wrap: nowrap;
