@@ -50,8 +50,19 @@
   </url>
   <url>
     <loc>https://www.buttonupmedia.com/restaurant-advertising</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.buttonupmedia.com/restaurant-advertising"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.buttonupmedia.com/es/publicidad-restaurantes"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.buttonupmedia.com/restaurant-advertising"/>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.buttonupmedia.com/es/publicidad-restaurantes</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.buttonupmedia.com/restaurant-advertising"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.buttonupmedia.com/es/publicidad-restaurantes"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.buttonupmedia.com/restaurant-advertising"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.buttonupmedia.com/contact</loc>

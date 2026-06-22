@@ -322,6 +322,11 @@
       "permanent": true
     },
     {
+      "source": "/restaurant-advertising-es.html",
+      "destination": "/es/publicidad-restaurantes",
+      "permanent": true
+    },
+    {
       "source": "/contact-es.html",
       "destination": "/es/contacto",
       "permanent": true
@@ -366,6 +371,10 @@
     {
       "source": "/es/diseno-web-restaurantes",
       "destination": "/restaurant-website-design-es.html"
+    },
+    {
+      "source": "/es/publicidad-restaurantes",
+      "destination": "/restaurant-advertising-es.html"
     },
     {
       "source": "/es/contacto",

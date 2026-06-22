@@ -23,6 +23,7 @@ const filesToCopy = [
   'index-es.html',
   'social-media-marketing-es.html',
   'restaurant-website-design-es.html',
+  'restaurant-advertising-es.html',
   'contact-es.html',
   'robots.txt',
   'sitemap.xml',
