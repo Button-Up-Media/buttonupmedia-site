@@ -49,6 +49,8 @@
   <!-- Fonts -->
   <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-variable.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
+  <!-- Mobile hero background (LCP on phones): self-hosted + preloaded for small viewports only -->
+  <link rel="preload" as="image" href="/images/paid-hero-mobile-bg.avif" type="image/avif" media="(max-width:760px)" fetchpriority="high" />
 
   <link rel="stylesheet" href="shared.css?v=nav-mobile-4" />
 
@@ -269,7 +271,7 @@
     <!-- COPY (gets a photo background on mobile) -->
     <div class="hcopy" style="align-self:center;">
       <div class="hbg" style="display:none;position:absolute;inset:0;z-index:0;">
-        <div style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=72');background-size:cover;background-position:50% 45%;"></div>
+        <div style="position:absolute;inset:0;background-image:url('images/paid-hero-mobile-bg.jpg');background-image:image-set(url('images/paid-hero-mobile-bg.avif') type('image/avif'), url('images/paid-hero-mobile-bg.jpg') type('image/jpeg'));background-size:cover;background-position:50% 45%;"></div>
         <div style="position:absolute;inset:0;background:radial-gradient(130% 85% at 72% 0%, rgba(226,168,77,0.20), transparent 55%);"></div>
         <div style="position:absolute;inset:0;background:linear-gradient(to right, #0A0A0A 0%, rgba(10,10,10,0) 15%, rgba(10,10,10,0) 85%, #0A0A0A 100%);"></div>
         <div style="position:absolute;inset:0;background:linear-gradient(to top, #0A0A0A 0%, rgba(10,10,10,0.72) 36%, rgba(10,10,10,0.52) 70%, rgba(10,10,10,0.56) 100%);"></div>
