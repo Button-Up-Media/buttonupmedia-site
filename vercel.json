@@ -349,6 +349,42 @@
   ],
   "rewrites": [
     {
+      "source": "/es/images/:path*",
+      "destination": "/images/:path*"
+    },
+    {
+      "source": "/es/videos/:path*",
+      "destination": "/videos/:path*"
+    },
+    {
+      "source": "/es/media/:path*",
+      "destination": "/media/:path*"
+    },
+    {
+      "source": "/es/fonts/:path*",
+      "destination": "/fonts/:path*"
+    },
+    {
+      "source": "/es/shared.css",
+      "destination": "/shared.css"
+    },
+    {
+      "source": "/es/shared.js",
+      "destination": "/shared.js"
+    },
+    {
+      "source": "/es/website-design-redesign.css",
+      "destination": "/website-design-redesign.css"
+    },
+    {
+      "source": "/es/website-design-redesign.js",
+      "destination": "/website-design-redesign.js"
+    },
+    {
+      "source": "/es/pixel-canvas.js",
+      "destination": "/pixel-canvas.js"
+    },
+    {
       "source": "/socialmediamarketing",
       "destination": "/social-media-marketing.html"
     },
