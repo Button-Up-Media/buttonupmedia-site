@@ -292,13 +292,11 @@
       <div style="position:absolute;inset:-34px;background:radial-gradient(circle at 72% 14%, rgba(226,168,77,0.18), transparent 60%);filter:blur(26px);z-index:0;animation:floatBlob 9s ease-in-out infinite;"></div>
       <div style="position:relative;z-index:1;">
         <!-- team photo (desktop) -->
-        <div class="hpc" style="position:relative;overflow:hidden;border-radius:22px;height:320px;background:linear-gradient(155deg,#241f1a,#100f0d);border:1px solid rgba(255,248,235,0.10);display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;box-shadow:0 30px 80px rgba(0,0,0,0.5);">
-          <div style="position:absolute;top:-30px;right:-20px;width:220px;height:160px;background:radial-gradient(circle, rgba(226,168,77,0.14), transparent 65%);filter:blur(16px);"></div>
-          <div style="position:relative;color:#E2A84D;">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="margin-bottom:10px;"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            <div style="font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;margin-bottom:6px;">Photo · Team (16:9)</div>
-            <div style="font-size:0.86rem;color:rgba(246,240,230,0.7);max-width:340px;line-height:1.5;">Two team members reviewing a live campaign on screen, pointing at a metric. Warm desk-lamp light.</div>
-          </div>
+        <div class="hpc" style="position:relative;overflow:hidden;border-radius:22px;height:320px;border:1px solid rgba(255,248,235,0.10);box-shadow:0 30px 80px rgba(0,0,0,0.5);">
+          <picture>
+            <source type="image/avif" srcset="images/paid-hero-team-800.avif 800w, images/paid-hero-team-1280.avif 1280w" sizes="(max-width:980px) 92vw, 540px">
+            <img src="images/paid-hero-team-1280.jpg" alt="The Button Up Media team presenting a live Google Ads performance dashboard on a TV" width="1280" height="720" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%;display:block;">
+          </picture>
         </div>
         <!-- metrics card -->
         <div class="hm" style="position:relative;z-index:2;margin:-52px 18px 0;border-radius:18px;background:linear-gradient(180deg, rgba(26,24,21,0.95), rgba(18,17,15,0.95));backdrop-filter:blur(12px);border:1px solid rgba(255,248,235,0.14);padding:20px;box-shadow:0 26px 60px rgba(0,0,0,0.55);">
@@ -487,7 +485,13 @@
             <p style="color:rgba(246,240,230,0.72);font-size:1rem;line-height:1.6;margin:0 0 16px;">Social ads don't capture demand, they create it. We target local audiences by location, dining interests, age, and behavior before they start searching.</p>
             <div style="display:flex;flex-wrap:wrap;gap:8px;"><span style="font-size:0.66rem;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,248,235,0.12);color:rgba(246,240,230,0.7);">Local awareness</span><span style="font-size:0.66rem;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,248,235,0.12);color:rgba(246,240,230,0.7);">Event promos</span><span style="font-size:0.66rem;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,248,235,0.12);color:rgba(246,240,230,0.7);">Retargeting</span><span style="font-size:0.66rem;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,248,235,0.12);color:rgba(246,240,230,0.7);">Lead gen</span></div>
           </div>
-          <div style="flex:1;position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/3;border:1px solid rgba(255,248,235,0.10);"><div style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1652947701245-4c0e190571af?auto=format&fit=crop&w=800&q=70');background-size:cover;background-position:50% 38%;"></div><div style="position:absolute;inset:0;background:linear-gradient(155deg, rgba(10,10,10,0.22), rgba(10,10,10,0.5));"></div><div style="position:absolute;bottom:10px;right:10px;font-size:0.54rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(246,240,230,0.6);background:rgba(0,0,0,0.42);border:1px solid rgba(255,248,235,0.12);border-radius:999px;padding:4px 9px;">Example photo</div></div>
+          <div style="flex:1;position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/3;border:1px solid rgba(255,248,235,0.10);">
+            <picture>
+              <source type="image/avif" srcset="images/paid-fbig-560.avif 560w, images/paid-fbig.avif 889w" sizes="(max-width:900px) 100vw, 480px">
+              <img src="images/paid-fbig.jpg" alt="Scrolling an Instagram feed of restaurant dishes on a phone" width="889" height="667" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%;display:block;">
+            </picture>
+            <div style="position:absolute;inset:0;background:linear-gradient(155deg, rgba(10,10,10,0.20), rgba(10,10,10,0.46));"></div>
+          </div>
         </div>
 
         <div class="svc-panel">
@@ -507,7 +511,12 @@
             <p style="color:rgba(246,240,230,0.72);font-size:1rem;line-height:1.6;margin:0 0 16px;">Most people don't convert the first time. Retargeting keeps you visible to people who already showed interest, reminding them to come back and book.</p>
             <div style="display:flex;flex-wrap:wrap;gap:8px;"><span style="font-size:0.66rem;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,248,235,0.12);color:rgba(246,240,230,0.7);">Website visitors</span><span style="font-size:0.66rem;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,248,235,0.12);color:rgba(246,240,230,0.7);">Video viewers</span><span style="font-size:0.66rem;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,248,235,0.12);color:rgba(246,240,230,0.7);">Ad engagers</span></div>
           </div>
-          <div style="flex:1;position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/3;border:1px solid rgba(255,248,235,0.10);"><div style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1688322185458-0e9d0564bfe8?auto=format&fit=crop&w=800&q=70');background-size:cover;background-position:50% 45%;"></div><div style="position:absolute;inset:0;background:linear-gradient(155deg, rgba(10,10,10,0.22), rgba(10,10,10,0.5));"></div><div style="position:absolute;bottom:10px;right:10px;font-size:0.54rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(246,240,230,0.6);background:rgba(0,0,0,0.42);border:1px solid rgba(255,248,235,0.12);border-radius:999px;padding:4px 9px;">Example photo</div></div>
+          <div style="flex:1;position:relative;border-radius:18px;overflow:hidden;aspect-ratio:3/2;border:1px solid rgba(255,248,235,0.10);background:#fcead7;">
+            <picture>
+              <source type="image/avif" srcset="images/paid-retargeting.avif">
+              <img src="images/paid-retargeting.jpg" alt="Retargeting concept: a laptop beside a bullseye target hit by an arrow" width="598" height="398" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">
+            </picture>
+          </div>
         </div>
 
         <div class="svc-panel">
