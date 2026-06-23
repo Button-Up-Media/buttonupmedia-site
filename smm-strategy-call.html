@@ -1570,5 +1570,41 @@
       els.forEach(el => io.observe(el));
     })();
   </script>
+  <script>
+    /* Cold-load deep link for Google Ads sitelinks (#results, #why-restaurants,
+       #what-you-get, #book). On a fresh tab the browser reads the hash and tries
+       to scroll before web fonts, lazy reel posters, and the scroll-reveal
+       settle, so its early native jump lands wrong (usually back at the hero,
+       and html { scroll-behavior: smooth } makes that worse). Re-assert an
+       instant scroll to the target across the moments layout shifts (now, next
+       frame, after fonts, after full load), and bail the instant the visitor
+       scrolls or taps so we never fight a real interaction. scrollIntoView
+       honors the section's scroll-margin-top, keeping it clear of the top edge. */
+    (() => {
+      const id = decodeURIComponent((location.hash || "").replace(/^#/, ""));
+      if (!/^(results|why-restaurants|what-you-get|book)$/.test(id)) return;
+      if (!document.getElementById(id)) return;
+
+      let cancelled = false;
+      ["wheel", "touchstart", "keydown", "pointerdown"].forEach((evt) =>
+        window.addEventListener(evt, () => { cancelled = true; }, { passive: true, once: true }));
+
+      const jump = () => {
+        if (cancelled) return;
+        const el = document.getElementById(id);
+        if (!el) return;
+        try { el.scrollIntoView({ behavior: "instant", block: "start" }); }
+        catch (_) { el.scrollIntoView(); }
+      };
+
+      jump();
+      requestAnimationFrame(jump);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(jump);
+      window.addEventListener("load", () => {
+        jump();
+        [60, 200, 500].forEach((d) => setTimeout(jump, d));
+      });
+    })();
+  </script>
 </body>
 </html>
