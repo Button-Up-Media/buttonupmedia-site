@@ -3,33 +3,6 @@
   "trailingSlash": false,
   "headers": [
     {
-      "source": "/about",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, nofollow, noarchive"
-        }
-      ]
-    },
-    {
-      "source": "/about/",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, nofollow, noarchive"
-        }
-      ]
-    },
-    {
-      "source": "/about.html",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, nofollow, noarchive"
-        }
-      ]
-    },
-    {
       "source": "/gmcp.html",
       "headers": [
         {
@@ -223,18 +196,23 @@
       "permanent": true
     },
     {
-      "source": "/about",
-      "destination": "/",
+      "source": "/about.html",
+      "destination": "/about",
       "permanent": true
     },
     {
       "source": "/about/",
-      "destination": "/",
+      "destination": "/about",
       "permanent": true
     },
     {
-      "source": "/about.html",
-      "destination": "/",
+      "source": "/about-es.html",
+      "destination": "/es/nosotros",
+      "permanent": true
+    },
+    {
+      "source": "/es/nosotros/",
+      "destination": "/es/nosotros",
       "permanent": true
     },
     {
@@ -481,8 +459,16 @@
       "destination": "/contact-es.html"
     },
     {
+      "source": "/es/nosotros",
+      "destination": "/about-es.html"
+    },
+    {
       "source": "/contact",
       "destination": "/contact.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about.html"
     },
     {
       "source": "/websitedesign",
