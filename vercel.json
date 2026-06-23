@@ -75,7 +75,7 @@
       ]
     },
     {
-      "source": "/paid-ads-strategy-call",
+      "source": "/restaurant-paid-ads",
       "headers": [
         {
           "key": "X-Robots-Tag",
@@ -84,7 +84,7 @@
       ]
     },
     {
-      "source": "/paid-ads-strategy-call.html",
+      "source": "/restaurant-paid-ads.html",
       "headers": [
         {
           "key": "X-Robots-Tag",
@@ -93,7 +93,7 @@
       ]
     },
     {
-      "source": "/paid-ads-strategy-call-es",
+      "source": "/restaurant-paid-ads-es",
       "headers": [
         {
           "key": "X-Robots-Tag",
@@ -102,7 +102,7 @@
       ]
     },
     {
-      "source": "/paid-ads-strategy-call-es.html",
+      "source": "/restaurant-paid-ads-es.html",
       "headers": [
         {
           "key": "X-Robots-Tag",
@@ -343,23 +343,23 @@
       "permanent": true
     },
     {
-      "source": "/paid-ads-strategy-call/",
-      "destination": "/paid-ads-strategy-call",
+      "source": "/restaurant-paid-ads/",
+      "destination": "/restaurant-paid-ads",
       "permanent": true
     },
     {
-      "source": "/paid-ads-strategy-call.html",
-      "destination": "/paid-ads-strategy-call",
+      "source": "/restaurant-paid-ads.html",
+      "destination": "/restaurant-paid-ads",
       "permanent": true
     },
     {
-      "source": "/paid-ads-strategy-call-es/",
-      "destination": "/paid-ads-strategy-call-es",
+      "source": "/restaurant-paid-ads-es/",
+      "destination": "/restaurant-paid-ads-es",
       "permanent": true
     },
     {
-      "source": "/paid-ads-strategy-call-es.html",
-      "destination": "/paid-ads-strategy-call-es",
+      "source": "/restaurant-paid-ads-es.html",
+      "destination": "/restaurant-paid-ads-es",
       "permanent": true
     },
     {
@@ -453,12 +453,12 @@
       "destination": "/smm-strategy-call-es.html"
     },
     {
-      "source": "/paid-ads-strategy-call",
-      "destination": "/paid-ads-strategy-call.html"
+      "source": "/restaurant-paid-ads",
+      "destination": "/restaurant-paid-ads.html"
     },
     {
-      "source": "/paid-ads-strategy-call-es",
-      "destination": "/paid-ads-strategy-call-es.html"
+      "source": "/restaurant-paid-ads-es",
+      "destination": "/restaurant-paid-ads-es.html"
     },
     {
       "source": "/es",

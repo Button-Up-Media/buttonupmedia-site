@@ -20,8 +20,8 @@ const filesToCopy = [
   'social-media-marketing.html',
   'smm-strategy-call.html',
   'smm-strategy-call-es.html',
-  'paid-ads-strategy-call.html',
-  'paid-ads-strategy-call-es.html',
+  'restaurant-paid-ads.html',
+  'restaurant-paid-ads-es.html',
   'index-es.html',
   'social-media-marketing-es.html',
   'restaurant-website-design-es.html',
@@ -86,7 +86,7 @@ for (const { file, loader } of filesToMinify) {
   const { code: inlinedCss } = await transform(cssSource, { loader: 'css', minify: true, legalComments: 'none' });
   // Match any cache-busting version (?v=...) so bumping it never breaks the build.
   const linkRe = /<link rel="stylesheet" href="shared\.css(?:\?v=[^"]*)?" \/>/;
-  for (const page of ['contact.html', 'contact-es.html', 'smm-strategy-call.html', 'smm-strategy-call-es.html']) {
+  for (const page of ['contact.html', 'contact-es.html', 'smm-strategy-call.html', 'smm-strategy-call-es.html', 'restaurant-paid-ads.html', 'restaurant-paid-ads-es.html']) {
     const pagePath = path.join(outDir, page);
     const pageHtml = await readFile(pagePath, 'utf8');
     if (!linkRe.test(pageHtml)) {
