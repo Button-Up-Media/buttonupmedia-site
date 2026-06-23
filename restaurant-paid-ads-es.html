@@ -109,6 +109,21 @@
   }
   </script>
 
+  <!-- JSON-LD: FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "¿Cuál es el presupuesto mínimo de anuncios?", "acceptedAnswer": { "@type": "Answer", "text": "Nuestro mínimo es de $600 al mes en inversión publicitaria. Ese es el presupuesto que va a Google o Meta, aparte de nuestro manejo. En tu llamada gratis te recomendaremos un presupuesto inicial acorde a tus objetivos y tu mercado." } },
+      { "@type": "Question", "name": "¿Quedo atado a un contrato?", "acceptedAnswer": { "@type": "Answer", "text": "No. Nunca quedas atado. Puedes cancelar cuando quieras, sin contrato a largo plazo. Nos ganamos tu confianza cada mes con resultados." } },
+      { "@type": "Question", "name": "¿Puedo ver el rendimiento de mis anuncios?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Tienes acceso al backend, así que puedes ver tus Google Ads cuando quieras, en tus propios términos. Nunca escondemos información. Tienes transparencia total sobre la inversión, las conversiones y el retorno." } },
+      { "@type": "Question", "name": "¿En cuánto tiempo veré resultados?", "acceptedAnswer": { "@type": "Answer", "text": "La mayoría de los negocios empiezan a ver resultados en uno a tres meses. Esa primera etapa también nos da los datos que necesitamos para optimizar, así que el rendimiento sigue mejorando con el tiempo." } },
+      { "@type": "Question", "name": "¿Qué hacen exactamente?", "acceptedAnswer": { "@type": "Answer", "text": "Los anuncios pagados no son pagar más para vender más. Google evalúa tus anuncios, y tu presupuesto te mete en una guerra de pujas con competidores que buscan a los mismos clientes. Google considera tu puja, la calidad de tu anuncio, la calidad de tu landing page y si tu anuncio y tu landing page coinciden con lo que vendes, así que pagar más no te posiciona automáticamente más arriba. Manejamos todo el sistema, no solo la puja, y también creamos tu landing page, que suele decidir si las personas que hacen clic realmente reservan." } }
+    ]
+  }
+  </script>
+
   <style>
     /* ============================================================
        PAID MEDIA LANDING — page-scoped. Light + warm (eye-friendly,
@@ -473,6 +488,7 @@
       .pm-svc:nth-child(even) .pm-svc-viz { order: 0; }
       .pm-svc-viz { aspect-ratio: 16 / 10; }
       .pm-fit-grid { grid-template-columns: 1fr; }
+      .pm-call-steps { grid-template-columns: 1fr; }
     }
     @media (max-width: 520px) {
       .pm-proof-stats { grid-template-columns: 1fr 1fr; }
@@ -483,6 +499,23 @@
 
     /* Results disclaimer */
     .pm-proof-note { max-width: 680px; margin: 18px auto 0; text-align: center; font-size: 0.74rem; line-height: 1.5; color: var(--text-soft); }
+
+    /* FAQ accordion */
+    .pm-faq { max-width: 760px; margin: 32px auto 0; display: flex; flex-direction: column; gap: 12px; }
+    .pm-faq-item { border: 1px solid var(--line-soft); border-radius: var(--r-md); background: #FFFFFF; box-shadow: 0 8px 22px rgba(40,30,12,0.04); overflow: hidden; }
+    .pm-faq-item summary { list-style: none; cursor: pointer; padding: 18px 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px; font-family: var(--font-display); font-weight: 700; font-size: 1.04rem; color: var(--text-head); }
+    .pm-faq-item summary::-webkit-details-marker { display: none; }
+    .pm-faq-ic { flex: 0 0 auto; width: 20px; height: 20px; color: var(--gold); transition: transform 0.25s ease; }
+    .pm-faq-item[open] .pm-faq-ic { transform: rotate(45deg); }
+    .pm-faq-a { padding: 0 22px 20px; color: var(--text-dim); font-size: 0.96rem; line-height: 1.62; }
+
+    /* What happens on the call */
+    .pm-call-steps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 30px; }
+    .pm-call-step { display: flex; gap: 14px; padding: 22px; border-radius: var(--r-md); border: 1px solid var(--line-soft); background: #FFFFFF; box-shadow: 0 8px 22px rgba(40,30,12,0.04); }
+    .pm-call-n { flex: 0 0 auto; width: 34px; height: 34px; border-radius: 10px; background: var(--gold-soft); border: 1px solid rgba(181,126,30,0.28); color: var(--gold); display: grid; place-items: center; font-family: var(--font-hero); font-weight: 800; font-size: 0.95rem; }
+    .pm-call-step h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.02rem; color: var(--text-head); margin: 0 0 5px; }
+    .pm-call-step p { font-size: 0.92rem; line-height: 1.55; color: var(--text-dim); margin: 0; }
+    .pm-call-foot { text-align: center; margin-top: 22px; font-size: 0.95rem; color: var(--text-dim); }
 
     /* Mobile sticky conversion bar (book + call) */
     .pm-mobilebar { display: none; }
@@ -935,6 +968,36 @@
       </div>
     </section>
 
+    <!-- ░░ FAQ ░░ -->
+    <section class="pm-sec" id="faq">
+      <div class="pm-sec-head center reveal">
+        <span class="pm-eyebrow">Preguntas, respondidas</span>
+        <h2 class="pm-h2">Todo lo que quieres saber <span class="accent">antes de invertir un dólar.</span></h2>
+      </div>
+      <div class="pm-faq">
+        <details class="pm-faq-item reveal">
+          <summary>¿Cuál es el presupuesto mínimo de anuncios?<span class="pm-faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
+          <div class="pm-faq-a">Nuestro mínimo es de $600 al mes en inversión publicitaria. Ese es el presupuesto que va a Google o Meta, aparte de nuestro manejo. En tu llamada gratis te recomendaremos un presupuesto inicial acorde a tus objetivos y tu mercado.</div>
+        </details>
+        <details class="pm-faq-item reveal">
+          <summary>¿Quedo atado a un contrato?<span class="pm-faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
+          <div class="pm-faq-a">No. Nunca quedas atado. Puedes cancelar cuando quieras, sin contrato a largo plazo. Nos ganamos tu confianza cada mes con resultados.</div>
+        </details>
+        <details class="pm-faq-item reveal">
+          <summary>¿Puedo ver el rendimiento de mis anuncios?<span class="pm-faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
+          <div class="pm-faq-a">Sí. Tienes acceso al backend, así que puedes ver tus Google Ads cuando quieras, en tus propios términos. Nunca escondemos información. Tienes transparencia total sobre la inversión, las conversiones y el retorno.</div>
+        </details>
+        <details class="pm-faq-item reveal">
+          <summary>¿En cuánto tiempo veré resultados?<span class="pm-faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
+          <div class="pm-faq-a">La mayoría de los negocios empiezan a ver resultados en uno a tres meses. Esa primera etapa también nos da los datos que necesitamos para optimizar, así que el rendimiento sigue mejorando con el tiempo.</div>
+        </details>
+        <details class="pm-faq-item reveal">
+          <summary>¿Qué hacen exactamente? ¿No es solo pagar más para vender más?<span class="pm-faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
+          <div class="pm-faq-a">Los anuncios pagados no son pagar más para vender más. Google tiene que evaluar tus anuncios, y tu presupuesto te mete en una guerra de pujas con competidores que buscan a los mismos clientes. Para decidir quién aparece, Google considera tu puja, la calidad de tu anuncio, la calidad de tu landing page y si tu anuncio y tu landing page realmente coinciden con lo que vendes. Google protege su propia confianza, así que pagar más no te posiciona automáticamente más arriba. Por eso manejamos todo el sistema, no solo la puja. También creamos tu landing page, que muchas veces es más importante que el anuncio y suele decidir si las personas que hacen clic realmente reservan.</div>
+        </details>
+      </div>
+    </section>
+
     <!-- ░░ FINAL CTA ░░ -->
     <section class="pm-final">
       <div class="pm-final-inner reveal">
@@ -957,6 +1020,22 @@
       </div>
     </section>
   </main>
+
+  <!-- ░░ WHAT HAPPENS ON THE CALL ░░ -->
+  <section class="pm-sec pm-book-head" style="max-width:880px;margin:0 auto;padding-left:clamp(20px,5vw,40px);padding-right:clamp(20px,5vw,40px);">
+    <div class="pm-sec-head center reveal">
+      <span class="pm-eyebrow">Qué pasa en la llamada</span>
+      <h2 class="pm-h2">Una conversación simple <span class="accent">y sin presión.</span></h2>
+      <p class="pm-sub">Una llamada gratis de 30 minutos. Esto es exactamente lo que puedes esperar.</p>
+    </div>
+    <div class="pm-call-steps">
+      <div class="pm-call-step reveal"><span class="pm-call-n">1</span><div><h3>Te conocemos</h3><p>Una llamada rápida y relajada sobre tu negocio, tus retos y tus metas de ventas.</p></div></div>
+      <div class="pm-call-step reveal"><span class="pm-call-n">2</span><div><h3>Te decimos qué es realista</h3><p>No te vendemos un sueño, te vendemos una realidad, basada en tu mercado y tus metas.</p></div></div>
+      <div class="pm-call-step reveal"><span class="pm-call-n">3</span><div><h3>Investigamos tu mercado</h3><p>Nuestro equipo estudia tu mercado y exactamente contra quién vas a competir en las pujas.</p></div></div>
+      <div class="pm-call-step reveal"><span class="pm-call-n">4</span><div><h3>Empezamos de inmediato</h3><p>Revisamos tu landing page actual, o creamos una para ti si la necesitas.</p></div></div>
+    </div>
+    <p class="pm-call-foot reveal">Sin presión y sin compromiso. Te quedas con una idea clara de lo que es posible.</p>
+  </section>
 
   <!-- ░░ BOOKING ░░ -->
   <section class="pm-book" id="book">
