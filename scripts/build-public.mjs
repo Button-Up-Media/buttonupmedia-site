@@ -20,6 +20,8 @@ const filesToCopy = [
   'social-media-marketing.html',
   'smm-strategy-call.html',
   'smm-strategy-call-es.html',
+  'paid-ads-strategy-call.html',
+  'paid-ads-strategy-call-es.html',
   'index-es.html',
   'social-media-marketing-es.html',
   'restaurant-website-design-es.html',

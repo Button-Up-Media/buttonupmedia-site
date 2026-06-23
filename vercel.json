@@ -75,6 +75,42 @@
       ]
     },
     {
+      "source": "/paid-ads-strategy-call",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/paid-ads-strategy-call.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/paid-ads-strategy-call-es",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/paid-ads-strategy-call-es.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
       "source": "/terms.html",
       "headers": [
         {
@@ -307,6 +343,26 @@
       "permanent": true
     },
     {
+      "source": "/paid-ads-strategy-call/",
+      "destination": "/paid-ads-strategy-call",
+      "permanent": true
+    },
+    {
+      "source": "/paid-ads-strategy-call.html",
+      "destination": "/paid-ads-strategy-call",
+      "permanent": true
+    },
+    {
+      "source": "/paid-ads-strategy-call-es/",
+      "destination": "/paid-ads-strategy-call-es",
+      "permanent": true
+    },
+    {
+      "source": "/paid-ads-strategy-call-es.html",
+      "destination": "/paid-ads-strategy-call-es",
+      "permanent": true
+    },
+    {
       "source": "/index-es.html",
       "destination": "/es",
       "permanent": true
@@ -395,6 +451,14 @@
     {
       "source": "/smm-strategy-call-es",
       "destination": "/smm-strategy-call-es.html"
+    },
+    {
+      "source": "/paid-ads-strategy-call",
+      "destination": "/paid-ads-strategy-call.html"
+    },
+    {
+      "source": "/paid-ads-strategy-call-es",
+      "destination": "/paid-ads-strategy-call-es.html"
     },
     {
       "source": "/es",
