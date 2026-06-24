@@ -384,57 +384,38 @@ const HUB_CSS = `
     .bl-hero { position: relative; padding: clamp(104px, 14vw, 168px) 0 clamp(28px, 4vw, 44px); }
     .bl-hero h1 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.045em; font-size: clamp(2.3rem, 6vw, 4.2rem); line-height: 0.99; margin-top: 16px; max-width: 18ch; }
     .bl-hero-sub { max-width: 56ch; margin-top: 18px; font-size: clamp(1.02rem, 2.2vw, 1.18rem); line-height: 1.62; color: var(--text-dim); }
-    .bl-filters { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
-    .bl-chip { appearance: none; cursor: pointer; font-family: var(--font-body); display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--text-soft); font-size: 0.82rem; font-weight: 600; transition: color .2s, border-color .2s, background .2s, transform .2s; }
-    .bl-chip:hover { color: var(--text); border-color: rgba(255,248,235,0.2); transform: translateY(-1px); }
-    .bl-chip.--active { color: var(--gold); border-color: rgba(226,168,77,0.4); background: var(--gold-soft); }
-    .bl-featured { display: grid; grid-template-columns: 1fr; gap: 0; margin-top: 38px; border-radius: 22px; overflow: hidden; border: 1px solid var(--line); background: var(--bg-2); transition: border-color .3s, transform .3s; }
-    .bl-featured:hover { border-color: rgba(226,168,77,0.28); transform: translateY(-3px); }
-    .bl-featured-media { position: relative; min-height: clamp(220px, 38vw, 380px); overflow: hidden; }
-    .bl-featured-body { padding: clamp(26px, 4vw, 46px); display: flex; flex-direction: column; justify-content: center; }
-    .bl-featured-flag { position: absolute; top: 18px; left: 18px; z-index: 2; display: inline-flex; align-items: center; gap: 7px; padding: 6px 13px; border-radius: 999px; background: rgba(10,10,10,0.7); backdrop-filter: blur(8px); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
-    .bl-featured-body h2 { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.03em; font-size: clamp(1.5rem, 3vw, 2.4rem); line-height: 1.04; margin: 14px 0; text-wrap: balance; }
-    .bl-featured-body h2 a { color: var(--text-head); transition: color .2s; }
-    .bl-featured-body h2 a:hover { color: var(--gold); }
-    .bl-featured-body p { color: var(--text-dim); font-size: 0.98rem; line-height: 1.62; max-width: 52ch; }
-    @media (min-width: 880px) { .bl-featured { grid-template-columns: 1.05fr 0.95fr; } }
-    .bl-section { padding: clamp(48px, 7vw, 84px) 0; }
-    .bl-grid-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 26px; }
-    .bl-grid-head h2 { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.025em; font-size: clamp(1.3rem, 2.4vw, 1.85rem); }
-    .bl-grid { display: grid; grid-template-columns: 1fr; gap: clamp(20px, 2.4vw, 30px); }
-    @media (min-width: 620px) { .bl-grid { grid-template-columns: 1fr 1fr; } }
-    @media (min-width: 980px) { .bl-grid { grid-template-columns: 1fr 1fr 1fr; } }
-    .bl-card { display: flex; flex-direction: column; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); background: var(--bg-2); transition: border-color .3s, transform .3s; }
-    .bl-card.is-hidden { display: none; }
-    .bl-card:hover { border-color: rgba(226,168,77,0.28); transform: translateY(-4px); }
-    .bl-card-media { position: relative; aspect-ratio: 16 / 10; overflow: hidden; }
-    .bl-card-flag { position: absolute; top: 14px; left: 14px; z-index: 2; display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px; background: rgba(10,10,10,0.7); backdrop-filter: blur(8px); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--gold); }
-    .bl-card-body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
-    .bl-card-body h3 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; font-size: 1.16rem; line-height: 1.18; margin-bottom: 9px; }
-    .bl-card-body h3 a { color: var(--text-head); transition: color .2s; }
-    .bl-card-body h3 a:hover { color: var(--gold); }
-    .bl-card-body p { color: var(--text-dim); font-size: 0.88rem; line-height: 1.55; }
-    .bl-card-meta { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line-soft); display: flex; align-items: center; gap: 10px; font-size: 0.74rem; color: var(--text-soft); }
-    .bl-card-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-soft); }
-    .bl-art { width: 100%; height: 100%; display: grid; place-items: center; position: relative; }
-    .bl-art svg { width: 46px; height: 46px; color: rgba(255,248,235,0.34); position: relative; z-index: 1; }
-    .bl-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    .bl-art.--social { background: linear-gradient(135deg, #2a1a3a, #120b1c); }
-    .bl-art.--ads { background: linear-gradient(135deg, rgba(226,168,77,0.24), #1a1206); }
-    .bl-art.--web { background: linear-gradient(135deg, #16221e, #0b110e); }
-    .bl-art.--seo { background: linear-gradient(135deg, #123040, #08161c); }
-    .bl-art.--strategy { background: linear-gradient(135deg, #3a1f1a, #1a0d0a); }
+    /* ===== LEAD: big featured (left) + text list (right) ===== */
+    .bl-lead { padding: clamp(18px, 2.5vw, 28px) 0 clamp(48px, 7vw, 84px); }
+    .bl-lead-grid { display: grid; grid-template-columns: 1fr; gap: clamp(34px, 4vw, 48px); align-items: start; }
+    @media (min-width: 900px) { .bl-lead-grid { grid-template-columns: 1.18fr 0.82fr; gap: clamp(40px, 4.5vw, 70px); } }
+    .bl-feature { position: relative; display: block; }
+    .bl-feature-media { position: relative; aspect-ratio: 16 / 10; border-radius: 20px; overflow: hidden; border: 1px solid var(--line); background: #ece6db; }
+    .bl-feature-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .5s cubic-bezier(.22,1,.36,1); }
+    .bl-feature:hover .bl-feature-media img { transform: scale(1.03); }
+    .bl-feature-flag { position: absolute; top: 16px; left: 16px; z-index: 2; display: inline-flex; align-items: center; gap: 7px; padding: 6px 13px; border-radius: 999px; background: rgba(10,10,10,0.72); backdrop-filter: blur(8px); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
+    .bl-feature-body { padding-top: clamp(18px, 2.4vw, 24px); }
+    .bl-feature h2 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.035em; font-size: clamp(1.7rem, 3.4vw, 2.7rem); line-height: 1.04; margin-top: 10px; text-wrap: balance; }
+    .bl-feature h2 a { color: var(--text-head); transition: color .2s; }
+    .bl-feature:hover h2 a { color: var(--gold); }
+    .bl-feature-excerpt { margin-top: 14px; color: var(--text-dim); font-size: clamp(1rem, 1.4vw, 1.08rem); line-height: 1.62; max-width: 56ch; }
+    .bl-feature-meta { margin-top: 18px; display: flex; align-items: center; flex-wrap: wrap; gap: 9px; font-size: 0.8rem; color: var(--text-soft); }
+    .bl-feature-meta strong { font-family: var(--font-display); font-weight: 700; color: var(--text-head); }
+    .bl-feature-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-soft); }
+    .bl-feature h2 a::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+    .bl-list { display: flex; flex-direction: column; }
+    .bl-list-head { font-family: var(--font-display); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-head); padding-bottom: 14px; border-bottom: 2px solid var(--gold); }
+    .bl-list-item { display: block; padding: 18px 0; border-bottom: 1px solid var(--line-soft); }
+    .bl-list-item:last-child { border-bottom: 0; }
+    .bl-list-cat { display: block; font-size: 0.64rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--gold); margin-bottom: 7px; }
+    .bl-list-item h3 { font-family: var(--font-display); font-size: 1.04rem; font-weight: 700; line-height: 1.26; letter-spacing: -0.01em; color: var(--text-head); transition: color .2s; }
+    .bl-list-item:hover h3 { color: var(--gold); }
+    .bl-list-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 9px; font-size: 0.76rem; color: var(--text-soft); }
+    .bl-list-meta strong { font-weight: 600; color: var(--text-dim); }
     .bl-news { position: relative; margin: 0 0 clamp(40px, 6vw, 72px); }
     .bl-news-inner { border-radius: 24px; overflow: hidden; position: relative; border: 1px solid rgba(226,168,77,0.22); background: linear-gradient(135deg, rgba(226,168,77,0.1), rgba(208,106,80,0.07)), var(--bg-2); padding: clamp(34px, 5vw, 60px); display: grid; grid-template-columns: 1fr; gap: 24px; align-items: center; }
     .bl-news h2 { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.03em; font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.05; }
     .bl-news p { color: var(--text-dim); font-size: 0.96rem; line-height: 1.6; margin-top: 10px; max-width: 46ch; }
     @media (min-width: 820px) { .bl-news-inner { grid-template-columns: 1.1fr 0.9fr; gap: 40px; } .bl-news-inner > div:last-child { justify-self: end; } }
-    /* whole-card click target (stretched link) */
-    .bl-card { position: relative; }
-    .bl-card-body h3 a::after { content: ""; position: absolute; inset: 0; z-index: 1; }
-    .bl-featured { position: relative; }
-    .bl-featured-body h2 a::after { content: ""; position: absolute; inset: 0; z-index: 1; }
-    .bl-featured-body .btn { position: relative; z-index: 2; }
 `;
 
 // Light, editorial theme for the blog. Scoped to .page so the dark brand nav
@@ -484,15 +465,11 @@ const LIGHT_CSS = `
     /* flatten gold-glow boxes into clean cream cards */
     .page .bp-cta-inner, .page .bl-news-inner, .page .bp-midcta, .page .bp-callout { background:#faf6ee; border:1px solid var(--line); }
     /* content cards read on white */
-    .page .bl-featured, .page .bl-card, .page .bp-rcard, .page .bp-author { background:#ffffff; }
-    .page .bp-hero-art, .page .bl-art { background:#ece6db; }
+    .page .bp-rcard, .page .bp-author { background:#ffffff; }
+    .page .bp-hero-art { background:#ece6db; }
     /* editorial links: dark text, gold underline */
     .page .bp-body a { color:var(--text-head); text-decoration-color:rgba(226,168,77,0.7); }
     .page .bp-body a:hover { color:#9a6410; text-decoration-color:var(--gold); }
-    /* category chips */
-    .page .bl-chip { background:#ffffff; }
-    .page .bl-chip:hover { border-color:rgba(28,24,18,0.28); color:var(--text); }
-    .page .bl-chip.--active { color:#9a6410; background:var(--gold-soft); border-color:rgba(226,168,77,0.5); }
 `;
 
 // ---------- date / reading helpers ----------
@@ -715,18 +692,13 @@ function renderHub(lang, views) {
   const t = T[lang];
   const hubUrl = `${BASE}${t.hub}`;
   const featured = views[0];
-  const grid = views.slice(1);
-  const presentCats = [...new Set(views.map((v) => v.post.category))];
-  const chips = presentCats.map((k) => `<button class="bl-chip" data-filter="${k}">${esc((CATS[k] || CATS.strategy)[lang])}</button>`).join('\n          ');
+  const rest = views.slice(1);
 
-  const card = (v) => `<article class="bl-card bl-rise" data-cat="${v.post.category}">
-            <div class="bl-card-media"><span class="bl-card-flag">${esc(v.catLabel)}</span><div class="bl-art ${v.catArt}"><img src="${v.hero}" alt="${escAttr(v.heroAlt)}" loading="lazy" /></div></div>
-            <div class="bl-card-body">
-              <h3><a href="${v.path}">${esc(v.title)}</a></h3>
-              <p>${esc(v.excerpt)}</p>
-              <div class="bl-card-meta"><span>${v.dateFmt}</span><span class="dot"></span><span>${esc(v.read)}</span></div>
-            </div>
-          </article>`;
+  const listItem = (v) => `<a class="bl-list-item bl-rise" href="${v.path}">
+            <span class="bl-list-cat">${esc(v.catLabel)}</span>
+            <h3>${esc(v.title)}</h3>
+            <div class="bl-list-meta"><strong>${esc(v.author.name)}</strong><span>${v.dateFmt}</span></div>
+          </a>`;
 
   const schema = JSON.stringify({
     '@context': 'https://schema.org',
@@ -776,34 +748,24 @@ ${nav(lang)}
       <span class="bl-eyebrow bl-rise">${esc(t.heroEyebrow)}</span>
       <h1 class="bl-rise">${t.heroH1}</h1>
       <p class="bl-hero-sub bl-rise">${esc(t.heroSub)}</p>
-      <div class="bl-filters bl-rise" role="tablist" aria-label="Filter posts by category">
-        <button class="bl-chip --active" data-filter="all">${esc(t.all)}</button>
-          ${chips}
-      </div>
     </div></section>
 
-    <section class="bl-wrap" aria-label="${escAttr(t.featured)}">
-      <article class="bl-featured bl-rise" data-cat="${featured.post.category}">
-        <div class="bl-featured-media"><span class="bl-featured-flag">${esc(t.featured)} &middot; ${esc(featured.catLabel)}</span><div class="bl-art ${featured.catArt}"><img src="${featured.hero}" alt="${escAttr(featured.heroAlt)}" fetchpriority="high" /></div></div>
-        <div class="bl-featured-body">
-          <span class="bl-eyebrow">${esc(t.latestStory)}</span>
-          <h2><a href="${featured.path}">${esc(featured.title)}</a></h2>
-          <p>${esc(featured.excerpt)}</p>
-          <div class="bl-card-meta" style="border:0;padding:0;margin-top:18px;"><span>${featured.dateFmt}</span><span class="dot"></span><span>${esc(featured.read)}</span></div>
-          <a href="${featured.path}" class="btn btn-primary" style="margin-top:22px;align-self:flex-start;">${esc(t.read)} ${ARROW}</a>
-        </div>
-      </article>
-    </section>
-
-    <section class="bl-section"><div class="bl-wrap">
-      <div class="bl-grid-head bl-rise">
-        <h2>${esc(t.latest)}</h2>
-        <span style="font-size:0.82rem;color:var(--text-soft);" id="bl-count">${esc(t.articles(grid.length))}</span>
+    <section class="bl-lead"><div class="bl-wrap">
+      <div class="bl-lead-grid">
+        <article class="bl-feature bl-rise">
+          <div class="bl-feature-media"><span class="bl-feature-flag">${esc(t.featured)} &middot; ${esc(featured.catLabel)}</span><img src="${featured.hero}" alt="${escAttr(featured.heroAlt)}" fetchpriority="high" /></div>
+          <div class="bl-feature-body">
+            <span class="bl-eyebrow">${esc(t.latestStory)}</span>
+            <h2><a href="${featured.path}">${esc(featured.title)}</a></h2>
+            <p class="bl-feature-excerpt">${esc(featured.excerpt)}</p>
+            <div class="bl-feature-meta"><strong>${esc(featured.author.name)}</strong><span class="dot"></span><span>${featured.dateFmt}</span><span class="dot"></span><span>${esc(featured.read)}</span></div>
+          </div>
+        </article>
+        <aside class="bl-list" aria-label="${escAttr(t.latest)}">
+          <div class="bl-list-head bl-rise">${esc(t.latest)}</div>
+          ${rest.map(listItem).join('\n          ')}
+        </aside>
       </div>
-      <div class="bl-grid" id="bl-grid">
-        ${grid.map(card).join('\n        ')}
-      </div>
-      <div class="bl-rise" id="bl-empty" style="display:none; text-align:center; padding:40px 0; color:var(--text-soft);">${esc(t.empty)}</div>
     </div></section>
 
     <section class="bl-wrap">
@@ -822,19 +784,6 @@ ${footer(lang)}
   </main>
   <script defer src="/shared.js?v=${CSS_VER}"></script>
   <script>
-    (function () {
-      var chips = [].slice.call(document.querySelectorAll('.bl-chip'));
-      var cards = [].slice.call(document.querySelectorAll('#bl-grid .bl-card'));
-      var count = document.getElementById('bl-count'); var empty = document.getElementById('bl-empty');
-      var one = ${JSON.stringify(t.articles(1))}, many = function (n) { return n + ${JSON.stringify(' ' + t.articles(2).split(' ').slice(1).join(' '))}; };
-      chips.forEach(function (chip) { chip.addEventListener('click', function () {
-        chips.forEach(function (c) { c.classList.remove('--active'); }); chip.classList.add('--active');
-        var f = chip.getAttribute('data-filter'); var shown = 0;
-        cards.forEach(function (card) { var match = f === 'all' || card.getAttribute('data-cat') === f; card.classList.toggle('is-hidden', !match); if (match) shown++; });
-        if (count) count.textContent = shown === 1 ? one : many(shown);
-        if (empty) empty.style.display = shown === 0 ? 'block' : 'none';
-      }); });
-    })();
     (function () {
       var els = [].slice.call(document.querySelectorAll('.bl-rise'));
       if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) { els.forEach(function (e) { e.classList.add('is-in'); }); return; }
