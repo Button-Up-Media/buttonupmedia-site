@@ -4124,6 +4124,34 @@
     })();
     </script>
 
+    <!-- ═══ MEET THE TEAM ═══ -->
+    <style>
+      .hp2-team .hp2-split-copy { align-self: center; }
+      .hp2-team-collage { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .hp2-team-collage figure { margin: 0; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,248,235,0.06); background: #14110b; }
+      .hp2-team-collage img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.55s cubic-bezier(0.22,1,0.36,1); }
+      .hp2-team-collage figure:hover img { transform: scale(1.04); }
+      .hp2-team-collage .tc-main { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
+      .hp2-team-collage .tc-sm { aspect-ratio: 4 / 3; }
+      .hp2-team .hp2-team-cta { margin-top: 26px; }
+      @media (max-width: 768px) { .hp2-team-collage { gap: 10px; } }
+    </style>
+    <section class="card-overlay lib-section" id="team" data-shared-animations="off">
+      <div class="hp2-split hp2-team" style="margin-top:0;">
+        <div class="hp2-split-copy">
+          <div class="lib-section-label">Who you work with</div>
+          <h2 class="lib-section-title">Real people, not a faceless agency.</h2>
+          <p class="lib-section-sub">We're a small Miami team that treats your restaurant like our own. The same people you meet on the first call are the ones shooting your content, building your site, and running your ads.</p>
+          <a href="/about" class="btn btn-primary hp2-team-cta">About Us</a>
+        </div>
+        <div class="hp2-team-collage">
+          <figure class="tc-main"><img src="images/team-group.jpg" alt="The Button Up Media team together at their Miami office" width="1100" height="619" loading="lazy"></figure>
+          <figure class="tc-sm"><img src="images/team-collab.jpg" alt="Two Button Up Media team members talking and laughing in the office" width="820" height="461" loading="lazy"></figure>
+          <figure class="tc-sm"><img src="images/team-working.jpg" alt="A Button Up Media team member working on a client campaign" width="820" height="461" loading="lazy"></figure>
+        </div>
+      </div>
+    </section>
+
     <!-- ═══ 5b. HORIZONTAL SCROLL GROWTH SYSTEM ═══ -->
     <section class="hp2-hscroll-section" id="system">
       <div class="hp2-hscroll-pin">
@@ -4471,7 +4499,7 @@
         <div class="glass-card-wrap hp2-service-reveal">
           <div class="glass-accents"><div class="glass-acc"></div><div class="glass-acc"></div></div>
           <div class="glass-toplight"></div>
-          <div class="glass-card" style="text-align:center; cursor:pointer;" data-brand="googleads" data-hover-colors="#4285F4, #FBBC04, #34A853" onclick="window.location.href='/contact'">
+          <div class="glass-card" style="text-align:center; cursor:pointer;" data-brand="googleads" data-hover-colors="#4285F4, #FBBC04, #34A853" onclick="window.location.href='/restaurant-advertising'">
             <pixel-canvas data-gap="6" data-speed="30" data-colors="#45B08C, #3A9A78, #5CC4A0" data-no-focus></pixel-canvas>
             <div class="glass-card-icon" style="margin-left:auto;margin-right:auto;">
               <i data-lucide="megaphone" width="22" height="22"></i>

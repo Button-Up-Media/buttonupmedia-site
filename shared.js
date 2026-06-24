@@ -1900,12 +1900,10 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
   audioManagedVideos.forEach((video) => warmObserver.observe(video));
 })();
 
-// ── Testimonial cards: explicit hover/tap playback, one audio source at a time ──
+// ── Testimonial cards: explicit click-to-play, one audio source at a time ──
 (() => {
   const cards = Array.from(document.querySelectorAll(".hp2-vid-card"));
   if (!cards.length) return;
-
-  const useTapVideo = window.matchMedia("(hover: none), (pointer: coarse)");
 
   const stopCard = (card) => {
     const video = card.querySelector("video");
@@ -1936,18 +1934,10 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
     const video = card.querySelector("video");
     if (!video) return;
 
-    card.addEventListener("mouseenter", () => {
-      if (useTapVideo.matches) return;
-      playCard(card);
-    });
-
-    card.addEventListener("mouseleave", () => {
-      if (useTapVideo.matches) return;
-      stopCard(card);
-    });
+    // Reset to the play-button state when the clip finishes.
+    video.addEventListener("ended", () => stopCard(card));
 
     card.addEventListener("click", (event) => {
-      if (!useTapVideo.matches) return;
       event.preventDefault();
       event.stopPropagation();
       if (card.classList.contains("--playing")) {
@@ -1959,7 +1949,6 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
   });
 
   document.addEventListener("click", (event) => {
-    if (!useTapVideo.matches) return;
     if (cards.some((card) => card.contains(event.target))) return;
     cards.forEach(stopCard);
   });

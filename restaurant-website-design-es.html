@@ -201,7 +201,7 @@
     .ws-gold { color: var(--gold); }
 
     /* reveal (transform-only; opacity stays 1) */
-    .ws-rise { transform: translateY(20px); transition: transform .7s cubic-bezier(.22,1,.36,1); will-change: transform; }
+    .ws-rise { transform: translateY(20px); transition: transform .7s cubic-bezier(.22,1,.36,1); }
     .ws-rise.is-in { transform: none; }
     @media (prefers-reduced-motion: reduce) { .ws-rise { transform: none; transition: none; } }
 
@@ -433,6 +433,13 @@
       .ws-serv-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
       .ws-lang-grid { grid-template-columns: 1.04fr 0.96fr; }
       .ws-serp-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 859px) {
+      /* Mobile: render content immediately (the scroll-reveal caused flicker /
+         slow repaints on phones), and give the hero device graphic enough room
+         below it so the overlapping trust-ribbon card never covers it. */
+      .ws-rise { transform: none; transition: none; }
+      .ws-hero { padding-bottom: 155px; }
     }
     @media (max-width: 520px) {
       .ws-ribbon { grid-template-columns: 1fr 1fr; }
