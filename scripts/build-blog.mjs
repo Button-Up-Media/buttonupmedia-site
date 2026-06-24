@@ -368,6 +368,9 @@ const POST_CSS = `
     .bp-cta-inner p { color: var(--text-dim); font-size: 1rem; line-height: 1.6; margin: 14px auto 0; max-width: 48ch; }
     .bp-cta-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 26px; }
     .bp-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: linear-gradient(90deg, var(--gold), var(--coral)); z-index: 60; transition: width .1s linear; }
+    /* whole related-card click target */
+    .bp-rcard { position: relative; }
+    .bp-rcard-body h3 a::after { content: ""; position: absolute; inset: 0; z-index: 1; }
 `;
 
 const HUB_CSS = `
@@ -426,15 +429,46 @@ const HUB_CSS = `
     .bl-news h2 { font-family: var(--font-display); font-weight: 800; letter-spacing: -0.03em; font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.05; }
     .bl-news p { color: var(--text-dim); font-size: 0.96rem; line-height: 1.6; margin-top: 10px; max-width: 46ch; }
     @media (min-width: 820px) { .bl-news-inner { grid-template-columns: 1.1fr 0.9fr; gap: 40px; } .bl-news-inner > div:last-child { justify-self: end; } }
+    /* whole-card click target (stretched link) */
+    .bl-card { position: relative; }
+    .bl-card-body h3 a::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+    .bl-featured { position: relative; }
+    .bl-featured-body h2 a::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+    .bl-featured-body .btn { position: relative; z-index: 2; }
 `;
 
 // Light, editorial theme for the blog. Scoped to .page so the dark brand nav
 // pill is untouched. Flattens the gold-glow gradients and removes the mesh orbs
 // for a cleaner, less "stock-AI" reading experience.
+// Light header for blog pages. The nav lives OUTSIDE .page, so these rules are
+// unscoped; they only land on blog pages because they ship in the blog's inline
+// <style>. The white logo is recolored to black, and the hamburger bars/chevron
+// follow the trigger's currentColor, so setting that dark fixes mobile too.
+const NAV_LIGHT_CSS = `
+    .lib-nav { background: rgba(255,255,255,0.82); border-color: rgba(28,24,18,0.10); box-shadow: 0 6px 24px rgba(20,16,9,0.07); }
+    .lib-nav-brand img { filter: brightness(0); }
+    .lib-nav-links a { color: #4a443b; }
+    .lib-nav-links a:hover { color: #1d1a15; background: rgba(20,16,9,0.05); }
+    .lib-nav-phone { color: #1d1a15; border-color: rgba(28,24,18,0.18); background: rgba(20,16,9,0.03); }
+    .lib-nav-phone:hover { border-color: rgba(226,168,77,0.5); background: rgba(226,168,77,0.12); color: #9a6410; }
+    .lib-nav-dropdown-trigger { color: #1d1a15; border-color: rgba(28,24,18,0.16); background: rgba(20,16,9,0.03); }
+    .lib-nav-dropdown-menu { background: rgba(255,255,255,0.98); border-color: rgba(28,24,18,0.12); box-shadow: 0 24px 50px rgba(20,16,9,0.16); }
+    .lib-nav-dropdown-menu a { color: #1d1a15; }
+    .lib-nav-dropdown-menu a:hover { background: rgba(226,168,77,0.14); color: #9a6410; }
+    .lib-nav .btn-primary { background: #E2A84D; border-color: #E2A84D; color: #1c1407; }
+    .lib-nav .btn-primary:hover { box-shadow: 0 8px 24px rgba(226,168,77,0.34); }
+    .lib-nav-links > .lib-lang-switch-mobile, .lib-nav-links > .lib-nav-call-mobile { color: #1d1a15; border-color: rgba(28,24,18,0.16); background: rgba(20,16,9,0.03); }
+    .lib-nav-links > .lib-lang-switch-mobile:hover, .lib-nav-links > .lib-nav-call-mobile:hover { border-color: rgba(226,168,77,0.5); background: rgba(226,168,77,0.12); color: #9a6410; }
+    .lib-mobile-services-trigger { color: #1d1a15; border-color: rgba(28,24,18,0.12); background: rgba(20,16,9,0.03); }
+    .lib-mobile-services-menu a { color: #1d1a15; }
+    .lib-mobile-action.--ghost { color: #1d1a15; border-color: rgba(28,24,18,0.16); background: rgba(20,16,9,0.03); }
+    .lib-mobile-action.--primary { background: #E2A84D; border-color: #E2A84D; color: #1c1407; }
+`;
+
 const LIGHT_CSS = `
-    body { background: #ffffff; }
+    body { background: #fbfaf6; }
     main.page {
-      --bg-0:#ffffff; --bg-1:#faf8f4; --bg-2:#ffffff; --bg-3:#f1ede5; --surface:#f6f3ee;
+      --bg-0:#fbfaf6; --bg-1:#f5f2ea; --bg-2:#ffffff; --bg-3:#f1ede5; --surface:#f6f3ee;
       --line:rgba(28,24,18,0.14); --line-soft:rgba(28,24,18,0.08);
       --text:#1d1a15; --text-head:#120e08; --text-dim:rgba(29,26,21,0.84); --text-soft:rgba(29,26,21,0.56);
       --gold-soft:rgba(226,168,77,0.16);
@@ -450,7 +484,7 @@ const LIGHT_CSS = `
     /* flatten gold-glow boxes into clean cream cards */
     .page .bp-cta-inner, .page .bl-news-inner, .page .bp-midcta, .page .bp-callout { background:#faf6ee; border:1px solid var(--line); }
     /* content cards read on white */
-    .page .bl-featured, .page .bl-card, .page .bp-rcard, .page .bp-author { background:#fbf9f5; }
+    .page .bl-featured, .page .bl-card, .page .bp-rcard, .page .bp-author { background:#ffffff; }
     .page .bp-hero-art, .page .bl-art { background:#ece6db; }
     /* editorial links: dark text, gold underline */
     .page .bp-body a { color:var(--text-head); text-decoration-color:rgba(226,168,77,0.7); }
@@ -584,7 +618,7 @@ ${fontPreloads()}
   <script defer src="https://unpkg.com/lucide@1.17.0/dist/umd/lucide.min.js"></script>
   <link rel="stylesheet" href="/shared.css?v=${CSS_VER}" />
   <script type="application/ld+json">${schema}</script>
-  <style>${LIGHT_CSS}${POST_CSS}</style>
+  <style>${NAV_LIGHT_CSS}${LIGHT_CSS}${POST_CSS}</style>
 </head>
 <body>
 ${gtmNoscript()}
@@ -732,7 +766,7 @@ ${fontPreloads()}
   <script defer src="https://unpkg.com/lucide@1.17.0/dist/umd/lucide.min.js"></script>
   <link rel="stylesheet" href="/shared.css?v=${CSS_VER}" />
   <script type="application/ld+json">${schema}</script>
-  <style>${LIGHT_CSS}${HUB_CSS}</style>
+  <style>${NAV_LIGHT_CSS}${LIGHT_CSS}${HUB_CSS}</style>
 </head>
 <body>
 ${gtmNoscript()}
