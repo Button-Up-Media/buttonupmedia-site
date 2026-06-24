@@ -39,7 +39,6 @@ const filesToCopy = [
 const filesToMinify = [
   { file: 'shared.css', loader: 'css' },
   { file: 'shared.js', loader: 'js' },
-  { file: 'website-design-redesign.js', loader: 'js' },
   { file: 'pixel-canvas.js', loader: 'js' },
 ];
 
@@ -58,25 +57,6 @@ for (const { file, loader } of filesToMinify) {
   await writeFile(path.join(outDir, file), result.code);
 }
 
-// Inline the page-specific redesign CSS into the restaurant page so it is not a
-// render-blocking request that stalls the hero paint. The source of truth stays
-// in website-design-redesign.css and the raw/dev HTML keeps its <link>; only the
-// production build swaps that <link> for an inline <style> at the same position,
-// so the cascade is unchanged.
-{
-  const cssSource = await readFile(path.join(root, 'website-design-redesign.css'), 'utf8');
-  const { code: inlinedCss } = await transform(cssSource, { loader: 'css', minify: true, legalComments: 'none' });
-  const linkTag = '<link rel="stylesheet" href="website-design-redesign.css" />';
-  for (const page of ['restaurant-website-design.html', 'restaurant-website-design-es.html']) {
-    const pagePath = path.join(outDir, page);
-    const pageHtml = await readFile(pagePath, 'utf8');
-    if (!pageHtml.includes(linkTag)) {
-      throw new Error(`Expected redesign CSS <link> not found in ${page}`);
-    }
-    await writeFile(pagePath, pageHtml.replace(linkTag, `<style>${inlinedCss}</style>`));
-  }
-}
-
 // Inline shared.css into pages where it is the only render-blocking stylesheet,
 // so first paint never waits on that request. The source of truth stays in
 // shared.css and every other page keeps the cached <link>; only these production
@@ -87,7 +67,7 @@ for (const { file, loader } of filesToMinify) {
   const { code: inlinedCss } = await transform(cssSource, { loader: 'css', minify: true, legalComments: 'none' });
   // Match any cache-busting version (?v=...) so bumping it never breaks the build.
   const linkRe = /<link rel="stylesheet" href="shared\.css(?:\?v=[^"]*)?" \/>/;
-  for (const page of ['contact.html', 'contact-es.html', 'smm-strategy-call.html', 'smm-strategy-call-es.html', 'restaurant-paid-ads.html', 'restaurant-paid-ads-es.html', 'about.html', 'about-es.html']) {
+  for (const page of ['contact.html', 'contact-es.html', 'smm-strategy-call.html', 'smm-strategy-call-es.html', 'restaurant-paid-ads.html', 'restaurant-paid-ads-es.html', 'about.html', 'about-es.html', 'restaurant-website-design.html', 'restaurant-website-design-es.html']) {
     const pagePath = path.join(outDir, page);
     const pageHtml = await readFile(pagePath, 'utf8');
     if (!linkRe.test(pageHtml)) {

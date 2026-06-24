@@ -407,14 +407,6 @@
       "destination": "/shared.js"
     },
     {
-      "source": "/es/website-design-redesign.css",
-      "destination": "/website-design-redesign.css"
-    },
-    {
-      "source": "/es/website-design-redesign.js",
-      "destination": "/website-design-redesign.js"
-    },
-    {
       "source": "/es/pixel-canvas.js",
       "destination": "/pixel-canvas.js"
     },

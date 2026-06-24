@@ -42,7 +42,7 @@
   })(window,document,'script','dataLayer','GTM-WR9TZHT');</script>
   <!-- End Google Tag Manager -->
   <title>Restaurant Website Design &amp; Development | Button Up Media</title>
-  <meta name="description" content="Restaurant website design and development for owners who need more bookings, orders, and calls. SEO, menu pages, reservations, and mobile-first conversion tools built from scratch by Button Up Media." />
+  <meta name="description" content="Restaurant website design and development that turns browsers into bookings. Custom-coded, mobile-first, SEO-ready, and bilingual. Book a free strategy call." />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg">
   <link rel="canonical" href="https://www.buttonupmedia.com/restaurant-website-design" />
@@ -51,16 +51,15 @@
   <link rel="alternate" hreflang="x-default" href="https://www.buttonupmedia.com/restaurant-website-design" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Restaurant Website Design &amp; Development | Button Up Media" />
-  <meta property="og:description" content="Restaurant website design and development for owners who need more bookings, orders, and calls. SEO, menu pages, reservations, and mobile-first conversion tools built from scratch by Button Up Media." />
+  <meta property="og:description" content="Restaurant website design and development that turns browsers into bookings. Custom-coded, mobile-first, SEO-ready, and bilingual. Book a free strategy call." />
   <meta property="og:url" content="https://www.buttonupmedia.com/restaurant-website-design" />
-  <meta property="og:image" content="https://www.buttonupmedia.com/images/website-design/rusty-pelican-desktop.png" />
+  <meta property="og:image" content="https://www.buttonupmedia.com/media/woa-hero-desktop.webp" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Restaurant Website Design &amp; Development | Button Up Media" />
-  <meta name="twitter:description" content="Restaurant website design and development for owners who need more bookings, orders, and calls. SEO, menu pages, reservations, and mobile-first conversion tools built from scratch by Button Up Media." />
-  <meta name="twitter:image" content="https://www.buttonupmedia.com/images/website-design/rusty-pelican-desktop.png" />
+  <meta name="twitter:description" content="Restaurant website design and development that turns browsers into bookings. Custom-coded, mobile-first, SEO-ready, and bilingual. Book a free strategy call." />
+  <meta name="twitter:image" content="https://www.buttonupmedia.com/media/woa-hero-desktop.webp" />
 
   <!-- Resource hints -->
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="preconnect" href="https://unpkg.com" crossorigin />
 
   <!-- Fonts -->
@@ -70,49 +69,8 @@
   <!-- Base styles -->
   <link rel="stylesheet" href="shared.css?v=nav-mobile-4" />
 
-  <!-- Animation runtime (Lucide, GSAP, ScrollTrigger, pixel-canvas) loads after
-       the page is interactive so it never blocks the hero paint. The hero is
-       static text plus eager images and does not depend on it. Mirrors the
-       homepage deferred-runtime pattern. -->
-  <script>
-    (function () {
-      function queueIdle(cb, timeout) {
-        if ("requestIdleCallback" in window) { requestIdleCallback(cb, { timeout: timeout || 1500 }); return; }
-        setTimeout(cb, Math.min(timeout || 1500, 600));
-      }
-      function loadScript(src, key) {
-        window.__bumScriptPromises = window.__bumScriptPromises || {};
-        if (window.__bumScriptPromises[key]) return window.__bumScriptPromises[key];
-        window.__bumScriptPromises[key] = new Promise(function (resolve, reject) {
-          var s = document.createElement("script");
-          s.src = src; s.async = true; s.defer = true;
-          s.addEventListener("load", function () { resolve(s); }, { once: true });
-          s.addEventListener("error", reject, { once: true });
-          document.head.appendChild(s);
-        });
-        return window.__bumScriptPromises[key];
-      }
-      window.__bumLoadRwdRuntime = function () {
-        if (window.__bumRwdRuntimePromise) return window.__bumRwdRuntimePromise;
-        window.__bumRwdRuntimePromise = new Promise(function (resolve) {
-          var start = function () {
-            Promise.all([
-              loadScript("https://unpkg.com/lucide@1.17.0/dist/umd/lucide.min.js", "lucide"),
-              loadScript("https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js", "gsap"),
-              loadScript("https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js", "scrolltrigger"),
-              loadScript("pixel-canvas.js", "pixel-canvas")
-            ]).then(function () {
-              if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
-              resolve();
-            }).catch(function () { resolve(); });
-          };
-          if (document.readyState === "complete") { queueIdle(start, 1500); }
-          else { window.addEventListener("load", function () { queueIdle(start, 1500); }, { once: true }); }
-        });
-        return window.__bumRwdRuntimePromise;
-      };
-    })();
-  </script>
+  <!-- Lucide (icons used by the shared cookie banner). Deferred so it never blocks the hero paint. -->
+  <script defer src="https://unpkg.com/lucide@1.17.0/dist/umd/lucide.min.js"></script>
 
   <!-- Schema: BreadcrumbList -->
   <script type="application/ld+json">
@@ -167,6 +125,7 @@
     "name": "Restaurant Website Design & Development",
     "url": "https://www.buttonupmedia.com/restaurant-website-design",
     "description": "Restaurant website design and development for owners who need more bookings, orders, and calls. SEO, menu pages, reservations, and mobile-first conversion tools built from scratch by Button Up Media.",
+    "inLanguage": "en",
     "isPartOf": {
       "@type": "WebSite",
       "name": "Button Up Media",
@@ -204,7 +163,7 @@
       {
         "@type": "Question",
         "name": "What if I already have a website?",
-        "acceptedAnswer": { "@type": "Answer", "text": "We almost always recommend a restaurant website redesign from scratch rather than retrofitting an existing site. Retrofits take longer, cost more, and usually result in a weaker final product. We&rsquo;ll discuss your situation on the kickoff call." }
+        "acceptedAnswer": { "@type": "Answer", "text": "We almost always recommend a restaurant website redesign from scratch rather than retrofitting an existing site. Retrofits take longer, cost more, and usually result in a weaker final product. We'll discuss your situation on the kickoff call." }
       },
       {
         "@type": "Question",
@@ -214,7 +173,7 @@
       {
         "@type": "Question",
         "name": "What POS systems do you integrate with?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Toast, Square, Clover, and most other major restaurant POS platforms. If you use something unusual, we&rsquo;ll confirm compatibility on the kickoff call." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Toast, Square, Clover, and most other major restaurant POS platforms. If you use something unusual, we'll confirm compatibility on the kickoff call." }
       },
       {
         "@type": "Question",
@@ -223,2236 +182,274 @@
       },
       {
         "@type": "Question",
-        "name": "Do I own the website when it&rsquo;s finished?",
+        "name": "Do I own the website when it's finished?",
         "acceptedAnswer": { "@type": "Answer", "text": "Yes. You own everything we build: domain, code, content, and assets." }
       }
     ]
   }
   </script>
 
-  <!-- RESTAURANT WEBSITE DESIGN - ALL CSS SELF-CONTAINED -->
+  <!-- RESTAURANT WEBSITE DESIGN - page styles (self-contained; shared.css supplies tokens + components) -->
   <style>
-    /* -- Global body text 17px -- */
-    .card-overlay p,
-    .card-overlay li,
-    .card-overlay .rw-callout,
-    .rw-hscroll-copy p,
-    .lib-section-sub,
-    .rw-fit-item p,
-    .rw-risk-card p,
-    .rw-crosssell-bullets li,
-    .rw-compare-row span {
-      font-size: 17px !important;
-      line-height: 1.75;
+    .ws-wrap { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; }
+    .ws-eyebrow {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-family: var(--font-display); font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold);
+    }
+    .ws-eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--gold); opacity: 0.7; }
+    .ws-gold { color: var(--gold); }
+
+    /* reveal (transform-only; opacity stays 1) */
+    .ws-rise { transform: translateY(20px); transition: transform .7s cubic-bezier(.22,1,.36,1); will-change: transform; }
+    .ws-rise.is-in { transform: none; }
+    @media (prefers-reduced-motion: reduce) { .ws-rise { transform: none; transition: none; } }
+
+    /* ============ HERO ============ */
+    .ws-hero { position: relative; overflow: hidden; padding: clamp(96px, 13vw, 150px) 0 clamp(40px, 6vw, 80px); }
+    .ws-hero-grid { display: grid; grid-template-columns: 1fr; gap: clamp(36px, 6vw, 64px); align-items: center; }
+    .ws-hero h1 {
+      font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.045em;
+      font-size: clamp(2.4rem, 6.4vw, 4.6rem); line-height: 0.98; margin-top: 18px;
+    }
+    .ws-hero h1 .ws-gold { letter-spacing: -0.045em; }
+    .ws-hero-sub { max-width: 46ch; margin-top: 20px; font-size: clamp(1.04rem, 2.4vw, 1.2rem); line-height: 1.65; color: var(--text-dim); }
+    .ws-hero-ctas { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 30px; }
+    .ws-hero-trust { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 26px; }
+    .ws-hero-trust span { display: inline-flex; align-items: center; gap: 9px; font-size: 0.82rem; font-weight: 600; color: var(--text-soft); }
+    .ws-hero-trust svg { width: 16px; height: 16px; color: var(--teal); flex: none; }
+
+    /* device showcase */
+    .ws-stage { position: relative; }
+    .ws-stage-glow { position: absolute; inset: -8% -4% 0; background: radial-gradient(ellipse 70% 60% at 60% 40%, rgba(226,168,77,0.16), transparent 70%); filter: blur(20px); pointer-events: none; }
+    .ws-float { animation: wsFloat 7s ease-in-out infinite; }
+    @keyframes wsFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+    @media (prefers-reduced-motion: reduce) { .ws-float { animation: none; } }
+
+    /* browser frame */
+    .ws-browser { position: relative; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,248,235,0.1); background: #14110b; box-shadow: 0 40px 90px rgba(0,0,0,0.55); }
+    .ws-browser-bar { display: flex; align-items: center; gap: 8px; padding: 11px 14px; background: #1b1813; border-bottom: 1px solid rgba(255,248,235,0.07); }
+    .ws-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .ws-dot.r { background: #e06c5a; } .ws-dot.y { background: #e2b24d; } .ws-dot.g { background: #54b07f; }
+    .ws-url { flex: 1; margin-left: 8px; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,0.05); font-size: 0.72rem; color: var(--text-soft); display: flex; align-items: center; gap: 7px; }
+    .ws-url svg { width: 11px; height: 11px; color: var(--teal); }
+    .ws-browser-view { position: relative; height: clamp(280px, 42vw, 460px); overflow: hidden; background: #0c0a07; }
+    .ws-browser-view img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; display: block; }
+    /* hero browser shows the full desktop screenshot at its natural aspect ratio */
+    #ws-browser .ws-browser-view, .ws-lang-shot .ws-browser-view { height: auto; }
+    #ws-browser .ws-browser-view img, .ws-lang-shot .ws-browser-view img { height: auto; object-fit: contain; }
+    /* bilingual crossfade: English underneath, Spanish fading over it */
+    .ws-lang-fade { position: relative; }
+    .ws-lang-fade img { display: block; width: 100%; height: auto; }
+    .ws-lang-fade .lf-es { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 1; }
+    .ws-url-lang::after { content: "/es"; }
+    @media (prefers-reduced-motion: no-preference) {
+      .ws-lang-fade .lf-es { animation: wsLangFade 7s ease-in-out infinite; }
+      .ws-url-lang { position: relative; }
+      .ws-url-lang::after { animation: wsLangUrl 7s step-end infinite; }
+    }
+    @keyframes wsLangFade { 0%, 42% { opacity: 1; } 50%, 92% { opacity: 0; } 100% { opacity: 1; } }
+    @keyframes wsLangUrl { 0%, 42% { content: "/es"; } 50%, 92% { content: "/en"; } 100% { content: "/es"; } }
+    /* full-page browser: hover to scroll through the whole site (desktop) */
+    .ws-scrollbox { --fh: clamp(360px, 54vh, 580px); }
+    .ws-scrollbox .ws-browser-view { height: var(--fh); overflow: hidden; }
+    .ws-scrollbox .ws-browser-view img { width: 100%; height: auto; display: block; transition: transform 9s linear; }
+    .ws-scrollbox:hover .ws-browser-view img { transform: translateY(calc(-100% + var(--fh))); }
+    .ws-scrub-hint { position: absolute; right: 12px; bottom: 12px; z-index: 3; display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px; border-radius: 999px; background: rgba(10,10,10,0.62); backdrop-filter: blur(8px); border: 1px solid var(--line); font-size: 0.7rem; font-weight: 600; color: var(--text); pointer-events: none; }
+    .ws-scrub-hint svg { width: 13px; height: 13px; color: var(--gold); }
+    /* Touch / small screens: no hover, show the whole page, scroll naturally */
+    @media (hover: none), (max-width: 859px) {
+      .ws-scrollbox .ws-browser-view { height: auto; }
+      .ws-scrollbox .ws-browser-view img { transform: none !important; }
+      .ws-scrollbox .ws-scrub-hint { display: none; }
     }
 
-    /* -- Nav: fixed -- */
-    .lib-nav {
-      position: fixed;
-      top: 16px;
-      left: 0;
-      right: 0;
-      z-index: 999;
+    /* phone frame */
+    .ws-phone { position: absolute; width: clamp(110px, 17vw, 188px); right: -4%; bottom: -7%; border-radius: 26px; padding: 7px; background: #0a0a0a; border: 1px solid rgba(255,248,235,0.12); box-shadow: 0 30px 60px rgba(0,0,0,0.6); z-index: 3; }
+    .ws-phone-screen { border-radius: 20px; overflow: hidden; aspect-ratio: 9/19; background: #0c0a07; }
+
+    /* Tighten the stacked dark bands; default card-overlay padding (140/200) leaves dead space here */
+    main.page .card-overlay { padding-top: clamp(72px, 8.5vw, 108px); padding-bottom: clamp(70px, 8vw, 96px); }
+
+    /* ============ TEAM / PERSONAL TOUCH ============ */
+    .ws-team { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 4vw, 52px); align-items: center; }
+    .ws-team-copy h3 { font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.35rem); line-height: 1.1; letter-spacing: -0.02em; color: var(--text-head); margin: 14px 0; text-wrap: balance; }
+    .ws-team-copy p { color: var(--text-dim); font-size: 1rem; line-height: 1.65; max-width: 46ch; }
+    .ws-team-meta { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 24px; }
+    .ws-team-meta span { display: inline-flex; align-items: center; gap: 8px; font-size: 0.86rem; color: var(--text-soft); font-weight: 600; }
+    .ws-team-meta svg { width: 16px; height: 16px; color: var(--gold); flex: none; }
+    .ws-team-shots { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .ws-team-shots figure { margin: 0; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,248,235,0.08); background: #14110b; }
+    .ws-team-shots img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .ws-team-shots .t-sub { aspect-ratio: 4 / 5; }
+    @media (min-width: 860px) {
+      .ws-team { grid-template-columns: 0.9fr 1.1fr; }
     }
 
-    /* ============================
-       1. HERO - 2-col split
-       ============================ */
-    .rw-hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      background: #050608;
-      width: 100vw;
-      margin-left: calc(50% - 50vw);
-    }
-    .rw-hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 20% 50%, rgba(202,138,4,0.06) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 80% at 80% 30%, rgba(202,138,4,0.04) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .rw-hero-inner {
-      position: relative;
-      z-index: 2;
-      width: min(1200px, calc(100% - 48px));
-      margin: 0 auto;
-      padding: 140px 0 100px;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 56px;
-      align-items: center;
-    }
-    .rw-hero-copy { padding-bottom: 32px; }
-    .rw-hero-copy h1 {
-      font-family: var(--font-hero);
-      font-size: clamp(2.2rem, 4.2vw, 3.4rem);
-      line-height: 1.08;
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      margin-bottom: 24px;
-    }
-    .rw-hero-copy h1 .accent-serif {
-      font-family: var(--font-hero);
-      font-style: normal;
-      font-weight: 500;
-      color: var(--gold);
-    }
-    .rw-hero-copy > p {
-      font-size: 1.02rem;
-      color: var(--text-dim);
-      max-width: 50ch;
-      line-height: 1.7;
-      margin-bottom: 28px;
-    }
-    .rw-hero-cta {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .rw-hero-cta .flex-row { gap: 12px; }
-    /* Hero gauge dashboard */
-    .rw-hero-dashboard {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .rw-gauge-card {
-      padding: 24px 16px 20px;
-      background: rgba(10,10,10,0.6);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,248,235,0.06);
-      border-radius: 16px;
-      text-align: center;
-      transition: border-color 0.3s, transform 0.3s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .rw-gauge-card:hover {
-      border-color: rgba(226,168,77,0.2);
-      transform: translateY(-2px);
-    }
-    .rw-gauge-wrap {
-      position: relative;
-      width: 90px;
-      height: 90px;
-      margin-bottom: 10px;
-    }
-    .rw-gauge-svg {
-      width: 90px;
-      height: 90px;
-      transform: rotate(-90deg);
-    }
-    .rw-gauge-bg {
-      fill: none;
-      stroke: rgba(255,255,255,0.06);
-      stroke-width: 6;
-    }
-    .rw-gauge-fill {
-      fill: none;
-      stroke-width: 6;
-      stroke-linecap: round;
-      transition: stroke-dashoffset 1.5s cubic-bezier(0.22,1,0.36,1);
-    }
-    .rw-gauge-fill.--red { stroke: #D06A50; }
-    .rw-gauge-fill.--yellow { stroke: #E2A84D; }
-    .rw-gauge-fill.--green { stroke: #45B08C; }
-    .rw-gauge-value {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-display);
-      font-size: 1.3rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-    .rw-gauge-value.--red { color: #D06A50; }
-    .rw-gauge-value.--yellow { color: #E2A84D; }
-    .rw-gauge-label {
-      font-size: 0.68rem;
-      font-weight: 600;
-      color: var(--text-soft);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      line-height: 1.3;
+    /* ============ TRUST RIBBON ============ */
+    #trust.lib-section { padding-top: clamp(30px, 4.5vw, 46px); padding-bottom: clamp(30px, 4.5vw, 46px); }
+    .ws-ribbon { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 0; }
+    .ws-ribbon-item { text-align: center; padding: 22px 12px; border: 1px solid var(--line-soft); border-radius: var(--r-lg); background: var(--bg-1); }
+    .ws-ribbon-num { font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -0.03em; line-height: 1; }
+    .ws-ribbon-label { margin-top: 8px; font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-soft); }
+
+    /* ============ WOA SHOWCASE ============ */
+    .ws-feature-head { max-width: 56ch; }
+    .ws-feature-head h2 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.03em; font-size: clamp(1.9rem, 4.4vw, 3rem); line-height: 1.08; margin-top: 12px; }
+    .ws-feature-head p { margin-top: 14px; color: var(--text-dim); font-size: 1.04rem; line-height: 1.7; }
+    .ws-case { display: grid; grid-template-columns: 1fr; gap: clamp(30px, 5vw, 56px); margin-top: 40px; align-items: center; }
+    .ws-case-copy .tag { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(226,168,77,0.3); background: var(--gold-soft); color: var(--gold); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.04em; }
+    .ws-case-copy h3 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -0.02em; margin: 16px 0 0; }
+    .ws-case-rows { margin: 22px 0 0; display: flex; flex-direction: column; gap: 16px; }
+    .ws-case-row { display: grid; grid-template-columns: auto 1fr; gap: 13px; align-items: start; }
+    .ws-case-row .k { width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; background: var(--gold-soft); border: 1px solid rgba(226,168,77,0.3); color: var(--gold); flex: none; }
+    .ws-case-row .k svg { width: 17px; height: 17px; }
+    .ws-case-row h4 { font-family: var(--font-display); font-size: 0.96rem; font-weight: 700; color: var(--text-head); }
+    .ws-case-row p { font-size: 0.92rem; line-height: 1.6; color: var(--text-dim); margin-top: 2px; }
+    .ws-case-cta { margin-top: 26px; }
+    .ws-result-strip { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--line-soft); }
+    .ws-result-strip b { display: block; font-family: var(--font-hero); font-weight: 800; font-size: 1.5rem; letter-spacing: -0.02em; }
+    .ws-result-strip span { font-size: 0.72rem; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* ============ SERVICES ============ */
+    .ws-serv-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 36px; }
+    .ws-serv { padding: 26px 24px; border: 1px solid var(--line-soft); border-radius: var(--r-lg); background: var(--bg-1); transition: transform .25s, border-color .25s; }
+    .ws-serv:hover { transform: translateY(-3px); border-color: rgba(226,168,77,0.28); }
+    .ws-serv .ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--gold-soft); border: 1px solid rgba(226,168,77,0.28); color: var(--gold); margin-bottom: 16px; }
+    .ws-serv .ic svg { width: 22px; height: 22px; }
+    .ws-serv h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; margin-bottom: 7px; }
+    .ws-serv p { font-size: 0.9rem; line-height: 1.6; color: var(--text-dim); }
+
+    .ws-sec-head { max-width: 30ch; }
+    .ws-sec-head .lib-section-title { margin-top: 10px; }
+    .ws-sec-head .lib-section-sub { margin-top: 12px; }
+
+    /* ============ BILINGUAL ============ */
+    .ws-lang-grid { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 5vw, 52px); margin-top: 40px; align-items: center; }
+    .ws-lang-copy .tag { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(226,168,77,0.3); background: var(--gold-soft); color: var(--gold); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.04em; }
+    .ws-lang-copy h3 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -0.02em; margin: 16px 0 0; }
+    .ws-shot-cap { margin-top: 14px; font-size: 0.86rem; color: var(--text-dim); line-height: 1.5; display: flex; align-items: center; gap: 9px; }
+    .ws-flag { flex: none; display: inline-grid; place-items: center; min-width: 30px; height: 22px; padding: 0 7px; border-radius: 6px; background: var(--gold-soft); border: 1px solid rgba(226,168,77,0.32); color: var(--gold); font-family: var(--font-display); font-weight: 800; font-size: 0.7rem; letter-spacing: 0.04em; }
+    .ws-serp-head { max-width: 54ch; margin-top: clamp(50px, 8vw, 86px); }
+    .ws-serp-title { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.03em; font-size: clamp(1.6rem, 3.6vw, 2.4rem); line-height: 1.1; margin-top: 10px; }
+    .ws-serp-head p { margin-top: 14px; color: var(--text-dim); font-size: 1.02rem; line-height: 1.7; }
+    .ws-serp-head p em { font-style: italic; color: var(--text-head); }
+    .ws-serp-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 30px; }
+    .ws-serp { margin: 0; border: 1px solid var(--line-soft); border-radius: var(--r-lg); background: var(--bg-1); overflow: hidden; transition: transform .25s, border-color .25s; }
+    .ws-serp:hover { transform: translateY(-3px); border-color: rgba(226,168,77,0.28); }
+    .ws-serp img { width: 100%; height: auto; display: block; border-bottom: 1px solid var(--line-soft); }
+    .ws-serp-cap { display: flex; align-items: center; gap: 10px; padding: 14px 18px; font-family: var(--font-display); font-weight: 700; font-size: 0.92rem; color: var(--text-head); }
+
+    /* ============ SEO (compact) ============ */
+    .seo-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 40px; }
+    .seo-item { display: flex; gap: 15px; align-items: flex-start; padding: 18px 18px 19px; border: 1px solid var(--line-soft); border-radius: 14px; background: var(--bg-1); transition: transform .25s, border-color .25s; }
+    .seo-item:hover { transform: translateY(-3px); border-color: rgba(226,168,77,0.28); }
+    .seo-ic { flex: none; width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; background: var(--gold-soft); color: var(--gold); }
+    .seo-ic svg { width: 19px; height: 19px; }
+    .seo-item h3 { font-family: var(--font-display); font-weight: 700; font-size: 1rem; letter-spacing: -0.01em; margin-bottom: 5px; }
+    .seo-item p { color: var(--text-dim); font-size: 0.9rem; line-height: 1.5; }
+    .seo-incl { margin-top: 26px; padding: clamp(24px, 3vw, 36px); border: 1px solid var(--line-soft); border-radius: var(--r-lg); background: linear-gradient(135deg, var(--gold-soft), transparent 72%); display: grid; grid-template-columns: 1fr; gap: 22px; }
+    .seo-incl-lab { font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; letter-spacing: -0.01em; color: var(--text-head); }
+    .seo-incl-note { margin-top: 11px; color: var(--text-dim); font-size: 0.92rem; line-height: 1.6; max-width: 32ch; }
+    .seo-checks { display: grid; grid-template-columns: 1fr; gap: 0; }
+    .seo-checks li { display: flex; align-items: flex-start; gap: 13px; padding: 13px 0; border-top: 1px solid var(--line-soft); color: var(--text-head); font-size: 0.95rem; line-height: 1.45; }
+    .seo-checks li:first-child { border-top: none; padding-top: 0; }
+    .seo-checks .chk { flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--gold); color: #1a1206; display: grid; place-items: center; margin-top: 1px; }
+    .seo-checks .chk svg { width: 13px; height: 13px; }
+    @media (min-width: 760px) {
+      .seo-grid { grid-template-columns: repeat(3, 1fr); }
+      .seo-incl { grid-template-columns: 0.82fr 1.18fr; gap: 44px; align-items: start; }
     }
 
-    /* Word-reveal */
-    .rw-word {
-      overflow: hidden;
-      display: inline-flex;
-      vertical-align: bottom;
-    }
-    .rw-word-inner {
-      display: inline-block;
-    }
-
-    /* ============================
-       2. TRUST RIBBON
-       ============================ */
-    .rw-trust {
-      margin-top: -40px;
-      padding: 64px calc(50vw - 50%) 80px;
-      z-index: 2;
-      border-top: 1px solid rgba(255,248,235,0.04);
-      border-bottom: 1px solid rgba(255,248,235,0.04);
-      background: var(--bg-0);
-      border-radius: 40px 40px 0 0;
-      box-shadow: 0 -20px 60px rgba(0,0,0,0.5);
-    }
-    .rw-trust-inner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 48px;
-      flex-wrap: wrap;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .rw-trust-stat {
-      text-align: center;
-      position: relative;
-    }
-    .rw-trust-stat::after {
-      content: "";
-      position: absolute;
-      right: -24px;
-      top: 20%;
-      bottom: 20%;
-      width: 1px;
-      background: rgba(255,248,235,0.06);
-    }
-    .rw-trust-stat:last-child::after { display: none; }
-    .rw-trust-num {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.2;
-      margin-bottom: 6px;
-    }
-    .rw-trust-label {
-      font-size: 0.64rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-soft);
+    /* ============ PROCESS TIMELINE ============ */
+    .pc-steps { margin-top: 44px; display: grid; grid-template-columns: 1fr; gap: 0; }
+    .pc-step { position: relative; padding: 0 0 36px 48px; }
+    .pc-step::before { content: ""; position: absolute; left: 16px; top: 36px; bottom: -2px; width: 2px; background: linear-gradient(180deg, rgba(226,168,77,0.55), rgba(226,168,77,0.06)); }
+    .pc-step:last-child::before { display: none; }
+    .pc-num { position: absolute; left: 0; top: 0; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-hero); font-weight: 800; font-size: 0.95rem; color: #1a1206; background: var(--gold); box-shadow: 0 0 0 5px var(--gold-soft); }
+    .pc-step h3 { font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; letter-spacing: -0.01em; line-height: 1.1; padding-top: 5px; margin-bottom: 13px; }
+    .pc-feats { display: grid; gap: 9px; }
+    .pc-feats li { position: relative; padding-left: 20px; color: var(--text-dim); font-size: 0.94rem; line-height: 1.55; max-width: 44ch; }
+    .pc-feats li::before { content: ""; position: absolute; left: 3px; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+    @media (min-width: 860px) {
+      .pc-steps { grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 56px; }
+      .pc-step { padding: 50px 0 0 0; }
+      .pc-step::before { left: 34px; right: -30px; top: 16px; bottom: auto; width: auto; height: 2px; background: linear-gradient(90deg, rgba(226,168,77,0.55), rgba(226,168,77,0.12)); }
+      .pc-step h3 { padding-top: 0; }
+      .pc-feats li { max-width: none; }
     }
 
-    /* ============================
-       3. YOUR WEBSITE IS YOUR FRONT DOOR
-       ============================ */
-    .rw-stat-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
-      margin: 40px 0;
-    }
-    .rw-stat-card {
-      padding: 28px 20px;
-      background: rgba(255,255,255,0.015);
-      border: 1px solid var(--line-soft);
-      border-radius: var(--r-lg);
-      text-align: center;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .rw-stat-card:hover {
-      border-color: rgba(226,168,77,0.15);
-      transform: translateY(-3px);
-    }
-    .rw-stat-num {
-      font-family: var(--font-display);
-      font-size: 2.2rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.2;
-      margin-bottom: 8px;
-    }
-    .rw-stat-label {
-      font-size: 0.78rem;
-      color: var(--text-dim);
-      line-height: 1.4;
-    }
-    .rw-callout {
-      padding: 32px;
-      background: rgba(255,255,255,0.015);
-      border: 1px solid var(--line-soft);
-      border-left: 3px solid var(--gold);
-      border-radius: var(--r-lg);
-      margin: 40px 0;
-    }
-    .rw-callout h3 {
-      font-size: 1.2rem;
-      font-weight: 800;
-      margin-bottom: 20px;
-      letter-spacing: -0.01em;
-    }
-    .rw-action-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .rw-action-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 16px;
-      border: 1px solid var(--line-soft);
-      border-radius: var(--r-sm);
-      color: var(--text-dim);
-      transition: border-color 0.3s;
-    }
-    .rw-action-item:hover { border-color: rgba(226,168,77,0.15); }
-    .rw-action-icon {
-      flex-shrink: 0;
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: rgba(226,168,77,0.08);
-      display: grid;
-      place-items: center;
-      color: var(--gold);
-    }
-    .rw-action-icon svg {
-      width: 16px;
-      height: 16px;
-      stroke-width: 1.5;
-    }
-    .rw-pull-quote {
-      margin: 40px 0 0;
-      padding: 24px 28px;
-      border-radius: var(--r-lg);
-      background: rgba(226,168,77,0.03);
-      border: 1px solid rgba(226,168,77,0.1);
-      font-family: var(--font-hero);
-      font-style: normal;
-      font-size: 1.1rem;
-      color: var(--gold);
-      line-height: 1.6;
+    /* ============ FAQ ============ */
+    .ws-faq { margin-top: 44px; max-width: 880px; border-top: 1px solid var(--line-soft); }
+    .ws-faq details { border-bottom: 1px solid var(--line-soft); }
+    .ws-faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 18px; padding: 24px 4px; }
+    .ws-faq summary::-webkit-details-marker { display: none; }
+    .ws-faq-n { font-family: var(--font-hero); font-weight: 800; font-size: 0.92rem; color: var(--gold); flex: none; min-width: 24px; }
+    .ws-faq summary h3 { flex: 1; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.05rem, 2vw, 1.2rem); letter-spacing: -0.01em; color: var(--text-head); }
+    .ws-faq-ic { flex: none; width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(226,168,77,0.4); display: grid; place-items: center; color: var(--gold); transition: transform .3s, background .25s; }
+    .ws-faq-ic svg { width: 15px; height: 15px; }
+    .ws-faq details[open] .ws-faq-ic { transform: rotate(45deg); background: var(--gold-soft); }
+    .ws-faq-a { padding: 0 4px 26px 60px; color: var(--text-dim); font-size: 0.98rem; line-height: 1.7; max-width: 70ch; }
+
+    /* ============ PRICING (menu style) ============ */
+    .pr-menu { margin-top: 40px; border: 1px solid var(--line-soft); border-radius: var(--r-lg); background: var(--bg-1); overflow: hidden; }
+    .pr-line { padding: clamp(24px, 3.5vw, 40px); }
+    .pr-line + .pr-line { border-top: 1px solid var(--line-soft); }
+    .pr-line.--feature { background: linear-gradient(180deg, var(--gold-soft), transparent 62%); }
+    .pr-line-head { display: flex; align-items: flex-end; gap: 16px; }
+    .pr-line-name h3 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.3rem, 2.4vw, 1.75rem); letter-spacing: -0.02em; line-height: 1.1; }
+    .pr-kickrow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+    .pr-kicker { font-family: var(--font-display); font-weight: 600; font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-soft); }
+    .pr-tag { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); background: var(--gold-soft); border: 1px solid rgba(226,168,77,0.3); padding: 3px 9px; border-radius: 999px; }
+    .pr-dots { flex: 1; min-width: 24px; margin-bottom: 9px; border-bottom: 2px dotted rgba(226,168,77,0.32); }
+    .pr-price { text-align: right; white-space: nowrap; }
+    .pr-price b { font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.7rem, 2.8vw, 2.2rem); letter-spacing: -0.02em; color: var(--gold); }
+    .pr-price span { display: block; font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-soft); margin-top: 2px; }
+    .pr-desc { margin-top: 14px; color: var(--text-dim); font-size: 0.98rem; line-height: 1.6; max-width: 62ch; }
+    .pr-incl { margin-top: 12px; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-soft); }
+    .pr-feats { margin-top: 14px; display: grid; grid-template-columns: 1fr; gap: 9px; }
+    .pr-feats li { position: relative; padding-left: 24px; font-size: 0.93rem; color: var(--text-dim); line-height: 1.5; }
+    .pr-feats li::before { content: ""; position: absolute; left: 5px; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+    .pr-addon-head { margin-top: clamp(40px, 6vw, 66px); color: var(--text-dim); font-size: 1rem; line-height: 1.6; }
+    .pr-addon-ey { color: var(--gold); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; margin-right: 10px; }
+    .pr-addons { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 22px; }
+    .pr-addon { padding: 26px 24px; border: 1px solid var(--line-soft); border-radius: var(--r-lg); background: var(--bg-1); transition: transform .25s, border-color .25s; }
+    .pr-addon:hover { transform: translateY(-3px); border-color: rgba(226,168,77,0.28); }
+    .pr-addon-top { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; }
+    .pr-addon-top h4 { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; }
+    .pr-price.sm b { font-size: 1.45rem; }
+    .pr-addon p { margin-top: 10px; color: var(--text-dim); font-size: 0.92rem; line-height: 1.6; }
+    .pr-cta { margin-top: clamp(32px, 5vw, 48px); display: flex; justify-content: center; }
+    @media (min-width: 760px) {
+      .pr-feats { grid-template-columns: 1fr 1fr; gap: 10px 28px; }
+      .pr-addons { grid-template-columns: 1fr 1fr; }
     }
 
-    /* ============================
-       4. WHY MOST WEBSITES FAIL - TABS
-       ============================ */
-    .rw-problem-tabs { margin: 40px 0 0; }
-    .rw-problem-tabs-nav {
-      display: flex;
-      gap: 0;
-      border-bottom: 2px solid rgba(255,248,235,0.06);
-      margin-bottom: 40px;
-      overflow-x: auto;
-      overflow-y: hidden;
-      scrollbar-width: none;
-      overscroll-behavior-x: contain;
-      overscroll-behavior-y: none;
-      touch-action: pan-x;
-    }
-    .rw-problem-tabs-nav::-webkit-scrollbar { display: none; }
-    .rw-problem-tab-btn {
-      flex: 1;
-      min-width: 130px;
-      padding: 16px 16px;
-      background: none;
-      border: none;
-      border-bottom: 2px solid transparent;
-      margin-bottom: -2px;
-      color: var(--text-soft);
-      font-family: var(--font-display);
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: color 0.3s, border-color 0.3s, background 0.3s;
-      white-space: nowrap;
-    }
-    .rw-problem-tab-btn:hover {
-      color: var(--text);
-      background: rgba(226,168,77,0.03);
-    }
-    .rw-problem-tab-btn.--active {
-      color: var(--gold);
-      border-bottom-color: var(--gold);
-    }
-    .rw-problem-tab-btn svg {
-      width: 18px;
-      height: 18px;
-      stroke-width: 1.5;
-    }
-    .rw-problem-tab-panel {
-      display: none;
-      animation: rwFadeIn 0.35s ease;
-    }
-    .rw-problem-tab-panel.--active {
-      display: block;
-    }
-    @keyframes rwFadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .rw-problem-tab-content h3 {
-      font-size: 1.3rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 10px;
-    }
-    .rw-problem-tab-content > p {
-      color: var(--text-dim);
-      max-width: 60ch;
-      margin-bottom: 20px;
-    }
-    .rw-problem-bullets {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 24px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .rw-problem-bullets li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      color: var(--text-dim);
-      padding: 10px 12px;
-      border: 1px solid var(--line-soft);
-      border-radius: var(--r-sm);
-    }
-    .rw-problem-bullet-icon {
-      flex-shrink: 0;
-      width: 24px;
-      height: 24px;
-      border-radius: 6px;
-      background: rgba(208,106,80,0.08);
-      display: grid;
-      place-items: center;
-      color: var(--coral);
-      margin-top: 1px;
-    }
-    .rw-problem-bullet-icon svg {
-      width: 14px;
-      height: 14px;
-      stroke-width: 1.5;
-    }
-    .rw-problem-solution {
-      padding: 18px 20px;
-      background: rgba(69,176,140,0.06);
-      border: 1px solid rgba(69,176,140,0.12);
-      border-radius: var(--r-sm);
-      margin-top: 8px;
-    }
-    .rw-problem-solution strong {
-      display: block;
-      font-size: 0.82rem;
-      color: var(--teal);
-      margin-bottom: 6px;
-    }
-    .rw-problem-solution p {
-      color: var(--text-dim);
-    }
-
-    /* ============================
-       5. AUDIT TOOL PLACEHOLDER
-       ============================ */
-    .rw-audit-tool {
-      max-width: 640px;
-      margin: 48px auto 0;
-      padding: 40px 36px;
-      background: rgba(10,10,10,0.5);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(226,168,77,0.12);
-      border-radius: var(--r-xl);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .rw-audit-tool::before {
-      content: "";
-      position: absolute;
-      inset: -1px;
-      border-radius: inherit;
-      padding: 1px;
-      background: linear-gradient(135deg, rgba(226,168,77,0.2), transparent 50%, rgba(226,168,77,0.1));
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-      animation: rwAuditPulse 3s ease-in-out infinite alternate;
-    }
-    @keyframes rwAuditPulse {
-      0% { opacity: 0.5; }
-      100% { opacity: 1; }
-    }
-    .rw-audit-tool h3 {
-      font-size: 1.3rem;
-      font-weight: 800;
-      margin-bottom: 8px;
-      letter-spacing: -0.01em;
-    }
-    .rw-audit-tool > p {
-      color: var(--text-dim);
-      margin-bottom: 24px;
-    }
-    .rw-audit-form {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-    .rw-audit-input {
-      flex: 1;
-      padding: 14px 18px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,248,235,0.1);
-      border-radius: var(--r-sm);
-      color: var(--text);
-      font-family: var(--font-body);
-      font-size: 0.92rem;
-      outline: none;
-      transition: border-color 0.3s;
-    }
-    .rw-audit-input::placeholder {
-      color: var(--text-soft);
-    }
-    .rw-audit-input:focus {
-      border-color: var(--gold);
-    }
-    .rw-audit-submit {
-      padding: 14px 24px;
-      background: var(--gold);
-      color: var(--bg-0);
-      font-family: var(--font-display);
-      font-size: 0.88rem;
-      font-weight: 700;
-      border: none;
-      border-radius: var(--r-sm);
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.3s, transform 0.2s;
-    }
-    .rw-audit-submit:hover {
-      background: #d4a94e;
-      transform: translateY(-1px);
-    }
-    .rw-audit-note {
-      font-size: 0.76rem;
-      color: var(--text-soft);
-    }
-    .rw-audit-message {
-      display: none;
-      margin-top: 16px;
-      padding: 16px;
-      background: rgba(226,168,77,0.06);
-      border: 1px solid rgba(226,168,77,0.15);
-      border-radius: var(--r-sm);
-      font-size: 0.88rem;
-      color: var(--text-dim);
-    }
-    .rw-audit-message a {
-      color: var(--gold);
-      font-weight: 600;
-    }
-
-    /* ============================
-       6. CUSTOMER DECISION JOURNEY
-       ============================ */
-    .rw-journey {
-      display: flex;
-      align-items: flex-start;
-      gap: 0;
-      margin: 40px 0 16px;
-      position: relative;
-      width: 100%;
-    }
-    .rw-journey-step {
-      flex: 1;
-      text-align: center;
-      position: relative;
-      padding: 24px 16px;
-    }
-    .rw-journey-num {
-      width: 52px;
-      height: 52px;
-      margin: 0 auto 14px;
-      border-radius: 50%;
-      background: rgba(226,168,77,0.1);
-      border: 2px solid rgba(226,168,77,0.25);
-      display: grid;
-      place-items: center;
-      font-family: var(--font-display);
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: var(--gold);
-    }
-    .rw-journey-icon {
-      color: var(--gold);
-      margin-bottom: 12px;
-    }
-    .rw-journey-icon svg {
-      width: 34px;
-      height: 34px;
-      stroke-width: 1.5;
-    }
-    .rw-journey-label {
-      font-weight: 700;
-      font-size: 0.92rem;
-      margin-bottom: 6px;
-    }
-    .rw-journey-text {
-      color: var(--text-dim);
-      font-size: 0.82rem;
-      font-weight: 500;
-      line-height: 1.4;
-    }
-    .rw-journey-connector {
-      position: absolute;
-      top: 50px;
-      left: calc(50% + 26px);
-      right: -50%;
-      height: 1px;
-      background: linear-gradient(90deg, rgba(226,168,77,0.25), rgba(226,168,77,0.08));
-      z-index: 0;
-    }
-    .rw-journey-step:last-child .rw-journey-connector { display: none; }
-
-    /* Priority list */
-    .rw-priority-list {
-      margin: 48px 0 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-    .rw-priority-item {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      padding: 20px 24px;
-      border-bottom: 1px solid rgba(255,248,235,0.04);
-      transition: background 0.3s;
-    }
-    .rw-priority-item:first-child {
-      border-top: 1px solid rgba(255,248,235,0.04);
-    }
-    .rw-priority-item:hover {
-      background: rgba(226,168,77,0.02);
-    }
-    .rw-priority-num {
-      flex-shrink: 0;
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      background: rgba(226,168,77,0.06);
-      border: 1px solid rgba(226,168,77,0.15);
-      display: grid;
-      place-items: center;
-      font-family: var(--font-display);
-      font-size: 1rem;
-      font-weight: 800;
-      color: var(--gold);
-    }
-    .rw-priority-content strong {
-      display: block;
-      font-size: 1rem;
-      margin-bottom: 2px;
-    }
-    .rw-priority-content span {
-      color: var(--text-dim);
-      font-size: 0.88rem;
-    }
-
-    /* ============================
-       7. SERVICES - HORIZONTAL SCROLL
-       ============================ */
-    .rw-hscroll-section {
-      position: relative;
-      padding: 0;
-      z-index: 4;
-      width: 100vw;
-      margin-left: calc(50% - 50vw);
-      background: var(--bg-0);
-    }
-    .rw-hscroll-intro {
-      padding: 100px 0 40px;
-      position: relative;
-      z-index: 2;
-      background: var(--bg-0);
-      width: min(calc(100% - 48px), 1200px);
-      margin: 0 auto;
-    }
-    .rw-hscroll-entry { height: 10vh; background: var(--bg-0); }
-    .rw-hscroll-exit { height: 10vh; background: var(--bg-0); }
-    .rw-hscroll-pin {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-      z-index: 4;
-      background: var(--bg-0);
-    }
-    .rw-hscroll-track {
-      display: flex;
-      height: 100%;
-      will-change: transform;
-    }
-    .rw-hscroll-panel {
-      flex: 0 0 100vw;
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .rw-hscroll-panel:nth-child(odd) { background: var(--bg-0); }
-    .rw-hscroll-panel:nth-child(even) { background: #090b0e; }
-    .rw-hscroll-panel::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, transparent 0%, transparent 28%, rgba(255,248,235,0.035) 40%, rgba(255,248,235,0.07) 50%, rgba(255,248,235,0.035) 60%, transparent 72%, transparent 100%);
-      pointer-events: none;
-      z-index: 0;
-    }
-    .rw-hscroll-panel:nth-child(even)::before {
-      background: linear-gradient(135deg, transparent 0%, transparent 38%, rgba(255,248,235,0.028) 48%, rgba(255,248,235,0.055) 55%, rgba(255,248,235,0.028) 62%, transparent 74%, transparent 100%);
-    }
-    .rw-hscroll-particle {
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 1;
-      animation: rwParticleDrift 10s ease-in-out infinite alternate;
-    }
-    @keyframes rwParticleDrift {
-      0%   { transform: translateY(0) translateX(0); opacity: 0; }
-      15%  { opacity: 1; }
-      85%  { opacity: 1; }
-      100% { transform: translateY(-60px) translateX(30px); opacity: 0; }
-    }
-    .rw-hscroll-num {
-      position: absolute;
-      top: 40px;
-      left: 40px;
-      font-family: var(--font-display);
-      font-size: 7rem;
-      font-weight: 900;
-      letter-spacing: -0.06em;
-      line-height: 1;
-      background: linear-gradient(180deg, rgba(202,138,4,0.12) 0%, rgba(202,138,4,0.04) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      z-index: 0;
-      will-change: transform;
-    }
-    .rw-hscroll-inner {
-      width: min(1100px, calc(100% - 80px));
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-    }
-    .rw-hscroll-copy { will-change: transform, opacity; }
-    .rw-hscroll-copy .label {
-      font-size: 0.64rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--gold);
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .rw-hscroll-copy .label::before {
-      content: "";
-      width: 20px;
-      height: 1px;
-      background: var(--gold);
-    }
-    .rw-hscroll-copy h2 {
-      font-size: clamp(1.6rem, 2.8vw, 2.4rem);
-      font-weight: 800;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      margin-bottom: 14px;
-    }
-    .rw-hscroll-copy p {
-      color: var(--text-dim);
-      max-width: 40ch;
-      margin-bottom: 20px;
-    }
-    .rw-hscroll-deliverables {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 16px;
-      overflow: hidden;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-    .rw-deliverable {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 16px 20px;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      transition: background 0.3s;
-      will-change: transform, opacity;
-    }
-    .rw-deliverable:last-child { border-bottom: none; }
-    .rw-deliverable:hover { background: rgba(226,168,77,0.04); }
-    .rw-deliverable-icon {
-      flex-shrink: 0;
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
-      background: rgba(226,168,77,0.06);
-      border: 1px solid rgba(226,168,77,0.12);
-      display: grid;
-      place-items: center;
-      color: var(--gold);
-      transition: background 0.3s, border-color 0.3s;
-    }
-    .rw-deliverable:hover .rw-deliverable-icon {
-      background: rgba(226,168,77,0.1);
-      border-color: rgba(226,168,77,0.25);
-    }
-    .rw-deliverable-icon svg {
-      width: 16px;
-      height: 16px;
-      stroke-width: 1.5;
-    }
-    .rw-deliverable span {
-      font-size: 0.88rem;
-      color: var(--text-soft);
-      font-weight: 500;
-      line-height: 1.4;
-    }
-    .rw-hscroll-divider {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      right: -1px;
-      width: 3px;
-      z-index: 100;
-    }
-    .rw-hscroll-divider::before {
-      content: "";
-      position: absolute;
-      top: 15%;
-      bottom: 15%;
-      left: 0;
-      width: 1px;
-      background: linear-gradient(180deg, transparent, rgba(202,138,4,0.2) 30%, rgba(202,138,4,0.3) 50%, rgba(202,138,4,0.2) 70%, transparent);
-    }
-    .rw-hscroll-progress {
-      position: absolute;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 200px;
-      height: 2px;
-      background: rgba(255,248,235,0.08);
-      border-radius: 2px;
-      z-index: 10;
-      overflow: hidden;
-    }
-    .rw-hscroll-progress-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--gold), var(--coral));
-      border-radius: 2px;
-      will-change: width;
-    }
-    .rw-hscroll-dots {
-      position: absolute;
-      bottom: 44px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 8px;
-      z-index: 10;
-    }
-    .rw-hscroll-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: rgba(255,248,235,0.15);
-      transition: background 0.3s, transform 0.3s;
-    }
-    .rw-hscroll-dot.--active {
-      background: var(--gold);
-      transform: scale(1.4);
-      box-shadow: 0 0 8px rgba(226,168,77,0.4);
-    }
-    .rw-hscroll-glow {
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(202,138,4,0.14) 0%, rgba(202,138,4,0.04) 40%, transparent 70%);
-      filter: blur(40px);
-      z-index: 1;
-      pointer-events: none;
-      will-change: transform;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    /* ============================
-       8. COMPARISON TABLE
-       ============================ */
-    .rw-compare-table {
-      margin-top: 40px;
-      border: 1px solid var(--line-soft);
-      border-radius: var(--r-lg);
-      overflow: hidden;
-    }
-    .rw-compare-header {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr 1fr;
-      background: rgba(255,255,255,0.03);
-      border-bottom: 1px solid var(--line-soft);
-    }
-    .rw-compare-header span {
-      padding: 16px 20px;
-      font-family: var(--font-display);
-      font-size: 0.82rem;
-      font-weight: 700;
-    }
-    .rw-compare-header span:first-child { color: var(--text-soft); }
-    .rw-compare-header span:nth-child(2) {
-      color: var(--text-soft);
-      border-left: 1px solid var(--line-soft);
-    }
-    .rw-compare-header span:nth-child(3) {
-      color: var(--gold);
-      border-left: 1px solid var(--line-soft);
-      background: rgba(226,168,77,0.04);
-    }
-    .rw-compare-row {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr 1fr;
-      border-bottom: 1px solid var(--line-soft);
-      transition: background 0.2s;
-    }
-    .rw-compare-row:last-child { border-bottom: none; }
-    .rw-compare-row:hover { background: rgba(226,168,77,0.02); }
-    .rw-compare-row span {
-      padding: 14px 20px;
-      color: var(--text-dim);
-      line-height: 1.5;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .rw-compare-row span:first-child {
-      font-weight: 600;
-      color: var(--text);
-    }
-    .rw-compare-row span:nth-child(2) {
-      border-left: 1px solid var(--line-soft);
-    }
-    .rw-compare-row span:nth-child(3) {
-      border-left: 3px solid rgba(226,168,77,0.2);
-      background: rgba(226,168,77,0.02);
-    }
-    .rw-compare-icon {
-      flex-shrink: 0;
-      width: 18px;
-      height: 18px;
-    }
-    .rw-compare-icon.--check { color: var(--teal); }
-    .rw-compare-icon.--x { color: var(--text-soft); opacity: 0.5; }
-    .rw-testimonial {
-      margin: 48px auto 0;
-      max-width: 720px;
-      text-align: center;
-      position: relative;
-      padding: 36px 44px;
-      border: 1px solid rgba(226,168,77,0.08);
-      border-radius: var(--r-lg);
-      background: rgba(226,168,77,0.02);
-    }
-    .rw-testimonial::before {
-      content: "\201C";
-      position: absolute;
-      top: -14px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: var(--font-hero);
-      font-size: 5rem;
-      color: rgba(226,168,77,0.15);
-      line-height: 1;
-    }
-    .rw-testimonial blockquote {
-      font-family: var(--font-body);
-      font-style: normal;
-      font-size: 1.05rem;
-      color: var(--text-dim);
-      line-height: 1.75;
-      margin-bottom: 16px;
-    }
-    .rw-testimonial cite {
-      font-style: normal;
-      font-size: 0.84rem;
-      font-weight: 700;
-      color: var(--gold);
-    }
-
-    /* ============================
-       9. WHAT EVERY WEBSITE INCLUDES (TIERS)
-       ============================ */
-    .rw-tiers {
-      margin-top: 56px;
-      display: grid;
-      grid-template-columns: 1fr 1.3fr 1fr;
-      gap: 0;
-      align-items: stretch;
-      position: relative;
-    }
-    /* Ambient glow behind featured card */
-    .rw-tiers::before {
-      content: "";
-      position: absolute;
-      top: -30px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(226,168,77,0.07), transparent 65%);
-      pointer-events: none;
-      filter: blur(60px);
-      z-index: 0;
-    }
-    .rw-tier-card {
-      padding: 36px 28px 32px;
-      border: 1px solid rgba(255,248,235,0.06);
-      background: linear-gradient(170deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.005) 100%);
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s;
-    }
-    .rw-tier-card:first-child {
-      border-radius: var(--r-xl) 0 0 var(--r-xl);
-      border-right: none;
-    }
-    .rw-tier-card:last-child {
-      border-radius: 0 var(--r-xl) var(--r-xl) 0;
-      border-left: none;
-    }
-    .rw-tier-card:hover {
-      border-color: rgba(226,168,77,0.15);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    }
-    /* Featured center card */
-    .rw-tier-card.--featured {
-      border: 1px solid rgba(226,168,77,0.2);
-      border-radius: var(--r-xl);
-      background: linear-gradient(170deg, rgba(226,168,77,0.06) 0%, rgba(226,168,77,0.01) 40%, rgba(255,255,255,0.01) 100%);
-      z-index: 2;
-      transform: scale(1.03);
-      box-shadow:
-        0 0 0 1px rgba(226,168,77,0.08),
-        0 24px 80px rgba(0,0,0,0.4),
-        0 0 120px rgba(226,168,77,0.06);
-      padding: 44px 32px 36px;
-    }
-    .rw-tier-card.--featured::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      border-radius: var(--r-xl) var(--r-xl) 0 0;
-    }
-    .rw-tier-card.--featured:hover {
-      transform: scale(1.03) translateY(-4px);
-      box-shadow:
-        0 0 0 1px rgba(226,168,77,0.12),
-        0 30px 100px rgba(0,0,0,0.5),
-        0 0 140px rgba(226,168,77,0.1);
-    }
-    /* Gold accent line for side cards */
-    .rw-tier-card.--gold::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 24px;
-      right: 24px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(226,168,77,0.35), transparent);
-    }
-    .rw-tier-card.--teal::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 24px;
-      right: 24px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(69,176,140,0.4), transparent);
-    }
-    .rw-tier-header {
-      margin-bottom: 20px;
-    }
-    .rw-tier-num {
-      font-family: var(--font-display);
-      font-size: 0.68rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-soft);
-      margin-bottom: 10px;
-    }
-    .rw-tier-card.--featured .rw-tier-num { color: var(--gold); }
-    .rw-tier-card.--teal .rw-tier-num { color: var(--teal); }
-    .rw-tier-header h3 {
-      font-size: 1.1rem;
-      font-weight: 800;
-      letter-spacing: -0.01em;
-      margin-bottom: 4px;
-    }
-    .rw-tier-card.--featured .rw-tier-header h3 {
-      font-size: 1.2rem;
-    }
-    .rw-tier-header p {
-      font-size: 0.78rem;
-      color: var(--text-soft);
-      line-height: 1.4;
-    }
-    .rw-tier-items {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      border-top: 1px solid rgba(255,248,235,0.05);
-      padding-top: 16px;
-      flex: 1;
-    }
-    .rw-tier-card.--featured .rw-tier-items {
-      border-top-color: rgba(226,168,77,0.1);
-    }
-    .rw-tier-items li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 10px 0;
-      color: var(--text-dim);
-      font-size: 0.86rem;
-      line-height: 1.5;
-      border-bottom: 1px solid rgba(255,248,235,0.03);
-      transition: color 0.3s;
-    }
-    .rw-tier-items li:last-child { border-bottom: none; }
-    .rw-tier-items li:hover { color: var(--text); }
-    .rw-tier-icon {
-      flex-shrink: 0;
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
-      display: grid;
-      place-items: center;
-      margin-top: 1px;
-    }
-    .rw-tier-card.--gold .rw-tier-icon {
-      background: rgba(226,168,77,0.08);
-      border: 1px solid rgba(226,168,77,0.15);
-      color: var(--gold);
-    }
-    .rw-tier-card.--featured .rw-tier-icon {
-      background: rgba(226,168,77,0.1);
-      border: 1px solid rgba(226,168,77,0.2);
-      color: var(--gold);
-    }
-    .rw-tier-card.--teal .rw-tier-icon {
-      background: rgba(69,176,140,0.06);
-      border: 1px solid rgba(69,176,140,0.15);
-      color: var(--teal);
-    }
-    .rw-tier-icon svg {
-      width: 15px;
-      height: 15px;
-      stroke-width: 1.5;
-    }
-
-    /* ============================
-       10. PROCESS TIMELINE
-       ============================ */
-    .rw-timeline {
-      display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
-      gap: 56px;
-      margin-top: 48px;
-      align-items: start;
-    }
-    .rw-timeline-track {
-      position: relative;
-      padding-left: 52px;
-    }
-    #process {
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
-    }
-    #process::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(180deg, rgba(9, 8, 10, 0.86), rgba(9, 8, 10, 0.96)),
-        url("images/bts-shoot-optimized.avif") center/cover no-repeat;
-      opacity: 0.24;
-      filter: saturate(0.72) brightness(0.44) contrast(1.02);
-      pointer-events: none;
-      z-index: 0;
-    }
-    #process > * {
-      position: relative;
-      z-index: 1;
-    }
-    .rw-timeline-line {
-      position: absolute;
-      left: 18px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: rgba(255,248,235,0.06);
-      border-radius: 2px;
-    }
-    .rw-timeline-line-fill {
-      width: 100%;
-      height: 0%;
-      background: linear-gradient(180deg, var(--gold), var(--coral));
-      border-radius: 2px;
-    }
-    .rw-timeline-step {
-      position: relative;
-      padding-bottom: 56px;
-    }
-    .rw-timeline-step:last-child { padding-bottom: 0; }
-    .rw-timeline-marker {
-      position: absolute;
-      left: -52px;
-      top: 0;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: rgba(226,168,77,0.1);
-      border: 2px solid rgba(226,168,77,0.25);
-      display: grid;
-      place-items: center;
-      font-family: var(--font-display);
-      font-size: 0.72rem;
-      font-weight: 800;
-      color: var(--gold);
-      z-index: 2;
-      transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
-    }
-    .rw-timeline-step.--active .rw-timeline-marker {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: #050608;
-      box-shadow: 0 0 16px rgba(226,168,77,0.4);
-    }
-    .rw-timeline-step h4 {
-      font-size: 1.05rem;
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-    .rw-timeline-step ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .rw-timeline-step ul li {
-      font-size: 0.84rem;
-      color: var(--text-dim);
-      padding: 4px 0 4px 18px;
-      position: relative;
-      line-height: 1.5;
-    }
-    .rw-timeline-step ul li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 12px;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--gold);
-    }
-    /* ============================
-       11. TESTIMONIAL MARQUEE
-       ============================ */
-    /* Uses shared.css proof-marquee + proof-card classes */
-
-    /* ============================
-       12. PRICING
-       ============================ */
-    .rw-pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      margin-top: 32px;
-      align-items: stretch;
-      position: relative;
-    }
-    /* Ambient glow behind featured card */
-    .rw-pricing-grid::before {
-      content: "";
-      position: absolute;
-      top: -40px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(226,168,77,0.08), transparent 65%);
-      pointer-events: none;
-      filter: blur(60px);
-      z-index: 0;
-    }
-    .rw-pricing-card {
-      padding: 28px 22px 24px;
-      border: 1px solid rgba(255,248,235,0.06);
-      background: linear-gradient(170deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.005) 100%);
-      position: relative;
-      transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .rw-pricing-card:first-child {
-      border-radius: var(--r-xl) 0 0 var(--r-xl);
-      border-right: none;
-    }
-    .rw-pricing-card:last-child {
-      border-radius: 0 var(--r-xl) var(--r-xl) 0;
-      border-left: none;
-    }
-    .rw-pricing-card:hover {
-      border-color: rgba(226,168,77,0.15);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    }
-    /* Featured / center card — elevated */
-    .rw-pricing-card.--featured {
-      border: 1px solid rgba(226,168,77,0.2);
-      border-radius: var(--r-xl);
-      background: linear-gradient(170deg, rgba(226,168,77,0.06) 0%, rgba(226,168,77,0.01) 40%, rgba(255,255,255,0.01) 100%);
-      z-index: 2;
-      transform: scale(1.015);
-      box-shadow:
-        0 0 0 1px rgba(226,168,77,0.08),
-        0 24px 80px rgba(0,0,0,0.4),
-        0 0 90px rgba(226,168,77,0.05);
-      padding: 28px 22px 24px;
-    }
-    .rw-pricing-card.--featured::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      border-radius: var(--r-xl) var(--r-xl) 0 0;
-    }
-    .rw-pricing-card.--featured:hover {
-      transform: scale(1.015) translateY(-4px);
-      box-shadow:
-        0 0 0 1px rgba(226,168,77,0.12),
-        0 30px 100px rgba(0,0,0,0.5),
-        0 0 140px rgba(226,168,77,0.1);
-    }
-    /* Gold accent line for side cards */
-    .rw-pricing-card.--gold::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 24px;
-      right: 24px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(226,168,77,0.35), transparent);
-    }
-    .rw-pricing-card.--teal::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 24px;
-      right: 24px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(69,176,140,0.4), transparent);
-    }
-    /* Badge */
-    .rw-pricing-badge {
-      position: absolute;
-      top: -11px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, #D4A744, #E2A84D, #F2D688);
-      color: #0a0a0c;
-      font-size: 0.58rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      padding: 5px 14px;
-      border-radius: 999px;
-      box-shadow: 0 4px 16px rgba(226,168,77,0.3), 0 0 40px rgba(226,168,77,0.1);
-      white-space: nowrap;
-    }
-    /* Tier label */
-    .rw-pricing-tier {
-      font-size: 0.64rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-soft);
-      margin-bottom: 8px;
-    }
-    .rw-pricing-card.--featured .rw-pricing-tier { color: var(--gold); }
-    .rw-pricing-card.--teal .rw-pricing-tier { color: var(--teal); }
-    /* Header */
-    .rw-pricing-header h3 {
-      font-size: 1.03rem;
-      font-weight: 800;
-      margin-bottom: 10px;
-      letter-spacing: -0.01em;
-    }
-    .rw-pricing-card.--featured .rw-pricing-header h3 {
-      font-size: 1.08rem;
-    }
-    /* Price */
-    .rw-pricing-price {
-      font-family: var(--font-display);
-      font-size: 1.7rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      margin-bottom: 4px;
-      line-height: 1.1;
-      background: linear-gradient(115deg, #C6943A 0%, #F2D688 35%, #ffef9d 50%, #F2D688 65%, #C6943A 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .rw-pricing-card.--featured .rw-pricing-price {
-      font-size: 1.95rem;
-    }
-    .rw-pricing-card.--teal .rw-pricing-price {
-      background: linear-gradient(115deg, #3A9E7E 0%, #45B08C 35%, #6DD5B0 50%, #45B08C 65%, #3A9E7E 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .rw-pricing-timeline {
-      font-size: 0.7rem;
-      color: var(--text-soft);
-      margin-bottom: 16px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid rgba(255,248,235,0.05);
-    }
-    .rw-pricing-card.--featured .rw-pricing-timeline {
-      border-bottom-color: rgba(226,168,77,0.1);
-    }
-    /* Includes list */
-    .rw-pricing-includes {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      flex: 1;
-    }
-    .rw-pricing-includes li {
-      font-size: 0.77rem;
-      color: var(--text-dim);
-      padding: 6px 0 6px 22px;
-      position: relative;
-      line-height: 1.42;
-    }
-    .rw-pricing-includes li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 10px;
-      width: 13px;
-      height: 13px;
-      border-radius: 50%;
-      background: rgba(226,168,77,0.1);
-      border: 1px solid rgba(226,168,77,0.2);
-    }
-    .rw-pricing-includes li::after {
-      content: "";
-      position: absolute;
-      left: 3px;
-      top: 14px;
-      width: 6px;
-      height: 4px;
-      border-left: 1.5px solid var(--gold);
-      border-bottom: 1.5px solid var(--gold);
-      transform: rotate(-45deg);
-    }
-    .rw-pricing-card.--teal .rw-pricing-includes li::before {
-      background: rgba(69,176,140,0.08);
-      border-color: rgba(69,176,140,0.2);
-    }
-    .rw-pricing-card.--teal .rw-pricing-includes li::after {
-      border-color: var(--teal);
-    }
-    /* CTA inside each card */
-    .rw-pricing-card-cta {
-      margin-top: 16px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(255,248,235,0.05);
-    }
-    .rw-pricing-card.--featured .rw-pricing-card-cta {
-      border-top-color: rgba(226,168,77,0.1);
-    }
-    .rw-pricing-card-cta .btn {
-      width: 100%;
-      justify-content: center;
-    }
-    .rw-pricing-card.--gold .rw-pricing-card-cta .btn,
-    .rw-pricing-card.--teal .rw-pricing-card-cta .btn {
-      background: transparent;
-      border: 1px solid rgba(226,168,77,0.25);
-      color: var(--gold);
-    }
-    .rw-pricing-card.--teal .rw-pricing-card-cta .btn {
-      border-color: rgba(69,176,140,0.25);
-      color: var(--teal);
-    }
-    .rw-pricing-card.--gold .rw-pricing-card-cta .btn:hover,
-    .rw-pricing-card.--teal .rw-pricing-card-cta .btn:hover {
-      background: rgba(226,168,77,0.08);
-    }
-    .rw-pricing-card.--teal .rw-pricing-card-cta .btn:hover {
-      background: rgba(69,176,140,0.08);
-    }
-    /* Factors */
-    .rw-pricing-factors {
-      margin-top: 30px;
-      position: relative;
-    }
-    .rw-pricing-factors h3 {
-      font-size: 0.68rem;
-      font-weight: 700;
-      margin-bottom: 14px;
-      text-align: center;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-soft);
-    }
-    .rw-pricing-factors-grid {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 28px;
-      flex-wrap: wrap;
-    }
-    .rw-pricing-factor {
-      text-align: center;
-      padding: 12px 14px;
-      border: 1px solid rgba(255,248,235,0.04);
-      border-radius: var(--r-lg);
-      background: rgba(255,255,255,0.01);
-      transition: border-color 0.3s, background 0.3s;
-      min-width: 120px;
-    }
-    .rw-pricing-factor:hover {
-      border-color: rgba(226,168,77,0.15);
-      background: rgba(226,168,77,0.02);
-    }
-    .rw-pricing-factor i {
-      width: 18px;
-      height: 18px;
-      color: rgba(226,168,77,0.5);
-      margin-bottom: 6px;
-      stroke-width: 1.5;
-    }
-    .rw-pricing-factor span {
-      display: block;
-      font-size: 0.71rem;
-      color: var(--text-soft);
-      line-height: 1.35;
-    }
-    .rw-pricing-cta {
-      text-align: center;
-      margin-bottom: 18px;
-    }
-    .rw-pricing-cta p {
-      font-size: 0.8rem;
-      color: var(--text-soft);
-      margin-bottom: 12px;
-      font-style: normal;
-    }
-
-    /* ============================
-       13. CROSS-SELL
-       ============================ */
-    .rw-crosssell {
-      position: relative;
-      padding: 56px 48px;
-      border-radius: var(--r-xl);
-      border: 1px solid rgba(226,168,77,0.15);
-      background: rgba(226,168,77,0.03);
-      overflow: hidden;
-      margin: 0;
-    }
-    .rw-crosssell::before {
-      content: "";
-      position: absolute;
-      top: -30%;
-      right: -10%;
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(226,168,77,0.08), transparent 70%);
-      pointer-events: none;
-      filter: blur(40px);
-    }
-    .rw-crosssell h2 {
-      font-size: clamp(1.2rem, 2vw, 1.6rem);
-      font-weight: 800;
-      margin-bottom: 14px;
-      position: relative;
-      z-index: 1;
-    }
-    .rw-crosssell > p {
-      font-size: 0.92rem;
-      color: var(--text-dim);
-      line-height: 1.65;
-      max-width: 56ch;
-      margin-bottom: 8px;
-      position: relative;
-      z-index: 1;
-    }
-    .rw-crosssell-bullets {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 24px;
-      position: relative;
-      z-index: 1;
-    }
-    .rw-crosssell-bullets li {
-      padding: 4px 0 4px 18px;
-      font-size: 0.86rem;
-      color: var(--text-dim);
-      position: relative;
-      line-height: 1.5;
-    }
-    .rw-crosssell-bullets li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 12px;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--gold);
-    }
-    .rw-crosssell-ctas {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* ============================
-       14. BY THE NUMBERS (STATS)
-       ============================ */
-    .rw-stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-top: 48px;
-    }
-    .rw-stat-counter {
-      padding: 28px 20px;
-      border: 1px solid var(--line-soft);
-      border-radius: var(--r-lg);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .rw-stat-counter::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,248,235,0.08), transparent);
-    }
-    .rw-stat-counter:hover {
-      border-color: rgba(226,168,77,0.25);
-      transform: translateY(-2px);
-    }
-    .rw-stat-counter-num {
-      font-family: var(--font-display);
-      font-size: 2.4rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-    .rw-stat-counter p {
-      font-size: 0.78rem;
-      color: var(--text-soft);
-      line-height: 1.4;
-    }
-    .rw-scorecard-cta {
-      margin-top: 48px;
-      padding: 36px;
-      border: 1px solid var(--line-soft);
-      border-radius: var(--r-lg);
-      background: rgba(255,255,255,0.015);
-      text-align: center;
-    }
-    .rw-scorecard-cta h3 {
-      font-size: 1.15rem;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-    .rw-scorecard-cta p {
-      font-size: 0.88rem;
-      color: var(--text-dim);
-      margin-bottom: 20px;
-    }
-    .rw-scorecard-form {
-      display: flex;
-      gap: 10px;
-      max-width: 440px;
-      margin: 0 auto;
-    }
-    .rw-scorecard-form .input { flex: 1; }
-
-    /* ============================
-       15. WHO THIS IS FOR
-       ============================ */
-    .rw-fit-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-top: 48px;
-      align-items: start;
-    }
-    .rw-fit-card {
-      padding: 36px 32px;
-      border-radius: 20px;
-      border: 1px solid rgba(255,248,235,0.06);
-    }
-    .rw-fit-card.--yes {
-      background: linear-gradient(180deg, rgba(226,168,77,0.04) 0%, rgba(23,23,23,0.5) 100%);
-      border-color: rgba(226,168,77,0.12);
-    }
-    .rw-fit-card.--no {
-      background: linear-gradient(180deg, rgba(23,23,23,0.4) 0%, rgba(15,15,15,0.6) 100%);
-    }
-    .rw-fit-card h3 {
-      font-size: 1.1rem;
-      font-weight: 800;
-      margin-bottom: 24px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid rgba(255,248,235,0.06);
-    }
-    .rw-fit-card.--yes h3 { color: var(--gold); border-bottom-color: rgba(226,168,77,0.15); }
-    .rw-fit-card.--no h3 { color: rgba(255,255,255,0.8); }
-    .rw-fit-item {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      margin-bottom: 16px;
-    }
-    .rw-fit-item:last-child { margin-bottom: 0; }
-    .rw-fit-icon {
-      flex-shrink: 0;
-      width: 24px;
-      height: 24px;
-      display: grid;
-      place-items: center;
-      font-size: 0.88rem;
-      margin-top: 1px;
-    }
-    .rw-fit-card.--yes .rw-fit-icon { color: var(--gold); }
-    .rw-fit-card.--no .rw-fit-icon { color: rgba(255,255,255,0.5); }
-    .rw-fit-item p {
-      color: rgba(255,255,255,0.88);
-      line-height: 1.6;
-    }
-    .rw-fit-card.--no .rw-fit-item p { color: rgba(255,255,255,0.75); }
-
-    /* ============================
-       16. RISK REVERSAL
-       ============================ */
-    .rw-risk-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin: 30px 0 20px;
-    }
-    .rw-risk-card {
-      padding: 16px 16px 16px 14px;
-      border: 1px solid var(--line-soft);
-      border-radius: 18px;
-      text-align: left;
-      transition: border-color 0.2s ease, background 0.2s ease;
-      position: relative;
-      overflow: hidden;
-      background: rgba(255,255,255,0.012);
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      gap: 12px;
-    }
-    .rw-risk-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at top, rgba(226,168,77,0.04), transparent 60%);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .rw-risk-card:hover {
-      border-color: rgba(226,168,77,0.14);
-      background: rgba(255,255,255,0.014);
-    }
-    .rw-risk-card:hover::before { opacity: 1; }
-    .rw-risk-card-icon {
-      width: 34px;
-      height: 34px;
-      margin: 1px 0 0;
-      border-radius: 10px;
-      background: rgba(226,168,77,0.08);
-      border: 1px solid rgba(226,168,77,0.15);
-      display: grid;
-      place-items: center;
-      color: var(--gold);
-      position: relative;
-      z-index: 1;
-    }
-    .rw-risk-card-icon svg {
-      width: 17px;
-      height: 17px;
-      stroke-width: 1.5;
-    }
-    .rw-risk-copy {
-      position: relative;
-      z-index: 1;
-      min-width: 0;
-    }
-    .rw-risk-card h4 {
-      font-size: 0.92rem;
-      font-weight: 700;
-      margin-bottom: 3px;
-    }
-    .rw-risk-card p {
-      font-size: 0.82rem;
-      color: var(--text-soft);
-      line-height: 1.45;
-    }
-    .rw-keep-card {
-      padding: 32px 28px;
-      border: 1px solid rgba(226,168,77,0.15);
-      border-radius: var(--r-lg);
-      background: rgba(226,168,77,0.03);
-      margin-top: 32px;
-    }
-    .rw-keep-card h3 {
-      font-size: 1.05rem;
-      font-weight: 800;
-      margin-bottom: 16px;
-    }
-    .rw-keep-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 16px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-    .rw-keep-list li {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.86rem;
-      color: var(--text-dim);
-      padding: 6px 0;
-    }
-    .rw-keep-list li svg {
-      flex-shrink: 0;
-      width: 16px;
-      height: 16px;
-      color: var(--gold);
-      stroke-width: 2;
-    }
-    .rw-keep-bold {
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: var(--text);
-    }
-    .rw-limited-banner {
-      margin-top: 32px;
-      padding: 20px 28px;
-      border-radius: var(--r-lg);
-      border: 1px solid rgba(226,168,77,0.15);
-      background: rgba(226,168,77,0.04);
-      text-align: center;
-    }
-    .rw-limited-banner h4 {
-      font-size: 0.92rem;
-      font-weight: 800;
-      color: var(--gold);
-      margin-bottom: 6px;
-    }
-    .rw-limited-banner p {
-      font-size: 0.82rem;
-      color: var(--text-dim);
-      margin-bottom: 12px;
-    }
-
-    /* ============================
-       17. FAQ
-       ============================ */
-    .rw-faq-header {
-      text-align: center;
-      margin-bottom: 64px;
-    }
-    .rw-faq-hero-heading {
-      font-family: var(--font-hero);
-      font-size: clamp(2.2rem, 5vw, 3.8rem);
-      font-weight: 400;
-      font-style: normal;
-      letter-spacing: -0.02em;
-      line-height: 1.15;
-      margin-bottom: 16px;
-      padding: 4px 0;
-      background: linear-gradient(135deg, var(--gold) 0%, #fff8eb 40%, var(--gold) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .rw-faq-subtitle {
-      font-size: 1rem;
-      color: var(--text-dim);
-      max-width: 480px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-    .rw-faq-grid {
-      display: block;
-      max-width: 780px;
-      margin: 0 auto;
-    }
-    .rw-faq-list {
-      display: flex;
-      flex-direction: column;
-    }
-    .rw-faq-item {
-      border: none;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      border-radius: 0;
-      overflow: hidden;
-      transition: background 0.4s ease;
-      background: transparent;
-      position: relative;
-    }
-    .rw-faq-item:first-child {
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-    .rw-faq-item:hover {
-      background: rgba(226,168,77,0.02);
-    }
-    .rw-faq-item[open] {
-      background: rgba(226,168,77,0.03);
-      border-color: rgba(226,168,77,0.15);
-    }
-    .rw-faq-item::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background: var(--gold);
-      transform: scaleY(0);
-      transform-origin: top;
-      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
-    }
-    .rw-faq-item[open]::before {
-      transform: scaleY(1);
-    }
-    .rw-faq-item summary {
-      list-style: none;
-      padding: 28px 32px 28px 24px;
-      font-family: var(--font-display);
-      font-size: 1.05rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      transition: color 0.3s, padding-left 0.3s;
-      letter-spacing: -0.01em;
-    }
-    .rw-faq-item[open] summary {
-      padding-left: 32px;
-      color: #fff;
-    }
-    .rw-faq-item summary::-webkit-details-marker { display: none; }
-    .rw-faq-item summary::after {
-      content: "";
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(226,168,77,0.3);
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='M7 1v12M1 7h12' stroke='%23E2A84D' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center;
-      flex-shrink: 0;
-      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), background-color 0.3s, border-color 0.3s;
-    }
-    .rw-faq-item[open] summary::after {
-      transform: rotate(45deg);
-      background-color: rgba(226,168,77,0.1);
-      border-color: var(--gold);
-    }
-    .rw-faq-item .rw-faq-answer {
-      padding: 0 32px 28px 24px;
-      color: var(--text-dim);
-      line-height: 1.7;
-    }
-    .rw-faq-item[open] .rw-faq-answer {
-      padding-left: 32px;
-    }
-    .rw-faq-count {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 24px;
-      color: rgba(226,168,77,0.5);
-      font-family: var(--font-hero);
-      font-size: 0.82rem;
-      font-style: normal;
-      font-weight: 400;
-      margin-right: 16px;
-      flex-shrink: 0;
-    }
-    .rw-faq-item[open] .rw-faq-count {
-      color: var(--gold);
-    }
-
-    /* ============================
-       18. FOOTER CTA
-       ============================ */
-    .hp2-cta-scene {
-      position: relative;
-      padding: 120px 48px;
-      border-radius: var(--r-xl);
-      overflow: hidden;
-      text-align: center;
-      background: var(--bg-0);
-      border: 1px solid rgba(202,138,4,0.2);
-      margin-bottom: 80px;
-      cursor: pointer;
-    }
-    .hp2-cta-orb {
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-      filter: blur(80px);
-      will-change: transform;
-    }
-    .hp2-cta-orb:nth-child(1) {
-      width: 500px; height: 500px;
-      top: -20%; left: -10%;
-      background: radial-gradient(circle, rgba(202,138,4,0.25), transparent 70%);
-      animation: ctaOrb1 8s ease-in-out infinite alternate;
-    }
-    .hp2-cta-orb:nth-child(2) {
-      width: 400px; height: 400px;
-      bottom: -15%; right: -5%;
-      background: radial-gradient(circle, rgba(242,214,136,0.2), transparent 70%);
-      animation: ctaOrb2 10s ease-in-out infinite alternate;
-    }
-    .hp2-cta-orb:nth-child(3) {
-      width: 350px; height: 350px;
-      top: 30%; left: 50%;
-      transform: translateX(-50%);
-      background: radial-gradient(circle, rgba(208,106,80,0.12), transparent 70%);
-      animation: ctaOrb3 12s ease-in-out infinite alternate;
-    }
-    @keyframes ctaOrb1 {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(60px, 40px) scale(1.2); }
-    }
-    @keyframes ctaOrb2 {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(-50px, -30px) scale(1.15); }
-    }
-    @keyframes ctaOrb3 {
-      0% { transform: translateX(-50%) scale(0.9); opacity: 0.5; }
-      100% { transform: translateX(-30%) scale(1.3); opacity: 1; }
-    }
-    .hp2-cta-scene pixel-canvas {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      border-radius: var(--r-xl);
-    }
-    .hp2-cta-scene::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.4) 100%);
-      pointer-events: none;
-      z-index: 1;
-    }
-    .hp2-cta-scene h2 {
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 14px;
-      position: relative;
-      z-index: 1;
-    }
-    .hp2-cta-scene > p {
-      font-size: 1rem;
-      color: var(--text-dim);
-      max-width: 48ch;
-      margin: 0 auto 32px;
-      line-height: 1.6;
-      position: relative;
-      z-index: 1;
-    }
-    .hp2-cta-actions {
-      display: flex;
-      gap: 14px;
-      justify-content: center;
-      position: relative;
-      z-index: 1;
-    }
-    .hp2-cta-scene .btn-primary {
-      box-shadow: 0 0 30px rgba(226,168,77,0.2), 0 0 60px rgba(226,168,77,0.08);
-      animation: hp2-btn-glow 3s ease-in-out infinite alternate;
-    }
-    @keyframes hp2-btn-glow {
-      0% { box-shadow: 0 0 20px rgba(226,168,77,0.15), 0 0 40px rgba(226,168,77,0.06); }
-      100% { box-shadow: 0 0 35px rgba(226,168,77,0.25), 0 0 70px rgba(226,168,77,0.1); }
-    }
-
-    /* ============================
-       RESPONSIVE
-       ============================ */
-    @media (max-width: 900px) {
-      .rw-hero-inner {
-        grid-template-columns: 1fr;
-        gap: 32px;
-        padding: 120px 0 60px;
-      }
-      .rw-hero-dashboard {
-        max-width: 360px;
-      }
-      .rw-stat-grid { grid-template-columns: repeat(3, 1fr); }
-      .rw-action-list { grid-template-columns: 1fr; }
-      .rw-problem-bullets { grid-template-columns: 1fr; }
-      .rw-journey { flex-wrap: wrap; }
-      .rw-journey-step { flex: 0 0 50%; }
-      .rw-journey-connector { display: none; }
-      .rw-compare-table { font-size: 0.82rem; overflow-x: auto; }
-      .rw-tiers { grid-template-columns: 1fr; gap: 20px; }
-      .rw-tier-card:first-child { border-radius: var(--r-xl); border-right: 1px solid rgba(255,248,235,0.06); }
-      .rw-tier-card:last-child { border-radius: var(--r-xl); border-left: 1px solid rgba(255,248,235,0.06); }
-      .rw-tier-card.--featured { transform: none; }
-      .rw-tier-card.--featured:hover { transform: translateY(-4px); }
-      .rw-timeline { grid-template-columns: 1fr; }
-      .rw-pricing-grid { grid-template-columns: 1fr; gap: 20px; }
-      .rw-pricing-card:first-child { border-radius: var(--r-xl); border-right: 1px solid rgba(255,248,235,0.06); }
-      .rw-pricing-card:last-child { border-radius: var(--r-xl); border-left: 1px solid rgba(255,248,235,0.06); }
-      .rw-pricing-card.--featured { transform: none; }
-      .rw-pricing-card.--featured:hover { transform: translateY(-4px); }
-      .rw-pricing-factors-grid { gap: 8px; }
-      .rw-crosssell { padding: 40px 28px; }
-      .rw-crosssell-ctas { flex-direction: column; }
-      .rw-stats-grid { grid-template-columns: 1fr 1fr; }
-      .rw-fit-grid { grid-template-columns: 1fr; }
-      .rw-risk-grid { grid-template-columns: 1fr; gap: 10px; margin: 28px 0; }
-      .rw-risk-card { padding: 16px 14px 14px; border-radius: 16px; }
-      .rw-risk-card-icon { width: 32px; height: 32px; margin-bottom: 8px; }
-      .rw-risk-card-icon svg { width: 16px; height: 16px; }
-      .rw-risk-card h4 { font-size: 0.86rem; margin-bottom: 4px; }
-      .rw-risk-card p { font-size: 0.76rem; line-height: 1.42; }
-      .rw-keep-list { grid-template-columns: 1fr; }
-      .hp2-cta-scene { padding: 44px 24px; }
-      .hp2-cta-scene h2 { font-size: clamp(1.7rem, 8vw, 2.6rem); }
-      .hp2-cta-scene > p { margin-bottom: 20px; }
-      .hp2-cta-scene .hp2-cta-actions { flex-direction: column; align-items: center; }
-      .hp2-cta-scene .btn { width: min(100%, 320px); }
-      .rw-risk-grid { grid-template-columns: 1fr; gap: 10px; margin: 24px 0 18px; }
-      .rw-risk-card { padding: 14px 14px 14px 12px; }
-      .rw-risk-card-icon { width: 32px; height: 32px; }
-      .rw-risk-card-icon svg { width: 16px; height: 16px; }
-      .rw-risk-card h4 { font-size: 0.88rem; }
-      .rw-risk-card p { font-size: 0.78rem; line-height: 1.4; }
-    }
-  @media (max-width: 600px) {
-      .rw-hero-copy h1 { font-size: clamp(1.8rem, 8vw, 2.4rem); }
-      .rw-hero-dashboard { grid-template-columns: 1fr 1fr; gap: 10px; }
-      .rw-hero-cta .flex-row { flex-direction: column; }
-      .rw-trust-inner { gap: 32px; }
-      .rw-trust-stat::after { display: none; }
-      .rw-stat-grid { grid-template-columns: 1fr 1fr; }
-      .rw-audit-form { flex-direction: column; }
-      .rw-stats-grid { grid-template-columns: 1fr; }
-      .rw-scorecard-form { flex-direction: column; }
-      .rw-risk-grid { gap: 8px; }
-      .rw-risk-card { padding: 13px 12px; }
-      .rw-risk-card p { font-size: 0.75rem; }
+    @media (min-width: 860px) {
+      .ws-hero-grid { grid-template-columns: 1.02fr 0.98fr; }
+      .ws-ribbon { gap: 16px; }
+      .ws-case { grid-template-columns: 1.05fr 0.95fr; }
+      .ws-case.--flip .ws-case-media { order: -1; }
+      .ws-serv-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      .ws-lang-grid { grid-template-columns: 1.04fr 0.96fr; }
+      .ws-serp-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 520px) {
+      .ws-ribbon { grid-template-columns: 1fr 1fr; }
+      .ws-phone { right: 2%; bottom: -10%; }
     }
   </style>
-  <link rel="stylesheet" href="website-design-redesign.css" />
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WR9TZHT"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
+
+  <div class="depth-canvas" aria-hidden="true">
+    <div class="mesh-orb" style="--orb-color: var(--gold); width: 540px; height: 540px; top: -6%; right: 2%;"></div>
+    <div class="mesh-orb" style="--orb-color: var(--teal); width: 380px; height: 380px; bottom: 18%; left: -8%;"></div>
+  </div>
 
   <nav class="lib-nav">
     <a class="lib-nav-brand" href="/" aria-label="Button Up Media home">
@@ -2493,483 +490,486 @@
     </div>
   </nav>
 
-  <div class="page">
+  <main class="page">
 
-    <!-- 1. HERO -->
-    <section class="rw-hero rw-parallax-hero" id="hero">
-      <div class="rw-hero-inner">
-        <div class="rw-hero-copy">
-          <div class="rw-mobile-hero-kicker">Restaurant Website Design</div>
-          <h1 class="rw-hero-title">Restaurant website design built to bring in customers.</h1>
-          <p class="rw-desktop-hero-sub">Custom restaurant website development with SEO, menu pages, reservations, online ordering, and conversion-focused copy built to turn local searches into calls and bookings.</p>
-          <p class="rw-mobile-hero-sub">Need a restaurant website developer? We build fast, mobile-first sites that show your menu, take reservations, capture orders, and help local diners find you.</p>
-          <div class="rw-hero-cta">
-            <div class="flex-row" style="gap: 12px;">
-              <a href="/contact" class="btn btn-primary">Book a Free Consultation</a>
-              <a href="#pricing" class="btn btn-ghost"><span class="rw-desktop-cta-label">See Package Options</span><span class="rw-mobile-cta-label">View Packages</span></a>
+    <!-- HERO -->
+    <section class="lib-section ws-hero">
+      <div class="ws-wrap">
+        <div class="ws-hero-grid">
+          <div class="ws-hero-copy">
+            <span class="ws-eyebrow ws-rise">Restaurant Website Design</span>
+            <h1 class="ws-rise">Restaurant websites your guests <span class="ws-gold">screenshot</span> before they book.</h1>
+            <p class="ws-hero-sub ws-rise">Custom-designed, hand-coded, mobile-first. We build restaurant and hospitality sites that look stunning and turn browsers into reservations, like the one we just shipped for WOA Cocktails.</p>
+            <div class="ws-hero-ctas ws-rise">
+              <a href="/contact" class="btn btn-primary">Get Your Free Strategy Call</a>
+              <a href="#work" class="btn">See our work</a>
+            </div>
+            <div class="ws-hero-trust ws-rise">
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Custom-coded, zero templates</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> You own everything</span>
             </div>
           </div>
-        </div>
-        <div class="rw-parallax-stage" data-hero-parallax>
-          <div class="rw-parallax-stage-inner">
-            <div class="rw-parallax-credit">
-              <span class="rw-credit-label">Client</span>
-              <span class="rw-credit-divider"></span>
-              <span class="rw-credit-name">Rusty Pelican</span>
-            </div>
 
-            <div class="rw-parallax-layer rw-parallax-laptop" data-depth="1.0">
-              <img src="images/website-design/rusty-pelican-desktop.avif" alt="Rusty Pelican Miami desktop website, designed by Button Up Media" draggable="false">
-            </div>
-
-            <div class="rw-parallax-layer rw-parallax-phone" data-depth="2.2">
-              <img src="images/website-design/rusty-pelican-mobile.avif" alt="Rusty Pelican Miami mobile website, designed by Button Up Media" draggable="false">
-            </div>
-
-            <div class="rw-parallax-layer rw-parallax-card --top" data-depth="2.8">
-              <span class="rw-parallax-card-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="12" y1="19" x2="12" y2="5"></line>
-                  <polyline points="5 12 12 5 19 12"></polyline>
-                </svg>
-              </span>
-              <span class="rw-parallax-card-label">Reservations</span>
-            </div>
-
-            <div class="rw-parallax-layer rw-parallax-card --bottom" data-depth="2.4">
-              <span class="rw-parallax-card-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="12" y1="19" x2="12" y2="5"></line>
-                  <polyline points="5 12 12 5 19 12"></polyline>
-                </svg>
-              </span>
-              <span class="rw-parallax-card-label">Orders</span>
+          <div class="ws-stage ws-rise">
+            <div class="ws-stage-glow"></div>
+            <div class="ws-float">
+              <div class="ws-browser" id="ws-browser">
+                <div class="ws-browser-bar">
+                  <span class="ws-dot r"></span><span class="ws-dot y"></span><span class="ws-dot g"></span>
+                  <span class="ws-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> woacocktails.com</span>
+                </div>
+                <div class="ws-browser-view">
+                  <img src="media/woa-hero-desktop.webp" alt="Custom restaurant website design for WOA Cocktails, built by Button Up Media" width="1600" height="904" fetchpriority="high" />
+                </div>
+              </div>
+              <div class="ws-phone">
+                <div class="ws-phone-screen">
+                  <img src="media/woa-hero-mobile.webp" alt="The WOA Cocktails website shown on a mobile phone" loading="lazy" width="188" height="397" style="width:100%;height:100%;object-fit:cover;object-position:50% 0;display:block;" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 4. WHY MOST WEBSITES FAIL -->
-    <section class="card-overlay --dark lib-section" id="the-problem">
-      <div class="lib-section-label">The Problem</div>
-      <h2 class="lib-section-title">Why Most Restaurant Websites Don&rsquo;t Convert</h2>
-      <p class="lib-section-sub">If diners can&rsquo;t find the menu, reserve a table, order online, or understand why your restaurant is the right choice, they leave.</p>
-
-      <div class="rw-problem-tabs">
-        <nav class="rw-problem-tabs-nav" role="tablist">
-          <button class="rw-problem-tab-btn --active" data-problem-tab="menu" role="tab"><i data-lucide="utensils"></i> Menu Hidden</button>
-          <button class="rw-problem-tab-btn" data-problem-tab="mobile" role="tab"><i data-lucide="smartphone"></i> Mobile Broken</button>
-          <button class="rw-problem-tab-btn" data-problem-tab="cta" role="tab"><i data-lucide="mouse-pointer-click"></i> No CTA</button>
-          <button class="rw-problem-tab-btn" data-problem-tab="design" role="tab"><i data-lucide="palette"></i> Outdated</button>
-          <button class="rw-problem-tab-btn" data-problem-tab="seo" role="tab"><i data-lucide="search-x"></i> No SEO</button>
-          <button class="rw-problem-tab-btn" data-problem-tab="speed" role="tab"><i data-lucide="gauge"></i> Slow</button>
-        </nav>
-
-        <!-- Menu Hidden -->
-        <div class="rw-problem-tab-panel --active" data-problem-panel="menu">
-          <div class="rw-problem-tab-content">
-            <h3>The Menu Is Impossible to Find</h3>
-            <p>A restaurant website should make the menu easy to find and easy for Google to read.</p>
-            <ul class="rw-problem-bullets">
-              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Buried behind 3 clicks or hidden in a hamburger menu</li>
-              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Uploaded as a blurry PDF that can&rsquo;t be read on mobile</li>
-              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Not optimized for Google &mdash; Google can&rsquo;t read PDFs</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Mobile Broken -->
-        <div class="rw-problem-tab-panel" data-problem-panel="mobile">
-          <div class="rw-problem-tab-content">
-            <h3>The Mobile Experience Is Broken</h3>
-            <p>A restaurant website redesign should start with mobile, because most diners are deciding on a phone.</p>
-            <ul class="rw-problem-bullets">
-              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Tiny text and slow load times on phones</li>
-              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Buttons too small to tap accurately</li>
-              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Forms that don&rsquo;t work on mobile browsers</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- No CTA -->
-        <div class="rw-problem-tab-panel" data-problem-panel="cta">
-          <div class="rw-problem-tab-content">
-            <h3>There&rsquo;s No Clear Call to Action</h3>
-            <p>If the site does not make booking, ordering, or calling obvious, customers move on.</p>
-            <ul class="rw-problem-bullets">
-              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> No reservation button above the fold</li>
-              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> No &ldquo;Order Online&rdquo; link without scrolling</li>
-              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> No clickable phone number on mobile</li>
-              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> No clear path from interested to committed</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Outdated Design -->
-        <div class="rw-problem-tab-panel" data-problem-panel="design">
-          <div class="rw-problem-tab-content">
-            <h3>The Design Is Outdated</h3>
-            <p>An outdated restaurant web design makes the brand feel smaller and less trustworthy than the competition.</p>
-            <ul class="rw-problem-bullets">
-              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Stock photos instead of real food photography</li>
-              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Inconsistent branding across pages</li>
-              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Walls of text with no visual hierarchy</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- No SEO -->
-        <div class="rw-problem-tab-panel" data-problem-panel="seo">
-          <div class="rw-problem-tab-content">
-            <h3>No SEO &mdash; Google Can&rsquo;t Find You</h3>
-            <p>Without local SEO, Google has no clear signal for your cuisine, location, menu, or hours.</p>
-            <ul class="rw-problem-bullets">
-              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> No title tags or meta descriptions</li>
-              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> No schema markup telling Google &ldquo;this is a restaurant&rdquo;</li>
-              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> No keyword targeting for cuisine + location</li>
-              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> No structured data for menu items, hours, or reviews</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Slow -->
-        <div class="rw-problem-tab-panel" data-problem-panel="speed">
-          <div class="rw-problem-tab-content">
-            <h3>It&rsquo;s Slow</h3>
-            <p>Slow restaurant websites lose visitors before the first photo loads. Speed matters for rankings and conversions.</p>
-            <ul class="rw-problem-bullets">
-              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Every second over 3s loses 7% of visitors</li>
-              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Slow sites rank lower on Google</li>
-              <li><div class="rw-problem-bullet-icon"><i data-lucide="alert-triangle"></i></div> Bloated code and uncompressed images</li>
-            </ul>
-          </div>
+    <!-- TRUST RIBBON -->
+    <section class="card-overlay --dark lib-section" id="trust">
+      <div class="ws-wrap">
+        <div class="ws-ribbon">
+          <div class="ws-ribbon-item ws-rise"><div class="ws-ribbon-num ws-gold">100%</div><div class="ws-ribbon-label">Custom built</div></div>
+          <div class="ws-ribbon-item ws-rise"><div class="ws-ribbon-num ws-gold">0</div><div class="ws-ribbon-label">Templates</div></div>
+          <div class="ws-ribbon-item ws-rise"><div class="ws-ribbon-num ws-gold">Mobile</div><div class="ws-ribbon-label">First, always</div></div>
+          <div class="ws-ribbon-item ws-rise"><div class="ws-ribbon-num ws-gold">Yours</div><div class="ws-ribbon-label">Full ownership</div></div>
         </div>
       </div>
-
     </section>
 
-    <!-- 6. CUSTOMER DECISION JOURNEY -->
-    <section class="card-overlay lib-section" id="journey">
-      <div class="lib-section-label">How They Decide</div>
-      <h2 class="lib-section-title">How Restaurant Customers Use Your Website</h2>
-      <p class="lib-section-sub">Restaurant customers make a fast decision. We design the site to win that 60-second window from search to booking.</p>
-
-      <h3 style="margin-top: 40px; font-size: 1.15rem; font-weight: 800;">The 60-Second Decision</h3>
-
-      <div class="rw-journey">
-        <div class="rw-journey-step">
-          <div class="rw-journey-num">1</div>
-          <div class="rw-journey-icon"><i data-lucide="search"></i></div>
-          <div class="rw-journey-label">Search</div>
-          <div class="rw-journey-text">&ldquo;Italian restaurant near me&rdquo;</div>
-          <div class="rw-journey-connector"></div>
+    <!-- WOA SHOWCASE -->
+    <section class="lib-section" id="work">
+      <div class="ws-wrap">
+        <div class="ws-feature-head ws-rise">
+          <span class="ws-eyebrow">Recent work</span>
+          <h2>Don't take our word for it. <span class="ws-gold">Take a look.</span></h2>
+          <p>WOA Cocktails came to us for a site that felt as premium as their product. Here's what we built. Explore it live.</p>
         </div>
-        <div class="rw-journey-step">
-          <div class="rw-journey-num">2</div>
-          <div class="rw-journey-icon"><i data-lucide="mouse-pointer"></i></div>
-          <div class="rw-journey-label">Click</div>
-          <div class="rw-journey-text">Tap the top result, map listing, or local pack</div>
-          <div class="rw-journey-connector"></div>
-        </div>
-        <div class="rw-journey-step">
-          <div class="rw-journey-num">3</div>
-          <div class="rw-journey-icon"><i data-lucide="globe"></i></div>
-          <div class="rw-journey-label">Land</div>
-          <div class="rw-journey-text">Hit your website or GBP</div>
-          <div class="rw-journey-connector"></div>
-        </div>
-        <div class="rw-journey-step">
-          <div class="rw-journey-num">4</div>
-          <div class="rw-journey-icon"><i data-lucide="eye"></i></div>
-          <div class="rw-journey-label">Scan</div>
-          <div class="rw-journey-text">Food photos, menu, vibe, price, and trust</div>
-          <div class="rw-journey-connector"></div>
-        </div>
-        <div class="rw-journey-step">
-          <div class="rw-journey-num">5</div>
-          <div class="rw-journey-icon"><i data-lucide="check-circle"></i></div>
-          <div class="rw-journey-label">Decide</div>
-          <div class="rw-journey-text">Book, order, call &mdash; or leave</div>
-        </div>
-      </div>
 
-      <div class="rw-pull-quote" style="margin-bottom: 24px;">&ldquo;The entire process takes under 60 seconds. Your website either captures that customer or loses them. There is no middle ground.&rdquo;</div>
-
-    </section>
-
-    <!-- 8. PRICING -->
-    <section class="card-overlay --dark lib-section" id="pricing">
-      <div class="lib-section-label">Pricing</div>
-      <h2 class="lib-section-title">Simple pricing. Easy to compare.</h2>
-      <p class="lib-section-sub">Choose the restaurant website build that fits now, then add the integrations, content, and care your business needs.</p>
-
-      <div class="wd-packages-grid">
-        <article class="wd-package-card">
-          <div class="wd-package-title">Standard</div>
-          <h3>Website Build</h3>
-          <div class="wd-package-price">
-            <span class="wd-price">$1,500</span>
-            <span class="wd-price-note">one-time build</span>
-          </div>
-          <p class="wd-package-tag">A restaurant website build for owners who need a clean, credible presence and a better path to bookings.</p>
-          <ul class="wd-package-features">
-            <li>Custom site + copy written in-house</li>
-            <li>SEO basics, local pages, and clean metadata</li>
-            <li>Mobile-first responsive build</li>
-            <li>Menu, booking, and order links where needed</li>
-            <li>Deployed and live</li>
-          </ul>
-        </article>
-
-        <article class="wd-package-card --featured">
-          <div class="wd-package-badge">Most Popular</div>
-          <div class="wd-package-title">Premium</div>
-          <h3>Integrated Website Build</h3>
-          <div class="wd-package-price">
-            <span class="wd-price">$2,000</span>
-            <span class="wd-price-note">one-time build</span>
-          </div>
-          <p class="wd-package-tag">A restaurant website redesign with the integrations that keep menus, reservations, and orders in sync.</p>
-          <ul class="wd-package-features">
-            <li>POS menu sync</li>
-            <li>Reservations integration</li>
-            <li>Ordering support</li>
-            <li>Reviews + analytics connected</li>
-          </ul>
-        </article>
-      </div>
-      <div style="height: 1px; background: rgba(255,255,255,0.08); margin: 28px 0 16px;"></div>
-
-      <div class="wd-pricing-inline-head">
-        <div class="lib-section-label">Add-ons</div>
-        <p>Optional extras for restaurants that want more content, more support, or more landing pages.</p>
-      </div>
-
-      <div class="wd-addon-grid">
-        <article class="wd-addon-card">
-          <div class="wd-addon-head">
-            <div class="wd-addon-icon"><i data-lucide="camera"></i></div>
-            <div class="wd-addon-price">
-              <span class="wd-addon-num">$750</span>
-              <span class="wd-addon-denom">standalone</span>
+        <div class="ws-case --flip">
+          <div class="ws-case-media ws-rise">
+            <div class="ws-browser ws-scrollbox" id="ws-browser-2">
+              <div class="ws-browser-bar">
+                <span class="ws-dot r"></span><span class="ws-dot y"></span><span class="ws-dot g"></span>
+                <span class="ws-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> woacocktails.com</span>
+              </div>
+              <div class="ws-browser-view">
+                <img src="media/woa-full.webp" alt="The full WOA Cocktails homepage Button Up Media designed and built" loading="lazy" width="2938" height="9671" />
+                <span class="ws-scrub-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg> Hover to explore the full site</span>
+              </div>
             </div>
           </div>
-          <h3>Content Shoot</h3>
-          <p>On-site photo and video, edited for the website, social, and ads.</p>
-          <ul class="wd-addon-list">
-            <li>$750 standalone, or $500 with Premium</li>
-            <li>On-site photo and video capture</li>
-            <li>Editing for web, social, and ads</li>
-          </ul>
-        </article>
-
-        <article class="wd-addon-card">
-          <div class="wd-addon-head">
-            <div class="wd-addon-icon"><i data-lucide="life-buoy"></i></div>
-            <div class="wd-addon-price">
-              <span class="wd-addon-num">$250</span>
-              <span class="wd-addon-denom">per month</span>
+          <div class="ws-case-copy ws-rise">
+            <span class="tag">WOA Cocktails &middot; Full site build</span>
+            <h3>A site that pours as smooth as the product.</h3>
+            <div class="ws-case-rows">
+              <div class="ws-case-row">
+                <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 2"/></svg></span>
+                <div><h4>The challenge</h4><p>A premium cocktail brand with no home online, nowhere to send customers, press, or stockists that matched the quality in the bottle.</p></div>
+              </div>
+              <div class="ws-case-row">
+                <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.9 5.8H20l-4.9 3.6L17 18l-5-3.7L7 18l1.9-5.6L4 8.8h6.1z"/></svg></span>
+                <div><h4>What we built</h4><p>A fully custom, hand-coded site. Immersive visuals, smooth motion, mobile-first, and built to make every cocktail look irresistible.</p></div>
+              </div>
+              <div class="ws-case-row">
+                <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></span>
+                <div><h4>The result</h4><p>A digital home that feels like the brand. The kind of site that makes a first impression do the selling for you.</p></div>
+              </div>
             </div>
           </div>
-          <h3>Monthly Care Plan</h3>
-          <p>Ongoing updates, backups, and quick edits for your restaurant website.</p>
-          <ul class="wd-addon-list">
-            <li>Site maintenance, security monitoring, and backups</li>
-            <li>Up to 5 content edit requests per month</li>
-            <li>Landing page builds for ad campaigns</li>
-            <li>Performance checks and reporting</li>
-          </ul>
-        </article>
-      </div>
-      <div class="wd-pricing-footer">
-        <a href="/contact" class="btn btn-primary">Get Started</a>
+        </div>
+
+        <div class="ws-case" style="margin-top: clamp(44px, 7vw, 84px);">
+          <div class="ws-case-copy ws-rise">
+            <span class="tag">Rusty Pelican &middot; Full site build</span>
+            <h3>An icon's site, as breathtaking as the view.</h3>
+            <div class="ws-case-rows">
+              <div class="ws-case-row">
+                <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 2"/></svg></span>
+                <div><h4>The challenge</h4><p>Miami's iconic waterfront restaurant (est. 1972, 56K+ five-star reviews) needed a site as memorable as the skyline-meets-bay experience.</p></div>
+              </div>
+              <div class="ws-case-row">
+                <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.9 5.8H20l-4.9 3.6L17 18l-5-3.7L7 18l1.9-5.6L4 8.8h6.1z"/></svg></span>
+                <div><h4>What we built</h4><p>A bold, editorial site. Full-bleed photography, a living menu by section, the chef's story, and reservations wired right in.</p></div>
+              </div>
+              <div class="ws-case-row">
+                <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></span>
+                <div><h4>The result</h4><p>A first impression worthy of an icon, one that turns the view into reservations before guests ever arrive.</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="ws-case-media ws-rise">
+            <div class="ws-browser ws-scrollbox" id="ws-browser-3">
+              <div class="ws-browser-bar">
+                <span class="ws-dot r"></span><span class="ws-dot y"></span><span class="ws-dot g"></span>
+                <span class="ws-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> rustypelican.com</span>
+              </div>
+              <div class="ws-browser-view">
+                <img src="media/rp-full.webp" alt="The full Rusty Pelican homepage Button Up Media designed and built" loading="lazy" width="2940" height="4994" />
+                <span class="ws-scrub-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg> Hover to explore the full site</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- 10. OUR PROCESS - TIMELINE -->
-    <section class="card-overlay --dark lib-section" id="process">
-      <div class="lib-section-label">Our Process</div>
-      <h2 class="lib-section-title">What to expect when we build your website.</h2>
-      <p class="lib-section-sub">Standard timeline: 2&ndash;4 weeks. Premium timeline: 4&ndash;6 weeks. Built to move fast without cutting corners on restaurant website design.</p>
+    <!-- SERVICES -->
+    <section class="card-overlay --dark lib-section">
+      <div class="ws-wrap">
+        <div class="ws-sec-head ws-rise">
+          <span class="ws-eyebrow">What you get</span>
+          <h2 class="lib-section-title">Restaurant website design, built to convert.</h2>
+          <p class="lib-section-sub">Not just pretty. Engineered to turn visitors into reservations, orders, and calls.</p>
+        </div>
+        <div class="ws-serv-grid">
+          <div class="ws-serv ws-rise">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12 20 7.5"/><path d="M12 12v9"/><path d="M12 12 4 7.5"/></svg></div>
+            <h3>Custom design and code</h3>
+            <p>Designed and built from scratch around your brand. No themes, no drag-and-drop templates.</p>
+          </div>
+          <div class="ws-serv ws-rise">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+            <h3>Mobile-first and fast</h3>
+            <p>Most of your traffic is on a phone. Every site is built to look flawless and load fast there first.</p>
+          </div>
+          <div class="ws-serv ws-rise">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div>
+            <h3>SEO and found on Google</h3>
+            <p>Menu pages, local SEO, and clean structure so hungry locals find you first.</p>
+          </div>
+          <div class="ws-serv ws-rise">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18"/><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 15h4"/></svg></div>
+            <h3>Reservations and ordering</h3>
+            <p>POS, reservations, and online ordering wired in: Toast, Square, Clover, OpenTable, and more.</p>
+          </div>
+          <div class="ws-serv ws-rise">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+            <h3>You own everything</h3>
+            <p>Domain, code, content, assets, all yours on launch. No hostage situations, ever.</p>
+          </div>
+          <div class="ws-serv ws-rise">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-7 7c0 3 2 5 2 5h10s2-2 2-5a7 7 0 0 0-7-7z"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></div>
+            <h3>Care plan after launch</h3>
+            <p>Optional monthly plan for edits, landing pages, and updates so your site keeps working.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <div class="rw-timeline">
-        <div class="rw-timeline-track">
-          <div class="rw-timeline-line">
-            <div class="rw-timeline-line-fill"></div>
+    <!-- SEO -->
+    <section class="lib-section" id="seo">
+      <div class="ws-wrap">
+        <div class="ws-feature-head ws-rise">
+          <span class="ws-eyebrow">Why SEO matters</span>
+          <h2>SEO is the <span class="ws-gold">foundation</span>, not an upgrade.</h2>
+          <p>A beautiful restaurant website nobody finds doesn't book tables. Every build ships SEO-ready, for Google and for AI.</p>
+        </div>
+        <div class="seo-grid">
+          <div class="seo-item ws-rise">
+            <span class="seo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
+            <div><h3>Found by Google</h3><p>Built to show up when diners search for restaurant websites, menus, and places to eat nearby.</p></div>
+          </div>
+          <div class="seo-item ws-rise">
+            <span class="seo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7z"/></svg></span>
+            <div><h3>Found by AI</h3><p>Structured so ChatGPT and AI Overviews can read your restaurant offer and cite it correctly.</p></div>
+          </div>
+          <div class="seo-item ws-rise">
+            <span class="seo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <div><h3>Location pages</h3><p>Targets neighborhood searches instead of broad, unwinnable competition.</p></div>
+          </div>
+          <div class="seo-item ws-rise">
+            <span class="seo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>
+            <div><h3>Schema markup</h3><p>Gives search engines the business signals they need for cuisine, hours, location, and reviews.</p></div>
+          </div>
+          <div class="seo-item ws-rise">
+            <span class="seo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14a6 6 0 1 0-6-6"/><path d="M12 14 8 8"/><path d="M5 20a8 8 0 0 1 14 0z"/></svg></span>
+            <div><h3>Fast load times</h3><p>Lean code and compressed assets keep the site fast and usable on mobile.</p></div>
+          </div>
+          <div class="seo-item ws-rise">
+            <span class="seo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/><path d="M9 13h6"/><path d="M9 17h4"/></svg></span>
+            <div><h3>AI-readable content</h3><p>Clear structure for humans, search, and AI assistants alike.</p></div>
+          </div>
+        </div>
+        <div class="seo-incl ws-rise">
+          <div class="seo-incl-head">
+            <span class="seo-incl-lab">Included in every package</span>
+            <p class="seo-incl-note">No SEO tier, no upsell. It's the baseline that makes a restaurant site actually get found.</p>
+          </div>
+          <ul class="seo-checks">
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Keyword research before the first line of copy is written</li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Page titles, meta descriptions, schema markup, and clean URLs</li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Location-targeted content built to attract local customers</li>
+            <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Copy that AI assistants can understand and cite</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- BILINGUAL -->
+    <section class="lib-section" id="bilingual">
+      <div class="ws-wrap">
+        <div class="ws-feature-head ws-rise">
+          <span class="ws-eyebrow">Built for Miami</span>
+          <h2>Every page, in <span class="ws-gold">English and Spanish.</span></h2>
+          <p>More than half of Miami speaks Spanish at home. We build every site bilingual from day one. A one-tap toggle greets every guest in their language, so you never lose a booking to a language barrier.</p>
+        </div>
+
+        <div class="ws-lang-grid">
+          <div class="ws-lang-shot ws-rise">
+            <div class="ws-browser">
+              <div class="ws-browser-bar">
+                <span class="ws-dot r"></span><span class="ws-dot y"></span><span class="ws-dot g"></span>
+                <span class="ws-url ws-url-fade"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> woacocktails.com<span class="ws-url-lang"></span></span>
+              </div>
+              <div class="ws-browser-view ws-lang-fade">
+                <img class="lf-en" src="media/woa-en-bar.jpg" alt="A WOA Cocktails service page shown in English with a one-tap EN/ES language toggle in the navigation" loading="lazy" width="1600" height="907" />
+                <img class="lf-es" src="media/woa-es-bar.jpg" alt="The same WOA Cocktails service page shown in Spanish" loading="lazy" width="1600" height="905" />
+              </div>
+            </div>
+            <p class="ws-shot-cap"><span class="ws-flag">EN&nbsp;/&nbsp;ES</span> The same WOA page, one tap apart. Watch the toggle flip the whole page between English and Spanish.</p>
           </div>
 
-          <div class="rw-timeline-step">
-            <div class="rw-timeline-marker">1</div>
-            <h4>Kickoff Call</h4>
-            <ul>
-              <li>We align on brand voice, SEO goals, and the scope of your restaurant website build.</li>
+          <div class="ws-lang-copy ws-rise">
+            <span class="tag">One site &middot; two languages</span>
+            <h3>A toggle on every page, not just the homepage.</h3>
+            <div class="ws-case-rows">
+              <div class="ws-case-row">
+                <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20z"/></svg></span>
+                <div><h4>One-tap switch</h4><p>Every page, menu, and form mirrors instantly between English and Spanish. Nothing gets left untranslated.</p></div>
+              </div>
+              <div class="ws-case-row">
+                <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+                <div><h4>Speak to all of Miami</h4><p>Greet Spanish-speaking guests in their own language. It's the difference between a bounce and a booking.</p></div>
+              </div>
+              <div class="ws-case-row">
+                <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+                <div><h4>Done for you</h4><p>We write and wire both versions. You approve once, and they stay in sync as your site grows.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ws-serp-head ws-rise">
+          <span class="ws-eyebrow">Double the visibility</span>
+          <h3 class="ws-serp-title">Indexed twice. Found by <span class="ws-gold">everyone.</span></h3>
+          <p>Because each page exists in both languages, Google indexes your English <em>and</em> Spanish pages separately, so you show up whether a local searches in English or in Spanish. Two front doors to the same restaurant.</p>
+        </div>
+        <div class="ws-serp-grid">
+          <figure class="ws-serp ws-rise">
+            <img src="media/woa-serp-en-fit.png" alt="WOA Cocktails English result on Google, with sitelinks for Mobile Bar Experience, Events, Services, and About" loading="lazy" width="1500" height="885" />
+            <figcaption class="ws-serp-cap"><span class="ws-flag">EN</span> Ranks for English searches</figcaption>
+          </figure>
+          <figure class="ws-serp ws-rise">
+            <img src="media/woa-serp-es-fit.png" alt="WOA Cocktails Spanish result on Google, with sitelinks in Spanish for Experiencia de bar movil, Eventos, Servicios, and Acerca de" loading="lazy" width="1500" height="885" />
+            <figcaption class="ws-serp-cap"><span class="ws-flag">ES</span> Ranks for Spanish searches</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="lib-section" id="process">
+      <div class="ws-wrap">
+        <div class="ws-feature-head ws-rise">
+          <span class="ws-eyebrow">Our process</span>
+          <h2>What to expect when we <span class="ws-gold">build your website.</span></h2>
+          <p>Standard timeline: 2 to 4 weeks. Premium: 4 to 6 weeks. Built to move fast without cutting corners on restaurant website design.</p>
+        </div>
+        <div class="pc-steps">
+          <div class="pc-step ws-rise">
+            <span class="pc-num">1</span>
+            <h3>Kickoff Call</h3>
+            <ul class="pc-feats">
+              <li>We align on brand voice, SEO goals, and the scope of your build.</li>
               <li>We confirm what success looks like before design starts.</li>
             </ul>
           </div>
-
-          <div class="rw-timeline-step">
-            <div class="rw-timeline-marker">2</div>
-            <h4>Design &amp; Copy</h4>
-            <ul>
+          <div class="pc-step ws-rise">
+            <span class="pc-num">2</span>
+            <h3>Design &amp; Copy</h3>
+            <ul class="pc-feats">
               <li>We design every page and write all the copy in-house with search intent in mind.</li>
               <li>You review the work at each stage so nothing surprises you later.</li>
             </ul>
           </div>
-
-          <div class="rw-timeline-step">
-            <div class="rw-timeline-marker">3</div>
-            <h4>Build &amp; Integrate</h4>
-            <ul>
+          <div class="pc-step ws-rise">
+            <span class="pc-num">3</span>
+            <h3>Build &amp; Integrate</h3>
+            <ul class="pc-feats">
               <li>We code the site from scratch and connect any integrations you need.</li>
               <li>POS, reservations, online ordering, and analytics are connected where applicable.</li>
             </ul>
           </div>
-
-          <div class="rw-timeline-step">
-            <div class="rw-timeline-marker">4</div>
-            <h4>Launch</h4>
-            <ul>
+          <div class="pc-step ws-rise">
+            <span class="pc-num">4</span>
+            <h3>Launch</h3>
+            <ul class="pc-feats">
               <li>The site goes live and we hand over full ownership.</li>
-              <li>You&rsquo;re ready to publish, promote, and start turning search traffic into bookings.</li>
+              <li>You're ready to publish, promote, and turn search traffic into bookings.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="lib-section" id="pricing">
+      <div class="ws-wrap">
+        <div class="ws-feature-head ws-rise">
+          <span class="ws-eyebrow">Pricing</span>
+          <h2>Simple pricing. <span class="ws-gold">Easy to compare.</span></h2>
+          <p>Choose the build that fits now, then add the content, support, and landing pages your restaurant needs.</p>
+        </div>
+
+        <div class="pr-menu ws-rise">
+          <div class="pr-line">
+            <div class="pr-line-head">
+              <div class="pr-line-name">
+                <div class="pr-kickrow"><span class="pr-kicker">Standard</span></div>
+                <h3>Website Build</h3>
+              </div>
+              <span class="pr-dots"></span>
+              <div class="pr-price"><b>$1,500</b><span>One-time build</span></div>
+            </div>
+            <p class="pr-desc">A restaurant website build for owners who need a clean, credible presence and a better path to bookings.</p>
+            <ul class="pr-feats">
+              <li>Custom site + copy written in-house</li>
+              <li>SEO basics, local pages, and clean metadata</li>
+              <li>Mobile-first responsive build</li>
+              <li>Menu, booking, and order links where needed</li>
+              <li>Deployed and live</li>
+            </ul>
+          </div>
+          <div class="pr-line --feature">
+            <div class="pr-line-head">
+              <div class="pr-line-name">
+                <div class="pr-kickrow"><span class="pr-kicker">Premium</span><span class="pr-tag">House favorite</span></div>
+                <h3>Integrated Website Build</h3>
+              </div>
+              <span class="pr-dots"></span>
+              <div class="pr-price"><b>$2,000</b><span>One-time build</span></div>
+            </div>
+            <p class="pr-desc">A restaurant website redesign with the integrations that keep menus, reservations, and orders in sync.</p>
+            <p class="pr-incl">Everything in Standard, plus</p>
+            <ul class="pr-feats">
+              <li>POS menu sync</li>
+              <li>Reservations integration</li>
+              <li>Ordering support</li>
+              <li>Reviews + analytics connected</li>
             </ul>
           </div>
         </div>
 
+        <p class="pr-addon-head ws-rise"><span class="pr-addon-ey">Add-ons</span>Optional extras for restaurants that want more content, more support, or more landing pages.</p>
+        <div class="pr-addons">
+          <div class="pr-addon ws-rise">
+            <div class="pr-addon-top">
+              <h4>Content Shoot</h4>
+              <div class="pr-price sm"><b>$750</b><span>Standalone</span></div>
+            </div>
+            <p>On-site photo and video, edited for the website, social, and ads, or $500 when added to Premium.</p>
+          </div>
+          <div class="pr-addon ws-rise">
+            <div class="pr-addon-top">
+              <h4>Monthly Care Plan</h4>
+              <div class="pr-price sm"><b>$250</b><span>Per month</span></div>
+            </div>
+            <p>Site maintenance, security, and backups. Up to 5 edits a month, landing-page builds, and performance reporting.</p>
+          </div>
+        </div>
+
+        <div class="pr-cta ws-rise">
+          <a href="/contact" class="btn btn-primary">Book Your Free Strategy Call
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;margin-left:6px"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+          </a>
+        </div>
       </div>
     </section>
 
-    <!-- 16. WHY SEO MATTERS -->
-    <section class="card-overlay --dark lib-section" id="seo" style="scroll-margin-top: 120px;">
-      <div class="lib-section-label">Why SEO Matters</div>
-      <h2 class="lib-section-title">Why SEO is the foundation, not an upgrade.</h2>
-
-      <div class="rw-risk-grid">
-        <div class="rw-risk-card">
-          <div class="rw-risk-card-icon"><i data-lucide="search"></i></div>
-          <div class="rw-risk-copy">
-            <h4>Found by Google</h4>
-            <p>Built to show up when diners search for restaurant websites, menus, and places to eat nearby.</p>
-          </div>
+    <!-- FAQ -->
+    <section class="lib-section" id="faq">
+      <div class="ws-wrap">
+        <div class="ws-feature-head ws-rise">
+          <span class="ws-eyebrow">FAQ</span>
+          <h2>Frequently asked <span class="ws-gold">questions.</span></h2>
+          <p>Common questions about our restaurant website design, packages, integrations, and support.</p>
         </div>
-        <div class="rw-risk-card">
-          <div class="rw-risk-card-icon"><i data-lucide="sparkles"></i></div>
-          <div class="rw-risk-copy">
-            <h4>Found by AI</h4>
-            <p>Structured so ChatGPT and AI Overviews can read your restaurant offer and cite it correctly.</p>
-          </div>
-        </div>
-        <div class="rw-risk-card">
-          <div class="rw-risk-card-icon"><i data-lucide="map-pinned"></i></div>
-          <div class="rw-risk-copy">
-            <h4>Location pages</h4>
-            <p>Targets neighborhood searches instead of broad competition.</p>
-          </div>
-        </div>
-        <div class="rw-risk-card">
-          <div class="rw-risk-card-icon"><i data-lucide="file-cog"></i></div>
-          <div class="rw-risk-copy">
-            <h4>Schema markup</h4>
-            <p>Gives search engines the business signals they need for cuisine, hours, location, and reviews.</p>
-          </div>
-        </div>
-        <div class="rw-risk-card">
-          <div class="rw-risk-card-icon"><i data-lucide="gauge"></i></div>
-          <div class="rw-risk-copy">
-            <h4>Fast load times</h4>
-            <p>Lean code and compressed assets keep the restaurant website fast and usable on mobile.</p>
-          </div>
-        </div>
-        <div class="rw-risk-card">
-          <div class="rw-risk-card-icon"><i data-lucide="file-text"></i></div>
-          <div class="rw-risk-copy">
-            <h4>AI-readable content</h4>
-            <p>Clear structure for humans, search, and AI assistants.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="rw-keep-card">
-        <h3>Included in every package</h3>
-        <ul class="rw-keep-list">
-          <li><i data-lucide="check"></i> Keyword research before the first line of copy is written</li>
-          <li><i data-lucide="check"></i> Page titles, meta descriptions, schema markup, and clean URLs</li>
-          <li><i data-lucide="check"></i> Location-targeted content built to attract local customers</li>
-          <li><i data-lucide="check"></i> Copy that AI assistants can understand and cite</li>
-        </ul>
-        <p class="rw-keep-bold">For restaurant website development, SEO is the baseline that makes the site work.</p>
-      </div>
-
-      <div class="rw-limited-banner">
-        <h4>Why we include SEO in every build</h4>
-        <p>A beautiful restaurant website that nobody finds doesn&rsquo;t book tables. This is the difference between a site that exists and a site that works.</p>
-        <a href="/contact" class="btn btn-primary">Book a Free Consultation</a>
-      </div>
-    </section>
-
-    <!-- 17. FAQ -->
-    <section class="card-overlay --dark lib-section" id="faq">
-      <div class="rw-faq-header">
-        <div class="lib-section-label">FAQ</div>
-        <h2 class="rw-faq-hero-heading">Frequently Asked Questions</h2>
-        <p class="rw-faq-subtitle">Common questions about our restaurant website design, packages, integrations, and support.</p>
-      </div>
-      <div class="rw-faq-grid">
-        <div class="rw-faq-list">
-          <details class="rw-faq-item">
-            <summary><span><span class="rw-faq-count">01</span>Do I need to be a restaurant to work with you?</span></summary>
-            <div class="rw-faq-answer">
-              <p>Our restaurant website design packages are built for restaurants and food &amp; beverage businesses, but we also work with hospitality brands broadly: cocktail bars, mobile bars, catering companies, coffee shops, and similar businesses. If you&rsquo;re not sure if you&rsquo;re a fit, book a call.</p>
-            </div>
+        <div class="ws-faq ws-rise">
+          <details>
+            <summary><span class="ws-faq-n">01</span><h3>Do I need to be a restaurant to work with you?</h3><span class="ws-faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+            <div class="ws-faq-a">Our restaurant website design packages are built for restaurants and food &amp; beverage businesses, but we also work with hospitality brands broadly: cocktail bars, mobile bars, catering companies, coffee shops, and similar businesses. If you're not sure if you're a fit, book a call.</div>
           </details>
-          <details class="rw-faq-item">
-            <summary><span><span class="rw-faq-count">02</span>What if I already have a website?</span></summary>
-            <div class="rw-faq-answer">
-              <p>We almost always recommend a restaurant website redesign from scratch rather than retrofitting an existing site. Retrofits take longer, cost more, and usually result in a weaker final product. We&rsquo;ll discuss your situation on the kickoff call.</p>
-            </div>
+          <details>
+            <summary><span class="ws-faq-n">02</span><h3>What if I already have a website?</h3><span class="ws-faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+            <div class="ws-faq-a">We almost always recommend a restaurant website redesign from scratch rather than retrofitting an existing site. Retrofits take longer, cost more, and usually result in a weaker final product. We'll discuss your situation on the kickoff call.</div>
           </details>
-          <details class="rw-faq-item">
-            <summary><span><span class="rw-faq-count">03</span>Do you offer payment plans?</span></summary>
-            <div class="rw-faq-answer">
-              <p>Yes. Payment plans are available on both restaurant website build options, so you do not need to pay in full upfront.</p>
-            </div>
+          <details>
+            <summary><span class="ws-faq-n">03</span><h3>Do you offer payment plans?</h3><span class="ws-faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+            <div class="ws-faq-a">Yes. Payment plans are available on both restaurant website build options, so you do not need to pay in full upfront.</div>
           </details>
-          <details class="rw-faq-item">
-            <summary><span><span class="rw-faq-count">04</span>What POS systems do you integrate with?</span></summary>
-            <div class="rw-faq-answer">
-              <p>Toast, Square, Clover, and most other major restaurant POS platforms. If you use something unusual, we&rsquo;ll confirm compatibility on the kickoff call.</p>
-            </div>
+          <details>
+            <summary><span class="ws-faq-n">04</span><h3>What POS systems do you integrate with?</h3><span class="ws-faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+            <div class="ws-faq-a">Toast, Square, Clover, and most other major restaurant POS platforms. If you use something unusual, we'll confirm compatibility on the kickoff call.</div>
           </details>
-          <details class="rw-faq-item">
-            <summary><span><span class="rw-faq-count">05</span>Can I add or remove things after launch?</span></summary>
-            <div class="rw-faq-answer">
-              <p>Yes. The Monthly Care Plan includes up to 5 content edits per month and 3 landing page builds per quarter, which covers most ongoing restaurant website support needs. For larger changes, we can scope additional work separately.</p>
-            </div>
+          <details>
+            <summary><span class="ws-faq-n">05</span><h3>Can I add or remove things after launch?</h3><span class="ws-faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+            <div class="ws-faq-a">Yes. The Monthly Care Plan includes up to 5 content edits per month and 3 landing page builds per quarter, which covers most ongoing restaurant website support needs. For larger changes, we can scope additional work separately.</div>
           </details>
-          <details class="rw-faq-item">
-            <summary><span><span class="rw-faq-count">06</span>Do I own the website when it&rsquo;s finished?</span></summary>
-            <div class="rw-faq-answer">
-              <p>Yes. You own everything we build: domain, code, content, and assets.</p>
-            </div>
+          <details>
+            <summary><span class="ws-faq-n">06</span><h3>Do I own the website when it's finished?</h3><span class="ws-faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+            <div class="ws-faq-a">Yes. You own everything we build: domain, code, content, and assets.</div>
           </details>
         </div>
       </div>
     </section>
 
-    <!-- 18. FOOTER CTA -->
-    <section class="card-overlay lib-section" id="cta" data-shared-animations="off">
-      <div class="hp2-cta-scene" onclick="window.location.href='/contact'" style="cursor:pointer">
-        <div class="hp2-cta-orb"></div>
-        <div class="hp2-cta-orb"></div>
-        <div class="hp2-cta-orb"></div>
-        <pixel-canvas data-gap="10" data-speed="20" data-colors="#CA8A04, #A16207, #F2D688" data-no-focus></pixel-canvas>
-        <h2 style="position:relative; z-index:2;">Ready to build a <span class="accent-serif">restaurant website</span> that works?</h2>
-        <p style="position:relative; z-index:2;">Book a free consultation with a restaurant website developer and we&rsquo;ll review your site, your local SEO, and the clearest path to more reservations, orders, and calls.</p>
-        <p style="position:relative; z-index:2; margin: 2px 0 0; font-size: 0.9rem; line-height: 1.4; color: rgba(255,248,235,0.74); text-decoration: underline; text-underline-offset: 0.2em;">Click here for consultation</p>
+    <!-- TEAM / PERSONAL TOUCH -->
+    <section class="card-overlay lib-section">
+      <div class="ws-wrap">
+        <div class="ws-team">
+          <div class="ws-team-copy ws-rise">
+            <span class="tag">The people behind the build</span>
+            <h3>You're working with us, not a ticket queue.</h3>
+            <p>Every site is designed, coded, and launched by the same small Miami team you meet on your first call. We sit down with you, learn the room, and build it like it's our own restaurant.</p>
+            <div class="ws-team-meta">
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Based in Miami</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> One team, start to finish</span>
+            </div>
+          </div>
+          <div class="ws-team-shots ws-rise">
+            <figure class="t-sub"><img src="media/team-deal.webp" alt="The Button Up Media team closing a project with a handshake across the table" loading="lazy" width="2000" height="1125" /></figure>
+            <figure class="t-sub"><img src="media/team-deal-handshake.webp" alt="The Button Up Media team closing a project with a handshake over the laptop" loading="lazy" width="1081" height="1351" /></figure>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- 19. FOOTER -->
+    <!-- CTA -->
+    <section class="card-overlay --dark lib-section">
+      <div class="ws-wrap">
+        <div class="cta-banner">
+          <div class="cta-content">
+            <h3>Ready for a website worth showing off?</h3>
+            <p>Book a free strategy call. We'll look at your current site, your goals, and exactly what we'd build. No pressure, no obligation.</p>
+          </div>
+          <div class="cta-actions">
+            <a href="/contact" class="btn btn-primary">Get Your Free Strategy Call</a>
+            <a href="tel:+17867409499" class="btn">Call (786) 740-9499</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer class="lib-section footer-demo">
       <div class="footer-grid">
         <div class="footer-brand">
@@ -3008,380 +1008,24 @@
       </div>
     </footer>
 
-  </div><!-- .page -->
+  </main>
 
-  <!-- GSAP + Animations -->
-  <script src="shared.js?v=nav-mobile-4"></script>
-  <script src="website-design-redesign.js"></script>
+  <!-- Scroll reveal (transform-only; content stays visible without JS) -->
   <script>
-  function initRwDesign() {
-    "use strict";
-    if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
-      if (typeof lucide !== "undefined" && lucide.createIcons) lucide.createIcons();
-      return;
-    }
-    gsap.registerPlugin(ScrollTrigger);
-
-    /* ── Hero gauge animations ── */
-    document.querySelectorAll('.rw-gauge-fill[data-gauge-target]').forEach(circle => {
-      const target = parseFloat(circle.getAttribute('data-gauge-target'));
-      gsap.to(circle, {
-        strokeDashoffset: target,
-        duration: 1.8,
-        delay: 0.5,
-        ease: "power2.out"
-      });
-    });
-
-    document.querySelectorAll('.rw-gauge-value[data-gauge-count]').forEach(el => {
-      const target = parseInt(el.getAttribute('data-gauge-count'));
-      gsap.to(el, {
-        innerText: target,
-        duration: 1.8,
-        delay: 0.5,
-        ease: "power2.out",
-        snap: { innerText: 1 },
-        onUpdate: function() {
-          el.textContent = Math.round(parseFloat(el.innerText));
-        }
-      });
-    });
-
-    /* ── Hero word reveal ── */
-    document.querySelectorAll('.rw-word-inner').forEach((word, i) => {
-      gsap.from(word, {
-        yPercent: 110,
-        duration: 0.8,
-        delay: 0.1 + i * 0.06,
-        ease: "power3.out"
-      });
-    });
-
-    /* ── Hero dashboard stagger ── */
-    gsap.from('.rw-gauge-card', {
-      y: 40,
-      opacity: 0,
-      duration: 0.7,
-      stagger: 0.12,
-      delay: 0.3,
-      ease: "power2.out"
-    });
-
-    /* ── Trust ribbon counters ── */
-    document.querySelectorAll('.rw-trust-num[data-count-to]').forEach(el => {
-      const target = parseInt(el.getAttribute('data-count-to'));
-      const suffix = el.getAttribute('data-suffix') || '';
-      ScrollTrigger.create({
-        trigger: el,
-        start: "top 85%",
-        once: true,
-        onEnter: () => {
-          gsap.to(el, {
-            innerText: target,
-            duration: 1.5,
-            ease: "power2.out",
-            snap: { innerText: 1 },
-            onUpdate() {
-              el.textContent = Math.round(parseFloat(el.innerText)) + suffix;
-            }
-          });
-        }
-      });
-    });
-
-    /* ── Trust ribbon fade up ── */
-    gsap.from('.rw-trust', {
-      y: 30,
-      opacity: 0,
-      duration: 0.8,
-      delay: 0.8,
-      ease: "power2.out"
-    });
-
-    /* ── Stat card counters ── */
-    document.querySelectorAll('.rw-stat-num[data-count-to]').forEach(el => {
-      const target = parseInt(el.getAttribute('data-count-to'));
-      const suffix = el.getAttribute('data-suffix') || '';
-      ScrollTrigger.create({
-        trigger: el,
-        start: "top 85%",
-        once: true,
-        onEnter: () => {
-          gsap.to(el, {
-            innerText: target,
-            duration: 1.5,
-            ease: "power2.out",
-            snap: { innerText: 1 },
-            onUpdate() {
-              el.textContent = Math.round(parseFloat(el.innerText)) + suffix;
-            }
-          });
-        }
-      });
-    });
-
-    /* ── Stat cards + action items stagger ── */
-    gsap.utils.toArray('.rw-stat-card, .rw-action-item, .rw-pull-quote, .rw-callout').forEach(el => {
-      gsap.from(el, {
-        y: 30,
-        opacity: 0,
-        duration: 0.6,
-        ease: "power2.out",
-        scrollTrigger: { trigger: el, start: "top 88%" }
-      });
-    });
-
-    /* ── Problem tabs ── */
-    document.querySelectorAll('.rw-problem-tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const tab = btn.getAttribute('data-problem-tab');
-        document.querySelectorAll('.rw-problem-tab-btn').forEach(b => b.classList.remove('--active'));
-        document.querySelectorAll('.rw-problem-tab-panel').forEach(p => p.classList.remove('--active'));
-        btn.classList.add('--active');
-        const panel = document.querySelector(`[data-problem-panel="${tab}"]`);
-        if (panel) {
-          panel.classList.add('--active');
-          lucide.createIcons();
-        }
-      });
-    });
-
-    /* ── Journey steps stagger ── */
-    gsap.from('.rw-journey-step', {
-      y: 30,
-      opacity: 0,
-      duration: 0.6,
-      stagger: 0.1,
-      ease: "power2.out",
-      scrollTrigger: { trigger: '.rw-journey', start: "top 80%" }
-    });
-
-    gsap.utils.toArray('.rw-priority-item').forEach(el => {
-      gsap.from(el, {
-        y: 20,
-        opacity: 0,
-        duration: 0.5,
-        ease: "power2.out",
-        scrollTrigger: { trigger: el, start: "top 90%" }
-      });
-    });
-
-    /* ── Reduced motion check ── */
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    /* ── HORIZONTAL SCROLL (Services) ── */
-    const hscrollPin = document.querySelector(".rw-hscroll-pin");
-    const hscrollTrack = document.querySelector(".rw-hscroll-track");
-    const hscrollPanels = gsap.utils.toArray(".rw-hscroll-panel");
-    const hscrollDots = gsap.utils.toArray(".rw-hscroll-dot");
-    const hscrollFill = document.querySelector(".rw-hscroll-progress-fill");
-
-    if (hscrollPin && hscrollTrack && hscrollPanels.length > 1) {
-      const totalPanels = hscrollPanels.length;
-      const getScrollDistance = () => (totalPanels - 1) * window.innerWidth;
-
-      const hscrollTL = gsap.to(hscrollTrack, {
-        x: () => -getScrollDistance(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: hscrollPin,
-          pin: true,
-          anticipatePin: 1,
-          scrub: 1.5,
-          end: () => "+=" + getScrollDistance(),
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            if (hscrollFill) gsap.set(hscrollFill, { width: (self.progress * 100) + "%" });
-            const activeIndex = Math.round(self.progress * (totalPanels - 1));
-            hscrollDots.forEach((dot, i) => dot.classList.toggle("--active", i === activeIndex));
-          },
-        },
-      });
-
-      // Per-panel parallax animations
-      hscrollPanels.forEach((panel, i) => {
-        const copy = panel.querySelector(".rw-hscroll-copy");
-        const deliverables = panel.querySelector(".rw-hscroll-deliverables");
-        const num = panel.querySelector(".rw-hscroll-num");
-        const items = panel.querySelectorAll(".rw-deliverable");
-
-        if (copy && i > 0) {
-          gsap.fromTo(copy,
-            { x: 80, opacity: 0 },
-            { x: 0, opacity: 1, ease: "power3.out", immediateRender: false,
-              scrollTrigger: { trigger: panel, containerAnimation: hscrollTL, start: "left 80%", end: "left 30%", scrub: 1 }
-            }
-          );
-        }
-        if (copy) {
-          gsap.fromTo(copy,
-            { x: 0, opacity: 1 },
-            { x: -60, opacity: 0, ease: "power2.in", immediateRender: false,
-              scrollTrigger: { trigger: panel, containerAnimation: hscrollTL, start: "right 60%", end: "right 20%", scrub: 1 }
-            }
-          );
-        }
-        if (deliverables && i > 0) {
-          gsap.fromTo(deliverables,
-            { scale: 0.88, opacity: 0 },
-            { scale: 1, opacity: 1, ease: "power3.out", immediateRender: false,
-              scrollTrigger: { trigger: panel, containerAnimation: hscrollTL, start: "left 75%", end: "left 25%", scrub: 1 }
-            }
-          );
-        }
-        if (items.length && i > 0) {
-          gsap.fromTo(items,
-            { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, stagger: 0.06, ease: "power2.out", immediateRender: false,
-              scrollTrigger: { trigger: panel, containerAnimation: hscrollTL, start: "left 70%", end: "left 30%", scrub: 1 }
-            }
-          );
-        }
-        if (num) {
-          gsap.fromTo(num,
-            { x: -60, opacity: i === 0 ? 1 : 0 },
-            { x: 60, opacity: 1, ease: "none", immediateRender: false,
-              scrollTrigger: { trigger: panel, containerAnimation: hscrollTL, start: "left right", end: "right left", scrub: 1 }
-            }
-          );
-        }
-      });
-
-      // Gold dust particles
-      if (!prefersReducedMotion) {
-        hscrollPanels.forEach(panel => {
-          for (let j = 0; j < 20; j++) {
-            const p = document.createElement("div");
-            p.className = "rw-hscroll-particle";
-            const size = Math.random() * 3 + 1.5;
-            const gold = Math.random() > 0.4
-              ? "rgba(202,138,4," + (0.3 + Math.random() * 0.4) + ")"
-              : "rgba(242,214,136," + (0.2 + Math.random() * 0.3) + ")";
-            p.style.width = size + "px";
-            p.style.height = size + "px";
-            p.style.left = (5 + Math.random() * 90) + "%";
-            p.style.top = (10 + Math.random() * 80) + "%";
-            p.style.animationDelay = -(Math.random() * 14) + "s";
-            p.style.animationDuration = (8 + Math.random() * 12) + "s";
-            p.style.background = gold;
-            p.style.boxShadow = "0 0 " + (size * 4) + "px " + gold;
-            panel.appendChild(p);
-          }
-        });
+    (function () {
+      var els = [].slice.call(document.querySelectorAll('.ws-rise'));
+      var inView = function (e) { var r = e.getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0; };
+      if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        els.forEach(function (e) { e.classList.add('is-in'); });
+      } else {
+        var io = new IntersectionObserver(function (ents) {
+          ents.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
+        els.forEach(function (e) { if (inView(e)) e.classList.add('is-in'); else io.observe(e); });
+        setTimeout(function () { els.forEach(function (e) { e.classList.add('is-in'); }); }, 1500);
       }
-
-      // Drift glow orbs
-      hscrollPanels.forEach(panel => {
-        const glow = panel.querySelector(".rw-hscroll-glow");
-        if (glow) {
-          gsap.fromTo(glow,
-            { x: "-60%", y: "-50%", scale: 0.8 },
-            { x: "-40%", y: "-50%", scale: 1.2, ease: "none", immediateRender: false,
-              scrollTrigger: { trigger: panel, containerAnimation: hscrollTL, start: "left right", end: "right left", scrub: 1 }
-            }
-          );
-        }
-      });
-    }
-
-    /* ── Comparison rows, tier cards, testimonial, pricing stagger ── */
-    gsap.utils.toArray('.rw-compare-row, .rw-tier-card, .rw-testimonial, .rw-pricing-card, .rw-pricing-factor, .rw-crosssell, .rw-stat-counter, .rw-fit-card, .rw-risk-card, .rw-keep-card, .rw-limited-banner, .rw-faq-item, .rw-scorecard-cta, .hp2-cta-scene').forEach(el => {
-      gsap.from(el, {
-        y: 25,
-        opacity: 0,
-        duration: 0.5,
-        ease: "power2.out",
-        scrollTrigger: { trigger: el, start: "top 88%" }
-      });
-    });
-
-    const ctaScene = document.querySelector(".hp2-cta-scene");
-    if (ctaScene) {
-      gsap.fromTo(ctaScene,
-        { y: 40, scale: 0.97 },
-        {
-          y: 0,
-          scale: 1,
-          duration: 0.8,
-          ease: "power3.out",
-          clearProps: "transform",
-          scrollTrigger: {
-            trigger: ctaScene,
-            start: "top 80%",
-            toggleActions: "play none none none",
-            onEnter: () => {
-              const ctaCanvas = ctaScene.querySelector("pixel-canvas");
-              if (ctaCanvas && ctaCanvas.handleAnimation) ctaCanvas.handleAnimation("appear");
-            },
-          },
-        }
-      );
-    }
-
-    /* ── TIMELINE: Scroll-driven progress (bidirectional) ── */
-    const timelineSteps = document.querySelectorAll(".rw-timeline-step");
-    const timelineFill = document.querySelector(".rw-timeline-line-fill");
-    const timelineSection = document.querySelector("#process .rw-timeline");
-
-    if (timelineSteps.length && timelineFill) {
-      let lastActive = 0;
-      function updateProgress(activeIndex) {
-        if (activeIndex === lastActive) return;
-        lastActive = activeIndex;
-        const total = timelineSteps.length;
-        const pct = (activeIndex / total) * 100;
-
-        gsap.to(timelineFill, { height: pct + "%", duration: 0.4, ease: "power2.out" });
-
-        timelineSteps.forEach((s, i) => {
-          s.classList.toggle("--active", i < activeIndex);
-        });
-      }
-
-      timelineSteps.forEach((step, i) => {
-        ScrollTrigger.create({
-          trigger: step,
-          start: "top 65%",
-          end: "bottom 35%",
-          onEnter: () => updateProgress(i + 1),
-          onLeaveBack: () => updateProgress(i),
-        });
-      });
-    }
-
-    /* ── By The Numbers stat counters ── */
-    document.querySelectorAll('.rw-stat-counter-num[data-count-to]').forEach(el => {
-      const target = parseInt(el.getAttribute('data-count-to'));
-      const suffix = el.getAttribute('data-suffix') || '';
-      ScrollTrigger.create({
-        trigger: el,
-        start: "top 85%",
-        once: true,
-        onEnter: () => {
-          gsap.to(el, {
-            innerText: target,
-            duration: 1.6,
-            ease: "power2.out",
-            snap: { innerText: 1 },
-            onUpdate() {
-              el.textContent = Math.round(parseFloat(el.innerText)) + suffix;
-            }
-          });
-        }
-      });
-    });
-
-    /* ── Init Lucide ── */
-    if (typeof lucide !== "undefined" && lucide.createIcons) lucide.createIcons();
-  }
-
-  if (window.__bumLoadRwdRuntime) {
-    window.__bumLoadRwdRuntime().then(initRwDesign);
-  } else if (document.readyState === "complete") {
-    initRwDesign();
-  } else {
-    window.addEventListener("load", initRwDesign, { once: true });
-  }
+    })();
   </script>
+  <script src="shared.js?v=nav-mobile-4" defer></script>
 </body>
 </html>
