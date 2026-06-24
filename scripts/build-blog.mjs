@@ -428,6 +428,39 @@ const HUB_CSS = `
     @media (min-width: 820px) { .bl-news-inner { grid-template-columns: 1.1fr 0.9fr; gap: 40px; } .bl-news-inner > div:last-child { justify-self: end; } }
 `;
 
+// Light, editorial theme for the blog. Scoped to .page so the dark brand nav
+// pill is untouched. Flattens the gold-glow gradients and removes the mesh orbs
+// for a cleaner, less "stock-AI" reading experience.
+const LIGHT_CSS = `
+    body { background: #ffffff; }
+    main.page {
+      --bg-0:#ffffff; --bg-1:#faf8f4; --bg-2:#ffffff; --bg-3:#f1ede5; --surface:#f6f3ee;
+      --line:rgba(28,24,18,0.14); --line-soft:rgba(28,24,18,0.08);
+      --text:#1d1a15; --text-head:#120e08; --text-dim:rgba(29,26,21,0.84); --text-soft:rgba(29,26,21,0.56);
+      --gold-soft:rgba(226,168,77,0.16);
+      color: var(--text);
+    }
+    .page .btn { background:#ffffff; border-color:rgba(28,24,18,0.2); color:var(--text); }
+    .page .btn:hover { border-color:rgba(28,24,18,0.36); }
+    .page .btn-primary { background:var(--gold); border-color:var(--gold); color:#1c1407; }
+    .page .btn-primary:hover { box-shadow:0 10px 26px rgba(226,168,77,0.34); }
+    .page .footer-demo { border-top:1px solid var(--line); margin-top:48px; }
+    .page .footer-demo::before { display:none; }
+    .page .footer-col a:hover, .page .footer-links a:hover { color:#9a6410; }
+    /* flatten gold-glow boxes into clean cream cards */
+    .page .bp-cta-inner, .page .bl-news-inner, .page .bp-midcta, .page .bp-callout { background:#faf6ee; border:1px solid var(--line); }
+    /* content cards read on white */
+    .page .bl-featured, .page .bl-card, .page .bp-rcard, .page .bp-author { background:#fbf9f5; }
+    .page .bp-hero-art, .page .bl-art { background:#ece6db; }
+    /* editorial links: dark text, gold underline */
+    .page .bp-body a { color:var(--text-head); text-decoration-color:rgba(226,168,77,0.7); }
+    .page .bp-body a:hover { color:#9a6410; text-decoration-color:var(--gold); }
+    /* category chips */
+    .page .bl-chip { background:#ffffff; }
+    .page .bl-chip:hover { border-color:rgba(28,24,18,0.28); color:var(--text); }
+    .page .bl-chip.--active { color:#9a6410; background:var(--gold-soft); border-color:rgba(226,168,77,0.5); }
+`;
+
 // ---------- date / reading helpers ----------
 function fmtDate(dateStr, lang) {
   const [y, m, d] = dateStr.split('-').map(Number);
@@ -536,7 +569,7 @@ ${gtmHead()}
   <link rel="alternate" hreflang="en" href="${enUrl}" />
   <link rel="alternate" hreflang="es" href="${esUrl}" />
   <link rel="alternate" hreflang="x-default" href="${enUrl}" />
-  <meta name="theme-color" content="#0b0d10" />
+  <meta name="theme-color" content="#ffffff" />
   <meta property="og:type" content="article" />
   <meta property="og:title" content="${escAttr(content.metaTitle)}" />
   <meta property="og:description" content="${escAttr(content.metaDescription)}" />
@@ -551,12 +584,11 @@ ${fontPreloads()}
   <script defer src="https://unpkg.com/lucide@1.17.0/dist/umd/lucide.min.js"></script>
   <link rel="stylesheet" href="/shared.css?v=${CSS_VER}" />
   <script type="application/ld+json">${schema}</script>
-  <style>${POST_CSS}</style>
+  <style>${LIGHT_CSS}${POST_CSS}</style>
 </head>
 <body>
 ${gtmNoscript()}
   <div class="bp-progress" id="bp-progress" aria-hidden="true"></div>
-${depthCanvas()}
 ${nav(lang)}
   <main class="page">
     <article>
@@ -689,7 +721,7 @@ ${gtmHead()}
   <link rel="alternate" hreflang="es" href="${BASE}/es/blog" />
   <link rel="alternate" hreflang="x-default" href="${BASE}/blog" />
   <link rel="alternate" type="application/rss+xml" title="Button Up Media Blog" href="${t.hub}/rss.xml" />
-  <meta name="theme-color" content="#0b0d10" />
+  <meta name="theme-color" content="#ffffff" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="${escAttr(t.blogTitle)}" />
   <meta property="og:description" content="${escAttr(t.blogDesc)}" />
@@ -700,11 +732,10 @@ ${fontPreloads()}
   <script defer src="https://unpkg.com/lucide@1.17.0/dist/umd/lucide.min.js"></script>
   <link rel="stylesheet" href="/shared.css?v=${CSS_VER}" />
   <script type="application/ld+json">${schema}</script>
-  <style>${HUB_CSS}</style>
+  <style>${LIGHT_CSS}${HUB_CSS}</style>
 </head>
 <body>
 ${gtmNoscript()}
-${depthCanvas()}
 ${nav(lang)}
   <main class="page">
     <section class="bl-hero"><div class="bl-wrap">
