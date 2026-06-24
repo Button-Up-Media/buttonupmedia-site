@@ -1,6 +1,7 @@
 import { cp, mkdir, readdir, readFile, rm, writeFile } from 'fs/promises';
 import path from 'path';
 import { transform } from 'esbuild';
+import { buildBlog } from './build-blog.mjs';
 
 const root = process.cwd();
 const outDir = path.join(root, 'public');
@@ -29,7 +30,6 @@ const filesToCopy = [
   'contact-es.html',
   'about-es.html',
   'robots.txt',
-  'sitemap.xml',
   'llms.txt',
   'favicon-bum.svg',
   'google1836ba38076ac9c6.html',
@@ -87,6 +87,20 @@ for (const dir of dirsToCopy) {
     recursive: true,
     filter: (source) => path.basename(source) !== '.DS_Store',
   });
+}
+
+// Generate the blog (EN /blog + ES /es/blog hubs, post pages, RSS feeds) and
+// collect its sitemap entries.
+const blogSitemapEntries = await buildBlog(root, outDir);
+
+// Sitemap: take the hand-maintained source and inject the generated blog URLs
+// before the closing tag, so adding a post automatically updates the sitemap.
+{
+  const sitemapSrc = await readFile(path.join(root, 'sitemap.xml'), 'utf8');
+  if (!sitemapSrc.includes('</urlset>')) {
+    throw new Error('sitemap.xml missing </urlset>');
+  }
+  await writeFile(path.join(outDir, 'sitemap.xml'), sitemapSrc.replace('</urlset>', `${blogSitemapEntries}\n</urlset>`));
 }
 
 console.log(`Built static site into ${outDir}`);

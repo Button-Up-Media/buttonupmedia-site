@@ -379,9 +379,45 @@
       "source": "/thank-you/",
       "destination": "/contact",
       "permanent": true
+    },
+    {
+      "source": "/blog.html",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog-es.html",
+      "destination": "/es/blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog/",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/es/blog/",
+      "destination": "/es/blog",
+      "permanent": true
     }
   ],
   "rewrites": [
+    {
+      "source": "/blog",
+      "destination": "/blog.html"
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/blog/:slug.html"
+    },
+    {
+      "source": "/es/blog",
+      "destination": "/blog-es.html"
+    },
+    {
+      "source": "/es/blog/:slug",
+      "destination": "/blog-es/:slug.html"
+    },
     {
       "source": "/es/images/:path*",
       "destination": "/images/:path*"

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "p1",
+    "category": "social",
+    "author": "juan",
+    "date": "2026-06-24",
+    "hero": "/images/blog/p1.jpg",
+    "heroAlt": "A person using a phone to take an overhead photo of a plate of restaurant food for social media",
+    "en": { "slug": "restaurant-social-media-management-cost" },
+    "es": { "slug": "costo-manejo-redes-sociales-restaurante" }
+  },
+  {
+    "id": "p2",
+    "category": "strategy",
+    "author": "chris",
+    "date": "2026-06-24",
+    "hero": "/images/blog/p2.jpg",
+    "heroAlt": "A warm, upscale-casual restaurant interior with a chandelier and inviting dining ambiance",
+    "en": { "slug": "restaurant-marketing-cost-miami" },
+    "es": { "slug": "cuanto-cuesta-marketing-restaurante-miami" }
+  },
+  {
+    "id": "p3",
+    "category": "strategy",
+    "author": "juan",
+    "date": "2026-06-24",
+    "hero": "/images/blog/p3.jpg",
+    "heroAlt": "A 'Come in, we are open' sign hanging in the glass window of a newly opened storefront",
+    "en": { "slug": "promote-new-restaurant-miami" },
+    "es": { "slug": "dar-a-conocer-restaurante-nuevo-miami" }
+  },
+  {
+    "id": "p4",
+    "category": "ads",
+    "author": "chris",
+    "date": "2026-06-24",
+    "hero": "/images/blog/p4.jpg",
+    "heroAlt": "A lively crowd gathered outside a brightly lit, busy restaurant during evening dinner service",
+    "en": { "slug": "miami-restaurant-google-meta-ads-budget" },
+    "es": { "slug": "presupuesto-anuncios-google-meta-restaurante-miami" }
+  },
+  {
+    "id": "p5",
+    "category": "web",
+    "author": "chris",
+    "date": "2026-06-24",
+    "hero": "/images/blog/p5.jpg",
+    "heroAlt": "A clean, modern desk setup with an open laptop displaying a website on its screen",
+    "en": { "slug": "restaurant-website-vs-instagram-2026" },
+    "es": { "slug": "pagina-web-restaurante-vs-instagram-2026" }
+  }
+]
