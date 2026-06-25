@@ -1,5 +1,15 @@
 [
   {
+    "id": "gmaps-fix",
+    "category": "seo",
+    "author": "juan",
+    "date": "2026-06-25",
+    "hero": "/images/blog/gmaps-fix.jpg",
+    "heroAlt": "A classic stainless-steel American diner on a street corner in daylight with a red neon sign",
+    "en": { "slug": "restaurant-not-showing-on-google-maps" },
+    "es": { "slug": "restaurante-no-aparece-en-google-maps" }
+  },
+  {
     "id": "p1",
     "category": "social",
     "author": "juan",

@@ -1,0 +1,59 @@
+{
+  "_comment": "Phase 2 content queue. The publishing pipeline takes the first status:'pending' entry, writes EN+ES, runs the quality gate, and on pass marks it 'published'. Refill before it runs dry. Cadence: 2x/week (Tue+Fri) for ~3 weeks, then 3x/week (Mon/Wed/Fri), 9am ET. Authors rotate juan/christian.",
+  "queue": [
+    {
+      "id": "gmaps-fix",
+      "status": "pending",
+      "category": "seo",
+      "author": "juan",
+      "heroQuery": "person using phone to find a restaurant on a map in an american city",
+      "en": { "slug": "restaurant-not-showing-on-google-maps", "title": "Why Your Restaurant Isn't Showing Up on Google Maps (and How to Fix It)", "keyword": "restaurant not showing up on google maps", "internal": ["https://www.buttonupmedia.com/contact", "https://www.buttonupmedia.com/restaurant-website-design"] },
+      "es": { "slug": "restaurante-no-aparece-en-google-maps", "title": "Por Qué tu Restaurante No Aparece en Google Maps (y Cómo Arreglarlo)", "keyword": "por qué mi restaurante no aparece en google maps", "internal": ["https://www.buttonupmedia.com/es/contacto", "https://www.buttonupmedia.com/es/diseno-web-restaurantes"] }
+    },
+    {
+      "id": "local-3pack",
+      "status": "pending",
+      "category": "seo",
+      "author": "christian",
+      "heroQuery": "miami restaurant exterior storefront daytime",
+      "en": { "slug": "restaurant-seo-miami-local-pack", "title": "Restaurant SEO in Miami: How to Rank in the Local 3-Pack", "keyword": "restaurant seo miami local pack", "internal": ["https://www.buttonupmedia.com/contact"] },
+      "es": { "slug": "seo-local-restaurante-miami", "title": "SEO Local para Restaurantes en Miami: Cómo Llegar al Top 3 de Google", "keyword": "seo local para restaurantes en miami", "internal": ["https://www.buttonupmedia.com/es/contacto"] }
+    },
+    {
+      "id": "more-google-reviews",
+      "status": "pending",
+      "category": "seo",
+      "author": "juan",
+      "heroQuery": "happy diners leaving an american restaurant",
+      "en": { "slug": "get-more-google-reviews-restaurant", "title": "How to Get More Google Reviews for Your Restaurant (Without Being Annoying)", "keyword": "how to get more google reviews for my restaurant", "internal": ["https://www.buttonupmedia.com/contact"] },
+      "es": { "slug": "conseguir-mas-resenas-google-restaurante", "title": "Cómo Conseguir Más Reseñas en Google para tu Restaurante", "keyword": "cómo conseguir más reseñas en google para mi restaurante", "internal": ["https://www.buttonupmedia.com/es/contacto"] }
+    },
+    {
+      "id": "reel-ideas",
+      "status": "pending",
+      "category": "social",
+      "author": "christian",
+      "heroQuery": "person filming food video on phone in an american restaurant kitchen",
+      "en": { "slug": "restaurant-reel-ideas-that-get-customers", "title": "Restaurant Reel Ideas That Actually Bring in Customers", "keyword": "restaurant reels ideas that get views", "internal": ["https://www.buttonupmedia.com/socialmediamarketing"] },
+      "es": { "slug": "ideas-de-reels-para-restaurantes", "title": "Ideas de Reels para Restaurantes Que de Verdad Atraen Clientes", "keyword": "ideas de reels para restaurantes", "internal": ["https://www.buttonupmedia.com/es/marketing-redes-sociales"] }
+    },
+    {
+      "id": "slow-tuesday",
+      "status": "pending",
+      "category": "strategy",
+      "author": "juan",
+      "heroQuery": "quiet empty american restaurant dining room",
+      "en": { "slug": "fill-restaurant-slow-tuesday", "title": "How to Fill Your Restaurant on a Slow Tuesday: A Channel-by-Channel Playbook", "keyword": "how to get more customers on slow nights restaurant", "internal": ["https://www.buttonupmedia.com/socialmediamarketing", "https://www.buttonupmedia.com/restaurant-advertising"] },
+      "es": { "slug": "llenar-restaurante-noches-lentas", "title": "Cómo Llenar tu Restaurante en una Noche Lenta: Guía Canal por Canal", "keyword": "cómo atraer más clientes a mi restaurante entre semana", "internal": ["https://www.buttonupmedia.com/es/marketing-redes-sociales", "https://www.buttonupmedia.com/es/publicidad-restaurantes"] }
+    },
+    {
+      "id": "recommended-by-chatgpt",
+      "status": "pending",
+      "category": "seo",
+      "author": "christian",
+      "heroQuery": "person using ai chatbot on phone at a cafe",
+      "en": { "slug": "get-restaurant-recommended-by-chatgpt", "title": "How to Get Your Restaurant Recommended by ChatGPT, Gemini, and Google AI", "keyword": "how to get my restaurant recommended by chatgpt", "internal": ["https://www.buttonupmedia.com/contact"] },
+      "es": { "slug": "restaurante-recomendado-por-chatgpt", "title": "Cómo Lograr Que ChatGPT y la Búsqueda con IA Recomienden tu Restaurante", "keyword": "cómo aparecer en chatgpt con mi restaurante", "internal": ["https://www.buttonupmedia.com/es/contacto"] }
+    }
+  ]
+}
