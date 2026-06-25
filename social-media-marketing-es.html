@@ -614,8 +614,10 @@
       pointer-events: none;
     }
     .v-stack-card:hover .v-stack-play {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0.5);
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      background: rgba(202,138,4,0.34);
+      border-color: rgba(202,138,4,0.5);
     }
     .v-stack-card.is-active video {
       opacity: 1;
@@ -627,6 +629,41 @@
     .v-stack-card.is-active .v-stack-label {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    /* ── Click-to-play button for standalone videos ── */
+    .sm-play-btn {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      width: 62px; height: 62px;
+      border-radius: 50%;
+      background: rgba(202,138,4,0.26);
+      border: 1px solid rgba(202,138,4,0.42);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      opacity: 0.92;
+      transition: all 0.35s ease;
+      pointer-events: none;
+      z-index: 4;
+    }
+    .sm-play-btn i { width: 26px; height: 26px; margin-left: 2px; }
+    .sm-problem-accent:hover .sm-play-btn,
+    .sm-approach-video:hover .sm-play-btn,
+    .sm-proof-visual:hover .sm-play-btn {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.08);
+      background: rgba(202,138,4,0.4);
+      border-color: rgba(202,138,4,0.55);
+    }
+    .sm-problem-accent.is-active .sm-play-btn,
+    .sm-approach-video.is-active .sm-play-btn,
+    .sm-proof-visual.is-active .sm-play-btn {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.5);
     }
 
     /* ══════════════════════════════════════
@@ -2631,7 +2668,7 @@
         <div class="v-stack-wrap">
           <div class="sm-audio-hint" data-audio-hint>
             <i data-lucide="volume-2" aria-hidden="true"></i>
-            <span class="sm-audio-hint-desktop">Pasa el cursor sobre cualquier video para escucharlo</span>
+            <span class="sm-audio-hint-desktop">Haz clic en cualquier video para escucharlo</span>
             <span class="sm-audio-hint-mobile">Toca cualquier video para escucharlo</span>
           </div>
           <div class="v-stack">
@@ -2710,6 +2747,7 @@
         </div>
         <div class="sm-problem-accent" data-autoplay-hover data-audio-managed="true">
           <video data-video-src="videos/sm-problem-accent.mp4" muted loop playsinline preload="none" poster="images/sm-problem-accent-poster.avif"></video>
+          <div class="sm-play-btn" aria-hidden="true"><i data-lucide="play"></i></div>
         </div>
       </div>
     </section>
@@ -2839,6 +2877,7 @@
       </div>
       <div class="sm-approach-video" data-autoplay-hover data-audio-managed="true">
         <video data-video-src="videos/sm-how-we-work.mp4" muted loop playsinline preload="none" poster="images/sm-how-we-work-poster.avif"></video>
+        <div class="sm-play-btn" aria-hidden="true"><i data-lucide="play"></i></div>
       </div>
       </div><!-- /.sm-approach-layout -->
     </section>
@@ -2955,6 +2994,7 @@
       <div class="sm-proof-grid">
         <div class="sm-proof-visual" data-autoplay-hover data-audio-managed="true">
           <video data-video-src="videos/bts-behind-counter.mp4" muted loop playsinline preload="none" aria-label="Video de Button Up Media de una sesión en un restaurante, detrás de la barra"></video>
+          <div class="sm-play-btn" aria-hidden="true"><i data-lucide="play"></i></div>
         </div>
         <div class="sm-proof-copy">
           <div class="lib-section-label">La Prueba</div>
@@ -3254,32 +3294,18 @@
 
       if (audioHint) setTimeout(hideAudioHint, 6000);
 
+      // Click (or tap) to play on every device — no hover-to-play. A visible
+      // play button invites the click; clicking again or clicking away stops it.
       document.querySelectorAll("[data-autoplay-hover]").forEach(card => {
         const video = card.querySelector("video");
         if (!video) return;
-        card.addEventListener("mouseenter", () => {
-          if (useTapVideo.matches) return;
-          hideAudioHint();
-          stopOtherVideos(video);
-          deactivateCards(card);
-          card.classList.add("is-active");
-          playWithAudio(video);
-        });
-        card.addEventListener("mouseleave", () => {
-          if (useTapVideo.matches) return;
-          muteVideo(video);
-          card.classList.remove("is-active");
-          if (activeTouchCard === card) activeTouchCard = null;
-        });
         card.addEventListener("pointerup", event => {
-          if (!useTapVideo.matches) return;
           event.preventDefault();
           event.stopPropagation();
           lastPointerTap = Date.now();
           toggleTapVideo(card, video);
         });
         card.addEventListener("click", event => {
-          if (!useTapVideo.matches) return;
           if (Date.now() - lastPointerTap < 450) return;
           event.preventDefault();
           event.stopPropagation();
@@ -3288,7 +3314,6 @@
       });
 
       document.addEventListener("click", event => {
-        if (!useTapVideo.matches) return;
         if (!activeTouchCard || activeTouchCard.contains(event.target)) return;
         const video = activeTouchCard.querySelector("video");
         if (video) muteVideo(video);
