@@ -4124,29 +4124,76 @@
 
     <!-- ═══ MEET THE TEAM ═══ -->
     <style>
-      .hp2-team .hp2-split-copy { align-self: center; }
-      .hp2-team-collage { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-      .hp2-team-collage figure { margin: 0; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,248,235,0.06); background: #14110b; }
-      .hp2-team-collage img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.55s cubic-bezier(0.22,1,0.36,1); }
-      .hp2-team-collage figure:hover img { transform: scale(1.04); }
-      .hp2-team-collage .tc-main { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
-      .hp2-team-collage .tc-sm { aspect-ratio: 4 / 3; }
-      .hp2-team .hp2-team-cta { margin-top: 26px; }
-      @media (max-width: 768px) { .hp2-team-collage { gap: 10px; } }
+      .hp2-faces { text-align: center; }
+      .hp2-faces-head { max-width: 32ch; margin: 0 auto; }
+      .hp2-faces-card {
+        position: relative; display: block; margin: 34px auto 0;
+        width: 100%; max-width: 1080px; aspect-ratio: 4 / 5;
+        border-radius: 24px; overflow: hidden;
+        border: 1px solid rgba(255,248,235,0.08); background: #14110b;
+        box-shadow: 0 30px 70px rgba(0,0,0,0.5);
+        cursor: pointer; -webkit-tap-highlight-color: transparent;
+      }
+      .hp2-faces-card img {
+        position: absolute; inset: 0; width: 100%; height: 100%;
+        object-fit: cover; object-position: 50% 30%; display: block; filter: none;
+        transition: filter 0.6s ease, transform 0.7s cubic-bezier(0.22,1,0.36,1);
+      }
+      .hp2-faces-card::after {
+        content: ""; position: absolute; inset: 0; pointer-events: none;
+        background: linear-gradient(180deg, rgba(8,8,8,0.12) 0%, transparent 26%, transparent 50%, rgba(8,8,8,0.84) 100%);
+      }
+      .hp2-faces-overlay {
+        position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+        display: flex; align-items: flex-end; justify-content: space-between;
+        gap: 14px; flex-wrap: wrap; padding: clamp(18px, 3vw, 30px); text-align: left;
+      }
+      .hp2-faces-overlay h3 {
+        flex: 1 1 auto; min-width: 0;
+        font-family: var(--font-display); font-weight: 800; letter-spacing: -0.01em;
+        font-size: clamp(1.15rem, 2.6vw, 1.6rem); line-height: 1.12; color: var(--text);
+      }
+      .hp2-faces-pill {
+        flex: none; display: inline-flex; align-items: center; gap: 8px;
+        padding: 12px 18px; border-radius: 999px; white-space: nowrap;
+        background: rgba(226,168,77,0.16); border: 1px solid rgba(226,168,77,0.42);
+        color: var(--gold); font-weight: 700; font-size: 0.86rem;
+        backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+        transition: background 0.35s ease, border-color 0.35s ease;
+      }
+      .hp2-faces-pill svg { width: 17px; height: 17px; transition: transform 0.35s ease; }
+      @media (hover: hover) and (pointer: fine) {
+        .hp2-faces-card img { filter: grayscale(1) contrast(1.02); }
+        .hp2-faces-card { transition: border-color 0.4s ease, box-shadow 0.4s ease; }
+        .hp2-faces-card:hover img { filter: grayscale(0); transform: scale(1.05); }
+        .hp2-faces-card:hover { border-color: rgba(226,168,77,0.42); box-shadow: 0 36px 84px rgba(0,0,0,0.6), 0 0 44px rgba(226,168,77,0.1); }
+        .hp2-faces-card:hover .hp2-faces-pill { background: rgba(226,168,77,0.3); border-color: rgba(226,168,77,0.65); }
+        .hp2-faces-card:hover .hp2-faces-pill svg { transform: translateX(3px); }
+      }
+      @media (min-width: 760px) {
+        .hp2-faces-card { aspect-ratio: 16 / 9; }
+        .hp2-faces-card img { object-position: 50% 37%; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .hp2-faces-card:hover img { transform: none; }
+      }
     </style>
     <section class="card-overlay lib-section" id="team" data-shared-animations="off">
-      <div class="hp2-split hp2-team" style="margin-top:0;">
-        <div class="hp2-split-copy">
-          <div class="lib-section-label">Con quién trabajas</div>
-          <h2 class="lib-section-title">Personas reales, no una agencia sin rostro.</h2>
-          <p class="lib-section-sub">Somos un pequeño equipo de Miami que trata tu restaurante como si fuera nuestro. Las mismas personas que conoces en la primera llamada son las que graban tu contenido, construyen tu sitio y manejan tus anuncios.</p>
-          <a href="/es/nosotros" class="btn btn-primary hp2-team-cta">Sobre nosotros</a>
+      <div class="hp2-faces">
+        <div class="hp2-faces-head">
+          <div class="lib-section-label">Detrás de cámaras</div>
+          <h2 class="lib-section-title">Las caras detrás de cámaras.</h2>
+          <p class="lib-section-sub">Somos un pequeño equipo de Miami que trata tu restaurante como si fuera nuestro. Las mismas personas que conoces en la primera llamada graban tu contenido, construyen tu sitio y manejan tus anuncios.</p>
         </div>
-        <div class="hp2-team-collage">
-          <figure class="tc-main"><img src="images/team-group.jpg" alt="El equipo de Button Up Media junto en su oficina de Miami" width="1100" height="619" loading="lazy"></figure>
-          <figure class="tc-sm"><img src="images/team-collab.jpg" alt="Dos miembros del equipo de Button Up Media conversando y riendo en la oficina" width="820" height="461" loading="lazy"></figure>
-          <figure class="tc-sm"><img src="images/team-working.jpg" alt="Un miembro del equipo de Button Up Media trabajando en la campaña de un cliente" width="820" height="461" loading="lazy"></figure>
-        </div>
+        <a href="/es/nosotros" class="hp2-faces-card" aria-label="Conozca al equipo de Button Up Media, visite nuestra página Sobre nosotros">
+          <img src="images/team-about.webp" alt="El equipo de Button Up Media junto en su oficina de Miami" width="1351" height="2400" loading="lazy">
+          <div class="hp2-faces-overlay">
+            <h3>Conoce a las personas detrás del trabajo</h3>
+            <span class="hp2-faces-pill" aria-hidden="true">Sobre nosotros
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </span>
+          </div>
+        </a>
       </div>
     </section>
 
