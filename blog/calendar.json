@@ -29,7 +29,7 @@
     },
     {
       "id": "local-3pack",
-      "status": "ready",
+      "status": "published",
       "category": "seo",
       "author": "chris",
       "heroQuery": "miami restaurant exterior storefront daytime",
@@ -49,7 +49,8 @@
           "https://www.buttonupmedia.com/es/contacto"
         ]
       },
-      "heroAlt": "Diners at sidewalk tables outside a city restaurant on a sunny American street in the early evening"
+      "heroAlt": "Diners at sidewalk tables outside a city restaurant on a sunny American street in the early evening",
+      "publishedDate": "2026-06-26"
     },
     {
       "id": "more-google-reviews",

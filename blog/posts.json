@@ -1,13 +1,31 @@
 [
   {
+    "id": "local-3pack",
+    "category": "seo",
+    "author": "chris",
+    "date": "2026-06-26",
+    "hero": "/images/blog/local-3pack.jpg",
+    "heroAlt": "Diners at sidewalk tables outside a city restaurant on a sunny American street in the early evening",
+    "en": {
+      "slug": "restaurant-seo-miami-local-pack"
+    },
+    "es": {
+      "slug": "seo-local-restaurante-miami"
+    }
+  },
+  {
     "id": "gmaps-fix",
     "category": "seo",
     "author": "juan",
     "date": "2026-06-25",
     "hero": "/images/blog/gmaps-fix.jpg",
     "heroAlt": "A classic stainless-steel American diner on a street corner in daylight with a red neon sign",
-    "en": { "slug": "restaurant-not-showing-on-google-maps" },
-    "es": { "slug": "restaurante-no-aparece-en-google-maps" }
+    "en": {
+      "slug": "restaurant-not-showing-on-google-maps"
+    },
+    "es": {
+      "slug": "restaurante-no-aparece-en-google-maps"
+    }
   },
   {
     "id": "p1",
@@ -16,8 +34,12 @@
     "date": "2026-06-24",
     "hero": "/images/blog/p1.jpg",
     "heroAlt": "A woman photographing a bakery display case with her phone at an American restaurant",
-    "en": { "slug": "restaurant-social-media-management-cost" },
-    "es": { "slug": "costo-manejo-redes-sociales-restaurante" }
+    "en": {
+      "slug": "restaurant-social-media-management-cost"
+    },
+    "es": {
+      "slug": "costo-manejo-redes-sociales-restaurante"
+    }
   },
   {
     "id": "p2",
@@ -26,8 +48,12 @@
     "date": "2026-06-24",
     "hero": "/images/blog/p2.jpg",
     "heroAlt": "A sunny Miami South Beach street with palm trees, US flags, and outdoor cafe dining",
-    "en": { "slug": "restaurant-marketing-cost-miami" },
-    "es": { "slug": "cuanto-cuesta-marketing-restaurante-miami" }
+    "en": {
+      "slug": "restaurant-marketing-cost-miami"
+    },
+    "es": {
+      "slug": "cuanto-cuesta-marketing-restaurante-miami"
+    }
   },
   {
     "id": "p3",
@@ -36,8 +62,12 @@
     "date": "2026-06-24",
     "hero": "/images/blog/p3.jpg",
     "heroAlt": "A 'Come in, we're open' sign in English hanging on a restaurant door",
-    "en": { "slug": "promote-new-restaurant-miami" },
-    "es": { "slug": "dar-a-conocer-restaurante-nuevo-miami" }
+    "en": {
+      "slug": "promote-new-restaurant-miami"
+    },
+    "es": {
+      "slug": "dar-a-conocer-restaurante-nuevo-miami"
+    }
   },
   {
     "id": "p4",
@@ -46,8 +76,12 @@
     "date": "2026-06-24",
     "hero": "/images/blog/p4.jpg",
     "heroAlt": "A bartender pouring beer from the taps at a busy, warmly lit American bar at night",
-    "en": { "slug": "miami-restaurant-google-meta-ads-budget" },
-    "es": { "slug": "presupuesto-anuncios-google-meta-restaurante-miami" }
+    "en": {
+      "slug": "miami-restaurant-google-meta-ads-budget"
+    },
+    "es": {
+      "slug": "presupuesto-anuncios-google-meta-restaurante-miami"
+    }
   },
   {
     "id": "p5",
@@ -56,7 +90,11 @@
     "date": "2026-06-24",
     "hero": "/images/blog/p5.jpg",
     "heroAlt": "A person ordering from a restaurant menu on a laptop and phone in a modern American cafe",
-    "en": { "slug": "restaurant-website-vs-instagram-2026" },
-    "es": { "slug": "pagina-web-restaurante-vs-instagram-2026" }
+    "en": {
+      "slug": "restaurant-website-vs-instagram-2026"
+    },
+    "es": {
+      "slug": "pagina-web-restaurante-vs-instagram-2026"
+    }
   }
 ]
