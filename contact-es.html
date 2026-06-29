@@ -351,7 +351,7 @@
     }
     @media (max-width: 900px) {
       .contact-page .card-overlay-spacer {
-        padding-top: 26px;
+        padding-top: 40px;
         padding-bottom: 76px !important;
       }
       .contact-calendly-loaded .calendly-inline-widget iframe {
@@ -441,7 +441,7 @@
     /* Scoped .ci-* so nothing collides with the global .contact-info-card
        base rules, the mobile reflow block, or the Calendly column. */
     .ci-host {
-      margin-top: 26px;
+      margin-top: 34px;
       display: flex;
       gap: 16px;
       align-items: flex-start;
@@ -519,19 +519,12 @@
 
     /* What-to-expect steps */
     .ci-expect {
-      margin-top: 18px;
+      margin-top: 26px;
       padding: 22px 20px;
       border: 1px solid var(--line-soft);
       border-radius: var(--r-lg);
       background: var(--surface);
     }
-    .ci-eyebrow {
-      display: flex; align-items: center; gap: 9px;
-      font-family: var(--font-display); font-size: 0.7rem; font-weight: 700;
-      letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold);
-      margin-bottom: 16px;
-    }
-    .ci-eyebrow::before { content: ""; width: 20px; height: 1px; background: var(--gold); opacity: 0.7; }
     .ci-steps {
       list-style: none;
       margin: 0;
@@ -569,7 +562,7 @@
     }
 
     /* Demoted contact rows: reaching a person, not a form. Always visible. */
-    .ci-details { margin-top: 26px; gap: 0 !important; }
+    .ci-details { margin-top: 34px; gap: 0 !important; }
     .ci-details-eyebrow {
       font-family: var(--font-display);
       font-size: 0.7rem;
@@ -641,6 +634,11 @@
       .contact-page .ci-host,
       .contact-page .ci-trust,
       .contact-page .ci-expect { animation: none; }
+    }
+
+    /* A little more top breathing room on desktop (mobile keeps its own value). */
+    @media (min-width: 901px) {
+      .contact-page .card-overlay-spacer { padding-top: 144px; }
     }
 
     @media (max-width: 900px) {
@@ -826,7 +824,7 @@
           <!-- LO QUE PASA: reduce lo desconocido. En móvil baja debajo del
                calendario para que reservar siga a la mano. -->
           <div class="ci-expect">
-            <span class="ci-eyebrow">Lo que pasa en la llamada</span>
+            <div class="lib-section-label">Lo que pasa en la llamada</div>
             <ol class="ci-steps">
               <li class="ci-step">
                 <span class="ci-step-num" aria-hidden="true">1</span>
@@ -920,7 +918,7 @@
     <!-- PRUEBA SOCIAL -->
     <section class="lib-section ci-proof">
       <div class="ci-proof-head">
-        <span class="ci-eyebrow">Lo que dicen los dueños</span>
+        <div class="lib-section-label">Lo que dicen los dueños</div>
         <h2 class="ci-proof-title">Estarías en buena compañía.</h2>
       </div>
       <div class="ci-proof-grid">
