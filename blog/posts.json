@@ -1,5 +1,19 @@
 [
   {
+    "id": "more-google-reviews",
+    "category": "seo",
+    "author": "juan",
+    "date": "2026-06-29",
+    "hero": "/images/blog/more-google-reviews.jpg",
+    "heroAlt": "A happy smiling couple enjoying a candlelit dinner together at a restaurant table",
+    "en": {
+      "slug": "get-more-google-reviews-restaurant"
+    },
+    "es": {
+      "slug": "conseguir-mas-resenas-google-restaurante"
+    }
+  },
+  {
     "id": "local-3pack",
     "category": "seo",
     "author": "chris",

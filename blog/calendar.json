@@ -54,7 +54,7 @@
     },
     {
       "id": "more-google-reviews",
-      "status": "ready",
+      "status": "published",
       "category": "seo",
       "author": "juan",
       "heroQuery": "happy diners leaving an american restaurant",
@@ -74,7 +74,8 @@
           "https://www.buttonupmedia.com/es/contacto"
         ]
       },
-      "heroAlt": "A happy smiling couple enjoying a candlelit dinner together at a restaurant table"
+      "heroAlt": "A happy smiling couple enjoying a candlelit dinner together at a restaurant table",
+      "publishedDate": "2026-06-29"
     },
     {
       "id": "reel-ideas",
