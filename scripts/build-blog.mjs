@@ -299,6 +299,45 @@ function founderCta(lang) {
           </aside>`;
 }
 
+// Time-delayed, topic-aware CTA popup. Shows once after ~1 min of reading,
+// dismissed with the X / backdrop / Esc and never shown again (localStorage).
+const POPUP_COPY = {
+  en: {
+    seo: { h: "Want a hand getting found on Google?", p: "We will look at your Google profile and tell you exactly what is holding your ranking back. Free, no pressure." },
+    social: { h: "Want a hand with your social media?", p: "We make the content that actually fills tables. Tell us about your spot and we take it from there." },
+    ads: { h: "Want a hand making your ads pay off?", p: "We will find where your ad budget is leaking and what a smart first month looks like. Free." },
+    web: { h: "Want a hand with your website?", p: "We build restaurant sites that bring in orders and reservations, not just ones that look nice." },
+    strategy: { h: "Want a hand with your restaurant marketing?", p: "Tell us about your spot and we will map out what to do first. Free 30-minute call, no pressure." },
+  },
+  es: {
+    seo: { h: "¿Quiere ayuda para aparecer en Google?", p: "Revisamos su perfil de Google y le decimos qué está frenando su posición. Gratis, sin compromiso." },
+    social: { h: "¿Quiere ayuda con sus redes sociales?", p: "Hacemos el contenido que de verdad llena mesas. Cuéntenos de su local y nosotros nos encargamos." },
+    ads: { h: "¿Quiere que su publicidad por fin funcione?", p: "Encontramos dónde se fuga su presupuesto y cómo se ve un primer mes inteligente. Gratis." },
+    web: { h: "¿Quiere ayuda con su página web?", p: "Creamos sitios de restaurante que traen pedidos y reservas, no solo bonitos." },
+    strategy: { h: "¿Quiere ayuda con el marketing de su restaurante?", p: "Cuéntenos de su local y le decimos qué hacer primero. Llamada gratis de 30 minutos." },
+  },
+};
+
+function ctaPopup(lang, category, contactUrl) {
+  const t = T[lang];
+  const j = AUTHORS.juan;
+  const copy = (POPUP_COPY[lang] && POPUP_COPY[lang][category]) || POPUP_COPY[lang].strategy;
+  const later = lang === 'es' ? 'Ahora no, gracias' : 'Not now, thanks';
+  const closeLabel = lang === 'es' ? 'Cerrar' : 'Close';
+  return `
+    <div class="bp-cta-pop" id="bp-cta-pop" hidden aria-hidden="true">
+      <div class="bp-cta-pop-backdrop" data-close></div>
+      <div class="bp-cta-pop-card" role="dialog" aria-modal="true" aria-labelledby="bp-cta-pop-h" tabindex="-1">
+        <button type="button" class="bp-cta-pop-x" data-close aria-label="${escAttr(closeLabel)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+        <div class="bp-cta-pop-photo"><img src="${j.photo}" alt="${escAttr(j.name)}" width="66" height="66" loading="lazy" /></div>
+        <strong id="bp-cta-pop-h">${esc(copy.h)}</strong>
+        <p>${esc(copy.p)}</p>
+        <a href="${contactUrl}" class="btn btn-primary" data-book>${esc(t.fcBtn)} ${ARROW}</a>
+        <button type="button" class="bp-cta-pop-later" data-close>${esc(later)}</button>
+      </div>
+    </div>`;
+}
+
 // ---------- CSS (from the Claude Design handoff, conformed) ----------
 const POST_CSS = `
     .bp-wrap { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; }
@@ -408,6 +447,25 @@ const POST_CSS = `
     .bp-foundercta-text span { display: block; font-size: 0.92rem; line-height: 1.5; color: var(--text-dim); margin-top: 3px; }
     .bp-foundercta .btn { flex: none; }
     @media (max-width: 540px) { .bp-foundercta { gap: 14px; } .bp-foundercta .btn { width: 100%; justify-content: center; } }
+    /* time-delayed CTA popup */
+    .bp-cta-pop[hidden] { display: none; }
+    .bp-cta-pop { position: fixed; inset: 0; z-index: 1300; display: grid; place-items: center; padding: 20px; }
+    .bp-cta-pop-backdrop { position: absolute; inset: 0; background: rgba(20,16,9,0.42); backdrop-filter: blur(2px); animation: bpPopFade .25s ease; }
+    .bp-cta-pop-card { position: relative; z-index: 1; width: min(100%, 430px); background: #ffffff; border: 1px solid var(--line); border-radius: 22px; padding: 32px 28px 24px; text-align: center; box-shadow: 0 30px 80px rgba(20,16,9,0.3); animation: bpPopIn .3s cubic-bezier(.22,1,.36,1); }
+    .bp-cta-pop-card:focus { outline: none; }
+    .bp-cta-pop-photo { width: 66px; height: 66px; border-radius: 50%; overflow: hidden; margin: 0 auto 14px; border: 2px solid rgba(226,168,77,0.55); }
+    .bp-cta-pop-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .bp-cta-pop-card strong { display: block; font-family: var(--font-display); font-size: clamp(1.25rem, 3.4vw, 1.42rem); font-weight: 800; letter-spacing: -0.02em; color: var(--text-head); line-height: 1.16; }
+    .bp-cta-pop-card p { font-size: 0.98rem; line-height: 1.55; color: var(--text-dim); margin: 10px auto 20px; max-width: 34ch; }
+    .bp-cta-pop-card .btn { width: 100%; justify-content: center; }
+    .bp-cta-pop-x { position: absolute; top: 12px; right: 12px; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--text-soft); display: grid; place-items: center; cursor: pointer; transition: color .2s, border-color .2s; }
+    .bp-cta-pop-x svg { width: 17px; height: 17px; }
+    .bp-cta-pop-x:hover { color: var(--text-head); border-color: rgba(28,24,18,0.3); }
+    .bp-cta-pop-later { display: block; margin: 13px auto 0; background: none; border: 0; color: var(--text-soft); font-size: 0.84rem; cursor: pointer; }
+    .bp-cta-pop-later:hover { color: var(--text-dim); text-decoration: underline; text-underline-offset: 2px; }
+    @keyframes bpPopIn { from { opacity: 0; transform: translateY(14px) scale(0.96); } to { opacity: 1; transform: none; } }
+    @keyframes bpPopFade { from { opacity: 0; } to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) { .bp-cta-pop-card, .bp-cta-pop-backdrop { animation: none; } }
 `;
 
 const HUB_CSS = `
@@ -729,6 +787,7 @@ ${relatedHtml}
         </div>
       </div>
     </section>
+${ctaPopup(lang, view.post.category, t.contact)}
 ${footer(lang)}
   </main>
   <script defer src="/shared.js?v=${CSS_VER}"></script>
@@ -738,6 +797,22 @@ ${footer(lang)}
       if (!bar || !article) return;
       var update = function () { var rect = article.getBoundingClientRect(); var total = article.offsetHeight - innerHeight; var scrolled = Math.min(Math.max(-rect.top, 0), Math.max(total, 1)); bar.style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%'; };
       addEventListener('scroll', update, { passive: true }); addEventListener('resize', update); update();
+    })();
+    (function () {
+      var KEY = 'bum-blog-cta-pop-v1';
+      try { if (localStorage.getItem(KEY)) return; } catch (e) {}
+      var pop = document.getElementById('bp-cta-pop');
+      if (!pop) return;
+      var shown = false, dismissed = false;
+      function remember() { try { localStorage.setItem(KEY, '1'); } catch (e) {} }
+      function dismiss() { if (dismissed) return; dismissed = true; pop.hidden = true; pop.setAttribute('aria-hidden', 'true'); document.documentElement.style.overflow = ''; remember(); }
+      function show() { if (shown || dismissed) return; shown = true; pop.hidden = false; pop.setAttribute('aria-hidden', 'false'); document.documentElement.style.overflow = 'hidden'; var card = pop.querySelector('.bp-cta-pop-card'); if (card) try { card.focus(); } catch (e) {} }
+      setTimeout(show, 60000);
+      pop.addEventListener('click', function (e) {
+        if (e.target.closest('[data-book]')) { remember(); return; }
+        if (e.target.closest('[data-close]')) { dismiss(); }
+      });
+      addEventListener('keydown', function (e) { if (e.key === 'Escape' && shown && !dismissed) dismiss(); });
     })();
     (function () {
       var els = [].slice.call(document.querySelectorAll('.bp-rise'));
