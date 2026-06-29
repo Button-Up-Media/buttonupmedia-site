@@ -452,12 +452,20 @@
       box-shadow: 0 18px 42px rgba(0,0,0,0.22);
     }
     .ci-host-avatar { position: relative; flex: none; }
-    .ci-host-avatar img {
+    .ci-host-imgwrap {
+      display: block;
       width: 84px; height: 84px;
       border-radius: 18px;
-      object-fit: cover;
-      object-position: 50% 28%;
+      overflow: hidden;
       border: 1px solid var(--line);
+    }
+    .ci-host-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      /* Square source in a square frame: object-position can't crop, so scale
+         up and anchor on Juan's face so he reads clearly at this small size. */
+      transform: scale(1.5);
+      transform-origin: 50% 34%;
       display: block;
     }
     /* Static decorative dot only. No animation, no availability implication. */
@@ -643,7 +651,7 @@
 
     @media (max-width: 900px) {
       .ci-host { margin-top: 20px; padding: 16px; gap: 14px; }
-      .ci-host-avatar img { width: 68px; height: 68px; border-radius: 15px; }
+      .ci-host-imgwrap { width: 68px; height: 68px; border-radius: 15px; }
       .ci-trust { margin-top: 14px; }
       /* Reflow order on mobile: intro+host+pills, then the CALENDAR, then the
          "what happens" explainer, then the other-ways-to-reach rows. Keeps the
@@ -803,7 +811,9 @@
             <!-- TARJETA DEL ANFITRIÓN: con quién hablas en la llamada -->
             <div class="ci-host">
               <div class="ci-host-avatar">
-                <img src="media/author-juan.webp" alt="Juan, cofundador de Button Up Media" width="512" height="512" loading="lazy" decoding="async" />
+                <span class="ci-host-imgwrap">
+                  <img src="media/author-juan.webp" alt="Juan, cofundador de Button Up Media" width="512" height="512" loading="lazy" decoding="async" />
+                </span>
                 <span class="ci-host-dot" aria-hidden="true"></span>
               </div>
               <div class="ci-host-copy">
