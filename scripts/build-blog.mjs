@@ -49,6 +49,8 @@ const MONTHS_ES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep'
 const T = {
   en: {
     home: 'Home', blog: 'Blog', faq: 'Frequently asked questions', takeaways: 'The short version',
+    tocTitle: 'Jump to what you need', tocAria: 'On this page',
+    fcStrong: 'Want a hand with this?', fcSpan: 'Juan, our founder, will walk you through it on a free 30-minute call. Real person, no jargon, no pressure.', fcBtn: 'Book a free call with Juan',
     keepReading: 'Keep reading', minRead: (n) => `${n} min read`, articles: (n) => `${n} ${n === 1 ? 'article' : 'articles'}`,
     all: 'All', latest: 'Latest articles', featured: 'Featured', latestStory: 'Latest story', read: 'Read the article',
     empty: 'No articles in this category yet. Check back soon.',
@@ -66,6 +68,8 @@ const T = {
   },
   es: {
     home: 'Inicio', blog: 'Blog', faq: 'Preguntas frecuentes', takeaways: 'En resumen',
+    tocTitle: 'Vaya directo a lo que busca', tocAria: 'En esta página',
+    fcStrong: '¿Quiere ayuda con esto?', fcSpan: 'Juan, nuestro fundador, se lo explica en una llamada gratis de 30 minutos. Una persona real, sin tecnicismos y sin compromiso.', fcBtn: 'Agende una llamada gratis con Juan',
     keepReading: 'Sigue leyendo', minRead: (n) => `${n} min de lectura`, articles: (n) => `${n} ${n === 1 ? 'artículo' : 'artículos'}`,
     all: 'Todos', latest: 'Artículos recientes', featured: 'Destacado', latestStory: 'Lo más reciente', read: 'Leer el artículo',
     empty: 'Aún no hay artículos en esta categoría. Vuelva pronto.',
@@ -88,6 +92,8 @@ const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</
 const escAttr = (s) => esc(s).replace(/"/g, '&quot;');
 const escXml = (s) => escAttr(s);
 const stripTags = (s) => String(s == null ? '' : s).replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
+const slugify = (s) => stripTags(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+  .replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 60) || 'section';
 
 // ---------- shared chrome ----------
 function gtmHead() {
@@ -129,7 +135,7 @@ function nav(lang) {
   if (lang === 'es') {
     return `  <nav class="lib-nav" data-shared-animations="off">
     <a class="lib-nav-brand" href="/es" aria-label="Inicio de Button Up Media">
-      <img src="/images/full-logo.svg" alt="Button Up Media" width="145" height="45" />
+      <img src="/images/full-logo-dark.png" alt="Button Up Media" width="145" height="48" />
     </a>
     <div class="lib-nav-links">
       <details class="lib-nav-dropdown">
@@ -164,7 +170,7 @@ function nav(lang) {
   }
   return `  <nav class="lib-nav" data-shared-animations="off">
     <a class="lib-nav-brand" href="/" aria-label="Button Up Media home">
-      <img src="/images/full-logo.svg" alt="Button Up Media" width="145" height="45" />
+      <img src="/images/full-logo-dark.png" alt="Button Up Media" width="145" height="48" />
     </a>
     <div class="lib-nav-links">
       <details class="lib-nav-dropdown">
@@ -281,6 +287,18 @@ function footer(lang) {
 const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;margin-left:6px"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 const CHEVRON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>';
 
+// Inline "book a call with our founder" nudge. Juan's face makes the agency feel
+// human; placed mid-article so a reader who is sold can act without scrolling.
+function founderCta(lang) {
+  const t = T[lang];
+  const j = AUTHORS.juan;
+  return `<aside class="bp-foundercta bp-rise">
+            <div class="bp-foundercta-photo"><img src="${j.photo}" alt="${escAttr(j.name)}, ${esc(lang === 'es' ? j.jobTitleEs : j.jobTitleEn)}" width="66" height="66" loading="lazy" /></div>
+            <div class="bp-foundercta-text"><strong>${esc(t.fcStrong)}</strong><span>${esc(t.fcSpan)}</span></div>
+            <a href="${t.contact}" class="btn btn-primary">${esc(t.fcBtn)} ${ARROW}</a>
+          </aside>`;
+}
+
 // ---------- CSS (from the Claude Design handoff, conformed) ----------
 const POST_CSS = `
     .bp-wrap { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; }
@@ -320,7 +338,7 @@ const POST_CSS = `
     .bp-body ul, .bp-body ol { padding-left: 1.3em; }
     .bp-body li { font-size: 1.06rem; line-height: 1.7; color: var(--text-dim); margin-top: 0.55em; }
     .bp-body li::marker { color: var(--gold); }
-    .bp-body img { width: 100%; border-radius: 16px; border: 1px solid var(--line); display: block; }
+    .bp-body img { width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--line); display: block; }
     .bp-body figure { margin: 0; }
     .bp-body figcaption { font-size: 0.82rem; color: var(--text-soft); margin-top: 10px; text-align: center; }
     .bp-body hr { border: 0; border-top: 1px solid var(--line-soft); margin: 2.4em 0; }
@@ -371,6 +389,25 @@ const POST_CSS = `
     /* whole related-card click target */
     .bp-rcard { position: relative; }
     .bp-rcard-body h3 a::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+    /* table of contents (quick-answer jump nav) */
+    .bp-toc { margin: 1.6em 0 0; padding: 20px 22px; border-radius: 16px; border: 1px solid var(--line); background: var(--bg-2); }
+    .bp-toc-title { display: flex; align-items: center; gap: 9px; font-family: var(--font-display); font-size: 0.74rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+    .bp-toc-title::before { content: ""; width: 20px; height: 1px; background: var(--gold); opacity: 0.7; }
+    .bp-toc ol { list-style: none; padding: 0; margin: 0; counter-reset: bptoc; display: grid; gap: 1px; }
+    @media (min-width: 640px) { .bp-toc ol { grid-template-columns: 1fr 1fr; gap: 1px 20px; } }
+    .bp-toc li { margin: 0; }
+    .bp-toc a { display: flex; gap: 11px; align-items: baseline; padding: 9px 10px; border-radius: 10px; color: var(--text-dim); font-size: 0.99rem; line-height: 1.4; text-decoration: none; transition: background .2s, color .2s; }
+    .bp-toc a::before { counter-increment: bptoc; content: counter(bptoc); font-variant-numeric: tabular-nums; font-weight: 800; color: var(--gold); font-size: 0.8rem; flex: none; min-width: 1.5em; }
+    .bp-toc a:hover { background: var(--gold-soft); color: var(--text-head); }
+    /* founder CTA (human, book-a-call nudge) */
+    .bp-foundercta { margin: 2.2em 0; padding: 20px 22px; border-radius: 18px; border: 1px solid rgba(226,168,77,0.3); background: linear-gradient(135deg, rgba(226,168,77,0.13), rgba(208,106,80,0.05)), var(--bg-2); display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .bp-foundercta-photo { width: 66px; height: 66px; border-radius: 50%; overflow: hidden; border: 2px solid rgba(226,168,77,0.55); flex: none; }
+    .bp-foundercta-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .bp-foundercta-text { flex: 1 1 240px; }
+    .bp-foundercta-text strong { display: block; font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-head); }
+    .bp-foundercta-text span { display: block; font-size: 0.92rem; line-height: 1.5; color: var(--text-dim); margin-top: 3px; }
+    .bp-foundercta .btn { flex: none; }
+    @media (max-width: 540px) { .bp-foundercta { gap: 14px; } .bp-foundercta .btn { width: 100%; justify-content: center; } }
 `;
 
 const HUB_CSS = `
@@ -423,11 +460,13 @@ const HUB_CSS = `
 // for a cleaner, less "stock-AI" reading experience.
 // Light header for blog pages. The nav lives OUTSIDE .page, so these rules are
 // unscoped; they only land on blog pages because they ship in the blog's inline
-// <style>. The white logo is recolored to black, and the hamburger bars/chevron
-// follow the trigger's currentColor, so setting that dark fixes mobile too.
+// <style>. The brand uses a pre-blackened logo asset (full-logo-dark.png) rather
+// than a CSS filter: the white wordmark is a raster-in-SVG with an internal mask,
+// and stacking filter: brightness(0) on top made iOS Safari rasterize it at 1x
+// and upscale, smearing the logo on mobile. A flat dark PNG renders crisply.
+// The hamburger bars/chevron follow the trigger's currentColor, set dark below.
 const NAV_LIGHT_CSS = `
     .lib-nav { background: rgba(255,255,255,0.82); border-color: rgba(28,24,18,0.10); box-shadow: 0 6px 24px rgba(20,16,9,0.07); }
-    .lib-nav-brand img { filter: brightness(0); }
     .lib-nav-links a { color: #4a443b; }
     .lib-nav-links a:hover { color: #1d1a15; background: rgba(20,16,9,0.05); }
     .lib-nav-phone { color: #1d1a15; border-color: rgba(28,24,18,0.18); background: rgba(20,16,9,0.03); }
@@ -522,12 +561,36 @@ function renderPost(view, allViews) {
 
   const midCta = `<div class="bp-midcta"><div class="bp-midcta-text"><strong>${esc(t.midStrong)}</strong><span>${esc(t.midSpan)}</span></div><a href="${t.contact}" class="btn btn-primary">${esc(t.midBtn)} ${ARROW}</a></div>`;
 
-  const sections = (content.sections || []).map((s, i) =>
-    `<h2>${esc(s.h2)}</h2>\n${s.html}${i === 1 ? '\n' + midCta : ''}`
-  ).join('\n');
+  // Anchor every section so the table of contents and "quick answer" links work,
+  // and AI assistants can deep-link to a specific step. Dedupe collided slugs.
+  const secs = content.sections || [];
+  const usedIds = new Set();
+  const ids = secs.map((s) => {
+    let id = slugify(s.h2); let n = 2;
+    while (usedIds.has(id)) id = `${slugify(s.h2)}-${n++}`;
+    usedIds.add(id); return id;
+  });
+  const hasFaq = (content.faqs || []).length > 0;
 
-  const faq = (content.faqs || []).length
-    ? `<h2>${t.faq}</h2>\n${content.faqs.map((f) => `<h3>${esc(f.q)}</h3>\n<p>${f.a}</p>`).join('\n')}`
+  // Two inline CTAs spaced through the article: the founder (with photo) early,
+  // a lighter text nudge later. Both stay out of the way but keep "work with us"
+  // present. The big closing CTA still lives at the end of the page.
+  const lateIdx = secs.length >= 6 ? Math.min(secs.length - 2, Math.round(secs.length * 0.68)) : -1;
+  const sections = secs.map((s, i) => {
+    let block = `<h2 id="${ids[i]}">${esc(s.h2)}</h2>\n${s.html}`;
+    if (i === 1) block += '\n' + founderCta(lang);
+    else if (i === lateIdx) block += '\n' + midCta;
+    return block;
+  }).join('\n');
+
+  const tocItems = secs.map((s, i) => `<li><a href="#${ids[i]}">${esc(s.h2)}</a></li>`);
+  if (hasFaq) tocItems.push(`<li><a href="#faq">${esc(t.faq)}</a></li>`);
+  const toc = secs.length >= 3
+    ? `<nav class="bp-toc bp-rise" aria-label="${escAttr(t.tocAria)}"><p class="bp-toc-title">${esc(t.tocTitle)}</p><ol>${tocItems.join('')}</ol></nav>`
+    : '';
+
+  const faq = hasFaq
+    ? `<h2 id="faq">${t.faq}</h2>\n${content.faqs.map((f) => `<h3>${esc(f.q)}</h3>\n<p>${f.a}</p>`).join('\n')}`
     : '';
 
   const related = allViews.filter((v) => v.lang === lang && v.slug !== view.slug).slice(0, 3);
@@ -631,6 +694,7 @@ ${nav(lang)}
       <div class="bp-body">
         <div class="bp-narrow">
           ${takeaways}
+          ${toc}
           ${content.intro || ''}
           ${sections}
           ${faq}
