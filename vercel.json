@@ -48,6 +48,42 @@
       ]
     },
     {
+      "source": "/restaurant-social-media",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/restaurant-social-media.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/restaurant-social-media-es.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/es/redes-sociales",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
       "source": "/restaurant-paid-ads",
       "headers": [
         {
@@ -321,6 +357,26 @@
       "permanent": true
     },
     {
+      "source": "/restaurant-social-media/",
+      "destination": "/restaurant-social-media",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-social-media.html",
+      "destination": "/restaurant-social-media",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-social-media-es.html",
+      "destination": "/es/redes-sociales",
+      "permanent": true
+    },
+    {
+      "source": "/es/redes-sociales/",
+      "destination": "/es/redes-sociales",
+      "permanent": true
+    },
+    {
       "source": "/restaurant-paid-ads/",
       "destination": "/restaurant-paid-ads",
       "permanent": true
@@ -463,6 +519,10 @@
       "destination": "/smm-strategy-call-es.html"
     },
     {
+      "source": "/restaurant-social-media",
+      "destination": "/restaurant-social-media.html"
+    },
+    {
       "source": "/restaurant-paid-ads",
       "destination": "/restaurant-paid-ads.html"
     },
@@ -493,6 +553,10 @@
     {
       "source": "/es/nosotros",
       "destination": "/about-es.html"
+    },
+    {
+      "source": "/es/redes-sociales",
+      "destination": "/restaurant-social-media-es.html"
     },
     {
       "source": "/contact",

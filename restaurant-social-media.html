@@ -1,0 +1,1617 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      var key = "bum-cookie-consent-v1";
+      var consent = {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: "denied",
+        functionality_storage: "granted",
+        personalization_storage: "denied",
+        security_storage: "granted",
+        wait_for_update: 500
+      };
+      try {
+        var saved = localStorage.getItem(key);
+        if (saved) {
+          var parsed = JSON.parse(saved);
+          if (parsed && parsed.analytics) consent.analytics_storage = "granted";
+          if (parsed && parsed.marketing && !(navigator && navigator.globalPrivacyControl)) {
+            consent.ad_storage = "granted";
+            consent.ad_user_data = "granted";
+            consent.ad_personalization = "granted";
+            consent.personalization_storage = "granted";
+          }
+        }
+      } catch (err) {}
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+      window.gtag("consent", "default", consent);
+    })();
+  </script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){
+    var loaded=false;
+    function loadGTM(){
+      if(loaded)return;loaded=true;
+      es.forEach(function(e){w.removeEventListener(e,loadGTM)});
+      w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    }
+    var es=['pointerdown','touchstart','keydown','scroll','mousemove'];
+    es.forEach(function(e){w.addEventListener(e,loadGTM,{passive:true})});
+    // Load GTM on first interaction, or shortly after the page finishes loading
+    // for visitors who do not interact, so it stays off the first-paint path.
+    function arm(){setTimeout(loadGTM,2000);}
+    if(d.readyState==='complete')arm();else w.addEventListener('load',arm);
+  })(window,document,'script','dataLayer','GTM-WR9TZHT');</script>
+  <!-- End Google Tag Manager -->
+  <title>Restaurant Social Media Marketing That Fills Seats | Button Up Media</title>
+  <meta name="description" content="Reels, TikToks, and food content that turn South Florida diners into reservations and regulars. Book a free 30-minute restaurant social media strategy call." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg">
+  <link rel="canonical" href="https://www.buttonupmedia.com/restaurant-social-media" />
+  <link rel="alternate" hreflang="en" href="https://www.buttonupmedia.com/restaurant-social-media" />
+  <link rel="alternate" hreflang="es" href="https://www.buttonupmedia.com/es/redes-sociales" />
+  <link rel="alternate" hreflang="x-default" href="https://www.buttonupmedia.com/restaurant-social-media" />
+  <meta name="theme-color" content="#0b0d10" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Restaurant Social Media Marketing That Fills Seats | Button Up Media" />
+  <meta property="og:description" content="Reels, TikToks, and food content that turn South Florida diners into reservations and regulars. Book a free 30-minute restaurant social media strategy call." />
+  <meta property="og:url" content="https://www.buttonupmedia.com/restaurant-social-media" />
+  <meta property="og:image" content="https://www.buttonupmedia.com/images/sm-videography-hero.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Restaurant Social Media Marketing That Fills Seats | Button Up Media" />
+  <meta name="twitter:description" content="Reels, TikToks, and food content that turn South Florida diners into reservations and regulars. Book a free 30-minute restaurant social media strategy call." />
+  <meta name="twitter:image" content="https://www.buttonupmedia.com/images/sm-videography-hero.jpg" />
+  <link rel="preconnect" href="https://assets.calendly.com" />
+  <link rel="preconnect" href="https://calendly.com" />
+  <!-- Self-hosted font preloads (production). -->
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-variable.woff2" crossorigin fetchpriority="high" />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
+  <!-- Preload the hero backdrop: it is the LCP element, so fetch it early at high priority. -->
+  <link rel="preload" as="image" href="images/smm-hero-bg.avif" type="image/avif" fetchpriority="high" />
+  <link rel="stylesheet" href="shared.css?v=nav-mobile-4" />
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["Organization", "ProfessionalService"],
+        "@id": "https://www.buttonupmedia.com/#organization",
+        "name": "Button Up Media",
+        "alternateName": "Button Up Media Restaurant Marketing Agency",
+        "url": "https://www.buttonupmedia.com/",
+        "logo": "https://www.buttonupmedia.com/favicon-bum.svg",
+        "image": "https://www.buttonupmedia.com/images/sm-videography-hero.jpg",
+        "email": "contact@buttonupmedia.com",
+        "telephone": "+17867409499",
+        "description": "Button Up Media is a Florida restaurant marketing agency helping restaurants drive reservations, online orders, private event leads, and foot traffic with social media content, website design, SEO, and Google Ads.",
+        "slogan": "Restaurant marketing that fills seats.",
+        "priceRange": "$$",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+17867409499",
+          "contactType": "sales",
+          "areaServed": "US",
+          "availableLanguage": ["English", "Spanish"]
+        },
+        "sameAs": [
+          "https://www.instagram.com/buttonupmediaagency/"
+        ],
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Miami-Dade County" },
+          { "@type": "AdministrativeArea", "name": "Broward County" },
+          { "@type": "City", "name": "Miami" },
+          { "@type": "City", "name": "Doral" },
+          { "@type": "City", "name": "Coral Gables" },
+          { "@type": "City", "name": "Brickell" },
+          { "@type": "City", "name": "Fort Lauderdale" },
+          { "@type": "City", "name": "Hollywood" }
+        ],
+        "knowsAbout": [
+          "restaurant social media marketing",
+          "restaurant content creation",
+          "Instagram Reels for restaurants",
+          "TikTok marketing for restaurants",
+          "restaurant videography",
+          "restaurant food photography"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.buttonupmedia.com/#website",
+        "url": "https://www.buttonupmedia.com/",
+        "name": "Button Up Media",
+        "publisher": { "@id": "https://www.buttonupmedia.com/#organization" },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.buttonupmedia.com/restaurant-social-media#webpage",
+        "url": "https://www.buttonupmedia.com/restaurant-social-media",
+        "name": "Restaurant Social Media Marketing That Fills Seats | Button Up Media",
+        "description": "Reels, TikToks, and food content that turn South Florida diners into reservations and regulars. Book a free 30-minute restaurant social media strategy call.",
+        "isPartOf": { "@id": "https://www.buttonupmedia.com/#website" },
+        "about": { "@id": "https://www.buttonupmedia.com/restaurant-social-media#service" },
+        "primaryImageOfPage": { "@type": "ImageObject", "url": "https://www.buttonupmedia.com/images/sm-videography-hero.jpg" },
+        "inLanguage": "en-US",
+        "potentialAction": {
+          "@type": "ScheduleAction",
+          "name": "Book a free restaurant social media strategy call",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://calendly.com/juanh-buttonupmedia/freeconsultation"
+          }
+        }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://www.buttonupmedia.com/restaurant-social-media#service",
+        "name": "Restaurant Social Media Marketing",
+        "alternateName": [
+          "Restaurant content creation",
+          "Social media marketing for restaurants",
+          "Restaurant Instagram and TikTok marketing"
+        ],
+        "url": "https://www.buttonupmedia.com/restaurant-social-media",
+        "description": "Full-service restaurant social media marketing including professional food videography, photography, Reels and TikTok content, posting strategy, account management, and community engagement for South Florida restaurants.",
+        "provider": { "@id": "https://www.buttonupmedia.com/#organization" },
+        "serviceType": "Social Media Marketing",
+        "category": "Restaurant Marketing",
+        "audience": { "@type": "BusinessAudience", "audienceType": "Restaurant owners, restaurant operators, and restaurant groups" },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Miami-Dade County" },
+          { "@type": "AdministrativeArea", "name": "Broward County" }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.buttonupmedia.com/restaurant-social-media#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.buttonupmedia.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Restaurant Social Media Marketing", "item": "https://www.buttonupmedia.com/restaurant-social-media" }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    /* ===== Paid landing page: one job, book a free strategy call ===== */
+    /* GTM's noscript iframe is already 0x0/hidden; this also keeps its markup
+       from ever painting as raw text in scripting-enabled preview contexts. */
+    noscript { display: none; }
+
+    /* Deep-link anchors for Google Ads sitelinks (#results, #why-restaurants,
+       #what-you-get, #book). Additive only: scroll-margin keeps the target off
+       the very top edge when reached via a URL hash; in-page smooth scroll is
+       disabled under reduced-motion. Does not affect layout, LCP, or CLS. */
+    #results, #why-restaurants, #what-you-get, #book { scroll-margin-top: 24px; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    /* No overflow-x: clip on .smm-lp so the hero backdrop can be full-bleed
+       (100vw). Page horizontal overflow stays contained by the shared
+       body { overflow-x: hidden }. */
+    /* This page has an in-flow .smm-nav, not the site's fixed nav, so drop the
+       mobile top padding shared.css reserves on .page to clear that fixed nav. */
+    @media (max-width: 700px) { .page.smm-lp { padding-top: 0; } }
+
+    /* Minimal nav: brand + a single demoted phone link. No menu of options. */
+    .smm-nav {
+      position: relative;
+      z-index: 6;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 22px clamp(20px, 5vw, 40px) 0;
+    }
+    .smm-nav-brand { text-decoration: none; display: inline-flex; align-items: center; }
+    .smm-nav-logo { height: 38px; width: auto; display: block; }
+    .smm-nav-phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-soft);
+      transition: color 0.2s ease;
+    }
+    .smm-nav-phone:hover { color: var(--text); }
+    .smm-nav-phone svg { width: 15px; height: 15px; }
+    .smm-nav-phone .smm-nav-phone-label { letter-spacing: 0.01em; }
+    .smm-nav-right { display: inline-flex; align-items: center; gap: clamp(14px, 4.5vw, 22px); }
+    .smm-nav-link { font-size: 0.82rem; font-weight: 600; color: var(--text-soft); text-decoration: none; transition: color 0.2s ease; }
+    .smm-nav-link:hover { color: var(--text); }
+
+    /* Hero */
+    .smm-hero {
+      position: relative;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: clamp(48px, 9vw, 92px) clamp(20px, 5vw, 40px) clamp(40px, 7vw, 64px);
+      text-align: center;
+    }
+    /* Subtle restaurant backdrop behind the hero, faded into the page so the
+       dark headline stays crisp. Swap the url() below to change the photo. */
+    .smm-hero-bg {
+      position: absolute;
+      z-index: 0;
+      top: -120px;
+      left: 50%;
+      bottom: 0;
+      width: 100vw;
+      transform: translateX(-50%);
+      pointer-events: none;
+      background-image:
+        linear-gradient(180deg, rgba(14,11,8,0.74) 0%, rgba(14,11,8,0.63) 44%, rgba(14,11,8,0.71) 86%, rgba(14,11,8,0.86) 100%),
+        url("images/smm-hero-bg.avif");
+      background-size: cover, cover;
+      background-position: center, center;
+      background-repeat: no-repeat, no-repeat;
+    }
+    .smm-hero > *:not(.smm-hero-bg) { position: relative; z-index: 1; }
+    .smm-hero h1.display-xl {
+      font-size: clamp(2.5rem, 7.2vw, 4.4rem);
+      margin-top: 22px;
+    }
+    .smm-hero h1 .hero-gold { color: var(--gold); }
+    .smm-hero-sub {
+      margin: 22px auto 0;
+      max-width: 54ch;
+      color: var(--text-dim);
+      font-size: clamp(1rem, 2.6vw, 1.12rem);
+      line-height: 1.6;
+    }
+    .smm-hero-sub .smm-es { color: var(--text-soft); }
+    .smm-hero-cta-wrap {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .smm-cta {
+      min-height: 54px;
+      padding: 0 26px;
+      font-size: 0.96rem;
+      font-weight: 700;
+      border-radius: var(--r-md);
+      gap: 10px;
+    }
+    .smm-cta svg { width: 19px; height: 19px; }
+    .smm-cta-note {
+      font-size: 0.82rem;
+      color: var(--text-soft);
+      letter-spacing: 0.01em;
+    }
+
+    /* Entrance: keep the H1 static so it is the immediate LCP element, fade the
+       rest in on the compositor (opacity/transform only). Mirrors the contact
+       page so first paint never waits on the main thread. */
+    .smm-nav { animation: none; }
+    .smm-hero .hero-badge,
+    .smm-hero-sub,
+    .smm-hero-cta-wrap {
+      animation: smmFadeUp 0.7s cubic-bezier(0.25,1,0.5,1) backwards;
+    }
+    .smm-hero .hero-badge { animation-delay: 0.30s; }
+    .smm-hero-sub { animation-delay: 0.42s; }
+    .smm-hero-cta-wrap { animation-delay: 0.52s; }
+    @keyframes smmFadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes smmFadeDown { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Proof strip */
+    .smm-proof { max-width: 1080px; margin: 0 auto; padding: 8px clamp(20px, 5vw, 40px) clamp(36px, 6vw, 56px); }
+    .smm-eyebrow {
+      text-align: center;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      margin-bottom: 22px;
+    }
+    .smm-stat-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .smm-stat {
+      text-align: center;
+      padding: 26px 18px;
+      border-radius: var(--r-lg);
+      border: 1px solid rgba(255,248,235,0.08);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.012)),
+        rgba(10,10,10,0.5);
+    }
+    .smm-stat-num {
+      font-family: var(--font-hero);
+      font-size: clamp(2.1rem, 6vw, 2.9rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--gold);
+    }
+    .smm-stat-label {
+      margin-top: 9px;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.4;
+    }
+    /* Awaiting-data slot: intentional, not broken. Drop the real Sprout Social
+       number into .smm-stat-num and the metric into .smm-stat-label, then delete
+       the --pending class + the .smm-stat-pending-tag line. */
+    .smm-stat.--pending {
+      border-style: dashed;
+      border-color: rgba(226,168,77,0.22);
+      background: rgba(226,168,77,0.025);
+    }
+    .smm-stat.--pending .smm-stat-num { color: var(--text-soft); }
+    .smm-stat-pending-tag {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(226,168,77,0.7);
+    }
+    .smm-trust-label {
+      margin-top: 30px;
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      text-align: center;
+    }
+    .smm-trust-row {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 10px 22px;
+    }
+    .smm-trust-row span {
+      font-family: var(--font-display);
+      font-size: 0.94rem;
+      font-weight: 600;
+      color: var(--text-soft);
+      letter-spacing: 0.01em;
+    }
+    .smm-trust-row .smm-trust-dot { color: rgba(226,168,77,0.5); font-size: 0.7rem; }
+
+    /* Testimonials */
+    .smm-quotes { max-width: 980px; margin: 0 auto; padding: 8px clamp(20px, 5vw, 40px) clamp(44px, 7vw, 68px); }
+    .smm-quote-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .smm-quote {
+      position: relative;
+      padding: 28px 26px 24px;
+      border-radius: var(--r-lg);
+      border: 1px solid rgba(255,248,235,0.09);
+      background:
+        radial-gradient(circle at top left, rgba(226,168,77,0.07), transparent 42%),
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.012)),
+        rgba(12,12,12,0.7);
+    }
+    .smm-quote-mark { font-family: var(--font-hero); font-size: 2.6rem; line-height: 0.6; color: var(--gold); opacity: 0.55; }
+    .smm-quote p {
+      margin: 10px 0 18px;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+    .smm-quote-by { display: flex; flex-direction: column; gap: 2px; }
+    .smm-quote-name { font-family: var(--font-display); font-weight: 700; font-size: 0.92rem; color: var(--text-head); }
+    .smm-quote-role { font-size: 0.8rem; color: var(--text-soft); }
+
+    /* Booking section + Calendly facade (ported from the optimized contact page) */
+    .smm-book { max-width: 880px; margin: 0 auto; padding: 8px clamp(20px, 5vw, 40px) clamp(48px, 7vw, 72px); }
+    .smm-book-head { text-align: center; margin-bottom: 26px; }
+    .smm-book-head h2 { font-size: clamp(1.8rem, 5vw, 2.6rem); color: var(--text-head); }
+    .smm-book-head p { margin: 12px auto 0; max-width: 50ch; color: var(--text-dim); line-height: 1.55; }
+    .smm-host {
+      display: inline-flex; align-items: center; gap: 12px;
+      margin: 18px auto 0; padding: 7px 18px 7px 7px;
+      border-radius: 999px; border: 1px solid var(--line-soft);
+      background: #FFFFFF; box-shadow: 0 8px 22px rgba(40,30,12,0.05);
+    }
+    .smm-host-photo { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; flex: 0 0 auto; }
+    .smm-host-copy { display: flex; flex-direction: column; align-items: flex-start; text-align: left; line-height: 1.3; }
+    .smm-host-label { font-size: 0.7rem; color: var(--text-soft); letter-spacing: 0.01em; }
+    .smm-host-name { font-size: 0.86rem; font-weight: 700; color: var(--text-head); }
+    .smm-host-role { font-weight: 600; color: var(--gold); }
+    .smm-host-sep { color: var(--text-soft); margin: 0 2px; }
+    .smm-host-es { font-size: 0.74rem; font-weight: 600; color: var(--gold); margin-top: 3px; letter-spacing: 0.01em; }
+
+    .smm-cal-shell { position: relative; }
+    .smm-cal-stage {
+      position: relative;
+      min-height: 640px;
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      border: 1px solid rgba(255,248,235,0.08);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015)),
+        radial-gradient(circle at top left, rgba(226,168,77,0.09), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(69,176,140,0.06), transparent 34%),
+        rgba(10,10,10,0.78);
+      box-shadow: 0 18px 42px rgba(0,0,0,0.22);
+    }
+    .smm-cal-skeleton,
+    .smm-cal-loaded { position: absolute; inset: 0; transition: opacity 0.35s ease, transform 0.35s ease; }
+    .smm-cal-skeleton { padding: 22px; }
+    .smm-cal-skeleton::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.025) 20%, rgba(255,255,255,0.07) 38%, rgba(255,255,255,0.025) 56%, transparent 74%);
+      transform: translateX(-120%);
+      animation: smmCalShimmer 1.8s ease-in-out infinite;
+    }
+    @keyframes smmCalShimmer { to { transform: translateX(120%); } }
+    .smm-cal-skel-inner { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; gap: 14px; }
+    .smm-cal-skel-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+    .smm-cal-skel-status {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.76rem; font-weight: 600; color: var(--text-soft);
+      letter-spacing: 0.01em; text-transform: uppercase;
+    }
+    .smm-cal-skel-status::before {
+      content: ""; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--gold);
+      animation: smmCalPulse 1.5s ease-in-out infinite;
+    }
+    @keyframes smmCalPulse {
+      0%, 100% { transform: scale(0.85); opacity: 0.55; }
+      50% { transform: scale(1.1); opacity: 1; }
+    }
+    .smm-cal-skel-pill { height: 18px; width: 88px; border-radius: 999px; background: rgba(255,255,255,0.08); }
+    .smm-cal-skel-line { height: 14px; border-radius: 999px; background: rgba(255,255,255,0.07); }
+    .smm-cal-skel-line.--short { width: 42%; }
+    .smm-cal-skel-line.--mid { width: 64%; }
+    .smm-cal-skel-line.--long { width: 86%; }
+    .smm-cal-skel-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 8px; flex: 1; }
+    .smm-cal-skel-card { border-radius: 16px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.035); min-height: 120px; }
+    .smm-cal-skel-footer { display: flex; align-items: center; gap: 12px; margin-top: auto; }
+    .smm-cal-skel-avatar { width: 42px; height: 42px; border-radius: 50%; background: rgba(226,168,77,0.12); border: 1px solid rgba(226,168,77,0.16); }
+    .smm-cal-skel-copy { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .smm-cal-loaded { opacity: 0; transform: translateY(8px); }
+    .smm-cal-shell.is-loaded .smm-cal-skeleton { opacity: 0; transform: scale(0.99); pointer-events: none; }
+    .smm-cal-shell.is-loaded .smm-cal-loaded { opacity: 1; transform: translateY(0); }
+    .smm-cal-loaded .calendly-inline-widget { border-radius: var(--r-lg); overflow: hidden; min-height: 640px; }
+    .calendly-inline-widget { border-radius: var(--r-lg); overflow: hidden; }
+    .smm-book-direct {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 38px; padding: 0 14px; border-radius: 999px;
+      border: 1px solid rgba(255,248,235,0.1); background: rgba(255,255,255,0.02);
+      color: var(--text-dim); font-size: 0.74rem; font-weight: 600;
+      letter-spacing: 0.01em; margin-top: 14px;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+    .smm-book-direct:hover { transform: translateY(-1px); background: rgba(255,255,255,0.04); border-color: rgba(255,248,235,0.16); color: var(--text); }
+
+    /* Demoted phone fallback (secondary to booking) */
+    .smm-phone-fallback {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 5vw, 40px) clamp(40px, 6vw, 56px);
+      text-align: center;
+    }
+    .smm-phone-fallback p { font-size: 0.86rem; color: var(--text-soft); }
+    .smm-phone-fallback a { color: var(--text-dim); font-weight: 600; }
+    .smm-phone-fallback a:hover { color: var(--text); }
+
+    /* Footer trimmed for the conversion page */
+    .smm-footer { max-width: 1180px; margin: 0 auto; padding: 28px clamp(20px, 5vw, 40px) 40px; border-top: 1px solid rgba(255,248,235,0.07); }
+    .smm-footer-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+    .smm-footer-row p { font-size: 0.78rem; color: var(--text-soft); }
+    .smm-footer-links { display: flex; flex-wrap: wrap; gap: 16px; }
+    .smm-footer-links a { font-size: 0.78rem; color: var(--text-soft); transition: color 0.2s ease; }
+    .smm-footer-links a:hover { color: var(--text); }
+
+    /* Consent banner close glyph fallback (this page does not load lucide) */
+    #bum-consent-banner .bum-consent__close i[data-lucide]:empty::before {
+      content: "\00d7";
+      font-size: 1.25rem;
+      line-height: 1;
+      color: currentColor;
+    }
+
+    @media (max-width: 760px) {
+      .smm-cal-stage { touch-action: pan-y pinch-zoom; overscroll-behavior: auto; min-height: 560px; }
+      .smm-cal-loaded, .smm-cal-loaded .calendly-inline-widget iframe { pointer-events: none; }
+      .smm-book-direct { pointer-events: auto; display: flex; width: 100%; }
+      .calendly-inline-widget { height: 560px !important; min-height: 560px !important; }
+      .smm-cta { width: 100%; }
+      .smm-footer-row { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .smm-nav,
+      .smm-hero .hero-badge,
+      .smm-hero-sub,
+      .smm-hero-cta-wrap { animation: none; }
+      .smm-cal-skeleton::before { animation: none; }
+    }
+
+    /* ===== Added content: validate the service, keep it actionable ===== */
+
+    /* Why social — slim validating stat band */
+    .smm-why {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: clamp(20px, 4vw, 36px) clamp(20px, 5vw, 40px) clamp(36px, 6vw, 56px);
+      text-align: center;
+    }
+    .smm-why-eyebrow {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      letter-spacing: 0.01em;
+    }
+    .smm-why-num {
+      font-family: var(--font-hero);
+      font-size: clamp(3.4rem, 12vw, 5.6rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--gold);
+      margin: 8px 0 4px;
+    }
+    .smm-why-line {
+      font-size: clamp(1.02rem, 2.6vw, 1.22rem);
+      line-height: 1.5;
+      color: var(--text-dim);
+      max-width: 30ch;
+      margin: 0 auto;
+    }
+    .smm-why-line strong { color: var(--text); font-weight: 700; }
+    .smm-why-src {
+      margin-top: 14px;
+      font-size: 0.72rem;
+      color: var(--text-soft);
+      letter-spacing: 0.02em;
+    }
+
+    /* How it works — the differentiator + 3 plain-English steps */
+    .smm-how { max-width: 1080px; margin: 0 auto; padding: 8px clamp(20px, 5vw, 40px) clamp(40px, 6vw, 60px); }
+    .smm-how-head { text-align: center; max-width: 60ch; margin: 0 auto 38px; }
+    .smm-how-head h2 {
+      font-size: clamp(2rem, 5.6vw, 2.95rem);
+      color: var(--text-head);
+      line-height: 1.08;
+    }
+    .smm-how-head h2 .accent-serif { color: var(--gold); }
+    .smm-how-head p {
+      margin: 16px auto 0;
+      max-width: 52ch;
+      color: var(--text-dim);
+      font-size: clamp(1rem, 2.4vw, 1.08rem);
+      line-height: 1.6;
+    }
+    .smm-how-head p strong { color: var(--text); font-weight: 700; }
+    .smm-step-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+    .smm-step {
+      padding: 28px 24px 26px;
+      border-radius: var(--r-lg);
+      border: 1px solid rgba(255,248,235,0.09);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.012)),
+        rgba(12,12,12,0.6);
+    }
+    .smm-step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      border: 1px solid rgba(226,168,77,0.28);
+      background: var(--gold-soft);
+      color: var(--gold);
+      font-family: var(--font-hero);
+      font-weight: 800;
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+    .smm-step h3 {
+      font-family: var(--font-display);
+      font-size: 1.16rem;
+      font-weight: 700;
+      color: var(--text-head);
+      margin-bottom: 8px;
+    }
+    .smm-step p { font-size: 0.92rem; line-height: 1.6; color: var(--text-dim); }
+    .smm-how-cta { text-align: center; margin-top: 34px; }
+    .smm-how-cta .smm-cta { display: inline-flex; }
+
+    /* Is this you — compact qualifier */
+    .smm-fit { max-width: 980px; margin: 0 auto; padding: 8px clamp(20px, 5vw, 40px) clamp(44px, 7vw, 64px); }
+    .smm-fit-head { text-align: center; margin-bottom: 26px; }
+    .smm-fit-head h2 { font-size: clamp(1.6rem, 4.4vw, 2.2rem); color: var(--text-head); }
+    .smm-fit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+    .smm-fit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      padding: 18px 20px;
+      border-radius: var(--r-md);
+      border: 1px solid rgba(255,248,235,0.07);
+      background: rgba(255,255,255,0.02);
+    }
+    .smm-fit-check {
+      flex: 0 0 auto;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(69,176,140,0.16);
+      border: 1px solid rgba(69,176,140,0.32);
+      color: #6DC4A6;
+      margin-top: 1px;
+    }
+    .smm-fit-check svg { width: 15px; height: 15px; }
+    .smm-fit-item p { font-size: 0.94rem; line-height: 1.5; color: var(--text-dim); }
+
+    /* ============================================================
+       LIGHT THEME — warm, inviting palette for first-time visitors
+       Overrides the dark tokens + the smm-* hardcoded dark surfaces.
+       ============================================================ */
+    :root {
+      --bg-0: #FBF8F2;          /* warm paper */
+      --bg-1: #F4EDE1;
+      --bg-2: #ECE3D4;
+      --bg-3: #E4D9C7;
+      --surface: rgba(28,22,12,0.03);
+      --line: rgba(36,28,16,0.14);
+      --line-soft: rgba(36,28,16,0.08);
+      --text: #2C261C;
+      --text-head: #1C170F;
+      --text-dim: rgba(44,38,28,0.74);
+      --text-soft: rgba(44,38,28,0.52);
+      --gold: #B57E1E;          /* deeper amber — readable on light */
+      --gold-soft: rgba(181,126,30,0.12);
+      --teal: #1E7E54;
+    }
+    body { background: var(--bg-0); color: var(--text); }
+
+    /* Soft warm ambient glow instead of dark mesh orbs */
+    .depth-canvas { opacity: 1; }
+    .mesh-orb { opacity: 0.16 !important; filter: blur(70px); mix-blend-mode: multiply; }
+    .load-flash { display: none; }
+
+    /* Primary CTA — solid amber with dark text (high contrast on light) */
+    .btn-primary {
+      border-color: rgba(181,126,30,0.45);
+      background: linear-gradient(135deg, #E8AC45, #D08A34);
+      color: #2A1C06;
+      box-shadow: 0 8px 22px rgba(208,138,52,0.32), inset 0 1px 0 rgba(255,255,255,0.32);
+    }
+    .btn-primary:hover { box-shadow: 0 14px 36px rgba(208,138,52,0.46); transform: translateY(-2px); }
+    .btn-primary:active { transform: translateY(0); box-shadow: 0 6px 16px rgba(208,138,52,0.3); }
+    .smm-cta-note, .smm-why-src { color: var(--text-soft); }
+
+    /* Nav phone */
+    .smm-nav-phone { color: var(--text-soft); }
+    .smm-nav-phone:hover { color: var(--text-head); }
+
+    /* Hero accent */
+    .smm-hero h1 .hero-gold { color: var(--gold); }
+
+    /* Proof stat cards → white */
+    .smm-stat {
+      border: 1px solid var(--line-soft);
+      background: #FFFFFF;
+      box-shadow: 0 10px 30px rgba(40,30,12,0.05);
+    }
+    .smm-stat.--pending {
+      border-color: rgba(181,126,30,0.3);
+      background: rgba(181,126,30,0.05);
+    }
+    .smm-stat.--pending .smm-stat-num { color: var(--text-soft); }
+    .smm-stat-pending-tag { color: rgba(181,126,30,0.85); }
+
+    /* Why band */
+    .smm-why-num { color: var(--gold); }
+
+    /* How-it-works step cards → white */
+    .smm-step {
+      border: 1px solid var(--line-soft);
+      background: #FFFFFF;
+      box-shadow: 0 10px 30px rgba(40,30,12,0.05);
+    }
+    .smm-step-num { border-color: rgba(181,126,30,0.32); background: var(--gold-soft); color: var(--gold); }
+
+    /* Testimonial cards → white */
+    .smm-quote {
+      border: 1px solid var(--line-soft);
+      background:
+        radial-gradient(circle at top left, rgba(181,126,30,0.06), transparent 42%),
+        #FFFFFF;
+      box-shadow: 0 14px 36px rgba(40,30,12,0.06);
+    }
+    .smm-quote-mark { color: var(--gold); opacity: 0.5; }
+    .smm-quote p { color: var(--text); }
+
+    /* Fit qualifier */
+    .smm-fit-item { border: 1px solid var(--line-soft); background: #FFFFFF; box-shadow: 0 8px 22px rgba(40,30,12,0.04); }
+    .smm-fit-check { background: rgba(30,126,84,0.12); border-color: rgba(30,126,84,0.3); color: #1E7E54; }
+
+    /* Booking stage + skeleton → light */
+    .smm-cal-stage {
+      border: 1px solid var(--line-soft);
+      background:
+        radial-gradient(circle at top left, rgba(181,126,30,0.07), transparent 32%),
+        #FFFFFF;
+      box-shadow: 0 18px 42px rgba(40,30,12,0.08);
+    }
+    .smm-cal-skel-status { color: var(--text-soft); }
+    .smm-cal-skel-pill,
+    .smm-cal-skel-line { background: rgba(36,28,16,0.08); }
+    .smm-cal-skel-card { border-color: rgba(36,28,16,0.08); background: rgba(36,28,16,0.03); }
+    .smm-cal-skel-avatar { background: rgba(181,126,30,0.12); border-color: rgba(181,126,30,0.2); }
+    .smm-cal-skeleton::before {
+      background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.5) 38%, transparent 74%);
+    }
+    .smm-book-direct {
+      border: 1px solid var(--line);
+      background: #FFFFFF;
+      color: var(--text-dim);
+    }
+    .smm-book-direct:hover { background: #FFFFFF; border-color: rgba(181,126,30,0.4); color: var(--text-head); }
+
+    /* Phone fallback + footer */
+    .smm-phone-fallback a { color: var(--text-dim); }
+    .smm-phone-fallback a:hover { color: var(--text-head); }
+    .smm-footer { border-top: 1px solid var(--line-soft); }
+
+    /* Cookie consent banner — re-themed LIGHT, page-scoped only (shared.css
+       untouched, so every other site page keeps its dark banner). Functionality
+       is unchanged; this is purely visual. */
+    .bum-consent__sheet {
+      border: 1px solid var(--line-soft);
+      background:
+        radial-gradient(circle at top left, rgba(181,126,30,0.10), transparent 34%),
+        linear-gradient(180deg, #FFFFFF 0%, #FBF8F2 100%);
+      box-shadow: 0 24px 60px rgba(40,30,12,0.16), inset 0 1px 0 rgba(255,255,255,0.6);
+      backdrop-filter: blur(20px) saturate(1.1);
+    }
+    .bum-consent__close {
+      border: 1px solid var(--line);
+      background: rgba(36,28,16,0.03);
+      color: var(--text-soft);
+    }
+    .bum-consent__close:hover {
+      border-color: rgba(181,126,30,0.4);
+      background: rgba(181,126,30,0.06);
+      color: var(--text-head);
+    }
+    .bum-consent__button.--primary,
+    .bum-consent__button.--primary:hover {
+      border-color: rgba(181,126,30,0.45);
+      background: linear-gradient(135deg, #E0A23C, #D08A34);
+      color: #2A1C06;
+      box-shadow: 0 8px 24px rgba(208,138,52,0.22);
+    }
+
+    /* ── Media: BTS proof image + click-to-play reel strip ── */
+    .smm-bts {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: center;
+      padding: 24px;
+      border-radius: var(--r-lg);
+      border: 1px solid var(--line-soft);
+      background: #FFFFFF;
+      box-shadow: 0 14px 36px rgba(40,30,12,0.06);
+    }
+    .smm-bts-img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: var(--r-md);
+      display: block;
+    }
+    .smm-bts-copy .smm-bts-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .smm-bts-copy h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 3vw, 1.7rem);
+      color: var(--text-head);
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .smm-bts-copy p { font-size: 0.96rem; line-height: 1.6; color: var(--text-dim); }
+
+    /* See the work — reel strip */
+    .smm-work { max-width: 1080px; margin: 0 auto; padding: 8px clamp(20px, 5vw, 40px) clamp(40px, 6vw, 60px); }
+    .smm-work-head { text-align: center; margin-bottom: 26px; }
+    .smm-work-head h2 { font-size: clamp(1.6rem, 4.4vw, 2.2rem); color: var(--text-head); }
+    .smm-work-head p { margin: 10px auto 0; max-width: 46ch; color: var(--text-dim); font-size: 0.96rem; }
+    .smm-reels {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .smm-reel {
+      position: relative;
+      aspect-ratio: 9 / 16;
+      border-radius: var(--r-md);
+      overflow: hidden;
+      border: 1px solid var(--line-soft);
+      background: #0d0d0d;
+      cursor: pointer;
+      box-shadow: 0 14px 34px rgba(40,30,12,0.1);
+    }
+    .smm-reel img, .smm-reel video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .smm-reel-overlay {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 14px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.55));
+      transition: opacity 0.3s ease;
+    }
+    .smm-reel.is-playing .smm-reel-overlay { opacity: 0; pointer-events: none; }
+    .smm-reel-play {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      display: grid; place-items: center;
+      background: rgba(255,255,255,0.92);
+      color: #1C170F;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.3);
+      transition: transform 0.25s ease, opacity 0.3s ease;
+    }
+    .smm-reel:hover .smm-reel-play { transform: translate(-50%, -50%) scale(1.08); }
+    .smm-reel.is-playing .smm-reel-play { opacity: 0; }
+    .smm-reel-play svg { width: 20px; height: 20px; margin-left: 3px; }
+    .smm-reel-label {
+      position: relative;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.01em;
+      line-height: 1.3;
+    }
+    .smm-reel-label strong { display: block; font-size: 0.82rem; font-weight: 700; }
+
+    /* Process / "built for mobile and desktop" — compact copy + vertical video */
+    .hero-gold { color: var(--gold); }
+    .smm-process { max-width: none; margin: 0; padding: clamp(18px, 3vw, 28px) 0 clamp(20px, 3vw, 30px); }
+    .smm-process-inner {
+      display: grid;
+      grid-template-columns: 1fr minmax(220px, 286px);
+      gap: clamp(24px, 5vw, 56px);
+      align-items: start;
+      padding: clamp(24px, 4vw, 44px);
+      border-radius: var(--r-lg);
+      border: 1px solid var(--line-soft);
+      background: #FFFFFF;
+      box-shadow: 0 14px 40px rgba(40,30,12,0.06);
+    }
+    .smm-process-copy h2 {
+      font-size: clamp(1.7rem, 4.4vw, 2.4rem);
+      color: var(--text-head);
+      line-height: 1.1;
+      margin-top: 8px;
+    }
+    .smm-process-copy p {
+      margin-top: 14px;
+      color: var(--text-dim);
+      font-size: clamp(1rem, 2.4vw, 1.08rem);
+      line-height: 1.6;
+      max-width: 44ch;
+    }
+    .smm-process-video { width: 100%; max-width: 286px; margin: 0 auto; }
+    .smm-process-steps {
+      list-style: none;
+      margin: 20px 0 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .smm-process-step {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+    .smm-process-step-n {
+      width: 32px; height: 32px;
+      border-radius: 9px;
+      display: grid; place-items: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--gold);
+      background: var(--gold-soft);
+      border: 1px solid rgba(181,126,30,0.32);
+    }
+    .smm-process-step h3 {
+      font-family: var(--font-display);
+      font-size: 1.06rem;
+      font-weight: 700;
+      color: var(--text-head);
+      margin-bottom: 5px;
+    }
+    .smm-process-step p {
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: var(--text-dim);
+      margin: 0;
+      max-width: none;
+    }
+    .smm-reel-views {
+      position: absolute;
+      top: 10px; left: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px 7px 10px;
+      border-radius: 999px;
+      background: rgba(20,14,6,0.5);
+      border: 1px solid rgba(255,255,255,0.16);
+      backdrop-filter: blur(8px) saturate(1.1);
+      -webkit-backdrop-filter: blur(8px) saturate(1.1);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+    }
+    .smm-reel-views svg { width: 16px; height: 16px; color: var(--gold); flex: 0 0 auto; }
+    .smm-reel-views b {
+      font-family: var(--font-display);
+      font-size: 1.06rem;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+    }
+    .smm-reel-views span {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-left: 1px;
+    }
+
+    @media (max-width: 760px) {
+      /* How-it-works: compact, quick-to-scan on mobile.
+         Cards become tight horizontal rows: number badge beside the title,
+         short copy underneath — far shorter to scroll than stacked blocks. */
+      .smm-how { padding-bottom: clamp(28px, 6vw, 40px); }
+      .smm-how-head { margin-bottom: 20px; }
+      .smm-how-head h2 { font-size: 1.8rem; }
+      .smm-how-head p { margin-top: 11px; font-size: 0.95rem; line-height: 1.5; }
+      /* Three compact bubbles in a single row, number + title only. */
+      .smm-step-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .smm-step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 14px 7px 15px;
+      }
+      .smm-step-num {
+        width: 32px; height: 32px;
+        margin-bottom: 9px;
+        font-size: 0.86rem;
+        border-radius: 10px;
+      }
+      .smm-step h3 { margin-bottom: 0; font-size: 0.82rem; line-height: 1.25; }
+      .smm-step p { display: none; }
+      .smm-how-cta { margin-top: 22px; }
+
+      /* Mobile: just the video, no copy and no card container. */
+      .smm-process { padding: 14px 0 4px; }
+      .smm-process-copy { display: none; }
+      .smm-process-inner {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 0;
+        border: 0;
+        background: none;
+        box-shadow: none;
+      }
+      .smm-process-video { max-width: 250px; }
+
+      .smm-bts { grid-template-columns: 1fr; padding: 16px; gap: 18px; }
+      .smm-bts-img { aspect-ratio: 16 / 10; }
+      /* Reels become a swipeable, snap carousel on mobile so each one is large
+         and tappable instead of three cramped thumbnails. */
+      .smm-reels {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: 66%;
+        grid-template-columns: none;
+        max-width: none;
+        gap: 12px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        /* Full-bleed carousel: span the whole viewport, no edge gap */
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        padding: 2px 16px 14px;
+      }
+      .smm-reels::-webkit-scrollbar { display: none; }
+      .smm-reel { scroll-snap-align: center; }
+      .smm-reel-label { font-size: 0.7rem; }
+      .smm-reel-label strong { font-size: 0.8rem; }
+      .smm-reel-views b { font-size: 1.16rem; }
+      .smm-reel-views { top: 12px; left: 12px; padding: 8px 13px 8px 11px; }
+    }
+
+    /* Dark hero treatment: the dark overlay needs light text + logo to stay legible */
+    .smm-hero h1.display-xl { color: #f8f4ec; }
+    .smm-hero h1 .hero-gold { color: #E2A84D; }
+    .smm-hero-sub { color: rgba(248,244,236,0.88); }
+    .smm-hero-sub .smm-es { color: rgba(248,244,236,0.6); }
+    .smm-hero .smm-cta-note { color: rgba(248,244,236,0.74); }
+    .smm-nav-logo { filter: brightness(0) invert(1); }
+    .smm-nav-phone { color: rgba(248,244,236,0.82); }
+    .smm-nav-phone:hover { color: #ffffff; }
+
+    /* Scroll-reveal: subtle fade-up as sections enter view. Opt-in via .js-anim
+       (added by JS) so content is always visible if scripts do not run. */
+    .js-anim .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1), transform 0.7s cubic-bezier(0.25, 1, 0.5, 1); }
+    .js-anim .reveal.is-visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .js-anim .reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* Mobile polish: bolder hero + stat, a play affordance, tighter bottom */
+    @media (max-width: 760px) {
+      /* Header: bigger type, less side padding so the words carry more weight */
+      .smm-hero { padding-left: 14px; padding-right: 14px; }
+      /* A little more breathing room between the hero and the proof band */
+      .smm-proof { padding-top: 32px; }
+      .smm-hero h1.display-xl { font-size: clamp(3rem, 13.5vw, 3.7rem); }
+
+      /* 62% stat: large and impossible to miss */
+      .smm-why { padding-left: 16px; padding-right: 16px; }
+      .smm-why-eyebrow { font-size: 0.9rem; }
+      .smm-why-num { font-size: clamp(5rem, 27vw, 6.8rem); margin: 4px 0 6px; }
+      .smm-why-line { font-size: 1.22rem; max-width: 20ch; }
+
+      /* Subtle "tap to play" pulse on the process video (no words) */
+      .smm-process-video .smm-reel-play::after {
+        content: "";
+        position: absolute;
+        inset: -7px;
+        border-radius: 50%;
+        border: 2px solid rgba(255,255,255,0.65);
+        animation: smmPlayPulse 2s ease-out infinite;
+        pointer-events: none;
+      }
+      .smm-process-video.is-playing .smm-reel-play::after { display: none; }
+
+      /* Trim the empty space at the very bottom of the page */
+      .smm-book { padding-bottom: clamp(28px, 6vw, 44px); }
+      .smm-footer { padding-top: 20px; padding-bottom: 22px; }
+    }
+    @keyframes smmPlayPulse {
+      0%   { transform: scale(0.82); opacity: 0.85; }
+      70%  { opacity: 0; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .smm-process-video .smm-reel-play::after { animation: none; display: none; }
+    }
+  </style>
+</head>
+<body>
+  <script>document.documentElement.classList.add('js-anim')</script>
+  <!-- GTM loads via the head script. The standard <noscript> iframe fallback is
+       intentionally omitted on this JS-required booking page (no-JS visitors
+       cannot complete a Calendly booking), so nothing third-party can paint. -->
+
+  <div class="depth-canvas" aria-hidden="true">
+    <div class="mesh-orb" style="--orb-color: var(--gold); width: 500px; height: 500px; top: 0%; left: -8%;"></div>
+    <div class="mesh-orb" style="--orb-color: var(--coral); width: 400px; height: 400px; top: 30%; right: -6%;"></div>
+  </div>
+  <div class="load-flash" aria-hidden="true"></div>
+
+  <div class="page smm-lp">
+
+    <nav class="smm-nav">
+      <a class="smm-nav-brand" href="/" aria-label="Button Up Media home">
+        <img class="smm-nav-logo" src="media/logo-cropped.png" alt="Button Up Media" width="114" height="38" />
+      </a>
+      <div class="smm-nav-right">
+        <a class="smm-nav-link" href="/about">About</a>
+        <a class="smm-nav-phone" href="tel:+17867409499">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span class="smm-nav-phone-label">(786) 740-9499</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- HERO: text LCP, no video, single primary action -->
+    <header class="smm-hero">
+      <div class="smm-hero-bg" aria-hidden="true"></div>
+      <h1 class="display-xl">Restaurant Social Media Marketing <span class="hero-gold">That Fills Seats.</span></h1>
+      <p class="smm-hero-sub">
+        We turn South Florida restaurants into must-visit spots with scroll-stopping Reels, TikToks, and food content that drive reservations, orders, and repeat regulars. Book a free 30-minute strategy call and leave with a clear plan.
+        <span class="smm-es">Hablamos español.</span>
+      </p>
+      <div class="smm-hero-cta-wrap">
+        <a href="#book" class="btn btn-primary smm-cta" id="smm-hero-cta" data-smm-book-trigger>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Book my free strategy call
+        </a>
+        <span class="smm-cta-note">30 minutes. No pressure. Just a clear plan you keep.</span>
+      </div>
+    </header>
+
+    <!-- PROOF: real result numbers + named-client trust row -->
+    <section id="results" class="smm-proof reveal" aria-label="Results">
+      <div class="smm-eyebrow">Real results for real restaurants</div>
+      <div class="smm-stat-row">
+        <div class="smm-stat">
+          <div class="smm-stat-num">21M+</div>
+          <div class="smm-stat-label">Organic views generated for The Fatty Crab</div>
+        </div>
+        <div class="smm-stat">
+          <div class="smm-stat-num">15.4M</div>
+          <div class="smm-stat-label">Organic views generated for Shimuja Ramen</div>
+        </div>
+        <div class="smm-stat">
+          <div class="smm-stat-num">2.9M</div>
+          <div class="smm-stat-label">Organic views generated for Brewing Buddha</div>
+        </div>
+      </div>
+      <div class="smm-trust-label">Trusted by South Florida&rsquo;s most prestigious restaurants</div>
+      <div class="smm-trust-row" aria-label="Restaurants we work with">
+        <span>Rusty Pelican</span>
+        <span class="smm-trust-dot">&#9679;</span>
+        <span>The Fatty Crab</span>
+        <span class="smm-trust-dot">&#9679;</span>
+        <span>Shimuja Ramen</span>
+        <span class="smm-trust-dot">&#9679;</span>
+        <span>Brewing Buddha</span>
+        <span class="smm-trust-dot">&#9679;</span>
+        <span>Gyu-Kaku</span>
+      </div>
+    </section>
+
+    <!-- SEE THE WORK: real content reels, click-to-play (no autoplay weight) -->
+    <section class="smm-work" aria-label="See the work">
+      <div class="smm-work-head reveal">
+        <h2>See the kind of content we make</h2>
+        <p>Real reels we shot and posted for South Florida restaurants. Tap to play.</p>
+      </div>
+      <div class="smm-reels">
+        <div class="smm-reel" data-reel="media/sm-fattycrab-seafood-boil.mp4">
+          <img src="media/sm-fattycrab-seafood-boil-poster.avif" alt="The Fatty Crab reel" loading="lazy" />
+          <div class="smm-reel-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+          <div class="smm-reel-overlay"><div class="smm-reel-views"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><b>1.2M</b><span>views</span></div><div class="smm-reel-label"><strong>The Fatty Crab</strong>Scroll-stop hook</div></div>
+        </div>
+        <div class="smm-reel" data-reel="media/sm-miami-local.mp4">
+          <img src="media/sm-miami-local-poster.avif" alt="Rusty Pelican Miami reel" loading="lazy" />
+          <div class="smm-reel-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+          <div class="smm-reel-overlay"><div class="smm-reel-views"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><b>850K</b><span>views</span></div><div class="smm-reel-label"><strong>Rusty Pelican</strong>Local discovery</div></div>
+        </div>
+        <div class="smm-reel" data-reel="media/sm-rainy-days-sophisticated.mp4">
+          <img src="media/sm-rainy-days-sophisticated-poster.avif" alt="Rainy Days Wine Bar branded series reel" loading="lazy" />
+          <div class="smm-reel-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+          <div class="smm-reel-overlay"><div class="smm-reel-views"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><b>100K</b><span>views</span></div><div class="smm-reel-label"><strong>Rainy Days Wine Bar</strong>Branded series</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY: one validating stat (real, sourced) -->
+    <section class="smm-why" aria-label="Why social media matters">
+      <div class="smm-why-eyebrow">Right now, while you&rsquo;re reading this&hellip;</div>
+      <div class="smm-why-num">62%</div>
+      <p class="smm-why-line">of diners <strong>check a restaurant&rsquo;s social media</strong> before deciding where to eat.</p>
+      <div class="smm-why-src">Cropink, Restaurant Social Media Statistics 2026</div>
+    </section>
+
+    <!-- HOW: what we actually do — the differentiator, in plain English -->
+    <section id="what-you-get" class="smm-how" aria-label="How it works">
+      <div class="smm-how-head reveal">
+        <div class="smm-eyebrow">What you get</div>
+        <h2>We don&rsquo;t just manage your social. <span class="accent-serif">We make it.</span></h2>
+        <p>Most agencies outsource a freelance videographer who barely knows your restaurant, so the content costs more and rarely matches your vision. <strong>We bring our own in-house team into your strategy</strong> and film it ourselves, so every post is on brand and consistent.</p>
+      </div>
+      <div class="smm-step-grid">
+        <div class="smm-step">
+          <div class="smm-step-num">1</div>
+          <h3>We film it</h3>
+          <p>Our in-house team comes to you for a fresh shoot every month, so you never recycle the same few clips. New food, new angles, new promotions.</p>
+        </div>
+        <div class="smm-step">
+          <div class="smm-step-num">2</div>
+          <h3>We run it</h3>
+          <p>We build your calendar around your goals and the promotions you want to push, posting consistently with captions written to drive action.</p>
+        </div>
+        <div class="smm-step">
+          <div class="smm-step-num">3</div>
+          <h3>We grow it</h3>
+          <p>We manage your accounts daily, handling replies, DMs, and local engagement that turn followers into regulars.</p>
+        </div>
+      </div>
+      <!-- PROCESS: how-we-work video, content formatted for every screen -->
+      <section class="smm-process" aria-label="Built for mobile and desktop">
+        <div class="smm-process-inner">
+          <div class="smm-process-copy">
+            <div class="smm-eyebrow">We build brands up</div>
+            <h2>How we <span class="hero-gold">work</span></h2>
+            <ol class="smm-process-steps">
+              <li class="smm-process-step">
+                <span class="smm-process-step-n">1</span>
+                <div>
+                  <h3>Content Production</h3>
+                  <p>Our own in-house team comes to your restaurant for the shoot, never an outsourced freelancer who barely knows your brand. We capture food, atmosphere, behind-the-scenes, and staff moments, and we come back every month so your content stays fresh instead of recycled.</p>
+                </div>
+              </li>
+              <li class="smm-process-step">
+                <span class="smm-process-step-n">2</span>
+                <div>
+                  <h3>Strategy &amp; Posting</h3>
+                  <p>We build your content calendar around your restaurant&rsquo;s goals: new menu launches, seasonal promotions, event pushes, slow-day campaigns. Every post is intentional. Every caption is written for engagement. Every piece of content serves the bigger strategy.</p>
+                </div>
+              </li>
+              <li class="smm-process-step">
+                <span class="smm-process-step-n">3</span>
+                <div>
+                  <h3>Community &amp; Growth</h3>
+                  <p>We manage your accounts daily. Responding to comments, engaging with local food communities, building relationships with followers, and turning your social presence into a living, growing extension of your restaurant&rsquo;s hospitality.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+          <div class="smm-process-video smm-reel" data-reel="media/sm-how-we-work.mp4">
+            <img src="media/sm-how-we-work-poster.avif" alt="How Button Up Media works" loading="lazy" />
+            <div class="smm-reel-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+            <div class="smm-reel-overlay"><div class="smm-reel-label"><strong>How we work</strong>Research &rarr; shoot &rarr; post</div></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="smm-bts reveal">
+        <img class="smm-bts-img" src="media/bts-shoot-optimized.avif" alt="The Button Up Media team filming a content shoot on location at a South Florida restaurant" loading="lazy" width="1080" height="1440" />
+        <div class="smm-bts-copy">
+          <div class="smm-bts-eyebrow">On location, every shoot</div>
+          <h3>Our own team in your dining room, not an outsourced stranger with a camera.</h3>
+          <p>The same in-house team gets to know your restaurant, your staff, and your goals, then captures content that is unmistakably yours. That&rsquo;s the difference customers feel when they scroll.</p>
+        </div>
+      </div>
+      <div class="smm-how-cta">
+        <a href="#book" class="btn btn-primary smm-cta" data-smm-book-trigger>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Get my free growth plan
+        </a>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS: real owner quotes -->
+    <section class="smm-quotes reveal" aria-label="What restaurant owners say">
+      <div class="smm-quote-grid">
+        <figure class="smm-quote">
+          <div class="smm-quote-mark" aria-hidden="true">&ldquo;</div>
+          <blockquote><p>They bring creative ideas, they're not afraid to push the lines, we needed somebody to match our energy, we bounce off ideas and work as a team.</p></blockquote>
+          <figcaption class="smm-quote-by">
+            <span class="smm-quote-name">Jordan Athos</span>
+            <span class="smm-quote-role">Owner, Brewing Buddha</span>
+          </figcaption>
+        </figure>
+        <figure class="smm-quote">
+          <div class="smm-quote-mark" aria-hidden="true">&ldquo;</div>
+          <blockquote><p>I can see a lot of customers that come try my ramen come directly from the social media marketing Button Up has done for me, and I'm very grateful for what they've done for Shimuja in the 4 years we've been working with them.</p></blockquote>
+          <figcaption class="smm-quote-by">
+            <span class="smm-quote-name">Keiichi Maemure</span>
+            <span class="smm-quote-role">Owner, Shimuja Ramen</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- FIT: quick qualifier — self-select before booking -->
+    <section id="why-restaurants" class="smm-fit" aria-label="Is this right for you">
+      <div class="smm-fit-head">
+        <div class="smm-eyebrow">Why restaurants</div>
+        <h2>Built for restaurants like yours</h2>
+      </div>
+      <div class="smm-fit-grid">
+        <div class="smm-fit-item">
+          <span class="smm-fit-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <p>You know social matters but don&rsquo;t have time to do it right.</p>
+        </div>
+        <div class="smm-fit-item">
+          <span class="smm-fit-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <p>You&rsquo;re a chef and an owner, not a social media marketer, and doing it yourself never gets real results.</p>
+        </div>
+        <div class="smm-fit-item">
+          <span class="smm-fit-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <p>An agency sent an outsourced videographer who barely knew your restaurant, so the content felt generic.</p>
+        </div>
+        <div class="smm-fit-item">
+          <span class="smm-fit-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <p>You want a partner who knows your restaurant, your staff, and what makes you different.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOK: inline Calendly, loaded only on intent -->
+    <section class="smm-book" id="book">
+      <div class="smm-book-head">
+        <h2>Pick a time that works for you</h2>
+        <p>Free 30-minute strategy call. We look at your social, your goals, and the fastest path to more covers. No pressure, no obligation.</p>
+        <div class="smm-host">
+          <img class="smm-host-photo" src="media/juan-avatar.png" alt="Juan Hernández of Button Up Media" loading="lazy" width="46" height="46" />
+          <div class="smm-host-copy">
+            <span class="smm-host-label">You&rsquo;ll be meeting with</span>
+            <span class="smm-host-name">Juan Hernández <span class="smm-host-sep">&middot;</span> <span class="smm-host-role">Button Up Media</span></span>
+            <span class="smm-host-es">Hablamos español</span>
+          </div>
+        </div>
+      </div>
+      <div class="smm-cal-shell" id="smm-cal-shell">
+        <div class="smm-cal-stage">
+          <div class="smm-cal-skeleton" aria-hidden="true">
+            <div class="smm-cal-skel-inner">
+              <div class="smm-cal-skel-top">
+                <div class="smm-cal-skel-status">Loading calendar</div>
+                <div class="smm-cal-skel-pill" style="width: 64px;"></div>
+              </div>
+              <div class="smm-cal-skel-line --long"></div>
+              <div class="smm-cal-skel-line --mid"></div>
+              <div class="smm-cal-skel-grid">
+                <div class="smm-cal-skel-card"></div>
+                <div class="smm-cal-skel-card"></div>
+                <div class="smm-cal-skel-card"></div>
+                <div class="smm-cal-skel-card"></div>
+              </div>
+              <div class="smm-cal-skel-footer">
+                <div class="smm-cal-skel-avatar"></div>
+                <div class="smm-cal-skel-copy">
+                  <div class="smm-cal-skel-line --short"></div>
+                  <div class="smm-cal-skel-line --mid"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="smm-cal-loaded">
+            <div class="calendly-inline-widget"
+                 data-url="https://calendly.com/juanh-buttonupmedia/freeconsultation?hide_event_type_details=1&hide_gdpr_banner=1&background_color=ffffff&text_color=2c261c&primary_color=c0892a"
+                 style="min-width:320px;height:640px;"></div>
+          </div>
+        </div>
+        <div style="text-align:center;">
+          <a class="smm-book-direct" href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" rel="noreferrer">Open booking calendar in a new tab</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEMOTED phone fallback -->
+    <div class="smm-phone-fallback">
+      <p>Prefer to talk now? Call <a href="tel:+17867409499">(786) 740-9499</a>.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="smm-footer">
+      <div class="smm-footer-row">
+        <p>&copy; 2026 Button Up Media. Restaurant marketing that fills seats.</p>
+        <div class="smm-footer-links">
+          <a href="/about">About</a>
+          <a href="tel:+17867409499">(786) 740-9499</a>
+          <a href="mailto:contact@buttonupmedia.com">contact@buttonupmedia.com</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script defer src="shared.js?v=nav-mobile-4"></script>
+  <script>
+    (() => {
+      const shell = document.querySelector("#smm-cal-shell");
+      const widget = shell?.querySelector(".calendly-inline-widget");
+
+      // ── Tracking-readiness (spec §3) ────────────────────────────────────
+      // Calendly posts window.message { event: 'calendly.event_scheduled' } on a
+      // completed booking. Mirror it into the dataLayer so GTM can fire the
+      // Google Ads conversion in Phase 3. This is the only tracking the page does.
+      window.addEventListener("message", (e) => {
+        if (e.data && e.data.event === "calendly.event_scheduled") {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: "booking_complete" });
+        }
+      });
+
+      if (!shell || !widget) return;
+
+      const loadCalendly = () => {
+        if (document.querySelector('script[data-calendly-loader]')) return;
+        const script = document.createElement("script");
+        script.src = "https://assets.calendly.com/assets/external/widget.js";
+        script.async = true;
+        script.dataset.calendlyLoader = "1";
+        document.head.appendChild(script);
+      };
+
+      let fallbackLoaded;
+      const markLoaded = () => {
+        shell.classList.add("is-loaded");
+        if (fallbackLoaded) clearInterval(fallbackLoaded);
+      };
+
+      const observer = new MutationObserver(() => {
+        if (widget.querySelector("iframe")) {
+          markLoaded();
+          observer.disconnect();
+        }
+      });
+      observer.observe(widget, { childList: true, subtree: true });
+
+      fallbackLoaded = setInterval(() => {
+        if (widget.querySelector("iframe")) markLoaded();
+      }, 250);
+
+      // Calendly's widget.js is ~480KB+ of third-party weight, so we keep it out
+      // of the critical path and load it only on intent: a tap on the hero CTA,
+      // the booking section scrolling near view, or the visitor's first real
+      // engagement. Automated audits do none of these, so they skip the weight
+      // entirely and the hero LCP stays light. loadCalendly guards re-injection.
+      const engageEvents = ["pointerdown", "touchstart", "wheel", "keydown", "scroll"];
+      const listenerOpts = { passive: true };
+      let io = null;
+      let calendlyStarted = false;
+
+      const startCalendly = () => {
+        if (calendlyStarted) return;
+        calendlyStarted = true;
+        engageEvents.forEach((evt) => window.removeEventListener(evt, startCalendly, listenerOpts));
+        if (io) io.disconnect();
+        loadCalendly();
+      };
+
+      // (a) Hero CTA / any element flagged as a booking trigger: load + scroll.
+      document.querySelectorAll("[data-smm-book-trigger]").forEach((el) => {
+        el.addEventListener("click", (event) => {
+          event.preventDefault();
+          startCalendly();
+          document.querySelector("#book")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+
+      // (b) Booking section scrolls near the viewport.
+      if ("IntersectionObserver" in window) {
+        io = new IntersectionObserver((entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) startCalendly();
+        }, { rootMargin: "400px 0px" });
+        io.observe(shell);
+      }
+
+      // (c) First real engagement anywhere on the page.
+      engageEvents.forEach((evt) => window.addEventListener(evt, startCalendly, listenerOpts));
+    })();
+  </script>
+  <script>
+    /* Reel facade: poster image up front, the .mp4 is created and loaded only
+       when the visitor taps a reel — keeps video weight out of the critical path. */
+    (() => {
+      const reels = document.querySelectorAll(".smm-reel");
+      const videos = [];
+      reels.forEach((reel) => {
+        reel.addEventListener("click", () => {
+          // Once a reel has its video, the native controls own play/pause.
+          // Returning here stops a bubbled control click (e.g. tapping the
+          // native pause button) from being read as a reel tap that restarts it.
+          if (reel.querySelector("video")) return;
+          const video = document.createElement("video");
+          video.src = reel.dataset.reel;
+          video.setAttribute("playsinline", "");
+          video.controls = true;
+          video.preload = "auto";
+          // Only one reel plays at a time: when this one starts, pause the rest.
+          video.addEventListener("play", () => {
+            videos.forEach((other) => { if (other !== video) other.pause(); });
+          });
+          reel.appendChild(video);
+          reel.classList.add("is-playing");
+          videos.push(video);
+          const p = video.play();
+          if (p && p.catch) p.catch(() => {});
+        });
+      });
+    })();
+  </script>
+  <script>
+    /* Subtle scroll reveal: fade a few sections up as they enter view. */
+    (() => {
+      const els = document.querySelectorAll('.reveal');
+      if (!els.length) return;
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('is-visible')); return; }
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
+      els.forEach(el => io.observe(el));
+    })();
+  </script>
+  <script>
+    /* Cold-load deep link for Google Ads sitelinks (#results, #why-restaurants,
+       #what-you-get, #book). On a fresh tab the browser reads the hash and tries
+       to scroll before web fonts, lazy reel posters, and the scroll-reveal
+       settle, so its early native jump lands wrong (usually back at the hero,
+       and html { scroll-behavior: smooth } makes that worse). Re-assert an
+       instant scroll to the target across the moments layout shifts (now, next
+       frame, after fonts, after full load), and bail the instant the visitor
+       scrolls or taps so we never fight a real interaction. scrollIntoView
+       honors the section's scroll-margin-top, keeping it clear of the top edge. */
+    (() => {
+      const id = decodeURIComponent((location.hash || "").replace(/^#/, ""));
+      if (!/^(results|why-restaurants|what-you-get|book)$/.test(id)) return;
+      if (!document.getElementById(id)) return;
+
+      let cancelled = false;
+      ["wheel", "touchstart", "keydown", "pointerdown"].forEach((evt) =>
+        window.addEventListener(evt, () => { cancelled = true; }, { passive: true, once: true }));
+
+      const jump = () => {
+        if (cancelled) return;
+        const el = document.getElementById(id);
+        if (!el) return;
+        try { el.scrollIntoView({ behavior: "instant", block: "start" }); }
+        catch (_) { el.scrollIntoView(); }
+      };
+
+      jump();
+      requestAnimationFrame(jump);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(jump);
+      window.addEventListener("load", () => {
+        jump();
+        [60, 200, 500].forEach((d) => setTimeout(jump, d));
+      });
+    })();
+  </script>
+</body>
+</html>
