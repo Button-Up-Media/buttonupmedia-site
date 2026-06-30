@@ -1,5 +1,19 @@
 [
   {
+    "id": "reel-ideas",
+    "category": "social",
+    "author": "chris",
+    "date": "2026-06-30",
+    "hero": "/images/blog/reel-ideas.jpg",
+    "heroAlt": "A person using a smartphone to photograph a plate of food for social media content",
+    "en": {
+      "slug": "restaurant-reel-ideas-that-get-customers"
+    },
+    "es": {
+      "slug": "ideas-de-reels-para-restaurantes"
+    }
+  },
+  {
     "id": "more-google-reviews",
     "category": "seo",
     "author": "juan",

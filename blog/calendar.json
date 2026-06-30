@@ -79,7 +79,7 @@
     },
     {
       "id": "reel-ideas",
-      "status": "ready",
+      "status": "published",
       "category": "social",
       "author": "chris",
       "heroQuery": "person filming food video on phone in an american restaurant kitchen",
@@ -99,7 +99,8 @@
           "https://www.buttonupmedia.com/es/marketing-redes-sociales"
         ]
       },
-      "heroAlt": "A person using a smartphone to photograph a plate of food for social media content"
+      "heroAlt": "A person using a smartphone to photograph a plate of food for social media content",
+      "publishedDate": "2026-06-30"
     },
     {
       "id": "slow-tuesday",
