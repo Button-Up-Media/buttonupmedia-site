@@ -93,6 +93,9 @@ async function runPsi(url, strategy, key) {
     const err = new Error(`PSI ${resp.status}`);
     err.status = resp.status;
     try { err.body = await resp.text(); } catch (e) { /* ignore */ }
+    // Surface the real PSI reason in the server logs (bad key, quota, blocked
+    // URL, etc.) so scanner outages are diagnosable without guessing.
+    try { console.warn(`PSI ${resp.status} (${strategy}) key=${key ? 'set' : 'MISSING'}: ${String(err.body || '').replace(/\s+/g, ' ').slice(0, 300)}`); } catch (e) { /* ignore */ }
     throw err;
   }
   return resp.json();
