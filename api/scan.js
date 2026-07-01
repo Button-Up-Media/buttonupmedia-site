@@ -41,10 +41,18 @@ module.exports = async (req, res) => {
 
   try {
     // Run both strategies in parallel — wall time is the slower of the two.
-    const [mobile, desktop] = await Promise.all([
+    // Tolerate one strategy flaking (PSI cold-scan 500s): as long as either
+    // mobile or desktop returns, we still build a real report. Only a total
+    // failure (both strategies down) surfaces an error to the visitor.
+    const settled = await Promise.allSettled([
       runPsi(url, 'mobile', key, deadline),
       runPsi(url, 'desktop', key, deadline),
     ]);
+    const mobile = settled[0].status === 'fulfilled' ? settled[0].value : null;
+    const desktop = settled[1].status === 'fulfilled' ? settled[1].value : null;
+    if (!mobile && !desktop) {
+      throw settled[0].reason || settled[1].reason || new Error('scan_failed');
+    }
 
     const mob = extract(mobile);
     const desk = extract(desktop);
@@ -133,7 +141,8 @@ function pct(score) {
 }
 
 function extract(data) {
-  const lr = (data && data.lighthouseResult) || {};
+  data = data || {};
+  const lr = data.lighthouseResult || {};
   const cats = lr.categories || {};
   const audits = lr.audits || {};
 
@@ -174,7 +183,7 @@ function extract(data) {
     .map((a) => ({ id: a.id, title: a.title, description: a.description, score: a.score, weight: a.weight || 0 }));
 
   // CrUX field data (real-user) when Google has enough traffic for the origin.
-  const le = data.loadingExperience || null;
+  const le = (data && data.loadingExperience) || null;
 
   return {
     finalUrl: lr.finalUrl || lr.requestedUrl || null,
