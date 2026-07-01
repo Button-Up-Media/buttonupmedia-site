@@ -372,12 +372,17 @@ function buildIssues(mob, desk, lang) {
 }
 
 function stripMd(s) {
-  // Lighthouse descriptions contain markdown links + a [Learn more] tail.
-  return String(s)
+  // Lighthouse descriptions contain markdown links + a [Learn more] tail, and
+  // sometimes a plain-text "Learn more about ..." sentence. Strip both, collapse
+  // whitespace, and cap the length so fallback cards stay tidy.
+  let out = String(s)
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
     .replace(/\s*\[Learn more[^\]]*\][^.]*\.?/i, '')
+    .replace(/\s*Learn more\b[^.]*\.?/gi, '')
     .replace(/\s+/g, ' ')
     .trim();
+  if (out.length > 160) out = out.slice(0, 157).replace(/\s+\S*$/, '') + '…';
+  return out;
 }
 
 /* ---------- url helpers ---------- */
