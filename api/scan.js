@@ -73,7 +73,23 @@ module.exports = async (req, res) => {
 
 /* ---------- PSI ---------- */
 
+// PageSpeed occasionally returns a transient HTTP 500 "Lighthouse returned
+// error: Something went wrong." on a cold analysis; a second attempt almost
+// always succeeds. Retry once on 500 so a first-time scan does not show the
+// visitor a spurious "we couldn't analyze that site" in the lead funnel.
 async function runPsi(url, strategy, key) {
+  try {
+    return await runPsiOnce(url, strategy, key);
+  } catch (err) {
+    if (err && err.status === 500) {
+      await new Promise((r) => setTimeout(r, 1200));
+      return runPsiOnce(url, strategy, key);
+    }
+    throw err;
+  }
+}
+
+async function runPsiOnce(url, strategy, key) {
   const params = new URLSearchParams();
   params.set('url', url);
   params.set('strategy', strategy);

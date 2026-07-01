@@ -34,6 +34,15 @@ module.exports = async (req, res) => {
     return res.status(400).json({ ok: false, error: 'invalid_phone', message: 'Enter a valid mobile number.' });
   }
 
+  // Best-effort abuse guard BEFORE we pay Twilio for a send. This is per warm
+  // instance (serverless has no shared memory), so it blunts the common case
+  // of one visitor spamming "resend"; Twilio Verify's own per-number limits +
+  // Fraud Guard remain the real backstop for distributed abuse.
+  const limitMsg = throttle(phone, clientIp(req));
+  if (limitMsg) {
+    return res.status(429).json({ ok: false, error: 'rate_limited', message: limitMsg });
+  }
+
   try {
     const form = new URLSearchParams({ To: phone, Channel: 'sms' });
     const resp = await fetch(`https://verify.twilio.com/v2/Services/${encodeURIComponent(service)}/Verifications`, {
@@ -69,6 +78,52 @@ function parseBody(req) {
     try { return JSON.parse(req.body); } catch (e) { return {}; }
   }
   return {};
+}
+
+/* ---- best-effort in-memory send throttle (per warm instance) ---- */
+const SEND_LOG = new Map(); // key -> [timestamps within the window]
+const THROTTLE_WINDOW = 10 * 60 * 1000; // 10 minutes
+const PHONE_COOLDOWN = 20 * 1000;        // min gap between codes to one number
+const PHONE_MAX = 3;                     // codes per number per window
+const IP_MAX = 8;                        // codes per IP per window
+
+function throttle(phone, ip) {
+  const now = Date.now();
+  const recent = (key) => (SEND_LOG.get(key) || []).filter((t) => now - t < THROTTLE_WINDOW);
+
+  const pKey = 'p:' + phone;
+  const pHits = recent(pKey);
+  if (pHits.length && now - pHits[pHits.length - 1] < PHONE_COOLDOWN) {
+    return 'Please wait a few seconds before requesting another code.';
+  }
+  if (pHits.length >= PHONE_MAX) {
+    return 'Too many codes requested for this number. Please try again later.';
+  }
+
+  let iHits = null;
+  if (ip) {
+    iHits = recent('i:' + ip);
+    if (iHits.length >= IP_MAX) {
+      return 'Too many requests from your network. Please try again later.';
+    }
+  }
+
+  pHits.push(now); SEND_LOG.set(pKey, pHits);
+  if (ip) { iHits.push(now); SEND_LOG.set('i:' + ip, iHits); }
+
+  // Opportunistic cleanup so the map cannot grow unbounded on a long-lived instance.
+  if (SEND_LOG.size > 5000) {
+    for (const [k, v] of SEND_LOG) {
+      const f = v.filter((t) => now - t < THROTTLE_WINDOW);
+      if (f.length) SEND_LOG.set(k, f); else SEND_LOG.delete(k);
+    }
+  }
+  return null;
+}
+
+function clientIp(req) {
+  const xff = String((req.headers && req.headers['x-forwarded-for']) || '').split(',')[0].trim();
+  return xff;
 }
 
 /* Normalize US/CA numbers to E.164; pass through other already-+ numbers. */
