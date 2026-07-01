@@ -122,12 +122,12 @@
        defeat position:sticky). Simplified to logo + Call us + Get started. */
     .gr-nav {
       position: fixed;
-      top: 12px;
+      top: 16px;
       left: 0; right: 0;
       z-index: 999;
-      width: min(calc(100% - 28px), 1080px);
-      margin: 0 auto;
-      padding: 9px 12px 9px 20px;
+      width: min(calc(100% - 48px), 1180px);
+      margin: 16px auto 0;
+      padding: 12px 20px;
       background: rgba(255,255,255,0.70);
       -webkit-backdrop-filter: blur(22px) saturate(1.5);
       backdrop-filter: blur(22px) saturate(1.5);
@@ -135,25 +135,32 @@
       border-radius: 16px;
       box-shadow: 0 10px 34px rgba(40,30,12,0.12), inset 0 1px 0 rgba(255,255,255,0.6);
     }
-    .gr-nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; margin: 0; }
+    .gr-nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; margin: 0; }
     .gr-nav-brand { display: inline-flex; align-items: center; flex-shrink: 0; }
-    .gr-logo { height: 30px; width: auto; display: block; }
-    .gr-nav-right { display: flex; align-items: center; gap: 10px; }
-    .gr-nav-phone { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-display); font-weight: 700; font-size: 0.86rem; color: var(--text-head); white-space: nowrap; }
+    .gr-logo { height: 46px; width: auto; display: block; }
+    .gr-nav-right { display: flex; align-items: center; gap: 16px; }
+    .gr-nav-phone { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--text-head); white-space: nowrap; }
     .gr-nav-phone svg { width: 15px; height: 15px; color: var(--gold); }
     .gr-nav-phone:hover { color: var(--gold); }
-    .gr-nav-cta { height: 40px; padding: 0 20px; font-size: 0.84rem; white-space: nowrap; display: inline-flex; align-items: center; }
-    /* Anchor jumps (e.g. See our work) clear the fixed header. */
-    html { scroll-padding-top: 84px; }
-    @media (max-width: 380px) { .gr-nav-phone span { display: none; } .gr-nav { padding-left: 16px; } }
+    .gr-nav-cta { height: 42px; padding: 0 22px; font-size: 0.86rem; white-space: nowrap; display: inline-flex; align-items: center; }
+    html { scroll-padding-top: 100px; }
+    /* Scale the pill down on mobile the same way the main header does (.lib-nav). */
+    @media (max-width: 700px) {
+      .gr-nav { top: 8px; width: min(calc(100% - 20px), 1180px); min-height: 54px; margin: 0 auto; padding: 8px 12px; border-radius: 14px; }
+      .gr-nav-inner { gap: 10px; }
+      .gr-logo { height: 30px; }
+      .gr-nav-right { gap: 10px; }
+      .gr-nav-cta { height: 38px; padding: 0 16px; }
+    }
+    @media (max-width: 380px) { .gr-nav-phone span { display: none; } .gr-nav { padding-left: 14px; } }
 
     /* ============ HERO ============ */
-    .gr-hero { position: relative; overflow: hidden; padding: clamp(86px, 12vw, 116px) 0 clamp(50px, 8vw, 96px); text-align: center; }
+    .gr-hero { position: relative; overflow: hidden; padding: clamp(84px, 13vw, 128px) 0 clamp(50px, 8vw, 96px); text-align: center; }
     .gr-rating { display: inline-flex; align-items: center; gap: 9px; font-size: 0.82rem; font-weight: 600; color: var(--text-dim); }
     .gr-stars { display: inline-flex; gap: 2px; color: var(--gold); }
     .gr-stars svg { width: 15px; height: 15px; }
-    .gr-hero h1 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.04em; font-size: clamp(2.5rem, 7.4vw, 5rem); line-height: 0.98; margin: 16px auto 0; max-width: 14ch; text-wrap: balance; }
-    .gr-hero-sub { max-width: 50ch; margin: 18px auto 0; font-size: clamp(1.02rem, 2.3vw, 1.2rem); line-height: 1.6; color: var(--text-dim); }
+    .gr-hero h1 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.04em; font-size: clamp(2.5rem, 7.4vw, 5.6rem); line-height: 0.98; margin: 16px auto 0; max-width: 18ch; text-wrap: balance; }
+    .gr-hero-sub { max-width: 60ch; margin: 18px auto 0; font-size: clamp(1.02rem, 2.3vw, 1.28rem); line-height: 1.6; color: var(--text-dim); }
 
     /* search box */
     .gr-search { position: relative; max-width: 540px; margin: clamp(26px, 4vw, 36px) auto 0; z-index: 20; }
@@ -189,16 +196,17 @@
     .gr-cta-primary { display: inline-flex; align-items: center; gap: 9px; height: 54px; padding: 0 28px; border-radius: 999px; font-family: var(--font-display); font-weight: 700; font-size: 1rem; background: #241804; color: #FBF5EA; box-shadow: 0 12px 30px rgba(36,24,4,0.26); transition: background .25s, box-shadow .25s, transform .2s; }
     .gr-cta-primary:hover { background: linear-gradient(135deg, #E8AC44, #D08A34); color: #241804; box-shadow: 0 16px 38px rgba(208,138,52,0.45); transform: translateY(-2px); }
     .gr-cta-primary svg { width: 17px; height: 17px; }
-    .gr-cta-ghost { display: inline-flex; align-items: center; height: 54px; padding: 0 26px; border-radius: 999px; font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--text); background: #FFFFFF; border: 1px solid var(--line); transition: border-color .2s, transform .2s; }
+    .gr-cta-ghost { display: inline-flex; align-items: center; gap: 9px; height: 54px; padding: 0 26px; border-radius: 999px; font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--text); background: #FFFFFF; border: 1px solid var(--line); transition: border-color .2s, transform .2s; }
+    .gr-cta-ghost svg { width: 18px; height: 18px; color: var(--gold); }
     .gr-cta-ghost:hover { border-color: rgba(181,126,30,0.45); transform: translateY(-2px); }
     @media (max-width: 460px) { .gr-hero-cta { flex-direction: column; align-items: stretch; } .gr-cta-primary, .gr-cta-ghost { justify-content: center; width: 100%; } }
 
     /* ============ HERO PHONE MOCKUP ============ */
-    .gr-hero-stage { position: relative; margin: clamp(40px, 6vw, 64px) auto 0; max-width: 720px; }
+    .gr-hero-stage { position: relative; margin: clamp(40px, 6vw, 64px) auto 0; max-width: 960px; }
     .gr-phone-box { position: relative; height: clamp(280px, 40vw, 360px); border-radius: clamp(20px, 4vw, 30px); display: flex; justify-content: center; align-items: center; clip-path: inset(-240px 0 0 0 round clamp(20px, 4vw, 30px)); background: linear-gradient(160deg, #E9B65A, #D89A3C 55%, #ECC079); box-shadow: 0 24px 70px rgba(0,0,0,0.45); }
     .gr-phone-box::before { content: ""; position: absolute; inset: 0; background: radial-gradient(110% 80% at 50% 40%, rgba(255,255,255,0.5), transparent 70%); pointer-events: none; }
     .gr-phone-box::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(231,182,88,0.45); pointer-events: none; }
-    .gr-phone { position: relative; z-index: 1; width: clamp(248px, 62vw, 296px); padding: 10px 10px 0; background: linear-gradient(150deg, #F2F4F6 0%, #C9CDD2 24%, #EDEFF1 50%, #B4B9BF 76%, #DDE0E3 100%); border-radius: 49px 49px 0 0; box-shadow: 0 30px 70px rgba(0,0,0,0.55), inset 0 0 0 1.5px rgba(255,255,255,0.6), inset 0 0 0 3px rgba(120,126,134,0.35); }
+    .gr-phone { position: relative; z-index: 1; width: clamp(248px, 62vw, 340px); padding: 10px 10px 0; background: linear-gradient(150deg, #F2F4F6 0%, #C9CDD2 24%, #EDEFF1 50%, #B4B9BF 76%, #DDE0E3 100%); border-radius: 49px 49px 0 0; box-shadow: 0 30px 70px rgba(0,0,0,0.55), inset 0 0 0 1.5px rgba(255,255,255,0.6), inset 0 0 0 3px rgba(120,126,134,0.35); }
     .gr-phone::before { content: ""; position: absolute; inset: 3px 3px 0; border-radius: 46px 46px 0 0; box-shadow: inset 0 0 0 1px rgba(40,44,50,0.55); pointer-events: none; z-index: 2; }
     .gr-phone-screen { background: #FFFFFF; border-radius: 40px 40px 0 0; overflow: hidden; position: relative;
       --bg-1: #EEF1F4; --line: rgba(20,24,30,0.12); --line-soft: rgba(20,24,30,0.08);
@@ -963,7 +971,7 @@
           <a href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener" class="gr-cta-primary">Book a free consult
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
-          <a href="#work" class="gr-cta-ghost">See our work</a>
+          <a href="tel:+17867409499" class="gr-cta-ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> (786) 740-9499</a>
         </div>
 
         <div class="gr-hero-fine gr-rise d3">
