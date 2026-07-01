@@ -31,6 +31,13 @@ module.exports = async (req, res) => {
     return res.status(200).json({ ok: false, error: 'not_configured' });
   }
 
+  // Best-effort per-IP throttle (per warm instance). Google marks the Places
+  // "requests per day" quota non-adjustable, so this is the practical cap on a
+  // script hammering autocomplete. Generous enough for real typing + scans.
+  if (throttle(clientIp(req))) {
+    return res.status(429).json({ ok: false, error: 'rate_limited', message: 'Too many requests. Please slow down.' });
+  }
+
   const action = (req.query && req.query.action) || '';
 
   try {
@@ -58,6 +65,31 @@ async function getJson(url) {
   } finally {
     clearTimeout(timer);
   }
+}
+
+/* ---- best-effort in-memory per-IP throttle (per warm instance) ---- */
+const HITS = new Map(); // ip -> [timestamps within the window]
+const THROTTLE_WINDOW = 60 * 1000; // 1 minute
+const IP_MAX = 80;                  // Places calls per IP per minute
+
+function throttle(ip) {
+  if (!ip) return false;
+  const now = Date.now();
+  const hits = (HITS.get(ip) || []).filter((t) => now - t < THROTTLE_WINDOW);
+  if (hits.length >= IP_MAX) return true;
+  hits.push(now);
+  HITS.set(ip, hits);
+  if (HITS.size > 5000) {
+    for (const [k, v] of HITS) {
+      const f = v.filter((t) => now - t < THROTTLE_WINDOW);
+      if (f.length) HITS.set(k, f); else HITS.delete(k);
+    }
+  }
+  return false;
+}
+
+function clientIp(req) {
+  return String((req.headers && req.headers['x-forwarded-for']) || '').split(',')[0].trim();
 }
 
 async function autocomplete(req, res, key) {

@@ -126,13 +126,16 @@ function clientIp(req) {
   return xff;
 }
 
-/* Normalize US/CA numbers to E.164; pass through other already-+ numbers. */
+/* Normalize to a US/Canada E.164 number. The grader serves US restaurants, so
+   we only accept +1 numbers; any other country code is rejected here so the app
+   never triggers an expensive international Verify SMS (defense in depth on top
+   of Twilio Fraud Guard). */
 function toE164(raw) {
   let s = String(raw || '').trim();
   if (!s) return null;
   if (s[0] === '+') {
     const digits = s.slice(1).replace(/\D/g, '');
-    return digits.length >= 8 && digits.length <= 15 ? '+' + digits : null;
+    return (digits.length === 11 && digits[0] === '1') ? '+' + digits : null;
   }
   const d = s.replace(/\D/g, '');
   if (d.length === 10) return '+1' + d;

@@ -187,8 +187,10 @@ function toE164(raw) {
   let s = String(raw || '').trim();
   if (!s) return null;
   if (s[0] === '+') {
+    // US/Canada only (+1), matching /api/sms/send so a verify check lines up
+    // with what we were willing to text.
     const digits = s.slice(1).replace(/\D/g, '');
-    return digits.length >= 8 && digits.length <= 15 ? '+' + digits : null;
+    return (digits.length === 11 && digits[0] === '1') ? '+' + digits : null;
   }
   const d = s.replace(/\D/g, '');
   if (d.length === 10) return '+1' + d;
