@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      var key = "bum-cookie-consent-v1";
+      var consent = {
+        ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied",
+        analytics_storage: "denied", functionality_storage: "granted",
+        personalization_storage: "denied", security_storage: "granted", wait_for_update: 500
+      };
+      try {
+        var saved = localStorage.getItem(key);
+        if (saved) {
+          var parsed = JSON.parse(saved);
+          if (parsed && parsed.analytics) consent.analytics_storage = "granted";
+          if (parsed && parsed.marketing && !(navigator && navigator.globalPrivacyControl)) {
+            consent.ad_storage = "granted"; consent.ad_user_data = "granted";
+            consent.ad_personalization = "granted"; consent.personalization_storage = "granted";
+          }
+        }
+      } catch (err) {}
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+      window.gtag("consent", "default", consent);
+    })();
+  </script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WR9TZHT');</script>
+  <!-- End Google Tag Manager -->
+  <title>Your Website Report | Button Up Media</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg" />
+  <meta name="theme-color" content="#FBF8F2" />
+  <link rel="preconnect" href="https://assets.calendly.com" />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-variable.woff2" crossorigin fetchpriority="high" />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/epilogue-variable.woff2" crossorigin />
+  <link rel="stylesheet" href="shared.css?v=nav-mobile-4" />
+  <style>
+    :root {
+      --bg-0: #FBF8F2; --bg-1: #F4EDE1; --bg-2: #ECE3D4;
+      --line: rgba(36,28,16,0.14); --line-soft: rgba(36,28,16,0.08);
+      --text: #2C261C; --text-head: #1C170F; --text-dim: rgba(44,38,28,0.74); --text-soft: rgba(44,38,28,0.52);
+      --gold: #B57E1E; --gold-soft: rgba(181,126,30,0.12); --teal: #1E7E54;
+      --good: #1E7E54; --fair: #C9820E; --poor: #CF4A3C; --ink: #1C170F;
+    }
+    body { background: var(--bg-0); color: var(--text); }
+    .btn-primary { border-color: rgba(181,126,30,0.45); background: linear-gradient(135deg, #E0A23C, #D08A34); color: #2A1C06; }
+    .btn { border-color: var(--line); color: var(--text); background: #FFFFFF; }
+    .sr-wrap { width: min(calc(100% - 32px), 1240px); margin: 0 auto; }
+
+    /* ============ TOP BAR ============ */
+    .sr-top { display: flex; align-items: center; justify-content: space-between; height: 60px; border-bottom: 1px solid var(--line-soft); background: #FFFFFF; }
+    .sr-top img { height: 22px; }
+    .sr-top a.call { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-display); font-weight: 700; font-size: 0.86rem; color: var(--text-head); }
+    .sr-top a.call svg { width: 15px; height: 15px; color: var(--gold); }
+
+    /* ============ SCAN STATE ============ */
+    .sr-scan { min-height: calc(100vh - 60px); display: grid; grid-template-columns: 1fr; gap: 28px; align-items: start; padding: clamp(28px, 5vw, 56px) 0; }
+    .sr-scan-list h1 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.03em; font-size: clamp(1.5rem, 4vw, 2rem); margin-bottom: 26px; }
+    .sr-check { display: flex; align-items: center; gap: 14px; padding: 14px 0; color: var(--text-soft); font-size: 0.98rem; font-weight: 500; transition: color .3s; }
+    .sr-check.done { color: var(--text-head); font-weight: 600; }
+    .sr-check.active { color: var(--text-head); font-weight: 600; }
+    .sr-check .dot { flex: none; width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--line); display: grid; place-items: center; transition: all .3s; }
+    .sr-check.done .dot { background: var(--ink); border-color: var(--ink); }
+    .sr-check.done .dot svg { width: 13px; height: 13px; color: #fff; }
+    .sr-check.active .dot { border-color: var(--gold); border-top-color: transparent; animation: srSpin .8s linear infinite; }
+    @keyframes srSpin { to { transform: rotate(360deg); } }
+    .sr-scan-card { border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line-soft); background: #FFFFFF; box-shadow: 0 20px 50px rgba(40,30,12,0.08); max-width: 520px; }
+    .sr-scan-card .img { height: 180px; background: linear-gradient(135deg, #cfe3d0, #aacbb0); display: grid; place-items: center; color: rgba(28,23,15,0.4); }
+    .sr-scan-card .img svg { width: 48px; height: 48px; }
+    .sr-scan-card .body { padding: 22px 24px 26px; }
+    .sr-scan-card h2 { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; }
+    .sr-scan-card .meta { display: flex; align-items: center; gap: 10px; margin-top: 8px; font-size: 0.9rem; color: var(--text-dim); }
+    .sr-scan-card .stars { color: var(--gold); }
+    .sr-scan-card p { margin-top: 12px; color: var(--text-dim); font-size: 0.94rem; line-height: 1.55; }
+    .sr-progress { margin-top: 28px; padding: 16px 18px; border-radius: 14px; background: #FFFFFF; border: 1px solid var(--line-soft); display: flex; align-items: center; gap: 12px; max-width: 360px; }
+    .sr-progress .sp { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--gold); border-top-color: transparent; animation: srSpin .8s linear infinite; flex: none; }
+    .sr-progress b { font-size: 0.92rem; color: var(--text-head); }
+    @media (min-width: 880px) { .sr-scan { grid-template-columns: 0.8fr 1.2fr; gap: 56px; place-items: start center; } .sr-scan-list { position: sticky; top: 90px; } }
+
+    /* ============ REPORT STATE ============ */
+    .sr-report { display: none; padding: clamp(20px, 3vw, 32px) 0 80px; }
+    .sr-report.show { display: block; }
+    .sr-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    @media (min-width: 980px) { .sr-grid { grid-template-columns: 320px 1fr; align-items: start; } }
+
+    /* sidebar */
+    .sr-side { border-radius: var(--r-lg); background: linear-gradient(180deg, #FBEDE4, #FFFFFF 60%); border: 1px solid var(--line-soft); padding: clamp(24px, 3vw, 32px); text-align: center; }
+    @media (min-width: 980px) { .sr-side { position: sticky; top: 80px; } }
+    .sr-gauge { position: relative; width: 200px; height: 200px; margin: 0 auto; }
+    .sr-gauge svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .sr-gauge .val { position: absolute; inset: 0; display: grid; place-items: center; }
+    .sr-gauge .val b { font-family: var(--font-hero); font-weight: 800; font-size: 3.4rem; line-height: 1; color: var(--text-head); }
+    .sr-gauge .val span { font-size: 0.82rem; color: var(--text-soft); margin-top: 4px; }
+    .sr-grade-lab { margin-top: 16px; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-soft); }
+    .sr-grade { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; color: var(--poor); }
+    .sr-grade-note { margin-top: 12px; font-size: 0.86rem; color: var(--text-dim); line-height: 1.5; }
+    .sr-subs { margin-top: 24px; text-align: left; display: grid; gap: 4px; }
+    .sr-sub { display: flex; align-items: center; gap: 13px; padding: 12px 0; border-top: 1px solid var(--line-soft); }
+    .sr-sub .ring { flex: none; width: 34px; height: 34px; }
+    .sr-sub .lbl { flex: 1; }
+    .sr-sub .lbl b { display: block; font-size: 0.92rem; font-weight: 700; color: var(--text-head); }
+    .sr-sub .lbl small { font-size: 0.78rem; font-weight: 700; }
+    .sr-sub .pts { font-size: 0.86rem; font-weight: 700; color: var(--text-soft); }
+    .sr-side-cta { margin-top: 24px; padding: 18px; border-radius: var(--r-md); background: var(--ink); text-align: left; }
+    .sr-side-cta b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: #FBF5EA; }
+    .sr-side-cta p { font-size: 0.84rem; color: rgba(244,236,221,0.7); margin-top: 4px; line-height: 1.45; }
+    .sr-side-cta a { display: flex; align-items: center; gap: 12px; margin-top: 14px; padding: 10px; border-radius: 12px; background: linear-gradient(135deg, #E0A23C, #D08A34); color: #2A1C06; font-family: var(--font-display); font-weight: 700; font-size: 0.92rem; }
+    .sr-side-cta a img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.5); }
+    .sr-side-cta a .arr { margin-left: auto; }
+
+    /* main column */
+    .sr-main { display: grid; gap: 20px; }
+    .sr-card { border-radius: var(--r-lg); border: 1px solid var(--line-soft); background: #FFFFFF; box-shadow: 0 14px 40px rgba(40,30,12,0.05); padding: clamp(22px, 3vw, 32px); }
+    .sr-card h3 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.2rem, 2.4vw, 1.55rem); letter-spacing: -0.02em; line-height: 1.15; }
+    .sr-card h3 .gold { color: var(--gold); }
+    .sr-twocol { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    @media (min-width: 720px) { .sr-twocol { grid-template-columns: 1fr 1fr; } }
+
+    .sr-biz { display: flex; align-items: center; gap: 13px; margin: 18px 0; padding-bottom: 18px; border-bottom: 1px solid var(--line-soft); }
+    .sr-biz .ic { width: 46px; height: 46px; border-radius: 11px; background: var(--bg-1); display: grid; place-items: center; color: var(--text-soft); flex: none; }
+    .sr-biz b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--text-head); }
+    .sr-biz span { font-size: 0.86rem; color: var(--text-soft); }
+    .sr-prob { display: flex; align-items: flex-start; gap: 11px; padding: 11px 0; }
+    .sr-prob svg { flex: none; width: 18px; height: 18px; color: var(--poor); margin-top: 1px; }
+    .sr-prob .pt { font-size: 0.92rem; color: var(--text-head); font-weight: 600; }
+    .sr-prob .im { font-size: 0.82rem; color: var(--text-soft); margin-top: 2px; line-height: 1.45; }
+
+    .sr-comp { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line-soft); }
+    .sr-comp:first-of-type { border-top: none; }
+    .sr-comp .ic { width: 34px; height: 34px; border-radius: 9px; background: var(--bg-1); display: grid; place-items: center; color: var(--text-soft); flex: none; }
+    .sr-comp .ic svg { width: 17px; height: 17px; }
+    .sr-comp .nm { flex: 1; }
+    .sr-comp .nm b { display: block; font-size: 0.92rem; font-weight: 600; color: var(--text-head); }
+    .sr-comp .nm span { font-size: 0.78rem; color: var(--text-soft); }
+    .sr-comp .rk { font-size: 0.84rem; font-weight: 700; color: var(--text-soft); }
+    .sr-comp.--you { background: var(--gold-soft); border-radius: 12px; padding: 12px; margin-top: 6px; border: 1px solid rgba(181,126,30,0.2); }
+    .sr-comp.--you .rk { color: var(--poor); }
+
+    /* pagespeed-style category gauges with mobile/desktop tabs */
+    .sr-cat-tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--bg-1); margin: 18px 0 4px; }
+    .sr-cat-tab { padding: 8px 20px; border: none; border-radius: 999px; background: none; font-family: var(--font-display); font-weight: 700; font-size: 0.88rem; color: var(--text-soft); cursor: pointer; transition: all .2s; }
+    .sr-cat-tab.is-active { background: #FFFFFF; color: var(--text-head); box-shadow: 0 2px 8px rgba(40,30,12,0.08); }
+    .sr-cats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
+    @media (min-width: 560px) { .sr-cats { grid-template-columns: repeat(4, 1fr); } }
+    .sr-cat { text-align: center; }
+    .sr-cat .ring { width: 84px; height: 84px; margin: 0 auto; position: relative; }
+    .sr-cat .ring b { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--font-hero); font-weight: 800; font-size: 1.4rem; }
+    .sr-cat .nm { margin-top: 10px; font-size: 0.82rem; font-weight: 700; color: var(--text-head); }
+
+    /* keyword table (gated) */
+    .sr-kw { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line-soft); }
+    .sr-kw .g { flex: none; width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 1px solid var(--line); display: grid; place-items: center; font-weight: 800; font-size: 0.72rem; color: var(--text-soft); }
+    .sr-kw .q { flex: 1; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+    .sr-kw .tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .sr-kw .tag { font-size: 0.72rem; font-weight: 700; padding: 4px 9px; border-radius: 999px; background: rgba(207,74,60,0.1); color: var(--poor); }
+    .sr-kw .tag.--win { background: rgba(30,126,84,0.12); color: var(--good); }
+
+    /* gate */
+    .sr-gated { position: relative; }
+    .sr-gated.locked .sr-blur { filter: blur(7px); pointer-events: none; user-select: none; }
+    .sr-gate { position: absolute; inset: 0; display: grid; place-items: center; padding: 20px; z-index: 5; }
+    .sr-gate.hidden { display: none; }
+    .sr-gate-card { width: min(440px, 100%); background: #FFFFFF; border: 1px solid var(--line-soft); border-radius: var(--r-lg); box-shadow: 0 30px 80px rgba(40,30,12,0.2); padding: clamp(26px, 4vw, 38px); text-align: center; }
+    .sr-gate-lock { width: 44px; height: 44px; border-radius: 50%; background: var(--gold-soft); display: grid; place-items: center; margin: 0 auto 16px; color: var(--gold); }
+    .sr-gate-lock svg { width: 21px; height: 21px; }
+    .sr-gate-card h3 { font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.5rem, 3vw, 1.9rem); letter-spacing: -0.02em; }
+    .sr-gate-card .sub { margin-top: 10px; color: var(--text-dim); font-size: 0.94rem; line-height: 1.5; }
+    .sr-gate-step { margin-top: 22px; text-align: left; }
+    .sr-gate-step.hidden { display: none; }
+    .sr-gate-label { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 7px; display: block; }
+    .sr-input { width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--line); background: #FFF; font-family: var(--font-body); font-size: 1.05rem; color: var(--text); text-align: center; letter-spacing: 0.02em; }
+    .sr-input:focus { outline: none; border-color: var(--gold); }
+    .sr-input.code { letter-spacing: 0.5em; font-weight: 700; font-size: 1.3rem; padding-left: 0.5em; }
+    .sr-gate-btn { width: 100%; margin-top: 14px; height: 52px; border: none; border-radius: 12px; background: linear-gradient(135deg, #E0A23C, #D08A34); color: #2A1C06; font-family: var(--font-display); font-weight: 700; font-size: 1rem; cursor: pointer; transition: box-shadow .2s, transform .2s; }
+    .sr-gate-btn:hover { box-shadow: 0 10px 28px rgba(208,138,52,0.3); transform: translateY(-1px); }
+    .sr-gate-fine { margin-top: 14px; font-size: 0.74rem; color: var(--text-soft); line-height: 1.5; }
+    .sr-gate-back { background: none; border: none; color: var(--text-soft); font-size: 0.82rem; cursor: pointer; margin-top: 12px; text-decoration: underline; }
+    .sr-code-sent { font-size: 0.84rem; color: var(--teal); margin-top: 7px; font-weight: 600; }
+
+    /* unlocked final CTA */
+    .sr-final { margin-top: 4px; background: linear-gradient(135deg, #E0A23C, #C9820E); border-radius: var(--r-lg); padding: clamp(26px, 4vw, 40px); display: grid; grid-template-columns: 1fr; gap: 22px; align-items: center; }
+    .sr-final h3 { font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.5rem, 3vw, 2.1rem); letter-spacing: -0.02em; color: #2A1C06; line-height: 1.05; }
+    .sr-final p { margin-top: 10px; color: rgba(42,28,6,0.82); font-size: 0.98rem; line-height: 1.55; }
+    .sr-final-host { display: flex; align-items: center; gap: 14px; }
+    .sr-final-host img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.7); flex: none; }
+    .sr-final-host .lab { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(42,28,6,0.66); font-weight: 700; }
+    .sr-final-host .nm { font-family: var(--font-display); font-weight: 800; font-size: 1.02rem; color: #2A1C06; }
+    .sr-final .book { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 52px; padding: 0 26px; border-radius: 12px; background: #2A1C06; color: #FBF5EA; font-family: var(--font-display); font-weight: 700; font-size: 1rem; white-space: nowrap; }
+    @media (min-width: 720px) { .sr-final { grid-template-columns: 1.3fr auto; } }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WR9TZHT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <div class="sr-wrap">
+    <div class="sr-top">
+      <img src="media/logo-cropped.png" alt="Button Up Media" />
+      <a class="call" href="tel:+17867409499"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> (786) 740-9499</a>
+    </div>
+  </div>
+
+  <!-- ============ SCAN STATE ============ -->
+  <div class="sr-wrap">
+    <div class="sr-scan" id="sr-scan">
+      <div class="sr-scan-list">
+        <h1>Scanning&hellip;</h1>
+        <div class="sr-check active" data-step="0"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="t" id="sr-check-0">Your restaurant &amp; competitors</span></div>
+        <div class="sr-check" data-step="1"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="t">Google business profile</span></div>
+        <div class="sr-check" data-step="2"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="t">Website speed &amp; performance</span></div>
+        <div class="sr-check" data-step="3"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="t">SEO &amp; search visibility</span></div>
+        <div class="sr-check" data-step="4"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="t">Mobile experience</span></div>
+        <div class="sr-progress"><span class="sp"></span><b><span id="sr-secs">28</span> seconds remaining</b></div>
+      </div>
+      <div class="sr-scan-card">
+        <div class="img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-6 9 6v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21V12h6v9"/></svg></div>
+        <div class="body">
+          <h2 id="sr-scan-name">Your Restaurant</h2>
+          <div class="meta"><span>Running a full Google-grade audit&hellip;</span></div>
+          <p>Checking your website, your Google presence, and how you stack up against the restaurants competing for your customers&hellip;</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ REPORT STATE ============ -->
+  <div class="sr-wrap">
+    <div class="sr-report" id="sr-report">
+      <div class="sr-grid">
+        <!-- SIDEBAR -->
+        <aside class="sr-side">
+          <div class="sr-gauge">
+            <svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="86" fill="none" stroke="rgba(44,38,28,0.1)" stroke-width="14"/><circle id="sr-gauge-arc" cx="100" cy="100" r="86" fill="none" stroke="#CF4A3C" stroke-width="14" stroke-linecap="round" stroke-dasharray="540" stroke-dashoffset="540"/></svg>
+            <div class="val"><b id="sr-score">0</b><span>of 100</span></div>
+          </div>
+          <div class="sr-grade-lab">Online health grade</div>
+          <div class="sr-grade" id="sr-grade">,</div>
+          <div class="sr-grade-note" id="sr-grade-note"></div>
+          <div class="sr-subs" id="sr-subs"></div>
+          <div class="sr-side-cta">
+            <b>Fix everything in weeks, not months</b>
+            <p>Let our team walk you through these results and build the fixes for you.</p>
+            <a href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener">
+              <img src="media/author-juan.webp" alt="Juan" />
+              Book a consult with Juan
+              <span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+          </div>
+        </aside>
+
+        <!-- MAIN -->
+        <div class="sr-main">
+          <div class="sr-twocol" id="sr-twocol">
+            <!-- issues -->
+            <div class="sr-card">
+              <h3 id="sr-loss-h">Reviewing your results</h3>
+              <div class="sr-biz">
+                <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-6 9 6v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21V12h6v9"/></svg></div>
+                <div><b id="sr-biz-name">Your restaurant</b><span id="sr-biz-url">your website</span></div>
+              </div>
+              <div id="sr-problems"></div>
+            </div>
+
+            <!-- competitors (shown only when real Places data is available) -->
+            <div class="sr-card" id="sr-comp-card" style="display:none;">
+              <h3 id="sr-comp-h">Top-rated restaurants near you</h3>
+              <p style="color:var(--text-dim);font-size:0.9rem;margin:8px 0 16px;">How your guest rating stacks up against the highest-rated spots nearby.</p>
+              <div id="sr-comps"></div>
+            </div>
+          </div>
+
+          <!-- pagespeed-style categories -->
+          <div class="sr-card">
+            <h3>Your technical scores</h3>
+            <p style="color:var(--text-dim);font-size:0.9rem;margin-top:8px;">Measured the way Google measures it, on mobile and desktop.</p>
+            <div class="sr-cat-tabs" role="tablist">
+              <button class="sr-cat-tab is-active" data-dev="mobile">Mobile</button>
+              <button class="sr-cat-tab" data-dev="desktop">Desktop</button>
+            </div>
+            <div class="sr-cats" id="sr-cats"></div>
+          </div>
+
+          <!-- GATED: the full prioritized fix list -->
+          <div class="sr-card sr-gated locked" id="sr-gated">
+            <div class="sr-blur">
+              <h3>Your full fix list</h3>
+              <p style="color:var(--text-dim);font-size:0.9rem;margin:8px 0 10px;">Every issue we found, in priority order, with what it is costing you.</p>
+              <div id="sr-fulllist"></div>
+            </div>
+
+            <!-- phone + code gate -->
+            <div class="sr-gate" id="sr-gate">
+              <div class="sr-gate-card">
+                <div class="sr-gate-lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+                <h3>Unlock your full report</h3>
+                <p class="sub" id="sr-gate-sub">See every fix that will move you up Google, and how to tackle them.</p>
+
+                <!-- step 1: phone -->
+                <div class="sr-gate-step" id="sr-step-phone">
+                  <label class="sr-gate-label" for="sr-phone">Your phone number</label>
+                  <input class="sr-input" type="tel" id="sr-phone" placeholder="(305) 555-0199" autocomplete="tel" />
+                  <button class="sr-gate-btn" id="sr-send">Send my code</button>
+                  <p class="sr-gate-fine">We text a 6-digit code to confirm it is you. Standard rates may apply. No spam, ever.</p>
+                </div>
+
+                <!-- step 2: code -->
+                <div class="sr-gate-step hidden" id="sr-step-code">
+                  <label class="sr-gate-label" for="sr-code">Enter the 6-digit code</label>
+                  <input class="sr-input code" type="text" id="sr-code" inputmode="numeric" maxlength="6" placeholder="••••••" />
+                  <div class="sr-code-sent" id="sr-code-sent">Code sent to your phone ✓</div>
+                  <button class="sr-gate-btn" id="sr-verify">Unlock my report</button>
+                  <button class="sr-gate-back" id="sr-back">&larr; Use a different number</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- final CTA -->
+          <div class="sr-final">
+            <div>
+              <h3>Want our team to fix all of this for you?</h3>
+              <p>Book a free consultation with Juan. He will walk you through your report line by line and show you exactly what a Button Up site would change.</p>
+            </div>
+            <a class="book" href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><path d="M8 2v4M16 2v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2"/></svg>
+              Book a consult
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    var params = new URLSearchParams(location.search);
+    var nameParam = (params.get("name") || "").trim();
+    var urlParam = (params.get("url") || "").trim();
+    var placeId = (params.get("placeId") || "").trim();
+
+    var scanEl = document.getElementById("sr-scan");
+    var reportEl = document.getElementById("sr-report");
+    var checks = [].slice.call(document.querySelectorAll(".sr-check"));
+    var secsEl = document.getElementById("sr-secs");
+
+    var bizName = nameParam || "Your restaurant";
+    var COLORS = { good: "#1E7E54", fair: "#C9820E", poor: "#CF4A3C", dim: "#9a8f7d" };
+    var lastScan = null, placeInfo = null, animDone = false;
+
+    setText("sr-scan-name", bizName);
+    document.title = bizName + " - Website Report | Button Up Media";
+
+    /* ---- loading animation (visual only; real work runs in parallel) ---- */
+    var step = 0, secs = 26;
+    var stepTimer = setInterval(function () {
+      if (step < checks.length - 1) { checks[step].classList.remove("active"); checks[step].classList.add("done"); step++; checks[step].classList.add("active"); }
+    }, 1100);
+    var secTimer = setInterval(function () { secs = Math.max(1, secs - 3); if (secsEl) secsEl.textContent = secs; }, 1100);
+    var guard = setTimeout(function () { finishScan(); renderError({ kind: "timeout" }); }, 75000);
+
+    /* ---- real work: resolve the place, then scan its website ---- */
+    resolvePlace().then(function (place) {
+      placeInfo = place;
+      var target = urlParam || (place && place.website) || "";
+      if (!target) throw { kind: "no_url" };
+      return fetchJson("/api/scan?url=" + encodeURIComponent(target));
+    }).then(function (scan) {
+      if (!scan || !scan.ok) throw { kind: (scan && scan.error) || "scan_failed" };
+      lastScan = scan;
+      finishScan();
+      renderReport(scan, placeInfo);
+      loadCompetitors();
+      wireGate();
+    }).catch(function (e) {
+      finishScan();
+      renderError(e || {});
+    });
+
+    function resolvePlace() {
+      if (!placeId) return Promise.resolve(null);
+      return fetchJson("/api/places?action=details&placeId=" + encodeURIComponent(placeId))
+        .then(function (d) { return (d && d.ok && d.place) ? d.place : null; })
+        .catch(function () { return null; });
+    }
+
+    function finishScan() {
+      if (animDone) return;
+      animDone = true;
+      clearInterval(stepTimer); clearInterval(secTimer); clearTimeout(guard);
+      checks.forEach(function (c) { c.classList.remove("active"); c.classList.add("done"); });
+      if (scanEl) scanEl.style.display = "none";
+      reportEl.classList.add("show");
+      window.scrollTo(0, 0);
+    }
+
+    /* ---- render the real report ---- */
+    function renderReport(scan, place) {
+      var rep = scan.report;
+      var name = (place && place.name) || bizName;
+      var host = hostOf((place && place.website) || scan.url || urlParam);
+
+      setText("sr-biz-name", name);
+      setText("sr-biz-url", host || "your website");
+
+      setText("sr-grade", rep.grade);
+      var gradeEl = document.getElementById("sr-grade");
+      if (gradeEl) gradeEl.style.color = rep.gradeColor;
+      setText("sr-grade-note", gradeNote(rep.overall));
+
+      var arc = document.getElementById("sr-gauge-arc");
+      if (arc) {
+        var off = 540 * (1 - rep.overall / 100);
+        arc.setAttribute("stroke", rep.gradeColor);
+        requestAnimationFrame(function () { arc.style.transition = "stroke-dashoffset 1.2s cubic-bezier(.22,1,.36,1)"; arc.style.strokeDashoffset = off; });
+      }
+      countUp(document.getElementById("sr-score"), rep.overall);
+
+      document.getElementById("sr-subs").innerHTML = rep.subs.map(function (s) {
+        var doff = 97 * (1 - s.points / s.max);
+        return '<div class="sr-sub">' +
+          '<svg class="ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(44,38,28,0.1)" stroke-width="4"/><circle cx="18" cy="18" r="15.5" fill="none" stroke="' + s.color + '" stroke-width="4" stroke-linecap="round" stroke-dasharray="97" stroke-dashoffset="' + doff.toFixed(1) + '" transform="rotate(-90 18 18)"/></svg>' +
+          '<div class="lbl"><b>' + esc(s.label) + '</b><small style="color:' + s.color + ';">' + esc(s.rating) + '</small></div>' +
+          '<div class="pts">' + s.points + '/' + s.max + '</div></div>';
+      }).join("");
+
+      var n = rep.issueCount || rep.issues.length;
+      var lossH = document.getElementById("sr-loss-h");
+      if (lossH) {
+        lossH.innerHTML = n
+          ? 'We found <span class="gold">' + n + ' fixable issue' + (n === 1 ? '' : 's') + '</span> hurting your bookings'
+          : 'Your site is in good shape';
+      }
+
+      document.getElementById("sr-problems").innerHTML =
+        rep.issues.length ? rep.issues.slice(0, 4).map(probRow).join("")
+                          : '<p style="color:var(--text-dim);font-size:0.92rem;padding:10px 0;">No major issues on the basics. Book a call and we will find the finer wins.</p>';
+
+      document.getElementById("sr-fulllist").innerHTML =
+        rep.issues.map(probRow).join("") + cwvBlock(scan);
+
+      setupCats(scan);
+    }
+
+    /* ---- competitors (real Places data, or hide the card) ---- */
+    function loadCompetitors() {
+      var card = document.getElementById("sr-comp-card");
+      var twocol = document.getElementById("sr-twocol");
+      function hide() { card.style.display = "none"; if (twocol) twocol.style.gridTemplateColumns = "1fr"; }
+      if (!placeId) { hide(); return; }
+      fetchJson("/api/places?action=competitors&placeId=" + encodeURIComponent(placeId)).then(function (d) {
+        if (!d || !d.ok || !d.competitors || !d.competitors.length) { hide(); return; }
+        var comps = d.competitors;
+        var youRating = placeInfo && placeInfo.rating != null ? placeInfo.rating : null;
+        var better = youRating == null ? comps.length : comps.filter(function (c) { return c.rating > youRating; }).length;
+        var youRank = better + 1;
+        var rows = comps.slice(0, 4).map(function (c, i) { return compRow(c.name, c.rating + " ★", ord(i + 1)); }).join("");
+        var youRow = compRow((placeInfo && placeInfo.name) || bizName, youRating != null ? youRating + " ★" : "Your restaurant", ord(youRank), true);
+        document.getElementById("sr-comps").innerHTML = rows + youRow;
+        var h = document.getElementById("sr-comp-h");
+        if (h) h.innerHTML = 'You rank <span class="gold">' + ord(youRank) + '</span> of ' + (comps.length + 1) + ' nearby by guest rating';
+        card.style.display = "";
+        if (twocol) twocol.style.gridTemplateColumns = "";
+      }).catch(hide);
+    }
+
+    /* ---- technical category gauges (mobile / desktop tabs) ---- */
+    function setupCats(scan) {
+      function row(cats) { return [["Performance", cats.performance], ["Accessibility", cats.accessibility], ["Best Practices", cats.bestPractices], ["SEO", cats.seo]]; }
+      var DATA = { mobile: row(scan.mobile.categories), desktop: row(scan.desktop.categories) };
+      var C = 2 * Math.PI * 30;
+      var wrap = document.getElementById("sr-cats");
+      function col(v) { return v == null ? COLORS.dim : (v >= 90 ? COLORS.good : (v >= 50 ? COLORS.fair : COLORS.poor)); }
+      function render(dev) {
+        wrap.innerHTML = DATA[dev].map(function (d) {
+          var v = d[1] == null ? 0 : d[1], c = col(d[1]), off = C * (1 - v / 100);
+          return '<div class="sr-cat"><div class="ring"><svg viewBox="0 0 72 72"><circle cx="36" cy="36" r="30" fill="none" stroke="rgba(44,38,28,0.1)" stroke-width="6"/><circle cx="36" cy="36" r="30" fill="none" stroke="' + c + '" stroke-width="6" stroke-linecap="round" stroke-dasharray="' + C.toFixed(1) + '" stroke-dashoffset="' + C.toFixed(1) + '" transform="rotate(-90 36 36)"><animate attributeName="stroke-dashoffset" from="' + C.toFixed(1) + '" to="' + off.toFixed(1) + '" dur="1s" fill="freeze" calcMode="spline" keySplines="0.22 1 0.36 1" keyTimes="0;1"/></circle></svg><b style="color:' + c + '">' + (d[1] == null ? "-" : d[1]) + '</b></div><div class="nm">' + d[0] + '</div></div>';
+        }).join("");
+      }
+      render("mobile");
+      [].forEach.call(document.querySelectorAll(".sr-cat-tab"), function (t) {
+        t.addEventListener("click", function () {
+          document.querySelectorAll(".sr-cat-tab").forEach(function (x) { x.classList.remove("is-active"); });
+          t.classList.add("is-active");
+          render(t.dataset.dev);
+        });
+      });
+    }
+
+    /* ---- real SMS unlock gate (Twilio Verify via /api/sms) ---- */
+    function wireGate() {
+      var gated = document.getElementById("sr-gated");
+      var gate = document.getElementById("sr-gate");
+      var stepPhone = document.getElementById("sr-step-phone");
+      var stepCode = document.getElementById("sr-step-code");
+      var phone = document.getElementById("sr-phone");
+      var code = document.getElementById("sr-code");
+      var sub = document.getElementById("sr-gate-sub");
+      var sendBtn = document.getElementById("sr-send");
+      var verifyBtn = document.getElementById("sr-verify");
+      var sentEl = document.getElementById("sr-code-sent");
+
+      function unlock() {
+        gate.classList.add("hidden");
+        gated.classList.remove("locked");
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: "report_unlocked" });
+      }
+
+      sendBtn.addEventListener("click", function () {
+        var v = (phone.value || "").replace(/\D/g, "");
+        if (v.length < 10) { phone.style.borderColor = "var(--poor)"; phone.focus(); return; }
+        sendBtn.disabled = true; sendBtn.textContent = "Sending…";
+        postJson("/api/sms/send", { phone: phone.value }).then(function (d) {
+          sendBtn.disabled = false; sendBtn.textContent = "Send my code";
+          if (d && d.error === "not_configured") { unlock(); return; }
+          if (d && d.ok) {
+            stepPhone.classList.add("hidden");
+            stepCode.classList.remove("hidden");
+            sub.textContent = "We just texted a 6-digit code to " + phone.value + ".";
+            setTimeout(function () { code.focus(); }, 100);
+          } else {
+            phone.style.borderColor = "var(--poor)";
+            sub.textContent = (d && d.message) || "We could not send the code. Try again.";
+          }
+        }).catch(function () { sendBtn.disabled = false; sendBtn.textContent = "Send my code"; unlock(); });
+      });
+
+      document.getElementById("sr-back").addEventListener("click", function () {
+        stepCode.classList.add("hidden");
+        stepPhone.classList.remove("hidden");
+        sub.textContent = "See every fix that will move you up Google, and how to tackle them.";
+      });
+
+      verifyBtn.addEventListener("click", function () {
+        var v = (code.value || "").replace(/\D/g, "");
+        if (v.length < 4) { code.style.borderColor = "var(--poor)"; code.focus(); return; }
+        verifyBtn.disabled = true; verifyBtn.textContent = "Verifying…";
+        postJson("/api/sms/check", {
+          phone: phone.value, code: v,
+          restaurant: bizName,
+          website: (placeInfo && placeInfo.website) || urlParam || (lastScan && lastScan.url) || "",
+          score: lastScan && lastScan.report ? lastScan.report.overall : null
+        }).then(function (d) {
+          verifyBtn.disabled = false; verifyBtn.textContent = "Unlock my report";
+          if (d && d.error === "not_configured") { unlock(); return; }
+          if (d && d.ok && d.verified) { unlock(); }
+          else if (d && d.error === "expired") { sentEl.style.color = "var(--poor)"; sentEl.textContent = d.message || "That code expired. Request a new one."; }
+          else { code.style.borderColor = "var(--poor)"; sentEl.style.color = "var(--poor)"; sentEl.textContent = (d && d.message) || "That code is not correct."; }
+        }).catch(function () { verifyBtn.disabled = false; verifyBtn.textContent = "Unlock my report"; });
+      });
+    }
+
+    /* ---- error / fallback states ---- */
+    function renderError(e) {
+      reportEl.classList.add("show");
+      var kind = e && e.kind;
+      if (kind === "no_url") {
+        reportEl.innerHTML = errorShell("Almost there, what is your website?",
+          "We could not find a website for " + esc(bizName) + ". Enter your address and we will grade it.",
+          '<form id="sr-urlform" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:18px;"><input class="sr-input" id="sr-urlin" type="text" placeholder="yourrestaurant.com" style="max-width:300px;text-align:left;" /><button class="sr-gate-btn" style="width:auto;margin-top:0;padding:0 22px;">Grade my site</button></form>');
+        document.getElementById("sr-urlform").addEventListener("submit", function (ev) {
+          ev.preventDefault();
+          var val = document.getElementById("sr-urlin").value.trim();
+          if (!val) return;
+          var u = new URL(location.href); u.searchParams.set("url", val); u.searchParams.delete("placeId"); location.href = u.toString();
+        });
+        return;
+      }
+      var msg = kind === "quota" ? "Our scanner is busy right now. Please try again in a minute."
+        : kind === "unreachable" ? "We could not load that website. Double-check the address and try again."
+        : kind === "timeout" ? "That scan took too long. Please try again."
+        : "Something went wrong running your scan. Please try again.";
+      reportEl.innerHTML = errorShell("We hit a snag", msg,
+        '<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:18px;"><button class="sr-gate-btn" style="width:auto;margin-top:0;padding:0 22px;" onclick="location.reload()">Try again</button><a class="sr-gate-btn" style="width:auto;margin-top:0;padding:0 22px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#2A1C06;color:#FBF5EA;" href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener">Talk to us instead</a></div>');
+    }
+    function errorShell(title, sub, actions) {
+      return '<div class="sr-wrap"><div class="sr-card" style="max-width:560px;margin:48px auto;text-align:center;"><h3 style="font-family:var(--font-hero);font-weight:800;font-size:clamp(1.4rem,3vw,1.9rem);">' + esc(title) + '</h3><p style="color:var(--text-dim);margin-top:10px;line-height:1.55;">' + sub + '</p>' + actions + '</div></div>';
+    }
+
+    /* ---- helpers ---- */
+    function fetchJson(url) { return fetch(url).then(function (r) { return r.json(); }); }
+    function postJson(url, body) { return fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).then(function (r) { return r.json(); }); }
+    function setText(id, txt) { var el = document.getElementById(id); if (el) el.textContent = txt; }
+    function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+    function hostOf(u) {
+      if (!u) return "";
+      try { return new URL(/^https?:\/\//i.test(u) ? u : "https://" + u).hostname.replace(/^www\./, ""); }
+      catch (e) { return String(u).replace(/^https?:\/\//i, "").replace(/^www\./, "").split("/")[0]; }
+    }
+    function countUp(el, target) {
+      if (!el) return;
+      var n = 0, stepv = Math.max(1, Math.round(target / 19));
+      var t = setInterval(function () { n += stepv; if (n >= target) { n = target; clearInterval(t); } el.textContent = n; }, 28);
+    }
+    function ord(n) { var s = ["th", "st", "nd", "rd"], v = n % 100; return n + (s[(v - 20) % 10] || s[v] || s[0]); }
+    function gradeNote(o) {
+      if (o >= 90) return "Strong foundation. A few tweaks would make it elite.";
+      if (o >= 70) return "Solid, but there is real money still on the table.";
+      if (o >= 50) return "Middling. Faster, cleaner competitors are pulling ahead.";
+      return "Your site is losing customers to competitors before they ever see your menu.";
+    }
+    function homeSvg() { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-6 9 6v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg>'; }
+    function probRow(it) {
+      return '<div class="sr-prob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.7 18-9-15a1.7 1.7 0 0 0-3 0l-9 15A1.7 1.7 0 0 0 3.2 20.5h17.6A1.7 1.7 0 0 0 21.7 18z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><div><div class="pt">' + esc(it.pt) + '</div><div class="im">' + esc(it.im) + '</div></div></div>';
+    }
+    function compRow(name, sub, rank, you) {
+      return '<div class="sr-comp' + (you ? ' --you' : '') + '"><div class="ic">' + homeSvg() + '</div><div class="nm"><b>' + esc(name) + '</b><span>' + esc(sub) + '</span></div><div class="rk">' + esc(rank) + '</div></div>';
+    }
+    function cwvBlock(scan) {
+      var m = scan.mobile.metrics || {};
+      function r(label, met) { if (!met || met.display == null) return ""; return '<div style="display:flex;justify-content:space-between;padding:7px 0;font-size:0.86rem;border-top:1px solid var(--line-soft);"><span style="color:var(--text-dim);">' + label + '</span><b style="color:var(--text-head);">' + esc(met.display) + '</b></div>'; }
+      var rows = r("Largest Contentful Paint", m.lcp) + r("Total Blocking Time", m.tbt) + r("Cumulative Layout Shift", m.cls) + r("Speed Index", m.speedIndex);
+      if (!rows) return "";
+      return '<div style="margin-top:16px;"><div style="font-family:var(--font-display);font-weight:800;font-size:0.95rem;color:var(--text-head);margin-bottom:2px;">Core Web Vitals (mobile)</div>' + rows + '</div>';
+    }
+
+  })();
+  </script>
+  <script defer src="shared.js?v=nav-mobile-4"></script>
+</body>
+</html>

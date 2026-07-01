@@ -156,6 +156,42 @@
       ]
     },
     {
+      "source": "/website-grader",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/website-grader.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/website-grader-report",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/website-grader-report.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
       "source": "/terms.html",
       "headers": [
         {
@@ -453,6 +489,26 @@
       "permanent": true
     },
     {
+      "source": "/website-grader/",
+      "destination": "/website-grader",
+      "permanent": true
+    },
+    {
+      "source": "/website-grader.html",
+      "destination": "/website-grader",
+      "permanent": true
+    },
+    {
+      "source": "/website-grader-report/",
+      "destination": "/website-grader-report",
+      "permanent": true
+    },
+    {
+      "source": "/website-grader-report.html",
+      "destination": "/website-grader-report",
+      "permanent": true
+    },
+    {
       "source": "/index-es.html",
       "destination": "/es",
       "permanent": true
@@ -591,6 +647,14 @@
       "destination": "/restaurant-paid-ads-es.html"
     },
     {
+      "source": "/website-grader",
+      "destination": "/website-grader.html"
+    },
+    {
+      "source": "/website-grader-report",
+      "destination": "/website-grader-report.html"
+    },
+    {
       "source": "/es",
       "destination": "/index-es.html"
     },
@@ -671,6 +735,18 @@
     "api/meta/**/*.js": {
       "memory": 256,
       "maxDuration": 30
+    },
+    "api/scan.js": {
+      "memory": 512,
+      "maxDuration": 60
+    },
+    "api/places.js": {
+      "memory": 256,
+      "maxDuration": 15
+    },
+    "api/sms/**/*.js": {
+      "memory": 256,
+      "maxDuration": 15
     }
   }
 }
