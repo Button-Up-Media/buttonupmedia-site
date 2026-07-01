@@ -57,8 +57,9 @@
     .sr-wrap { width: min(calc(100% - 32px), 1240px); margin: 0 auto; }
 
     /* ============ TOP BAR ============ */
-    .sr-top { display: flex; align-items: center; justify-content: space-between; height: 60px; border-bottom: 1px solid var(--line-soft); background: #FFFFFF; }
-    .sr-top img { height: 22px; }
+    .sr-topbar { background: #FFFFFF; border-bottom: 1px solid var(--line-soft); position: sticky; top: 0; z-index: 20; }
+    .sr-top { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .sr-top img { height: 26px; width: auto; }
     .sr-top a.call { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-display); font-weight: 700; font-size: 0.86rem; color: var(--text-head); }
     .sr-top a.call svg { width: 15px; height: 15px; color: var(--gold); }
 
@@ -69,8 +70,9 @@
     .sr-check.done { color: var(--text-head); font-weight: 600; }
     .sr-check.active { color: var(--text-head); font-weight: 600; }
     .sr-check .dot { flex: none; width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--line); display: grid; place-items: center; transition: all .3s; }
+    .sr-check .dot svg { display: none; width: 13px; height: 13px; }
     .sr-check.done .dot { background: var(--ink); border-color: var(--ink); }
-    .sr-check.done .dot svg { width: 13px; height: 13px; color: #fff; }
+    .sr-check.done .dot svg { display: block; color: #fff; }
     .sr-check.active .dot { border-color: var(--gold); border-top-color: transparent; animation: srSpin .8s linear infinite; }
     @keyframes srSpin { to { transform: rotate(360deg); } }
     .sr-scan-card { border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line-soft); background: #FFFFFF; box-shadow: 0 20px 50px rgba(40,30,12,0.08); max-width: 520px; }
@@ -202,12 +204,12 @@
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WR9TZHT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
-  <div class="sr-wrap">
-    <div class="sr-top">
+  <header class="sr-topbar">
+    <div class="sr-wrap sr-top">
       <img src="media/logo-cropped.png" alt="Button Up Media" />
       <a class="call" href="tel:+17867409499"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> (786) 740-9499</a>
     </div>
-  </div>
+  </header>
 
   <!-- ============ SCAN STATE ============ -->
   <div class="sr-wrap">
@@ -219,7 +221,7 @@
         <div class="sr-check" data-step="2"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="t">Website speed &amp; performance</span></div>
         <div class="sr-check" data-step="3"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="t">SEO &amp; search visibility</span></div>
         <div class="sr-check" data-step="4"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="t">Mobile experience</span></div>
-        <div class="sr-progress"><span class="sp"></span><b><span id="sr-secs">28</span> seconds remaining</b></div>
+        <div class="sr-progress"><span class="sp"></span><b id="sr-progress-label"><span id="sr-secs">30</span> seconds remaining</b></div>
       </div>
       <div class="sr-scan-card">
         <div class="img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-6 9 6v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21V12h6v9"/></svg></div>
@@ -360,21 +362,24 @@
     document.title = bizName + " - Website Report | Button Up Media";
 
     /* ---- loading animation (visual only; real work runs in parallel) ---- */
-    var step = 0, secs = 26;
+    var step = 0, secs = 30;
     var stepTimer = setInterval(function () {
       if (step < checks.length - 1) { checks[step].classList.remove("active"); checks[step].classList.add("done"); step++; checks[step].classList.add("active"); }
     }, 1100);
-    var secTimer = setInterval(function () { secs = Math.max(1, secs - 3); if (secsEl) secsEl.textContent = secs; }, 1100);
-    var guard = setTimeout(function () { finishScan(); renderError({ kind: "timeout" }); }, 75000);
+    var secTimer = setInterval(function () {
+      secs -= 3;
+      if (secs > 1) { if (secsEl) secsEl.textContent = secs; }
+      else { clearInterval(secTimer); setProgress("Finishing your report…"); }
+    }, 1100);
+    var guard = setTimeout(function () { finishScan(); renderError({ kind: "timeout" }); }, 140000);
 
     /* ---- real work: resolve the place, then scan its website ---- */
     resolvePlace().then(function (place) {
       placeInfo = place;
       var target = urlParam || (place && place.website) || "";
       if (!target) throw { kind: "no_url" };
-      return fetchJson("/api/scan?url=" + encodeURIComponent(target));
+      return scanWithRetry(target, 1);
     }).then(function (scan) {
-      if (!scan || !scan.ok) throw { kind: (scan && scan.error) || "scan_failed" };
       lastScan = scan;
       finishScan();
       renderReport(scan, placeInfo);
@@ -384,6 +389,23 @@
       finishScan();
       renderError(e || {});
     });
+
+    /* Cold PageSpeed scans (especially Wix/Squarespace template sites) often
+       fail once then succeed on a warmer second request. Retry silently before
+       ever showing an error, so slow sites still grade. */
+    function scanWithRetry(target, retries) {
+      return fetchJson("/api/scan?url=" + encodeURIComponent(target)).then(function (scan) {
+        if (scan && scan.ok) return scan;
+        var err = (scan && scan.error) || "scan_failed";
+        if (retries > 0 && err !== "invalid_url") {
+          setProgress("Still working, hang tight…");
+          return new Promise(function (r) { setTimeout(r, 1500); }).then(function () { return scanWithRetry(target, retries - 1); });
+        }
+        throw { kind: err };
+      });
+    }
+
+    function setProgress(txt) { var el = document.getElementById("sr-progress-label"); if (el) el.textContent = txt; }
 
     function resolvePlace() {
       if (!placeId) return Promise.resolve(null);
