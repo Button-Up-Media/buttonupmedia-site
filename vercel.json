@@ -84,6 +84,42 @@
       ]
     },
     {
+      "source": "/restaurant-websites",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/restaurant-websites.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/restaurant-websites-es.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/es/sitios-web-restaurantes",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
       "source": "/restaurant-paid-ads",
       "headers": [
         {
@@ -377,6 +413,26 @@
       "permanent": true
     },
     {
+      "source": "/restaurant-websites/",
+      "destination": "/restaurant-websites",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-websites.html",
+      "destination": "/restaurant-websites",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-websites-es.html",
+      "destination": "/es/sitios-web-restaurantes",
+      "permanent": true
+    },
+    {
+      "source": "/es/sitios-web-restaurantes/",
+      "destination": "/es/sitios-web-restaurantes",
+      "permanent": true
+    },
+    {
       "source": "/restaurant-paid-ads/",
       "destination": "/restaurant-paid-ads",
       "permanent": true
@@ -523,6 +579,10 @@
       "destination": "/restaurant-social-media.html"
     },
     {
+      "source": "/restaurant-websites",
+      "destination": "/restaurant-websites.html"
+    },
+    {
       "source": "/restaurant-paid-ads",
       "destination": "/restaurant-paid-ads.html"
     },
@@ -557,6 +617,10 @@
     {
       "source": "/es/redes-sociales",
       "destination": "/restaurant-social-media-es.html"
+    },
+    {
+      "source": "/es/sitios-web-restaurantes",
+      "destination": "/restaurant-websites-es.html"
     },
     {
       "source": "/contact",

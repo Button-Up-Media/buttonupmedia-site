@@ -1,0 +1,1787 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      var key = "bum-cookie-consent-v1";
+      var consent = {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: "denied",
+        functionality_storage: "granted",
+        personalization_storage: "denied",
+        security_storage: "granted",
+        wait_for_update: 500
+      };
+      try {
+        var saved = localStorage.getItem(key);
+        if (saved) {
+          var parsed = JSON.parse(saved);
+          if (parsed && parsed.analytics) consent.analytics_storage = "granted";
+          if (parsed && parsed.marketing && !(navigator && navigator.globalPrivacyControl)) {
+            consent.ad_storage = "granted";
+            consent.ad_user_data = "granted";
+            consent.ad_personalization = "granted";
+            consent.personalization_storage = "granted";
+          }
+        }
+      } catch (err) {}
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+      window.gtag("consent", "default", consent);
+    })();
+  </script>
+  <!-- Google Tag Manager (deferred to first interaction / post-load so it stays off the LCP path) -->
+  <script>(function(w,d,s,l,i){
+    var loaded=false;
+    function loadGTM(){
+      if(loaded)return;loaded=true;
+      es.forEach(function(e){w.removeEventListener(e,loadGTM)});
+      w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    }
+    var es=['pointerdown','touchstart','keydown','scroll','mousemove'];
+    es.forEach(function(e){w.addEventListener(e,loadGTM,{passive:true})});
+    function arm(){setTimeout(loadGTM,2000);}
+    if(d.readyState==='complete')arm();else w.addEventListener('load',arm);
+  })(window,document,'script','dataLayer','GTM-WR9TZHT');</script>
+  <!-- End Google Tag Manager -->
+  <title>Custom Restaurant Websites That Fill More Tables | Button Up Media</title>
+  <meta name="description" content="Custom, mobile-first restaurant websites: stunning, fast, bilingual, and built to book. Live in a week and you own everything. Book a free 15-minute consult." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg" />
+  <link rel="canonical" href="https://www.buttonupmedia.com/restaurant-websites" />
+  <link rel="alternate" hreflang="en" href="https://www.buttonupmedia.com/restaurant-websites" />
+  <link rel="alternate" hreflang="es" href="https://www.buttonupmedia.com/es/sitios-web-restaurantes" />
+  <link rel="alternate" hreflang="x-default" href="https://www.buttonupmedia.com/restaurant-websites" />
+  <meta name="theme-color" content="#FBF8F2" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Custom Restaurant Websites That Fill More Tables | Button Up Media" />
+  <meta property="og:description" content="Custom, mobile-first restaurant websites: stunning, fast, bilingual, and built to book. Live in a week and you own everything." />
+  <meta property="og:url" content="https://www.buttonupmedia.com/restaurant-websites" />
+  <meta property="og:image" content="https://www.buttonupmedia.com/media/woa-hero-desktop.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Custom Restaurant Websites That Fill More Tables | Button Up Media" />
+  <meta name="twitter:description" content="Custom, mobile-first restaurant websites: stunning, fast, bilingual, and built to book. Live in a week and you own everything." />
+  <meta name="twitter:image" content="https://www.buttonupmedia.com/media/woa-hero-desktop.webp" />
+  <link rel="preconnect" href="https://assets.calendly.com" />
+  <link rel="preconnect" href="https://calendly.com" />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-variable.woff2" crossorigin fetchpriority="high" />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/epilogue-variable.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
+  <!-- Phone-mockup screenshot is the mobile LCP element: preload it so it is not delayed. -->
+  <link rel="preload" as="image" href="media/woa-hero-mobile.webp" fetchpriority="high" />
+  <link rel="stylesheet" href="shared.css?v=nav-mobile-4" />
+  <style>
+    /* ============================================================
+       LIGHT THEME — warm paper + deep amber (Button Up brand)
+       ============================================================ */
+    :root {
+      --bg-0: #FBF8F2;          /* warm paper */
+      --bg-1: #F4EDE1;
+      --bg-2: #ECE3D4;
+      --line: rgba(36,28,16,0.14);
+      --line-soft: rgba(36,28,16,0.08);
+      --text: #2C261C;
+      --text-head: #1C170F;
+      --text-dim: rgba(44,38,28,0.74);
+      --text-soft: rgba(44,38,28,0.52);
+      --gold: #B57E1E;          /* deeper amber — readable on light */
+      --gold-soft: rgba(181,126,30,0.12);
+      --teal: #1E7E54;
+      --good: #1E9C66;
+      --fair: #B57E1E;
+      --poor: #CF4A3C;
+      --ink: #1C170F;
+    }
+    body { background: var(--bg-0); color: var(--text); }
+    .btn-primary { border: none; background: linear-gradient(135deg, #E8AC44, #D08A34); color: #241804; box-shadow: 0 8px 22px rgba(208,138,52,0.34); font-weight: 700; }
+    .btn-primary:hover { background: linear-gradient(135deg, #E8AC44, #D08A34); color: #241804; box-shadow: 0 12px 30px rgba(208,138,52,0.42); transform: translateY(-1px); }
+    .btn { border-color: var(--line); color: var(--text); background: var(--bg-2); }
+    .btn:hover { border-color: rgba(181,126,30,0.4); }
+
+    .gr-wrap { width: min(calc(100% - 36px), 1200px); margin: 0 auto; }
+    .gr-gold { color: var(--gold); }
+    .gr-eyebrow { display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-display); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
+
+    /* reveal */
+    .gr-rise { transform: translateY(26px); transition: transform .7s cubic-bezier(.22,1,.36,1); will-change: transform; }
+    .gr-rise.is-in { transform: none; }
+    .gr-rise.d1 { transition-delay: .08s; } .gr-rise.d2 { transition-delay: .16s; } .gr-rise.d3 { transition-delay: .24s; } .gr-rise.d4 { transition-delay: .32s; }
+    @media (prefers-reduced-motion: reduce) { .gr-rise { transform: none; transition: none; } }
+
+    /* ============ HEADER ============ */
+    .gr-nav { position: sticky; top: 0; z-index: 50; background: rgba(251,248,242,0.82); backdrop-filter: blur(14px) saturate(1.1); border-bottom: 1px solid var(--line-soft); }
+    .gr-nav-inner { display: flex; align-items: center; justify-content: space-between; width: min(calc(100% - 36px), 1200px); margin: 0 auto; height: 64px; }
+    .gr-logo { height: 24px; width: auto; display: block; }
+    .gr-nav-links { display: none; align-items: center; gap: 30px; }
+    .gr-nav-links a { font-size: 0.9rem; font-weight: 600; color: var(--text-dim); transition: color .2s; }
+    .gr-nav-links a:hover { color: var(--text-head); }
+    .gr-nav-right { display: flex; align-items: center; gap: 14px; }
+    .gr-nav-phone { display: none; align-items: center; gap: 7px; font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; color: var(--text-head); }
+    .gr-nav-phone svg { width: 15px; height: 15px; color: var(--gold); }
+    @media (min-width: 960px) { .gr-nav-links { display: flex; } .gr-nav-phone { display: inline-flex; } }
+
+    /* ============ HERO ============ */
+    .gr-hero { position: relative; overflow: hidden; padding: clamp(40px, 7vw, 84px) 0 clamp(50px, 8vw, 96px); text-align: center; }
+    .gr-rating { display: inline-flex; align-items: center; gap: 9px; font-size: 0.82rem; font-weight: 600; color: var(--text-dim); }
+    .gr-stars { display: inline-flex; gap: 2px; color: var(--gold); }
+    .gr-stars svg { width: 15px; height: 15px; }
+    .gr-hero h1 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.04em; font-size: clamp(2.5rem, 7.4vw, 5rem); line-height: 0.98; margin: 16px auto 0; max-width: 14ch; text-wrap: balance; }
+    .gr-hero-sub { max-width: 50ch; margin: 18px auto 0; font-size: clamp(1.02rem, 2.3vw, 1.2rem); line-height: 1.6; color: var(--text-dim); }
+
+    /* search box */
+    .gr-search { position: relative; max-width: 540px; margin: clamp(26px, 4vw, 36px) auto 0; z-index: 20; }
+    .gr-search-bar { display: flex; align-items: center; gap: 8px; padding: 8px 8px 8px 8px; background: #FFFFFF; border: 1px solid var(--line); border-radius: 999px; box-shadow: 0 14px 40px rgba(40,30,12,0.1); transition: border-color .2s, box-shadow .2s; }
+    .gr-search-bar:focus-within { border-color: rgba(181,126,30,0.5); box-shadow: 0 16px 46px rgba(208,138,52,0.18); }
+    .gr-search-ic { flex: none; margin-left: 10px; color: var(--text-soft); display: grid; place-items: center; }
+    .gr-search-ic svg { width: 18px; height: 18px; }
+    .gr-search input { flex: 1; min-width: 0; border: none; background: none; outline: none; font-family: var(--font-body); font-size: 1rem; color: var(--text); padding: 12px 4px; }
+    .gr-search input::placeholder { color: var(--text-soft); }
+    .gr-search-btn { flex: none; height: 48px; padding: 0 20px; border-radius: 999px; font-family: var(--font-display); font-weight: 700; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; border: none; cursor: pointer; background: #241804; color: #FBF5EA; box-shadow: 0 6px 18px rgba(36,24,4,0.28); transition: background .2s, box-shadow .2s, transform .2s, color .2s; }
+    .gr-search-btn:hover { background: linear-gradient(135deg, #E8AC44, #D08A34); color: #241804; box-shadow: 0 12px 30px rgba(208,138,52,0.45); transform: translateY(-1px); }
+    .gr-search-btn svg { width: 15px; height: 15px; }
+    @media (max-width: 540px) {
+      .gr-search-bar { flex-wrap: wrap; border-radius: 22px; padding: 10px; }
+      .gr-search input { width: 100%; flex-basis: 100%; order: 1; padding: 8px 6px; }
+      .gr-search-ic { display: none; }
+      .gr-search-btn { order: 2; width: 100%; justify-content: center; }
+    }
+    /* autocomplete dropdown */
+    .gr-ac { position: absolute; left: 0; right: 0; top: calc(100% + 10px); background: #FFFFFF; border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 24px 60px rgba(40,30,12,0.18); overflow: hidden; text-align: left; display: none; }
+    .gr-ac.is-open { display: block; }
+    .gr-ac-item { display: flex; flex-direction: column; gap: 2px; padding: 13px 18px; cursor: pointer; transition: background .15s; border-bottom: 1px solid var(--line-soft); }
+    .gr-ac-item:last-child { border-bottom: none; }
+    .gr-ac-item:hover, .gr-ac-item.is-active { background: var(--bg-1); }
+    .gr-ac-name { font-weight: 700; font-size: 0.96rem; color: var(--text-head); }
+    .gr-ac-addr { font-size: 0.82rem; color: var(--text-soft); }
+    .gr-hero-fine { margin-top: 16px; font-size: 0.8rem; color: var(--text-soft); display: inline-flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .gr-hero-fine span { display: inline-flex; align-items: center; gap: 6px; }
+    .gr-hero-fine svg { width: 14px; height: 14px; color: var(--teal); }
+
+    /* hero CTA buttons */
+    .gr-hero-cta { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin: clamp(26px, 4vw, 34px) auto 0; }
+    .gr-cta-primary { display: inline-flex; align-items: center; gap: 9px; height: 54px; padding: 0 28px; border-radius: 999px; font-family: var(--font-display); font-weight: 700; font-size: 1rem; background: #241804; color: #FBF5EA; box-shadow: 0 12px 30px rgba(36,24,4,0.26); transition: background .25s, box-shadow .25s, transform .2s; }
+    .gr-cta-primary:hover { background: linear-gradient(135deg, #E8AC44, #D08A34); color: #241804; box-shadow: 0 16px 38px rgba(208,138,52,0.45); transform: translateY(-2px); }
+    .gr-cta-primary svg { width: 17px; height: 17px; }
+    .gr-cta-ghost { display: inline-flex; align-items: center; height: 54px; padding: 0 26px; border-radius: 999px; font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--text); background: #FFFFFF; border: 1px solid var(--line); transition: border-color .2s, transform .2s; }
+    .gr-cta-ghost:hover { border-color: rgba(181,126,30,0.45); transform: translateY(-2px); }
+    @media (max-width: 460px) { .gr-hero-cta { flex-direction: column; align-items: stretch; } .gr-cta-primary, .gr-cta-ghost { justify-content: center; width: 100%; } }
+
+    /* ============ HERO PHONE MOCKUP ============ */
+    .gr-hero-stage { position: relative; margin: clamp(40px, 6vw, 64px) auto 0; max-width: 720px; }
+    .gr-phone-box { position: relative; height: clamp(280px, 40vw, 360px); border-radius: clamp(20px, 4vw, 30px); display: flex; justify-content: center; align-items: center; clip-path: inset(-240px 0 0 0 round clamp(20px, 4vw, 30px)); background: linear-gradient(160deg, #E9B65A, #D89A3C 55%, #ECC079); box-shadow: 0 24px 70px rgba(0,0,0,0.45); }
+    .gr-phone-box::before { content: ""; position: absolute; inset: 0; background: radial-gradient(110% 80% at 50% 40%, rgba(255,255,255,0.5), transparent 70%); pointer-events: none; }
+    .gr-phone-box::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(231,182,88,0.45); pointer-events: none; }
+    .gr-phone { position: relative; z-index: 1; width: clamp(248px, 62vw, 296px); padding: 10px 10px 0; background: linear-gradient(150deg, #F2F4F6 0%, #C9CDD2 24%, #EDEFF1 50%, #B4B9BF 76%, #DDE0E3 100%); border-radius: 49px 49px 0 0; box-shadow: 0 30px 70px rgba(0,0,0,0.55), inset 0 0 0 1.5px rgba(255,255,255,0.6), inset 0 0 0 3px rgba(120,126,134,0.35); }
+    .gr-phone::before { content: ""; position: absolute; inset: 3px 3px 0; border-radius: 46px 46px 0 0; box-shadow: inset 0 0 0 1px rgba(40,44,50,0.55); pointer-events: none; z-index: 2; }
+    .gr-phone-screen { background: #FFFFFF; border-radius: 40px 40px 0 0; overflow: hidden; position: relative;
+      --bg-1: #EEF1F4; --line: rgba(20,24,30,0.12); --line-soft: rgba(20,24,30,0.08);
+      --text: #1B1F24; --text-head: #0F1318; --text-dim: rgba(28,32,38,0.80); --text-soft: rgba(28,32,38,0.54); }
+    .gr-phone-screen .ps-bar { background: rgba(20,24,30,0.10); }
+    .gr-phone-screen .ps-q { background: #F1F3F6; }
+    .gr-phone-screen .ps-result { background: #F7F8FA; }
+    .gr-phone-screen .ps-result.--top { background: rgba(52,168,83,0.12); border-color: rgba(52,168,83,0.4); }
+    .gr-phone-screen .ps-langbar { background: rgba(20,24,30,0.06); }
+    @property --sb-fg { syntax: '<color>'; inherits: true; initial-value: #F5EEDF; }
+    @property --sb-bg { syntax: '<color>'; inherits: true; initial-value: rgba(18,16,14,0.30); }
+    .gr-sb { position: absolute; top: 0; left: 0; right: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; padding: 13px 22px 7px; background: var(--sb-bg); -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%); }
+    @media (prefers-reduced-motion: no-preference) { .gr-sb { animation: grSbTint 26s cubic-bezier(.7,0,.3,1) infinite; } }
+    @keyframes grSbTint {
+      0%, 19%   { --sb-fg: #F5EEDF; --sb-bg: rgba(18,16,14,0.30); }
+      24%, 94%  { --sb-fg: #0F1318; --sb-bg: rgba(255,255,255,0.42); }
+      98%, 100% { --sb-fg: #F5EEDF; --sb-bg: rgba(18,16,14,0.30); }
+    }
+    .gr-sb .t { font-family: var(--font-display); font-weight: 700; font-size: 0.84rem; color: var(--sb-fg); letter-spacing: -0.01em; }
+    .gr-sb-island { position: absolute; left: 50%; top: 9px; transform: translateX(-50%); width: 84px; height: 25px; border-radius: 999px; background: #0a0a0b; }
+    .gr-sb-ic { display: flex; align-items: center; gap: 5px; }
+    .gr-sb-ic svg { height: 11px; width: auto; color: var(--sb-fg); }
+    .gr-screen-vp { --vph: clamp(356px, 54vw, 432px); height: var(--vph); overflow: hidden; }
+    .gr-show-track { display: block; }
+    @media (prefers-reduced-motion: no-preference) { .gr-show-track { animation: grShowcase 26s cubic-bezier(.7,0,.3,1) infinite; } }
+    @keyframes grShowcase {
+      0%, 19%   { transform: translateY(0); }
+      24%, 44%  { transform: translateY(-25%); }
+      49%, 69%  { transform: translateY(-50%); }
+      74%, 94%  { transform: translateY(-75%); }
+      98%, 100% { transform: translateY(0); }
+    }
+    .gr-show-panel { height: var(--vph); overflow: hidden; position: relative; box-sizing: border-box; }
+    .ps-site { display: block; width: 100%; height: var(--vph); object-fit: cover; object-position: top center; }
+    .ps-pad { padding: 48px 17px 0; text-align: left; }
+    .ps-hd { display: flex; align-items: center; gap: 8px; font-family: var(--font-display); font-weight: 700; font-size: 0.7rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 12px; }
+    .ps-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--good); box-shadow: 0 0 0 3px rgba(79,203,140,0.18); }
+    .ps-gauge { position: relative; width: 118px; height: 118px; margin: 4px auto 0; }
+    .ps-gauge svg { width: 118px; height: 118px; display: block; }
+    .ps-val { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .ps-val b { font-family: var(--font-hero); font-weight: 800; font-size: 2.15rem; color: var(--text-head); line-height: 1; }
+    .ps-val small { position: absolute; top: 63%; left: 0; right: 0; text-align: center; font-size: 0.6rem; font-weight: 700; color: var(--text-soft); }
+    .ps-cap { text-align: center; font-size: 0.74rem; color: var(--text-soft); margin-top: 7px; }
+    .ps-cap b { color: var(--good); }
+    .ps-rows { margin-top: 16px; display: grid; gap: 12px; }
+    .ps-row { display: flex; align-items: center; gap: 10px; font-size: 0.78rem; }
+    .ps-l { width: 84px; flex: none; color: var(--text-dim); font-weight: 600; }
+    .ps-bar { flex: 1; height: 7px; border-radius: 999px; background: rgba(20,24,30,0.10); overflow: hidden; }
+    .ps-bar i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #4FCB8C, #36B879); }
+    .ps-n { flex: none; font-family: var(--font-display); font-weight: 800; font-size: 0.82rem; color: var(--good); width: 24px; text-align: right; }
+    .ps-q { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-dim); background: rgba(20,24,30,0.05); border: 1px solid var(--line-soft); border-radius: 999px; padding: 10px 14px; }
+    .ps-q svg { width: 14px; height: 14px; color: var(--text-soft); flex: none; }
+    .ps-result { display: flex; align-items: center; gap: 11px; padding: 12px 13px; border-radius: 14px; border: 1px solid var(--line-soft); background: rgba(20,24,30,0.03); margin-top: 12px; }
+    .ps-result.--top { border-color: rgba(79,203,140,0.4); background: rgba(79,203,140,0.1); }
+    .ps-rank { flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-hero); font-weight: 800; font-size: 0.92rem; background: var(--good); color: #0d2a1c; }
+    .ps-rinfo b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; color: var(--text-head); }
+    .ps-rinfo small { font-size: 0.73rem; color: var(--text-soft); }
+    .ps-maps { display: grid; gap: 10px; margin-top: 14px; }
+    .ps-map-row { display: flex; align-items: center; gap: 9px; font-size: 0.8rem; font-weight: 600; color: var(--text-dim); }
+    .ps-map-row .pin { width: 8px; height: 8px; border-radius: 50%; background: var(--good); flex: none; }
+    /* ---- google maps panel ---- */
+    .ps-gmaps { padding: 0; position: relative; background: #E8EAED; overflow: hidden; }
+    .gm-map { position: absolute; inset: 0; overflow: hidden; }
+    .gm-canvas { width: 100%; height: 100%; display: block; }
+    .gm-pin { position: absolute; transform: translate(-50%,-100%); z-index: 2; }
+    .gm-pin svg { display: block; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.35)); }
+    .gm-pin-top { left: 47%; top: 41%; z-index: 3; }
+    .gm-pin-a { left: 23%; top: 63%; }
+    .gm-pin-b { left: 73%; top: 27%; }
+    .gm-pulse { position: absolute; left: 50%; bottom: 1px; width: 30px; height: 30px; border-radius: 50%; background: rgba(234,67,53,0.4); transform: translate(-50%,0) scale(.4); z-index: -1; }
+    .gm-you { position: absolute; left: 53%; top: 74%; width: 15px; height: 15px; border-radius: 50%; background: #4285F4; border: 3px solid #fff; box-shadow: 0 0 0 6px rgba(66,133,244,0.22), 0 1px 3px rgba(0,0,0,.3); transform: translate(-50%,-50%); z-index: 2; }
+    .gm-search { position: absolute; top: 46px; left: 12px; right: 12px; z-index: 5; display: flex; align-items: center; gap: 10px; background: #fff; border-radius: 999px; padding: 10px 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.20); font-size: 0.82rem; font-weight: 600; color: #202124; }
+    .gm-search svg { width: 15px; height: 15px; flex: none; color: #5f6368; }
+    .gm-search span:not(.gm-x) { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .gm-search .gm-x { margin-left: auto; color: #80868b; font-weight: 500; font-size: 1.05rem; }
+    .gm-sheet { position: absolute; left: 0; right: 0; bottom: 0; z-index: 6; background: #fff; border-radius: 16px 16px 0 0; padding: 8px 13px 16px; box-shadow: 0 -6px 24px rgba(0,0,0,0.16); }
+    .gm-grab { width: 36px; height: 4px; border-radius: 999px; background: #DADCE0; margin: 2px auto 10px; }
+    .gm-board { position: relative; height: 156px; }
+    .gm-row { position: absolute; left: 0; right: 0; top: 0; height: 50px; display: flex; align-items: center; gap: 10px; padding: 0 8px; border-radius: 12px; box-sizing: border-box; border: 1px solid transparent; }
+    .gm-rk { flex: none; position: relative; width: 16px; height: 18px; text-align: center; }
+    .gm-rk i { position: absolute; inset: 0; font-style: normal; font-weight: 800; font-size: 0.86rem; font-family: var(--font-display); }
+    .gm-logo { width: 40px; height: 40px; border-radius: 11px; flex: none; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06); }
+    .gm-logo svg { width: 23px; height: 23px; }
+    .gm-logo.--you { background: linear-gradient(140deg,#E7B658,#C9820E); color: #fff; }
+    .gm-logo.--r1 { background: #E2592E; color: #fff; }
+    .gm-logo.--r2 { background: #3A5A78; color: #fff; }
+    .gm-rinfo { flex: 1; min-width: 0; text-align: left; }
+    .gm-rinfo b { font-family: var(--font-display); font-weight: 700; font-size: 0.86rem; color: #202124; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .gm-rrate { font-size: 0.72rem; color: #70757a; margin-top: 1px; }
+    .gm-rrate .s { color: #FBBC04; }
+    .gm-tag { flex: none; display: inline-flex; align-items: center; gap: 3px; font-size: 0.66rem; font-weight: 800; padding: 4px 8px; border-radius: 999px; }
+    .gm-tag.--up { background: rgba(52,168,83,0.14); color: #1A8C4A; }
+    .gm-tag.--down { background: rgba(197,34,31,0.10); color: #C5221F; }
+    /* base (rest / reduced-motion) = you already at #1; animation plays the climb */
+    .gm-you-row { transform: translateY(0); }
+    .gm-r1-row  { transform: translateY(50px); }
+    .gm-r2-row  { transform: translateY(100px); }
+    .gm-you-row .d1, .gm-r1-row .d2 { opacity: 1; }
+    .gm-you-row .d2, .gm-r1-row .d1 { opacity: 0; }
+    .gm-you-row .gm-tag, .gm-r1-row .gm-tag { opacity: 1; }
+    @media (prefers-reduced-motion: no-preference) {
+      .gm-sheet { animation: gmSheet 7s cubic-bezier(.22,1,.36,1) infinite; }
+      .gm-pin-top { animation: gmDrop 7s cubic-bezier(.34,1.56,.64,1) infinite; }
+      .gm-pulse { animation: gmPulse 2.1s ease-out infinite; }
+      .gm-you-row { animation: gmYouUp 7s cubic-bezier(.5,0,.2,1) infinite; }
+      .gm-r1-row { animation: gmR1Down 7s cubic-bezier(.5,0,.2,1) infinite; }
+      .gm-you-row .d2 { animation: gmFadeOut 7s steps(1) infinite; }
+      .gm-you-row .d1 { animation: gmFadeIn 7s steps(1) infinite; }
+      .gm-r1-row .d1 { animation: gmFadeOut 7s steps(1) infinite; }
+      .gm-r1-row .d2 { animation: gmFadeIn 7s steps(1) infinite; }
+      .gm-you-row .gm-tag, .gm-r1-row .gm-tag { animation: gmTagIn 7s ease-out infinite; }
+      .gm-you-row { will-change: transform; }
+    }
+    @keyframes gmYouUp { 0%, 26% { transform: translateY(50px); } 42%, 100% { transform: translateY(0); } }
+    @keyframes gmR1Down { 0%, 26% { transform: translateY(0); } 42%, 100% { transform: translateY(50px); } }
+    @keyframes gmFadeOut { 0%, 33% { opacity: 1; } 34%, 100% { opacity: 0; } }
+    @keyframes gmFadeIn { 0%, 33% { opacity: 0; } 34%, 100% { opacity: 1; } }
+    @keyframes gmTagIn { 0%, 38% { opacity: 0; transform: scale(.6); } 50%, 92% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1); } }
+    @keyframes gmSheet { 0% { transform: translateY(112%); } 15%, 100% { transform: translateY(0); } }
+    @keyframes gmDrop { 0%, 3% { transform: translate(-50%,-210%); opacity: 0; } 15% { opacity: 1; } 20%, 100% { transform: translate(-50%,-100%); opacity: 1; } }
+    @keyframes gmPulse { 0% { transform: translate(-50%,0) scale(.35); opacity: .65; } 100% { transform: translate(-50%,0) scale(1.7); opacity: 0; } }
+    .ps-lang { display: flex; flex-direction: column; }
+    .ps-langbar { display: inline-flex; align-self: center; gap: 3px; padding: 3px; border-radius: 999px; background: rgba(20,24,30,0.05); border: 1px solid var(--line-soft); margin-bottom: 22px; }
+    .ps-langbar button { border: none; cursor: default; font-family: var(--font-display); font-weight: 700; font-size: 0.72rem; padding: 6px 16px; border-radius: 999px; background: transparent; color: var(--text-soft); }
+    .ps-langbar button.on { background: var(--gold); color: #241804; }
+    .ps-lang-stack { display: grid; }
+    .ps-lang-stack > .ps-lang-body { grid-area: 1 / 1; }
+    .ps-lb-en { opacity: 0; }
+    .ps-lb-es { opacity: 1; }
+    .ps-lang-es-btn { background: var(--gold); color: #241804; }
+    @media (prefers-reduced-motion: no-preference) {
+      .ps-lb-en { animation: grLbEn 6s ease-in-out infinite; }
+      .ps-lb-es { animation: grLbEs 6s ease-in-out infinite; }
+      .ps-lang-en-btn { animation: grBtnEn 6s ease-in-out infinite; }
+      .ps-lang-es-btn { animation: grBtnEs 6s ease-in-out infinite; }
+    }
+    @keyframes grLbEn { 0%,42%{opacity:1} 50%,92%{opacity:0} 100%{opacity:1} }
+    @keyframes grLbEs { 0%,42%{opacity:0} 50%,92%{opacity:1} 100%{opacity:0} }
+    @keyframes grBtnEn { 0%,42%{background:var(--gold);color:#241804} 50%,92%{background:transparent;color:var(--text-soft)} 100%{background:var(--gold);color:#241804} }
+    @keyframes grBtnEs { 0%,42%{background:transparent;color:var(--text-soft)} 50%,92%{background:var(--gold);color:#241804} 100%{background:transparent;color:var(--text-soft)} }
+    .ps-lang-body { text-align: left; }
+    .ps-eyebrow { font-family: var(--font-display); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .ps-lang-h { font-family: var(--font-hero); font-weight: 700; font-size: 1.7rem; line-height: 1.04; letter-spacing: -0.015em; color: var(--text-head); margin: 0; }
+    .ps-lang-h em { font-style: italic; font-weight: 400; color: var(--gold); }
+    .ps-lang-en { margin-top: 12px; font-family: var(--font-display); font-style: italic; font-size: 0.82rem; color: var(--text-soft); }
+    .ps-lang-chip { display: inline-block; margin-top: 18px; padding: 8px 14px; border-radius: 999px; background: rgba(79,203,140,0.12); border: 1px solid rgba(79,203,140,0.32); font-size: 0.72rem; font-weight: 700; color: var(--good); }
+    @keyframes grPhoneScroll {
+      0%, 19%   { transform: translateY(0); }
+      25%, 44%  { transform: translateY(-25%); }
+      50%, 69%  { transform: translateY(-50%); }
+      75%, 96%  { transform: translateY(-75%); }
+      100%      { transform: translateY(-75%); }
+    }
+    .gr-state { height: var(--vph); padding: 6px 18px 0; box-sizing: border-box; overflow: hidden; text-align: left; }
+    .gr-state-hd { display: flex; align-items: center; gap: 10px; padding: 4px 0 10px; }
+    .gr-state-hd .ph { width: 34px; height: 34px; border-radius: 9px; flex: none; object-fit: cover; background: linear-gradient(135deg,#E7B658,#D89A3C); }
+    .gr-state-hd b { font-family: var(--font-display); font-weight: 800; font-size: 0.98rem; color: var(--text-head); }
+    .gr-gauge { position: relative; width: 124px; margin: 2px auto 0; }
+    .gr-gauge svg { width: 124px; height: 124px; display: block; }
+    .gr-gauge .val { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .gr-gauge .val b { font-family: var(--font-hero); font-weight: 800; font-size: 2.2rem; color: var(--text-head); line-height: 1; }
+    .gr-gauge .val small { position: absolute; top: 63%; left: 0; right: 0; text-align: center; font-size: 0.62rem; font-weight: 700; color: var(--text-soft); }
+    .gr-gauge-cap { text-align: center; font-size: 0.76rem; color: var(--text-soft); margin-top: 6px; }
+    .gr-gauge-cap b { display: block; font-family: var(--font-display); font-size: 1.02rem; color: var(--poor); margin-top: 1px; }
+    .gr-mini-row { display: flex; align-items: center; gap: 11px; padding: 9px 0; border-bottom: 1px solid var(--line-soft); }
+    .gr-mini-ring { flex: none; width: 28px; height: 28px; }
+    .gr-mini-row .lbl { flex: 1; }
+    .gr-mini-row .lbl b { display: block; font-size: 0.8rem; font-weight: 700; color: var(--text-head); }
+    .gr-mini-row .lbl small { font-size: 0.7rem; font-weight: 700; }
+    .gr-mini-row .sc { font-size: 0.78rem; font-weight: 700; color: var(--text-soft); }
+    .gr-mini-h { font-family: var(--font-display); font-weight: 800; font-size: 0.98rem; color: var(--text-head); margin: 2px 0 8px; }
+    .gr-mini-comp { display: flex; align-items: center; gap: 10px; padding: 7px 0; }
+    .gr-mini-comp .rank { font-size: 0.7rem; font-weight: 700; color: var(--text-soft); width: 24px; }
+    .gr-mini-comp .nm { flex: 1; font-size: 0.8rem; font-weight: 600; color: var(--text); }
+    .gr-mini-comp .nm small { display: block; color: var(--text-soft); font-weight: 500; }
+    .gr-mini-comp .pts { font-size: 0.76rem; font-weight: 700; }
+    .gr-mini-comp.--you { background: var(--gold-soft); border-radius: 10px; padding: 8px; margin: 4px -6px 0; }
+    .gr-mini-alert > b { font-size: 0.92rem; color: var(--text-head); display: block; margin: 6px 0 11px; line-height: 1.3; }
+    .gr-issue { display: flex; gap: 9px; padding: 10px 11px; border-radius: 11px; background: rgba(44,38,28,0.045); margin-bottom: 8px; }
+    .gr-issue svg { width: 15px; height: 15px; color: var(--poor); flex: none; margin-top: 1px; }
+    .gr-issue b { display: block; font-size: 0.78rem; color: var(--text-head); }
+    .gr-issue span { font-size: 0.69rem; color: var(--text-soft); line-height: 1.4; }
+
+    /* ============ SECTION SCAFFOLD ============ */
+    .gr-section { padding: clamp(56px, 9vw, 110px) 0; }
+    .gr-section-head { max-width: 40ch; }
+    .gr-section-head.--center { max-width: 34ch; margin: 0 auto; text-align: center; }
+    .gr-section-head h2 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.035em; font-size: clamp(1.9rem, 4.6vw, 3.1rem); line-height: 1.05; margin-top: 12px; text-wrap: balance; }
+    .gr-section-head p { margin-top: 14px; color: var(--text-dim); font-size: 1.06rem; line-height: 1.6; }
+
+    /* split layout: heading left, content right on wide screens */
+    .gr-split { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 4vw, 46px); }
+    .gr-split > .gr-feat-grid, .gr-split > .gr-quotes { margin-top: 0; }
+    @media (min-width: 940px) {
+      .gr-split { grid-template-columns: minmax(250px, 0.8fr) 1.2fr; gap: clamp(44px, 5vw, 76px); align-items: start; }
+      .gr-split > .gr-section-head { max-width: none; position: sticky; top: 96px; }
+      .gr-split > .gr-quotes { grid-template-columns: 1fr; }
+    }
+
+    /* ============ VALUE TABS ============ */
+    .gr-tabs { margin-top: 38px; }
+    .gr-tablist { display: flex; gap: 4px; overflow-x: auto; border-bottom: 1px solid var(--line); -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .gr-tablist::-webkit-scrollbar { display: none; }
+    .gr-tab { position: relative; flex: none; padding: 16px 6px; margin-right: 26px; font-family: var(--font-display); font-weight: 700; font-size: clamp(0.95rem, 2vw, 1.1rem); color: var(--text-soft); background: none; border: none; cursor: pointer; white-space: nowrap; transition: color .2s; }
+    .gr-tab.is-active { color: var(--text-head); }
+    .gr-tab.is-active::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--gold); }
+    .gr-panel { display: none; margin-top: 30px; }
+    .gr-panel.is-active { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 4vw, 52px); align-items: center; animation: grFade .5s ease both; }
+    @keyframes grFade { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .gr-panel-copy .pe { color: var(--gold); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; }
+    .gr-panel-copy h3 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 3vw, 2rem); letter-spacing: -0.02em; line-height: 1.1; margin: 12px 0 14px; }
+    .gr-panel-copy p { color: var(--text-dim); font-size: 1.02rem; line-height: 1.5; max-width: 44ch; }
+    .gr-panel-list { margin-top: 18px; display: grid; gap: 11px; }
+    .gr-panel-list li { display: flex; align-items: flex-start; gap: 11px; font-size: 0.96rem; color: var(--text); line-height: 1.5; }
+    .gr-panel-list svg { flex: none; width: 20px; height: 20px; color: var(--good); margin-top: 1px; }
+    .gr-panel-visual { border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line-soft); background: #FFFFFF; box-shadow: 0 20px 50px rgba(40,30,12,0.12); padding: clamp(22px, 3vw, 34px); min-height: 280px; display: flex; flex-direction: column; justify-content: center; }
+    @media (min-width: 860px) { .gr-panel.is-active { grid-template-columns: 0.92fr 1.08fr; } }
+
+    /* search-rank visual */
+    .gr-rankrow { display: flex; align-items: center; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line-soft); }
+    .gr-rankrow:last-child { border-bottom: none; }
+    .gr-rankrow .g { flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--bg-1); font-weight: 800; font-size: 0.8rem; color: var(--text-soft); }
+    .gr-rankrow .q { flex: 1; font-size: 0.92rem; font-weight: 600; color: var(--text); }
+    .gr-rankrow .badge { font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 999px; }
+    .gr-rankrow .badge.--you { background: rgba(30,126,84,0.14); color: var(--good); }
+    .gr-rankrow .badge.--none { background: rgba(207,74,60,0.1); color: var(--poor); }
+
+    /* google search-results visual — your site outranking a competitor */
+    .gr-serp { background: #fff; padding: clamp(16px, 2.4vw, 22px) clamp(16px, 2.4vw, 22px) clamp(18px, 2.6vw, 24px); display: flex; flex-direction: column; gap: 0; }
+    .serp-bar { display: flex; align-items: center; gap: 11px; height: 44px; padding: 0 8px 0 14px; border-radius: 999px; border: 1px solid #dfe1e5; box-shadow: 0 1px 5px rgba(32,33,36,0.10); }
+    .serp-gicon svg { display: block; width: 18px; height: 18px; }
+    .serp-q { flex: 1; min-width: 0; font-family: arial, sans-serif; font-size: 0.96rem; color: #202124; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .serp-search { flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; }
+    .serp-search svg { width: 17px; height: 17px; }
+    .serp-meta { font-family: arial, sans-serif; font-size: 0.74rem; color: #70757a; padding: 12px 2px 4px; border-bottom: 1px solid #ececec; margin-bottom: 14px; }
+    .serp-result { position: relative; font-family: arial, sans-serif; padding: 12px 14px; border-radius: 12px; }
+    .serp-result + .serp-result { margin-top: 8px; }
+    .serp-result.--you { background: #fef8ec; box-shadow: inset 0 0 0 1px rgba(208,138,52,0.4); }
+    .serp-result.--comp { opacity: 0.72; }
+    .serp-pill { position: absolute; top: 12px; right: 12px; font-size: 0.66rem; font-weight: 700; font-family: var(--font-display); color: #fff; background: linear-gradient(135deg, #E8AC44, #D08A34); padding: 4px 9px; border-radius: 999px; letter-spacing: 0.01em; }
+    .serp-site { display: flex; align-items: center; gap: 9px; }
+    .serp-fav { flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: #2A1C06; color: #fff; font-family: var(--font-display); font-weight: 800; font-size: 0.8rem; }
+    .serp-fav.--c { background: #9aa0a6; }
+    .serp-sitemeta { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+    .serp-name { font-size: 0.8rem; color: #202124; font-weight: 400; }
+    .serp-url { font-size: 0.72rem; color: #5f6368; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .serp-title { display: block; margin: 7px 0 2px; font-size: 1.06rem; line-height: 1.3; color: #1a0dab; font-weight: 400; }
+    .serp-result.--comp .serp-title { font-size: 0.98rem; }
+    .serp-rate { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; font-size: 0.78rem; color: #70757a; margin: 3px 0 2px; }
+    .serp-rate b { color: #202124; font-weight: 700; }
+    .serp-stars { color: #fbbc04; letter-spacing: -1px; font-size: 0.82rem; }
+    .serp-open { color: #1e7e54; font-weight: 700; }
+    .serp-dot { color: #bdc1c6; }
+    .serp-snip { font-size: 0.8rem; line-height: 1.5; color: #4d5156; margin-top: 4px; }
+    /* entrance: your result lifts above the competitor */
+    .gr-serp .serp-result { opacity: 1; }
+    @media (prefers-reduced-motion: no-preference) {
+      .gr-serp.viz-go .serp-result.--you { animation: serpRise .6s cubic-bezier(.22,1,.36,1) both; }
+      .gr-serp.viz-go .serp-pill { animation: serpPop .5s cubic-bezier(.34,1.4,.5,1) .35s both; }
+      .gr-serp.viz-go .serp-result.--comp { animation: serpFade .6s ease .12s both; }
+    }
+    @keyframes serpRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+    @keyframes serpFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 0.72; transform: none; } }
+    @keyframes serpPop { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: none; } }
+
+    /* bars visual */
+    .gr-bars { display: grid; gap: 18px; }
+    .gr-bar-item .top { display: flex; justify-content: space-between; font-size: 0.86rem; font-weight: 700; margin-bottom: 7px; }
+    .gr-bar-track { height: 12px; border-radius: 999px; background: var(--bg-1); overflow: hidden; }
+    .gr-bar-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #E0A23C, #C9820E); width: 0; transition: width 1.1s cubic-bezier(.22,1,.36,1); }
+    .gr-bar-item.--muted .gr-bar-fill { background: rgba(44,38,28,0.2); }
+
+    /* ===== order-feed visual (sales) ===== */
+    .gr-vsales { display: grid; gap: 15px; }
+    .gr-vsales-hd { display: flex; align-items: center; justify-content: space-between; padding-bottom: 14px; border-bottom: 1px solid var(--line-soft); }
+    .gr-vsales-hd .big { font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.7rem,4vw,2.1rem); color: var(--good); letter-spacing: -0.02em; line-height: 1; }
+    .gr-vsales-hd .lbl { font-size: 0.8rem; font-weight: 700; color: var(--text-soft); text-align: right; max-width: 11ch; line-height: 1.3; }
+    .gr-tickets { display: grid; gap: 10px; }
+    .gr-ticket { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; border: 1px solid var(--line-soft); background: var(--bg-0); opacity: 0; transform: translateY(12px); }
+    .gr-ticket .ic { flex: none; width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; background: var(--gold-soft); color: var(--gold); }
+    .gr-ticket .ic svg { width: 19px; height: 19px; }
+    .gr-ticket .who { flex: 1; min-width: 0; }
+    .gr-ticket .who b { display: block; font-family: var(--font-display); font-size: 0.9rem; color: var(--text-head); font-weight: 700; }
+    .gr-ticket .who span { font-size: 0.77rem; color: var(--text-soft); }
+    .gr-ticket .amt { font-family: var(--font-display); font-weight: 800; font-size: 1rem; color: var(--text-head); }
+    .gr-ticket .new { display: block; font-size: 0.58rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--good); text-align: right; margin-top: 2px; }
+    .viz-go .gr-ticket { animation: grTkIn .5s cubic-bezier(.22,1,.36,1) forwards; }
+    .viz-go .gr-ticket:nth-child(1) { animation-delay: .08s; }
+    .viz-go .gr-ticket:nth-child(2) { animation-delay: .42s; }
+    .viz-go .gr-ticket:nth-child(3) { animation-delay: .76s; }
+    @keyframes grTkIn { to { opacity: 1; transform: none; } }
+
+    /* ===== loyalty ring visual (repeat) ===== */
+    .gr-vloyal { display: flex; align-items: center; gap: clamp(20px,4vw,32px); flex-wrap: wrap; }
+    .gr-ring { flex: none; position: relative; width: 138px; height: 138px; }
+    .gr-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .gr-ring .track { fill: none; stroke: var(--bg-1); stroke-width: 13; }
+    .gr-ring .prog { fill: none; stroke: #C9820E; stroke-width: 13; stroke-linecap: round; stroke-dasharray: 339; stroke-dashoffset: 339; }
+    .viz-go .gr-ring .prog { animation: grRing 1.3s cubic-bezier(.22,1,.36,1) forwards; }
+    @keyframes grRing { to { stroke-dashoffset: 99; } }
+    .gr-ring .ctr { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-align: center; padding: 0 12px; }
+    .gr-ring .ctr b { font-family: var(--font-hero); font-weight: 800; font-size: 1.85rem; line-height: 1; color: var(--text-head); letter-spacing: -0.02em; }
+    .gr-ring .ctr span { font-size: 0.62rem; color: var(--text-soft); font-weight: 700; max-width: 10ch; line-height: 1.25; }
+    .gr-loyal-leg { display: grid; gap: 14px; flex: 1; min-width: 150px; }
+    .gr-loyal-leg .lg { display: flex; align-items: center; gap: 10px; }
+    .gr-loyal-leg .dot { flex: none; width: 12px; height: 12px; border-radius: 50%; }
+    .gr-loyal-leg .lg b { font-family: var(--font-display); font-size: 1.02rem; font-weight: 800; color: var(--text-head); }
+    .gr-loyal-leg .lg small { display: block; font-size: 0.78rem; color: var(--text-soft); font-weight: 600; }
+
+    /* ===== phone booking visual (mobile) ===== */
+    .gr-vmob { display: flex; align-items: center; gap: clamp(16px,3.5vw,30px); flex-wrap: wrap; }
+    .gr-mphone { flex: none; width: 128px; border-radius: 26px; background: #1C170F; padding: 7px; box-shadow: 0 18px 40px rgba(28,23,15,0.24); }
+    .gr-mphone-scr { border-radius: 20px; background: var(--bg-0); overflow: hidden; padding: 16px 13px; }
+    .gr-mphone-top { display: flex; align-items: center; gap: 6px; font-size: 0.6rem; font-weight: 700; color: var(--text-soft); margin-bottom: 12px; }
+    .gr-mphone-top .pin { width: 10px; height: 10px; border-radius: 50%; background: var(--good); }
+    .gr-bk-check { width: 42px; height: 42px; border-radius: 50%; background: rgba(30,126,84,0.14); color: var(--good); display: grid; place-items: center; margin: 0 auto 11px; opacity: 0; transform: scale(.6); }
+    .gr-bk-check svg { width: 22px; height: 22px; }
+    .viz-go .gr-bk-check { animation: grPop .5s .25s cubic-bezier(.34,1.5,.5,1) forwards; }
+    @keyframes grPop { to { opacity: 1; transform: none; } }
+    .gr-bk-title { text-align: center; font-family: var(--font-display); font-weight: 800; font-size: 0.86rem; color: var(--text-head); }
+    .gr-bk-sub { text-align: center; font-size: 0.7rem; color: var(--text-soft); margin-top: 2px; }
+    .gr-bk-row { margin-top: 12px; padding-top: 11px; border-top: 1px solid var(--line-soft); display: flex; justify-content: space-between; font-size: 0.66rem; font-weight: 700; }
+    .gr-bk-row .v { color: var(--text-head); }
+    .gr-mob-side { flex: 1; min-width: 150px; display: grid; gap: 13px; }
+    .gr-speed-chip { display: inline-flex; align-items: center; gap: 8px; align-self: start; padding: 8px 14px; border-radius: 999px; background: var(--gold-soft); color: var(--gold); font-family: var(--font-display); font-weight: 800; font-size: 0.92rem; }
+    .gr-speed-chip svg { width: 16px; height: 16px; }
+    .gr-mob-line { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+    .gr-mob-line svg { flex: none; width: 19px; height: 19px; color: var(--good); }
+    .gr-mob-comp { font-size: 0.8rem; color: var(--text-soft); }
+    .gr-mob-comp b { color: var(--text-head); }
+
+    /* ============ FEATURE CARDS (same tech) ============ */
+    .gr-feat-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: clamp(36px, 4vw, 52px); }
+    .gr-feat { border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line-soft); background: var(--bg-1); box-shadow: 0 14px 40px rgba(0,0,0,0.3); padding: clamp(26px, 3vw, 36px); }
+    .gr-feat.--wide { grid-column: 1 / -1; }
+    .gr-feat .ic { width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center; background: var(--gold-soft); border: 1px solid rgba(181,126,30,0.28); color: var(--gold); margin-bottom: 16px; }
+    .gr-feat .ic svg { width: 23px; height: 23px; }
+    .gr-feat h3 { font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; letter-spacing: -0.01em; margin-bottom: 8px; }
+    .gr-feat p { color: var(--text-dim); font-size: 0.96rem; line-height: 1.6; }
+    @media (min-width: 760px) { .gr-feat-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1060px) { .gr-feat-grid { grid-template-columns: repeat(4, 1fr); } .gr-feat { padding: clamp(22px, 1.8vw, 28px); } .gr-feat h3 { font-size: 1.08rem; } }
+
+    /* ============ WHY (speed / mobile / seo) ============ */
+    .gr-why { background: var(--bg-1); color: var(--text); border: 1px solid var(--line-soft); border-radius: clamp(24px, 4vw, 44px); padding: clamp(40px, 6vw, 80px) clamp(24px, 4vw, 64px); position: relative; overflow: hidden; }
+    .gr-why::before { content: ""; position: absolute; top: -20%; right: -10%; width: 460px; height: 460px; background: radial-gradient(circle, rgba(181,126,30,0.06), transparent 68%); pointer-events: none; }
+    .gr-why-top { position: relative; display: grid; grid-template-columns: 1fr; gap: clamp(26px, 4vw, 44px); align-items: center; }
+    .gr-why-head { position: relative; max-width: 30ch; }
+    .gr-why-head .gr-eyebrow { color: var(--gold); }
+    .gr-why-head h2 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.035em; font-size: clamp(1.8rem, 4.4vw, 2.9rem); line-height: 1.06; margin-top: 12px; color: #2A1C06; }
+    .gr-why-head p { margin-top: 14px; color: rgba(42,28,6,0.8); font-size: 1.04rem; line-height: 1.6; }
+    .gr-why-grid { position: relative; display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: clamp(28px, 4vw, 44px); }
+    .gr-why-card { display: grid; grid-template-columns: minmax(78px, auto) 1fr; column-gap: 22px; row-gap: 3px; align-items: center; padding: 20px 24px; border-radius: var(--r-lg); background: rgba(42,28,6,0.07); border: 1px solid rgba(42,28,6,0.14); }
+    .gr-why-stat { grid-row: 1 / span 2; align-self: center; font-family: var(--font-hero); font-weight: 800; font-size: clamp(2rem, 4vw, 2.7rem); letter-spacing: -0.03em; line-height: 1; color: #2A1C06; }
+    .gr-why-card h3 { align-self: end; font-family: var(--font-display); font-weight: 700; font-size: 1.06rem; margin: 0; color: #2A1C06; }
+    .gr-why-card p { align-self: start; margin: 0; color: rgba(42,28,6,0.72); font-size: 0.9rem; line-height: 1.55; }
+    @media (min-width: 900px) {
+      .gr-why { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: clamp(40px, 5vw, 72px); align-items: center; }
+      .gr-why-head { max-width: 34ch; align-self: center; }
+      .gr-why-head h2 { font-size: clamp(2rem, 3.4vw, 3.1rem); }
+      .gr-why-demo { margin-top: 0; max-width: none; }
+    }
+
+    /* why — animated before/after sales graph */
+    .gr-why-graph { position: relative; margin-top: 18px; border-radius: var(--r-lg); background: rgba(255,253,248,0.9); border: 1px solid rgba(42,28,6,0.12); padding: clamp(18px,3vw,26px) clamp(18px,3vw,28px) clamp(14px,2vw,20px); overflow: hidden; }
+    .gr-wg-head { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 10px; margin-bottom: 4px; }
+    .gr-wg-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(0.92rem,2.2vw,1.02rem); color: var(--text-head); margin-right: auto; letter-spacing: -0.01em; }
+    .gr-wg-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 0.7rem; font-weight: 800; padding: 5px 10px; border-radius: 999px; line-height: 1; }
+    .gr-wg-tag svg { width: 12px; height: 12px; }
+    .gr-wg-tag--before { background: rgba(207,74,60,0.14); color: var(--poor); }
+    .gr-wg-tag--after { background: rgba(30,126,84,0.16); color: var(--good); }
+    .gr-wg-plot { position: relative; width: 100%; height: clamp(140px, 24vw, 188px); margin-top: 8px; }
+    .gr-wg-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .gr-wg-grid line { stroke: rgba(42,28,6,0.09); stroke-width: 1; }
+    .gr-wg-line { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 100; stroke-dashoffset: 0; }
+    .gr-wg-line--down { stroke: var(--poor); }
+    .gr-wg-line--up { stroke: var(--good); }
+    .gr-wg-dot { opacity: 0; }
+    .gr-wg-dot--down { fill: var(--poor); }
+    .gr-wg-dot--up { fill: var(--good); }
+    .gr-wg-axis { display: flex; justify-content: space-between; font-size: 0.66rem; font-weight: 700; color: var(--text-soft); margin-top: 6px; letter-spacing: 0.02em; }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .gr-wg-line--down { animation: grWgDown 12s ease-in-out infinite; }
+      .gr-wg-line--up { animation: grWgUp 12s ease-in-out infinite; }
+      .gr-wg-dot--down { animation: grWgDotD 12s ease-in-out infinite; }
+      .gr-wg-dot--up { animation: grWgDotU 12s ease-in-out infinite; }
+      .gr-wg-tag--before { animation: grWgTagB 12s ease-in-out infinite; }
+      .gr-wg-tag--after { animation: grWgTagA 12s ease-in-out infinite; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .gr-wg-line--down { opacity: 0.28; }
+      .gr-wg-dot--up { opacity: 1; }
+      .gr-wg-tag--before { opacity: 0.4; }
+    }
+    @keyframes grWgDown {
+      0%, 5% { stroke-dashoffset: 100; opacity: 1; }
+      20%, 28% { stroke-dashoffset: 0; opacity: 1; }
+      34%, 100% { stroke-dashoffset: 0; opacity: 0; }
+    }
+    @keyframes grWgUp {
+      0%, 35% { stroke-dashoffset: 100; opacity: 0; }
+      39% { stroke-dashoffset: 100; opacity: 1; }
+      62%, 96% { stroke-dashoffset: 0; opacity: 1; }
+      100% { stroke-dashoffset: 0; opacity: 0; }
+    }
+    @keyframes grWgDotD {
+      0%, 18% { opacity: 0; }
+      23%, 28% { opacity: 1; }
+      33%, 100% { opacity: 0; }
+    }
+    @keyframes grWgDotU {
+      0%, 60% { opacity: 0; }
+      65%, 96% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    @keyframes grWgTagB { 0%, 30% { opacity: 1; } 38%, 100% { opacity: 0.32; } }
+    @keyframes grWgTagA { 0%, 30% { opacity: 0.32; } 38%, 100% { opacity: 1; } }
+
+    /* why — demo: site transform stacked above its sales graph, as one unit */
+    .gr-why-demo { position: relative; display: flex; flex-direction: column; gap: 0; margin-top: clamp(32px, 4.5vw, 52px); margin-inline: auto; width: 100%; max-width: 600px; border-radius: var(--r-lg); overflow: hidden; box-shadow: 0 18px 46px rgba(40,30,12,0.16); border: 1px solid rgba(42,28,6,0.16); }
+    .gr-why-demo .gr-why-graph { margin-top: 0; border-radius: 0; border: none; border-top: 1px solid rgba(42,28,6,0.1); box-shadow: none; }
+    .gr-why-demo .gr-wg-plot { height: clamp(116px, 18vw, 150px); }
+
+    /* before/after restaurant site mockup */
+    .gr-mockup { position: relative; overflow: hidden; background: #16100a; display: flex; flex-direction: column; }
+    .gr-mockup-bar { display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: #241809; flex: none; }
+    .gr-mockup-bar i { width: 9px; height: 9px; border-radius: 50%; display: block; }
+    .gr-mockup-url { margin-left: 8px; flex: 1; height: 21px; border-radius: 6px; background: rgba(255,255,255,0.1); display: flex; align-items: center; padding: 0 10px; overflow: hidden; }
+    .gr-mockup-url span { font-family: var(--font-display); font-size: 0.66rem; color: rgba(255,255,255,0.62); white-space: nowrap; grid-area: 1/1; }
+    .gr-mockup-url .url-grid { display: grid; }
+    .gr-mockup-screen { position: relative; flex: 1; aspect-ratio: 16 / 9.2; min-height: clamp(210px, 30vw, 340px); overflow: hidden; }
+    .gr-mock-layer { position: absolute; inset: 0; }
+
+    /* BAD layer — generic ~2014 restaurant template, "modern bad" */
+    .gr-mock-bad { background: #ffffff; display: flex; flex-direction: column; font-family: Arial, "Helvetica Neue", sans-serif; }
+    .mb-nav { display: flex; align-items: center; gap: 8px; padding: 8px 14px; background: #fff; border-bottom: 1px solid #e4e4e4; flex: none; }
+    .mb-logo { font-weight: 700; font-size: 0.94rem; color: #2f6db0; letter-spacing: 0.01em; margin-right: auto; }
+    .mb-logo span { color: #e07b39; }
+    .mb-menu { display: flex; gap: 11px; font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.03em; color: #888; font-weight: 700; }
+    .mb-cta { background: #2f6db0; color: #fff; font-size: 0.56rem; font-weight: 700; text-transform: uppercase; padding: 6px 11px; border-radius: 4px; letter-spacing: 0.03em; flex: none; }
+    .mb-hero { position: relative; flex: 1; min-height: 0; display: grid; place-items: center; overflow: hidden; }
+    .mb-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(1.4) contrast(0.9) brightness(0.9); }
+    .mb-hero::after { content: ""; position: absolute; inset: 0; background: rgba(22,42,72,0.52); }
+    .mb-hero-in { position: relative; z-index: 2; text-align: center; padding: 10px 16px; color: #fff; max-width: 88%; }
+    .mb-h { font-weight: 700; font-size: clamp(1.05rem, 3.2vw, 1.55rem); line-height: 1.08; text-shadow: 0 1px 3px rgba(0,0,0,0.45); margin-bottom: 7px; }
+    .mb-tag { font-family: Georgia, "Times New Roman", serif; font-style: italic; font-size: 0.8rem; color: #ece3d4; margin-bottom: 14px; }
+    .mb-btn2 { display: inline-block; background: #2f6db0; color: #fff; font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; padding: 9px 20px; border-radius: 4px; box-shadow: 0 2px 0 #234f80; }
+    .mb-dots { position: absolute; bottom: 9px; left: 0; right: 0; z-index: 2; display: flex; justify-content: center; gap: 6px; }
+    .mb-dots i { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.5); display: block; }
+    .mb-dots i.on { background: #fff; }
+    @media (max-width: 560px) { .mb-menu { display: none; } }
+
+    /* GOOD layer — editorial rebuild (WOA-style): black hero, photo on the right */
+    .gr-mock-good { opacity: 0; background: #0c0a08; }
+    .gr-mock-good img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+    .mg-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12,10,8,0.5) 0%, rgba(12,10,8,0.12) 22%, rgba(12,10,8,0) 42%, rgba(12,10,8,0.32) 66%, rgba(12,10,8,0.78) 100%); }
+    .mg-frame { position: absolute; inset: 11px; border: 1px solid rgba(255,255,255,0.26); pointer-events: none; z-index: 3; }
+    .gr-mock-good img.mg-award { position: absolute; inset: 26px 26px auto auto; width: clamp(46px, 9vw, 60px); height: auto; z-index: 4; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.35)); }
+    .mg-nav { position: absolute; top: 0; left: 0; right: 0; z-index: 3; display: flex; align-items: center; justify-content: space-between; padding: 20px clamp(24px, 4vw, 36px) 0; color: rgba(255,255,255,0.88); font-family: var(--font-display); font-size: 0.56rem; letter-spacing: 0.22em; text-transform: uppercase; }
+    .mg-nav > span:last-child { text-align: right; min-width: 34px; }
+    .mg-word { font-family: var(--font-hero); font-weight: 700; font-size: clamp(1rem, 2.6vw, 1.32rem); letter-spacing: 0.42em; text-transform: none; padding-left: 0.42em; color: #fff; }
+    .mg-side { position: absolute; left: 19px; bottom: 22px; z-index: 3; writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--font-display); font-size: 0.54rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.62); }
+    .mg-hero { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding: 0 clamp(24px, 4vw, 38px) clamp(34px, 5vw, 50px) clamp(40px, 7vw, 60px); color: #fff; }
+    .mg-idx { font-family: var(--font-display); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 10px; }
+    .mg-hero h4 { font-family: var(--font-hero); font-weight: 600; letter-spacing: -0.015em; font-size: clamp(1.5rem, 4.8vw, 2.35rem); line-height: 0.98; margin-bottom: 15px; max-width: 12ch; }
+    .mg-hero h4 em { font-style: italic; font-weight: 400; }
+    .mg-cta { display: inline-flex; align-items: center; gap: 16px; }
+    .mg-order { display: inline-flex; align-items: center; gap: 8px; background: #fffdf8; color: #16100a; font-family: var(--font-display); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.01em; padding: 10px 18px; border-radius: 999px; box-shadow: 0 8px 22px rgba(0,0,0,0.28); }
+    .mg-order svg { width: 14px; height: 14px; flex: none; }
+    .mg-menu-link { font-family: var(--font-display); font-weight: 600; font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.86); padding-bottom: 3px; border-bottom: 1px solid rgba(255,255,255,0.45); }
+
+    /* before/after pill */
+
+    @media (prefers-reduced-motion: no-preference) {
+      .gr-mock-bad { animation: grMockBad 12s ease-in-out infinite; }
+      .gr-mock-good { animation: grMockGood 12s ease-in-out infinite; }
+      .gr-url-bad { animation: grMockBad 12s ease-in-out infinite; }
+      .gr-url-good { opacity: 0; animation: grMockGood 12s ease-in-out infinite; }
+      .gr-mock-good img { animation: grMockZoom 12s ease-out infinite; transform-origin: 50% 50%; }
+      .gr-mock-good .mg-frame { animation: mgFade 12s ease-out infinite; }
+      .gr-mock-good .mg-award { animation: mgRise2 12s cubic-bezier(.22,1,.36,1) infinite; }
+      .gr-mock-good .mg-nav { animation: mgRise1 12s cubic-bezier(.22,1,.36,1) infinite; }
+      .gr-mock-good .mg-side { animation: mgFadeSide 12s ease-out infinite; }
+      .gr-mock-good .mg-idx { animation: mgRise2 12s cubic-bezier(.22,1,.36,1) infinite; }
+      .gr-mock-good .mg-hero h4 { animation: mgRise3 12s cubic-bezier(.22,1,.36,1) infinite; }
+      .gr-mock-good .mg-cta { animation: mgRise4 12s cubic-bezier(.34,1.4,.5,1) infinite; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .gr-mock-good, .gr-url-good { opacity: 1; }
+      .gr-mock-bad, .gr-url-bad { opacity: 0; }
+    }
+    @keyframes grMockBad { 0%, 28% { opacity: 1; } 35%, 100% { opacity: 0; } }
+    @keyframes grMockGood { 0%, 30% { opacity: 0; } 37%, 100% { opacity: 1; } }
+    @keyframes grMockZoom { 0%, 33% { transform: scale(1.05); } 100% { transform: scale(1); } }
+    @keyframes mgFade { 0%, 37% { opacity: 0; } 47%, 100% { opacity: 1; } }
+    @keyframes mgFadeSide { 0%, 44% { opacity: 0; } 54%, 100% { opacity: 0.62; } }
+    @keyframes mgRise1 { 0%, 38% { opacity: 0; transform: translateY(-14px); } 47%, 100% { opacity: 1; transform: translateY(0); } }
+    @keyframes mgRise2 { 0%, 41% { opacity: 0; transform: translateY(16px); } 50%, 100% { opacity: 1; transform: translateY(0); } }
+    @keyframes mgRise3 { 0%, 44% { opacity: 0; transform: translateY(18px); } 54%, 100% { opacity: 1; transform: translateY(0); } }
+    @keyframes mgRise4 { 0%, 48% { opacity: 0; transform: translateY(16px); } 58%, 100% { opacity: 1; transform: translateY(0); } }
+
+    /* ============ TESTIMONIALS (2 real) ============ */
+    .gr-testi { background: linear-gradient(180deg, rgba(230,174,69,0.06), var(--bg-0) 70%); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); padding-top: clamp(58px, 7vw, 92px) !important; padding-bottom: clamp(58px, 7vw, 92px); }
+    .gr-testi .gr-section-head { margin-bottom: clamp(36px, 4vw, 52px); }
+    .gr-quotes { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 40px; }
+    .gr-quote { position: relative; border-radius: var(--r-lg); border: 1px solid var(--line-soft); background: radial-gradient(circle at top left, rgba(181,126,30,0.06), transparent 42%), var(--bg-1); box-shadow: 0 14px 40px rgba(40,30,12,0.07); padding: clamp(22px, 2.4vw, 30px); display: flex; flex-direction: column; }
+    .gr-quote-stars { display: inline-flex; gap: 2px; color: var(--gold); margin-bottom: 13px; }
+    .gr-quote-stars svg { width: 15px; height: 15px; }
+    .gr-quote p { font-family: var(--font-display); font-size: clamp(1rem, 1.4vw, 1.12rem); line-height: 1.5; color: var(--text-head); font-weight: 500; letter-spacing: -0.01em; flex: 1; }
+    .gr-quote-by { display: flex; align-items: center; gap: 13px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line-soft); }
+    .gr-quote-by .av { width: 46px; height: 46px; border-radius: 50%; background: var(--gold-soft); border: 1px solid rgba(181,126,30,0.24); display: grid; place-items: center; font-family: var(--font-hero); font-weight: 800; color: var(--gold); flex: none; }
+    .gr-quote-by b { display: block; font-family: var(--font-display); font-size: 0.96rem; color: var(--text-head); }
+    .gr-quote-by span { font-size: 0.82rem; color: var(--text-soft); }
+    .gr-testi .gr-quotes { margin-top: 0; }
+    .gr-testi .gr-quote { padding-top: clamp(34px, 4vw, 46px); }
+    .gr-testi .gr-quote::before { content: "\201C"; position: absolute; top: clamp(4px, 1vw, 10px); left: clamp(20px, 2.4vw, 30px); font-family: var(--font-hero); font-size: clamp(3.4rem, 6vw, 4.6rem); line-height: 1; color: var(--gold); opacity: 0.32; pointer-events: none; }
+    .gr-testi .gr-quote p { font-size: clamp(1.08rem, 1.5vw, 1.26rem); line-height: 1.55; }
+    @media (min-width: 760px) { .gr-quotes { grid-template-columns: 1fr 1fr; } }
+
+    /* ============ MID-PAGE CTA ============ */
+    .gr-midcta { position: relative; overflow: hidden; border-radius: clamp(20px, 3vw, 32px); background: linear-gradient(135deg, #2A1C06, #181004); color: #FBF5EA; padding: clamp(30px, 4.5vw, 54px) clamp(24px, 4vw, 56px); display: grid; grid-template-columns: 1fr; gap: clamp(20px, 3vw, 34px); align-items: center; box-shadow: 0 22px 54px rgba(28,19,5,0.28); }
+    .gr-midcta::after { content: ""; position: absolute; top: -34%; right: -8%; width: 360px; height: 360px; background: radial-gradient(circle, rgba(224,162,60,0.20), transparent 66%); pointer-events: none; }
+    .gr-midcta-txt { position: relative; }
+    .gr-midcta-txt h2 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.03em; font-size: clamp(1.5rem, 3vw, 2.1rem); line-height: 1.08; }
+    .gr-midcta-txt p { margin-top: 10px; color: rgba(251,245,234,0.74); font-size: 1rem; line-height: 1.55; max-width: 46ch; }
+    .gr-midcta-actions { position: relative; display: flex; flex-wrap: wrap; gap: 12px; }
+    .gr-midcta-actions .btn { height: 50px; padding: 0 24px; display: inline-flex; align-items: center; font-family: var(--font-display); font-weight: 700; border-radius: 14px; }
+    .gr-midcta-actions .mc-gold { background: linear-gradient(135deg, #E8AC44, #D08A34); color: #241804; border: none; box-shadow: 0 10px 26px rgba(208,138,52,0.36); }
+    .gr-midcta-actions .mc-gold:hover { transform: translateY(-1px); box-shadow: 0 14px 32px rgba(208,138,52,0.46); }
+    .gr-midcta-actions .mc-ghost { background: rgba(255,255,255,0.08); color: #FBF5EA; border: 1px solid rgba(251,245,234,0.28); }
+    .gr-midcta-actions .mc-ghost:hover { background: rgba(255,255,255,0.14); }
+    @media (min-width: 820px) { .gr-midcta { grid-template-columns: 1.3fr 1fr; gap: clamp(32px, 4vw, 60px); } .gr-midcta-actions { justify-content: flex-end; } }
+
+    /* ============ BELIEFS / FOUNDERS ============ */
+    .gr-beliefs { display: grid; grid-template-columns: 1fr; gap: clamp(30px, 5vw, 56px); }
+    .gr-beliefs-photo { border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line-soft); box-shadow: 0 18px 46px rgba(40,30,12,0.12); width: 100%; }
+    .gr-beliefs-photo img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: center 35%; display: block; }
+    .gr-beliefs-cap { margin-top: 14px; }
+    .gr-beliefs-cap b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 0.96rem; color: var(--text-head); }
+    .gr-beliefs-cap span { font-size: 0.82rem; color: var(--text-soft); }
+    .gr-belief { padding: 24px 0; border-top: 1px solid var(--line); }
+    .gr-belief:first-child { border-top: none; padding-top: 0; }
+    .gr-belief h3 { font-family: var(--font-display); font-weight: 800; font-size: 1.16rem; letter-spacing: -0.01em; margin-bottom: 10px; }
+    .gr-belief p { color: var(--text-dim); font-size: 0.96rem; line-height: 1.65; }
+    @media (min-width: 860px) { .gr-beliefs { grid-template-columns: 0.85fr 1.15fr; align-items: start; } }
+
+    /* ============ RECENT WORK SHOWCASE ============ */
+    .gw-case { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 4.5vw, 52px); align-items: center; }
+    .gw-case + .gw-case { margin-top: clamp(44px, 7vw, 84px); }
+    @media (min-width: 900px) {
+      .gw-case { grid-template-columns: 1.04fr 0.96fr; }
+      .gw-case .gw-media { order: 2; } .gw-case .gw-copy { order: 1; }
+      .gw-case.--flip .gw-media { order: 1; } .gw-case.--flip .gw-copy { order: 2; }
+    }
+    /* browser frame (dark device on the light page) */
+    .gw-browser { position: relative; border-radius: 14px; overflow: hidden; border: 1px solid rgba(20,15,8,0.1); background: #14110b; box-shadow: 0 40px 90px rgba(40,28,10,0.22); }
+    .gw-bar { display: flex; align-items: center; gap: 8px; padding: 11px 14px; background: #1b1813; border-bottom: 1px solid rgba(255,248,235,0.07); }
+    .gw-dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+    .gw-dot.r { background: #e06c5a; } .gw-dot.y { background: #e2b24d; } .gw-dot.g { background: #54b07f; }
+    .gw-url { flex: 1; margin-left: 8px; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,0.05); font-size: 0.72rem; color: rgba(251,245,234,0.6); display: flex; align-items: center; gap: 7px; }
+    .gw-url svg { width: 11px; height: 11px; color: #54b07f; }
+    .gw-view { position: relative; overflow: hidden; background: #0c0a07; }
+    .gw-scrollbox { --fh: clamp(330px, 48vw, 520px); }
+    .gw-scrollbox .gw-view { height: var(--fh); }
+    .gw-scrollbox .gw-view img { width: 100%; height: auto; display: block; transition: transform 9s linear; }
+    .gw-scrollbox:hover .gw-view img { transform: translateY(calc(-100% + var(--fh))); }
+    .gw-hint { position: absolute; right: 12px; bottom: 12px; z-index: 3; display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px; border-radius: 999px; background: rgba(12,10,7,0.78); backdrop-filter: blur(6px); border: 1px solid rgba(255,248,235,0.14); color: #FBF5EA; font-size: 0.76rem; font-weight: 600; transition: opacity .4s; }
+    .gw-hint svg { width: 13px; height: 13px; color: #E8AC44; }
+    .gw-scrollbox:hover .gw-hint { opacity: 0; }
+    @media (hover: none), (max-width: 859px) {
+      .gw-scrollbox .gw-view { height: auto; }
+      .gw-scrollbox .gw-view img { transform: none !important; }
+      .gw-scrollbox .gw-hint { display: none; }
+    }
+    /* case copy */
+    .gw-copy .tag { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(181,126,30,0.3); background: var(--gold-soft); color: var(--gold); font-size: 0.74rem; font-weight: 800; letter-spacing: 0.04em; }
+    .gw-copy h3 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.5rem, 3vw, 2.05rem); letter-spacing: -0.02em; margin: 16px 0 0; color: var(--text-head); line-height: 1.08; }
+    .gw-rows { margin: 22px 0 0; display: flex; flex-direction: column; gap: 16px; }
+    .gw-row { display: grid; grid-template-columns: auto 1fr; gap: 13px; align-items: start; }
+    .gw-row .k { width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; background: var(--gold-soft); border: 1px solid rgba(181,126,30,0.3); color: var(--gold); flex: none; }
+    .gw-row .k svg { width: 17px; height: 17px; }
+    .gw-row h4 { font-family: var(--font-display); font-size: 0.96rem; font-weight: 700; color: var(--text-head); }
+    .gw-row p { font-size: 0.92rem; line-height: 1.6; color: var(--text-dim); margin-top: 2px; }
+
+    /* ============ THE OFFER ============ */
+    /* focal price card */
+    .gr-offer { max-width: 720px; margin: clamp(30px, 4vw, 44px) auto 0; }
+    .gr-pricecard { background: var(--bg-1); border: 1px solid var(--line-soft); border-radius: 24px; padding: clamp(34px, 4.5vw, 52px) clamp(26px, 4vw, 48px); text-align: center; box-shadow: 0 26px 64px rgba(40,28,10,0.09); position: relative; overflow: hidden; }
+    .gr-pricecard::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, #E8AC44, #D08A34); }
+    .gr-pricecard .lead { display: inline-flex; align-items: center; gap: 8px; padding: 7px 15px; border-radius: 999px; background: var(--gold-soft); color: var(--gold); font-family: var(--font-display); font-weight: 800; font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    .gr-pricecard .amt { display: flex; align-items: baseline; justify-content: center; gap: 10px; margin-top: 20px; }
+    .gr-pricecard .amt b { font-family: var(--font-hero); font-weight: 800; font-size: clamp(3.6rem, 11vw, 5.6rem); line-height: 0.82; letter-spacing: -0.045em; color: var(--text-head); }
+    .gr-pricecard .amt span { font-size: 1rem; font-weight: 600; color: var(--text-soft); }
+    /* summer-offer price reveal */
+    .gr-pricecard .amt { position: relative; }
+    .amt-stage { position: relative; display: inline-grid; }
+    .amt-stage > b { grid-area: 1 / 1; justify-self: center; }
+    .amt-old { position: relative; }
+    .amt-strike { position: absolute; left: -3%; right: -3%; top: 50%; height: clamp(5px, 0.9vw, 8px); border-radius: 999px; background: #E5484D; transform: scaleX(0); transform-origin: left center; box-shadow: 0 1px 5px rgba(229,72,77,0.45); }
+    .amt-new { opacity: 0; transform: scale(.7); transform-origin: center; }
+    .amt-unit { opacity: 0; }
+    .amt-save { display: inline-flex; align-items: center; gap: 9px; margin: 14px 0 0; padding: 7px 16px; border-radius: 999px; background: var(--gold-soft); color: var(--gold); font-family: var(--font-display); font-weight: 800; font-size: 0.84rem; letter-spacing: 0.005em; opacity: 0; transform: translateY(8px) scale(.92); }
+    .amt-save s { color: var(--text-soft); text-decoration-thickness: 2px; font-weight: 700; }
+    .gr-offer.is-in .amt-strike { animation: amtStrike .42s cubic-bezier(.7,0,.3,1) .8s forwards; }
+    .gr-offer.is-in .amt-old { animation: amtOldOut .5s cubic-bezier(.5,0,.75,0) 1.3s forwards; }
+    .gr-offer.is-in .amt-new { animation: amtNewIn .6s cubic-bezier(.34,1.56,.64,1) 1.36s forwards; }
+    .gr-offer.is-in .amt-unit { animation: amtUnitIn .5s ease 1.62s forwards; }
+    .gr-offer.is-in .amt-save { animation: amtSaveIn .6s cubic-bezier(.34,1.56,.64,1) 1.76s forwards; }
+    @keyframes amtStrike { to { transform: scaleX(1); } }
+    @keyframes amtOldOut { to { opacity: 0; transform: scale(.72) translateY(-8px); } }
+    @keyframes amtNewIn { from { opacity: 0; transform: scale(.7); } to { opacity: 1; transform: scale(1); } }
+    @keyframes amtUnitIn { to { opacity: 1; } }
+    @keyframes amtSaveIn { to { opacity: 1; transform: translateY(0) scale(1); } }
+    @media (prefers-reduced-motion: reduce) {
+      .amt-old, .amt-strike { display: none; }
+      .amt-new, .amt-unit, .amt-save { opacity: 1; transform: none; }
+    }
+    .gr-pricecard .desc { margin: 14px auto 0; font-size: 1.08rem; line-height: 1.5; color: var(--text-dim); max-width: 34ch; }
+    .gr-pricecard .desc b { color: var(--text-head); font-weight: 700; }
+    .gr-terms { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 24px; }
+    .gr-terms span { display: inline-flex; align-items: center; gap: 7px; padding: 9px 15px; border-radius: 999px; background: var(--bg-1); border: 1px solid var(--line-soft); font-size: 0.85rem; font-weight: 600; color: var(--text); }
+    .gr-terms svg { width: 15px; height: 15px; color: var(--gold); }
+    .gr-pricecard .cta { margin-top: 28px; }
+    .gr-pricecard .cta a { display: inline-flex; align-items: center; justify-content: center; width: 100%; max-width: 400px; height: 56px; border-radius: 14px; background: linear-gradient(135deg, #E8AC44, #D08A34); color: #241804; font-family: var(--font-display); font-weight: 700; font-size: 1.02rem; box-shadow: 0 10px 26px rgba(208,138,52,0.32); transition: background .2s, box-shadow .2s, transform .2s; }
+    .gr-pricecard .cta a:hover { background: linear-gradient(135deg, #F0B752, #DA9540); box-shadow: 0 16px 38px rgba(208,138,52,0.5); transform: translateY(-1px); }
+    .gr-pricecard .note { margin-top: 13px; font-size: 0.86rem; color: var(--text-soft); border-left: none; padding: 0; }
+    /* what's included — clean 2-col checklist */
+    .gr-get-wrap { max-width: 920px; margin: clamp(42px, 6vw, 64px) auto 0; }
+    .gr-get-h { text-align: center; font-family: var(--font-display); font-weight: 800; font-size: clamp(1.2rem, 2.6vw, 1.5rem); color: var(--text-head); letter-spacing: -0.01em; margin-bottom: clamp(22px, 3vw, 30px); }
+    .gr-get-grid { display: grid; grid-template-columns: 1fr; gap: 16px 30px; }
+    @media (min-width: 680px) { .gr-get-grid { grid-template-columns: 1fr 1fr; } }
+    .gr-get { display: flex; gap: 13px; align-items: flex-start; }
+    .gr-get .chk { flex: none; width: 27px; height: 27px; border-radius: 50%; background: var(--gold-soft); color: var(--gold); display: grid; place-items: center; margin-top: 1px; }
+    .gr-get .chk svg { width: 15px; height: 15px; }
+    .gr-get b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 0.98rem; color: var(--text-head); }
+    .gr-get p { font-size: 0.88rem; line-height: 1.5; color: var(--text-dim); margin-top: 2px; }
+    .gr-get em { font-style: normal; color: var(--gold); font-weight: 700; }
+    /* how it works — 4-step dotted flow */
+    .gr-how2 { max-width: 1040px; margin: clamp(46px, 6vw, 68px) auto 0; }
+    .gr-how2-h { text-align: center; font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.4rem, 3vw, 1.95rem); color: var(--text-head); letter-spacing: -0.02em; }
+    .gr-how2-s { text-align: center; max-width: 36ch; margin: 10px auto 0; color: var(--text-dim); font-size: 0.99rem; line-height: 1.5; }
+    .gr-flow { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: clamp(28px, 4vw, 40px); position: relative; }
+    @media (min-width: 780px) {
+      .gr-flow { grid-template-columns: repeat(4, 1fr); gap: clamp(14px, 2vw, 26px); }
+      .gr-flow::before { content: ""; position: absolute; top: 23px; left: 12.5%; right: 12.5%; height: 2px; background: repeating-linear-gradient(90deg, var(--gold) 0 6px, transparent 6px 13px); opacity: 0.4; z-index: 1; }
+      .gr-flow::after { content: ""; position: absolute; top: 23px; left: 12.5%; right: 12.5%; height: 2px; background: var(--gold); opacity: 0.85; z-index: 1; transform: scaleX(0); transform-origin: left center; }
+      .gr-how2.is-in .gr-flow::after { animation: flowProg 4.6s linear 0.55s both; }
+    }
+    .gr-flowstep { text-align: center; position: relative; z-index: 2; }
+    .gr-flowstep .no { width: 48px; height: 48px; border-radius: 50%; margin: 0 auto 14px; display: grid; place-items: center; background: var(--bg-2); border: 2px solid var(--gold); color: var(--gold); font-family: var(--font-hero); font-weight: 800; font-size: 1.18rem; }
+    .gr-flowstep b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--text-head); margin-bottom: 5px; }
+    .gr-flowstep p { font-size: 0.88rem; line-height: 1.5; color: var(--text-dim); max-width: 25ch; margin: 0 auto; }
+    .gr-flowstep .dur { display: inline-block; margin-top: 10px; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--gold); }
+    /* sequential read-in-order highlight */
+    .gr-flowstep:nth-child(1) { --d: 0.3s; }
+    .gr-flowstep:nth-child(2) { --d: 1.7s; }
+    .gr-flowstep:nth-child(3) { --d: 3.1s; }
+    .gr-flowstep:nth-child(4) { --d: 4.5s; }
+    .gr-flowstep .no { transition: none; }
+    .gr-how2.is-in .gr-flowstep .no { animation: flowNo 0.75s cubic-bezier(.34,1.56,.64,1) var(--d) both; }
+    .gr-how2.is-in .gr-flowstep b { animation: flowTitle 0.75s ease var(--d) both; }
+    @keyframes flowNo {
+      0%   { background: var(--bg-2); color: var(--gold); box-shadow: 0 0 0 0 rgba(208,138,52,0); transform: scale(1); }
+      35%  { transform: scale(1.18); }
+      55%  { background: var(--gold); color: #2A1C06; box-shadow: 0 0 0 9px rgba(208,138,52,0.16); }
+      100% { background: var(--gold); color: #2A1C06; transform: scale(1); box-shadow: 0 10px 24px rgba(208,138,52,0.30), 0 0 0 4px rgba(208,138,52,0.12); }
+    }
+    @keyframes flowTitle { 0%, 100% { color: var(--text-head); } 45% { color: var(--gold); } }
+    @keyframes flowProg { to { transform: scaleX(1); } }
+    @media (prefers-reduced-motion: reduce) {
+      .gr-flowstep .no { background: var(--gold); color: #2A1C06; }
+    }
+
+    /* ============ FINAL CTA ============ */
+    .gr-final { background: linear-gradient(135deg, #E0A23C, #C9820E); border-radius: clamp(24px, 4vw, 44px); padding: clamp(34px, 4vw, 52px) clamp(24px, 4vw, 60px); position: relative; overflow: hidden; }
+    .gr-final-grid { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 4vw, 48px); align-items: center; }
+    .gr-final h2 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.035em; font-size: clamp(1.9rem, 4.6vw, 3rem); line-height: 1.04; color: #2A1C06; max-width: 16ch; }
+    .gr-final p { margin-top: 14px; color: rgba(42,28,6,0.82); font-size: 1.04rem; line-height: 1.6; max-width: 42ch; }
+    .gr-final-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+    .gr-final .btn-dark { background: #2A1C06; color: #FBF5EA; border: none; }
+    .gr-final .btn-dark:hover { box-shadow: 0 10px 30px rgba(42,28,6,0.3); }
+    .gr-final .btn-light { background: rgba(255,255,255,0.85); color: #2A1C06; border: none; }
+    .gr-host { display: flex; align-items: center; gap: 14px; padding: 16px; border-radius: var(--r-lg); background: rgba(255,255,255,0.55); backdrop-filter: blur(6px); }
+    .gr-host img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex: none; border: 2px solid rgba(255,255,255,0.7); }
+    .gr-host .lab { font-size: 0.74rem; color: rgba(42,28,6,0.66); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
+    .gr-host .nm { font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; color: #2A1C06; margin-top: 2px; }
+    .gr-host .ro { font-size: 0.84rem; color: rgba(42,28,6,0.7); }
+    @media (min-width: 820px) { .gr-final-grid { grid-template-columns: 1.3fr 0.7fr; gap: clamp(36px, 4vw, 60px); } .gr-final h2 { font-size: clamp(2rem, 3.4vw, 2.7rem); } }
+
+    /* ============ FOOTER ============ */
+    .gr-footer { padding: clamp(40px, 6vw, 72px) 0 40px; border-top: 1px solid var(--line); }
+    .gr-footer-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px; padding-bottom: 32px; border-bottom: 1px solid var(--line-soft); }
+    .gr-footer-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 20px; margin-top: 36px; }
+    .gr-footer-col h4 { font-family: var(--font-display); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 14px; }
+    .gr-footer-col a, .gr-footer-col span { display: block; font-size: 0.9rem; color: var(--text-dim); margin-bottom: 10px; transition: color .2s; }
+    .gr-footer-col a:hover { color: var(--gold); }
+    .gr-footer-bottom { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line-soft); display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; font-size: 0.82rem; color: var(--text-soft); }
+    @media (min-width: 720px) { .gr-footer-cols { grid-template-columns: repeat(4, 1fr); } }
+
+    /* sticky mobile CTA */
+    .gr-mobile-cta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: none; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); background: rgba(20,16,9,0.94); backdrop-filter: blur(12px); border-top: 1px solid var(--line); }
+    .gr-mobile-cta button { width: 100%; height: 50px; border: none; border-radius: 14px; font-family: var(--font-display); font-weight: 700; font-size: 0.96rem; background: linear-gradient(135deg,#E8AC44,#D08A34); color: #241804; box-shadow: 0 6px 18px rgba(36,24,4,0.3); cursor: pointer; }
+    @media (max-width: 700px) { .gr-mobile-cta { display: block; } body { padding-bottom: 74px; } }
+    /* lift Calendly badge above the sticky mobile CTA bar */
+    @media (max-width: 700px) { .calendly-badge-widget { bottom: 86px !important; right: 12px !important; } }
+
+    /* host card (Juan) above scheduler */
+    .gr-host { display: flex; align-items: center; gap: 16px; justify-content: center; margin: clamp(22px, 3vw, 30px) auto 0; }
+    .gr-host-photo { width: 64px; height: 64px; border-radius: 50%; overflow: hidden; flex: none; border: 2px solid var(--gold); box-shadow: 0 6px 16px rgba(40,30,12,0.16); }
+    .gr-host-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%; display: block; }
+    .gr-host-meta { display: flex; flex-direction: column; line-height: 1.3; }
+    .gr-host-name { font-family: var(--font-display); font-weight: 700; font-size: 1.04rem; color: var(--text-head); }
+    .gr-host-role { font-size: 0.86rem; color: var(--text-soft); }
+
+    /* ============ INLINE SCHEDULER (lazy) ============ */
+    .gr-cal-wrap { margin-top: clamp(20px, 2.5vw, 28px); }
+    .gr-cal-inline { position: relative; min-height: 700px; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line-soft); background: #FFFFFF; box-shadow: 0 18px 48px rgba(40,30,12,0.07); }
+    .gr-cal-inline iframe { display: block; width: 100%; min-height: 700px; border: 0; }
+    .gr-cal-ph { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; text-align: center; padding: 28px; color: var(--text-dim); }
+    .gr-cal-ph p { font-size: 0.98rem; margin: 0; }
+    .gr-cal-inline.is-failed .gr-cal-ph p::after { content: " \2014 use the button below to open it in a new tab."; }
+    .gr-cal-spin { width: 32px; height: 32px; border-radius: 50%; border: 3px solid var(--line-soft); border-top-color: var(--gold); animation: gr-cal-spin 0.8s linear infinite; }
+    .gr-cal-inline.is-failed .gr-cal-spin { display: none; }
+    @keyframes gr-cal-spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .gr-cal-spin { animation: none; } }
+    .gr-cal-fallback { text-align: center; margin-top: 16px; font-size: 0.9rem; color: var(--text-soft); }
+    .gr-cal-fallback a { color: var(--gold); font-weight: 600; }
+    @media (max-width: 700px) { .gr-cal-inline, .gr-cal-inline iframe { min-height: 660px; } }
+  </style>
+  <!-- Calendly assets are lazy-loaded on first interaction / when the inline scheduler nears the viewport (keeps them off the critical path; see script at end of body) -->
+</head>
+<body>
+  <!-- ============ HEADER ============ -->
+  <nav class="gr-nav">
+    <div class="gr-nav-inner">
+      <a href="/" aria-label="Button Up Media home"><img class="gr-logo" src="media/logo-cropped.webp" alt="Button Up Media" width="72" height="24" fetchpriority="high" /></a>
+      <div class="gr-nav-links">
+        <a href="#how">How it works</a>
+        <a href="#fixes">What we fix</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#why">Why it matters</a>
+      </div>
+      <div class="gr-nav-right">
+        <a class="gr-nav-phone" href="tel:+17867409499"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> (786) 740-9499</a>
+        <a href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener" class="btn btn-primary" style="height:40px;padding:0 18px;font-size:0.84rem;white-space:nowrap;">Start my website</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="gr-hero">
+      <div class="gr-wrap">
+        <div class="gr-rating gr-rise">
+          <span class="gr-stars" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+          </span>
+          Trusted by South Florida&rsquo;s favorite restaurants
+        </div>
+        <h1 class="gr-rise d1">Websites that fill <span class="gr-gold">more tables.</span></h1>
+        <p class="gr-hero-sub gr-rise d2">Custom, mobile-first restaurant websites; stunning, fast, and built to book. Live in a week.</p>
+
+        <div class="gr-hero-cta gr-rise d2">
+          <a href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener" class="gr-cta-primary">Book a free consult
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a href="#work" class="gr-cta-ghost">See our work</a>
+        </div>
+
+        <div class="gr-hero-fine gr-rise d3">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 100% custom design</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Live in a week</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Bilingual EN / ES</span>
+        </div>
+
+        <!-- PHONE MOCKUP -->
+        <div class="gr-hero-stage gr-rise d3">
+          <div class="gr-phone-box">
+            <div class="gr-phone">
+              <div class="gr-phone-screen">
+                <div class="gr-sb">
+                  <span class="t">9:41</span>
+                  <span class="gr-sb-island"></span>
+                  <span class="gr-sb-ic">
+                    <svg viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+                    <svg viewBox="0 0 18 13" fill="currentColor"><path d="M9 2.2c2.6 0 5 1 6.8 2.7l-1.4 1.5A7.6 7.6 0 0 0 9 4.3 7.6 7.6 0 0 0 3.6 6.4L2.2 4.9A9.7 9.7 0 0 1 9 2.2zm0 4a5.6 5.6 0 0 1 3.9 1.6l-1.5 1.5A3.5 3.5 0 0 0 9 8.3c-1 0-1.8.4-2.4 1L5.1 7.8A5.6 5.6 0 0 1 9 6.2zm0 3.8c.7 0 1.3.3 1.7.8L9 12.4 7.3 10.8c.4-.5 1-.8 1.7-.8z"/></svg>
+                    <svg viewBox="0 0 26 13" fill="none"><rect x="0.5" y="1" width="21" height="11" rx="3" stroke="currentColor"/><rect x="2" y="2.5" width="16" height="8" rx="1.5" fill="currentColor"/><rect x="23" y="4.5" width="2" height="4" rx="1" fill="currentColor"/></svg>
+                  </span>
+                </div>
+                <div class="gr-screen-vp">
+                  <div class="gr-show-track">
+
+                    <!-- 1: the website -->
+                    <div class="gr-show-panel">
+                      <img class="ps-site" src="media/woa-hero-mobile.webp" alt="A restaurant website built by Button Up Media" fetchpriority="high" width="690" height="1484" />
+                    </div>
+
+                    <!-- 2: performance scores -->
+                    <div class="gr-show-panel ps-pad">
+                      <div class="ps-hd"><span class="ps-dot"></span>Performance report</div>
+                      <div class="ps-gauge">
+                        <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="none" stroke="#E6E9ED" stroke-width="10"/><circle cx="60" cy="60" r="54" fill="none" stroke="#4FCB8C" stroke-width="10" stroke-linecap="round" stroke-dasharray="339" stroke-dashoffset="0" transform="rotate(-90 60 60)"/></svg>
+                        <span class="ps-val"><b>100</b><small>/ 100</small></span>
+                      </div>
+                      <div class="ps-cap">Google PageSpeed &mdash; <b>Excellent</b></div>
+                      <div class="ps-rows">
+                        <div class="ps-row"><span class="ps-l">Speed</span><span class="ps-bar"><i style="width:99%"></i></span><span class="ps-n">99</span></div>
+                        <div class="ps-row"><span class="ps-l">SEO</span><span class="ps-bar"><i style="width:100%"></i></span><span class="ps-n">100</span></div>
+                        <div class="ps-row"><span class="ps-l">Accessibility</span><span class="ps-bar"><i style="width:97%"></i></span><span class="ps-n">97</span></div>
+                      </div>
+                    </div>
+
+                    <!-- 3: found on google (maps) -->
+                    <div class="gr-show-panel ps-gmaps">
+                      <div class="gm-map">
+                        <svg class="gm-canvas" viewBox="0 0 300 420" preserveAspectRatio="xMidYMid slice">
+                          <rect width="300" height="420" fill="#E8EAED"/>
+                          <path d="M0 0 H300 V64 Q225 92 150 74 Q72 56 0 86 Z" fill="#AAD6F5"/>
+                          <path d="M178 252 q62 -22 122 8 V420 H150 q-14 -88 28 -168 Z" fill="#C7E9C9"/>
+                          <g stroke="#FFFFFF" fill="none" stroke-linecap="round">
+                            <path d="M-10 150 H320" stroke-width="15"/>
+                            <path d="M64 -10 V440" stroke-width="13"/>
+                            <path d="M-10 312 H320" stroke-width="10"/>
+                            <path d="M210 -10 V440" stroke-width="9"/>
+                            <path d="M-10 70 L320 240" stroke-width="7"/>
+                          </g>
+                        </svg>
+                        <div class="gm-pin gm-pin-a"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="#9AA0A6" d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7z"/><circle cx="12" cy="9" r="2.4" fill="#fff"/></svg></div>
+                        <div class="gm-pin gm-pin-b"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="#9AA0A6" d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7z"/><circle cx="12" cy="9" r="2.4" fill="#fff"/></svg></div>
+                        <div class="gm-pin gm-pin-top"><span class="gm-pulse"></span><svg viewBox="0 0 24 24" width="30" height="30"><path fill="#EA4335" d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7z"/><circle cx="12" cy="9" r="2.8" fill="#fff"/></svg></div>
+                        <div class="gm-you"></div>
+                      </div>
+                      <div class="gm-search">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                        <span>cocktail bar near me</span><span class="gm-x">&times;</span>
+                      </div>
+                      <div class="gm-sheet">
+                        <div class="gm-grab"></div>
+                        <div class="gm-board">
+                          <div class="gm-row gm-you-row">
+                            <span class="gm-rk"><i class="d1" style="color:#1A8C4A">1</i><i class="d2" style="color:#9AA0A6">2</i></span>
+                            <span class="gm-logo --you"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14l-7 8-7-8z"/><path d="M12 12v7"/><path d="M8 19h8"/></svg></span>
+                            <div class="gm-rinfo"><b>The Copper Mule</b><div class="gm-rrate"><span class="s">&#9733;</span> 4.9 (482) &middot; $$</div></div>
+                            <span class="gm-tag --up">&#9650; #1</span>
+                          </div>
+                          <div class="gm-row gm-r1-row">
+                            <span class="gm-rk"><i class="d1" style="color:#9AA0A6">1</i><i class="d2" style="color:#9AA0A6">2</i></span>
+                            <span class="gm-logo --r1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14l-7 8-7-8z"/><path d="M12 12v7"/><path d="M8 19h8"/></svg></span>
+                            <div class="gm-rinfo"><b>The Tipsy Fox</b><div class="gm-rrate"><span class="s">&#9733;</span> 4.4 (311) &middot; $$</div></div>
+                            <span class="gm-tag --down">&#9660; #2</span>
+                          </div>
+                          <div class="gm-row gm-r2-row">
+                            <span class="gm-rk"><i class="d2" style="color:#9AA0A6;opacity:1">3</i></span>
+                            <span class="gm-logo --r2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14l-7 8-7-8z"/><path d="M12 12v7"/><path d="M8 19h8"/></svg></span>
+                            <div class="gm-rinfo"><b>Lantern Room</b><div class="gm-rrate"><span class="s">&#9733;</span> 4.2 (188) &middot; $$$</div></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 4: bilingual -->
+                    <div class="gr-show-panel ps-pad ps-lang">
+                      <div class="ps-langbar"><button class="ps-lang-en-btn">EN</button><button class="ps-lang-es-btn">ES</button></div>
+                      <div class="ps-lang-stack">
+                        <div class="ps-lang-body ps-lb-en">
+                          <div class="ps-eyebrow">In English</div>
+                          <h4 class="ps-lang-h">A work of <em>art</em> in every pour.</h4>
+                          <div class="ps-lang-en">Built for every guest you serve.</div>
+                          <div class="ps-lang-chip">Every page &mdash; English &amp; Spanish</div>
+                        </div>
+                        <div class="ps-lang-body ps-lb-es">
+                          <div class="ps-eyebrow">En espa&ntilde;ol, tambi&eacute;n</div>
+                          <h4 class="ps-lang-h">Una obra de <em>arte</em> en cada trago.</h4>
+                          <div class="ps-lang-en">Pensado para cada comensal.</div>
+                          <div class="ps-lang-chip">Cada p&aacute;gina &mdash; Ingl&eacute;s y Espa&ntilde;ol</div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ VALUE TABS ============ -->
+    <section class="gr-section" id="fixes" style="padding-top:0;">
+      <div class="gr-wrap">
+        <div class="gr-section-head gr-rise">
+          <span class="gr-eyebrow">What a great website does</span>
+          <h2>More traffic, more orders, more regulars.</h2>
+        </div>
+        <div class="gr-tabs gr-rise d1">
+          <div class="gr-tablist" role="tablist">
+            <button class="gr-tab is-active" data-tab="traffic" role="tab">More Google traffic</button>
+            <button class="gr-tab" data-tab="sales" role="tab">More online orders</button>
+            <button class="gr-tab" data-tab="repeat" role="tab">More repeat guests</button>
+            <button class="gr-tab" data-tab="mobile" role="tab">More mobile bookings</button>
+          </div>
+
+          <!-- traffic -->
+          <div class="gr-panel is-active" data-panel="traffic">
+            <div class="gr-panel-copy">
+              <span class="pe">Upgrade your SEO</span>
+              <h3>Get found when hungry locals search.</h3>
+              <p>A fast, SEO-built site ranks for the searches that actually fill tables: &ldquo;best tacos near me,&rdquo; not page three of Google.</p>
+              <ul class="gr-panel-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Local SEO + neighborhood pages</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Menu &amp; schema markup Google reads</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Built to be cited by AI search too</li>
+              </ul>
+            </div>
+            <div class="gr-panel-visual gr-serp">
+              <div class="serp-bar">
+                <span class="serp-gicon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.7-2.4 3.6v3h3.9c2.3-2.1 3.6-5.2 3.6-8.8z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.7-5H1.3v3.1C3.3 21.3 7.3 24 12 24z"/><path fill="#FBBC05" d="M5.3 14.3c-.2-.7-.4-1.5-.4-2.3s.1-1.6.4-2.3V6.6H1.3C.5 8.2 0 10 0 12s.5 3.8 1.3 5.4l4-3.1z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4C18 1.2 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l4 3.1c.9-2.9 3.6-4.9 6.7-4.9z"/></svg>
+                </span>
+                <span class="serp-q">best seafood near me</span>
+                <span class="serp-search" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#4285F4" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.4-3.4"/></svg></span>
+              </div>
+              <div class="serp-meta">About 1,240,000 results &middot; Garden Cove, FL</div>
+
+              <div class="serp-result --you">
+                <span class="serp-pill">Your site &middot; #1</span>
+                <div class="serp-site">
+                  <span class="serp-fav">M</span>
+                  <div class="serp-sitemeta"><span class="serp-name">Marisol &middot; Waterfront Seafood</span><span class="serp-url">marisolmiami.com</span></div>
+                </div>
+                <a class="serp-title">Marisol | Fresh Gulf Seafood &amp; Waterfront Dining in Garden Cove</a>
+                <div class="serp-rate"><b>4.9</b><span class="serp-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span>(482)</span><span class="serp-dot">&middot;</span><span>$$</span><span class="serp-dot">&middot;</span><span class="serp-open">Open now</span></div>
+                <p class="serp-snip">Award-winning seafood on the water. Reserve a table or order online in seconds &mdash; the catch of the day, fresh off the dock&hellip;</p>
+              </div>
+
+              <div class="serp-result --comp">
+                <div class="serp-site">
+                  <span class="serp-fav --c">P</span>
+                  <div class="serp-sitemeta"><span class="serp-name">Pelican Catch Grill</span><span class="serp-url">pelicancatch-grill.weebly.com</span></div>
+                </div>
+                <a class="serp-title">Pelican Catch Grill - Home</a>
+                <p class="serp-snip">Welcome to our website. Seafood restaurant. Please call for hours and reservations&hellip;</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- sales -->
+          <div class="gr-panel" data-panel="sales">
+            <div class="gr-panel-copy">
+              <span class="pe">Convert the click</span>
+              <h3>Turn visitors into orders, not bounces.</h3>
+              <p>Clear menus, one-tap ordering, and reservations wired right in &mdash; so the people who find you actually book.</p>
+              <ul class="gr-panel-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Online ordering &amp; reservations</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> POS integrations (Toast, Square, Clover)</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Clear calls-to-action on every page</li>
+              </ul>
+            </div>
+            <div class="gr-panel-visual">
+              <div class="gr-vsales">
+                <div class="gr-vsales-hd"><span class="big">+38%</span><span class="lbl">more online orders</span></div>
+                <div class="gr-tickets">
+                  <div class="gr-ticket"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span><span class="who"><b>Online order</b><span>2&times; surf &amp; turf, 1 ceviche</span></span><span class="amt">$94<span class="new">New</span></span></div>
+                  <div class="gr-ticket"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span><span class="who"><b>Pickup order</b><span>Lunch bowl + drink</span></span><span class="amt">$28<span class="new">New</span></span></div>
+                  <div class="gr-ticket"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span><span class="who"><b>Online order</b><span>Family paella, 2 sides</span></span><span class="amt">$132<span class="new">New</span></span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- repeat -->
+          <div class="gr-panel" data-panel="repeat">
+            <div class="gr-panel-copy">
+              <span class="pe">Keep them coming back</span>
+              <h3>Make regulars out of first-timers.</h3>
+              <p>Email and SMS capture built into the site keeps your best guests one tap from their next visit.</p>
+              <ul class="gr-panel-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Email &amp; SMS list capture</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Loyalty &amp; offers built in</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Reviews engine to grow your rating</li>
+              </ul>
+            </div>
+            <div class="gr-panel-visual">
+              <div class="gr-vloyal">
+                <div class="gr-ring">
+                  <svg viewBox="0 0 120 120"><circle class="track" cx="60" cy="60" r="54"/><circle class="prog" cx="60" cy="60" r="54"/></svg>
+                  <div class="ctr"><b>2.4&times;</b><span>more repeat visits</span></div>
+                </div>
+                <div class="gr-loyal-leg">
+                  <div class="lg"><span class="dot" style="background:#C9820E;"></span><span><b>71%</b><small>guests who come back</small></span></div>
+                  <div class="lg"><span class="dot" style="background:var(--bg-2);"></span><span><b>29%</b><small>one-time, never return</small></span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- mobile -->
+          <div class="gr-panel" data-panel="mobile">
+            <div class="gr-panel-copy">
+              <span class="pe">Built for the phone</span>
+              <h3>Where 70%+ of your guests already are.</h3>
+              <p>Most diners check you out on their phone first. If it&rsquo;s slow or clumsy there, they&rsquo;re gone before they ever see your menu.</p>
+              <ul class="gr-panel-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Mobile-first, loads in under 2 seconds</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Tap-to-call, tap-to-book, tap-to-order</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Looks flawless on every screen size</li>
+              </ul>
+            </div>
+            <div class="gr-panel-visual">
+              <div class="gr-vmob">
+                <div class="gr-mphone">
+                  <div class="gr-mphone-scr">
+                    <div class="gr-bk-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                    <div class="gr-bk-title">Table booked</div>
+                    <div class="gr-bk-sub">Party of 2 &middot; Tonight</div>
+                    <div class="gr-bk-row"><span>Time</span><span class="v">7:30 PM</span></div>
+                  </div>
+                </div>
+                <div class="gr-mob-side">
+                  <span class="gr-speed-chip"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>Loads in 1.4s</span>
+                  <div class="gr-mob-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Tap-to-book, no app needed</div>
+                  <div class="gr-mob-comp">Typical restaurant site: <b>5.8s</b> &mdash; most guests are gone by then.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WHY IT MATTERS ============ -->
+    <section class="gr-section" id="why" style="padding-top:0;">
+      <div class="gr-wrap">
+        <div class="gr-why gr-rise">
+          <div class="gr-why-head">
+            <span class="gr-eyebrow">Why it matters</span>
+            <h2>A slow, dated site quietly costs you every single night.</h2>
+            <p>See what changes the moment a slow, dated page becomes a fast, beautiful one &mdash; guests stay longer, more locals find you, and more of them book. Your website is working for you, or against you, 24/7.</p>
+          </div>
+          <div class="gr-why-demo">
+          <div class="gr-mockup" aria-hidden="true">
+            <div class="gr-mockup-bar">
+              <i style="background:#ff5f57;"></i><i style="background:#febc2e;"></i><i style="background:#28c840;"></i>
+              <div class="gr-mockup-url"><div class="url-grid"><span class="gr-url-bad">marisol-restaurant.weebly.com/home.html</span><span class="gr-url-good">marisolmiami.com</span></div></div>
+            </div>
+            <div class="gr-mockup-screen">
+              <div class="gr-mock-layer gr-mock-bad">
+                <div class="mb-nav">
+                  <span class="mb-logo">Marisol<span>.</span></span>
+                  <span class="mb-menu"><span>Home</span><span>About</span><span>Menu</span><span>Gallery</span><span>Contact</span></span>
+                  <span class="mb-cta">Book Now</span>
+                </div>
+                <div class="mb-hero">
+                  <img src="media/old-site-food-lowres.jpg" alt="" />
+                  <div class="mb-hero-in">
+                    <div class="mb-h">Welcome to Marisol Restaurant</div>
+                    <div class="mb-tag">Authentic Mediterranean Cuisine &amp; Catering in Miami</div>
+                    <span class="mb-btn2">View Our Menu</span>
+                  </div>
+                  <div class="mb-dots"><i class="on"></i><i></i><i></i></div>
+                </div>
+              </div>
+
+              <div class="gr-mock-layer gr-mock-good">
+                <img src="media/good-site-food.webp" alt="" loading="lazy" decoding="async" width="1100" height="726" />
+                <div class="mg-overlay"></div>
+                <div class="mg-frame"></div>
+                <img class="mg-award" src="media/opentable-diners-choice.png" alt="OpenTable Diners' Choice 2026" />
+                <div class="mg-nav"><span>Menu</span><span class="mg-word">MARISOL</span><span></span></div>
+                <div class="mg-side">Miami &mdash; Est. 2019</div>
+                <div class="mg-hero">
+                  <div class="mg-idx">Miami&rsquo;s most iconic Mediterranean restaurant</div>
+                  <h4>Dinner <em>by the</em> water.</h4>
+                  <div class="mg-cta">
+                    <span class="mg-order">Order Now
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    </span>
+                    <span class="mg-menu-link">View menu</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gr-why-graph">
+            <div class="gr-wg-head">
+              <span class="gr-wg-title">&hellip;and your sales follow</span>
+              <span class="gr-wg-tag gr-wg-tag--before">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 7 17 17"></polyline><polyline points="17 9 17 17 9 17"></polyline></svg>
+                Old site
+              </span>
+              <span class="gr-wg-tag gr-wg-tag--after">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="7 17 17 7"></polyline><polyline points="9 7 17 7 17 15"></polyline></svg>
+                New site
+              </span>
+            </div>
+            <div class="gr-wg-plot">
+              <svg class="gr-wg-svg" viewBox="0 0 600 200" preserveAspectRatio="none" aria-hidden="true">
+                <g class="gr-wg-grid">
+                  <line x1="0" y1="50" x2="600" y2="50"></line>
+                  <line x1="0" y1="100" x2="600" y2="100"></line>
+                  <line x1="0" y1="150" x2="600" y2="150"></line>
+                </g>
+                <path class="gr-wg-line gr-wg-line--down" pathLength="100" d="M24,46 C90,52 150,58 220,80 S360,128 432,148 S520,168 576,178"></path>
+                <path class="gr-wg-line gr-wg-line--up" pathLength="100" d="M24,168 C100,162 152,154 230,132 S372,84 444,64 S520,44 576,30"></path>
+                <circle class="gr-wg-dot gr-wg-dot--down" cx="576" cy="178" r="6"></circle>
+                <circle class="gr-wg-dot gr-wg-dot--up" cx="576" cy="30" r="6"></circle>
+              </svg>
+            </div>
+            <div class="gr-wg-axis"><span>Online orders &amp; bookings</span><span>Time &rarr;</span></div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SAME TECH AS BIG BRANDS ============ -->
+    <section class="gr-section" id="how" style="padding-top:0;">
+      <div class="gr-wrap">
+        <div class="gr-section-head --center gr-rise">
+          <span class="gr-eyebrow">How we build</span>
+          <h2>The same tech as the big brands &mdash; built for your spot.</h2>
+          <p>Custom-coded, mobile-first, and bilingual from day one. Everything a national chain has, sized for an independent restaurant.</p>
+        </div>
+        <div class="gr-feat-grid">
+          <div class="gr-feat gr-rise">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div>
+            <h3>Get found on Google &amp; AI</h3>
+            <p>SEO baked in as the baseline &mdash; menu pages, local pages, and structure so search engines and AI both surface you.</p>
+          </div>
+          <div class="gr-feat gr-rise d1">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+            <h3>A site as fast as a big brand&rsquo;s</h3>
+            <p>Hand-coded and mobile-first, loading in under two seconds &mdash; because your guests are deciding on their phones.</p>
+          </div>
+          <div class="gr-feat gr-rise">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18"/><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 15h4"/></svg></div>
+            <h3>Ordering &amp; reservations wired in</h3>
+            <p>Toast, Square, Clover, OpenTable and more &mdash; connected so the click turns into a real order or booking.</p>
+          </div>
+          <div class="gr-feat gr-rise d1">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20z"/></svg></div>
+            <h3>English &amp; Spanish, every page</h3>
+            <p>A one-tap toggle greets every guest in their language &mdash; and Google indexes both, doubling how you get found.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS (2 real) ============ -->
+    <section class="gr-section" id="reviews" style="padding-top:0;">
+      <div class="gr-wrap">
+        <div class="gr-split">
+        <div class="gr-section-head gr-rise">
+          <span class="gr-eyebrow">Owners say it best</span>
+          <h2>Real restaurants. Real partnership.</h2>
+        </div>
+        <div class="gr-quotes">
+          <div class="gr-quote gr-rise">
+            <span class="gr-quote-stars" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.9 5.8 20.6l1.6-6.7L2.2 8.9l6.9-.6z"/></svg>
+            </span>
+            <p>&ldquo;They said they would deliver it in a week and they did! It was absolutely great to see my site done exactly how I wanted it. I&rsquo;ve already gotten more sales from it in the first 2 months &mdash; thank you Chris and Juan!&rdquo;</p>
+            <div class="gr-quote-by"><span class="av">FP</span><div><b>Fabio Perez</b><span>Restaurant Owner</span></div></div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MID-PAGE CTA ============ -->
+    <section class="gr-section" style="padding-top:0;">
+      <div class="gr-wrap">
+        <div class="gr-final gr-rise">
+          <div class="gr-final-grid">
+            <div>
+              <h2>Ready to see where you really stand?</h2>
+              <p>Book a 15-minute call with Juan &mdash; we&rsquo;ll walk through exactly what&rsquo;s costing you bookings and how to fix it, then get started today.</p>
+              <div class="gr-final-actions">
+                <a class="btn btn-light" href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener" style="height:50px;padding:0 24px;display:inline-flex;align-items:center;font-family:var(--font-display);font-weight:700;">Book a consult</a>
+              </div>
+            </div>
+            <div class="gr-host">
+              <img src="media/author-juan.webp" alt="Juan Hernández of Button Up Media" />
+              <div>
+                <div class="lab">Your call is with</div>
+                <div class="nm">Juan Hern&aacute;ndez</div>
+                <div class="ro">Website expert &middot; Button Up Media</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BELIEFS / FOUNDERS ============ -->
+    <section class="gr-section" style="padding-top:0;">
+      <div class="gr-wrap">
+        <div class="gr-beliefs">
+          <div class="gr-rise">
+            <div class="gr-beliefs-photo"><img src="media/chris-client-meeting.webp" alt="Chris, co-founder of Button Up Media, meeting with a client about their website" /></div>
+            <div class="gr-beliefs-cap"><b>Chris</b><span>Co-Founder, meeting a client about their new website</span></div>
+          </div>
+          <div>
+            <div class="gr-section-head gr-rise" style="margin-bottom:8px;">
+              <span class="gr-eyebrow">Why we started Button Up</span>
+              <h2 style="font-size:clamp(1.7rem,4vw,2.6rem);">Built to give restaurants a fair shot.</h2>
+            </div>
+            <div class="gr-belief gr-rise d1">
+              <h3>Great food deserves to be found.</h3>
+              <p>We founded Button Up in 2022 so restaurant, bar, and coffee shop owners could advertise affordably and stand out in brutally crowded markets &mdash; without a national chain&rsquo;s budget.</p>
+            </div>
+            <div class="gr-belief gr-rise d2">
+              <h3>You cook. We sell.</h3>
+              <p>You focus on your product, your team, and your craft. We handle getting your restaurant seen, clicked, and booked &mdash; so growth doesn&rsquo;t pull you out of the kitchen.</p>
+            </div>
+            <div class="gr-belief gr-rise d3">
+              <h3>A small team that actually shows up.</h3>
+              <p>You work directly with the same Miami team start to finish &mdash; not a ticket queue. We build every site like it&rsquo;s our own restaurant on the line.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RECENT WORK SHOWCASE ============ -->
+    <section class="gr-section" id="work" style="background: var(--bg-1);">
+      <div class="gr-wrap">
+        <div class="gr-section-head --center gr-rise">
+          <span class="gr-eyebrow">Recent work</span>
+          <h2>Don&rsquo;t take our word for it. <span style="color:var(--gold)">Take a look.</span></h2>
+          <p>Real restaurant &amp; hospitality sites we designed and built. Hover to explore the full page &mdash; top to bottom.</p>
+        </div>
+
+        <div class="gw-case --flip gr-rise d1" style="margin-top: clamp(32px, 4vw, 48px);">
+          <div class="gw-media">
+            <div class="gw-browser gw-scrollbox">
+              <div class="gw-bar">
+                <span class="gw-dot r"></span><span class="gw-dot y"></span><span class="gw-dot g"></span>
+                <span class="gw-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> woacocktails.com</span>
+              </div>
+              <div class="gw-view">
+                <img src="media/woa-full.webp" alt="The full WOA Cocktails homepage we designed and built" loading="lazy" width="2938" height="9671" />
+                <span class="gw-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg> Hover to explore</span>
+              </div>
+            </div>
+          </div>
+          <div class="gw-copy">
+            <span class="tag">WOA Cocktails &middot; Full site build</span>
+            <h3>A site that pours as smooth as the product.</h3>
+            <div class="gw-rows">
+              <div class="gw-row">
+                <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 2"/></svg></span>
+                <div><h4>The challenge</h4><p>A premium cocktail brand with no home online &mdash; nowhere to send customers, press, or stockists that matched the quality in the bottle.</p></div>
+              </div>
+              <div class="gw-row">
+                <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.9 5.8H20l-4.9 3.6L17 18l-5-3.7L7 18l1.9-5.6L4 8.8h6.1z"/></svg></span>
+                <div><h4>What we built</h4><p>A fully custom, hand-coded site &mdash; immersive visuals, smooth motion, mobile-first, and built to make every cocktail look irresistible.</p></div>
+              </div>
+              <div class="gw-row">
+                <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></span>
+                <div><h4>The result</h4><p>A digital home that feels like the brand &mdash; the kind of site that makes a first impression do the selling for you.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="gw-case gr-rise d1">
+          <div class="gw-copy">
+            <span class="tag">Rusty Pelican &middot; Full site build</span>
+            <h3>An icon&rsquo;s site, as breathtaking as the view.</h3>
+            <div class="gw-rows">
+              <div class="gw-row">
+                <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 2"/></svg></span>
+                <div><h4>The challenge</h4><p>Miami&rsquo;s iconic waterfront restaurant &mdash; est. 1972, 56K+ five-star reviews &mdash; needed a site as memorable as the skyline-meets-bay experience.</p></div>
+              </div>
+              <div class="gw-row">
+                <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.9 5.8H20l-4.9 3.6L17 18l-5-3.7L7 18l1.9-5.6L4 8.8h6.1z"/></svg></span>
+                <div><h4>What we built</h4><p>A bold, editorial site &mdash; full-bleed photography, a living menu by section, the chef&rsquo;s story, and reservations wired right in.</p></div>
+              </div>
+              <div class="gw-row">
+                <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></span>
+                <div><h4>The result</h4><p>A first impression worthy of an icon &mdash; one that turns the view into reservations before guests ever arrive.</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="gw-media">
+            <div class="gw-browser gw-scrollbox">
+              <div class="gw-bar">
+                <span class="gw-dot r"></span><span class="gw-dot y"></span><span class="gw-dot g"></span>
+                <span class="gw-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> rustypelican.com</span>
+              </div>
+              <div class="gw-view">
+                <img src="media/rp-full.webp" alt="The full Rusty Pelican homepage we designed and built" loading="lazy" width="2940" height="4994" />
+                <span class="gw-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg> Hover to explore</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ THE OFFER ============ -->
+    <section class="gr-section" id="offer" style="padding-top:0;">
+      <div class="gr-wrap">
+        <div class="gr-section-head --center gr-rise" style="max-width: min(880px, 92%);">
+          <span class="gr-eyebrow">The offer</span>
+          <h2>A custom website, built in a week.</h2>
+          <p>No templates. No monthly fees. You own everything.<br>a fully custom site, built for Google, AI search, mobile, and Spanish-speaking Miami.</p>
+        </div>
+
+        <div class="gr-offer gr-rise d1">
+          <div class="gr-pricecard">
+            <div class="amt">
+              <span class="amt-stage">
+                <b class="amt-old" aria-hidden="true">$2,250<i class="amt-strike"></i></b>
+                <b class="amt-new">$1,500</b>
+              </span>
+              <span class="amt-unit">one-time</span>
+            </div>
+            <span class="amt-save"><s>$2,250</s>Summer offer &mdash; you save $750</span>
+            <p class="desc">A custom-built restaurant website, <b>live in a week</b>. You own everything &mdash; no monthly fees, ever.</p>
+            <div class="gr-terms">
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>15% deposit to start</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>3-month payment plans</span>
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Unlimited revisions</span>
+            </div>
+            <div class="cta">
+              <a href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener">Book your 15-minute call</a>
+            </div>
+            <p class="note">Just a 15% deposit &mdash; we start right away.</p>
+          </div>
+        </div>
+
+        <!-- what's included -->
+        <div class="gr-get-wrap gr-rise d1">
+          <h3 class="gr-get-h">Everything&rsquo;s included.</h3>
+          <div class="gr-get-grid">
+            <div class="gr-get">
+              <span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <div><b>Found on Google &amp; AI search</b><p>Built for SEO and <em>AI answer engines (AEO)</em> &mdash; so you show up in Google and in ChatGPT.</p></div>
+            </div>
+            <div class="gr-get">
+              <span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <div><b>Mobile-first &amp; lightning fast</b><p>Loads in under 2 seconds on a phone &mdash; where most guests find you first.</p></div>
+            </div>
+            <div class="gr-get">
+              <span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <div><b>A full Spanish version, free</b><p>Your whole site duplicated in Spanish to <em>double your reach</em> across Miami.</p></div>
+            </div>
+            <div class="gr-get">
+              <span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <div><b>You own everything</b><p>No lock-in, no monthly fees &mdash; full control of your site and files, fully transparent.</p></div>
+            </div>
+            <div class="gr-get">
+              <span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <div><b>Unlimited revisions</b><p>We revise in batches until you&rsquo;re genuinely happy with it.</p></div>
+            </div>
+            <div class="gr-get">
+              <span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <div><b>A personal account manager</b><p>One contact to guide you through the whole process, whenever you need them.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- how it works -->
+        <div class="gr-how2 gr-rise d1">
+          <h3 class="gr-how2-h">How it works</h3>
+          <p class="gr-how2-s">A quick call, then we do the heavy lifting. Your finished site lands in a week.</p>
+          <div class="gr-flow">
+            <div class="gr-flowstep">
+              <div class="no">1</div>
+              <b>A quick call</b>
+              <p>We learn your business and goals, and grab any photos you have.</p>
+              <span class="dur">15 minutes</span>
+            </div>
+            <div class="gr-flowstep">
+              <div class="no">2</div>
+              <b>We start right away</b>
+              <p>A 15% deposit kicks it off &mdash; with your account manager on hand.</p>
+              <span class="dur">Same week</span>
+            </div>
+            <div class="gr-flowstep">
+              <div class="no">3</div>
+              <b>Built in a week</b>
+              <p>Fully custom &mdash; SEO, AI search, mobile, and your Spanish version.</p>
+              <span class="dur">7 days</span>
+            </div>
+            <div class="gr-flowstep">
+              <div class="no">4</div>
+              <b>Revise until you love it</b>
+      <p>Unlimited revisions. Then it&rsquo;s all yours.</p>
+              <span class="dur">Until you&rsquo;re happy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ INLINE SCHEDULER ============ -->
+    <section class="gr-section" id="book" style="padding-top:0;">
+      <div class="gr-wrap">
+        <div class="gr-section-head --center gr-rise">
+          <span class="gr-eyebrow">Book your call</span>
+          <h2 style="text-align: center;">Grab a time that works for you</h2>
+          <p>Pick a 15-minute slot with Juan below. No back-and-forth emails.</p>
+        </div>
+        <div class="gr-host gr-rise">
+          <div class="gr-host-photo"><img src="media/juan-call.webp" alt="Juan Hern&aacute;ndez, Founder at Button Up Media" /></div>
+          <div class="gr-host-meta">
+            <span class="gr-host-name">Juan Hern&aacute;ndez</span>
+            <span class="gr-host-role">Founder, Button Up Media</span>
+          </div>
+        </div>
+        <div class="gr-cal-wrap gr-rise">
+          <div id="cal-inline" class="gr-cal-inline" aria-label="Schedule a call with Juan">
+            <div class="gr-cal-ph">
+              <span class="gr-cal-spin" aria-hidden="true"></span>
+              <p>Loading the scheduler&hellip;</p>
+              <a class="btn btn-primary" href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener" style="height:48px;padding:0 22px;display:inline-flex;align-items:center;font-family:var(--font-display);font-weight:700;">Open scheduler in a new tab</a>
+            </div>
+          </div>
+          <p class="gr-cal-fallback"><a href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener">Open Calendly link in new tab to get started &rarr;</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="gr-footer">
+      <div class="gr-wrap">
+        <div class="gr-footer-top">
+          <img class="gr-logo" src="media/logo-cropped.webp" alt="Button Up Media" width="78" height="26" loading="lazy" style="height:26px;" />
+          <a href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener" class="btn btn-primary" style="height:42px;padding:0 20px;">Book a consult</a>
+        </div>
+        <div class="gr-footer-cols">
+          <div class="gr-footer-col">
+            <h4>Services</h4>
+            <a href="/socialmediamarketing">Social Media Marketing</a>
+            <a href="/restaurant-advertising">Paid Media</a>
+            <a href="/restaurant-website-design">Website Design</a>
+          </div>
+          <div class="gr-footer-col">
+            <h4>Locations</h4>
+            <span>Miami</span>
+            <span>Fort Lauderdale</span>
+            <span>Orlando</span>
+            <span>Tampa</span>
+          </div>
+          <div class="gr-footer-col">
+            <h4>Company</h4>
+            <a href="/">Home</a>
+            <a href="/contact">Contact</a>
+            <a href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener">Book a consult</a>
+          </div>
+          <div class="gr-footer-col">
+            <h4>Get in touch</h4>
+            <a href="tel:+17867409499">(786) 740-9499</a>
+            <a href="mailto:contact@buttonupmedia.com">contact@buttonupmedia.com</a>
+          </div>
+        </div>
+        <div class="gr-footer-bottom">
+          <span>&copy; 2026 Button Up Media. Restaurant marketing that fills tables.</span>
+          <span>Privacy &middot; Terms</span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- sticky mobile CTA -->
+  <div class="gr-mobile-cta"><a href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener"><button>Book a free consult</button></a></div>
+
+  <script>
+    /* ===== value tabs ===== */
+    (function () {
+      var tabs = [].slice.call(document.querySelectorAll(".gr-tab"));
+      var panels = [].slice.call(document.querySelectorAll(".gr-panel"));
+      function animateBars(panel) {
+        panel.querySelectorAll(".gr-bar-fill").forEach(function (b) { b.style.width = "0"; requestAnimationFrame(function () { setTimeout(function () { b.style.width = (b.dataset.w || 0) + "%"; }, 60); }); });
+        var viz = panel.querySelector(".gr-panel-visual");
+        if (viz) { viz.classList.remove("viz-go"); void viz.offsetWidth; viz.classList.add("viz-go"); }
+      }
+      tabs.forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          tabs.forEach(function (t) { t.classList.remove("is-active"); });
+          panels.forEach(function (p) { p.classList.remove("is-active"); });
+          tab.classList.add("is-active");
+          var key = tab.dataset.tab;
+          var panel = document.querySelector('.gr-panel[data-panel="' + key + '"]');
+          panel.classList.add("is-active");
+          animateBars(panel);
+        });
+      });
+    })();
+
+    /* ===== reveal on scroll + animate bars when in view ===== */
+    (function () {
+      var els = [].slice.call(document.querySelectorAll(".gr-rise"));
+      if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        els.forEach(function (e) { e.classList.add("is-in"); });
+        document.querySelectorAll(".gr-panel.is-active .gr-bar-fill").forEach(function (b) { b.style.width = (b.dataset.w || 0) + "%"; });
+        document.querySelectorAll(".gr-panel.is-active .gr-panel-visual").forEach(function (v) { v.classList.add("viz-go"); });
+        return;
+      }
+      var io = new IntersectionObserver(function (ents) {
+        ents.forEach(function (en) {
+          if (en.isIntersecting) {
+            en.target.classList.add("is-in");
+            if (en.target.querySelector) { en.target.querySelectorAll(".gr-panel.is-active .gr-bar-fill").forEach(function (b) { b.style.width = (b.dataset.w || 0) + "%"; }); en.target.querySelectorAll(".gr-panel.is-active .gr-panel-visual").forEach(function (v) { v.classList.add("viz-go"); }); }
+            io.unobserve(en.target);
+          }
+        });
+      }, { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
+      els.forEach(function (e) { io.observe(e); });
+      // first panel bars on load
+      setTimeout(function () { document.querySelectorAll(".gr-panel.is-active .gr-bar-fill").forEach(function (b) { b.style.width = (b.dataset.w || 0) + "%"; }); document.querySelectorAll(".gr-panel.is-active .gr-panel-visual").forEach(function (v) { v.classList.add("viz-go"); }); }, 800);
+    })();
+
+    /* ===== Calendly: lazy-loaded to protect FCP/LCP (badge on first interaction, inline embed when near) ===== */
+    (function () {
+      var CAL_URL = "https://calendly.com/juanh-buttonupmedia/website-consultation";
+      var state = 0; // 0 idle, 1 loading, 2 ready, 3 failed
+
+      // Mirror a completed Calendly booking into the dataLayer so GTM can fire the
+      // Google Ads conversion (same booking_complete signal the other ad pages use).
+      window.addEventListener("message", function (e) {
+        if (e && e.data && e.data.event === "calendly.event_scheduled") {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: "booking_complete" });
+        }
+      });
+      var cbs = [];
+      function whenReady(cb) { if (state === 2) return cb(true); if (state === 3) return cb(false); cbs.push(cb); load(); }
+      function flush(ok) { state = ok ? 2 : 3; cbs.splice(0).forEach(function (c) { c(ok); }); }
+      function load() {
+        if (state >= 1) return;
+        state = 1;
+        var link = document.createElement("link");
+        link.rel = "stylesheet"; link.href = "https://assets.calendly.com/assets/external/widget.css";
+        document.head.appendChild(link);
+        var s = document.createElement("script");
+        s.src = "https://assets.calendly.com/assets/external/widget.js"; s.async = true;
+        s.onerror = function () { flush(false); };
+        document.head.appendChild(s);
+        var tries = 0;
+        (function poll() {
+          if (window.Calendly && Calendly.initBadgeWidget) { flush(true); }
+          else if (state === 1 && tries++ < 80) { setTimeout(poll, 150); }
+          else if (state === 1) { flush(false); }
+        })();
+      }
+
+      // Every "Book a consult" link: open the popup if ready; otherwise let it open in a new tab (never blocked) and kick off the load.
+      document.querySelectorAll('a[href*="calendly.com/juanh-buttonupmedia"]').forEach(function (a) {
+        a.addEventListener("click", function (e) {
+          if (window.Calendly && Calendly.initPopupWidget) { e.preventDefault(); Calendly.initPopupWidget({ url: CAL_URL }); }
+          else { load(); }
+        });
+      });
+
+      // Floating badge: load when idle or on first interaction, off the critical path.
+      var badgeDone = false;
+      function initBadge() {
+        if (badgeDone) return; badgeDone = true;
+        whenReady(function (ok) {
+          if (ok && window.Calendly && Calendly.initBadgeWidget) {
+            Calendly.initBadgeWidget({ url: CAL_URL, text: "Build your website today", color: "#006BFF", textColor: "#FFFFFF", branding: true });
+          }
+        });
+      }
+      ["scroll", "pointerdown", "keydown", "touchstart"].forEach(function (ev) {
+        window.addEventListener(ev, initBadge, { once: true, passive: true });
+      });
+      function scheduleBadge() { if ("requestIdleCallback" in window) requestIdleCallback(initBadge, { timeout: 4000 }); else setTimeout(initBadge, 3000); }
+      if (document.readyState === "complete") scheduleBadge(); else window.addEventListener("load", scheduleBadge);
+
+      // Inline embed: mount only when the scheduler section nears the viewport.
+      var host = document.getElementById("cal-inline");
+      var section = document.getElementById("book");
+      if (host && section && "IntersectionObserver" in window) {
+        var mounted = false;
+        function mount() {
+          if (mounted) return; mounted = true;
+          whenReady(function (ok) {
+            if (ok && window.Calendly && Calendly.initInlineWidget) {
+              host.innerHTML = "";
+              host.classList.add("is-ready");
+              Calendly.initInlineWidget({ url: CAL_URL, parentElement: host });
+            } else {
+              host.classList.add("is-failed");
+            }
+          });
+        }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) { if (en.isIntersecting) { mount(); io.disconnect(); } });
+        }, { rootMargin: "700px 0px" });
+        io.observe(section);
+      }
+    })();
+  </script>
+</body>
+</html>
