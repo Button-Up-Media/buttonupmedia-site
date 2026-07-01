@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
     return res.status(405).json({ ok: false, error: 'method_not_allowed' });
   }
 
-  const key = process.env.GOOGLE_PLACES_API_KEY || '';
+  const key = process.env.GOOGLE_PLACES_API_KEY || process.env.PAGESPEED_API_KEY || '';
   if (!key) {
     return res.status(200).json({ ok: false, error: 'not_configured' });
   }
