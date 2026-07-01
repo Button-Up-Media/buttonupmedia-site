@@ -414,11 +414,21 @@
 
     /* ============ VALUE TABS ============ */
     .gr-tabs { margin-top: 38px; }
-    .gr-tablist { display: flex; gap: 4px; overflow-x: auto; border-bottom: 1px solid var(--line); -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .gr-tablist-wrap { position: relative; }
+    /* Edge fades hint that the tab strip scrolls horizontally. Shown only when there
+       is actually more to scroll (.can-left / .can-right toggled in JS). */
+    .gr-tablist-wrap::before, .gr-tablist-wrap::after { content: ""; position: absolute; top: 0; bottom: 1px; width: 46px; pointer-events: none; z-index: 2; opacity: 0; transition: opacity .25s ease; }
+    .gr-tablist-wrap::before { left: 0; background: linear-gradient(to left, transparent, var(--bg-0) 78%); }
+    .gr-tablist-wrap::after { right: 0; background: linear-gradient(to right, transparent, var(--bg-0) 78%); }
+    .gr-tablist-wrap.can-left::before { opacity: 1; }
+    .gr-tablist-wrap.can-right::after { opacity: 1; }
+    /* Strictly horizontal scroll (overflow-x:auto alone lets overflow-y compute to auto). */
+    .gr-tablist { display: flex; gap: 4px; overflow-x: auto; overflow-y: hidden; border-bottom: 1px solid var(--line); -webkit-overflow-scrolling: touch; scrollbar-width: none; scroll-behavior: smooth; scroll-snap-type: x proximity; }
     .gr-tablist::-webkit-scrollbar { display: none; }
-    .gr-tab { position: relative; flex: none; padding: 16px 6px; margin-right: 26px; font-family: var(--font-display); font-weight: 700; font-size: clamp(0.95rem, 2vw, 1.1rem); color: var(--text-soft); background: none; border: none; cursor: pointer; white-space: nowrap; transition: color .2s; }
+    .gr-tab { position: relative; flex: none; padding: 16px 6px; margin-right: 26px; font-family: var(--font-display); font-weight: 700; font-size: clamp(0.95rem, 2vw, 1.1rem); color: var(--text-soft); background: none; border: none; cursor: pointer; white-space: nowrap; transition: color .2s; scroll-snap-align: center; }
     .gr-tab.is-active { color: var(--text-head); }
-    .gr-tab.is-active::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--gold); }
+    .gr-tab.is-active::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--gold); }
+    @media (prefers-reduced-motion: reduce) { .gr-tablist { scroll-behavior: auto; } }
     .gr-panel { display: none; margin-top: 30px; }
     .gr-panel.is-active { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 4vw, 52px); align-items: center; animation: grFade .5s ease both; }
     @keyframes grFade { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
@@ -1120,11 +1130,13 @@
           <h2>Más tráfico, más pedidos, más clientes frecuentes.</h2>
         </div>
         <div class="gr-tabs gr-rise d1">
+          <div class="gr-tablist-wrap">
           <div class="gr-tablist" role="tablist">
             <button class="gr-tab is-active" data-tab="traffic" role="tab">Más tráfico de Google</button>
             <button class="gr-tab" data-tab="sales" role="tab">Más pedidos en línea</button>
             <button class="gr-tab" data-tab="repeat" role="tab">Más clientes que vuelven</button>
             <button class="gr-tab" data-tab="mobile" role="tab">Más reservas desde el celular</button>
+          </div>
           </div>
 
           <!-- traffic -->
@@ -1694,26 +1706,61 @@
   </main>
 
   <script>
-    /* ===== value tabs ===== */
+    /* ===== value tabs: click, horizontal scroll hints, auto-advance until touched ===== */
     (function () {
-      var tabs = [].slice.call(document.querySelectorAll(".gr-tab"));
-      var panels = [].slice.call(document.querySelectorAll(".gr-panel"));
+      var section = document.getElementById("fixes");
+      if (!section) return;
+      var wrap = section.querySelector(".gr-tablist-wrap");
+      var list = section.querySelector(".gr-tablist");
+      var tabs = [].slice.call(section.querySelectorAll(".gr-tab"));
+      var panels = [].slice.call(section.querySelectorAll(".gr-panel"));
+      if (!tabs.length) return;
+      var current = Math.max(0, tabs.indexOf(section.querySelector(".gr-tab.is-active")));
+
       function animateBars(panel) {
         panel.querySelectorAll(".gr-bar-fill").forEach(function (b) { b.style.width = "0"; requestAnimationFrame(function () { setTimeout(function () { b.style.width = (b.dataset.w || 0) + "%"; }, 60); }); });
         var viz = panel.querySelector(".gr-panel-visual");
         if (viz) { viz.classList.remove("viz-go"); void viz.offsetWidth; viz.classList.add("viz-go"); }
       }
-      tabs.forEach(function (tab) {
-        tab.addEventListener("click", function () {
-          tabs.forEach(function (t) { t.classList.remove("is-active"); });
-          panels.forEach(function (p) { p.classList.remove("is-active"); });
-          tab.classList.add("is-active");
-          var key = tab.dataset.tab;
-          var panel = document.querySelector('.gr-panel[data-panel="' + key + '"]');
-          panel.classList.add("is-active");
-          animateBars(panel);
-        });
-      });
+      // Toggle the edge fades based on how far the strip is scrolled.
+      function updateHints() {
+        if (!wrap || !list) return;
+        var max = list.scrollWidth - list.clientWidth - 1;
+        wrap.classList.toggle("can-left", list.scrollLeft > 2);
+        wrap.classList.toggle("can-right", max > 2 && list.scrollLeft < max);
+      }
+      function activate(i, smooth) {
+        current = i;
+        tabs.forEach(function (t, j) { t.classList.toggle("is-active", j === i); });
+        panels.forEach(function (p) { p.classList.remove("is-active"); });
+        var panel = section.querySelector('.gr-panel[data-panel="' + tabs[i].dataset.tab + '"]');
+        if (panel) { panel.classList.add("is-active"); animateBars(panel); }
+        // Keep the active tab in view, which also shows the strip scrolls sideways.
+        if (list) {
+          var t = tabs[i];
+          list.scrollTo({ left: Math.max(0, t.offsetLeft - (list.clientWidth - t.offsetWidth) / 2), behavior: smooth === false ? "auto" : "smooth" });
+        }
+        updateHints();
+      }
+      tabs.forEach(function (tab, i) { tab.addEventListener("click", function () { stop(); activate(i); }); });
+      if (list) list.addEventListener("scroll", updateHints, { passive: true });
+      window.addEventListener("resize", updateHints);
+
+      // Auto-advance every 8s while the section is on screen, until the visitor's
+      // first touch/click in the section, so it never switches while they are reading.
+      var timer = null, stopped = false, inView = false;
+      var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      function loop() { if (stopped) return; if (inView) activate((current + 1) % tabs.length); timer = setTimeout(loop, 8000); }
+      function stop() { if (stopped) return; stopped = true; clearTimeout(timer); }
+      if (!reduce) {
+        section.addEventListener("pointerdown", stop, { passive: true });
+        if ("IntersectionObserver" in window) {
+          new IntersectionObserver(function (e) { inView = e[0].isIntersecting; }, { threshold: 0.35 }).observe(section);
+        } else { inView = true; }
+        timer = setTimeout(loop, 8000);
+      }
+      requestAnimationFrame(updateHints);
+      setTimeout(updateHints, 500);
     })();
 
     /* ===== reveal on scroll + animate bars when in view ===== */
