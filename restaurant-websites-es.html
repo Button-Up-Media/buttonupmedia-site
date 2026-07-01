@@ -146,13 +146,16 @@
     html { scroll-padding-top: 100px; }
     /* Scale the pill down on mobile the same way the main header does (.lib-nav). */
     @media (max-width: 700px) {
-      .gr-nav { top: 8px; width: min(calc(100% - 20px), 1180px); min-height: 54px; margin: 0 auto; padding: 8px 12px; border-radius: 14px; }
-      .gr-nav-inner { gap: 10px; }
+      .gr-nav { top: 8px; width: min(calc(100% - 20px), 1180px); min-height: 56px; margin: 0 auto; padding: 8px 10px 8px 14px; border-radius: 14px; }
+      .gr-nav-inner { gap: 12px; }
       .gr-logo { height: 30px; }
-      .gr-nav-right { gap: 10px; }
-      .gr-nav-cta { height: 38px; padding: 0 16px; }
+      /* Phone becomes a clear, easy-to-tap circular button, well clear of the CTA. */
+      .gr-nav-right { gap: 14px; }
+      .gr-nav-phone { width: 40px; height: 40px; padding: 0; border-radius: 50%; border: 1px solid var(--line); background: rgba(36,28,16,0.03); justify-content: center; gap: 0; }
+      .gr-nav-phone svg { width: 19px; height: 19px; }
+      .gr-nav-phone span { display: none; }
+      .gr-nav-cta { height: 40px; padding: 0 18px; }
     }
-    @media (max-width: 380px) { .gr-nav-phone span { display: none; } .gr-nav { padding-left: 14px; } }
 
     /* ============ HERO ============ */
     .gr-hero { position: relative; overflow: hidden; padding: clamp(84px, 13vw, 128px) 0 clamp(50px, 8vw, 96px); text-align: center; }
@@ -391,7 +394,10 @@
     .gr-issue span { font-size: 0.69rem; color: var(--text-soft); line-height: 1.4; }
 
     /* ============ SECTION SCAFFOLD ============ */
-    .gr-section { padding: clamp(56px, 9vw, 110px) 0; }
+    /* Skip layout/paint of the long below-the-fold sections until they are
+       scrolled near, so the hero's LCP paints without waiting on the whole page's
+       style+layout. Renders identically; only the off-screen render is deferred. */
+    .gr-section { padding: clamp(56px, 9vw, 110px) 0; content-visibility: auto; contain-intrinsic-size: auto 760px; }
     .gr-section-head { max-width: 40ch; }
     .gr-section-head.--center { max-width: 34ch; margin: 0 auto; text-align: center; }
     .gr-section-head h2 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.035em; font-size: clamp(1.9rem, 4.6vw, 3.1rem); line-height: 1.05; margin-top: 12px; text-wrap: balance; }
@@ -907,9 +913,7 @@
     @media (min-width: 720px) { .gr-footer-cols { grid-template-columns: repeat(4, 1fr); } }
 
     /* sticky mobile CTA */
-    .gr-mobile-cta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: none; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); background: rgba(20,16,9,0.94); backdrop-filter: blur(12px); border-top: 1px solid var(--line); }
-    .gr-mobile-cta button { width: 100%; height: 50px; border: none; border-radius: 14px; font-family: var(--font-display); font-weight: 700; font-size: 0.96rem; background: linear-gradient(135deg,#E8AC44,#D08A34); color: #241804; box-shadow: 0 6px 18px rgba(36,24,4,0.3); cursor: pointer; }
-    @media (max-width: 700px) { .gr-mobile-cta { display: block; } body { padding-bottom: 74px; } }
+
     /* lift Calendly badge above the sticky mobile CTA bar */
     @media (max-width: 700px) { .calendly-badge-widget { bottom: 86px !important; right: 12px !important; } }
 
@@ -935,6 +939,21 @@
     .gr-cal-fallback { text-align: center; margin-top: 16px; font-size: 0.9rem; color: var(--text-soft); }
     .gr-cal-fallback a { color: var(--gold); font-weight: 600; }
     @media (max-width: 700px) { .gr-cal-inline, .gr-cal-inline iframe { min-height: 660px; } }
+
+    /* ===== Mobile typography harmony (placed last so it wins the cascade) =====
+       One clear, consistent scale so the hierarchy reads cleanly:
+       H1 (40) > section H2 (~28) > prominent subhead (21) > card subhead (19) >
+       body (15-16) > eyebrow (12). Desktop is untouched. */
+    @media (max-width: 700px) {
+      .gr-pricecard .amt b.amt-new, .gr-pricecard .amt b.amt-old { font-size: 46px; }  /* offer price: was 58px, no longer dwarfs the hero */
+      .gw-copy h3, .gr-panel-copy h3, .gr-how2-h { font-size: 21px; } /* prominent subheads: unify (were 24/22/22) */
+      .gr-feat h3, .gr-belief h3, .gr-get-h { font-size: 19px; }      /* card subheads: unify */
+      .gr-section-head p, .gr-final p, .gr-how2-s { font-size: 16px; line-height: 1.6; }  /* section intros: was 17px */
+      .gr-get p { font-size: 15px; }                                  /* offer-item body: match other cards (was 14px) */
+      /* A little more breathing room around section headers on small screens. */
+      .gr-section-head { margin-bottom: 30px; }
+      .gr-section-head p { margin-top: 14px; }
+    }
   </style>
   <!-- Calendly assets are lazy-loaded on first interaction / when the inline scheduler nears the viewport (keeps them off the critical path; see script at end of body) -->
 </head>
@@ -968,7 +987,7 @@
         <p class="gr-hero-sub gr-rise d2">Sitios web para restaurantes hechos a la medida y pensados para el celular: impactantes, rápidos y hechos para reservar. Listos en una semana.</p>
 
         <div class="gr-hero-cta gr-rise d2">
-          <a href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener" class="gr-cta-primary">Reserve una consulta gratis
+          <a href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener" data-cal-newtab class="gr-cta-primary">Reserve una consulta gratis
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
           <a href="tel:+17867409499" class="gr-cta-ghost"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> (786) 740-9499</a>
@@ -1514,7 +1533,7 @@
         <div class="gr-section-head --center gr-rise" style="max-width: min(880px, 92%);">
           <span class="gr-eyebrow">La oferta</span>
           <h2>Un sitio web a la medida, listo en una semana.</h2>
-          <p>Sin plantillas. Sin cuotas mensuales. Todo es tuyo.<br>un sitio totalmente a la medida, hecho para Google, la búsqueda con IA, el celular y el Miami hispanohablante.</p>
+          <p>Sin plantillas. Sin cuotas mensuales. Todo es tuyo.<br>Un sitio totalmente a la medida, hecho para Google, la búsqueda con IA, el celular y el Miami hispanohablante.</p>
         </div>
 
         <div class="gr-offer gr-rise d1">
@@ -1674,9 +1693,6 @@
     </footer>
   </main>
 
-  <!-- sticky mobile CTA -->
-  <div class="gr-mobile-cta"><a href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener"><button>Reserve una consulta gratis</button></a></div>
-
   <script>
     /* ===== value tabs ===== */
     (function () {
@@ -1723,7 +1739,10 @@
       setTimeout(function () { document.querySelectorAll(".gr-panel.is-active .gr-bar-fill").forEach(function (b) { b.style.width = (b.dataset.w || 0) + "%"; }); document.querySelectorAll(".gr-panel.is-active .gr-panel-visual").forEach(function (v) { v.classList.add("viz-go"); }); }, 800);
     })();
 
-    /* ===== Calendly: lazy-loaded to protect FCP/LCP (badge on first interaction, inline embed when near) ===== */
+    /* ===== Calendly: lazy-loaded to protect FCP/LCP. CTA behavior:
+       - hero "Book a free consult" (data-cal-newtab): opens Calendly in a new tab.
+       - every other consult CTA: opens the Calendly popup (loading it first if needed).
+       - #book: inline embed. No floating badge, no sticky bar. ===== */
     (function () {
       var CAL_URL = "https://calendly.com/juanh-buttonupmedia/website-consultation";
       var state = 0; // 0 idle, 1 loading, 2 ready, 3 failed
@@ -1751,35 +1770,31 @@
         document.head.appendChild(s);
         var tries = 0;
         (function poll() {
-          if (window.Calendly && Calendly.initBadgeWidget) { flush(true); }
+          if (window.Calendly && Calendly.initPopupWidget) { flush(true); }
           else if (state === 1 && tries++ < 80) { setTimeout(poll, 150); }
           else if (state === 1) { flush(false); }
         })();
       }
 
-      // Every "Book a consult" link: open the popup if ready; otherwise let it open in a new tab (never blocked) and kick off the load.
-      document.querySelectorAll('a[href*="calendly.com/juanh-buttonupmedia"]').forEach(function (a) {
-        a.addEventListener("click", function (e) {
-          if (window.Calendly && Calendly.initPopupWidget) { e.preventDefault(); Calendly.initPopupWidget({ url: CAL_URL }); }
-          else { load(); }
-        });
+      // Warm up Calendly on the visitor's first interaction so the popup is instant,
+      // while staying off the critical (LCP) path.
+      ["pointerdown", "touchstart", "keydown", "scroll", "mousemove"].forEach(function (ev) {
+        window.addEventListener(ev, function warm() { load(); }, { once: true, passive: true });
       });
 
-      // Floating badge: load when idle or on first interaction, off the critical path.
-      var badgeDone = false;
-      function initBadge() {
-        if (badgeDone) return; badgeDone = true;
-        whenReady(function (ok) {
-          if (ok && window.Calendly && Calendly.initBadgeWidget) {
-            Calendly.initBadgeWidget({ url: CAL_URL, text: "Cree su sitio web hoy", color: "#006BFF", textColor: "#FFFFFF", branding: true });
-          }
+      // Consult CTAs -> Calendly popup. The hero button is flagged data-cal-newtab and
+      // is skipped here so it opens in a new tab (its native target="_blank").
+      document.querySelectorAll('a[href*="calendly.com/juanh-buttonupmedia"]').forEach(function (a) {
+        if (a.hasAttribute("data-cal-newtab")) return;
+        a.addEventListener("click", function (e) {
+          e.preventDefault();
+          if (window.Calendly && Calendly.initPopupWidget) { Calendly.initPopupWidget({ url: CAL_URL }); return; }
+          whenReady(function (ok) {
+            if (ok && window.Calendly && Calendly.initPopupWidget) Calendly.initPopupWidget({ url: CAL_URL });
+            else window.open(CAL_URL, "_blank", "noopener");
+          });
         });
-      }
-      ["scroll", "pointerdown", "keydown", "touchstart"].forEach(function (ev) {
-        window.addEventListener(ev, initBadge, { once: true, passive: true });
       });
-      function scheduleBadge() { if ("requestIdleCallback" in window) requestIdleCallback(initBadge, { timeout: 4000 }); else setTimeout(initBadge, 3000); }
-      if (document.readyState === "complete") scheduleBadge(); else window.addEventListener("load", scheduleBadge);
 
       // Inline embed: mount only when the scheduler section nears the viewport.
       var host = document.getElementById("cal-inline");
