@@ -85,13 +85,44 @@ function forwardLead(lead) {
   } catch (e) { /* ignore */ }
 }
 
-/* Create a ClickUp task for each lead. Needs CLICKUP_TOKEN (a ClickUp
-   personal API token) and CLICKUP_LIST_ID. Fire-and-forget. */
+/* Notify the team of each lead in ClickUp. Needs CLICKUP_TOKEN (a personal
+   API token). Prefers a Chat message to CLICKUP_CHANNEL_ID (with
+   CLICKUP_WORKSPACE_ID; CLICKUP_FOLLOWERS = comma-separated user IDs to
+   ping); falls back to creating a task in CLICKUP_LIST_ID. Fire-and-forget. */
 function clickupLead(lead) {
   const token = process.env.CLICKUP_TOKEN || '';
-  const listId = process.env.CLICKUP_LIST_ID || '';
-  if (!token || !listId) return;
+  if (!token) return;
 
+  const channelId = process.env.CLICKUP_CHANNEL_ID || '';
+  const workspaceId = process.env.CLICKUP_WORKSPACE_ID || '';
+  const listId = process.env.CLICKUP_LIST_ID || '';
+
+  // Preferred: a chat message to the team channel.
+  if (channelId && workspaceId) {
+    const content = [
+      '🌐 **New website grader lead**',
+      '• **Restaurant:** ' + (lead.restaurant || 'Unknown'),
+      '• **Phone:** ' + (lead.phone || ''),
+      lead.score != null ? '• **Score:** ' + lead.score + ' / 100' : '',
+      lead.website ? '• **Site:** ' + lead.website : '',
+    ].filter(Boolean).join('\n');
+    const payload = { type: 'message', content_format: 'text/md', content: content };
+    const followers = String(process.env.CLICKUP_FOLLOWERS || '')
+      .split(',').map((s) => s.trim()).filter(Boolean);
+    if (followers.length) payload.followers = followers;
+    try {
+      fetch('https://api.clickup.com/api/v3/workspaces/' + encodeURIComponent(workspaceId) +
+            '/chat/channels/' + encodeURIComponent(channelId) + '/messages', {
+        method: 'POST',
+        headers: { Authorization: token, 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      }).catch(() => {});
+    } catch (e) { /* ignore */ }
+    return;
+  }
+
+  // Fallback: create a task in a list.
+  if (!listId) return;
   const name = 'Lead: ' + (lead.restaurant || 'Unknown restaurant') +
     (lead.score != null ? ' (' + lead.score + '/100)' : '');
   const desc = [
@@ -102,7 +133,6 @@ function clickupLead(lead) {
     '- **Received:** ' + (lead.at || ''),
     '- **Source:** website-grader',
   ].filter(Boolean).join('\n');
-
   try {
     fetch('https://api.clickup.com/api/v2/list/' + encodeURIComponent(listId) + '/task', {
       method: 'POST',
