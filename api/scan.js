@@ -34,11 +34,16 @@ module.exports = async (req, res) => {
 
   const key = process.env.PAGESPEED_API_KEY || '';
 
+  // A single hard deadline for all PSI work (the Vercel function cap is 60s).
+  // Every attempt and retry must finish before this, so a retry can never push
+  // total time past the function limit and trigger a 504.
+  const deadline = Date.now() + 52000;
+
   try {
     // Run both strategies in parallel — wall time is the slower of the two.
     const [mobile, desktop] = await Promise.all([
-      runPsi(url, 'mobile', key),
-      runPsi(url, 'desktop', key),
+      runPsi(url, 'mobile', key, deadline),
+      runPsi(url, 'desktop', key, deadline),
     ]);
 
     const mob = extract(mobile);
@@ -75,29 +80,33 @@ module.exports = async (req, res) => {
 
 // PageSpeed occasionally returns a transient HTTP 500 "Lighthouse returned
 // error: Something went wrong." on a cold analysis; a second attempt almost
-// always succeeds. Retry once on 500 so a first-time scan does not show the
-// visitor a spurious "we couldn't analyze that site" in the lead funnel.
-async function runPsi(url, strategy, key) {
+// always succeeds. Retry once on 500, but only while there is still time left
+// before the shared deadline, so the retry can never blow the 60s function cap.
+async function runPsi(url, strategy, key, deadline) {
   try {
-    return await runPsiOnce(url, strategy, key);
+    return await runPsiOnce(url, strategy, key, deadline);
   } catch (err) {
-    if (err && err.status === 500) {
-      await new Promise((r) => setTimeout(r, 1200));
-      return runPsiOnce(url, strategy, key);
+    // Only retry a transient 500, and only if a retry can realistically finish.
+    if (err && err.status === 500 && Date.now() < deadline - 9000) {
+      await new Promise((r) => setTimeout(r, 700));
+      return runPsiOnce(url, strategy, key, deadline);
     }
     throw err;
   }
 }
 
-async function runPsiOnce(url, strategy, key) {
+async function runPsiOnce(url, strategy, key, deadline) {
   const params = new URLSearchParams();
   params.set('url', url);
   params.set('strategy', strategy);
   ['performance', 'seo', 'accessibility', 'best-practices'].forEach((c) => params.append('category', c));
   if (key) params.set('key', key);
 
+  // Abort at the shared deadline (bounded so a first attempt cannot consume the
+  // whole budget and starve the retry, and never negative).
+  const budget = Math.max(1000, (deadline || (Date.now() + 52000)) - Date.now());
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 55000);
+  const timer = setTimeout(() => controller.abort(), budget);
   let resp;
   try {
     resp = await fetch(`${PSI_ENDPOINT}?${params.toString()}`, { signal: controller.signal });
