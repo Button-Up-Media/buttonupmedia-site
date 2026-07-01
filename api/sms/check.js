@@ -53,7 +53,6 @@ module.exports = async (req, res) => {
     }
 
     if (data.status === 'approved') {
-      // Fire-and-forget lead delivery; never block the unlock on it.
       const lead = {
         phone,
         restaurant: body.restaurant || null,
@@ -61,9 +60,9 @@ module.exports = async (req, res) => {
         score: body.score != null ? body.score : null,
         at: new Date().toISOString(),
       };
-      forwardLead(lead);
-      alertOwners(lead);
-      clickupLead(lead);
+      // Await delivery so it finishes before the serverless instance freezes
+      // (a fire-and-forget fetch after res is not guaranteed to complete).
+      await Promise.allSettled([clickupLead(lead), forwardLead(lead), alertOwners(lead)]);
       return res.status(200).json({ ok: true, verified: true });
     }
 
@@ -75,21 +74,20 @@ module.exports = async (req, res) => {
 
 function forwardLead(lead) {
   const hook = process.env.LEAD_WEBHOOK_URL || '';
-  if (!hook) return;
-  try {
-    fetch(hook, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(lead),
-    }).catch(() => {});
-  } catch (e) { /* ignore */ }
+  if (!hook) return Promise.resolve();
+  return fetch(hook, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(lead),
+  });
 }
 
 /* Notify the team of each lead in ClickUp. Needs CLICKUP_TOKEN (a personal
    API token). Prefers a Chat message to CLICKUP_CHANNEL_ID (with
    CLICKUP_WORKSPACE_ID; CLICKUP_FOLLOWERS = comma-separated user IDs to
-   ping); falls back to creating a task in CLICKUP_LIST_ID. Fire-and-forget. */
-function clickupLead(lead) {
+   ping); falls back to creating a task in CLICKUP_LIST_ID. Returns a promise
+   the handler awaits so it completes before the instance freezes. */
+async function clickupLead(lead) {
   const token = process.env.CLICKUP_TOKEN || '';
   if (!token) return;
 
@@ -111,17 +109,18 @@ function clickupLead(lead) {
       .split(',').map((s) => s.trim()).filter(Boolean);
     if (followers.length) payload.followers = followers;
     try {
-      fetch('https://api.clickup.com/api/v3/workspaces/' + encodeURIComponent(workspaceId) +
+      const r = await fetch('https://api.clickup.com/api/v3/workspaces/' + encodeURIComponent(workspaceId) +
             '/chat/channels/' + encodeURIComponent(channelId) + '/messages', {
         method: 'POST',
         headers: { Authorization: token, 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
-      }).catch(() => {});
-    } catch (e) { /* ignore */ }
-    return;
+      });
+      if (r.ok) return; // chat message posted
+    } catch (e) { /* fall through to the task fallback */ }
   }
 
-  // Fallback: create a task in a list.
+  // Fallback: create a task (the v2 API works reliably with a personal token),
+  // so a lead is never silently lost if the chat post fails.
   if (!listId) return;
   const name = 'Lead: ' + (lead.restaurant || 'Unknown restaurant') +
     (lead.score != null ? ' (' + lead.score + '/100)' : '');
@@ -133,28 +132,27 @@ function clickupLead(lead) {
     '- **Received:** ' + (lead.at || ''),
     '- **Source:** website-grader',
   ].filter(Boolean).join('\n');
-  try {
-    fetch('https://api.clickup.com/api/v2/list/' + encodeURIComponent(listId) + '/task', {
-      method: 'POST',
-      headers: { Authorization: token, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: name, markdown_description: desc }),
-    }).catch(() => {});
-  } catch (e) { /* ignore */ }
+  await fetch('https://api.clickup.com/api/v2/list/' + encodeURIComponent(listId) + '/task', {
+    method: 'POST',
+    headers: { Authorization: token, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: name, markdown_description: desc }),
+  });
 }
 
 /* Text a lead notification to the owner number(s) in TWILIO_ALERT_TO
    (comma-separated E.164). Needs a sender: TWILIO_MESSAGING_SERVICE_SID
-   or TWILIO_FROM_NUMBER. Fire-and-forget; never blocks the unlock. */
+   or TWILIO_FROM_NUMBER. Returns a promise the handler awaits. OFF unless
+   TWILIO_ALERT_TO is set. */
 function alertOwners(lead) {
   const to = String(process.env.TWILIO_ALERT_TO || '')
     .split(',').map((s) => s.trim()).filter(Boolean);
-  if (!to.length) return;
+  if (!to.length) return Promise.resolve();
 
   const sid = process.env.TWILIO_ACCOUNT_SID || '';
   const token = process.env.TWILIO_AUTH_TOKEN || '';
   const from = process.env.TWILIO_FROM_NUMBER || '';
   const service = process.env.TWILIO_MESSAGING_SERVICE_SID || '';
-  if (!sid || !token || (!from && !service)) return;
+  if (!sid || !token || (!from && !service)) return Promise.resolve();
 
   const body =
     'New website grader lead: ' + (lead.restaurant || 'Unknown restaurant') +
@@ -163,20 +161,18 @@ function alertOwners(lead) {
     (lead.website ? '\nSite: ' + lead.website : '');
   const auth = 'Basic ' + Buffer.from(`${sid}:${token}`).toString('base64');
 
-  to.forEach((dest) => {
-    try {
-      const form = new URLSearchParams();
-      form.set('To', dest);
-      form.set('Body', body);
-      if (service) form.set('MessagingServiceSid', service);
-      else form.set('From', from);
-      fetch(`https://api.twilio.com/2010-04-01/Accounts/${encodeURIComponent(sid)}/Messages.json`, {
-        method: 'POST',
-        headers: { Authorization: auth, 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: form.toString(),
-      }).catch(() => {});
-    } catch (e) { /* ignore */ }
-  });
+  return Promise.all(to.map((dest) => {
+    const form = new URLSearchParams();
+    form.set('To', dest);
+    form.set('Body', body);
+    if (service) form.set('MessagingServiceSid', service);
+    else form.set('From', from);
+    return fetch(`https://api.twilio.com/2010-04-01/Accounts/${encodeURIComponent(sid)}/Messages.json`, {
+      method: 'POST',
+      headers: { Authorization: auth, 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: form.toString(),
+    });
+  }));
 }
 
 function parseBody(req) {
