@@ -192,6 +192,42 @@
       ]
     },
     {
+      "source": "/website-grader-es.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/es/analisis-web",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/website-grader-report-es.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/es/analisis-web-reporte",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
       "source": "/terms.html",
       "headers": [
         {
@@ -509,6 +545,26 @@
       "permanent": true
     },
     {
+      "source": "/website-grader-es.html",
+      "destination": "/es/analisis-web",
+      "permanent": true
+    },
+    {
+      "source": "/es/analisis-web/",
+      "destination": "/es/analisis-web",
+      "permanent": true
+    },
+    {
+      "source": "/website-grader-report-es.html",
+      "destination": "/es/analisis-web-reporte",
+      "permanent": true
+    },
+    {
+      "source": "/es/analisis-web-reporte/",
+      "destination": "/es/analisis-web-reporte",
+      "permanent": true
+    },
+    {
       "source": "/index-es.html",
       "destination": "/es",
       "permanent": true
@@ -685,6 +741,14 @@
     {
       "source": "/es/sitios-web-restaurantes",
       "destination": "/restaurant-websites-es.html"
+    },
+    {
+      "source": "/es/analisis-web",
+      "destination": "/website-grader-es.html"
+    },
+    {
+      "source": "/es/analisis-web-reporte",
+      "destination": "/website-grader-report-es.html"
     },
     {
       "source": "/contact",

@@ -28,6 +28,10 @@ module.exports = async (req, res) => {
     return res.status(400).json({ ok: false, error: 'invalid_url', message: 'Provide a valid website URL.' });
   }
 
+  // Localize the derived report labels (grade, sub-scores, issue cards). The raw
+  // PSI data stays language-neutral; only the friendly text depends on lang.
+  const lang = ((req.query && req.query.lang) === 'es') ? 'es' : 'en';
+
   const key = process.env.PAGESPEED_API_KEY || '';
 
   try {
@@ -39,7 +43,7 @@ module.exports = async (req, res) => {
 
     const mob = extract(mobile);
     const desk = extract(desktop);
-    const report = buildReport(mob, desk);
+    const report = buildReport(mob, desk, lang);
 
     // Per-URL results are stable for a while; let the edge cache them so we
     // stay well inside the PSI quota and repeat scans feel instant.
@@ -158,14 +162,34 @@ function extract(data) {
 
 function clamp(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
 
-function ratingFor(p) {
+// Localized labels for the derived report model (grades, ratings, sub-scores).
+const LABELS = {
+  en: {
+    ratingGood: 'Good', ratingFair: 'Fair', ratingPoor: 'Poor',
+    gradeExcellent: 'Excellent', gradeGood: 'Good', gradeFair: 'Fair', gradePoor: 'Poor',
+    subSpeed: 'Speed & performance', subSeo: 'SEO & visibility', subMobile: 'Mobile & best practices',
+    lcpTitle: (s) => `Slow mobile load time (${s}s)`,
+    lcpImpact: 'Pages over 2.5 seconds lose more than half their mobile visitors before the menu appears.',
+  },
+  es: {
+    ratingGood: 'Bueno', ratingFair: 'Regular', ratingPoor: 'Deficiente',
+    gradeExcellent: 'Excelente', gradeGood: 'Bueno', gradeFair: 'Regular', gradePoor: 'Deficiente',
+    subSpeed: 'Velocidad y rendimiento', subSeo: 'SEO y visibilidad', subMobile: 'Móvil y buenas prácticas',
+    lcpTitle: (s) => `Carga lenta en el móvil (${s}s)`,
+    lcpImpact: 'Las páginas que tardan más de 2.5 segundos pierden a más de la mitad de los visitantes móviles antes de que aparezca el menú.',
+  },
+};
+
+function ratingFor(p, lang) {
   // p is a 0-100 percentage of the bucket max
-  if (p >= 90) return { label: 'Good', color: '#1E7E54' };
-  if (p >= 50) return { label: 'Fair', color: '#C9820E' };
-  return { label: 'Poor', color: '#CF4A3C' };
+  const L = LABELS[lang] || LABELS.en;
+  if (p >= 90) return { label: L.ratingGood, color: '#1E7E54' };
+  if (p >= 50) return { label: L.ratingFair, color: '#C9820E' };
+  return { label: L.ratingPoor, color: '#CF4A3C' };
 }
 
-function buildReport(mob, desk) {
+function buildReport(mob, desk, lang) {
+  const L = LABELS[lang] || LABELS.en;
   const c = mob.categories;
   // Fall back to desktop for any category mobile couldn't score.
   const perf = c.performance != null ? c.performance : desk.categories.performance;
@@ -179,20 +203,20 @@ function buildReport(mob, desk) {
 
   // Three sub-scores mirror the report layout (40 / 40 / 20 = 100).
   const subs = [
-    makeSub('speed', 'Speed & performance', perfP, 40),
-    makeSub('seo', 'SEO & visibility', seoP, 40),
-    makeSub('mobile', 'Mobile & best practices', bpAccP, 20),
+    makeSub('speed', L.subSpeed, perfP, 40, lang),
+    makeSub('seo', L.subSeo, seoP, 40, lang),
+    makeSub('mobile', L.subMobile, bpAccP, 20, lang),
   ];
 
   const overall = clamp(subs.reduce((sum, s) => sum + s.points, 0), 0, 100);
 
   let grade;
-  if (overall >= 90) grade = { label: 'Excellent', color: '#1E7E54' };
-  else if (overall >= 70) grade = { label: 'Good', color: '#1E7E54' };
-  else if (overall >= 50) grade = { label: 'Fair', color: '#C9820E' };
-  else grade = { label: 'Poor', color: '#CF4A3C' };
+  if (overall >= 90) grade = { label: L.gradeExcellent, color: '#1E7E54' };
+  else if (overall >= 70) grade = { label: L.gradeGood, color: '#1E7E54' };
+  else if (overall >= 50) grade = { label: L.gradeFair, color: '#C9820E' };
+  else grade = { label: L.gradePoor, color: '#CF4A3C' };
 
-  const issues = buildIssues(mob, desk);
+  const issues = buildIssues(mob, desk, lang);
 
   return {
     overall,
@@ -205,9 +229,9 @@ function buildReport(mob, desk) {
   };
 }
 
-function makeSub(key, label, percent, max) {
+function makeSub(key, label, percent, max, lang) {
   const points = Math.round((clamp(percent, 0, 100) / 100) * max);
-  const r = ratingFor(percent);
+  const r = ratingFor(percent, lang);
   return { key, label, points, max, percent: Math.round(percent), rating: r.label, color: r.color };
 }
 
@@ -240,14 +264,45 @@ const ISSUE_LABELS = {
   'crawlable-anchors': { pt: 'Some links are not crawlable', im: 'Google cannot follow these links, so those pages may never get indexed.' },
 };
 
-function buildIssues(mob, desk) {
+/* Spanish (LatAm) versions of the friendly problem cards. Keys match ISSUE_LABELS. */
+const ISSUE_LABELS_ES = {
+  'largest-contentful-paint': { pt: 'Tarda en mostrar tu contenido principal', im: 'Más de la mitad de los clientes en el móvil se van antes de que una página lenta termine de cargar, y eso son pedidos perdidos cada noche.' },
+  'speed-index': { pt: 'La página se siente lenta al cargar', im: 'Una primera impresión lenta manda a los clientes con hambre a un competidor que carga más rápido.' },
+  'total-blocking-time': { pt: 'La página no responde mientras carga', im: 'Los toques y el desplazamiento se traban, así que los clientes se rinden antes de llegar al menú.' },
+  'interactive': { pt: 'Tarda demasiado antes de que el cliente pueda tocar', im: 'Si la página no se puede usar rápido, la gente se va en vez de reservar.' },
+  'cumulative-layout-shift': { pt: 'El contenido se mueve mientras carga', im: 'Los botones que se mueven bajo el dedo provocan toques equivocados y frustración en el móvil.' },
+  'uses-optimized-images': { pt: 'Las fotos pesan más de lo necesario', im: 'Las imágenes muy grandes hacen lenta la página y consumen los datos del móvil antes de que aparezca tu comida.' },
+  'modern-image-formats': { pt: 'Las fotos usan formatos viejos y pesados', im: 'Los formatos modernos cargan las fotos de tu comida mucho más rápido en el teléfono.' },
+  'uses-responsive-images': { pt: 'Las imágenes no están adaptadas al teléfono', im: 'Enviar fotos de tamaño de escritorio a los teléfonos desperdicia un tiempo de carga que los clientes no van a esperar.' },
+  'render-blocking-resources': { pt: 'El código impide que la página se muestre', im: 'Los scripts y estilos que bloquean el renderizado retrasan lo primero que ve el cliente.' },
+  'unused-css-rules': { pt: 'Estilos sin usar recargan la página', im: 'El código que no se usa hace cada visita más lenta de lo que debería.' },
+  'unused-javascript': { pt: 'Código sin usar recarga la página', im: 'El JavaScript de más hace lenta la página sin ningún beneficio para tus clientes.' },
+  'unminified-css': { pt: 'El código de estilos no está optimizado', im: 'Los archivos sin minificar son más grandes y más lentos de descargar.' },
+  'unminified-javascript': { pt: 'Los scripts no están optimizados', im: 'Los scripts sin minificar agregan peso que hace lenta la página en el móvil.' },
+  'server-response-time': { pt: 'Tu servidor tarda en responder', im: 'Un primer byte lento retrasa todo lo demás en la página.' },
+  'meta-description': { pt: 'Falta la meta descripción o es débil', im: 'Google la muestra debajo de tu nombre en la búsqueda, y dejarla en blanco te cuesta clics.' },
+  'document-title': { pt: 'Al título le falta tu palabra clave principal', im: 'Un buen título es uno de los factores más importantes para saber en qué posición apareces en las búsquedas "cerca de mí".' },
+  'is-crawlable': { pt: 'Las páginas están bloqueadas para Google', im: 'Si los buscadores no te pueden rastrear, no vas a aparecer para los clientes locales con hambre.' },
+  'hreflang': { pt: 'No está configurado el idioma de destino', im: 'Sin esto, Google puede mostrarle el idioma equivocado a los clientes que buscan en español.' },
+  'http-status-code': { pt: 'Las páginas devuelven errores a Google', im: 'Las páginas con error se eliminan por completo de los resultados de búsqueda.' },
+  'tap-targets': { pt: 'Los botones son muy pequeños para tocar', im: 'Los botones apretados hacen que reservar desde el teléfono sea frustrante, y los clientes se rinden.' },
+  'viewport': { pt: 'No está hecha para pantallas de móvil', im: 'Sin una configuración móvil, tu sitio es casi imposible de usar en los teléfonos que usa la mayoría de los clientes.' },
+  'color-contrast': { pt: 'El bajo contraste dificulta la lectura', im: 'El texto difícil de leer pierde clientes, y Google lo cuenta en contra de tu puntaje de experiencia.' },
+  'image-alt': { pt: 'A las fotos les faltan descripciones', im: 'El texto alternativo ayuda a Google a entender tus fotos y a que aparezcas en la búsqueda de imágenes.' },
+  'link-text': { pt: 'Texto de enlace vago ("clic aquí")', im: 'Los enlaces descriptivos ayudan tanto a los clientes como a Google a entender tus páginas.' },
+  'crawlable-anchors': { pt: 'Algunos enlaces no se pueden rastrear', im: 'Google no puede seguir estos enlaces, así que esas páginas quizás nunca se indexen.' },
+};
+
+function buildIssues(mob, desk, lang) {
   const out = [];
   const seen = new Set();
+  const L = LABELS[lang] || LABELS.en;
+  const labelMap = lang === 'es' ? ISSUE_LABELS_ES : ISSUE_LABELS;
 
   const push = (id, fallbackTitle, fallbackDesc) => {
     if (!id || seen.has(id)) return;
     seen.add(id);
-    const friendly = ISSUE_LABELS[id];
+    const friendly = labelMap[id];
     if (friendly) {
       out.push({ pt: friendly.pt, im: friendly.im });
     } else if (fallbackTitle) {
@@ -259,7 +314,7 @@ function buildIssues(mob, desk) {
   const lcp = mob.metrics.lcp;
   if (lcp && lcp.value != null && lcp.value > 2500) {
     const secs = (lcp.value / 1000).toFixed(1);
-    out.push({ pt: `Slow mobile load time (${secs}s)`, im: 'Pages over 2.5 seconds lose more than half their mobile visitors before the menu appears.' });
+    out.push({ pt: L.lcpTitle(secs), im: L.lcpImpact });
     seen.add('largest-contentful-paint');
   }
 
