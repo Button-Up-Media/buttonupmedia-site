@@ -53,14 +53,17 @@ module.exports = async (req, res) => {
     }
 
     if (data.status === 'approved') {
-      // Fire-and-forget lead forwarding; never block the unlock on it.
-      forwardLead({
+      // Fire-and-forget lead delivery; never block the unlock on it.
+      const lead = {
         phone,
         restaurant: body.restaurant || null,
         website: body.website || null,
         score: body.score != null ? body.score : null,
         at: new Date().toISOString(),
-      });
+      };
+      forwardLead(lead);
+      alertOwners(lead);
+      clickupLead(lead);
       return res.status(200).json({ ok: true, verified: true });
     }
 
@@ -80,6 +83,70 @@ function forwardLead(lead) {
       body: JSON.stringify(lead),
     }).catch(() => {});
   } catch (e) { /* ignore */ }
+}
+
+/* Create a ClickUp task for each lead. Needs CLICKUP_TOKEN (a ClickUp
+   personal API token) and CLICKUP_LIST_ID. Fire-and-forget. */
+function clickupLead(lead) {
+  const token = process.env.CLICKUP_TOKEN || '';
+  const listId = process.env.CLICKUP_LIST_ID || '';
+  if (!token || !listId) return;
+
+  const name = 'Lead: ' + (lead.restaurant || 'Unknown restaurant') +
+    (lead.score != null ? ' (' + lead.score + '/100)' : '');
+  const desc = [
+    '- **Phone:** ' + (lead.phone || ''),
+    '- **Restaurant:** ' + (lead.restaurant || ''),
+    lead.website ? '- **Website:** ' + lead.website : '',
+    lead.score != null ? '- **Score:** ' + lead.score + ' / 100' : '',
+    '- **Received:** ' + (lead.at || ''),
+    '- **Source:** website-grader',
+  ].filter(Boolean).join('\n');
+
+  try {
+    fetch('https://api.clickup.com/api/v2/list/' + encodeURIComponent(listId) + '/task', {
+      method: 'POST',
+      headers: { Authorization: token, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: name, markdown_description: desc }),
+    }).catch(() => {});
+  } catch (e) { /* ignore */ }
+}
+
+/* Text a lead notification to the owner number(s) in TWILIO_ALERT_TO
+   (comma-separated E.164). Needs a sender: TWILIO_MESSAGING_SERVICE_SID
+   or TWILIO_FROM_NUMBER. Fire-and-forget; never blocks the unlock. */
+function alertOwners(lead) {
+  const to = String(process.env.TWILIO_ALERT_TO || '')
+    .split(',').map((s) => s.trim()).filter(Boolean);
+  if (!to.length) return;
+
+  const sid = process.env.TWILIO_ACCOUNT_SID || '';
+  const token = process.env.TWILIO_AUTH_TOKEN || '';
+  const from = process.env.TWILIO_FROM_NUMBER || '';
+  const service = process.env.TWILIO_MESSAGING_SERVICE_SID || '';
+  if (!sid || !token || (!from && !service)) return;
+
+  const body =
+    'New website grader lead: ' + (lead.restaurant || 'Unknown restaurant') +
+    '\nPhone: ' + (lead.phone || '') +
+    (lead.score != null ? '\nScore: ' + lead.score + '/100' : '') +
+    (lead.website ? '\nSite: ' + lead.website : '');
+  const auth = 'Basic ' + Buffer.from(`${sid}:${token}`).toString('base64');
+
+  to.forEach((dest) => {
+    try {
+      const form = new URLSearchParams();
+      form.set('To', dest);
+      form.set('Body', body);
+      if (service) form.set('MessagingServiceSid', service);
+      else form.set('From', from);
+      fetch(`https://api.twilio.com/2010-04-01/Accounts/${encodeURIComponent(sid)}/Messages.json`, {
+        method: 'POST',
+        headers: { Authorization: auth, 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: form.toString(),
+      }).catch(() => {});
+    } catch (e) { /* ignore */ }
+  });
 }
 
 function parseBody(req) {
