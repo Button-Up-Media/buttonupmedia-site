@@ -100,8 +100,8 @@
     .sr-gauge { position: relative; width: 200px; height: 200px; margin: 0 auto; }
     .sr-gauge svg { width: 100%; height: 100%; transform: rotate(-90deg); }
     .sr-gauge .val { position: absolute; inset: 0; display: grid; place-items: center; }
-    .sr-gauge .val b { font-family: var(--font-hero); font-weight: 800; font-size: 3.4rem; line-height: 1; color: var(--text-head); }
-    .sr-gauge .val span { font-size: 0.82rem; color: var(--text-soft); margin-top: 4px; }
+    .sr-gauge .val b { grid-area: 1 / 1; font-family: var(--font-hero); font-weight: 800; font-size: 3.4rem; line-height: 1; color: var(--text-head); }
+    .sr-gauge .val span { grid-area: 1 / 1; transform: translateY(33px); font-size: 0.82rem; color: var(--text-soft); }
     .sr-grade-lab { margin-top: 16px; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-soft); }
     .sr-grade { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; color: var(--poor); }
     .sr-grade-note { margin-top: 12px; font-size: 0.86rem; color: var(--text-dim); line-height: 1.5; }

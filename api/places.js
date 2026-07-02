@@ -196,7 +196,9 @@ async function competitors(req, res, key) {
 
   const list = (n.results || [])
     .filter((p) => p.place_id !== placeId && (p.name || '').toLowerCase() !== selfName)
-    .filter((p) => p.rating != null && p.user_ratings_total != null)
+    // Only count places with a meaningful review base as real competition; a
+    // 5.0 from 3 reviews should not outrank an established spot.
+    .filter((p) => p.rating != null && p.user_ratings_total != null && p.user_ratings_total >= 40)
     .map((p) => ({
       placeId: p.place_id,
       name: p.name,
