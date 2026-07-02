@@ -57,11 +57,29 @@
     .sr-wrap { width: min(calc(100% - 32px), 1240px); margin: 0 auto; }
 
     /* ============ TOP BAR ============ */
-    .sr-topbar { background: #FFFFFF; border-bottom: 1px solid var(--line-soft); position: sticky; top: 0; z-index: 20; }
-    .sr-top { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-    .sr-top img { height: 26px; width: auto; }
-    .sr-top a.call { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-display); font-weight: 700; font-size: 0.86rem; color: var(--text-head); }
-    .sr-top a.call svg { width: 15px; height: 15px; color: var(--gold); }
+    /* header: the same liquid-glass floating pill as /es/analisis-web + the landing */
+    body { padding-top: 90px; }
+    .gr-nav { position: fixed; top: 16px; left: 0; right: 0; z-index: 999; width: min(calc(100% - 48px), 1180px); margin: 16px auto 0; padding: 12px 20px; background: rgba(255,255,255,0.70); -webkit-backdrop-filter: blur(22px) saturate(1.5); backdrop-filter: blur(22px) saturate(1.5); border: 1px solid rgba(36,28,16,0.10); border-radius: 16px; box-shadow: 0 10px 34px rgba(40,30,12,0.12), inset 0 1px 0 rgba(255,255,255,0.6); }
+    .gr-nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; }
+    .gr-nav-brand { display: inline-flex; align-items: center; flex-shrink: 0; }
+    .gr-logo { height: 46px; width: auto; display: block; }
+    .gr-nav-right { display: flex; align-items: center; gap: 16px; }
+    .gr-nav-phone { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--text-head); white-space: nowrap; text-decoration: none; }
+    .gr-nav-phone svg { width: 15px; height: 15px; color: var(--gold); }
+    .gr-nav-phone:hover { color: var(--gold); }
+    .gr-nav-cta { height: 42px; padding: 0 22px; display: inline-flex; align-items: center; justify-content: center; border: none; border-radius: 12px; background: #FFFFFF; color: var(--text); font-family: var(--font-display); font-weight: 700; font-size: 0.86rem; white-space: nowrap; text-decoration: none; box-shadow: 0 6px 18px rgba(36,24,4,0.26); cursor: pointer; transition: background .2s, color .2s, box-shadow .2s, transform .2s; }
+    .gr-nav-cta:hover { background: linear-gradient(135deg, #E8AC44, #D08A34); color: #241804; box-shadow: 0 12px 30px rgba(208,138,52,0.42); transform: translateY(-1px); }
+    @media (max-width: 700px) {
+      body { padding-top: 74px; }
+      .gr-nav { top: 8px; width: min(calc(100% - 20px), 1180px); margin: 0 auto; padding: 8px 10px 8px 14px; border-radius: 14px; }
+      .gr-nav-inner { gap: 12px; }
+      .gr-logo { height: 30px; }
+      .gr-nav-right { gap: 14px; }
+      .gr-nav-phone { width: 40px; height: 40px; padding: 0; border-radius: 50%; border: 1px solid var(--line); background: rgba(36,28,16,0.03); justify-content: center; gap: 0; }
+      .gr-nav-phone svg { width: 19px; height: 19px; }
+      .gr-nav-phone span { display: none; }
+      .gr-nav-cta { height: 40px; padding: 0 18px; }
+    }
 
     /* ============ SCAN STATE ============ */
     .sr-scan { min-height: calc(100vh - 60px); display: grid; grid-template-columns: 1fr; gap: 28px; align-items: start; padding: clamp(28px, 5vw, 56px) 0; }
@@ -204,12 +222,15 @@
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WR9TZHT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
-  <header class="sr-topbar">
-    <div class="sr-wrap sr-top">
-      <img src="media/logo-cropped.png" alt="Button Up Media" />
-      <a class="call" href="tel:+17867409499"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> (786) 740-9499</a>
+  <nav class="gr-nav">
+    <div class="gr-nav-inner">
+      <a href="/" class="gr-nav-brand" aria-label="Button Up Media inicio"><img class="gr-logo" src="media/logo-cropped.webp" alt="Button Up Media" width="138" height="46" /></a>
+      <div class="gr-nav-right">
+        <a class="gr-nav-phone" href="tel:+17867409499"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <span>Llámanos</span></a>
+        <a href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener" class="gr-nav-cta">Comenzar</a>
+      </div>
     </div>
-  </header>
+  </nav>
 
   <!-- ============ SCAN STATE ============ -->
   <div class="sr-wrap">
