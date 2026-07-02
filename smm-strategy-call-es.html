@@ -231,6 +231,9 @@
     .smm-nav-phone:hover { color: var(--text); }
     .smm-nav-phone svg { width: 15px; height: 15px; }
     .smm-nav-phone .smm-nav-phone-label { letter-spacing: 0.01em; }
+    .smm-nav-right { display: inline-flex; align-items: center; gap: clamp(14px, 4.5vw, 22px); }
+    .smm-nav-link { font-size: 0.82rem; font-weight: 600; color: var(--text-soft); text-decoration: none; transition: color 0.2s ease; }
+    .smm-nav-link:hover { color: var(--text); }
 
     /* Hero */
     .smm-hero {
@@ -1160,10 +1163,13 @@
       <a class="smm-nav-brand" href="/" aria-label="Inicio de Button Up Media">
         <img class="smm-nav-logo" src="media/logo-cropped.png" alt="Button Up Media" width="114" height="38" />
       </a>
-      <a class="smm-nav-phone" href="tel:+17867409499">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        <span class="smm-nav-phone-label">(786) 740-9499</span>
-      </a>
+      <div class="smm-nav-right">
+        <a class="smm-nav-link" href="/es/nosotros">Nosotros</a>
+        <a class="smm-nav-phone" href="tel:+17867409499">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span class="smm-nav-phone-label">(786) 740-9499</span>
+        </a>
+      </div>
     </nav>
 
     <!-- HERO: text LCP, no video, single primary action -->
@@ -1432,6 +1438,7 @@
       <div class="smm-footer-row">
         <p>&copy; 2026 Button Up Media. Marketing para restaurantes que llena mesas.</p>
         <div class="smm-footer-links">
+          <a href="/es/nosotros">Nosotros</a>
           <a href="tel:+17867409499">(786) 740-9499</a>
           <a href="mailto:contact@buttonupmedia.com">contact@buttonupmedia.com</a>
           <a href="/privacy">Política de Privacidad</a>

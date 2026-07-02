@@ -64,6 +64,50 @@
   </style>
 </head>
 <body style="background:#0b0d10;">
+  <div class="depth-canvas" aria-hidden="true">
+    <div class="mesh-orb" style="--orb-color: var(--gold); width: 550px; height: 550px; top: -8%; right: 5%;"></div>
+    <div class="mesh-orb" style="--orb-color: var(--teal); width: 400px; height: 400px; bottom: 15%; left: -5%;"></div>
+  </div>
+
+  <nav class="lib-nav">
+    <a class="lib-nav-brand" href="/" aria-label="Button Up Media home">
+      <img src="images/full-logo.svg" alt="Button Up Media" width="145" height="45" />
+    </a>
+    <div class="lib-nav-links">
+      <details class="lib-nav-dropdown">
+        <summary class="lib-nav-dropdown-trigger">
+          Services
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="lib-nav-dropdown-menu" role="menu" aria-label="Services">
+          <div class="lib-desktop-services">
+            <a href="/socialmediamarketing">Social Media Marketing</a>
+            <a href="/restaurant-advertising">Paid Media</a>
+            <a href="/restaurant-website-design">Website</a>
+          </div>
+          <details class="lib-mobile-services lib-mobile-menu-only">
+            <summary class="lib-mobile-services-trigger">
+              Services
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="lib-mobile-services-menu" role="menu" aria-label="Services">
+              <a href="/socialmediamarketing">Social Media Marketing</a>
+              <a href="/restaurant-advertising">Paid Media</a>
+              <a href="/restaurant-website-design">Website</a>
+            </div>
+          </details>
+          <a href="/about" class="lib-mobile-menu-only lib-mobile-action --ghost">About</a>
+          <a href="tel:+17867409499" class="lib-mobile-menu-only lib-mobile-action --ghost">Call Us</a>
+          <a href="/contact" class="lib-mobile-menu-only lib-mobile-action --primary">Book Free Strategy Call</a>
+        </div>
+      </details>
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a class="lib-nav-phone" href="tel:+17867409499">Call Us</a>
+      <a href="/contact" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Book Free Strategy Call</a>
+    </div>
+  </nav>
+
   <div class="privacy-container">
     <h1>Data Privacy Policy</h1>
     <p class="last-updated">Last Updated: May 26, 2026</p>
@@ -207,5 +251,44 @@
       <li><a href="https://www.facebook.com/policy.php" target="_blank" rel="noopener">Meta Data Policy</a></li>
     </ul>
   </div>
+
+  <footer class="lib-section footer-demo">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <strong style="font-family: var(--font-display); font-size: 1rem;">Button Up Media</strong>
+        <p>Button Up Media is a restaurant marketing agency in Florida. We help restaurants grow with social media, website design, SEO, and advertising.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="/socialmediamarketing">Social Media Marketing</a>
+        <a href="/restaurant-advertising">Paid Media</a>
+        <a href="/restaurant-website-design">Website</a>
+      </div>
+      <div class="footer-col">
+        <h4>Locations</h4>
+        <span class="footer-location">Miami</span>
+        <span class="footer-location">Fort Lauderdale</span>
+        <span class="footer-location">Orlando</span>
+        <span class="footer-location">Tampa</span>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="/blog">Blog</a>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/contact">Free Strategy Call</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Button Up Media. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="mailto:contact@buttonupmedia.com">contact@buttonupmedia.com</a>
+        <a href="tel:+17867409499">(786) 740-9499</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

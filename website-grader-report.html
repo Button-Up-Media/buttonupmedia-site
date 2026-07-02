@@ -136,6 +136,23 @@
     .sr-prob .pt { font-size: 0.92rem; color: var(--text-head); font-weight: 600; }
     .sr-prob .im { font-size: 0.82rem; color: var(--text-soft); margin-top: 2px; line-height: 1.45; }
 
+    /* owner.com-style detailed report card */
+    .rc-sec { border-top: 1px solid var(--line-soft); padding: 20px 0 6px; }
+    .rc-sec:first-of-type { border-top: none; padding-top: 4px; }
+    .rc-sec-h { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+    .rc-sec-h b { font-family: var(--font-display); font-weight: 800; font-size: 1.06rem; color: var(--text-head); letter-spacing: -0.01em; }
+    .rc-badge { font-family: var(--font-display); font-weight: 800; font-size: 0.9rem; white-space: nowrap; }
+    .rc-intro { font-size: 0.86rem; color: var(--text-soft); line-height: 1.5; margin: 5px 0 12px; }
+    .rc-row { display: flex; align-items: flex-start; gap: 11px; padding: 9px 0; border-top: 1px dashed var(--line-soft); }
+    .rc-row:first-child { border-top: none; }
+    .rc-ic { flex: none; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; margin-top: 1px; }
+    .rc-ic svg { width: 12px; height: 12px; stroke-width: 3; }
+    .rc-row.pass .rc-ic { background: rgba(30,126,84,0.12); color: var(--good); }
+    .rc-row.fail .rc-ic { background: rgba(207,74,60,0.12); color: var(--poor); }
+    .rc-txt b { font-size: 0.9rem; font-weight: 600; color: var(--text-head); display: block; line-height: 1.35; }
+    .rc-row.pass .rc-txt b { color: var(--text-soft); font-weight: 500; }
+    .rc-txt small { display: block; font-size: 0.82rem; color: var(--text-soft); margin-top: 3px; line-height: 1.5; }
+
     .sr-comp { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line-soft); }
     .sr-comp:first-of-type { border-top: none; }
     .sr-comp .ic { width: 34px; height: 34px; border-radius: 9px; background: var(--bg-1); display: grid; place-items: center; color: var(--text-soft); flex: none; }
@@ -294,8 +311,8 @@
           <!-- GATED: the full prioritized fix list -->
           <div class="sr-card sr-gated locked" id="sr-gated">
             <div class="sr-blur">
-              <h3>Your full fix list</h3>
-              <p style="color:var(--text-dim);font-size:0.9rem;margin:8px 0 10px;">Every issue we found, in priority order, with what it is costing you.</p>
+              <h3>Your full report card</h3>
+              <p style="color:var(--text-dim);font-size:0.9rem;margin:8px 0 10px;">All 49 checks we ran across your website and Google listing, and exactly why each one wins or loses you customers.</p>
               <div id="sr-fulllist"></div>
             </div>
 
@@ -419,26 +436,184 @@
         .catch(function () { clearTimeout(to); return null; });
     }
 
-    /* Combine the AI design review with PageSpeed into the scored report.
-       Design & experience is the heaviest sub-score, so a fast-but-ugly site
-       (generic template, no food photos) can no longer score "Excellent". */
-    function combinedReport(scan, ux) {
-      var s = scan.report.subs || [];
-      function pctOf(k) { for (var i = 0; i < s.length; i++) { if (s[i].key === k) return s[i].percent; } return 0; }
-      var subs = [
-        mkSub("design", "Design & experience", ux.score, 55),
-        mkSub("speed", "Speed", pctOf("speed"), 15),
-        mkSub("seo", "SEO & visibility", pctOf("seo"), 20),
-        mkSub("mobile", "Mobile & best practices", pctOf("mobile"), 10)
-      ];
+    /* ---- the owner.com-style report card: 49 explained checks in 5 sections.
+       Each check is graded by the AI (look + content), Google PageSpeed (speed),
+       or the Google listing (reviews/photos/hours), then scored by weight. ---- */
+    var RUBRIC = [
+      { key:"content", title:"What your website tells hungry customers", intro:"This checks whether your site quickly gives a hungry visitor the things they came for: your food, your prices, and an easy way to order or book.", checks:[
+        {id:"menu-and-prices-visible",label:"Your menu and prices are easy to find",why:"When people cannot see what you serve or what it costs, they leave and order from a place that shows them.",detect:"ai-vision",w:5},
+        {id:"order-or-reserve-button",label:"A clear \"Order\" or \"Book a table\" button sits right at the top",why:"If a ready-to-buy customer has to hunt for how to order, most give up in seconds and that sale walks out the door.",detect:"ai-vision",w:5},
+        {id:"order-on-own-site",label:"People can order straight from your own site",why:"Pushing every order through an outside app means you pay fat commissions and hand your best customers to a middleman.",detect:"html",w:4},
+        {id:"real-food-photos",label:"Your homepage shows real, mouth-watering photos of your food",why:"People eat with their eyes first, and a site with no craveable photos never turns a browser into an order.",detect:"ai-vision",w:5},
+        {id:"phone-number-visible",label:"Your phone number is shown and tappable",why:"A buried phone number means a caller ready to place a big catering or takeout order just gives up.",detect:"html",w:4},
+        {id:"address-on-site",label:"Your full address is on the site",why:"If people cannot instantly see where you are, they will not drive across town on a guess and you lose the walk-in.",detect:"html",w:4},
+        {id:"hours-on-site",label:"Your opening hours are listed on the site",why:"When people cannot tell if you are open right now, they assume you are closed and go somewhere they are sure about.",detect:"html",w:4},
+        {id:"reviews-shown",label:"Real customer reviews or ratings appear somewhere for you",why:"New visitors trust other diners over your own marketing, and with nothing to see they click away to a place that has reviews.",detect:"places",w:3},
+        {id:"about-story",label:"You have a real \"About\" story that gives people a reason to pick you",why:"Without a story about who you are, you look like every other spot in town and customers choose on price alone.",detect:"html",w:3},
+        {id:"enough-real-text",label:"The page has enough real words, not just pictures",why:"A site with almost no words leaves both customers and Google guessing what you offer, so you get skipped.",detect:"html",w:3},
+        {id:"social-links",label:"Links to your Instagram and Facebook are on the site",why:"Without easy links to your social pages, food lovers cannot follow you and you lose a free way to bring them back.",detect:"html",w:2},
+        {id:"faq-section",label:"A questions-and-answers section covers what guests ask before buying",why:"Every unanswered question about parking, allergies, or reservations is a customer talking themselves out of choosing you.",detect:"html",w:2},
+      ]},
+      { key:"appearance", title:"How your website looks and feels", intro:"This is the gut-reaction test: whether your site looks like a real, appetizing restaurant a stranger would trust in the first few seconds, especially on a phone.", checks:[
+        {id:"photos-are-your-own-food",label:"The food photos are your own, not generic stock images",why:"Hungry people order with their eyes, and obvious stock plates make them scroll away to the place that shows the real thing.",detect:"ai-vision",w:5},
+        {id:"strong-hero",label:"A strong first screen that grabs attention",why:"The first thing a visitor sees decides in about three seconds whether they stay or leave for a competitor.",detect:"ai-vision",w:5},
+        {id:"mobile-layout-looks-right",label:"The site looks good on a phone, not squished or cut off",why:"Most guests find you on their phone, and if the layout is squished or forces pinching, they bail before they can order.",detect:"ai-vision",w:5},
+        {id:"appetizing-photo-quality",label:"Your food photos actually look appetizing",why:"Dark, blurry photos make even great food look cheap, and a customer who is not hungry looking at your site will not order.",detect:"ai-vision",w:4},
+        {id:"modern-non-template-design",label:"The design looks modern, not like a cheap template",why:"A dated, cookie-cutter look makes people quietly assume your food and cleanliness are just as outdated.",detect:"ai-vision",w:4},
+        {id:"readable-text",label:"Text is easy to read at a glance",why:"Tiny fonts and low-contrast writing over busy photos make people squint and give up before finding your menu.",detect:"ai-vision",w:4},
+        {id:"strong-branding",label:"Clear branding that looks like a real, trustworthy restaurant",why:"A visible logo and consistent look build the trust that turns a stranger into a customer, and a site with no identity feels sketchy.",detect:"ai-vision",w:3},
+        {id:"not-cluttered",label:"A clean, uncluttered layout with room to breathe",why:"A wall of cramped text and pop-ups overwhelms visitors so they leave before they ever find the order button.",detect:"ai-vision",w:3},
+        {id:"enough-photos-shown",label:"Enough photos to show off your place",why:"A near-empty site gives a customer nothing to get excited about, so they go browse the competitor whose photos look irresistible.",detect:"places",w:3},
+      ]},
+      { key:"local", title:"Your Google listing and reviews", intro:"This is your Google Maps and search profile, which most hungry locals see and judge before they ever reach your website.", checks:[
+        {id:"star-rating-strong",label:"Your Google star rating is 4.0 or higher",why:"Most people will not even consider a spot under four stars, so a low rating quietly sends customers next door.",detect:"places",w:5},
+        {id:"enough-reviews",label:"You have at least 50 Google reviews",why:"A handful of reviews makes people wonder if anyone actually eats here, and they pick a competitor with hundreds.",detect:"places",w:5},
+        {id:"listing-links-website",label:"Your Google listing links to a real website you own",why:"With no website link, or one pointing to a third-party page, you hand every curious customer and their order to someone else.",detect:"places",w:5},
+        {id:"hours-on-listing",label:"Your opening hours are shown on Google",why:"When your hours are missing, people assume you might be closed and go somewhere they know is open right now.",detect:"places",w:5},
+        {id:"recent-review-sentiment",label:"Your latest reviews sound positive, not full of complaints",why:"Fresh reviews about cold food or rude staff are the last thing a customer reads before deciding, and it costs you the order.",detect:"places",w:4},
+        {id:"phone-on-listing",label:"Your phone number is on your Google listing",why:"No phone number means a customer with a reservation or takeout question cannot reach you, so they call a place that answers.",detect:"places",w:4},
+        {id:"photos-on-listing",label:"Your listing has at least 10 photos",why:"People eat with their eyes first, and a listing with few photos looks abandoned next to competitors showing off their food.",detect:"places",w:4},
+        {id:"listed-as-restaurant",label:"Google has you correctly listed as a restaurant",why:"If your business type is wrong or vague, Google stops showing you when people search for places to eat nearby.",detect:"places",w:3},
+        {id:"price-level-set",label:"Your price range is shown on Google",why:"Without a price level, budget-minded diners cannot tell if you fit their wallet and skip you rather than risk a surprise bill.",detect:"places",w:2},
+      ]},
+      { key:"seo", title:"Getting found on Google search", intro:"This checks whether Google can find your site and whether it makes a hungry local click you instead of scrolling past to a competitor.", checks:[
+        {id:"own-domain",label:"You own your own website address",why:"A free builder address or a Facebook page looks temporary, so guests trust the competitor with a real .com and order from them.",detect:"html",w:5},
+        {id:"crawlable",label:"Google is allowed to find and list your website",why:"If your site is accidentally hidden from Google you never appear in search, so every local looking for you finds a competitor.",detect:"psi",w:5},
+        {id:"headline-food-town",label:"The blue headline Google shows says your food and your town",why:"That headline is the biggest reason a hungry local clicks you, and if it does not say your food and town they scroll past.",detect:"html",w:5},
+        {id:"h1-city",label:"Your main headline mentions your city or neighborhood",why:"When someone searches \"pizza near me,\" Google looks for your town on the page, and if it is missing you lose out.",detect:"html",w:5},
+        {id:"pages-load-without-errors",label:"Your website opens without error pages",why:"Pages that return errors get dropped from Google entirely, so a broken page is a page no customer will ever find.",detect:"psi",w:4},
+        {id:"meta-description",label:"You have a short pitch that shows under your name in Google",why:"That little paragraph under your name is your one free sales pitch, and leaving it blank hands the click to whoever wrote a tastier one.",detect:"html",w:4},
+        {id:"title-matches-listing",label:"Your website name matches your Google listing name",why:"When the two names do not match, Google trusts you less and guests wonder if they landed on the wrong place.",detect:"html",w:3},
+        {id:"alt-text",label:"Your food photos have text descriptions Google can read",why:"Google cannot see a picture, so photos with no description never show up when people search images for food in your area.",detect:"html",w:3},
+        {id:"og-tags",label:"Your link shows a photo and title when shared on Facebook or texts",why:"When a shared link shows up as a blank gray box, nobody clicks it and your free word-of-mouth dies on the spot.",detect:"html",w:3},
+      ]},
+      { key:"speed", title:"How fast your website loads", intro:"This measures whether your food and menu show up quickly on a phone, because a slow page loses orders before a hungry customer ever sees a plate.", checks:[
+        {id:"food-photos-show-fast",label:"Your food photos and menu show up fast",why:"More than half of phone visitors leave before a slow page finishes loading, and that is lost orders every single night.",detect:"psi",w:5},
+        {id:"overall-mobile-speed",label:"Your site is fast on a phone, where most customers find you",why:"The vast majority of restaurant searches happen on a phone, and a slow phone experience quietly sends those customers next door.",detect:"psi",w:5},
+        {id:"built-for-phone-screens",label:"Your site is built to fit phone screens, not a shrunk-down desktop page",why:"A site not made for phones forces customers to pinch and zoom just to read your menu, and most quit before they order.",detect:"psi",w:5},
+        {id:"something-appears-quickly",label:"Something appears right away instead of a blank white screen",why:"If a hungry customer stares at a blank screen for a couple of seconds they assume your site is broken and tap over to a competitor.",detect:"psi",w:4},
+        {id:"buttons-respond-fast",label:"Buttons respond the instant someone taps them",why:"When your Order or Menu button feels frozen for a beat, customers tap again in frustration and give up before checkout.",detect:"psi",w:4},
+        {id:"real-world-phone-speed",label:"Real customers on real phones actually feel a fast site",why:"Google tracks how slow your site feels to real visitors and shows competitors ahead of you when yours drags.",detect:"psi",w:4},
+        {id:"server-responds-quickly",label:"Your website starts loading the instant someone clicks",why:"A slow first response holds up everything else, so guests wait longer for your menu than on a faster competitor's site.",detect:"psi",w:3},
+        {id:"content-does-not-jump",label:"The page holds still instead of jumping around while it loads",why:"When buttons shift under a customer's thumb they tap the wrong thing, get annoyed, and abandon the order.",detect:"psi",w:3},
+        {id:"buttons-big-enough-to-tap",label:"Buttons and links are big enough to tap with a thumb",why:"Cramped, tiny buttons make ordering on a phone frustrating, so guests give up instead of fighting with your site.",detect:"psi",w:3},
+        {id:"photos-not-oversized",label:"Your photos are sized right so they do not slow the page down",why:"Oversized images drag your page to a crawl and burn through a customer's data before your food ever appears.",detect:"psi",w:3},
+      ]},
+    ];
+
+    /* Grade every rubric check to true / false / null(not-applicable). */
+    function evalChecks(scan, place, ux) {
+      var out = {};
+      var uc = (ux && ux.checks) || {};
+      var m = (scan && scan.mobile) || {};
+      var met = m.metrics || {};
+      var cats = m.categories || {};
+      var failing = m.failing || [];
+      function failHas(id) { for (var i = 0; i < failing.length; i++) { if (failing[i].id === id) return true; } return false; }
+      function metOk(key, max) { var v = met[key]; if (!v || typeof v.value !== "number") return true; return v.value <= max; }
+      function fieldStr() { var f = scan && scan.report && scan.report.fieldData; if (f && typeof f === "object") f = f.overall_category || f.category || null; return (typeof f === "string") ? f : null; }
+      var pl = place || {};
+      var types = pl.types || [];
+      var sample = pl.sampleReviews || [];
+      function psi(id) {
+        switch (id) {
+          case "crawlable": return !failHas("is-crawlable");
+          case "pages-load-without-errors": return !failHas("http-status-code");
+          case "food-photos-show-fast": return metOk("lcp", 2500);
+          case "overall-mobile-speed": return cats.performance != null ? cats.performance >= 50 : true;
+          case "built-for-phone-screens": return !failHas("meta-viewport") && !failHas("viewport");
+          case "something-appears-quickly": return metOk("fcp", 1800);
+          case "buttons-respond-fast": return metOk("tbt", 200);
+          case "real-world-phone-speed": { var f = fieldStr(); return f ? f === "FAST" : (cats.performance != null ? cats.performance >= 50 : true); }
+          case "server-responds-quickly": return !failHas("server-response-time");
+          case "content-does-not-jump": return metOk("cls", 0.1);
+          case "buttons-big-enough-to-tap": return !failHas("tap-targets");
+          case "photos-not-oversized": return !failHas("uses-optimized-images") && !failHas("uses-responsive-images") && !failHas("modern-image-formats");
+          default: return true;
+        }
+      }
+      function places(id) {
+        var rating = pl.rating, reviews = pl.reviews;
+        switch (id) {
+          case "reviews-shown": return reviews != null && reviews > 0;
+          case "enough-photos-shown": return (pl.photosCount || 0) >= 5;
+          case "star-rating-strong": return rating != null && rating >= 4.0;
+          case "enough-reviews": return reviews != null && reviews >= 50;
+          case "listing-links-website": return !!pl.website;
+          case "hours-on-listing": return !!pl.hasHours;
+          case "recent-review-sentiment": { if (sample.length) { var s = 0, n = 0; sample.forEach(function (r) { if (r.rating != null) { s += r.rating; n++; } }); return n ? (s / n) >= 4.0 : (rating != null ? rating >= 4.0 : true); } return rating != null ? rating >= 4.0 : true; }
+          case "phone-on-listing": return !!pl.phone;
+          case "photos-on-listing": return (pl.photosCount || 0) >= 10;
+          case "listed-as-restaurant": return types.some(function (t) { return ["restaurant", "food", "meal_takeaway", "meal_delivery", "cafe", "bakery", "bar", "night_club"].indexOf(t) >= 0; });
+          case "price-level-set": return pl.priceLevel != null;
+          default: return false;
+        }
+      }
+      RUBRIC.forEach(function (sec) {
+        sec.checks.forEach(function (c) {
+          if (c.detect === "ai-vision" || c.detect === "html") out[c.id] = (c.id in uc) ? (uc[c.id] === true) : null;
+          else if (c.detect === "psi") out[c.id] = psi(c.id);
+          else if (c.detect === "places") out[c.id] = place ? places(c.id) : null;
+          else out[c.id] = null;
+        });
+      });
+      return out;
+    }
+
+    var SECT_LABELS = { content: "Menu, ordering & info", appearance: "Design & first impression", local: "Your Google presence", seo: "Getting found online", speed: "Speed on a phone" };
+
+    /* Build the scored report from the 49 checks. The look-and-design section
+       gates the overall grade, so a fast site that looks like a cheap template
+       still cannot score "Excellent". Sub-scores add up to the overall. */
+    function buildCard(scan, place, ux) {
+      var ev = evalChecks(scan, place, ux);
+      var totW = 0;
+      var secInfo = RUBRIC.map(function (sec) {
+        var sw = 0, sp = 0;
+        sec.checks.forEach(function (c) { if (ev[c.id] === null || ev[c.id] === undefined) return; sw += c.w; if (ev[c.id]) sp += c.w; });
+        totW += sw;
+        return { key: sec.key, sw: sw, pct: sw ? Math.round(sp / sw * 100) : 0 };
+      });
+      var subs = secInfo.map(function (si) {
+        var max = totW ? Math.round(si.sw / totW * 100) : 20;
+        return mkSub(si.key, SECT_LABELS[si.key], si.pct, max);
+      });
       var overall = subs.reduce(function (a, x) { return a + x.points; }, 0);
-      // For a restaurant, a site that looks bad to customers cannot score well
-      // no matter how fast it is: the design rating gates the overall grade.
-      if (ux.score < 50) overall = Math.min(overall, 59);
-      else if (ux.score < 70) overall = Math.min(overall, 74);
+      var appear = 0; secInfo.forEach(function (si) { if (si.key === "appearance") appear = si.pct; });
+      if (appear < 50) overall = Math.min(overall, 59);
+      else if (appear < 70) overall = Math.min(overall, 74);
+      overall = Math.max(0, Math.min(100, overall));
       var g = gradeFor(overall);
-      var issues = (ux.findings || []).concat(scan.report.issues || []).slice(0, 6);
-      return { overall: overall, grade: g.label, gradeColor: g.color, subs: subs, issues: issues, issueCount: issues.length, fieldData: scan.report.fieldData, ux: ux };
+      var fails = [];
+      RUBRIC.forEach(function (sec) { sec.checks.forEach(function (c) { if (ev[c.id] === false) fails.push({ pt: c.label, im: c.why, w: c.w }); }); });
+      fails.sort(function (a, b) { return b.w - a.w; });
+      var issues = [], seen = {};
+      (ux.findings || []).map(function (f) { return { pt: f.pt || f.title, im: f.im || f.impact }; }).concat(fails).forEach(function (f) {
+        var k = (f.pt || "").toLowerCase().slice(0, 40); if (f.pt && !seen[k]) { seen[k] = 1; issues.push(f); }
+      });
+      return { overall: overall, grade: g.label, gradeColor: g.color, subs: subs, issues: issues, issueCount: fails.length, fieldData: scan.report.fieldData, ux: ux, ev: ev };
+    }
+
+    /* The gated detail: all 5 sections rendered as explained pass/fail lists. */
+    function renderChecklists(rep) {
+      var ev = rep.ev || {};
+      var okIc = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+      var noIc = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>';
+      return RUBRIC.map(function (sec) {
+        var rows = sec.checks.filter(function (c) { return ev[c.id] === true || ev[c.id] === false; });
+        if (!rows.length) return "";
+        var pass = rows.filter(function (c) { return ev[c.id]; }).length;
+        var pct = Math.round(pass / rows.length * 100);
+        var col = pct >= 90 ? COLORS.good : pct >= 50 ? COLORS.fair : COLORS.poor;
+        var body = rows.map(function (c) {
+          var ok = ev[c.id];
+          return '<div class="rc-row ' + (ok ? 'pass' : 'fail') + '"><span class="rc-ic">' + (ok ? okIc : noIc) + '</span>' +
+            '<div class="rc-txt"><b>' + esc(c.label) + '</b>' + (ok ? '' : '<small>' + esc(c.why) + '</small>') + '</div></div>';
+        }).join("");
+        return '<div class="rc-sec"><div class="rc-sec-h"><b>' + esc(sec.title) + '</b>' +
+          '<span class="rc-badge" style="color:' + col + '">' + pass + '/' + rows.length + ' good</span></div>' +
+          '<p class="rc-intro">' + esc(sec.intro) + '</p>' + body + '</div>';
+      }).join("");
     }
     function mkSub(key, label, pct, max) {
       pct = Math.max(0, Math.min(100, pct || 0));
@@ -560,7 +735,7 @@
 
     /* ---- render the real report ---- */
     function renderReport(scan, place, ux) {
-      var rep = ux ? combinedReport(scan, ux) : scan.report;
+      var rep = ux ? buildCard(scan, place, ux) : scan.report;
       lastReport = rep;
       var name = (place && place.name) || bizName;
       var host = hostOf((place && place.website) || scan.url || urlParam);
@@ -593,7 +768,7 @@
       var lossH = document.getElementById("sr-loss-h");
       if (lossH) {
         lossH.innerHTML = n
-          ? 'We found <span class="gold">' + n + ' fixable issue' + (n === 1 ? '' : 's') + '</span> hurting your bookings'
+          ? 'We found <span class="gold">' + n + ' fixable issue' + (n === 1 ? '' : 's') + '</span> costing you customers'
           : 'Your site is in good shape';
       }
 
@@ -602,7 +777,7 @@
                           : '<p style="color:var(--text-dim);font-size:0.92rem;padding:10px 0;">No major issues on the basics. Book a call and we will find the finer wins.</p>';
 
       document.getElementById("sr-fulllist").innerHTML =
-        rep.issues.map(probRow).join("") + cwvBlock(scan);
+        (ux && rep.ev) ? renderChecklists(rep) : (rep.issues.map(probRow).join("") + cwvBlock(scan));
 
       setupCats(scan);
     }
