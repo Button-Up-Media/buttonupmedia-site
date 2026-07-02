@@ -105,20 +105,30 @@
     .gr-rise.d1 { transition-delay: .08s; } .gr-rise.d2 { transition-delay: .16s; } .gr-rise.d3 { transition-delay: .24s; } .gr-rise.d4 { transition-delay: .32s; }
     @media (prefers-reduced-motion: reduce) { .gr-rise { transform: none; transition: none; } }
 
-    /* ============ HEADER ============ */
-    .gr-nav { position: sticky; top: 0; z-index: 50; background: rgba(251,248,242,0.82); backdrop-filter: blur(14px) saturate(1.1); border-bottom: 1px solid var(--line-soft); }
-    .gr-nav-inner { display: flex; align-items: center; justify-content: space-between; width: min(calc(100% - 36px), 1200px); margin: 0 auto; height: 64px; }
-    .gr-logo { height: 24px; width: auto; display: block; }
-    .gr-nav-links { display: none; align-items: center; gap: 30px; }
-    .gr-nav-links a { font-size: 0.9rem; font-weight: 600; color: var(--text-dim); transition: color .2s; }
-    .gr-nav-links a:hover { color: var(--text-head); }
-    .gr-nav-right { display: flex; align-items: center; gap: 14px; }
-    .gr-nav-phone { display: none; align-items: center; gap: 7px; font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; color: var(--text-head); }
+    /* ============ HEADER (matches /restaurant-websites: liquid-glass floating pill) ============ */
+    .gr-nav { position: fixed; top: 16px; left: 0; right: 0; z-index: 999; width: min(calc(100% - 48px), 1180px); margin: 16px auto 0; padding: 12px 20px; background: rgba(255,255,255,0.70); -webkit-backdrop-filter: blur(22px) saturate(1.5); backdrop-filter: blur(22px) saturate(1.5); border: 1px solid rgba(36,28,16,0.10); border-radius: 16px; box-shadow: 0 10px 34px rgba(40,30,12,0.12), inset 0 1px 0 rgba(255,255,255,0.6); }
+    .gr-nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; margin: 0; height: auto; }
+    .gr-nav-brand { display: inline-flex; align-items: center; flex-shrink: 0; }
+    .gr-logo { height: 46px; width: auto; display: block; }
+    .gr-nav-right { display: flex; align-items: center; gap: 16px; }
+    .gr-nav-phone { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--text-head); white-space: nowrap; }
     .gr-nav-phone svg { width: 15px; height: 15px; color: var(--gold); }
-    @media (min-width: 960px) { .gr-nav-links { display: flex; } .gr-nav-phone { display: inline-flex; } }
+    .gr-nav-phone:hover { color: var(--gold); }
+    .gr-nav-cta { height: 42px; padding: 0 22px; font-size: 0.86rem; white-space: nowrap; display: inline-flex; align-items: center; }
+    html { scroll-padding-top: 100px; }
+    @media (max-width: 700px) {
+      .gr-nav { top: 8px; width: min(calc(100% - 20px), 1180px); min-height: 56px; margin: 0 auto; padding: 8px 10px 8px 14px; border-radius: 14px; }
+      .gr-nav-inner { gap: 12px; }
+      .gr-logo { height: 30px; }
+      .gr-nav-right { gap: 14px; }
+      .gr-nav-phone { width: 40px; height: 40px; padding: 0; border-radius: 50%; border: 1px solid var(--line); background: rgba(36,28,16,0.03); justify-content: center; gap: 0; }
+      .gr-nav-phone svg { width: 19px; height: 19px; }
+      .gr-nav-phone span { display: none; }
+      .gr-nav-cta { height: 40px; padding: 0 18px; }
+    }
 
     /* ============ HERO ============ */
-    .gr-hero { position: relative; overflow: hidden; padding: clamp(40px, 7vw, 84px) 0 clamp(50px, 8vw, 96px); text-align: center; }
+    .gr-hero { position: relative; overflow: hidden; padding: clamp(100px, 14vw, 140px) 0 clamp(50px, 8vw, 96px); text-align: center; }
     .gr-rating { display: inline-flex; align-items: center; gap: 9px; font-size: 0.82rem; font-weight: 600; color: var(--text-dim); }
     .gr-stars { display: inline-flex; gap: 2px; color: var(--gold); }
     .gr-stars svg { width: 15px; height: 15px; }
@@ -683,19 +693,13 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WR9TZHT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <!-- ============ HEADER ============ -->
+  <!-- ============ HEADER (matches /restaurant-websites) ============ -->
   <nav class="gr-nav">
     <div class="gr-nav-inner">
-      <a href="/" aria-label="Button Up Media home"><img class="gr-logo" src="media/logo-cropped.png" alt="Button Up Media" /></a>
-      <div class="gr-nav-links">
-        <a href="#how">How it works</a>
-        <a href="#fixes">What we fix</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#why">Why it matters</a>
-      </div>
+      <a href="/" class="gr-nav-brand" aria-label="Button Up Media home"><img class="gr-logo" src="media/logo-cropped.webp" alt="Button Up Media" width="138" height="46" fetchpriority="high" /></a>
       <div class="gr-nav-right">
-        <a class="gr-nav-phone" href="tel:+17867409499"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> (786) 740-9499</a>
-        <a href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener" class="btn btn-primary" style="height:40px;padding:0 18px;font-size:0.84rem;white-space:nowrap;">Start my website</a>
+        <a class="gr-nav-phone" href="tel:+17867409499"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <span>Call us</span></a>
+        <a href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener" class="btn btn-primary gr-nav-cta">Get started</a>
       </div>
     </div>
   </nav>
