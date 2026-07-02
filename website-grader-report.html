@@ -409,9 +409,10 @@
       var ctrl = ("AbortController" in window) ? new AbortController() : null;
       var to = setTimeout(function () { if (ctrl) ctrl.abort(); }, 22000);
       var website = (placeInfo && placeInfo.website) || urlParam || (scan && scan.url) || "";
+      var url = (scan && scan.url) || website;
       return fetch("/api/places", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ screenshot: scan.screenshot, name: bizName, website: website, lang: "en" }),
+        body: JSON.stringify({ screenshot: scan.screenshot, name: bizName, website: website, url: url, lang: "en" }),
         signal: ctrl ? ctrl.signal : undefined
       }).then(function (r) { return r.json(); })
         .then(function (d) { clearTimeout(to); return (d && d.ok && d.ux) ? d.ux : null; })

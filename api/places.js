@@ -150,7 +150,7 @@ async function details(req, res, key) {
 
   const params = new URLSearchParams({
     place_id: placeId,
-    fields: 'name,website,url,rating,user_ratings_total,formatted_address,geometry,price_level,types',
+    fields: 'name,website,url,rating,user_ratings_total,formatted_address,geometry,price_level,types,formatted_phone_number,opening_hours,photos,reviews,editorial_summary',
     key,
   });
   const data = await getJson(`${BASE}/details/json?${params.toString()}`);
@@ -158,6 +158,14 @@ async function details(req, res, key) {
     return res.status(502).json({ ok: false, error: 'places_status', status: data.status });
   }
   const r = data.result;
+  // Up to 5 sample reviews (rating + short text) so the report can gauge recent
+  // sentiment. Google does not expose owner responses or all reviews here.
+  const sampleReviews = Array.isArray(r.reviews)
+    ? r.reviews.slice(0, 5).map((v) => ({
+        rating: v.rating != null ? v.rating : null,
+        text: String(v.text || '').replace(/\s+/g, ' ').slice(0, 300),
+      }))
+    : [];
   res.setHeader('Cache-Control', 'public, s-maxage=86400');
   return res.status(200).json({
     ok: true,
@@ -171,6 +179,12 @@ async function details(req, res, key) {
       address: r.formatted_address || null,
       priceLevel: r.price_level != null ? r.price_level : null,
       location: r.geometry && r.geometry.location ? r.geometry.location : null,
+      phone: r.formatted_phone_number || null,
+      hasHours: !!(r.opening_hours && Array.isArray(r.opening_hours.weekday_text) && r.opening_hours.weekday_text.length),
+      photosCount: Array.isArray(r.photos) ? r.photos.length : 0,
+      types: Array.isArray(r.types) ? r.types : [],
+      editorialSummary: (r.editorial_summary && r.editorial_summary.overview) || null,
+      sampleReviews: sampleReviews,
     },
   });
 }
@@ -246,7 +260,14 @@ async function uxReview(req, res) {
   const lang = body.lang === 'es' ? 'es' : 'en';
   const name = String(body.name || '').slice(0, 120) || 'this restaurant';
   const website = String(body.website || '').slice(0, 200);
+  const url = String(body.url || website || '').slice(0, 300);
   const model = process.env.UX_MODEL || 'claude-sonnet-4-6';
+
+  // Read the page HTML too, so the AI can grade content/SEO checks (menu, hours,
+  // address, About, off-site ordering, title, H1, meta, alt text) it cannot see
+  // from a screenshot alone. Best-effort; degrades to screenshot-only.
+  let html = '';
+  if (url) { try { html = await fetchHtml(url); } catch (e) { html = ''; } }
 
   try {
     const resp = await fetch(ANTHROPIC_URL, {
@@ -258,12 +279,12 @@ async function uxReview(req, res) {
       },
       body: JSON.stringify({
         model,
-        max_tokens: 900,
+        max_tokens: 1600,
         messages: [{
           role: 'user',
           content: [
             { type: 'image', source: { type: 'base64', media_type: img.mediaType, data: img.data } },
-            { type: 'text', text: uxPrompt(name, website, lang) },
+            { type: 'text', text: uxPrompt(name, website, lang, html) },
           ],
         }],
       }),
@@ -279,19 +300,24 @@ async function uxReview(req, res) {
     const data = await resp.json();
     const text = (data && data.content && data.content[0] && data.content[0].text) || '';
     const parsed = extractJson(text);
-    if (!parsed || typeof parsed.score !== 'number') {
+    if (!parsed || typeof parsed.designScore !== 'number') {
       return res.status(502).json({ ok: false, error: 'ux_unparsable' });
     }
 
-    const score = uxClamp(Math.round(parsed.score), 0, 100);
+    const score = uxClamp(Math.round(parsed.designScore), 0, 100);
+    const checks = {};
+    if (parsed.checks && typeof parsed.checks === 'object') {
+      Object.keys(parsed.checks).forEach((k) => { checks[k] = parsed.checks[k] === true; });
+    }
     const ux = {
       score,
-      rating: uxRating(score, parsed.rating, lang),
+      rating: uxRating(score, null, lang),
       summary: uxStr(parsed.summary, 240),
       findings: Array.isArray(parsed.findings)
         ? parsed.findings.slice(0, 4).map((f) => ({ pt: uxStr(f && f.title, 90), im: uxStr(f && f.impact, 200) })).filter((f) => f.pt)
         : [],
-      flags: uxFlags(parsed.flags),
+      checks: checks,
+      htmlRead: !!html,
     };
 
     res.setHeader('Cache-Control', 'public, s-maxage=86400, stale-while-revalidate=604800');
@@ -301,23 +327,58 @@ async function uxReview(req, res) {
   }
 }
 
-function uxPrompt(name, website, lang) {
+function uxPrompt(name, website, lang, html) {
   const langLine = lang === 'es'
-    ? 'Write every string (summary, findings) in Latin American Spanish that a restaurant owner who is NOT a marketer will understand. No jargon, no em-dashes.'
-    : 'Write every string (summary, findings) in plain English that a restaurant owner who is NOT a marketer will understand. No jargon, no em-dashes.';
+    ? 'Write the summary and findings strings in Latin American Spanish that a restaurant owner who is NOT a marketer understands. Check ids stay in English. No jargon, no em-dashes.'
+    : 'Write the summary and findings strings in plain English a restaurant owner who is NOT a marketer understands. No jargon, no em-dashes.';
+  const CHECKS = [
+    // [see] = judge from the SCREENSHOT, [html] = judge from the HTML
+    '[see] menu-and-prices-visible: the menu and prices are easy to find from the homepage',
+    '[see] order-or-reserve-button: a clear Order or Book/Reserve button is visible near the top',
+    '[see] real-food-photos: the homepage shows real, appetizing photos of the food',
+    '[see] photos-are-your-own-food: the food photos look like this restaurant\'s own, not generic stock',
+    '[see] strong-hero: a strong, attention-grabbing first screen',
+    '[see] mobile-layout-looks-right: the layout looks good on a phone, not squished or cut off',
+    '[see] appetizing-photo-quality: the food photos look appetizing (bright, sharp, not dark or blurry)',
+    '[see] modern-non-template-design: the design looks modern, not a cheap cookie-cutter template',
+    '[see] readable-text: text is easy to read at a glance (good size and contrast)',
+    '[see] strong-branding: clear branding (logo, consistent look) that reads as a real restaurant',
+    '[see] not-cluttered: clean, uncluttered layout with room to breathe',
+    '[html] order-on-own-site: customers can order on THIS site, not only pushed to a third-party ordering app or domain',
+    '[html] phone-number-visible: a phone number appears on the page (a tel: link or a visible number)',
+    '[html] address-on-site: a street address appears on the page',
+    '[html] hours-on-site: opening hours appear on the page',
+    '[html] about-story: there is a real About or Our Story section',
+    '[html] enough-real-text: the page has a meaningful amount of real text, not just images',
+    '[html] social-links: there are links to Instagram and/or Facebook',
+    '[html] faq-section: there is an FAQ or common-questions section',
+    '[html] own-domain: the site is on the restaurant\'s OWN custom domain, not a free builder subdomain (wixsite.com, godaddysites.com, square.site, etc.) or a facebook.com page',
+    '[html] headline-food-town: the <title> tag names the food or cuisine and the city or area',
+    '[html] h1-city: an <h1> heading mentions the city or neighborhood',
+    '[html] meta-description: a non-empty <meta name="description"> exists',
+    '[html] title-matches-listing: the <title> or site name matches the business name "' + name + '"',
+    '[html] alt-text: images have descriptive alt attributes',
+    '[html] og-tags: Open Graph tags (og:title and og:image) exist for nice link sharing',
+  ];
   return [
-    "You are a blunt restaurant-marketing expert grading a restaurant's WEBSITE from a screenshot, as a hungry customer deciding whether to order or visit. Be STRICT and skeptical: most small-restaurant sites are mediocre.",
+    'You are a blunt restaurant-marketing expert building a report card for a restaurant\'s homepage, judging it as a hungry customer deciding whether to order or visit. Be STRICT and skeptical.',
     '',
-    'Business: ' + name + (website ? ' (' + website + ')' : ''),
+    'Business name: ' + name + (website ? '\nWebsite: ' + website : ''),
     '',
-    "Score the customer experience 0-100. Heavily PENALIZE: generic website-builder/template look, stock photos instead of the restaurant's own food, no appetizing food photography, cluttered or dated design, unclear or missing menu, no obvious way to order or book, ordering that dumps to a clunky third-party page, weak or missing branding, poor mobile layout, walls of text. REWARD only genuinely strong sites: real appetizing food photos, clean modern design, an obvious menu and an order/reserve button, clear branding.",
+    'You are given the page SCREENSHOT (a mobile view) and its HTML below. Do two things:',
+    '1) Give a strict designScore 0-100 for the overall look and customer experience (real food photos, modern non-template design, readable, strong hero, clean, branding). Anchor: a plain template with no real food photos scores about 45-60; reserve 85+ for genuinely professional, appetizing sites.',
+    '2) Grade every check below as true (pass) or false (fail). Use the SCREENSHOT for [see] checks and the HTML for [html] checks. When unsure or the evidence is missing, mark it false.',
     '',
-    'Anchor: a plain template site with no real food photos and third-party ordering should score about 45-60, not higher. Reserve 85+ for sites that clearly look professionally designed and appetizing.',
+    'CHECKS (return every id in "checks"):',
+    CHECKS.join('\n'),
     '',
     'Respond with ONLY this JSON and nothing else:',
-    '{"score": <int 0-100>, "rating": "Poor"|"Fair"|"Good"|"Excellent", "summary": "<one blunt sentence for the owner>", "findings": [{"title":"<short issue, no jargon>","impact":"<one sentence: why it loses customers>"}], "flags": {"realFoodPhotos": <bool>, "onlineOrdering": <bool>, "clearMenu": <bool>, "modernDesign": <bool>, "strongBranding": <bool>}}',
-    'findings: 2-4 items, worst first; use [] only if the site is genuinely excellent.',
+    '{"designScore": <int 0-100>, "summary": "<one blunt sentence for the owner>", "findings": [{"title":"<short failed item, no jargon>","impact":"<one sentence: how it loses customers>"}], "checks": {"<id>": <true|false>, ... every id above ...}}',
+    'findings: the 2-4 worst FAILED checks, worst first, in plain owner language.',
     langLine,
+    '',
+    'HTML (may be truncated):',
+    html ? html : '(the page HTML could not be fetched; grade the [html] checks conservatively as false unless the screenshot clearly shows otherwise)',
   ].join('\n');
 }
 
@@ -340,6 +401,31 @@ function uxFlags(f) {
     modernDesign: b(f.modernDesign),
     strongBranding: b(f.strongBranding),
   };
+}
+
+/* Fetch a page's HTML for the content/SEO checks. Strips script/style noise and
+   caps the size so we send Claude signal, not megabytes. Best-effort. */
+async function fetchHtml(url) {
+  if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8000);
+  try {
+    const resp = await fetch(url, {
+      signal: controller.signal,
+      redirect: 'follow',
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; ButtonUpGrader/1.0; +https://www.buttonupmedia.com)' },
+    });
+    if (!resp.ok) return '';
+    let text = await resp.text();
+    text = text
+      .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+      .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+      .replace(/<!--[\s\S]*?-->/g, ' ')
+      .replace(/[ \t]+/g, ' ');
+    return text.slice(0, 55000);
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 function parseDataUri(s) {
