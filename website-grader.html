@@ -1410,6 +1410,21 @@
       var ac = document.getElementById("gr-ac");
       var form = document.getElementById("gr-form");
       var active = -1, current = [], seq = 0, placesOff = false, debounce;
+      var userLat = null, userLng = null, geoAsked = false;
+
+      // Bias suggestions to the searcher. On first focus we ask the browser for
+      // location (the native prompt); granted = precise coords, denied = the
+      // backend still biases by the visitor's IP city.
+      function geoQS() { return (userLat != null && userLng != null) ? ("&lat=" + userLat + "&lng=" + userLng) : ""; }
+      function requestGeo() {
+        if (geoAsked || !navigator.geolocation) return;
+        geoAsked = true;
+        navigator.geolocation.getCurrentPosition(function (pos) {
+          userLat = pos.coords.latitude.toFixed(5);
+          userLng = pos.coords.longitude.toFixed(5);
+          if (input.value.trim().length >= 2) fetchSuggest();
+        }, function () {}, { enableHighAccuracy: false, timeout: 8000, maximumAge: 600000 });
+      }
 
       function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
       function looksLikeUrl(v) { return /^(https?:\/\/)?([a-z0-9-]+\.)+[a-z]{2,}([\/?#].*)?$/i.test(v.trim()); }
@@ -1435,7 +1450,7 @@
         var q = input.value.trim();
         if (placesOff || looksLikeUrl(q) || q.length < 2) { render([]); return; }
         var mine = ++seq;
-        fetch("/api/places?action=autocomplete&q=" + encodeURIComponent(q))
+        fetch("/api/places?action=autocomplete&q=" + encodeURIComponent(q) + geoQS())
           .then(function (r) { return r.json(); })
           .then(function (d) {
             if (mine !== seq) return;
@@ -1454,7 +1469,7 @@
         var v = input.value.trim();
         if (!v) { input.focus(); return; }
         if (looksLikeUrl(v)) { openReport({ url: v, name: v }); return; }
-        fetch("/api/places?action=autocomplete&q=" + encodeURIComponent(v))
+        fetch("/api/places?action=autocomplete&q=" + encodeURIComponent(v) + geoQS())
           .then(function (r) { return r.json(); })
           .then(function (d) {
             if (d && d.predictions && d.predictions.length) openReport({ placeId: d.predictions[0].placeId, name: d.predictions[0].name });
@@ -1463,7 +1478,7 @@
           .catch(function () { openReport({ name: v }); });
       }
       input.addEventListener("input", function () { clearTimeout(debounce); debounce = setTimeout(fetchSuggest, 180); });
-      input.addEventListener("focus", fetchSuggest);
+      input.addEventListener("focus", function () { requestGeo(); fetchSuggest(); });
       input.addEventListener("keydown", function (e) {
         if (!ac.classList.contains("is-open")) return;
         var items = ac.querySelectorAll(".gr-ac-item");

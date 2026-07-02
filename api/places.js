@@ -92,24 +92,50 @@ function clientIp(req) {
   return String((req.headers && req.headers['x-forwarded-for']) || '').split(',')[0].trim();
 }
 
+/* Where to bias restaurant suggestions. Prefer precise browser coordinates
+   (lat/lng from the geolocation prompt), then fall back to Vercel's IP-based
+   geolocation headers (the searcher's approximate city). Returns "lat,lng" or
+   null. IMPORTANT: with no bias, Google's autocomplete biases to the REQUESTING
+   SERVER's location (Vercel iad1 = Virginia), which buried every non-Virginia
+   restaurant. Biasing to the user fixes that. */
+function biasLocation(req) {
+  const q = req.query || {};
+  const lat = parseFloat(q.lat), lng = parseFloat(q.lng);
+  if (isFinite(lat) && isFinite(lng) && Math.abs(lat) <= 90 && Math.abs(lng) <= 180) {
+    return lat + ',' + lng;
+  }
+  const h = req.headers || {};
+  const ilat = parseFloat(h['x-vercel-ip-latitude']);
+  const ilng = parseFloat(h['x-vercel-ip-longitude']);
+  if (isFinite(ilat) && isFinite(ilng)) return ilat + ',' + ilng;
+  return null;
+}
+
 async function autocomplete(req, res, key) {
   const q = String((req.query && req.query.q) || '').trim();
   if (q.length < 2) {
     return res.status(200).json({ ok: true, predictions: [] });
   }
   const params = new URLSearchParams({ input: q, types: 'establishment', key });
+  // US restaurants only (this tool is nationwide US; drop foreign results).
+  params.set('components', 'country:us');
+  // Prioritize restaurants near the searcher, so a local spot outranks a more
+  // prominent same-named business elsewhere in the country.
+  const loc = biasLocation(req);
+  if (loc) { params.set('location', loc); params.set('radius', '60000'); }
+
   const data = await getJson(`${BASE}/autocomplete/json?${params.toString()}`);
 
   if (data.status !== 'OK' && data.status !== 'ZERO_RESULTS') {
     return res.status(502).json({ ok: false, error: 'places_status', status: data.status });
   }
-  const predictions = (data.predictions || []).slice(0, 6).map((p) => ({
+  const predictions = (data.predictions || []).slice(0, 8).map((p) => ({
     placeId: p.place_id,
     name: (p.structured_formatting && p.structured_formatting.main_text) || p.description,
     addr: (p.structured_formatting && p.structured_formatting.secondary_text) || '',
   }));
-  // Predictions can be cached briefly per query.
-  res.setHeader('Cache-Control', 'public, s-maxage=3600');
+  // Results are location-specific now, so keep them out of the shared edge cache.
+  res.setHeader('Cache-Control', 'private, max-age=60');
   return res.status(200).json({ ok: true, predictions });
 }
 
