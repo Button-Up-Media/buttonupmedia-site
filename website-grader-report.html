@@ -83,6 +83,17 @@
     .sr-scan-card .meta { display: flex; align-items: center; gap: 10px; margin-top: 8px; font-size: 0.9rem; color: var(--text-dim); }
     .sr-scan-card .stars { color: var(--gold); }
     .sr-scan-card p { margin-top: 12px; color: var(--text-dim); font-size: 0.94rem; line-height: 1.55; }
+    /* live "findings" feed: real Google data streamed in while the scan runs */
+    .sr-findings { margin-top: 8px; }
+    .sr-find { display: flex; align-items: flex-start; gap: 11px; padding: 10px 0; border-top: 1px solid var(--line-soft); opacity: 0; transform: translateY(7px); transition: opacity .45s ease, transform .45s ease; }
+    .sr-find.in { opacity: 1; transform: none; }
+    .sr-find .fi { flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; margin-top: 1px; background: var(--bg-1); color: var(--text-soft); }
+    .sr-find .fi svg { width: 12px; height: 12px; }
+    .sr-find.good .fi { background: rgba(30,126,84,0.12); color: var(--good); }
+    .sr-find.warn .fi { background: rgba(201,130,14,0.15); color: var(--fair); }
+    .sr-find .ft { font-size: 0.9rem; color: var(--text-head); line-height: 1.42; }
+    .sr-find .ft b { font-weight: 700; }
+    .sr-find .ft.quote { font-style: italic; color: var(--text-dim); }
     .sr-progress { margin-top: 28px; padding: 16px 18px; border-radius: 14px; background: #FFFFFF; border: 1px solid var(--line-soft); display: flex; align-items: center; gap: 12px; max-width: 360px; }
     .sr-progress .sp { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--gold); border-top-color: transparent; animation: srSpin .8s linear infinite; flex: none; }
     .sr-progress b { font-size: 0.92rem; color: var(--text-head); }
@@ -254,7 +265,8 @@
         <div class="body">
           <h2 id="sr-scan-name">Your Restaurant</h2>
           <div class="meta"><span>Running a full Google-grade audit&hellip;</span></div>
-          <p>Checking your website, your Google presence, and how you stack up against the restaurants competing for your customers&hellip;</p>
+          <p id="sr-scan-lead">Reading your Google listing, your reviews, and how you stack up against the restaurants competing for your customers&hellip;</p>
+          <div class="sr-findings" id="sr-findings"></div>
         </div>
       </div>
     </div>
@@ -384,6 +396,7 @@
     var bizName = nameParam || "Your restaurant";
     var COLORS = { good: "#1E7E54", fair: "#C9820E", poor: "#CF4A3C", dim: "#9a8f7d" };
     var lastScan = null, placeInfo = null, animDone = false, lastUx = null, lastReport = null;
+    var compPromise = null, findQueue = [], findTimer = null;
 
     setText("sr-scan-name", bizName);
     document.title = bizName + " - Website Report | Button Up Media";
@@ -400,9 +413,54 @@
     }, 1100);
     var guard = setTimeout(function () { finishScan(); renderError({ kind: "timeout" }); }, 140000);
 
+    /* ---- #4: stream the real Google data we find into the scan card so the
+       wait feels like a genuine, personalized audit (not a fake spinner) ---- */
+    var findEl = document.getElementById("sr-findings");
+    var ICON = {
+      star: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.8 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg>',
+      photo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>',
+      clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+      trophy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h12v3a6 6 0 0 1-12 0z"/><path d="M6 5H4v2a3 3 0 0 0 3 3M18 5h2v2a3 3 0 0 1-3 3M9 20h6M12 15v5"/></svg>',
+      quote: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 7h4v6H8a2 2 0 0 1-2-2V8a1 1 0 0 1 1-1zm8 0h4v6h-3a2 2 0 0 1-2-2V8a1 1 0 0 1 1-1z"/></svg>'
+    };
+    function drainFind() {
+      if (animDone || !findEl) { clearInterval(findTimer); findTimer = null; return; }
+      if (!findQueue.length) return;
+      var f = findQueue.shift();
+      var row = document.createElement("div");
+      row.className = "sr-find " + f.tone;
+      row.innerHTML = '<span class="fi">' + f.icon + '</span><span class="ft' + (f.quote ? ' quote' : '') + '">' + f.html + '</span>';
+      findEl.appendChild(row);
+      requestAnimationFrame(function () { row.classList.add("in"); });
+    }
+    function pushFind(icon, html, tone, quote) {
+      findQueue.push({ icon: icon, html: html, tone: tone || "", quote: !!quote });
+      if (!findTimer) findTimer = setInterval(drainFind, 1300);
+    }
+    function getCompetitors() {
+      if (compPromise) return compPromise;
+      if (!placeId) { compPromise = Promise.resolve([]); return compPromise; }
+      compPromise = fetchJson("/api/places?action=competitors&placeId=" + encodeURIComponent(placeId))
+        .then(function (d) { return (d && d.ok && d.competitors) ? d.competitors : []; })
+        .catch(function () { return []; });
+      return compPromise;
+    }
+    function startFindings(place) {
+      if (!place) return;
+      if (place.rating != null) pushFind(ICON.star, "<b>" + place.rating.toFixed(1) + "&#9733;</b> from " + (place.reviews != null ? place.reviews.toLocaleString() : "your") + " Google reviews", place.rating >= 4 ? "good" : "warn");
+      pushFind(ICON.photo, place.photosCount ? ("<b>" + place.photosCount + " photo" + (place.photosCount === 1 ? "" : "s") + "</b> on your Google listing") : "No photos on your Google listing yet", place.photosCount >= 10 ? "good" : "warn");
+      pushFind(ICON.clock, place.hasHours ? "Your opening hours are listed on Google" : "No opening hours on your listing", place.hasHours ? "good" : "warn");
+      getCompetitors().then(function (comps) {
+        comps.slice(0, 3).forEach(function (c) { pushFind(ICON.trophy, "Competing nearby: <b>" + esc(c.name) + "</b> &middot; " + c.rating + "&#9733;"); });
+        var revs = (place.sampleReviews || []).filter(function (r) { return r.text && r.text.length > 20; });
+        if (revs.length) { var t = revs[0].text.replace(/\s+/g, " ").trim(); pushFind(ICON.quote, "&ldquo;" + esc(t.slice(0, 90)) + (t.length > 90 ? "&hellip;" : "") + "&rdquo;", "", true); }
+      });
+    }
+
     /* ---- real work: resolve the place, then scan its website ---- */
     resolvePlace().then(function (place) {
       placeInfo = place;
+      startFindings(place);
       var target = urlParam || (place && place.website) || "";
       if (!target) {
         // No website to grade. If we still resolved the Google listing, show a
@@ -739,7 +797,7 @@
     function finishScan() {
       if (animDone) return;
       animDone = true;
-      clearInterval(stepTimer); clearInterval(secTimer); clearTimeout(guard);
+      clearInterval(stepTimer); clearInterval(secTimer); clearTimeout(guard); clearInterval(findTimer);
       checks.forEach(function (c) { c.classList.remove("active"); c.classList.add("done"); });
       if (scanEl) scanEl.style.display = "none";
       reportEl.classList.add("show");
@@ -806,9 +864,9 @@
       var twocol = document.getElementById("sr-twocol");
       function hide() { card.style.display = "none"; if (twocol) twocol.style.gridTemplateColumns = "1fr"; }
       if (!placeId) { hide(); return; }
-      fetchJson("/api/places?action=competitors&placeId=" + encodeURIComponent(placeId)).then(function (d) {
-        if (!d || !d.ok || !d.competitors || !d.competitors.length) { hide(); return; }
-        var comps = d.competitors;
+      // reuse the competitors we already fetched for the scan-screen findings feed
+      getCompetitors().then(function (comps) {
+        if (!comps || !comps.length) { hide(); return; }
         var youRating = placeInfo && placeInfo.rating != null ? placeInfo.rating : null;
         var better = youRating == null ? comps.length : comps.filter(function (c) { return c.rating > youRating; }).length;
         var youRank = better + 1;
