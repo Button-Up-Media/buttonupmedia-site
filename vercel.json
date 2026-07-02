@@ -192,6 +192,24 @@
       ]
     },
     {
+      "source": "/website-offer",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/website-offer.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
       "source": "/website-grader-es.html",
       "headers": [
         {
@@ -545,6 +563,16 @@
       "permanent": true
     },
     {
+      "source": "/website-offer/",
+      "destination": "/website-offer",
+      "permanent": true
+    },
+    {
+      "source": "/website-offer.html",
+      "destination": "/website-offer",
+      "permanent": true
+    },
+    {
       "source": "/website-grader-es.html",
       "destination": "/es/analisis-web",
       "permanent": true
@@ -709,6 +737,10 @@
     {
       "source": "/website-grader-report",
       "destination": "/website-grader-report.html"
+    },
+    {
+      "source": "/website-offer",
+      "destination": "/website-offer.html"
     },
     {
       "source": "/es",

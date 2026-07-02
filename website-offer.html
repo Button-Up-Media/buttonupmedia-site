@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      var key = "bum-cookie-consent-v1";
+      var consent = {
+        ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied",
+        analytics_storage: "denied", functionality_storage: "granted",
+        personalization_storage: "denied", security_storage: "granted", wait_for_update: 500
+      };
+      try {
+        var saved = localStorage.getItem(key);
+        if (saved) {
+          var parsed = JSON.parse(saved);
+          if (parsed && parsed.analytics) consent.analytics_storage = "granted";
+          if (parsed && parsed.marketing && !(navigator && navigator.globalPrivacyControl)) {
+            consent.ad_storage = "granted"; consent.ad_user_data = "granted";
+            consent.ad_personalization = "granted"; consent.personalization_storage = "granted";
+          }
+        }
+      } catch (err) {}
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+      window.gtag("consent", "default", consent);
+    })();
+  </script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WR9TZHT');</script>
+  <!-- End Google Tag Manager -->
+  <title>Fix your report: a custom restaurant website, built for you | Button Up Media</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg" />
+  <meta name="theme-color" content="#FBF8F2" />
+  <link rel="preconnect" href="https://assets.calendly.com" />
+  <link rel="preconnect" href="https://calendly.com" />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-variable.woff2" crossorigin fetchpriority="high" />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/epilogue-variable.woff2" crossorigin />
+  <link rel="stylesheet" href="shared.css?v=nav-mobile-4" />
+  <style>
+    :root {
+      --bg-0: #FBF8F2; --bg-1: #F4EDE1; --bg-2: #ECE3D4;
+      --line: rgba(36,28,16,0.14); --line-soft: rgba(36,28,16,0.08);
+      --text: #2C261C; --text-head: #1C170F; --text-dim: rgba(44,38,28,0.74); --text-soft: rgba(44,38,28,0.52);
+      --gold: #B57E1E; --gold-soft: rgba(181,126,30,0.12); --teal: #1E7E54;
+      --good: #1E7E54; --fair: #C9820E; --poor: #CF4A3C; --ink: #1C170F;
+    }
+    body { background: var(--bg-0); color: var(--text); }
+    .of-wrap { width: min(calc(100% - 32px), 1080px); margin: 0 auto; }
+
+    /* header */
+    .of-topbar { background: #FFFFFF; border-bottom: 1px solid var(--line-soft); position: sticky; top: 0; z-index: 20; }
+    .of-top { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .of-top img { height: 26px; width: auto; }
+    .of-top a.call { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-display); font-weight: 700; font-size: 0.86rem; color: var(--text-head); }
+    .of-top a.call svg { width: 15px; height: 15px; color: var(--gold); }
+
+    /* hero */
+    .of-hero { text-align: center; padding: clamp(40px, 6vw, 72px) 0 clamp(8px, 2vw, 16px); }
+    .of-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
+    .of-hero h1 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.035em; font-size: clamp(2rem, 5.4vw, 3.5rem); line-height: 1.03; margin: 14px auto 0; max-width: 20ch; text-wrap: balance; }
+    .of-hero h1 .g { color: var(--gold); }
+    .of-hero p { max-width: 60ch; margin: 16px auto 0; font-size: clamp(1.02rem, 2.2vw, 1.18rem); line-height: 1.6; color: var(--text-dim); }
+
+    /* main grid: offer card + host/booking */
+    .of-grid { display: grid; grid-template-columns: 1fr; gap: clamp(20px, 3vw, 28px); margin: clamp(28px, 4vw, 44px) 0 0; align-items: start; }
+    @media (min-width: 900px) { .of-grid { grid-template-columns: 1.05fr 0.95fr; } }
+
+    /* price / offer card */
+    .of-card { background: #FFFFFF; border: 1px solid var(--line-soft); border-radius: 24px; padding: clamp(28px, 3.6vw, 44px); box-shadow: 0 26px 64px rgba(40,28,10,0.09); position: relative; overflow: hidden; }
+    .of-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, #E8AC44, #D08A34); }
+    .of-card h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.3rem, 2.6vw, 1.7rem); letter-spacing: -0.02em; color: var(--text-head); }
+    .of-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+    .of-price .was { font-family: var(--font-display); font-size: 1.5rem; color: var(--text-soft); text-decoration: line-through; text-decoration-thickness: 2px; }
+    .of-price .now { font-family: var(--font-hero); font-weight: 800; font-size: clamp(3rem, 8vw, 4.2rem); line-height: 0.9; letter-spacing: -0.04em; color: var(--text-head); }
+    .of-price .tag { align-self: center; padding: 6px 12px; border-radius: 999px; background: rgba(207,74,60,0.1); color: var(--poor); font-family: var(--font-display); font-weight: 800; font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    .of-price-note { margin-top: 8px; font-size: 0.95rem; color: var(--text-dim); }
+    .of-price-note b { color: var(--text-head); font-weight: 700; }
+
+    .of-diffs { list-style: none; margin: 24px 0 0; padding: 0; display: grid; gap: 14px; }
+    .of-diffs li { display: flex; gap: 13px; align-items: flex-start; }
+    .of-diffs .chk { flex: none; width: 26px; height: 26px; border-radius: 50%; background: rgba(30,126,84,0.12); color: var(--good); display: grid; place-items: center; margin-top: 1px; }
+    .of-diffs .chk svg { width: 15px; height: 15px; }
+    .of-diffs b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--text-head); }
+    .of-diffs span { font-size: 0.9rem; line-height: 1.5; color: var(--text-dim); }
+
+    .of-includes { margin-top: 26px; padding-top: 24px; border-top: 1px solid var(--line-soft); }
+    .of-includes h3 { font-family: var(--font-display); font-weight: 800; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 14px; }
+    .of-includes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px; }
+    .of-inc { display: flex; align-items: flex-start; gap: 9px; font-size: 0.9rem; color: var(--text); line-height: 1.4; }
+    .of-inc svg { flex: none; width: 17px; height: 17px; color: var(--gold); margin-top: 1px; }
+    @media (max-width: 520px) { .of-includes-grid { grid-template-columns: 1fr; } }
+
+    /* host + booking column */
+    .of-book { background: linear-gradient(180deg, #FBEDE4, #FFFFFF 62%); border: 1px solid var(--line-soft); border-radius: 24px; padding: clamp(26px, 3.4vw, 38px); text-align: center; }
+    .of-host { display: flex; align-items: center; gap: 16px; text-align: left; }
+    .of-host-imgwrap { width: 72px; height: 72px; border-radius: 50%; overflow: hidden; flex: none; border: 3px solid #fff; box-shadow: 0 8px 22px rgba(40,28,10,0.18); }
+    .of-host-imgwrap img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.5); transform-origin: 50% 42%; }
+    .of-host .lab { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-soft); font-weight: 800; }
+    .of-host .nm { font-family: var(--font-display); font-weight: 800; font-size: 1.15rem; color: var(--text-head); margin-top: 2px; }
+    .of-host .role { font-size: 0.86rem; color: var(--text-dim); }
+    .of-book p.lead { margin: 20px 0 0; font-size: 1rem; line-height: 1.6; color: var(--text-dim); text-align: left; }
+    .of-book p.lead b { color: var(--text-head); font-weight: 700; }
+    .of-cta { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 58px; margin-top: 22px; border-radius: 14px; background: #241804; color: #FBF5EA; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; cursor: pointer; border: none; transition: background .2s, box-shadow .2s, transform .2s; }
+    .of-cta:hover { background: linear-gradient(135deg, #E8AC44, #D08A34); color: #241804; box-shadow: 0 14px 34px rgba(208,138,52,0.4); transform: translateY(-1px); }
+    .of-cta svg { width: 18px; height: 18px; }
+    .of-book .fine { margin-top: 13px; font-size: 0.82rem; color: var(--text-soft); line-height: 1.5; }
+    .of-book .stars { display: inline-flex; gap: 3px; color: var(--gold); margin-top: 18px; }
+    .of-book .stars svg { width: 16px; height: 16px; }
+    .of-book .trust { font-size: 0.82rem; color: var(--text-dim); margin-top: 6px; }
+
+    /* reassurance strip */
+    .of-strip { display: grid; grid-template-columns: 1fr; gap: 14px; margin: clamp(30px, 4vw, 46px) 0 clamp(50px, 7vw, 80px); }
+    @media (min-width: 720px) { .of-strip { grid-template-columns: repeat(3, 1fr); } }
+    .of-strip .it { background: #FFFFFF; border: 1px solid var(--line-soft); border-radius: 16px; padding: 20px 22px; }
+    .of-strip .it .ic { width: 40px; height: 40px; border-radius: 11px; background: var(--gold-soft); color: var(--gold); display: grid; place-items: center; margin-bottom: 12px; }
+    .of-strip .it .ic svg { width: 20px; height: 20px; }
+    .of-strip .it b { display: block; font-family: var(--font-display); font-weight: 800; font-size: 1rem; color: var(--text-head); }
+    .of-strip .it p { margin-top: 5px; font-size: 0.9rem; line-height: 1.55; color: var(--text-dim); }
+
+    .of-foot { border-top: 1px solid var(--line-soft); padding: 26px 0 40px; text-align: center; font-size: 0.82rem; color: var(--text-soft); }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WR9TZHT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <header class="of-topbar">
+    <div class="of-wrap of-top">
+      <img src="media/logo-cropped.png" alt="Button Up Media" />
+      <a class="call" href="tel:+17867409499"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> (786) 740-9499</a>
+    </div>
+  </header>
+
+  <main class="of-wrap">
+    <section class="of-hero">
+      <span class="of-eyebrow">Your fix</span>
+      <h1>Let's build the website that turns those problems into <span class="g">customers</span>.</h1>
+      <p>Your report showed exactly what's costing you. Here is the fix: a restaurant website our team custom-builds for you, so you load fast, show up on Google, and make people hungry the second they land.</p>
+    </section>
+
+    <div class="of-grid">
+      <!-- OFFER CARD -->
+      <div class="of-card">
+        <h2>A custom restaurant website, built for you</h2>
+        <div class="of-price">
+          <span class="was">$2,250</span>
+          <span class="now">$1,500</span>
+          <span class="tag">Limited offer</span>
+        </div>
+        <p class="of-price-note"><b>Pay as we build.</b> Not one big bill up front, you pay in steps as your site comes together.</p>
+
+        <ul class="of-diffs">
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><b>No templates, fully custom built</b><span>Designed from scratch around your restaurant, not a cookie-cutter theme like everyone else uses.</span></div></li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><b>You own it forever</b><span>It is yours, no monthly rental, no getting locked into a platform you can never leave.</span></div></li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><b>Translated pages included</b><span>English and Spanish built in, so every guest in your area feels at home.</span></div></li>
+          <li><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><b>Pay as we build</b><span>Spread the cost across the build instead of paying it all at once.</span></div></li>
+        </ul>
+
+        <div class="of-includes">
+          <h3>Every site includes</h3>
+          <div class="of-includes-grid">
+            <span class="of-inc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Real food photography</span>
+            <span class="of-inc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Online ordering built in</span>
+            <span class="of-inc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Fast, mobile-first design</span>
+            <span class="of-inc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Built for Google + AI search</span>
+            <span class="of-inc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Google Business Profile setup</span>
+            <span class="of-inc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Menu, hours, location, all clear</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HOST + BOOKING -->
+      <div class="of-book">
+        <div class="of-host">
+          <div class="of-host-imgwrap"><img src="media/author-juan.webp" alt="Juan, Button Up Media" /></div>
+          <div>
+            <div class="lab">You'll meet with</div>
+            <div class="nm">Juan</div>
+            <div class="role">Button Up Media</div>
+          </div>
+        </div>
+        <p class="lead">On a quick call, Juan walks you through your report line by line, shows you exactly what your new site would change, and maps out the plan. <b>No pressure, no jargon.</b></p>
+        <button class="of-cta" data-cal>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4M16 2v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2"/></svg>
+          Book your free build call
+        </button>
+        <p class="fine">Free 15-minute call. Pick a time that works for you.</p>
+        <div class="stars" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z"/></svg>
+        </div>
+        <p class="trust">Trusted by South Florida's favorite restaurants</p>
+      </div>
+    </div>
+
+    <div class="of-strip">
+      <div class="it">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></div>
+        <b>Fixes what your report found</b>
+        <p>We build straight from your results, so every problem it flagged gets solved.</p>
+      </div>
+      <div class="it">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <b>Done for you</b>
+        <p>You run the restaurant. We handle the design, the photos, the copy, and the tech.</p>
+      </div>
+      <div class="it">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <b>Live in weeks, not months</b>
+        <p>A focused build with clear steps, so your new site is working for you fast.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="of-foot">
+    <div class="of-wrap">&copy; 2026 Button Up Media. Restaurant marketing that fills tables.</div>
+  </footer>
+
+  <script>
+    /* Calendly, lazy-loaded on first interaction; buttons open the popup. */
+    (function () {
+      var CAL_URL = "https://calendly.com/juanh-buttonupmedia/website-consultation";
+      var loaded = false, ready = false, queued = false;
+      function load() {
+        if (loaded) return; loaded = true;
+        var link = document.createElement("link");
+        link.rel = "stylesheet"; link.href = "https://assets.calendly.com/assets/external/widget.css";
+        document.head.appendChild(link);
+        var s = document.createElement("script");
+        s.src = "https://assets.calendly.com/assets/external/widget.js"; s.async = true;
+        s.onload = function () { ready = true; if (queued) openPopup(); };
+        document.body.appendChild(s);
+      }
+      function openPopup() {
+        if (window.Calendly && Calendly.initPopupWidget) { Calendly.initPopupWidget({ url: CAL_URL }); queued = false; }
+        else { queued = true; load(); }
+      }
+      ["mousemove", "touchstart", "scroll", "keydown"].forEach(function (ev) {
+        window.addEventListener(ev, load, { once: true, passive: true });
+      });
+      document.querySelectorAll("[data-cal]").forEach(function (el) {
+        el.addEventListener("click", function (e) {
+          e.preventDefault();
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: "offer_book_click" });
+          openPopup();
+        });
+      });
+      window.addEventListener("message", function (e) {
+        if (e.origin && e.origin.indexOf("calendly.com") === -1) return;
+        if (e.data && e.data.event === "calendly.event_scheduled") {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: "booking_complete" });
+        }
+      });
+    })();
+  </script>
+  <script defer src="shared.js?v=nav-mobile-4"></script>
+</body>
+</html>
