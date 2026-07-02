@@ -1409,7 +1409,7 @@
       var input = document.getElementById("gr-input");
       var ac = document.getElementById("gr-ac");
       var form = document.getElementById("gr-form");
-      var active = -1, current = [], seq = 0, placesOff = false, debounce;
+      var active = -1, current = [], seq = 0, placesOff = false, debounce, selected = null;
       var userLat = null, userLng = null, geoAsked = false;
 
       // Bias suggestions to the searcher. On first focus we ask the browser for
@@ -1461,9 +1461,13 @@
       }
       function choose(r) {
         if (!r) return;
+        // Selecting a suggestion just fills the box and remembers the place; the
+        // scan only runs when the visitor presses Enter or clicks the button.
+        selected = r;
         input.value = r.name;
+        active = -1;
         ac.classList.remove("is-open");
-        openReport({ placeId: r.placeId, name: r.name });
+        input.focus();
       }
       function submitFreeText() {
         var v = input.value.trim();
@@ -1477,7 +1481,7 @@
           })
           .catch(function () { openReport({ name: v }); });
       }
-      input.addEventListener("input", function () { clearTimeout(debounce); debounce = setTimeout(fetchSuggest, 180); });
+      input.addEventListener("input", function () { selected = null; clearTimeout(debounce); debounce = setTimeout(fetchSuggest, 180); });
       input.addEventListener("focus", function () { requestGeo(); fetchSuggest(); });
       input.addEventListener("keydown", function (e) {
         if (!ac.classList.contains("is-open")) return;
@@ -1491,7 +1495,8 @@
       document.addEventListener("click", function (e) { if (!form.contains(e.target) && !ac.contains(e.target)) ac.classList.remove("is-open"); });
       form.addEventListener("submit", function (e) {
         e.preventDefault();
-        if (active > -1 && current[active]) { choose(current[active]); return; }
+        ac.classList.remove("is-open");
+        if (selected && selected.name === input.value.trim()) { openReport({ placeId: selected.placeId, name: selected.name }); return; }
         submitFreeText();
       });
 
