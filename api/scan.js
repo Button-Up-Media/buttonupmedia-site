@@ -58,6 +58,10 @@ module.exports = async (req, res) => {
     const desk = extract(desktop);
     const report = buildReport(mob, desk, lang);
 
+    // The rendered screenshot Lighthouse already captured, so the front-end can
+    // hand it to the AI design review (/api/ux) without a second render.
+    const screenshot = pickScreenshot(mobile) || pickScreenshot(desktop);
+
     // Per-URL results are stable for a while; let the edge cache them so we
     // stay well inside the PSI quota and repeat scans feel instant.
     res.setHeader('Cache-Control', 'public, s-maxage=86400, stale-while-revalidate=604800');
@@ -70,6 +74,7 @@ module.exports = async (req, res) => {
       mobile: mob,
       desktop: desk,
       report,
+      screenshot,
     });
   } catch (err) {
     const status = err && err.status;
@@ -138,6 +143,18 @@ async function runPsiOnce(url, strategy, key, deadline) {
 
 function pct(score) {
   return typeof score === 'number' ? Math.round(score * 100) : null;
+}
+
+/* The final rendered screenshot Lighthouse captured (a data: URI), used by the
+   AI design review. Returns null if PSI did not include it. */
+function pickScreenshot(data) {
+  try {
+    const shot = data.lighthouseResult.audits['final-screenshot'];
+    const uri = shot && shot.details && shot.details.data;
+    return typeof uri === 'string' && uri.indexOf('data:image') === 0 ? uri : null;
+  } catch (e) {
+    return null;
+  }
 }
 
 function extract(data) {
