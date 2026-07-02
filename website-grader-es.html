@@ -167,6 +167,14 @@
     .gr-sb-ic { display: flex; align-items: center; gap: 5px; }
     .gr-sb-ic svg { height: 11px; width: auto; color: #0a0a0b; }
     .gr-screen-vp { --vph: clamp(322px, 50vw, 398px); height: var(--vph); overflow: hidden; }
+    /* Desktop: make the hero phone big and pronounced (same phone proportions,
+       screen height scales with width at the 398/296 ratio). */
+    @media (min-width: 1000px) {
+      .gr-hero-stage { max-width: 960px; }
+      .gr-phone-box { height: 472px; }
+      .gr-phone { width: 384px; }
+      .gr-screen-vp { --vph: 516px; }
+    }
     .gr-screen-track { display: block; }
     @media (prefers-reduced-motion: no-preference) { .gr-screen-track { animation: grPhoneScroll 16s cubic-bezier(.65,0,.35,1) infinite; } }
     @keyframes grPhoneScroll {
