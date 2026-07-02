@@ -281,7 +281,7 @@
           </div>
 
           <!-- pagespeed-style categories -->
-          <div class="sr-card">
+          <div class="sr-card" id="sr-tech-card">
             <h3>Your technical scores</h3>
             <p style="color:var(--text-dim);font-size:0.9rem;margin-top:8px;">Measured the way Google measures it, on mobile and desktop.</p>
             <div class="sr-cat-tabs" role="tablist">
@@ -377,9 +377,16 @@
     resolvePlace().then(function (place) {
       placeInfo = place;
       var target = urlParam || (place && place.website) || "";
-      if (!target) throw { kind: "no_url" };
+      if (!target) {
+        // No website to grade. If we still resolved the Google listing, show a
+        // "no website" report (a serious problem, and our best sales moment)
+        // instead of dead-ending on a "what's your website?" form.
+        if (place) { finishScan(); renderNoWebsite(place); loadCompetitors(); wireGate(); return null; }
+        throw { kind: "no_url" };
+      }
       return scanWithRetry(target, 1);
     }).then(function (scan) {
+      if (!scan) return;
       lastScan = scan;
       setProgress("Reviewing your design…");
       return reviewUx(scan).then(function (ux) {
@@ -439,6 +446,82 @@
     }
     function ratingOf(p) { if (p >= 90) return { label: "Good", color: COLORS.good }; if (p >= 50) return { label: "Fair", color: COLORS.fair }; return { label: "Poor", color: COLORS.poor }; }
     function gradeFor(o) { if (o >= 90) return { label: "Excellent", color: COLORS.good }; if (o >= 70) return { label: "Good", color: COLORS.good }; if (o >= 50) return { label: "Fair", color: COLORS.fair }; return { label: "Poor", color: COLORS.poor }; }
+
+    /* No website found: still show the Google listing we did find, score the
+       missing site as the serious problem it is, and route them to a build. */
+    function renderNoWebsite(place) {
+      var name = (place && place.name) || bizName;
+      var rating = place && place.rating != null ? place.rating : null;
+      var reviews = place && place.reviews != null ? place.reviews : null;
+      var score = Math.max(10, Math.min(28, Math.round(10 + (rating ? (rating / 5) * 15 : 0))));
+      lastReport = { overall: score };
+
+      setText("sr-biz-name", name);
+      setText("sr-biz-url", "No website found");
+      setText("sr-grade", "Poor");
+      var gradeEl = document.getElementById("sr-grade");
+      if (gradeEl) gradeEl.style.color = COLORS.poor;
+      setText("sr-grade-note", "You don't have a website we could find, and that is a serious problem. Most guests check a website before they visit or order, so you are handing them straight to your competitors.");
+
+      var arc = document.getElementById("sr-gauge-arc");
+      if (arc) {
+        var off = 540 * (1 - score / 100);
+        arc.setAttribute("stroke", COLORS.poor);
+        requestAnimationFrame(function () { arc.style.transition = "stroke-dashoffset 1.2s cubic-bezier(.22,1,.36,1)"; arc.style.strokeDashoffset = off; });
+      }
+      countUp(document.getElementById("sr-score"), score);
+
+      var subs = document.getElementById("sr-subs");
+      if (subs) {
+        var html = subRow("Website", "Not found", 0, COLORS.poor);
+        if (rating != null) { var rp = Math.round(rating / 5 * 100); html += subRow("Google rating", rating.toFixed(1) + " ★", rp, rp >= 90 ? COLORS.good : rp >= 70 ? COLORS.fair : COLORS.poor); }
+        subs.innerHTML = html;
+      }
+
+      var lossH = document.getElementById("sr-loss-h");
+      if (lossH) lossH.innerHTML = 'The <span class="gold">biggest problem</span>: you have no website';
+      document.getElementById("sr-problems").innerHTML =
+        probRow({ pt: "Guests can't see your menu, photos, or how to order", im: "Most people check a website before they visit. With nothing to find, they pick a competitor who shows them the food and makes ordering easy." }) +
+        probRow({ pt: "You're invisible for “near me” searches", im: "A website is how you show up when people search for the best spot near them. Without one, that steady stream of new customers goes to everyone else." }) +
+        probRow({ pt: "No online ordering or reservations", im: "Guests increasingly expect to order or book in a couple of taps. No site means no easy way to do either, so you lose the sale." });
+
+      var tech = document.getElementById("sr-tech-card");
+      if (tech) {
+        var found = (rating != null || reviews != null)
+          ? ("but we did find your Google listing" + (rating != null ? " (" + rating.toFixed(1) + " ★" + (reviews != null ? ", " + reviews.toLocaleString() + " reviews" : "") + ")" : "") + ". A listing alone is not enough, though, guests still expect a real website.")
+          : "and we could not find much online for you at all, which means new customers have almost no way to find you.";
+        tech.innerHTML =
+          '<h3>We couldn\'t find your website</h3>' +
+          '<p style="color:var(--text-dim);font-size:0.95rem;margin-top:10px;line-height:1.6;">We searched for a site for ' + esc(name) + ' ' + found + '</p>' +
+          '<form id="sr-nw-form" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;">' +
+            '<input class="sr-input" id="sr-nw-url" type="text" placeholder="yourrestaurant.com" style="flex:1;min-width:200px;text-align:left;" />' +
+            '<button class="sr-gate-btn" style="width:auto;margin-top:0;padding:0 22px;">Grade it</button>' +
+          '</form>' +
+          '<p style="color:var(--text-soft);font-size:0.84rem;margin-top:10px;line-height:1.5;">Think we missed it? Paste your website above and we will grade it. If you do not have one yet, that is the single biggest thing holding you back, and it is very fixable.</p>' +
+          '<div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--line-soft);">' +
+            '<div style="font-family:var(--font-display);font-weight:800;font-size:1.05rem;color:var(--text-head);">Let us build you one</div>' +
+            '<p style="color:var(--text-dim);font-size:0.92rem;margin-top:6px;line-height:1.55;">A custom restaurant website, live in about a week. Affordable, fully custom, no added fees. You own it forever.</p>' +
+            '<a href="/website-offer" target="_blank" rel="noopener" class="sr-gate-btn" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;width:auto;padding:0 24px;margin-top:14px;">Build my website &rarr;</a>' +
+          '</div>';
+        var f = document.getElementById("sr-nw-form");
+        if (f) f.addEventListener("submit", function (ev) {
+          ev.preventDefault();
+          var val = document.getElementById("sr-nw-url").value.trim();
+          if (!val) return;
+          var u = new URL(location.href); u.searchParams.set("url", val); u.searchParams.delete("placeId"); location.href = u.toString();
+        });
+      }
+
+      var gated = document.getElementById("sr-gated");
+      if (gated) gated.style.display = "none";
+    }
+    function subRow(label, ratingTxt, pct, color) {
+      pct = Math.max(0, Math.min(100, pct || 0));
+      var doff = 97 * (1 - pct / 100);
+      return '<div class="sr-sub">' +
+        '<svg class="ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(44,38,28,0.1)" stroke-width="4"/><circle cx="18" cy="18" r="15.5" fill="none" stroke="' + color + '" stroke-width="4" stroke-linecap="round" stroke-dasharray="97" stroke-dashoffset="' + doff.toFixed(1) + '" transform="rotate(-90 18 18)"/></svg>' +
+        '<div class="lbl"><b>' + esc(label) + '</b><small style="color:' + color + ';">' + esc(ratingTxt) + '</small></div></div>';
+    }
 
     /* Cold PageSpeed scans (especially Wix/Squarespace template sites) often
        fail once then succeed on a warmer second request. Retry silently before
