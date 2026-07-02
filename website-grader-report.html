@@ -630,7 +630,7 @@
 
     /* ---- technical category gauges (mobile / desktop tabs) ---- */
     function setupCats(scan) {
-      function row(cats) { return [["Performance", cats.performance], ["Accessibility", cats.accessibility], ["Best Practices", cats.bestPractices], ["SEO", cats.seo]]; }
+      function row(cats) { return [["Speed", cats.performance], ["Ease of use", cats.accessibility], ["Trust & safety", cats.bestPractices], ["Found on Google", cats.seo]]; }
       var DATA = { mobile: row(scan.mobile.categories), desktop: row(scan.desktop.categories) };
       var C = 2 * Math.PI * 30;
       var wrap = document.getElementById("sr-cats");
@@ -771,12 +771,30 @@
     function compRow(name, sub, rank, you) {
       return '<div class="sr-comp' + (you ? ' --you' : '') + '"><div class="ic">' + homeSvg() + '</div><div class="nm"><b>' + esc(name) + '</b><span>' + esc(sub) + '</span></div><div class="rk">' + esc(rank) + '</div></div>';
     }
+    /* Plain-language speed section: no acronyms, each metric is what it means to
+       a hungry customer, with a "this is costing you" line when it is slow. */
     function cwvBlock(scan) {
-      var m = scan.mobile.metrics || {};
-      function r(label, met) { if (!met || met.display == null) return ""; return '<div style="display:flex;justify-content:space-between;padding:7px 0;font-size:0.86rem;border-top:1px solid var(--line-soft);"><span style="color:var(--text-dim);">' + label + '</span><b style="color:var(--text-head);">' + esc(met.display) + '</b></div>'; }
-      var rows = r("Largest Contentful Paint", m.lcp) + r("Total Blocking Time", m.tbt) + r("Cumulative Layout Shift", m.cls) + r("Speed Index", m.speedIndex);
+      var m = (scan.mobile && scan.mobile.metrics) || {};
+      var SPEED = [
+        { met: m.lcp, limit: 2500, label: "Your food photos and menu show up fast", why: "More than half of phone visitors leave before a slow page finishes loading, and that is lost orders every single night." },
+        { met: m.fcp, limit: 1800, label: "Something appears right away, not a blank screen", why: "If a hungry customer stares at a blank screen for a couple of seconds, they assume your site is broken and tap over to a competitor." },
+        { met: m.tbt, limit: 200, label: "Buttons respond the instant someone taps them", why: "When your Order or Menu button feels frozen for a beat, customers tap again in frustration and give up before checkout." },
+        { met: m.cls, limit: 0.1, label: "The page holds still while it loads", why: "When buttons shift under a customer's thumb they tap the wrong thing, get annoyed, and abandon the order." }
+      ];
+      var okSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+      var badSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="var(--poor)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+      var rows = SPEED.map(function (s) {
+        if (!s.met || s.met.value == null) return "";
+        var ok = s.met.value <= s.limit;
+        var color = ok ? "var(--good)" : "var(--poor)";
+        return '<div style="display:flex;gap:11px;padding:12px 0;border-top:1px solid var(--line-soft);align-items:flex-start;">' +
+          '<span style="flex:none;width:18px;height:18px;margin-top:1px;">' + (ok ? okSvg : badSvg) + '</span>' +
+          '<div style="flex:1;min-width:0;"><div style="display:flex;justify-content:space-between;gap:10px;"><b style="font-size:0.9rem;color:var(--text-head);font-weight:600;">' + s.label + '</b><span style="font-size:0.82rem;color:' + color + ';font-weight:700;white-space:nowrap;">' + esc(s.met.display || "") + '</span></div>' +
+          (ok ? '' : '<div style="font-size:0.8rem;color:var(--text-soft);margin-top:3px;line-height:1.45;">' + s.why + '</div>') +
+          '</div></div>';
+      }).join("");
       if (!rows) return "";
-      return '<div style="margin-top:16px;"><div style="font-family:var(--font-display);font-weight:800;font-size:0.95rem;color:var(--text-head);margin-bottom:2px;">Core Web Vitals (mobile)</div>' + rows + '</div>';
+      return '<div style="margin-top:18px;"><div style="font-family:var(--font-display);font-weight:800;font-size:0.98rem;color:var(--text-head);">How fast your site feels on a phone</div><p style="font-size:0.82rem;color:var(--text-soft);margin:3px 0 2px;line-height:1.4;">A slow page loses orders before a hungry customer ever sees a plate.</p>' + rows + '</div>';
     }
 
   })();
