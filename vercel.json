@@ -804,13 +804,9 @@
       "memory": 512,
       "maxDuration": 60
     },
-    "api/ux.js": {
-      "memory": 512,
-      "maxDuration": 30
-    },
     "api/places.js": {
       "memory": 256,
-      "maxDuration": 15
+      "maxDuration": 30
     },
     "api/sms/**/*.js": {
       "memory": 256,
