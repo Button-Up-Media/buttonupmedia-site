@@ -356,7 +356,7 @@
 
     var bizName = nameParam || "Your restaurant";
     var COLORS = { good: "#1E7E54", fair: "#C9820E", poor: "#CF4A3C", dim: "#9a8f7d" };
-    var lastScan = null, placeInfo = null, animDone = false;
+    var lastScan = null, placeInfo = null, animDone = false, lastUx = null, lastReport = null;
 
     setText("sr-scan-name", bizName);
     document.title = bizName + " - Website Report | Button Up Media";
@@ -381,14 +381,60 @@
       return scanWithRetry(target, 1);
     }).then(function (scan) {
       lastScan = scan;
-      finishScan();
-      renderReport(scan, placeInfo);
-      loadCompetitors();
-      wireGate();
+      setProgress("Reviewing your design…");
+      return reviewUx(scan).then(function (ux) {
+        lastUx = ux;
+        finishScan();
+        renderReport(scan, placeInfo, ux);
+        loadCompetitors();
+        wireGate();
+      });
     }).catch(function (e) {
       finishScan();
       renderError(e || {});
     });
+
+    /* AI design review: hand the screenshot the scan captured to /api/places
+       (POST) and get back a strict design/experience score + plain-language
+       findings. Degrades to null (PageSpeed-only report) on any failure. */
+    function reviewUx(scan) {
+      if (!scan || !scan.screenshot) return Promise.resolve(null);
+      var ctrl = ("AbortController" in window) ? new AbortController() : null;
+      var to = setTimeout(function () { if (ctrl) ctrl.abort(); }, 22000);
+      var website = (placeInfo && placeInfo.website) || urlParam || (scan && scan.url) || "";
+      return fetch("/api/places", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ screenshot: scan.screenshot, name: bizName, website: website, lang: "en" }),
+        signal: ctrl ? ctrl.signal : undefined
+      }).then(function (r) { return r.json(); })
+        .then(function (d) { clearTimeout(to); return (d && d.ok && d.ux) ? d.ux : null; })
+        .catch(function () { clearTimeout(to); return null; });
+    }
+
+    /* Combine the AI design review with PageSpeed into the scored report.
+       Design & experience is the heaviest sub-score, so a fast-but-ugly site
+       (generic template, no food photos) can no longer score "Excellent". */
+    function combinedReport(scan, ux) {
+      var s = scan.report.subs || [];
+      function pctOf(k) { for (var i = 0; i < s.length; i++) { if (s[i].key === k) return s[i].percent; } return 0; }
+      var subs = [
+        mkSub("design", "Design & experience", ux.score, 40),
+        mkSub("speed", "Speed", pctOf("speed"), 25),
+        mkSub("seo", "SEO & visibility", pctOf("seo"), 20),
+        mkSub("mobile", "Mobile & best practices", pctOf("mobile"), 15)
+      ];
+      var overall = subs.reduce(function (a, x) { return a + x.points; }, 0);
+      var g = gradeFor(overall);
+      var issues = (ux.findings || []).concat(scan.report.issues || []).slice(0, 6);
+      return { overall: overall, grade: g.label, gradeColor: g.color, subs: subs, issues: issues, issueCount: issues.length, fieldData: scan.report.fieldData, ux: ux };
+    }
+    function mkSub(key, label, pct, max) {
+      pct = Math.max(0, Math.min(100, pct || 0));
+      var r = ratingOf(pct);
+      return { key: key, label: label, points: Math.round(pct / 100 * max), max: max, percent: Math.round(pct), rating: r.label, color: r.color };
+    }
+    function ratingOf(p) { if (p >= 90) return { label: "Good", color: COLORS.good }; if (p >= 50) return { label: "Fair", color: COLORS.fair }; return { label: "Poor", color: COLORS.poor }; }
+    function gradeFor(o) { if (o >= 90) return { label: "Excellent", color: COLORS.good }; if (o >= 70) return { label: "Good", color: COLORS.good }; if (o >= 50) return { label: "Fair", color: COLORS.fair }; return { label: "Poor", color: COLORS.poor }; }
 
     /* Cold PageSpeed scans (especially Wix/Squarespace template sites) often
        fail once then succeed on a warmer second request. Retry silently before
@@ -425,8 +471,9 @@
     }
 
     /* ---- render the real report ---- */
-    function renderReport(scan, place) {
-      var rep = scan.report;
+    function renderReport(scan, place, ux) {
+      var rep = ux ? combinedReport(scan, ux) : scan.report;
+      lastReport = rep;
       var name = (place && place.name) || bizName;
       var host = hostOf((place && place.website) || scan.url || urlParam);
 
@@ -570,7 +617,7 @@
           phone: phone.value, code: v,
           restaurant: bizName,
           website: (placeInfo && placeInfo.website) || urlParam || (lastScan && lastScan.url) || "",
-          score: lastScan && lastScan.report ? lastScan.report.overall : null
+          score: lastReport ? lastReport.overall : (lastScan && lastScan.report ? lastScan.report.overall : null)
         }).then(function (d) {
           verifyBtn.disabled = false; verifyBtn.textContent = "Unlock my report";
           if (d && d.error === "not_configured") { unlock(); return; }
