@@ -418,12 +418,16 @@
       var s = scan.report.subs || [];
       function pctOf(k) { for (var i = 0; i < s.length; i++) { if (s[i].key === k) return s[i].percent; } return 0; }
       var subs = [
-        mkSub("design", "Design & experience", ux.score, 40),
-        mkSub("speed", "Speed", pctOf("speed"), 25),
+        mkSub("design", "Design & experience", ux.score, 55),
+        mkSub("speed", "Speed", pctOf("speed"), 15),
         mkSub("seo", "SEO & visibility", pctOf("seo"), 20),
-        mkSub("mobile", "Mobile & best practices", pctOf("mobile"), 15)
+        mkSub("mobile", "Mobile & best practices", pctOf("mobile"), 10)
       ];
       var overall = subs.reduce(function (a, x) { return a + x.points; }, 0);
+      // For a restaurant, a site that looks bad to customers cannot score well
+      // no matter how fast it is: the design rating gates the overall grade.
+      if (ux.score < 50) overall = Math.min(overall, 59);
+      else if (ux.score < 70) overall = Math.min(overall, 74);
       var g = gradeFor(overall);
       var issues = (ux.findings || []).concat(scan.report.issues || []).slice(0, 6);
       return { overall: overall, grade: g.label, gradeColor: g.color, subs: subs, issues: issues, issueCount: issues.length, fieldData: scan.report.fieldData, ux: ux };
