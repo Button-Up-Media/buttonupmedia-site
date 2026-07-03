@@ -1,5 +1,19 @@
 [
   {
+    "id": "slow-tuesday",
+    "category": "strategy",
+    "author": "juan",
+    "date": "2026-07-03",
+    "hero": "/images/blog/slow-tuesday.jpg",
+    "heroAlt": "A calm, empty restaurant dining room with set tables and warm evening lighting",
+    "en": {
+      "slug": "fill-restaurant-slow-tuesday"
+    },
+    "es": {
+      "slug": "llenar-restaurante-noches-lentas"
+    }
+  },
+  {
     "id": "reel-ideas",
     "category": "social",
     "author": "chris",

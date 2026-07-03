@@ -104,7 +104,7 @@
     },
     {
       "id": "slow-tuesday",
-      "status": "ready",
+      "status": "published",
       "category": "strategy",
       "author": "juan",
       "heroQuery": "quiet empty american restaurant dining room",
@@ -126,7 +126,8 @@
           "https://www.buttonupmedia.com/es/publicidad-restaurantes"
         ]
       },
-      "heroAlt": "A calm, empty restaurant dining room with set tables and warm evening lighting"
+      "heroAlt": "A calm, empty restaurant dining room with set tables and warm evening lighting",
+      "publishedDate": "2026-07-03"
     },
     {
       "id": "recommended-by-chatgpt",
