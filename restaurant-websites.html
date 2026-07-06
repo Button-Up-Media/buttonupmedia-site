@@ -1797,14 +1797,16 @@
       var CAL_URL = "https://calendly.com/juanh-buttonupmedia/website-consultation";
       var state = 0; // 0 idle, 1 loading, 2 ready, 3 failed
 
-      // Mirror a completed Calendly booking into the dataLayer so GTM can fire the
-      // Google Ads conversion (same booking_complete signal the other ad pages use).
+      // A completed booking on this website-consultation landing page fires the
+      // Google Ads conversion through GTM. This LP uses its own dedicated event name,
+      // website_consult_booked, matched by a Google Ads conversion trigger that is
+      // already built. Do not rename it. Origin-checked per Calendly's guidance.
       window.addEventListener("message", function (e) {
-        if (e && e.data && e.data.event === "calendly.event_scheduled") {
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({ event: "booking_complete" });
-        }
-      });
+        if (e.origin !== "https://calendly.com") return;
+        if (!e.data || e.data.event !== "calendly.event_scheduled") return;
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: "website_consult_booked" });
+      }, false);
       var cbs = [];
       function whenReady(cb) { if (state === 2) return cb(true); if (state === 3) return cb(false); cbs.push(cb); load(); }
       function flush(ok) { state = ok ? 2 : 3; cbs.splice(0).forEach(function (c) { c(ok); }); }
