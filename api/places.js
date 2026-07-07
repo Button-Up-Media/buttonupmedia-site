@@ -423,7 +423,7 @@ function uxPrompt(name, website, lang, html, reviews, gPhotoCount) {
     'Business name: ' + name + (website ? '\nWebsite: ' + website : ''),
     '',
     'You are given the page SCREENSHOT (a mobile view) and its HTML below. Do these things:',
-    '1) Give a strict designScore 0-100 for the overall look and customer experience (real food photos, modern non-template design, readable, strong hero, clean, branding). Anchor: a plain template with no real food photos scores about 45-60; reserve 85+ for genuinely professional, appetizing sites.',
+    '1) Give a strict designScore 0-100 for how good the site LOOKS and how USEFUL it is to a hungry customer (real appetizing food photos, modern non-template design, easy to use, a real reason to stay, clean layout, strong branding). Be harsh: a generic cookie-cutter template that gives a visitor little reason to stay, or a basically useless site (just a background image and an off-site order button, no real content) scores 25-45. A decent-but-forgettable site scores 50-65. Reserve 80+ ONLY for genuinely professional, appetizing, easy-to-use sites.',
     '2) Give a strict photoScore 0-100 rating the food photography across BOTH the site screenshot AND the ' + (gPhotoCount || 0) + ' Google listing photo(s) shown above. Judge how appetizing and high quality the food looks. Real, authentic photos (including genuine customer phone photos) are GOOD and beat obvious stock or AI-generated images. But award 80+ ONLY when photos are genuinely appetizing AND professional grade (great light, composition, freshness). Real-but-amateur photos of decent food land ~55-70. No real food photos, or clearly stock/AI, under 30. In findings, if the photos are authentic but not professional, say that (a photographer would help), rather than calling them fake.',
     '3) sitDown: true if this looks like a sit-down / dine-in restaurant where reservations make sense; false if it is fast-casual, counter-service, takeout, a cafe, bakery, food truck or quick bite.',
     (reviews && reviews.length)
@@ -605,8 +605,32 @@ function guessHandles(name) {
   const base = name.toLowerCase().replace(/['’.]/g, '').replace(/&/g, 'and');
   const words = base.replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(Boolean);
   if (!words.length) return [];
-  const out = new Set([words.join(''), words.join('_')]);
-  return [...out].filter((h) => h.length >= 3 && h.length <= 30).slice(0, 2);
+  const generic = new Set(['restaurant', 'pizzeria', 'cafe', 'kitchen', 'grill', 'bar', 'and', 'the', 'co', 'inc', 'llc']);
+  const core = words.filter((w) => !generic.has(w));
+  const joined = (core.length ? core : words).join('');
+  const out = new Set([joined, words.join(''), (core.length ? core : words).join('_')]);
+  ['inc', 'official', 'restaurant', 'eats', 'miami', 'fl'].forEach((sfx) => out.add(joined + sfx));
+  return [...out].filter((h) => h.length >= 3 && h.length <= 30).slice(0, 6);
+}
+
+function socialHost(u) {
+  try { return new URL(/^https?:/.test(u) ? u : 'https://' + u).hostname.replace(/^www\./, '').toLowerCase(); } catch (e) { return ''; }
+}
+// does a profile's bio link back to the restaurant's own website? (the reliable
+// way to pick the right account out of many same-named ones)
+function linksToWebsite(links, website) {
+  const w = socialHost(website);
+  if (!w) return false;
+  const core = w.split('.')[0];
+  return (links || []).some((u) => { const h = socialHost(u); return h && (h === w || (core.length > 4 && h.indexOf(core) !== -1)); });
+}
+// Find a handle via web search (Apify Google-search actor; reuses APIFY_TOKEN).
+async function searchHandles(query) {
+  if (!APIFY_TOKEN) return { ig: [], tt: [] };
+  const item = await apifyProfile('apify~google-search-scraper', { queries: query, resultsPerPage: 10, maxPagesPerQuery: 1, countryCode: 'us', saveHtml: false });
+  const results = (item && (item.organicResults || item.results)) || [];
+  const urls = results.map((r) => (r && (r.url || r.link)) || '').filter(Boolean);
+  return discoverHandles(urls.join('\n'));
 }
 
 async function scrapeInstagram(handle) {
@@ -715,35 +739,49 @@ async function social(req, res) {
     const handle = (q.handle || '').trim().replace(/^@/, '');
     if (platform && handle) {
       if (!/^[A-Za-z0-9_.]{2,30}$/.test(handle)) return res.status(400).json({ ok: false, error: 'bad_handle' });
+      const website = (q.website || '').trim();
       const key = platform + ':' + handle.toLowerCase();
       const cached = SOCIAL_CACHE.get(key);
-      if (cached && Date.now() - cached.t < SOCIAL_TTL) {
-        return res.status(200).json({ ok: true, platform: platform, profile: cached.data, cached: true });
-      }
-      if (socialThrottle(clientIp(req))) return res.status(429).json({ ok: false, error: 'rate_limited' });
       let profile;
-      if (platform === 'ig' || platform === 'instagram') profile = await scrapeInstagram(handle);
-      else if (platform === 'tt' || platform === 'tiktok') profile = await scrapeTiktok(handle);
-      else return res.status(400).json({ ok: false, error: 'bad_platform' });
-      if (profile) delete profile._raw;
-      if (profile && profile.found) SOCIAL_CACHE.set(key, { t: Date.now(), data: profile });
-      return res.status(200).json({ ok: true, platform: platform, profile: profile });
+      if (cached && Date.now() - cached.t < SOCIAL_TTL) {
+        profile = cached.data;
+      } else {
+        if (socialThrottle(clientIp(req))) return res.status(429).json({ ok: false, error: 'rate_limited' });
+        if (platform === 'ig' || platform === 'instagram') profile = await scrapeInstagram(handle);
+        else if (platform === 'tt' || platform === 'tiktok') profile = await scrapeTiktok(handle);
+        else return res.status(400).json({ ok: false, error: 'bad_platform' });
+        if (profile) delete profile._raw;
+        if (profile && profile.found) SOCIAL_CACHE.set(key, { t: Date.now(), data: profile });
+      }
+      // confirm this is the right account: does its bio link back to their site?
+      if (profile && profile.found && website) profile.linksToWebsite = linksToWebsite(profile.links, website);
+      return res.status(200).json({ ok: true, platform: platform, profile: profile, cached: !!cached });
     }
 
-    // ---- mode 1: discovery (fast, no scraping) ----
+    // ---- mode 1: discovery: site links first, then a web search ----
     const website = (q.website || '').trim();
     const name = (q.name || '').trim();
-    let ig = [], tt = [];
+    let ig = [], tt = [], searched = false;
     if (website) {
       const site = await fetchRaw(website, 250000);
       const d = discoverHandles(site.text || '');
       ig = d.ig; tt = d.tt;
     }
+    // If the site didn't link a handle, search the web for it (Apify Google
+    // actor). The report then scrapes the top candidate and confirms it links
+    // back to the website, which picks the right one out of many same-named accounts.
+    if ((!ig.length || !tt.length) && name && q.search !== '0') {
+      const s = await searchHandles(name + ' Instagram TikTok');
+      searched = true;
+      if (!ig.length) ig = s.ig;
+      if (!tt.length && s.tt.length) tt = s.tt;
+    }
     return res.status(200).json({
       ok: true,
+      searched: searched,
       discover: {
-        instagram: { linked: ig[0] || null, guesses: ig.length ? [] : guessHandles(name) },
-        tiktok: { linked: tt[0] || null, guesses: tt.length ? [] : guessHandles(name) },
+        instagram: { linked: ig[0] || null, candidates: ig.slice(0, 3), guesses: ig.length ? [] : guessHandles(name) },
+        tiktok: { linked: tt[0] || null, candidates: tt.slice(0, 3), guesses: tt.length ? [] : guessHandles(name) },
       },
     });
   } catch (e) {
