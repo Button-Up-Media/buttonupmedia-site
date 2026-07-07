@@ -605,12 +605,21 @@ function guessHandles(name) {
   const base = name.toLowerCase().replace(/['’.]/g, '').replace(/&/g, 'and');
   const words = base.replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(Boolean);
   if (!words.length) return [];
-  const generic = new Set(['restaurant', 'pizzeria', 'cafe', 'kitchen', 'grill', 'bar', 'and', 'the', 'co', 'inc', 'llc']);
-  const core = words.filter((w) => !generic.has(w));
-  const joined = (core.length ? core : words).join('');
-  const out = new Set([joined, words.join(''), (core.length ? core : words).join('_')]);
-  ['inc', 'official', 'restaurant', 'eats', 'miami', 'fl'].forEach((sfx) => out.add(joined + sfx));
-  return [...out].filter((h) => h.length >= 3 && h.length <= 30).slice(0, 6);
+  const generic = new Set(['restaurant', 'pizzeria', 'cafe', 'kitchen', 'grill', 'bar', 'and', 'the', 'co', 'inc', 'llc', 'italian', 'mexican', 'chinese', 'japanese', 'thai', 'american', 'of', 'a']);
+  const sig = words.filter((w) => !generic.has(w));
+  // most restaurant handles are the first 1-2 meaningful words, sometimes + a suffix
+  const bases = new Set();
+  if (sig[0]) bases.add(sig[0]);
+  if (sig[0] && sig[1]) bases.add(sig[0] + sig[1]);
+  if (sig.length) bases.add(sig.slice(0, 3).join(''));
+  bases.add(words.slice(0, 2).join(''));
+  const out = new Set();
+  for (const b of bases) {
+    if (b.length < 3) continue;
+    out.add(b);
+    ['inc', 'official', 'restaurant', 'eats', 'fl', 'miami'].forEach((s) => out.add(b + s));
+  }
+  return [...out].filter((h) => h.length >= 3 && h.length <= 30).slice(0, 10);
 }
 
 function socialHost(u) {
@@ -734,13 +743,6 @@ function socialThrottle(ip) {
 async function social(req, res) {
   const q = req.query || {};
   try {
-    if (q.searchdebug) {
-      const actor = String(q.actor || 'apify~google-search-scraper');
-      const url = 'https://api.apify.com/v2/acts/' + actor + '/run-sync-get-dataset-items?token=' + encodeURIComponent(APIFY_TOKEN) + '&maxItems=1';
-      const rr = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ queries: String(q.searchdebug), resultsPerPage: 10, maxPagesPerQuery: 1, countryCode: 'us' }) });
-      const body = (await rr.text()).slice(0, 500);
-      return res.status(200).json({ ok: true, actor: actor, status: rr.status, body: body });
-    }
     // ---- mode 2: scrape a single profile (the building block) ----
     const platform = (q.platform || '').toLowerCase();
     const handle = (q.handle || '').trim().replace(/^@/, '');
@@ -765,30 +767,23 @@ async function social(req, res) {
       return res.status(200).json({ ok: true, platform: platform, profile: profile, cached: !!cached });
     }
 
-    // ---- mode 1: discovery: site links first, then a web search ----
+    // ---- mode 1: discovery (fast, no scraping) ----
+    // Site links are the confident signal. When the site links nothing, return
+    // name-based guesses; the report scrapes the top few and picks the one whose
+    // bio links back to the website (the reliable disambiguator), else asks the user.
     const website = (q.website || '').trim();
     const name = (q.name || '').trim();
-    let ig = [], tt = [], searched = false;
+    let ig = [], tt = [];
     if (website) {
       const site = await fetchRaw(website, 250000);
       const d = discoverHandles(site.text || '');
       ig = d.ig; tt = d.tt;
     }
-    // If the site didn't link a handle, search the web for it (Apify Google
-    // actor). The report then scrapes the top candidate and confirms it links
-    // back to the website, which picks the right one out of many same-named accounts.
-    if ((!ig.length || !tt.length) && name && q.search !== '0') {
-      const s = await searchHandles(name + ' Instagram TikTok');
-      searched = true;
-      if (!ig.length) ig = s.ig;
-      if (!tt.length && s.tt.length) tt = s.tt;
-    }
     return res.status(200).json({
       ok: true,
-      searched: searched,
       discover: {
-        instagram: { linked: ig[0] || null, candidates: ig.slice(0, 3), guesses: ig.length ? [] : guessHandles(name) },
-        tiktok: { linked: tt[0] || null, candidates: tt.slice(0, 3), guesses: tt.length ? [] : guessHandles(name) },
+        instagram: { linked: ig[0] || null, candidates: ig.length ? ig.slice(0, 3) : guessHandles(name), fromSite: !!ig.length },
+        tiktok: { linked: tt[0] || null, candidates: tt.slice(0, 3), fromSite: !!tt.length },
       },
     });
   } catch (e) {
