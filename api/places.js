@@ -583,6 +583,22 @@ async function scrapeTiktok(handle) {
      2) ?action=social&platform=ig|tt&handle=X     -> one profile's real stats.
    So the frontend discovers, confirms a guessed handle with the user, then
    fires the per-profile scrapes (restaurant + competitors) in parallel. */
+// Each profile scrape is a paid Apify run, so cache results (competitors and
+// re-scans reuse them) and cap the paid calls harder than the free Places ones.
+const SOCIAL_CACHE = new Map(); // "platform:handle" -> { t, data }
+const SOCIAL_TTL = 20 * 60 * 1000;
+const SOCIAL_HITS = new Map();  // ip -> [timestamps]
+const SOCIAL_IP_MAX = 20;       // paid scrapes per IP per minute
+function socialThrottle(ip) {
+  if (!ip) return false;
+  const now = Date.now();
+  const hits = (SOCIAL_HITS.get(ip) || []).filter((t) => now - t < 60000);
+  if (hits.length >= SOCIAL_IP_MAX) return true;
+  hits.push(now); SOCIAL_HITS.set(ip, hits);
+  if (SOCIAL_HITS.size > 5000) { for (const [k, v] of SOCIAL_HITS) { const f = v.filter((t) => now - t < 60000); if (f.length) SOCIAL_HITS.set(k, f); else SOCIAL_HITS.delete(k); } }
+  return false;
+}
+
 async function social(req, res) {
   const q = req.query || {};
   try {
@@ -591,11 +607,18 @@ async function social(req, res) {
     const handle = (q.handle || '').trim().replace(/^@/, '');
     if (platform && handle) {
       if (!/^[A-Za-z0-9_.]{2,30}$/.test(handle)) return res.status(400).json({ ok: false, error: 'bad_handle' });
+      const key = platform + ':' + handle.toLowerCase();
+      const cached = SOCIAL_CACHE.get(key);
+      if (cached && Date.now() - cached.t < SOCIAL_TTL) {
+        return res.status(200).json({ ok: true, platform: platform, profile: cached.data, cached: true });
+      }
+      if (socialThrottle(clientIp(req))) return res.status(429).json({ ok: false, error: 'rate_limited' });
       let profile;
       if (platform === 'ig' || platform === 'instagram') profile = await scrapeInstagram(handle);
       else if (platform === 'tt' || platform === 'tiktok') profile = await scrapeTiktok(handle);
       else return res.status(400).json({ ok: false, error: 'bad_platform' });
-      if (!q.debug && profile) delete profile._raw;
+      if (profile) delete profile._raw;
+      if (profile && profile.found) SOCIAL_CACHE.set(key, { t: Date.now(), data: profile });
       return res.status(200).json({ ok: true, platform: platform, profile: profile });
     }
 
