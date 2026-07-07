@@ -220,6 +220,24 @@
     .sr-igc-btns button { flex: 1; height: 38px; border-radius: 9px; border: 1px solid var(--line); background: #FFFFFF; font-family: var(--font-display); font-weight: 700; font-size: 0.8rem; color: var(--text-head); cursor: pointer; }
     .sr-igc-btns #sr-igc-yes { background: linear-gradient(135deg, #E0A23C, #D08A34); color: #2A1C06; border: none; }
 
+    /* your own social media card */
+    .soc-block { padding: 16px 0; border-top: 1px solid var(--line-soft); }
+    .soc-block:first-child { border-top: none; padding-top: 4px; }
+    .soc-head { display: flex; align-items: baseline; gap: 10px; }
+    .soc-head b { font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; color: var(--text-head); }
+    .soc-head span { color: var(--gold); font-weight: 700; font-size: 0.9rem; }
+    .soc-stats { display: flex; gap: 26px; margin-top: 12px; flex-wrap: wrap; }
+    .soc-stat span { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-soft); }
+    .soc-stat b { font-family: var(--font-hero); font-weight: 800; font-size: 1.32rem; color: var(--text-head); }
+    .soc-stat b.good { color: var(--good); } .soc-stat b.warn { color: var(--fair); } .soc-stat b.poor { color: var(--poor); }
+    .soc-checks { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; margin-top: 16px; }
+    .soc-chk { display: flex; align-items: center; gap: 8px; font-size: 0.86rem; color: var(--text-dim); }
+    .soc-chk .ci { width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; font-size: 0.66rem; font-weight: 800; flex: none; }
+    .soc-chk.ok .ci { background: rgba(30,126,84,0.12); color: var(--good); }
+    .soc-chk.no .ci { background: rgba(207,74,60,0.12); color: var(--poor); }
+    .soc-empty { color: var(--text-dim); font-size: 0.94rem; line-height: 1.6; padding: 6px 0; }
+    @media (max-width: 520px) { .soc-checks { grid-template-columns: 1fr; } }
+
     /* pagespeed-style category gauges with mobile/desktop tabs */
     .sr-cat-tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--bg-1); margin: 18px 0 4px; }
     .sr-cat-tab { padding: 8px 20px; border: none; border-radius: 999px; background: none; font-family: var(--font-display); font-weight: 700; font-size: 0.88rem; color: var(--text-soft); cursor: pointer; transition: all .2s; }
@@ -397,6 +415,12 @@
               <p style="color:var(--text-dim);font-size:0.9rem;margin:8px 0 16px;">How your guest rating stacks up against the highest-rated spots nearby.</p>
               <div id="sr-comps"></div>
             </div>
+          </div>
+
+          <!-- your own social media stats -->
+          <div class="sr-card" id="sr-socialcard" style="display:none;">
+            <h3>Your social media</h3>
+            <div id="sr-social-body"></div>
           </div>
 
           <!-- social + presence scoreboard vs nearby same-cuisine competitors -->
@@ -1115,6 +1139,7 @@
       setupCats(scan);
       renderPitch(rep);
       renderSocialConfirm(social);
+      renderSocialCard(social);
     }
 
     /* If we found a likely-but-unconfirmed Instagram, ask the owner in one tap.
@@ -1220,6 +1245,44 @@
       if (hEl && you.igFollowers != null && withIg.length > 1 && !withIg[0].you) {
         hEl.innerHTML = 'On Instagram, <span class="gold">' + esc(withIg[0].name) + '</span> has ' + fmtK(withIg[0].igFollowers) + ' followers to your ' + fmtK(you.igFollowers);
       }
+      card.style.display = "";
+    }
+
+    /* ---- your own social media stats (IG/TikTok + bio quality) ---- */
+    function igBioChecks(ig) {
+      var B = ig.bio || "", L = ig.links || [];
+      return [
+        { label: "Location in your bio", ok: /📍|\bmiami|kendall|coral gables|brickell|doral|wynwood|fl\b|florida|ave|st\b|blvd|\d{3,}/i.test(B) },
+        { label: "An order or menu link", ok: L.some(function (u) { return /ubereats|doordash|toast|order|menu|opentable|resy|grubhub|appfront|linktr\.ee|linkin\.bio|beacons/i.test(u); }) },
+        { label: "Story highlights set up", ok: (ig.highlights || 0) >= 3 },
+        { label: "A business account", ok: !!ig.isBusiness }
+      ];
+    }
+    function socBlock(platform, handle, stats, checks) {
+      var s = stats.map(function (x) { return '<div class="soc-stat"><span>' + esc(x[0]) + '</span><b' + (x[2] ? ' class="' + x[2] + '"' : '') + '>' + esc(x[1]) + '</b></div>'; }).join("");
+      var c = checks.length ? '<div class="soc-checks">' + checks.map(function (k) { return '<div class="soc-chk ' + (k.ok ? "ok" : "no") + '"><span class="ci">' + (k.ok ? "&#10003;" : "&#10005;") + '</span>' + esc(k.label) + '</div>'; }).join("") + '</div>' : "";
+      return '<div class="soc-block"><div class="soc-head"><b>' + esc(platform) + '</b><span>@' + esc(handle) + '</span></div><div class="soc-stats">' + s + '</div>' + c + '</div>';
+    }
+    function renderSocialCard(social) {
+      var card = document.getElementById("sr-socialcard"), body = document.getElementById("sr-social-body");
+      if (!card || !body) return;
+      var ig = social && social.instagram, tt = social && social.tiktok;
+      if ((!ig || !ig.found) && (!tt || !tt.found)) {
+        body.innerHTML = '<div class="soc-empty">We could not find an active Instagram or TikTok for you. On the platforms where hungry locals discover and vet restaurants, you are invisible right now, and that is one of the fastest, highest-impact things to fix.</div>';
+        card.style.display = "";
+        return;
+      }
+      var html = "";
+      if (ig && ig.found) {
+        var d = ig.latestPostAt ? Math.round((Date.now() - ig.latestPostAt) / 86400000) : null;
+        var recency = d == null ? "—" : d <= 1 ? "Today" : d < 365 ? d + " days ago" : Math.round(d / 365) + "+ yrs ago";
+        var recTone = d == null ? "" : d <= 14 ? "good" : d <= 60 ? "warn" : "poor";
+        html += socBlock("Instagram", ig.handle, [["Followers", fmtK(ig.followers)], ["Posts", ig.posts != null ? ig.posts.toLocaleString() : "—"], ["Last post", recency, recTone]], igBioChecks(ig));
+      }
+      if (tt && tt.found) {
+        html += socBlock("TikTok", tt.handle, [["Followers", fmtK(tt.followers)], ["Videos", tt.videos != null ? tt.videos.toLocaleString() : "—"], ["Total likes", fmtK(tt.likes)]], []);
+      }
+      body.innerHTML = html;
       card.style.display = "";
     }
 
