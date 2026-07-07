@@ -153,7 +153,7 @@ async function details(req, res, key) {
 
   const params = new URLSearchParams({
     place_id: placeId,
-    fields: 'name,website,url,rating,user_ratings_total,formatted_address,geometry,price_level,types,formatted_phone_number,opening_hours,photos,reviews,editorial_summary',
+    fields: 'name,website,url,rating,user_ratings_total,formatted_address,geometry,price_level,types,formatted_phone_number,opening_hours,photos,reviews,editorial_summary,reservable,dine_in,serves_dinner,takeout,delivery',
     key,
   });
   const data = await getJson(`${BASE}/details/json?${params.toString()}`);
@@ -185,8 +185,15 @@ async function details(req, res, key) {
       phone: r.formatted_phone_number || null,
       hasHours: !!(r.opening_hours && Array.isArray(r.opening_hours.weekday_text) && r.opening_hours.weekday_text.length),
       photosCount: Array.isArray(r.photos) ? r.photos.length : 0,
+      photoRefs: Array.isArray(r.photos) ? r.photos.slice(0, 3).map((p) => p.photo_reference).filter(Boolean) : [],
       types: Array.isArray(r.types) ? r.types : [],
       editorialSummary: (r.editorial_summary && r.editorial_summary.overview) || null,
+      // reliable reservation/service signals from Google (not a guess)
+      reservable: (r.reservable === true || r.reservable === false) ? r.reservable : null,
+      dineIn: (r.dine_in === true || r.dine_in === false) ? r.dine_in : null,
+      servesDinner: (r.serves_dinner === true || r.serves_dinner === false) ? r.serves_dinner : null,
+      takeout: (r.takeout === true || r.takeout === false) ? r.takeout : null,
+      delivery: (r.delivery === true || r.delivery === false) ? r.delivery : null,
       sampleReviews: sampleReviews,
     },
   });
@@ -291,12 +298,32 @@ async function uxReview(req, res) {
     ? body.reviews.slice(0, 5).map((r) => ({ rating: r && r.rating, text: uxStr(r && r.text, 260) })).filter((r) => r.text)
     : [];
   const model = process.env.UX_MODEL || 'claude-sonnet-4-6';
+  const placesKey = process.env.GOOGLE_PLACES_API_KEY || process.env.PAGESPEED_API_KEY || '';
 
   // Read the page HTML too, so the AI can grade content/SEO checks (menu, hours,
   // address, About, off-site ordering, title, H1, meta, alt text) it cannot see
   // from a screenshot alone. Best-effort; degrades to screenshot-only.
   let html = '';
   if (url) { try { html = await fetchHtml(url); } catch (e) { html = ''; } }
+
+  // Pull a few Google Business Profile photos so the food-photography grade
+  // reflects the real photos customers see on Google, not just the homepage.
+  const photoRefs = Array.isArray(body.photoRefs) ? body.photoRefs.slice(0, 3) : [];
+  const gPhotos = [];
+  if (photoRefs.length && placesKey) {
+    const fetched = await Promise.all(photoRefs.map((ref) => fetchGooglePhoto(ref, placesKey)));
+    fetched.forEach((p) => { if (p) gPhotos.push(p); });
+  }
+
+  const content = [
+    { type: 'text', text: 'SITE SCREENSHOT (mobile homepage):' },
+    { type: 'image', source: { type: 'base64', media_type: img.mediaType, data: img.data } },
+  ];
+  gPhotos.forEach((p, i) => {
+    content.push({ type: 'text', text: 'GOOGLE LISTING PHOTO ' + (i + 1) + ':' });
+    content.push({ type: 'image', source: { type: 'base64', media_type: p.mediaType, data: p.data } });
+  });
+  content.push({ type: 'text', text: uxPrompt(name, website, lang, html, reviews, gPhotos.length) });
 
   try {
     const resp = await fetch(ANTHROPIC_URL, {
@@ -309,13 +336,7 @@ async function uxReview(req, res) {
       body: JSON.stringify({
         model,
         max_tokens: 1900,
-        messages: [{
-          role: 'user',
-          content: [
-            { type: 'image', source: { type: 'base64', media_type: img.mediaType, data: img.data } },
-            { type: 'text', text: uxPrompt(name, website, lang, html, reviews) },
-          ],
-        }],
+        messages: [{ role: 'user', content: content }],
       }),
     });
 
@@ -363,7 +384,7 @@ async function uxReview(req, res) {
   }
 }
 
-function uxPrompt(name, website, lang, html, reviews) {
+function uxPrompt(name, website, lang, html, reviews, gPhotoCount) {
   const langLine = lang === 'es'
     ? 'Write the summary and findings strings in Latin American Spanish that a restaurant owner who is NOT a marketer understands. Check ids stay in English. No jargon, no em-dashes.'
     : 'Write the summary and findings strings in plain English a restaurant owner who is NOT a marketer understands. No jargon, no em-dashes.';
@@ -403,7 +424,7 @@ function uxPrompt(name, website, lang, html, reviews) {
     '',
     'You are given the page SCREENSHOT (a mobile view) and its HTML below. Do these things:',
     '1) Give a strict designScore 0-100 for the overall look and customer experience (real food photos, modern non-template design, readable, strong hero, clean, branding). Anchor: a plain template with no real food photos scores about 45-60; reserve 85+ for genuinely professional, appetizing sites.',
-    '2) Give a strict photoScore 0-100 rating ONLY the food photography: how appetizing and high quality the food looks (great light, fresh, crave-able, well composed). A technically sharp photo of unappetizing or sloppy food still scores LOW. No real food photos = under 25. Reserve 85+ for genuinely mouth-watering, professional food photography.',
+    '2) Give a strict photoScore 0-100 rating the food photography across BOTH the site screenshot AND the ' + (gPhotoCount || 0) + ' Google listing photo(s) shown above. Judge how appetizing and high quality the food looks. Real, authentic photos (including genuine customer phone photos) are GOOD and beat obvious stock or AI-generated images. But award 80+ ONLY when photos are genuinely appetizing AND professional grade (great light, composition, freshness). Real-but-amateur photos of decent food land ~55-70. No real food photos, or clearly stock/AI, under 30. In findings, if the photos are authentic but not professional, say that (a photographer would help), rather than calling them fake.',
     '3) sitDown: true if this looks like a sit-down / dine-in restaurant where reservations make sense; false if it is fast-casual, counter-service, takeout, a cafe, bakery, food truck or quick bite.',
     (reviews && reviews.length)
       ? '4) reviewSentiment: read the recent customer reviews below and answer "positive", "mixed" or "negative" based on RECENT complaints (cold food, slow or rude service, cleanliness, wrong orders). If negative or mixed, put the single main recurring complaint in reviewNote in plain owner language; otherwise leave reviewNote empty.'
@@ -465,6 +486,26 @@ async function fetchHtml(url) {
       .replace(/<!--[\s\S]*?-->/g, ' ')
       .replace(/[ \t]+/g, ' ');
     return text.slice(0, 55000);
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+// Fetch one Google Business Profile photo as base64 for the vision review.
+async function fetchGooglePhoto(ref, key) {
+  const url = BASE + '/photo?maxwidth=800&photo_reference=' + encodeURIComponent(ref) + '&key=' + key;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8000);
+  try {
+    const resp = await fetch(url, { redirect: 'follow', signal: controller.signal });
+    if (!resp.ok) return null;
+    const ct = (resp.headers.get('content-type') || '').split(';')[0];
+    if (!/^image\/(jpeg|png|webp)$/.test(ct)) return null;
+    const buf = Buffer.from(await resp.arrayBuffer());
+    if (!buf.length || buf.length > 4 * 1024 * 1024) return null;
+    return { mediaType: ct, data: buf.toString('base64') };
+  } catch (e) {
+    return null;
   } finally {
     clearTimeout(timer);
   }
