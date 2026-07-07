@@ -438,6 +438,30 @@ async function fetchHtml(url) {
    ========================================================================== */
 const IPHONE_UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1';
 
+// Apify runs purpose-built scrapers through residential IPs, so it works from
+// a server where direct requests get the datacenter-IP login wall. Pay-per-use.
+const APIFY_TOKEN = process.env.APIFY_TOKEN || '';
+async function apifyProfile(actor, input) {
+  if (!APIFY_TOKEN) return null;
+  const url = 'https://api.apify.com/v2/acts/' + actor + '/run-sync-get-dataset-items?token=' + encodeURIComponent(APIFY_TOKEN) + '&maxItems=1';
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 28000);
+  try {
+    const resp = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input), signal: controller.signal });
+    if (!resp.ok) return null;
+    const items = await resp.json();
+    return Array.isArray(items) && items.length ? items[0] : null;
+  } catch (e) {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+function firstNum(obj, keys) {
+  for (const k of keys) { if (obj && obj[k] != null && typeof obj[k] !== 'object') { const n = Number(obj[k]); if (!isNaN(n)) return n; } }
+  return null;
+}
+
 async function fetchRaw(url, cap) {
   if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
   const controller = new AbortController();
@@ -493,6 +517,17 @@ function guessHandles(name) {
 }
 
 async function scrapeInstagram(handle) {
+  // 1) Apify (works from a server); 2) direct read (residential IP only)
+  if (APIFY_TOKEN) {
+    const it = await apifyProfile('apify~instagram-profile-scraper', { usernames: [handle] });
+    if (it) {
+      const followers = firstNum(it, ['followersCount', 'followers', 'followerCount']);
+      const posts = firstNum(it, ['postsCount', 'mediaCount', 'igtvVideoCount']);
+      if (followers != null || posts != null) {
+        return { handle: handle, found: true, followers: followers, posts: posts, displayName: it.fullName || it.name || null, verified: !!it.verified, via: 'apify', _raw: it };
+      }
+    }
+  }
   const r = await fetchRaw('https://www.instagram.com/' + handle + '/', 200000);
   if (!r.ok) return { handle: handle, found: false };
   const og = r.text.match(/content=["']([^"']*?Followers[^"']*?)["']/i);
@@ -510,14 +545,28 @@ async function scrapeInstagram(handle) {
 }
 
 async function scrapeTiktok(handle) {
+  if (APIFY_TOKEN) {
+    const it = await apifyProfile('clockworks~tiktok-scraper', { profiles: [handle], resultsPerPage: 1, shouldDownloadVideos: false, shouldDownloadCovers: false, shouldDownloadSubtitles: false });
+    if (it) {
+      const meta = it.authorMeta || it.author || it;
+      const followers = firstNum(meta, ['fans', 'followerCount', 'followers']);
+      const videos = firstNum(meta, ['video', 'videoCount', 'videos']);
+      const likes = firstNum(meta, ['heart', 'heartCount', 'likes', 'diggCount']);
+      if (followers != null) {
+        return { handle: handle, found: true, followers: followers, videos: videos, likes: likes, avgLikes: (likes && videos) ? Math.round(likes / videos) : null, via: 'apify', _raw: it };
+      }
+    }
+  }
   const r = await fetchRaw('https://www.tiktok.com/@' + handle, 400000);
   if (!r.ok) return { handle: handle, found: false };
   const f = r.text.match(/"followerCount":(\d+)/);
   const v = r.text.match(/"videoCount":(\d+)/);
   const h = r.text.match(/"heartCount":(\d+)/);
-  if (!f && !v) return { handle: handle, found: false };
-  const followers = f ? +f[1] : null;
-  const videos = v ? +v[1] : null;
+  // require a real profile signal (followers + at least one video) so a challenge
+  // page or a wrong-guess handle doesn't return garbage like "14 followers, 0 videos"
+  if (!f || !v || +v[1] < 1) return { handle: handle, found: false };
+  const followers = +f[1];
+  const videos = +v[1];
   const likes = h ? +h[1] : null;
   return {
     handle: handle, found: true,
@@ -555,6 +604,11 @@ async function social(req, res) {
       resolvePlatform(scrapeInstagram, linkedIg, name),
       resolvePlatform(scrapeTiktok, linkedTt, name),
     ]);
+    // _raw is the full Apify item, kept only for field-mapping debug (?debug=1)
+    if (!(req.query && req.query.debug)) {
+      if (instagram) delete instagram._raw;
+      if (tiktok) delete tiktok._raw;
+    }
     return res.status(200).json({
       ok: true,
       social: {
