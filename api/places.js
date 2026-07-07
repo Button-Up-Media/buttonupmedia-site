@@ -55,6 +55,9 @@ module.exports = async (req, res) => {
     if (action === 'competitors') {
       return await competitors(req, res, key);
     }
+    if (action === 'social') {
+      return await social(req, res);
+    }
     return res.status(400).json({ ok: false, error: 'unknown_action' });
   } catch (err) {
     return res.status(502).json({ ok: false, error: 'places_failed', message: 'Place lookup failed.' });
@@ -425,6 +428,143 @@ async function fetchHtml(url) {
     return text.slice(0, 55000);
   } finally {
     clearTimeout(timer);
+  }
+}
+
+/* ============================================================================
+   SOCIAL AUDIT (best-effort, public data). Reads a restaurant's public
+   Instagram + TikTok follower/post counts. Everything degrades to
+   { found:false } on any block/timeout so it can never break the report.
+   ========================================================================== */
+const IPHONE_UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1';
+
+async function fetchRaw(url, cap) {
+  if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8000);
+  try {
+    const resp = await fetch(url, {
+      signal: controller.signal,
+      redirect: 'follow',
+      headers: { 'User-Agent': IPHONE_UA, 'Accept-Language': 'en-US,en;q=0.9' },
+    });
+    if (!resp.ok) return { ok: false, status: resp.status, text: '' };
+    const text = await resp.text();
+    return { ok: true, status: resp.status, text: text.slice(0, cap || 250000) };
+  } catch (e) {
+    return { ok: false, status: 0, text: '' };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+function socialNum(s) {
+  if (s == null) return null;
+  s = String(s).replace(/,/g, '').trim();
+  const m = s.match(/^([\d.]+)\s*([KMB])?$/i);
+  if (!m) return null;
+  const n = parseFloat(m[1]);
+  if (isNaN(n)) return null;
+  const mult = { k: 1e3, m: 1e6, b: 1e9 }[(m[2] || '').toLowerCase()] || 1;
+  return Math.round(n * mult);
+}
+
+function discoverHandles(html) {
+  const ig = new Set(), tt = new Set();
+  const IG_SKIP = new Set(['p', 'reel', 'reels', 'explore', 'accounts', 'stories', 'tv', 'about', 'developer', 'legal', 'directory', 'sharer', 'embed']);
+  let m;
+  const igRe = /instagram\.com\/([A-Za-z0-9_.]{2,30})/gi;
+  while ((m = igRe.exec(html))) {
+    const h = m[1].toLowerCase().replace(/\.$/, '');
+    if (!IG_SKIP.has(h) && !/\.(png|jpe?g|gif|css|js|svg)$/.test(h)) ig.add(h);
+  }
+  const ttRe = /tiktok\.com\/@([A-Za-z0-9_.]{2,30})/gi;
+  while ((m = ttRe.exec(html))) tt.add(m[1].toLowerCase().replace(/\.$/, ''));
+  return { ig: [...ig].slice(0, 3), tt: [...tt].slice(0, 3) };
+}
+
+function guessHandles(name) {
+  if (!name) return [];
+  const base = name.toLowerCase().replace(/['’.]/g, '').replace(/&/g, 'and');
+  const words = base.replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(Boolean);
+  if (!words.length) return [];
+  const out = new Set([words.join(''), words.join('_')]);
+  return [...out].filter((h) => h.length >= 3 && h.length <= 30).slice(0, 2);
+}
+
+async function scrapeInstagram(handle) {
+  const r = await fetchRaw('https://www.instagram.com/' + handle + '/', 200000);
+  if (!r.ok) return { handle: handle, found: false };
+  const og = r.text.match(/content=["']([^"']*?Followers[^"']*?)["']/i);
+  if (!og) return { handle: handle, found: false };
+  const s = og[1];
+  const f = s.match(/([\d,.]+\s*[KMB]?)\s*Followers/i);
+  const p = s.match(/([\d,.]+\s*[KMB]?)\s*Posts/i);
+  const nameM = s.match(/from\s+(.+?)\s*\(@/i);
+  return {
+    handle: handle, found: true,
+    followers: socialNum(f && f[1]), followersText: f ? f[1].trim() : null,
+    posts: socialNum(p && p[1]),
+    displayName: nameM ? nameM[1].trim() : null,
+  };
+}
+
+async function scrapeTiktok(handle) {
+  const r = await fetchRaw('https://www.tiktok.com/@' + handle, 400000);
+  if (!r.ok) return { handle: handle, found: false };
+  const f = r.text.match(/"followerCount":(\d+)/);
+  const v = r.text.match(/"videoCount":(\d+)/);
+  const h = r.text.match(/"heartCount":(\d+)/);
+  if (!f && !v) return { handle: handle, found: false };
+  const followers = f ? +f[1] : null;
+  const videos = v ? +v[1] : null;
+  const likes = h ? +h[1] : null;
+  return {
+    handle: handle, found: true,
+    followers: followers, videos: videos, likes: likes,
+    avgLikes: (likes && videos) ? Math.round(likes / videos) : null,
+  };
+}
+
+// resolve one platform: try the handle linked on their site, else guess+verify
+async function resolvePlatform(scrape, linked, name) {
+  if (linked) {
+    const hit = await scrape(linked);
+    if (hit.found) { hit.source = 'website'; return hit; }
+  }
+  for (const g of guessHandles(name)) {
+    if (g === linked) continue;
+    const hit = await scrape(g);
+    if (hit.found) { hit.source = 'guess'; hit.guessed = true; return hit; }
+  }
+  return { found: false, linkedOnSite: !!linked };
+}
+
+async function social(req, res) {
+  const website = ((req.query && req.query.website) || '').trim();
+  const name = ((req.query && req.query.name) || '').trim();
+  try {
+    let linkedIg = null, linkedTt = null;
+    if (website) {
+      const site = await fetchRaw(website, 250000);
+      const d = discoverHandles(site.text || '');
+      linkedIg = d.ig[0] || null;
+      linkedTt = d.tt[0] || null;
+    }
+    const [instagram, tiktok] = await Promise.all([
+      resolvePlatform(scrapeInstagram, linkedIg, name),
+      resolvePlatform(scrapeTiktok, linkedTt, name),
+    ]);
+    return res.status(200).json({
+      ok: true,
+      social: {
+        instagram: instagram,
+        tiktok: tiktok,
+        linkedOnSite: { instagram: !!linkedIg, tiktok: !!linkedTt },
+      },
+    });
+  } catch (e) {
+    return res.status(200).json({ ok: true, social: { instagram: { found: false }, tiktok: { found: false }, error: true } });
   }
 }
 
