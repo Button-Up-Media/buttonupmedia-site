@@ -1430,6 +1430,24 @@
       var form = document.getElementById("gr-form");
       var active = -1, current = [], seq = 0, placesOff = false, debounce, selected = null, brandOpt = null;
       function normName(n) { return String(n || "").toLowerCase().replace(/[^a-z0-9]/g, ""); }
+      // detect a local chain: 2+ nearby results sharing a leading brand word-prefix
+      // (e.g. "Sushi Maki Airport" + "Sushi Maki Dadeland" -> brand "Sushi Maki")
+      function brandStem(list) {
+        if (list.length < 2) return null;
+        var words = list.map(function (r) { return String(r.name || "").trim().split(/\s+/); });
+        for (var len = 3; len >= 1; len--) {
+          var groups = {};
+          words.forEach(function (w) { if (w.length >= len) { var k = w.slice(0, len).join(" ").toLowerCase(); (groups[k] = groups[k] || []).push(w); } });
+          var best = Object.keys(groups).filter(function (k) { return groups[k].length >= 2 && (len >= 2 || groups[k].length >= 3); })
+            .sort(function (a, b) { return groups[b].length - groups[a].length; })[0];
+          if (best) {
+            var idx = 0;
+            for (var i = 0; i < list.length; i++) { if (String(list[i].name || "").toLowerCase().indexOf(best) === 0) { idx = i; break; } }
+            return { name: words[idx].slice(0, len).join(" "), count: groups[best].length, placeId: list[idx].placeId };
+          }
+        }
+        return null;
+      }
       var userLat = null, userLng = null, geoAsked = false;
 
       // Bias suggestions to the searcher. On first focus we ask the browser for
@@ -1460,15 +1478,11 @@
         var q = input.value.trim();
         if (!list.length && (q.length < 2 || looksLikeUrl(q))) { ac.classList.remove("is-open"); ac.innerHTML = ""; return; }
         var html = "";
-        // multi-location brand: the same name appears 2+ times -> offer the whole brand
-        if (list.length >= 2) {
-          var counts = {};
-          list.forEach(function (r) { var k = normName(r.name); counts[k] = (counts[k] || 0) + 1; });
-          var bk = Object.keys(counts).filter(function (k) { return counts[k] >= 2; })[0];
-          if (bk) {
-            brandOpt = list.filter(function (r) { return normName(r.name) === bk; })[0];
-            html += '<div class="gr-ac-item gr-ac-brand" data-act="brand"><span class="gr-ac-name">' + esc(brandOpt.name) + ' &mdash; all locations</span><span class="gr-ac-addr">Grade the whole brand (' + counts[bk] + '+ nearby locations)</span></div>';
-          }
+        // multi-location brand: 2+ nearby spots sharing a brand prefix -> whole brand
+        var bs = brandStem(list);
+        if (bs) {
+          brandOpt = { name: bs.name, placeId: bs.placeId };
+          html += '<div class="gr-ac-item gr-ac-brand" data-act="brand"><span class="gr-ac-name">' + esc(bs.name) + ' &mdash; all locations</span><span class="gr-ac-addr">Grade the whole brand (' + bs.count + '+ nearby locations)</span></div>';
         }
         html += list.map(function (r, i) {
           return '<div class="gr-ac-item" role="option" data-act="pick" data-i="' + i + '"><span class="gr-ac-name">' + esc(r.name) + '</span><span class="gr-ac-addr">' + esc(r.addr) + '</span></div>';

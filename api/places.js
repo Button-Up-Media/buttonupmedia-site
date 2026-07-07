@@ -216,7 +216,9 @@ async function brand(req, res, key) {
       const d = await getJson(`${BASE}/details/json?${p.toString()}`);
       if (d.status === 'OK' && d.result) { anchor = d.result; loc = anchor.geometry && anchor.geometry.location; }
     }
-    const brandName = (anchor && anchor.name) || qName;
+    // prefer the brand stem the frontend passed (e.g. "Sushi Maki"), not the
+    // anchor's location-specific name ("Sushi Maki Airport").
+    const brandName = qName || (anchor && anchor.name) || '';
     const ts = new URLSearchParams({ query: brandName, key });
     if (loc) { ts.set('location', `${loc.lat},${loc.lng}`); ts.set('radius', '50000'); }
     const t = await getJson(`${BASE}/textsearch/json?${ts.toString()}`);
