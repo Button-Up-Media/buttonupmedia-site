@@ -203,6 +203,15 @@
     .sr-comp.--you { background: var(--gold-soft); border-radius: 12px; padding: 12px; margin-top: 6px; border: 1px solid rgba(181,126,30,0.2); }
     .sr-comp.--you .rk { color: var(--poor); }
 
+    /* social + presence scoreboard (you vs nearby competitors) */
+    .sb-row { display: grid; grid-template-columns: 1fr 74px 74px 56px; gap: 8px; align-items: center; padding: 12px 10px; border-top: 1px solid var(--line-soft); font-size: 0.9rem; }
+    .sb-row.sb-head { border-top: none; color: var(--text-soft); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; padding-bottom: 4px; }
+    .sb-name { font-weight: 600; color: var(--text-head); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .sb-col { text-align: right; color: var(--text-dim); }
+    .sb-col b { color: var(--text-head); font-weight: 800; }
+    .sb-row.sb-you { background: var(--gold-soft); border-radius: 12px; border: 1px solid rgba(181,126,30,0.22); margin: 4px 0; }
+    .sb-row.sb-you .sb-name { color: var(--gold); font-weight: 800; }
+
     /* pagespeed-style category gauges with mobile/desktop tabs */
     .sr-cat-tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--bg-1); margin: 18px 0 4px; }
     .sr-cat-tab { padding: 8px 20px; border: none; border-radius: 999px; background: none; font-family: var(--font-display); font-weight: 700; font-size: 0.88rem; color: var(--text-soft); cursor: pointer; transition: all .2s; }
@@ -377,6 +386,13 @@
             </div>
           </div>
 
+          <!-- social + presence scoreboard vs nearby same-cuisine competitors -->
+          <div class="sr-card" id="sr-scoreboard" style="display:none;">
+            <h3 id="sr-sb-h">How you stack up against nearby competitors</h3>
+            <p style="color:var(--text-dim);font-size:0.9rem;margin:8px 0 14px;">Your Instagram following, reviews and rating next to the top nearby spots in your category.</p>
+            <div id="sr-sb-body"></div>
+          </div>
+
           <!-- pagespeed-style categories -->
           <div class="sr-card" id="sr-tech-card">
             <h3>Your technical scores</h3>
@@ -518,6 +534,7 @@
         finishScan();
         renderReport(scan, placeInfo, res[0], res[1]);
         loadCompetitors();
+        loadScoreboard();
         wireGate();
       });
     }).catch(function (e) {
@@ -560,6 +577,24 @@
       return fetchJson("/api/places?action=social&platform=" + platform + "&handle=" + encodeURIComponent(handle) + "&website=" + encodeURIComponent(website || ""))
         .then(function (r) { return (r && r.ok && r.profile && r.profile.found) ? r.profile : null; })
         .catch(function () { return null; });
+    }
+    /* Find the best-matching Instagram for a website+name: discover candidates,
+       scrape the top few, keep the one whose bio links back to the site. maxGuess
+       is kept low for competitors so the scoreboard stays cheap. */
+    function bestIG(website, name, maxGuess) {
+      if (!website && !name) return Promise.resolve(null);
+      return fetchJson("/api/places?action=social&discover=1&website=" + encodeURIComponent(website || "") + "&name=" + encodeURIComponent(name || ""))
+        .then(function (d) {
+          if (!d || !d.ok || !d.discover) return null;
+          var ig = d.discover.instagram || {};
+          var cands = (ig.candidates || []).slice(0, ig.fromSite ? 1 : (maxGuess || 4));
+          if (!cands.length) return null;
+          return Promise.all(cands.map(function (h) { return scrapeOne("ig", h, website); })).then(function (profiles) {
+            profiles = profiles.filter(Boolean);
+            if (ig.fromSite) return profiles[0] || null;
+            return profiles.filter(function (p) { return p.linksToWebsite; })[0] || null;
+          });
+        }).catch(function () { return null; });
     }
 
     /* AI design review: hand the screenshot the scan captured to /api/places
@@ -1087,6 +1122,52 @@
         card.style.display = "";
         if (twocol) twocol.style.gridTemplateColumns = "";
       }).catch(hide);
+    }
+
+    /* ---- social scoreboard: your Instagram following, reviews and rating next
+       to the top nearby same-cuisine competitors. Loads after the report. ---- */
+    function fmtK(n) { if (n == null) return "—"; if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, "") + "M"; if (n >= 1e3) return (n / 1e3).toFixed(1).replace(/\.0$/, "") + "K"; return String(n); }
+    function loadScoreboard() {
+      if (!placeId) return;
+      getCompetitors().then(function (comps) {
+        if (!comps || !comps.length) return;
+        var top = comps.slice(0, 3);
+        return Promise.all(top.map(function (c) {
+          return fetchJson("/api/places?action=details&placeId=" + encodeURIComponent(c.placeId)).then(function (d) {
+            var pl = (d && d.place) || {};
+            var row = { name: c.name, rating: (pl.rating != null ? pl.rating : c.rating), reviews: (pl.reviews != null ? pl.reviews : c.reviews), photos: pl.photosCount, igFollowers: null };
+            if (!pl.website) return row;
+            return bestIG(pl.website, c.name, 2).then(function (ig) { if (ig) row.igFollowers = ig.followers; return row; });
+          }).catch(function () { return { name: c.name, rating: c.rating, reviews: c.reviews, igFollowers: null }; });
+        })).then(function (rows) {
+          rows = rows.filter(Boolean);
+          var youIg = socialInfo && socialInfo.instagram;
+          var you = { name: (placeInfo && placeInfo.name) || bizName, rating: (placeInfo && placeInfo.rating), reviews: (placeInfo && placeInfo.reviews), photos: (placeInfo && placeInfo.photosCount), igFollowers: youIg ? youIg.followers : null, you: true };
+          window.__compFollowers = rows.map(function (r) { return r.igFollowers; }).filter(function (n) { return n > 0; });
+          renderScoreboard(you, rows);
+        });
+      }).catch(function () {});
+    }
+    function renderScoreboard(you, comps) {
+      var body = document.getElementById("sr-sb-body"), card = document.getElementById("sr-scoreboard");
+      if (!body || !card) return;
+      var all = [you].concat(comps).sort(function (a, b) { return (b.igFollowers || -1) - (a.igFollowers || -1); });
+      var html = '<div class="sb-row sb-head"><span class="sb-name">Restaurant</span><span class="sb-col">Instagram</span><span class="sb-col">Reviews</span><span class="sb-col">Rating</span></div>';
+      html += all.map(function (r) {
+        return '<div class="sb-row' + (r.you ? ' sb-you' : '') + '">' +
+          '<span class="sb-name">' + esc(r.you ? "You" : r.name) + '</span>' +
+          '<span class="sb-col"><b>' + fmtK(r.igFollowers) + '</b></span>' +
+          '<span class="sb-col">' + (r.reviews != null ? r.reviews.toLocaleString() : "—") + '</span>' +
+          '<span class="sb-col">' + (r.rating != null ? r.rating.toFixed(1) + "★" : "—") + '</span></div>';
+      }).join("");
+      body.innerHTML = html;
+      // headline: the follower gap vs the strongest nearby account
+      var withIg = all.filter(function (r) { return r.igFollowers != null; });
+      var hEl = document.getElementById("sr-sb-h");
+      if (hEl && you.igFollowers != null && withIg.length > 1 && !withIg[0].you) {
+        hEl.innerHTML = 'On Instagram, <span class="gold">' + esc(withIg[0].name) + '</span> has ' + fmtK(withIg[0].igFollowers) + ' followers to your ' + fmtK(you.igFollowers);
+      }
+      card.style.display = "";
     }
 
     /* ---- technical category gauges (mobile / desktop tabs) ---- */
