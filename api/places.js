@@ -607,12 +607,13 @@ function guessHandles(name) {
   if (!words.length) return [];
   const generic = new Set(['restaurant', 'pizzeria', 'cafe', 'kitchen', 'grill', 'bar', 'and', 'the', 'co', 'inc', 'llc', 'italian', 'mexican', 'chinese', 'japanese', 'thai', 'american', 'of', 'a']);
   const sig = words.filter((w) => !generic.has(w));
-  // most restaurant handles are the first 1-2 meaningful words, sometimes + a suffix
+  // most restaurant handles are the first 1-2 meaningful words (+/- a suffix).
+  // Order most-specific first so the report finds the real one in the fewest scrapes.
   const bases = new Set();
-  if (sig[0]) bases.add(sig[0]);
   if (sig[0] && sig[1]) bases.add(sig[0] + sig[1]);
-  if (sig.length) bases.add(sig.slice(0, 3).join(''));
+  if (sig.length >= 2) bases.add(sig.slice(0, 3).join(''));
   bases.add(words.slice(0, 2).join(''));
+  if (sig[0]) bases.add(sig[0]);
   const out = new Set();
   for (const b of bases) {
     if (b.length < 3) continue;
@@ -632,14 +633,6 @@ function linksToWebsite(links, website) {
   if (!w) return false;
   const core = w.split('.')[0];
   return (links || []).some((u) => { const h = socialHost(u); return h && (h === w || (core.length > 4 && h.indexOf(core) !== -1)); });
-}
-// Find a handle via web search (Apify Google-search actor; reuses APIFY_TOKEN).
-async function searchHandles(query) {
-  if (!APIFY_TOKEN) return { ig: [], tt: [] };
-  const item = await apifyProfile('apify~google-search-scraper', { queries: query, resultsPerPage: 10, maxPagesPerQuery: 1, countryCode: 'us', saveHtml: false });
-  const results = (item && (item.organicResults || item.results)) || [];
-  const urls = results.map((r) => (r && (r.url || r.link)) || '').filter(Boolean);
-  return discoverHandles(urls.join('\n'));
 }
 
 async function scrapeInstagram(handle) {
