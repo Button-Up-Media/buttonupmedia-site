@@ -163,6 +163,10 @@
     .gr-ac-item:hover, .gr-ac-item.is-active { background: var(--bg-1); }
     .gr-ac-name { font-weight: 700; font-size: 0.96rem; color: var(--text-head); }
     .gr-ac-addr { font-size: 0.82rem; color: var(--text-soft); }
+    .gr-ac-brand { background: var(--gold-soft, rgba(181,126,30,0.1)); }
+    .gr-ac-brand .gr-ac-name { color: var(--gold, #B57E1E); }
+    .gr-ac-brand .gr-ac-name::before { content: "\1F3E2  "; }
+    .gr-ac-none .gr-ac-name { color: var(--text-dim); font-weight: 600; }
     .gr-hero-fine { margin-top: 16px; font-size: 0.8rem; color: var(--text-soft); display: inline-flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; }
     .gr-hero-fine span { display: inline-flex; align-items: center; gap: 6px; }
     .gr-hero-fine svg { width: 14px; height: 14px; color: var(--teal); }
@@ -1424,7 +1428,8 @@
       var input = document.getElementById("gr-input");
       var ac = document.getElementById("gr-ac");
       var form = document.getElementById("gr-form");
-      var active = -1, current = [], seq = 0, placesOff = false, debounce, selected = null;
+      var active = -1, current = [], seq = 0, placesOff = false, debounce, selected = null, brandOpt = null;
+      function normName(n) { return String(n || "").toLowerCase().replace(/[^a-z0-9]/g, ""); }
       var userLat = null, userLng = null, geoAsked = false;
 
       // Bias suggestions to the searcher. On first focus we ask the browser for
@@ -1451,15 +1456,41 @@
         window.open("website-grader-report?" + qs, "_blank");
       }
       function render(list) {
-        current = list; active = -1;
-        if (!list.length) { ac.classList.remove("is-open"); ac.innerHTML = ""; return; }
-        ac.innerHTML = list.map(function (r, i) {
-          return '<div class="gr-ac-item" role="option" data-i="' + i + '"><span class="gr-ac-name">' + esc(r.name) + '</span><span class="gr-ac-addr">' + esc(r.addr) + '</span></div>';
+        current = list; active = -1; brandOpt = null;
+        var q = input.value.trim();
+        if (!list.length && (q.length < 2 || looksLikeUrl(q))) { ac.classList.remove("is-open"); ac.innerHTML = ""; return; }
+        var html = "";
+        // multi-location brand: the same name appears 2+ times -> offer the whole brand
+        if (list.length >= 2) {
+          var counts = {};
+          list.forEach(function (r) { var k = normName(r.name); counts[k] = (counts[k] || 0) + 1; });
+          var bk = Object.keys(counts).filter(function (k) { return counts[k] >= 2; })[0];
+          if (bk) {
+            brandOpt = list.filter(function (r) { return normName(r.name) === bk; })[0];
+            html += '<div class="gr-ac-item gr-ac-brand" data-act="brand"><span class="gr-ac-name">' + esc(brandOpt.name) + ' &mdash; all locations</span><span class="gr-ac-addr">Grade the whole brand (' + counts[bk] + '+ nearby locations)</span></div>';
+          }
+        }
+        html += list.map(function (r, i) {
+          return '<div class="gr-ac-item" role="option" data-act="pick" data-i="' + i + '"><span class="gr-ac-name">' + esc(r.name) + '</span><span class="gr-ac-addr">' + esc(r.addr) + '</span></div>';
         }).join("");
+        html += '<div class="gr-ac-item gr-ac-none" data-act="none"><span class="gr-ac-name">I don\'t see my restaurant</span><span class="gr-ac-addr">Grade it by your website address instead</span></div>';
+        ac.innerHTML = html;
         ac.classList.add("is-open");
         [].forEach.call(ac.querySelectorAll(".gr-ac-item"), function (el) {
-          el.addEventListener("mousedown", function (e) { e.preventDefault(); choose(current[+el.dataset.i]); });
+          el.addEventListener("mousedown", function (e) { e.preventDefault(); actOn(el); });
         });
+      }
+      function actOn(el) {
+        var a = el.dataset.act;
+        if (a === "brand" && brandOpt) openReport({ placeId: brandOpt.placeId, name: brandOpt.name, brand: "1" });
+        else if (a === "none") urlMode();
+        else if (a === "pick") choose(current[+el.dataset.i]);
+      }
+      function urlMode() {
+        ac.classList.remove("is-open");
+        input.value = ""; selected = null;
+        input.placeholder = "Enter your website, e.g. yourrestaurant.com";
+        input.focus();
       }
       function fetchSuggest() {
         var q = input.value.trim();
@@ -1503,7 +1534,7 @@
         var items = ac.querySelectorAll(".gr-ac-item");
         if (e.key === "ArrowDown") { e.preventDefault(); active = Math.min(active + 1, items.length - 1); }
         else if (e.key === "ArrowUp") { e.preventDefault(); active = Math.max(active - 1, 0); }
-        else if (e.key === "Enter") { if (active > -1) { e.preventDefault(); choose(current[active]); } return; }
+        else if (e.key === "Enter") { if (active > -1 && items[active]) { e.preventDefault(); actOn(items[active]); } return; }
         else return;
         items.forEach(function (el, i) { el.classList.toggle("is-active", i === active); });
       });

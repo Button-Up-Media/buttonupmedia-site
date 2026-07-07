@@ -451,6 +451,7 @@
     var nameParam = (params.get("name") || "").trim();
     var urlParam = (params.get("url") || "").trim();
     var placeId = (params.get("placeId") || "").trim();
+    var brandMode = (params.get("brand") || "") === "1";
 
     var scanEl = document.getElementById("sr-scan");
     var reportEl = document.getElementById("sr-report");
@@ -1041,7 +1042,9 @@
 
     function resolvePlace() {
       if (!placeId) return Promise.resolve(null);
-      return fetchJson("/api/places?action=details&placeId=" + encodeURIComponent(placeId))
+      // brand mode aggregates the chain's Google presence across its locations
+      var act = brandMode ? ("action=brand&name=" + encodeURIComponent(nameParam) + "&placeId=") : "action=details&placeId=";
+      return fetchJson("/api/places?" + act + encodeURIComponent(placeId))
         .then(function (d) { return (d && d.ok && d.place) ? d.place : null; })
         .catch(function () { return null; });
     }
@@ -1064,7 +1067,9 @@
       var host = hostOf((place && place.website) || scan.url || urlParam);
 
       setText("sr-biz-name", name);
-      setText("sr-biz-url", host || "your website");
+      setText("sr-biz-url", (place && place.isBrand)
+        ? (place.locationsCount + " location" + (place.locationsCount === 1 ? "" : "s") + (host ? " · " + host : ""))
+        : (host || "your website"));
 
       setText("sr-grade", rep.grade);
       var gradeEl = document.getElementById("sr-grade");

@@ -55,6 +55,9 @@ module.exports = async (req, res) => {
     if (action === 'competitors') {
       return await competitors(req, res, key);
     }
+    if (action === 'brand') {
+      return await brand(req, res, key);
+    }
     if (action === 'social') {
       return await social(req, res);
     }
@@ -197,6 +200,64 @@ async function details(req, res, key) {
       sampleReviews: sampleReviews,
     },
   });
+}
+
+// Whole-brand mode for a local chain (e.g. Sushi Maki): website + social are
+// shared across locations, so we grade those once and AGGREGATE the Google
+// presence (review-weighted rating, total reviews, total photos) across the
+// same-named nearby locations found via Text Search.
+async function brand(req, res, key) {
+  const placeId = String((req.query && req.query.placeId) || '').trim();
+  const qName = String((req.query && req.query.name) || '').trim();
+  try {
+    let anchor = null, loc = null;
+    if (placeId) {
+      const p = new URLSearchParams({ place_id: placeId, fields: 'name,website,url,rating,user_ratings_total,geometry,formatted_phone_number,opening_hours,photos,reviews,price_level,types,reservable,dine_in,serves_dinner,takeout,delivery,formatted_address', key });
+      const d = await getJson(`${BASE}/details/json?${p.toString()}`);
+      if (d.status === 'OK' && d.result) { anchor = d.result; loc = anchor.geometry && anchor.geometry.location; }
+    }
+    const brandName = (anchor && anchor.name) || qName;
+    const ts = new URLSearchParams({ query: brandName, key });
+    if (loc) { ts.set('location', `${loc.lat},${loc.lng}`); ts.set('radius', '50000'); }
+    const t = await getJson(`${BASE}/textsearch/json?${ts.toString()}`);
+    const norm = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const bn = norm(brandName);
+    const stem = bn.slice(0, Math.max(4, Math.min(bn.length, 14)));
+    const matches = (t.results || []).filter((r) => { const n = norm(r.name); return (n === bn || n.indexOf(stem) === 0) && r.rating != null && r.user_ratings_total != null; });
+    let totalReviews = 0, weighted = 0, sumPhotos = 0;
+    const locations = matches.map((r) => {
+      totalReviews += r.user_ratings_total; weighted += r.rating * r.user_ratings_total; sumPhotos += Array.isArray(r.photos) ? r.photos.length : 0;
+      return { name: r.name, address: r.formatted_address || null, rating: r.rating, reviews: r.user_ratings_total };
+    });
+    const count = locations.length || 1;
+    const avgRating = totalReviews ? Math.round(weighted / totalReviews * 10) / 10 : (anchor && anchor.rating != null ? anchor.rating : null);
+    const sampleReviews = anchor && Array.isArray(anchor.reviews)
+      ? anchor.reviews.slice(0, 5).map((v) => ({ rating: v.rating != null ? v.rating : null, text: String(v.text || '').replace(/\s+/g, ' ').slice(0, 300) })) : [];
+    res.setHeader('Cache-Control', 'public, s-maxage=86400');
+    return res.status(200).json({
+      ok: true,
+      place: {
+        placeId, name: brandName, isBrand: true, locationsCount: count, locations: locations.slice(0, 6),
+        website: (anchor && anchor.website) || null, mapsUrl: (anchor && anchor.url) || null,
+        rating: avgRating, reviews: totalReviews || (anchor && anchor.user_ratings_total) || null,
+        address: count > 1 ? (count + ' locations') : ((anchor && anchor.formatted_address) || null),
+        priceLevel: anchor && anchor.price_level != null ? anchor.price_level : null,
+        location: loc || null, phone: (anchor && anchor.formatted_phone_number) || null,
+        hasHours: !!(anchor && anchor.opening_hours && Array.isArray(anchor.opening_hours.weekday_text) && anchor.opening_hours.weekday_text.length),
+        photosCount: sumPhotos || (anchor && Array.isArray(anchor.photos) ? anchor.photos.length : 0),
+        photoRefs: anchor && Array.isArray(anchor.photos) ? anchor.photos.slice(0, 3).map((p) => p.photo_reference).filter(Boolean) : [],
+        types: anchor && Array.isArray(anchor.types) ? anchor.types : [],
+        reservable: anchor && (anchor.reservable === true || anchor.reservable === false) ? anchor.reservable : null,
+        dineIn: anchor && (anchor.dine_in === true || anchor.dine_in === false) ? anchor.dine_in : null,
+        servesDinner: anchor && (anchor.serves_dinner === true || anchor.serves_dinner === false) ? anchor.serves_dinner : null,
+        takeout: anchor && (anchor.takeout === true || anchor.takeout === false) ? anchor.takeout : null,
+        delivery: anchor && (anchor.delivery === true || anchor.delivery === false) ? anchor.delivery : null,
+        editorialSummary: null, sampleReviews: sampleReviews,
+      },
+    });
+  } catch (e) {
+    return res.status(502).json({ ok: false, error: 'brand_failed' });
+  }
 }
 
 async function competitors(req, res, key) {
