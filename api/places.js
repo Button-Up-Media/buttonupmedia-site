@@ -287,6 +287,9 @@ async function uxReview(req, res) {
   const name = String(body.name || '').slice(0, 120) || 'this restaurant';
   const website = String(body.website || '').slice(0, 200);
   const url = String(body.url || website || '').slice(0, 300);
+  const reviews = Array.isArray(body.reviews)
+    ? body.reviews.slice(0, 5).map((r) => ({ rating: r && r.rating, text: uxStr(r && r.text, 260) })).filter((r) => r.text)
+    : [];
   const model = process.env.UX_MODEL || 'claude-sonnet-4-6';
 
   // Read the page HTML too, so the AI can grade content/SEO checks (menu, hours,
@@ -305,12 +308,12 @@ async function uxReview(req, res) {
       },
       body: JSON.stringify({
         model,
-        max_tokens: 1600,
+        max_tokens: 1900,
         messages: [{
           role: 'user',
           content: [
             { type: 'image', source: { type: 'base64', media_type: img.mediaType, data: img.data } },
-            { type: 'text', text: uxPrompt(name, website, lang, html) },
+            { type: 'text', text: uxPrompt(name, website, lang, html, reviews) },
           ],
         }],
       }),
@@ -335,8 +338,15 @@ async function uxReview(req, res) {
     if (parsed.checks && typeof parsed.checks === 'object') {
       Object.keys(parsed.checks).forEach((k) => { checks[k] = parsed.checks[k] === true; });
     }
+    const photoScore = (typeof parsed.photoScore === 'number') ? uxClamp(Math.round(parsed.photoScore), 0, 100) : null;
+    const sentiment = ['positive', 'mixed', 'negative'].indexOf(String(parsed.reviewSentiment || '').toLowerCase()) >= 0
+      ? String(parsed.reviewSentiment).toLowerCase() : null;
     const ux = {
       score,
+      photoScore: photoScore,
+      reviewSentiment: reviews.length ? sentiment : null,
+      reviewNote: reviews.length ? uxStr(parsed.reviewNote, 200) : null,
+      sitLike: (parsed.sitDown === true || parsed.sitDown === false) ? parsed.sitDown : null,
       rating: uxRating(score, null, lang),
       summary: uxStr(parsed.summary, 240),
       findings: Array.isArray(parsed.findings)
@@ -353,7 +363,7 @@ async function uxReview(req, res) {
   }
 }
 
-function uxPrompt(name, website, lang, html) {
+function uxPrompt(name, website, lang, html, reviews) {
   const langLine = lang === 'es'
     ? 'Write the summary and findings strings in Latin American Spanish that a restaurant owner who is NOT a marketer understands. Check ids stay in English. No jargon, no em-dashes.'
     : 'Write the summary and findings strings in plain English a restaurant owner who is NOT a marketer understands. No jargon, no em-dashes.';
@@ -391,15 +401,21 @@ function uxPrompt(name, website, lang, html) {
     '',
     'Business name: ' + name + (website ? '\nWebsite: ' + website : ''),
     '',
-    'You are given the page SCREENSHOT (a mobile view) and its HTML below. Do two things:',
+    'You are given the page SCREENSHOT (a mobile view) and its HTML below. Do these things:',
     '1) Give a strict designScore 0-100 for the overall look and customer experience (real food photos, modern non-template design, readable, strong hero, clean, branding). Anchor: a plain template with no real food photos scores about 45-60; reserve 85+ for genuinely professional, appetizing sites.',
-    '2) Grade every check below as true (pass) or false (fail). Use the SCREENSHOT for [see] checks and the HTML for [html] checks. When unsure or the evidence is missing, mark it false.',
+    '2) Give a strict photoScore 0-100 rating ONLY the food photography: how appetizing and high quality the food looks (great light, fresh, crave-able, well composed). A technically sharp photo of unappetizing or sloppy food still scores LOW. No real food photos = under 25. Reserve 85+ for genuinely mouth-watering, professional food photography.',
+    '3) sitDown: true if this looks like a sit-down / dine-in restaurant where reservations make sense; false if it is fast-casual, counter-service, takeout, a cafe, bakery, food truck or quick bite.',
+    (reviews && reviews.length)
+      ? '4) reviewSentiment: read the recent customer reviews below and answer "positive", "mixed" or "negative" based on RECENT complaints (cold food, slow or rude service, cleanliness, wrong orders). If negative or mixed, put the single main recurring complaint in reviewNote in plain owner language; otherwise leave reviewNote empty.'
+      : '4) reviewSentiment: return "positive" and an empty reviewNote (no reviews were provided).',
+    '5) Grade every check below as true (pass) or false (fail). Use the SCREENSHOT for [see] checks and the HTML for [html] checks. When unsure or the evidence is missing, mark it false.',
     '',
     'CHECKS (return every id in "checks"):',
     CHECKS.join('\n'),
+    (reviews && reviews.length) ? ('\nRECENT REVIEWS:\n' + reviews.map((r) => '- ' + (r.rating != null ? r.rating + ' stars: ' : '') + r.text).join('\n')) : '',
     '',
     'Respond with ONLY this JSON and nothing else:',
-    '{"designScore": <int 0-100>, "summary": "<one blunt sentence for the owner>", "findings": [{"title":"<short failed item, no jargon>","impact":"<one sentence: how it loses customers>"}], "checks": {"<id>": <true|false>, ... every id above ...}}',
+    '{"designScore": <int 0-100>, "photoScore": <int 0-100>, "sitDown": <true|false>, "reviewSentiment": "<positive|mixed|negative>", "reviewNote": "<main recent complaint, or empty>", "summary": "<one blunt sentence for the owner>", "findings": [{"title":"<short failed item, no jargon>","impact":"<one sentence: how it loses customers>"}], "checks": {"<id>": <true|false>, ... every id above ...}}',
     'findings: the 2-4 worst FAILED checks, worst first, in plain owner language.',
     langLine,
     '',
