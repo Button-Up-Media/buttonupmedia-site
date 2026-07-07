@@ -445,7 +445,7 @@ async function apifyProfile(actor, input) {
   if (!APIFY_TOKEN) return null;
   const url = 'https://api.apify.com/v2/acts/' + actor + '/run-sync-get-dataset-items?token=' + encodeURIComponent(APIFY_TOKEN) + '&maxItems=1';
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 28000);
+  const timer = setTimeout(() => controller.abort(), 50000);
   try {
     const resp = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input), signal: controller.signal });
     if (!resp.ok) return null;
@@ -575,50 +575,48 @@ async function scrapeTiktok(handle) {
   };
 }
 
-// resolve one platform: try the handle linked on their site, else guess+verify
-async function resolvePlatform(scrape, linked, name) {
-  if (linked) {
-    const hit = await scrape(linked);
-    if (hit.found) { hit.source = 'website'; return hit; }
-  }
-  for (const g of guessHandles(name)) {
-    if (g === linked) continue;
-    const hit = await scrape(g);
-    if (hit.found) { hit.source = 'guess'; hit.guessed = true; return hit; }
-  }
-  return { found: false, linkedOnSite: !!linked };
-}
-
+/* The social action has two modes so each request is at most ONE Apify run
+   (Apify runs are slow; batching IG+TikTok+guesses into one call blew the
+   function timeout). The report page orchestrates them:
+     1) ?action=social&discover=1&website=&name=  -> fast, no scraping: returns
+        the handle linked on their site + guess candidates from the name.
+     2) ?action=social&platform=ig|tt&handle=X     -> one profile's real stats.
+   So the frontend discovers, confirms a guessed handle with the user, then
+   fires the per-profile scrapes (restaurant + competitors) in parallel. */
 async function social(req, res) {
-  const website = ((req.query && req.query.website) || '').trim();
-  const name = ((req.query && req.query.name) || '').trim();
+  const q = req.query || {};
   try {
-    let linkedIg = null, linkedTt = null;
+    // ---- mode 2: scrape a single profile (the building block) ----
+    const platform = (q.platform || '').toLowerCase();
+    const handle = (q.handle || '').trim().replace(/^@/, '');
+    if (platform && handle) {
+      if (!/^[A-Za-z0-9_.]{2,30}$/.test(handle)) return res.status(400).json({ ok: false, error: 'bad_handle' });
+      let profile;
+      if (platform === 'ig' || platform === 'instagram') profile = await scrapeInstagram(handle);
+      else if (platform === 'tt' || platform === 'tiktok') profile = await scrapeTiktok(handle);
+      else return res.status(400).json({ ok: false, error: 'bad_platform' });
+      if (!q.debug && profile) delete profile._raw;
+      return res.status(200).json({ ok: true, platform: platform, profile: profile });
+    }
+
+    // ---- mode 1: discovery (fast, no scraping) ----
+    const website = (q.website || '').trim();
+    const name = (q.name || '').trim();
+    let ig = [], tt = [];
     if (website) {
       const site = await fetchRaw(website, 250000);
       const d = discoverHandles(site.text || '');
-      linkedIg = d.ig[0] || null;
-      linkedTt = d.tt[0] || null;
-    }
-    const [instagram, tiktok] = await Promise.all([
-      resolvePlatform(scrapeInstagram, linkedIg, name),
-      resolvePlatform(scrapeTiktok, linkedTt, name),
-    ]);
-    // _raw is the full Apify item, kept only for field-mapping debug (?debug=1)
-    if (!(req.query && req.query.debug)) {
-      if (instagram) delete instagram._raw;
-      if (tiktok) delete tiktok._raw;
+      ig = d.ig; tt = d.tt;
     }
     return res.status(200).json({
       ok: true,
-      social: {
-        instagram: instagram,
-        tiktok: tiktok,
-        linkedOnSite: { instagram: !!linkedIg, tiktok: !!linkedTt },
+      discover: {
+        instagram: { linked: ig[0] || null, guesses: ig.length ? [] : guessHandles(name) },
+        tiktok: { linked: tt[0] || null, guesses: tt.length ? [] : guessHandles(name) },
       },
     });
   } catch (e) {
-    return res.status(200).json({ ok: true, social: { instagram: { found: false }, tiktok: { found: false }, error: true } });
+    return res.status(200).json({ ok: true, error: true });
   }
 }
 

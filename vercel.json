@@ -838,7 +838,7 @@
     },
     "api/places.js": {
       "memory": 256,
-      "maxDuration": 30
+      "maxDuration": 60
     },
     "api/sms/**/*.js": {
       "memory": 256,
