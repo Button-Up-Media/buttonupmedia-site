@@ -385,15 +385,19 @@
             <div id="sr-fulllist"></div>
           </div>
 
-          <!-- final CTA -->
+          <!-- final CTA (tailored to the single worst thing) -->
           <div class="sr-final">
             <div>
-              <h3>Want our team to fix all of this for you?</h3>
-              <p>Book a free consultation with Juan. He will walk you through your report line by line and show you exactly what a Button Up site would change.</p>
+              <div class="sr-final-host">
+                <img src="media/author-juan.webp" alt="Juan" />
+                <div><div class="lab">Your free consult is with</div><div class="nm">Juan, Button Up Media</div></div>
+              </div>
+              <h3 id="sr-final-h">Want our team to fix this for you?</h3>
+              <p id="sr-final-p">Book a free consultation. Juan will walk you through your report and show you exactly what to fix first.</p>
             </div>
             <a class="book" href="/website-offer" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><path d="M8 2v4M16 2v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2"/></svg>
-              Fix all of this
+              Book my free call
             </a>
           </div>
           </div><!-- /sr-blurzone -->
@@ -417,6 +421,7 @@
     var bizName = nameParam || "Your restaurant";
     var COLORS = { good: "#1E7E54", fair: "#C9820E", poor: "#CF4A3C", dim: "#9a8f7d" };
     var lastScan = null, placeInfo = null, animDone = false, lastUx = null, lastReport = null;
+    var socialPromise = null, socialInfo = null;
     var compPromise = null, findQueue = [], findTimer = null;
 
     setText("sr-scan-name", bizName);
@@ -482,6 +487,9 @@
     resolvePlace().then(function (place) {
       placeInfo = place;
       startFindings(place);
+      // Kick off the social audit now, in parallel with the (slow) PageSpeed scan,
+      // so it is ready by the time we render instead of adding to the wait.
+      socialPromise = loadSocial(place, urlParam);
       var target = urlParam || (place && place.website) || "";
       if (!target) {
         // No website to grade. If we still resolved the Google listing, show a
@@ -495,10 +503,10 @@
       if (!scan) return;
       lastScan = scan;
       setProgress("Reviewing your design…");
-      return reviewUx(scan).then(function (ux) {
-        lastUx = ux;
+      return Promise.all([reviewUx(scan), socialPromise]).then(function (res) {
+        lastUx = res[0]; socialInfo = res[1];
         finishScan();
-        renderReport(scan, placeInfo, ux);
+        renderReport(scan, placeInfo, res[0], res[1]);
         loadCompetitors();
         wireGate();
       });
@@ -507,18 +515,59 @@
       renderError(e || {});
     });
 
+    /* ---- social audit: discover the handle (site link, else name guesses),
+       scrape the top few, and confirm the right one by its bio linking back to
+       the website. Returns { instagram, tiktok } profiles (or nulls). ---- */
+    function loadSocial(place, urlP) {
+      var website = (place && place.website) || urlP || "";
+      var name = (place && place.name) || bizName;
+      if (!website && !name) return Promise.resolve(null);
+      return fetchJson("/api/places?action=social&discover=1&website=" + encodeURIComponent(website) + "&name=" + encodeURIComponent(name))
+        .then(function (d) {
+          if (!d || !d.ok || !d.discover) return null;
+          var ig = d.discover.instagram || {}, tt = d.discover.tiktok || {};
+          var igCands = (ig.candidates || []).slice(0, ig.fromSite ? 1 : 4);
+          var ttHandle = tt.fromSite ? (tt.candidates || [])[0] : null;
+          var jobs = igCands.map(function (h) { return scrapeOne("ig", h, website); });
+          if (ttHandle) jobs.push(scrapeOne("tt", ttHandle, website).then(function (p) { return { tt: p }; }));
+          return Promise.all(jobs).then(function (out) {
+            var tiktok = null, igProfiles = [];
+            out.forEach(function (o) { if (o && o.tt) tiktok = o.tt; else if (o) igProfiles.push(o); });
+            // pick the IG account: the site-linked one, else the one that links back
+            var instagram = null;
+            if (ig.fromSite) instagram = igProfiles[0] || null;
+            if (!instagram) instagram = igProfiles.filter(function (p) { return p.linksToWebsite; })[0] || null;
+            // confident only if from the site or it links back; otherwise leave it
+            // unknown (a guess we can't confirm should not be scored or pitched)
+            var confident = !!instagram;
+            var maybe = (!instagram && igProfiles.length === 1) ? igProfiles[0] : null;
+            return { instagram: instagram, tiktok: tiktok, confident: confident, maybe: maybe, fromSite: !!ig.fromSite };
+          });
+        })
+        .catch(function () { return null; });
+    }
+    function scrapeOne(platform, handle, website) {
+      return fetchJson("/api/places?action=social&platform=" + platform + "&handle=" + encodeURIComponent(handle) + "&website=" + encodeURIComponent(website || ""))
+        .then(function (r) { return (r && r.ok && r.profile && r.profile.found) ? r.profile : null; })
+        .catch(function () { return null; });
+    }
+
     /* AI design review: hand the screenshot the scan captured to /api/places
        (POST) and get back a strict design/experience score + plain-language
        findings. Degrades to null (PageSpeed-only report) on any failure. */
     function reviewUx(scan) {
       if (!scan || !scan.screenshot) return Promise.resolve(null);
       var ctrl = ("AbortController" in window) ? new AbortController() : null;
-      var to = setTimeout(function () { if (ctrl) ctrl.abort(); }, 22000);
+      var to = setTimeout(function () { if (ctrl) ctrl.abort(); }, 45000);
       var website = (placeInfo && placeInfo.website) || urlParam || (scan && scan.url) || "";
       var url = (scan && scan.url) || website;
       return fetch("/api/places", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ screenshot: scan.screenshot, name: bizName, website: website, url: url, lang: "en" }),
+        body: JSON.stringify({
+          screenshot: scan.screenshot, name: bizName, website: website, url: url, lang: "en",
+          reviews: (placeInfo && placeInfo.sampleReviews) || [],
+          photoRefs: (placeInfo && placeInfo.photoRefs) || []
+        }),
         signal: ctrl ? ctrl.signal : undefined
       }).then(function (r) { return r.json(); })
         .then(function (d) { clearTimeout(to); return (d && d.ok && d.ux) ? d.ux : null; })
@@ -654,33 +703,143 @@
     /* Build the scored report from the 49 checks. The look-and-design section
        gates the overall grade, so a fast site that looks like a cheap template
        still cannot score "Excellent". Sub-scores add up to the overall. */
-    function buildCard(scan, place, ux) {
-      var ev = evalChecks(scan, place, ux);
-      var totW = 0;
-      var secInfo = RUBRIC.map(function (sec) {
-        var sw = 0, sp = 0;
-        sec.checks.forEach(function (c) { if (ev[c.id] === null || ev[c.id] === undefined) return; sw += c.w; if (ev[c.id]) sp += c.w; });
-        totW += sw;
-        return { key: sec.key, sw: sw, pct: sw ? Math.round(sp / sw * 100) : 0 };
-      });
-      var subs = secInfo.map(function (si) {
-        var max = totW ? Math.round(si.sw / totW * 100) : 20;
-        return mkSub(si.key, SECT_LABELS[si.key], si.pct, max);
-      });
-      var overall = subs.reduce(function (a, x) { return a + x.points; }, 0);
-      var appear = 0; secInfo.forEach(function (si) { if (si.key === "appearance") appear = si.pct; });
-      if (appear < 50) overall = Math.min(overall, 59);
-      else if (appear < 70) overall = Math.min(overall, 74);
-      overall = Math.max(0, Math.min(100, overall));
-      var g = gradeFor(overall);
+    /* ===== whole-presence scoring model (photos-heavy, gated, tailored pitch) —
+       the calibrated engines, ported straight from the validated prototypes. ===== */
+    var CAT_ORDER = ['photos', 'google', 'mobile', 'ordering', 'social', 'findability'];
+    var CAT_LABELS = { photos: 'Photos & visual appeal', google: 'Google presence & reviews', mobile: 'Mobile experience', ordering: 'Ordering & booking', social: 'Social media', findability: 'Getting found (SEO)' };
+    var CAT_WEIGHTS = { photos: 22, google: 20, mobile: 18, ordering: 14, social: 12, findability: 14 };
+    function clampN(n, a, b) { return Math.max(a, Math.min(b, n)); }
+    function daysSinceMs(ms) { return ms == null ? null : Math.round((Date.now() - ms) / 86400000); }
+    function medianN(a) { if (!a.length) return null; var s = a.slice().sort(function (x, y) { return x - y; }); var m = Math.floor(s.length / 2); return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; }
+    function hostOfLink(u) { try { return new URL(/^https?:/.test(u) ? u : 'https://' + u).hostname.replace(/^www\./, '').toLowerCase(); } catch (e) { return ''; } }
+
+    function scoreSocialIG(ig, ctx) {
+      if (!ig || !ig.found) return null;
+      ctx = ctx || {};
+      var compMed = medianN((ctx.competitorFollowers || []).filter(function (n) { return n > 0; }));
+      var d = daysSinceMs(ig.latestPostAt);
+      var recent = d == null ? 9 : d <= 7 ? 30 : d <= 14 ? 25 : d <= 30 ? 17 : d <= 60 ? 9 : d <= 90 ? 4 : 0;
+      var content = compMed ? (ig.followers >= compMed ? 14 : ig.followers >= compMed * 0.5 ? 10 : ig.followers >= compMed * 0.25 ? 6 : 3)
+        : (ig.followers >= 5000 ? 14 : ig.followers >= 2000 ? 11 : ig.followers >= 1000 ? 8 : ig.followers >= 300 ? 5 : 2);
+      if ((ig.posts || 0) > 200 && ig.followers < 500) content -= 6;
+      else if (ig.followers / Math.max(ig.posts || 1, 1) > 30) content += 6; else content += 3;
+      content = clampN(content, 0, 20);
+      var B = ig.bio || '', L = ig.links || [], bio = 0;
+      bio += /📍|\bmiami|kendall|coral gables|brickell|doral|wynwood|fl\b|florida|ave|st\b|blvd|\d{3,}/i.test(B) ? 5 : 0;
+      bio += /\b(open|hours|am\b|pm\b|mon|tue|wed|thu|fri|sat|sun|daily|menu|order)\b/i.test(B) ? 5 : 0;
+      bio += L.some(function (u) { return /ubereats|doordash|toast|order|menu|opentable|resy|grubhub|appfront|chownow|linktr\.ee|linkin\.bio|beacons/i.test(u); }) ? 5 : 0;
+      bio += (ig.highlights || 0) >= 3 ? 5 : 0;
+      var cons = 0, w = ctx.website ? hostOfLink(ctx.website) : '';
+      var linksSite = w && L.some(function (u) { var h = hostOfLink(u), core = w.split('.')[0]; return h === w || (core.length > 4 && h.indexOf(core) !== -1); });
+      cons += ctx.website ? (linksSite ? 8 : 0) : 4;
+      var cityMatch = ctx.city ? new RegExp((ctx.city.split(',')[0] || '').trim().replace(/[^a-z0-9 ]/gi, '') || 'zzzz', 'i').test(B) : null;
+      cons += cityMatch === true ? 7 : cityMatch === null ? 4 : 0;
+      cons = clampN(cons, 0, 15);
+      var legit = 8 + (ig.isBusiness ? 4 : 0) + (ig.verified ? 3 : 0);
+      return clampN(Math.round(recent + content + bio + cons + legit), 0, 100);
+    }
+    function socialFindingsOf(ig) {
+      var out = []; if (!ig) return out;
+      var d = daysSinceMs(ig.latestPostAt);
+      if (d != null && d > 60) out.push({ pt: 'Your Instagram has gone quiet', im: 'Your last post was about ' + d + ' days ago. A customer who checks your page sees a ghost town and wonders if you are even open.' });
+      if ((ig.posts || 0) > 150 && ig.followers < 500) out.push({ pt: "You've posted " + ig.posts + ' times but only have ' + (ig.followers || 0) + ' followers', im: 'The content is not pulling people in. The right strategy turns those posts into a real local following.' });
+      else if (ig.followers != null && ig.followers < 300) out.push({ pt: 'Barely anyone follows you on Instagram', im: 'With ' + ig.followers + ' followers you are nearly invisible where locals discover restaurants.' });
+      return out.slice(0, 2);
+    }
+    function computeCategories(scan, place, ux, ev, socialScore) {
+      var m = (scan && scan.mobile) || {}, met = m.metrics || {}, cats = m.categories || {};
+      function metv(k) { return met[k] && typeof met[k].value === 'number' ? met[k].value : null; }
+      function chk(id) { return ev[id] === true; }
+      var lcp = metv('lcp'), perf = cats.performance;
+      var photos = (ux && ux.photoScore != null) ? ux.photoScore
+        : ((chk('real-food-photos') ? 40 : 0) + (chk('appetizing-photo-quality') ? 30 : 0) + (chk('photos-are-your-own-food') ? 30 : 0));
+      if ((place && place.photosCount || 0) < 5) photos = Math.round(photos * 0.9);
+      var google = null;
+      if (place) {
+        var g = 0, rt = place.rating, rv = place.reviews;
+        g += rt != null ? (rt >= 4.5 ? 30 : rt >= 4.2 ? 24 : rt >= 4.0 ? 18 : rt >= 3.7 ? 10 : 4) : 10;
+        g += rv != null ? (rv >= 500 ? 25 : rv >= 200 ? 20 : rv >= 100 ? 15 : rv >= 50 ? 10 : rv >= 25 ? 6 : 2) : 5;
+        g += place.hasHours ? 12 : 0;
+        g += (place.photosCount || 0) >= 10 ? 13 : (place.photosCount || 0) >= 5 ? 8 : (place.photosCount || 0) >= 1 ? 4 : 0;
+        g += place.phone ? 5 : 0;
+        if (ux && ux.reviewSentiment === 'negative') g -= 15; else if (ux && ux.reviewSentiment === 'mixed') g -= 7; else if (ux && ux.reviewSentiment === 'positive') g += 3;
+        g += place.website ? 12 : 0;
+        google = clampN(Math.round(g), 0, 100);
+      }
+      var mobile = null;
+      if (lcp != null || perf != null) {
+        var mo = 0;
+        mo += lcp != null ? (lcp <= 2500 ? 45 : lcp <= 4000 ? 28 : lcp <= 6000 ? 12 : 4) : (perf >= 50 ? 30 : 15);
+        mo += perf != null ? (perf >= 90 ? 30 : perf >= 70 ? 24 : perf >= 50 ? 16 : perf >= 30 ? 8 : 3) : 15;
+        mo += chk('mobile-layout-looks-right') ? 25 : 0;
+        mobile = clampN(Math.round(mo), 0, 100);
+      }
+      var ordering = 0, oMax = 0; function ao(c, p) { oMax += p; if (c) ordering += p; }
+      ao(chk('menu-and-prices-visible'), 30); ao(chk('order-or-reserve-button'), 25); ao(chk('order-on-own-site'), 20); ao(chk('phone-number-visible'), 10);
+      if (place && place.reservable === true) { oMax += 15; if (chk('order-or-reserve-button')) ordering += 15; }
+      ordering = oMax ? clampN(Math.round(ordering / oMax * 100), 0, 100) : null;
+      var find = 0, fMax = 0; function af(c, p) { fMax += p; if (c) find += p; }
+      af(chk('own-domain'), 18); af(chk('headline-food-town'), 16); af(chk('h1-city'), 14); af(chk('meta-description'), 12); af(chk('title-matches-listing'), 10); af(chk('alt-text'), 8); af(chk('og-tags'), 8); af(cats.seo != null && cats.seo >= 90, 14);
+      var findability = fMax ? clampN(Math.round(find / fMax * 100), 0, 100) : null;
+      return {
+        photos: photos, google: google, mobile: mobile, ordering: ordering, social: socialScore, findability: findability,
+        mobileLcpMs: lcp, designScore: ux && ux.score,
+        hasFoodPhotos: ux ? (chk('real-food-photos') || (ux.photoScore != null && ux.photoScore >= 35)) : null,
+        hasOrderOrMenu: chk('menu-and-prices-visible') || chk('order-or-reserve-button'),
+        rating: place && place.rating, reviews: place && place.reviews, hasWebsite: !!(scan && scan.url)
+      };
+    }
+    function overallEngine(cat) {
+      var ws = 0, ss = 0;
+      CAT_ORDER.forEach(function (k) { if (cat[k] != null) { ws += CAT_WEIGHTS[k]; ss += CAT_WEIGHTS[k] * cat[k]; } });
+      var s = ws ? ss / ws : 0, gates = [];
+      if (cat.mobileLcpMs != null && cat.mobileLcpMs > 4000) { s = Math.min(s, 74); gates.push('slow on mobile'); }
+      else if (cat.mobileLcpMs != null && cat.mobileLcpMs > 2500) { s = Math.min(s, 84); gates.push('a bit slow on mobile'); }
+      if (cat.hasFoodPhotos === false) { s = Math.min(s, 60); gates.push('no real food photos'); }
+      else if (cat.photos != null && cat.photos < 40) { s = Math.min(s, 68); gates.push('weak, unappetizing photos'); }
+      if (cat.designScore != null && cat.designScore < 40) { s = Math.min(s, 55); gates.push('the site looks poor'); }
+      else if (cat.designScore != null && cat.designScore < 50) { s = Math.min(s, 64); gates.push('the site is unappealing'); }
+      if (cat.hasOrderOrMenu === false) { s = Math.min(s, 70); gates.push('no clear menu or order path'); }
+      if (cat.rating != null && cat.rating < 4.0) { s = Math.min(s, 72); gates.push('Google rating under 4.0'); }
+      if (cat.reviews != null && cat.reviews < 25) { s = Math.min(s, 75); gates.push('under 25 reviews'); }
+      return { score: clampN(Math.round(s), 0, 100), gates: gates };
+    }
+    function pickPitch(cat) {
+      var siteQ = Math.round(((cat.designScore || 0) * 0.5) + ((cat.photos || 0) * 0.5));
+      var p = [], verySlow = cat.mobileLcpMs != null && cat.mobileLcpMs > 4000, slightlySlow = cat.mobileLcpMs != null && cat.mobileLcpMs > 2500 && cat.mobileLcpMs <= 4000;
+      if (!cat.hasWebsite) p.push({ svc: 'website', v: 100, why: "you don't have a real website to send hungry customers to" });
+      else if (siteQ < 55) p.push({ svc: 'website', v: 100 - siteQ, why: "your website isn't doing your food justice" });
+      else if (verySlow) p.push({ svc: 'website', v: 60, why: "your site is too slow on a phone, where most people find you" });
+      if (cat.hasWebsite && siteQ >= 55 && ((cat.findability != null && cat.findability < 62) || slightlySlow || (cat.google != null && cat.google < 55)))
+        p.push({ svc: 'seo', v: Math.max(62 - (cat.findability != null ? cat.findability : 60), slightlySlow ? 40 : 0, (cat.google != null && cat.google < 55) ? 35 : 0) + 8, why: "your site looks good but people can't find you on Google" });
+      if (cat.social != null && cat.social < 55) p.push({ svc: 'social', v: 72 - cat.social, why: "your social media isn't pulling people in" });
+      var revBad = (cat.rating != null && cat.rating < 4.0) || (cat.reviews != null && cat.reviews < 25), lowEyes = (cat.reviews != null && cat.reviews < 60) || (cat.social != null && cat.social < 38);
+      if (revBad) p.push({ svc: 'ads', v: 62, why: "not enough people are walking through the door yet" });
+      else if (lowEyes) p.push({ svc: 'ads', v: 44, why: "you're just not getting enough eyes right now" });
+      if (!p.length) return { svc: null, why: "you're in genuinely great shape" };
+      p.sort(function (a, b) { return b.v - a.v; });
+      return p[0];
+    }
+
+    function buildCard(scan, place, ux, social) {
+      var ev = evalChecks(scan, place, ux);   // keep the 49-check detail for the gated checklist
+      var igProfile = social && social.instagram;
+      var socialScore = igProfile ? scoreSocialIG(igProfile, { website: (place && place.website) || '', city: (place && place.address) || '', competitorFollowers: (window.__compFollowers || []) }) : null;
+      var cat = computeCategories(scan, place, ux, ev, socialScore);
+      var ov = overallEngine(cat);
+      var overall = ov.score, g = gradeFor(overall);
+      var present = CAT_ORDER.filter(function (k) { return cat[k] != null; });
+      var totW = present.reduce(function (a, k) { return a + CAT_WEIGHTS[k]; }, 0);
+      var subs = present.map(function (k) { return mkSub(k, CAT_LABELS[k], cat[k], totW ? Math.round(CAT_WEIGHTS[k] / totW * 100) : 20); });
       var fails = [];
       RUBRIC.forEach(function (sec) { sec.checks.forEach(function (c) { if (ev[c.id] === false) fails.push({ pt: c.label, im: c.why, w: c.w }); }); });
       fails.sort(function (a, b) { return b.w - a.w; });
+      var socialFindings = socialFindingsOf(igProfile);
       var issues = [], seen = {};
-      (ux.findings || []).map(function (f) { return { pt: f.pt || f.title, im: f.im || f.impact }; }).concat(fails).forEach(function (f) {
+      (ux.findings || []).map(function (f) { return { pt: f.pt || f.title, im: f.im || f.impact }; }).concat(socialFindings).concat(fails).forEach(function (f) {
         var k = (f.pt || "").toLowerCase().slice(0, 40); if (f.pt && !seen[k]) { seen[k] = 1; issues.push(f); }
       });
-      return { overall: overall, grade: g.label, gradeColor: g.color, subs: subs, issues: issues, issueCount: fails.length, fieldData: scan.report.fieldData, ux: ux, ev: ev };
+      return { overall: overall, grade: g.label, gradeColor: g.color, subs: subs, issues: issues, issueCount: fails.length + socialFindings.length, fieldData: scan.report.fieldData, ux: ux, ev: ev, cat: cat, gates: ov.gates, pitch: pickPitch(cat), social: social, socialScore: socialScore };
     }
 
     /* The gated detail: all 5 sections rendered as explained pass/fail lists. */
@@ -709,8 +868,8 @@
       var r = ratingOf(pct);
       return { key: key, label: label, points: Math.round(pct / 100 * max), max: max, percent: Math.round(pct), rating: r.label, color: r.color };
     }
-    function ratingOf(p) { if (p >= 90) return { label: "Good", color: COLORS.good }; if (p >= 50) return { label: "Fair", color: COLORS.fair }; return { label: "Poor", color: COLORS.poor }; }
-    function gradeFor(o) { if (o >= 90) return { label: "Excellent", color: COLORS.good }; if (o >= 70) return { label: "Good", color: COLORS.good }; if (o >= 50) return { label: "Fair", color: COLORS.fair }; return { label: "Poor", color: COLORS.poor }; }
+    function ratingOf(p) { if (p >= 75) return { label: "Good", color: COLORS.good }; if (p >= 50) return { label: "Fair", color: COLORS.fair }; return { label: "Poor", color: COLORS.poor }; }
+    function gradeFor(o) { if (o >= 85) return { label: "Excellent", color: COLORS.good }; if (o >= 70) return { label: "Good", color: COLORS.good }; if (o >= 50) return { label: "Fair", color: COLORS.fair }; return { label: "Poor", color: COLORS.poor }; }
 
     /* No website found: still show the Google listing we did find, score the
        missing site as the serious problem it is, and route them to a build. */
@@ -826,8 +985,8 @@
     }
 
     /* ---- render the real report ---- */
-    function renderReport(scan, place, ux) {
-      var rep = ux ? buildCard(scan, place, ux) : scan.report;
+    function renderReport(scan, place, ux, social) {
+      var rep = ux ? buildCard(scan, place, ux, social) : scan.report;
       lastReport = rep;
       var name = (place && place.name) || bizName;
       var host = hostOf((place && place.website) || scan.url || urlParam);
@@ -877,6 +1036,25 @@
         (ux && rep.ev) ? renderChecklists(rep) : (rep.issues.map(probRow).join("") + cwvBlock(scan));
 
       setupCats(scan);
+      renderPitch(rep);
+    }
+
+    /* Tailored conversion CTA: name the single worst thing and pitch the one
+       Button Up service that fixes it, with the tone scaled to the score. */
+    function renderPitch(rep) {
+      var fh = document.getElementById("sr-final-h"), fp = document.getElementById("sr-final-p");
+      if (!fh || !fp || !rep.pitch) return;  // PSI-only fallback keeps the default CTA
+      var pitch = rep.pitch;
+      var ACTION = { website: "rebuild your website into one that actually sells your food", seo: "get you showing up on Google when locals search", social: "run your social media so it brings people in", ads: "run paid ads that put you in front of hungry locals" };
+      if (!pitch.svc) {
+        fh.textContent = "You're in great shape. Want to go from great to unbeatable?";
+        fp.textContent = "Book a free call with Juan. We will find the last few wins and handle them for you.";
+        return;
+      }
+      var tone = rep.overall >= 78 ? "gentle" : rep.overall >= 55 ? "lever" : "urgent";
+      var lead = tone === "urgent" ? "The most urgent fix: " : tone === "gentle" ? "You're solid. The one upgrade I'd make: " : "Here's what I'd fix first: ";
+      fh.textContent = lead + pitch.why + ".";
+      fp.textContent = "That is exactly what we do. We would " + (ACTION[pitch.svc] || "help you fix it") + ". Book a free call with Juan and we will map it out.";
     }
 
     /* ---- competitors (real Places data, or hide the card) ---- */
