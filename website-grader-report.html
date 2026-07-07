@@ -212,6 +212,14 @@
     .sb-row.sb-you { background: var(--gold-soft); border-radius: 12px; border: 1px solid rgba(181,126,30,0.22); margin: 4px 0; }
     .sb-row.sb-you .sb-name { color: var(--gold); font-weight: 800; }
 
+    /* one-tap Instagram confirm */
+    .sr-igconfirm { margin-top: 14px; padding: 14px; border-radius: 12px; background: var(--gold-soft); border: 1px solid rgba(181,126,30,0.22); }
+    .sr-igconfirm p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.45; }
+    .sr-igconfirm b { color: var(--gold); }
+    .sr-igc-btns { display: flex; gap: 8px; margin-top: 10px; }
+    .sr-igc-btns button { flex: 1; height: 38px; border-radius: 9px; border: 1px solid var(--line); background: #FFFFFF; font-family: var(--font-display); font-weight: 700; font-size: 0.8rem; color: var(--text-head); cursor: pointer; }
+    .sr-igc-btns #sr-igc-yes { background: linear-gradient(135deg, #E0A23C, #D08A34); color: #2A1C06; border: none; }
+
     /* pagespeed-style category gauges with mobile/desktop tabs */
     .sr-cat-tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--bg-1); margin: 18px 0 4px; }
     .sr-cat-tab { padding: 8px 20px; border: none; border-radius: 999px; background: none; font-family: var(--font-display); font-weight: 700; font-size: 0.88rem; color: var(--text-soft); cursor: pointer; transition: all .2s; }
@@ -325,6 +333,11 @@
           <div class="sr-grade-lab">Online health grade</div>
           <div class="sr-grade" id="sr-grade">,</div>
           <div class="sr-grade-note" id="sr-grade-note"></div>
+          <!-- one-tap confirm for an unconfirmed Instagram guess (stays crisp, above the gate) -->
+          <div class="sr-igconfirm" id="sr-igconfirm" style="display:none;">
+            <p>Is <b id="sr-igc-handle">@handle</b> your Instagram? Confirming makes your social grade accurate.</p>
+            <div class="sr-igc-btns"><button id="sr-igc-yes">Yes, that's us</button><button id="sr-igc-no">Not us</button></div>
+          </div>
           <div class="sr-blurzone">
             <div class="sr-subs" id="sr-subs"></div>
             <div class="sr-side-cta">
@@ -473,8 +486,21 @@
       photo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>',
       clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
       trophy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h12v3a6 6 0 0 1-12 0z"/><path d="M6 5H4v2a3 3 0 0 0 3 3M18 5h2v2a3 3 0 0 1-3 3M9 20h6M12 15v5"/></svg>',
-      quote: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 7h4v6H8a2 2 0 0 1-2-2V8a1 1 0 0 1 1-1zm8 0h4v6h-3a2 2 0 0 1-2-2V8a1 1 0 0 1 1-1z"/></svg>'
+      quote: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 7h4v6H8a2 2 0 0 1-2-2V8a1 1 0 0 1 1-1zm8 0h4v6h-3a2 2 0 0 1-2-2V8a1 1 0 0 1 1-1z"/></svg>',
+      ig: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>'
     };
+    function pushSocialFindings(s) {
+      var ig = s && s.instagram;
+      if (ig && ig.found) {
+        pushFind(ICON.ig, "Instagram: <b>@" + esc(ig.handle) + "</b> &middot; " + fmtK(ig.followers) + " followers", ig.followers >= 1000 ? "good" : "warn");
+        var d = ig.latestPostAt ? Math.round((Date.now() - ig.latestPostAt) / 86400000) : null;
+        if (d != null && d > 60) pushFind(ICON.clock, "Your last Instagram post was " + d + " days ago", "warn");
+      } else if (s && s.maybe && s.maybe.found) {
+        pushFind(ICON.ig, "Found a possible Instagram: <b>@" + esc(s.maybe.handle) + "</b> &mdash; confirm it on your report", "warn");
+      } else {
+        pushFind(ICON.ig, "No active Instagram we could confirm for you", "warn");
+      }
+    }
     function drainFind() {
       if (animDone || !findEl) { clearInterval(findTimer); findTimer = null; return; }
       if (!findQueue.length) return;
@@ -516,6 +542,7 @@
       // Kick off the social audit now, in parallel with the (slow) PageSpeed scan,
       // so it is ready by the time we render instead of adding to the wait.
       socialPromise = loadSocial(place, urlParam);
+      socialPromise.then(function (s) { pushSocialFindings(s); });
       var target = urlParam || (place && place.website) || "";
       if (!target) {
         // No website to grade. If we still resolved the Google listing, show a
@@ -1082,6 +1109,27 @@
 
       setupCats(scan);
       renderPitch(rep);
+      renderSocialConfirm(social);
+    }
+
+    /* If we found a likely-but-unconfirmed Instagram, ask the owner in one tap.
+       Lives in the crisp sidebar so it works even before the report is unlocked. */
+    function renderSocialConfirm(social) {
+      var el = document.getElementById("sr-igconfirm");
+      if (!el) return;
+      var maybe = social && !social.instagram && social.maybe;
+      if (!maybe || !maybe.found) { el.style.display = "none"; return; }
+      document.getElementById("sr-igc-handle").textContent = "@" + maybe.handle;
+      el.style.display = "";
+      document.getElementById("sr-igc-yes").onclick = function () {
+        socialInfo.instagram = maybe; socialInfo.confident = true; socialInfo.maybe = null;
+        el.style.display = "none";
+        renderReport(lastScan, placeInfo, lastUx, socialInfo);
+        loadScoreboard();
+      };
+      document.getElementById("sr-igc-no").onclick = function () {
+        socialInfo.maybe = null; el.style.display = "none";
+      };
     }
 
     /* Tailored conversion CTA: name the single worst thing and pitch the one
