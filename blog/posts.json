@@ -1,5 +1,19 @@
 [
   {
+    "id": "recommended-by-chatgpt",
+    "category": "seo",
+    "author": "chris",
+    "date": "2026-07-07",
+    "hero": "/images/blog/recommended-by-chatgpt.jpg",
+    "heroAlt": "A person at a cafe table looking something up on a laptop while holding a cup of coffee",
+    "en": {
+      "slug": "get-restaurant-recommended-by-chatgpt"
+    },
+    "es": {
+      "slug": "restaurante-recomendado-por-chatgpt"
+    }
+  },
+  {
     "id": "slow-tuesday",
     "category": "strategy",
     "author": "juan",

@@ -131,7 +131,7 @@
     },
     {
       "id": "recommended-by-chatgpt",
-      "status": "ready",
+      "status": "published",
       "category": "seo",
       "author": "chris",
       "heroQuery": "person using ai chatbot on phone at a cafe",
@@ -151,7 +151,8 @@
           "https://www.buttonupmedia.com/es/contacto"
         ]
       },
-      "heroAlt": "A person at a cafe table looking something up on a laptop while holding a cup of coffee"
+      "heroAlt": "A person at a cafe table looking something up on a laptop while holding a cup of coffee",
+      "publishedDate": "2026-07-07"
     }
   ]
 }
