@@ -734,6 +734,11 @@ function socialThrottle(ip) {
 async function social(req, res) {
   const q = req.query || {};
   try {
+    if (q.searchdebug) {
+      const item = await apifyProfile('apify~google-search-scraper', { queries: String(q.searchdebug), resultsPerPage: 10, maxPagesPerQuery: 1, countryCode: 'us' });
+      const arr = (item && (item.organicResults || item.results)) || [];
+      return res.status(200).json({ ok: true, gotItem: !!item, itemKeys: item ? Object.keys(item).slice(0, 25) : null, organicCount: arr.length, sampleUrls: arr.slice(0, 5).map((r) => r && (r.url || r.link)) });
+    }
     // ---- mode 2: scrape a single profile (the building block) ----
     const platform = (q.platform || '').toLowerCase();
     const handle = (q.handle || '').trim().replace(/^@/, '');
