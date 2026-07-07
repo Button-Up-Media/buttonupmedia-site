@@ -196,43 +196,66 @@ async function competitors(req, res, key) {
   const placeId = String((req.query && req.query.placeId) || '').trim();
   if (!placeId) return res.status(400).json({ ok: false, error: 'missing_place_id' });
 
-  // Need the subject's location + name first.
-  const dParams = new URLSearchParams({ place_id: placeId, fields: 'name,geometry', key });
+  // Need the subject's location, name + types first.
+  const dParams = new URLSearchParams({ place_id: placeId, fields: 'name,geometry,types', key });
   const d = await getJson(`${BASE}/details/json?${dParams.toString()}`);
   if (d.status !== 'OK' || !d.result || !d.result.geometry) {
     return res.status(502).json({ ok: false, error: 'places_status', status: d.status });
   }
   const loc = d.result.geometry.location;
   const selfName = (d.result.name || '').toLowerCase();
+  const cuisine = cuisineOf(d.result.name, d.result.types);
 
-  const nParams = new URLSearchParams({
-    location: `${loc.lat},${loc.lng}`,
-    rankby: 'distance',
-    type: 'restaurant',
-    key,
-  });
+  // A real competitor is a nearby spot with a SIMILAR cuisine, not just the
+  // closest restaurant (a ramen shop competes with ramen shops, not McDonald's).
+  // Google has no cuisine field, so we bias the search with a cuisine keyword
+  // derived from the name/types, then keep only same-cuisine-looking results.
+  const nParams = new URLSearchParams({ location: `${loc.lat},${loc.lng}`, rankby: 'distance', type: 'restaurant', key });
+  if (cuisine) nParams.set('keyword', cuisine);
   const n = await getJson(`${BASE}/nearbysearch/json?${nParams.toString()}`);
   if (n.status !== 'OK' && n.status !== 'ZERO_RESULTS') {
     return res.status(502).json({ ok: false, error: 'places_status', status: n.status });
   }
 
-  const list = (n.results || [])
+  let list = (n.results || [])
     .filter((p) => p.place_id !== placeId && (p.name || '').toLowerCase() !== selfName)
-    // Only count places with a meaningful review base as real competition; a
-    // 5.0 from 3 reviews should not outrank an established spot.
-    .filter((p) => p.rating != null && p.user_ratings_total != null && p.user_ratings_total >= 40)
-    .map((p) => ({
-      placeId: p.place_id,
-      name: p.name,
-      rating: p.rating,
-      reviews: p.user_ratings_total,
-    }))
-    // Rank competitors the way a guest sees "best nearby": rating, then volume.
+    // a meaningful review base = real competition (a 5.0 from 3 reviews is not)
+    .filter((p) => p.rating != null && p.user_ratings_total != null && p.user_ratings_total >= 40);
+
+  // When we know the cuisine, drop results that clearly are not it (the keyword
+  // biases but does not guarantee), matching on the name or a cuisine type.
+  if (cuisine) {
+    const strict = list.filter((p) => cuisineOf(p.name, p.types) === cuisine);
+    if (strict.length >= 2) list = strict;
+  }
+
+  list = list
+    .map((p) => ({ placeId: p.place_id, name: p.name, rating: p.rating, reviews: p.user_ratings_total }))
     .sort((a, b) => (b.rating - a.rating) || (b.reviews - a.reviews))
     .slice(0, 8);
 
   res.setHeader('Cache-Control', 'public, s-maxage=86400');
-  return res.status(200).json({ ok: true, competitors: list });
+  return res.status(200).json({ ok: true, cuisine: cuisine, competitors: list });
+}
+
+// Derive a cuisine keyword from a restaurant's name (and Google types when they
+// carry a cuisine, e.g. "pizza_restaurant"). Returns null when nothing obvious.
+const CUISINE_TERMS = [
+  'pizza', 'pizzeria', 'sushi', 'ramen', 'poke', 'taco', 'taqueria', 'burrito', 'burger', 'bbq', 'barbecue',
+  'thai', 'italian', 'mexican', 'chinese', 'japanese', 'korean', 'indian', 'mediterranean', 'greek', 'french',
+  'peruvian', 'cuban', 'colombian', 'venezuelan', 'spanish', 'vietnamese', 'pho', 'noodle', 'dumpling', 'dim sum',
+  'seafood', 'crab', 'lobster', 'oyster', 'ceviche', 'steakhouse', 'steak', 'deli', 'bakery', 'donut', 'bagel',
+  'wings', 'fried chicken', 'sandwich', 'arepa', 'empanada', 'falafel', 'shawarma', 'kebab', 'gyro', 'hibachi',
+  'teriyaki', 'curry', 'tapas', 'vegan', 'gelato', 'ice cream', 'creperie', 'crepe', 'cajun', 'creole', 'soul food',
+];
+function cuisineOf(name, types) {
+  const n = (name || '').toLowerCase();
+  for (const w of CUISINE_TERMS) { if (n.indexOf(w) !== -1) return (w === 'pizzeria' ? 'pizza' : w === 'taqueria' ? 'taco' : w); }
+  for (const t of (types || [])) {
+    const m = /^([a-z]+)_restaurant$/.exec(t); // Google's cuisine types, when present
+    if (m && m[1] !== 'fast' && m[1] !== 'fine') return m[1];
+  }
+  return null;
 }
 
 /* ============================================================================
@@ -461,6 +484,19 @@ function firstNum(obj, keys) {
   for (const k of keys) { if (obj && obj[k] != null && typeof obj[k] !== 'object') { const n = Number(obj[k]); if (!isNaN(n)) return n; } }
   return null;
 }
+// newest timestamp (ms epoch) across an IG profile's recent posts, for recency
+function latestPostTs(it) {
+  const arr = [].concat(it.latestPosts || [], it.latestIgtvVideos || []);
+  let best = null;
+  for (const p of arr) {
+    if (!p) continue;
+    const ts = p.timestamp || p.takenAt || p.taken_at || p.time;
+    if (ts == null) continue;
+    const ms = (typeof ts === 'number') ? (ts < 1e12 ? ts * 1000 : ts) : Date.parse(ts);
+    if (!isNaN(ms) && (best == null || ms > best)) best = ms;
+  }
+  return best;
+}
 
 async function fetchRaw(url, cap) {
   if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
@@ -522,9 +558,24 @@ async function scrapeInstagram(handle) {
     const it = await apifyProfile('apify~instagram-profile-scraper', { usernames: [handle] });
     if (it) {
       const followers = firstNum(it, ['followersCount', 'followers', 'followerCount']);
-      const posts = firstNum(it, ['postsCount', 'mediaCount', 'igtvVideoCount']);
+      const posts = firstNum(it, ['postsCount', 'mediaCount']);
       if (followers != null || posts != null) {
-        return { handle: handle, found: true, followers: followers, posts: posts, displayName: it.fullName || it.name || null, verified: !!it.verified, via: 'apify', _raw: it };
+        const links = [];
+        (it.externalUrls || []).forEach((u) => { const v = (u && (u.url || u.href)) || (typeof u === 'string' ? u : null); if (v) links.push(v); });
+        if (it.externalUrl && links.indexOf(it.externalUrl) === -1) links.push(it.externalUrl);
+        return {
+          handle: handle, found: true, followers: followers, posts: posts,
+          following: firstNum(it, ['followsCount', 'followingCount']),
+          displayName: it.fullName || it.name || null,
+          bio: it.biography || '',
+          links: links,
+          highlights: firstNum(it, ['highlightReelCount']),
+          latestPostAt: latestPostTs(it),
+          private: !!it.private, verified: !!it.verified,
+          isBusiness: !!it.isBusinessAccount, category: it.businessCategoryName || null,
+          profilePic: it.profilePicUrl || null,
+          via: 'apify', _raw: it,
+        };
       }
     }
   }
