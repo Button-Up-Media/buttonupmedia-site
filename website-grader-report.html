@@ -1477,7 +1477,10 @@
           phone: phone.value, code: v,
           restaurant: bizName,
           website: (placeInfo && placeInfo.website) || urlParam || (lastScan && lastScan.url) || "",
-          score: lastReport ? lastReport.overall : (lastScan && lastScan.report ? lastScan.report.overall : null)
+          score: lastReport ? lastReport.overall : (lastScan && lastScan.report ? lastScan.report.overall : null),
+          // the single biggest fix, so the outreach text can speak to their weak spot
+          focus: lastReport && lastReport.pitch ? (lastReport.pitch.svc || null) : null,
+          focusReason: lastReport && lastReport.pitch ? (lastReport.pitch.why || null) : null
         }).then(function (d) {
           verifyBtn.disabled = false; verifyBtn.textContent = "Unlock my report";
           if (d && d.error === "not_configured") { unlock(); return; }
