@@ -104,8 +104,21 @@
     .sr-check.active .dot { border-color: var(--gold); border-top-color: transparent; animation: srSpin .8s linear infinite; }
     @keyframes srSpin { to { transform: rotate(360deg); } }
     .sr-scan-card { border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line-soft); background: #FFFFFF; box-shadow: 0 20px 50px rgba(40,30,12,0.08); max-width: 520px; }
-    .sr-scan-card .img { height: 180px; background: linear-gradient(135deg, #cfe3d0, #aacbb0); display: grid; place-items: center; color: rgba(28,23,15,0.4); }
-    .sr-scan-card .img svg { width: 48px; height: 48px; }
+    /* animated "finding you on the map" opener: a pin drops on the business,
+       then the map zooms out and competitor pins pop in around it */
+    .sr-map { position: relative; height: 210px; overflow: hidden; background: #F1E8D6; }
+    .sr-map-view { position: absolute; inset: 0; transform-origin: 50% 46%; animation: srZoom 3.6s cubic-bezier(.4,0,.2,1) both; }
+    .sr-map-bg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .sr-youpin { position: absolute; left: 50%; top: 46%; width: 36px; height: 46px; margin: -46px 0 0 -18px; color: var(--gold); filter: drop-shadow(0 7px 9px rgba(120,80,10,0.4)); animation: srDrop .9s cubic-bezier(.3,1.5,.5,1) .25s both; z-index: 3; }
+    .sr-youpin svg { width: 100%; height: 100%; }
+    .sr-pulse { position: absolute; left: 50%; top: 46%; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; background: rgba(181,126,30,0.42); animation: srPulse 1.8s ease-out 1s infinite; z-index: 2; }
+    .sr-cpin { position: absolute; width: 13px; height: 13px; margin: -6px 0 0 -6px; border-radius: 50%; background: #8A7B60; box-shadow: 0 0 0 3px rgba(138,123,96,0.2), 0 2px 4px rgba(60,40,10,0.25); opacity: 0; animation: srPop .5s ease forwards; z-index: 1; }
+    .sr-map-cap { position: absolute; left: 14px; bottom: 12px; z-index: 4; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: #3A2E18; background: rgba(255,255,255,0.85); backdrop-filter: blur(4px); padding: 6px 12px; border-radius: 999px; box-shadow: 0 4px 12px rgba(60,40,10,0.16); }
+    @keyframes srZoom { 0%, 42% { transform: scale(1.32); } 100% { transform: scale(1); } }
+    @keyframes srDrop { 0% { transform: translateY(-150px) scale(.6); opacity: 0; } 55% { opacity: 1; } 78% { transform: translateY(8px) scale(1.06); } 100% { transform: translateY(0) scale(1); } }
+    @keyframes srPulse { 0% { transform: scale(.4); opacity: .55; } 100% { transform: scale(3.2); opacity: 0; } }
+    @keyframes srPop { 0% { transform: scale(0); opacity: 0; } 70% { transform: scale(1.25); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) { .sr-map-view, .sr-youpin, .sr-cpin, .sr-pulse { animation: none !important; opacity: 1 !important; transform: none !important; } }
     .sr-scan-card .body { padding: 22px 24px 26px; }
     .sr-scan-card h2 { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; }
     .sr-scan-card .meta { display: flex; align-items: center; gap: 10px; margin-top: 8px; font-size: 0.9rem; color: var(--text-dim); }
@@ -350,7 +363,35 @@
         <div class="sr-progress"><span class="sp"></span><b id="sr-progress-label"><span id="sr-secs">30</span> seconds remaining</b></div>
       </div>
       <div class="sr-scan-card">
-        <div class="img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-6 9 6v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21V12h6v9"/></svg></div>
+        <div class="sr-map" id="sr-map">
+          <div class="sr-map-view" id="sr-map-view">
+            <svg class="sr-map-bg" viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="400" height="210" fill="#F1E8D6"/>
+              <rect x="26" y="128" width="96" height="62" rx="10" fill="rgba(30,126,84,0.14)"/>
+              <path d="M300 150 Q360 140 400 168 L400 210 L286 210 Z" fill="rgba(70,130,180,0.13)"/>
+              <g stroke="#E4D7BE" stroke-linecap="round" fill="none">
+                <path d="M-10 58 H410" stroke-width="9"/>
+                <path d="M-10 150 H410" stroke-width="7"/>
+                <path d="M148 -10 V220" stroke-width="9"/>
+                <path d="M286 -10 V220" stroke-width="6"/>
+                <path d="M-10 205 L410 40" stroke-width="5"/>
+              </g>
+              <g stroke="#EBE1CC" stroke-linecap="round" fill="none" stroke-width="3">
+                <path d="M-10 104 H410"/>
+                <path d="M70 -10 V220"/>
+                <path d="M350 -10 V220"/>
+              </g>
+            </svg>
+            <span class="sr-cpin" style="left:24%;top:30%;animation-delay:1.75s"></span>
+            <span class="sr-cpin" style="left:73%;top:26%;animation-delay:1.95s"></span>
+            <span class="sr-cpin" style="left:30%;top:76%;animation-delay:2.15s"></span>
+            <span class="sr-cpin" style="left:79%;top:70%;animation-delay:2.35s"></span>
+            <span class="sr-cpin" style="left:63%;top:52%;animation-delay:2.55s"></span>
+            <span class="sr-pulse"></span>
+            <span class="sr-youpin"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 4.5 7 13 7 13s7-8.5 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.6" fill="#fff"/></svg></span>
+          </div>
+          <div class="sr-map-cap" id="sr-map-cap">Pinpointing your location&hellip;</div>
+        </div>
         <div class="body">
           <h2 id="sr-scan-name">Your Restaurant</h2>
           <div class="meta"><span>Running a full AI marketing audit&hellip;</span></div>
@@ -527,6 +568,14 @@
 
     setText("sr-scan-name", bizName);
     document.title = bizName + " - Website Report | Button Up Media";
+
+    /* narrate the map opener: pin drop -> zoom out to competitors -> the audit */
+    (function () {
+      var cap = document.getElementById("sr-map-cap");
+      if (!cap) return;
+      setTimeout(function () { cap.textContent = "Scanning nearby competitors…"; }, 2100);
+      setTimeout(function () { cap.textContent = "Reading your website & reviews…"; }, 4400);
+    })();
 
     /* ---- loading animation (visual only; real work runs in parallel) ---- */
     var step = 0, secs = 30;
