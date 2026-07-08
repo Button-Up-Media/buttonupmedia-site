@@ -118,7 +118,7 @@
     .gr-nav-phone { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--text-head); white-space: nowrap; }
     .gr-nav-phone svg { width: 15px; height: 15px; color: var(--gold); }
     .gr-nav-phone:hover { color: var(--gold); }
-    .gr-nav-cta { height: 42px; padding: 0 22px; font-size: 0.86rem; white-space: nowrap; display: inline-flex; align-items: center; }
+    .gr-nav-cta { height: 42px; padding: 0 22px; font-size: 0.86rem; white-space: nowrap; display: inline-flex; align-items: center; background: linear-gradient(135deg, #E8AC44, #D08A34); color: #241804; border: none; box-shadow: 0 8px 20px rgba(208,138,52,0.42); }
     html { scroll-padding-top: 100px; }
     @media (max-width: 700px) {
       .gr-nav { top: 8px; width: min(calc(100% - 20px), 1180px); min-height: 56px; margin: 0 auto; padding: 8px 10px 8px 14px; border-radius: 14px; }
@@ -733,7 +733,7 @@
           </span>
           Trusted by South Florida&rsquo;s favorite restaurants, bars &amp; caf&eacute;s
         </div>
-        <h1 class="gr-rise d1">Is your restaurant <span class="gr-gold">losing customers online</span>? Get your free AI grade in 60 seconds.</h1>
+        <h1 class="gr-rise d1">Your restaurant could be <span class="gr-gold">losing customers online</span> right now. Get your free AI grade in 60 seconds.</h1>
         <p class="gr-hero-sub gr-rise d2">Our AI checks everything your guests see, your website, Google listing, social media and reviews, then shows how you stack up against nearby spots and exactly what to fix first.</p>
 
         <div class="gr-search gr-rise d2" id="scan">
@@ -1468,7 +1468,7 @@
         navigator.geolocation.getCurrentPosition(function (pos) {
           userLat = pos.coords.latitude.toFixed(5);
           userLng = pos.coords.longitude.toFixed(5);
-          if (input.value.trim().length >= 2) fetchSuggest();
+          if (input.value.trim().length >= 1) fetchSuggest();
         }, function () {}, { enableHighAccuracy: false, timeout: 8000, maximumAge: 600000 });
       }
 
@@ -1479,12 +1479,12 @@
           .map(function (k) { return k + "=" + encodeURIComponent(params[k]); }).join("&");
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ event: "grader_scan_start" });
-        window.open("website-grader-report?" + qs, "_blank");
+        window.location.href = "website-grader-report?" + qs;
       }
       function render(list) {
         current = list; active = -1; brandOpt = null;
         var q = input.value.trim();
-        if (!list.length && (q.length < 2 || looksLikeUrl(q))) { ac.classList.remove("is-open"); ac.innerHTML = ""; return; }
+        if (!list.length && (q.length < 1 || looksLikeUrl(q))) { ac.classList.remove("is-open"); ac.innerHTML = ""; return; }
         var html = "";
         // multi-location brand: 2+ nearby spots sharing a brand prefix -> whole brand
         var bs = brandStem(list);
@@ -1516,7 +1516,7 @@
       }
       function fetchSuggest() {
         var q = input.value.trim();
-        if (placesOff || looksLikeUrl(q) || q.length < 2) { render([]); return; }
+        if (placesOff || looksLikeUrl(q) || q.length < 1) { render([]); return; }
         var mine = ++seq;
         fetch("/api/places?action=autocomplete&q=" + encodeURIComponent(q) + geoQS())
           .then(function (r) { return r.json(); })
@@ -1529,13 +1529,11 @@
       }
       function choose(r) {
         if (!r) return;
-        // Selecting a suggestion just fills the box and remembers the place; the
-        // scan only runs when the visitor presses Enter or clicks the button.
+        // Clicking a suggestion starts the grade right away.
         selected = r;
         input.value = r.name;
-        active = -1;
         ac.classList.remove("is-open");
-        input.focus();
+        openReport({ placeId: r.placeId, name: r.name });
       }
       function submitFreeText() {
         var v = input.value.trim();
