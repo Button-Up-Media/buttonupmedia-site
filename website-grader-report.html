@@ -691,7 +691,7 @@
         .then(function (d) {
           if (!d || !d.ok || !d.discover) return null;
           var ig = d.discover.instagram || {}, tt = d.discover.tiktok || {};
-          var igCands = (ig.candidates || []).slice(0, ig.fromSite ? 1 : 4);
+          var igCands = (ig.candidates || []).slice(0, ig.fromSite ? 3 : 4);
           var ttHandle = tt.fromSite ? (tt.candidates || [])[0] : null;
           var jobs = igCands.map(function (h) { return scrapeOne("ig", h, website); });
           if (ttHandle) jobs.push(scrapeOne("tt", ttHandle, website).then(function (p) { return { tt: p }; }));
@@ -702,7 +702,9 @@
             // the site, or the one linked FROM the site). 2+ = a real discoverability
             // problem (customers do not know which to follow).
             var linked = igProfiles.filter(function (p) { return p.linksToWebsite; });
-            if (ig.fromSite && igProfiles[0] && linked.indexOf(igProfiles[0]) < 0) linked.push(igProfiles[0]);
+            // accounts linked ON the restaurant's own site are confident even if
+            // their bio omits the website URL — trust every site-linked profile
+            if (ig.fromSite) igProfiles.forEach(function (p) { if (linked.indexOf(p) < 0) linked.push(p); });
             var seen = {}, accounts = [];
             linked.forEach(function (p) { var k = (p.handle || "").toLowerCase(); if (!seen[k]) { seen[k] = 1; accounts.push(p); } });
             accounts.sort(function (a, b) { return (b.followers || 0) - (a.followers || 0); });

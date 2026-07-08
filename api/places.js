@@ -602,6 +602,7 @@ async function fetchGooglePhoto(ref, key) {
    { found:false } on any block/timeout so it can never break the report.
    ========================================================================== */
 const IPHONE_UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1';
+const DESKTOP_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36';
 
 // Apify runs purpose-built scrapers through residential IPs, so it works from
 // a server where direct requests get the datacenter-IP login wall. Pay-per-use.
@@ -640,15 +641,15 @@ function latestPostTs(it) {
   return best;
 }
 
-async function fetchRaw(url, cap) {
+async function fetchRaw(url, cap, ua) {
   if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 8000);
+  const timer = setTimeout(() => controller.abort(), 9000);
   try {
     const resp = await fetch(url, {
       signal: controller.signal,
       redirect: 'follow',
-      headers: { 'User-Agent': IPHONE_UA, 'Accept-Language': 'en-US,en;q=0.9' },
+      headers: { 'User-Agent': ua || IPHONE_UA, 'Accept-Language': 'en-US,en;q=0.9', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' },
     });
     if (!resp.ok) return { ok: false, status: resp.status, text: '' };
     const text = await resp.text();
@@ -671,18 +672,67 @@ function socialNum(s) {
   return Math.round(n * mult);
 }
 
-function discoverHandles(html) {
-  const ig = new Set(), tt = new Set();
-  const IG_SKIP = new Set(['p', 'reel', 'reels', 'explore', 'accounts', 'stories', 'tv', 'about', 'developer', 'legal', 'directory', 'sharer', 'embed']);
+// Phase 1: pull every social link straight from the restaurant's own website HTML
+// (footer/header icons + schema.org sameAs). This is the reliable signal — most
+// restaurants link their socials on their site — so we lead with it before any
+// name-guessing. Handles instagram.com + instagr.am, tiktok, facebook, youtube,
+// twitter/x, and filters out share widgets / platform system paths.
+const IG_SKIP = new Set(['p', 'reel', 'reels', 'explore', 'accounts', 'stories', 'tv', 'about', 'developer', 'legal', 'directory', 'sharer', 'embed', 'invites', 'direct', 'graphql', 'web']);
+const FB_SKIP = new Set(['sharer', 'plugins', 'dialog', 'tr', 'profile.php', 'pages', 'groups', 'events', 'watch', 'login', 'help', 'share', 'people', 'story.php', 'permalink.php', 'photo.php', 'home.php', 'hashtag', 'l.php', 'flx']);
+const YT_SKIP = new Set(['watch', 'embed', 'results', 'playlist', 'shorts', 'feed', 'channel']);
+const TW_SKIP = new Set(['intent', 'share', 'home', 'hashtag', 'search', 'i', 'compose', 'privacy', 'tos']);
+function extractSocials(html) {
+  html = html || '';
+  const out = { ig: [], tt: [], fb: [], yt: [], tw: [] };
+  const add = (arr, v) => { v = String(v || '').toLowerCase().replace(/\.$/, ''); if (v && arr.indexOf(v) === -1) arr.push(v); };
+  const notFile = (h) => !/\.(png|jpe?g|gif|css|js|svg|webp|ico|php|html?)$/.test(h);
+  let m, re;
+  re = /(?:instagram\.com|instagr\.am)\/(?:[a-z]{2}\/)?([A-Za-z0-9_.]{2,30})/gi;
+  while ((m = re.exec(html))) { const h = m[1].toLowerCase().replace(/\.$/, ''); if (!IG_SKIP.has(h) && notFile(h)) add(out.ig, h); }
+  re = /tiktok\.com\/@([A-Za-z0-9_.]{2,30})/gi;
+  while ((m = re.exec(html))) add(out.tt, m[1]);
+  re = /facebook\.com\/(?:pg\/)?([A-Za-z0-9_.\-]{2,50})/gi;
+  while ((m = re.exec(html))) { const h = m[1].toLowerCase(); if (!FB_SKIP.has(h) && notFile(h) && !/^\d+$/.test(h)) add(out.fb, h); }
+  re = /(?:youtube\.com\/(?:@|c\/|channel\/|user\/)|youtu\.be\/)([A-Za-z0-9_.\-]{2,40})/gi;
+  while ((m = re.exec(html))) { const h = m[1].toLowerCase(); if (!YT_SKIP.has(h)) add(out.yt, h); }
+  re = /(?:twitter\.com|x\.com)\/([A-Za-z0-9_]{2,30})/gi;
+  while ((m = re.exec(html))) { const h = m[1].toLowerCase(); if (!TW_SKIP.has(h)) add(out.tw, h); }
+  return { ig: out.ig.slice(0, 3), tt: out.tt.slice(0, 3), fb: out.fb.slice(0, 2), yt: out.yt.slice(0, 2), tw: out.tw.slice(0, 2) };
+}
+// backward-compatible name used elsewhere
+function discoverHandles(html) { const s = extractSocials(html); return { ig: s.ig, tt: s.tt }; }
+
+// Pick one internal page likely to list socials, when the homepage HTML had none
+// (some sites only put the icons on contact/about). Same-origin, first match.
+function pickSocialSubpage(html, website) {
+  let origin;
+  try { origin = new URL(/^https?:/.test(website) ? website : 'https://' + website).origin; } catch (e) { return null; }
+  const re = /href\s*=\s*["']([^"']+)["']/gi;
   let m;
-  const igRe = /instagram\.com\/([A-Za-z0-9_.]{2,30})/gi;
-  while ((m = igRe.exec(html))) {
-    const h = m[1].toLowerCase().replace(/\.$/, '');
-    if (!IG_SKIP.has(h) && !/\.(png|jpe?g|gif|css|js|svg)$/.test(h)) ig.add(h);
+  while ((m = re.exec(html))) {
+    const href = m[1];
+    if (!/(contact|about|find|visit|connect|hours|location|reach)/i.test(href)) continue;
+    let abs;
+    try { abs = new URL(href, origin); } catch (e) { continue; }
+    if (abs.origin === origin && !/\.(pdf|jpg|jpeg|png|zip|doc)/i.test(abs.pathname)) return abs.href;
   }
-  const ttRe = /tiktok\.com\/@([A-Za-z0-9_.]{2,30})/gi;
-  while ((m = ttRe.exec(html))) tt.add(m[1].toLowerCase().replace(/\.$/, ''));
-  return { ig: [...ig].slice(0, 3), tt: [...tt].slice(0, 3) };
+  return null;
+}
+
+// Robustly pull all socials from a site: homepage (iPhone UA, desktop-UA retry if
+// blocked/empty), then one contact/about subpage if we still have no Instagram.
+async function siteSocials(website) {
+  const merged = { ig: [], tt: [], fb: [], yt: [], tw: [] };
+  const mergeIn = (s) => { for (const k of Object.keys(merged)) (s[k] || []).forEach((v) => { if (merged[k].indexOf(v) === -1) merged[k].push(v); }); };
+  let home = await fetchRaw(website, 300000, IPHONE_UA);
+  if (!home.ok || (home.text || '').length < 800) home = await fetchRaw(website, 300000, DESKTOP_UA);
+  if (home.ok && home.text) mergeIn(extractSocials(home.text));
+  if (!merged.ig.length && home.ok && home.text) {
+    const sub = pickSocialSubpage(home.text, website);
+    if (sub) { const r = await fetchRaw(sub, 300000, IPHONE_UA); if (r.ok && r.text) mergeIn(extractSocials(r.text)); }
+  }
+  for (const k of Object.keys(merged)) merged[k] = merged[k].slice(0, 3);
+  return merged;
 }
 
 function guessHandles(name) {
@@ -851,17 +901,18 @@ async function social(req, res) {
     // bio links back to the website (the reliable disambiguator), else asks the user.
     const website = (q.website || '').trim();
     const name = (q.name || '').trim();
-    let ig = [], tt = [];
-    if (website) {
-      const site = await fetchRaw(website, 250000);
-      const d = discoverHandles(site.text || '');
-      ig = d.ig; tt = d.tt;
-    }
+    let s = { ig: [], tt: [], fb: [], yt: [], tw: [] };
+    if (website) s = await siteSocials(website);   // phase 1: read all socials off the site
     return res.status(200).json({
       ok: true,
       discover: {
-        instagram: { linked: ig[0] || null, candidates: ig.length ? ig.slice(0, 3) : guessHandles(name), fromSite: !!ig.length },
-        tiktok: { linked: tt[0] || null, candidates: tt.slice(0, 3), fromSite: !!tt.length },
+        // Instagram/TikTok feed the Apify scrape (phase 2). Site links are the
+        // confident signal; fall back to name guesses only when the site links none.
+        instagram: { linked: s.ig[0] || null, candidates: s.ig.length ? s.ig.slice(0, 3) : guessHandles(name), fromSite: !!s.ig.length },
+        tiktok: { linked: s.tt[0] || null, candidates: s.tt.slice(0, 3), fromSite: !!s.tt.length },
+        // other socials found on the site (not scraped, surfaced for context/future use)
+        facebook: s.fb[0] || null, youtube: s.yt[0] || null, twitter: s.tw[0] || null,
+        siteLinks: { instagram: s.ig, tiktok: s.tt, facebook: s.fb, youtube: s.yt, twitter: s.tw },
       },
     });
   } catch (e) {
