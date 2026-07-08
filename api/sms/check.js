@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
   // automation/cron). Sends ONE tailored intro text FROM Gio's number so he can
   // then follow up as a human. Secret-guarded so only our automation can call it.
   const preBody = parseBody(req);
-  if (preBody && preBody.action === 'outreach') return outreachHandler(res, preBody);
+  if (preBody && preBody.action === 'outreach') return outreachHandler(req, res, preBody);
 
   const sid = process.env.TWILIO_ACCOUNT_SID || '';
   const token = process.env.TWILIO_AUTH_TOKEN || '';
@@ -90,49 +90,58 @@ function forwardLead(lead) {
   });
 }
 
-/* Notify the team of each lead in ClickUp. Needs CLICKUP_TOKEN (a personal
-   API token). Prefers a Chat message to CLICKUP_CHANNEL_ID (with
-   CLICKUP_WORKSPACE_ID; CLICKUP_FOLLOWERS = comma-separated user IDs to
-   ping); falls back to creating a task in CLICKUP_LIST_ID. Returns a promise
-   the handler awaits so it completes before the instance freezes. */
+/* Deliver each lead to ClickUp (needs CLICKUP_TOKEN, a personal API token).
+   Does BOTH, independently: a chat ping for the team (CLICKUP_CHANNEL_ID +
+   CLICKUP_WORKSPACE_ID) AND a task in CLICKUP_LIST_ID — the task is what the
+   8-minute outreach automation triggers on, and its custom fields feed the
+   tailored text. Awaited so it finishes before the instance freezes. */
 async function clickupLead(lead) {
   const token = process.env.CLICKUP_TOKEN || '';
   if (!token) return;
+  await Promise.allSettled([clickupChat(lead, token), clickupTask(lead, token)]);
+}
 
+async function clickupChat(lead, token) {
   const channelId = process.env.CLICKUP_CHANNEL_ID || '';
   const workspaceId = process.env.CLICKUP_WORKSPACE_ID || '';
+  if (!channelId || !workspaceId) return;
+  const content = [
+    '🌐 **New website grader lead**',
+    '• **Restaurant:** ' + (lead.restaurant || 'Unknown'),
+    '• **Phone:** ' + (lead.phone || ''),
+    lead.score != null ? '• **Score:** ' + lead.score + ' / 100' : '',
+    lead.focus ? '• **Biggest fix:** ' + lead.focus + (lead.focusReason ? ' — ' + lead.focusReason : '') : '',
+    lead.website ? '• **Site:** ' + lead.website : '',
+  ].filter(Boolean).join('\n');
+  const payload = { type: 'message', content_format: 'text/md', content: content };
+  const followers = String(process.env.CLICKUP_FOLLOWERS || '').split(',').map((s) => s.trim()).filter(Boolean);
+  if (followers.length) payload.followers = followers;
+  await fetch('https://api.clickup.com/api/v3/workspaces/' + encodeURIComponent(workspaceId) +
+        '/chat/channels/' + encodeURIComponent(channelId) + '/messages', {
+    method: 'POST',
+    headers: { Authorization: token, 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+}
+
+async function clickupTask(lead, token) {
   const listId = process.env.CLICKUP_LIST_ID || '';
-
-  // Preferred: a chat message to the team channel.
-  if (channelId && workspaceId) {
-    const content = [
-      '🌐 **New website grader lead**',
-      '• **Restaurant:** ' + (lead.restaurant || 'Unknown'),
-      '• **Phone:** ' + (lead.phone || ''),
-      lead.score != null ? '• **Score:** ' + lead.score + ' / 100' : '',
-      lead.focus ? '• **Biggest fix:** ' + lead.focus + (lead.focusReason ? ' — ' + lead.focusReason : '') : '',
-      lead.website ? '• **Site:** ' + lead.website : '',
-    ].filter(Boolean).join('\n');
-    const payload = { type: 'message', content_format: 'text/md', content: content };
-    const followers = String(process.env.CLICKUP_FOLLOWERS || '')
-      .split(',').map((s) => s.trim()).filter(Boolean);
-    if (followers.length) payload.followers = followers;
-    try {
-      const r = await fetch('https://api.clickup.com/api/v3/workspaces/' + encodeURIComponent(workspaceId) +
-            '/chat/channels/' + encodeURIComponent(channelId) + '/messages', {
-        method: 'POST',
-        headers: { Authorization: token, 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      if (r.ok) return; // chat message posted
-    } catch (e) { /* fall through to the task fallback */ }
-  }
-
-  // Fallback: create a task (the v2 API works reliably with a personal token),
-  // so a lead is never silently lost if the chat post fails.
   if (!listId) return;
-  const name = 'Lead: ' + (lead.restaurant || 'Unknown restaurant') +
-    (lead.score != null ? ' (' + lead.score + '/100)' : '');
+  // Populate any matching Text custom fields (create them named Phone / Restaurant
+  // / Score / Focus / Website on the list) so the ClickUp automation can merge
+  // them into the outreach webhook. Missing fields are simply skipped.
+  let customFields = [];
+  try {
+    const fr = await fetch('https://api.clickup.com/api/v2/list/' + encodeURIComponent(listId) + '/field', { headers: { Authorization: token } });
+    if (fr.ok) {
+      const fj = await fr.json().catch(() => ({}));
+      const byName = {};
+      (fj.fields || []).forEach((f) => { byName[String(f.name || '').trim().toLowerCase()] = f; });
+      const setF = (n, v) => { const f = byName[n]; if (f && v != null && v !== '') customFields.push({ id: f.id, value: String(v) }); };
+      setF('phone', lead.phone); setF('restaurant', lead.restaurant); setF('score', lead.score); setF('focus', lead.focus); setF('website', lead.website);
+    }
+  } catch (e) { /* custom fields are optional */ }
+  const name = 'Lead: ' + (lead.restaurant || 'Unknown restaurant') + (lead.score != null ? ' (' + lead.score + '/100)' : '');
   const desc = [
     '- **Phone:** ' + (lead.phone || ''),
     '- **Restaurant:** ' + (lead.restaurant || ''),
@@ -142,10 +151,12 @@ async function clickupLead(lead) {
     '- **Received:** ' + (lead.at || ''),
     '- **Source:** website-grader',
   ].filter(Boolean).join('\n');
+  const bodyObj = { name: name, markdown_description: desc };
+  if (customFields.length) bodyObj.custom_fields = customFields;
   await fetch('https://api.clickup.com/api/v2/list/' + encodeURIComponent(listId) + '/task', {
     method: 'POST',
     headers: { Authorization: token, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name: name, markdown_description: desc }),
+    body: JSON.stringify(bodyObj),
   });
 }
 
@@ -195,9 +206,10 @@ const OUTREACH_FOCUS = {
   ads: "You're just not getting enough new customers through the door yet.",
   _default: 'There are a few quick wins that would bring you more customers.',
 };
-async function outreachHandler(res, body) {
+async function outreachHandler(req, res, body) {
   const secret = process.env.OUTREACH_SECRET || '';
-  if (!secret || body.secret !== secret) return res.status(403).json({ ok: false, error: 'forbidden' });
+  const provided = body.secret || (req.headers && req.headers['x-outreach-secret']) || '';
+  if (!secret || provided !== secret) return res.status(403).json({ ok: false, error: 'forbidden' });
   const phone = toE164(body.phone);
   if (!phone) return res.status(400).json({ ok: false, error: 'invalid_phone' });
   const r = await sendOutreach({ phone: phone, restaurant: body.restaurant, score: body.score, focus: body.focus });
