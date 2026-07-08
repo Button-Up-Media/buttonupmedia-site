@@ -274,14 +274,15 @@ async function competitors(req, res, key) {
   }
   const loc = d.result.geometry.location;
   const selfName = (d.result.name || '').toLowerCase();
+  // A cafe competes with cafes, a bar with bars, a restaurant with same-cuisine
+  // restaurants — NOT just the closest food place. Detect the kind of business,
+  // search that Google place type, and for restaurants bias by cuisine.
+  const category = categoryOf(d.result.name, d.result.types);   // 'cafe' | 'bar' | 'bakery' | 'restaurant'
   const cuisine = cuisineOf(d.result.name, d.result.types);
 
-  // A real competitor is a nearby spot with a SIMILAR cuisine, not just the
-  // closest restaurant (a ramen shop competes with ramen shops, not McDonald's).
-  // Google has no cuisine field, so we bias the search with a cuisine keyword
-  // derived from the name/types, then keep only same-cuisine-looking results.
-  const nParams = new URLSearchParams({ location: `${loc.lat},${loc.lng}`, rankby: 'distance', type: 'restaurant', key });
-  if (cuisine) nParams.set('keyword', cuisine);
+  const nParams = new URLSearchParams({ location: `${loc.lat},${loc.lng}`, rankby: 'distance', type: category, key });
+  const kw = category === 'restaurant' ? cuisine : CATEGORY_KEYWORD[category];
+  if (kw) nParams.set('keyword', kw);
   const n = await getJson(`${BASE}/nearbysearch/json?${nParams.toString()}`);
   if (n.status !== 'OK' && n.status !== 'ZERO_RESULTS') {
     return res.status(502).json({ ok: false, error: 'places_status', status: n.status });
@@ -292,9 +293,13 @@ async function competitors(req, res, key) {
     // a meaningful review base = real competition (a 5.0 from 3 reviews is not)
     .filter((p) => p.rating != null && p.user_ratings_total != null && p.user_ratings_total >= 40);
 
-  // When we know the cuisine, drop results that clearly are not it (the keyword
-  // biases but does not guarantee), matching on the name or a cuisine type.
-  if (cuisine) {
+  // Enforce the same category (nearbysearch type biases but a restaurant with a
+  // bar can still slip in). Keep the filtered set only when it leaves enough.
+  const sameCat = list.filter((p) => categoryOf(p.name, p.types) === category);
+  if (sameCat.length >= 3) list = sameCat;
+
+  // For restaurants, tighten further to the same cuisine when we can.
+  if (category === 'restaurant' && cuisine) {
     const strict = list.filter((p) => cuisineOf(p.name, p.types) === cuisine);
     if (strict.length >= 2) list = strict;
   }
@@ -305,7 +310,24 @@ async function competitors(req, res, key) {
     .slice(0, 8);
 
   res.setHeader('Cache-Control', 'public, s-maxage=86400');
-  return res.status(200).json({ ok: true, cuisine: cuisine, competitors: list });
+  return res.status(200).json({ ok: true, category: category, cuisine: cuisine, competitors: list });
+}
+
+// Broad business category from the name + Google types. Drives which Place type
+// we search for competitors: coffee shops -> cafes, bars -> bars, etc. Cafe wins
+// on a coffee signal (so a "coffee bar" is a cafe, not a bar); a restaurant that
+// merely lists a 'bar' type stays a restaurant unless the name/primary type says
+// otherwise.
+const CATEGORY_KEYWORD = { cafe: 'coffee', bakery: 'bakery' };
+function categoryOf(name, types) {
+  const n = (name || '').toLowerCase();
+  const t = Array.isArray(types) ? types : [];
+  const primary = t[0] || '';
+  const has = (x) => t.indexOf(x) !== -1;
+  if (/\b(coffee|caf[eé]|espresso|roaster|roasters|tea house|teahouse|coffee bar)\b/.test(n) || primary === 'cafe' || has('coffee_shop')) return 'cafe';
+  if (/\b(bakery|patisserie|donut|doughnut|bagel|croissant)\b/.test(n) || primary === 'bakery') return 'bakery';
+  if (/\b(bar|pub|lounge|cocktail|brewery|brewpub|taproom|tavern|speakeasy|winery|wine bar|sports bar|nightclub|night club)\b/.test(n) || primary === 'bar' || primary === 'night_club' || has('night_club')) return 'bar';
+  return 'restaurant';
 }
 
 // Derive a cuisine keyword from a restaurant's name (and Google types when they
