@@ -64,12 +64,12 @@
     body { background: var(--bg-0); color: var(--text); }
     .btn-primary { border-color: rgba(181,126,30,0.45); background: linear-gradient(135deg, #E0A23C, #D08A34); color: #2A1C06; }
     .btn { border-color: var(--line); color: var(--text); background: #FFFFFF; }
-    .sr-wrap { width: min(calc(100% - 32px), 1240px); margin: 0 auto; }
+    .sr-wrap { width: min(calc(100% - 40px), 1400px); margin: 0 auto; }
 
     /* ============ TOP BAR ============ */
     /* header: the same liquid-glass floating pill as /website-grader + /restaurant-websites */
     body { padding-top: 90px; }
-    .gr-nav { position: fixed; top: 16px; left: 0; right: 0; z-index: 999; width: min(calc(100% - 48px), 1180px); margin: 16px auto 0; padding: 12px 20px; background: rgba(255,255,255,0.70); -webkit-backdrop-filter: blur(22px) saturate(1.5); backdrop-filter: blur(22px) saturate(1.5); border: 1px solid rgba(36,28,16,0.10); border-radius: 16px; box-shadow: 0 10px 34px rgba(40,30,12,0.12), inset 0 1px 0 rgba(255,255,255,0.6); }
+    .gr-nav { position: fixed; top: 16px; left: 0; right: 0; z-index: 999; width: min(calc(100% - 40px), 1400px); margin: 16px auto 0; padding: 12px 20px; background: rgba(255,255,255,0.70); -webkit-backdrop-filter: blur(22px) saturate(1.5); backdrop-filter: blur(22px) saturate(1.5); border: 1px solid rgba(36,28,16,0.10); border-radius: 16px; box-shadow: 0 10px 34px rgba(40,30,12,0.12), inset 0 1px 0 rgba(255,255,255,0.6); }
     .gr-nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; }
     .gr-nav-brand { display: inline-flex; align-items: center; flex-shrink: 0; }
     .gr-logo { height: 46px; width: auto; display: block; }
@@ -141,14 +141,14 @@
     @media (min-width: 880px) { .sr-scan { grid-template-columns: 0.8fr 1.2fr; gap: 56px; place-items: start center; } .sr-scan-list { position: sticky; top: 90px; } }
 
     /* ============ REPORT STATE ============ */
-    .sr-report { display: none; padding: clamp(20px, 3vw, 32px) 0 80px; }
+    .sr-report { display: none; padding: clamp(40px, 5vw, 68px) 0 80px; }
     .sr-report.show { display: block; }
     .sr-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
     @media (min-width: 980px) { .sr-grid { grid-template-columns: 320px 1fr; align-items: start; } }
 
     /* sidebar */
     .sr-side { border-radius: var(--r-lg); background: linear-gradient(180deg, #FBEDE4, #FFFFFF 60%); border: 1px solid var(--line-soft); padding: clamp(24px, 3vw, 32px); text-align: center; }
-    @media (min-width: 980px) { .sr-side { position: sticky; top: 80px; } }
+    @media (min-width: 980px) { .sr-side { align-self: start; } }
     .sr-gauge { position: relative; width: 200px; height: 200px; margin: 0 auto; }
     .sr-gauge svg { width: 100%; height: 100%; transform: rotate(-90deg); }
     .sr-gauge .val { position: absolute; inset: 0; display: grid; place-items: center; }
@@ -176,8 +176,8 @@
     .sr-card { border-radius: var(--r-lg); border: 1px solid var(--line-soft); background: #FFFFFF; box-shadow: 0 14px 40px rgba(40,30,12,0.05); padding: clamp(22px, 3vw, 32px); }
     .sr-card h3 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.2rem, 2.4vw, 1.55rem); letter-spacing: -0.02em; line-height: 1.15; }
     .sr-card h3 .gold { color: var(--gold); }
+    /* single column: side-by-side issues + competitors felt busy (3 columns with the sidebar) */
     .sr-twocol { display: grid; grid-template-columns: 1fr; gap: 20px; }
-    @media (min-width: 720px) { .sr-twocol { grid-template-columns: 1fr 1fr; } }
 
     .sr-biz { display: flex; align-items: center; gap: 13px; margin: 18px 0; padding-bottom: 18px; border-bottom: 1px solid var(--line-soft); }
     .sr-biz .ic { width: 46px; height: 46px; border-radius: 11px; background: var(--gold-soft); display: grid; place-items: center; color: var(--gold-text); font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; flex: none; }
