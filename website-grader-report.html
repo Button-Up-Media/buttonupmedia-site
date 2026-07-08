@@ -236,7 +236,21 @@
     .soc-chk.ok .ci { background: rgba(30,126,84,0.12); color: var(--good); }
     .soc-chk.no .ci { background: rgba(207,74,60,0.12); color: var(--poor); }
     .soc-empty { color: var(--text-dim); font-size: 0.94rem; line-height: 1.6; padding: 6px 0; }
+    .soc-link { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(181,126,30,0.35); }
+    .soc-link:hover { border-bottom-color: var(--gold); }
+    .soc-multi { margin-top: 16px; padding: 12px 14px; border-radius: 10px; background: rgba(207,74,60,0.07); border: 1px solid rgba(207,74,60,0.18); font-size: 0.88rem; color: var(--text-dim); line-height: 1.5; }
+    .soc-multi b { color: var(--poor); }
     @media (max-width: 520px) { .soc-checks { grid-template-columns: 1fr; } }
+
+    /* forefront "biggest fix" card (first thing after unlock) */
+    .sr-bigfix { display: flex; gap: 22px; align-items: center; background: linear-gradient(135deg, #241804, #3b2b13); border-radius: var(--r-lg); padding: clamp(22px, 3vw, 30px); margin-bottom: 20px; box-shadow: 0 22px 54px rgba(40,30,12,0.22); }
+    .bf-face { width: 86px; height: 86px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(224,162,60,0.55); flex: none; }
+    .bf-lab { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; color: #E0A23C; }
+    .bf-body h3 { font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.3rem, 2.6vw, 1.72rem); color: #FBF5EA; line-height: 1.12; margin-top: 6px; letter-spacing: -0.01em; }
+    .bf-body p { color: rgba(251,245,234,0.82); font-size: 0.96rem; line-height: 1.55; margin-top: 9px; }
+    .bf-cta { display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 24px; border-radius: 12px; background: linear-gradient(135deg, #E0A23C, #D08A34); color: #2A1C06; font-family: var(--font-display); font-weight: 700; font-size: 0.98rem; text-decoration: none; margin-top: 16px; transition: box-shadow .2s, transform .2s; }
+    .bf-cta:hover { box-shadow: 0 12px 30px rgba(208,138,52,0.42); transform: translateY(-1px); }
+    @media (max-width: 560px) { .sr-bigfix { flex-direction: column; text-align: center; align-items: center; } }
 
     /* pagespeed-style category gauges with mobile/desktop tabs */
     .sr-cat-tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--bg-1); margin: 18px 0 4px; }
@@ -359,11 +373,11 @@
           <div class="sr-blurzone">
             <div class="sr-subs" id="sr-subs"></div>
             <div class="sr-side-cta">
-              <b>Fix everything in weeks, not months</b>
-              <p>Let our team walk you through these results and build the fixes for you.</p>
-              <a href="/website-offer" target="_blank" rel="noopener">
+              <b>Let's fix this together</b>
+              <p>Get on a free call with Juan and we'll walk you through your results and handle the fixes for you.</p>
+              <a href="https://calendly.com/juanh-buttonupmedia/marketing-consultation-for-hospitality" target="_blank" rel="noopener">
                 <img src="media/author-juan.webp" alt="Juan" />
-                Fix this with our team
+                Talk to Juan, free
                 <span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
               </a>
             </div>
@@ -398,6 +412,19 @@
 
           <!-- everything below stays blurred until the report is unlocked -->
           <div class="sr-blurzone" id="sr-blurmain">
+          <!-- FOREFRONT: the single biggest thing to fix + a call with Juan -->
+          <div class="sr-bigfix" id="sr-bigfix" style="display:none;">
+            <img class="bf-face" src="media/author-juan.webp" alt="Juan, Button Up Media" />
+            <div class="bf-body">
+              <div class="bf-lab">What needs your attention most</div>
+              <h3 id="sr-bigfix-h">The biggest thing holding you back</h3>
+              <p id="sr-bigfix-p"></p>
+              <a class="bf-cta" id="sr-bigfix-cta" href="https://calendly.com/juanh-buttonupmedia/marketing-consultation-for-hospitality" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><path d="M8 2v4M16 2v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2"/></svg>
+                Book a free call with Juan
+              </a>
+            </div>
+          </div>
           <div class="sr-twocol" id="sr-twocol">
             <!-- issues -->
             <div class="sr-card">
@@ -458,7 +485,7 @@
               <h3 id="sr-final-h">Want our team to fix this for you?</h3>
               <p id="sr-final-p">Book a free consultation. Juan will walk you through your report and show you exactly what to fix first.</p>
             </div>
-            <a class="book" href="/website-offer" target="_blank" rel="noopener">
+            <a class="book" href="https://calendly.com/juanh-buttonupmedia/marketing-consultation-for-hospitality" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><path d="M8 2v4M16 2v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2"/></svg>
               Book my free call
             </a>
@@ -612,15 +639,18 @@
           return Promise.all(jobs).then(function (out) {
             var tiktok = null, igProfiles = [];
             out.forEach(function (o) { if (o && o.tt) tiktok = o.tt; else if (o) igProfiles.push(o); });
-            // pick the IG account: the site-linked one, else the one that links back
-            var instagram = null;
-            if (ig.fromSite) instagram = igProfiles[0] || null;
-            if (!instagram) instagram = igProfiles.filter(function (p) { return p.linksToWebsite; })[0] || null;
-            // confident only if from the site or it links back; otherwise leave it
-            // unknown (a guess we can't confirm should not be scored or pitched)
-            var confident = !!instagram;
+            // collect ALL accounts confidently this restaurant's (bio links back to
+            // the site, or the one linked FROM the site). 2+ = a real discoverability
+            // problem (customers do not know which to follow).
+            var linked = igProfiles.filter(function (p) { return p.linksToWebsite; });
+            if (ig.fromSite && igProfiles[0] && linked.indexOf(igProfiles[0]) < 0) linked.push(igProfiles[0]);
+            var seen = {}, accounts = [];
+            linked.forEach(function (p) { var k = (p.handle || "").toLowerCase(); if (!seen[k]) { seen[k] = 1; accounts.push(p); } });
+            accounts.sort(function (a, b) { return (b.followers || 0) - (a.followers || 0); });
+            var instagram = accounts[0] || null;
+            // a guess we can't confirm should not be scored or pitched -> stays "maybe"
             var maybe = (!instagram && igProfiles.length === 1) ? igProfiles[0] : null;
-            return { instagram: instagram, tiktok: tiktok, confident: confident, maybe: maybe, fromSite: !!ig.fromSite };
+            return { instagram: instagram, igAccounts: accounts, tiktok: tiktok, confident: !!instagram, maybe: maybe, fromSite: !!ig.fromSite };
           });
         })
         .catch(function () { return null; });
@@ -921,7 +951,9 @@
     function buildCard(scan, place, ux, social) {
       var ev = evalChecks(scan, place, ux);   // keep the 49-check detail for the gated checklist
       var igProfile = social && social.instagram;
+      var multiIg = !!(social && social.igAccounts && social.igAccounts.length >= 2);
       var socialScore = igProfile ? scoreSocialIG(igProfile, { website: (place && place.website) || '', city: (place && place.address) || '', competitorFollowers: (window.__compFollowers || []) }) : null;
+      if (socialScore != null && multiIg) socialScore = Math.max(0, socialScore - 12);   // split-audience penalty
       var cat = computeCategories(scan, place, ux, ev, socialScore);
       var ov = overallEngine(cat);
       var overall = ov.score, g = gradeFor(overall);
@@ -932,6 +964,7 @@
       RUBRIC.forEach(function (sec) { sec.checks.forEach(function (c) { if (ev[c.id] === false) fails.push({ pt: c.label, im: c.why, w: c.w }); }); });
       fails.sort(function (a, b) { return b.w - a.w; });
       var socialFindings = socialFindingsOf(igProfile);
+      if (multiIg) socialFindings.unshift({ pt: "You have " + social.igAccounts.length + " Instagram accounts", im: "Multiple accounts for the same restaurant confuse customers about which to follow and split your audience. Pick one, make it the official one, and retire the rest." });
       var issues = [], seen = {};
       (ux.findings || []).map(function (f) { return { pt: f.pt || f.title, im: f.im || f.impact }; }).concat(socialFindings).concat(fails).forEach(function (f) {
         var k = (f.pt || "").toLowerCase().slice(0, 40); if (f.pt && !seen[k]) { seen[k] = 1; issues.push(f); }
@@ -1164,20 +1197,31 @@
 
     /* Tailored conversion CTA: name the single worst thing and pitch the one
        Button Up service that fixes it, with the tone scaled to the score. */
+    function cap1(s) { s = String(s || ""); return s.charAt(0).toUpperCase() + s.slice(1); }
     function renderPitch(rep) {
+      var pitch = rep && rep.pitch;
+      var bf = document.getElementById("sr-bigfix"), bfh = document.getElementById("sr-bigfix-h"), bfp = document.getElementById("sr-bigfix-p");
       var fh = document.getElementById("sr-final-h"), fp = document.getElementById("sr-final-p");
-      if (!fh || !fp || !rep.pitch) return;  // PSI-only fallback keeps the default CTA
-      var pitch = rep.pitch;
-      var ACTION = { website: "rebuild your website into one that actually sells your food", seo: "get you showing up on Google when locals search", social: "run your social media so it brings people in", ads: "run paid ads that put you in front of hungry locals" };
+      var ACTION = { website: "rebuild your website into one that actually sells your food", seo: "get you showing up on Google when locals search you", social: "run your social so it actually brings people in", ads: "run paid ads that put you in front of hungry locals" };
+      if (!pitch) { if (bf) bf.style.display = "none"; return; }
       if (!pitch.svc) {
-        fh.textContent = "You're in great shape. Want to go from great to unbeatable?";
-        fp.textContent = "Book a free call with Juan. We will find the last few wins and handle them for you.";
+        // genuinely great across the board
+        if (bfh) bfh.textContent = "You're in great shape";
+        if (bfp) bfp.textContent = "Nothing urgent here. Hop on a quick free call with Juan and we'll find the last few wins to make you the spot everyone books.";
+        if (bf) bf.style.display = "";
+        if (fh) fh.textContent = "You're in great shape. Want to go from great to unbeatable?";
+        if (fp) fp.textContent = "Book a free call with Juan. We'll find the last few wins and handle them for you.";
         return;
       }
       var tone = rep.overall >= 78 ? "gentle" : rep.overall >= 55 ? "lever" : "urgent";
+      // forefront card: name the single biggest fix plainly
+      if (bfh) bfh.textContent = cap1(pitch.why) + ".";
+      if (bfp) bfp.textContent = (tone === "urgent" ? "This one's costing you customers right now. " : "") + "That's exactly what we do: we'd " + (ACTION[pitch.svc] || "help you fix it") + ". Jump on a quick free call with Juan and we'll map it out for you, no pressure.";
+      if (bf) bf.style.display = "";
+      // bottom CTA stays as a lighter reminder
       var lead = tone === "urgent" ? "The most urgent fix: " : tone === "gentle" ? "You're solid. The one upgrade I'd make: " : "Here's what I'd fix first: ";
-      fh.textContent = lead + pitch.why + ".";
-      fp.textContent = "That is exactly what we do. We would " + (ACTION[pitch.svc] || "help you fix it") + ". Book a free call with Juan and we will map it out.";
+      if (fh) fh.textContent = lead + pitch.why + ".";
+      if (fp) fp.textContent = "That's exactly what we do. Book a free call with Juan and we'll handle it.";
     }
 
     /* ---- competitors (real Places data, or hide the card) ---- */
@@ -1258,10 +1302,11 @@
         { label: "A business account", ok: !!ig.isBusiness }
       ];
     }
-    function socBlock(platform, handle, stats, checks) {
+    function socBlock(platform, handle, url, stats, checks) {
       var s = stats.map(function (x) { return '<div class="soc-stat"><span>' + esc(x[0]) + '</span><b' + (x[2] ? ' class="' + x[2] + '"' : '') + '>' + esc(x[1]) + '</b></div>'; }).join("");
       var c = checks.length ? '<div class="soc-checks">' + checks.map(function (k) { return '<div class="soc-chk ' + (k.ok ? "ok" : "no") + '"><span class="ci">' + (k.ok ? "&#10003;" : "&#10005;") + '</span>' + esc(k.label) + '</div>'; }).join("") + '</div>' : "";
-      return '<div class="soc-block"><div class="soc-head"><b>' + esc(platform) + '</b><span>@' + esc(handle) + '</span></div><div class="soc-stats">' + s + '</div>' + c + '</div>';
+      var htext = url ? '<a class="soc-link" href="' + url + '" target="_blank" rel="noopener">@' + esc(handle) + '</a>' : '@' + esc(handle);
+      return '<div class="soc-block"><div class="soc-head"><b>' + esc(platform) + '</b><span>' + htext + '</span></div><div class="soc-stats">' + s + '</div>' + c + '</div>';
     }
     function renderSocialCard(social) {
       var card = document.getElementById("sr-socialcard"), body = document.getElementById("sr-social-body");
@@ -1277,10 +1322,15 @@
         var d = ig.latestPostAt ? Math.round((Date.now() - ig.latestPostAt) / 86400000) : null;
         var recency = d == null ? "—" : d <= 1 ? "Today" : d < 365 ? d + " days ago" : Math.round(d / 365) + "+ yrs ago";
         var recTone = d == null ? "" : d <= 14 ? "good" : d <= 60 ? "warn" : "poor";
-        html += socBlock("Instagram", ig.handle, [["Followers", fmtK(ig.followers)], ["Posts", ig.posts != null ? ig.posts.toLocaleString() : "—"], ["Last post", recency, recTone]], igBioChecks(ig));
+        html += socBlock("Instagram", ig.handle, "https://www.instagram.com/" + ig.handle, [["Followers", fmtK(ig.followers)], ["Posts", ig.posts != null ? ig.posts.toLocaleString() : "—"], ["Last post", recency, recTone]], igBioChecks(ig));
       }
       if (tt && tt.found) {
-        html += socBlock("TikTok", tt.handle, [["Followers", fmtK(tt.followers)], ["Videos", tt.videos != null ? tt.videos.toLocaleString() : "—"], ["Total likes", fmtK(tt.likes)]], []);
+        html += socBlock("TikTok", tt.handle, "https://www.tiktok.com/@" + tt.handle, [["Followers", fmtK(tt.followers)], ["Videos", tt.videos != null ? tt.videos.toLocaleString() : "—"], ["Total likes", fmtK(tt.likes)]], []);
+      }
+      // multiple accounts for the same restaurant = a discoverability problem
+      var accts = social && social.igAccounts;
+      if (accts && accts.length >= 2) {
+        html += '<div class="soc-multi">&#9888; We found <b>' + accts.length + ' Instagram accounts</b> linking to your site (' + accts.map(function (a) { return "@" + esc(a.handle); }).join(", ") + '). Customers do not know which to follow, and it splits your audience. Pick one and retire the rest.</div>';
       }
       body.innerHTML = html;
       card.style.display = "";
