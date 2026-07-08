@@ -99,7 +99,7 @@
     .btn { border-color: var(--line); color: var(--text); background: #FFFFFF; }
     .btn:hover { border-color: rgba(181,126,30,0.4); }
 
-    .gr-wrap { width: min(calc(100% - 36px), 1200px); margin: 0 auto; }
+    .gr-wrap { width: min(calc(100% - 40px), 1400px); margin: 0 auto; }
     .gr-gold { color: var(--gold); }
     .gr-eyebrow { display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-display); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-text); }
 
@@ -132,12 +132,12 @@
     }
 
     /* ============ HERO ============ */
-    .gr-hero { position: relative; overflow: hidden; padding: clamp(100px, 14vw, 140px) 0 clamp(50px, 8vw, 96px); text-align: center; }
+    .gr-hero { position: relative; overflow: hidden; padding: clamp(96px, 9vw, 120px) 0 clamp(34px, 5vw, 56px); text-align: center; scroll-snap-align: start; }
     .gr-rating { display: inline-flex; align-items: center; gap: 9px; font-size: 0.82rem; font-weight: 600; color: var(--text-dim); }
     .gr-stars { display: inline-flex; gap: 2px; color: var(--gold); }
     .gr-stars svg { width: 15px; height: 15px; }
-    .gr-hero h1 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.04em; font-size: clamp(2.1rem, 6.2vw, 4.1rem); line-height: 1.0; margin: 16px auto 0; max-width: 16ch; text-wrap: balance; }
-    .gr-hero-sub { max-width: 50ch; margin: 18px auto 0; font-size: clamp(1.02rem, 2.3vw, 1.2rem); line-height: 1.6; color: var(--text-dim); }
+    .gr-hero h1 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.035em; font-size: clamp(1.85rem, 4.3vw, 3rem); line-height: 1.05; margin: 14px auto 0; max-width: 22ch; text-wrap: balance; }
+    .gr-hero-sub { max-width: 54ch; margin: 14px auto 0; font-size: clamp(0.98rem, 1.5vw, 1.08rem); line-height: 1.55; color: var(--text-dim); }
 
     /* search box */
     .gr-search { position: relative; max-width: 540px; margin: clamp(26px, 4vw, 36px) auto 0; z-index: 20; }
@@ -173,7 +173,7 @@
     .gr-hero-fine svg { width: 14px; height: 14px; color: var(--teal); }
 
     /* ============ HERO PHONE MOCKUP ============ */
-    .gr-hero-stage { position: relative; margin: clamp(40px, 6vw, 64px) auto 0; max-width: 720px; }
+    .gr-hero-stage { position: relative; margin: clamp(24px, 4vw, 40px) auto 0; max-width: 720px; }
     .gr-phone-box { position: relative; height: clamp(280px, 40vw, 360px); border-radius: clamp(20px, 4vw, 30px); display: flex; justify-content: center; align-items: center; clip-path: inset(-240px 0 0 0 round clamp(20px, 4vw, 30px)); background: linear-gradient(135deg, #E7B658, #D89A3C 52%, #ECC079); }
     .gr-phone-box::before { content: ""; position: absolute; inset: 0 50% 0 0; background: radial-gradient(120% 90% at 0% 55%, rgba(255,255,255,0.18), transparent 62%); pointer-events: none; }
     .gr-phone-box::after { content: ""; position: absolute; inset: 0 0 0 50%; background: radial-gradient(120% 90% at 100% 55%, rgba(255,255,255,0.26), transparent 62%); pointer-events: none; }
@@ -237,11 +237,13 @@
     .gr-issue span { font-size: 0.69rem; color: var(--text-soft); line-height: 1.4; }
 
     /* ============ SECTION SCAFFOLD ============ */
-    .gr-section { padding: clamp(56px, 9vw, 110px) 0; }
+    .gr-section { padding: clamp(38px, 5.5vw, 68px) 0; }
+    #fixes { scroll-snap-align: start; }
+    html, body { scroll-snap-type: y proximity; scroll-padding-top: 100px; }
     .gr-section-head { max-width: 40ch; }
     .gr-section-head.--center { max-width: 34ch; margin: 0 auto; text-align: center; }
-    .gr-section-head h2 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.035em; font-size: clamp(1.9rem, 4.6vw, 3.1rem); line-height: 1.05; margin-top: 12px; text-wrap: balance; }
-    .gr-section-head p { margin-top: 14px; color: var(--text-dim); font-size: 1.06rem; line-height: 1.6; }
+    .gr-section-head h2 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.03em; font-size: clamp(1.55rem, 3vw, 2.3rem); line-height: 1.08; margin-top: 10px; text-wrap: balance; }
+    .gr-section-head p { margin-top: 12px; color: var(--text-dim); font-size: 1rem; line-height: 1.55; }
 
     /* split layout: heading left, content right on wide screens */
     .gr-split { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 4vw, 46px); }
@@ -263,7 +265,7 @@
     .gr-panel.is-active { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 4vw, 52px); align-items: center; animation: grFade .5s ease both; }
     @keyframes grFade { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
     .gr-panel-copy .pe { color: var(--gold-text); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; }
-    .gr-panel-copy h3 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 3vw, 2rem); letter-spacing: -0.02em; line-height: 1.1; margin: 12px 0 14px; }
+    .gr-panel-copy h3 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.2rem, 2.2vw, 1.6rem); letter-spacing: -0.015em; line-height: 1.12; margin: 10px 0 12px; }
     .gr-panel-copy p { color: var(--text-dim); font-size: 1.02rem; line-height: 1.5; max-width: 44ch; }
     .gr-panel-list { margin-top: 18px; display: grid; gap: 11px; }
     .gr-panel-list li { display: flex; align-items: flex-start; gap: 11px; font-size: 0.96rem; color: var(--text); line-height: 1.5; }
@@ -358,7 +360,7 @@
     @media (min-width: 1060px) { .gr-feat-grid { grid-template-columns: repeat(4, 1fr); } .gr-feat { padding: clamp(22px, 1.8vw, 28px); } .gr-feat h3 { font-size: 1.08rem; } }
 
     /* ============ WHY (speed / mobile / seo) ============ */
-    .gr-why { background: linear-gradient(135deg, #E0A23C, #C9820E); color: #2A1C06; border-radius: clamp(24px, 4vw, 44px); padding: clamp(40px, 6vw, 80px) clamp(24px, 4vw, 64px); position: relative; overflow: hidden; }
+    .gr-why { background: linear-gradient(135deg, #E0A23C, #C9820E); color: #2A1C06; border-radius: clamp(20px, 3vw, 32px); padding: clamp(26px, 3.5vw, 44px) clamp(22px, 3.5vw, 44px); position: relative; overflow: hidden; }
     .gr-why::before { content: ""; position: absolute; top: -20%; right: -10%; width: 460px; height: 460px; background: radial-gradient(circle, rgba(255,255,255,0.22), transparent 68%); pointer-events: none; }
     .gr-why-top { position: relative; display: grid; grid-template-columns: 1fr; gap: clamp(26px, 4vw, 44px); align-items: center; }
     .gr-why-head { position: relative; max-width: 30ch; }
@@ -645,7 +647,7 @@
     /* ============ FINAL CTA ============ */
     .gr-final { background: linear-gradient(135deg, #E0A23C, #C9820E); border-radius: clamp(24px, 4vw, 44px); padding: clamp(34px, 4vw, 52px) clamp(24px, 4vw, 60px); position: relative; overflow: hidden; }
     .gr-final-grid { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 4vw, 48px); align-items: center; }
-    .gr-final h2 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.035em; font-size: clamp(1.9rem, 4.6vw, 3rem); line-height: 1.04; color: #2A1C06; max-width: 16ch; }
+    .gr-final h2 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.03em; font-size: clamp(1.6rem, 3vw, 2.3rem); line-height: 1.08; color: #2A1C06; max-width: 18ch; }
     .gr-final p { margin-top: 14px; color: rgba(42,28,6,0.92); font-size: 1.04rem; line-height: 1.6; max-width: 42ch; }
     .gr-final-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
     .gr-final .btn-dark { background: #2A1C06; color: #FBF5EA; border: none; }
@@ -659,7 +661,7 @@
     /* the standalone scheduler .gr-host rule (below) adds top margin + centering via a bare selector;
        scope it out of the mid-CTA host card so the grid's align-items:center places it cleanly */
     .gr-final .gr-host { margin: 0; }
-    @media (min-width: 820px) { .gr-final-grid { grid-template-columns: 1.3fr 0.7fr; gap: clamp(36px, 4vw, 60px); } .gr-final h2 { font-size: clamp(2rem, 3.4vw, 2.7rem); } }
+    @media (min-width: 820px) { .gr-final-grid { grid-template-columns: 1.3fr 0.7fr; gap: clamp(36px, 4vw, 60px); } .gr-final h2 { font-size: clamp(1.7rem, 2.6vw, 2.2rem); } }
 
     /* ============ FOOTER ============ */
     .gr-footer { padding: clamp(40px, 6vw, 72px) 0 40px; border-top: 1px solid var(--line); }
@@ -858,7 +860,7 @@
       <div class="gr-wrap">
         <div class="gr-section-head gr-rise">
           <span class="gr-eyebrow">What a great website does</span>
-          <h2>More traffic, more orders, more regulars.</h2>
+          <h2>More Traffic, More Orders, More Regulars.</h2>
         </div>
         <div class="gr-tabs gr-rise d1">
           <div class="gr-tablist" role="tablist">
@@ -872,7 +874,7 @@
           <div class="gr-panel is-active" data-panel="traffic">
             <div class="gr-panel-copy">
               <span class="pe">Upgrade your SEO</span>
-              <h3>Get found when hungry locals search.</h3>
+              <h3>Get Found When Hungry Locals Search.</h3>
               <p>A fast, SEO-built site ranks for the searches that actually fill tables, &ldquo;best tacos near me,&rdquo; not page three of Google.</p>
               <ul class="gr-panel-list">
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Local SEO + neighborhood pages</li>
@@ -891,7 +893,7 @@
           <div class="gr-panel" data-panel="sales">
             <div class="gr-panel-copy">
               <span class="pe">Convert the click</span>
-              <h3>Turn visitors into orders, not bounces.</h3>
+              <h3>Turn Visitors Into Orders, Not Bounces.</h3>
               <p>Clear menus, one-tap ordering, and reservations wired right in, so the people who find you actually book.</p>
               <ul class="gr-panel-list">
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Online ordering &amp; reservations</li>
@@ -915,7 +917,7 @@
           <div class="gr-panel" data-panel="repeat">
             <div class="gr-panel-copy">
               <span class="pe">Keep them coming back</span>
-              <h3>Make regulars out of first-timers.</h3>
+              <h3>Make Regulars Out Of First-Timers.</h3>
               <p>Email and SMS capture built into the site keeps your best guests one tap from their next visit.</p>
               <ul class="gr-panel-list">
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Email &amp; SMS list capture</li>
@@ -941,7 +943,7 @@
           <div class="gr-panel" data-panel="mobile">
             <div class="gr-panel-copy">
               <span class="pe">Built for the phone</span>
-              <h3>Where 70%+ of your guests already are.</h3>
+              <h3>Where 70%+ Of Your Guests Already Are.</h3>
               <p>Most diners check you out on their phone first. If it&rsquo;s slow or clumsy there, they&rsquo;re gone before they ever see your menu.</p>
               <ul class="gr-panel-list">
                 <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Mobile-first, loads in under 2 seconds</li>
@@ -977,7 +979,6 @@
         <div class="gr-why gr-rise">
           <div class="gr-why-head">
             <span class="gr-eyebrow">Why it matters</span>
-            <h2>A slow, dated site quietly costs you every single night.</h2>
             <p>Three numbers every restaurant owner should know, because your website is working for you or against you 24/7.</p>
           </div>
           <div class="gr-why-grid">
@@ -1079,28 +1080,28 @@
       <div class="gr-wrap">
         <div class="gr-section-head --center gr-rise">
           <span class="gr-eyebrow">How we build</span>
-          <h2>The same tech as the big brands, built for your spot.</h2>
+          <h2>The Same Tech As The Big Brands, Built For Your Spot.</h2>
           <p>Custom-coded, mobile-first, and bilingual from day one. Everything a national chain has, sized for an independent restaurant.</p>
         </div>
         <div class="gr-feat-grid">
           <div class="gr-feat gr-rise">
             <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div>
-            <h3>Get found on Google &amp; AI</h3>
+            <h3>Get Found On Google &amp; AI</h3>
             <p>SEO baked in as the baseline, menu pages, local pages, and structure so search engines and AI both surface you.</p>
           </div>
           <div class="gr-feat gr-rise d1">
             <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
-            <h3>A site as fast as a big brand&rsquo;s</h3>
+            <h3>A Site As Fast As A Big Brand&rsquo;s</h3>
             <p>Hand-coded and mobile-first, loading in under two seconds, because your guests are deciding on their phones.</p>
           </div>
           <div class="gr-feat gr-rise">
             <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18"/><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 15h4"/></svg></div>
-            <h3>Ordering &amp; reservations wired in</h3>
+            <h3>Ordering &amp; Reservations Wired In</h3>
             <p>Toast, Square, Clover, OpenTable and more, connected so the click turns into a real order or booking.</p>
           </div>
           <div class="gr-feat gr-rise d1">
             <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 0 20 15.3 15.3 0 0 1 0-20z"/></svg></div>
-            <h3>English &amp; Spanish, every page</h3>
+            <h3>English &amp; Spanish, Every Page</h3>
             <p>A one-tap toggle greets every guest in their language, and Google indexes both, doubling how you get found.</p>
           </div>
         </div>
@@ -1113,7 +1114,7 @@
         <div class="gr-split">
         <div class="gr-section-head gr-rise">
           <span class="gr-eyebrow">Owners say it best</span>
-          <h2>Real restaurants. Real partnership.</h2>
+          <h2>Real Restaurants. Real Partnership.</h2>
         </div>
         <div class="gr-quotes">
           <div class="gr-quote gr-rise">
@@ -1141,7 +1142,7 @@
         <div class="gr-final gr-rise">
           <div class="gr-final-grid">
             <div>
-              <h2>Ready to see where you really stand?</h2>
+              <h2>Ready To See Where You Really Stand?</h2>
               <p>Book a 15-minute call with Juan, we&rsquo;ll walk through exactly what&rsquo;s costing you bookings and how to fix it, then get started today.</p>
               <div class="gr-final-actions">
                 <a class="btn btn-light" href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener" style="height:50px;padding:0 24px;display:inline-flex;align-items:center;font-family:var(--font-display);font-weight:700;">Book a consult</a>
@@ -1171,18 +1172,18 @@
           <div>
             <div class="gr-section-head gr-rise" style="margin-bottom:8px;">
               <span class="gr-eyebrow">Why we started Button Up</span>
-              <h2 style="font-size:clamp(1.7rem,4vw,2.6rem);">Built to give restaurants a fair shot.</h2>
+              <h2 style="font-size:clamp(1.7rem,4vw,2.6rem);">Built To Give Restaurants A Fair Shot.</h2>
             </div>
             <div class="gr-belief gr-rise d1">
-              <h3>Great food deserves to be found.</h3>
+              <h3>Great Food Deserves To Be Found.</h3>
               <p>We founded Button Up in 2022 so restaurant, bar, and coffee shop owners could advertise affordably and stand out in brutally crowded markets, without a national chain&rsquo;s budget.</p>
             </div>
             <div class="gr-belief gr-rise d2">
-              <h3>You cook. We sell.</h3>
+              <h3>You Cook. We Sell.</h3>
               <p>You focus on your product, your team, and your craft. We handle getting your restaurant seen, clicked, and booked, so growth doesn&rsquo;t pull you out of the kitchen.</p>
             </div>
             <div class="gr-belief gr-rise d3">
-              <h3>A small team that actually shows up.</h3>
+              <h3>A Small Team That Actually Shows Up.</h3>
               <p>You work directly with the same Miami team start to finish, not a ticket queue. We build every site like it&rsquo;s our own restaurant on the line.</p>
             </div>
           </div>
@@ -1195,7 +1196,7 @@
       <div class="gr-wrap">
         <div class="gr-section-head --center gr-rise">
           <span class="gr-eyebrow">Recent work</span>
-          <h2>Don&rsquo;t take our word for it. <span style="color:var(--gold)">Take a look.</span></h2>
+          <h2>Don&rsquo;t Take Our Word For It. <span style="color:var(--gold)">Take A Look.</span></h2>
           <p>Real restaurant &amp; hospitality sites we designed and built. Hover to explore the full page, top to bottom.</p>
         </div>
 
@@ -1214,7 +1215,7 @@
           </div>
           <div class="gw-copy">
             <span class="tag">WOA Cocktails &middot; Full site build</span>
-            <h3>A site that pours as smooth as the product.</h3>
+            <h3>A Site That Pours As Smooth As The Product.</h3>
             <div class="gw-rows">
               <div class="gw-row">
                 <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 2"/></svg></span>
@@ -1235,7 +1236,7 @@
         <div class="gw-case gr-rise d1">
           <div class="gw-copy">
             <span class="tag">Rusty Pelican &middot; Full site build</span>
-            <h3>An icon&rsquo;s site, as breathtaking as the view.</h3>
+            <h3>An Icon&rsquo;s Site, As Breathtaking As The View.</h3>
             <div class="gw-rows">
               <div class="gw-row">
                 <span class="k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 2"/></svg></span>
@@ -1272,7 +1273,7 @@
       <div class="gr-wrap">
         <div class="gr-section-head --center gr-rise" style="max-width: min(880px, 92%);">
           <span class="gr-eyebrow">The offer</span>
-          <h2>A custom website, built in a week.</h2>
+          <h2>A Custom Website, Built In A Week.</h2>
           <p>No templates. No monthly fees. You own everything, a fully custom site, built for Google, AI search, mobile, and Spanish-speaking Miami.</p>
         </div>
 
@@ -1295,7 +1296,7 @@
 
         <!-- what's included -->
         <div class="gr-get-wrap gr-rise d1">
-          <h3 class="gr-get-h">Everything&rsquo;s included.</h3>
+          <h3 class="gr-get-h">Everything&rsquo;s Included.</h3>
           <div class="gr-get-grid">
             <div class="gr-get">
               <span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
@@ -1326,7 +1327,7 @@
 
         <!-- how it works -->
         <div class="gr-how2 gr-rise d1">
-          <h3 class="gr-how2-h">How it works</h3>
+          <h3 class="gr-how2-h">How It Works</h3>
           <p class="gr-how2-s">A quick call, then we do the heavy lifting. Your finished site lands in a week.</p>
           <div class="gr-flow">
             <div class="gr-flowstep">
@@ -1363,7 +1364,7 @@
       <div class="gr-wrap">
         <div class="gr-section-head --center gr-rise">
           <span class="gr-eyebrow">Book your call</span>
-          <h2 style="text-align: center;">Grab a time that works for you</h2>
+          <h2 style="text-align: center;">Grab A Time That Works For You</h2>
           <p>Pick a 15-minute slot with Juan below. No back-and-forth emails.</p>
         </div>
         <div class="gr-host gr-rise">
