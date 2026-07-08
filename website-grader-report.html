@@ -140,8 +140,8 @@
     .sr-gauge svg { width: 100%; height: 100%; transform: rotate(-90deg); }
     .sr-gauge .val { position: absolute; inset: 0; display: grid; place-items: center; }
     .sr-gauge .val b { grid-area: 1 / 1; font-family: var(--font-hero); font-weight: 800; font-size: 3.4rem; line-height: 1; color: var(--text-head); }
-    .sr-gauge .val span { grid-area: 1 / 1; transform: translateY(33px); font-size: 0.82rem; color: var(--text-soft); }
-    .sr-grade-lab { margin-top: 16px; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-soft); }
+    .sr-gauge .val span { grid-area: 1 / 1; transform: translateY(33px); font-size: 0.82rem; color: var(--text-dim); }
+    .sr-grade-lab { margin-top: 16px; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-dim); }
     .sr-grade { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; color: var(--poor); }
     .sr-grade-note { margin-top: 12px; font-size: 0.86rem; color: var(--text-dim); line-height: 1.5; }
     .sr-subs { margin-top: 24px; text-align: left; display: grid; gap: 4px; }
@@ -150,7 +150,7 @@
     .sr-sub .lbl { flex: 1; }
     .sr-sub .lbl b { display: block; font-size: 0.92rem; font-weight: 700; color: var(--text-head); }
     .sr-sub .lbl small { font-size: 0.78rem; font-weight: 700; }
-    .sr-sub .pts { font-size: 0.86rem; font-weight: 700; color: var(--text-soft); }
+    .sr-sub .pts { font-size: 0.86rem; font-weight: 700; color: var(--text-dim); }
     .sr-side-cta { margin-top: 24px; padding: 18px; border-radius: var(--r-md); background: var(--ink); text-align: left; }
     .sr-side-cta b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: #FBF5EA; }
     .sr-side-cta p { font-size: 0.84rem; color: rgba(244,236,221,0.7); margin-top: 4px; line-height: 1.45; }
@@ -175,10 +175,10 @@
     .sr-prob .pt { font-size: 0.92rem; color: var(--text-head); font-weight: 600; }
     .sr-prob .im { font-size: 0.82rem; color: var(--text-soft); margin-top: 2px; line-height: 1.45; }
     /* area tag so every finding says what it is about (website / social / google...) */
-    .sr-tag { display: inline-block; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 6px; margin-right: 8px; vertical-align: 1.5px; background: var(--bg-2); color: var(--text-soft); }
-    .sr-tag.tag-content, .sr-tag.tag-appearance, .sr-tag.tag-speed { background: rgba(181,126,30,0.14); color: var(--gold); }
-    .sr-tag.tag-local, .sr-tag.tag-seo { background: rgba(30,126,84,0.13); color: var(--teal); }
-    .sr-tag.tag-social { background: rgba(207,74,60,0.12); color: var(--poor); }
+    .sr-tag { display: inline-block; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 6px; margin-right: 8px; vertical-align: 1.5px; background: var(--bg-2); color: var(--text-dim); }
+    .sr-tag.tag-content, .sr-tag.tag-appearance, .sr-tag.tag-speed { background: rgba(181,126,30,0.14); color: #8A5E12; }
+    .sr-tag.tag-local, .sr-tag.tag-seo { background: rgba(30,126,84,0.13); color: #1A6E49; }
+    .sr-tag.tag-social { background: rgba(207,74,60,0.12); color: #B23325; }
 
     /* owner.com-style detailed report card */
     .rc-sec { border-top: 1px solid var(--line-soft); padding: 20px 0 6px; }
@@ -210,12 +210,16 @@
 
     /* social + presence scoreboard (you vs nearby competitors) */
     .sb-row { display: grid; grid-template-columns: 1fr 74px 74px 56px; gap: 8px; align-items: center; padding: 12px 10px; border-top: 1px solid var(--line-soft); font-size: 0.9rem; }
-    .sb-row.sb-head { border-top: none; color: var(--text-soft); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; padding-bottom: 4px; }
+    .sb-row.sb-head { border-top: none; color: var(--text-dim); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; padding-bottom: 4px; }
     .sb-name { font-weight: 600; color: var(--text-head); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .sb-col { text-align: right; color: var(--text-dim); }
     .sb-col b { color: var(--text-head); font-weight: 800; }
     .sb-row.sb-you { background: var(--gold-soft); border-radius: 12px; border: 1px solid rgba(181,126,30,0.22); margin: 4px 0; }
-    .sb-row.sb-you .sb-name { color: var(--gold); font-weight: 800; }
+    .sb-row.sb-you .sb-name { color: #8A5E12; font-weight: 800; }
+    @media (max-width: 480px) {
+      .sb-row { grid-template-columns: 1fr 58px 52px 46px; gap: 6px; padding: 12px 6px; font-size: 0.82rem; }
+      .sb-row.sb-head { font-size: 0.62rem; letter-spacing: 0.02em; }
+    }
 
     /* one-tap Instagram confirm */
     .sr-igconfirm { margin-top: 14px; padding: 14px; border-radius: 12px; background: var(--gold-soft); border: 1px solid rgba(181,126,30,0.22); }
@@ -230,9 +234,9 @@
     .soc-block:first-child { border-top: none; padding-top: 4px; }
     .soc-head { display: flex; align-items: baseline; gap: 10px; }
     .soc-head b { font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; color: var(--text-head); }
-    .soc-head span { color: var(--gold); font-weight: 700; font-size: 0.9rem; }
+    .soc-head span { color: #8A5E12; font-weight: 700; font-size: 0.9rem; }
     .soc-stats { display: flex; gap: 26px; margin-top: 12px; flex-wrap: wrap; }
-    .soc-stat span { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-soft); }
+    .soc-stat span { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim); }
     .soc-stat b { font-family: var(--font-hero); font-weight: 800; font-size: 1.32rem; color: var(--text-head); }
     .soc-stat b.good { color: var(--good); } .soc-stat b.warn { color: var(--fair); } .soc-stat b.poor { color: var(--poor); }
     .soc-checks { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; margin-top: 16px; }
@@ -241,10 +245,10 @@
     .soc-chk.ok .ci { background: rgba(30,126,84,0.12); color: var(--good); }
     .soc-chk.no .ci { background: rgba(207,74,60,0.12); color: var(--poor); }
     .soc-empty { color: var(--text-dim); font-size: 0.94rem; line-height: 1.6; padding: 6px 0; }
-    .soc-link { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(181,126,30,0.35); }
-    .soc-link:hover { border-bottom-color: var(--gold); }
+    .soc-link { color: #8A5E12; text-decoration: none; border-bottom: 1px solid rgba(138,94,18,0.4); }
+    .soc-link:hover { border-bottom-color: #8A5E12; }
     .soc-multi { margin-top: 16px; padding: 12px 14px; border-radius: 10px; background: rgba(207,74,60,0.07); border: 1px solid rgba(207,74,60,0.18); font-size: 0.88rem; color: var(--text-dim); line-height: 1.5; }
-    .soc-multi b { color: var(--poor); }
+    .soc-multi b { color: #B23325; }
     @media (max-width: 520px) { .soc-checks { grid-template-columns: 1fr; } }
 
     /* forefront "biggest fix" card (first thing after unlock) */
@@ -259,7 +263,7 @@
 
     /* pagespeed-style category gauges with mobile/desktop tabs */
     .sr-cat-tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--bg-1); margin: 18px 0 4px; }
-    .sr-cat-tab { padding: 8px 20px; border: none; border-radius: 999px; background: none; font-family: var(--font-display); font-weight: 700; font-size: 0.88rem; color: var(--text-soft); cursor: pointer; transition: all .2s; }
+    .sr-cat-tab { padding: 8px 20px; border: none; border-radius: 999px; background: none; font-family: var(--font-display); font-weight: 700; font-size: 0.88rem; color: var(--text-dim); cursor: pointer; transition: all .2s; }
     .sr-cat-tab.is-active { background: #FFFFFF; color: var(--text-head); box-shadow: 0 2px 8px rgba(40,30,12,0.08); }
     .sr-cats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
     @media (min-width: 560px) { .sr-cats { grid-template-columns: repeat(4, 1fr); } }
@@ -515,7 +519,8 @@
     var secsEl = document.getElementById("sr-secs");
 
     var bizName = nameParam || "Your restaurant";
-    var COLORS = { good: "#1E7E54", fair: "#C9820E", poor: "#CF4A3C", dim: "#9a8f7d" };
+    var COLORS = { good: "#1E7E54", fair: "#C9820E", poor: "#CF4A3C", dim: "#9a8f7d",
+      goodText: "#176544", fairText: "#8F5D06", poorText: "#B23325" };  /* darker, AA-safe for small caption text; the vivid ones stay for rings/graphics */
     var lastScan = null, placeInfo = null, animDone = false, lastUx = null, lastReport = null;
     var socialPromise = null, socialInfo = null;
     var compPromise = null, findQueue = [], findTimer = null;
@@ -1003,9 +1008,9 @@
     function mkSub(key, label, pct, max) {
       pct = Math.max(0, Math.min(100, pct || 0));
       var r = ratingOf(pct);
-      return { key: key, label: label, points: Math.round(pct / 100 * max), max: max, percent: Math.round(pct), rating: r.label, color: r.color };
+      return { key: key, label: label, points: Math.round(pct / 100 * max), max: max, percent: Math.round(pct), rating: r.label, color: r.color, textColor: r.textColor };
     }
-    function ratingOf(p) { if (p >= 75) return { label: "Good", color: COLORS.good }; if (p >= 50) return { label: "Fair", color: COLORS.fair }; return { label: "Poor", color: COLORS.poor }; }
+    function ratingOf(p) { if (p >= 75) return { label: "Good", color: COLORS.good, textColor: COLORS.goodText }; if (p >= 50) return { label: "Fair", color: COLORS.fair, textColor: COLORS.fairText }; return { label: "Poor", color: COLORS.poor, textColor: COLORS.poorText }; }
     function gradeFor(o) { if (o >= 85) return { label: "Excellent", color: COLORS.good }; if (o >= 70) return { label: "Good", color: COLORS.good }; if (o >= 50) return { label: "Fair", color: COLORS.fair }; return { label: "Poor", color: COLORS.poor }; }
 
     /* No website found: still show the Google listing we did find, score the
@@ -1082,9 +1087,10 @@
     function subRow(label, ratingTxt, pct, color) {
       pct = Math.max(0, Math.min(100, pct || 0));
       var doff = 97 * (1 - pct / 100);
+      var tc = color === COLORS.fair ? COLORS.fairText : color === COLORS.poor ? COLORS.poorText : color === COLORS.good ? COLORS.goodText : color;  /* AA-safe caption text; ring keeps the vivid color */
       return '<div class="sr-sub">' +
         '<svg class="ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(44,38,28,0.1)" stroke-width="4"/><circle cx="18" cy="18" r="15.5" fill="none" stroke="' + color + '" stroke-width="4" stroke-linecap="round" stroke-dasharray="97" stroke-dashoffset="' + doff.toFixed(1) + '" transform="rotate(-90 18 18)"/></svg>' +
-        '<div class="lbl"><b>' + esc(label) + '</b><small style="color:' + color + ';">' + esc(ratingTxt) + '</small></div></div>';
+        '<div class="lbl"><b>' + esc(label) + '</b><small style="color:' + tc + ';">' + esc(ratingTxt) + '</small></div></div>';
     }
 
     /* Cold PageSpeed scans (especially Wix/Squarespace template sites) often
@@ -1152,7 +1158,7 @@
         var doff = 97 * (1 - s.points / s.max);
         return '<div class="sr-sub">' +
           '<svg class="ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(44,38,28,0.1)" stroke-width="4"/><circle cx="18" cy="18" r="15.5" fill="none" stroke="' + s.color + '" stroke-width="4" stroke-linecap="round" stroke-dasharray="97" stroke-dashoffset="' + doff.toFixed(1) + '" transform="rotate(-90 18 18)"/></svg>' +
-          '<div class="lbl"><b>' + esc(s.label) + '</b><small style="color:' + s.color + ';">' + esc(s.rating) + '</small></div>' +
+          '<div class="lbl"><b>' + esc(s.label) + '</b><small style="color:' + (s.textColor || s.color) + ';">' + esc(s.rating) + '</small></div>' +
           '<div class="pts">' + s.points + '/' + s.max + '</div></div>';
       }).join("");
 

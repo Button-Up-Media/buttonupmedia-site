@@ -83,8 +83,9 @@
       --text: #2C261C;
       --text-head: #1C170F;
       --text-dim: rgba(44,38,28,0.74);
-      --text-soft: rgba(44,38,28,0.52);
+      --text-soft: rgba(44,38,28,0.7);
       --gold: #B57E1E;
+      --gold-text: #8A5E12;   /* AA-safe gold for small text; --gold stays for fills/icons/large headlines */
       --gold-soft: rgba(181,126,30,0.12);
       --teal: #1E7E54;
       --good: #1E7E54;
@@ -100,7 +101,7 @@
 
     .gr-wrap { width: min(calc(100% - 36px), 1200px); margin: 0 auto; }
     .gr-gold { color: var(--gold); }
-    .gr-eyebrow { display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-display); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
+    .gr-eyebrow { display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-display); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-text); }
 
     /* reveal */
     .gr-rise { transform: translateY(26px); transition: transform .7s cubic-bezier(.22,1,.36,1); will-change: transform; }
@@ -164,7 +165,7 @@
     .gr-ac-name { font-weight: 700; font-size: 0.96rem; color: var(--text-head); }
     .gr-ac-addr { font-size: 0.82rem; color: var(--text-soft); }
     .gr-ac-brand { background: var(--gold-soft, rgba(181,126,30,0.1)); }
-    .gr-ac-brand .gr-ac-name { color: var(--gold, #B57E1E); }
+    .gr-ac-brand .gr-ac-name { color: var(--gold-text); }
     .gr-ac-brand .gr-ac-name::before { content: "\1F3E2  "; }
     .gr-ac-none .gr-ac-name { color: var(--text-dim); font-weight: 600; }
     .gr-hero-fine { margin-top: 16px; font-size: 0.8rem; color: var(--text-soft); display: inline-flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; }
@@ -191,6 +192,10 @@
       .gr-phone-box { height: 472px; }
       .gr-phone { width: 384px; }
       .gr-screen-vp { --vph: 516px; }
+      /* the 4 states have uneven natural heights (435/275/282/435) but all fit the
+         516px desktop screen; center them so the short states don't dump ~240px of
+         blank white at the bottom during the auto-scroll loop */
+      .gr-state { display: flex; flex-direction: column; justify-content: center; }
     }
     .gr-screen-track { display: block; }
     @media (prefers-reduced-motion: no-preference) { .gr-screen-track { animation: grPhoneScroll 16s cubic-bezier(.65,0,.35,1) infinite; } }
@@ -249,7 +254,7 @@
 
     /* ============ VALUE TABS ============ */
     .gr-tabs { margin-top: 38px; }
-    .gr-tablist { display: flex; gap: 4px; overflow-x: auto; border-bottom: 1px solid var(--line); -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .gr-tablist { display: flex; gap: 4px; overflow-x: auto; border-bottom: 1px solid var(--line); -webkit-overflow-scrolling: touch; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 84%, transparent); mask-image: linear-gradient(90deg, #000 84%, transparent); padding-right: 20px; }
     .gr-tablist::-webkit-scrollbar { display: none; }
     .gr-tab { position: relative; flex: none; padding: 16px 6px; margin-right: 26px; font-family: var(--font-display); font-weight: 700; font-size: clamp(0.95rem, 2vw, 1.1rem); color: var(--text-soft); background: none; border: none; cursor: pointer; white-space: nowrap; transition: color .2s; }
     .gr-tab.is-active { color: var(--text-head); }
@@ -257,7 +262,7 @@
     .gr-panel { display: none; margin-top: 30px; }
     .gr-panel.is-active { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 4vw, 52px); align-items: center; animation: grFade .5s ease both; }
     @keyframes grFade { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-    .gr-panel-copy .pe { color: var(--gold); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; }
+    .gr-panel-copy .pe { color: var(--gold-text); font-weight: 700; font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; }
     .gr-panel-copy h3 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 3vw, 2rem); letter-spacing: -0.02em; line-height: 1.1; margin: 12px 0 14px; }
     .gr-panel-copy p { color: var(--text-dim); font-size: 1.02rem; line-height: 1.5; max-width: 44ch; }
     .gr-panel-list { margin-top: 18px; display: grid; gap: 11px; }
@@ -272,8 +277,8 @@
     .gr-rankrow .g { flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--bg-1); font-weight: 800; font-size: 0.8rem; color: var(--text-soft); }
     .gr-rankrow .q { flex: 1; font-size: 0.92rem; font-weight: 600; color: var(--text); }
     .gr-rankrow .badge { font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 999px; }
-    .gr-rankrow .badge.--you { background: rgba(30,126,84,0.14); color: var(--good); }
-    .gr-rankrow .badge.--none { background: rgba(207,74,60,0.1); color: var(--poor); }
+    .gr-rankrow .badge.--you { background: rgba(30,126,84,0.14); color: #176544; }
+    .gr-rankrow .badge.--none { background: rgba(207,74,60,0.1); color: #B23A2E; }
 
     /* bars visual */
     .gr-bars { display: grid; gap: 18px; }
@@ -334,7 +339,7 @@
     .gr-bk-row { margin-top: 12px; padding-top: 11px; border-top: 1px solid var(--line-soft); display: flex; justify-content: space-between; font-size: 0.66rem; font-weight: 700; }
     .gr-bk-row .v { color: var(--text-head); }
     .gr-mob-side { flex: 1; min-width: 150px; display: grid; gap: 13px; }
-    .gr-speed-chip { display: inline-flex; align-items: center; gap: 8px; align-self: start; padding: 8px 14px; border-radius: 999px; background: var(--gold-soft); color: var(--gold); font-family: var(--font-display); font-weight: 800; font-size: 0.92rem; }
+    .gr-speed-chip { display: inline-flex; align-items: center; gap: 8px; align-self: start; padding: 8px 14px; border-radius: 999px; background: var(--gold-soft); color: var(--gold-text); font-family: var(--font-display); font-weight: 800; font-size: 0.92rem; }
     .gr-speed-chip svg { width: 16px; height: 16px; }
     .gr-mob-line { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; font-weight: 600; color: var(--text); }
     .gr-mob-line svg { flex: none; width: 19px; height: 19px; color: var(--good); }
@@ -359,12 +364,12 @@
     .gr-why-head { position: relative; max-width: 30ch; }
     .gr-why-head .gr-eyebrow { color: #2A1C06; }
     .gr-why-head h2 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.035em; font-size: clamp(1.8rem, 4.4vw, 2.9rem); line-height: 1.06; margin-top: 12px; color: #2A1C06; }
-    .gr-why-head p { margin-top: 14px; color: rgba(42,28,6,0.8); font-size: 1.04rem; line-height: 1.6; }
+    .gr-why-head p { margin-top: 14px; color: rgba(42,28,6,0.92); font-size: 1.04rem; line-height: 1.6; }
     .gr-why-grid { position: relative; display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: clamp(28px, 4vw, 44px); }
     .gr-why-card { display: grid; grid-template-columns: minmax(78px, auto) 1fr; column-gap: 22px; row-gap: 3px; align-items: center; padding: 20px 24px; border-radius: var(--r-lg); background: rgba(42,28,6,0.07); border: 1px solid rgba(42,28,6,0.14); }
     .gr-why-stat { grid-row: 1 / span 2; align-self: center; font-family: var(--font-hero); font-weight: 800; font-size: clamp(2rem, 4vw, 2.7rem); letter-spacing: -0.03em; line-height: 1; color: #2A1C06; }
     .gr-why-card h3 { align-self: end; font-family: var(--font-display); font-weight: 700; font-size: 1.06rem; margin: 0; color: #2A1C06; }
-    .gr-why-card p { align-self: start; margin: 0; color: rgba(42,28,6,0.72); font-size: 0.9rem; line-height: 1.55; }
+    .gr-why-card p { align-self: start; margin: 0; color: #2A1C06; font-size: 0.9rem; line-height: 1.55; }
     @media (min-width: 900px) {
       .gr-why-top { grid-template-columns: 1.02fr 0.98fr; gap: clamp(40px, 5vw, 64px); }
       .gr-why-head { max-width: none; }
@@ -584,7 +589,7 @@
       .gw-scrollbox .gw-hint { display: none; }
     }
     /* case copy */
-    .gw-copy .tag { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(181,126,30,0.3); background: var(--gold-soft); color: var(--gold); font-size: 0.74rem; font-weight: 800; letter-spacing: 0.04em; }
+    .gw-copy .tag { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(181,126,30,0.3); background: var(--gold-soft); color: var(--gold-text); font-size: 0.74rem; font-weight: 800; letter-spacing: 0.04em; }
     .gw-copy h3 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.5rem, 3vw, 2.05rem); letter-spacing: -0.02em; margin: 16px 0 0; color: var(--text-head); line-height: 1.08; }
     .gw-rows { margin: 22px 0 0; display: flex; flex-direction: column; gap: 16px; }
     .gw-row { display: grid; grid-template-columns: auto 1fr; gap: 13px; align-items: start; }
@@ -598,8 +603,8 @@
     .gr-offer { max-width: 720px; margin: clamp(30px, 4vw, 44px) auto 0; }
     .gr-pricecard { background: #FFFFFF; border: 1px solid var(--line-soft); border-radius: 24px; padding: clamp(34px, 4.5vw, 52px) clamp(26px, 4vw, 48px); text-align: center; box-shadow: 0 26px 64px rgba(40,28,10,0.09); position: relative; overflow: hidden; }
     .gr-pricecard::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, #E8AC44, #D08A34); }
-    .gr-pricecard .lead { display: inline-flex; align-items: center; gap: 8px; padding: 7px 15px; border-radius: 999px; background: var(--gold-soft); color: var(--gold); font-family: var(--font-display); font-weight: 800; font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; }
-    .gr-pricecard .amt { display: flex; align-items: baseline; justify-content: center; gap: 10px; margin-top: 20px; }
+    .gr-pricecard .lead { display: inline-flex; align-items: center; gap: 8px; padding: 7px 15px; border-radius: 999px; background: var(--gold-soft); color: var(--gold-text); font-family: var(--font-display); font-weight: 800; font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    .gr-pricecard .amt { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; column-gap: 10px; row-gap: 2px; margin-top: 20px; }
     .gr-pricecard .amt b { font-family: var(--font-hero); font-weight: 800; font-size: clamp(3.6rem, 11vw, 5.6rem); line-height: 0.82; letter-spacing: -0.045em; color: var(--text-head); }
     .gr-pricecard .amt span { font-size: 1rem; font-weight: 600; color: var(--text-soft); }
     .gr-pricecard .desc { margin: 14px auto 0; font-size: 1.08rem; line-height: 1.5; color: var(--text-dim); max-width: 34ch; }
@@ -621,7 +626,7 @@
     .gr-get .chk svg { width: 15px; height: 15px; }
     .gr-get b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 0.98rem; color: var(--text-head); }
     .gr-get p { font-size: 0.88rem; line-height: 1.5; color: var(--text-dim); margin-top: 2px; }
-    .gr-get em { font-style: normal; color: var(--gold); font-weight: 700; }
+    .gr-get em { font-style: normal; color: var(--gold-text); font-weight: 700; }
     /* how it works, 4-step dotted flow */
     .gr-how2 { max-width: 1040px; margin: clamp(46px, 6vw, 68px) auto 0; }
     .gr-how2-h { text-align: center; font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.4rem, 3vw, 1.95rem); color: var(--text-head); letter-spacing: -0.02em; }
@@ -635,13 +640,13 @@
     .gr-flowstep .no { width: 48px; height: 48px; border-radius: 50%; margin: 0 auto 14px; display: grid; place-items: center; background: #FFFFFF; border: 2px solid var(--gold); color: var(--gold); font-family: var(--font-hero); font-weight: 800; font-size: 1.18rem; }
     .gr-flowstep b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--text-head); margin-bottom: 5px; }
     .gr-flowstep p { font-size: 0.88rem; line-height: 1.5; color: var(--text-dim); max-width: 25ch; margin: 0 auto; }
-    .gr-flowstep .dur { display: inline-block; margin-top: 10px; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--gold); }
+    .gr-flowstep .dur { display: inline-block; margin-top: 10px; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--gold-text); }
 
     /* ============ FINAL CTA ============ */
     .gr-final { background: linear-gradient(135deg, #E0A23C, #C9820E); border-radius: clamp(24px, 4vw, 44px); padding: clamp(34px, 4vw, 52px) clamp(24px, 4vw, 60px); position: relative; overflow: hidden; }
     .gr-final-grid { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 4vw, 48px); align-items: center; }
     .gr-final h2 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.035em; font-size: clamp(1.9rem, 4.6vw, 3rem); line-height: 1.04; color: #2A1C06; max-width: 16ch; }
-    .gr-final p { margin-top: 14px; color: rgba(42,28,6,0.82); font-size: 1.04rem; line-height: 1.6; max-width: 42ch; }
+    .gr-final p { margin-top: 14px; color: rgba(42,28,6,0.92); font-size: 1.04rem; line-height: 1.6; max-width: 42ch; }
     .gr-final-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
     .gr-final .btn-dark { background: #2A1C06; color: #FBF5EA; border: none; }
     .gr-final .btn-dark:hover { box-shadow: 0 10px 30px rgba(42,28,6,0.3); }
@@ -651,6 +656,9 @@
     .gr-host .lab { font-size: 0.74rem; color: rgba(42,28,6,0.66); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
     .gr-host .nm { font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; color: #2A1C06; margin-top: 2px; }
     .gr-host .ro { font-size: 0.84rem; color: rgba(42,28,6,0.7); }
+    /* the standalone scheduler .gr-host rule (below) adds top margin + centering via a bare selector;
+       scope it out of the mid-CTA host card so the grid's align-items:center places it cleanly */
+    .gr-final .gr-host { margin: 0; }
     @media (min-width: 820px) { .gr-final-grid { grid-template-columns: 1.3fr 0.7fr; gap: clamp(36px, 4vw, 60px); } .gr-final h2 { font-size: clamp(2rem, 3.4vw, 2.7rem); } }
 
     /* ============ FOOTER ============ */
