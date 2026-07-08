@@ -174,6 +174,11 @@
     .sr-prob svg { flex: none; width: 18px; height: 18px; color: var(--poor); margin-top: 1px; }
     .sr-prob .pt { font-size: 0.92rem; color: var(--text-head); font-weight: 600; }
     .sr-prob .im { font-size: 0.82rem; color: var(--text-soft); margin-top: 2px; line-height: 1.45; }
+    /* area tag so every finding says what it is about (website / social / google...) */
+    .sr-tag { display: inline-block; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 8px; border-radius: 6px; margin-right: 8px; vertical-align: 1.5px; background: var(--bg-2); color: var(--text-soft); }
+    .sr-tag.tag-content, .sr-tag.tag-appearance, .sr-tag.tag-speed { background: rgba(181,126,30,0.14); color: var(--gold); }
+    .sr-tag.tag-local, .sr-tag.tag-seo { background: rgba(30,126,84,0.13); color: var(--teal); }
+    .sr-tag.tag-social { background: rgba(207,74,60,0.12); color: var(--poor); }
 
     /* owner.com-style detailed report card */
     .rc-sec { border-top: 1px solid var(--line-soft); padding: 20px 0 6px; }
@@ -960,13 +965,15 @@
       var present = CAT_ORDER.filter(function (k) { return cat[k] != null; });
       var totW = present.reduce(function (a, k) { return a + CAT_WEIGHTS[k]; }, 0);
       var subs = present.map(function (k) { return mkSub(k, CAT_LABELS[k], cat[k], totW ? Math.round(CAT_WEIGHTS[k] / totW * 100) : 20); });
+      var AREA = { content: ["Website", "content"], appearance: ["Photos & design", "appearance"], local: ["Google listing", "local"], seo: ["Getting found", "seo"], speed: ["Speed", "speed"] };
       var fails = [];
-      RUBRIC.forEach(function (sec) { sec.checks.forEach(function (c) { if (ev[c.id] === false) fails.push({ pt: c.label, im: c.why, w: c.w }); }); });
+      RUBRIC.forEach(function (sec) { var a = AREA[sec.key] || ["", ""]; sec.checks.forEach(function (c) { if (ev[c.id] === false) fails.push({ pt: c.label, im: c.why, w: c.w, area: a[0], areaClass: "tag-" + a[1] }); }); });
       fails.sort(function (a, b) { return b.w - a.w; });
       var socialFindings = socialFindingsOf(igProfile);
       if (multiIg) socialFindings.unshift({ pt: "You have " + social.igAccounts.length + " Instagram accounts", im: "Multiple accounts for the same restaurant confuse customers about which to follow and split your audience. Pick one, make it the official one, and retire the rest." });
+      socialFindings.forEach(function (f) { f.area = "Social media"; f.areaClass = "tag-social"; });
       var issues = [], seen = {};
-      (ux.findings || []).map(function (f) { return { pt: f.pt || f.title, im: f.im || f.impact }; }).concat(socialFindings).concat(fails).forEach(function (f) {
+      (ux.findings || []).map(function (f) { return { pt: f.pt || f.title, im: f.im || f.impact, area: "Website", areaClass: "tag-content" }; }).concat(socialFindings).concat(fails).forEach(function (f) {
         var k = (f.pt || "").toLowerCase().slice(0, 40); if (f.pt && !seen[k]) { seen[k] = 1; issues.push(f); }
       });
       return { overall: overall, grade: g.label, gradeColor: g.color, subs: subs, issues: issues, issueCount: fails.length + socialFindings.length, fieldData: scan.report.fieldData, ux: ux, ev: ev, cat: cat, gates: ov.gates, pitch: pickPitch(cat), social: social, socialScore: socialScore };
@@ -1474,7 +1481,8 @@
     }
     function homeSvg() { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-6 9 6v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg>'; }
     function probRow(it) {
-      return '<div class="sr-prob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.7 18-9-15a1.7 1.7 0 0 0-3 0l-9 15A1.7 1.7 0 0 0 3.2 20.5h17.6A1.7 1.7 0 0 0 21.7 18z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><div><div class="pt">' + esc(it.pt) + '</div><div class="im">' + esc(it.im) + '</div></div></div>';
+      var tag = it.area ? '<span class="sr-tag ' + (it.areaClass || '') + '">' + esc(it.area) + '</span>' : '';
+      return '<div class="sr-prob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.7 18-9-15a1.7 1.7 0 0 0-3 0l-9 15A1.7 1.7 0 0 0 3.2 20.5h17.6A1.7 1.7 0 0 0 21.7 18z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><div><div class="pt">' + tag + esc(it.pt) + '</div><div class="im">' + esc(it.im) + '</div></div></div>';
     }
     function compRow(name, sub, rank, you) {
       return '<div class="sr-comp' + (you ? ' --you' : '') + '"><div class="ic">' + homeSvg() + '</div><div class="nm"><b>' + esc(name) + '</b><span>' + esc(sub) + '</span></div><div class="rk">' + esc(rank) + '</div></div>';
