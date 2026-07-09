@@ -221,12 +221,12 @@ async function sendOutreach(lead) {
   const from = process.env.GIO_SMS_FROM || '';   // Gio's Twilio number (E.164)
   if (!sid || !token || !from) return { ok: false, error: 'not_configured' };
   const line = OUTREACH_FOCUS[String(lead.focus || '').toLowerCase()] || OUTREACH_FOCUS._default;
-  const rest = lead.restaurant ? (' ' + String(lead.restaurant).trim()) : ' your spot';
-  const scoreBit = (lead.score != null && lead.score !== '') ? (' — it scored ' + lead.score + '/100') : '';
+  const rest = lead.restaurant ? String(lead.restaurant).trim() : 'your restaurant';
+  const scoreBit = (lead.score != null && lead.score !== '') ? (' and it scored ' + lead.score + '/100') : '';
   const bodyText =
-    'Hey! Gio here from Button Up Media. You just ran' + rest +
-    ' through our free Restaurant Marketing Grader' + scoreBit + '. ' + line +
-    " I'd love to show you exactly how to fix it, no charge. Got 15 min this week for a quick call? (Reply STOP to opt out.)";
+    'You just ran ' + rest + ' through our free Restaurant Marketing Grader' + scoreBit +
+    ". Hi, I'm Gio from Button Up Media. " + line +
+    " I'd love to show you exactly how to fix it, no charge. Do you have 15 min this week for a quick call? (Reply STOP to opt out.)";
   const auth = 'Basic ' + Buffer.from(sid + ':' + token).toString('base64');
   const form = new URLSearchParams();
   form.set('To', lead.phone);
