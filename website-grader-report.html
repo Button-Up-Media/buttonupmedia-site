@@ -331,6 +331,8 @@
     .sr-gate-fine { margin-top: 14px; font-size: 0.74rem; color: var(--text-soft); line-height: 1.5; }
     .sr-gate-back { background: none; border: none; color: var(--text-soft); font-size: 0.82rem; cursor: pointer; margin-top: 12px; text-decoration: underline; }
     .sr-code-sent { font-size: 0.84rem; color: var(--teal); margin-top: 7px; font-weight: 600; }
+    .sr-gate-resend { display: block; width: 100%; margin-top: 12px; border: none; background: none; font-family: var(--font-display); font-size: 0.86rem; font-weight: 700; color: #8A5E12; cursor: pointer; text-align: center; }
+    .sr-gate-resend:disabled { color: var(--text-soft); cursor: default; }
 
     /* gate v2: keep the score sharp, blur everything else until unlocked */
     .sr-blurzone { transition: filter .45s ease; }
@@ -473,6 +475,7 @@
               <input class="sr-input code" type="text" id="sr-code" inputmode="numeric" maxlength="6" placeholder="••••••" />
               <div class="sr-code-sent" id="sr-code-sent">Code sent to your phone ✓</div>
               <button class="sr-gate-btn" id="sr-verify">Unlock my report</button>
+              <button class="sr-gate-resend" id="sr-resend" type="button">Didn't get it? Resend code</button>
               <button class="sr-gate-back" id="sr-back">&larr; Use a different number</button>
             </div>
           </div>
@@ -1577,6 +1580,29 @@
         stepCode.classList.add("hidden");
         stepPhone.classList.remove("hidden");
         sub.textContent = "See every fix that will move you up Google, and how to tackle them.";
+      });
+
+      // "Didn't get it? Resend code" — re-request the code, with a 20s cooldown
+      // so a stuck user can retry without letting anyone hammer the SMS send.
+      var resendBtn = document.getElementById("sr-resend");
+      if (resendBtn) resendBtn.addEventListener("click", function () {
+        if (resendBtn.disabled) return;
+        var label = "Didn't get it? Resend code";
+        resendBtn.disabled = true; resendBtn.textContent = "Sending…";
+        postJson("/api/sms/send", { phone: phone.value }).then(function (d) {
+          if (d && d.ok) {
+            sentEl.style.color = "var(--teal)"; sentEl.textContent = "New code sent ✓";
+            var s = 20; resendBtn.textContent = "Resend in " + s + "s";
+            var iv = setInterval(function () {
+              s--;
+              if (s <= 0) { clearInterval(iv); resendBtn.disabled = false; resendBtn.textContent = label; }
+              else { resendBtn.textContent = "Resend in " + s + "s"; }
+            }, 1000);
+          } else {
+            resendBtn.disabled = false; resendBtn.textContent = label;
+            sentEl.style.color = "var(--poor)"; sentEl.textContent = (d && d.message) || "Could not resend. Try again in a moment.";
+          }
+        }).catch(function () { resendBtn.disabled = false; resendBtn.textContent = label; });
       });
 
       verifyBtn.addEventListener("click", function () {
