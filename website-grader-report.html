@@ -184,6 +184,17 @@
     .sr-jump a:hover { background: var(--bg-1); color: var(--text-head); }
     .sr-jump a.is-active { background: var(--ink); color: #FBF5EA; }
     @media (max-width: 620px) { .sr-jump { overflow-x: auto; flex-wrap: nowrap; -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); } }
+    /* once-ever booking popup */
+    .sr-pop { position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(28,19,5,0.55); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); animation: srPopIn .3s ease; }
+    .sr-pop-card { position: relative; width: min(400px, 100%); background: #FFFFFF; border-radius: 20px; padding: 30px 26px 22px; text-align: center; box-shadow: 0 30px 80px rgba(28,19,5,0.42); animation: srPopUp .35s cubic-bezier(.2,1,.4,1); }
+    .sr-pop-x { position: absolute; top: 10px; right: 14px; border: none; background: none; font-size: 1.7rem; line-height: 1; color: var(--text-soft); cursor: pointer; }
+    .sr-pop-face { width: 78px; height: 78px; border-radius: 50%; object-fit: cover; border: 3px solid var(--gold); box-shadow: 0 8px 20px rgba(40,30,12,0.22); }
+    .sr-pop-card h3 { font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; color: var(--text-head); margin-top: 14px; }
+    .sr-pop-card p { font-size: 0.95rem; color: var(--text-dim); line-height: 1.55; margin-top: 8px; }
+    .sr-pop-cta { display: inline-flex; align-items: center; justify-content: center; gap: 9px; width: 100%; margin-top: 18px; padding: 14px; border-radius: 13px; background: linear-gradient(135deg, #E8AC44, #D08A34); color: #241804; font-family: var(--font-display); font-weight: 800; font-size: 1rem; text-decoration: none; box-shadow: 0 10px 24px rgba(208,138,52,0.4); }
+    .sr-pop-dismiss { margin-top: 12px; border: none; background: none; font-size: 0.86rem; color: var(--text-soft); cursor: pointer; }
+    @keyframes srPopIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes srPopUp { from { opacity: 0; transform: translateY(20px) scale(.96); } to { opacity: 1; transform: none; } }
 
     .sr-biz { display: flex; align-items: center; gap: 13px; margin: 18px 0; padding-bottom: 18px; border-bottom: 1px solid var(--line-soft); }
     .sr-biz .ic { width: 46px; height: 46px; border-radius: 11px; background: var(--gold-soft); display: grid; place-items: center; color: var(--gold-text); font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; flex: none; }
@@ -551,6 +562,21 @@
           </div><!-- /sr-blurzone -->
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- once-ever booking popup (fires ~60s after the report renders) -->
+  <div class="sr-pop" id="sr-pop" style="display:none;">
+    <div class="sr-pop-card">
+      <button class="sr-pop-x" id="sr-pop-x" aria-label="Close">&times;</button>
+      <img class="sr-pop-face" src="media/author-juan.webp" alt="Juan, Button Up Media" />
+      <h3>Want a hand fixing this?</h3>
+      <p>I'm Juan. Book a free 15-minute call and I'll walk you through your report and exactly what to fix first, no charge.</p>
+      <a class="sr-pop-cta" id="sr-pop-cta" href="https://calendly.com/juanh-buttonupmedia/marketing-consultation-for-hospitality" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><path d="M8 2v4M16 2v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2"/></svg>
+        Book my free call
+      </a>
+      <button class="sr-pop-dismiss" id="sr-pop-dismiss">No thanks</button>
     </div>
   </div>
 
@@ -1247,6 +1273,36 @@
       renderSocialConfirm(social);
       renderSocialCard(social);
       buildJumpNav();
+      armGraderPopup();
+    }
+
+    /* Once-ever booking popup: ~60s after the report renders, show Juan + a
+       booking button. A localStorage flag means a visitor only ever sees it once
+       (shown, dismissed, or booked all count). */
+    var popupArmed = false;
+    function armGraderPopup() {
+      if (popupArmed) return; popupArmed = true;
+      var KEY = "bum_grader_popup_seen";
+      var pop = document.getElementById("sr-pop");
+      if (!pop) return;
+      function seen() { try { return localStorage.getItem(KEY) === "1"; } catch (e) { return false; } }
+      if (seen()) return;
+      var closed = false;
+      function markSeen() { try { localStorage.setItem(KEY, "1"); } catch (e) {} }
+      function hide() { closed = true; pop.style.display = "none"; }
+      document.getElementById("sr-pop-x").addEventListener("click", hide);
+      document.getElementById("sr-pop-dismiss").addEventListener("click", hide);
+      pop.addEventListener("click", function (e) { if (e.target === pop) hide(); });
+      document.getElementById("sr-pop-cta").addEventListener("click", function () {
+        markSeen();
+        window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: "grader_popup_book" });
+      });
+      setTimeout(function () {
+        if (closed || seen()) return;
+        pop.style.display = "";
+        markSeen();
+        window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: "grader_popup_shown" });
+      }, 60000);
     }
 
     /* Sticky labeled shortcuts to each visible part of the report, so the long
