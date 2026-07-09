@@ -178,6 +178,12 @@
     .sr-card h3 .gold { color: var(--gold); }
     /* single column: side-by-side issues + competitors felt busy (3 columns with the sidebar) */
     .sr-twocol { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    /* jump-nav: sticky labeled shortcuts to each part of the report */
+    .sr-jump { position: sticky; top: 94px; z-index: 50; display: flex; gap: 7px; flex-wrap: wrap; padding: 9px; border-radius: 14px; background: rgba(251,248,242,0.92); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid var(--line-soft); box-shadow: 0 6px 18px rgba(40,30,12,0.07); }
+    .sr-jump a { font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--text-dim); padding: 7px 14px; border-radius: 999px; text-decoration: none; white-space: nowrap; transition: background .2s, color .2s; }
+    .sr-jump a:hover { background: var(--bg-1); color: var(--text-head); }
+    .sr-jump a.is-active { background: var(--ink); color: #FBF5EA; }
+    @media (max-width: 620px) { .sr-jump { overflow-x: auto; flex-wrap: nowrap; -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); } }
 
     .sr-biz { display: flex; align-items: center; gap: 13px; margin: 18px 0; padding-bottom: 18px; border-bottom: 1px solid var(--line-soft); }
     .sr-biz .ic { width: 46px; height: 46px; border-radius: 11px; background: var(--gold-soft); display: grid; place-items: center; color: var(--gold-text); font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; flex: none; }
@@ -475,9 +481,11 @@
               </a>
             </div>
           </div>
+          <!-- jump-nav: labeled shortcuts to each part of the report -->
+          <nav class="sr-jump" id="sr-jump" style="display:none;"></nav>
           <div class="sr-twocol" id="sr-twocol">
             <!-- issues -->
-            <div class="sr-card">
+            <div class="sr-card" id="sr-issues-card">
               <h3 id="sr-loss-h">Reviewing your results</h3>
               <div class="sr-biz">
                 <div class="ic" id="sr-biz-ic"></div>
@@ -1238,6 +1246,50 @@
       renderPitch(rep);
       renderSocialConfirm(social);
       renderSocialCard(social);
+      buildJumpNav();
+    }
+
+    /* Sticky labeled shortcuts to each visible part of the report, so the long
+       single-column page is easy to navigate (Top fixes / Social / Competitors
+       / Speed / Full report). Rebuilt whenever async cards appear. */
+    var JUMP_SECTIONS = [
+      { id: "sr-issues-card", label: "Top fixes" },
+      { id: "sr-socialcard", label: "Social" },
+      { id: "sr-comp-card", label: "Competitors" },
+      { id: "sr-scoreboard", label: "Scoreboard" },
+      { id: "sr-tech-card", label: "Speed" },
+      { id: "sr-reportcard", label: "Full report" },
+    ];
+    var jumpObserver = null;
+    function buildJumpNav() {
+      var nav = document.getElementById("sr-jump");
+      if (!nav) return;
+      var visible = JUMP_SECTIONS.filter(function (s) {
+        var el = document.getElementById(s.id);
+        return el && getComputedStyle(el).display !== "none";
+      });
+      if (visible.length < 2) { nav.style.display = "none"; return; }
+      nav.innerHTML = visible.map(function (s) { return '<a href="#' + s.id + '" data-t="' + s.id + '">' + s.label + '</a>'; }).join("");
+      nav.style.display = "";
+      [].forEach.call(nav.querySelectorAll("a"), function (a) {
+        a.addEventListener("click", function (e) {
+          e.preventDefault();
+          var el = document.getElementById(a.dataset.t);
+          if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 150, behavior: "smooth" });
+        });
+      });
+      // highlight the section currently in view
+      if (jumpObserver) jumpObserver.disconnect();
+      if ("IntersectionObserver" in window) {
+        jumpObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (!en.isIntersecting) return;
+            var links = nav.querySelectorAll("a");
+            [].forEach.call(links, function (l) { l.classList.toggle("is-active", l.dataset.t === en.target.id); });
+          });
+        }, { rootMargin: "-160px 0px -55% 0px" });
+        visible.forEach(function (s) { var el = document.getElementById(s.id); if (el) jumpObserver.observe(el); });
+      }
     }
 
     /* If we found a likely-but-unconfirmed Instagram, ask the owner in one tap.
@@ -1308,6 +1360,7 @@
         if (h) h.innerHTML = 'You rank <span class="gold">' + ord(youRank) + '</span> of ' + (comps.length + 1) + ' nearby by guest rating';
         card.style.display = "";
         if (twocol) twocol.style.gridTemplateColumns = "";
+        buildJumpNav();
       }).catch(hide);
     }
 
@@ -1355,6 +1408,7 @@
         hEl.innerHTML = 'On Instagram, <span class="gold">' + esc(withIg[0].name) + '</span> has ' + fmtK(withIg[0].igFollowers) + ' followers to your ' + fmtK(you.igFollowers);
       }
       card.style.display = "";
+      buildJumpNav();
     }
 
     /* ---- your own social media stats (IG/TikTok + bio quality) ---- */
