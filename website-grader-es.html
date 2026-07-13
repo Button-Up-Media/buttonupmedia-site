@@ -109,7 +109,7 @@
     @media (prefers-reduced-motion: reduce) { .gr-rise { transform: none; transition: none; } }
 
     /* ============ HEADER (matches /es/sitios-web-restaurantes: liquid-glass floating pill) ============ */
-    .gr-nav { position: fixed; top: 16px; left: 0; right: 0; z-index: 999; width: min(calc(100% - 48px), 1180px); margin: 16px auto 0; padding: 12px 20px; background: rgba(255,255,255,0.70); -webkit-backdrop-filter: blur(22px) saturate(1.5); backdrop-filter: blur(22px) saturate(1.5); border: 1px solid rgba(36,28,16,0.10); border-radius: 16px; box-shadow: 0 10px 34px rgba(40,30,12,0.12), inset 0 1px 0 rgba(255,255,255,0.6); }
+    .gr-nav { position: fixed; top: 18px; left: 0; right: 0; z-index: 999; width: min(calc(100% - 48px), 1180px); margin: 18px auto 0; padding: 15px 22px; background: rgba(255,255,255,0.70); -webkit-backdrop-filter: blur(22px) saturate(1.5); backdrop-filter: blur(22px) saturate(1.5); border: 1px solid rgba(36,28,16,0.10); border-radius: 16px; box-shadow: 0 10px 34px rgba(40,30,12,0.12), inset 0 1px 0 rgba(255,255,255,0.6); }
     .gr-nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; margin: 0; height: auto; }
     .gr-nav-brand { display: inline-flex; align-items: center; flex-shrink: 0; }
     .gr-logo { height: 46px; width: auto; display: block; }
@@ -118,7 +118,7 @@
     .gr-nav-phone svg { width: 15px; height: 15px; color: var(--gold); }
     .gr-nav-phone:hover { color: var(--gold); }
     .gr-nav-cta { height: 42px; padding: 0 22px; font-size: 0.86rem; white-space: nowrap; display: inline-flex; align-items: center; }
-    html { scroll-padding-top: 100px; }
+    html { scroll-padding-top: 112px; }
     @media (max-width: 700px) {
       .gr-nav { top: 8px; width: min(calc(100% - 20px), 1180px); min-height: 56px; margin: 0 auto; padding: 8px 10px 8px 14px; border-radius: 14px; }
       .gr-nav-inner { gap: 12px; }
@@ -135,8 +135,8 @@
     .gr-rating { display: inline-flex; align-items: center; gap: 9px; font-size: 0.82rem; font-weight: 600; color: var(--text-dim); }
     .gr-stars { display: inline-flex; gap: 2px; color: var(--gold); }
     .gr-stars svg { width: 15px; height: 15px; }
-    .gr-hero h1 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.04em; font-size: clamp(2.1rem, 6.2vw, 4.1rem); line-height: 1.0; margin: 16px auto 0; max-width: 16ch; text-wrap: balance; }
-    .gr-hero-sub { max-width: 50ch; margin: 18px auto 0; font-size: clamp(1.02rem, 2.3vw, 1.2rem); line-height: 1.6; color: var(--text-dim); }
+    .gr-hero h1 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.03em; font-size: clamp(2.15rem, 5vw, 3.6rem); line-height: 1.08; margin: 18px auto 0; max-width: 30ch; text-wrap: balance; }
+    .gr-hero-sub { max-width: 58ch; margin: 20px auto 0; font-size: clamp(1.02rem, 1.6vw, 1.16rem); line-height: 1.6; color: var(--text-dim); }
 
     /* search box */
     .gr-search { position: relative; max-width: 540px; margin: clamp(26px, 4vw, 36px) auto 0; z-index: 20; }
@@ -163,7 +163,7 @@
     .gr-ac-item:hover, .gr-ac-item.is-active { background: var(--bg-1); }
     .gr-ac-name { font-weight: 700; font-size: 0.96rem; color: var(--text-head); }
     .gr-ac-addr { font-size: 0.82rem; color: var(--text-soft); }
-    .gr-hero-fine { margin-top: 16px; font-size: 0.8rem; color: var(--text-soft); display: inline-flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .gr-hero-fine { margin: clamp(22px, 2.6vw, 30px) auto 0; font-size: 0.82rem; color: var(--text-soft); display: inline-flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: center; }
     .gr-hero-fine span { display: inline-flex; align-items: center; gap: 6px; }
     .gr-hero-fine svg { width: 14px; height: 14px; color: var(--teal); }
 
@@ -721,8 +721,8 @@
           </span>
           La elección de los restaurantes favoritos del sur de la Florida
         </div>
-        <h1 class="gr-rise d1">¿Su sitio web le está <span class="gr-gold">costando clientes</span>? Reciba su calificación en 60 segundos.</h1>
-        <p class="gr-hero-sub gr-rise d2">Reciba una calificación gratis e instantánea del sitio web de su restaurante, velocidad, SEO y experiencia del cliente, más cómo se compara con la competencia cercana.</p>
+        <h1 class="gr-rise d1">El reporte gratis de visibilidad digital de tu restaurante.</h1>
+        <p class="gr-hero-sub gr-rise d2">Nuestra IA revisa todo lo que ven tus clientes, tu sitio web, tu perfil de Google, tus redes sociales y tus rese&ntilde;as, y te muestra c&oacute;mo te comparas con los negocios cercanos y qu&eacute; arreglar primero.</p>
 
         <div class="gr-search gr-rise d2" id="scan">
           <form class="gr-search-bar" id="gr-form" autocomplete="off">
