@@ -106,7 +106,7 @@ async function clickupChat(lead, token) {
   const workspaceId = process.env.CLICKUP_WORKSPACE_ID || '';
   if (!channelId || !workspaceId) return;
   const content = [
-    '🌐 **New website grader lead**',
+    '🌐 **New Restaurant Marketing Report Card lead**',
     '• **Restaurant:** ' + (lead.restaurant || 'Unknown'),
     '• **Phone:** ' + (lead.phone || ''),
     lead.score != null ? '• **Score:** ' + lead.score + ' / 100' : '',
@@ -176,7 +176,7 @@ function alertOwners(lead) {
   if (!sid || !token || (!from && !service)) return Promise.resolve();
 
   const body =
-    'New website grader lead: ' + (lead.restaurant || 'Unknown restaurant') +
+    'New Restaurant Marketing Report Card lead: ' + (lead.restaurant || 'Unknown restaurant') +
     '\nPhone: ' + (lead.phone || '') +
     (lead.score != null ? '\nScore: ' + lead.score + '/100' : '') +
     (lead.website ? '\nSite: ' + lead.website : '');
@@ -224,7 +224,7 @@ async function sendOutreach(lead) {
   const rest = lead.restaurant ? String(lead.restaurant).trim() : 'your restaurant';
   const scoreBit = (lead.score != null && lead.score !== '') ? (' and it scored ' + lead.score + '/100') : '';
   const bodyText =
-    'You just ran ' + rest + ' through our free Restaurant Marketing Grader' + scoreBit +
+    'You just ran ' + rest + ' through our free Restaurant Marketing Report Card' + scoreBit +
     ". Hi, I'm Gio from Button Up Media. " + line +
     " I'd love to show you exactly how to fix it, no charge. Do you have 15 min this week for a quick call? (Reply STOP to opt out.)";
   const auth = 'Basic ' + Buffer.from(sid + ':' + token).toString('base64');
