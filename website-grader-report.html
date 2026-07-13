@@ -49,6 +49,8 @@
   <meta name="twitter:title" content="Your Restaurant Marketing Report Card | Button Up Media" />
   <meta name="twitter:image" content="https://www.buttonupmedia.com/media/og-grader.png" />
   <link rel="preconnect" href="https://assets.calendly.com" />
+  <link rel="preconnect" href="https://challenges.cloudflare.com" />
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
   <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-variable.woff2" crossorigin fetchpriority="high" />
   <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="/fonts/epilogue-variable.woff2" crossorigin />
@@ -340,6 +342,7 @@
     .sr-code-sent { font-size: 0.84rem; color: var(--teal); margin-top: 7px; font-weight: 600; }
     .sr-gate-resend { display: block; width: 100%; margin-top: 12px; border: none; background: none; font-family: var(--font-display); font-size: 0.86rem; font-weight: 700; color: #8A5E12; cursor: pointer; text-align: center; }
     .sr-gate-resend:disabled { color: var(--text-soft); cursor: default; }
+    .sr-turnstile { margin: 6px 0 12px; min-height: 65px; display: flex; justify-content: center; }
 
     /* gate v2: keep the score sharp, blur everything else until unlocked */
     .sr-blurzone { transition: filter .45s ease; }
@@ -474,18 +477,9 @@
             <div class="sr-gate-step" id="sr-step-phone">
               <label class="sr-gate-label" for="sr-phone">Your phone number</label>
               <input class="sr-input" type="tel" id="sr-phone" placeholder="(305) 555-0199" autocomplete="tel" />
-              <button class="sr-gate-btn" id="sr-send">Send my code</button>
-              <p class="sr-gate-fine">We text a 6-digit code to confirm your number. By continuing, you agree Button Up Media may contact you by phone or text about your website results and services. Msg &amp; data rates may apply. Reply STOP to opt out.</p>
-            </div>
-
-            <!-- step 2: code -->
-            <div class="sr-gate-step hidden" id="sr-step-code">
-              <label class="sr-gate-label" for="sr-code">Enter the 6-digit code</label>
-              <input class="sr-input code" type="text" id="sr-code" inputmode="numeric" maxlength="6" placeholder="••••••" />
-              <div class="sr-code-sent" id="sr-code-sent">Code sent to your phone ✓</div>
-              <button class="sr-gate-btn" id="sr-verify">Unlock my report</button>
-              <button class="sr-gate-resend" id="sr-resend" type="button">Didn't get it? Resend code</button>
-              <button class="sr-gate-back" id="sr-back">&larr; Use a different number</button>
+              <div class="sr-turnstile" id="sr-turnstile"></div>
+              <button class="sr-gate-btn" id="sr-unlock">Unlock my report card</button>
+              <p class="sr-gate-fine">We use your number to send your report and follow up about your results. By continuing, you agree Button Up Media may contact you by phone or text. Msg &amp; data rates may apply. Reply STOP to opt out.</p>
             </div>
           </div>
 
@@ -1231,6 +1225,7 @@
       if (scanEl) scanEl.style.display = "none";
       reportEl.classList.add("show");
       window.scrollTo(0, 0);
+      renderTurnstile();   // widget is now visible; render it ahead of the user reaching the gate
     }
 
     /* ---- render the real report ---- */
@@ -1603,17 +1598,32 @@
     }
 
     /* ---- real SMS unlock gate (Twilio Verify via /api/sms) ---- */
+    /* Cloudflare Turnstile: render the captcha widget once the API + gate are
+       ready (poll until window.turnstile exists). Managed mode is near-invisible. */
+    var tsWidgetId = null, tsToken = "";
+    function renderTurnstile() {
+      var el = document.getElementById("sr-turnstile");
+      if (!el || tsWidgetId !== null) return;
+      if (!window.turnstile || !window.turnstile.render) { setTimeout(renderTurnstile, 250); return; }
+      try {
+        tsWidgetId = window.turnstile.render(el, {
+          sitekey: "0x4AAAAAAD1Jt-_pKepXpVoh",
+          theme: "light",
+          callback: function (t) { tsToken = t || ""; },
+          "expired-callback": function () { tsToken = ""; },
+          "error-callback": function () { tsToken = ""; }
+        });
+      } catch (e) { /* if it can't render, the backend not_configured path still unlocks */ }
+    }
+
+    /* Unlock gate: phone number + captcha (no SMS code). The captcha stops bots;
+       we still collect + deliver the number. Backend verifies the token. */
     function wireGate() {
       var report = document.getElementById("sr-report");
       var gate = document.getElementById("sr-gate");
-      var stepPhone = document.getElementById("sr-step-phone");
-      var stepCode = document.getElementById("sr-step-code");
       var phone = document.getElementById("sr-phone");
-      var code = document.getElementById("sr-code");
       var sub = document.getElementById("sr-gate-sub");
-      var sendBtn = document.getElementById("sr-send");
-      var verifyBtn = document.getElementById("sr-verify");
-      var sentEl = document.getElementById("sr-code-sent");
+      var unlockBtn = document.getElementById("sr-unlock");
 
       function unlock() {
         gate.classList.add("hidden");
@@ -1622,60 +1632,18 @@
         window.dataLayer.push({ event: "report_unlocked" });
       }
 
-      sendBtn.addEventListener("click", function () {
+      renderTurnstile();
+
+      unlockBtn.addEventListener("click", function () {
         var v = (phone.value || "").replace(/\D/g, "");
         if (v.length < 10) { phone.style.borderColor = "var(--poor)"; phone.focus(); return; }
-        sendBtn.disabled = true; sendBtn.textContent = "Sending…";
-        postJson("/api/sms/send", { phone: phone.value }).then(function (d) {
-          sendBtn.disabled = false; sendBtn.textContent = "Send my code";
-          if (d && d.error === "not_configured") { unlock(); return; }
-          if (d && d.ok) {
-            stepPhone.classList.add("hidden");
-            stepCode.classList.remove("hidden");
-            sub.textContent = "We just texted a 6-digit code to " + phone.value + ".";
-            setTimeout(function () { code.focus(); }, 100);
-          } else {
-            phone.style.borderColor = "var(--poor)";
-            sub.textContent = (d && d.message) || "We could not send the code. Try again.";
-          }
-        }).catch(function () { sendBtn.disabled = false; sendBtn.textContent = "Send my code"; unlock(); });
-      });
-
-      document.getElementById("sr-back").addEventListener("click", function () {
-        stepCode.classList.add("hidden");
-        stepPhone.classList.remove("hidden");
-        sub.textContent = "See every fix that will move you up Google, and how to tackle them.";
-      });
-
-      // "Didn't get it? Resend code" — re-request the code, with a 20s cooldown
-      // so a stuck user can retry without letting anyone hammer the SMS send.
-      var resendBtn = document.getElementById("sr-resend");
-      if (resendBtn) resendBtn.addEventListener("click", function () {
-        if (resendBtn.disabled) return;
-        var label = "Didn't get it? Resend code";
-        resendBtn.disabled = true; resendBtn.textContent = "Sending…";
-        postJson("/api/sms/send", { phone: phone.value }).then(function (d) {
-          if (d && d.ok) {
-            sentEl.style.color = "var(--teal)"; sentEl.textContent = "New code sent ✓";
-            var s = 20; resendBtn.textContent = "Resend in " + s + "s";
-            var iv = setInterval(function () {
-              s--;
-              if (s <= 0) { clearInterval(iv); resendBtn.disabled = false; resendBtn.textContent = label; }
-              else { resendBtn.textContent = "Resend in " + s + "s"; }
-            }, 1000);
-          } else {
-            resendBtn.disabled = false; resendBtn.textContent = label;
-            sentEl.style.color = "var(--poor)"; sentEl.textContent = (d && d.message) || "Could not resend. Try again in a moment.";
-          }
-        }).catch(function () { resendBtn.disabled = false; resendBtn.textContent = label; });
-      });
-
-      verifyBtn.addEventListener("click", function () {
-        var v = (code.value || "").replace(/\D/g, "");
-        if (v.length < 4) { code.style.borderColor = "var(--poor)"; code.focus(); return; }
-        verifyBtn.disabled = true; verifyBtn.textContent = "Verifying…";
+        var token = tsToken || (window.turnstile && tsWidgetId !== null ? (window.turnstile.getResponse(tsWidgetId) || "") : "");
+        // only block on a missing token if the captcha actually rendered
+        if (!token && window.turnstile && tsWidgetId !== null) { sub.style.color = "var(--poor)"; sub.textContent = "Please complete the quick check above."; return; }
+        unlockBtn.disabled = true; unlockBtn.textContent = "Unlocking…";
+        phone.style.borderColor = ""; sub.style.color = "";
         postJson("/api/sms/check", {
-          phone: phone.value, code: v,
+          action: "unlock", token: token, phone: phone.value,
           restaurant: bizName,
           website: (placeInfo && placeInfo.website) || urlParam || (lastScan && lastScan.url) || "",
           score: lastReport ? lastReport.overall : (lastScan && lastScan.report ? lastScan.report.overall : null),
@@ -1683,12 +1651,12 @@
           focus: lastReport && lastReport.pitch ? (lastReport.pitch.svc || null) : null,
           focusReason: lastReport && lastReport.pitch ? (lastReport.pitch.why || null) : null
         }).then(function (d) {
-          verifyBtn.disabled = false; verifyBtn.textContent = "Unlock my report";
+          unlockBtn.disabled = false; unlockBtn.textContent = "Unlock my report card";
           if (d && d.error === "not_configured") { unlock(); return; }
-          if (d && d.ok && d.verified) { unlock(); }
-          else if (d && d.error === "expired") { sentEl.style.color = "var(--poor)"; sentEl.textContent = d.message || "That code expired. Request a new one."; }
-          else { code.style.borderColor = "var(--poor)"; sentEl.style.color = "var(--poor)"; sentEl.textContent = (d && d.message) || "That code is not correct."; }
-        }).catch(function () { verifyBtn.disabled = false; verifyBtn.textContent = "Unlock my report"; });
+          if (d && d.ok && d.verified) { unlock(); return; }
+          if (window.turnstile && tsWidgetId !== null) { window.turnstile.reset(tsWidgetId); tsToken = ""; }
+          sub.style.color = "var(--poor)"; sub.textContent = (d && d.message) || "That did not go through. Please try again.";
+        }).catch(function () { unlockBtn.disabled = false; unlockBtn.textContent = "Unlock my report card"; unlock(); });
       });
     }
 

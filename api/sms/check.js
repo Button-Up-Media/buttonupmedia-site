@@ -24,6 +24,11 @@ module.exports = async (req, res) => {
   // then follow up as a human. Secret-guarded so only our automation can call it.
   const preBody = parseBody(req);
   if (preBody && preBody.action === 'outreach') return outreachHandler(req, res, preBody);
+  // Captcha-based unlock: verify a Cloudflare Turnstile token instead of an SMS
+  // code, then collect + deliver the lead. Bots are stopped by the captcha; the
+  // number is still captured. Degrades to "not_configured" (frontend unlocks)
+  // until TURNSTILE_SECRET is set.
+  if (preBody && preBody.action === 'unlock') return unlockHandler(req, res, preBody);
 
   const sid = process.env.TWILIO_ACCOUNT_SID || '';
   const token = process.env.TWILIO_AUTH_TOKEN || '';
@@ -241,6 +246,43 @@ async function sendOutreach(lead) {
   } catch (e) {
     return { ok: false, error: 'send_failed' };
   }
+}
+
+/* Captcha unlock: verify the Cloudflare Turnstile token, then collect + deliver
+   the lead. Graceful not_configured (so the gate keeps working) until the secret
+   is set. */
+async function unlockHandler(req, res, body) {
+  const secret = process.env.TURNSTILE_SECRET || '';
+  if (!secret) return res.status(200).json({ ok: false, error: 'not_configured' });
+  const phone = toE164(body.phone);
+  if (!phone) return res.status(400).json({ ok: false, error: 'invalid_phone', message: 'Enter a valid mobile number.' });
+  const token = String(body.token || '').trim();
+  if (!token) return res.status(400).json({ ok: false, error: 'captcha_missing', message: 'Please complete the quick check.' });
+
+  let passed = false;
+  try {
+    const form = new URLSearchParams();
+    form.set('secret', secret);
+    form.set('response', token);
+    const resp = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: form.toString(),
+    });
+    const data = await resp.json().catch(() => ({}));
+    passed = !!data.success;
+  } catch (e) { passed = false; }
+  if (!passed) return res.status(403).json({ ok: false, error: 'captcha_failed', message: 'That check did not pass. Please try again.' });
+
+  const lead = {
+    phone: phone,
+    restaurant: body.restaurant || null,
+    website: body.website || null,
+    score: body.score != null ? body.score : null,
+    focus: body.focus || null,
+    focusReason: body.focusReason || null,
+    at: new Date().toISOString(),
+  };
+  await Promise.allSettled([clickupLead(lead), forwardLead(lead), alertOwners(lead)]);
+  return res.status(200).json({ ok: true, verified: true });
 }
 
 function parseBody(req) {
