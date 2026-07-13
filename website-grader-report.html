@@ -195,6 +195,13 @@
     .sr-pop-dismiss { margin-top: 12px; border: none; background: none; font-size: 0.86rem; color: var(--text-soft); cursor: pointer; }
     @keyframes srPopIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes srPopUp { from { opacity: 0; transform: translateY(20px) scale(.96); } to { opacity: 1; transform: none; } }
+    /* multi-location breakdown rows */
+    .sr-loc { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 0; border-top: 1px solid var(--line-soft); }
+    .sr-loc:first-child { border-top: none; }
+    .sr-loc-nm b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; color: var(--text-head); }
+    .sr-loc-nm span { font-size: 0.82rem; color: var(--text-dim); }
+    .sr-loc-rt { text-align: right; font-family: var(--font-hero); font-weight: 800; font-size: 1.02rem; white-space: nowrap; }
+    .sr-loc-rt small { display: block; font-family: var(--font-display); font-weight: 600; font-size: 0.74rem; color: var(--text-dim); }
 
     .sr-biz { display: flex; align-items: center; gap: 13px; margin: 18px 0; padding-bottom: 18px; border-bottom: 1px solid var(--line-soft); }
     .sr-biz .ic { width: 46px; height: 46px; border-radius: 11px; background: var(--gold-soft); display: grid; place-items: center; color: var(--gold-text); font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; flex: none; }
@@ -514,6 +521,13 @@
               <p style="color:var(--text-dim);font-size:0.9rem;margin:8px 0 16px;">How your guest rating stacks up against the highest-rated spots nearby.</p>
               <div id="sr-comps"></div>
             </div>
+          </div>
+
+          <!-- multi-location: each of the brand's Google listings (brand mode only) -->
+          <div class="sr-card" id="sr-locations-card" style="display:none;">
+            <h3 id="sr-loc-h">Your locations on Google</h3>
+            <p style="color:var(--text-dim);font-size:0.9rem;margin:8px 0 14px;">How each of your spots is rated. Your lowest-rated locations are where you're losing the most customers, and the fastest to turn around.</p>
+            <div id="sr-locations"></div>
           </div>
 
           <!-- your own social media stats -->
@@ -1275,8 +1289,30 @@
       renderPitch(rep);
       renderSocialConfirm(social);
       renderSocialCard(social);
+      renderLocations(place);
       buildJumpNav();
       armGraderPopup();
+    }
+
+    /* Multi-location: for a brand, show each of its Google listings with its own
+       rating + review count (best to worst), so the owner sees which locations
+       are dragging the brand down. Data comes from the brand aggregation. */
+    function renderLocations(place) {
+      var card = document.getElementById("sr-locations-card");
+      if (!card) return;
+      var locs = place && place.isBrand && place.locations;
+      if (!locs || locs.length < 2) { card.style.display = "none"; return; }
+      var sorted = locs.slice().sort(function (a, b) { return (b.rating || 0) - (a.rating || 0); });
+      document.getElementById("sr-locations").innerHTML = sorted.map(function (l) {
+        var rt = l.rating != null ? l.rating : null;
+        var col = rt == null ? COLORS.dim : rt >= 4.4 ? COLORS.goodText : rt >= 4.0 ? COLORS.fairText : COLORS.poorText;
+        return '<div class="sr-loc"><div class="sr-loc-nm"><b>' + esc(l.name) + '</b><span>' + esc(l.address || "") + '</span></div>' +
+          '<div class="sr-loc-rt" style="color:' + col + '">' + (rt != null ? rt.toFixed(1) + ' ★' : '—') +
+          '<small>' + (l.reviews != null ? fmtK(l.reviews) + ' reviews' : '') + '</small></div></div>';
+      }).join("");
+      var h = document.getElementById("sr-loc-h");
+      if (h) h.textContent = "Your " + locs.length + " locations on Google";
+      card.style.display = "";
     }
 
     /* Once-ever booking popup: ~60s after the report renders, show Juan + a
@@ -1313,8 +1349,9 @@
        / Speed / Full report). Rebuilt whenever async cards appear. */
     var JUMP_SECTIONS = [
       { id: "sr-issues-card", label: "Top fixes" },
-      { id: "sr-socialcard", label: "Social" },
       { id: "sr-comp-card", label: "Competitors" },
+      { id: "sr-locations-card", label: "Locations" },
+      { id: "sr-socialcard", label: "Social" },
       { id: "sr-scoreboard", label: "Scoreboard" },
       { id: "sr-tech-card", label: "Speed" },
       { id: "sr-reportcard", label: "Full report" },
