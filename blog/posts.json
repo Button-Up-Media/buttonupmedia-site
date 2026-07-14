@@ -1,5 +1,19 @@
 [
   {
+    "id": "gbp-setup",
+    "category": "seo",
+    "author": "juan",
+    "date": "2026-07-14",
+    "hero": "/images/blog/gbp-setup.jpg",
+    "heroAlt": "A restaurant owner holding a phone that shows their business listing on a map",
+    "en": {
+      "slug": "set-up-restaurant-on-google"
+    },
+    "es": {
+      "slug": "registrar-restaurante-en-google"
+    }
+  },
+  {
     "id": "recommended-by-chatgpt",
     "category": "seo",
     "author": "chris",

@@ -156,7 +156,7 @@
     },
     {
       "id": "gbp-setup",
-      "status": "ready",
+      "status": "published",
       "category": "seo",
       "author": "juan",
       "heroQuery": "restaurant owner holding a phone showing their business on a map in an american city",
@@ -178,7 +178,8 @@
           "https://www.buttonupmedia.com/es/blog/restaurante-no-aparece-en-google-maps"
         ]
       },
-      "heroAlt": "A restaurant owner holding a phone that shows their business listing on a map"
+      "heroAlt": "A restaurant owner holding a phone that shows their business listing on a map",
+      "publishedDate": "2026-07-14"
     },
     {
       "id": "need-a-website",
