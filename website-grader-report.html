@@ -291,13 +291,13 @@
     @media (max-width: 520px) { .soc-checks { grid-template-columns: 1fr; } }
 
     /* forefront "biggest fix" card (first thing after unlock) */
-    .sr-bigfix { display: flex; gap: 22px; align-items: center; background: linear-gradient(135deg, #241804, #3b2b13); border-radius: var(--r-lg); padding: clamp(22px, 3vw, 30px); margin-bottom: 20px; box-shadow: 0 22px 54px rgba(40,30,12,0.22); }
-    .bf-face { width: 86px; height: 86px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(224,162,60,0.55); flex: none; }
-    .bf-lab { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; color: #E0A23C; }
-    .bf-body h3 { font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.3rem, 2.6vw, 1.72rem); color: #FBF5EA; line-height: 1.12; margin-top: 6px; letter-spacing: -0.01em; }
-    .bf-body p { color: rgba(251,245,234,0.82); font-size: 0.96rem; line-height: 1.55; margin-top: 9px; }
-    .bf-cta { display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 24px; border-radius: 12px; background: linear-gradient(135deg, #E0A23C, #D08A34); color: #2A1C06; font-family: var(--font-display); font-weight: 700; font-size: 0.98rem; text-decoration: none; margin-top: 16px; transition: box-shadow .2s, transform .2s; }
-    .bf-cta:hover { box-shadow: 0 12px 30px rgba(208,138,52,0.42); transform: translateY(-1px); }
+    .sr-bigfix { display: flex; gap: 16px; align-items: center; background: #FFFFFF; border: 1px solid var(--line-soft); border-left: 3px solid #E0A23C; border-radius: var(--r-lg); padding: clamp(15px, 2vw, 20px) clamp(16px, 2.2vw, 24px); margin-bottom: 18px; box-shadow: 0 6px 20px rgba(40,30,12,0.05); }
+    .bf-face { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(224,162,60,0.5); flex: none; }
+    .bf-lab { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; color: #8A5E12; }
+    .bf-body h3 { font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.02rem, 1.8vw, 1.24rem); color: var(--text-head); line-height: 1.2; margin-top: 3px; letter-spacing: -0.01em; }
+    .bf-body p { color: var(--text-dim); font-size: 0.9rem; line-height: 1.5; margin-top: 5px; }
+    .bf-cta { display: inline-flex; align-items: center; gap: 7px; height: 42px; padding: 0 18px; border-radius: 10px; background: linear-gradient(135deg, #E0A23C, #D08A34); color: #2A1C06; font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; text-decoration: none; margin-top: 12px; transition: box-shadow .2s, transform .2s; }
+    .bf-cta:hover { box-shadow: 0 10px 24px rgba(208,138,52,0.34); transform: translateY(-1px); }
     @media (max-width: 560px) { .sr-bigfix { flex-direction: column; text-align: center; align-items: center; } }
 
     /* pagespeed-style category gauges with mobile/desktop tabs */
@@ -354,7 +354,7 @@
     @media (max-width: 979px) { .sr-report.locked .sr-side .sr-blurzone { display: none; } }
 
     /* unlocked final CTA */
-    .sr-final { margin-top: 4px; background: linear-gradient(135deg, #E0A23C, #C9820E); border-radius: var(--r-lg); padding: clamp(22px, 3.5vw, 34px); overflow: hidden; }
+    .sr-final { margin-top: 4px; background: linear-gradient(135deg, #E0A23C, #C9820E); border-radius: var(--r-lg); padding: clamp(22px, 3.5vw, 34px); overflow: hidden; scroll-margin-top: 96px; }
     .sr-final h3 { font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.5rem, 3vw, 2.1rem); letter-spacing: -0.02em; color: #2A1C06; line-height: 1.05; margin-top: 12px; }
     .sr-final p { margin-top: 10px; color: rgba(42,28,6,0.9); font-size: 0.98rem; line-height: 1.55; max-width: 54ch; }
     .sr-final-host { display: flex; align-items: center; gap: 14px; }
@@ -376,7 +376,7 @@
       <a href="/" class="gr-nav-brand" aria-label="Button Up Media home"><img class="gr-logo" src="media/logo-cropped.webp" alt="Button Up Media" width="138" height="46" /></a>
       <div class="gr-nav-right">
         <a class="gr-nav-phone" href="tel:+17867409499"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <span>Call us</span></a>
-        <a href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener" class="gr-nav-cta">Get started</a>
+        <a href="https://calendly.com/juanh-buttonupmedia/marketing-consultation-for-hospitality" data-book-scroll data-cta-loc="nav" class="gr-nav-cta">Get started</a>
       </div>
     </div>
   </nav>
@@ -456,7 +456,7 @@
             <div class="sr-side-cta">
               <b>Let's fix this together</b>
               <p>Get on a free call with Juan and we'll walk you through your results and handle the fixes for you.</p>
-              <a href="https://calendly.com/juanh-buttonupmedia/marketing-consultation-for-hospitality" target="_blank" rel="noopener">
+              <a href="https://calendly.com/juanh-buttonupmedia/marketing-consultation-for-hospitality" data-book-scroll data-cta-loc="sidebar">
                 <img src="media/author-juan.webp" alt="Juan" />
                 Talk to Juan
                 <span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
@@ -492,7 +492,7 @@
               <div class="bf-lab">What needs your attention most</div>
               <h3 id="sr-bigfix-h">The biggest thing holding you back</h3>
               <p id="sr-bigfix-p"></p>
-              <a class="bf-cta" id="sr-bigfix-cta" href="https://calendly.com/juanh-buttonupmedia/marketing-consultation-for-hospitality" target="_blank" rel="noopener">
+              <a class="bf-cta" id="sr-bigfix-cta" href="https://calendly.com/juanh-buttonupmedia/marketing-consultation-for-hospitality" data-book-scroll data-cta-loc="bigfix">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><path d="M8 2v4M16 2v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2"/></svg>
                 Book a free call with Juan
               </a>
@@ -585,7 +585,7 @@
       <img class="sr-pop-face" src="media/author-juan.webp" alt="Juan, Button Up Media" />
       <h3>Want a hand fixing this?</h3>
       <p>I'm Juan. Book a free 15-minute call and I'll walk you through your report and exactly what to fix first, no charge.</p>
-      <a class="sr-pop-cta" id="sr-pop-cta" href="https://calendly.com/juanh-buttonupmedia/marketing-consultation-for-hospitality" target="_blank" rel="noopener">
+      <a class="sr-pop-cta" id="sr-pop-cta" href="https://calendly.com/juanh-buttonupmedia/marketing-consultation-for-hospitality">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><path d="M8 2v4M16 2v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2"/></svg>
         Book my free call
       </a>
@@ -1296,6 +1296,9 @@
        iframe + script once the section scrolls near view, so it never slows the
        initial report render. */
     var calSetup = false;
+    // Shared so a CTA click can trigger the embed load immediately instead of
+    // waiting for the scroll observer.
+    var calLoadFn = null;
     function setupLazyCalendly() {
       if (calSetup) return;
       var el = document.getElementById("sr-cal");
@@ -1309,6 +1312,7 @@
         s.src = "https://assets.calendly.com/assets/external/widget.js"; s.async = true;
         document.body.appendChild(s);
       }
+      calLoadFn = load;
       if ("IntersectionObserver" in window) {
         var obs = new IntersectionObserver(function (entries) {
           entries.forEach(function (e) { if (e.isIntersecting) { load(); obs.disconnect(); } });
@@ -1316,6 +1320,29 @@
         obs.observe(el);
       } else { load(); }
     }
+
+    /* CTA -> the on-page Calendly embed: trigger the load and smooth-scroll to it
+       instead of opening Calendly in a new tab (keeps them in context, which
+       converts better). Delegated so it covers the nav, sidebar + big-fix CTAs. */
+    function scrollToCal() {
+      var el = document.getElementById("sr-final") || document.getElementById("sr-cal");
+      if (!el) return false;
+      setupLazyCalendly();
+      if (calLoadFn) calLoadFn();
+      try { el.scrollIntoView({ behavior: "smooth", block: "start" }); }
+      catch (e) { el.scrollIntoView(); }
+      return true;
+    }
+    document.addEventListener("click", function (e) {
+      var t = e.target.closest ? e.target.closest("[data-book-scroll]") : null;
+      if (!t) return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; // let power-users open a tab
+      if (scrollToCal()) {
+        e.preventDefault();
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: "booking_cta_click", cta_location: t.getAttribute("data-cta-loc") || "report" });
+      }
+    });
 
     /* Multi-location: for a brand, show each of its Google listings with its own
        rating + review count (best to worst), so the owner sees which locations
@@ -1355,9 +1382,10 @@
       document.getElementById("sr-pop-x").addEventListener("click", hide);
       document.getElementById("sr-pop-dismiss").addEventListener("click", hide);
       pop.addEventListener("click", function (e) { if (e.target === pop) hide(); });
-      document.getElementById("sr-pop-cta").addEventListener("click", function () {
+      document.getElementById("sr-pop-cta").addEventListener("click", function (e) {
         markSeen();
         window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: "grader_popup_book" });
+        if (scrollToCal()) { e.preventDefault(); hide(); }
       });
       setTimeout(function () {
         if (closed || seen()) return;
