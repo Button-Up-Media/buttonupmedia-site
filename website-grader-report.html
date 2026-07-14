@@ -304,6 +304,15 @@
     .sr-cat-tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--bg-1); margin: 18px 0 4px; }
     .sr-cat-tab { padding: 8px 20px; border: none; border-radius: 999px; background: none; font-family: var(--font-display); font-weight: 700; font-size: 0.88rem; color: var(--text-dim); cursor: pointer; transition: all .2s; }
     .sr-cat-tab.is-active { background: #FFFFFF; color: var(--text-head); box-shadow: 0 2px 8px rgba(40,30,12,0.08); }
+
+    /* category tabs (Website / Social / Google Business) that group the score cards */
+    .sr-scoretabs { position: sticky; top: 88px; z-index: 40; display: flex; gap: 6px; padding: 6px; border-radius: 999px; background: rgba(251,248,242,0.86); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border: 1px solid var(--line-soft); box-shadow: 0 8px 24px rgba(40,30,12,0.08); }
+    .sr-stab { flex: 1; padding: 11px 14px; border: none; border-radius: 999px; background: none; font-family: var(--font-display); font-weight: 700; font-size: 0.94rem; white-space: nowrap; color: var(--text-dim); cursor: pointer; transition: background .2s, color .2s; }
+    .sr-stab:hover { color: var(--text-head); }
+    .sr-stab.is-active { background: #241804; color: #FBF5EA; box-shadow: 0 4px 12px rgba(36,24,4,0.22); }
+    .sr-panel { display: grid; gap: 20px; }
+    .sr-panel[hidden] { display: none; }
+    @media (max-width: 560px) { .sr-scoretabs { top: 72px; gap: 3px; padding: 5px; } .sr-stab { padding: 10px 4px; font-size: 0.74rem; } }
     .sr-cats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
     @media (min-width: 560px) { .sr-cats { grid-template-columns: repeat(4, 1fr); } }
     .sr-cat { text-align: center; }
@@ -519,6 +528,16 @@
             </div>
           </div>
 
+          <!-- category tabs: the score cards below are relocated into these panels by setupScoreTabs() -->
+          <div class="sr-scoretabs" id="sr-scoretabs" role="tablist" style="display:none;">
+            <button class="sr-stab is-active" data-panel="website" role="tab" type="button">Website</button>
+            <button class="sr-stab" data-panel="social" role="tab" type="button">Social</button>
+            <button class="sr-stab" data-panel="google" role="tab" type="button">Google Business</button>
+          </div>
+          <div class="sr-panel" id="sr-panel-website" role="tabpanel"></div>
+          <div class="sr-panel" id="sr-panel-social" role="tabpanel" hidden></div>
+          <div class="sr-panel" id="sr-panel-google" role="tabpanel" hidden></div>
+
           <!-- multi-location: each of the brand's Google listings (brand mode only) -->
           <div class="sr-card" id="sr-locations-card" style="display:none;">
             <h3 id="sr-loc-h">Your locations on Google</h3>
@@ -541,8 +560,8 @@
 
           <!-- pagespeed-style categories -->
           <div class="sr-card" id="sr-tech-card">
-            <h3>Your technical scores</h3>
-            <p style="color:var(--text-dim);font-size:0.9rem;margin-top:8px;">Measured the way Google measures it, on mobile and desktop.</p>
+            <h3>Website scores</h3>
+            <p style="color:var(--text-dim);font-size:0.9rem;margin-top:8px;">Your site graded the way Google measures it, on mobile and desktop.</p>
             <div class="sr-cat-tabs" role="tablist">
               <button class="sr-cat-tab is-active" data-dev="mobile">Mobile</button>
               <button class="sr-cat-tab" data-dev="desktop">Desktop</button>
@@ -1287,7 +1306,7 @@
       renderSocialConfirm(social);
       renderSocialCard(social);
       renderLocations(place);
-      buildJumpNav();
+      setupScoreTabs();
       armGraderPopup();
       setupLazyCalendly();
     }
@@ -1408,6 +1427,33 @@
       { id: "sr-reportcard", label: "Full report" },
     ];
     var jumpObserver = null;
+    /* Group the score cards under Website / Social / Google Business tabs so the
+       report reads as three clear categories instead of one long scroll. Each
+       card keeps its own render logic; we just relocate it into the right panel.
+       Idempotent, so the async cards (competitors, scoreboard) land correctly. */
+    function setupScoreTabs() {
+      var tabs = document.getElementById("sr-scoretabs");
+      var pW = document.getElementById("sr-panel-website");
+      var pS = document.getElementById("sr-panel-social");
+      var pG = document.getElementById("sr-panel-google");
+      if (!tabs || !pW || !pS || !pG) return;
+      var MAP = { "sr-tech-card": pW, "sr-socialcard": pS, "sr-scoreboard": pS, "sr-comp-card": pG, "sr-locations-card": pG };
+      Object.keys(MAP).forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el && el.parentElement !== MAP[id]) MAP[id].appendChild(el);
+      });
+      tabs.style.display = "";
+      if (tabs.dataset.wired) return;
+      tabs.dataset.wired = "1";
+      [].forEach.call(tabs.querySelectorAll(".sr-stab"), function (btn) {
+        btn.addEventListener("click", function () {
+          var p = btn.getAttribute("data-panel");
+          [].forEach.call(tabs.querySelectorAll(".sr-stab"), function (b) { b.classList.toggle("is-active", b === btn); });
+          pW.hidden = p !== "website"; pS.hidden = p !== "social"; pG.hidden = p !== "google";
+        });
+      });
+    }
+
     function buildJumpNav() {
       var nav = document.getElementById("sr-jump");
       if (!nav) return;
@@ -1507,7 +1553,7 @@
         if (h) h.innerHTML = 'You rank <span class="gold">' + ord(youRank) + '</span> of ' + (comps.length + 1) + ' nearby by guest rating';
         card.style.display = "";
         if (twocol) twocol.style.gridTemplateColumns = "";
-        buildJumpNav();
+        setupScoreTabs();
       }).catch(hide);
     }
 
@@ -1555,7 +1601,7 @@
         hEl.innerHTML = 'On Instagram, <span class="gold">' + esc(withIg[0].name) + '</span> has ' + fmtK(withIg[0].igFollowers) + ' followers to your ' + fmtK(you.igFollowers);
       }
       card.style.display = "";
-      buildJumpNav();
+      setupScoreTabs();
     }
 
     /* ---- your own social media stats (IG/TikTok + bio quality) ---- */
