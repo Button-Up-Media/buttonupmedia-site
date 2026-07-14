@@ -50,6 +50,8 @@
   <meta name="twitter:title" content="El Reporte de Visibilidad Digital de tu Restaurante | Button Up Media" />
   <meta name="twitter:image" content="https://www.buttonupmedia.com/media/og-grader-es.png" />
   <link rel="preconnect" href="https://assets.calendly.com" />
+  <link rel="preconnect" href="https://challenges.cloudflare.com" />
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
   <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-variable.woff2" crossorigin fetchpriority="high" />
   <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="/fonts/epilogue-variable.woff2" crossorigin />
@@ -216,6 +218,7 @@
     .sr-gate-fine { margin-top: 14px; font-size: 0.74rem; color: var(--text-soft); line-height: 1.5; }
     .sr-gate-back { background: none; border: none; color: var(--text-soft); font-size: 0.82rem; cursor: pointer; margin-top: 12px; text-decoration: underline; }
     .sr-code-sent { font-size: 0.84rem; color: var(--teal); margin-top: 7px; font-weight: 600; }
+    .sr-turnstile { margin: 6px 0 12px; min-height: 65px; display: flex; justify-content: center; }
 
     /* unlocked final CTA */
     .sr-final { margin-top: 4px; background: linear-gradient(135deg, #E0A23C, #C9820E); border-radius: var(--r-lg); padding: clamp(26px, 4vw, 40px); display: grid; grid-template-columns: 1fr; gap: 22px; align-items: center; }
@@ -338,21 +341,13 @@
                 <h3>Desbloquee su reporte completo</h3>
                 <p class="sub" id="sr-gate-sub">Vea cada arreglo que lo hará subir en Google, y cómo abordarlos.</p>
 
-                <!-- step 1: phone -->
+                <!-- step 1: phone + captcha -->
                 <div class="sr-gate-step" id="sr-step-phone">
                   <label class="sr-gate-label" for="sr-phone">Su número de teléfono</label>
                   <input class="sr-input" type="tel" id="sr-phone" placeholder="(305) 555-0199" autocomplete="tel" />
-                  <button class="sr-gate-btn" id="sr-send">Enviarme el código</button>
-                  <p class="sr-gate-fine">Le enviamos un código de 6 dígitos por mensaje de texto para confirmar su número. Al continuar, usted acepta que Button Up Media lo contacte por teléfono o mensaje de texto sobre los resultados de su sitio web y sus servicios. Pueden aplicar tarifas de mensajes y datos. Responda STOP para cancelar.</p>
-                </div>
-
-                <!-- step 2: code -->
-                <div class="sr-gate-step hidden" id="sr-step-code">
-                  <label class="sr-gate-label" for="sr-code">Ingrese el código de 6 dígitos</label>
-                  <input class="sr-input code" type="text" id="sr-code" inputmode="numeric" maxlength="6" placeholder="••••••" />
-                  <div class="sr-code-sent" id="sr-code-sent">Código enviado a su teléfono ✓</div>
-                  <button class="sr-gate-btn" id="sr-verify">Desbloquear mi reporte</button>
-                  <button class="sr-gate-back" id="sr-back">&larr; Usar otro número</button>
+                  <div class="sr-turnstile" id="sr-turnstile"></div>
+                  <button class="sr-gate-btn" id="sr-unlock">Desbloquear mi reporte</button>
+                  <p class="sr-gate-fine">Usamos su número para enviarle su reporte y darle seguimiento sobre sus resultados. Al continuar, usted acepta que Button Up Media lo contacte por teléfono o mensaje de texto. Pueden aplicar tarifas de mensajes y datos. Responda STOP para cancelar.</p>
                 </div>
               </div>
             </div>
@@ -550,66 +545,76 @@
     }
 
     /* ---- real SMS unlock gate (Twilio Verify via /api/sms) ---- */
+    /* Cloudflare Turnstile: render the captcha widget once the API + gate are
+       ready. Ad/privacy blockers frequently block challenges.cloudflare.com, so
+       treat that as unavailable and let real visitors through. */
+    var tsWidgetId = null, tsToken = "", tsUnavailable = false, tsTries = 0;
+    function markTsUnavailable() {
+      if (tsUnavailable) return;
+      tsUnavailable = true;
+      var el = document.getElementById("sr-turnstile");
+      if (el) el.style.display = "none";
+    }
+    function renderTurnstile() {
+      var el = document.getElementById("sr-turnstile");
+      if (!el || tsWidgetId !== null || tsUnavailable) return;
+      if (!window.turnstile || !window.turnstile.render) {
+        if (++tsTries > 24) { markTsUnavailable(); return; }   // ~6s, then fall back
+        setTimeout(renderTurnstile, 250); return;
+      }
+      try {
+        tsWidgetId = window.turnstile.render(el, {
+          sitekey: "0x4AAAAAAD1Jt-_pKepXpVoh",
+          theme: "light",
+          callback: function (t) { tsToken = t || ""; },
+          "expired-callback": function () { tsToken = ""; },
+          "error-callback": function () { tsToken = ""; markTsUnavailable(); }
+        });
+      } catch (e) { markTsUnavailable(); }
+    }
+
+    /* Unlock gate: phone number + captcha (no SMS code). Backend verifies the
+       token; a blocked/broken widget falls back so a real lead is never stuck. */
     function wireGate() {
       var gated = document.getElementById("sr-gated");
       var gate = document.getElementById("sr-gate");
-      var stepPhone = document.getElementById("sr-step-phone");
-      var stepCode = document.getElementById("sr-step-code");
       var phone = document.getElementById("sr-phone");
-      var code = document.getElementById("sr-code");
       var sub = document.getElementById("sr-gate-sub");
-      var sendBtn = document.getElementById("sr-send");
-      var verifyBtn = document.getElementById("sr-verify");
-      var sentEl = document.getElementById("sr-code-sent");
+      var unlockBtn = document.getElementById("sr-unlock");
 
       function unlock() {
         gate.classList.add("hidden");
-        gated.classList.remove("locked");
+        if (gated) gated.classList.remove("locked");
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ event: "report_unlocked" });
       }
 
-      sendBtn.addEventListener("click", function () {
+      renderTurnstile();
+
+      unlockBtn.addEventListener("click", function () {
         var v = (phone.value || "").replace(/\D/g, "");
         if (v.length < 10) { phone.style.borderColor = "var(--poor)"; phone.focus(); return; }
-        sendBtn.disabled = true; sendBtn.textContent = "Enviando…";
-        postJson("/api/sms/send", { phone: phone.value }).then(function (d) {
-          sendBtn.disabled = false; sendBtn.textContent = "Enviarme el código";
-          if (d && d.error === "not_configured") { unlock(); return; }
-          if (d && d.ok) {
-            stepPhone.classList.add("hidden");
-            stepCode.classList.remove("hidden");
-            sub.textContent = "Acabamos de enviar un código de 6 dígitos al " + phone.value + ".";
-            setTimeout(function () { code.focus(); }, 100);
-          } else {
-            phone.style.borderColor = "var(--poor)";
-            sub.textContent = (d && d.message) || "No pudimos enviar el código. Intente de nuevo.";
-          }
-        }).catch(function () { sendBtn.disabled = false; sendBtn.textContent = "Enviarme el código"; unlock(); });
-      });
-
-      document.getElementById("sr-back").addEventListener("click", function () {
-        stepCode.classList.add("hidden");
-        stepPhone.classList.remove("hidden");
-        sub.textContent = "Vea cada arreglo que lo hará subir en Google, y cómo abordarlos.";
-      });
-
-      verifyBtn.addEventListener("click", function () {
-        var v = (code.value || "").replace(/\D/g, "");
-        if (v.length < 4) { code.style.borderColor = "var(--poor)"; code.focus(); return; }
-        verifyBtn.disabled = true; verifyBtn.textContent = "Verificando…";
+        var token = tsToken || (window.turnstile && tsWidgetId !== null ? (window.turnstile.getResponse(tsWidgetId) || "") : "");
+        var tsBroken = tsUnavailable || !(window.turnstile && window.turnstile.render);
+        // Only hard-block when the captcha rendered and is working; otherwise fall back.
+        if (!token && !tsBroken && tsWidgetId !== null) { sub.style.color = "var(--poor)"; sub.textContent = "Complete la verificación rápida de arriba."; return; }
+        unlockBtn.disabled = true; unlockBtn.textContent = "Desbloqueando…";
+        phone.style.borderColor = ""; sub.style.color = "";
         postJson("/api/sms/check", {
-          phone: phone.value, code: v,
+          action: "unlock", token: token, captchaUnavailable: (!token && tsBroken), phone: phone.value,
           restaurant: bizName,
           website: (placeInfo && placeInfo.website) || urlParam || (lastScan && lastScan.url) || "",
-          score: lastScan && lastScan.report ? lastScan.report.overall : null
+          score: (lastScan && lastScan.report ? lastScan.report.overall : null)
         }).then(function (d) {
-          verifyBtn.disabled = false; verifyBtn.textContent = "Desbloquear mi reporte";
+          unlockBtn.disabled = false; unlockBtn.textContent = "Desbloquear mi reporte";
           if (d && d.error === "not_configured") { unlock(); return; }
-          if (d && d.ok && d.verified) { unlock(); }
-          else if (d && d.error === "expired") { sentEl.style.color = "var(--poor)"; sentEl.textContent = d.message || "Ese código expiró. Solicite uno nuevo."; }
-          else { code.style.borderColor = "var(--poor)"; sentEl.style.color = "var(--poor)"; sentEl.textContent = (d && d.message) || "Ese código no es correcto."; }
-        }).catch(function () { verifyBtn.disabled = false; verifyBtn.textContent = "Desbloquear mi reporte"; });
+          if (d && d.ok && (d.verified || d.unlocked)) { unlock(); return; }
+          if (window.turnstile && tsWidgetId !== null) { window.turnstile.reset(tsWidgetId); tsToken = ""; }
+          sub.style.color = "var(--poor)";
+          sub.textContent = (d && d.error === "captcha_failed") ? "Esa verificación no pasó. Intente de nuevo."
+            : (d && d.error === "invalid_phone") ? "Ingrese un número de celular válido."
+            : "No se pudo completar. Intente de nuevo.";
+        }).catch(function () { unlockBtn.disabled = false; unlockBtn.textContent = "Desbloquear mi reporte"; unlock(); });
       });
     }
 
