@@ -1600,20 +1600,32 @@
     /* ---- real SMS unlock gate (Twilio Verify via /api/sms) ---- */
     /* Cloudflare Turnstile: render the captcha widget once the API + gate are
        ready (poll until window.turnstile exists). Managed mode is near-invisible. */
-    var tsWidgetId = null, tsToken = "";
+    var tsWidgetId = null, tsToken = "", tsUnavailable = false, tsTries = 0;
+    // Ad blockers / privacy extensions frequently block challenges.cloudflare.com.
+    // When that happens the widget can never render, so treat it as unavailable
+    // and let real visitors through rather than trapping them at a blank box.
+    function markTsUnavailable() {
+      if (tsUnavailable) return;
+      tsUnavailable = true;
+      var el = document.getElementById("sr-turnstile");
+      if (el) el.style.display = "none";
+    }
     function renderTurnstile() {
       var el = document.getElementById("sr-turnstile");
-      if (!el || tsWidgetId !== null) return;
-      if (!window.turnstile || !window.turnstile.render) { setTimeout(renderTurnstile, 250); return; }
+      if (!el || tsWidgetId !== null || tsUnavailable) return;
+      if (!window.turnstile || !window.turnstile.render) {
+        if (++tsTries > 24) { markTsUnavailable(); return; }   // ~6s, then fall back
+        setTimeout(renderTurnstile, 250); return;
+      }
       try {
         tsWidgetId = window.turnstile.render(el, {
           sitekey: "0x4AAAAAAD1Jt-_pKepXpVoh",
           theme: "light",
           callback: function (t) { tsToken = t || ""; },
           "expired-callback": function () { tsToken = ""; },
-          "error-callback": function () { tsToken = ""; }
+          "error-callback": function () { tsToken = ""; markTsUnavailable(); }
         });
-      } catch (e) { /* if it can't render, the backend not_configured path still unlocks */ }
+      } catch (e) { markTsUnavailable(); }
     }
 
     /* Unlock gate: phone number + captcha (no SMS code). The captcha stops bots;
@@ -1638,12 +1650,14 @@
         var v = (phone.value || "").replace(/\D/g, "");
         if (v.length < 10) { phone.style.borderColor = "var(--poor)"; phone.focus(); return; }
         var token = tsToken || (window.turnstile && tsWidgetId !== null ? (window.turnstile.getResponse(tsWidgetId) || "") : "");
-        // only block on a missing token if the captcha actually rendered
-        if (!token && window.turnstile && tsWidgetId !== null) { sub.style.color = "var(--poor)"; sub.textContent = "Please complete the quick check above."; return; }
+        var tsBroken = tsUnavailable || !(window.turnstile && window.turnstile.render);
+        // Only hard-block when the captcha actually rendered and is working. If it
+        // is blocked/broken, fall back so a real lead is never locked out.
+        if (!token && !tsBroken && tsWidgetId !== null) { sub.style.color = "var(--poor)"; sub.textContent = "Please complete the quick check above."; return; }
         unlockBtn.disabled = true; unlockBtn.textContent = "Unlocking…";
         phone.style.borderColor = ""; sub.style.color = "";
         postJson("/api/sms/check", {
-          action: "unlock", token: token, phone: phone.value,
+          action: "unlock", token: token, captchaUnavailable: (!token && tsBroken), phone: phone.value,
           restaurant: bizName,
           website: (placeInfo && placeInfo.website) || urlParam || (lastScan && lastScan.url) || "",
           score: lastReport ? lastReport.overall : (lastScan && lastScan.report ? lastScan.report.overall : null),
@@ -1653,7 +1667,7 @@
         }).then(function (d) {
           unlockBtn.disabled = false; unlockBtn.textContent = "Unlock my report card";
           if (d && d.error === "not_configured") { unlock(); return; }
-          if (d && d.ok && d.verified) { unlock(); return; }
+          if (d && d.ok && (d.verified || d.unlocked)) { unlock(); return; }
           if (window.turnstile && tsWidgetId !== null) { window.turnstile.reset(tsWidgetId); tsToken = ""; }
           sub.style.color = "var(--poor)"; sub.textContent = (d && d.message) || "That did not go through. Please try again.";
         }).catch(function () { unlockBtn.disabled = false; unlockBtn.textContent = "Unlock my report card"; unlock(); });

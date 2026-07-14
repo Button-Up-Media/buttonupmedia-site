@@ -257,20 +257,27 @@ async function unlockHandler(req, res, body) {
   const phone = toE164(body.phone);
   if (!phone) return res.status(400).json({ ok: false, error: 'invalid_phone', message: 'Enter a valid mobile number.' });
   const token = String(body.token || '').trim();
-  if (!token) return res.status(400).json({ ok: false, error: 'captcha_missing', message: 'Please complete the quick check.' });
-
-  let passed = false;
-  try {
-    const form = new URLSearchParams();
-    form.set('secret', secret);
-    form.set('response', token);
-    const resp = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-      method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: form.toString(),
-    });
-    const data = await resp.json().catch(() => ({}));
-    passed = !!data.success;
-  } catch (e) { passed = false; }
-  if (!passed) return res.status(403).json({ ok: false, error: 'captcha_failed', message: 'That check did not pass. Please try again.' });
+  // The widget can be blocked by an ad/privacy blocker or fail to load; the
+  // client flags that so we never lock a real lead out over a captcha that
+  // could not render. Verify any real token; only allow an empty one when the
+  // client reports the captcha was unavailable.
+  const captchaUnavailable = body.captchaUnavailable === true;
+  if (token) {
+    let passed = false;
+    try {
+      const form = new URLSearchParams();
+      form.set('secret', secret);
+      form.set('response', token);
+      const resp = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+        method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: form.toString(),
+      });
+      const data = await resp.json().catch(() => ({}));
+      passed = !!data.success;
+    } catch (e) { passed = false; }
+    if (!passed) return res.status(403).json({ ok: false, error: 'captcha_failed', message: 'That check did not pass. Please try again.' });
+  } else if (!captchaUnavailable) {
+    return res.status(400).json({ ok: false, error: 'captcha_missing', message: 'Please complete the quick check.' });
+  }
 
   const lead = {
     phone: phone,
@@ -282,7 +289,7 @@ async function unlockHandler(req, res, body) {
     at: new Date().toISOString(),
   };
   await Promise.allSettled([clickupLead(lead), forwardLead(lead), alertOwners(lead)]);
-  return res.status(200).json({ ok: true, verified: true });
+  return res.status(200).json({ ok: true, verified: !!token, unlocked: true });
 }
 
 function parseBody(req) {
