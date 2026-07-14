@@ -153,6 +153,266 @@
       },
       "heroAlt": "A person at a cafe table looking something up on a laptop while holding a cup of coffee",
       "publishedDate": "2026-07-07"
+    },
+    {
+      "id": "gbp-setup",
+      "status": "ready",
+      "category": "seo",
+      "author": "juan",
+      "heroQuery": "restaurant owner holding a phone showing their business on a map in an american city",
+      "en": {
+        "slug": "set-up-restaurant-on-google",
+        "title": "How to Put Your Restaurant on Google: A Beginner's Setup Guide",
+        "keyword": "how to set up google business profile for a restaurant",
+        "internal": [
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/blog/restaurant-not-showing-on-google-maps"
+        ]
+      },
+      "es": {
+        "slug": "registrar-restaurante-en-google",
+        "title": "Cómo Poner tu Restaurante en Google: Guía para Principiantes",
+        "keyword": "cómo registrar mi restaurante en google",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/blog/restaurante-no-aparece-en-google-maps"
+        ]
+      },
+      "heroAlt": "A restaurant owner holding a phone that shows their business listing on a map"
+    },
+    {
+      "id": "need-a-website",
+      "status": "ready",
+      "category": "web",
+      "author": "chris",
+      "heroQuery": "restaurant website shown on a laptop and phone in a modern american cafe",
+      "en": {
+        "slug": "does-my-restaurant-need-a-website",
+        "title": "Does My Restaurant Really Need a Website in 2026?",
+        "keyword": "does my restaurant need a website",
+        "internal": [
+          "https://www.buttonupmedia.com/restaurant-website-design",
+          "https://www.buttonupmedia.com/blog/restaurant-website-vs-instagram-2026"
+        ]
+      },
+      "es": {
+        "slug": "mi-restaurante-necesita-pagina-web",
+        "title": "¿De Verdad Necesita mi Restaurante una Página Web en 2026?",
+        "keyword": "mi restaurante necesita una página web",
+        "internal": [
+          "https://www.buttonupmedia.com/es/diseno-web-restaurantes",
+          "https://www.buttonupmedia.com/es/blog/pagina-web-restaurante-vs-instagram-2026"
+        ]
+      },
+      "heroAlt": "A restaurant website displayed on a laptop and a phone"
+    },
+    {
+      "id": "restaurant-text-list",
+      "status": "ready",
+      "category": "strategy",
+      "author": "juan",
+      "heroQuery": "person reading a text message promotion on a phone in an american restaurant",
+      "en": {
+        "slug": "restaurant-text-message-marketing",
+        "title": "How to Build a Restaurant Text List That Fills Tables on Slow Nights",
+        "keyword": "restaurant sms text message marketing",
+        "internal": [
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/blog/fill-restaurant-slow-tuesday"
+        ]
+      },
+      "es": {
+        "slug": "marketing-mensajes-texto-restaurante",
+        "title": "Cómo Crear una Lista de Mensajes de Texto Que Llena Mesas en Noches Lentas",
+        "keyword": "marketing por mensajes de texto para restaurantes",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/blog/llenar-restaurante-noches-lentas"
+        ]
+      },
+      "heroAlt": "A guest reading a restaurant text message offer on their phone"
+    },
+    {
+      "id": "first-instagram-ad",
+      "status": "ready",
+      "category": "ads",
+      "author": "chris",
+      "heroQuery": "restaurant owner setting up an ad on a laptop in an american restaurant",
+      "en": {
+        "slug": "first-instagram-ad-restaurant",
+        "title": "How to Run Your First Instagram Ad for a Restaurant (Step by Step)",
+        "keyword": "how to run instagram ads for a restaurant",
+        "internal": [
+          "https://www.buttonupmedia.com/restaurant-advertising",
+          "https://www.buttonupmedia.com/contact"
+        ]
+      },
+      "es": {
+        "slug": "primer-anuncio-instagram-restaurante",
+        "title": "Cómo Poner tu Primer Anuncio de Instagram para un Restaurante (Paso a Paso)",
+        "keyword": "cómo poner anuncios de instagram para un restaurante",
+        "internal": [
+          "https://www.buttonupmedia.com/es/publicidad-restaurantes",
+          "https://www.buttonupmedia.com/es/contacto"
+        ]
+      },
+      "heroAlt": "A restaurant owner creating a social media ad on a laptop"
+    },
+    {
+      "id": "respond-bad-reviews",
+      "status": "ready",
+      "category": "seo",
+      "author": "juan",
+      "heroQuery": "restaurant owner reading reviews on a phone looking thoughtful in an american restaurant",
+      "en": {
+        "slug": "respond-to-bad-restaurant-reviews",
+        "title": "How to Respond to a Bad Restaurant Review (With Templates You Can Copy)",
+        "keyword": "how to respond to negative restaurant reviews",
+        "internal": [
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/blog/get-more-google-reviews-restaurant"
+        ]
+      },
+      "es": {
+        "slug": "responder-malas-resenas-restaurante",
+        "title": "Cómo Responder a una Mala Reseña de tu Restaurante (con Plantillas para Copiar)",
+        "keyword": "cómo responder a malas reseñas de un restaurante",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/blog/conseguir-mas-resenas-google-restaurante"
+        ]
+      },
+      "heroAlt": "A restaurant owner reading a review on their phone at a table"
+    },
+    {
+      "id": "boosting-wastes-money",
+      "status": "ready",
+      "category": "ads",
+      "author": "chris",
+      "heroQuery": "hand holding a phone showing an instagram post with a boost button in america",
+      "en": {
+        "slug": "why-boosting-posts-wastes-money",
+        "title": "Why 'Boosting' Your Restaurant Posts Wastes Money (Do This Instead)",
+        "keyword": "is boosting instagram posts worth it",
+        "internal": [
+          "https://www.buttonupmedia.com/restaurant-advertising",
+          "https://www.buttonupmedia.com/contact"
+        ]
+      },
+      "es": {
+        "slug": "promocionar-publicaciones-desperdicia-dinero",
+        "title": "Por Qué 'Promocionar' tus Publicaciones Desperdicia Dinero (Haz Esto Mejor)",
+        "keyword": "vale la pena promocionar publicaciones en instagram",
+        "internal": [
+          "https://www.buttonupmedia.com/es/publicidad-restaurantes",
+          "https://www.buttonupmedia.com/es/contacto"
+        ]
+      },
+      "heroAlt": "A phone showing an Instagram post with a boost button"
+    },
+    {
+      "id": "commission-free-ordering",
+      "status": "ready",
+      "category": "web",
+      "author": "juan",
+      "heroQuery": "person placing a food order on a restaurant website on a phone in america",
+      "en": {
+        "slug": "commission-free-online-ordering",
+        "title": "How to Take Online Orders Without Paying DoorDash 30%",
+        "keyword": "commission free online ordering for restaurants",
+        "internal": [
+          "https://www.buttonupmedia.com/restaurant-website-design",
+          "https://www.buttonupmedia.com/contact"
+        ]
+      },
+      "es": {
+        "slug": "pedidos-en-linea-sin-comisiones",
+        "title": "Cómo Recibir Pedidos en Línea Sin Pagarle 30% a DoorDash",
+        "keyword": "pedidos en línea sin comisiones para restaurantes",
+        "internal": [
+          "https://www.buttonupmedia.com/es/diseno-web-restaurantes",
+          "https://www.buttonupmedia.com/es/contacto"
+        ]
+      },
+      "heroAlt": "A guest placing an online order on a restaurant's own website"
+    },
+    {
+      "id": "miami-marketing-calendar",
+      "status": "ready",
+      "category": "strategy",
+      "author": "chris",
+      "heroQuery": "sunny miami street with palm trees and outdoor restaurant dining",
+      "en": {
+        "slug": "miami-restaurant-marketing-calendar",
+        "title": "The Miami Restaurant Marketing Calendar: What to Promote Every Month",
+        "keyword": "restaurant marketing calendar ideas",
+        "internal": [
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/socialmediamarketing"
+        ]
+      },
+      "es": {
+        "slug": "calendario-marketing-restaurantes-miami",
+        "title": "Calendario de Marketing para Restaurantes en Miami: Qué Promocionar Cada Mes",
+        "keyword": "calendario de marketing para restaurantes",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/marketing-redes-sociales"
+        ]
+      },
+      "heroAlt": "A sunny Miami street with palm trees and outdoor restaurant tables"
+    },
+    {
+      "id": "manager-vs-agency",
+      "status": "ready",
+      "category": "strategy",
+      "author": "juan",
+      "heroQuery": "small marketing team meeting with a restaurant owner at a table in america",
+      "en": {
+        "slug": "social-media-manager-vs-agency-restaurant",
+        "title": "Should You Hire a Social Media Manager or an Agency for Your Restaurant?",
+        "keyword": "restaurant social media manager vs agency",
+        "internal": [
+          "https://www.buttonupmedia.com/socialmediamarketing",
+          "https://www.buttonupmedia.com/blog/restaurant-social-media-management-cost"
+        ]
+      },
+      "es": {
+        "slug": "community-manager-vs-agencia-restaurante",
+        "title": "¿Contratar un Community Manager o una Agencia para tu Restaurante?",
+        "keyword": "community manager o agencia para restaurante",
+        "internal": [
+          "https://www.buttonupmedia.com/es/marketing-redes-sociales",
+          "https://www.buttonupmedia.com/es/blog/costo-manejo-redes-sociales-restaurante"
+        ]
+      },
+      "heroAlt": "A restaurant owner meeting with a marketing team at a table"
+    },
+    {
+      "id": "choose-agency-miami",
+      "status": "ready",
+      "category": "strategy",
+      "author": "chris",
+      "heroQuery": "restaurant owner shaking hands with a marketing consultant in a miami restaurant",
+      "en": {
+        "slug": "choose-restaurant-marketing-agency-miami",
+        "title": "How to Choose a Restaurant Marketing Agency in Miami (10 Questions to Ask)",
+        "keyword": "how to choose a restaurant marketing agency",
+        "internal": [
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/blog/restaurant-marketing-cost-miami"
+        ]
+      },
+      "es": {
+        "slug": "elegir-agencia-marketing-restaurantes-miami",
+        "title": "Cómo Elegir una Agencia de Marketing para Restaurantes en Miami (10 Preguntas)",
+        "keyword": "cómo elegir una agencia de marketing para restaurantes",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/blog/cuanto-cuesta-marketing-restaurante-miami"
+        ]
+      },
+      "heroAlt": "A restaurant owner shaking hands with a marketing consultant"
     }
   ]
 }
