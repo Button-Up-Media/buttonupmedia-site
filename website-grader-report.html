@@ -291,7 +291,7 @@
     @media (max-width: 520px) { .soc-checks { grid-template-columns: 1fr; } }
 
     /* forefront "biggest fix" card (first thing after unlock) */
-    .sr-bigfix { display: flex; gap: 16px; align-items: center; background: #FFFFFF; border: 1px solid var(--line-soft); border-left: 3px solid #E0A23C; border-radius: var(--r-lg); padding: clamp(15px, 2vw, 20px) clamp(16px, 2.2vw, 24px); margin-bottom: 18px; box-shadow: 0 6px 20px rgba(40,30,12,0.05); }
+    .sr-bigfix { display: flex; gap: 16px; align-items: center; background: #FFFFFF; border: 1px solid var(--line-soft); border-left: 3px solid #E0A23C; border-radius: var(--r-lg); padding: clamp(15px, 2vw, 20px) clamp(16px, 2.2vw, 24px); box-shadow: 0 6px 20px rgba(40,30,12,0.05); }
     .bf-face { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(224,162,60,0.5); flex: none; }
     .bf-lab { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; color: #8A5E12; }
     .bf-body h3 { font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.02rem, 1.8vw, 1.24rem); color: var(--text-head); line-height: 1.2; margin-top: 3px; letter-spacing: -0.01em; }
@@ -312,7 +312,35 @@
     .sr-stab.is-active { background: #241804; color: #FBF5EA; box-shadow: 0 4px 12px rgba(36,24,4,0.22); }
     .sr-panel { display: grid; gap: 20px; }
     .sr-panel[hidden] { display: none; }
-    @media (max-width: 560px) { .sr-scoretabs { top: 72px; gap: 3px; padding: 5px; } .sr-stab { padding: 10px 4px; font-size: 0.74rem; } }
+
+    /* colour-code the cards so containers are easy to tell apart */
+    .sr-card { border-color: var(--line); }
+    #sr-panel-website > .sr-card { border-top: 3px solid #D08A34; }
+    #sr-panel-social > .sr-card { border-top: 3px solid #CF4A3C; }
+    #sr-panel-google > .sr-card { border-top: 3px solid #1E7E54; }
+    /* loud "we found N issues" card */
+    #sr-issues-card { background: linear-gradient(180deg, #FDEDE7, #FFFFFF 62%); border: 1px solid rgba(207,74,60,0.28); border-left: 4px solid var(--poor); box-shadow: 0 18px 46px rgba(207,74,60,0.13); }
+    #sr-loss-h { font-size: clamp(1.6rem, 4.2vw, 2.6rem); line-height: 1.08; letter-spacing: -0.025em; }
+    .sr-loud-count { color: var(--poor); }
+    #sr-issues-card .sr-prob { padding: 14px 0; }
+    #sr-issues-card .sr-prob .pt { font-size: 1rem; }
+    #sr-issues-card .sr-prob svg { width: 20px; height: 20px; }
+    /* score-section header that sets the tabbed area apart */
+    .sr-scorehead { text-align: center; margin: clamp(8px, 2vw, 18px) auto 0; max-width: 62ch; }
+    .sr-scorehead .sr-eyebrow { display: inline-block; font-family: var(--font-display); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #8A5E12; }
+    .sr-scorehead h2 { font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.5rem, 3.4vw, 2.2rem); letter-spacing: -0.02em; color: var(--text-head); margin-top: 8px; line-height: 1.12; }
+    .sr-scorehead p { margin: 8px auto 0; color: var(--text-dim); font-size: clamp(0.95rem, 1.5vw, 1.05rem); line-height: 1.55; }
+    /* checks distributed into the score cards */
+    .sr-checks:empty { display: none; }
+    #sr-tech-card .sr-checks { margin-top: 22px; padding-top: 6px; border-top: 1px solid var(--line-soft); }
+    /* CTA anchor: land cleanly on the Calendly iframe under the fixed nav */
+    .sr-cal { scroll-margin-top: 96px; }
+
+    @media (max-width: 560px) {
+      .sr-scoretabs { top: 72px; gap: 4px; padding: 5px; overflow-x: auto; scrollbar-width: none; }
+      .sr-scoretabs::-webkit-scrollbar { display: none; }
+      .sr-stab { flex: 0 0 auto; padding: 9px 15px; font-size: 0.82rem; }
+    }
     .sr-cats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
     @media (min-width: 560px) { .sr-cats { grid-template-columns: repeat(4, 1fr); } }
     .sr-cat { text-align: center; }
@@ -355,6 +383,7 @@
 
     /* gate v2: keep the score sharp, blur everything else until unlocked */
     .sr-blurzone { transition: filter .45s ease; }
+    #sr-blurmain { display: grid; gap: 20px; }
     .sr-report.locked .sr-blurzone { filter: blur(8px); pointer-events: none; user-select: none; }
     .sr-gatetop { width: min(480px, 100%); max-width: 100%; margin: 0 auto 24px; }
     .sr-gatetop.hidden { display: none; }
@@ -528,11 +557,16 @@
             </div>
           </div>
 
-          <!-- category tabs: the score cards below are relocated into these panels by setupScoreTabs() -->
+          <!-- score section: header + category tabs (cards relocated into panels by setupScoreTabs()) -->
+          <div class="sr-scorehead" id="sr-scorehead" style="display:none;">
+            <span class="sr-eyebrow">Your scorecard, by area</span>
+            <h2>Where you stand, area by area</h2>
+            <p>Your website, your social and your Google listing, each with how you stack up against the nearby spots you compete with.</p>
+          </div>
           <div class="sr-scoretabs" id="sr-scoretabs" role="tablist" style="display:none;">
             <button class="sr-stab is-active" data-panel="website" role="tab" type="button">Website</button>
             <button class="sr-stab" data-panel="social" role="tab" type="button">Social</button>
-            <button class="sr-stab" data-panel="google" role="tab" type="button">Google Business</button>
+            <button class="sr-stab" data-panel="google" role="tab" type="button">Google My Business</button>
           </div>
           <div class="sr-panel" id="sr-panel-website" role="tabpanel"></div>
           <div class="sr-panel" id="sr-panel-social" role="tabpanel" hidden></div>
@@ -543,6 +577,13 @@
             <h3 id="sr-loc-h">Your locations on Google</h3>
             <p style="color:var(--text-dim);font-size:0.9rem;margin:8px 0 14px;">How each of your spots is rated. Your lowest-rated locations are where you're losing the most customers, and the fastest to turn around.</p>
             <div id="sr-locations"></div>
+          </div>
+
+          <!-- Google My Business checks (relocated into the Google My Business tab) -->
+          <div class="sr-card" id="sr-gbp-checks-card" style="display:none;">
+            <h3>Your Google listing, checked</h3>
+            <p style="color:var(--text-dim);font-size:0.9rem;margin:8px 0 6px;">What hungry locals see on Google before they ever reach your site.</p>
+            <div class="sr-checks" id="sr-gbp-checks"></div>
           </div>
 
           <!-- your own social media stats -->
@@ -567,13 +608,7 @@
               <button class="sr-cat-tab" data-dev="desktop">Desktop</button>
             </div>
             <div class="sr-cats" id="sr-cats"></div>
-          </div>
-
-          <!-- the full 49-check report card -->
-          <div class="sr-card" id="sr-reportcard">
-            <h3>Your full report card</h3>
-            <p style="color:var(--text-dim);font-size:0.9rem;margin:8px 0 10px;">All 49 checks we ran across your website and Google listing, and exactly why each one wins or loses you customers.</p>
-            <div id="sr-fulllist"></div>
+            <div class="sr-checks" id="sr-web-checks"></div>
           </div>
 
           <!-- final CTA (tailored to the single worst thing) -->
@@ -1102,11 +1137,11 @@
     }
 
     /* The gated detail: all 5 sections rendered as explained pass/fail lists. */
-    function renderChecklists(rep) {
+    function renderChecklists(rep, keys) {
       var ev = rep.ev || {};
       var okIc = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
       var noIc = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>';
-      return RUBRIC.map(function (sec) {
+      return RUBRIC.filter(function (sec) { return !keys || keys.indexOf(sec.key) >= 0; }).map(function (sec) {
         var rows = sec.checks.filter(function (c) { return ev[c.id] === true || ev[c.id] === false; });
         if (!rows.length) return "";
         var pass = rows.filter(function (c) { return ev[c.id]; }).length;
@@ -1285,7 +1320,7 @@
       var lossH = document.getElementById("sr-loss-h");
       if (lossH) {
         lossH.innerHTML = n
-          ? 'We found <span class="gold">' + n + ' fixable issue' + (n === 1 ? '' : 's') + '</span> costing you customers'
+          ? 'We found <span class="sr-loud-count">' + n + ' fixable issue' + (n === 1 ? '' : 's') + '</span> costing you customers'
           : 'Your site is in good shape';
       }
       // the gate is the only thing above the fold besides the score: make its promise concrete
@@ -1295,11 +1330,23 @@
         : 'Enter your number to unlock every check we ran and how to stay ahead of nearby restaurants.';
 
       document.getElementById("sr-problems").innerHTML =
-        rep.issues.length ? rep.issues.slice(0, 4).map(probRow).join("")
+        rep.issues.length ? rep.issues.slice(0, 3).map(probRow).join("")
                           : '<p style="color:var(--text-dim);font-size:0.92rem;padding:10px 0;">No major issues on the basics. Book a call and we will find the finer wins.</p>';
 
-      document.getElementById("sr-fulllist").innerHTML =
-        (ux && rep.ev) ? renderChecklists(rep) : (rep.issues.map(probRow).join("") + cwvBlock(scan));
+      // distribute the checklist into the tabs: website checks under Website scores,
+      // Google-listing checks under Google My Business (no more standalone "full report card")
+      var webChecks = document.getElementById("sr-web-checks");
+      var gbpChecks = document.getElementById("sr-gbp-checks");
+      var gbpCard = document.getElementById("sr-gbp-checks-card");
+      if (ux && rep.ev) {
+        if (webChecks) webChecks.innerHTML = renderChecklists(rep, ["content", "appearance", "seo", "speed"]);
+        var gbpHtml = renderChecklists(rep, ["local"]);
+        if (gbpChecks) gbpChecks.innerHTML = gbpHtml;
+        if (gbpCard) gbpCard.style.display = gbpHtml ? "" : "none";
+      } else {
+        if (webChecks) webChecks.innerHTML = rep.issues.map(probRow).join("") + cwvBlock(scan);
+        if (gbpCard) gbpCard.style.display = "none";
+      }
 
       setupCats(scan);
       renderPitch(rep);
@@ -1344,7 +1391,7 @@
        instead of opening Calendly in a new tab (keeps them in context, which
        converts better). Delegated so it covers the nav, sidebar + big-fix CTAs. */
     function scrollToCal() {
-      var el = document.getElementById("sr-final") || document.getElementById("sr-cal");
+      var el = document.getElementById("sr-cal") || document.getElementById("sr-final");
       if (!el) return false;
       setupLazyCalendly();
       if (calLoadFn) calLoadFn();
@@ -1437,11 +1484,13 @@
       var pS = document.getElementById("sr-panel-social");
       var pG = document.getElementById("sr-panel-google");
       if (!tabs || !pW || !pS || !pG) return;
-      var MAP = { "sr-tech-card": pW, "sr-socialcard": pS, "sr-scoreboard": pS, "sr-comp-card": pG, "sr-locations-card": pG };
+      var MAP = { "sr-tech-card": pW, "sr-socialcard": pS, "sr-scoreboard": pS, "sr-comp-card": pG, "sr-locations-card": pG, "sr-gbp-checks-card": pG };
       Object.keys(MAP).forEach(function (id) {
         var el = document.getElementById(id);
         if (el && el.parentElement !== MAP[id]) MAP[id].appendChild(el);
       });
+      var head = document.getElementById("sr-scorehead");
+      if (head) head.style.display = "";
       tabs.style.display = "";
       if (tabs.dataset.wired) return;
       tabs.dataset.wired = "1";
