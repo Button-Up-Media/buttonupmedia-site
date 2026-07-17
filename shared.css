@@ -4339,6 +4339,19 @@ h1, h2, h3, h4, .display { font-family: var(--font-display); letter-spacing: -0.
 .bum-consent__button.--ghost {
   display: none;
 }
+/* The consent sheet always has a dark glass background, so its text must always
+   be light — the base rules above pull the page theme's text colours, which are
+   dark on the light restaurant pages and render black-on-black. Force light. */
+.bum-consent__title { color: #FBF5EA; }
+.bum-consent__copy { color: rgba(251,245,234,0.74); }
+.bum-consent__close { color: rgba(251,245,234,0.62); }
+.bum-consent__close:hover { color: #FBF5EA; }
+.bum-consent__policy { color: rgba(251,245,234,0.62); }
+.bum-consent__policy:hover { color: #FBF5EA; }
+.bum-consent__link { color: rgba(251,245,234,0.74); }
+.bum-consent__link:hover { color: #FBF5EA; }
+.bum-consent__button { color: #FBF5EA; }
+.bum-consent__button:hover { color: #FBF5EA; }
 @media (max-width: 760px) {
   .bum-consent {
     left: 8px;
