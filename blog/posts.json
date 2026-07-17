@@ -1,5 +1,19 @@
 [
   {
+    "id": "need-a-website",
+    "category": "web",
+    "author": "chris",
+    "date": "2026-07-17",
+    "hero": "/images/blog/need-a-website.jpg",
+    "heroAlt": "A restaurant website displayed on a laptop and a phone",
+    "en": {
+      "slug": "does-my-restaurant-need-a-website"
+    },
+    "es": {
+      "slug": "mi-restaurante-necesita-pagina-web"
+    }
+  },
+  {
     "id": "gbp-setup",
     "category": "seo",
     "author": "juan",

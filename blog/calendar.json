@@ -183,7 +183,7 @@
     },
     {
       "id": "need-a-website",
-      "status": "ready",
+      "status": "published",
       "category": "web",
       "author": "chris",
       "heroQuery": "restaurant website shown on a laptop and phone in a modern american cafe",
@@ -205,7 +205,8 @@
           "https://www.buttonupmedia.com/es/blog/pagina-web-restaurante-vs-instagram-2026"
         ]
       },
-      "heroAlt": "A restaurant website displayed on a laptop and a phone"
+      "heroAlt": "A restaurant website displayed on a laptop and a phone",
+      "publishedDate": "2026-07-17"
     },
     {
       "id": "restaurant-text-list",
