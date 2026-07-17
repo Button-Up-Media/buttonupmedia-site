@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      var key = "bum-cookie-consent-v1";
+      var consent = {
+        ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied",
+        analytics_storage: "denied", functionality_storage: "granted",
+        personalization_storage: "denied", security_storage: "granted", wait_for_update: 500
+      };
+      try {
+        var saved = localStorage.getItem(key);
+        if (saved) {
+          var parsed = JSON.parse(saved);
+          if (parsed && parsed.analytics) consent.analytics_storage = "granted";
+          if (parsed && parsed.marketing && !(navigator && navigator.globalPrivacyControl)) {
+            consent.ad_storage = "granted"; consent.ad_user_data = "granted";
+            consent.ad_personalization = "granted"; consent.personalization_storage = "granted";
+          }
+        }
+      } catch (err) {}
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+      window.gtag("consent", "default", consent);
+    })();
+  </script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WR9TZHT');</script>
+  <!-- End Google Tag Manager -->
+  <title>Restaurant social media that fills your seats | Button Up Media</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg" />
+  <meta name="theme-color" content="#FBF8F2" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Restaurant social media that fills your seats | Button Up Media" />
+  <meta property="og:description" content="We shoot your food in-house, run your Instagram, TikTok and Facebook, and handle every comment and DM. Built around your restaurant, priced on a quick call." />
+  <meta property="og:site_name" content="Button Up Media" />
+  <meta property="og:image" content="https://www.buttonupmedia.com/media/og-offer.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Restaurant social media that fills your seats | Button Up Media" />
+  <meta name="twitter:image" content="https://www.buttonupmedia.com/media/og-offer.png" />
+  <link rel="preconnect" href="https://assets.calendly.com" />
+  <link rel="preconnect" href="https://calendly.com" />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-variable.woff2" crossorigin fetchpriority="high" />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/epilogue-variable.woff2" crossorigin />
+  <link rel="stylesheet" href="shared.css?v=nav-mobile-4" />
+  <style>
+    :root {
+      --bg-0: #FBF8F2; --bg-1: #F4EDE1; --bg-2: #ECE3D4;
+      --line: rgba(36,28,16,0.14); --line-soft: rgba(36,28,16,0.08);
+      --text: #2C261C; --text-head: #1C170F; --text-dim: rgba(44,38,28,0.74); --text-soft: rgba(44,38,28,0.52);
+      --gold: #B57E1E; --gold-soft: rgba(181,126,30,0.12); --teal: #1E7E54;
+      --good: #1E7E54; --fair: #C9820E; --poor: #CF4A3C; --ink: #1C170F;
+    }
+    body { background: var(--bg-0); color: var(--text); }
+    .btn-primary { border: none; background: #241804; color: #FBF5EA; box-shadow: 0 6px 18px rgba(36,24,4,0.26); font-weight: 700; border-radius: 999px; }
+    .btn-primary:hover { background: linear-gradient(135deg, #E8AC44, #D08A34); color: #241804; box-shadow: 0 12px 30px rgba(208,138,52,0.42); transform: translateY(-1px); }
+
+    /* ============ HEADER (matches /restaurant-websites: liquid-glass floating pill) ============ */
+    .gr-nav {
+      position: fixed; top: 16px; left: 0; right: 0; z-index: 999;
+      width: min(calc(100% - 48px), 1180px); margin: 16px auto 0; padding: 12px 20px;
+      background: rgba(255,255,255,0.70);
+      -webkit-backdrop-filter: blur(22px) saturate(1.5); backdrop-filter: blur(22px) saturate(1.5);
+      border: 1px solid rgba(36,28,16,0.10); border-radius: 16px;
+      box-shadow: 0 10px 34px rgba(40,30,12,0.12), inset 0 1px 0 rgba(255,255,255,0.6);
+    }
+    .gr-nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; margin: 0; }
+    .gr-nav-brand { display: inline-flex; align-items: center; flex-shrink: 0; }
+    .gr-logo { height: 46px; width: auto; display: block; }
+    .gr-nav-right { display: flex; align-items: center; gap: 16px; }
+    .gr-nav-phone { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--text-head); white-space: nowrap; }
+    .gr-nav-phone svg { width: 15px; height: 15px; color: var(--gold); }
+    .gr-nav-phone:hover { color: var(--gold); }
+    .gr-nav-cta { height: 42px; padding: 0 22px; font-size: 0.86rem; white-space: nowrap; display: inline-flex; align-items: center; }
+    @media (max-width: 700px) {
+      .gr-nav { top: 8px; width: min(calc(100% - 20px), 1180px); min-height: 56px; margin: 0 auto; padding: 8px 10px 8px 14px; border-radius: 14px; }
+      .gr-nav-inner { gap: 12px; }
+      .gr-logo { height: 30px; }
+      .gr-nav-right { gap: 14px; }
+      .gr-nav-phone { width: 40px; height: 40px; padding: 0; border-radius: 50%; border: 1px solid var(--line); background: rgba(36,28,16,0.03); justify-content: center; gap: 0; }
+      .gr-nav-phone svg { width: 19px; height: 19px; }
+      .gr-nav-phone span { display: none; }
+      .gr-nav-cta { height: 40px; padding: 0 18px; }
+    }
+
+    .of-wrap { width: min(calc(100% - 32px), 1120px); margin: 0 auto; }
+    main { padding-top: clamp(96px, 13vw, 132px); padding-bottom: clamp(48px, 7vw, 80px); }
+
+    /* ============ SELLING POINTS (first thing they see) ============ */
+    .of-lead { text-align: center; margin-bottom: clamp(24px, 3.5vw, 40px); }
+    .of-lead .eye { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
+    .of-lead h1 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.035em; font-size: clamp(1.7rem, 4.4vw, 2.8rem); line-height: 1.05; margin: 12px auto 0; max-width: 20ch; text-wrap: balance; color: var(--text-head); }
+    .of-lead h1 .g { color: var(--gold); }
+
+    .of-points { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 620px) { .of-points { grid-template-columns: 1fr 1fr; } }
+    .of-point { background: #FFFFFF; border: 1px solid var(--line-soft); border-radius: 18px; padding: clamp(20px, 2.6vw, 28px); box-shadow: 0 14px 40px rgba(40,30,12,0.05); display: flex; gap: 16px; align-items: flex-start; }
+    .of-point .ic { flex: none; width: 46px; height: 46px; border-radius: 13px; background: var(--gold-soft); border: 1px solid rgba(181,126,30,0.28); color: var(--gold); display: grid; place-items: center; }
+    .of-point .ic svg { width: 23px; height: 23px; }
+    .of-point b { display: block; font-family: var(--font-display); font-weight: 800; font-size: clamp(1.05rem, 2vw, 1.2rem); color: var(--text-head); letter-spacing: -0.01em; }
+    .of-point p { margin-top: 5px; font-size: 0.95rem; line-height: 1.55; color: var(--text-dim); }
+
+    /* ============ OFFER + BOOKING ============ */
+    .of-book-row { display: grid; grid-template-columns: 1fr; gap: clamp(20px, 3vw, 26px); margin-top: clamp(20px, 3vw, 26px); align-items: stretch; }
+    @media (min-width: 900px) { .of-book-row { grid-template-columns: 0.82fr 1.18fr; } }
+
+    /* offer card */
+    .of-offer { background: linear-gradient(165deg, #2A1C06, #181004); color: #FBF5EA; border-radius: 24px; padding: clamp(28px, 3.4vw, 40px); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
+    .of-offer::after { content: ""; position: absolute; top: -30%; right: -12%; width: 320px; height: 320px; background: radial-gradient(circle, rgba(224,162,60,0.22), transparent 66%); pointer-events: none; }
+    .of-offer .lab { position: relative; font-family: var(--font-display); font-weight: 800; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(251,245,234,0.7); }
+    .of-offer .amt { position: relative; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-top: 12px; }
+    .of-offer .now { font-family: var(--font-hero); font-weight: 800; font-size: clamp(2.6rem, 7vw, 3.7rem); line-height: 0.9; letter-spacing: -0.035em; color: #FBF5EA; }
+    .of-offer .tag { position: relative; align-self: flex-start; margin-top: 16px; padding: 7px 14px; border-radius: 999px; background: rgba(232,172,68,0.18); color: #F0C069; font-family: var(--font-display); font-weight: 800; font-size: 0.74rem; letter-spacing: 0.05em; text-transform: uppercase; }
+    .of-offer .note { position: relative; margin-top: 18px; font-size: 1rem; line-height: 1.55; color: rgba(251,245,234,0.82); }
+    .of-offer .note b { color: #FBF5EA; }
+    .of-offer .inc { position: relative; margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(251,245,234,0.14); font-size: 0.9rem; line-height: 1.6; color: rgba(251,245,234,0.72); }
+
+    /* booking: Juan + inline calendar */
+    .of-book { background: #FFFFFF; border: 1px solid var(--line-soft); border-radius: 24px; padding: clamp(20px, 2.6vw, 28px); box-shadow: 0 14px 40px rgba(40,30,12,0.06); }
+    .of-host { display: flex; align-items: center; gap: 14px; padding-bottom: 16px; margin-bottom: 8px; border-bottom: 1px solid var(--line-soft); }
+    .of-host-imgwrap { width: 60px; height: 60px; border-radius: 50%; overflow: hidden; flex: none; border: 3px solid #fff; box-shadow: 0 6px 18px rgba(40,28,10,0.18); }
+    .of-host-imgwrap img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.5); transform-origin: 50% 42%; }
+    .of-host .lab { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-soft); font-weight: 800; }
+    .of-host .nm { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--text-head); margin-top: 1px; }
+    .of-host .role { font-size: 0.85rem; color: var(--text-dim); }
+    .of-cal { border-radius: 14px; overflow: hidden; min-height: 640px; }
+    .of-cal .calendly-inline-widget { min-width: 300px; height: 660px; }
+    .of-cal-fallback { padding: 40px 20px; text-align: center; color: var(--text-soft); font-size: 0.9rem; }
+    .of-cal-fallback a { color: var(--gold); font-weight: 700; }
+
+    .of-foot { border-top: 1px solid var(--line-soft); padding: 24px 0 36px; text-align: center; font-size: 0.8rem; color: var(--text-soft); }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WR9TZHT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <nav class="gr-nav">
+    <div class="gr-nav-inner">
+      <a href="/" class="gr-nav-brand" aria-label="Button Up Media home"><img class="gr-logo" src="media/logo-cropped.webp" alt="Button Up Media" width="138" height="46" fetchpriority="high" /></a>
+      <div class="gr-nav-right">
+        <a class="gr-nav-phone" href="tel:+17867409499"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <span>Call us</span></a>
+        <a href="#book" class="btn btn-primary gr-nav-cta">Get started</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="of-wrap">
+    <div class="of-lead">
+      <span class="eye">Your restaurant's social</span>
+      <h1>Social media built to fill your <span class="g">seats</span>.</h1>
+    </div>
+
+    <!-- SELLING POINTS: first thing they see -->
+    <section class="of-points">
+      <div class="of-point">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></div>
+        <div><b>We shoot it all in-house</b><p>Our own videographers come to your restaurant and film your food, drinks and dining room. No contractors, no stock photos.</p></div>
+      </div>
+      <div class="of-point">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+        <div><b>Strategy, not just posting</b><p>A monthly content calendar built around your goals, across Instagram, TikTok and Facebook, so every post has a reason to exist.</p></div>
+      </div>
+      <div class="of-point">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div><b>We run your DMs and comments</b><p>Daily replies, reservation questions and reviews handled for you, so nothing that could turn into a booking slips through.</p></div>
+      </div>
+      <div class="of-point">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+        <div><b>An audience you own</b><p>Followers who come back on their own, instead of renting reach from an influencer you have to pay every single time.</p></div>
+      </div>
+    </section>
+
+    <!-- OFFER + BOOKING -->
+    <section class="of-book-row" id="book">
+      <div class="of-offer">
+        <div class="lab">What it costs</div>
+        <div class="amt"><span class="now">Custom</span></div>
+        <span class="tag">Limited spots each month</span>
+        <p class="note"><b>Priced on a quick call.</b> Every restaurant is different, so we build the plan around your goals and quote you on the call, no pressure.</p>
+        <p class="inc">In-house video shoots, a monthly content calendar for Instagram, TikTok and Facebook, and daily community management, all handled for you.</p>
+      </div>
+
+      <div class="of-book">
+        <div class="of-host">
+          <div class="of-host-imgwrap"><img src="media/author-juan.webp" alt="Juan, Button Up Media" /></div>
+          <div>
+            <div class="lab">You'll meet with</div>
+            <div class="nm">Juan</div>
+            <div class="role">Pick a time below, it is free.</div>
+          </div>
+        </div>
+        <div class="of-cal">
+          <div class="calendly-inline-widget" data-url="https://calendly.com/juanh-buttonupmedia/marketing-consultation-for-hospitality?hide_gdpr_banner=1&primary_color=b57e1e"></div>
+          <noscript><div class="of-cal-fallback">Enable JavaScript to book, or <a href="https://calendly.com/juanh-buttonupmedia/marketing-consultation-for-hospitality" target="_blank" rel="noopener">open the scheduler</a>.</div></noscript>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="of-foot">
+    <div class="of-wrap">&copy; 2026 Button Up Media. Restaurant marketing that fills tables.</div>
+  </footer>
+
+  <script>
+    /* Calendly inline embed, loaded when it nears the viewport (keeps first paint fast). */
+    (function () {
+      var host = document.querySelector(".of-cal .calendly-inline-widget");
+      if (!host) return;
+      var loaded = false;
+      function load() {
+        if (loaded) return; loaded = true;
+        var link = document.createElement("link");
+        link.rel = "stylesheet"; link.href = "https://assets.calendly.com/assets/external/widget.css";
+        document.head.appendChild(link);
+        var s = document.createElement("script");
+        s.src = "https://assets.calendly.com/assets/external/widget.js"; s.async = true;
+        s.onload = function () {
+          if (window.Calendly && Calendly.initInlineWidget) {
+            Calendly.initInlineWidget({ url: host.getAttribute("data-url"), parentElement: host });
+          }
+        };
+        document.body.appendChild(s);
+      }
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (es) {
+          es.forEach(function (en) { if (en.isIntersecting) { load(); io.disconnect(); } });
+        }, { rootMargin: "600px" });
+        io.observe(host);
+      } else { load(); }
+      window.addEventListener("message", function (e) {
+        if (e.origin && e.origin.indexOf("calendly.com") === -1) return;
+        if (e.data && e.data.event === "calendly.event_scheduled") {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: "booking_complete" });
+        }
+      });
+    })();
+  </script>
+  <script defer src="shared.js?v=nav-mobile-4"></script>
+</body>
+</html>

@@ -210,6 +210,24 @@
       ]
     },
     {
+      "source": "/socialmediamarketing-offer",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/socialmediamarketing-offer.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
       "source": "/website-grader-es.html",
       "headers": [
         {
@@ -573,6 +591,16 @@
       "permanent": true
     },
     {
+      "source": "/socialmediamarketing-offer/",
+      "destination": "/socialmediamarketing-offer",
+      "permanent": true
+    },
+    {
+      "source": "/socialmediamarketing-offer.html",
+      "destination": "/socialmediamarketing-offer",
+      "permanent": true
+    },
+    {
       "source": "/website-grader-es.html",
       "destination": "/es/analisis-web",
       "permanent": true
@@ -741,6 +769,10 @@
     {
       "source": "/website-offer",
       "destination": "/website-offer.html"
+    },
+    {
+      "source": "/socialmediamarketing-offer",
+      "destination": "/socialmediamarketing-offer.html"
     },
     {
       "source": "/es",
