@@ -139,12 +139,17 @@
     .gr-hero-sub { max-width: 58ch; margin: 20px auto 0; font-size: clamp(1.02rem, 1.6vw, 1.16rem); line-height: 1.6; color: var(--text-dim); }
 
     /* search box */
-    .gr-search { position: relative; max-width: 540px; margin: clamp(26px, 4vw, 36px) auto 0; z-index: 20; }
-    .gr-search-bar { display: flex; align-items: center; gap: 8px; padding: 8px 8px 8px 8px; background: #FFFFFF; border: 1px solid var(--line); border-radius: 999px; box-shadow: 0 14px 40px rgba(40,30,12,0.1); transition: border-color .2s, box-shadow .2s; }
-    .gr-search-bar:focus-within { border-color: rgba(181,126,30,0.5); box-shadow: 0 16px 46px rgba(208,138,52,0.18); }
-    .gr-search-ic { flex: none; margin-left: 10px; color: var(--text-soft); display: grid; place-items: center; }
-    .gr-search-ic svg { width: 18px; height: 18px; }
-    .gr-search input { flex: 1; min-width: 0; border: none; background: none; outline: none; font-family: var(--font-body); font-size: 1rem; color: var(--text); padding: 12px 4px; }
+    .gr-search { position: relative; max-width: 600px; margin: clamp(34px, 5vw, 48px) auto 0; z-index: 20; }
+    /* prominent, obviously-clickable search: gold ring + gentle breathing glow to pull the eye */
+    .gr-search-bar { display: flex; align-items: center; gap: 8px; padding: 10px; background: #FFFFFF; border: 1px solid rgba(181,126,30,0.32); border-radius: 999px; box-shadow: 0 0 0 3px rgba(181,126,30,0.12), 0 16px 44px rgba(40,30,12,0.12); transition: border-color .2s, box-shadow .2s, transform .2s; animation: grSearchGlow 2.8s ease-in-out infinite; }
+    .gr-search-bar:hover { transform: translateY(-1px); }
+    .gr-search-bar:hover, .gr-search-bar:focus-within { animation: none; }
+    .gr-search-bar:focus-within { border-color: rgba(181,126,30,0.6); box-shadow: 0 0 0 4px rgba(181,126,30,0.22), 0 18px 50px rgba(208,138,52,0.20); }
+    @keyframes grSearchGlow { 0%, 100% { box-shadow: 0 0 0 3px rgba(181,126,30,0.11), 0 16px 44px rgba(40,30,12,0.12); } 50% { box-shadow: 0 0 0 6px rgba(181,126,30,0.17), 0 18px 50px rgba(208,138,52,0.15); } }
+    @media (prefers-reduced-motion: reduce) { .gr-search-bar { animation: none; } }
+    .gr-search-ic { flex: none; margin-left: 12px; color: var(--gold); display: grid; place-items: center; }
+    .gr-search-ic svg { width: 19px; height: 19px; }
+    .gr-search input { flex: 1; min-width: 0; border: none; background: none; outline: none; font-family: var(--font-body); font-size: 1.05rem; color: var(--text); padding: 14px 6px; }
     .gr-search input::placeholder { color: var(--text-soft); }
     .gr-search-btn { flex: none; height: 48px; padding: 0 20px; border-radius: 999px; font-family: var(--font-display); font-weight: 700; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; border: none; cursor: pointer; background: #241804; color: #FBF5EA; box-shadow: 0 6px 18px rgba(36,24,4,0.28); transition: background .2s, box-shadow .2s, transform .2s, color .2s; }
     .gr-search-btn:hover { background: linear-gradient(135deg, #E8AC44, #D08A34); color: #241804; box-shadow: 0 12px 30px rgba(208,138,52,0.45); transform: translateY(-1px); }
