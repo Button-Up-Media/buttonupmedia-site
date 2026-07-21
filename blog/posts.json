@@ -1,5 +1,19 @@
 [
   {
+    "id": "restaurant-text-list",
+    "category": "strategy",
+    "author": "juan",
+    "date": "2026-07-21",
+    "hero": "/images/blog/restaurant-text-list.jpg",
+    "heroAlt": "A guest reading a restaurant text message offer on their phone",
+    "en": {
+      "slug": "restaurant-text-message-marketing"
+    },
+    "es": {
+      "slug": "marketing-mensajes-texto-restaurante"
+    }
+  },
+  {
     "id": "need-a-website",
     "category": "web",
     "author": "chris",

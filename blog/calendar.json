@@ -210,7 +210,7 @@
     },
     {
       "id": "restaurant-text-list",
-      "status": "ready",
+      "status": "published",
       "category": "strategy",
       "author": "juan",
       "heroQuery": "person reading a text message promotion on a phone in an american restaurant",
@@ -232,7 +232,8 @@
           "https://www.buttonupmedia.com/es/blog/llenar-restaurante-noches-lentas"
         ]
       },
-      "heroAlt": "A guest reading a restaurant text message offer on their phone"
+      "heroAlt": "A guest reading a restaurant text message offer on their phone",
+      "publishedDate": "2026-07-21"
     },
     {
       "id": "first-instagram-ad",
