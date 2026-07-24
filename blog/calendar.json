@@ -237,7 +237,7 @@
     },
     {
       "id": "first-instagram-ad",
-      "status": "ready",
+      "status": "published",
       "category": "ads",
       "author": "chris",
       "heroQuery": "restaurant owner setting up an ad on a laptop in an american restaurant",
@@ -259,7 +259,8 @@
           "https://www.buttonupmedia.com/es/contacto"
         ]
       },
-      "heroAlt": "A restaurant owner creating a social media ad on a laptop"
+      "heroAlt": "A restaurant owner creating a social media ad on a laptop",
+      "publishedDate": "2026-07-24"
     },
     {
       "id": "respond-bad-reviews",

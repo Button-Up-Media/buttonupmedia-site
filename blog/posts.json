@@ -1,5 +1,19 @@
 [
   {
+    "id": "first-instagram-ad",
+    "category": "ads",
+    "author": "chris",
+    "date": "2026-07-24",
+    "hero": "/images/blog/first-instagram-ad.jpg",
+    "heroAlt": "A restaurant owner creating a social media ad on a laptop",
+    "en": {
+      "slug": "first-instagram-ad-restaurant"
+    },
+    "es": {
+      "slug": "primer-anuncio-instagram-restaurante"
+    }
+  },
+  {
     "id": "restaurant-text-list",
     "category": "strategy",
     "author": "juan",
