@@ -264,7 +264,7 @@
     },
     {
       "id": "respond-bad-reviews",
-      "status": "ready",
+      "status": "published",
       "category": "seo",
       "author": "juan",
       "heroQuery": "restaurant owner reading reviews on a phone looking thoughtful in an american restaurant",
@@ -286,7 +286,8 @@
           "https://www.buttonupmedia.com/es/blog/conseguir-mas-resenas-google-restaurante"
         ]
       },
-      "heroAlt": "A restaurant owner reading a review on their phone at a table"
+      "heroAlt": "A restaurant owner reading a review on their phone at a table",
+      "publishedDate": "2026-07-31"
     },
     {
       "id": "boosting-wastes-money",

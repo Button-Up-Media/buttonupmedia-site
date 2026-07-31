@@ -1,5 +1,19 @@
 [
   {
+    "id": "respond-bad-reviews",
+    "category": "seo",
+    "author": "juan",
+    "date": "2026-07-31",
+    "hero": "/images/blog/respond-bad-reviews.jpg",
+    "heroAlt": "A restaurant owner reading a review on their phone at a table",
+    "en": {
+      "slug": "respond-to-bad-restaurant-reviews"
+    },
+    "es": {
+      "slug": "responder-malas-resenas-restaurante"
+    }
+  },
+  {
     "id": "first-instagram-ad",
     "category": "ads",
     "author": "chris",
