@@ -2,6 +2,7 @@ import { cp, mkdir, readdir, readFile, rm, writeFile } from 'fs/promises';
 import path from 'path';
 import { transform } from 'esbuild';
 import { buildBlog } from './build-blog.mjs';
+import { generateDemo } from './demo-mock.mjs';
 
 const root = process.cwd();
 const outDir = path.join(root, 'public');
@@ -86,6 +87,11 @@ for (const { file, loader } of filesToMinify) {
     await writeFile(pagePath, pageHtml.replace(linkRe, () => `<style>${inlinedCss}</style>`));
   }
 }
+
+// Demo grader (noindex): the real grader landing + report with a client-side
+// mock for "June's Burger Joint", generated from the finished grader pages so
+// it always matches the live grader. Recordable on any device.
+await generateDemo(outDir);
 
 for (const dir of dirsToCopy) {
   if (dir === 'videos') {

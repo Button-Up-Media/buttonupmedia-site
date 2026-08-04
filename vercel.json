@@ -228,6 +228,33 @@
       ]
     },
     {
+      "source": "/grader-demo",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/grader-demo.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/grader-demo-report.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
       "source": "/website-grader-es.html",
       "headers": [
         {
@@ -773,6 +800,14 @@
     {
       "source": "/socialmediamarketing-offer",
       "destination": "/socialmediamarketing-offer.html"
+    },
+    {
+      "source": "/grader-demo",
+      "destination": "/grader-demo.html"
+    },
+    {
+      "source": "/grader-demo-report",
+      "destination": "/grader-demo-report.html"
     },
     {
       "source": "/es",
