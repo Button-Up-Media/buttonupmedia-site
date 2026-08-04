@@ -290,6 +290,32 @@
       "publishedDate": "2026-07-31"
     },
     {
+      "id": "agency-roundup",
+      "status": "draft",
+      "category": "strategy",
+      "author": "juan",
+      "heroQuery": "busy South Florida restaurant dining room at golden hour with waiter serving",
+      "en": {
+        "slug": "best-restaurant-marketing-agencies-south-florida",
+        "title": "The Best Restaurant Marketing Agency in South Florida: 8 Firms Compared (2026)",
+        "keyword": "best restaurant marketing agency south florida",
+        "internal": [
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/socialmediamarketing"
+        ]
+      },
+      "es": {
+        "slug": "mejores-agencias-marketing-restaurantes-sur-florida",
+        "title": "Mejor agencia de marketing para restaurantes en Miami y el sur de Florida: 8 opciones para 2026",
+        "keyword": "mejor agencia de marketing para restaurantes en miami",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/socialmediamarketing"
+        ]
+      },
+      "heroAlt": "A bright, welcoming South Florida restaurant dining room with set tables"
+    },
+    {
       "id": "boosting-wastes-money",
       "status": "ready",
       "category": "ads",
