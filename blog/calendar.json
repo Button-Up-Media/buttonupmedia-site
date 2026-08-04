@@ -291,7 +291,7 @@
     },
     {
       "id": "agency-roundup",
-      "status": "draft",
+      "status": "published",
       "category": "strategy",
       "author": "juan",
       "heroQuery": "busy South Florida restaurant dining room at golden hour with waiter serving",
@@ -313,7 +313,8 @@
           "https://www.buttonupmedia.com/es/socialmediamarketing"
         ]
       },
-      "heroAlt": "A bright, welcoming South Florida restaurant dining room with set tables"
+      "heroAlt": "A bright, welcoming South Florida restaurant dining room with set tables",
+      "publishedDate": "2026-08-04"
     },
     {
       "id": "boosting-wastes-money",

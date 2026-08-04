@@ -1,5 +1,19 @@
 [
   {
+    "id": "agency-roundup",
+    "category": "strategy",
+    "author": "juan",
+    "date": "2026-08-04",
+    "hero": "/images/blog/agency-roundup.jpg",
+    "heroAlt": "A bright, welcoming South Florida restaurant dining room with set tables",
+    "en": {
+      "slug": "best-restaurant-marketing-agencies-south-florida"
+    },
+    "es": {
+      "slug": "mejores-agencias-marketing-restaurantes-sur-florida"
+    }
+  },
+  {
     "id": "respond-bad-reviews",
     "category": "seo",
     "author": "juan",
