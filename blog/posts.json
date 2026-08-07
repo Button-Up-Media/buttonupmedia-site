@@ -1,5 +1,19 @@
 [
   {
+    "id": "boosting-wastes-money",
+    "category": "ads",
+    "author": "chris",
+    "date": "2026-08-07",
+    "hero": "/images/blog/boosting-wastes-money.jpg",
+    "heroAlt": "A phone showing an Instagram post with a boost button",
+    "en": {
+      "slug": "why-boosting-posts-wastes-money"
+    },
+    "es": {
+      "slug": "promocionar-publicaciones-desperdicia-dinero"
+    }
+  },
+  {
     "id": "agency-roundup",
     "category": "strategy",
     "author": "juan",

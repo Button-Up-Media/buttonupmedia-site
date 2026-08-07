@@ -318,7 +318,7 @@
     },
     {
       "id": "boosting-wastes-money",
-      "status": "ready",
+      "status": "published",
       "category": "ads",
       "author": "chris",
       "heroQuery": "hand holding a phone showing an instagram post with a boost button in america",
@@ -340,7 +340,8 @@
           "https://www.buttonupmedia.com/es/contacto"
         ]
       },
-      "heroAlt": "A phone showing an Instagram post with a boost button"
+      "heroAlt": "A phone showing an Instagram post with a boost button",
+      "publishedDate": "2026-08-07"
     },
     {
       "id": "commission-free-ordering",
