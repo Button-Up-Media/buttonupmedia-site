@@ -345,7 +345,7 @@
     },
     {
       "id": "commission-free-ordering",
-      "status": "ready",
+      "status": "published",
       "category": "web",
       "author": "juan",
       "heroQuery": "person placing a food order on a restaurant website on a phone in america",
@@ -367,7 +367,8 @@
           "https://www.buttonupmedia.com/es/contacto"
         ]
       },
-      "heroAlt": "A guest placing an online order on a restaurant's own website"
+      "heroAlt": "A guest placing an online order on a restaurant's own website",
+      "publishedDate": "2026-08-11"
     },
     {
       "id": "miami-marketing-calendar",

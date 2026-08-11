@@ -1,5 +1,19 @@
 [
   {
+    "id": "commission-free-ordering",
+    "category": "web",
+    "author": "juan",
+    "date": "2026-08-11",
+    "hero": "/images/blog/commission-free-ordering.jpg",
+    "heroAlt": "A guest placing an online order on a restaurant's own website",
+    "en": {
+      "slug": "commission-free-online-ordering"
+    },
+    "es": {
+      "slug": "pedidos-en-linea-sin-comisiones"
+    }
+  },
+  {
     "id": "boosting-wastes-money",
     "category": "ads",
     "author": "chris",
