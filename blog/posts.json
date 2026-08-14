@@ -1,5 +1,19 @@
 [
   {
+    "id": "miami-marketing-calendar",
+    "category": "strategy",
+    "author": "chris",
+    "date": "2026-08-14",
+    "hero": "/images/blog/miami-marketing-calendar.jpg",
+    "heroAlt": "A sunny Miami street with palm trees and outdoor restaurant tables",
+    "en": {
+      "slug": "miami-restaurant-marketing-calendar"
+    },
+    "es": {
+      "slug": "calendario-marketing-restaurantes-miami"
+    }
+  },
+  {
     "id": "commission-free-ordering",
     "category": "web",
     "author": "juan",

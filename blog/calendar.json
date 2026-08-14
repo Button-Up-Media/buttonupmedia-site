@@ -372,7 +372,7 @@
     },
     {
       "id": "miami-marketing-calendar",
-      "status": "ready",
+      "status": "published",
       "category": "strategy",
       "author": "chris",
       "heroQuery": "sunny miami street with palm trees and outdoor restaurant dining",
@@ -394,7 +394,8 @@
           "https://www.buttonupmedia.com/es/marketing-redes-sociales"
         ]
       },
-      "heroAlt": "A sunny Miami street with palm trees and outdoor restaurant tables"
+      "heroAlt": "A sunny Miami street with palm trees and outdoor restaurant tables",
+      "publishedDate": "2026-08-14"
     },
     {
       "id": "manager-vs-agency",
