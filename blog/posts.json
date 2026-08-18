@@ -1,5 +1,19 @@
 [
   {
+    "id": "manager-vs-agency",
+    "category": "strategy",
+    "author": "juan",
+    "date": "2026-08-18",
+    "hero": "/images/blog/manager-vs-agency.jpg",
+    "heroAlt": "A restaurant owner meeting with a marketing team at a table",
+    "en": {
+      "slug": "social-media-manager-vs-agency-restaurant"
+    },
+    "es": {
+      "slug": "community-manager-vs-agencia-restaurante"
+    }
+  },
+  {
     "id": "miami-marketing-calendar",
     "category": "strategy",
     "author": "chris",

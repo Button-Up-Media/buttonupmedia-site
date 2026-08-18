@@ -399,7 +399,7 @@
     },
     {
       "id": "manager-vs-agency",
-      "status": "ready",
+      "status": "published",
       "category": "strategy",
       "author": "juan",
       "heroQuery": "small marketing team meeting with a restaurant owner at a table in america",
@@ -421,7 +421,8 @@
           "https://www.buttonupmedia.com/es/blog/costo-manejo-redes-sociales-restaurante"
         ]
       },
-      "heroAlt": "A restaurant owner meeting with a marketing team at a table"
+      "heroAlt": "A restaurant owner meeting with a marketing team at a table",
+      "publishedDate": "2026-08-18"
     },
     {
       "id": "choose-agency-miami",
