@@ -54,7 +54,7 @@
   })(window,document,'script','dataLayer','GTM-WR9TZHT');</script>
   <!-- End Google Tag Manager -->
   <title>Restaurant Social Media Marketing That Fills Seats | Button Up Media</title>
-  <meta name="description" content="Reels, TikToks, and food content that turn South Florida diners into reservations and regulars. Book a free 30-minute restaurant social media strategy call." />
+  <meta name="description" content="Restaurant content creation and food photography, plus Reels and TikToks that turn South Florida diners into reservations and regulars. Book a free 30-minute strategy call." />
   <meta name="robots" content="noindex, follow" />
   <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg">
   <link rel="canonical" href="https://www.buttonupmedia.com/smm-strategy-call" />
@@ -64,12 +64,12 @@
   <meta name="theme-color" content="#0b0d10" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Restaurant Social Media Marketing That Fills Seats | Button Up Media" />
-  <meta property="og:description" content="Reels, TikToks, and food content that turn South Florida diners into reservations and regulars. Book a free 30-minute restaurant social media strategy call." />
+  <meta property="og:description" content="Restaurant content creation and food photography, plus Reels and TikToks that turn South Florida diners into reservations and regulars. Book a free 30-minute strategy call." />
   <meta property="og:url" content="https://www.buttonupmedia.com/smm-strategy-call" />
   <meta property="og:image" content="https://www.buttonupmedia.com/images/sm-videography-hero.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Restaurant Social Media Marketing That Fills Seats | Button Up Media" />
-  <meta name="twitter:description" content="Reels, TikToks, and food content that turn South Florida diners into reservations and regulars. Book a free 30-minute restaurant social media strategy call." />
+  <meta name="twitter:description" content="Restaurant content creation and food photography, plus Reels and TikToks that turn South Florida diners into reservations and regulars. Book a free 30-minute strategy call." />
   <meta name="twitter:image" content="https://www.buttonupmedia.com/images/sm-videography-hero.jpg" />
   <link rel="preconnect" href="https://assets.calendly.com" />
   <link rel="preconnect" href="https://calendly.com" />
@@ -139,7 +139,7 @@
         "@id": "https://www.buttonupmedia.com/smm-strategy-call#webpage",
         "url": "https://www.buttonupmedia.com/smm-strategy-call",
         "name": "Restaurant Social Media Marketing That Fills Seats | Button Up Media",
-        "description": "Reels, TikToks, and food content that turn South Florida diners into reservations and regulars. Book a free 30-minute restaurant social media strategy call.",
+        "description": "Restaurant content creation and food photography, plus Reels and TikToks that turn South Florida diners into reservations and regulars. Book a free 30-minute strategy call.",
         "isPartOf": { "@id": "https://www.buttonupmedia.com/#website" },
         "about": { "@id": "https://www.buttonupmedia.com/smm-strategy-call#service" },
         "primaryImageOfPage": { "@type": "ImageObject", "url": "https://www.buttonupmedia.com/images/sm-videography-hero.jpg" },
@@ -593,6 +593,38 @@
       letter-spacing: 0.02em;
     }
 
+    /* Mid-page booking prompt — a second door to the calendar around a third of
+       the way down, so a convinced visitor is not asked to scroll to the end. */
+    .smm-midcta {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 5vw, 40px) clamp(34px, 6vw, 52px);
+      text-align: center;
+    }
+    .smm-midcta-inner {
+      padding: clamp(24px, 4vw, 34px) clamp(18px, 4vw, 30px);
+      border-radius: var(--r-lg);
+      border: 1px solid rgba(181,126,30,0.2);
+      background:
+        radial-gradient(circle at top left, rgba(181,126,30,0.09), transparent 46%),
+        #FFFFFF;
+      box-shadow: 0 14px 36px rgba(40,30,12,0.06);
+    }
+    .smm-midcta h2 {
+      max-width: 22ch;
+      margin: 0 auto 18px;
+      font-size: clamp(1.32rem, 3.8vw, 1.75rem);
+      line-height: 1.18;
+      color: var(--text-head);
+    }
+    .smm-midcta .smm-cta { display: inline-flex; }
+    .smm-midcta .smm-cta-note {
+      display: block;
+      max-width: 34ch;
+      margin: 13px auto 0;
+      line-height: 1.45;
+    }
+
     /* How it works — the differentiator + 3 plain-English steps */
     .smm-how { max-width: 1080px; margin: 0 auto; padding: 8px clamp(20px, 5vw, 40px) clamp(40px, 6vw, 60px); }
     .smm-how-head { text-align: center; max-width: 60ch; margin: 0 auto 38px; }
@@ -820,6 +852,17 @@
       color: #2A1C06;
       box-shadow: 0 8px 24px rgba(208,138,52,0.22);
     }
+    /* shared.css forces near-white banner text for the site-wide dark sheet.
+       This page re-themes the sheet to light, so that copy landed cream on
+       cream and was unreadable. Repaint it in the page's dark ink. */
+    .bum-consent__title { color: var(--text-head); }
+    .bum-consent__copy { color: var(--text-dim); }
+    .bum-consent__policy { color: var(--text-soft); }
+    .bum-consent__policy:hover { color: var(--text-head); }
+    .bum-consent__link { color: var(--text-dim); }
+    .bum-consent__link:hover { color: var(--text-head); }
+    .bum-consent__button { color: var(--text); }
+    .bum-consent__button:hover { color: var(--text-head); }
 
     /* ── Media: BTS proof image + click-to-play reel strip ── */
     .smm-bts {
@@ -864,6 +907,36 @@
     .smm-work-head { text-align: center; margin-bottom: 26px; }
     .smm-work-head h2 { font-size: clamp(1.6rem, 4.4vw, 2.2rem); color: var(--text-head); }
     .smm-work-head p { margin: 10px auto 0; max-width: 46ch; color: var(--text-dim); font-size: 0.96rem; }
+    /* What the shoot actually covers, in the visitor's own words (paid search
+       arrives here on "content creation" / "food photography"). Framed as one
+       package so it reads as the social offering, not a second services menu. */
+    .smm-work-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      max-width: 560px;
+      margin: 16px auto 0;
+      padding: 0;
+      list-style: none;
+    }
+    .smm-work-tags li {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(181,126,30,0.28);
+      background: var(--gold-soft);
+      color: var(--text-head);
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+    }
+    .smm-work-head p.smm-work-included {
+      margin-top: 14px;
+      max-width: 52ch;
+      font-size: 0.86rem;
+      color: var(--text-soft);
+    }
     .smm-reels {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -1142,6 +1215,57 @@
     @media (prefers-reduced-motion: reduce) {
       .smm-process-video .smm-reel-play::after { animation: none; display: none; }
     }
+
+    /* Compact cookie banner, this page only (shared.css keeps the taller sheet
+       everywhere else). The site-wide mobile banner is 176px, ~22% of a phone
+       screen, and it covered the hero CTA and its reassurance line on arrival.
+       The full consent copy stays (nothing is clamped or truncated): the height
+       comes off the visible title row, the two-row action stack, the padding,
+       and a hair of type size. */
+    @media (max-width: 760px) {
+      .bum-consent__sheet {
+        height: auto;
+        padding: 10px 12px 11px;
+        border-radius: 15px;
+        gap: 8px;
+      }
+      .bum-consent__title {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+      .bum-consent__copy { font-size: 0.66rem; line-height: 1.3; }
+      /* The X is a duplicate of "Got it" (same accept action). Dropping it on a
+         phone gives the copy the full width and saves a line of height; every
+         choice (accept, opt out, policy) is still one tap away below. */
+      .bum-consent__close { display: none; }
+      .bum-consent__actions {
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .bum-consent__actions-group { flex-wrap: nowrap; gap: 14px; }
+      .bum-consent__button {
+        width: auto;
+        min-height: 32px;
+        padding: 0 16px;
+        font-size: 0.74rem;
+      }
+
+      /* Message-match chips + mid-page CTA: tighter on a phone */
+      .smm-work-tags { gap: 7px; margin-top: 14px; }
+      .smm-work-tags li { padding: 6px 11px; font-size: 0.76rem; }
+      .smm-work-head p.smm-work-included { margin-top: 12px; font-size: 0.8rem; }
+      .smm-midcta { padding-bottom: clamp(26px, 5vw, 38px); }
+      .smm-midcta-inner { padding: 22px 16px 24px; }
+      .smm-midcta h2 { font-size: 1.42rem; margin-bottom: 16px; }
+      .smm-midcta .smm-cta { width: 100%; }
+    }
   </style>
 </head>
 <body>
@@ -1176,7 +1300,7 @@
       <div class="smm-hero-bg" aria-hidden="true"></div>
       <h1 class="display-xl">Restaurant Social Media Marketing <span class="hero-gold">That Fills Seats.</span></h1>
       <p class="smm-hero-sub">
-        We turn South Florida restaurants into must-visit spots with scroll-stopping Reels, TikToks, and food content that drive reservations, orders, and repeat regulars. Book a free 30-minute strategy call and leave with a clear plan.
+        In-house content creation and food photography, plus Reels and TikToks that turn South Florida diners into reservations, orders, and repeat regulars. Book a free 30-minute strategy call and leave with a clear plan.
         <span class="smm-es">Hablamos español.</span>
       </p>
       <div class="smm-hero-cta-wrap">
@@ -1223,7 +1347,14 @@
     <section class="smm-work" aria-label="See the work">
       <div class="smm-work-head reveal">
         <h2>See the kind of content we make</h2>
-        <p>Real reels we shot and posted for South Florida restaurants. Tap to play.</p>
+        <p>Real food photography and video our in-house team shot, edited, and posted for South Florida restaurants. Tap to play.</p>
+        <ul class="smm-work-tags">
+          <li>Food photography</li>
+          <li>Content creation</li>
+          <li>Reels &amp; TikToks</li>
+          <li>Monthly on-site shoots</li>
+        </ul>
+        <p class="smm-work-included">All of it included in your monthly social media management. One team, one fee, nothing outsourced.</p>
       </div>
       <div class="smm-reels">
         <div class="smm-reel" data-reel="media/sm-fattycrab-seafood-boil.mp4">
@@ -1252,18 +1383,33 @@
       <div class="smm-why-src">Cropink, Restaurant Social Media Statistics 2026</div>
     </section>
 
+    <!-- MID-PAGE BOOKING PROMPT: the calendar sits near the bottom of the page,
+         so an already-convinced visitor gets a way to jump straight to it here
+         instead of scrolling the rest. Same [data-smm-book-trigger] hook as the
+         hero CTA: loads Calendly on intent and scrolls to #book. -->
+    <section class="smm-midcta reveal" aria-label="Book a strategy call">
+      <div class="smm-midcta-inner">
+        <h2>Want content like this for your restaurant?</h2>
+        <a href="#book" class="btn btn-primary smm-cta" data-smm-book-trigger>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Book my free strategy call
+        </a>
+        <span class="smm-cta-note">Free 30 minutes. You leave with a content plan, whether you hire us or not.</span>
+      </div>
+    </section>
+
     <!-- HOW: what we actually do — the differentiator, in plain English -->
     <section id="what-you-get" class="smm-how" aria-label="How it works">
       <div class="smm-how-head reveal">
         <div class="smm-eyebrow">What you get</div>
         <h2>We don&rsquo;t just manage your social. <span class="accent-serif">We make it.</span></h2>
-        <p>Most agencies outsource a freelance videographer who barely knows your restaurant, so the content costs more and rarely matches your vision. <strong>We bring our own in-house team into your strategy</strong> and film it ourselves, so every post is on brand and consistent.</p>
+        <p>Most agencies outsource a freelance photographer or videographer who barely knows your restaurant, so the content costs more and rarely matches your vision. <strong>Content creation and food photography are built into our social media management</strong>, shot by our own in-house team, so every photo and video is on brand and consistent.</p>
       </div>
       <div class="smm-step-grid">
         <div class="smm-step">
           <div class="smm-step-num">1</div>
-          <h3>We film it</h3>
-          <p>Our in-house team comes to you for a fresh shoot every month, so you never recycle the same few clips. New food, new angles, new promotions.</p>
+          <h3>We shoot it</h3>
+          <p>Our in-house team comes to you for a fresh photo and video shoot every month, so you never recycle the same few clips. New dishes, new angles, new promotions.</p>
         </div>
         <div class="smm-step">
           <div class="smm-step-num">2</div>
@@ -1286,8 +1432,8 @@
               <li class="smm-process-step">
                 <span class="smm-process-step-n">1</span>
                 <div>
-                  <h3>Content Production</h3>
-                  <p>Our own in-house team comes to your restaurant for the shoot, never an outsourced freelancer who barely knows your brand. We capture food, atmosphere, behind-the-scenes, and staff moments, and we come back every month so your content stays fresh instead of recycled.</p>
+                  <h3>Content Creation &amp; Food Photography</h3>
+                  <p>Our own in-house team comes to your restaurant for the photo and video shoot, never an outsourced freelancer who barely knows your brand. We capture food photography, atmosphere, behind-the-scenes, and staff moments, and we come back every month so your content stays fresh instead of recycled.</p>
                 </div>
               </li>
               <li class="smm-process-step">
@@ -1319,7 +1465,7 @@
         <div class="smm-bts-copy">
           <div class="smm-bts-eyebrow">On location, every shoot</div>
           <h3>Our own team in your dining room, not an outsourced stranger with a camera.</h3>
-          <p>The same in-house team gets to know your restaurant, your staff, and your goals, then captures content that is unmistakably yours. That&rsquo;s the difference customers feel when they scroll.</p>
+          <p>The same in-house team gets to know your restaurant, your staff, and your goals, then shoots photos and video that are unmistakably yours. That&rsquo;s the difference customers feel when they scroll.</p>
         </div>
       </div>
       <div class="smm-how-cta">
@@ -1369,7 +1515,7 @@
         </div>
         <div class="smm-fit-item">
           <span class="smm-fit-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-          <p>An agency sent an outsourced videographer who barely knew your restaurant, so the content felt generic.</p>
+          <p>An agency sent an outsourced photographer or videographer who barely knew your restaurant, so the content felt generic.</p>
         </div>
         <div class="smm-fit-item">
           <span class="smm-fit-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
@@ -1382,7 +1528,7 @@
     <section class="smm-book" id="book">
       <div class="smm-book-head">
         <h2>Pick a time that works for you</h2>
-        <p>Free 30-minute strategy call. We look at your social, your goals, and the fastest path to more covers. No pressure, no obligation.</p>
+        <p>Free 30-minute strategy call. We look at your social, your photos and content, your goals, and the fastest path to more covers. No pressure, no obligation.</p>
         <div class="smm-host">
           <img class="smm-host-photo" src="media/juan-avatar.png" alt="Juan Hernández of Button Up Media" loading="lazy" width="46" height="46" />
           <div class="smm-host-copy">
