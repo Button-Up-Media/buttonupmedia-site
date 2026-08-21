@@ -1,5 +1,19 @@
 [
   {
+    "id": "choose-agency-miami",
+    "category": "strategy",
+    "author": "chris",
+    "date": "2026-08-21",
+    "hero": "/images/blog/choose-agency-miami.jpg",
+    "heroAlt": "A restaurant owner shaking hands with a marketing consultant",
+    "en": {
+      "slug": "choose-restaurant-marketing-agency-miami"
+    },
+    "es": {
+      "slug": "elegir-agencia-marketing-restaurantes-miami"
+    }
+  },
+  {
     "id": "manager-vs-agency",
     "category": "strategy",
     "author": "juan",

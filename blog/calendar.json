@@ -426,7 +426,7 @@
     },
     {
       "id": "choose-agency-miami",
-      "status": "ready",
+      "status": "published",
       "category": "strategy",
       "author": "chris",
       "heroQuery": "restaurant owner shaking hands with a marketing consultant in a miami restaurant",
@@ -448,7 +448,8 @@
           "https://www.buttonupmedia.com/es/blog/cuanto-cuesta-marketing-restaurante-miami"
         ]
       },
-      "heroAlt": "A restaurant owner shaking hands with a marketing consultant"
+      "heroAlt": "A restaurant owner shaking hands with a marketing consultant",
+      "publishedDate": "2026-08-21"
     }
   ]
 }
