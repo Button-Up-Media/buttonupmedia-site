@@ -450,6 +450,388 @@
       },
       "heroAlt": "A restaurant owner shaking hands with a marketing consultant",
       "publishedDate": "2026-08-21"
+    },
+    {
+      "id": "tiktok-first-30-days",
+      "status": "ready",
+      "category": "social",
+      "author": "chris",
+      "heroQuery": "young person filming a food video on a phone in an american restaurant",
+      "en": {
+        "slug": "tiktok-for-restaurants-beginners",
+        "title": "TikTok for Restaurants: A Beginner's Guide to Your First 30 Days",
+        "keyword": "tiktok marketing for restaurants",
+        "internal": [
+          "https://www.buttonupmedia.com/socialmediamarketing",
+          "https://www.buttonupmedia.com/blog/restaurant-reel-ideas-that-get-customers"
+        ]
+      },
+      "es": {
+        "slug": "tiktok-para-restaurantes-principiantes",
+        "title": "TikTok para Restaurantes: Guía para tus Primeros 30 Días",
+        "keyword": "tiktok para restaurantes",
+        "internal": [
+          "https://www.buttonupmedia.com/es/marketing-redes-sociales",
+          "https://www.buttonupmedia.com/es/blog/ideas-de-reels-para-restaurantes"
+        ]
+      },
+      "heroAlt": "A person filming a plate of food with a phone at a restaurant table"
+    },
+    {
+      "id": "instagram-setup",
+      "status": "ready",
+      "category": "social",
+      "author": "chris",
+      "heroQuery": "restaurant instagram profile shown on a phone held in an american restaurant",
+      "en": {
+        "slug": "set-up-restaurant-instagram",
+        "title": "How to Set Up a Restaurant Instagram That Turns Followers Into Diners",
+        "keyword": "how to set up a restaurant instagram",
+        "internal": [
+          "https://www.buttonupmedia.com/socialmediamarketing"
+        ]
+      },
+      "es": {
+        "slug": "crear-instagram-restaurante",
+        "title": "Cómo Crear un Instagram de Restaurante Que Convierte Seguidores en Clientes",
+        "keyword": "cómo crear un instagram para restaurante",
+        "internal": [
+          "https://www.buttonupmedia.com/es/marketing-redes-sociales"
+        ]
+      },
+      "heroAlt": "A restaurant's social media profile open on a phone at a cafe table"
+    },
+    {
+      "id": "how-often-post",
+      "status": "ready",
+      "category": "social",
+      "author": "chris",
+      "heroQuery": "restaurant owner planning social posts on a phone calendar in an american cafe",
+      "en": {
+        "slug": "how-often-restaurant-post-instagram",
+        "title": "How Often Should a Restaurant Post on Instagram in 2026?",
+        "keyword": "how often should a restaurant post on instagram",
+        "internal": [
+          "https://www.buttonupmedia.com/socialmediamarketing",
+          "https://www.buttonupmedia.com/blog/restaurant-reel-ideas-that-get-customers"
+        ]
+      },
+      "es": {
+        "slug": "frecuencia-publicar-instagram-restaurante",
+        "title": "¿Con Qué Frecuencia Debe Publicar un Restaurante en Instagram en 2026?",
+        "keyword": "con qué frecuencia debe publicar un restaurante en instagram",
+        "internal": [
+          "https://www.buttonupmedia.com/es/marketing-redes-sociales",
+          "https://www.buttonupmedia.com/es/blog/ideas-de-reels-para-restaurantes"
+        ]
+      },
+      "heroAlt": "A restaurant owner planning social posts on a phone at a cafe table"
+    },
+    {
+      "id": "ugc-customer-photos",
+      "status": "ready",
+      "category": "social",
+      "author": "juan",
+      "heroQuery": "happy guests taking a photo of their food at a table in an american restaurant",
+      "en": {
+        "slug": "customer-photos-restaurant-marketing",
+        "title": "How to Turn Customer Photos Into Your Best Restaurant Marketing",
+        "keyword": "how to use customer photos for restaurant marketing",
+        "internal": [
+          "https://www.buttonupmedia.com/socialmediamarketing"
+        ]
+      },
+      "es": {
+        "slug": "fotos-de-clientes-marketing-restaurante",
+        "title": "Cómo Convertir las Fotos de tus Clientes en tu Mejor Publicidad",
+        "keyword": "cómo usar las fotos de los clientes para promocionar mi restaurante",
+        "internal": [
+          "https://www.buttonupmedia.com/es/marketing-redes-sociales"
+        ]
+      },
+      "heroAlt": "A group of friends taking a photo together at a restaurant table"
+    },
+    {
+      "id": "website-must-haves",
+      "status": "ready",
+      "category": "web",
+      "author": "chris",
+      "heroQuery": "modern restaurant website homepage on a laptop screen in america",
+      "en": {
+        "slug": "restaurant-website-must-haves",
+        "title": "7 Things Every Restaurant Website Needs to Turn Visitors Into Reservations",
+        "keyword": "restaurant website must haves",
+        "internal": [
+          "https://www.buttonupmedia.com/restaurant-website-design",
+          "https://www.buttonupmedia.com/contact"
+        ]
+      },
+      "es": {
+        "slug": "elementos-pagina-web-restaurante",
+        "title": "7 Cosas Que Toda Página Web de Restaurante Necesita para Convertir Visitas en Reservas",
+        "keyword": "qué debe tener la página web de un restaurante",
+        "internal": [
+          "https://www.buttonupmedia.com/es/diseno-web-restaurantes",
+          "https://www.buttonupmedia.com/es/contacto"
+        ]
+      },
+      "heroAlt": "A restaurant website open on a laptop at a cafe table"
+    },
+    {
+      "id": "google-reserve-bookings",
+      "status": "ready",
+      "category": "web",
+      "author": "juan",
+      "heroQuery": "person booking a restaurant table on a phone in an american city",
+      "en": {
+        "slug": "book-a-table-from-google",
+        "title": "How to Let Diners Book a Table Straight From Google",
+        "keyword": "how to add reservations to google",
+        "internal": [
+          "https://www.buttonupmedia.com/restaurant-website-design",
+          "https://www.buttonupmedia.com/contact"
+        ]
+      },
+      "es": {
+        "slug": "reservar-mesa-desde-google",
+        "title": "Cómo Permitir Que los Clientes Reserven Mesa Directamente Desde Google",
+        "keyword": "cómo agregar reservas a google",
+        "internal": [
+          "https://www.buttonupmedia.com/es/diseno-web-restaurantes",
+          "https://www.buttonupmedia.com/es/contacto"
+        ]
+      },
+      "heroAlt": "A diner booking a restaurant table from a phone at dinner"
+    },
+    {
+      "id": "google-ads-worth-it",
+      "status": "ready",
+      "category": "ads",
+      "author": "juan",
+      "heroQuery": "person searching google for restaurants on a laptop in an american cafe",
+      "en": {
+        "slug": "google-ads-for-restaurants-worth-it",
+        "title": "Should Your Restaurant Run Google Ads? What $500 a Month Really Gets You",
+        "keyword": "are google ads worth it for restaurants",
+        "internal": [
+          "https://www.buttonupmedia.com/restaurant-advertising",
+          "https://www.buttonupmedia.com/blog/miami-restaurant-google-meta-ads-budget"
+        ]
+      },
+      "es": {
+        "slug": "google-ads-para-restaurantes-vale-la-pena",
+        "title": "¿Debe tu Restaurante Usar Google Ads? Qué Consigues de Verdad con $500 al Mes",
+        "keyword": "vale la pena google ads para restaurantes",
+        "internal": [
+          "https://www.buttonupmedia.com/es/publicidad-restaurantes",
+          "https://www.buttonupmedia.com/es/blog/presupuesto-anuncios-google-meta-restaurante-miami"
+        ]
+      },
+      "heroAlt": "A person researching Google Ads on a laptop in a cafe"
+    },
+    {
+      "id": "happy-hour-that-works",
+      "status": "ready",
+      "category": "strategy",
+      "author": "juan",
+      "heroQuery": "bartender making cocktails at a busy happy hour in an american bar",
+      "en": {
+        "slug": "happy-hour-that-makes-money",
+        "title": "How to Run a Restaurant Happy Hour That Actually Makes Money",
+        "keyword": "restaurant happy hour ideas that work",
+        "internal": [
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/blog/fill-restaurant-slow-tuesday"
+        ]
+      },
+      "es": {
+        "slug": "happy-hour-que-deja-ganancias",
+        "title": "Cómo Hacer un Happy Hour Que de Verdad Deja Ganancias",
+        "keyword": "ideas de happy hour para restaurantes",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/blog/llenar-restaurante-noches-lentas"
+        ]
+      },
+      "heroAlt": "A bartender making cocktails during happy hour at a bar"
+    },
+    {
+      "id": "third-party-delivery",
+      "status": "ready",
+      "category": "strategy",
+      "author": "chris",
+      "heroQuery": "delivery courier picking up food bags at an american restaurant counter",
+      "en": {
+        "slug": "is-doordash-worth-it-restaurants",
+        "title": "Are DoorDash and Uber Eats Worth It for Your Restaurant?",
+        "keyword": "is doordash worth it for restaurants",
+        "internal": [
+          "https://www.buttonupmedia.com/restaurant-website-design",
+          "https://www.buttonupmedia.com/contact"
+        ]
+      },
+      "es": {
+        "slug": "vale-la-pena-doordash-restaurante",
+        "title": "¿Vale la Pena DoorDash y Uber Eats para tu Restaurante?",
+        "keyword": "vale la pena doordash para restaurantes",
+        "internal": [
+          "https://www.buttonupmedia.com/es/diseno-web-restaurantes",
+          "https://www.buttonupmedia.com/es/contacto"
+        ]
+      },
+      "heroAlt": "A takeout order and a delivery bag ready for pickup at a restaurant"
+    },
+    {
+      "id": "signs-you-need-help",
+      "status": "ready",
+      "category": "strategy",
+      "author": "juan",
+      "heroQuery": "tired restaurant owner looking at a phone in an empty american restaurant",
+      "en": {
+        "slug": "signs-restaurant-marketing-needs-help",
+        "title": "5 Signs Your Restaurant's Marketing Needs Help (and What to Do First)",
+        "keyword": "restaurant marketing not working",
+        "internal": [
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/socialmediamarketing"
+        ]
+      },
+      "es": {
+        "slug": "senales-marketing-restaurante-necesita-ayuda",
+        "title": "5 Señales de Que el Marketing de tu Restaurante Necesita Ayuda (y Qué Hacer Primero)",
+        "keyword": "el marketing de mi restaurante no funciona",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/marketing-redes-sociales"
+        ]
+      },
+      "heroAlt": "A restaurant owner looking out the window during a slow shift"
+    },
+    {
+      "id": "loyalty-program",
+      "status": "ready",
+      "category": "strategy",
+      "author": "juan",
+      "heroQuery": "server handing a loyalty card to a smiling guest in an american cafe",
+      "en": {
+        "slug": "restaurant-loyalty-program-setup",
+        "title": "Do Restaurant Loyalty Programs Work? A Simple Setup for Small Spots",
+        "keyword": "restaurant loyalty program ideas",
+        "internal": [
+          "https://www.buttonupmedia.com/contact"
+        ]
+      },
+      "es": {
+        "slug": "programa-de-lealtad-restaurante",
+        "title": "¿Funcionan los Programas de Lealtad? Una Guía Sencilla para Locales Pequeños",
+        "keyword": "ideas de programa de lealtad para restaurantes",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto"
+        ]
+      },
+      "heroAlt": "A server helping a regular guest at the restaurant counter"
+    },
+    {
+      "id": "near-me-searches",
+      "status": "ready",
+      "category": "seo",
+      "author": "juan",
+      "heroQuery": "hand holding a phone searching restaurants near me in an american city street",
+      "en": {
+        "slug": "win-restaurants-near-me-searches",
+        "title": "How to Win 'Restaurants Near Me' Searches for Your Spot",
+        "keyword": "how to rank for restaurants near me",
+        "internal": [
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/blog/restaurant-seo-miami-local-pack"
+        ]
+      },
+      "es": {
+        "slug": "ganar-busquedas-restaurantes-cerca-de-mi",
+        "title": "Cómo Ganar las Búsquedas de 'Restaurantes Cerca de Mí' para tu Local",
+        "keyword": "cómo aparecer en restaurantes cerca de mí",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/blog/seo-local-restaurante-miami"
+        ]
+      },
+      "heroAlt": "A phone showing a map of nearby restaurants on a city street"
+    },
+    {
+      "id": "ai-overviews",
+      "status": "ready",
+      "category": "seo",
+      "author": "chris",
+      "heroQuery": "person using an ai search app on a phone at a cafe table in america",
+      "en": {
+        "slug": "google-ai-answers-restaurant",
+        "title": "Why Google's AI Answers Skip Your Restaurant (and How to Get Included)",
+        "keyword": "how to appear in google ai overviews restaurant",
+        "internal": [
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/blog/get-restaurant-recommended-by-chatgpt"
+        ]
+      },
+      "es": {
+        "slug": "respuestas-ia-google-restaurante",
+        "title": "Por Qué las Respuestas con IA de Google Ignoran tu Restaurante (y Cómo Aparecer)",
+        "keyword": "cómo aparecer en las respuestas con ia de google",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/blog/restaurante-recomendado-por-chatgpt"
+        ]
+      },
+      "heroAlt": "A person using a search app on a phone at a cafe table"
+    },
+    {
+      "id": "remove-fake-review",
+      "status": "ready",
+      "category": "seo",
+      "author": "chris",
+      "heroQuery": "person frustrated looking at a phone in an american restaurant",
+      "en": {
+        "slug": "remove-fake-google-review-restaurant",
+        "title": "How to Get a Fake or Unfair Google Review Removed From Your Restaurant",
+        "keyword": "how to remove a fake google review",
+        "internal": [
+          "https://www.buttonupmedia.com/contact"
+        ]
+      },
+      "es": {
+        "slug": "eliminar-resena-falsa-google-restaurante",
+        "title": "Cómo Eliminar una Reseña Falsa o Injusta de tu Restaurante en Google",
+        "keyword": "cómo eliminar una reseña falsa en google",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto"
+        ]
+      },
+      "heroAlt": "A restaurant owner frustrated by an unfair online review"
+    },
+    {
+      "id": "claim-restaurant-google",
+      "status": "ready",
+      "category": "seo",
+      "author": "juan",
+      "heroQuery": "restaurant owner working on a laptop at a table in an american restaurant",
+      "en": {
+        "slug": "claim-restaurant-google-listing",
+        "title": "Someone Else Controls Your Restaurant's Google Listing: How to Take It Back",
+        "keyword": "how to claim my restaurant on google",
+        "internal": [
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/blog/restaurant-not-showing-on-google-maps"
+        ]
+      },
+      "es": {
+        "slug": "reclamar-ficha-google-restaurante",
+        "title": "Alguien Más Controla la Ficha de tu Restaurante en Google: Cómo Recuperarla",
+        "keyword": "cómo reclamar mi restaurante en google",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/blog/restaurante-no-aparece-en-google-maps"
+        ]
+      },
+      "heroAlt": "A restaurant owner and team updating their Google listing on a laptop"
     }
   ]
 }
