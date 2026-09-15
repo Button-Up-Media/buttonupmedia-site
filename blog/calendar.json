@@ -453,7 +453,7 @@
     },
     {
       "id": "tiktok-first-30-days",
-      "status": "ready",
+      "status": "published",
       "category": "social",
       "author": "chris",
       "heroQuery": "young person filming a food video on a phone in an american restaurant",
@@ -475,7 +475,8 @@
           "https://www.buttonupmedia.com/es/blog/ideas-de-reels-para-restaurantes"
         ]
       },
-      "heroAlt": "A person filming a plate of food with a phone at a restaurant table"
+      "heroAlt": "A person filming a plate of food with a phone at a restaurant table",
+      "publishedDate": "2026-09-15"
     },
     {
       "id": "instagram-setup",

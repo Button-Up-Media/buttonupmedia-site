@@ -1,5 +1,19 @@
 [
   {
+    "id": "tiktok-first-30-days",
+    "category": "social",
+    "author": "chris",
+    "date": "2026-09-15",
+    "hero": "/images/blog/tiktok-first-30-days.jpg",
+    "heroAlt": "A person filming a plate of food with a phone at a restaurant table",
+    "en": {
+      "slug": "tiktok-for-restaurants-beginners"
+    },
+    "es": {
+      "slug": "tiktok-para-restaurantes-principiantes"
+    }
+  },
+  {
     "id": "choose-agency-miami",
     "category": "strategy",
     "author": "chris",
