@@ -1,5 +1,19 @@
 [
   {
+    "id": "instagram-setup",
+    "category": "social",
+    "author": "chris",
+    "date": "2026-09-18",
+    "hero": "/images/blog/instagram-setup.jpg",
+    "heroAlt": "A restaurant's social media profile open on a phone at a cafe table",
+    "en": {
+      "slug": "set-up-restaurant-instagram"
+    },
+    "es": {
+      "slug": "crear-instagram-restaurante"
+    }
+  },
+  {
     "id": "tiktok-first-30-days",
     "category": "social",
     "author": "chris",

@@ -480,7 +480,7 @@
     },
     {
       "id": "instagram-setup",
-      "status": "ready",
+      "status": "published",
       "category": "social",
       "author": "chris",
       "heroQuery": "restaurant instagram profile shown on a phone held in an american restaurant",
@@ -500,7 +500,8 @@
           "https://www.buttonupmedia.com/es/marketing-redes-sociales"
         ]
       },
-      "heroAlt": "A restaurant's social media profile open on a phone at a cafe table"
+      "heroAlt": "A restaurant's social media profile open on a phone at a cafe table",
+      "publishedDate": "2026-09-18"
     },
     {
       "id": "how-often-post",
