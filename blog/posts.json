@@ -1,5 +1,19 @@
 [
   {
+    "id": "how-often-post",
+    "category": "social",
+    "author": "chris",
+    "date": "2026-09-22",
+    "hero": "/images/blog/how-often-post.jpg",
+    "heroAlt": "A restaurant owner planning social posts on a phone at a cafe table",
+    "en": {
+      "slug": "how-often-restaurant-post-instagram"
+    },
+    "es": {
+      "slug": "frecuencia-publicar-instagram-restaurante"
+    }
+  },
+  {
     "id": "instagram-setup",
     "category": "social",
     "author": "chris",

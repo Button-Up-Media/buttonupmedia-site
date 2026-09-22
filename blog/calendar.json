@@ -505,7 +505,7 @@
     },
     {
       "id": "how-often-post",
-      "status": "ready",
+      "status": "published",
       "category": "social",
       "author": "chris",
       "heroQuery": "restaurant owner planning social posts on a phone calendar in an american cafe",
@@ -527,7 +527,8 @@
           "https://www.buttonupmedia.com/es/blog/ideas-de-reels-para-restaurantes"
         ]
       },
-      "heroAlt": "A restaurant owner planning social posts on a phone at a cafe table"
+      "heroAlt": "A restaurant owner planning social posts on a phone at a cafe table",
+      "publishedDate": "2026-09-22"
     },
     {
       "id": "ugc-customer-photos",
