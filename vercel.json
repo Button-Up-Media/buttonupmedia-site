@@ -156,20 +156,20 @@
       ]
     },
     {
-      "source": "/website-grader",
+      "source": "/social-media-website-grader-report",
       "headers": [
         {
           "key": "X-Robots-Tag",
-          "value": "noindex, follow"
+          "value": "noindex, nofollow"
         }
       ]
     },
     {
-      "source": "/website-grader.html",
+      "source": "/es/analizador-redes-sociales-web-reporte",
       "headers": [
         {
           "key": "X-Robots-Tag",
-          "value": "noindex, follow"
+          "value": "noindex, nofollow"
         }
       ]
     },
@@ -251,24 +251,6 @@
         {
           "key": "X-Robots-Tag",
           "value": "noindex, nofollow"
-        }
-      ]
-    },
-    {
-      "source": "/website-grader-es.html",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
-        }
-      ]
-    },
-    {
-      "source": "/es/analisis-web",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
         }
       ]
     },
@@ -588,23 +570,63 @@
       "permanent": true
     },
     {
+      "source": "/website-grader",
+      "destination": "/social-media-website-grader",
+      "permanent": true
+    },
+    {
+      "source": "/website-grader-report",
+      "destination": "/social-media-website-grader-report",
+      "permanent": true
+    },
+    {
+      "source": "/es/analisis-web",
+      "destination": "/es/analizador-redes-sociales-web",
+      "permanent": true
+    },
+    {
+      "source": "/es/analisis-web-reporte",
+      "destination": "/es/analizador-redes-sociales-web-reporte",
+      "permanent": true
+    },
+    {
+      "source": "/social-media-website-grader/",
+      "destination": "/social-media-website-grader",
+      "permanent": true
+    },
+    {
+      "source": "/social-media-website-grader-report/",
+      "destination": "/social-media-website-grader-report",
+      "permanent": true
+    },
+    {
+      "source": "/es/analizador-redes-sociales-web/",
+      "destination": "/es/analizador-redes-sociales-web",
+      "permanent": true
+    },
+    {
+      "source": "/es/analizador-redes-sociales-web-reporte/",
+      "destination": "/es/analizador-redes-sociales-web-reporte",
+      "permanent": true
+    },
+    {
       "source": "/website-grader/",
-      "destination": "/website-grader",
+      "destination": "/social-media-website-grader",
       "permanent": true
     },
     {
       "source": "/website-grader.html",
-      "destination": "/website-grader",
+      "destination": "/social-media-website-grader",
       "permanent": true
     },
     {
       "source": "/website-grader-report/",
-      "destination": "/website-grader-report",
+      "destination": "/social-media-website-grader-report",
       "permanent": true
     },
     {
       "source": "/website-grader-report.html",
-      "destination": "/website-grader-report",
+      "destination": "/social-media-website-grader-report",
       "permanent": true
     },
     {
@@ -629,22 +651,22 @@
     },
     {
       "source": "/website-grader-es.html",
-      "destination": "/es/analisis-web",
+      "destination": "/es/analizador-redes-sociales-web",
       "permanent": true
     },
     {
       "source": "/es/analisis-web/",
-      "destination": "/es/analisis-web",
+      "destination": "/es/analizador-redes-sociales-web",
       "permanent": true
     },
     {
       "source": "/website-grader-report-es.html",
-      "destination": "/es/analisis-web-reporte",
+      "destination": "/es/analizador-redes-sociales-web-reporte",
       "permanent": true
     },
     {
       "source": "/es/analisis-web-reporte/",
-      "destination": "/es/analisis-web-reporte",
+      "destination": "/es/analizador-redes-sociales-web-reporte",
       "permanent": true
     },
     {
@@ -786,11 +808,11 @@
       "destination": "/restaurant-paid-ads-es.html"
     },
     {
-      "source": "/website-grader",
+      "source": "/social-media-website-grader",
       "destination": "/website-grader.html"
     },
     {
-      "source": "/website-grader-report",
+      "source": "/social-media-website-grader-report",
       "destination": "/website-grader-report.html"
     },
     {
@@ -842,11 +864,11 @@
       "destination": "/restaurant-websites-es.html"
     },
     {
-      "source": "/es/analisis-web",
+      "source": "/es/analizador-redes-sociales-web",
       "destination": "/website-grader-es.html"
     },
     {
-      "source": "/es/analisis-web-reporte",
+      "source": "/es/analizador-redes-sociales-web-reporte",
       "destination": "/website-grader-report-es.html"
     },
     {

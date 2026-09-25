@@ -141,7 +141,7 @@ export async function generateDemo(outDir) {
   // landing: real grader landing + mock, and send its "start" navigation to the demo report
   let landing = await readFile(path.join(outDir, 'website-grader.html'), 'utf8');
   landing = landing.replace('</head>', MOCK + '\n</head>');
-  landing = landing.replace(/"website-grader-report\?"/g, '"grader-demo-report.html?"');   // .html so it resolves locally + on Vercel
+  landing = landing.replace(/"\/social-media-website-grader-report\?"/g, '"grader-demo-report.html?"');   // .html so it resolves locally + on Vercel
   await writeFile(path.join(outDir, 'grader-demo.html'), landing);
 
   // report: real grader report + mock
