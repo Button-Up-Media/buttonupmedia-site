@@ -156,13 +156,13 @@ function nav(lang) {
               <a href="/es/diseno-web-restaurantes">Diseño Web</a>
             </div>
           </details>
-          <a href="/es/analizador-redes-sociales-web" class="lib-mobile-menu-only lib-mobile-action --grader"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Analizador gratis de redes y web</a>
+          <a href="/es/analizador-redes-sociales-web" class="lib-mobile-menu-only lib-mobile-action --grader" target="_blank" rel="noopener" aria-label="Analizador gratis de redes y web (se abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Analizador gratis de redes y web</a>
           <a href="/es/nosotros" class="lib-mobile-menu-only lib-mobile-action --ghost">Nosotros</a>
           <a href="tel:${PHONE}" class="lib-mobile-menu-only lib-mobile-action --ghost">Llámanos</a>
           <a href="/es/contacto" class="lib-mobile-menu-only lib-mobile-action --primary">Agende su llamada de estrategia gratis</a>
         </div>
       </details>
-      <a href="/es/analizador-redes-sociales-web" class="lib-nav-grader"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Analizador Gratis</a>
+      <a href="/es/analizador-redes-sociales-web" class="lib-nav-grader" target="_blank" rel="noopener" aria-label="Analizador Gratis (se abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Analizador Gratis</a>
       <a href="/es">Inicio</a>
       <a href="/es/nosotros">Nosotros</a>
       <a class="lib-nav-phone" href="tel:${PHONE}">Llámanos</a>
@@ -195,13 +195,13 @@ function nav(lang) {
               <a href="/restaurant-website-design">Website</a>
             </div>
           </details>
-          <a href="/social-media-website-grader" class="lib-mobile-menu-only lib-mobile-action --grader"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Free Social &amp; Website Grader</a>
+          <a href="/social-media-website-grader" class="lib-mobile-menu-only lib-mobile-action --grader" target="_blank" rel="noopener" aria-label="Free Social &amp; Website Grader (opens in a new tab)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Free Social &amp; Website Grader</a>
           <a href="/about" class="lib-mobile-menu-only lib-mobile-action --ghost">About</a>
           <a href="tel:${PHONE}" class="lib-mobile-menu-only lib-mobile-action --ghost">Call Us</a>
           <a href="/contact" class="lib-mobile-menu-only lib-mobile-action --primary">Book Free Strategy Call</a>
         </div>
       </details>
-      <a href="/social-media-website-grader" class="lib-nav-grader"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Social &amp; Web Grader</a>
+      <a href="/social-media-website-grader" class="lib-nav-grader" target="_blank" rel="noopener" aria-label="Social &amp; Web Grader (opens in a new tab)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Social &amp; Web Grader</a>
       <a href="/">Home</a>
       <a href="/about">About</a>
       <a class="lib-nav-phone" href="tel:${PHONE}">Call Us</a>

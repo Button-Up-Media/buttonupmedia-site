@@ -42,7 +42,7 @@
   })(window,document,'script','dataLayer','GTM-WR9TZHT');</script>
   <!-- End Google Tag Manager -->
   <title>Analizador Gratis de Redes Sociales y Sitio Web para Restaurantes | Button Up Media</title>
-  <meta name="description" content="Descubre cómo se ve tu restaurante en internet. Una calificación gratis e instantánea de tu sitio web, tu ficha de Google, tus redes sociales y tus reseñas, más cómo te comparas con la competencia cercana." />
+  <meta name="description" content="Analizador gratis de marketing para restaurantes: califica tu sitio web, Instagram, TikTok, ficha de Google y reseñas en 60 segundos y te compara con la competencia cercana." />
   <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg" />
   <link rel="canonical" href="https://www.buttonupmedia.com/es/analizador-redes-sociales-web" />
   <link rel="alternate" hreflang="en" href="https://www.buttonupmedia.com/social-media-website-grader" />
@@ -51,7 +51,7 @@
   <meta name="theme-color" content="#FBF8F2" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Analizador Gratis de Redes Sociales y Sitio Web para Restaurantes | Button Up Media" />
-  <meta property="og:description" content="Descubre cómo se ve tu restaurante en internet. Una calificación gratis e instantánea de tu sitio web, tu ficha de Google, tus redes sociales y tus reseñas, más cómo te comparas con la competencia cercana." />
+  <meta property="og:description" content="Analizador gratis de marketing para restaurantes: califica tu sitio web, Instagram, TikTok, ficha de Google y reseñas en 60 segundos y te compara con la competencia cercana." />
   <meta property="og:url" content="https://www.buttonupmedia.com/es/analizador-redes-sociales-web" />
   <meta property="og:site_name" content="Button Up Media" />
   <meta property="og:locale" content="es_US" />
@@ -237,6 +237,19 @@
     .gr-section-head.--center { max-width: 34ch; margin: 0 auto; text-align: center; }
     .gr-section-head h2 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.035em; font-size: clamp(1.9rem, 4.6vw, 3.1rem); line-height: 1.05; margin-top: 12px; text-wrap: balance; }
     .gr-section-head p { margin-top: 14px; color: var(--text-dim); font-size: 1.06rem; line-height: 1.6; }
+    /* FAQ: answers stay in the DOM inside <details> so crawlers and answer
+       engines can read them whether or not the panel is open. */
+    .gr-faq { max-width: 880px; margin: clamp(26px, 4vw, 44px) auto 0; display: flex; flex-direction: column; gap: 10px; }
+    .gr-faq details { border: 1px solid var(--line); border-radius: 16px; background: #fff; }
+    .gr-faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 17px 20px; font-family: var(--font-display); font-weight: 700; font-size: 1rem; line-height: 1.35; color: var(--text-head); }
+    .gr-faq summary::-webkit-details-marker { display: none; }
+    .gr-faq summary::after { content: ""; flex: none; width: 10px; height: 10px; margin-top: -3px; border-right: 2px solid var(--gold); border-bottom: 2px solid var(--gold); transform: rotate(45deg); transition: transform 0.2s ease; }
+    .gr-faq details[open] summary::after { transform: rotate(-135deg); margin-top: 3px; }
+    .gr-faq summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 16px; }
+    .gr-faq .gr-faq-a { padding: 0 20px 18px; color: var(--text-dim); font-size: 0.96rem; line-height: 1.65; }
+    .gr-faq .gr-faq-a a { color: var(--gold-text); text-decoration: underline; }
+    @media (max-width: 600px) { .gr-faq summary { font-size: 0.95rem; padding: 15px 16px; } .gr-faq .gr-faq-a { padding: 0 16px 16px; font-size: 0.93rem; } }
+
 
     /* split layout: heading left, content right on wide screens */
     .gr-split { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 4vw, 46px); }
@@ -694,6 +707,165 @@
     @media (max-width: 700px) { .gr-cal-inline, .gr-cal-inline iframe { min-height: 660px; } }
   </style>
   <!-- Calendly assets are lazy-loaded on first interaction / when the inline scheduler nears the viewport (keeps them off the critical path; see script at end of body) -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Analizador de Redes Sociales y Sitio Web para Restaurantes",
+  "alternateName": [
+    "Analizador de marketing para restaurantes",
+    "Analizador de sitio web para restaurantes",
+    "Analizador de redes sociales para restaurantes",
+    "Auditoría gratis de marketing para restaurantes"
+  ],
+  "url": "https://www.buttonupmedia.com/es/analizador-redes-sociales-web",
+  "inLanguage": "es",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any (web browser)",
+  "browserRequirements": "Requires JavaScript.",
+  "description": "Un analizador gratis que califica el sitio web, el Instagram, el TikTok, el perfil de Google Business y las reseñas de un restaurante en unos 60 segundos, y lo compara con los restaurantes cercanos.",
+  "featureList": [
+    "Califica la velocidad móvil y los Core Web Vitals con Google PageSpeed Insights",
+    "Califica Instagram y TikTok con datos públicos, sin conectar ninguna cuenta",
+    "Califica el perfil de Google Business, las reseñas y las fotos",
+    "Revisa el sistema de pedidos en línea y de reservas",
+    "Revisa el SEO on-page: título, H1, meta descripción, texto alternativo y etiquetas para compartir",
+    "Compara el restaurante con la competencia cercana",
+    "Entrega una calificación sobre 100 y una lista de arreglos por prioridad"
+  ],
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Restaurant, bar and café owners"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "Button Up Media",
+    "url": "https://www.buttonupmedia.com/",
+    "areaServed": [
+      {
+        "@type": "State",
+        "name": "Florida"
+      }
+    ]
+  }
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": "es",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Qué es un analizador de marketing para restaurantes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Un analizador de marketing para restaurantes es una herramienta gratis que califica cómo se ve tu restaurante en internet y te dice qué arreglar primero. Este califica seis áreas: la velocidad móvil de tu sitio web, tus fotos de comida, tu perfil de Google Business y tus reseñas, tu sistema de pedidos y reservas, tu Instagram y tu TikTok, y tu SEO on-page. Luego te compara con los restaurantes que compiten contigo cerca y te da una sola calificación sobre 100 con una lista de arreglos en orden de prioridad."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿El analizador de sitio web es gratis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, completamente. No hay prueba gratis, no pedimos tarjeta y no tienes que crear una cuenta. Te pedimos un número de celular para enviarte el reporte por mensaje, y puedes responder STOP cuando quieras."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué revisa en el sitio web de mi restaurante?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La velocidad de carga en celular y los Core Web Vitals (usamos el propio PageSpeed Insights de Google, así que los números son los mismos que ve Google), si el diseño aguanta en un teléfono, si tu menú y tus precios de verdad se ven, si hay un botón de pedido o reserva que funcione, si el dominio es tuyo, y el SEO on-page como el título, el H1, la meta descripción, el texto alternativo de las imágenes y las etiquetas para compartir."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo califica mi Instagram y mi TikTok?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Encuentra tus perfiles públicos de Instagram y TikTok desde tu sitio web y tu ficha de Google, y luego lee cuántos seguidores tienes, cuántas publicaciones llevas, hace cuánto publicaste por última vez y tu interacción promedio. Marca lo que te está costando clientes en silencio, como una cuenta que lleva dos meses callada, muchas publicaciones con casi ningún seguidor, o varias cuentas compitiendo por el mismo restaurante."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Tengo que conectar mi cuenta de Instagram o de Google?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. No se conecta nada y no se inicia sesión en nada. El analizador solo lee información pública, lo mismo que vería un cliente que te está buscando."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿También revisa mi perfil de Google Business y mis reseñas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Califica tu puntuación en estrellas, cuántas reseñas tienes, el tono de tus reseñas recientes, cuántas fotos hay en la ficha, si tus horarios y tu teléfono están completos, y si tu sitio web está enlazado. También te muestra qué restaurantes cercanos te están ganando."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto tarda el análisis?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Unos 60 segundos. La mayor parte es la prueba de velocidad de tu sitio, que corre en vivo contra tu página en vez de sacar una calificación guardada."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿En qué se diferencia de un analizador de sitios web común?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Un analizador común califica una página web. La mayoría de los restaurantes pierden al cliente mucho antes del sitio web, en Google, en las reseñas o en Instagram. Este los revisa todos, y te compara con restaurantes reales cerca de ti en vez de un promedio genérico de la industria."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Sirve para bares, cafés y food trucks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Funciona con cualquier negocio que tenga un perfil de Google Business. Si tu local no aparece, puedes analizarlo por la dirección de tu sitio web."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Dónde funciona el analizador?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El análisis funciona en cualquier lugar donde Google tenga una ficha de tu negocio. Button Up Media es una agencia de marketing para restaurantes con base en Florida, así que la ayuda gratis de seguimiento se enfoca en Miami, Fort Lauderdale, Orlando y Tampa."
+      }
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Inicio",
+      "item": "https://www.buttonupmedia.com/es"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Analizador de Redes Sociales y Sitio Web",
+      "item": "https://www.buttonupmedia.com/es/analizador-redes-sociales-web"
+    }
+  ]
+}
+  </script>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -1351,6 +1523,59 @@
     </section>
 
     <!-- ============ INLINE SCHEDULER ============ -->
+    <!-- ============ FAQ (also the FAQPage schema source) ============ -->
+    <section class="gr-section" id="faq" style="padding-top:0;">
+      <div class="gr-wrap">
+        <div class="gr-section-head --center gr-rise">
+          <span class="gr-eyebrow">Preguntas</span>
+          <h2>El Analizador de Redes Sociales y Sitio Web, Explicado.</h2>
+          <p>Qu&eacute; revisa, cu&aacute;nto cuesta y c&oacute;mo calcula tu calificaci&oacute;n.</p>
+        </div>
+        <div class="gr-faq gr-rise">
+          <details open>
+            <summary>&iquest;Qu&eacute; es un analizador de marketing para restaurantes?</summary>
+            <div class="gr-faq-a"><p>Un analizador de marketing para restaurantes es una herramienta gratis que califica c&oacute;mo se ve tu restaurante en internet y te dice qu&eacute; arreglar primero. Este califica seis &aacute;reas: la velocidad m&oacute;vil de tu sitio web, tus fotos de comida, tu perfil de Google Business y tus rese&ntilde;as, tu sistema de pedidos y reservas, tu Instagram y tu TikTok, y tu SEO on-page. Luego te compara con los restaurantes que compiten contigo cerca y te da una sola calificaci&oacute;n sobre 100 con una lista de arreglos en orden de prioridad.</p></div>
+          </details>
+          <details>
+            <summary>&iquest;El analizador de sitio web es gratis?</summary>
+            <div class="gr-faq-a"><p>S&iacute;, completamente. No hay prueba gratis, no pedimos tarjeta y no tienes que crear una cuenta. Te pedimos un n&uacute;mero de celular para enviarte el reporte por mensaje, y puedes responder STOP cuando quieras.</p></div>
+          </details>
+          <details>
+            <summary>&iquest;Qu&eacute; revisa en el sitio web de mi restaurante?</summary>
+            <div class="gr-faq-a"><p>La velocidad de carga en celular y los Core Web Vitals (usamos el propio PageSpeed Insights de Google, as&iacute; que los n&uacute;meros son los mismos que ve Google), si el dise&ntilde;o aguanta en un tel&eacute;fono, si tu men&uacute; y tus precios de verdad se ven, si hay un bot&oacute;n de pedido o reserva que funcione, si el dominio es tuyo, y el SEO on-page como el t&iacute;tulo, el H1, la meta descripci&oacute;n, el texto alternativo de las im&aacute;genes y las etiquetas para compartir.</p></div>
+          </details>
+          <details>
+            <summary>&iquest;C&oacute;mo califica mi Instagram y mi TikTok?</summary>
+            <div class="gr-faq-a"><p>Encuentra tus perfiles p&uacute;blicos de Instagram y TikTok desde tu sitio web y tu ficha de Google, y luego lee cu&aacute;ntos seguidores tienes, cu&aacute;ntas publicaciones llevas, hace cu&aacute;nto publicaste por &uacute;ltima vez y tu interacci&oacute;n promedio. Marca lo que te est&aacute; costando clientes en silencio, como una cuenta que lleva dos meses callada, muchas publicaciones con casi ning&uacute;n seguidor, o varias cuentas compitiendo por el mismo restaurante.</p></div>
+          </details>
+          <details>
+            <summary>&iquest;Tengo que conectar mi cuenta de Instagram o de Google?</summary>
+            <div class="gr-faq-a"><p>No. No se conecta nada y no se inicia sesi&oacute;n en nada. El analizador solo lee informaci&oacute;n p&uacute;blica, lo mismo que ver&iacute;a un cliente que te est&aacute; buscando.</p></div>
+          </details>
+          <details>
+            <summary>&iquest;Tambi&eacute;n revisa mi perfil de Google Business y mis rese&ntilde;as?</summary>
+            <div class="gr-faq-a"><p>S&iacute;. Califica tu puntuaci&oacute;n en estrellas, cu&aacute;ntas rese&ntilde;as tienes, el tono de tus rese&ntilde;as recientes, cu&aacute;ntas fotos hay en la ficha, si tus horarios y tu tel&eacute;fono est&aacute;n completos, y si tu sitio web est&aacute; enlazado. Tambi&eacute;n te muestra qu&eacute; restaurantes cercanos te est&aacute;n ganando.</p></div>
+          </details>
+          <details>
+            <summary>&iquest;Cu&aacute;nto tarda el an&aacute;lisis?</summary>
+            <div class="gr-faq-a"><p>Unos 60 segundos. La mayor parte es la prueba de velocidad de tu sitio, que corre en vivo contra tu p&aacute;gina en vez de sacar una calificaci&oacute;n guardada.</p></div>
+          </details>
+          <details>
+            <summary>&iquest;En qu&eacute; se diferencia de un analizador de sitios web com&uacute;n?</summary>
+            <div class="gr-faq-a"><p>Un analizador com&uacute;n califica una p&aacute;gina web. La mayor&iacute;a de los restaurantes pierden al cliente mucho antes del sitio web, en Google, en las rese&ntilde;as o en Instagram. Este los revisa todos, y te compara con restaurantes reales cerca de ti en vez de un promedio gen&eacute;rico de la industria.</p></div>
+          </details>
+          <details>
+            <summary>&iquest;Sirve para bares, caf&eacute;s y food trucks?</summary>
+            <div class="gr-faq-a"><p>S&iacute;. Funciona con cualquier negocio que tenga un perfil de Google Business. Si tu local no aparece, puedes analizarlo por la direcci&oacute;n de tu sitio web.</p></div>
+          </details>
+          <details>
+            <summary>&iquest;D&oacute;nde funciona el analizador?</summary>
+            <div class="gr-faq-a"><p>El an&aacute;lisis funciona en cualquier lugar donde Google tenga una ficha de tu negocio. Button Up Media es una agencia de marketing para restaurantes con base en Florida, as&iacute; que la ayuda gratis de seguimiento se enfoca en Miami, Fort Lauderdale, Orlando y Tampa.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <section class="gr-section" id="book" style="padding-top:0;">
       <div class="gr-wrap">
         <div class="gr-section-head --center gr-rise">

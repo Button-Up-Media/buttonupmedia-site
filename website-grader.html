@@ -42,7 +42,7 @@
   })(window,document,'script','dataLayer','GTM-WR9TZHT');</script>
   <!-- End Google Tag Manager -->
   <title>Free Restaurant Social Media &amp; Website Grader | Button Up Media</title>
-  <meta name="description" content="See how your restaurant, bar or café actually shows up online. A free, instant AI grade on your website, Google listing, social media and reviews, plus how you compare to nearby competitors." />
+  <meta name="description" content="Free restaurant marketing grader: scores your website, Instagram, TikTok, Google listing and reviews in 60 seconds, then ranks you against nearby restaurants." />
   <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg" />
   <link rel="canonical" href="https://www.buttonupmedia.com/social-media-website-grader" />
   <link rel="alternate" hreflang="en" href="https://www.buttonupmedia.com/social-media-website-grader" />
@@ -51,7 +51,7 @@
   <meta name="theme-color" content="#FBF8F2" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Free Restaurant Social Media &amp; Website Grader | Button Up Media" />
-  <meta property="og:description" content="See how your restaurant, bar or café actually shows up online. A free, instant AI grade on your website, Google listing, social media and reviews, plus how you compare to nearby competitors." />
+  <meta property="og:description" content="Free restaurant marketing grader: scores your website, Instagram, TikTok, Google listing and reviews in 60 seconds, then ranks you against nearby restaurants." />
   <meta property="og:url" content="https://www.buttonupmedia.com/social-media-website-grader" />
   <meta property="og:site_name" content="Button Up Media" />
   <meta property="og:locale" content="en_US" />
@@ -248,6 +248,19 @@
     .gr-section-head.--center { max-width: 34ch; margin: 0 auto; text-align: center; }
     .gr-section-head h2 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.03em; font-size: clamp(1.55rem, 3vw, 2.3rem); line-height: 1.08; margin-top: 10px; text-wrap: balance; }
     .gr-section-head p { margin-top: 12px; color: var(--text-dim); font-size: 1rem; line-height: 1.55; }
+    /* FAQ: answers stay in the DOM inside <details> so crawlers and answer
+       engines can read them whether or not the panel is open. */
+    .gr-faq { max-width: 880px; margin: clamp(26px, 4vw, 44px) auto 0; display: flex; flex-direction: column; gap: 10px; }
+    .gr-faq details { border: 1px solid var(--line); border-radius: 16px; background: #fff; }
+    .gr-faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 17px 20px; font-family: var(--font-display); font-weight: 700; font-size: 1rem; line-height: 1.35; color: var(--text-head); }
+    .gr-faq summary::-webkit-details-marker { display: none; }
+    .gr-faq summary::after { content: ""; flex: none; width: 10px; height: 10px; margin-top: -3px; border-right: 2px solid var(--gold); border-bottom: 2px solid var(--gold); transform: rotate(45deg); transition: transform 0.2s ease; }
+    .gr-faq details[open] summary::after { transform: rotate(-135deg); margin-top: 3px; }
+    .gr-faq summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 16px; }
+    .gr-faq .gr-faq-a { padding: 0 20px 18px; color: var(--text-dim); font-size: 0.96rem; line-height: 1.65; }
+    .gr-faq .gr-faq-a a { color: var(--gold-text); text-decoration: underline; }
+    @media (max-width: 600px) { .gr-faq summary { font-size: 0.95rem; padding: 15px 16px; } .gr-faq .gr-faq-a { padding: 0 16px 16px; font-size: 0.93rem; } }
+
 
     /* split layout: heading left, content right on wide screens */
     .gr-split { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 4vw, 46px); }
@@ -708,6 +721,165 @@
     @media (max-width: 700px) { .gr-cal-inline, .gr-cal-inline iframe { min-height: 660px; } }
   </style>
   <!-- Calendly assets are lazy-loaded on first interaction / when the inline scheduler nears the viewport (keeps them off the critical path; see script at end of body) -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Restaurant Social Media & Website Grader",
+  "alternateName": [
+    "Restaurant marketing grader",
+    "Restaurant website grader",
+    "Restaurant social media grader",
+    "Free restaurant marketing audit"
+  ],
+  "url": "https://www.buttonupmedia.com/social-media-website-grader",
+  "inLanguage": "en",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any (web browser)",
+  "browserRequirements": "Requires JavaScript.",
+  "description": "A free grader that scores a restaurant’s website, Instagram, TikTok, Google Business Profile and reviews in about 60 seconds, then ranks it against nearby restaurants.",
+  "featureList": [
+    "Grades website mobile speed and Core Web Vitals using Google PageSpeed Insights",
+    "Grades Instagram and TikTok from public data, with no account connection",
+    "Grades the Google Business Profile, reviews and photos",
+    "Checks online ordering and reservation setup",
+    "Checks on-page SEO: title, H1, meta description, alt text and share tags",
+    "Ranks the restaurant against nearby competitors",
+    "Returns a score out of 100 and a prioritized list of fixes"
+  ],
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Restaurant, bar and café owners"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "Button Up Media",
+    "url": "https://www.buttonupmedia.com/",
+    "areaServed": [
+      {
+        "@type": "State",
+        "name": "Florida"
+      }
+    ]
+  }
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": "en",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a restaurant marketing grader?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A restaurant marketing grader is a free tool that scores how your restaurant shows up online and tells you what to fix first. This one grades six areas: your website’s mobile speed, your food photos, your Google Business Profile and reviews, your ordering and reservation setup, your Instagram and TikTok, and your on-page SEO. It then ranks you against the restaurants competing with you nearby and returns one score out of 100 with a prioritized list of fixes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the restaurant website grader free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, completely. There is no trial, no card, and no account to create. We ask for a mobile number so we can text you the finished report, and you can reply STOP at any time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does the grader check on my restaurant’s website?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mobile load speed and Core Web Vitals (we run Google’s own PageSpeed Insights, so the numbers match what Google sees), whether the layout holds up on a phone, whether your menu and prices are actually visible, whether there is a working order or reserve button, whether you own your domain, and on-page SEO like your title tag, H1, meta description, image alt text and social share tags."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the social media grader score my Instagram and TikTok?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It finds your public Instagram and TikTok profiles from your website and your Google listing, then reads follower count, how many posts you have published, how recently you last posted, and average engagement. It flags the things that quietly cost you customers, like an account that has gone silent for two months, a large post count with almost no following, or several competing accounts for the same restaurant."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I have to connect my Instagram or Google account?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Nothing gets connected and nothing gets logged into. The grader reads public information only, the same things a customer looking you up would see."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it check my Google Business Profile and reviews?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. It scores your star rating, your review count, the sentiment running through your recent reviews, how many photos are on the listing, whether your hours and phone number are filled in, and whether your website is linked. It also shows you which nearby restaurants are outranking you."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does the scan take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "About 60 seconds. Most of that is the live website speed test, which runs in real time against your site rather than pulling a cached score."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is this different from a generic website grader?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A generic website grader scores a web page. Most restaurants lose the customer well before the website, on Google, in the reviews, or on Instagram. This grader covers all of it, and it benchmarks you against real restaurants near you instead of a generic industry average."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work for bars, cafés, coffee shops and food trucks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Anything with a Google Business Profile works. If your spot is not listed, you can grade it by website address instead."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where does the restaurant marketing grader work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The scan works anywhere Google has a listing for your business. Button Up Media is a restaurant marketing agency based in Florida, so the free follow-up help is focused on Miami, Fort Lauderdale, Orlando and Tampa."
+      }
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://www.buttonupmedia.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Social Media & Website Grader",
+      "item": "https://www.buttonupmedia.com/social-media-website-grader"
+    }
+  ]
+}
+  </script>
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -1364,6 +1536,59 @@
     </section>
 
     <!-- ============ INLINE SCHEDULER ============ -->
+    <!-- ============ FAQ (also the FAQPage schema source) ============ -->
+    <section class="gr-section" id="faq" style="padding-top:0;">
+      <div class="gr-wrap">
+        <div class="gr-section-head --center gr-rise">
+          <span class="gr-eyebrow">Questions</span>
+          <h2>The Restaurant Social Media &amp; Website Grader, Explained.</h2>
+          <p>What it checks, what it costs, and how it works out your score.</p>
+        </div>
+        <div class="gr-faq gr-rise">
+          <details open>
+            <summary>What is a restaurant marketing grader?</summary>
+            <div class="gr-faq-a"><p>A restaurant marketing grader is a free tool that scores how your restaurant shows up online and tells you what to fix first. This one grades six areas: your website&rsquo;s mobile speed, your food photos, your Google Business Profile and reviews, your ordering and reservation setup, your Instagram and TikTok, and your on-page SEO. It then ranks you against the restaurants competing with you nearby and returns one score out of 100 with a prioritized list of fixes.</p></div>
+          </details>
+          <details>
+            <summary>Is the restaurant website grader free?</summary>
+            <div class="gr-faq-a"><p>Yes, completely. There is no trial, no card, and no account to create. We ask for a mobile number so we can text you the finished report, and you can reply STOP at any time.</p></div>
+          </details>
+          <details>
+            <summary>What does the grader check on my restaurant&rsquo;s website?</summary>
+            <div class="gr-faq-a"><p>Mobile load speed and Core Web Vitals (we run Google&rsquo;s own PageSpeed Insights, so the numbers match what Google sees), whether the layout holds up on a phone, whether your menu and prices are actually visible, whether there is a working order or reserve button, whether you own your domain, and on-page SEO like your title tag, H1, meta description, image alt text and social share tags.</p></div>
+          </details>
+          <details>
+            <summary>How does the social media grader score my Instagram and TikTok?</summary>
+            <div class="gr-faq-a"><p>It finds your public Instagram and TikTok profiles from your website and your Google listing, then reads follower count, how many posts you have published, how recently you last posted, and average engagement. It flags the things that quietly cost you customers, like an account that has gone silent for two months, a large post count with almost no following, or several competing accounts for the same restaurant.</p></div>
+          </details>
+          <details>
+            <summary>Do I have to connect my Instagram or Google account?</summary>
+            <div class="gr-faq-a"><p>No. Nothing gets connected and nothing gets logged into. The grader reads public information only, the same things a customer looking you up would see.</p></div>
+          </details>
+          <details>
+            <summary>Does it check my Google Business Profile and reviews?</summary>
+            <div class="gr-faq-a"><p>Yes. It scores your star rating, your review count, the sentiment running through your recent reviews, how many photos are on the listing, whether your hours and phone number are filled in, and whether your website is linked. It also shows you which nearby restaurants are outranking you.</p></div>
+          </details>
+          <details>
+            <summary>How long does the scan take?</summary>
+            <div class="gr-faq-a"><p>About 60 seconds. Most of that is the live website speed test, which runs in real time against your site rather than pulling a cached score.</p></div>
+          </details>
+          <details>
+            <summary>How is this different from a generic website grader?</summary>
+            <div class="gr-faq-a"><p>A generic website grader scores a web page. Most restaurants lose the customer well before the website, on Google, in the reviews, or on Instagram. This grader covers all of it, and it benchmarks you against real restaurants near you instead of a generic industry average.</p></div>
+          </details>
+          <details>
+            <summary>Does it work for bars, caf&eacute;s, coffee shops and food trucks?</summary>
+            <div class="gr-faq-a"><p>Yes. Anything with a Google Business Profile works. If your spot is not listed, you can grade it by website address instead.</p></div>
+          </details>
+          <details>
+            <summary>Where does the restaurant marketing grader work?</summary>
+            <div class="gr-faq-a"><p>The scan works anywhere Google has a listing for your business. Button Up Media is a restaurant marketing agency based in Florida, so the free follow-up help is focused on Miami, Fort Lauderdale, Orlando and Tampa.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <section class="gr-section" id="book" style="padding-top:0;">
       <div class="gr-wrap">
         <div class="gr-section-head --center gr-rise">
