@@ -532,7 +532,7 @@
     },
     {
       "id": "ugc-customer-photos",
-      "status": "ready",
+      "status": "published",
       "category": "social",
       "author": "juan",
       "heroQuery": "happy guests taking a photo of their food at a table in an american restaurant",
@@ -552,7 +552,8 @@
           "https://www.buttonupmedia.com/es/marketing-redes-sociales"
         ]
       },
-      "heroAlt": "A group of friends taking a photo together at a restaurant table"
+      "heroAlt": "A group of friends taking a photo together at a restaurant table",
+      "publishedDate": "2026-09-25"
     },
     {
       "id": "website-must-haves",

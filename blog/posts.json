@@ -1,5 +1,19 @@
 [
   {
+    "id": "ugc-customer-photos",
+    "category": "social",
+    "author": "juan",
+    "date": "2026-09-25",
+    "hero": "/images/blog/ugc-customer-photos.jpg",
+    "heroAlt": "A group of friends taking a photo together at a restaurant table",
+    "en": {
+      "slug": "customer-photos-restaurant-marketing"
+    },
+    "es": {
+      "slug": "fotos-de-clientes-marketing-restaurante"
+    }
+  },
+  {
     "id": "how-often-post",
     "category": "social",
     "author": "chris",
