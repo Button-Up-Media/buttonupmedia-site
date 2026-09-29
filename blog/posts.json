@@ -1,5 +1,19 @@
 [
   {
+    "id": "website-must-haves",
+    "category": "web",
+    "author": "chris",
+    "date": "2026-09-29",
+    "hero": "/images/blog/website-must-haves.jpg",
+    "heroAlt": "A restaurant website open on a laptop at a cafe table",
+    "en": {
+      "slug": "restaurant-website-must-haves"
+    },
+    "es": {
+      "slug": "elementos-pagina-web-restaurante"
+    }
+  },
+  {
     "id": "ugc-customer-photos",
     "category": "social",
     "author": "juan",

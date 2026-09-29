@@ -557,7 +557,7 @@
     },
     {
       "id": "website-must-haves",
-      "status": "ready",
+      "status": "published",
       "category": "web",
       "author": "chris",
       "heroQuery": "modern restaurant website homepage on a laptop screen in america",
@@ -579,7 +579,8 @@
           "https://www.buttonupmedia.com/es/contacto"
         ]
       },
-      "heroAlt": "A restaurant website open on a laptop at a cafe table"
+      "heroAlt": "A restaurant website open on a laptop at a cafe table",
+      "publishedDate": "2026-09-29"
     },
     {
       "id": "google-reserve-bookings",
