@@ -583,6 +583,114 @@
       "publishedDate": "2026-09-29"
     },
     {
+      "id": "vs-host-hospitality",
+      "status": "ready",
+      "category": "strategy",
+      "author": "juan",
+      "heroQuery": "restaurant owner working on a laptop inside a restaurant",
+      "en": {
+        "slug": "button-up-media-vs-host-hospitality",
+        "title": "Button Up Media vs Host Hospitality: Which Restaurant Marketing Agency Should You Hire?",
+        "keyword": "button up media vs host hospitality",
+        "internal": [
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/blog/best-restaurant-marketing-agencies-south-florida",
+          "https://www.buttonupmedia.com/blog/choose-restaurant-marketing-agency-miami"
+        ]
+      },
+      "es": {
+        "slug": "button-up-media-vs-host-hospitality-comparacion",
+        "title": "Button Up Media vs Host Hospitality: ¿cuál agencia de marketing para restaurantes contratar?",
+        "keyword": "button up media vs host hospitality",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/blog/mejores-agencias-marketing-restaurantes-sur-florida"
+        ]
+      },
+      "heroAlt": "A restaurant owner working on a laptop at a table inside a quiet restaurant"
+    },
+    {
+      "id": "vs-restaurant-suite-360",
+      "status": "ready",
+      "category": "strategy",
+      "author": "chris",
+      "heroQuery": "two professionals reviewing a laptop at a table over coffee",
+      "en": {
+        "slug": "button-up-media-vs-restaurant-suite-360",
+        "title": "Button Up Media vs Restaurant Suite 360: Comparing Two Restaurant-Only Agencies",
+        "keyword": "button up media vs restaurant suite 360",
+        "internal": [
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/blog/best-restaurant-marketing-agencies-south-florida",
+          "https://www.buttonupmedia.com/blog/choose-restaurant-marketing-agency-miami"
+        ]
+      },
+      "es": {
+        "slug": "button-up-media-vs-restaurant-suite-360-comparacion",
+        "title": "Button Up Media vs Restaurant Suite 360: dos agencias dedicadas solo a restaurantes",
+        "keyword": "button up media vs restaurant suite 360",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/blog/mejores-agencias-marketing-restaurantes-sur-florida"
+        ]
+      },
+      "heroAlt": "Two professionals reviewing a laptop together at a table over coffee"
+    },
+    {
+      "id": "vs-slique-media",
+      "status": "ready",
+      "category": "social",
+      "author": "juan",
+      "heroQuery": "person photographing a plated dish with a phone at a restaurant table",
+      "en": {
+        "slug": "button-up-media-vs-slique-media",
+        "title": "Button Up Media vs Slique Media: Which Restaurant Social Media Agency Should You Hire?",
+        "keyword": "button up media vs slique media",
+        "internal": [
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/socialmediamarketing",
+          "https://www.buttonupmedia.com/blog/best-restaurant-marketing-agencies-south-florida"
+        ]
+      },
+      "es": {
+        "slug": "button-up-media-vs-slique-media-comparacion",
+        "title": "Button Up Media vs Slique Media: ¿cuál agencia de redes sociales para restaurantes contratar?",
+        "keyword": "button up media vs slique media",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/marketing-redes-sociales"
+        ]
+      },
+      "heroAlt": "A person photographing a plated dish with a phone at a restaurant table"
+    },
+    {
+      "id": "vs-savage-global",
+      "status": "ready",
+      "category": "strategy",
+      "author": "chris",
+      "heroQuery": "busy american restaurant and bar dining room full of guests",
+      "en": {
+        "slug": "button-up-media-vs-savage-global-marketing",
+        "title": "Button Up Media vs Savage Global Marketing: Hospitality Specialist or Generalist Agency?",
+        "keyword": "button up media vs savage global marketing",
+        "internal": [
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/blog/best-restaurant-marketing-agencies-south-florida",
+          "https://www.buttonupmedia.com/blog/social-media-manager-vs-agency-restaurant"
+        ]
+      },
+      "es": {
+        "slug": "button-up-media-vs-savage-global-marketing-comparacion",
+        "title": "Button Up Media vs Savage Global Marketing: ¿especialista en hospitalidad o agencia generalista?",
+        "keyword": "button up media vs savage global marketing",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/blog/mejores-agencias-marketing-restaurantes-sur-florida"
+        ]
+      },
+      "heroAlt": "A busy American restaurant and bar dining room full of guests"
+    },
+    {
       "id": "google-reserve-bookings",
       "status": "ready",
       "category": "web",
