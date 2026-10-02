@@ -1,5 +1,19 @@
 [
   {
+    "id": "vs-host-hospitality",
+    "category": "strategy",
+    "author": "juan",
+    "date": "2026-10-02",
+    "hero": "/images/blog/vs-host-hospitality.jpg",
+    "heroAlt": "A restaurant owner working on a laptop at a table inside a quiet restaurant",
+    "en": {
+      "slug": "button-up-media-vs-host-hospitality"
+    },
+    "es": {
+      "slug": "button-up-media-vs-host-hospitality-comparacion"
+    }
+  },
+  {
     "id": "website-must-haves",
     "category": "web",
     "author": "chris",
