@@ -1,5 +1,19 @@
 [
   {
+    "id": "vs-restaurant-suite-360",
+    "category": "strategy",
+    "author": "chris",
+    "date": "2026-10-06",
+    "hero": "/images/blog/vs-restaurant-suite-360.jpg",
+    "heroAlt": "Two professionals reviewing a laptop together at a table over coffee",
+    "en": {
+      "slug": "button-up-media-vs-restaurant-suite-360"
+    },
+    "es": {
+      "slug": "button-up-media-vs-restaurant-suite-360-comparacion"
+    }
+  },
+  {
     "id": "vs-host-hospitality",
     "category": "strategy",
     "author": "juan",

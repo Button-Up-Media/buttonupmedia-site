@@ -612,7 +612,7 @@
     },
     {
       "id": "vs-restaurant-suite-360",
-      "status": "ready",
+      "status": "published",
       "category": "strategy",
       "author": "chris",
       "heroQuery": "two professionals reviewing a laptop at a table over coffee",
@@ -635,7 +635,8 @@
           "https://www.buttonupmedia.com/es/blog/mejores-agencias-marketing-restaurantes-sur-florida"
         ]
       },
-      "heroAlt": "Two professionals reviewing a laptop together at a table over coffee"
+      "heroAlt": "Two professionals reviewing a laptop together at a table over coffee",
+      "publishedDate": "2026-10-06"
     },
     {
       "id": "vs-slique-media",
