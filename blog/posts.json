@@ -1,5 +1,19 @@
 [
   {
+    "id": "vs-slique-media",
+    "category": "social",
+    "author": "juan",
+    "date": "2026-10-09",
+    "hero": "/images/blog/vs-slique-media.jpg",
+    "heroAlt": "A person photographing a plated dish with a phone at a restaurant table",
+    "en": {
+      "slug": "button-up-media-vs-slique-media"
+    },
+    "es": {
+      "slug": "button-up-media-vs-slique-media-comparacion"
+    }
+  },
+  {
     "id": "vs-restaurant-suite-360",
     "category": "strategy",
     "author": "chris",

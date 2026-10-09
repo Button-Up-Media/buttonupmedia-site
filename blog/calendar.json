@@ -640,7 +640,7 @@
     },
     {
       "id": "vs-slique-media",
-      "status": "ready",
+      "status": "published",
       "category": "social",
       "author": "juan",
       "heroQuery": "person photographing a plated dish with a phone at a restaurant table",
@@ -663,7 +663,8 @@
           "https://www.buttonupmedia.com/es/marketing-redes-sociales"
         ]
       },
-      "heroAlt": "A person photographing a plated dish with a phone at a restaurant table"
+      "heroAlt": "A person photographing a plated dish with a phone at a restaurant table",
+      "publishedDate": "2026-10-09"
     },
     {
       "id": "vs-savage-global",
