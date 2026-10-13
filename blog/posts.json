@@ -1,5 +1,19 @@
 [
   {
+    "id": "vs-savage-global",
+    "category": "strategy",
+    "author": "chris",
+    "date": "2026-10-13",
+    "hero": "/images/blog/vs-savage-global.jpg",
+    "heroAlt": "A busy American restaurant and bar dining room full of guests",
+    "en": {
+      "slug": "button-up-media-vs-savage-global-marketing"
+    },
+    "es": {
+      "slug": "button-up-media-vs-savage-global-marketing-comparacion"
+    }
+  },
+  {
     "id": "vs-slique-media",
     "category": "social",
     "author": "juan",

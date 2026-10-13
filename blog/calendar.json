@@ -668,7 +668,7 @@
     },
     {
       "id": "vs-savage-global",
-      "status": "ready",
+      "status": "published",
       "category": "strategy",
       "author": "chris",
       "heroQuery": "busy american restaurant and bar dining room full of guests",
@@ -691,7 +691,8 @@
           "https://www.buttonupmedia.com/es/blog/mejores-agencias-marketing-restaurantes-sur-florida"
         ]
       },
-      "heroAlt": "A busy American restaurant and bar dining room full of guests"
+      "heroAlt": "A busy American restaurant and bar dining room full of guests",
+      "publishedDate": "2026-10-13"
     },
     {
       "id": "google-reserve-bookings",
