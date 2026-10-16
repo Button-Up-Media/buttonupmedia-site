@@ -696,7 +696,7 @@
     },
     {
       "id": "google-reserve-bookings",
-      "status": "ready",
+      "status": "published",
       "category": "web",
       "author": "juan",
       "heroQuery": "person booking a restaurant table on a phone in an american city",
@@ -718,7 +718,8 @@
           "https://www.buttonupmedia.com/es/contacto"
         ]
       },
-      "heroAlt": "A diner booking a restaurant table from a phone at dinner"
+      "heroAlt": "A diner booking a restaurant table from a phone at dinner",
+      "publishedDate": "2026-10-16"
     },
     {
       "id": "google-ads-worth-it",

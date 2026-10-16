@@ -1,5 +1,19 @@
 [
   {
+    "id": "google-reserve-bookings",
+    "category": "web",
+    "author": "juan",
+    "date": "2026-10-16",
+    "hero": "/images/blog/google-reserve-bookings.jpg",
+    "heroAlt": "A diner booking a restaurant table from a phone at dinner",
+    "en": {
+      "slug": "book-a-table-from-google"
+    },
+    "es": {
+      "slug": "reservar-mesa-desde-google"
+    }
+  },
+  {
     "id": "vs-savage-global",
     "category": "strategy",
     "author": "chris",
