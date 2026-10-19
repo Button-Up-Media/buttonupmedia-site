@@ -722,6 +722,34 @@
       "publishedDate": "2026-10-16"
     },
     {
+      "id": "marketing-fort-lauderdale",
+      "status": "ready",
+      "category": "strategy",
+      "author": "juan",
+      "heroQuery": "waterfront restaurant dining at dusk in Fort Lauderdale Florida",
+      "en": {
+        "slug": "restaurant-marketing-agency-fort-lauderdale",
+        "title": "Restaurant Marketing Agency in Fort Lauderdale: A Local Owner's Guide (2026)",
+        "keyword": "restaurant marketing agency fort lauderdale",
+        "internal": [
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/blog/best-restaurant-marketing-agencies-south-florida",
+          "https://www.buttonupmedia.com/blog/choose-restaurant-marketing-agency-miami"
+        ]
+      },
+      "es": {
+        "slug": "agencia-marketing-restaurantes-fort-lauderdale",
+        "title": "Agencia de Marketing para Restaurantes en Fort Lauderdale: Guía Local (2026)",
+        "keyword": "agencia de marketing para restaurantes en fort lauderdale",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/blog/mejores-agencias-marketing-restaurantes-sur-florida",
+          "https://www.buttonupmedia.com/es/blog/elegir-agencia-marketing-restaurantes-miami"
+        ]
+      },
+      "heroAlt": "The Fort Lauderdale waterfront and marina at sunset"
+    },
+    {
       "id": "google-ads-worth-it",
       "status": "ready",
       "category": "ads",
@@ -746,6 +774,34 @@
         ]
       },
       "heroAlt": "A person researching Google Ads on a laptop in a cafe"
+    },
+    {
+      "id": "marketing-coral-gables",
+      "status": "ready",
+      "category": "strategy",
+      "author": "chris",
+      "heroQuery": "upscale restaurant with outdoor seating on a tree-lined street in Coral Gables Florida",
+      "en": {
+        "slug": "restaurant-marketing-agency-coral-gables",
+        "title": "Restaurant Marketing Agency in Coral Gables: A Local Owner's Guide (2026)",
+        "keyword": "restaurant marketing agency coral gables",
+        "internal": [
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/blog/best-restaurant-marketing-agencies-south-florida",
+          "https://www.buttonupmedia.com/blog/choose-restaurant-marketing-agency-miami"
+        ]
+      },
+      "es": {
+        "slug": "agencia-marketing-restaurantes-coral-gables",
+        "title": "Agencia de Marketing para Restaurantes en Coral Gables: Guía Local (2026)",
+        "keyword": "agencia de marketing para restaurantes en coral gables",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/blog/mejores-agencias-marketing-restaurantes-sur-florida",
+          "https://www.buttonupmedia.com/es/blog/elegir-agencia-marketing-restaurantes-miami"
+        ]
+      },
+      "heroAlt": "An outdoor dining plaza with Mediterranean-style architecture and string lights"
     },
     {
       "id": "happy-hour-that-works",
@@ -774,6 +830,34 @@
       "heroAlt": "A bartender making cocktails during happy hour at a bar"
     },
     {
+      "id": "marketing-brickell",
+      "status": "ready",
+      "category": "strategy",
+      "author": "juan",
+      "heroQuery": "modern rooftop restaurant with Miami skyline at dusk Brickell",
+      "en": {
+        "slug": "restaurant-marketing-agency-brickell",
+        "title": "Restaurant Marketing in Brickell: How to Stand Out in Miami's Busiest Dining District (2026)",
+        "keyword": "restaurant marketing agency brickell",
+        "internal": [
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/blog/best-restaurant-marketing-agencies-south-florida",
+          "https://www.buttonupmedia.com/blog/choose-restaurant-marketing-agency-miami"
+        ]
+      },
+      "es": {
+        "slug": "agencia-marketing-restaurantes-brickell",
+        "title": "Marketing para Restaurantes en Brickell: Cómo Destacar en el Distrito más Competido de Miami (2026)",
+        "keyword": "agencia de marketing para restaurantes en brickell",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/blog/mejores-agencias-marketing-restaurantes-sur-florida",
+          "https://www.buttonupmedia.com/es/blog/elegir-agencia-marketing-restaurantes-miami"
+        ]
+      },
+      "heroAlt": "The Brickell skyline lit up at night in Miami"
+    },
+    {
       "id": "third-party-delivery",
       "status": "ready",
       "category": "strategy",
@@ -798,6 +882,34 @@
         ]
       },
       "heroAlt": "A takeout order and a delivery bag ready for pickup at a restaurant"
+    },
+    {
+      "id": "marketing-wynwood",
+      "status": "ready",
+      "category": "strategy",
+      "author": "chris",
+      "heroQuery": "trendy restaurant near colorful street art murals in Wynwood Miami",
+      "en": {
+        "slug": "restaurant-marketing-agency-wynwood",
+        "title": "Restaurant Marketing in Wynwood: Turning Miami's Most Instagrammable Neighborhood Into Covers (2026)",
+        "keyword": "restaurant marketing agency wynwood",
+        "internal": [
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/blog/best-restaurant-marketing-agencies-south-florida",
+          "https://www.buttonupmedia.com/blog/choose-restaurant-marketing-agency-miami"
+        ]
+      },
+      "es": {
+        "slug": "agencia-marketing-restaurantes-wynwood",
+        "title": "Marketing para Restaurantes en Wynwood: Cómo Convertir el Barrio más Fotografiado de Miami en Mesas Llenas (2026)",
+        "keyword": "agencia de marketing para restaurantes en wynwood",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/blog/mejores-agencias-marketing-restaurantes-sur-florida",
+          "https://www.buttonupmedia.com/es/blog/elegir-agencia-marketing-restaurantes-miami"
+        ]
+      },
+      "heroAlt": "Colorful street art in the Wynwood Arts District in Miami"
     },
     {
       "id": "signs-you-need-help",
@@ -826,6 +938,34 @@
       "heroAlt": "A restaurant owner looking out the window during a slow shift"
     },
     {
+      "id": "marketing-doral",
+      "status": "ready",
+      "category": "strategy",
+      "author": "juan",
+      "heroQuery": "family restaurant dining room in Doral Miami Florida",
+      "en": {
+        "slug": "restaurant-marketing-agency-doral",
+        "title": "Restaurant Marketing Agency in Doral: A Local Owner's Guide (2026)",
+        "keyword": "restaurant marketing agency doral",
+        "internal": [
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/blog/best-restaurant-marketing-agencies-south-florida",
+          "https://www.buttonupmedia.com/blog/choose-restaurant-marketing-agency-miami"
+        ]
+      },
+      "es": {
+        "slug": "agencia-marketing-restaurantes-doral",
+        "title": "Agencia de Marketing para Restaurantes en Doral: Guía Local (2026)",
+        "keyword": "agencia de marketing para restaurantes en doral",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/blog/mejores-agencias-marketing-restaurantes-sur-florida",
+          "https://www.buttonupmedia.com/es/blog/elegir-agencia-marketing-restaurantes-miami"
+        ]
+      },
+      "heroAlt": "Guests dining together at an outdoor restaurant in South Florida"
+    },
+    {
       "id": "loyalty-program",
       "status": "ready",
       "category": "strategy",
@@ -848,6 +988,34 @@
         ]
       },
       "heroAlt": "A server helping a regular guest at the restaurant counter"
+    },
+    {
+      "id": "marketing-west-palm-beach",
+      "status": "ready",
+      "category": "strategy",
+      "author": "chris",
+      "heroQuery": "outdoor restaurant dining on Clematis Street West Palm Beach Florida evening",
+      "en": {
+        "slug": "restaurant-marketing-agency-west-palm-beach",
+        "title": "Restaurant Marketing Agency in West Palm Beach: A Local Owner's Guide (2026)",
+        "keyword": "restaurant marketing agency west palm beach",
+        "internal": [
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/blog/best-restaurant-marketing-agencies-south-florida",
+          "https://www.buttonupmedia.com/blog/choose-restaurant-marketing-agency-miami"
+        ]
+      },
+      "es": {
+        "slug": "agencia-marketing-restaurantes-west-palm-beach",
+        "title": "Agencia de Marketing para Restaurantes en West Palm Beach: Guía Local (2026)",
+        "keyword": "agencia de marketing para restaurantes en west palm beach",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/blog/mejores-agencias-marketing-restaurantes-sur-florida",
+          "https://www.buttonupmedia.com/es/blog/elegir-agencia-marketing-restaurantes-miami"
+        ]
+      },
+      "heroAlt": "A warm outdoor restaurant glowing at night in downtown South Florida"
     },
     {
       "id": "near-me-searches",
