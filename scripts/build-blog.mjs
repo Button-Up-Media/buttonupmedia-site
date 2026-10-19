@@ -54,7 +54,7 @@ const T = {
     keepReading: 'Keep reading', minRead: (n) => `${n} min read`, articles: (n) => `${n} ${n === 1 ? 'article' : 'articles'}`,
     all: 'All', latest: 'Latest articles', featured: 'Featured', latestStory: 'Latest story', read: 'Read the article',
     empty: 'No articles in this category yet. Check back soon.',
-    midStrong: 'Want a plan like this for your restaurant?', midSpan: 'Free 30-minute strategy call. No pressure, no jargon.', midBtn: 'Book a Free Strategy Call',
+    midStrong: 'Not sure where your restaurant stands online?', midSpan: 'Our free Social and Website Grader checks your website, Google, and social in about a minute and shows you what to fix first.', midBtn: 'Get your free report card', graderUrl: '/social-media-website-grader',
     ctaEyebrow: 'Free, no pressure', call: `Call ${PHONE_DISPLAY}`,
     bandEyebrow: 'Free, no pressure', bandH2: 'Want this handled for you?',
     bandP: 'Book a free strategy call and we will map out exactly how we would help your restaurant stand out. No obligation.', bandBtn: 'Book a Free Strategy Call',
@@ -73,7 +73,7 @@ const T = {
     keepReading: 'Sigue leyendo', minRead: (n) => `${n} min de lectura`, articles: (n) => `${n} ${n === 1 ? 'artículo' : 'artículos'}`,
     all: 'Todos', latest: 'Artículos recientes', featured: 'Destacado', latestStory: 'Lo más reciente', read: 'Leer el artículo',
     empty: 'Aún no hay artículos en esta categoría. Vuelva pronto.',
-    midStrong: '¿Quiere un plan así para su restaurante?', midSpan: 'Llamada de estrategia gratis de 30 minutos. Sin compromiso.', midBtn: 'Reserve su llamada gratis',
+    midStrong: '¿No sabe cómo está su restaurante en línea?', midSpan: 'Nuestro Analizador gratis de redes y web revisa su sitio, Google y redes en aproximadamente un minuto y le muestra qué arreglar primero.', midBtn: 'Reciba su reporte gratis', graderUrl: '/es/analizador-redes-sociales-web',
     ctaEyebrow: 'Gratis, sin compromiso', call: `Llame al ${PHONE_DISPLAY}`,
     bandEyebrow: 'Gratis, sin compromiso', bandH2: '¿Quiere que lo hagamos por usted?',
     bandP: 'Reserve una llamada de estrategia gratis y le mostramos exactamente cómo ayudaríamos a su restaurante a destacar. Sin compromiso.', bandBtn: 'Reserve su llamada gratis',
@@ -623,7 +623,7 @@ function renderPost(view, allViews) {
     ? `<div class="bp-callout"><strong>${t.takeaways}</strong><ul>${content.keyTakeaways.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>`
     : '';
 
-  const midCta = `<div class="bp-midcta"><div class="bp-midcta-text"><strong>${esc(t.midStrong)}</strong><span>${esc(t.midSpan)}</span></div><a href="${t.contact}" class="btn btn-primary">${esc(t.midBtn)} ${ARROW}</a></div>`;
+  const midCta = `<div class="bp-midcta"><div class="bp-midcta-text"><strong>${esc(t.midStrong)}</strong><span>${esc(t.midSpan)}</span></div><a href="${t.graderUrl}" class="btn btn-primary" target="_blank" rel="noopener">${esc(t.midBtn)} ${ARROW}</a></div>`;
 
   // Anchor every section so the table of contents and "quick answer" links work,
   // and AI assistants can deep-link to a specific step. Dedupe collided slugs.
