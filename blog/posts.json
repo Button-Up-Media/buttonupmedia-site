@@ -1,5 +1,19 @@
 [
   {
+    "id": "marketing-fort-lauderdale",
+    "category": "strategy",
+    "author": "juan",
+    "date": "2026-10-20",
+    "hero": "/images/blog/marketing-fort-lauderdale.jpg",
+    "heroAlt": "The Fort Lauderdale waterfront and marina at sunset",
+    "en": {
+      "slug": "restaurant-marketing-agency-fort-lauderdale"
+    },
+    "es": {
+      "slug": "agencia-marketing-restaurantes-fort-lauderdale"
+    }
+  },
+  {
     "id": "google-reserve-bookings",
     "category": "web",
     "author": "juan",

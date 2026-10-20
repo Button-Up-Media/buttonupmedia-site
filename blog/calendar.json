@@ -723,7 +723,7 @@
     },
     {
       "id": "marketing-fort-lauderdale",
-      "status": "ready",
+      "status": "published",
       "category": "strategy",
       "author": "juan",
       "heroQuery": "waterfront restaurant dining at dusk in Fort Lauderdale Florida",
@@ -747,7 +747,8 @@
           "https://www.buttonupmedia.com/es/blog/elegir-agencia-marketing-restaurantes-miami"
         ]
       },
-      "heroAlt": "The Fort Lauderdale waterfront and marina at sunset"
+      "heroAlt": "The Fort Lauderdale waterfront and marina at sunset",
+      "publishedDate": "2026-10-20"
     },
     {
       "id": "google-ads-worth-it",
