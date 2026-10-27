@@ -1,5 +1,19 @@
 [
   {
+    "id": "google-ads-worth-it",
+    "category": "ads",
+    "author": "juan",
+    "date": "2026-10-27",
+    "hero": "/images/blog/google-ads-worth-it.jpg",
+    "heroAlt": "A person researching Google Ads on a laptop in a cafe",
+    "en": {
+      "slug": "google-ads-for-restaurants-worth-it"
+    },
+    "es": {
+      "slug": "google-ads-para-restaurantes-vale-la-pena"
+    }
+  },
+  {
     "id": "marketing-fort-lauderdale",
     "category": "strategy",
     "author": "juan",

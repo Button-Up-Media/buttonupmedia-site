@@ -752,7 +752,7 @@
     },
     {
       "id": "google-ads-worth-it",
-      "status": "ready",
+      "status": "published",
       "category": "ads",
       "author": "juan",
       "heroQuery": "person searching google for restaurants on a laptop in an american cafe",
@@ -774,7 +774,8 @@
           "https://www.buttonupmedia.com/es/blog/presupuesto-anuncios-google-meta-restaurante-miami"
         ]
       },
-      "heroAlt": "A person researching Google Ads on a laptop in a cafe"
+      "heroAlt": "A person researching Google Ads on a laptop in a cafe",
+      "publishedDate": "2026-10-27"
     },
     {
       "id": "marketing-coral-gables",
