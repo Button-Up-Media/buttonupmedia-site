@@ -779,7 +779,7 @@
     },
     {
       "id": "marketing-coral-gables",
-      "status": "ready",
+      "status": "published",
       "category": "strategy",
       "author": "chris",
       "heroQuery": "upscale restaurant with outdoor seating on a tree-lined street in Coral Gables Florida",
@@ -803,7 +803,8 @@
           "https://www.buttonupmedia.com/es/blog/elegir-agencia-marketing-restaurantes-miami"
         ]
       },
-      "heroAlt": "An outdoor dining plaza with Mediterranean-style architecture and string lights"
+      "heroAlt": "An outdoor dining plaza with Mediterranean-style architecture and string lights",
+      "publishedDate": "2026-10-30"
     },
     {
       "id": "happy-hour-that-works",

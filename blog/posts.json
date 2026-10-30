@@ -1,5 +1,19 @@
 [
   {
+    "id": "marketing-coral-gables",
+    "category": "strategy",
+    "author": "chris",
+    "date": "2026-10-30",
+    "hero": "/images/blog/marketing-coral-gables.jpg",
+    "heroAlt": "An outdoor dining plaza with Mediterranean-style architecture and string lights",
+    "en": {
+      "slug": "restaurant-marketing-agency-coral-gables"
+    },
+    "es": {
+      "slug": "agencia-marketing-restaurantes-coral-gables"
+    }
+  },
+  {
     "id": "google-ads-worth-it",
     "category": "ads",
     "author": "juan",
