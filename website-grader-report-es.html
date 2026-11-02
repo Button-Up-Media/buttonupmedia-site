@@ -55,7 +55,7 @@
   <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-variable.woff2" crossorigin fetchpriority="high" />
   <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="/fonts/epilogue-variable.woff2" crossorigin />
-  <link rel="stylesheet" href="shared.css?v=nav-mobile-6" />
+  <link rel="stylesheet" href="shared.css?v=nav-mobile-7" />
   <style>
     :root {
       --bg-0: #FBF8F2; --bg-1: #F4EDE1; --bg-2: #ECE3D4;
@@ -684,6 +684,19 @@
 
   })();
   </script>
-  <script defer src="shared.js?v=nav-mobile-6"></script>
-</body>
+  <script defer src="shared.js?v=nav-mobile-7"></script>
+<script>
+      // Calendly announces a confirmed booking by postMessage, never by a link
+      // click, so the site-wide click tracker in shared.js cannot see it. This
+      // page hosts an inline scheduler, so without this listener the booking
+      // itself is invisible and only the click that arrived here is recorded.
+      window.addEventListener("message", function (e) {
+        if (e.origin && e.origin.indexOf("calendly.com") === -1) return;
+        if (e.data && e.data.event === "calendly.event_scheduled") {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: "booking_complete" });
+        }
+      });
+    </script>
+  </body>
 </html>

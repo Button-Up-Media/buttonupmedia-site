@@ -2221,27 +2221,34 @@ if (document.readyState === "loading") {
 (function () {
   if (window.__bumSharedLeadTracking) return;
 
-  var SELF_TRACKING_PATHS = [
-    "/smm-strategy-call", "/smm-strategy-call-es",
-    "/restaurant-social-media", "/es/redes-sociales",
-    "/restaurant-websites", "/es/sitios-web-restaurantes",
-    "/restaurant-paid-ads", "/restaurant-paid-ads-es",
-    "/social-media-website-grader", "/social-media-website-grader-report",
-    "/es/analizador-redes-sociales-web", "/es/analizador-redes-sociales-web-reporte",
-    "/website-offer", "/socialmediamarketing-offer",
-    // Source filenames too. These pages are reached by their clean URL in
-    // production, but a direct .html hit (or a local preview) must skip just the
-    // same, otherwise their own inline trackers double-count every click.
-    "/website-grader", "/website-grader-report",
-    "/website-grader-es", "/website-grader-report-es",
-    "/restaurant-social-media-es", "/restaurant-websites-es"
-  ];
+  // Events a page already pushes from its own inline script. This tracker
+  // suppresses exactly those on that page and still tracks everything else.
+  //
+  // This was previously a flat list of paths the tracker switched itself off for
+  // entirely. That was wrong, and expensively so: of the fourteen pages on that
+  // list, nine push nothing but a completed booking, so skipping them wholesale
+  // discarded every phone tap and every booking click those pages produced.
+  // Censused against the pages themselves: this tracker pushes only
+  // booking_cta_click, grader_cta_click and phone_call_click, and only the five
+  // pages below push any of those three on their own.
+  //
+  // Note website-grader-report-es is deliberately absent. Unlike its English
+  // twin it pushes only report_unlocked, which this tracker never pushes, so it
+  // needs no suppression at all and wants full coverage.
+  var SELF_TRACKED = {
+    "/restaurant-paid-ads": ["booking_cta_click", "phone_call_click"],
+    "/restaurant-paid-ads-es": ["booking_cta_click", "phone_call_click"],
+    "/social-media-website-grader": ["booking_cta_click", "phone_call_click"],
+    "/es/analizador-redes-sociales-web": ["booking_cta_click", "phone_call_click"],
+    // Source filenames too. Production reaches these by their clean URL, but a
+    // direct .html hit or a local preview must suppress the same events.
+    "/website-grader": ["booking_cta_click", "phone_call_click"],
+    "/website-grader-es": ["booking_cta_click", "phone_call_click"]
+  };
 
   // Trailing slashes and the .html form both reach these pages, so normalize first.
   var path = location.pathname.replace(/\.html$/, "").replace(/\/+$/, "") || "/";
-  for (var i = 0; i < SELF_TRACKING_PATHS.length; i++) {
-    if (path === SELF_TRACKING_PATHS[i]) return;
-  }
+  var suppressed = SELF_TRACKED[path] || [];
 
   window.__bumSharedLeadTracking = true;
 
@@ -2257,7 +2264,10 @@ if (document.readyState === "loading") {
     if (el.closest(".bp-cta-pop")) return "timed_popup";
     if (el.closest(".bp-midcta")) return "mid_article_grader";
     if (el.closest(".bp-foundercta")) return "founder_cta";
-    if (el.closest(".bp-cta, .cta-banner")) return "final_cta";
+    // hp2-cta-scene is the closing conversion panel on the homepage and the
+    // social-media service page. Without it the site's largest CTA reports as
+    // the generic "page" bucket, which is indistinguishable from a stray link.
+    if (el.closest(".bp-cta, .cta-banner, .hp2-cta-scene, #cta")) return "final_cta";
     if (el.closest(".bp-related")) return "related_posts";
     if (el.closest(".bp-body, article")) return "article_body";
     if (el.closest(".at-hero, .sm-hero, .lib-hero, header")) return "hero";
@@ -2265,6 +2275,8 @@ if (document.readyState === "loading") {
   }
 
   function push(name, extra) {
+    // This page's own inline script already reports this event.
+    if (suppressed.indexOf(name) !== -1) return;
     window.dataLayer = window.dataLayer || [];
     var o = { event: name, cta_location: extra && extra.cta_location };
     if (postSlug) {
@@ -2281,6 +2293,14 @@ if (document.readyState === "loading") {
   document.addEventListener("click", function (e) {
     var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
     if (!a) return;
+
+    // A page that owns a particular click marks it with data-book-scroll. Only
+    // the English grader report does, and its own handler reports a finer
+    // data-cta-loc than where() could infer, so let that one win. Suppressing
+    // booking_cta_click for the whole page instead would have silenced the
+    // three Calendly links on it that carry no such marker.
+    if (a.closest("[data-book-scroll]")) return;
+
     var href = a.getAttribute("href") || "";
     var loc = where(a);
 
@@ -2290,6 +2310,10 @@ if (document.readyState === "loading") {
         link_location: loc,
         cta_location: loc
       });
+    } else if (href.indexOf("mailto:") === 0) {
+      // The contact page offers email as one of three ways to reach us, and it
+      // sits in the footer of every page, so an emailed enquiry is a lead.
+      push("email_click", { link_location: loc, cta_location: loc });
     } else if (href.indexOf("calendly.com") !== -1) {
       push("booking_cta_click", { cta_location: loc });
     } else if (href.indexOf("/contact") !== -1) {

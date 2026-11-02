@@ -187,7 +187,7 @@
   <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
 
   <!-- Base styles (nav, footer, cards, etc.) -->
-  <link rel="stylesheet" href="shared.css?v=nav-mobile-6" />
+  <link rel="stylesheet" href="shared.css?v=nav-mobile-7" />
 
   <!-- ═══ HOMEPAGE 2.0, ALL CSS SELF-CONTAINED ═══ -->
   <style>
@@ -1717,6 +1717,9 @@
        13. CTA, Word Reveal + Gold Pulse
        ══════════════════════════════════════ */
     .hp2-cta-scene {
+      display: block;
+      text-decoration: none;
+      color: inherit;
       position: relative;
       padding: 120px 48px;
       border-radius: var(--r-xl);
@@ -4746,7 +4749,7 @@
 
     <!-- ═══ 13. CTA, Word Reveal + Gold Pulse ═══ -->
     <section class="card-overlay lib-section" id="cta" data-shared-animations="off">
-      <div class="hp2-cta-scene" onclick="window.location.href='/contact'" style="cursor:pointer">
+      <a class="hp2-cta-scene" href="/contact">
         <div class="hp2-cta-orb"></div>
         <div class="hp2-cta-orb"></div>
         <div class="hp2-cta-orb"></div>
@@ -4754,7 +4757,7 @@
         <h2 style="position:relative; z-index:2;">Ready to Grow Your <span class="accent-serif">Restaurant?</span></h2>
         <p style="position:relative; z-index:2;">Stop guessing. Start growing. Schedule a free consultation and let's build a marketing strategy that fills your restaurant with the customers you deserve.</p>
         <p style="position:relative; z-index:2; margin: 2px auto 0; font-size: 0.9rem; line-height: 1.4; color: rgba(255,248,235,0.74); text-decoration: underline; text-underline-offset: 0.2em;">Click here for consultation</p>
-      </div>
+      </a>
     </section>
 
     <!-- ═══ FOOTER ═══ -->
@@ -4801,7 +4804,7 @@
   </div><!-- /.page -->
 
   <!-- Base shared.js for nav, card-overlay stacking, immersive expand, etc. -->
-  <script src="shared.js?v=nav-mobile-6"></script>
+  <script src="shared.js?v=nav-mobile-7"></script>
 
   <!-- ═══ HOMEPAGE 2.0, ALL ANIMATION JS SELF-CONTAINED ═══ -->
   <script>

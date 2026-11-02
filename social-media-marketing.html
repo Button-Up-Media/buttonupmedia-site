@@ -70,7 +70,7 @@
   <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
 
   <!-- Base styles -->
-  <link rel="stylesheet" href="shared.css?v=nav-mobile-6" />
+  <link rel="stylesheet" href="shared.css?v=nav-mobile-7" />
 
   <!-- Animation runtime (Lucide, GSAP, ScrollTrigger, pixel-canvas) loads after
        the page is interactive so it never blocks the hero paint. The hero
@@ -2091,6 +2091,9 @@
 
     /* CTA scene */
     .hp2-cta-scene {
+      display: block;
+      text-decoration: none;
+      color: inherit;
       position: relative;
       padding: 120px 48px;
       border-radius: var(--r-xl, 24px);
@@ -3110,14 +3113,14 @@
 
     <!-- ═══ 13. CTA ═══ -->
     <section class="card-overlay lib-section" id="cta">
-      <div class="hp2-cta-scene" onclick="window.location.href='/contact'" style="cursor:pointer">
+      <a class="hp2-cta-scene" href="/contact">
         <div class="hp2-cta-orb"></div>
         <div class="hp2-cta-orb"></div>
         <div class="hp2-cta-orb"></div>
         <pixel-canvas data-gap="10" data-speed="20" data-colors="#CA8A04, #A16207, #F2D688" data-no-focus></pixel-canvas>
         <h2 class="hp2-word-reveal" style="position:relative; z-index:2;">Ready to Grow Your Restaurant?</h2>
         <p style="position:relative; z-index:2;">Stop guessing. Start growing. Schedule a free consultation and let's build a marketing strategy that fills your restaurant with the customers you deserve.</p>
-      </div>
+      </a>
     </section>
 
     <!-- ═══ FOOTER ═══ -->
@@ -3164,7 +3167,7 @@
   </div><!-- /.page -->
 
   <!-- Base shared.js for nav, card-overlay stacking, etc. -->
-  <script defer src="shared.js?v=nav-mobile-6"></script>
+  <script defer src="shared.js?v=nav-mobile-7"></script>
 
   <!-- ═══ SOCIAL MEDIA MARKETING — ALL ANIMATION JS ═══ -->
   <script>

@@ -187,7 +187,7 @@
   <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
 
   <!-- Base styles (nav, footer, cards, etc.) -->
-  <link rel="stylesheet" href="shared.css?v=nav-mobile-6" />
+  <link rel="stylesheet" href="shared.css?v=nav-mobile-7" />
 
   <!-- ═══ HOMEPAGE 2.0, ALL CSS SELF-CONTAINED ═══ -->
   <style>
@@ -1717,6 +1717,9 @@
        13. CTA, Word Reveal + Gold Pulse
        ══════════════════════════════════════ */
     .hp2-cta-scene {
+      display: block;
+      text-decoration: none;
+      color: inherit;
       position: relative;
       padding: 120px 48px;
       border-radius: var(--r-xl);
@@ -4744,7 +4747,7 @@
 
     <!-- ═══ 13. CTA, Word Reveal + Gold Pulse ═══ -->
     <section class="card-overlay lib-section" id="cta" data-shared-animations="off">
-      <div class="hp2-cta-scene" onclick="window.location.href='/es/contacto'" style="cursor:pointer">
+      <a class="hp2-cta-scene" href="/es/contacto">
         <div class="hp2-cta-orb"></div>
         <div class="hp2-cta-orb"></div>
         <div class="hp2-cta-orb"></div>
@@ -4752,7 +4755,7 @@
         <h2 style="position:relative; z-index:2;">¿Listo para Hacer Crecer tu <span class="accent-serif">Restaurante?</span></h2>
         <p style="position:relative; z-index:2;">Deja de adivinar. Empieza a crecer. Agende una consulta gratis y construyamos una estrategia de marketing que llene tu restaurante con los clientes que te mereces.</p>
         <p style="position:relative; z-index:2; margin: 2px auto 0; font-size: 0.9rem; line-height: 1.4; color: rgba(255,248,235,0.74); text-decoration: underline; text-underline-offset: 0.2em;">Haz clic aquí para tu consulta</p>
-      </div>
+      </a>
     </section>
 
     <!-- ═══ FOOTER ═══ -->
@@ -4798,7 +4801,7 @@
   </div><!-- /.page -->
 
   <!-- Base shared.js for nav, card-overlay stacking, immersive expand, etc. -->
-  <script src="shared.js?v=nav-mobile-6"></script>
+  <script src="shared.js?v=nav-mobile-7"></script>
 
   <!-- ═══ HOMEPAGE 2.0, ALL ANIMATION JS SELF-CONTAINED ═══ -->
   <script>

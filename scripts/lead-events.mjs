@@ -15,6 +15,7 @@ export const LEAD_EVENTS = [
   'booking_cta_click',
   'calendar_open_newtab',
   'calendly_loaded',
+  'email_click',
   'grader_cta_click',
   'grader_popup_book',
   'grader_popup_shown',
@@ -30,6 +31,7 @@ export const KEY_EVENTS = [
   'booking_complete',
   'website_consult_booked',
   'phone_call_click',
+  'email_click',
   'report_unlocked',
 ];
 
