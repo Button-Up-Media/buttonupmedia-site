@@ -68,7 +68,7 @@
   <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-variable.woff2" crossorigin fetchpriority="high" />
   <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="/fonts/epilogue-variable.woff2" crossorigin />
-  <link rel="stylesheet" href="shared.css?v=nav-mobile-4" />
+  <link rel="stylesheet" href="shared.css?v=nav-mobile-6" />
   <style>
     /* ============================================================
        LIGHT THEME, warm paper + deep amber (Button Up brand)
@@ -1754,7 +1754,10 @@
           .then(function (r) { return r.json(); })
           .then(function (d) {
             if (mine !== seq) return;
-            if (d && d.error === "not_configured") { placesOff = true; render([]); return; }
+            // Any Places failure, not just an unset key: a denied or rate-limited
+            // key used to fail silently on every keystroke, so the field looked
+            // broken. Switch to the "grade by website" path once and stop asking.
+            if (d && d.ok === false) { placesOff = true; render([]); return; }
             render((d && d.predictions) || []);
           })
           .catch(function () { if (mine === seq) render([]); });
@@ -1943,6 +1946,6 @@
       });
     })();
   </script>
-  <script defer src="shared.js?v=nav-mobile-4"></script>
+  <script defer src="shared.js?v=nav-mobile-6"></script>
 </body>
 </html>

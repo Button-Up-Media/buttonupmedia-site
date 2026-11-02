@@ -2198,3 +2198,108 @@ if (document.readyState === "loading") {
     buildCallButton();
   }
 })();
+
+/* ===== Lead conversion tracking (site-wide) =====
+   Every organic page announced nothing: only the paid-ads and grader pages pushed
+   conversion events, so a booking or call that started on the homepage, a service
+   page or a blog post was invisible. This installs one delegated click tracker for
+   the whole site, with a single consistent event taxonomy, so GTM needs exactly one
+   trigger and one tag to forward all of it to GA4.
+
+   Events fired here (match the regex in reports/SETUP.md):
+     booking_cta_click   a click toward booking (contact page or Calendly)
+     phone_call_click    a tel: link
+     grader_cta_click    a click toward the free Social & Website Grader
+
+   Parameters: cta_location (where on the page), plus post_slug / post_category /
+   post_lang on blog posts, which is what finally attributes a lead to the article
+   that earned it. Blog posts declare their identity via data attributes on <body>.
+
+   The paid-ads and grader pages already push these events from their own inline
+   scripts. Running this there too would double-count, and several of them are live
+   ad destinations that must not be edited, so they are skipped by path instead. */
+(function () {
+  if (window.__bumSharedLeadTracking) return;
+
+  var SELF_TRACKING_PATHS = [
+    "/smm-strategy-call", "/smm-strategy-call-es",
+    "/restaurant-social-media", "/es/redes-sociales",
+    "/restaurant-websites", "/es/sitios-web-restaurantes",
+    "/restaurant-paid-ads", "/restaurant-paid-ads-es",
+    "/social-media-website-grader", "/social-media-website-grader-report",
+    "/es/analizador-redes-sociales-web", "/es/analizador-redes-sociales-web-reporte",
+    "/website-offer", "/socialmediamarketing-offer",
+    // Source filenames too. These pages are reached by their clean URL in
+    // production, but a direct .html hit (or a local preview) must skip just the
+    // same, otherwise their own inline trackers double-count every click.
+    "/website-grader", "/website-grader-report",
+    "/website-grader-es", "/website-grader-report-es",
+    "/restaurant-social-media-es", "/restaurant-websites-es"
+  ];
+
+  // Trailing slashes and the .html form both reach these pages, so normalize first.
+  var path = location.pathname.replace(/\.html$/, "").replace(/\/+$/, "") || "/";
+  for (var i = 0; i < SELF_TRACKING_PATHS.length; i++) {
+    if (path === SELF_TRACKING_PATHS[i]) return;
+  }
+
+  window.__bumSharedLeadTracking = true;
+
+  var body = document.body || document.documentElement;
+  var postSlug = body.getAttribute("data-post-slug") || "";
+  var postCategory = body.getAttribute("data-post-category") || "";
+  var postLang = body.getAttribute("data-post-lang") || "";
+
+  function where(el) {
+    if (!el || !el.closest) return "other";
+    if (el.closest(".lib-nav, nav")) return "nav";
+    if (el.closest("footer")) return "footer";
+    if (el.closest(".bp-cta-pop")) return "timed_popup";
+    if (el.closest(".bp-midcta")) return "mid_article_grader";
+    if (el.closest(".bp-foundercta")) return "founder_cta";
+    if (el.closest(".bp-cta, .cta-banner")) return "final_cta";
+    if (el.closest(".bp-related")) return "related_posts";
+    if (el.closest(".bp-body, article")) return "article_body";
+    if (el.closest(".at-hero, .sm-hero, .lib-hero, header")) return "hero";
+    return "page";
+  }
+
+  function push(name, extra) {
+    window.dataLayer = window.dataLayer || [];
+    var o = { event: name, cta_location: extra && extra.cta_location };
+    if (postSlug) {
+      o.post_slug = postSlug;
+      o.post_category = postCategory;
+      o.post_lang = postLang;
+    }
+    for (var k in extra) {
+      if (Object.prototype.hasOwnProperty.call(extra, k)) o[k] = extra[k];
+    }
+    window.dataLayer.push(o);
+  }
+
+  document.addEventListener("click", function (e) {
+    var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+    if (!a) return;
+    var href = a.getAttribute("href") || "";
+    var loc = where(a);
+
+    if (href.indexOf("tel:") === 0) {
+      push("phone_call_click", {
+        phone_number: href.replace("tel:", ""),
+        link_location: loc,
+        cta_location: loc
+      });
+    } else if (href.indexOf("calendly.com") !== -1) {
+      push("booking_cta_click", { cta_location: loc });
+    } else if (href.indexOf("/contact") !== -1) {
+      // '/contacto' starts with '/contact', so this covers both languages.
+      push("booking_cta_click", { cta_location: loc });
+    } else if (
+      href.indexOf("social-media-website-grader") !== -1 ||
+      href.indexOf("analizador-redes-sociales-web") !== -1
+    ) {
+      push("grader_cta_click", { cta_location: loc });
+    }
+  }, true);
+})();

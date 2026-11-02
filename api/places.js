@@ -67,6 +67,22 @@ module.exports = async (req, res) => {
   }
 };
 
+/* A Places failure is almost always a configuration problem (API not enabled on
+   the project, billing off, or a key restricted to a different API). Google says
+   which in error_message; passing it through turns an opaque REQUEST_DENIED into
+   something actionable, and the console line puts it in the Vercel runtime logs. */
+function placesFailure(res, data) {
+  const status = (data && data.status) || 'UNKNOWN';
+  const detail = (data && data.error_message) || '';
+  console.error(`places_status ${status}${detail ? `: ${detail}` : ''}`);
+  return res.status(502).json({
+    ok: false,
+    error: 'places_status',
+    status,
+    ...(detail ? { detail } : {}),
+  });
+}
+
 async function getJson(url) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 9000);
@@ -138,7 +154,7 @@ async function autocomplete(req, res, key) {
   const data = await getJson(`${BASE}/autocomplete/json?${params.toString()}`);
 
   if (data.status !== 'OK' && data.status !== 'ZERO_RESULTS') {
-    return res.status(502).json({ ok: false, error: 'places_status', status: data.status });
+    return placesFailure(res, data);
   }
   const predictions = (data.predictions || []).slice(0, 8).map((p) => ({
     placeId: p.place_id,
@@ -161,7 +177,7 @@ async function details(req, res, key) {
   });
   const data = await getJson(`${BASE}/details/json?${params.toString()}`);
   if (data.status !== 'OK' || !data.result) {
-    return res.status(502).json({ ok: false, error: 'places_status', status: data.status });
+    return placesFailure(res, data);
   }
   const r = data.result;
   // Up to 5 sample reviews (rating + short text) so the report can gauge recent
@@ -270,7 +286,7 @@ async function competitors(req, res, key) {
   const dParams = new URLSearchParams({ place_id: placeId, fields: 'name,geometry,types', key });
   const d = await getJson(`${BASE}/details/json?${dParams.toString()}`);
   if (d.status !== 'OK' || !d.result || !d.result.geometry) {
-    return res.status(502).json({ ok: false, error: 'places_status', status: d.status });
+    return placesFailure(res, d);
   }
   const loc = d.result.geometry.location;
   const selfName = (d.result.name || '').toLowerCase();
@@ -285,7 +301,7 @@ async function competitors(req, res, key) {
   if (kw) nParams.set('keyword', kw);
   const n = await getJson(`${BASE}/nearbysearch/json?${nParams.toString()}`);
   if (n.status !== 'OK' && n.status !== 'ZERO_RESULTS') {
-    return res.status(502).json({ ok: false, error: 'places_status', status: n.status });
+    return placesFailure(res, n);
   }
 
   let list = (n.results || [])

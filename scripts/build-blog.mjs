@@ -8,7 +8,7 @@ import { readFile, writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 
 const BASE = 'https://www.buttonupmedia.com';
-const CSS_VER = 'nav-mobile-4';
+const CSS_VER = 'nav-mobile-6';
 const GTM_ID = 'GTM-WR9TZHT';
 const PHONE = '+17867409499';
 const PHONE_DISPLAY = '(786) 740-9499';
@@ -724,7 +724,7 @@ ${fontPreloads()}
   <script type="application/ld+json">${schema}</script>
   <style>${NAV_LIGHT_CSS}${LIGHT_CSS}${POST_CSS}</style>
 </head>
-<body>
+<body data-post-slug="${view.slug}" data-post-category="${view.post.category}" data-post-lang="${lang}">
 ${gtmNoscript()}
   <div class="bp-progress" id="bp-progress" aria-hidden="true"></div>
 ${nav(lang)}
