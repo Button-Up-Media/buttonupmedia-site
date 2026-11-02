@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vercel dev",
     "build": "node scripts/build-public.mjs",
-    "test:meta": "node api/meta/test-connection.js"
+    "test:meta": "node api/meta/test-connection.js",
+    "report": "node scripts/report.mjs",
+    "report:week": "node scripts/report.mjs --days 7",
+    "report:quarter": "node scripts/report.mjs --days 90"
   },
   "dependencies": {
     "node-fetch": "^3.3.2"

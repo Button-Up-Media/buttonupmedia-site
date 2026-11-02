@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Weekly organic performance report for buttonupmedia.com.
+
+  Install:
+    cp local/com.buttonup.weekly-report.plist ~/Library/LaunchAgents/
+    launchctl unload ~/Library/LaunchAgents/com.buttonup.weekly-report.plist 2>/dev/null
+    launchctl load -w ~/Library/LaunchAgents/com.buttonup.weekly-report.plist
+
+  Runs Monday 8am ET. StartInterval is a safety net so a run missed because the
+  Mac was asleep fires once the Mac is awake again; the report is idempotent, so
+  a repeat run simply overwrites the same day's snapshot.
+
+  Reads credentials from the gcloud login in ~/.config/gcloud, so it keeps working
+  without any key file in the repo. If the login expires the run exits with code 2
+  and the reason is written to the log below.
+
+  Output:  reports/latest.md  +  reports/history/<date>-28d.json
+  Logs:    /tmp/bum-weekly-report.out  /tmp/bum-weekly-report.err
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.buttonup.weekly-report</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/opt/homebrew/bin/node</string>
+    <string>/Users/christianbusiness/buttonupmedia-site/scripts/report.mjs</string>
+  </array>
+  <key>WorkingDirectory</key>
+  <string>/Users/christianbusiness/buttonupmedia-site</string>
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict>
+      <key>Weekday</key><integer>1</integer>
+      <key>Hour</key><integer>8</integer>
+      <key>Minute</key><integer>0</integer>
+    </dict>
+  </array>
+  <!-- Safety net: if the Mac was asleep on Monday morning, catch up when it wakes. -->
+  <key>StartInterval</key>
+  <integer>86400</integer>
+  <key>StandardOutPath</key>
+  <string>/tmp/bum-weekly-report.out</string>
+  <key>StandardErrorPath</key>
+  <string>/tmp/bum-weekly-report.err</string>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+  </dict>
+</dict>
+</plist>

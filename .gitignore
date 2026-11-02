@@ -9,3 +9,7 @@ node_modules/
 .vercel
 setup-credentials/
 public/
+
+# Performance reports hold private traffic, lead and keyword data.
+# This repository is public, so they stay local.
+reports/
