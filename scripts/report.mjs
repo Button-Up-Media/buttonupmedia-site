@@ -19,6 +19,7 @@
 import { writeFile, mkdir, readFile, readdir } from 'fs/promises';
 import path from 'path';
 import { googleFetch, hasScope, AuthError, AUTH_COMMAND } from './google-auth.mjs';
+import { LEAD_EVENTS } from './lead-events.mjs';
 
 const SITE = 'buttonupmedia.com';
 const ROOT = process.cwd();
@@ -459,8 +460,7 @@ function render(snap) {
   // --- events ---
   p(`## Conversion events recorded`);
   p();
-  const WATCH = ['booking_complete', 'booking_cta_click', 'phone_call_click', 'grader_scan_start',
-    'report_unlocked', 'website_consult_booked', 'calendly_loaded', 'calendar_open_newtab'];
+  const WATCH = LEAD_EVENTS;
   p(`| Event | Count |`);
   p(`|---|---|`);
   for (const e of WATCH) p(`| ${e} | ${e in ga4.events ? n(ga4.events[e]) : 'NOT FIRING'} |`);

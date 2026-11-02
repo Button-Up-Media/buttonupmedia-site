@@ -9,7 +9,9 @@
     "test:meta": "node api/meta/test-connection.js",
     "report": "node scripts/report.mjs",
     "report:week": "node scripts/report.mjs --days 7",
-    "report:quarter": "node scripts/report.mjs --days 90"
+    "report:quarter": "node scripts/report.mjs --days 90",
+    "tracking:setup": "node scripts/tracking-setup.mjs",
+    "tracking:apply": "node scripts/tracking-setup.mjs --publish"
   },
   "dependencies": {
     "node-fetch": "^3.3.2"

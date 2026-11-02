@@ -13,14 +13,28 @@ import path from 'path';
 
 export const ADC_PATH = path.join(homedir(), '.config', 'gcloud', 'application_default_credentials.json');
 
+// Every scope this tooling can use, named so callers can ask for just the one
+// they need. Each is checked at the point of use, never upfront, so a partial
+// grant still runs whatever it does have access to.
+export const SCOPE_ANALYTICS = 'https://www.googleapis.com/auth/analytics.readonly';
+export const SCOPE_ANALYTICS_EDIT = 'https://www.googleapis.com/auth/analytics.edit';
+export const SCOPE_SEARCH_CONSOLE = 'https://www.googleapis.com/auth/webmasters.readonly';
+export const SCOPE_GTM_EDIT = 'https://www.googleapis.com/auth/tagmanager.edit.containers';
+export const SCOPE_GTM_PUBLISH = 'https://www.googleapis.com/auth/tagmanager.publish';
+
 export const SCOPES = [
-  'https://www.googleapis.com/auth/analytics.readonly',
-  'https://www.googleapis.com/auth/webmasters.readonly',
+  SCOPE_ANALYTICS,
+  SCOPE_ANALYTICS_EDIT,
+  SCOPE_SEARCH_CONSOLE,
+  SCOPE_GTM_EDIT,
+  SCOPE_GTM_PUBLISH,
 ];
 
-// The one command the owner runs to grant the scopes this tooling needs.
+// The one command the owner runs to grant everything this tooling needs. Listing
+// all of them every time matters: gcloud replaces the stored grant rather than
+// adding to it, so re-authorizing with a short list silently revokes the rest.
 export const AUTH_COMMAND =
-  `gcloud auth application-default login --scopes="openid,https://www.googleapis.com/auth/userinfo.email,https://www.googleapis.com/auth/cloud-platform,${SCOPES.join(',')}"`;
+  `gcloud auth application-default login --scopes="openid,email,profile,https://www.googleapis.com/auth/cloud-platform,${SCOPES.join(',')}"`;
 
 export class AuthError extends Error {}
 
