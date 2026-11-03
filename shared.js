@@ -2274,11 +2274,20 @@ if (document.readyState === "loading") {
     return "page";
   }
 
+  // Every parameter the GA4 tag reads, so each push can clear the ones it does
+  // not set. GTM's data layer remembers the last value it saw for a key, and a
+  // key left out of a push keeps that value rather than going empty. Observed
+  // live: a footer mailto set link_location to "footer", and the next booking
+  // click reported the booking as coming from the footer. Pushing undefined
+  // resets the variable, so GA4 simply omits the parameter.
+  var TRACKED_PARAMS = ["cta_location", "link_location", "post_slug", "post_category", "post_lang"];
+
   function push(name, extra) {
     // This page's own inline script already reports this event.
     if (suppressed.indexOf(name) !== -1) return;
     window.dataLayer = window.dataLayer || [];
-    var o = { event: name, cta_location: extra && extra.cta_location };
+    var o = { event: name };
+    for (var i = 0; i < TRACKED_PARAMS.length; i++) o[TRACKED_PARAMS[i]] = undefined;
     if (postSlug) {
       o.post_slug = postSlug;
       o.post_category = postCategory;

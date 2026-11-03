@@ -8,7 +8,7 @@ import { readFile, writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 
 const BASE = 'https://www.buttonupmedia.com';
-const CSS_VER = 'nav-mobile-7';
+const CSS_VER = 'nav-mobile-8';
 const GTM_ID = 'GTM-WR9TZHT';
 const PHONE = '+17867409499';
 const PHONE_DISPLAY = '(786) 740-9499';
