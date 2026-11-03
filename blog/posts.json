@@ -1,5 +1,19 @@
 [
   {
+    "id": "happy-hour-that-works",
+    "category": "strategy",
+    "author": "juan",
+    "date": "2026-11-03",
+    "hero": "/images/blog/happy-hour-that-works.jpg",
+    "heroAlt": "A bartender making cocktails during happy hour at a bar",
+    "en": {
+      "slug": "happy-hour-that-makes-money"
+    },
+    "es": {
+      "slug": "happy-hour-que-deja-ganancias"
+    }
+  },
+  {
     "id": "marketing-coral-gables",
     "category": "strategy",
     "author": "chris",

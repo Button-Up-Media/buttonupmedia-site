@@ -808,7 +808,7 @@
     },
     {
       "id": "happy-hour-that-works",
-      "status": "ready",
+      "status": "published",
       "category": "strategy",
       "author": "juan",
       "heroQuery": "bartender making cocktails at a busy happy hour in an american bar",
@@ -830,7 +830,8 @@
           "https://www.buttonupmedia.com/es/blog/llenar-restaurante-noches-lentas"
         ]
       },
-      "heroAlt": "A bartender making cocktails during happy hour at a bar"
+      "heroAlt": "A bartender making cocktails during happy hour at a bar",
+      "publishedDate": "2026-11-03"
     },
     {
       "id": "marketing-brickell",
