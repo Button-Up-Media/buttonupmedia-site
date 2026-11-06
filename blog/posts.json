@@ -1,5 +1,19 @@
 [
   {
+    "id": "marketing-brickell",
+    "category": "strategy",
+    "author": "juan",
+    "date": "2026-11-06",
+    "hero": "/images/blog/marketing-brickell.jpg",
+    "heroAlt": "The Brickell skyline lit up at night in Miami",
+    "en": {
+      "slug": "restaurant-marketing-agency-brickell"
+    },
+    "es": {
+      "slug": "agencia-marketing-restaurantes-brickell"
+    }
+  },
+  {
     "id": "happy-hour-that-works",
     "category": "strategy",
     "author": "juan",

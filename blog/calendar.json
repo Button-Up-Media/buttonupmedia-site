@@ -835,7 +835,7 @@
     },
     {
       "id": "marketing-brickell",
-      "status": "ready",
+      "status": "published",
       "category": "strategy",
       "author": "juan",
       "heroQuery": "modern rooftop restaurant with Miami skyline at dusk Brickell",
@@ -859,7 +859,8 @@
           "https://www.buttonupmedia.com/es/blog/elegir-agencia-marketing-restaurantes-miami"
         ]
       },
-      "heroAlt": "The Brickell skyline lit up at night in Miami"
+      "heroAlt": "The Brickell skyline lit up at night in Miami",
+      "publishedDate": "2026-11-06"
     },
     {
       "id": "third-party-delivery",
