@@ -864,7 +864,7 @@
     },
     {
       "id": "third-party-delivery",
-      "status": "ready",
+      "status": "published",
       "category": "strategy",
       "author": "chris",
       "heroQuery": "delivery courier picking up food bags at an american restaurant counter",
@@ -886,7 +886,8 @@
           "https://www.buttonupmedia.com/es/contacto"
         ]
       },
-      "heroAlt": "A takeout order and a delivery bag ready for pickup at a restaurant"
+      "heroAlt": "A takeout order and a delivery bag ready for pickup at a restaurant",
+      "publishedDate": "2026-11-10"
     },
     {
       "id": "marketing-wynwood",

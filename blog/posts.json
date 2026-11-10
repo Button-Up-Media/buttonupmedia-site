@@ -1,5 +1,19 @@
 [
   {
+    "id": "third-party-delivery",
+    "category": "strategy",
+    "author": "chris",
+    "date": "2026-11-10",
+    "hero": "/images/blog/third-party-delivery.jpg",
+    "heroAlt": "A takeout order and a delivery bag ready for pickup at a restaurant",
+    "en": {
+      "slug": "is-doordash-worth-it-restaurants"
+    },
+    "es": {
+      "slug": "vale-la-pena-doordash-restaurante"
+    }
+  },
+  {
     "id": "marketing-brickell",
     "category": "strategy",
     "author": "juan",
