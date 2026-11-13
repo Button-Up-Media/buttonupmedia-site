@@ -3,17 +3,25 @@
   "lang": "en",
   "order": 1,
   "service": "social",
-  "services": ["social"],
+  "services": [
+    "social"
+  ],
   "client": "The Fatty Crab",
-  "organizations": ["The Fatty Crab"],
-  "metaTitle": "The Fatty Crab Case Study: 21M+ Views | Button Up Media",
-  "metaDescription": "How Button Up Media grew The Fatty Crab in Doral to 21M+ organic views, 110K+ followers and 6.5% engagement on Instagram and Facebook with short video.",
-  "ldHeadline": "The Fatty Crab: 21M+ organic social views for a Doral seafood boil restaurant",
+  "organizations": [
+    "The Fatty Crab"
+  ],
+  "metaTitle": "The Fatty Crab Case Study: 46M+ Views | Button Up Media",
+  "metaDescription": "How Button Up Media grew The Fatty Crab in Doral to 46M+ video views and 350K+ followers across Instagram, Facebook and TikTok with short video.",
+  "ldHeadline": "The Fatty Crab: 46M+ social video views for a Doral seafood boil restaurant",
   "h1": "The Fatty Crab",
-  "h1Sub": "21M+ organic views in Doral",
-  "answer": "We run organic Instagram and Facebook for The Fatty Crab, a Cajun seafood boil spot in Doral. Short videos built around the food reached 21M+ views.",
+  "h1Sub": "46M+ video views in Doral",
+  "answer": "We run social media for The Fatty Crab, a Cajun seafood boil spot in Doral. Short videos built around the food reached 46M+ views on Instagram, Facebook and TikTok.",
   "descriptor": "Cajun seafood boil",
-  "area": { "name": "Doral", "detail": "2000 NW 87th Ave", "page": "doral" },
+  "area": {
+    "name": "Doral",
+    "detail": "2000 NW 87th Ave",
+    "page": "doral"
+  },
   "timeframe": "Influencer campaign Jul 2023 to Mar 2024",
   "hero": {
     "type": "video",
@@ -22,13 +30,32 @@
     "width": 406,
     "height": 720,
     "alt": "A short video Button Up Media made for The Fatty Crab: a guest digging into a seafood boil",
-    "chip": "21M+ views"
+    "chip": "46M+ views"
   },
-  "card": { "src": "/images/fatty-crab-thumbnail-ayce.avif", "width": 540, "height": 960, "alt": "A guest eating crab at The Fatty Crab", "value": "21M+", "label": "organic views" },
+  "card": {
+    "src": "/images/fatty-crab-thumbnail-ayce.avif",
+    "width": 540,
+    "height": 960,
+    "alt": "A guest eating crab at The Fatty Crab",
+    "value": "46M+",
+    "label": "video views"
+  },
   "metrics": [
-    { "value": "21M+", "label": "Organic views", "meaning": "Organic means unpaid. People watched because the videos were worth watching, not because we bought ad space." },
-    { "value": "110K+", "label": "Followers", "meaning": "A local audience The Fatty Crab can reach for free every time it posts." },
-    { "value": "6.5%", "label": "Engagement rate", "meaning": "How often people react with likes, comments and shares. It shows the audience is paying attention, not just scrolling past." }
+    {
+      "value": "46M+",
+      "label": "Video views",
+      "meaning": "Instagram Reels 34.3M, Facebook 9.1M and TikTok 2.7M, measured in Sprout Social from January 2022 to November 2026."
+    },
+    {
+      "value": "350K+",
+      "label": "Followers",
+      "meaning": "Facebook 182K, Instagram 155K and TikTok 16K. A local audience The Fatty Crab can reach for free every time it posts."
+    },
+    {
+      "value": "7.3%",
+      "label": "Instagram engagement rate",
+      "meaning": "How often people who see a post like, comment or share it. Across all three platforms it is 5.5%."
+    }
   ],
   "situation": {
     "paragraphs": [
@@ -38,12 +65,30 @@
   },
   "steps": {
     "items": [
-      { "title": "Give every post a job", "bodyHtml": "Four content pillars: the food, the experience, the people and the culture." },
-      { "title": "Build video templates", "bodyHtml": "Reusable short-form formats, so shooting and editing stay fast." },
-      { "title": "Post when the audience is online", "bodyHtml": "A schedule tuned to when their followers actually scroll, on Instagram and Facebook." },
-      { "title": "Point every caption at a visit", "bodyHtml": "Hooks, captions and calls to action aimed at one thing: reservations and visits." },
-      { "title": "Sell dinner at dinnertime", "bodyHtml": "One organic Reel with pack-out shots and an “Order on Uber Eats” call to action, posted at peak delivery hours. It drove Uber Eats orders with no paid budget behind it." },
-      { "title": "Team up with a local creator", "bodyHtml": "From July 2023 to March 2024 we partnered with a food creator with a strong Miami and South Florida following. We planned the videos together around hero dishes, the room and the staff, posted at peak discovery times on Instagram and TikTok, and backed them up with reposts, story features and community management." }
+      {
+        "title": "Give every post a job",
+        "bodyHtml": "Four content pillars: the food, the experience, the people and the culture."
+      },
+      {
+        "title": "Build video templates",
+        "bodyHtml": "Reusable short-form formats, so shooting and editing stay fast."
+      },
+      {
+        "title": "Post when the audience is online",
+        "bodyHtml": "A schedule tuned to when their followers actually scroll, on Instagram and Facebook."
+      },
+      {
+        "title": "Point every caption at a visit",
+        "bodyHtml": "Hooks, captions and calls to action aimed at one thing: reservations and visits."
+      },
+      {
+        "title": "Sell dinner at dinnertime",
+        "bodyHtml": "One organic Reel with pack-out shots and an “Order on Uber Eats” call to action, posted at peak delivery hours. It drove Uber Eats orders with no paid budget behind it."
+      },
+      {
+        "title": "Team up with a local creator",
+        "bodyHtml": "From July 2023 to March 2024 we partnered with a food creator with a strong Miami and South Florida following. We planned the videos together around hero dishes, the room and the staff, posted at peak discovery times on Instagram and TikTok, and backed them up with reposts, story features and community management."
+      }
     ]
   },
   "results": {
@@ -54,6 +99,9 @@
   },
   "quote": null,
   "links": [
-    { "href": "/socialmediamarketing", "text": "Restaurant social media marketing" }
+    {
+      "href": "/socialmediamarketing",
+      "text": "Restaurant social media marketing"
+    }
   ]
 }

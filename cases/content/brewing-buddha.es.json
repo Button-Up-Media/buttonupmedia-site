@@ -10,12 +10,12 @@
   "organizations": [
     "Brewing Buddha Cafe & Arthouse"
   ],
-  "metaTitle": "Brewing Buddha: 40M de vistas orgánicas | Button Up Media",
-  "metaDescription": "Cómo Button Up Media hizo videos cortos para Brewing Buddha Cafe & Arthouse, una cafetería y espacio de arte en Pinecrest, que llegaron a 40M de vistas.",
-  "ldHeadline": "Brewing Buddha Cafe & Arthouse: 40M de vistas orgánicas para una cafetería en Pinecrest",
+  "metaTitle": "Brewing Buddha: 24M+ vistas de video | Button Up Media",
+  "metaDescription": "Cómo Button Up Media hizo videos cortos para Brewing Buddha Cafe & Arthouse, una cafetería y espacio de arte en Pinecrest, que llegaron a 24M+ vistas de video.",
+  "ldHeadline": "Brewing Buddha Cafe & Arthouse: 24M+ vistas de video para una cafetería en Pinecrest",
   "h1": "Brewing Buddha",
-  "h1Sub": "40M de vistas orgánicas para un café en Pinecrest",
-  "answer": "Brewing Buddha Cafe & Arthouse es una cafetería y espacio de arte bien original en Pinecrest. Nuestros videos cortos sobre sus lattes creativos llegaron a 40M de vistas orgánicas.",
+  "h1Sub": "24M+ vistas de video para un café en Pinecrest",
+  "answer": "Brewing Buddha Cafe & Arthouse es una cafetería y espacio de arte en Pinecrest. Nuestros videos cortos sobre sus lattes creativos llegaron a 24M+ vistas en Instagram, YouTube, TikTok y Facebook.",
   "descriptor": "Cafetería y espacio de arte",
   "area": {
     "name": "Pinecrest",
@@ -30,31 +30,31 @@
     "width": 406,
     "height": 720,
     "alt": "Clientes de Brewing Buddha hablan de la cafetería en un video corto para redes",
-    "chip": "40M de vistas"
+    "chip": "24M+ vistas"
   },
   "card": {
     "src": "/media/cs-brewing-buddha-jordan.webp",
     "width": 540,
     "height": 960,
     "alt": "Jordan Athos, dueño de Brewing Buddha",
-    "value": "40M",
-    "label": "vistas orgánicas"
+    "value": "24M+",
+    "label": "vistas de video"
   },
   "metrics": [
     {
-      "value": "40M",
-      "label": "Vistas orgánicas en redes",
-      "meaning": "Vistas sin pagar. La gente encontró y vio estos videos por su cuenta, sin dinero en anuncios empujándolos."
+      "value": "24M+",
+      "label": "Vistas de video",
+      "meaning": "Reels de Instagram 11.8M, YouTube 6.6M, TikTok 4.0M y Facebook 1.7M, medido en Sprout Social de enero de 2022 a noviembre de 2026."
     },
     {
-      "value": "Feb. 2025",
-      "label": "El más destacado: el video del butter coffee",
-      "meaning": "Una bebida estrella, grabada de cerca, se volvió de lo más visto en la cuenta. Muchas veces un solo producto del menú es todo lo que un video necesita."
+      "value": "53K+",
+      "label": "Seguidores",
+      "meaning": "Entre Instagram, Facebook, TikTok y YouTube, con 33.8K ganados desde 2022."
     },
     {
-      "value": "Ago. 2024",
-      "label": "Testimonio en video del dueño",
-      "meaning": "Su dueño, Jordan Athos, se puso frente a la cámara para contar cómo es trabajar con nosotros. Puedes verlo más abajo en esta página."
+      "value": "7.5%",
+      "label": "Tasa de interacción",
+      "meaning": "Qué tan seguido quien ve una publicación le da like, comenta o comparte. Muestra que el público presta atención y no solo pasa de largo."
     }
   ],
   "situation": {
@@ -79,7 +79,12 @@
       }
     ]
   },
-  "results": null,
+  "results": {
+    "points": [
+      "El video del butter coffee (febrero de 2025), una bebida estrella grabada de cerca, se volvió de lo más visto en la cuenta. Muchas veces un solo producto del menú es todo lo que un video necesita.",
+      "Su dueño, Jordan Athos, se puso frente a la cámara en agosto de 2024 para contar cómo es trabajar con nosotros. Puedes verlo en esta página."
+    ]
+  },
   "quote": {
     "text": "Traen ideas creativas, no tienen miedo de romper esquemas, necesitábamos a alguien que igualara nuestra energía, intercambiamos ideas y trabajamos como un equipo.",
     "name": "Jordan Athos",

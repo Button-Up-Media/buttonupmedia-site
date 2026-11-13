@@ -3,9 +3,13 @@
   "lang": "es",
   "order": 3,
   "service": "social",
-  "services": ["social"],
+  "services": [
+    "social"
+  ],
   "client": "Shimuja Ramen",
-  "organizations": ["Shimuja Ramen"],
+  "organizations": [
+    "Shimuja Ramen"
+  ],
   "metaTitle": "Shimuja Ramen: 15.4M de vistas en redes | Button Up Media",
   "metaDescription": "Cómo el marketing en redes de Button Up Media ayudó a Shimuja Ramen a llegar a 15.4M de vistas mientras se mudaba de Southwest Ranches al downtown de Miami.",
   "ldHeadline": "Shimuja Ramen: 15.4M de vistas en redes sociales para un ramen en el downtown de Miami",
@@ -13,7 +17,11 @@
   "h1Sub": "15.4M de vistas en el downtown de Miami",
   "answer": "Shimuja Ramen sirve en el food hall Julia & Henry's, en el downtown de Miami. Nuestros videos cortos ponen el ramen primero y llegaron a 15.4M de vistas en redes.",
   "descriptor": "Restaurante de ramen",
-  "area": { "name": "Downtown Miami", "detail": "Julia & Henry's, 200 E Flagler St", "page": "brickell" },
+  "area": {
+    "name": "Downtown Miami",
+    "detail": "Julia & Henry's, 200 E Flagler St",
+    "page": "brickell"
+  },
   "timeframe": "Unos 4 años, según Chef Kei",
   "hero": {
     "type": "image",
@@ -23,11 +31,30 @@
     "alt": "Chef Kei, dueño de Shimuja Ramen, en su restaurante",
     "chip": "15.4M de vistas"
   },
-  "card": { "src": "/media/cs-shimuja-hero.webp", "width": 540, "height": 960, "alt": "Chef Kei, dueño de Shimuja Ramen", "value": "15.4M", "label": "vistas en redes" },
+  "card": {
+    "src": "/media/cs-shimuja-hero.webp",
+    "width": 540,
+    "height": 960,
+    "alt": "Chef Kei, dueño de Shimuja Ramen",
+    "value": "15.4M",
+    "label": "vistas en redes"
+  },
   "metrics": [
-    { "value": "15.4M", "label": "Vistas en redes sociales", "meaning": "Cada vista es una oportunidad de que alguien cerca descubra el lugar y venga a probar un tazón." },
-    { "value": "4 años", "label": "Trabajando juntos", "meaning": "Según la cuenta de Chef Kei. Las redes dan resultado cuando se trabajan mes tras mes, no en un arranque corto." },
-    { "value": "4", "label": "Locales hasta ahora", "meaning": "Southwest Ranches, pop-ups en Baby Jane en Brickell y en Sunset Harbour, y ahora Julia & Henry's." }
+    {
+      "value": "15.4M",
+      "label": "Vistas en redes sociales",
+      "meaning": "Reels de Instagram 11.1M, TikTok 2.7M, Facebook 1.3M y YouTube, medido en Sprout Social de enero de 2022 a noviembre de 2026. Cada vista es una oportunidad de que alguien cerca descubra el lugar y venga a probar un tazón."
+    },
+    {
+      "value": "4 años",
+      "label": "Trabajando juntos",
+      "meaning": "Según la cuenta de Chef Kei. Las redes dan resultado cuando se trabajan mes tras mes, no en un arranque corto."
+    },
+    {
+      "value": "4",
+      "label": "Locales hasta ahora",
+      "meaning": "Southwest Ranches, pop-ups en Baby Jane en Brickell y en Sunset Harbour, y ahora Julia & Henry's."
+    }
   ],
   "situation": {
     "paragraphs": [
@@ -37,9 +64,18 @@
   },
   "steps": {
     "items": [
-      { "title": "Poner el ramen en primer plano", "bodyHtml": "Videos cortos con los tazones como protagonistas." },
-      { "title": "Que cada video lleve al mostrador", "bodyHtml": "Un solo objetivo: llevar a la gente del feed a sentarse en Shimuja." },
-      { "title": "Mantenerlo en el tiempo", "bodyHtml": "Marketing de redes sociales a largo plazo, unos cuatro años según la cuenta de Chef Kei." }
+      {
+        "title": "Poner el ramen en primer plano",
+        "bodyHtml": "Videos cortos con los tazones como protagonistas."
+      },
+      {
+        "title": "Que cada video lleve al mostrador",
+        "bodyHtml": "Un solo objetivo: llevar a la gente del feed a sentarse en Shimuja."
+      },
+      {
+        "title": "Mantenerlo en el tiempo",
+        "bodyHtml": "Marketing de redes sociales a largo plazo, unos cuatro años según la cuenta de Chef Kei."
+      }
     ]
   },
   "results": {
@@ -52,9 +88,18 @@
     "name": "Keiichi Maemure (Chef Kei)",
     "role": "dueño de Shimuja Ramen",
     "reviewNote": "the site spells Chef Kei's surname both “Maemure” (social media and grader pages) and “Maemura” (contact page). Confirm which is correct.",
-    "video": { "src": "videos/testimonial-shimuja-short.mp4", "poster": "/media/cs-shimuja-chef-kei.webp", "width": 540, "height": 960, "playLabel": "Reproducir el testimonio en video de Chef Kei, con sonido" }
+    "video": {
+      "src": "videos/testimonial-shimuja-short.mp4",
+      "poster": "/media/cs-shimuja-chef-kei.webp",
+      "width": 540,
+      "height": 960,
+      "playLabel": "Reproducir el testimonio en video de Chef Kei, con sonido"
+    }
   },
   "links": [
-    { "href": "/es/marketing-redes-sociales", "text": "Marketing de redes sociales para restaurantes" }
+    {
+      "href": "/es/marketing-redes-sociales",
+      "text": "Marketing de redes sociales para restaurantes"
+    }
   ]
 }
