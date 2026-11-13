@@ -1,0 +1,35 @@
+{
+  "id": "hub",
+  "lang": "es",
+  "metaTitle": "Zonas que Atendemos en Miami | Button Up Media",
+  "metaDescription": "Mira dónde hacemos marketing para restaurantes en Miami y el sur de la Florida, de Fort Lauderdale a Coral Gables, con nuestro trabajo más cercano en cada zona.",
+  "eyebrow": "Zonas que atendemos",
+  "h1": "Marketing para restaurantes en Miami y el sur de la Florida",
+  "answer": "Button Up Media es una agencia de Miami que trabaja con restaurantes, bares y cafés desde Fort Lauderdale hasta Pinecrest. Elige tu zona y mira nuestro trabajo más cercano.",
+  "mapAria": "Mapa tipo metro de las seis zonas del sur de la Florida que atendemos y de los restaurantes con los que trabajamos",
+  "mapHint": "Toca una parada del mapa para ver nuestro trabajo más cercano y lo primero que haríamos allí.",
+  "legend": {
+    "area": "Zona que atendemos",
+    "stop": "Cliente",
+    "scale": "Sin escala"
+  },
+  "county": {
+    "north": "Broward",
+    "south": "Miami-Dade"
+  },
+  "listLabel": "Seis resúmenes por zona",
+  "listH2": "Elige tu barrio",
+  "listSub": "Cada zona tiene un resumen corto: cómo escogen restaurante allí, nuestro trabajo más cercano y lo primero que haríamos.",
+  "stops": [
+    {"case": "the-fatty-crab", "name": "The Fatty Crab", "where": "Doral", "area": "doral", "line": "Redes orgánicas en Instagram y Facebook: 21M+ vistas, 110K+ seguidores y 6.5% de interacción."},
+    {"case": "tonis-sushi-bar", "name": "Toni's Sushi Bar", "where": "South Beach", "area": "miami-beach", "line": "Videos cortos con el chef para un sushi bar familiar en Washington Ave. 79.4K seguidores en Instagram y un reel con más de 1.3M de vistas."},
+    {"case": "shimuja-ramen", "name": "Shimuja Ramen", "where": "Downtown Miami", "area": "brickell", "line": "Redes sociales para un ramen que empezó en Southwest Ranches y hoy sirve en Julia & Henry's: 15.4M de vistas."},
+    {"case": "rusty-pelican", "name": "Rusty Pelican Miami", "mapLabel": "Rusty Pelican", "where": "Key Biscayne", "area": "brickell", "line": "Google Ads en 2025: un retorno de 7 a 1, es decir, unos $7 en valor de conversión medido por cada $1, en 1,007 conversiones."},
+    {"case": "brewing-buddha", "name": "Brewing Buddha", "where": "Pinecrest", "area": "coral-gables", "line": "Redes orgánicas para una cafetería y espacio de arte conocida por sus lattes creativos: 40M de vistas orgánicas."}
+  ],
+  "cta": {
+    "h2": "¿Su zona no está entre estas seis?",
+    "body": "También trabajamos con restaurantes en todo el sur de la Florida y con clientes en todo Estados Unidos. Agende una llamada gratis y Juan le dirá qué haríamos en su zona.",
+    "button": "Agende una llamada estratégica gratis"
+  }
+}

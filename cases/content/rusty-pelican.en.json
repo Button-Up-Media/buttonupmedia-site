@@ -1,0 +1,149 @@
+{
+  "slug": "rusty-pelican",
+  "lang": "en",
+  "order": 5,
+  "service": "ads",
+  "services": [
+    "ads",
+    "web"
+  ],
+  "client": "Rusty Pelican",
+  "organizations": [
+    "Rusty Pelican Miami",
+    "The Rusty Pelican Tampa"
+  ],
+  "metaTitle": "Rusty Pelican Google Ads Case Study | Button Up Media",
+  "metaDescription": "Google Ads for Rusty Pelican Miami on Key Biscayne and Rusty Pelican Tampa: 7:1 ROAS, 1,007 conversions, 27:1 on private events, plus the website we built.",
+  "ldHeadline": "Rusty Pelican: Google Ads in Miami and Tampa, plus a new restaurant website",
+  "h1": "Rusty Pelican",
+  "h1Sub": "Google Ads in Miami and Tampa, plus the website",
+  "answer": "We run Google Ads for Rusty Pelican in Miami and Tampa and built its website. In 2025, every $1 of Miami ads brought back about $7 in tracked bookings.",
+  "descriptor": "Waterfront restaurant",
+  "area": {
+    "name": "Key Biscayne, Miami and Tampa",
+    "detail": null,
+    "page": "brickell"
+  },
+  "timeframe": "Google Ads, 2025",
+  "hero": {
+    "type": "image",
+    "src": "/images/rusty-pelican-bar.avif",
+    "width": 1080,
+    "height": 1932,
+    "alt": "The bar at Rusty Pelican Miami, with a cocktail on the counter",
+    "chip": "7:1 ROAS"
+  },
+  "card": {
+    "src": "/images/rusty-pelican-bar.avif",
+    "width": 1080,
+    "height": 1932,
+    "alt": "The bar at Rusty Pelican Miami",
+    "value": "7:1",
+    "label": "ROAS in Miami"
+  },
+  "webCard": {
+    "kicker": "Rusty Pelican · Key Biscayne",
+    "title": "An editorial site for a waterfront icon",
+    "body": "Full-bleed photography, a menu by section, the chef's story and reservations wired right in.",
+    "image": {
+      "src": "/images/rusty-pelican-device-mockup-transparent.webp",
+      "width": 1080,
+      "height": 746,
+      "alt": "The Rusty Pelican website Button Up Media built, shown on a laptop and a phone"
+    }
+  },
+  "metrics": [
+    {
+      "value": "7:1",
+      "label": "ROAS, Miami, all of 2025",
+      "meaning": "Every $1 of Google Ads brought back about $7 in bookings and inquiries tracked by Google."
+    },
+    {
+      "value": "27:1",
+      "label": "ROAS on private events, Tampa",
+      "meaning": "For private events in Tampa, every $1 of ads brought back about $27 in tracked value."
+    },
+    {
+      "value": "$3.06",
+      "label": "Per conversion on Mother's Day",
+      "meaning": "155 Mother's Day reservations, calls and inquiries in Miami, at about three dollars each."
+    }
+  ],
+  "situation": {
+    "paragraphs": [
+      "Big waterfront rooms live on reservations, private events and holiday rushes.",
+      "In two very different markets, Miami and Tampa, every ad dollar has to show what it brought back."
+    ]
+  },
+  "steps": {
+    "items": [
+      {
+        "title": "Reach people who are already looking",
+        "bodyHtml": "Google search ads aimed at people already searching for a place to eat, with every click tracked through to the booking."
+      },
+      {
+        "title": "Split the goals",
+        "bodyHtml": "Separate campaigns for reservations, private events and seasonal dates, with private events as the focus in Tampa."
+      },
+      {
+        "title": "Plan around the big dates",
+        "bodyHtml": "Seasonal pushes for days like Mother's Day, Thanksgiving and Christmas, when people book ahead."
+      },
+      {
+        "title": "Track every booking",
+        "bodyHtml": "Conversion tracking on calls, reservations and form fills, reported against spend every month."
+      },
+      {
+        "title": "Build the website",
+        "bodyHtml": "We designed and built the Rusty Pelican site: full-bleed photography, a menu by section, the chef's story and reservations wired in. More on our <a href=\"/restaurant-website-design\">restaurant website design</a> page.",
+        "figure": {
+          "src": "/images/rusty-pelican-device-mockup-transparent.webp",
+          "width": 1080,
+          "height": 746,
+          "alt": "The Rusty Pelican website Button Up Media built, shown on a laptop and a phone",
+          "caption": "The Rusty Pelican site, on a laptop and a phone."
+        }
+      }
+    ]
+  },
+  "results": {
+    "explainHtml": "<strong>How to read these numbers:</strong> a conversion is one tracked action, like a reservation, a call or a private-event inquiry. ROAS (return on ad spend) compares the tracked value of those conversions with what the ads cost.",
+    "accounts": [
+      {
+        "name": "Rusty Pelican Miami",
+        "period": "Full year 2025",
+        "campaigns": "Reservations, private events and seasonal",
+        "roas": "7:1",
+        "roasNumber": 7,
+        "conversions": "1,007",
+        "value": "$135K",
+        "costPer": "$18.95",
+        "standout": "Mother's Day brought 155 conversions at $3.06 each. Thanksgiving brought 252 at $3.70 each."
+      },
+      {
+        "name": "Rusty Pelican Tampa",
+        "period": "Aug to Dec 2025",
+        "campaigns": "Reservations, private events and seasonal",
+        "roas": "27:1",
+        "roasLabel": "ROAS on private events",
+        "roasNumber": 27,
+        "conversions": "287",
+        "value": "$87K",
+        "costPer": "$23.64",
+        "standout": "Christmas and Thanksgiving were the top performers."
+      }
+    ],
+    "disclaimer": true
+  },
+  "quote": null,
+  "links": [
+    {
+      "href": "/restaurant-advertising",
+      "text": "Google Ads for restaurants"
+    },
+    {
+      "href": "/restaurant-website-design",
+      "text": "Restaurant website design"
+    }
+  ]
+}

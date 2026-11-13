@@ -868,9 +868,130 @@
       "source": "/areas-es/fort-lauderdale.html",
       "destination": "/es/marketing-restaurantes-fort-lauderdale",
       "permanent": true
+    },
+    {
+      "source": "/areas-we-serve/",
+      "destination": "/areas-we-serve",
+      "permanent": true
+    },
+    {
+      "source": "/areas-we-serve.html",
+      "destination": "/areas-we-serve",
+      "permanent": true
+    },
+    {
+      "source": "/es/zonas-que-atendemos/",
+      "destination": "/es/zonas-que-atendemos",
+      "permanent": true
+    },
+    {
+      "source": "/areas-es/index.html",
+      "destination": "/es/zonas-que-atendemos",
+      "permanent": true
+    },
+    {
+      "source": "/es/zonas",
+      "destination": "/es/zonas-que-atendemos",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/tonis-sushi-bar.html",
+      "destination": "/case-studies/tonis-sushi-bar",
+      "permanent": true
+    },
+    {
+      "source": "/casos-de-exito/tonis-sushi-bar.html",
+      "destination": "/es/casos-de-exito/tonis-sushi-bar",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/the-fatty-crab.html",
+      "destination": "/case-studies/the-fatty-crab",
+      "permanent": true
+    },
+    {
+      "source": "/casos-de-exito/the-fatty-crab.html",
+      "destination": "/es/casos-de-exito/the-fatty-crab",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/brewing-buddha.html",
+      "destination": "/case-studies/brewing-buddha",
+      "permanent": true
+    },
+    {
+      "source": "/casos-de-exito/brewing-buddha.html",
+      "destination": "/es/casos-de-exito/brewing-buddha",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/shimuja-ramen.html",
+      "destination": "/case-studies/shimuja-ramen",
+      "permanent": true
+    },
+    {
+      "source": "/casos-de-exito/shimuja-ramen.html",
+      "destination": "/es/casos-de-exito/shimuja-ramen",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/rusty-pelican.html",
+      "destination": "/case-studies/rusty-pelican",
+      "permanent": true
+    },
+    {
+      "source": "/casos-de-exito/rusty-pelican.html",
+      "destination": "/es/casos-de-exito/rusty-pelican",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/private-events.html",
+      "destination": "/case-studies/private-events",
+      "permanent": true
+    },
+    {
+      "source": "/casos-de-exito/private-events.html",
+      "destination": "/es/casos-de-exito/private-events",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/woa-cocktails.html",
+      "destination": "/case-studies/woa-cocktails",
+      "permanent": true
+    },
+    {
+      "source": "/casos-de-exito/woa-cocktails.html",
+      "destination": "/es/casos-de-exito/woa-cocktails",
+      "permanent": true
+    },
+    {
+      "source": "/areas-es",
+      "destination": "/es/zonas-que-atendemos",
+      "permanent": true
+    },
+    {
+      "source": "/areas-es/",
+      "destination": "/es/zonas-que-atendemos",
+      "permanent": true
     }
   ],
   "rewrites": [
+    {
+      "source": "/areas-we-serve",
+      "destination": "/areas-we-serve.html"
+    },
+    {
+      "source": "/es/zonas-que-atendemos",
+      "destination": "/areas-es/index.html"
+    },
+    {
+      "source": "/case-studies/:slug",
+      "destination": "/case-studies/:slug.html"
+    },
+    {
+      "source": "/es/casos-de-exito/:slug",
+      "destination": "/casos-de-exito/:slug.html"
+    },
     {
       "source": "/case-studies",
       "destination": "/case-studies.html"

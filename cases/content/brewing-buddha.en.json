@@ -1,0 +1,56 @@
+{
+  "slug": "brewing-buddha",
+  "lang": "en",
+  "order": 2,
+  "service": "social",
+  "services": ["social"],
+  "client": "Brewing Buddha",
+  "organizations": ["Brewing Buddha Cafe & Arthouse"],
+  "metaTitle": "Brewing Buddha Case Study: 40M Views | Button Up Media",
+  "metaDescription": "How Button Up Media made short videos for Brewing Buddha Cafe & Arthouse in Pinecrest, a quirky coffee shop and art space, that reached 40M organic views.",
+  "ldHeadline": "Brewing Buddha Cafe & Arthouse: 40M organic social views for a Pinecrest coffee shop",
+  "h1": "Brewing Buddha",
+  "h1Sub": "40M organic views for a Pinecrest cafe",
+  "answer": "Brewing Buddha Cafe & Arthouse is a quirky coffee shop and art space in Pinecrest. Our short videos about its creative lattes reached 40M organic views.",
+  "descriptor": "Coffee shop and art space",
+  "area": { "name": "Pinecrest", "detail": "8219 SW 124th St, near Coral Gables", "page": "coral-gables" },
+  "timeframe": null,
+  "hero": {
+    "type": "video",
+    "src": "videos/testimonial-brewing-buddha.mp4",
+    "poster": "/media/cs-brewing-buddha-guests.webp",
+    "width": 406,
+    "height": 720,
+    "alt": "Guests at Brewing Buddha talk about the cafe in a short social video",
+    "chip": "40M views"
+  },
+  "card": { "src": "/media/cs-brewing-buddha-jordan.webp", "width": 540, "height": 960, "alt": "Jordan Athos, owner of Brewing Buddha", "value": "40M", "label": "organic views" },
+  "metrics": [
+    { "value": "40M", "label": "Organic social views", "meaning": "Unpaid views. People found and watched these videos on their own, with no ad money pushing them." },
+    { "value": "Feb 2025", "label": "Standout: the butter coffee video", "meaning": "One signature drink, shot up close, became a standout for the account. Often one menu item is all a video needs." },
+    { "value": "Aug 2024", "label": "Owner video testimonial", "meaning": "Owner Jordan Athos went on camera to talk about working with us. You can watch it further down this page." }
+  ],
+  "situation": {
+    "paragraphs": [
+      "Brewing Buddha is a quirky coffee shop and art space known for its creative lattes.",
+      "Generic coffee content would have hidden exactly what makes it different. In owner Jordan Athos's words, they needed somebody to match their energy."
+    ]
+  },
+  "steps": {
+    "items": [
+      { "title": "Film what people come for", "bodyHtml": "Short videos built around the creative lattes and the art space." },
+      { "title": "Trade ideas both ways", "bodyHtml": "We pitch, they pitch, and the strongest concepts make the feed." },
+      { "title": "Let one drink lead", "bodyHtml": "Our February 2025 video on their butter coffee became a standout." }
+    ]
+  },
+  "results": null,
+  "quote": {
+    "text": "They bring creative ideas, they're not afraid to push the lines, we needed somebody to match our energy, we bounce off ideas and work as a team.",
+    "name": "Jordan Athos",
+    "role": "Owner, Brewing Buddha",
+    "video": { "src": "videos/testimonial-brewing-buddha-v2.mp4", "poster": "/media/cs-brewing-buddha-jordan.webp", "width": 540, "height": 960, "playLabel": "Play Jordan Athos's video testimonial, with sound" }
+  },
+  "links": [
+    { "href": "/socialmediamarketing", "text": "Restaurant social media marketing" }
+  ]
+}

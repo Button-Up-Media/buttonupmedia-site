@@ -1,0 +1,59 @@
+{
+  "slug": "the-fatty-crab",
+  "lang": "en",
+  "order": 1,
+  "service": "social",
+  "services": ["social"],
+  "client": "The Fatty Crab",
+  "organizations": ["The Fatty Crab"],
+  "metaTitle": "The Fatty Crab Case Study: 21M+ Views | Button Up Media",
+  "metaDescription": "How Button Up Media grew The Fatty Crab in Doral to 21M+ organic views, 110K+ followers and 6.5% engagement on Instagram and Facebook with short video.",
+  "ldHeadline": "The Fatty Crab: 21M+ organic social views for a Doral seafood boil restaurant",
+  "h1": "The Fatty Crab",
+  "h1Sub": "21M+ organic views in Doral",
+  "answer": "We run organic Instagram and Facebook for The Fatty Crab, a Cajun seafood boil spot in Doral. Short videos built around the food reached 21M+ views.",
+  "descriptor": "Cajun seafood boil",
+  "area": { "name": "Doral", "detail": "2000 NW 87th Ave", "page": "doral" },
+  "timeframe": "Influencer campaign Jul 2023 to Mar 2024",
+  "hero": {
+    "type": "video",
+    "src": "videos/fatty-crab-nola-flavors.mp4",
+    "poster": "/media/cs-fatty-crab-boil.webp",
+    "width": 406,
+    "height": 720,
+    "alt": "A short video Button Up Media made for The Fatty Crab: a guest digging into a seafood boil",
+    "chip": "21M+ views"
+  },
+  "card": { "src": "/images/fatty-crab-thumbnail-ayce.avif", "width": 540, "height": 960, "alt": "A guest eating crab at The Fatty Crab", "value": "21M+", "label": "organic views" },
+  "metrics": [
+    { "value": "21M+", "label": "Organic views", "meaning": "Organic means unpaid. People watched because the videos were worth watching, not because we bought ad space." },
+    { "value": "110K+", "label": "Followers", "meaning": "A local audience The Fatty Crab can reach for free every time it posts." },
+    { "value": "6.5%", "label": "Engagement rate", "meaning": "How often people react with likes, comments and shares. It shows the audience is paying attention, not just scrolling past." }
+  ],
+  "situation": {
+    "paragraphs": [
+      "The feed was mostly static posts on an inconsistent schedule.",
+      "A Cajun seafood boil is made for video, and the occasional photo was not keeping The Fatty Crab top of mind."
+    ]
+  },
+  "steps": {
+    "items": [
+      { "title": "Give every post a job", "bodyHtml": "Four content pillars: the food, the experience, the people and the culture." },
+      { "title": "Build video templates", "bodyHtml": "Reusable short-form formats, so shooting and editing stay fast." },
+      { "title": "Post when the audience is online", "bodyHtml": "A schedule tuned to when their followers actually scroll, on Instagram and Facebook." },
+      { "title": "Point every caption at a visit", "bodyHtml": "Hooks, captions and calls to action aimed at one thing: reservations and visits." },
+      { "title": "Sell dinner at dinnertime", "bodyHtml": "One organic Reel with pack-out shots and an “Order on Uber Eats” call to action, posted at peak delivery hours. It drove Uber Eats orders with no paid budget behind it." },
+      { "title": "Team up with a local creator", "bodyHtml": "From July 2023 to March 2024 we partnered with a food creator with a strong Miami and South Florida following. We planned the videos together around hero dishes, the room and the staff, posted at peak discovery times on Instagram and TikTok, and backed them up with reposts, story features and community management." }
+    ]
+  },
+  "results": {
+    "points": [
+      "One of our Fatty Crab Reels, built on a scroll-stop hook, passed 1.2M views on its own.",
+      "The influencer campaign brought a wave of new followers, and more guests mentioned the creator's videos when they came in."
+    ]
+  },
+  "quote": null,
+  "links": [
+    { "href": "/socialmediamarketing", "text": "Restaurant social media marketing" }
+  ]
+}

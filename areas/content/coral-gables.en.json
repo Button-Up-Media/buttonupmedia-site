@@ -7,114 +7,65 @@
   "eyebrow": "Coral Gables, Miami-Dade",
   "h1": "Restaurant marketing in Coral Gables",
   "answer": "Button Up Media is a Miami restaurant marketing agency that helps Coral Gables restaurants fill lunches and dinners with polished content, Google visibility and bilingual ads.",
-  "heroSub": "In the Gables, your storefront stays quiet by design. Your photos, reviews and Google listing have to do the talking.",
-  "market": {
-    "h2": "Why the Gables is different",
-    "paragraphsHtml": [
-      "Coral Gables was planned as “The City Beautiful,” and it still runs that way. A Board of Architects reviews how buildings look and signage stays understated, so you cannot out-shout the restaurant next door with a bigger sign. Most new guests find you online first and walk in second.",
-      "You are also serving several crowds on the same day: client lunches from the Ponce de Leon Boulevard office corridor, residents planning a date night or a celebration, and visitors to the Biltmore and the University of Miami who do not know the area. Each group searches differently, and many of your guests search, read reviews and decide in Spanish.",
-      "Expectations are high. Diners here compare you with rooms that have built their reputations over decades, so a blurry phone photo or a listing full of old reviews quietly puts you in a lower tier, even when your kitchen is not."
-    ],
-    "facts": [
-      { "label": "Nickname", "value": "The City Beautiful" },
-      { "label": "Incorporated", "value": "1925" },
-      { "label": "Dining streets", "value": "Miracle Mile, Giralda Avenue" },
-      { "label": "Design review", "value": "Board of Architects" }
-    ]
+  "card": {
+    "insight": "Signs stay understated by design, so your photos, reviews and Google listing have to do the talking.",
+    "proofLine": "Nearby: Brewing Buddha in Pinecrest, 40M organic views"
   },
-  "needs": {
-    "h2": "What a Coral Gables restaurant needs most",
-    "items": [
-      {
-        "title": "Photos that look as good as the room",
-        "body": "Your images carry your brand here, because your exterior cannot. Food, dining room and service shot professionally and kept consistent across Google, Instagram and your website, so guests see the same restaurant everywhere they look."
-      },
-      {
-        "title": "A complete Google listing with fresh reviews",
-        "body": "Correct categories, current hours and menu, a working reservation link, and recent reviews answered in the guest's language. For an upscale room, a page of recent, detailed reviews often settles the choice."
-      },
-      {
-        "title": "Fast booking for the lunch crowd",
-        "body": "Office lunches get planned quickly. A clear menu online and a reservation or private-room inquiry that takes seconds on a phone wins the table before a competitor does."
-      },
-      {
-        "title": "English and Spanish, written like a local",
-        "body": "A feed and listing that only speak English miss a large part of your own neighborhood. Both languages should read like they were written here, not translated at the end."
-      }
+  "heroMedia": {
+    "type": "testimonial",
+    "video": "/videos/testimonial-brewing-buddha-v2.mp4",
+    "poster": "/media/area-poster-brewing-buddha-testimonial.webp",
+    "width": 540,
+    "height": 960,
+    "focus": "50% 20%",
+    "alt": "Jordan, owner of Brewing Buddha in Pinecrest, talks about working with Button Up Media",
+    "kicker": "Nearby in Pinecrest",
+    "tag": "Jordan, Brewing Buddha Cafe & Arthouse",
+    "play": "Watch Jordan (1 min)"
+  },
+  "snapshot": {
+    "h2": "In the Gables, your photos do the talking",
+    "facts": [
+      {"label": "Nickname", "value": "The City Beautiful"},
+      {"label": "Dining streets", "value": "Miracle Mile, Giralda Avenue"},
+      {"label": "Design review", "value": "Board of Architects"}
+    ],
+    "paragraphsHtml": [
+      "Coral Gables was planned as \"The City Beautiful,\" and a Board of Architects still reviews how buildings and signs look. You cannot out-shout the restaurant next door with a bigger sign, so most new guests find you online first.",
+      "One day can bring client lunches from the Ponce de Leon Boulevard offices, residents planning a celebration, and visitors to the Biltmore and the University of Miami. Expectations are high, and many guests search and decide in Spanish."
     ]
   },
   "proof": {
-    "h2": "Work close to the Gables",
+    "h2": "Proof nearby, in Pinecrest",
+    "case": "brewing-buddha",
+    "relation": "Nearby in Pinecrest",
+    "client": "Brewing Buddha Cafe & Arthouse",
+    "where": "SW 124th St, Pinecrest",
+    "service": "Organic social",
+    "stat": "40M",
+    "statLabel": "organic social views",
+    "chips": ["Standout: the butter coffee video"],
+    "bodyHtml": "A quirky coffee shop and art space just south of the Gables, known for its creative lattes. Its content has drawn 40M organic views, led by a butter coffee video from February 2025."
+  },
+  "steps": {
+    "h2": "What we'd do first in Coral Gables",
     "items": [
-      {
-        "client": "Brewing Buddha Cafe & Arthouse",
-        "where": "Pinecrest, near Coral Gables",
-        "service": "Organic social",
-        "result": "40M organic views",
-        "body": "A coffee shop and art space in nearby Pinecrest, known for its creative lattes. Its content, including a standout butter coffee video, has drawn 40M organic views.",
-        "href": "/case-studies#brewing-buddha"
-      }
+      {"title": "Photos that look as good as the room", "bodyHtml": "Food, dining room and service shot by our crew and kept consistent across Google, Instagram and your site. Plated dishes are usually captured before doors open. See our <a href=\"/socialmediamarketing\">content service</a>."},
+      {"title": "A complete Google listing with fresh reviews", "bodyHtml": "Correct categories, a current menu, a working reservation link and recent reviews answered in each guest's language, through our <a href=\"/restaurant-seo\">Google Business Profile service</a>."},
+      {"title": "Make the lunch booking take seconds", "bodyHtml": "Office lunches get planned fast. A clear menu and a reservation or private-room inquiry that works in one tap on a phone wins the table first."}
     ]
   },
-  "plan": {
-    "h2": "What we would do for a Coral Gables restaurant",
-    "items": [
-      {
-        "service": "social",
-        "title": "Polished content on a steady schedule",
-        "bodyHtml": "We shoot your food, room and service on site, then keep Instagram and TikTok current with posts that look like the experience you built. That is how our <a href=\"/socialmediamarketing\">restaurant social media and content</a> service runs."
-      },
-      {
-        "service": "seo",
-        "title": "Google listing and reviews",
-        "bodyHtml": "We fix your Google Business Profile, keep it active and reply to reviews in English and Spanish, so you show up for searches like “dinner in Coral Gables.” It is the core of our <a href=\"/restaurant-seo\">restaurant SEO and Google Business Profile</a> work."
-      },
-      {
-        "service": "web",
-        "title": "A website as refined as the room",
-        "bodyHtml": "A custom-coded, bilingual, mobile-first site with your menu, your story and reservations built in, so a resident or a visitor can book in a few taps. See our <a href=\"/restaurant-website-design\">restaurant website design</a> work."
-      },
-      {
-        "service": "ads",
-        "title": "Ads for lunches, celebrations and private events",
-        "bodyHtml": "Google Ads reach people searching nearby right now, and Meta ads reach residents planning an anniversary or an event, all tracked to calls, reservations and inquiries. For a landmark waterfront restaurant, a private-events search campaign returned 72:1 on ad spend from May to December 2025. See how our <a href=\"/restaurant-advertising\">restaurant Google and Meta ads</a> work."
-      }
-    ]
-  },
-  "shoots": {
-    "h2": "How shoots work in Coral Gables",
-    "body": "We come to your restaurant and shoot there, scheduled around lunch and dinner so service runs normally. Plated dishes are usually captured before doors open, and the dining room when the light suits it. The same in-house team that plans your content shoots it, and one shoot typically gives us 4 to 6 weeks of content across your platforms. Planning starts with a strategy call hosted by Juan Hernandez, our founder, so the shoot covers what your guests actually care about."
-  },
-  "pricing": {
-    "h2": "What it costs",
-    "bodyHtml": "Most restaurants invest $1,500 to $5,000 per month for a coordinated program across content, Google and ads. If your site needs work first, a custom build is a one-time $1,500 (Website Build) or $2,000 (Integrated Website Build, which adds POS menu sync, reservations and ordering). Ad management carries no long-term contract. To see how you compare with nearby restaurants before you spend anything, run the free <a href=\"/social-media-website-grader\">Social Media &amp; Website Grader</a>."
-  },
+  "pricingHtml": "Most restaurants invest <strong>$1,500 to $5,000 a month</strong> for a coordinated program. Website builds are a one-time <strong>$1,500 or $2,000</strong>.",
   "faqs": [
-    {
-      "q": "Do you work with restaurants in Coral Gables?",
-      "a": "Yes. We work with restaurants, bars and cafes across Miami-Dade. Our work nearby includes Brewing Buddha in Pinecrest, featured in our case studies."
-    },
-    {
-      "q": "Can you shoot without disrupting lunch service?",
-      "a": "Yes. Shoots are scheduled around your service, and most food and drink content is captured before doors open."
-    },
-    {
-      "q": "Can you reply to reviews in Spanish?",
-      "a": "Yes. Our team is bilingual, so review replies, captions, ads and your website can run in English, Spanish or both."
-    },
-    {
-      "q": "Can you help us book more private events?",
-      "a": "Yes. We run Google Ads built around private-event inquiries and reservations, with conversion tracking so you can see what each inquiry costs."
-    },
-    {
-      "q": "How much does it cost?",
-      "a": "Most restaurants invest $1,500 to $5,000 per month for a coordinated program. A website build is a one-time $1,500 or $2,000."
-    }
+    {"q": "Do you work with restaurants in Coral Gables?", "a": "Yes. We work with restaurants, bars and cafes across Miami-Dade. Our closest case study is Brewing Buddha in nearby Pinecrest."},
+    {"q": "Can you shoot without disrupting lunch service?", "a": "Yes. Shoots are scheduled around your service, and most food and drink content is captured before doors open."},
+    {"q": "Can you reply to reviews in Spanish?", "a": "Yes. Our team is bilingual, so review replies, captions, ads and your website can run in English, Spanish or both."},
+    {"q": "Can you help us book more private events?", "a": "Yes. We run Google Ads built around private-event inquiries and reservations, with conversion tracking so you can see what each inquiry costs."}
   ],
-  "nearby": ["brickell", "doral"],
+  "nearby": ["doral", "brickell"],
   "cta": {
     "h2": "Want the Gables to find you first?",
-    "body": "Book a free strategy call with Juan. We will look at how your restaurant shows up online today and tell you what we would fix first.",
+    "body": "Juan will look at how your restaurant shows up online today and tell you what we would fix first. Free, in English or Spanish.",
     "button": "Book a free strategy call"
   }
 }

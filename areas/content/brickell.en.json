@@ -2,70 +2,71 @@
   "id": "brickell",
   "lang": "en",
   "areaName": "Brickell & Downtown Miami",
+  "shortName": "Brickell & Downtown",
   "metaTitle": "Restaurant Marketing in Brickell, Miami | Button Up Media",
   "metaDescription": "Restaurant marketing in Brickell and Downtown Miami: bilingual social video, Google, websites and ads for the lunch rush, happy hour and the towers nearby.",
-  "eyebrow": "Brickell & Downtown Miami",
+  "eyebrow": "Brickell & Downtown",
   "h1": "Restaurant marketing in Brickell & Downtown Miami",
   "answer": "Button Up Media is a Miami restaurant marketing agency that helps Brickell and Downtown restaurants fill lunch, happy hour and weeknight tables with social video, Google search, websites and ads.",
-  "heroSub": "Our social work for Shimuja Ramen at Julia & Henry's on Flagler St adds up to 15.4M views. Here is how we would approach your restaurant.",
-  "market": {
-    "h2": "Dense, fast and busy from lunch to last call",
-    "paragraphsHtml": [
-      "Brickell and Downtown pack a lot of restaurants, bars and food halls into a few walkable blocks. Your competition is not just next door. It is the rooftop across the street and the new opening down the block, all on the same phone screen.",
-      "The day runs in shifts. Weekdays bring a lunch rush from the office towers, then an after-work crowd deciding on the fly. Evenings and weekends belong to the people who live in the condo towers, plus hotel guests and visitors looking for something close.",
-      "Spanish is everywhere here, from long-time Miami families to Latin American professionals and visitors. Marketing that only speaks English skips a big part of your own block."
-    ],
-    "facts": [
-      { "label": "Weekday rhythm", "value": "Office lunch, then after-work drinks" },
-      { "label": "Neighbors", "value": "High-rise residents within walking distance" },
-      { "label": "Dining hubs", "value": "Brickell City Centre, Mary Brickell Village, Flagler St" },
-      { "label": "Getting around", "value": "The free Metromover links Brickell and Downtown" }
-    ]
+  "card": {
+    "insight": "Office lunch, happy hour and condo towers, all deciding in five minutes on the same phone screen.",
+    "proofLine": "Right here: Shimuja Ramen in Downtown, 15.4M social views"
   },
-  "needs": {
-    "h2": "What works in Brickell and Downtown",
-    "items": [
-      { "title": "Own a time slot", "body": "Pick the shifts you want to win, like weekday lunch or happy hour, and market them on purpose: the right post, Google update and ad at the right hour, not a generic feed." },
-      { "title": "Be ready for the five-minute decision", "body": "People here often choose where to eat minutes before they walk in. Your Google profile, photos and reviews have to make the case fast, with directions and booking one tap away." },
-      { "title": "Stay fresh against new openings", "body": "New concepts open all the time. A steady flow of new video and photos keeps you in the conversation, so the newest place on the block does not take your regulars." },
-      { "title": "Speak to the whole block", "body": "Bilingual posts, ads and review replies reach Spanish-speaking residents, professionals and visitors along with everyone else." }
+  "heroMedia": {
+    "type": "testimonial",
+    "video": "/videos/testimonial-shimuja-short.mp4",
+    "poster": "/media/area-poster-shimuja-testimonial.webp",
+    "width": 540,
+    "height": 960,
+    "focus": "50% 22%",
+    "alt": "Chef Kei, owner of Shimuja Ramen, talks about working with Button Up Media",
+    "kicker": "Our client downtown",
+    "tag": "Chef Kei, Shimuja Ramen at Julia & Henry's",
+    "play": "Watch Chef Kei (25 sec)"
+  },
+  "snapshot": {
+    "h2": "Dense, fast and busy from lunch to last call",
+    "facts": [
+      {"label": "Weekday rhythm", "value": "Office lunch, then after-work drinks"},
+      {"label": "Neighbors", "value": "High-rise residents within walking distance"},
+      {"label": "Dining hubs", "value": "Brickell City Centre, Mary Brickell Village, Flagler St"}
+    ],
+    "paragraphsHtml": [
+      "Brickell and Downtown pack restaurants, bars and food halls into a few walkable blocks. Your competition is the rooftop across the street and the new opening down the block, all on the same phone screen.",
+      "Weekdays bring the office lunch rush, then an after-work crowd deciding on the fly. Evenings and weekends belong to condo residents, hotel guests and visitors, many of them more at home in Spanish."
     ]
   },
   "proof": {
-    "h2": "Work downtown and across the bay",
+    "h2": "Ads proof from across the causeway",
+    "case": "rusty-pelican",
+    "relation": "Across the causeway",
+    "client": "Rusty Pelican Miami",
+    "where": "Key Biscayne",
+    "service": "Google Ads",
+    "stat": "7:1",
+    "statLabel": "return on ad spend in 2025",
+    "chips": ["1,007 conversions", "$18.95 per conversion"],
+    "bodyHtml": "A 7:1 return means every $1 of ads brought back about $7 in conversion value tracked by Google, $135K across the year. Mother's Day alone brought 155 conversions at $3.06 each."
+  },
+  "steps": {
+    "h2": "What we'd do first in Brickell and Downtown",
     "items": [
-      { "client": "Shimuja Ramen", "where": "Downtown Miami", "service": "Social media", "result": "15.4M social views", "body": "A ramen shop that started in Southwest Ranches, ran a pop-up at Baby Jane in Brickell and now serves at Julia & Henry's food hall on Flagler St.", "href": "/case-studies#shimuja-ramen" },
-      { "client": "Rusty Pelican Miami", "where": "Key Biscayne", "service": "Google Ads", "result": "7:1 return on ad spend", "body": "Waterfront dining across the Rickenbacker Causeway. In 2025, Google Ads drove 1,007 conversions worth $135K at $18.95 each, including 155 on Mother's Day at $3.06 each.", "href": "/case-studies#rusty-pelican" }
+      {"title": "Pick the shift you want to own", "bodyHtml": "Weekday lunch or happy hour, chosen on purpose. Then the right Google update, post and ad go out at the right hour, instead of a generic feed."},
+      {"title": "Win the five-minute decision", "bodyHtml": "People here choose minutes before they walk in. We tune your Google listing, photos and reviews, and put booking one tap away on a fast, <a href=\"/restaurant-website-design\">mobile-first website</a>."},
+      {"title": "Aim ads a few blocks out", "bodyHtml": "<a href=\"/restaurant-advertising\">Google and Meta ads</a> aimed at the towers around you, on the days and hours that matter, with every call and booking tracked. Same work as Rusty Pelican's 7:1."}
     ]
   },
-  "plan": {
-    "h2": "What we would do for a Brickell or Downtown restaurant",
-    "items": [
-      { "service": "seo", "title": "Show up for \"near me\" and \"Brickell\" searches", "bodyHtml": "We tune your Google Business Profile, categories, photos and reviews so you appear when someone nearby searches for lunch, drinks or dinner. Our <a href=\"/restaurant-seo\">restaurant SEO and Google Business Profile service</a> covers the details." },
-      { "service": "social", "title": "Content as sharp as the skyline", "bodyHtml": "Our crew shoots at your restaurant, then we post Reels and TikToks in English and Spanish that show the food, the room and the view. See our <a href=\"/socialmediamarketing\">social media and content service</a>." },
-      { "service": "ads", "title": "Ads timed to lunch and happy hour", "bodyHtml": "We run <a href=\"/restaurant-advertising\">Google and Meta ads</a> aimed at people a few blocks away, on the days and hours that matter, with every reservation and call tracked. It is the same work behind Rusty Pelican's 7:1 return." },
-      { "service": "web", "title": "A site that books in one tap", "bodyHtml": "If your menu is a slow PDF or the booking link breaks, the next place gets the table. We build custom, mobile-first <a href=\"/restaurant-website-design\">restaurant websites</a> in English and Spanish." }
-    ]
-  },
-  "shoots": {
-    "h2": "How shoots work in Brickell and Downtown",
-    "body": "We come to you. Our own in-house crew shoots photo and video at your restaurant, and one shoot typically gives us 4 to 6 weeks of content. We plan the shot list with you and work around your lunch and happy hour rush so service keeps moving. If you are inside a tower, hotel or shopping center, we check any filming rules with you before shoot day."
-  },
-  "pricing": {
-    "h2": "What it costs",
-    "bodyHtml": "Most restaurants invest <strong>$1,500 to $5,000 per month</strong> for a coordinated program across social, search and ads. Website builds are one-time: <strong>$1,500</strong> for a Website Build or <strong>$2,000</strong> for an Integrated Website Build. Ad management has no long-term contract. On a free call we will tell you which pieces you need first."
-  },
+  "pricingHtml": "Most restaurants invest <strong>$1,500 to $5,000 a month</strong> for a coordinated program. Website builds are a one-time <strong>$1,500 or $2,000</strong>.",
   "faqs": [
-    { "q": "Do you work with restaurants in Brickell and Downtown Miami?", "a": "Yes. We are a Miami agency, and our work for Shimuja Ramen at Julia & Henry's on Flagler St is one of our case studies. We work with restaurants, bars and cafes across Brickell and Downtown." },
-    { "q": "Can you fill a slow weekday lunch or happy hour?", "a": "Yes. We line up Google updates, posts and targeted ads for the hours you want to fill, then track the calls, bookings and orders that come in." },
-    { "q": "Do you run Google Ads for restaurants?", "a": "Yes. For Rusty Pelican Miami on Key Biscayne, our 2025 Google Ads work returned about $7 in conversion value for every $1 spent, across 1,007 conversions." },
-    { "q": "Do you create content in Spanish?", "a": "Yes. Our team is bilingual, so posts, ads, menus and review replies can run in English, Spanish or both." },
-    { "q": "How much does restaurant marketing cost in Brickell?", "a": "Most restaurants invest $1,500 to $5,000 per month for a coordinated program. Website builds are a one-time $1,500 or $2,000. We will give you a real number for your restaurant on a free call." }
+    {"q": "Do you work with restaurants in Brickell and Downtown Miami?", "a": "Yes. We are a Miami agency, and our work for Shimuja Ramen at Julia & Henry's on Flagler St is one of our case studies."},
+    {"q": "Can you fill a slow weekday lunch or happy hour?", "a": "Yes. We line up Google updates, posts and targeted ads for the hours you want to fill, then track the calls, bookings and orders that come in."},
+    {"q": "Do you run Google Ads for restaurants?", "a": "Yes. For Rusty Pelican Miami on Key Biscayne, our 2025 Google Ads work returned about $7 in conversion value for every $1 spent, across 1,007 conversions."},
+    {"q": "Do you create content in Spanish?", "a": "Yes. Our team is bilingual, so posts, ads, menus and review replies can run in English, Spanish or both."}
   ],
-  "nearby": ["miami-beach", "wynwood", "coral-gables"],
+  "nearby": ["wynwood", "miami-beach"],
   "cta": {
     "h2": "Let's talk about your Brickell or Downtown restaurant",
-    "body": "Tell us which shifts you want fuller (lunch, happy hour or weekend nights) and we will show you where we would start. Free, in English or Spanish, no pressure.",
+    "body": "Tell us which shifts you want fuller (lunch, happy hour or weekend nights) and we will show you where we would start. Free, in English or Spanish.",
     "button": "Book a free strategy call"
   }
 }

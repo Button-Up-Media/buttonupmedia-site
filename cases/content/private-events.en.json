@@ -1,0 +1,148 @@
+{
+  "slug": "private-events",
+  "lang": "en",
+  "order": 6,
+  "service": "ads",
+  "services": [
+    "ads"
+  ],
+  "client": "The Boathouse, The Odyssey and Castaway",
+  "crumb": "Private events",
+  "organizations": [
+    "The Boathouse",
+    "The Odyssey",
+    "Castaway"
+  ],
+  "metaTitle": "Private Event Ads Case Study: 72:1 ROAS | Button Up Media",
+  "metaDescription": "How Google Ads filled private events for The Boathouse (72:1 ROAS, $30.58 per lead) and The Odyssey (49:1 ROAS, 951 conversions), plus Castaway, in 2025.",
+  "ldHeadline": "Private event Google Ads for The Boathouse, The Odyssey and Castaway",
+  "h1": "Private events",
+  "h1Sub": "The Boathouse, The Odyssey and Castaway",
+  "answer": "We ran Google Ads for private events and reservations at three restaurants in 2025. At The Boathouse, every $1 of ads brought back about $72 in tracked value.",
+  "descriptor": "Private events and dinner reservations",
+  "area": null,
+  "timeframe": "Google Ads, 2025",
+  "hero": {
+    "type": "logos",
+    "big": "72:1",
+    "bigLabel": "ROAS for The Boathouse",
+    "logos": [
+      {
+        "src": "/media/clients/the-boathouse.webp",
+        "width": 225,
+        "height": 120,
+        "alt": "The Boathouse logo"
+      },
+      {
+        "src": "/media/clients/the-odyssey.webp",
+        "width": 533,
+        "height": 120,
+        "alt": "The Odyssey logo"
+      },
+      {
+        "src": "/media/clients/castaway.webp",
+        "width": 262,
+        "height": 120,
+        "alt": "Castaway logo"
+      }
+    ]
+  },
+  "card": {
+    "value": "72:1",
+    "label": "ROAS for The Boathouse"
+  },
+  "metrics": [
+    {
+      "value": "72:1",
+      "label": "ROAS, The Boathouse",
+      "meaning": "Every $1 of ads brought back about $72 in tracked private-event value, May to Dec 2025."
+    },
+    {
+      "value": "$30.58",
+      "label": "Per private-event lead, The Boathouse",
+      "meaning": "What each event inquiry cost. A single booked event can bring in thousands."
+    },
+    {
+      "value": "49:1",
+      "label": "ROAS, The Odyssey",
+      "meaning": "Dinner reservations plus private events: about $49 back for every $1, Jun to Dec 2025."
+    }
+  ],
+  "situation": {
+    "paragraphs": [
+      "A private event is a big-ticket booking: each one that converts can bring in thousands.",
+      "The goal is to reach people who are already planning an event and turn their search into an inquiry, not to buy as many clicks as possible."
+    ]
+  },
+  "steps": {
+    "items": [
+      {
+        "title": "Show up when planners search by name",
+        "bodyHtml": "Branded search ads for The Boathouse's private events. Branded search means your ad shows when someone searches for the restaurant by name, so your own ad is the first thing a planner sees."
+      },
+      {
+        "title": "Split events from dinner",
+        "bodyHtml": "Separate campaigns for dinner reservations and for private events at The Odyssey and at Castaway, so each goal has its own budget and its own numbers."
+      },
+      {
+        "title": "Track every inquiry and booking",
+        "bodyHtml": "So each campaign is judged on what it brings back, not on clicks."
+      },
+      {
+        "title": "Report against spend every month",
+        "bodyHtml": "Conversions, cost per conversion, conversion value and ROAS, every month, in plain numbers."
+      }
+    ]
+  },
+  "results": {
+    "explainHtml": "<strong>How to read these numbers:</strong> a conversion is one tracked action, like a private-event inquiry, a reservation or a call. ROAS (return on ad spend) compares the tracked value of those conversions with what the ads cost.",
+    "accounts": [
+      {
+        "name": "The Boathouse",
+        "period": "May to Dec 2025",
+        "campaigns": "Private events, branded search",
+        "roas": "72:1",
+        "roasNumber": 72,
+        "conversions": "234",
+        "value": "$520K",
+        "costPer": "$30.58",
+        "spend": "$7,157"
+      },
+      {
+        "name": "The Odyssey",
+        "period": "Jun to Dec 2025",
+        "campaigns": "Dinner reservations and private events",
+        "roas": "49:1",
+        "roasNumber": 49,
+        "conversions": "951",
+        "value": "$337K",
+        "costPer": "$7.15",
+        "spend": "$6,802"
+      },
+      {
+        "name": "Castaway",
+        "period": "Mar to Dec 2025",
+        "campaigns": "Reservations and private events",
+        "roas": "Positive",
+        "roasLabel": "ROAS on both campaigns",
+        "roasNumber": null,
+        "conversions": "140",
+        "value": "$17K",
+        "costPer": "$42.34",
+        "spend": "$5,926"
+      }
+    ],
+    "disclaimer": true
+  },
+  "quote": null,
+  "links": [
+    {
+      "href": "/restaurant-advertising",
+      "text": "Google Ads for restaurants"
+    },
+    {
+      "href": "/contact",
+      "text": "Ask us about private-event ads"
+    }
+  ]
+}

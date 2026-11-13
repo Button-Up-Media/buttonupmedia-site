@@ -7,65 +7,73 @@
   "eyebrow": "Miami Beach, FL",
   "h1": "Restaurant marketing in Miami Beach",
   "answer": "Button Up Media is a Miami restaurant marketing agency that helps Miami Beach restaurants reach visitors and locals with chef-led video, Google search, websites and ads.",
-  "heroSub": "We create the social video for Toni's Sushi Bar on Washington Ave, a family-run South Beach favorite since 1987. Here is how we would approach your spot.",
-  "market": {
-    "h2": "One island, two crowds, and a calendar that matters",
-    "paragraphsHtml": [
-      "Miami Beach restaurants serve two very different guests. Visitors pick a place from their phone, often minutes before they sit down, based on photos, reviews and what is close. Locals already know the strip and want a reason to come back: a new dish, a familiar face, a weeknight deal.",
-      "The neighborhoods split the same way. South Beach, around Ocean Drive, Collins Avenue and Washington Avenue, runs on visitors. Sunset Harbour, Mid-Beach and North Beach lean more local, with regulars who live a few blocks away.",
-      "The calendar shapes everything. Winter and spring bring the most visitors, and big weeks like Art Basel Miami Beach in December pack the island. In the slower months your locals carry the room, so your marketing has to work in both seasons."
-    ],
-    "facts": [
-      { "label": "Two crowds", "value": "Visitors and year-round locals" },
-      { "label": "Visitor core", "value": "Ocean Drive, Collins Ave, Washington Ave" },
-      { "label": "Local pockets", "value": "Sunset Harbour, Mid-Beach, North Beach" },
-      { "label": "Busiest stretch", "value": "Winter and spring, plus Art Basel week" }
-    ]
+  "card": {
+    "insight": "Two crowds on one island: visitors choosing from their phones, and locals who need a reason to come back.",
+    "proofLine": "Right here: Toni's Sushi Bar in South Beach, 79.4K Instagram followers"
   },
-  "needs": {
-    "h2": "What works for a Miami Beach restaurant",
-    "items": [
-      { "title": "Be the obvious pick on the map", "body": "A visitor on Collins Ave is choosing from Google Maps. Your profile needs fresh photos, current hours, a menu that loads and reviews you actually reply to, in English and Spanish." },
-      { "title": "Let your people be the brand", "body": "People remember a face. Short videos with your chef or bartender on camera, showing knife work, plating and a simple hook, give visitors a reason to come in tonight." },
-      { "title": "Plan around the season", "body": "Push visitor-friendly content and ads in high season and big event weeks, then shift to locals in the slower months with weeknight specials and neighborhood posts." },
-      { "title": "Give locals a reason to return", "body": "Regulars in Sunset Harbour or North Beach do not need a tour of the menu. They need to know what is new, what is on this week and that the people they like are still behind the bar." }
+  "heroMedia": {
+    "type": "graphic",
+    "alt": "Instagram numbers for Toni's Sushi Bar, a Button Up Media social media client in South Beach",
+    "kicker": "Our work here",
+    "tag": "Toni's Sushi Bar, Washington Ave",
+    "graphic": {
+      "handle": "@tonissushi",
+      "hookLabel": "A Toni's hook",
+      "hook": "POV: you find the best sushi spot on South Beach",
+      "big": "79.4K",
+      "bigLabel": "Instagram followers",
+      "rows": [
+        {"value": "478", "label": "posts"},
+        {"value": "1.3M+", "label": "views on one Reel"}
+      ],
+      "asOf": "Instagram, checked Nov 13, 2026"
+    },
+    "reviewNote": "Ask the owner for a short Toni's clip or photo we can use here instead of this graphic (we have no Toni's media in the repo)."
+  },
+  "snapshot": {
+    "h2": "One island, two crowds, and a calendar that matters",
+    "facts": [
+      {"label": "Visitor core", "value": "Ocean Drive, Collins Ave, Washington Ave"},
+      {"label": "Local pockets", "value": "Sunset Harbour, Mid-Beach, North Beach"},
+      {"label": "Busiest stretch", "value": "Winter and spring, plus Art Basel week"}
+    ],
+    "paragraphsHtml": [
+      "Visitors pick a place from their phone, often minutes before they sit down, based on photos, reviews and what is close. Locals already know the strip and want a reason to come back: a new dish, a familiar face, a weeknight deal.",
+      "Winter and spring bring the most visitors, and Art Basel Miami Beach in December packs the island. In the slower months your locals carry the room, so your marketing has to work in both seasons."
     ]
   },
   "proof": {
-    "h2": "Work on the beach and nearby",
+    "h2": "Proof from right here on the beach",
+    "case": "tonis-sushi-bar",
+    "relation": "Right here in South Beach",
+    "client": "Toni's Sushi Bar",
+    "where": "Washington Ave, South Beach",
+    "service": "Social media",
+    "stat": "About 60M",
+    "statLabel": "views since we started",
+    "chips": ["79.4K Instagram followers", "Family-run since 1987"],
+    "bodyHtml": "We build short videos around the sushi chef: knife work, nigiri close-ups and hooks like \"POV: you find the best sushi spot on South Beach.\" One video alone passed about 50M views.",
+    "reviewNote": "Confirm the owner-reported numbers before launch: the exact total views (about 60M), which platforms that covers, the month we started with Toni's, and the link to the single video at about 50M views."
+  },
+  "steps": {
+    "h2": "What we'd do first in Miami Beach",
     "items": [
-      { "client": "Toni's Sushi Bar", "where": "South Beach", "service": "Social media", "result": "About 60M views since we started", "body": "A family-run sushi bar on Washington Ave since 1987. We build short videos around the sushi chef: knife work, nigiri close-ups and hooks like \"POV: you find the best sushi spot on South Beach.\" One video alone passed about 50M views.", "href": "/case-studies#tonis-sushi-bar", "reviewNote": "Confirm the owner-reported numbers before launch: the exact total views (about 60M), which platforms that covers, the month we started with Toni's, and the link to the single video at about 50M views." },
-      { "client": "Shimuja Ramen", "where": "Sunset Harbour pop-up", "service": "Social media", "result": "15.4M social views", "body": "A ramen shop that ran pop-ups in Sunset Harbour and at Baby Jane in Brickell before settling into Julia & Henry's food hall in Downtown Miami.", "href": "/case-studies#shimuja-ramen" }
+      {"title": "Be the obvious pick on the map", "bodyHtml": "A visitor on Collins Ave is choosing from Google Maps. We refresh your photos, hours and menu link and reply to reviews in English and Spanish, through our <a href=\"/restaurant-seo\">restaurant SEO and Google Business Profile service</a>."},
+      {"title": "Put your people on camera", "bodyHtml": "Short videos with your chef or bartender up front, the approach behind Toni's. Our crew films at your restaurant and handles the <a href=\"/socialmediamarketing\">posting and comments</a> too."},
+      {"title": "Plan the year around the season", "bodyHtml": "Visitor-friendly content and ads in high season and event weeks, then weeknight specials and neighborhood posts for locals when the island slows down."}
     ]
   },
-  "plan": {
-    "h2": "What we would do for a Miami Beach restaurant",
-    "items": [
-      { "service": "social", "title": "Short video built around your people", "bodyHtml": "Our crew films at your restaurant and we post Reels and TikToks that put your chef, bartender or owner up front, the approach behind Toni's Sushi Bar. Here is our full <a href=\"/socialmediamarketing\">social media and content service</a>." },
-      { "service": "seo", "title": "Win the \"near me\" moment", "bodyHtml": "We tune your Google Business Profile, photos and reviews so visitors nearby find you first. Our <a href=\"/restaurant-seo\">restaurant SEO and Google Business Profile service</a> covers the details." },
-      { "service": "web", "title": "A menu and booking page that load fast", "bodyHtml": "Visitors will not wait for a slow PDF menu on their phone. We build custom, mobile-first <a href=\"/restaurant-website-design\">restaurant websites</a> in English and Spanish, with booking and ordering one tap away." },
-      { "service": "ads", "title": "Ads that follow the season", "bodyHtml": "In high season we put your spot in front of people searching nearby right now. In the slower months we aim at locals. Our <a href=\"/restaurant-advertising\">Google and Meta ads</a> track every reservation and call." }
-    ]
-  },
-  "shoots": {
-    "h2": "How shoots work on the beach",
-    "body": "We come to you. Our own in-house crew films and photographs at your restaurant, and one shoot typically gives us 4 to 6 weeks of content. We plan the shot list with you ahead of time and work around service. If you are on a busy stretch like Ocean Drive or Washington Ave, we plan street and exterior shots for quieter hours."
-  },
-  "pricing": {
-    "h2": "What it costs",
-    "bodyHtml": "Most restaurants invest <strong>$1,500 to $5,000 per month</strong> for a coordinated program across social, search and ads. Website builds are one-time: <strong>$1,500</strong> for a Website Build or <strong>$2,000</strong> for an Integrated Website Build. Ad management has no long-term contract. On a free call we will tell you which pieces you need first, and when in the season to start."
-  },
+  "pricingHtml": "Most restaurants invest <strong>$1,500 to $5,000 a month</strong> for a coordinated program. Website builds are a one-time <strong>$1,500 or $2,000</strong>.",
   "faqs": [
-    { "q": "Do you work with restaurants in Miami Beach?", "a": "Yes. We create the social video for Toni's Sushi Bar on Washington Ave in South Beach, and we work with restaurants, bars and cafes across Miami Beach, from South Beach to Sunset Harbour and North Beach." },
-    { "q": "Should I market to tourists or locals?", "a": "Usually both, with different messages. Visitors need to find you fast on Google and social, and locals need a reason to come back. We plan the mix around your location and the season." },
-    { "q": "What do you do in the slow season?", "a": "We shift the focus to people who live nearby: weeknight specials, new dishes and posts that feel like a neighborhood spot. Ads can make the same shift, so you are not paying to reach visitors who are not in town." },
-    { "q": "Can you film our chef or staff?", "a": "Yes, and it often works best. At Toni's Sushi Bar the sushi chef is the on-camera personality. We plan the shoot with your team and keep it around service." },
-    { "q": "How much does restaurant marketing cost in Miami Beach?", "a": "Most restaurants invest $1,500 to $5,000 per month for a coordinated program. Website builds are a one-time $1,500 or $2,000. We will give you a real number for your restaurant on a free call." }
+    {"q": "Do you work with restaurants in Miami Beach?", "a": "Yes. We create the social video for Toni's Sushi Bar on Washington Ave in South Beach, and we work with restaurants, bars and cafes from South Beach to North Beach."},
+    {"q": "Should I market to tourists or locals?", "a": "Usually both, with different messages. Visitors need to find you fast on Google and social, and locals need a reason to come back. We plan the mix around your location and the season."},
+    {"q": "What do you do in the slow season?", "a": "We shift the focus to people who live nearby: weeknight specials, new dishes and posts that feel like a neighborhood spot. Ads make the same shift, so you are not paying to reach visitors who are not in town."},
+    {"q": "Can you film our chef or staff?", "a": "Yes, and it often works best. At Toni's Sushi Bar the sushi chef is the on-camera personality. We plan the shoot with your team and keep it around service."}
   ],
-  "nearby": ["brickell", "wynwood", "fort-lauderdale"],
+  "nearby": ["brickell", "wynwood"],
   "cta": {
     "h2": "Let's talk about your Miami Beach restaurant",
-    "body": "Tell us who you want more of (visitors, locals or both) and in which months, and we will show you where we would start. Free, in English or Spanish, no pressure.",
+    "body": "Tell us who you want more of (visitors, locals or both) and in which months, and we will show you where we would start. Free, in English or Spanish.",
     "button": "Book a free strategy call"
   }
 }

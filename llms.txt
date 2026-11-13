@@ -21,10 +21,18 @@
 
 ## Results
 
-- [Case studies](https://www.buttonupmedia.com/case-studies) (Spanish: https://www.buttonupmedia.com/es/casos-de-exito): Toni's Sushi Bar (Miami Beach, social), The Fatty Crab (Doral, organic social: 21M+ views, 110K+ followers), Brewing Buddha (Pinecrest, 40M organic views), Shimuja Ramen (Downtown Miami, 15.4M views), Rusty Pelican Miami and Tampa (Google Ads), private-events Google Ads (The Boathouse 72:1 ROAS, The Odyssey 49:1), WOA Cocktails (website rebuild).
+- [Case studies library](https://www.buttonupmedia.com/case-studies) (Spanish: https://www.buttonupmedia.com/es/casos-de-exito), one page per client:
+  - [The Fatty Crab, Doral: organic social, 21M+ views, 110K+ followers](https://www.buttonupmedia.com/case-studies/the-fatty-crab)
+  - [Brewing Buddha, Pinecrest: organic social, 40M views](https://www.buttonupmedia.com/case-studies/brewing-buddha)
+  - [Shimuja Ramen, Downtown Miami: organic social, 15.4M views](https://www.buttonupmedia.com/case-studies/shimuja-ramen)
+  - [Toni's Sushi Bar, Miami Beach: social media](https://www.buttonupmedia.com/case-studies/tonis-sushi-bar)
+  - [Rusty Pelican Miami and Tampa: Google Ads](https://www.buttonupmedia.com/case-studies/rusty-pelican)
+  - [Private-event Google Ads: The Boathouse 72:1 ROAS, The Odyssey 49:1](https://www.buttonupmedia.com/case-studies/private-events)
+  - [WOA Cocktails: website rebuild](https://www.buttonupmedia.com/case-studies/woa-cocktails)
 
 ## Areas we serve (South Florida)
 
+- [Areas we serve hub](https://www.buttonupmedia.com/areas-we-serve) (Spanish: https://www.buttonupmedia.com/es/zonas-que-atendemos)
 - [Miami Beach](https://www.buttonupmedia.com/restaurant-marketing-miami-beach), [Brickell & Downtown Miami](https://www.buttonupmedia.com/restaurant-marketing-brickell), [Wynwood](https://www.buttonupmedia.com/restaurant-marketing-wynwood), [Coral Gables](https://www.buttonupmedia.com/restaurant-marketing-coral-gables), [Doral](https://www.buttonupmedia.com/restaurant-marketing-doral), [Fort Lauderdale & Broward](https://www.buttonupmedia.com/restaurant-marketing-fort-lauderdale). Spanish versions at /es/marketing-restaurantes-{area}.
 
 ## Company

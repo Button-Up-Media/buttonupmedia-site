@@ -1,0 +1,60 @@
+{
+  "slug": "woa-cocktails",
+  "lang": "es",
+  "order": 7,
+  "service": "web",
+  "services": ["web"],
+  "client": "WOA Cocktails",
+  "organizations": ["WOA Cocktails"],
+  "metaTitle": "WOA Cocktails: sitio web bilingüe | Button Up Media",
+  "metaDescription": "Cómo Button Up Media reconstruyó desde cero el sitio de WOA Cocktails: a la medida, pensado para el celular, cada página en inglés y español, y ambos en Google.",
+  "ldHeadline": "WOA Cocktails: un sitio web bilingüe reconstruido desde cero",
+  "h1": "WOA Cocktails",
+  "h1Sub": "Un sitio web bilingüe, reconstruido desde cero",
+  "answer": "WOA Cocktails es un bar móvil de lujo que atiende Miami y Nueva York. Reconstruimos su sitio web desde cero, con cada página en inglés y en español.",
+  "descriptor": "Bar móvil de lujo y empresa de bebidas",
+  "area": { "name": "Miami y Nueva York", "detail": null, "page": null },
+  "timeframe": "Reconstrucción completa del sitio",
+  "hero": {
+    "type": "device",
+    "url": "woacocktails.com",
+    "desktop": { "src": "/media/woa-hero-desktop.webp", "width": 1600, "height": 904, "alt": "La página de inicio de WOA Cocktails que diseñó y construyó Button Up Media" },
+    "mobile": { "src": "/media/woa-hero-mobile.webp", "width": 690, "height": 1484, "alt": "El sitio web de WOA Cocktails en un teléfono" }
+  },
+  "card": { "src": "/media/woa-hero-mobile.webp", "width": 690, "height": 1484, "alt": "El sitio web de WOA Cocktails en un teléfono", "value": "EN + ES", "label": "en cada página" },
+  "webCard": {
+    "kicker": "WOA Cocktails · Miami y Nueva York",
+    "title": "Un sitio bilingüe tan premium como sus cócteles",
+    "body": "Reconstruido desde cero, cada página en inglés y en español, y los dos idiomas aparecen en Google.",
+    "device": true
+  },
+  "metrics": [
+    { "value": "2 semanas", "label": "Para construirlo, en palabras de Fabio Perez", "meaning": "Del arranque a un sitio a la medida terminado en unas dos semanas.", "reviewNote": "“2 weeks” comes from the quote signed “Fabio, Website design” on the contact page. Confirm it is Fabio Perez talking about the WOA build." },
+    { "value": "EN + ES", "label": "Cada página en los dos idiomas", "meaning": "Un toque cambia todo el sitio entre inglés y español." },
+    { "value": "2", "label": "Idiomas que aparecen en Google", "meaning": "Si alguien busca en inglés o en español, WOA aparece, con sus páginas principales listadas justo debajo del resultado." }
+  ],
+  "situation": {
+    "paragraphs": [
+      "WOA vende una experiencia premium, y su sitio web tenía que sentirse igual de premium.",
+      "Sus clientes y la prensa necesitaban una casa en línea a la altura de lo que sirven en la copa."
+    ]
+  },
+  "steps": {
+    "items": [
+      { "title": "Reconstruir desde cero", "bodyHtml": "Totalmente a la medida y programado a mano, con visuales inmersivos, movimiento suave y un diseño pensado primero para el celular." },
+      { "title": "Hacer cada página en dos idiomas", "bodyHtml": "Cada página en inglés y en español, con un botón en el menú para cambiar de idioma en un toque.", "figure": { "src": "/media/woa-es-bar.jpg", "width": 1600, "height": 904, "alt": "La misma página de servicio de WOA Cocktails en español, con el botón EN/ES en la navegación", "caption": "Una página de servicio de WOA en español. Un toque la cambia a inglés." } },
+      { "title": "Prepararlo para Google en los dos idiomas", "bodyHtml": "Así WOA aparece tanto si alguien busca en inglés como en español.", "figure": { "src": "/media/woa-serp-es-fit.png", "width": 1500, "height": 885, "alt": "Resultado de WOA Cocktails en Google en español, con enlaces a Experiencia de bar móvil, Eventos, Servicios y Acerca de", "caption": "WOA en Google en español, con sus páginas principales debajo del resultado." } }
+    ]
+  },
+  "results": null,
+  "quote": {
+    "text": "Trabajar con Button Up Media ha sido una de las mejores inversiones que he hecho para mi negocio. Reconstruyeron por completo nuestro sitio web de WOA Cocktails, y el resultado final superó mis expectativas.",
+    "name": "Fabio Perez",
+    "role": "cofundador de WOA Cocktails",
+    "source": "reseña en Google, traducida del inglés"
+  },
+  "links": [
+    { "href": "/es/diseno-web-restaurantes", "text": "Diseño web para restaurantes" },
+    { "href": "/es/analizador-redes-sociales-web", "text": "Analice su sitio web gratis" }
+  ]
+}

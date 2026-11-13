@@ -2,70 +2,71 @@
   "id": "brickell",
   "lang": "es",
   "areaName": "Brickell y Downtown Miami",
+  "shortName": "Brickell y Downtown",
   "metaTitle": "Marketing para Restaurantes en Brickell | Button Up Media",
   "metaDescription": "Marketing para restaurantes en Brickell y Downtown Miami: videos bilingües, Google, páginas web y anuncios para el almuerzo, el happy hour y las torres vecinas.",
-  "eyebrow": "Brickell y Downtown Miami",
+  "eyebrow": "Brickell y Downtown",
   "h1": "Marketing para restaurantes en Brickell y Downtown Miami",
   "answer": "Button Up Media es una agencia de Miami que ayuda a llenar mesas en restaurantes de Brickell y Downtown, del almuerzo al happy hour, con redes, Google, web y anuncios.",
-  "heroSub": "Nuestro trabajo en redes para Shimuja Ramen, en Julia & Henry's sobre Flagler St, suma 15.4M de vistas. Así lo haríamos para tu restaurante.",
-  "market": {
-    "h2": "Denso, rápido y lleno desde el almuerzo hasta tarde",
-    "paragraphsHtml": [
-      "Brickell y Downtown concentran muchísimos restaurantes, bares y food halls en unas pocas cuadras caminables. Tu competencia no es solo el local de al lado. Es el rooftop de enfrente y la apertura nueva de la esquina, todos en la misma pantalla del celular.",
-      "El día va por turnos. Entre semana llega el almuerzo de las torres de oficinas y luego el público de después del trabajo, que decide sobre la marcha. Las noches y los fines de semana son de quienes viven en las torres de condominios, más los huéspedes de hotel y los visitantes que buscan algo cerca.",
-      "Aquí el español está en todas partes, desde familias de Miami de toda la vida hasta profesionales y visitantes latinoamericanos. El marketing que solo habla inglés deja fuera a buena parte de tu propia cuadra."
-    ],
-    "facts": [
-      { "label": "Ritmo entre semana", "value": "Almuerzo de oficina y luego after office" },
-      { "label": "Vecinos", "value": "Residentes de las torres, a pasos de tu local" },
-      { "label": "Zonas para comer", "value": "Brickell City Centre, Mary Brickell Village, Flagler St" },
-      { "label": "Cómo se mueven", "value": "El Metromover gratis une Brickell y Downtown" }
-    ]
+  "card": {
+    "insight": "Almuerzo de oficina, happy hour y torres de condominios, todos decidiendo en cinco minutos en la misma pantalla.",
+    "proofLine": "Aquí mismo: Shimuja Ramen en Downtown, 15.4M de vistas en redes"
   },
-  "needs": {
-    "h2": "Lo que funciona en Brickell y Downtown",
-    "items": [
-      { "title": "Adueñate de un horario", "body": "Elige los turnos que quieres ganar, como el almuerzo entre semana o el happy hour, y promuévelos a propósito: la publicación, el cambio en Google y el anuncio correctos a la hora correcta." },
-      { "title": "Prepárate para la decisión de cinco minutos", "body": "Aquí la gente muchas veces decide dónde comer minutos antes de entrar. Tu perfil de Google, tus fotos y tus reseñas tienen que convencer rápido, con cómo llegar y reservar a un toque." },
-      { "title": "Mantente fresco frente a las aperturas", "body": "Abren conceptos nuevos todo el tiempo. Un flujo constante de videos y fotos nuevos te mantiene en la conversación, para que el local más nuevo de la cuadra no se lleve a tus clientes fijos." },
-      { "title": "Háblale a toda la cuadra", "body": "Publicaciones, anuncios y respuestas a reseñas en los dos idiomas llegan también a los residentes, profesionales y visitantes que hablan español." }
+  "heroMedia": {
+    "type": "testimonial",
+    "video": "/videos/testimonial-shimuja-short.mp4",
+    "poster": "/media/area-poster-shimuja-testimonial.webp",
+    "width": 540,
+    "height": 960,
+    "focus": "50% 22%",
+    "alt": "Chef Kei, dueño de Shimuja Ramen, habla de su trabajo con Button Up Media",
+    "kicker": "Nuestro cliente en Downtown",
+    "tag": "Chef Kei, Shimuja Ramen en Julia & Henry's",
+    "play": "Vea a Chef Kei (25 s)"
+  },
+  "snapshot": {
+    "h2": "Denso, rápido y lleno desde el almuerzo hasta tarde",
+    "facts": [
+      {"label": "Ritmo entre semana", "value": "Almuerzo de oficina y luego after office"},
+      {"label": "Vecinos", "value": "Residentes de las torres, a pasos de tu local"},
+      {"label": "Zonas para comer", "value": "Brickell City Centre, Mary Brickell Village, Flagler St"}
+    ],
+    "paragraphsHtml": [
+      "Brickell y Downtown concentran restaurantes, bares y food halls en unas pocas cuadras caminables. Tu competencia es el rooftop de enfrente y la apertura nueva de la esquina, todos en la misma pantalla del celular.",
+      "Entre semana llega el almuerzo de las oficinas y luego el público de after office, que decide sobre la marcha. Las noches y los fines de semana son de los residentes de las torres, los huéspedes de hotel y los visitantes, muchos de ellos más cómodos en español."
     ]
   },
   "proof": {
-    "h2": "Trabajo en Downtown y al otro lado de la bahía",
+    "h2": "Resultados en anuncios, al otro lado del puente",
+    "case": "rusty-pelican",
+    "relation": "Al otro lado del puente",
+    "client": "Rusty Pelican Miami",
+    "where": "Key Biscayne",
+    "service": "Google Ads",
+    "stat": "7:1",
+    "statLabel": "de retorno sobre la inversión en anuncios en 2025",
+    "chips": ["1,007 conversiones", "$18.95 por conversión"],
+    "bodyHtml": "Un retorno de 7 a 1 quiere decir que cada $1 en anuncios trajo unos $7 en valor de conversión medido por Google, $135K en todo el año. Solo el Día de las Madres sumó 155 conversiones a $3.06 cada una."
+  },
+  "steps": {
+    "h2": "Lo primero que haríamos en Brickell y Downtown",
     "items": [
-      { "client": "Shimuja Ramen", "where": "Downtown Miami", "service": "Redes sociales", "result": "15.4M de vistas en redes", "body": "Un ramen que nació en Southwest Ranches, hizo un pop-up en Baby Jane en Brickell y hoy sirve en el food hall Julia & Henry's, sobre Flagler St.", "href": "/es/casos-de-exito#shimuja-ramen" },
-      { "client": "Rusty Pelican Miami", "where": "Key Biscayne", "service": "Google Ads", "result": "Retorno de 7 a 1 en anuncios", "body": "Comida frente al agua, al otro lado del Rickenbacker Causeway. En 2025, Google Ads generó 1,007 conversiones por un valor de $135K a $18.95 cada una, incluidas 155 el Día de las Madres a $3.06 cada una.", "href": "/es/casos-de-exito#rusty-pelican" }
+      {"title": "Elige el turno que quieres ganar", "bodyHtml": "Almuerzo entre semana o happy hour, escogido a propósito. Luego la actualización en Google, la publicación y el anuncio correctos salen a la hora correcta, en vez de un feed genérico."},
+      {"title": "Gana la decisión de cinco minutos", "bodyHtml": "Aquí la gente escoge minutos antes de entrar. Ajustamos tu perfil de Google, tus fotos y tus reseñas, y dejamos la reserva a un toque en un <a href=\"/es/diseno-web-restaurantes\">sitio web rápido y hecho para el celular</a>."},
+      {"title": "Anuncios a pocas cuadras de tu local", "bodyHtml": "<a href=\"/es/publicidad-restaurantes\">Anuncios en Google y Meta</a> dirigidos a las torres de tu zona, en los días y horas que importan, con cada llamada y reserva medida. Es el mismo trabajo detrás del 7 a 1 de Rusty Pelican."}
     ]
   },
-  "plan": {
-    "h2": "Lo que haríamos por un restaurante en Brickell o Downtown",
-    "items": [
-      { "service": "seo", "title": "Aparece en \"cerca de mí\" y en búsquedas de \"Brickell\"", "bodyHtml": "Ajustamos tu perfil de Google, tus categorías, tus fotos y tus reseñas para que salgas cuando alguien cerca busca dónde almorzar, tomar algo o cenar. Nuestro <a href=\"/es/seo-restaurantes\">servicio de SEO y perfil de Google para restaurantes</a> cubre los detalles." },
-      { "service": "social", "title": "Contenido a la altura del skyline", "bodyHtml": "Nuestro equipo graba en tu restaurante y luego publicamos reels y TikToks en español e inglés que muestran la comida, el ambiente y la vista. Mira nuestro <a href=\"/es/marketing-redes-sociales\">servicio de redes sociales y contenido</a>." },
-      { "service": "ads", "title": "Anuncios a la hora del almuerzo y del happy hour", "bodyHtml": "Manejamos <a href=\"/es/publicidad-restaurantes\">anuncios en Google y Meta</a> dirigidos a la gente que está a pocas cuadras, en los días y horas que importan, midiendo cada reserva y cada llamada. Es el mismo trabajo detrás del retorno de 7 a 1 de Rusty Pelican." },
-      { "service": "web", "title": "Una página que reserva con un toque", "bodyHtml": "Si tu menú es un PDF lento o el enlace de reservas falla, la mesa se la lleva el de al lado. Creamos <a href=\"/es/diseno-web-restaurantes\">páginas web para restaurantes</a> a la medida, pensadas para el celular, en español e inglés." }
-    ]
-  },
-  "shoots": {
-    "h2": "Cómo son las grabaciones en Brickell y Downtown",
-    "body": "Vamos a tu local. Nuestro propio equipo graba fotos y videos en tu restaurante, y una sola sesión suele darnos de 4 a 6 semanas de contenido. Planificamos las tomas contigo y trabajamos alrededor del almuerzo y del happy hour para que el servicio no se detenga. Si estás dentro de una torre, un hotel o un centro comercial, revisamos contigo las reglas para grabar antes del día de la sesión."
-  },
-  "pricing": {
-    "h2": "Cuánto cuesta",
-    "bodyHtml": "La mayoría de los restaurantes invierte <strong>entre $1,500 y $5,000 al mes</strong> en un programa coordinado de redes, Google y anuncios. Las páginas web se pagan una sola vez: <strong>$1,500</strong> la Construcción del sitio web o <strong>$2,000</strong> la Construcción web integrada. El manejo de anuncios no tiene contratos a largo plazo. En una llamada gratis te decimos qué necesitas primero."
-  },
+  "pricingHtml": "La mayoría de los restaurantes invierte <strong>entre $1,500 y $5,000 al mes</strong> en un programa coordinado. Las páginas web son un pago único de <strong>$1,500 o $2,000</strong>.",
   "faqs": [
-    { "q": "¿Trabajan con restaurantes en Brickell y Downtown Miami?", "a": "Sí. Somos una agencia de Miami, y nuestro trabajo para Shimuja Ramen en Julia & Henry's, sobre Flagler St, es uno de nuestros casos de éxito. Trabajamos con restaurantes, bares y cafés en todo Brickell y Downtown." },
-    { "q": "¿Pueden llenar un almuerzo flojo o el happy hour?", "a": "Sí. Preparamos actualizaciones en Google, publicaciones y anuncios dirigidos para las horas que quieres llenar, y medimos las llamadas, reservas y pedidos que llegan." },
-    { "q": "¿Manejan Google Ads para restaurantes?", "a": "Sí. Para Rusty Pelican Miami en Key Biscayne, nuestro trabajo de Google Ads en 2025 devolvió unos $7 en valor de conversión por cada $1 invertido, en 1,007 conversiones." },
-    { "q": "¿Crean contenido en español?", "a": "Sí. Nuestro equipo es bilingüe, así que las publicaciones, los anuncios, los menús y las respuestas a reseñas pueden ir en español, en inglés o en los dos." },
-    { "q": "¿Cuánto cuesta el marketing para restaurantes en Brickell?", "a": "La mayoría de los restaurantes invierte entre $1,500 y $5,000 al mes en un programa coordinado. Las páginas web cuestan un pago único de $1,500 o $2,000. En una llamada gratis te damos un número real para tu restaurante." }
+    {"q": "¿Trabajan con restaurantes en Brickell y Downtown Miami?", "a": "Sí. Somos una agencia de Miami, y nuestro trabajo para Shimuja Ramen en Julia & Henry's, sobre Flagler St, es uno de nuestros casos de éxito."},
+    {"q": "¿Pueden llenar un almuerzo flojo o el happy hour?", "a": "Sí. Preparamos actualizaciones en Google, publicaciones y anuncios dirigidos para las horas que quieres llenar, y medimos las llamadas, reservas y pedidos que llegan."},
+    {"q": "¿Manejan Google Ads para restaurantes?", "a": "Sí. Para Rusty Pelican Miami en Key Biscayne, nuestro trabajo de Google Ads en 2025 devolvió unos $7 en valor de conversión por cada $1 invertido, en 1,007 conversiones."},
+    {"q": "¿Crean contenido en español?", "a": "Sí. Nuestro equipo es bilingüe, así que las publicaciones, los anuncios, los menús y las respuestas a reseñas pueden ir en español, en inglés o en los dos."}
   ],
-  "nearby": ["miami-beach", "wynwood", "coral-gables"],
+  "nearby": ["wynwood", "miami-beach"],
   "cta": {
     "h2": "Hablemos de su restaurante en Brickell o Downtown",
-    "body": "Cuéntenos qué turnos quiere más llenos (almuerzo, happy hour o noches de fin de semana) y le mostramos por dónde empezaríamos. Gratis, en español o en inglés, sin compromiso.",
+    "body": "Cuéntenos qué turnos quiere más llenos (almuerzo, happy hour o noches de fin de semana) y le mostramos por dónde empezaríamos. Gratis, en español o en inglés.",
     "button": "Agende una llamada estratégica gratis"
   }
 }

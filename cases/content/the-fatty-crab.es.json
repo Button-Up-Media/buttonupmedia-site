@@ -1,0 +1,59 @@
+{
+  "slug": "the-fatty-crab",
+  "lang": "es",
+  "order": 1,
+  "service": "social",
+  "services": ["social"],
+  "client": "The Fatty Crab",
+  "organizations": ["The Fatty Crab"],
+  "metaTitle": "The Fatty Crab: 21M+ vistas orgánicas | Button Up Media",
+  "metaDescription": "Cómo Button Up Media llevó a The Fatty Crab, en Doral, a más de 21M de vistas orgánicas, 110K+ seguidores y 6.5% de interacción con videos cortos.",
+  "ldHeadline": "The Fatty Crab: más de 21M de vistas orgánicas para un restaurante de mariscos en Doral",
+  "h1": "The Fatty Crab",
+  "h1Sub": "21M+ vistas orgánicas en Doral",
+  "answer": "Manejamos el Instagram y el Facebook orgánico de The Fatty Crab, un seafood boil cajún en Doral. Los videos cortos alrededor de la comida superaron las 21M de vistas.",
+  "descriptor": "Mariscos al estilo cajún (seafood boil)",
+  "area": { "name": "Doral", "detail": "2000 NW 87th Ave", "page": "doral" },
+  "timeframe": "Campaña con influencer de jul. 2023 a mar. 2024",
+  "hero": {
+    "type": "video",
+    "src": "videos/fatty-crab-nola-flavors.mp4",
+    "poster": "/media/cs-fatty-crab-boil.webp",
+    "width": 406,
+    "height": 720,
+    "alt": "Un video corto que Button Up Media hizo para The Fatty Crab: un cliente frente a un seafood boil",
+    "chip": "21M+ vistas"
+  },
+  "card": { "src": "/images/fatty-crab-thumbnail-ayce.avif", "width": 540, "height": 960, "alt": "Un cliente comiendo cangrejo en The Fatty Crab", "value": "21M+", "label": "vistas orgánicas" },
+  "metrics": [
+    { "value": "21M+", "label": "Vistas orgánicas", "meaning": "Orgánico significa sin pagar. La gente vio los videos porque valían la pena, no porque compramos espacio publicitario." },
+    { "value": "110K+", "label": "Seguidores", "meaning": "Un público local al que The Fatty Crab llega gratis cada vez que publica." },
+    { "value": "6.5%", "label": "Tasa de interacción", "meaning": "Qué tan seguido la gente reacciona con likes, comentarios y compartidos. Muestra que el público presta atención y no solo pasa de largo." }
+  ],
+  "situation": {
+    "paragraphs": [
+      "El perfil tenía sobre todo publicaciones estáticas, sin un calendario constante.",
+      "Un seafood boil cajún está hecho para video, y una foto de vez en cuando no mantenía a The Fatty Crab en la mente de la gente."
+    ]
+  },
+  "steps": {
+    "items": [
+      { "title": "Darle un propósito a cada publicación", "bodyHtml": "Cuatro pilares de contenido: la comida, la experiencia, la gente y la cultura." },
+      { "title": "Crear plantillas de video", "bodyHtml": "Formatos cortos que se repiten, para grabar y editar rápido." },
+      { "title": "Publicar cuando el público está conectado", "bodyHtml": "Un calendario ajustado a las horas en que sus seguidores de verdad están en Instagram y Facebook." },
+      { "title": "Que cada texto lleve a una visita", "bodyHtml": "Ganchos, textos y llamados a la acción con un solo objetivo: reservaciones y visitas." },
+      { "title": "Vender la cena a la hora de la cena", "bodyHtml": "Un solo Reel orgánico con tomas de los pedidos empacados y un llamado a “Order on Uber Eats”, publicado en las horas pico de delivery. Generó pedidos en Uber Eats sin presupuesto pagado detrás." },
+      { "title": "Aliarnos con un creador local", "bodyHtml": "De julio 2023 a marzo 2024 trabajamos con un creador de contenido gastronómico con una audiencia fuerte en Miami y el Sur de Florida. Planificamos juntos los videos alrededor de los platos estrella, el ambiente y el equipo, publicamos en los horarios de mayor descubrimiento en Instagram y TikTok, y lo reforzamos con reposts, menciones en historias y manejo de comunidad." }
+    ]
+  },
+  "results": {
+    "points": [
+      "Uno de nuestros Reels de The Fatty Crab, armado alrededor de un gancho que detiene el scroll, pasó de 1.2M de vistas por sí solo.",
+      "La campaña con influencer trajo una ola de seguidores nuevos, y más clientes mencionaban los videos del creador al llegar."
+    ]
+  },
+  "quote": null,
+  "links": [
+    { "href": "/es/marketing-redes-sociales", "text": "Marketing de redes sociales para restaurantes" }
+  ]
+}

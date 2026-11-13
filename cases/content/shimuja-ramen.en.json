@@ -1,0 +1,60 @@
+{
+  "slug": "shimuja-ramen",
+  "lang": "en",
+  "order": 3,
+  "service": "social",
+  "services": ["social"],
+  "client": "Shimuja Ramen",
+  "organizations": ["Shimuja Ramen"],
+  "metaTitle": "Shimuja Ramen Case Study: 15.4M Views | Button Up Media",
+  "metaDescription": "How Button Up Media's social media marketing helped Shimuja Ramen reach 15.4M views while the shop moved from Southwest Ranches to downtown Miami.",
+  "ldHeadline": "Shimuja Ramen: 15.4M social media views for a downtown Miami ramen shop",
+  "h1": "Shimuja Ramen",
+  "h1Sub": "15.4M social views in downtown Miami",
+  "answer": "Shimuja Ramen serves at Julia & Henry's food hall in downtown Miami. Our short videos put the ramen first and reached 15.4M social views.",
+  "descriptor": "Ramen shop",
+  "area": { "name": "Downtown Miami", "detail": "Julia & Henry's, 200 E Flagler St", "page": "brickell" },
+  "timeframe": "About 4 years, by Chef Kei's count",
+  "hero": {
+    "type": "image",
+    "src": "/media/cs-shimuja-hero.webp",
+    "width": 540,
+    "height": 960,
+    "alt": "Chef Kei, owner of Shimuja Ramen, at his restaurant",
+    "chip": "15.4M views"
+  },
+  "card": { "src": "/media/cs-shimuja-hero.webp", "width": 540, "height": 960, "alt": "Chef Kei, owner of Shimuja Ramen", "value": "15.4M", "label": "social views" },
+  "metrics": [
+    { "value": "15.4M", "label": "Social media views", "meaning": "Each view is a chance for someone nearby to find the shop and come try a bowl." },
+    { "value": "4 years", "label": "Working together", "meaning": "By Chef Kei's count. Social media pays off when it runs month after month, not in one short burst." },
+    { "value": "4", "label": "Homes so far", "meaning": "Southwest Ranches, pop-ups at Baby Jane in Brickell and in Sunset Harbour, and now Julia & Henry's." }
+  ],
+  "situation": {
+    "paragraphs": [
+      "Shimuja has moved more than once. It started in Southwest Ranches in Broward, ran pop-ups at Baby Jane in Brickell and at Sunset Harbour in Miami Beach, and now serves ramen at Julia & Henry's in downtown Miami.",
+      "Every move means telling regulars where to find you and winning over a new neighborhood."
+    ]
+  },
+  "steps": {
+    "items": [
+      { "title": "Put the ramen front and center", "bodyHtml": "Short-form video with the bowls as the star." },
+      { "title": "Aim every video at the counter", "bodyHtml": "One goal: getting people from the feed to a seat at Shimuja." },
+      { "title": "Stay with it", "bodyHtml": "Social media marketing for the long run, about four years by Chef Kei's count." }
+    ]
+  },
+  "results": {
+    "points": [
+      "Chef Kei sees it at the counter: in his words, a lot of the customers who come try his ramen come directly from our social media marketing."
+    ]
+  },
+  "quote": {
+    "text": "I can see a lot of customers that come try my ramen come directly from the social media marketing Button Up has done for me, and I'm very grateful for what they've done for Shimuja in the 4 years we've been working with them.",
+    "name": "Keiichi Maemure (Chef Kei)",
+    "role": "Owner, Shimuja Ramen",
+    "reviewNote": "the site spells Chef Kei's surname both “Maemure” (social media and grader pages) and “Maemura” (contact page). Confirm which is correct.",
+    "video": { "src": "videos/testimonial-shimuja-short.mp4", "poster": "/media/cs-shimuja-chef-kei.webp", "width": 540, "height": 960, "playLabel": "Play Chef Kei's video testimonial, with sound" }
+  },
+  "links": [
+    { "href": "/socialmediamarketing", "text": "Restaurant social media marketing" }
+  ]
+}

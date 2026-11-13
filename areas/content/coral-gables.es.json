@@ -7,129 +7,65 @@
   "eyebrow": "Coral Gables, Miami-Dade",
   "h1": "Marketing para restaurantes en Coral Gables",
   "answer": "Button Up Media, agencia de marketing para restaurantes en Miami, ayuda a los restaurantes de Coral Gables a llenar almuerzos y cenas con contenido pulido, Google y anuncios bilingües.",
-  "heroSub": "En el Gables, tu fachada se mantiene discreta por diseño. Tus fotos, tus reseñas y tu perfil de Google tienen que hablar por ti.",
-  "market": {
-    "h2": "Por qué el Gables es diferente",
-    "paragraphsHtml": [
-      "Coral Gables se planificó como “The City Beautiful”, y todavía funciona así. Una Junta de Arquitectos revisa cómo se ven los edificios y los letreros se mantienen discretos, así que no puedes ganarle al restaurante de al lado con un letrero más grande. La mayoría de los clientes nuevos te encuentran primero en internet y después entran por la puerta.",
-      "Además, atiendes a varios públicos el mismo día: almuerzos con clientes del corredor de oficinas de Ponce de Leon Boulevard, residentes que planifican una cita o una celebración, y visitantes del Biltmore y de la Universidad de Miami que no conocen la zona. Cada grupo busca de forma distinta, y muchos de tus clientes buscan, leen reseñas y deciden en español.",
-      "Las expectativas son altas. Aquí los comensales te comparan con restaurantes que llevan décadas construyendo su reputación, así que una foto borrosa de celular o un perfil lleno de reseñas viejas te baja de categoría sin que nadie lo diga, aunque tu cocina esté a la altura."
-    ],
-    "facts": [
-      {
-        "label": "Apodo",
-        "value": "The City Beautiful"
-      },
-      {
-        "label": "Incorporación",
-        "value": "1925"
-      },
-      {
-        "label": "Calles gastronómicas",
-        "value": "Miracle Mile, Giralda Avenue"
-      },
-      {
-        "label": "Revisión de diseño",
-        "value": "Junta de Arquitectos"
-      }
-    ]
+  "card": {
+    "insight": "Los letreros son discretos por diseño, así que tus fotos, tus reseñas y tu perfil de Google tienen que hablar por ti.",
+    "proofLine": "Cerca: Brewing Buddha en Pinecrest, 40M de vistas orgánicas"
   },
-  "needs": {
-    "h2": "Lo que más necesita un restaurante en Coral Gables",
-    "items": [
-      {
-        "title": "Fotos que se vean tan bien como tu salón",
-        "body": "Aquí tus imágenes cargan con tu marca, porque tu fachada no puede. Comida, salón y servicio fotografiados de forma profesional y consistentes en Google, Instagram y tu sitio web, para que los clientes vean el mismo restaurante dondequiera que te busquen."
-      },
-      {
-        "title": "Un perfil de Google completo y reseñas recientes",
-        "body": "Categorías correctas, horario y menú al día, un enlace de reservas que funcione y reseñas recientes respondidas en el idioma de cada cliente. Para un restaurante de alto nivel, una página de reseñas recientes y detalladas muchas veces define la elección."
-      },
-      {
-        "title": "Reservas rápidas para el público del almuerzo",
-        "body": "Los almuerzos de oficina se deciden rápido. Un menú claro en internet y una reserva o solicitud de salón privado que tome segundos en el teléfono se ganan la mesa antes que la competencia."
-      },
-      {
-        "title": "Inglés y español, escritos como alguien de aquí",
-        "body": "Un perfil y unas redes que solo hablan inglés pierden una parte grande de tu propio vecindario. Los dos idiomas deben sonar naturales, no traducidos a última hora."
-      }
+  "heroMedia": {
+    "type": "testimonial",
+    "video": "/videos/testimonial-brewing-buddha-v2.mp4",
+    "poster": "/media/area-poster-brewing-buddha-testimonial.webp",
+    "width": 540,
+    "height": 960,
+    "focus": "50% 20%",
+    "alt": "Jordan, dueño de Brewing Buddha en Pinecrest, habla de su trabajo con Button Up Media",
+    "kicker": "Cerca, en Pinecrest",
+    "tag": "Jordan, Brewing Buddha Cafe & Arthouse",
+    "play": "Vea a Jordan (1 min)"
+  },
+  "snapshot": {
+    "h2": "En el Gables, tus fotos hablan por ti",
+    "facts": [
+      {"label": "Apodo", "value": "The City Beautiful"},
+      {"label": "Calles gastronómicas", "value": "Miracle Mile, Giralda Avenue"},
+      {"label": "Revisión de diseño", "value": "Junta de Arquitectos"}
+    ],
+    "paragraphsHtml": [
+      "Coral Gables se planificó como \"The City Beautiful\", y una Junta de Arquitectos todavía revisa cómo se ven los edificios y los letreros. No puedes ganarle al restaurante de al lado con un letrero más grande, así que la mayoría de los clientes nuevos te encuentran primero en internet.",
+      "Un mismo día puede traer almuerzos de negocios de las oficinas de Ponce de Leon Boulevard, residentes que planifican una celebración y visitantes del Biltmore y de la Universidad de Miami. Las expectativas son altas, y muchos clientes buscan y deciden en español."
     ]
   },
   "proof": {
-    "h2": "Trabajo cerca del Gables",
+    "h2": "Resultados cerca, en Pinecrest",
+    "case": "brewing-buddha",
+    "relation": "Cerca, en Pinecrest",
+    "client": "Brewing Buddha Cafe & Arthouse",
+    "where": "SW 124th St, Pinecrest",
+    "service": "Redes orgánicas",
+    "stat": "40M",
+    "statLabel": "de vistas orgánicas en redes",
+    "chips": ["Video destacado: el butter coffee"],
+    "bodyHtml": "Una cafetería y espacio de arte justo al sur del Gables, conocida por sus lattes creativos. Su contenido ha sumado 40M de vistas orgánicas, con un video de butter coffee de febrero de 2025 a la cabeza."
+  },
+  "steps": {
+    "h2": "Lo primero que haríamos en Coral Gables",
     "items": [
-      {
-        "client": "Brewing Buddha Cafe & Arthouse",
-        "where": "Pinecrest, cerca de Coral Gables",
-        "service": "Redes sociales orgánicas",
-        "result": "40M de vistas orgánicas",
-        "body": "Una cafetería y espacio de arte en la cercana Pinecrest, conocida por sus lattes creativos. Su contenido, incluido un video destacado de su butter coffee, ha sumado 40M de vistas orgánicas.",
-        "href": "/es/casos-de-exito#brewing-buddha"
-      }
+      {"title": "Fotos que se vean tan bien como tu salón", "bodyHtml": "Comida, salón y servicio fotografiados por nuestro equipo y consistentes en Google, Instagram y tu sitio web. Los platos suelen grabarse antes de abrir. Mira nuestro <a href=\"/es/marketing-redes-sociales\">servicio de contenido</a>."},
+      {"title": "Un perfil de Google completo y con reseñas recientes", "bodyHtml": "Categorías correctas, menú al día, un enlace de reservas que funcione y reseñas recientes respondidas en el idioma de cada cliente, con nuestro <a href=\"/es/seo-restaurantes\">servicio de Perfil de Empresa de Google</a>."},
+      {"title": "Que reservar el almuerzo tome segundos", "bodyHtml": "Los almuerzos de oficina se deciden rápido. Un menú claro y una reserva o solicitud de salón privado que funcione con un toque en el teléfono se ganan la mesa primero."}
     ]
   },
-  "plan": {
-    "h2": "Lo que haríamos por un restaurante en Coral Gables",
-    "items": [
-      {
-        "service": "social",
-        "title": "Contenido pulido, con constancia",
-        "bodyHtml": "Fotografiamos y grabamos tu comida, tu salón y tu servicio en el local, y mantenemos tu Instagram y TikTok al día con publicaciones que reflejan la experiencia que construiste. Así funciona nuestro servicio de <a href=\"/es/marketing-redes-sociales\">redes sociales y contenido para restaurantes</a>."
-      },
-      {
-        "service": "seo",
-        "title": "Perfil de Google y reseñas",
-        "bodyHtml": "Arreglamos tu Perfil de Empresa de Google, lo mantenemos activo y respondemos reseñas en inglés y español, para que aparezcas en búsquedas como “cena en Coral Gables”. Es el centro de nuestro trabajo de <a href=\"/es/seo-restaurantes\">SEO para restaurantes y Perfil de Empresa de Google</a>."
-      },
-      {
-        "service": "web",
-        "title": "Un sitio web tan refinado como tu salón",
-        "bodyHtml": "Un sitio programado a medida, bilingüe y pensado primero para el celular, con tu menú, tu historia y las reservas integradas, para que un residente o un visitante reserve en pocos toques. Mira nuestro <a href=\"/es/diseno-web-restaurantes\">diseño web para restaurantes</a>."
-      },
-      {
-        "service": "ads",
-        "title": "Anuncios para almuerzos, celebraciones y eventos privados",
-        "bodyHtml": "Google Ads llega a la gente que busca cerca en ese momento, y Meta llega a los residentes que planifican un aniversario o un evento, todo medido en llamadas, reservas y solicitudes. Para un restaurante emblemático frente al agua, una campaña de búsqueda para eventos privados rindió 72:1 sobre la inversión en anuncios de mayo a diciembre de 2025. Así funciona nuestra <a href=\"/es/publicidad-restaurantes\">publicidad para restaurantes en Google y Meta</a>."
-      }
-    ]
-  },
-  "shoots": {
-    "h2": "Cómo funcionan las sesiones en Coral Gables",
-    "body": "Vamos a tu restaurante y grabamos ahí, en horarios que respetan el almuerzo y la cena para que el servicio siga normal. Los platos casi siempre se capturan antes de abrir, y el salón cuando la luz lo favorece. El mismo equipo interno que planifica tu contenido es el que lo graba, y una sola sesión suele dar de 4 a 6 semanas de contenido para todas tus plataformas. Todo empieza con una llamada estratégica con Juan Hernandez, nuestro fundador, para que la sesión cubra lo que de verdad les importa a tus clientes."
-  },
-  "pricing": {
-    "h2": "Cuánto cuesta",
-    "bodyHtml": "La mayoría de los restaurantes invierte entre $1,500 y $5,000 al mes en un programa coordinado de contenido, Google y anuncios. Si primero hay que arreglar tu sitio, una construcción a medida es un pago único de $1,500 (Construcción del sitio web) o $2,000 (Construcción web integrada, que suma la sincronización del menú con el POS, reservas y pedidos). La gestión de anuncios no tiene contratos a largo plazo. Para ver cómo te comparas con los restaurantes cercanos antes de gastar nada, usa el <a href=\"/es/analizador-redes-sociales-web\">Analizador Gratis de Redes Sociales y Sitio Web</a>."
-  },
+  "pricingHtml": "La mayoría de los restaurantes invierte <strong>entre $1,500 y $5,000 al mes</strong> en un programa coordinado. Las páginas web son un pago único de <strong>$1,500 o $2,000</strong>.",
   "faqs": [
-    {
-      "q": "¿Trabajan con restaurantes en Coral Gables?",
-      "a": "Sí. Trabajamos con restaurantes, bares y cafés en todo Miami-Dade. Entre nuestro trabajo cercano está Brewing Buddha, en Pinecrest, que puedes ver en nuestros casos de éxito."
-    },
-    {
-      "q": "¿Pueden grabar sin interrumpir el almuerzo?",
-      "a": "Sí. Las sesiones se agendan alrededor de tu servicio, y la mayor parte del contenido de comida y bebida se graba antes de abrir."
-    },
-    {
-      "q": "¿Pueden responder reseñas en español?",
-      "a": "Sí. Nuestro equipo es bilingüe, así que las respuestas a reseñas, los textos, los anuncios y tu sitio web pueden ir en inglés, en español o en los dos."
-    },
-    {
-      "q": "¿Pueden ayudarnos a conseguir más eventos privados?",
-      "a": "Sí. Hacemos campañas de Google Ads enfocadas en solicitudes de eventos privados y reservas, con seguimiento de conversiones para que veas cuánto cuesta cada solicitud."
-    },
-    {
-      "q": "¿Cuánto cuesta?",
-      "a": "La mayoría de los restaurantes invierte entre $1,500 y $5,000 al mes en un programa coordinado. Un sitio web es un pago único de $1,500 o $2,000."
-    }
+    {"q": "¿Trabajan con restaurantes en Coral Gables?", "a": "Sí. Trabajamos con restaurantes, bares y cafés en todo Miami-Dade. Nuestro caso de éxito más cercano es Brewing Buddha, en la cercana Pinecrest."},
+    {"q": "¿Pueden grabar sin interrumpir el almuerzo?", "a": "Sí. Las sesiones se agendan alrededor de tu servicio, y la mayor parte del contenido de comida y bebida se graba antes de abrir."},
+    {"q": "¿Pueden responder reseñas en español?", "a": "Sí. Nuestro equipo es bilingüe, así que las respuestas a reseñas, los textos, los anuncios y tu sitio web pueden ir en inglés, en español o en los dos."},
+    {"q": "¿Pueden ayudarnos a conseguir más eventos privados?", "a": "Sí. Hacemos campañas de Google Ads enfocadas en solicitudes de eventos privados y reservas, con seguimiento de conversiones para que veas cuánto cuesta cada solicitud."}
   ],
-  "nearby": [
-    "brickell",
-    "doral"
-  ],
+  "nearby": ["doral", "brickell"],
   "cta": {
     "h2": "¿Quiere que el Gables lo encuentre primero?",
-    "body": "Agende una llamada estratégica gratis con Juan. Revisaremos cómo aparece su restaurante en internet hoy y le diremos qué arreglaríamos primero.",
+    "body": "Juan revisará cómo aparece su restaurante en internet hoy y le dirá qué arreglaríamos primero. Gratis, en español o en inglés.",
     "button": "Agende una llamada estratégica gratis"
   }
 }

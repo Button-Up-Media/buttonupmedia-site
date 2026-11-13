@@ -1,0 +1,95 @@
+{
+  "slug": "tonis-sushi-bar",
+  "lang": "es",
+  "order": 4,
+  "service": "social",
+  "services": [
+    "social"
+  ],
+  "client": "Toni's Sushi Bar",
+  "organizations": [
+    "Toni's Sushi Bar"
+  ],
+  "metaTitle": "Toni's Sushi Bar: caso de redes sociales | Button Up Media",
+  "metaDescription": "Cómo Button Up Media graba videos cortos con el chef de Toni's Sushi Bar, un sushi bar familiar en South Beach desde 1987, para Instagram y más en Miami Beach.",
+  "ldHeadline": "Toni's Sushi Bar: videos para redes sociales con el chef de un sushi bar de South Beach",
+  "h1": "Toni's Sushi Bar",
+  "h1Sub": "Videos cortos con el chef en South Beach",
+  "answer": "Toni's Sushi Bar es un negocio familiar en South Beach desde 1987. Convertimos a su chef de sushi en la estrella de videos cortos hechos para Instagram.",
+  "descriptor": "Sushi bar familiar desde 1987",
+  "area": {
+    "name": "South Beach, Miami Beach",
+    "detail": "1208 Washington Ave",
+    "page": "miami-beach"
+  },
+  "timeframe": "Cliente reciente",
+  "timeframeReviewNote": "confirm the month Toni's started with us.",
+  "hero": {
+    "type": "graphic",
+    "kicker": "South Beach · Desde 1987",
+    "name": "Toni's",
+    "sub": "Sushi Bar",
+    "big": "79.4K",
+    "bigLabel": "seguidores en Instagram",
+    "handle": "@tonissushi",
+    "reviewNote": "Toni's has no photo or video in the repo yet. Send one vertical chef-led clip (MP4) to use here and on the case studies page."
+  },
+  "card": {
+    "value": "79.4K",
+    "label": "seguidores en Instagram",
+    "place": "South Beach"
+  },
+  "metrics": [
+    {
+      "value": "79.4K",
+      "label": "Seguidores en Instagram",
+      "meaning": "Esa es la gente que sigue a @tonissushi, así que cada video nuevo les llega a su feed. Contados el 13 de nov. de 2026."
+    },
+    {
+      "value": "1.3M+",
+      "label": "Vistas en un solo Reel",
+      "meaning": "Un video corto se vio más de 1.3 millones de veces, mucho más allá de quienes ya siguen la cuenta.",
+      "reviewNote": "confirm the 1.3M+ Reel (and the 141K one mentioned below) are videos we made."
+    },
+    {
+      "value": "60M",
+      "label": "Vistas desde que empezamos, todas las plataformas (aprox.)",
+      "meaning": "Todas las plataformas donde corren los videos, sumadas. Incluye un video que llegó a unos 50M de vistas por sí solo.",
+      "reviewNote": "this is owner-reported. Confirm the exact all-platform total (about 60M), which platforms it covers, and send the link to the roughly 50M-view video and its platform."
+    }
+  ],
+  "situation": {
+    "paragraphs": [
+      "Toni's es un negocio familiar en South Beach desde 1987, cuando Hiromi “Toni” Takarada lo abrió, según Miami New Times.",
+      "Un lugar con esa trayectoria ya tiene la comida y una historia que contar. El reto es ponerlas frente a la gente que hoy decide dónde comer mientras desliza videos cortos."
+    ]
+  },
+  "steps": {
+    "items": [
+      {
+        "title": "Convertir al chef de sushi en la estrella",
+        "bodyHtml": "Él es la personalidad frente a la cámara, así que cada video se siente como sentarse en la barra."
+      },
+      {
+        "title": "Grabar los primeros planos que abren el apetito",
+        "bodyHtml": "El trabajo con el cuchillo y el nigiri, bien de cerca."
+      },
+      {
+        "title": "Escribir ganchos como la gente desliza",
+        "bodyHtml": "Frases como “POV: you find the best sushi spot on South Beach” (algo así como “POV: encuentras el mejor sushi de South Beach”) le dan a la gente una razón para detenerse y mirar."
+      }
+    ]
+  },
+  "results": {
+    "points": [
+      "Otro Reel de @tonissushi pasó de 141K vistas."
+    ]
+  },
+  "quote": null,
+  "links": [
+    {
+      "href": "/es/marketing-redes-sociales",
+      "text": "Marketing de redes sociales para restaurantes"
+    }
+  ]
+}

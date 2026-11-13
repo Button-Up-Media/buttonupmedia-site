@@ -1,29 +1,53 @@
-// Area page generator for Button Up Media.
-// Renders the "Restaurant marketing in {area}" service pages from JSON content:
-//   EN  /restaurant-marketing-{id}          -> outDir/areas/{id}.html
-//   ES  /es/marketing-restaurantes-{id}     -> outDir/areas-es/{id}.html
+// Area pages generator for Button Up Media.
+// Renders, from areas/content/*.json:
+//   the hub      EN /areas-we-serve                    -> outDir/areas-we-serve.html
+//                ES /es/zonas-que-atendemos             -> outDir/areas-es/index.html
+//   area briefs  EN /restaurant-marketing-{id}          -> outDir/areas/{id}.html
+//                ES /es/marketing-restaurantes-{id}     -> outDir/areas-es/{id}.html
 // and returns sitemap <url> entries for every page it rendered.
-// Source of truth: areas/content/{id}.{en|es}.json (shape documented below).
+//
 // Page chrome (consent mode, GTM, fonts, lucide, nav, footer, shared.js) is read
 // from about.html / about-es.html at build time, so these pages always match the
-// live site; relative asset paths in that chrome are made absolute because area
+// live site; relative asset paths in that chrome are made absolute because these
 // pages are served at clean and nested URLs.
 //
-// Content shape (keys ending in Html may contain <a>, <strong>, <em>; all other
-// strings are plain text and get HTML-escaped):
-// { id, lang, areaName, metaTitle, metaDescription, eyebrow, h1, answer, heroSub,
-//   market: { h2, paragraphsHtml: [], facts?: [{ label, value }] },
-//   needs: { h2, items: [{ title, body }] },
-//   proof: { h2, items: [{ client, where, service, result, body, href }] },
-//   plan: { h2, items: [{ service: social|web|ads|seo, title, bodyHtml }] },
-//   shoots: { h2, body }, pricing: { h2, bodyHtml },
-//   faqs: [{ q, a }], nearby: [areaId], cta: { h2, body, button } }
-// Optional on proof/plan/needs items, facts, market, shoots and pricing:
-//   "reviewNote": "what the owner must confirm"  -> renders an
-//   <aside class="review-note"> next to that block (never in JSON-LD). Delete the
-//   key before launch to remove the note.
+// ---------------------------------------------------------------------------
+// Content shapes. Keys ending in Html may contain <a>, <strong>, <em> only; all
+// other strings are plain text and get HTML-escaped.
+//
+// Area brief: areas/content/{id}.{en|es}.json
+// { id, lang, areaName, shortName?, metaTitle, metaDescription, eyebrow, h1, answer,
+//   card: { insight, proofLine },                 // hub card + map panel
+//   heroMedia: {
+//     type: "loop" | "testimonial" | "graphic",
+//     video?, poster?, width?, height?, focus?,    // loop + testimonial
+//     alt, kicker, tag, play?,                     // play = testimonial button text
+//     graphic?: { handle, hook?, hookLabel?, big, bigLabel, rows: [{ value, label }], asOf },
+//     reviewNote? },
+//   snapshot: { h2, facts: [{ label, value }] x3, paragraphsHtml: [] x2 },
+//   proof: { h2, case, relation, client, where, service, stat, statLabel,
+//            chips?: [], bodyHtml, reviewNote? },
+//   steps: { h2, items: [{ title, bodyHtml }] x3 },
+//   pricingHtml,
+//   faqs: [{ q, a }] x3-4,                         // visible + FAQPage schema
+//   faqH2?,
+//   nearby: [areaId, areaId],
+//   cta: { h2, body, button } }
+//
+// Hub: areas/content/hub.{en|es}.json
+// { id: "hub", lang, metaTitle, metaDescription, eyebrow, h1, answer,
+//   mapAria, mapHint, legend: { area, stop, scale }, county: { north, south },
+//   listLabel?, listH2, listSub,
+//   stops: [{ case, name, mapLabel?, where, area, line }],
+//   cta: { h2, body, button } }
+//
+// "reviewNote": "what the owner must confirm" renders an
+// <aside class="review-note"> next to that block (never in JSON-LD). Delete the
+// key before launch to remove the note.
+// ---------------------------------------------------------------------------
 
 import { readFile, writeFile, mkdir, readdir } from 'fs/promises';
+import { existsSync } from 'fs';
 import path from 'path';
 
 const BASE = 'https://www.buttonupmedia.com';
@@ -31,14 +55,18 @@ const ORG_ID = `${BASE}/#organization`;
 const PHONE = '+17867409499';
 const PHONE_DISPLAY = '(786) 740-9499';
 const OG_IMAGE = `${BASE}/media/founders-duo.webp`;
-const HERO_IMG = { src: '/media/bts-shoot-optimized.avif', width: 1080, height: 1440 };
 const HOST_IMG = { src: '/media/author-juan.webp', width: 512, height: 512 };
+
+const AREA_IDS = ['fort-lauderdale', 'miami-beach', 'wynwood', 'doral', 'brickell', 'coral-gables']; // north to south
+const CASE_SLUGS = ['tonis-sushi-bar', 'the-fatty-crab', 'brewing-buddha', 'shimuja-ramen', 'rusty-pelican'];
 
 export const areaPath = (id, lang) => (lang === 'es' ? `/es/marketing-restaurantes-${id}` : `/restaurant-marketing-${id}`);
 export const areaUrl = (id, lang) => `${BASE}${areaPath(id, lang)}`;
+export const hubPath = (lang) => (lang === 'es' ? '/es/zonas-que-atendemos' : '/areas-we-serve');
+export const hubUrl = (lang) => `${BASE}${hubPath(lang)}`;
+export const casePath = (slug, lang) => (lang === 'es' ? `/es/casos-de-exito/${slug}` : `/case-studies/${slug}`);
 
-// Internal URLs a content file may link to (SPEC.md URL list). Anything else is
-// reported as a lint warning.
+// Internal URLs a content file may link to (SPEC.md URL list + case pages + hub).
 const ALLOWED_PATHS = new Set([
   '/socialmediamarketing', '/es/marketing-redes-sociales',
   '/restaurant-website-design', '/es/diseno-web-restaurantes',
@@ -47,84 +75,99 @@ const ALLOWED_PATHS = new Set([
   '/case-studies', '/es/casos-de-exito',
   '/social-media-website-grader', '/es/analizador-redes-sociales-web',
   '/about', '/es/nosotros', '/contact', '/es/contacto', '/blog', '/es/blog',
+  hubPath('en'), hubPath('es'),
 ]);
-const AREA_IDS = ['miami-beach', 'brickell', 'wynwood', 'coral-gables', 'doral', 'fort-lauderdale'];
 for (const id of AREA_IDS) { ALLOWED_PATHS.add(areaPath(id, 'en')); ALLOWED_PATHS.add(areaPath(id, 'es')); }
-
-// When an area has no real proof of its own, show the closest relevant case study.
-const FALLBACK_CASE = {
-  wynwood: 'shimuja-ramen',
-  'fort-lauderdale': 'shimuja-ramen',
-  doral: 'the-fatty-crab',
-  'miami-beach': 'tonis-sushi-bar',
-  brickell: 'shimuja-ramen',
-  'coral-gables': 'brewing-buddha',
-};
-const CASES = {
-  'the-fatty-crab': {
-    en: { client: 'The Fatty Crab', where: 'Doral', service: 'Organic social', result: '21M+ organic views', body: 'A Cajun seafood boil spot on NW 87th Ave. Organic Instagram and Facebook content built 110K+ followers at 6.5% engagement.' },
-    es: { client: 'The Fatty Crab', where: 'Doral', service: 'Redes orgánicas', result: '21M+ vistas orgánicas', body: 'Un restaurante de mariscos cajún en la NW 87th Ave. El contenido orgánico en Instagram y Facebook sumó más de 110K seguidores con 6.5% de interacción.' },
-  },
-  'shimuja-ramen': {
-    en: { client: 'Shimuja Ramen', where: 'Downtown Miami', service: 'Social media', result: '15.4M social views', body: 'A ramen shop that started in Southwest Ranches, ran pop-ups at Baby Jane in Brickell and in Sunset Harbour, and now serves at Julia & Henry\'s food hall.' },
-    es: { client: 'Shimuja Ramen', where: 'Downtown Miami', service: 'Redes sociales', result: '15.4M de vistas en redes', body: 'Un ramen que nació en Southwest Ranches, hizo pop-ups en Baby Jane en Brickell y en Sunset Harbour, y hoy sirve en el food hall Julia & Henry\'s.' },
-  },
-  'tonis-sushi-bar': {
-    en: { client: 'Toni\'s Sushi Bar', where: 'South Beach', service: 'Social media', result: 'Chef-led short video', body: 'A family-run sushi bar on Washington Ave since 1987, where the sushi chef is the on-camera star.' },
-    es: { client: 'Toni\'s Sushi Bar', where: 'South Beach', service: 'Redes sociales', result: 'Videos cortos con el chef', body: 'Un sushi bar familiar en Washington Ave desde 1987, donde el chef de sushi es la estrella frente a la cámara.' },
-  },
-  'brewing-buddha': {
-    en: { client: 'Brewing Buddha', where: 'Pinecrest', service: 'Organic social', result: '40M organic views', body: 'A quirky coffee shop and art space known for creative lattes. Their butter coffee video was a standout.' },
-    es: { client: 'Brewing Buddha', where: 'Pinecrest', service: 'Redes orgánicas', result: '40M de vistas orgánicas', body: 'Una cafetería y galería de arte conocida por sus lattes creativos. Su video del butter coffee fue de los más vistos.' },
-  },
-  'rusty-pelican': {
-    en: { client: 'Rusty Pelican Miami', where: 'Key Biscayne', service: 'Google Ads', result: '7:1 return on ad spend', body: 'A waterfront restaurant on Key Biscayne. In 2025, Google Ads drove 1,007 conversions at $18.95 each.' },
-    es: { client: 'Rusty Pelican Miami', where: 'Key Biscayne', service: 'Google Ads', result: 'Retorno de 7 a 1', body: 'Un restaurante frente al agua en Key Biscayne. En 2025, Google Ads generó 1,007 conversiones a $18.95 cada una.' },
-  },
-};
+for (const s of CASE_SLUGS) { ALLOWED_PATHS.add(casePath(s, 'en')); ALLOWED_PATHS.add(casePath(s, 'es')); }
 
 const T = {
   en: {
     htmlLang: 'en', ogLocale: 'en_US', ogLocaleAlt: 'es_US',
-    home: 'Home', homeUrl: `${BASE}/`, contact: '/contact', grader: '/social-media-website-grader', cases: '/case-studies',
+    home: 'Home', homeUrl: `${BASE}/`, contact: '/contact', grader: '/social-media-website-grader',
+    hubName: 'Areas we serve',
     primary: 'Book a free strategy call', graderBtn: 'Get a free report card',
-    trust: ['Restaurants, bars and cafes only', 'Bilingual: English and Spanish', '5.0 stars on Google'],
-    photoAlt: 'The Button Up Media team filming a content shoot on location at a South Florida restaurant',
-    photoTag: 'Our in-house crew on a shoot',
-    eyebrow: { market: 'The neighborhood', needs: 'What works here', proof: 'Proof', plan: 'The plan', shoots: 'Shoots and meetings', pricing: 'Pricing', faq: 'FAQ' },
-    proofSub: 'Across all our clients: 200M+ organic social views and 50+ restaurants served.',
+    trust: ['Restaurants, bars and cafes only', 'English and Spanish', '5.0 stars on Google'],
+    label: { snapshot: 'Neighborhood snapshot', proof: 'Proof nearby', plan: 'The plan', faq: 'FAQ', others: 'Other areas' },
+    priceKey: 'What it costs',
+    faqH2: (n) => `Questions ${n} owners ask`,
     caseLink: (c) => `Read ${/^the\s/i.test(c) ? '' : 'the '}${c} case study`,
-    closest: 'Closest case study',
-    planLabel: { social: 'Social media & content', web: 'Website', ads: 'Google & Meta ads', seo: 'Local SEO & Google' },
-    faqH2: 'Frequently asked questions',
+    stepAria: (i) => `Step ${i}`,
     host: 'Juan Hernandez, our founder, hosts every strategy call himself.',
     hostAlt: 'Juan Hernandez, founder of Button Up Media',
     call: `Call ${PHONE_DISPLAY}`,
-    nearby: 'Nearby areas we serve', nearbyAria: 'Nearby areas we serve',
+    othersAria: 'Other areas we serve',
+    allAreas: 'All areas we serve',
+    breadcrumbAria: 'Breadcrumb',
     serviceType: 'Restaurant marketing',
+    nearest: 'Nearest work', firstMove: 'First move',
+    readBrief: (n) => `Read the ${n} brief`,
+    closestArea: 'Closest area',
+    clientWhere: (w) => `Client, ${w}`,
+    playing: 'Playing',
   },
   es: {
     htmlLang: 'es', ogLocale: 'es_US', ogLocaleAlt: 'en_US',
-    home: 'Inicio', homeUrl: `${BASE}/es`, contact: '/es/contacto', grader: '/es/analizador-redes-sociales-web', cases: '/es/casos-de-exito',
+    home: 'Inicio', homeUrl: `${BASE}/es`, contact: '/es/contacto', grader: '/es/analizador-redes-sociales-web',
+    hubName: 'Zonas que atendemos',
     primary: 'Agende una llamada estratégica gratis', graderBtn: 'Reciba su reporte gratis',
-    trust: ['Solo restaurantes, bares y cafés', 'Equipo bilingüe: inglés y español', '5.0 estrellas en Google'],
-    photoAlt: 'El equipo de Button Up Media grabando contenido en un restaurante del sur de la Florida',
-    photoTag: 'Nuestro equipo grabando en locación',
-    eyebrow: { market: 'El barrio', needs: 'Lo que funciona aquí', proof: 'Resultados', plan: 'El plan', shoots: 'Grabaciones y reuniones', pricing: 'Precios', faq: 'Preguntas' },
-    proofSub: 'Entre todos nuestros clientes: más de 200M de vistas orgánicas en redes y más de 50 restaurantes atendidos.',
+    trust: ['Solo restaurantes, bares y cafés', 'Inglés y español', '5.0 estrellas en Google'],
+    label: { snapshot: 'El barrio de un vistazo', proof: 'Resultados cerca', plan: 'El plan', faq: 'Preguntas', others: 'Otras zonas' },
+    priceKey: 'Cuánto cuesta',
+    faqH2: (n) => `Preguntas de dueños en ${n}`,
     caseLink: (c) => `Ver el caso de ${c}`,
-    closest: 'El caso de éxito más cercano',
-    planLabel: { social: 'Redes sociales y contenido', web: 'Página web', ads: 'Anuncios en Google y Meta', seo: 'SEO local y Google' },
-    faqH2: 'Preguntas frecuentes',
+    stepAria: (i) => `Paso ${i}`,
     host: 'Juan Hernandez, nuestro fundador, atiende personalmente cada llamada de estrategia.',
     hostAlt: 'Juan Hernandez, fundador de Button Up Media',
     call: `Llame al ${PHONE_DISPLAY}`,
-    nearby: 'Otras zonas cercanas que atendemos', nearbyAria: 'Otras zonas cercanas que atendemos',
+    othersAria: 'Otras zonas que atendemos',
+    allAreas: 'Todas las zonas que atendemos',
+    breadcrumbAria: 'Ruta de navegación',
     serviceType: 'Marketing para restaurantes',
+    nearest: 'Trabajo más cercano', firstMove: 'Lo primero',
+    readBrief: (n) => `Ver el resumen de ${n}`,
+    closestArea: 'Zona más cercana',
+    clientWhere: (w) => `Cliente, ${w}`,
+    playing: 'Reproduciendo',
   },
 };
 
-const PLAN_ICON = { social: 'camera', web: 'monitor-smartphone', ads: 'megaphone', seo: 'map-pin' };
+// ---------- transit map geometry (design canvas 340 x 470, north up) ----------
+// Schematic, not to scale: relative positions only. Label side: r, l, t, b, tr, br.
+const MAP_W = 340;
+const MAP_H = 470;
+const MAP_AREAS = {
+  'fort-lauderdale': { x: 150, y: 36, side: 'r' },
+  wynwood: { x: 150, y: 160, side: 'br' },
+  doral: { x: 34, y: 160, side: 't' },
+  'miami-beach': { x: 282, y: 160, side: 't' },
+  brickell: { x: 150, y: 296, side: 'l', wrap: true },
+  'coral-gables': { x: 94, y: 374, side: 'l', wrap: true },
+};
+const MAP_STOPS = {
+  'the-fatty-crab': { x: 92, y: 160, side: 'b' },
+  'tonis-sushi-bar': { x: 282, y: 234, side: 'l', wrap: true },
+  'shimuja-ramen': { x: 150, y: 234, side: 'l' },
+  'rusty-pelican': { x: 226, y: 394, side: 'r' },
+  'brewing-buddha': { x: 94, y: 444, side: 'r' },
+};
+// Water (bay + ocean) fades out at the canvas edges; islands sit on top.
+const MAP_SVG = `<svg class="ar-map-svg" viewBox="0 0 ${MAP_W} ${MAP_H}" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="ar-fade-y" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".14" stop-color="#fff"/><stop offset=".86" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+              <linearGradient id="ar-fade-x" x1="0" y1="0" x2="1" y2="0"><stop offset=".78" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+              <mask id="ar-mask-y" maskUnits="userSpaceOnUse" x="0" y="0" width="${MAP_W}" height="${MAP_H}"><rect width="${MAP_W}" height="${MAP_H}" fill="url(#ar-fade-y)"/></mask>
+              <mask id="ar-mask-x" maskUnits="userSpaceOnUse" x="0" y="0" width="${MAP_W}" height="${MAP_H}"><rect width="${MAP_W}" height="${MAP_H}" fill="url(#ar-fade-x)"/></mask>
+            </defs>
+            <g mask="url(#ar-mask-y)"><g mask="url(#ar-mask-x)">
+              <path class="ar-map-water" d="M214 0 L210 70 C206 104 190 118 186 140 L182 200 C180 250 186 290 176 330 C166 372 150 420 130 ${MAP_H} L${MAP_W} ${MAP_H} L${MAP_W} 0 Z"/>
+              <path class="ar-map-coast" d="M214 0 L210 70 C206 104 190 118 186 140 L182 200 C180 250 186 290 176 330 C166 372 150 420 130 ${MAP_H}"/>
+              <path class="ar-map-land" d="M268 0 H300 V196 C300 236 292 256 282 258 C272 256 266 236 266 196 Z"/>
+              <path class="ar-map-land" d="M222 388 C232 378 246 382 252 396 C260 416 258 442 248 454 C240 462 232 456 230 444 C228 428 216 402 222 388 Z"/>
+            </g></g>
+            <path class="ar-map-county" d="M0 98 H205"/>
+            <path class="ar-map-line" d="M150 36 V88 M150 108 V318 L94 374 V444 M34 160 H282 V234 M150 318 L226 394"/>
+            <path class="ar-map-break" d="M141 93 L159 85 M141 111 L159 103"/>
+          </svg>`;
 
 // ---------- escaping ----------
 const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -132,10 +175,21 @@ const escAttr = (s) => esc(s).replace(/"/g, '&quot;');
 const stripTags = (s) => String(s == null ? '' : s).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
 // JSON-LD lives inside <script>; keep "</script>" and friends from closing it early.
 const ldJson = (obj) => JSON.stringify(obj, null, 2).replace(/</g, '\\u003c').replace(/>/g, '\\u003e').replace(/&/g, '\\u0026');
+const pct = (v, total) => `${Math.round((v / total) * 10000) / 100}%`;
 
-const CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
-const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
-const PLUS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
+// ---------- inline icons (no lucide dependency for page content) ----------
+const svg = (body, cls = '') => `<svg${cls ? ` class="${cls}"` : ''} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${body}</svg>`;
+const I = {
+  arrow: svg('<path d="M5 12h14M13 6l6 6-6 6"/>'),
+  check: svg('<polyline points="20 6 9 17 4 12"/>'),
+  pin: svg('<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>'),
+  route: svg('<circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/>'),
+  tag: svg('<path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4Z"/><circle cx="7.5" cy="7.5" r="1.2" fill="currentColor" stroke="none"/>'),
+  plus: svg('<path d="M12 5v14M5 12h14"/>'),
+  play: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.2v13.6L19 12z" fill="currentColor"/></svg>',
+  ig: svg('<rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/>'),
+  tap: svg('<path d="M9 9V4.5a1.5 1.5 0 0 1 3 0V12"/><path d="M12 11.5V10a1.5 1.5 0 0 1 3 0v2"/><path d="M15 12v-1a1.5 1.5 0 0 1 3 0v4.5a6 6 0 0 1-6 6h-.5a6 6 0 0 1-4.8-2.4L4.2 15a1.6 1.6 0 0 1 2.4-2.1L9 15V9"/>'),
+};
 
 // ---------- chrome from about.html / about-es.html ----------
 function absolutize(html) {
@@ -175,140 +229,57 @@ async function loadChrome(root) {
   return { en: extractChrome(en, 'about.html'), es: extractChrome(es, 'about-es.html') };
 }
 
-// ---------- page CSS (one block, .ar- prefixed) ----------
-const PAGE_CSS = `
+// ---------- CSS (one <style> block per page, .ar- prefixed) ----------
+const BASE_CSS = `
     /* ============================================================
-       Area pages ("Restaurant marketing in {area}"). Mobile-first;
-       extends the shared.css dark system. Sections keep left/right
-       padding untouched so even-numbered sections stay full-bleed.
+       Areas hub + neighborhood briefs. Mobile-first, extends the
+       shared.css dark system. Transit-map motif: gold line, ring
+       stations. Sections keep left/right padding untouched so
+       even-numbered sections stay full-bleed.
        ============================================================ */
-    .ar-wrap { width: min(calc(100% - 8px), var(--max)); margin: 0 auto; }
-    .ar-eyebrow { display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-display); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
-    .ar-eyebrow::before { content: ""; width: 20px; height: 1px; background: var(--gold); opacity: 0.7; }
+    .ar-wrap { width: 100%; max-width: var(--max); margin: 0 auto; }
     .ar-gold { color: var(--gold); }
-    .ar-rise { transform: translateY(18px); transition: transform .7s cubic-bezier(.22,1,.36,1); will-change: transform; }
+    .ar-label { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+    .ar-label::before { content: ""; width: 11px; height: 11px; border-radius: 50%; border: 3px solid var(--gold); box-sizing: border-box; flex: none; }
+    .ar-h2 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.035em; font-size: clamp(1.6rem, 4.3vw, 2.5rem); line-height: 1.1; margin-top: 12px; color: var(--text-head); max-width: 24ch; text-wrap: balance; }
+    .ar-sub { margin-top: 12px; color: var(--text-dim); font-size: 1rem; line-height: 1.6; max-width: 60ch; }
+    .ar-btn.btn { height: auto; min-height: 48px; padding: 12px 20px; line-height: 1.25; text-align: center; font-size: 0.95rem; }
+    .ar-btn svg { width: 16px; height: 16px; flex: none; }
+    .ar-dot { width: 13px; height: 13px; border-radius: 50%; border: 3px solid var(--gold); background: var(--bg-0); box-sizing: border-box; flex: none; }
+    .ar-dot.--fill { background: var(--text-head); }
+    .ar-copy-link, .ar-rich a { color: var(--gold); text-decoration: underline; text-decoration-color: rgba(226,168,77,0.45); text-underline-offset: 3px; transition: text-decoration-color .2s; }
+    .ar-copy-link:hover, .ar-rich a:hover { text-decoration-color: var(--gold); }
+    .ar-rich strong { color: var(--text); font-weight: 700; }
+    .ar-rise { transform: translateY(16px); transition: transform .7s cubic-bezier(.22,1,.36,1); }
     .ar-rise.is-in { transform: none; }
     @media (prefers-reduced-motion: reduce) { .ar-rise { transform: none; transition: none; } }
 
-    main.page .ar-sec { --ar-pad: clamp(56px, 7.5vw, 100px); padding-top: var(--ar-pad); padding-bottom: var(--ar-pad); }
-    /* a section followed by an overlay card gets extra room for the 40px overlap */
+    main.page .ar-sec { --ar-pad: clamp(56px, 8vw, 104px); padding-top: var(--ar-pad); padding-bottom: var(--ar-pad); }
     main.page .ar-sec.--lap { padding-bottom: calc(var(--ar-pad) + 40px); }
     main.page .ar-sec.--end { padding-bottom: clamp(40px, 5vw, 64px); }
     main.page .card-overlay.ar-sec { margin-top: -40px; }
-    .ar-h2 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.035em; font-size: clamp(1.7rem, 4.4vw, 2.7rem); line-height: 1.08; margin-top: 12px; color: var(--text-head); max-width: 26ch; text-wrap: balance; }
-    .ar-sec-head { max-width: 64ch; }
-    .ar-sec-sub { margin-top: 14px; color: var(--text-dim); font-size: 1rem; line-height: 1.65; max-width: 60ch; }
-    .ar-prose p { color: var(--text-dim); font-size: 1.03rem; line-height: 1.75; max-width: 66ch; }
-    .ar-prose p + p { margin-top: 1em; }
-    .ar-prose strong, .ar-card strong { color: var(--text); font-weight: 700; }
-    .ar-prose a, .ar-card p a, .ar-panel p a { color: var(--gold); text-decoration: underline; text-decoration-color: rgba(226,168,77,0.4); text-underline-offset: 3px; transition: text-decoration-color .2s; }
-    .ar-prose a:hover, .ar-card p a:hover, .ar-panel p a:hover { text-decoration-color: var(--gold); }
-    .ar-btn.btn { height: auto; min-height: 44px; padding: 11px 20px; line-height: 1.25; text-align: center; }
-    .ar-btn svg { width: 15px; height: 15px; flex: none; }
+    main.page .ar-sec, .ar-acard { scroll-margin-top: 84px; }
 
-    /* ---------- HERO ---------- */
-    main.page .ar-hero { padding-top: 132px; padding-bottom: calc(clamp(40px, 6vw, 72px) + 40px); }
-    .ar-hero-grid { display: grid; grid-template-columns: 1fr; gap: 30px; align-items: center; }
-    .ar-hero .ar-eyebrow svg { width: 13px; height: 13px; }
-    .ar-hero h1 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.045em; font-size: clamp(2.1rem, 5.6vw, 3.7rem); line-height: 1.02; margin-top: 14px; max-width: 17ch; text-wrap: balance; }
-    .ar-lede { margin-top: 16px; max-width: 46ch; font-size: clamp(1.05rem, 2.3vw, 1.24rem); line-height: 1.55; font-weight: 500; color: var(--text); }
-    .ar-hero-sub { margin-top: 10px; max-width: 52ch; font-size: clamp(0.95rem, 1.9vw, 1.03rem); line-height: 1.6; color: var(--text-dim); }
-    .ar-hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
-    .ar-hero-trust { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 22px; }
-    .ar-hero-trust li { display: inline-flex; align-items: center; gap: 8px; font-size: 0.8rem; font-weight: 600; color: var(--text-soft); }
-    .ar-hero-trust svg { width: 15px; height: 15px; color: var(--teal); flex: none; }
-    .ar-hero-photo { position: relative; margin: 0; border-radius: var(--r-xl); overflow: hidden; border: 1px solid var(--line-soft); box-shadow: 0 30px 70px rgba(0,0,0,0.5); aspect-ratio: 16 / 11; background: var(--bg-2); }
-    .ar-hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; display: block; }
-    .ar-hero-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(8,8,8,0.6)); pointer-events: none; }
-    .ar-photo-tag { position: absolute; left: 14px; bottom: 13px; z-index: 2; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: rgba(10,10,10,0.6); backdrop-filter: blur(8px); border: 1px solid var(--line); font-size: 0.72rem; font-weight: 600; color: var(--text); }
-    .ar-photo-tag .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+    .ar-ctas { display: flex; flex-wrap: wrap; gap: 10px 12px; margin-top: 22px; }
+    .ar-trust { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 18px 0 0; padding: 0; }
+    .ar-trust li { display: inline-flex; align-items: center; gap: 7px; font-size: 0.8125rem; font-weight: 600; color: var(--text-dim); }
+    .ar-trust svg { width: 14px; height: 14px; color: var(--teal); flex: none; }
+    .ar-lede { margin-top: 16px; max-width: 46ch; font-size: clamp(1.06rem, 2.2vw, 1.2rem); line-height: 1.55; font-weight: 500; color: var(--text); }
 
-    /* ---------- MARKET ---------- */
-    .ar-market-grid { display: grid; grid-template-columns: 1fr; gap: 28px; margin-top: 24px; }
-    .ar-facts { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; align-content: start; }
-    .ar-fact { padding: 15px 16px; border: 1px solid var(--line-soft); border-radius: var(--r-md); background: var(--surface); }
-    .ar-fact span { display: block; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-soft); }
-    .ar-fact strong { display: block; margin-top: 5px; font-family: var(--font-display); font-weight: 700; font-size: 0.98rem; line-height: 1.3; letter-spacing: -0.01em; color: var(--text-head); }
-
-    /* ---------- CARDS (needs, plan) ---------- */
-    .ar-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 30px; }
-    .ar-card { padding: 24px 22px; border: 1px solid var(--line-soft); border-radius: var(--r-lg); background: var(--surface); transition: transform .25s, border-color .25s; }
-    .ar-card:hover { transform: translateY(-3px); border-color: rgba(226,168,77,0.28); }
-    .ar-num { font-family: var(--font-hero); font-weight: 800; font-size: 0.86rem; color: var(--gold); letter-spacing: 0; }
-    .ar-card h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; color: var(--text-head); margin: 10px 0 8px; }
-    .ar-card p { font-size: 0.93rem; line-height: 1.62; color: var(--text-dim); }
-    .ar-ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--gold-soft); border: 1px solid rgba(226,168,77,0.28); color: var(--gold); margin-bottom: 14px; }
-    .ar-ic svg { width: 21px; height: 21px; }
-    .ar-plan-label { display: block; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-soft); }
-    .ar-plan h3 { margin-top: 6px; }
-
-    /* ---------- PROOF ---------- */
-    .ar-proof-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 30px; }
-    .ar-proof-grid.--single { max-width: 640px; }
-    .ar-proof { position: relative; display: flex; flex-direction: column; padding: 26px 24px 22px; border: 1px solid var(--line-soft); border-radius: var(--r-lg); background: linear-gradient(160deg, rgba(226,168,77,0.08), transparent 55%), var(--surface); transition: transform .25s, border-color .25s; }
-    .ar-proof:hover { transform: translateY(-3px); border-color: rgba(226,168,77,0.3); }
-    .ar-proof-kicker { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 12px; }
-    .ar-proof-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
-    .ar-tag { display: inline-flex; padding: 5px 11px; border-radius: 999px; border: 1px solid rgba(226,168,77,0.3); background: var(--gold-soft); color: var(--gold); font-size: 0.66rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-    .ar-where { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 600; color: var(--text-soft); }
-    .ar-where svg { width: 14px; height: 14px; }
-    .ar-proof-result { margin-top: 18px; font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.55rem, 3.2vw, 2.1rem); letter-spacing: -0.03em; line-height: 1.08; color: var(--gold); }
-    .ar-proof h3 { margin-top: 8px; font-family: var(--font-display); font-size: 1.12rem; font-weight: 700; letter-spacing: -0.01em; color: var(--text-head); }
-    .ar-proof-body { margin-top: 10px; font-size: 0.93rem; line-height: 1.62; color: var(--text-dim); }
-    .ar-proof-link { margin-top: auto; padding-top: 18px; display: inline-flex; align-items: center; gap: 7px; font-size: 0.88rem; font-weight: 700; color: var(--text-head); transition: color .2s; }
-    .ar-proof-link svg { width: 15px; height: 15px; color: var(--gold); transition: transform .2s; }
-    .ar-proof-link:hover { color: var(--gold); }
-    .ar-proof-link:hover svg { transform: translateX(3px); }
-
-    /* ---------- SHOOTS + PRICING ---------- */
-    .ar-duo { display: grid; grid-template-columns: 1fr; gap: 16px; }
-    .ar-panel { padding: clamp(26px, 3.4vw, 40px); border: 1px solid var(--line-soft); border-radius: var(--r-lg); background: var(--surface); }
-    .ar-panel.--gold { border-color: rgba(226,168,77,0.24); background: linear-gradient(135deg, rgba(226,168,77,0.1), rgba(208,106,80,0.05)), var(--bg-2); }
-    .ar-panel .ar-h2 { font-size: clamp(1.45rem, 3vw, 1.95rem); }
-    .ar-panel p { margin-top: 14px; color: var(--text-dim); font-size: 0.98rem; line-height: 1.7; }
-    .ar-panel strong { color: var(--text); }
-
-    /* ---------- FAQ ---------- */
-    .ar-faq { margin-top: 30px; max-width: 880px; border-top: 1px solid var(--line-soft); }
-    .ar-faq details { border-bottom: 1px solid var(--line-soft); }
-    .ar-faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 16px; padding: 22px 4px; }
-    .ar-faq summary::-webkit-details-marker { display: none; }
-    .ar-faq summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 8px; }
-    .ar-faq-n { flex: none; min-width: 24px; font-family: var(--font-hero); font-weight: 800; font-size: 0.88rem; color: var(--gold); }
-    .ar-faq summary h3 { flex: 1; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.02rem, 2vw, 1.16rem); line-height: 1.35; letter-spacing: -0.01em; color: var(--text-head); }
-    .ar-faq-ic { flex: none; width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(226,168,77,0.4); display: grid; place-items: center; color: var(--gold); transition: transform .3s, background .25s; }
-    .ar-faq-ic svg { width: 15px; height: 15px; }
-    .ar-faq details[open] .ar-faq-ic { transform: rotate(45deg); background: var(--gold-soft); }
-    .ar-faq-a { padding: 0 4px 24px 44px; }
-    .ar-faq-a p { color: var(--text-dim); font-size: 0.97rem; line-height: 1.7; max-width: 68ch; }
-
-    /* ---------- FINAL CTA + NEARBY ---------- */
-    .ar-cta.cta-banner { padding: clamp(30px, 5vw, 56px) clamp(20px, 5vw, 56px); }
+    /* ---------- FINAL CTA ---------- */
+    .ar-cta.cta-banner { padding: clamp(28px, 5vw, 56px) clamp(20px, 5vw, 56px); }
     .ar-cta h2 { font-family: var(--font-display); font-size: clamp(1.45rem, 2.6vw, 1.95rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.12; margin-bottom: 8px; }
-    .ar-cta .cta-content p { font-size: 0.95rem; line-height: 1.6; color: var(--text-dim); max-width: 54ch; }
+    .ar-cta .cta-content p { font-size: 1rem; line-height: 1.6; color: var(--text-dim); max-width: 54ch; }
     .ar-cta .cta-actions { flex-wrap: wrap; }
     .ar-host { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
     .ar-host img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(226,168,77,0.55); flex: none; }
-    .ar-host span { font-size: 0.85rem; line-height: 1.4; color: var(--text-dim); text-align: left; }
-    .ar-nearby { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 10px; margin-top: 28px; }
-    .ar-nearby-label { width: 100%; text-align: center; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 2px; }
-    .ar-nearby a { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line-soft); background: var(--surface); font-size: 0.84rem; font-weight: 600; color: var(--text-dim); transition: color .2s, border-color .2s; }
-    .ar-nearby a svg { width: 13px; height: 13px; color: var(--gold); }
-    .ar-nearby a:hover { color: var(--gold); border-color: rgba(226,168,77,0.3); }
+    .ar-host span { font-size: 0.875rem; line-height: 1.45; color: var(--text-dim); text-align: left; }
 
     /* Owner review notes (stripped before launch) */
     .review-note { display: block; margin: 12px 0 0; padding: 10px 14px; border: 2px dashed #d4a64a; border-radius: 8px; font-size: 13px; line-height: 1.5; color: #f6f0e6; background: rgba(212,166,74,0.06); }
 
-    /* ===================== PHONE ===================== */
-    @media (max-width: 700px) {
-      main.page .ar-hero { padding-top: 22px; }
-    }
     @media (max-width: 719px) {
-      main.page .card-overlay.ar-sec, main.page .card-overlay.ar-sec::after { border-radius: 36px 36px 0 0; }
-    }
-    @media (max-width: 600px) {
-      .ar-faq summary { gap: 12px; padding: 18px 2px; }
-      .ar-faq-a { padding-left: 2px; }
+      main.page .card-overlay.ar-sec, main.page .card-overlay.ar-sec::after { border-radius: 32px 32px 0 0; }
     }
     @media (max-width: 768px) {
       .ar-cta .cta-actions { width: 100%; }
@@ -318,28 +289,244 @@ const PAGE_CSS = `
       .ar-host { justify-content: center; }
       .ar-cta .cta-content p { margin: 0 auto; }
     }
+`;
+
+const AREA_CSS = `
+    /* ---------- BRIEF HERO ---------- */
+    main.page .ar-hero { padding-top: 128px; padding-bottom: calc(clamp(44px, 6vw, 80px) + 40px); }
+    .ar-hero-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
+    .ar-route ol { list-style: none; display: flex; flex-wrap: wrap; align-items: center; margin: 0; padding: 0; }
+    .ar-route li { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 0.875rem; font-weight: 600; color: var(--text-head); }
+    .ar-route li + li::before { content: ""; width: 28px; height: 4px; border-radius: 2px; background: var(--gold); margin-right: 0; }
+    .ar-route a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding-right: 2px; color: var(--text-dim); text-decoration: underline; text-decoration-color: rgba(246,240,230,0.25); text-underline-offset: 4px; transition: color .2s; }
+    .ar-route a:hover { color: var(--gold); }
+    .ar-hero h1 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.045em; font-size: clamp(2.05rem, 5.6vw, 3.6rem); line-height: 1.03; margin-top: 8px; max-width: 16ch; text-wrap: balance; }
+
+    .ar-media { position: relative; width: 100%; max-width: 440px; }
+    .ar-media-frame { position: relative; margin: 0; aspect-ratio: 1 / 1; border-radius: var(--r-xl); overflow: hidden; background: var(--bg-2); border: 1px solid var(--line); box-shadow: 0 30px 70px rgba(0,0,0,0.5); }
+    .ar-media-el { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--focus, 50% 50%); display: block; background: var(--bg-2); }
+    .ar-media-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(8,8,8,0) 46%, rgba(8,8,8,0.84)); pointer-events: none; z-index: 1; transition: opacity .3s; }
+    .ar-media-cap { position: absolute; left: 16px; right: 16px; bottom: 14px; z-index: 2; display: flex; flex-direction: column; gap: 2px; pointer-events: none; transition: opacity .3s; }
+    .ar-media-kicker { font-family: var(--font-display); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+    .ar-media-tag { font-size: 0.95rem; font-weight: 600; line-height: 1.35; color: var(--text-head); }
+    .ar-play { align-self: flex-start; margin-bottom: 10px; pointer-events: auto; display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 8px 20px 8px 8px; border-radius: 999px; border: 1px solid rgba(255,248,235,0.22); background: rgba(10,10,10,0.62); backdrop-filter: blur(10px); color: var(--text-head); font: 600 0.95rem/1.2 var(--font-body); cursor: pointer; max-width: 100%; text-align: left; transition: background .2s, transform .2s; }
+    .ar-play:hover { background: rgba(10,10,10,0.8); }
+    .ar-play:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .ar-play-ic { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--gold); color: #141414; flex: none; }
+    .ar-play-ic svg { width: 18px; height: 18px; margin-left: 2px; }
+    .ar-media.is-playing .ar-play, .ar-media.is-playing .ar-media-cap, .ar-media.is-playing .ar-media-shade { opacity: 0; pointer-events: none; visibility: hidden; }
+    .ar-media.is-playing .ar-media-el { object-fit: contain; background: #000; }
+
+    /* Designed stat card (no client media in the repo yet) */
+    .ar-media.--graphic .ar-media-frame { aspect-ratio: auto; display: flex; flex-direction: column; background: radial-gradient(120% 90% at 100% 0%, rgba(226,168,77,0.26), transparent 55%), radial-gradient(90% 80% at 0% 100%, rgba(208,106,80,0.2), transparent 60%), #121110; }
+    .ar-media.--graphic .ar-media-frame::after { content: ""; position: absolute; right: -46px; top: -46px; width: 190px; height: 190px; border-radius: 50%; border: 18px solid rgba(226,168,77,0.07); pointer-events: none; }
+    .ar-ig { position: relative; flex: 1; display: flex; flex-direction: column; padding: 20px 20px 4px; }
+    .ar-ig-handle { display: inline-flex; align-items: center; gap: 8px; font-size: 0.95rem; font-weight: 700; color: var(--text-head); }
+    .ar-ig-handle svg { width: 20px; height: 20px; color: var(--gold); }
+    .ar-ig-hook { margin: 16px 0 0; padding: 12px 14px; max-width: 30ch; border-radius: 14px 14px 14px 4px; background: rgba(255,248,235,0.07); border: 1px solid var(--line); }
+    .ar-ig-hook span { display: block; font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
+    .ar-ig-hook q { display: block; margin-top: 3px; font-size: 1rem; line-height: 1.45; font-weight: 600; color: var(--text-head); quotes: "“" "”" "‘" "’"; }
+    .ar-ig-big { margin-top: 18px; }
+    .ar-ig-big strong { display: block; font-family: var(--font-hero); font-weight: 800; font-size: clamp(3.4rem, 15vw, 5.2rem); line-height: 0.92; letter-spacing: -0.05em; color: var(--gold); }
+    .ar-ig-big span { display: block; margin-top: 6px; font-size: 1rem; font-weight: 600; color: var(--text-head); }
+    .ar-ig-rows { display: flex; flex-wrap: wrap; gap: 10px 26px; margin: 14px 0 0; }
+    .ar-ig-rows div { display: flex; flex-direction: column-reverse; }
+    .ar-ig-rows dt { font-size: 0.8125rem; color: var(--text-dim); }
+    .ar-ig-rows dd { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; color: var(--text-head); }
+    .ar-ig-asof { margin-top: 10px; font-size: 0.8125rem; color: var(--text-dim); }
+    .ar-media.--graphic .ar-media-shade { display: none; }
+    .ar-media.--graphic .ar-media-cap { position: relative; left: auto; right: auto; bottom: auto; padding: 14px 20px 18px; margin-top: 12px; border-top: 1px solid var(--line-soft); }
+
+    /* ---------- SNAPSHOT ---------- */
+    .ar-facts { margin: 26px 0 0; display: grid; grid-template-columns: minmax(0, 1fr); border: 1px solid var(--line); border-top: 3px solid var(--gold); border-radius: var(--r-lg); background: linear-gradient(180deg, rgba(226,168,77,0.07), rgba(226,168,77,0) 70%), var(--bg-1); overflow: hidden; }
+    .ar-fact { padding: 14px 18px 15px; display: grid; gap: 3px; }
+    .ar-fact + .ar-fact { border-top: 1px solid var(--line-soft); }
+    .ar-fact dt { font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
+    .ar-fact dd { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 1.06rem; line-height: 1.35; color: var(--text-head); }
+    .ar-snap-text { display: grid; gap: 14px; margin-top: 24px; }
+    .ar-snap-text p { color: var(--text-dim); font-size: 1rem; line-height: 1.7; max-width: 62ch; }
+    .ar-snap-text em { color: var(--text); }
+
+    /* ---------- PROOF ---------- */
+    .ar-proof { margin-top: 28px; display: grid; grid-template-columns: minmax(0, 1fr); border: 1px solid rgba(226,168,77,0.24); border-radius: var(--r-xl); overflow: hidden; background: var(--bg-1); }
+    .ar-proof-stat { position: relative; padding: 26px 22px 22px; display: flex; flex-direction: column; justify-content: center; gap: 8px; background: radial-gradient(120% 120% at 0% 0%, rgba(226,168,77,0.2), transparent 62%), var(--bg-2); border-bottom: 1px solid var(--line-soft); }
+    .ar-proof-stat strong { font-family: var(--font-hero); font-weight: 800; font-size: clamp(3rem, 11vw, 4.8rem); line-height: 0.95; letter-spacing: -0.05em; color: var(--gold); }
+    .ar-proof-stat span { font-size: 1rem; line-height: 1.45; color: var(--text); max-width: 24ch; }
+    .ar-proof-body { padding: 22px 22px 26px; }
+    .ar-rel { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: 999px; background: var(--gold-soft); border: 1px solid rgba(226,168,77,0.3); color: var(--gold); font-size: 0.8125rem; font-weight: 700; line-height: 1.3; }
+    .ar-rel svg { width: 14px; height: 14px; flex: none; }
+    .ar-proof h3 { margin-top: 14px; font-family: var(--font-display); font-size: 1.35rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; color: var(--text-head); }
+    .ar-proof-meta { margin-top: 4px; font-size: 0.875rem; color: var(--text-dim); }
+    .ar-proof-text { margin-top: 12px; font-size: 1rem; line-height: 1.65; color: var(--text-dim); max-width: 60ch; }
+    .ar-chips { list-style: none; padding: 0; margin: 16px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+    .ar-chips li { padding: 7px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); font-size: 0.875rem; font-weight: 600; color: var(--text); }
+    .ar-proof .ar-btn { margin-top: 20px; }
+
+    /* ---------- FIRST STEPS (route) ---------- */
+    .ar-steps { list-style: none; margin: 30px 0 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); position: relative; }
+    .ar-step { position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 16px; padding-bottom: 28px; }
+    .ar-step:last-child { padding-bottom: 0; }
+    .ar-step::before { content: ""; position: absolute; left: 20px; top: 40px; bottom: -4px; width: 4px; border-radius: 2px; background: var(--gold); }
+    .ar-step:last-child::before { display: none; }
+    .ar-step-n { position: relative; z-index: 1; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; border: 4px solid var(--gold); background: var(--bg-0); box-sizing: border-box; font-family: var(--font-hero); font-weight: 800; font-size: 1rem; color: var(--text-head); }
+    .ar-step h3 { margin-top: 9px; font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; line-height: 1.3; letter-spacing: -0.01em; color: var(--text-head); }
+    .ar-step p { margin-top: 8px; font-size: 1rem; line-height: 1.65; color: var(--text-dim); }
+    .ar-price { margin-top: 34px; display: flex; align-items: flex-start; gap: 14px; padding: 18px 20px; border-radius: var(--r-lg); border: 1px solid rgba(226,168,77,0.28); background: linear-gradient(135deg, rgba(226,168,77,0.12), rgba(208,106,80,0.06)), var(--bg-1); }
+    .ar-price > svg { width: 22px; height: 22px; color: var(--gold); flex: none; margin-top: 2px; }
+    .ar-price p { font-size: 1rem; line-height: 1.6; color: var(--text-dim); }
+    .ar-price b { display: block; margin-bottom: 2px; font-family: var(--font-display); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+
+    /* ---------- FAQ ---------- */
+    .ar-faq { margin-top: 24px; max-width: 860px; border-top: 1px solid var(--line-soft); }
+    .ar-faq details { border-bottom: 1px solid var(--line-soft); }
+    .ar-faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 60px; padding: 14px 2px; }
+    .ar-faq summary::-webkit-details-marker { display: none; }
+    .ar-faq summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 8px; }
+    .ar-faq summary h3 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.02rem, 2vw, 1.14rem); line-height: 1.35; letter-spacing: -0.01em; color: var(--text-head); }
+    .ar-faq-ic { flex: none; width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(226,168,77,0.4); display: grid; place-items: center; color: var(--gold); transition: transform .3s, background .25s; }
+    .ar-faq-ic svg { width: 15px; height: 15px; }
+    .ar-faq details[open] .ar-faq-ic { transform: rotate(45deg); background: var(--gold-soft); }
+    .ar-faq-a { padding: 0 2px 20px; }
+    .ar-faq-a p { color: var(--text-dim); font-size: 1rem; line-height: 1.7; max-width: 66ch; }
+
+    /* ---------- OTHER AREAS ---------- */
+    .ar-others { margin-top: 36px; text-align: center; }
+    .ar-others-label { font-family: var(--font-display); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
+    .ar-others ul { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 12px 0 0; padding: 0; }
+    .ar-others a { display: inline-flex; align-items: center; gap: 9px; min-height: 48px; padding: 10px 18px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); font-size: 1rem; font-weight: 600; color: var(--text); transition: border-color .2s, color .2s; }
+    .ar-others a:hover { border-color: rgba(226,168,77,0.4); color: var(--gold); }
+    .ar-others a.--hub { border-color: rgba(226,168,77,0.35); background: var(--gold-soft); color: var(--gold); }
+    .ar-others a.--hub svg { width: 16px; height: 16px; }
+
+    /* ===================== PHONE ===================== */
+    @media (max-width: 700px) {
+      main.page .ar-hero { padding-top: 14px; }
+    }
+    @media (max-width: 420px) {
+      .ar-ctas .ar-btn { flex: 1 1 100%; }
+    }
 
     /* ===================== TABLET / DESKTOP ===================== */
-    @media (min-width: 720px) {
-      .ar-wrap { width: min(calc(100% - 48px), var(--max)); }
-      .ar-grid.--2, .ar-grid.--3, .ar-plan-grid { grid-template-columns: 1fr 1fr; }
-      .ar-proof-grid.--multi { grid-template-columns: 1fr 1fr; }
+    @media (min-width: 760px) {
+      .ar-facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .ar-fact { padding: 20px 22px; }
+      .ar-fact + .ar-fact { border-top: 0; border-left: 1px solid var(--line-soft); }
+    }
+    @media (min-width: 820px) {
+      .ar-proof { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr); }
+      .ar-proof-stat { border-bottom: 0; border-right: 1px solid var(--line-soft); padding: 40px 34px; }
+      .ar-proof-body { padding: 34px 38px 36px; }
     }
     @media (min-width: 900px) {
-      .ar-market-grid { grid-template-columns: 1.35fr 0.65fr; gap: clamp(36px, 5vw, 64px); align-items: start; }
-      .ar-facts { grid-template-columns: 1fr; }
-      .ar-duo { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .ar-snap-text { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .ar-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+      .ar-steps::before { content: ""; position: absolute; left: 22px; right: calc((100% - 56px) / 3 - 22px); top: 20px; height: 4px; border-radius: 2px; background: var(--gold); }
+      .ar-step { grid-template-columns: minmax(0, 1fr); gap: 6px; padding-bottom: 0; }
+      .ar-step::before { display: none; }
+      .ar-step h3 { margin-top: 12px; }
+    }
+    @media (min-width: 720px) {
+      .ar-ig-big strong { font-size: clamp(2.7rem, 6vw, 4.5rem); }
+      .ar-hero-grid { grid-template-columns: minmax(0, 1fr) clamp(236px, 30vw, 318px); gap: clamp(32px, 6vw, 96px); align-items: center; }
+      .ar-media { max-width: none; }
+      .ar-media-frame { aspect-ratio: 9 / 16; }
+      .ar-media-el { object-position: 50% 50%; }
     }
     @media (min-width: 960px) {
-      .ar-hero-grid { grid-template-columns: 1.12fr 0.88fr; gap: clamp(36px, 5vw, 64px); }
-      .ar-hero-photo { aspect-ratio: 4 / 5; }
-    }
-    @media (min-width: 1000px) {
-      .ar-grid.--3 { grid-template-columns: repeat(3, 1fr); }
-      .ar-proof-grid.--three { grid-template-columns: repeat(3, 1fr); }
+      .ar-ig { padding: 28px 26px 4px; }
+      .ar-ig-big { margin-top: auto; }
+      .ar-media.--graphic .ar-media-cap { padding: 16px 26px 22px; }
     }
 `;
 
+const HUB_CSS = `
+    /* ---------- HUB HERO + MAP ---------- */
+    main.page .ar-hub-hero { padding-top: 124px; padding-bottom: calc(clamp(40px, 6vw, 72px) + 40px); }
+    .ar-hub-grid { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "copy" "map" "panel"; gap: 26px; }
+    .ar-hub-copy { grid-area: copy; }
+    .ar-hub-hero h1 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.045em; font-size: clamp(2.05rem, 5.4vw, 3.5rem); line-height: 1.03; margin-top: 12px; max-width: 17ch; text-wrap: balance; }
+    .ar-map { grid-area: map; margin: 0; width: 100%; max-width: 460px; justify-self: center; }
+    .ar-map-canvas { position: relative; width: 100%; aspect-ratio: ${MAP_W} / ${MAP_H}; }
+    .ar-map-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; overflow: visible; }
+    .ar-map-water { fill: rgba(69,176,140,0.085); }
+    .ar-map-coast { fill: none; stroke: rgba(69,176,140,0.3); stroke-width: 1.2; }
+    .ar-map-land { fill: #0d0d0d; stroke: rgba(69,176,140,0.22); stroke-width: 1; }
+    .ar-map-county { fill: none; stroke: rgba(246,240,230,0.2); stroke-width: 1.2; stroke-dasharray: 4 5; }
+    .ar-map-line { fill: none; stroke: var(--gold); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+    .ar-map-break { fill: none; stroke: var(--gold); stroke-width: 2.5; stroke-linecap: round; }
+    .ar-map-cty { position: absolute; left: 0; transform: translateY(-50%); font-family: var(--font-display); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); pointer-events: none; }
+    .ar-st { position: absolute; z-index: 2; width: 44px; height: 44px; transform: translate(-50%, -50%); display: grid; place-items: center; border-radius: 50%; color: var(--text-head); -webkit-tap-highlight-color: transparent; }
+    .ar-st::before { content: ""; width: 20px; height: 20px; border-radius: 50%; background: var(--text-head); border: 4px solid var(--gold); box-sizing: border-box; box-shadow: 0 0 0 3px var(--bg-0); transition: transform .2s, box-shadow .2s; }
+    .ar-st.--stop::before { width: 13px; height: 13px; background: var(--gold); border: 3px solid var(--bg-0); box-shadow: 0 0 0 2px var(--gold); }
+    .ar-st-label { position: absolute; display: flex; align-items: center; min-height: 30px; padding: 3px 2px; font-family: var(--font-display); font-size: 0.875rem; font-weight: 700; line-height: 1.15; white-space: nowrap; color: var(--text-head); text-shadow: 0 1px 6px #000, 0 0 2px #000; }
+    .ar-st.--stop .ar-st-label { font-family: var(--font-body); font-size: 0.8125rem; font-weight: 600; color: var(--text); }
+    .ar-st.--r .ar-st-label { left: calc(100% - 8px); top: 50%; transform: translateY(-50%); }
+    .ar-st.--l .ar-st-label { right: calc(100% - 8px); top: 50%; transform: translateY(-50%); justify-content: flex-end; text-align: right; }
+    .ar-st.--t .ar-st-label { bottom: calc(100% - 12px); left: 50%; transform: translateX(-50%); }
+    .ar-st.--b .ar-st-label { top: 100%; min-height: 26px; left: 50%; transform: translateX(-50%); }
+    .ar-st.--tr .ar-st-label { bottom: calc(100% - 16px); left: calc(100% - 14px); }
+    .ar-st.--br .ar-st-label { top: calc(100% - 16px); left: calc(100% - 14px); }
+    .ar-st:hover::before, .ar-st:focus-visible::before { transform: scale(1.18); }
+    .ar-st:hover .ar-st-label { color: var(--gold); }
+    .ar-st:focus-visible { outline: 2px solid var(--gold); outline-offset: 0; }
+    .ar-st.is-on::before { transform: scale(1.25); box-shadow: 0 0 0 3px var(--bg-0), 0 0 0 7px rgba(226,168,77,0.5); }
+    .ar-st.--stop.is-on::before { box-shadow: 0 0 0 2px var(--gold), 0 0 0 7px rgba(226,168,77,0.45); }
+    .ar-st.is-on .ar-st-label { color: var(--gold); }
+    .ar-map-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; margin-top: 14px; font-size: 0.8125rem; color: var(--text-dim); }
+    .ar-map-legend span { display: inline-flex; align-items: center; gap: 8px; }
+    .ar-lg { width: 14px; height: 14px; border-radius: 50%; box-sizing: border-box; border: 3px solid var(--gold); background: var(--text-head); }
+    .ar-lg.--stop { width: 10px; height: 10px; border: 0; background: var(--gold); box-shadow: 0 0 0 2px var(--bg-0), 0 0 0 3px var(--gold); }
+
+    .ar-map-panel { grid-area: panel; display: none; }
+    .ar-js .ar-map-panel { display: block; }
+    .ar-map-panel { border-radius: var(--r-lg); border: 1px solid var(--line); background: var(--bg-1); padding: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.35); }
+    .ar-map-panel.is-on { border-color: rgba(226,168,77,0.45); }
+    .ar-map-hint { display: flex; align-items: flex-start; gap: 12px; font-size: 1rem; line-height: 1.55; color: var(--text-dim); }
+    .ar-map-hint svg { width: 24px; height: 24px; color: var(--gold); flex: none; }
+
+    /* ---------- AREA CARDS (also cloned into the map panel) ---------- */
+    .ar-acards { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-top: 28px; }
+    .ar-acard { position: relative; display: flex; flex-direction: column; padding: 22px 20px 14px; border-radius: var(--r-lg); border: 1px solid var(--line-soft); background: var(--surface); transition: border-color .25s, box-shadow .25s; }
+    .ar-acard:target, .ar-acard.is-on { border-color: rgba(226,168,77,0.5); box-shadow: 0 0 0 1px rgba(226,168,77,0.25); }
+    .ar-ac-where { font-family: var(--font-display); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
+    .ar-acard h3, .ar-panel-card h3 { margin-top: 6px; font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; letter-spacing: -0.02em; line-height: 1.2; color: var(--text-head); }
+    .ar-ac-insight { margin-top: 8px; font-size: 1rem; line-height: 1.6; color: var(--text-dim); }
+    .ar-ac-rows { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 12px; }
+    .ar-ac-rows li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; font-size: 1rem; line-height: 1.5; color: var(--text); }
+    .ar-ac-rows svg { width: 18px; height: 18px; color: var(--gold); margin-top: 3px; }
+    .ar-ac-rows b { display: block; font-family: var(--font-display); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
+    .ar-ac-links { margin-top: auto; padding-top: 10px; display: flex; flex-wrap: wrap; gap: 0 18px; }
+    .ar-ac-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 0.95rem; font-weight: 700; color: var(--gold); }
+    .ar-ac-link svg { width: 16px; height: 16px; transition: transform .2s; }
+    .ar-ac-link:hover svg { transform: translateX(3px); }
+    .ar-ac-link.--quiet { color: var(--text); }
+
+    @media (max-width: 700px) {
+      main.page .ar-hub-hero { padding-top: 16px; }
+    }
+    @media (max-width: 520px) {
+      .ar-st.--wrap .ar-st-label { white-space: normal; width: min-content; min-width: 4.6em; }
+    }
+    @media (max-width: 340px) {
+      .ar-st.--stop .ar-st-label { display: none; }
+    }
+    @media (min-width: 700px) {
+      .ar-acards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .ar-st-label { font-size: 0.95rem; }
+      .ar-st.--stop .ar-st-label { font-size: 0.875rem; }
+    }
+    @media (min-width: 960px) {
+      main.page .ar-hub-hero { padding-top: 150px; }
+      .ar-hub-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 430px); grid-template-rows: auto 1fr; grid-template-areas: "copy map" "panel map"; column-gap: clamp(40px, 6vw, 88px); row-gap: 30px; align-items: start; }
+      .ar-map { max-width: none; }
+      .ar-map-panel { max-width: 560px; }
+    }
+    @media (min-width: 1060px) {
+      .ar-acards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+`;
+
+// ---------- page scripts ----------
 const REVEAL_JS = `
     (function () {
       var els = [].slice.call(document.querySelectorAll('.ar-rise'));
@@ -355,42 +542,171 @@ const REVEAL_JS = `
     })();
 `;
 
+// Loop clips: poster first; after the page has loaded (and only without
+// reduced motion or data saver) the clip is handed to shared.js's lazy loader
+// (data-video-src: Bunny CDN on production, local fallback) and plays muted
+// while in view. Testimonials download nothing until the visitor taps play,
+// then play with sound (shared.js playLazyVideoWithAudio). Their figure is
+// data-audio-managed so shared.js never autoplays them.
+const MEDIA_JS = `
+    (function () {
+      var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var conn = navigator.connection || navigator.webkitConnection;
+      var lite = conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || ''));
+      var local = function (v) {
+        v.addEventListener('error', function () {
+          var src = v.currentSrc || v.getAttribute('src') || '';
+          if (/^https?:/.test(src) && src.indexOf(location.origin) !== 0 && !v.dataset.arLocal) { v.dataset.arLocal = '1'; v.src = v.dataset.arSrc; v.load(); }
+        });
+      };
+      var load = function (v) {
+        if (v.getAttribute('src')) return;
+        v.dataset.videoSrc = v.dataset.arSrc;
+        if (window.ensureLazyVideoSource) window.ensureLazyVideoSource(v);
+        else { v.src = v.dataset.arSrc; v.load(); }
+      };
+      var loops = [].slice.call(document.querySelectorAll('.ar-media.--loop video[data-ar-src]'));
+      var start = function (v) { load(v); var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+      var arm = function () {
+        loops.forEach(function (v) {
+          local(v);
+          if (!('IntersectionObserver' in window)) { start(v); return; }
+          new IntersectionObserver(function (ents) {
+            ents.forEach(function (en) { if (en.isIntersecting) start(v); else if (!v.paused) v.pause(); });
+          }, { threshold: 0.25 }).observe(v);
+        });
+      };
+      if (loops.length && !reduce && !lite) {
+        var defer = function () { if ('requestIdleCallback' in window) requestIdleCallback(arm, { timeout: 2500 }); else setTimeout(arm, 1200); };
+        if (document.readyState === 'complete') defer(); else addEventListener('load', defer, { once: true });
+      }
+      [].slice.call(document.querySelectorAll('.ar-play')).forEach(function (btn) {
+        var fig = btn.closest('.ar-media'); var v = fig && fig.querySelector('video');
+        if (!v) return;
+        local(v);
+        var stop = function () { fig.classList.remove('is-playing'); v.controls = false; };
+        btn.addEventListener('click', function () {
+          fig.classList.add('is-playing'); v.controls = true;
+          load(v);
+          var go = window.playLazyVideoWithAudio
+            ? window.playLazyVideoWithAudio(v, 0.9)
+            : (function () { v.muted = false; return v.play(); })();
+          if (go && go.then) go.then(function (ok) { if (ok === false) stop(); }, stop);
+          v.focus({ preventScroll: true });
+        });
+        v.addEventListener('ended', stop);
+      });
+    })();
+`;
+
+const HUB_JS = `
+    (function () {
+      var panel = document.getElementById('ar-map-panel');
+      if (!panel) return;
+      var sts = [].slice.call(document.querySelectorAll('.ar-st'));
+      var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var show = function (st) {
+        var src = st.dataset.area ? document.getElementById('area-' + st.dataset.area) : document.getElementById('ar-stop-' + st.dataset.stop);
+        if (!src) return;
+        panel.innerHTML = '<div class="ar-panel-card">' + src.innerHTML + '</div>';
+        panel.classList.add('is-on');
+        sts.forEach(function (s) { var on = s === st; s.classList.toggle('is-on', on); s.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+        [].slice.call(document.querySelectorAll('.ar-acard')).forEach(function (c) { c.classList.toggle('is-on', c.id === 'area-' + (st.dataset.area || st.dataset.near)); });
+        if (matchMedia('(max-width: 959px)').matches) {
+          var r = panel.getBoundingClientRect();
+          if (r.bottom > innerHeight || r.top < 70) panel.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest' });
+        }
+      };
+      sts.forEach(function (st) {
+        st.setAttribute('role', 'button');
+        st.setAttribute('aria-pressed', 'false');
+        st.setAttribute('aria-controls', 'ar-map-panel');
+        st.addEventListener('click', function (e) { e.preventDefault(); show(st); });
+        st.addEventListener('keydown', function (e) { if (e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); show(st); } });
+      });
+    })();
+`;
+
 // ---------- validation / lint ----------
 const DASH_RE = /[\u2013\u2014]|&mdash;|&ndash;|&#821[12];|&#x201[34];/i;
 
-function validateShape(c, file) {
+function checker() {
   const errs = [];
   const str = (v, k) => { if (typeof v !== 'string' || !v.trim()) errs.push(`${k} must be a non-empty string`); };
-  const arr = (v, k) => { if (!Array.isArray(v)) errs.push(`${k} must be an array`); return Array.isArray(v) ? v : []; };
+  const arr = (v, k) => { if (!Array.isArray(v)) { errs.push(`${k} must be an array`); return []; } return v; };
   const obj = (v, k) => { if (!v || typeof v !== 'object' || Array.isArray(v)) { errs.push(`${k} must be an object`); return {}; } return v; };
-  ['id', 'lang', 'areaName', 'metaTitle', 'metaDescription', 'eyebrow', 'h1', 'answer', 'heroSub'].forEach((k) => str(c[k], k));
-  if (c.lang && !['en', 'es'].includes(c.lang)) errs.push('lang must be "en" or "es"');
-  const m = obj(c.market, 'market'); str(m.h2, 'market.h2');
-  arr(m.paragraphsHtml, 'market.paragraphsHtml').forEach((p, i) => str(p, `market.paragraphsHtml[${i}]`));
-  if (m.facts !== undefined) arr(m.facts, 'market.facts').forEach((f, i) => { str(f && f.label, `market.facts[${i}].label`); str(f && f.value, `market.facts[${i}].value`); });
-  const n = obj(c.needs, 'needs'); str(n.h2, 'needs.h2');
-  arr(n.items, 'needs.items').forEach((it, i) => { str(it && it.title, `needs.items[${i}].title`); str(it && it.body, `needs.items[${i}].body`); });
-  const p = obj(c.proof, 'proof'); str(p.h2, 'proof.h2');
-  arr(p.items, 'proof.items').forEach((it, i) => ['client', 'where', 'service', 'result', 'body', 'href'].forEach((k) => str(it && it[k], `proof.items[${i}].${k}`)));
-  const pl = obj(c.plan, 'plan'); str(pl.h2, 'plan.h2');
-  arr(pl.items, 'plan.items').forEach((it, i) => {
-    if (!it || !PLAN_ICON[it.service]) errs.push(`plan.items[${i}].service must be social|web|ads|seo`);
-    str(it && it.title, `plan.items[${i}].title`); str(it && it.bodyHtml, `plan.items[${i}].bodyHtml`);
-  });
-  const s = obj(c.shoots, 'shoots'); str(s.h2, 'shoots.h2'); str(s.body, 'shoots.body');
-  const pr = obj(c.pricing, 'pricing'); str(pr.h2, 'pricing.h2'); str(pr.bodyHtml, 'pricing.bodyHtml');
+  return { errs, str, arr, obj };
+}
+
+function validateArea(c) {
+  const { errs, str, arr, obj } = checker();
+  ['areaName', 'metaTitle', 'metaDescription', 'eyebrow', 'h1', 'answer', 'pricingHtml'].forEach((k) => str(c[k], k));
+  const card = obj(c.card, 'card'); str(card.insight, 'card.insight'); str(card.proofLine, 'card.proofLine');
+  const m = obj(c.heroMedia, 'heroMedia');
+  if (!['loop', 'testimonial', 'graphic'].includes(m.type)) errs.push('heroMedia.type must be loop|testimonial|graphic');
+  ['alt', 'kicker', 'tag'].forEach((k) => str(m[k], `heroMedia.${k}`));
+  if (m.type === 'loop' || m.type === 'testimonial') {
+    ['video', 'poster'].forEach((k) => str(m[k], `heroMedia.${k}`));
+    if (!Number.isFinite(m.width) || !Number.isFinite(m.height)) errs.push('heroMedia.width/height must be numbers');
+  }
+  if (m.type === 'testimonial') str(m.play, 'heroMedia.play');
+  if (m.type === 'graphic') {
+    const g = obj(m.graphic, 'heroMedia.graphic');
+    ['handle', 'big', 'bigLabel', 'asOf'].forEach((k) => str(g[k], `heroMedia.graphic.${k}`));
+    arr(g.rows, 'heroMedia.graphic.rows').forEach((r, i) => { str(r && r.value, `heroMedia.graphic.rows[${i}].value`); str(r && r.label, `heroMedia.graphic.rows[${i}].label`); });
+  }
+  const s = obj(c.snapshot, 'snapshot'); str(s.h2, 'snapshot.h2');
+  arr(s.facts, 'snapshot.facts').forEach((f, i) => { str(f && f.label, `snapshot.facts[${i}].label`); str(f && f.value, `snapshot.facts[${i}].value`); });
+  arr(s.paragraphsHtml, 'snapshot.paragraphsHtml').forEach((p, i) => str(p, `snapshot.paragraphsHtml[${i}]`));
+  const p = obj(c.proof, 'proof');
+  ['h2', 'case', 'relation', 'client', 'where', 'service', 'stat', 'statLabel', 'bodyHtml'].forEach((k) => str(p[k], `proof.${k}`));
+  if (p.case && !CASE_SLUGS.includes(p.case)) errs.push(`proof.case "${p.case}" is not a known case study (${CASE_SLUGS.join(', ')})`);
+  if (p.chips !== undefined) arr(p.chips, 'proof.chips').forEach((x, i) => str(x, `proof.chips[${i}]`));
+  const st = obj(c.steps, 'steps'); str(st.h2, 'steps.h2');
+  arr(st.items, 'steps.items').forEach((it, i) => { str(it && it.title, `steps.items[${i}].title`); str(it && it.bodyHtml, `steps.items[${i}].bodyHtml`); });
   arr(c.faqs, 'faqs').forEach((f, i) => { str(f && f.q, `faqs[${i}].q`); str(f && f.a, `faqs[${i}].a`); });
   arr(c.nearby, 'nearby').forEach((x, i) => str(x, `nearby[${i}]`));
   const ct = obj(c.cta, 'cta'); ['h2', 'body', 'button'].forEach((k) => str(ct[k], `cta.${k}`));
+  return errs;
+}
+
+function validateHub(h) {
+  const { errs, str, arr, obj } = checker();
+  ['metaTitle', 'metaDescription', 'eyebrow', 'h1', 'answer', 'mapAria', 'mapHint', 'listH2', 'listSub'].forEach((k) => str(h[k], k));
+  const lg = obj(h.legend, 'legend'); ['area', 'stop', 'scale'].forEach((k) => str(lg[k], `legend.${k}`));
+  const co = obj(h.county, 'county'); ['north', 'south'].forEach((k) => str(co[k], `county.${k}`));
+  arr(h.stops, 'stops').forEach((s, i) => {
+    ['case', 'name', 'where', 'area', 'line'].forEach((k) => str(s && s[k], `stops[${i}].${k}`));
+    if (s && s.case && !MAP_STOPS[s.case]) errs.push(`stops[${i}].case "${s.case}" has no map position`);
+    if (s && s.area && !AREA_IDS.includes(s.area)) errs.push(`stops[${i}].area "${s.area}" is not an area id`);
+  });
+  const ct = obj(h.cta, 'cta'); ['h2', 'body', 'button'].forEach((k) => str(ct[k], `cta.${k}`));
+  return errs;
+}
+
+function validateShape(c, file) {
+  const errs = [];
   const expect = path.basename(file).match(/^([a-z0-9-]+)\.(en|es)\.json$/);
   if (!expect) errs.push('file name must be {id}.{en|es}.json');
   else if (c.id !== expect[1] || c.lang !== expect[2]) errs.push(`id/lang (${c.id}/${c.lang}) do not match the file name`);
+  if (!['en', 'es'].includes(c.lang)) errs.push('lang must be "en" or "es"');
+  if (c.id === 'hub') errs.push(...validateHub(c));
+  else {
+    if (!AREA_IDS.includes(c.id)) errs.push(`id "${c.id}" is not one of ${AREA_IDS.join(', ')}`);
+    errs.push(...validateArea(c));
+  }
   return errs;
 }
 
 // Non-fatal content checks (SPEC.md rules). Reported as warnings, or thrown in strict mode.
-function lint(c) {
+function lint(c, root) {
   const warn = [];
+  const checkHref = (href, k) => {
+    if (/^(tel:|mailto:)/.test(href)) return;
+    const clean = href.replace(/#.*$/, '');
+    if (!ALLOWED_PATHS.has(clean)) warn.push(`${k}: link ${href} is not in the URL list`);
+    if ((c.lang === 'es') !== clean.startsWith('/es/')) warn.push(`${k}: link ${href} points at the wrong language`);
+  };
   const walk = (v, k) => {
     if (typeof v === 'string') {
       if (DASH_RE.test(v)) warn.push(`${k}: contains an em/en dash`);
@@ -402,24 +718,33 @@ function lint(c) {
     } else if (Array.isArray(v)) v.forEach((x, i) => walk(x, `${k}[${i}]`));
     else if (v && typeof v === 'object') Object.entries(v).forEach(([kk, vv]) => walk(vv, k ? `${k}.${kk}` : kk));
   };
-  const checkHref = (href, k) => {
-    if (/^(tel:|mailto:)/.test(href)) return;
-    const clean = href.replace(/#.*$/, '');
-    if (!ALLOWED_PATHS.has(clean)) warn.push(`${k}: link ${href} is not in the SPEC URL list`);
-    const isEs = clean.startsWith('/es/');
-    if ((c.lang === 'es') !== isEs) warn.push(`${k}: link ${href} points at the wrong language`);
-  };
   walk(c, '');
-  (c.proof && c.proof.items || []).forEach((it, i) => it && it.href && checkHref(it.href, `proof.items[${i}].href`));
   const words = (s) => stripTags(s).split(/\s+/).filter(Boolean).length;
   if (words(c.answer) > 30) warn.push(`answer is ${words(c.answer)} words (max 30)`);
-  if ((c.metaDescription || '').length < 140 || (c.metaDescription || '').length > 160) warn.push(`metaDescription is ${(c.metaDescription || '').length} chars (want 140-160)`);
+  const md = (c.metaDescription || '').length;
+  if (md < 140 || md > 160) warn.push(`metaDescription is ${md} chars (want 140-160)`);
   if ((c.metaTitle || '').length > 60) warn.push(`metaTitle is ${(c.metaTitle || '').length} chars (want <= 60)`);
   if (!/\| Button Up Media$/.test(c.metaTitle || '')) warn.push('metaTitle should end with "| Button Up Media"');
-  const faqN = (c.faqs || []).length;
-  if (faqN < 4 || faqN > 6) warn.push(`faqs has ${faqN} questions (want 4-6)`);
-  if ((c.nearby || []).length > 3) warn.push('nearby has more than 3 areas (only the first 3 render)');
-  if (c.lang === 'es' && c.cta && c.cta.button !== 'Agende una llamada estratégica gratis') warn.push('cta.button should be "Agende una llamada estratégica gratis"');
+  const wantBtn = c.lang === 'es' ? 'Agende una llamada estratégica gratis' : 'Book a free strategy call';
+  if (c.cta && c.cta.button !== wantBtn) warn.push(`cta.button should be "${wantBtn}"`);
+  if (c.id === 'hub') {
+    const missing = Object.keys(MAP_STOPS).filter((s) => !(c.stops || []).some((x) => x.case === s));
+    if (missing.length) warn.push(`stops is missing map clients: ${missing.join(', ')}`);
+    return warn;
+  }
+  const n = (a) => (Array.isArray(a) ? a.length : 0);
+  if (n(c.snapshot && c.snapshot.facts) !== 3) warn.push(`snapshot.facts has ${n(c.snapshot && c.snapshot.facts)} items (want 3)`);
+  if (n(c.snapshot && c.snapshot.paragraphsHtml) !== 2) warn.push(`snapshot.paragraphsHtml has ${n(c.snapshot && c.snapshot.paragraphsHtml)} items (want 2)`);
+  if (n(c.steps && c.steps.items) !== 3) warn.push(`steps.items has ${n(c.steps && c.steps.items)} items (want 3)`);
+  if (n(c.faqs) < 3 || n(c.faqs) > 4) warn.push(`faqs has ${n(c.faqs)} questions (want 3-4)`);
+  if (n(c.nearby) !== 2) warn.push(`nearby has ${n(c.nearby)} areas (want 2)`);
+  if (words(c.card && c.card.insight) > 24) warn.push(`card.insight is ${words(c.card.insight)} words (want a 2-line insight, <= 24)`);
+  const m = c.heroMedia || {};
+  for (const k of ['video', 'poster']) {
+    if (m[k] && !existsSync(path.join(root, m[k]))) warn.push(`heroMedia.${k} ${m[k]} does not exist in the repo`);
+    if (m[k] && !/^\/(videos|media|images)\//.test(m[k])) warn.push(`heroMedia.${k} must be an absolute /videos, /media or /images path`);
+  }
+  if (m.poster === '/media/bts-shoot-optimized.avif') warn.push('heroMedia.poster: do not reuse the round-1 team photo as a hero');
   return warn;
 }
 
@@ -427,8 +752,7 @@ function lint(c) {
 const note = (o) => (o && typeof o.reviewNote === 'string' && o.reviewNote.trim()
   ? `<aside class="review-note">${/^review:/i.test(o.reviewNote.trim()) ? '' : 'Review: '}${esc(o.reviewNote.trim())}</aside>`
   : '');
-const icon = (name) => `<i data-lucide="${name}" aria-hidden="true"></i>`;
-const pad2 = (n) => String(n).padStart(2, '0');
+const shortOf = (c) => c.shortName || c.areaName;
 
 function highlightArea(h1, areaName) {
   const e = esc(h1);
@@ -437,91 +761,165 @@ function highlightArea(h1, areaName) {
   return i < 0 ? e : `${e.slice(0, i)}<span class="ar-gold">${a}</span>${e.slice(i + a.length)}`;
 }
 
-function proofCards(c, t) {
-  let items = (c.proof.items || []).map((it) => ({ ...it, closest: false }));
-  if (!items.length) {
-    const key = FALLBACK_CASE[c.id] || 'shimuja-ramen';
-    const fb = CASES[key] && CASES[key][c.lang];
-    if (fb) items = [{ ...fb, href: `${t.cases}#${key}`, closest: true }];
-  }
-  const cls = items.length === 1 ? '--single' : items.length >= 3 ? '--multi --three' : '--multi';
-  const cards = items.map((it) => `<article class="ar-proof ar-rise">
-            ${it.closest ? `<p class="ar-proof-kicker">${esc(t.closest)}</p>` : ''}
-            <div class="ar-proof-meta"><span class="ar-tag">${esc(it.service)}</span><span class="ar-where">${icon('map-pin')}${esc(it.where)}</span></div>
-            <p class="ar-proof-result">${esc(it.result)}</p>
-            <h3>${esc(it.client)}</h3>
-            <p class="ar-proof-body">${esc(it.body)}</p>
-            ${note(it)}
-            <a class="ar-proof-link" href="${escAttr(it.href)}">${esc(t.caseLink(it.client))} ${ARROW}</a>
-          </article>`).join('\n          ');
-  return `<div class="ar-proof-grid ${cls}">
-          ${cards}
-        </div>`;
+// Map labels that may wrap on phones: keep the last two words together so a
+// three-word name breaks as "Toni's / Sushi Bar", never one word per line.
+function wrapLabel(text, wrap) {
+  const words = String(text).split(' ');
+  if (!wrap || words.length < 3) return esc(text);
+  return esc(words.slice(0, -2).join(' ')) + ' ' + esc(words.slice(-2).join('\u00a0')).replace(/\u00a0/g, '&nbsp;');
 }
 
-function renderPage(c, chrome, available) {
+function alternatesFor(enUrl, esUrl, enAvail, esAvail) {
+  return [
+    enAvail ? `<link rel="alternate" hreflang="en" href="${enUrl}" />` : '',
+    esAvail ? `<link rel="alternate" hreflang="es" href="${esUrl}" />` : '',
+    `<link rel="alternate" hreflang="x-default" href="${enAvail ? enUrl : esUrl}" />`,
+  ].filter(Boolean).join('\n  ');
+}
+
+function renderHead({ c, t, chrome, url, alternates, hasAlt, schema, css, preload = '' }) {
+  return `<!doctype html>
+<html lang="${t.htmlLang}">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  ${chrome.consent}
+  ${chrome.gtm}
+  <title>${esc(c.metaTitle)}</title>
+  <meta name="description" content="${escAttr(c.metaDescription)}" />
+  <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg" />
+  <link rel="canonical" href="${url}" />
+  ${alternates}
+  <meta name="theme-color" content="#0b0d10" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="${t.ogLocale}" />
+  ${hasAlt ? `<meta property="og:locale:alternate" content="${t.ogLocaleAlt}" />` : ''}
+  <meta property="og:title" content="${escAttr(c.metaTitle)}" />
+  <meta property="og:description" content="${escAttr(c.metaDescription)}" />
+  <meta property="og:url" content="${url}" />
+  <meta property="og:image" content="${OG_IMAGE}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="${escAttr(c.metaTitle)}" />
+  <meta name="twitter:description" content="${escAttr(c.metaDescription)}" />
+  <meta name="twitter:image" content="${OG_IMAGE}" />
+  ${chrome.fonts}
+  ${preload}
+  ${chrome.lucide}
+  <link rel="stylesheet" href="/shared.css?v=${chrome.cssVer}" />
+  <script type="application/ld+json">
+${ldJson(schema)}
+  </script>
+  <style>${css}  </style>
+</head>`;
+}
+
+function renderCta(cta, t, extra = '') {
+  return `<div class="cta-banner ar-cta ar-rise">
+          <div class="cta-content">
+            <div class="ar-host"><img src="${HOST_IMG.src}" alt="${escAttr(t.hostAlt)}" width="${HOST_IMG.width}" height="${HOST_IMG.height}" loading="lazy" decoding="async" /><span>${esc(t.host)}</span></div>
+            <h2>${esc(cta.h2)}</h2>
+            <p>${esc(cta.body)}</p>
+          </div>
+          <div class="cta-actions">
+            <a href="${t.contact}" class="btn btn-primary ar-btn">${esc(cta.button)} ${I.arrow}</a>
+            <a href="tel:${PHONE}" class="btn ar-btn">${esc(t.call)}</a>
+          </div>
+        </div>${extra}`;
+}
+
+// <div.ar-media> (grid item, may hold a review note) > <figure.ar-media-frame>
+// with the clip or card and one <figcaption> as its last child. A testimonial's
+// play button sits in the caption stack so it never covers a face or the text.
+function renderMedia(m, t) {
+  const capText = `<span class="ar-media-kicker">${esc(m.kicker)}</span><span class="ar-media-tag">${esc(m.tag)}</span>`;
+  const focus = m.focus ? ` style="--focus: ${escAttr(m.focus)}"` : '';
+  if (m.type === 'graphic') {
+    const g = m.graphic;
+    return `<div class="ar-media --graphic">
+            <figure class="ar-media-frame">
+              <div class="ar-ig">
+                <p class="ar-ig-handle">${I.ig}${esc(g.handle)}</p>
+                ${g.hook ? `<p class="ar-ig-hook"><span>${esc(g.hookLabel || '')}</span><q>${esc(g.hook)}</q></p>` : ''}
+                <p class="ar-ig-big"><strong>${esc(g.big)}</strong><span>${esc(g.bigLabel)}</span></p>
+                <dl class="ar-ig-rows">
+                  ${g.rows.map((r) => `<div><dt>${esc(r.label)}</dt><dd>${esc(r.value)}</dd></div>`).join('\n                  ')}
+                </dl>
+                <p class="ar-ig-asof">${esc(g.asOf)}</p>
+              </div>
+              <figcaption class="ar-media-cap">${capText}</figcaption>
+            </figure>
+            ${note(m)}
+          </div>`;
+  }
+  if (m.type === 'testimonial') {
+    return `<div class="ar-media --talk" data-audio-managed="true">
+            <figure class="ar-media-frame">
+              <video class="ar-media-el" data-ar-src="${escAttr(m.video)}" poster="${escAttr(m.poster)}" width="${m.width}" height="${m.height}" playsinline preload="none" aria-label="${escAttr(m.alt)}"${focus}></video>
+              <div class="ar-media-shade" aria-hidden="true"></div>
+              <figcaption class="ar-media-cap"><button type="button" class="ar-play"><span class="ar-play-ic">${I.play}</span><span>${esc(m.play)}</span></button>${capText}</figcaption>
+            </figure>
+            ${note(m)}
+          </div>`;
+  }
+  return `<div class="ar-media --loop">
+            <figure class="ar-media-frame">
+              <video class="ar-media-el" data-ar-src="${escAttr(m.video)}" poster="${escAttr(m.poster)}" width="${m.width}" height="${m.height}" muted loop playsinline preload="none" aria-label="${escAttr(m.alt)}"${focus}></video>
+              <div class="ar-media-shade" aria-hidden="true"></div>
+              <figcaption class="ar-media-cap">${capText}</figcaption>
+            </figure>
+            ${note(m)}
+          </div>`;
+}
+
+const sec = (cls, id, inner) => `    <section class="${cls} ar-sec"${id ? ` id="${id}"` : ''}>
+      <div class="ar-wrap">
+${inner}
+      </div>
+    </section>`;
+
+// ---------- area brief ----------
+function renderArea(c, chrome, available) {
   const t = T[c.lang];
   const url = areaUrl(c.id, c.lang);
   const enAvail = available.has(`${c.id}.en`);
   const esAvail = available.has(`${c.id}.es`);
-  const enUrl = areaUrl(c.id, 'en');
-  const esUrl = areaUrl(c.id, 'es');
-  const xDefault = enAvail ? enUrl : esUrl;
-  const alternates = [
-    enAvail ? `<link rel="alternate" hreflang="en" href="${enUrl}" />` : '',
-    esAvail ? `<link rel="alternate" hreflang="es" href="${esUrl}" />` : '',
-    `<link rel="alternate" hreflang="x-default" href="${xDefault}" />`,
-  ].filter(Boolean).join('\n  ');
+  const short = shortOf(c);
+  const m = c.heroMedia;
+  const hasHub = available.has(`hub.${c.lang}`);
 
-  const facts = (c.market.facts || []).length
-    ? `<ul class="ar-facts ar-rise">
-            ${c.market.facts.map((f) => `<li class="ar-fact"><span>${esc(f.label)}</span><strong>${esc(f.value)}</strong>${note(f)}</li>`).join('\n            ')}
-          </ul>`
-    : '';
-
-  const needsN = c.needs.items.length;
-  const needsCls = needsN === 3 || needsN >= 5 ? '--3' : '--2';
-  const needs = c.needs.items.map((it, i) => `<div class="ar-card ar-rise">
-            <span class="ar-num">${pad2(i + 1)}</span>
-            <h3>${esc(it.title)}</h3>
-            <p>${esc(it.body)}</p>
-            ${note(it)}
-          </div>`).join('\n          ');
-
-  const plan = c.plan.items.map((it) => `<div class="ar-card ar-plan ar-rise">
-            <div class="ar-ic">${icon(PLAN_ICON[it.service])}</div>
-            <span class="ar-plan-label">${esc(t.planLabel[it.service])}</span>
-            <h3>${esc(it.title)}</h3>
-            <p>${it.bodyHtml}</p>
-            ${note(it)}
-          </div>`).join('\n          ');
-
-  const faqs = c.faqs.map((f, i) => `<details>
-            <summary><span class="ar-faq-n">${pad2(i + 1)}</span><h3>${esc(f.q)}</h3><span class="ar-faq-ic">${PLUS}</span></summary>
+  const facts = c.snapshot.facts.map((f) => `<div class="ar-fact"><dt>${esc(f.label)}</dt><dd>${esc(f.value)}</dd></div>`).join('\n            ');
+  const p = c.proof;
+  const chips = (p.chips || []).length ? `<ul class="ar-chips">${p.chips.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : '';
+  const steps = c.steps.items.map((it, i) => `<li class="ar-step ar-rise">
+            <span class="ar-step-n" aria-hidden="true">${i + 1}</span>
+            <div>
+              <h3><span class="ar-sr">${esc(t.stepAria(i + 1))}: </span>${esc(it.title)}</h3>
+              <p class="ar-rich">${it.bodyHtml}</p>
+              ${note(it)}
+            </div>
+          </li>`).join('\n          ');
+  const faqs = c.faqs.map((f) => `<details>
+            <summary><h3>${esc(f.q)}</h3><span class="ar-faq-ic">${I.plus}</span></summary>
             <div class="ar-faq-a"><p>${esc(f.a)}</p></div>
           </details>`).join('\n          ');
 
-  const nearby = (c.nearby || [])
-    .filter((id) => id !== c.id && available.has(`${id}.${c.lang}`))
-    .slice(0, 3)
-    .map((id) => `<a href="${areaPath(id, c.lang)}">${icon('map-pin')}${esc(available.get(`${id}.${c.lang}`).areaName)}</a>`);
-  const nearbyHtml = nearby.length
-    ? `<nav class="ar-nearby ar-rise" aria-label="${escAttr(t.nearbyAria)}">
-          <span class="ar-nearby-label">${esc(t.nearby)}</span>
-          ${nearby.join('\n          ')}
-        </nav>`
-    : '';
+  const others = [
+    `<li><a class="--hub" href="${hubPath(c.lang)}">${I.route}${esc(t.allAreas)}</a></li>`,
+    ...(c.nearby || [])
+      .filter((id) => id !== c.id && available.has(`${id}.${c.lang}`))
+      .slice(0, 2)
+      .map((id) => `<li><a href="${areaPath(id, c.lang)}"><span class="ar-dot" aria-hidden="true"></span>${esc(shortOf(available.get(`${id}.${c.lang}`)))}</a></li>`),
+  ];
 
+  const crumbs = [
+    { '@type': 'ListItem', position: 1, name: t.home, item: t.homeUrl },
+    ...(hasHub ? [{ '@type': 'ListItem', position: 2, name: t.hubName, item: hubUrl(c.lang) }] : []),
+  ];
+  crumbs.push({ '@type': 'ListItem', position: crumbs.length + 1, name: c.h1, item: url });
   const schema = {
     '@context': 'https://schema.org',
     '@graph': [
-      {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: t.home, item: t.homeUrl },
-          { '@type': 'ListItem', position: 2, name: c.h1, item: url },
-        ],
-      },
+      { '@type': 'BreadcrumbList', itemListElement: crumbs },
       { '@type': ['Organization', 'ProfessionalService'], '@id': ORG_ID, name: 'Button Up Media', url: `${BASE}/` },
       {
         '@type': 'Service',
@@ -541,45 +939,15 @@ function renderPage(c, chrome, available) {
     ].filter(Boolean),
   };
 
-  const sec = (cls, id, inner) => `    <section class="${cls} ar-sec"${id ? ` id="${id}"` : ''}>
-      <div class="ar-wrap">
-${inner}
-      </div>
-    </section>`;
+  const poster = m.poster ? `<link rel="preload" as="image" href="${escAttr(m.poster)}"${/\.avif$/.test(m.poster) ? ' type="image/avif"' : /\.webp$/.test(m.poster) ? ' type="image/webp"' : ''} fetchpriority="high" />` : '';
+  const head = renderHead({
+    c, t, chrome, url,
+    alternates: alternatesFor(areaUrl(c.id, 'en'), areaUrl(c.id, 'es'), enAvail, esAvail),
+    hasAlt: c.lang === 'en' ? esAvail : enAvail,
+    schema, css: BASE_CSS + AREA_CSS + '\n    .ar-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }\n', preload: poster,
+  });
 
-  return `<!doctype html>
-<html lang="${t.htmlLang}">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  ${chrome.consent}
-  ${chrome.gtm}
-  <title>${esc(c.metaTitle)}</title>
-  <meta name="description" content="${escAttr(c.metaDescription)}" />
-  <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg" />
-  <link rel="canonical" href="${url}" />
-  ${alternates}
-  <meta name="theme-color" content="#0b0d10" />
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="${t.ogLocale}" />
-  ${(c.lang === 'en' ? esAvail : enAvail) ? `<meta property="og:locale:alternate" content="${t.ogLocaleAlt}" />` : ''}
-  <meta property="og:title" content="${escAttr(c.metaTitle)}" />
-  <meta property="og:description" content="${escAttr(c.metaDescription)}" />
-  <meta property="og:url" content="${url}" />
-  <meta property="og:image" content="${OG_IMAGE}" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="${escAttr(c.metaTitle)}" />
-  <meta name="twitter:description" content="${escAttr(c.metaDescription)}" />
-  <meta name="twitter:image" content="${OG_IMAGE}" />
-  ${chrome.fonts}
-  <link rel="preload" as="image" type="image/avif" media="(min-width: 960px)" href="${HERO_IMG.src}" fetchpriority="high" />
-  ${chrome.lucide}
-  <link rel="stylesheet" href="/shared.css?v=${chrome.cssVer}" />
-  <script type="application/ld+json">
-${ldJson(schema)}
-  </script>
-  <style>${PAGE_CSS}  </style>
-</head>
+  return `${head}
 <body>
   ${chrome.gtmNoscript}
 
@@ -589,114 +957,230 @@ ${ldJson(schema)}
 
   <main class="page">
 
-    <!-- HERO -->
+    <!-- HERO: neighborhood brief -->
     <section class="lib-section ar-hero">
       <div class="ar-wrap">
         <div class="ar-hero-grid">
           <div class="ar-hero-copy">
-            <span class="ar-eyebrow ar-rise">${esc(c.eyebrow)}</span>
-            <h1 class="ar-rise">${highlightArea(c.h1, c.areaName)}</h1>
-            <p class="ar-lede ar-rise">${esc(c.answer)}</p>
-            <p class="ar-hero-sub ar-rise">${esc(c.heroSub)}</p>
-            <div class="ar-hero-ctas ar-rise">
-              <a href="${t.contact}" class="btn btn-primary ar-btn">${esc(t.primary)} ${ARROW}</a>
+            <nav class="ar-route" aria-label="${escAttr(t.breadcrumbAria)}">
+              <ol>
+                <li><a href="${hubPath(c.lang)}"><span class="ar-dot" aria-hidden="true"></span>${esc(t.hubName)}</a></li>
+                <li aria-current="page"><span class="ar-dot --fill" aria-hidden="true"></span>${esc(c.eyebrow)}</li>
+              </ol>
+            </nav>
+            <h1>${highlightArea(c.h1, c.areaName)}</h1>
+            <p class="ar-lede">${esc(c.answer)}</p>
+            <div class="ar-ctas">
+              <a href="${t.contact}" class="btn btn-primary ar-btn">${esc(t.primary)} ${I.arrow}</a>
               <a href="${t.grader}" class="btn ar-btn">${esc(t.graderBtn)}</a>
             </div>
-            <ul class="ar-hero-trust ar-rise">
-              ${t.trust.map((x) => `<li>${CHECK}${esc(x)}</li>`).join('\n              ')}
+            <ul class="ar-trust">
+              ${t.trust.map((x) => `<li>${I.check}${esc(x)}</li>`).join('\n              ')}
             </ul>
           </div>
-          <figure class="ar-hero-photo ar-rise">
-            <img src="${HERO_IMG.src}" alt="${escAttr(t.photoAlt)}" width="${HERO_IMG.width}" height="${HERO_IMG.height}" decoding="async" />
-            <figcaption class="ar-photo-tag"><span class="dot"></span>${esc(t.photoTag)}</figcaption>
-          </figure>
+          ${renderMedia(m, t)}
         </div>
       </div>
     </section>
 
-    <!-- MARKET -->
-${sec('card-overlay --dark lib-section', 'market', `        <div class="ar-sec-head ar-rise">
-          <span class="ar-eyebrow">${esc(t.eyebrow.market)}</span>
-          <h2 class="ar-h2">${esc(c.market.h2)}</h2>
+    <!-- SNAPSHOT -->
+${sec('card-overlay --dark lib-section', 'snapshot', `        <p class="ar-label">${esc(t.label.snapshot)}</p>
+        <h2 class="ar-h2">${esc(c.snapshot.h2)}</h2>
+        <dl class="ar-facts ar-rise">
+            ${facts}
+        </dl>
+        <div class="ar-snap-text ar-rich ar-rise">
+          ${c.snapshot.paragraphsHtml.map((x) => `<p>${x}</p>`).join('\n          ')}
         </div>
-        <div class="ar-market-grid">
-          <div class="ar-prose ar-rise">
-            ${c.market.paragraphsHtml.map((p) => `<p>${p}</p>`).join('\n            ')}
-            ${note(c.market)}
+        ${note(c.snapshot)}`)}
+
+    <!-- PROOF NEARBY -->
+${sec('lib-section --lap', 'proof', `        <p class="ar-label">${esc(t.label.proof)}</p>
+        <h2 class="ar-h2">${esc(p.h2)}</h2>
+        <article class="ar-proof ar-rise">
+          <div class="ar-proof-stat"><strong>${esc(p.stat)}</strong><span>${esc(p.statLabel)}</span></div>
+          <div class="ar-proof-body">
+            <p class="ar-rel">${I.pin}${esc(p.relation)}</p>
+            <h3>${esc(p.client)}</h3>
+            <p class="ar-proof-meta">${esc(p.where)} · ${esc(p.service)}</p>
+            <p class="ar-proof-text ar-rich">${p.bodyHtml}</p>
+            ${chips}
+            ${note(p)}
+            <a class="btn ar-btn" href="${casePath(p.case, c.lang)}">${esc(t.caseLink(p.client))} ${I.arrow}</a>
           </div>
-          ${facts}
-        </div>`)}
+        </article>`)}
 
-    <!-- WHAT WORKS HERE -->
-${sec('lib-section', 'what-works', `        <div class="ar-sec-head ar-rise">
-          <span class="ar-eyebrow">${esc(t.eyebrow.needs)}</span>
-          <h2 class="ar-h2">${esc(c.needs.h2)}</h2>
-        </div>
-        <div class="ar-grid ${needsCls}">
-          ${needs}
-        </div>`)}
-
-    <!-- PROOF -->
-${sec('lib-section --lap', 'proof', `        <div class="ar-sec-head ar-rise">
-          <span class="ar-eyebrow">${esc(t.eyebrow.proof)}</span>
-          <h2 class="ar-h2">${esc(c.proof.h2)}</h2>
-          <p class="ar-sec-sub">${esc(t.proofSub)}</p>
-        </div>
-        ${proofCards(c, t)}`)}
-
-    <!-- PLAN -->
-${sec('card-overlay --dark lib-section', 'plan', `        <div class="ar-sec-head ar-rise">
-          <span class="ar-eyebrow">${esc(t.eyebrow.plan)}</span>
-          <h2 class="ar-h2">${esc(c.plan.h2)}</h2>
-        </div>
-        <div class="ar-grid ar-plan-grid">
-          ${plan}
-        </div>`)}
-
-    <!-- SHOOTS + PRICING -->
-${sec('lib-section --lap', '', `        <div class="ar-duo">
-          <div class="ar-panel ar-rise" id="shoots">
-            <span class="ar-eyebrow">${esc(t.eyebrow.shoots)}</span>
-            <h2 class="ar-h2">${esc(c.shoots.h2)}</h2>
-            <p>${esc(c.shoots.body)}</p>
-            ${note(c.shoots)}
-          </div>
-          <div class="ar-panel --gold ar-rise" id="pricing">
-            <span class="ar-eyebrow">${esc(t.eyebrow.pricing)}</span>
-            <h2 class="ar-h2">${esc(c.pricing.h2)}</h2>
-            <p>${c.pricing.bodyHtml}</p>
-            ${note(c.pricing)}
-          </div>
-        </div>`)}
+    <!-- WHAT WE'D DO FIRST + PRICE -->
+${sec('card-overlay --dark lib-section', 'first-steps', `        <p class="ar-label">${esc(t.label.plan)}</p>
+        <h2 class="ar-h2">${esc(c.steps.h2)}</h2>
+        <ol class="ar-steps">
+          ${steps}
+        </ol>
+        <div class="ar-price ar-rise">${I.tag}<p class="ar-rich"><b>${esc(t.priceKey)}</b>${c.pricingHtml}</p></div>`)}
 
     <!-- FAQ -->
-${sec('card-overlay --dark lib-section', 'faq', `        <div class="ar-sec-head ar-rise">
-          <span class="ar-eyebrow">${esc(t.eyebrow.faq)}</span>
-          <h2 class="ar-h2">${esc(t.faqH2)}</h2>
-        </div>
+${sec('lib-section', 'faq', `        <p class="ar-label">${esc(t.label.faq)}</p>
+        <h2 class="ar-h2">${esc(c.faqH2 || t.faqH2(short))}</h2>
         <div class="ar-faq ar-rise">
           ${faqs}
         </div>`)}
 
-    <!-- CTA -->
-${sec('lib-section --end', 'book', `        <div class="cta-banner ar-cta ar-rise">
-          <div class="cta-content">
-            <div class="ar-host"><img src="${HOST_IMG.src}" alt="${escAttr(t.hostAlt)}" width="${HOST_IMG.width}" height="${HOST_IMG.height}" loading="lazy" /><span>${esc(t.host)}</span></div>
-            <h2>${esc(c.cta.h2)}</h2>
-            <p>${esc(c.cta.body)}</p>
-          </div>
-          <div class="cta-actions">
-            <a href="${t.contact}" class="btn btn-primary ar-btn">${esc(c.cta.button)}</a>
-            <a href="tel:${PHONE}" class="btn ar-btn">${esc(t.call)}</a>
-          </div>
-        </div>
-        ${nearbyHtml}`)}
+    <!-- CTA + OTHER AREAS -->
+${sec('lib-section --end', 'book', `        ${renderCta(c.cta, t, `
+        <nav class="ar-others ar-rise" aria-label="${escAttr(t.othersAria)}">
+          <p class="ar-others-label">${esc(t.label.others)}</p>
+          <ul>
+            ${others.join('\n            ')}
+          </ul>
+        </nav>`)}`)}
 
     <!-- FOOTER -->
     ${chrome.footer}
   </main>
 
-  <script>${REVEAL_JS}  </script>
+  <script>${REVEAL_JS}${MEDIA_JS}  </script>
+  <script src="/shared.js?v=${chrome.jsVer}" defer></script>
+</body>
+</html>
+`;
+}
+
+// ---------- hub ----------
+function renderHub(h, chrome, available) {
+  const t = T[h.lang];
+  const url = hubUrl(h.lang);
+  const areas = AREA_IDS.filter((id) => available.has(`${id}.${h.lang}`)).map((id) => available.get(`${id}.${h.lang}`));
+  const byId = new Map(areas.map((a) => [a.id, a]));
+
+  const stations = areas.map((a) => {
+    const g = MAP_AREAS[a.id];
+    return `<a class="ar-st --area --${g.side}${g.wrap ? ' --wrap' : ''}" href="#area-${a.id}" data-area="${a.id}" style="left:${pct(g.x, MAP_W)};top:${pct(g.y, MAP_H)}"><span class="ar-st-label">${wrapLabel(shortOf(a), g.wrap)}</span></a>`;
+  });
+  const stops = (h.stops || []).filter((s) => MAP_STOPS[s.case]).map((s) => {
+    const g = MAP_STOPS[s.case];
+    return `<a class="ar-st --stop --${g.side}${g.wrap ? ' --wrap' : ''}" href="${casePath(s.case, h.lang)}" data-stop="${s.case}" data-near="${s.area}" style="left:${pct(g.x, MAP_W)};top:${pct(g.y, MAP_H)}"><span class="ar-st-label">${wrapLabel(s.mapLabel || s.name, g.wrap)}</span></a>`;
+  });
+
+  const cards = areas.map((a) => `<article class="ar-acard ar-rise" id="area-${a.id}">
+            <p class="ar-ac-where">${esc(a.eyebrow)}</p>
+            <h3>${esc(shortOf(a))}</h3>
+            <p class="ar-ac-insight">${esc(a.card.insight)}</p>
+            <ul class="ar-ac-rows">
+              <li>${I.pin}<span><b>${esc(t.nearest)}</b>${esc(a.card.proofLine)}</span></li>
+              <li>${I.route}<span><b>${esc(t.firstMove)}</b>${esc(a.steps.items[0].title)}</span></li>
+            </ul>
+            <div class="ar-ac-links"><a class="ar-ac-link" href="${areaPath(a.id, h.lang)}">${esc(t.readBrief(shortOf(a)))} ${I.arrow}</a></div>
+          </article>`).join('\n          ');
+
+  const templates = (h.stops || []).filter((s) => MAP_STOPS[s.case]).map((s) => {
+    const near = byId.get(s.area);
+    return `<template id="ar-stop-${s.case}">
+    <p class="ar-ac-where">${esc(t.clientWhere(s.where))}</p>
+    <h3>${esc(s.name)}</h3>
+    <p class="ar-ac-insight">${esc(s.line)}</p>
+    ${near ? `<ul class="ar-ac-rows"><li>${I.pin}<span><b>${esc(t.closestArea)}</b>${esc(shortOf(near))}</span></li></ul>` : ''}
+    <div class="ar-ac-links"><a class="ar-ac-link" href="${casePath(s.case, h.lang)}">${esc(t.caseLink(s.mapLabel || s.name))} ${I.arrow}</a>${near ? `<a class="ar-ac-link --quiet" href="${areaPath(near.id, h.lang)}">${esc(t.readBrief(shortOf(near)))} ${I.arrow}</a>` : ''}</div>
+  </template>`;
+  }).join('\n  ');
+
+  const schema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: t.home, item: t.homeUrl },
+          { '@type': 'ListItem', position: 2, name: t.hubName, item: url },
+        ],
+      },
+      { '@type': ['Organization', 'ProfessionalService'], '@id': ORG_ID, name: 'Button Up Media', url: `${BASE}/` },
+      {
+        '@type': 'CollectionPage',
+        '@id': `${url}#page`,
+        url,
+        name: h.h1,
+        description: h.answer,
+        inLanguage: h.lang,
+        publisher: { '@id': ORG_ID },
+        mainEntity: { '@id': `${url}#areas` },
+      },
+      {
+        '@type': 'ItemList',
+        '@id': `${url}#areas`,
+        name: h.listH2,
+        numberOfItems: areas.length,
+        itemListElement: areas.map((a, i) => ({ '@type': 'ListItem', position: i + 1, name: a.h1, url: areaUrl(a.id, h.lang) })),
+      },
+    ],
+  };
+
+  const head = renderHead({
+    c: h, t, chrome, url,
+    alternates: alternatesFor(hubUrl('en'), hubUrl('es'), available.has('hub.en'), available.has('hub.es')),
+    hasAlt: available.has(h.lang === 'en' ? 'hub.es' : 'hub.en'),
+    schema, css: BASE_CSS + HUB_CSS,
+  });
+
+  return `${head}
+<body>
+  <script>document.documentElement.classList.add('ar-js');</script>
+  ${chrome.gtmNoscript}
+
+  ${chrome.depth}
+
+  ${chrome.nav}
+
+  <main class="page">
+
+    <!-- HERO + TRANSIT MAP -->
+    <section class="lib-section ar-hub-hero">
+      <div class="ar-wrap ar-hub-grid">
+        <div class="ar-hub-copy">
+          <p class="ar-label">${esc(h.eyebrow)}</p>
+          <h1>${esc(h.h1)}</h1>
+          <p class="ar-lede">${esc(h.answer)}</p>
+          <div class="ar-ctas">
+            <a href="${t.contact}" class="btn btn-primary ar-btn">${esc(t.primary)} ${I.arrow}</a>
+            <a href="${t.grader}" class="btn ar-btn">${esc(t.graderBtn)}</a>
+          </div>
+        </div>
+        <figure class="ar-map" role="group" aria-label="${escAttr(h.mapAria)}">
+          <div class="ar-map-canvas">
+          ${MAP_SVG}
+            <span class="ar-map-cty" style="top:${pct(84, MAP_H)}" aria-hidden="true">${esc(h.county.north)}</span>
+            <span class="ar-map-cty" style="top:${pct(113, MAP_H)}" aria-hidden="true">${esc(h.county.south)}</span>
+            ${stations.join('\n            ')}
+            ${stops.join('\n            ')}
+          </div>
+          <figcaption class="ar-map-legend"><span><i class="ar-lg" aria-hidden="true"></i>${esc(h.legend.area)}</span><span><i class="ar-lg --stop" aria-hidden="true"></i>${esc(h.legend.stop)}</span><span>${esc(h.legend.scale)}</span></figcaption>
+        </figure>
+        <div class="ar-map-panel" id="ar-map-panel" aria-live="polite">
+          <p class="ar-map-hint">${I.tap}<span>${esc(h.mapHint)}</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- AREA CARDS -->
+${sec('card-overlay --dark lib-section --lap', 'areas', `        <p class="ar-label">${esc(h.listLabel || h.eyebrow)}</p>
+        <h2 class="ar-h2">${esc(h.listH2)}</h2>
+        <p class="ar-sub">${esc(h.listSub)}</p>
+        <div class="ar-acards">
+          ${cards}
+        </div>`)}
+
+    <!-- CTA -->
+${sec('lib-section --end', 'book', `        ${renderCta(h.cta, t)}`)}
+
+    <!-- map panel content for client stops (cloned by the script below) -->
+    <div class="ar-tpls" hidden>
+  ${templates}
+    </div>
+
+    <!-- FOOTER -->
+    ${chrome.footer}
+  </main>
+
+  <script>${REVEAL_JS}${HUB_JS}  </script>
   <script src="/shared.js?v=${chrome.jsVer}" defer></script>
 </body>
 </html>
@@ -708,11 +1192,24 @@ function todayET() {
   return new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
 }
 
+// Visible words in <main> minus the shared footer, scripts and review notes.
+export function visibleWords(html) {
+  const main = (html.match(/<main[\s\S]*?<\/main>/) || [''])[0]
+    .replace(/<footer[\s\S]*?<\/footer>/, ' ')
+    .replace(/<script[\s\S]*?<\/script>/g, ' ')
+    .replace(/<template[\s\S]*?<\/template>/g, ' ')
+    .replace(/<aside class="review-note">[\s\S]*?<\/aside>/g, ' ')
+    .replace(/<span class="ar-sr">[\s\S]*?<\/span>/g, ' ')
+    .replace(/<span class="ar-map-cty"[\s\S]*?<\/span>/g, ' ');
+  return stripTags(main).replace(/&[a-z]+;|&#\d+;/g, ' ').split(/\s+/).filter((w) => /[\p{L}\p{N}]/u.test(w)).length;
+}
+
 // ---------- entry point ----------
 // buildAreas(root, outDir[, { strict }]) renders every valid areas/content/*.json
-// and returns the sitemap <url> entries for the pages it wrote. Invalid files are
-// skipped with a warning; lint issues (dashes, off-list links, meta lengths) are
-// warnings unless strict is true, in which case they throw.
+// (area briefs + the hub) and returns the sitemap <url> entries for the pages it
+// wrote. Invalid files are skipped with a warning; lint issues (dashes, off-list
+// links, meta lengths, word counts) are warnings unless strict is true, in which
+// case they throw.
 export async function buildAreas(root, outDir, { strict = false } = {}) {
   const contentDir = path.join(root, 'areas', 'content');
   let files = [];
@@ -735,13 +1232,8 @@ export async function buildAreas(root, outDir, { strict = false } = {}) {
     }
     const errs = validateShape(c, f);
     if (errs.length) { problems.push(`${f}: skipped, ${errs.join('; ')}`); continue; }
-    lint(c).forEach((w) => problems.push(`${f}: ${w}`));
+    lint(c, root).forEach((w) => problems.push(`${f}: ${w}`));
     available.set(`${c.id}.${c.lang}`, c);
-  }
-  if (problems.length) {
-    const msg = `build-areas:\n  ${problems.join('\n  ')}`;
-    if (strict) throw new Error(msg);
-    console.warn(msg);
   }
 
   const chrome = await loadChrome(root);
@@ -750,23 +1242,40 @@ export async function buildAreas(root, outDir, { strict = false } = {}) {
 
   const lastmod = todayET();
   const entries = [];
-  const order = (k) => { const [id, lang] = [k.slice(0, k.lastIndexOf('.')), k.slice(k.lastIndexOf('.') + 1)]; const i = AREA_IDS.indexOf(id); return `${i < 0 ? 99 : String(i).padStart(2, '0')}-${id}-${lang}`; };
-  for (const key of [...available.keys()].sort((a, b) => order(a).localeCompare(order(b)))) {
-    const c = available.get(key);
-    const html = renderPage(c, chrome[c.lang], available);
-    if (DASH_RE.test(html)) {
-      const msg = `build-areas: rendered ${key} contains an em/en dash`;
-      if (strict) throw new Error(msg);
-      console.warn(msg);
-    }
-    const dir = c.lang === 'es' ? 'areas-es' : 'areas';
-    await writeFile(path.join(outDir, dir, `${c.id}.html`), html);
-    entries.push(`  <url>
-    <loc>${areaUrl(c.id, c.lang)}</loc>
+  const written = [];
+  const entry = (loc) => `  <url>
+    <loc>${loc}</loc>
     <lastmod>${lastmod}</lastmod>
-  </url>`);
+  </url>`;
+  const emit = async (key, html, file, loc, wordRange) => {
+    if (DASH_RE.test(html)) problems.push(`rendered ${key} contains an em/en dash`);
+    const w = visibleWords(html);
+    if (wordRange && (w < wordRange[0] || w > wordRange[1])) problems.push(`rendered ${key} has ${w} visible words (want ${wordRange[0]}-${wordRange[1]})`);
+    await writeFile(file, html);
+    entries.push(entry(loc));
+    written.push(`${key} (${w} words)`);
+  };
+
+  for (const lang of ['en', 'es']) {
+    const h = available.get(`hub.${lang}`);
+    if (!h) continue;
+    const file = lang === 'es' ? path.join(outDir, 'areas-es', 'index.html') : path.join(outDir, 'areas-we-serve.html');
+    await emit(`hub.${lang}`, renderHub(h, chrome[lang], available), file, hubUrl(lang));
+  }
+  for (const lang of ['en', 'es']) {
+    for (const id of AREA_IDS) {
+      const c = available.get(`${id}.${lang}`);
+      if (!c) continue;
+      const dir = lang === 'es' ? 'areas-es' : 'areas';
+      await emit(`${id}.${lang}`, renderArea(c, chrome[lang], available), path.join(outDir, dir, `${id}.html`), areaUrl(id, lang), [500, 700]);
+    }
   }
 
-  console.log(`Built area pages: ${entries.length} (${[...available.keys()].join(', ')})`);
+  if (problems.length) {
+    const msg = `build-areas:\n  ${problems.join('\n  ')}`;
+    if (strict) throw new Error(msg);
+    console.warn(msg);
+  }
+  console.log(`Built area pages: ${written.length} (${written.join(', ')})`);
   return entries.join('\n');
 }

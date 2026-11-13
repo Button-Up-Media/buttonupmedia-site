@@ -12,12 +12,12 @@ The blog gets traffic, but mostly from do-it-yourself readers and people outside
 
 ## Every post must
 1. Link to the most relevant service page in the body, where a reader would naturally want it (not in a link list): /socialmediamarketing, /restaurant-website-design, /restaurant-advertising, /restaurant-seo (ES: /es/marketing-redes-sociales, /es/diseno-web-restaurantes, /es/publicidad-restaurantes, /es/seo-restaurantes).
-2. Cite a real result from /case-studies (ES /es/casos-de-exito) when one fits, with the anchor link (#tonis-sushi-bar, #the-fatty-crab, #brewing-buddha, #shimuja-ramen, #rusty-pelican, #private-events, #woa-cocktails). Use only numbers published on that page.
+2. Cite a real result when one fits, linking the case page itself: /case-studies/{slug} (ES /es/casos-de-exito/{slug}) for tonis-sushi-bar, the-fatty-crab, brewing-buddha, shimuja-ramen, rusty-pelican, private-events, woa-cocktails. Use only numbers published on that page.
 3. Keep the grader mid-CTA (build-blog.mjs adds it) and the founder CTA. Do not add extra "book a call" blocks.
 4. Follow the existing style rules: beginner-friendly, click-by-click where it is a how-to, no em or en dashes, ES register (usted in CTAs, tú in body), no invented statistics.
 
 ## Local posts
-- Six neighborhoods now have real area service pages: Miami Beach, Brickell & Downtown, Wynwood, Coral Gables, Doral, Fort Lauderdale (/restaurant-marketing-{area}, ES /es/marketing-restaurantes-{area}). Do NOT write "restaurant marketing in {area}" posts for those six; it makes two of our pages compete for one search. Link to the area page instead when a post mentions the area.
+- Six neighborhoods now have real area service pages: Miami Beach, Brickell & Downtown, Wynwood, Coral Gables, Doral, Fort Lauderdale (/restaurant-marketing-{area}, ES /es/marketing-restaurantes-{area}). Do NOT write "restaurant marketing in {area}" posts for those six; it makes two of our pages compete for one search. Link to the area page instead when a post mentions the area (hub: /areas-we-serve, ES /es/zonas-que-atendemos).
 - New city posts are fine only for areas without an area page (Aventura, Kendall, Hialeah, Boca Raton, Delray, West Palm Beach), and only with real local detail.
 
 ## Cadence

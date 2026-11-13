@@ -6,66 +6,65 @@
   "metaDescription": "Marketing bilingüe para restaurantes en Doral: videos en español, Google, páginas web y anuncios, del equipo detrás de las 21M+ vistas de The Fatty Crab.",
   "eyebrow": "Doral, Miami-Dade",
   "h1": "Marketing para restaurantes en Doral",
-  "answer": "Button Up Media es una agencia bilingüe de Miami que ayuda a restaurantes de Doral a atraer más clientes con contenido en español, Google, páginas web y anuncios.",
-  "heroSub": "Nuestro trabajo de redes orgánicas para The Fatty Crab, en la NW 87th Ave, logró más de 21M de vistas y 110K seguidores. Así lo haríamos para tu restaurante.",
-  "market": {
-    "h2": "Doral come en español, a la hora del almuerzo y en familia",
-    "paragraphsHtml": [
-      "Doral es una ciudad joven y en pleno crecimiento, justo al oeste del Aeropuerto Internacional de Miami, a la que muchos llaman <em>Doralzuela</em> por su gran comunidad venezolana. También se escucha el español de Colombia, Cuba y Perú en cada cuadra. Muchos de tus clientes leen reseñas, ven videos y buscan en Google primero en español.",
-      "El día se divide en dos públicos. Entre semana, las oficinas y bodegas cerca del aeropuerto salen a almorzar con prisa y quieren buena comida, rápido. Las noches y los fines de semana son de las familias de los barrios nuevos alrededor de Downtown Doral y CityPlace Doral, que buscan un lugar que le guste a toda la mesa.",
-      "Además, siguen llegando vecinos nuevos que buscan sus lugares de siempre. El restaurante que aparece bien en Google e Instagram, en su idioma, es el que prueban primero."
-    ],
-    "facts": [
-      { "label": "Ubicación", "value": "Al oeste del Aeropuerto Internacional de Miami" },
-      { "label": "Idioma", "value": "Primero español, con bastante inglés" },
-      { "label": "Zonas para comer", "value": "Downtown Doral, CityPlace Doral" },
-      { "label": "Públicos clave", "value": "Almuerzo de oficina, familias, recién llegados" }
-    ]
+  "answer": "Button Up Media es una agencia bilingüe de Miami que ayuda a los restaurantes de Doral a atraer más clientes con videos en español, Google, páginas web y anuncios.",
+  "card": {
+    "insight": "Primero en español, con el almuerzo de oficina cerca del aeropuerto y familias llenando mesas el fin de semana.",
+    "proofLine": "Aquí mismo: The Fatty Crab, 21M+ vistas orgánicas"
   },
-  "needs": {
-    "h2": "Lo que de verdad llena mesas en Doral",
-    "items": [
-      { "title": "Español escrito para Doral, no traducido", "body": "Los textos, las publicaciones en Google y las respuestas a reseñas deben sonar como habla tu gente, en un español cálido del Caribe y de Sudamérica, con inglés al lado para el público de oficina." },
-      { "title": "Gana la búsqueda del almuerzo", "body": "Cuando alguien cerca del aeropuerto busca dónde almorzar a las 11:45, tu perfil de Google necesita el horario al día, un menú de almuerzo claro, buenas fotos y cómo llegar o pedir con un toque." },
-      { "title": "Dale a las familias una razón para elegirte", "body": "Las familias deciden con fotos y reseñas. Muestra las porciones reales, el local en una noche llena y a tu equipo, y responde cada reseña en el idioma en que la escribieron." },
-      { "title": "El delivery es tu segundo comedor", "body": "Las apps de delivery también pesan en la decisión. Tomas del empaque, un enlace claro para pedir y publicaciones a la hora de la cena pueden mover pedidos sin anuncios pagados, como lo demostró el reel de Uber Eats de The Fatty Crab." }
+  "heroMedia": {
+    "type": "loop",
+    "video": "/videos/fatty-crab-seafood-boil.mp4",
+    "poster": "/images/fatty-crab-thumbnail-boil.avif",
+    "width": 540,
+    "height": 960,
+    "focus": "50% 80%",
+    "alt": "Un seafood boil en The Fatty Crab, en Doral, del contenido para redes que creamos para el restaurante",
+    "kicker": "Nuestro trabajo aquí",
+    "tag": "The Fatty Crab, NW 87th Ave"
+  },
+  "snapshot": {
+    "h2": "Doral come en español, a la hora del almuerzo y en familia",
+    "facts": [
+      {"label": "Ubicación", "value": "Justo al oeste del Aeropuerto Internacional de Miami"},
+      {"label": "Idioma", "value": "Primero español, con bastante inglés"},
+      {"label": "Públicos clave", "value": "Almuerzo de oficina, familias, recién llegados"}
+    ],
+    "paragraphsHtml": [
+      "Doral es una ciudad joven y en pleno crecimiento, a la que muchos llaman <em>Doralzuela</em> por su gran comunidad venezolana, y donde se escucha el español de Colombia, Cuba y Perú en cada cuadra. Muchos de tus clientes leen reseñas y buscan en Google primero en español.",
+      "Entre semana, las oficinas y bodegas cerca del aeropuerto salen a almorzar con prisa y quieren buena comida, rápido. Las noches y los fines de semana son de las familias de Downtown Doral y CityPlace Doral, que buscan un lugar que le guste a toda la mesa."
     ]
   },
   "proof": {
     "h2": "Resultados aquí mismo en Doral",
+    "case": "the-fatty-crab",
+    "relation": "Aquí mismo en Doral",
+    "client": "The Fatty Crab",
+    "where": "NW 87th Ave, Doral",
+    "service": "Redes orgánicas",
+    "stat": "21M+",
+    "statLabel": "vistas orgánicas en Instagram y Facebook",
+    "chips": ["110K+ seguidores", "6.5% de interacción"],
+    "bodyHtml": "Un restaurante de mariscos cajún. Construimos su contenido alrededor de la comida, la experiencia, la gente y la cultura. Un solo reel, publicado en las horas pico de delivery con un llamado a \"Pedir en Uber Eats\", generó pedidos sin presupuesto de anuncios."
+  },
+  "steps": {
+    "h2": "Lo primero que haríamos en Doral",
     "items": [
-      { "client": "The Fatty Crab", "where": "Doral", "service": "Redes orgánicas", "result": "21M+ vistas, 110K+ seguidores", "body": "Un restaurante de mariscos cajún en la NW 87th Ave. Creamos pilares de contenido sobre comida, experiencia, gente y cultura, plantillas de video para producir rápido y un calendario ajustado a su público, con 6.5% de interacción.", "href": "/es/casos-de-exito#the-fatty-crab" },
-      { "client": "The Fatty Crab", "where": "Doral", "service": "Reel de Instagram", "result": "Pedidos en Uber Eats, sin pagar anuncios", "body": "Un solo reel con la urgencia de \"pide esta noche\", tomas del empaque y un llamado a \"Pedir en Uber Eats\", publicado en las horas pico de delivery. Generó pedidos solo con alcance orgánico.", "href": "/es/casos-de-exito#the-fatty-crab" }
+      {"title": "Prepara tu perfil de Google para el almuerzo", "bodyHtml": "Horario al día, un menú de almuerzo claro, fotos recientes y respuestas a reseñas en el idioma en que las escribieron. Es la base de nuestro <a href=\"/es/seo-restaurantes\">servicio de SEO y Perfil de Empresa de Google</a>."},
+      {"title": "Graba un día de contenido bilingüe", "bodyHtml": "Nuestro equipo graba en tu restaurante entre el almuerzo y la cena. Una sola sesión suele darnos de 4 a 6 semanas de <a href=\"/es/marketing-redes-sociales\">reels, TikToks y fotos</a>, con textos en español y en inglés."},
+      {"title": "Trata el delivery como un segundo comedor", "bodyHtml": "Tomas del empaque y un enlace claro para pedir, publicados cuando la gente está decidiendo qué cenar. Es la misma fórmula del reel de Uber Eats de The Fatty Crab."}
     ]
   },
-  "plan": {
-    "h2": "Lo que haríamos por un restaurante en Doral",
-    "items": [
-      { "service": "social", "title": "Contenido bilingüe que luce la comida", "bodyHtml": "Nuestro equipo graba en tu restaurante y luego publicamos reels y TikToks en español e inglés y respondemos los comentarios. Es el mismo <a href=\"/es/marketing-redes-sociales\">servicio de redes sociales y contenido</a> detrás de The Fatty Crab." },
-      { "service": "seo", "title": "Aparece en \"cerca de mí\" en los dos idiomas", "bodyHtml": "Configuramos y manejamos tu perfil de Google para que salgas en búsquedas como \"comida venezolana Doral\" y \"almuerzo cerca de mí\". Nuestro <a href=\"/es/seo-restaurantes\">servicio de SEO y perfil de Google para restaurantes</a> cubre los detalles." },
-      { "service": "web", "title": "Una página rápida y bilingüe que recibe pedidos", "bodyHtml": "Casi todos tus clientes te encuentran desde el celular. Creamos <a href=\"/es/diseno-web-restaurantes\">páginas web para restaurantes</a> a la medida, en español e inglés, con el menú, los pedidos y las reservas a un toque." },
-      { "service": "ads", "title": "Anuncios para las cuadras y horas correctas", "bodyHtml": "Cuando necesitas llenar un martes flojo o lanzar un menú nuevo, manejamos <a href=\"/es/publicidad-restaurantes\">anuncios en Google y Meta</a> dirigidos a las oficinas y los barrios cercanos, midiendo cada llamada y cada pedido." }
-    ]
-  },
-  "shoots": {
-    "h2": "Cómo son las grabaciones en Doral",
-    "body": "Vamos a tu local. Nuestro propio equipo graba fotos y videos en tu restaurante, y una sola sesión suele darnos de 4 a 6 semanas de contenido. Planificamos las tomas contigo y trabajamos alrededor de tus horas pico, por ejemplo entre el almuerzo y la cena, para que el servicio no se detenga. Frente a la cámara, tu equipo puede hablar en español, en inglés o en los dos."
-  },
-  "pricing": {
-    "h2": "Cuánto cuesta",
-    "bodyHtml": "La mayoría de los restaurantes invierte <strong>entre $1,500 y $5,000 al mes</strong> en un programa coordinado de redes, Google y anuncios. Las páginas web se pagan una sola vez: <strong>$1,500</strong> la Construcción del sitio web o <strong>$2,000</strong> la Construcción web integrada. El manejo de anuncios no tiene contratos a largo plazo. En una llamada gratis te decimos qué necesitas primero."
-  },
+  "pricingHtml": "La mayoría de los restaurantes invierte <strong>entre $1,500 y $5,000 al mes</strong> en un programa coordinado. Las páginas web son un pago único de <strong>$1,500 o $2,000</strong>.",
   "faqs": [
-    { "q": "¿Trabajan con restaurantes en Doral?", "a": "Sí. Estamos en Miami, y nuestro trabajo para The Fatty Crab en la NW 87th Ave es uno de nuestros casos de éxito más conocidos. Trabajamos con restaurantes, bares y cafés en todo Doral." },
-    { "q": "¿Crean contenido en español?", "a": "Sí. Nuestro equipo es bilingüe: textos, anuncios, publicaciones en Google y respuestas a reseñas pueden ir en español, en inglés o en los dos, escritos como se habla en Doral." },
-    { "q": "¿Pueden grabar durante el servicio?", "a": "Planificamos la sesión contigo para que encaje con el servicio. Los momentos de mucho movimiento dan buenas tomas, pero los platos estrella se graban mejor cuando la cocina está tranquila." },
-    { "q": "¿Ayudan con pedidos de delivery, no solo en el local?", "a": "Sí. Para The Fatty Crab, un solo reel orgánico con tomas del empaque y un llamado a \"Pedir en Uber Eats\", publicado en las horas pico de delivery, generó pedidos sin presupuesto pagado." },
-    { "q": "¿Cuánto cuesta el marketing para restaurantes en Doral?", "a": "La mayoría de los restaurantes invierte entre $1,500 y $5,000 al mes en un programa coordinado. Las páginas web cuestan un pago único de $1,500 o $2,000. En una llamada gratis te damos un número real para tu restaurante." }
+    {"q": "¿Trabajan con restaurantes en Doral?", "a": "Sí. Estamos en Miami, y nuestro trabajo para The Fatty Crab en la NW 87th Ave es uno de nuestros casos de éxito más conocidos."},
+    {"q": "¿Crean contenido en español?", "a": "Sí. Nuestro equipo es bilingüe: textos, anuncios, publicaciones en Google y respuestas a reseñas pueden ir en español, en inglés o en los dos, escritos como se habla en Doral."},
+    {"q": "¿Ayudan con pedidos de delivery, no solo en el local?", "a": "Sí. Para The Fatty Crab, un solo reel orgánico con tomas del empaque y un llamado a \"Pedir en Uber Eats\", publicado en las horas pico de delivery, generó pedidos sin presupuesto pagado."},
+    {"q": "¿Pueden grabar durante el servicio?", "a": "Planificamos la sesión contigo para que encaje con el servicio. Los momentos de mucho movimiento dan buenas tomas, pero los platos estrella se graban mejor cuando la cocina está tranquila."}
   ],
-  "nearby": ["coral-gables", "brickell", "wynwood"],
+  "nearby": ["coral-gables", "brickell"],
   "cta": {
     "h2": "Hablemos de su restaurante en Doral",
-    "body": "Cuéntenos qué quiere tener más (almuerzos entre semana, familias el fin de semana o pedidos de delivery) y le mostramos por dónde empezaríamos. Gratis, en español o en inglés, sin compromiso.",
+    "body": "Cuéntenos qué quiere tener más (almuerzos entre semana, familias el fin de semana o pedidos de delivery) y le mostramos por dónde empezaríamos. Gratis, en español o en inglés.",
     "button": "Agende una llamada estratégica gratis"
   }
 }
