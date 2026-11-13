@@ -624,7 +624,7 @@
       var kind = e && e.kind;
       if (kind === "no_url") {
         reportEl.innerHTML = errorShell("Ya casi, ¿cuál es su sitio web?",
-          "No pudimos encontrar un sitio web para " + esc(bizName) + ". Ingrese su dirección y lo calificamos.",
+          "Ingrese el sitio web de " + esc(bizName) + " y lo calificamos en un minuto.",
           '<form id="sr-urlform" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:18px;"><input class="sr-input" id="sr-urlin" type="text" placeholder="turestaurante.com" style="max-width:300px;text-align:left;" /><button class="sr-gate-btn" style="width:auto;margin-top:0;padding:0 22px;">Calificar mi sitio</button></form>');
         document.getElementById("sr-urlform").addEventListener("submit", function (ev) {
           ev.preventDefault();

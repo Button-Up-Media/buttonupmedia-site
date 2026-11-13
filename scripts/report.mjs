@@ -17,6 +17,7 @@
 // Writes: reports/latest.md, reports/latest.json, reports/history/<date>.json
 // Credentials: see scripts/google-auth.mjs (uses your gcloud login, no key files).
 import { writeFile, mkdir, readFile, readdir } from 'fs/promises';
+import { checkGrader, renderHealth, notifyIfDown } from './grader-health.mjs';
 import path from 'path';
 import { googleFetch, hasScope, AuthError, AUTH_COMMAND } from './google-auth.mjs';
 import { LEAD_EVENTS } from './lead-events.mjs';
@@ -336,6 +337,7 @@ function render(snap) {
   p(`**Compared against:** ${meta.prior.start} to ${meta.prior.end}`);
   p(`**Generated:** ${meta.generated.slice(0, 16).replace('T', ' ')} UTC`);
   p();
+  if (snap.graderHealth) p(renderHealth(snap.graderHealth));
 
   // --- headline ---
   const chNow = ga4.channels.now;
@@ -596,8 +598,22 @@ async function main() {
   console.error(`Search Console: ${site || 'NOT AUTHORIZED (GA4-only report)'}`);
   console.error(`Window: ${WINDOW.start} to ${WINDOW.end} vs ${PRIOR.start} to ${PRIOR.end}`);
 
-  await resolveLeadMetric(property.id);
-  const snap = await collect(property.id, site);
+  // The grader health probe hits production and takes ~30s, so it runs while
+  // GA4 is queried. It is reported (and a Mac notification shown) even when the
+  // GA4 half fails, because a dead grader costs leads either way.
+  const healthP = checkGrader().catch((e) => [{ name: 'Grader health check', ok: false, detail: e.message, impact: 'Could not run the probe' }]);
+  let snap;
+  try {
+    await resolveLeadMetric(property.id);
+    snap = await collect(property.id, site);
+  } catch (err) {
+    const health = await healthP;
+    console.error(renderHealth(health));
+    await notifyIfDown(health);
+    throw err;
+  }
+  snap.graderHealth = await healthP;
+  await notifyIfDown(snap.graderHealth);
 
   if (AS_JSON) {
     console.log(JSON.stringify(snap, null, 2));

@@ -172,16 +172,25 @@ export async function requireScope(scope, feature) {
 }
 
 // Thin JSON wrapper that turns Google's error envelopes into readable messages.
+// Google's APIs (the GA4 Data API especially) return sporadic 5xx HTML error
+// pages; one of those used to kill the whole weekly report run, so transient
+// server errors are retried with backoff before giving up.
 export async function googleFetch(url, { method = 'GET', body, label = url, scope } = {}) {
   const token = await accessToken(scope || scopeForUrl(url) || undefined);
-  const res = await fetch(url, {
-    method,
-    headers: {
-      Authorization: `Bearer ${token}`,
-      ...(body ? { 'Content-Type': 'application/json' } : {}),
-    },
-    ...(body ? { body: JSON.stringify(body) } : {}),
-  });
+  let res;
+  for (let attempt = 1; ; attempt++) {
+    res = await fetch(url, {
+      method,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        ...(body ? { 'Content-Type': 'application/json' } : {}),
+      },
+      ...(body ? { body: JSON.stringify(body) } : {}),
+    });
+    if ((res.status < 500 && res.status !== 429) || attempt >= 5) break;
+    await res.text().catch(() => '');
+    await new Promise((r) => setTimeout(r, 1500 * attempt));
+  }
 
   const text = await res.text();
   let json;

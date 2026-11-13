@@ -1830,7 +1830,7 @@
       var kind = e && e.kind;
       if (kind === "no_url") {
         reportEl.innerHTML = errorShell("Almost there, what is your website?",
-          "We could not find a website for " + esc(bizName) + ". Enter your address and we will grade it.",
+          "Enter the website for " + esc(bizName) + " and we will grade it in about a minute.",
           '<form id="sr-urlform" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:18px;"><input class="sr-input" id="sr-urlin" type="text" placeholder="yourrestaurant.com" style="max-width:300px;text-align:left;" /><button class="sr-gate-btn" style="width:auto;margin-top:0;padding:0 22px;">Grade my site</button></form>');
         document.getElementById("sr-urlform").addEventListener("submit", function (ev) {
           ev.preventDefault();
