@@ -11,6 +11,7 @@
     "report:week": "node scripts/report.mjs --days 7",
     "report:quarter": "node scripts/report.mjs --days 90",
     "grader:health": "node scripts/grader-health.mjs",
+    "indexnow": "node scripts/indexnow.mjs",
     "tracking:setup": "node scripts/tracking-setup.mjs",
     "tracking:apply": "node scripts/tracking-setup.mjs --publish"
   },

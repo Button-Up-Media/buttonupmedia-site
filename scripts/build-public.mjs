@@ -44,6 +44,7 @@ const filesToCopy = [
   'llms.txt',
   'favicon-bum.svg',
   'google1836ba38076ac9c6.html',
+  'b214247b4ea57ca1e9e3f7523c0985db.txt', // IndexNow key (scripts/indexnow.mjs)
 ];
 
 // Assets minified through esbuild on the way into public/.

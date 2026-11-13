@@ -67,4 +67,9 @@ try {
   fail(`build/commit/push failed: ${e.message}`);
 }
 
+// Tell Bing/IndexNow once the deploy is live (best effort: never fails the publish).
+try {
+  execSync(`node scripts/indexnow.mjs --wait ${url} ${BASE}/es/blog/${next.es.slug} ${BASE}/blog ${BASE}/es/blog`, { cwd: root, stdio: 'inherit', timeout: 6 * 60 * 1000 });
+} catch (e) { /* IndexNow is a bonus; the post is already live */ }
+
 console.log(`PUBLISHED\t${title}\t${url}`);

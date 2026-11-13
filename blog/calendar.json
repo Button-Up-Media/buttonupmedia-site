@@ -919,34 +919,8 @@
       "publishedDate": "2026-11-13"
     },
     {
-      "id": "signs-you-need-help",
-      "status": "ready",
-      "category": "strategy",
-      "author": "juan",
-      "heroQuery": "tired restaurant owner looking at a phone in an empty american restaurant",
-      "en": {
-        "slug": "signs-restaurant-marketing-needs-help",
-        "title": "5 Signs Your Restaurant's Marketing Needs Help (and What to Do First)",
-        "keyword": "restaurant marketing not working",
-        "internal": [
-          "https://www.buttonupmedia.com/contact",
-          "https://www.buttonupmedia.com/socialmediamarketing"
-        ]
-      },
-      "es": {
-        "slug": "senales-marketing-restaurante-necesita-ayuda",
-        "title": "5 Señales de Que el Marketing de tu Restaurante Necesita Ayuda (y Qué Hacer Primero)",
-        "keyword": "el marketing de mi restaurante no funciona",
-        "internal": [
-          "https://www.buttonupmedia.com/es/contacto",
-          "https://www.buttonupmedia.com/es/marketing-redes-sociales"
-        ]
-      },
-      "heroAlt": "A restaurant owner looking out the window during a slow shift"
-    },
-    {
       "id": "marketing-doral",
-      "status": "ready",
+      "status": "merged",
       "category": "strategy",
       "author": "juan",
       "heroQuery": "family restaurant dining room in Doral Miami Florida",
@@ -976,31 +950,34 @@
           "https://www.buttonupmedia.com/es/publicidad-restaurantes"
         ]
       },
-      "heroAlt": "Guests dining together at an outdoor restaurant in South Florida"
+      "heroAlt": "Guests dining together at an outdoor restaurant in South Florida",
+      "note": "2026-11-13: not published as a blog post; its local research became the /restaurant-marketing-doral area page (avoids two pages competing for the same search)."
     },
     {
-      "id": "loyalty-program",
+      "id": "signs-you-need-help",
       "status": "ready",
       "category": "strategy",
       "author": "juan",
-      "heroQuery": "server handing a loyalty card to a smiling guest in an american cafe",
+      "heroQuery": "tired restaurant owner looking at a phone in an empty american restaurant",
       "en": {
-        "slug": "restaurant-loyalty-program-setup",
-        "title": "Do Restaurant Loyalty Programs Work? A Simple Setup for Small Spots",
-        "keyword": "restaurant loyalty program ideas",
+        "slug": "signs-restaurant-marketing-needs-help",
+        "title": "5 Signs Your Restaurant's Marketing Needs Help (and What to Do First)",
+        "keyword": "restaurant marketing not working",
         "internal": [
-          "https://www.buttonupmedia.com/contact"
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/socialmediamarketing"
         ]
       },
       "es": {
-        "slug": "programa-de-lealtad-restaurante",
-        "title": "¿Funcionan los Programas de Lealtad? Una Guía Sencilla para Locales Pequeños",
-        "keyword": "ideas de programa de lealtad para restaurantes",
+        "slug": "senales-marketing-restaurante-necesita-ayuda",
+        "title": "5 Señales de Que el Marketing de tu Restaurante Necesita Ayuda (y Qué Hacer Primero)",
+        "keyword": "el marketing de mi restaurante no funciona",
         "internal": [
-          "https://www.buttonupmedia.com/es/contacto"
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/marketing-redes-sociales"
         ]
       },
-      "heroAlt": "A server helping a regular guest at the restaurant counter"
+      "heroAlt": "A restaurant owner looking out the window during a slow shift"
     },
     {
       "id": "marketing-west-palm-beach",
@@ -1035,6 +1012,32 @@
         ]
       },
       "heroAlt": "A warm outdoor restaurant glowing at night in downtown South Florida"
+    },
+    {
+      "id": "claim-restaurant-google",
+      "status": "ready",
+      "category": "seo",
+      "author": "juan",
+      "heroQuery": "restaurant owner working on a laptop at a table in an american restaurant",
+      "en": {
+        "slug": "claim-restaurant-google-listing",
+        "title": "Someone Else Controls Your Restaurant's Google Listing: How to Take It Back",
+        "keyword": "how to claim my restaurant on google",
+        "internal": [
+          "https://www.buttonupmedia.com/contact",
+          "https://www.buttonupmedia.com/blog/restaurant-not-showing-on-google-maps"
+        ]
+      },
+      "es": {
+        "slug": "reclamar-ficha-google-restaurante",
+        "title": "Alguien Más Controla la Ficha de tu Restaurante en Google: Cómo Recuperarla",
+        "keyword": "cómo reclamar mi restaurante en google",
+        "internal": [
+          "https://www.buttonupmedia.com/es/contacto",
+          "https://www.buttonupmedia.com/es/blog/restaurante-no-aparece-en-google-maps"
+        ]
+      },
+      "heroAlt": "A restaurant owner and team updating their Google listing on a laptop"
     },
     {
       "id": "near-me-searches",
@@ -1113,30 +1116,28 @@
       "heroAlt": "A restaurant owner frustrated by an unfair online review"
     },
     {
-      "id": "claim-restaurant-google",
+      "id": "loyalty-program",
       "status": "ready",
-      "category": "seo",
+      "category": "strategy",
       "author": "juan",
-      "heroQuery": "restaurant owner working on a laptop at a table in an american restaurant",
+      "heroQuery": "server handing a loyalty card to a smiling guest in an american cafe",
       "en": {
-        "slug": "claim-restaurant-google-listing",
-        "title": "Someone Else Controls Your Restaurant's Google Listing: How to Take It Back",
-        "keyword": "how to claim my restaurant on google",
+        "slug": "restaurant-loyalty-program-setup",
+        "title": "Do Restaurant Loyalty Programs Work? A Simple Setup for Small Spots",
+        "keyword": "restaurant loyalty program ideas",
         "internal": [
-          "https://www.buttonupmedia.com/contact",
-          "https://www.buttonupmedia.com/blog/restaurant-not-showing-on-google-maps"
+          "https://www.buttonupmedia.com/contact"
         ]
       },
       "es": {
-        "slug": "reclamar-ficha-google-restaurante",
-        "title": "Alguien Más Controla la Ficha de tu Restaurante en Google: Cómo Recuperarla",
-        "keyword": "cómo reclamar mi restaurante en google",
+        "slug": "programa-de-lealtad-restaurante",
+        "title": "¿Funcionan los Programas de Lealtad? Una Guía Sencilla para Locales Pequeños",
+        "keyword": "ideas de programa de lealtad para restaurantes",
         "internal": [
-          "https://www.buttonupmedia.com/es/contacto",
-          "https://www.buttonupmedia.com/es/blog/restaurante-no-aparece-en-google-maps"
+          "https://www.buttonupmedia.com/es/contacto"
         ]
       },
-      "heroAlt": "A restaurant owner and team updating their Google listing on a laptop"
+      "heroAlt": "A server helping a regular guest at the restaurant counter"
     }
   ]
 }
