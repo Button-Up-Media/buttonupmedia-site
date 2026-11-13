@@ -1,0 +1,110 @@
+{
+  "id": "wynwood",
+  "lang": "es",
+  "areaName": "Wynwood",
+  "metaTitle": "Marketing para Restaurantes en Wynwood | Button Up Media",
+  "metaDescription": "Marketing para restaurantes en Wynwood, Miami: video corto, fotos de comida, Google Maps y anuncios por evento, con un equipo bilingüe que graba en tu local.",
+  "eyebrow": "Wynwood, Miami",
+  "h1": "Marketing para restaurantes en Wynwood",
+  "answer": "Button Up Media, agencia de marketing para restaurantes en Miami, ayuda a los restaurantes de Wynwood a llenar mesas con video en sitio, Google Maps y anuncios para cada evento.",
+  "heroSub": "En Wynwood, la gente decide en la acera, con el teléfono en la mano. Nos aseguramos de que tu restaurante sea el que encuentran, y el que les da ganas de entrar.",
+  "market": {
+    "h2": "Cómo se escoge dónde comer en Wynwood",
+    "paragraphsHtml": [
+      "Wynwood creció alrededor del arte, no de la comida. Las Wynwood Walls abrieron en 2009, y los restaurantes, las cervecerías y los bares llegaron detrás del público que venía a ver los murales. Eso todavía define tu negocio: mucha de la gente que camina por la NW 2nd Avenue vino por el barrio, no por ti, y decide dónde comer en el momento.",
+      "Esa decisión pasa en el teléfono. Alguien a una cuadra busca “tacos cerca de mí”, toca el mapa, mira tus fotos y tus últimas publicaciones, y escoge en segundos. Si tu perfil se ve abandonado o tus fotos de comida salen oscuras, se va caminando al próximo lugar con fila.",
+      "El calendario también cuenta. La semana de Art Basel, a principios de diciembre, y la Miami Music Week, en marzo, traen oleadas de visitantes que ya están en el barrio y con hambre, mientras que las semanas más tranquilas dependen más de la gente local. Un plan que sabe lo que viene llena más mesas que uno que reacciona tarde."
+    ],
+    "facts": [
+      { "label": "Apertura de Wynwood Walls", "value": "2009" },
+      { "label": "Semana de gran evento", "value": "Art Basel, principios de diciembre" },
+      { "label": "Calle principal", "value": "NW 2nd Avenue" }
+    ]
+  },
+  "needs": {
+    "h2": "Lo que más necesita un restaurante en Wynwood",
+    "items": [
+      {
+        "title": "Video corto que compita con los murales",
+        "body": "Tus clientes ya están grabando todo a su alrededor. Reels y TikToks de tus platos, tu barra y tu salón les dan una razón para escogerte, y les dan a tus propios clientes algo que vale la pena compartir."
+      },
+      {
+        "title": "Un perfil de Google pensado para quien pasa caminando",
+        "body": "Tu Perfil de Empresa de Google (la ficha que sale en Google Maps) es lo primero que ve alguien que busca cerca. El horario al día, fotos recientes, un enlace al menú que funcione y reseñas recientes deciden si camina hasta tu puerta."
+      },
+      {
+        "title": "Un plan para las semanas de eventos",
+        "body": "Basel y la Music Week traen gente que ya está aquí buscando dónde comer. Contenido, anuncios y un plan de menú listos con unas semanas de anticipación te permiten capturar ese público en vez de verlo pasar."
+      },
+      {
+        "title": "Todo en inglés y en español",
+        "body": "Wynwood atrae a gente local, turistas y un gran público latino. Textos, respuestas a reseñas y anuncios en los dos idiomas llegan a clientes que un perfil en un solo idioma pierde."
+      }
+    ]
+  },
+  "proof": {
+    "h2": "Nuestro trabajo más cercano a Wynwood",
+    "items": []
+  },
+  "plan": {
+    "h2": "Lo que haríamos por un restaurante en Wynwood",
+    "items": [
+      {
+        "service": "social",
+        "title": "Redes sociales y contenido en tu local",
+        "bodyHtml": "Hacemos fotografía gastronómica y video corto en tu restaurante, y luego planificamos, publicamos y manejamos tu Instagram y TikTok para que tu perfil siempre se vea al día cuando alguien lo revisa desde la acera. Así funciona nuestro servicio de <a href=\"/es/marketing-redes-sociales\">redes sociales y contenido para restaurantes</a>."
+      },
+      {
+        "service": "seo",
+        "title": "Google Maps y búsqueda local",
+        "bodyHtml": "Ponemos en orden tu Perfil de Empresa de Google, mantenemos al día las fotos y el horario, y creamos un flujo constante de reseñas para que aparezcas cuando la gente busca cerca. Es la base de nuestro trabajo de <a href=\"/es/seo-restaurantes\">SEO para restaurantes y Perfil de Empresa de Google</a>."
+      },
+      {
+        "service": "web",
+        "title": "Un sitio web que funcione en la acera",
+        "bodyHtml": "Muchos visitantes de Wynwood te revisan en el teléfono mientras están parados afuera. Hacemos sitios rápidos, bilingües y pensados primero para el celular, con el menú y las reservas o pedidos a un toque. Mira nuestro <a href=\"/es/diseno-web-restaurantes\">diseño web para restaurantes</a>."
+      },
+      {
+        "service": "ads",
+        "title": "Anuncios al ritmo del calendario",
+        "bodyHtml": "Anuncios en Google y Meta dirigidos a la gente cerca de Wynwood, con más fuerza en las semanas de eventos grandes, y con seguimiento de llamadas, reservas y pedidos. Nada se lanza hasta que el seguimiento está verificado. Así armamos nuestra <a href=\"/es/publicidad-restaurantes\">publicidad para restaurantes en Google y Meta</a>."
+      }
+    ]
+  },
+  "shoots": {
+    "h2": "Cómo funcionan las sesiones en Wynwood",
+    "body": "Vamos a tu restaurante y grabamos ahí: los platos, los tragos, el salón y la gente que lo hace funcionar. Las sesiones se agendan alrededor de tu servicio para que la cámara nunca estorbe en plena hora pico, y los primeros planos de comida casi siempre se hacen antes de abrir. El mismo equipo interno que planifica tu contenido es el que lo graba, sin pasárselo a contratistas, y una sola sesión suele dar de 4 a 6 semanas de contenido para todas tus plataformas. Todo empieza con una llamada estratégica con Juan Hernandez, nuestro fundador, para acordar qué vamos a capturar antes de sacar la cámara."
+  },
+  "pricing": {
+    "h2": "Cuánto cuesta",
+    "bodyHtml": "La mayoría de los restaurantes invierte entre $1,500 y $5,000 al mes en un programa coordinado de redes, Google y anuncios. Un sitio web nuevo es un pago único de $1,500 (Construcción del sitio web) o $2,000 (Construcción web integrada, que suma la sincronización del menú con el POS, reservas y pedidos). La gestión de anuncios no tiene contratos a largo plazo. ¿No sabes por dónde empezar? El <a href=\"/es/analizador-redes-sociales-web\">Analizador Gratis de Redes Sociales y Sitio Web</a> compara tu restaurante con la competencia cercana."
+  },
+  "faqs": [
+    {
+      "q": "¿Trabajan con restaurantes en Wynwood?",
+      "a": "Sí. Trabajamos con restaurantes, bares y cafés en todo Miami y el sur de la Florida, incluido Wynwood. Entre nuestro trabajo cercano está Shimuja Ramen, en Downtown Miami, que puedes ver en nuestros casos de éxito."
+    },
+    {
+      "q": "¿Pueden grabar contenido mientras estamos abiertos?",
+      "a": "Sí. Si quieres un salón lleno en cámara, planificamos la sesión para no estorbarle a tu personal. Los primeros planos de comida y bebida suelen salir mejor antes del servicio, cuando la cocina puede emplatar para la cámara."
+    },
+    {
+      "q": "¿Hacen contenido en español?",
+      "a": "Sí. Nuestro equipo es bilingüe, así que los textos, las respuestas a reseñas, los anuncios y tu sitio web pueden ir en inglés, en español o en los dos."
+    },
+    {
+      "q": "¿Cómo promociono mi restaurante durante Art Basel?",
+      "a": "Empieza con varias semanas de anticipación: contenido que muestre lo especial de esa semana, anuncios dirigidos a los visitantes cercanos y el horario correcto en Google. La meta es capturar a un público que ya está en el barrio."
+    },
+    {
+      "q": "¿Cuánto cuesta el marketing para restaurantes?",
+      "a": "La mayoría de los restaurantes invierte entre $1,500 y $5,000 al mes en un programa coordinado. Un sitio web es un pago único de $1,500 o $2,000."
+    }
+  ],
+  "nearby": ["brickell", "miami-beach"],
+  "cta": {
+    "h2": "¿Quiere más del público de Wynwood en sus mesas?",
+    "body": "Agende una llamada estratégica gratis con Juan. Cuéntenos de su restaurante y de sus noches flojas, y le diremos qué haríamos primero.",
+    "button": "Agende una llamada estratégica gratis"
+  }
+}

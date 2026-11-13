@@ -723,7 +723,7 @@
     },
     {
       "id": "marketing-fort-lauderdale",
-      "status": "published",
+      "status": "merged",
       "category": "strategy",
       "author": "juan",
       "heroQuery": "waterfront restaurant dining at dusk in Fort Lauderdale Florida",
@@ -748,7 +748,8 @@
         ]
       },
       "heroAlt": "The Fort Lauderdale waterfront and marina at sunset",
-      "publishedDate": "2026-10-20"
+      "publishedDate": "2026-10-20",
+      "note": "2026-11: merged into the /restaurant-marketing-fort-lauderdale area page (308 redirect)."
     },
     {
       "id": "google-ads-worth-it",
@@ -779,7 +780,7 @@
     },
     {
       "id": "marketing-coral-gables",
-      "status": "published",
+      "status": "merged",
       "category": "strategy",
       "author": "chris",
       "heroQuery": "upscale restaurant with outdoor seating on a tree-lined street in Coral Gables Florida",
@@ -804,7 +805,8 @@
         ]
       },
       "heroAlt": "An outdoor dining plaza with Mediterranean-style architecture and string lights",
-      "publishedDate": "2026-10-30"
+      "publishedDate": "2026-10-30",
+      "note": "2026-11: merged into the /restaurant-marketing-coral-gables area page (308 redirect)."
     },
     {
       "id": "happy-hour-that-works",
@@ -835,7 +837,7 @@
     },
     {
       "id": "marketing-brickell",
-      "status": "published",
+      "status": "merged",
       "category": "strategy",
       "author": "juan",
       "heroQuery": "modern rooftop restaurant with Miami skyline at dusk Brickell",
@@ -860,7 +862,8 @@
         ]
       },
       "heroAlt": "The Brickell skyline lit up at night in Miami",
-      "publishedDate": "2026-11-06"
+      "publishedDate": "2026-11-06",
+      "note": "2026-11: merged into the /restaurant-marketing-brickell area page (308 redirect)."
     },
     {
       "id": "third-party-delivery",
@@ -891,7 +894,7 @@
     },
     {
       "id": "marketing-wynwood",
-      "status": "published",
+      "status": "merged",
       "category": "strategy",
       "author": "chris",
       "heroQuery": "trendy restaurant near colorful street art murals in Wynwood Miami",
@@ -916,7 +919,8 @@
         ]
       },
       "heroAlt": "Colorful street art in the Wynwood Arts District in Miami",
-      "publishedDate": "2026-11-13"
+      "publishedDate": "2026-11-13",
+      "note": "2026-11: merged into the /restaurant-marketing-wynwood area page (308 redirect)."
     },
     {
       "id": "marketing-doral",

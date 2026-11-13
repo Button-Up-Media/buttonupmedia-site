@@ -460,21 +460,6 @@
       "permanent": true
     },
     {
-      "source": "/case-studies",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/case-studies/",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/case-studies.html",
-      "destination": "/",
-      "permanent": true
-    },
-    {
       "source": "/restaurant-advertising/",
       "destination": "/restaurant-advertising",
       "permanent": true
@@ -482,21 +467,6 @@
     {
       "source": "/restaurant-advertising.html",
       "destination": "/restaurant-advertising",
-      "permanent": true
-    },
-    {
-      "source": "/restaurant-seo",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/restaurant-seo/",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/restaurant-seo.html",
-      "destination": "/",
       "permanent": true
     },
     {
@@ -715,11 +685,6 @@
       "permanent": true
     },
     {
-      "source": "/es/casos-de-estudio",
-      "destination": "/es",
-      "permanent": true
-    },
-    {
       "source": "/thank-you",
       "destination": "/contact",
       "permanent": true
@@ -748,9 +713,228 @@
       "source": "/es/blog/",
       "destination": "/es/blog",
       "permanent": true
+    },
+    {
+      "source": "/case-studies/",
+      "destination": "/case-studies",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies.html",
+      "destination": "/case-studies",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies-es.html",
+      "destination": "/es/casos-de-exito",
+      "permanent": true
+    },
+    {
+      "source": "/es/casos-de-exito/",
+      "destination": "/es/casos-de-exito",
+      "permanent": true
+    },
+    {
+      "source": "/es/casos-de-estudio",
+      "destination": "/es/casos-de-exito",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-seo/",
+      "destination": "/restaurant-seo",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-seo.html",
+      "destination": "/restaurant-seo",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-seo-es.html",
+      "destination": "/es/seo-restaurantes",
+      "permanent": true
+    },
+    {
+      "source": "/es/seo-restaurantes/",
+      "destination": "/es/seo-restaurantes",
+      "permanent": true
+    },
+    {
+      "source": "/blog/restaurant-marketing-agency-brickell",
+      "destination": "/restaurant-marketing-brickell",
+      "permanent": true
+    },
+    {
+      "source": "/es/blog/agencia-marketing-restaurantes-brickell",
+      "destination": "/es/marketing-restaurantes-brickell",
+      "permanent": true
+    },
+    {
+      "source": "/blog/restaurant-marketing-agency-wynwood",
+      "destination": "/restaurant-marketing-wynwood",
+      "permanent": true
+    },
+    {
+      "source": "/es/blog/agencia-marketing-restaurantes-wynwood",
+      "destination": "/es/marketing-restaurantes-wynwood",
+      "permanent": true
+    },
+    {
+      "source": "/blog/restaurant-marketing-agency-coral-gables",
+      "destination": "/restaurant-marketing-coral-gables",
+      "permanent": true
+    },
+    {
+      "source": "/es/blog/agencia-marketing-restaurantes-coral-gables",
+      "destination": "/es/marketing-restaurantes-coral-gables",
+      "permanent": true
+    },
+    {
+      "source": "/blog/restaurant-marketing-agency-fort-lauderdale",
+      "destination": "/restaurant-marketing-fort-lauderdale",
+      "permanent": true
+    },
+    {
+      "source": "/es/blog/agencia-marketing-restaurantes-fort-lauderdale",
+      "destination": "/es/marketing-restaurantes-fort-lauderdale",
+      "permanent": true
+    },
+    {
+      "source": "/blog/restaurant-marketing-agency-doral",
+      "destination": "/restaurant-marketing-doral",
+      "permanent": true
+    },
+    {
+      "source": "/es/blog/agencia-marketing-restaurantes-doral",
+      "destination": "/es/marketing-restaurantes-doral",
+      "permanent": true
+    },
+    {
+      "source": "/areas/miami-beach.html",
+      "destination": "/restaurant-marketing-miami-beach",
+      "permanent": true
+    },
+    {
+      "source": "/areas-es/miami-beach.html",
+      "destination": "/es/marketing-restaurantes-miami-beach",
+      "permanent": true
+    },
+    {
+      "source": "/areas/brickell.html",
+      "destination": "/restaurant-marketing-brickell",
+      "permanent": true
+    },
+    {
+      "source": "/areas-es/brickell.html",
+      "destination": "/es/marketing-restaurantes-brickell",
+      "permanent": true
+    },
+    {
+      "source": "/areas/wynwood.html",
+      "destination": "/restaurant-marketing-wynwood",
+      "permanent": true
+    },
+    {
+      "source": "/areas-es/wynwood.html",
+      "destination": "/es/marketing-restaurantes-wynwood",
+      "permanent": true
+    },
+    {
+      "source": "/areas/coral-gables.html",
+      "destination": "/restaurant-marketing-coral-gables",
+      "permanent": true
+    },
+    {
+      "source": "/areas-es/coral-gables.html",
+      "destination": "/es/marketing-restaurantes-coral-gables",
+      "permanent": true
+    },
+    {
+      "source": "/areas/doral.html",
+      "destination": "/restaurant-marketing-doral",
+      "permanent": true
+    },
+    {
+      "source": "/areas-es/doral.html",
+      "destination": "/es/marketing-restaurantes-doral",
+      "permanent": true
+    },
+    {
+      "source": "/areas/fort-lauderdale.html",
+      "destination": "/restaurant-marketing-fort-lauderdale",
+      "permanent": true
+    },
+    {
+      "source": "/areas-es/fort-lauderdale.html",
+      "destination": "/es/marketing-restaurantes-fort-lauderdale",
+      "permanent": true
     }
   ],
   "rewrites": [
+    {
+      "source": "/case-studies",
+      "destination": "/case-studies.html"
+    },
+    {
+      "source": "/es/casos-de-exito",
+      "destination": "/case-studies-es.html"
+    },
+    {
+      "source": "/restaurant-seo",
+      "destination": "/restaurant-seo.html"
+    },
+    {
+      "source": "/es/seo-restaurantes",
+      "destination": "/restaurant-seo-es.html"
+    },
+    {
+      "source": "/restaurant-marketing-miami-beach",
+      "destination": "/areas/miami-beach.html"
+    },
+    {
+      "source": "/restaurant-marketing-brickell",
+      "destination": "/areas/brickell.html"
+    },
+    {
+      "source": "/restaurant-marketing-wynwood",
+      "destination": "/areas/wynwood.html"
+    },
+    {
+      "source": "/restaurant-marketing-coral-gables",
+      "destination": "/areas/coral-gables.html"
+    },
+    {
+      "source": "/restaurant-marketing-doral",
+      "destination": "/areas/doral.html"
+    },
+    {
+      "source": "/restaurant-marketing-fort-lauderdale",
+      "destination": "/areas/fort-lauderdale.html"
+    },
+    {
+      "source": "/es/marketing-restaurantes-miami-beach",
+      "destination": "/areas-es/miami-beach.html"
+    },
+    {
+      "source": "/es/marketing-restaurantes-brickell",
+      "destination": "/areas-es/brickell.html"
+    },
+    {
+      "source": "/es/marketing-restaurantes-wynwood",
+      "destination": "/areas-es/wynwood.html"
+    },
+    {
+      "source": "/es/marketing-restaurantes-coral-gables",
+      "destination": "/areas-es/coral-gables.html"
+    },
+    {
+      "source": "/es/marketing-restaurantes-doral",
+      "destination": "/areas-es/doral.html"
+    },
+    {
+      "source": "/es/marketing-restaurantes-fort-lauderdale",
+      "destination": "/areas-es/fort-lauderdale.html"
+    },
     {
       "source": "/blog",
       "destination": "/blog.html"

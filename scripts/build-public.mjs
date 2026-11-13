@@ -2,6 +2,7 @@ import { cp, mkdir, readdir, readFile, rm, writeFile } from 'fs/promises';
 import path from 'path';
 import { transform } from 'esbuild';
 import { buildBlog } from './build-blog.mjs';
+import { buildAreas } from './build-areas.mjs';
 import { generateDemo } from './demo-mock.mjs';
 
 const root = process.cwd();
@@ -17,6 +18,8 @@ const filesToCopy = [
   'gmcp.html',
   'restaurant-advertising.html',
   'restaurant-seo.html',
+  'restaurant-seo-es.html',
+  'case-studies-es.html',
   'restaurant-website-design.html',
   'services.html',
   'social-media-marketing.html',
@@ -78,8 +81,8 @@ for (const { file, loader } of filesToMinify) {
   const cssSource = await readFile(path.join(root, 'shared.css'), 'utf8');
   const { code: inlinedCss } = await transform(cssSource, { loader: 'css', minify: true, legalComments: 'none' });
   // Match any cache-busting version (?v=...) so bumping it never breaks the build.
-  const linkRe = /<link rel="stylesheet" href="shared\.css(?:\?v=[^"]*)?" \/>/;
-  for (const page of ['contact.html', 'contact-es.html', 'smm-strategy-call.html', 'smm-strategy-call-es.html', 'restaurant-social-media.html', 'restaurant-social-media-es.html', 'restaurant-websites.html', 'restaurant-websites-es.html', 'restaurant-paid-ads.html', 'restaurant-paid-ads-es.html', 'website-grader.html', 'website-grader-report.html', 'website-grader-es.html', 'website-grader-report-es.html', 'website-offer.html', 'socialmediamarketing-offer.html', 'about.html', 'about-es.html', 'restaurant-website-design.html', 'restaurant-website-design-es.html']) {
+  const linkRe = /<link rel="stylesheet" href="\/?shared\.css(?:\?v=[^"]*)?" \/>/;
+  for (const page of ['case-studies.html', 'contact.html', 'contact-es.html', 'smm-strategy-call.html', 'smm-strategy-call-es.html', 'restaurant-social-media.html', 'restaurant-social-media-es.html', 'restaurant-websites.html', 'restaurant-websites-es.html', 'restaurant-paid-ads.html', 'restaurant-paid-ads-es.html', 'website-grader.html', 'website-grader-report.html', 'website-grader-es.html', 'website-grader-report-es.html', 'website-offer.html', 'socialmediamarketing-offer.html', 'about.html', 'about-es.html', 'restaurant-website-design.html', 'restaurant-website-design-es.html']) {
     const pagePath = path.join(outDir, page);
     const pageHtml = await readFile(pagePath, 'utf8');
     if (!linkRe.test(pageHtml)) {
@@ -109,6 +112,7 @@ for (const dir of dirsToCopy) {
 // Generate the blog (EN /blog + ES /es/blog hubs, post pages, RSS feeds) and
 // collect its sitemap entries.
 const blogSitemapEntries = await buildBlog(root, outDir);
+const areaSitemapEntries = await buildAreas(root, outDir);
 
 // Sitemap: take the hand-maintained source and inject the generated blog URLs
 // before the closing tag, so adding a post automatically updates the sitemap.
@@ -117,7 +121,7 @@ const blogSitemapEntries = await buildBlog(root, outDir);
   if (!sitemapSrc.includes('</urlset>')) {
     throw new Error('sitemap.xml missing </urlset>');
   }
-  await writeFile(path.join(outDir, 'sitemap.xml'), sitemapSrc.replace('</urlset>', `${blogSitemapEntries}\n</urlset>`));
+  await writeFile(path.join(outDir, 'sitemap.xml'), sitemapSrc.replace('</urlset>', `${blogSitemapEntries}\n${areaSitemapEntries}\n</urlset>`));
 }
 
 console.log(`Built static site into ${outDir}`);

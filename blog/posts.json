@@ -1,19 +1,5 @@
 [
   {
-    "id": "marketing-wynwood",
-    "category": "strategy",
-    "author": "chris",
-    "date": "2026-11-13",
-    "hero": "/images/blog/marketing-wynwood.jpg",
-    "heroAlt": "Colorful street art in the Wynwood Arts District in Miami",
-    "en": {
-      "slug": "restaurant-marketing-agency-wynwood"
-    },
-    "es": {
-      "slug": "agencia-marketing-restaurantes-wynwood"
-    }
-  },
-  {
     "id": "third-party-delivery",
     "category": "strategy",
     "author": "chris",
@@ -25,20 +11,6 @@
     },
     "es": {
       "slug": "vale-la-pena-doordash-restaurante"
-    }
-  },
-  {
-    "id": "marketing-brickell",
-    "category": "strategy",
-    "author": "juan",
-    "date": "2026-11-06",
-    "hero": "/images/blog/marketing-brickell.jpg",
-    "heroAlt": "The Brickell skyline lit up at night in Miami",
-    "en": {
-      "slug": "restaurant-marketing-agency-brickell"
-    },
-    "es": {
-      "slug": "agencia-marketing-restaurantes-brickell"
     }
   },
   {
@@ -56,20 +28,6 @@
     }
   },
   {
-    "id": "marketing-coral-gables",
-    "category": "strategy",
-    "author": "chris",
-    "date": "2026-10-30",
-    "hero": "/images/blog/marketing-coral-gables.jpg",
-    "heroAlt": "An outdoor dining plaza with Mediterranean-style architecture and string lights",
-    "en": {
-      "slug": "restaurant-marketing-agency-coral-gables"
-    },
-    "es": {
-      "slug": "agencia-marketing-restaurantes-coral-gables"
-    }
-  },
-  {
     "id": "google-ads-worth-it",
     "category": "ads",
     "author": "juan",
@@ -81,20 +39,6 @@
     },
     "es": {
       "slug": "google-ads-para-restaurantes-vale-la-pena"
-    }
-  },
-  {
-    "id": "marketing-fort-lauderdale",
-    "category": "strategy",
-    "author": "juan",
-    "date": "2026-10-20",
-    "hero": "/images/blog/marketing-fort-lauderdale.jpg",
-    "heroAlt": "The Fort Lauderdale waterfront and marina at sunset",
-    "en": {
-      "slug": "restaurant-marketing-agency-fort-lauderdale"
-    },
-    "es": {
-      "slug": "agencia-marketing-restaurantes-fort-lauderdale"
     }
   },
   {

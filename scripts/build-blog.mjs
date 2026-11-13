@@ -145,7 +145,10 @@ function nav(lang) {
         <div class="lib-nav-dropdown-menu" role="menu" aria-label="Servicios">
           <div class="lib-desktop-services">
             <a href="/es/marketing-redes-sociales">Marketing de Redes Sociales</a>
+            <a href="/es/publicidad-restaurantes">Publicidad Pagada</a>
             <a href="/es/diseno-web-restaurantes">Diseño Web</a>
+            <a href="/es/seo-restaurantes">SEO y Perfil de Google</a>
+            <a href="/es/casos-de-exito">Casos de Éxito</a>
           </div>
           <details class="lib-mobile-services lib-mobile-menu-only">
             <summary class="lib-mobile-services-trigger">Servicios
@@ -153,7 +156,10 @@ function nav(lang) {
             </summary>
             <div class="lib-mobile-services-menu" role="menu" aria-label="Servicios">
               <a href="/es/marketing-redes-sociales">Marketing de Redes Sociales</a>
+              <a href="/es/publicidad-restaurantes">Publicidad Pagada</a>
               <a href="/es/diseno-web-restaurantes">Diseño Web</a>
+              <a href="/es/seo-restaurantes">SEO y Perfil de Google</a>
+              <a href="/es/casos-de-exito">Casos de Éxito</a>
             </div>
           </details>
           <a href="/es/analizador-redes-sociales-web" class="lib-mobile-menu-only lib-mobile-action --grader" target="_blank" rel="noopener" aria-label="Analizador gratis de redes y web (se abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Analizador gratis de redes y web</a>
@@ -184,6 +190,8 @@ function nav(lang) {
             <a href="/socialmediamarketing">Social Media Marketing</a>
             <a href="/restaurant-advertising">Paid Media</a>
             <a href="/restaurant-website-design">Website</a>
+            <a href="/restaurant-seo">SEO &amp; Google Profile</a>
+            <a href="/case-studies">Case Studies</a>
           </div>
           <details class="lib-mobile-services lib-mobile-menu-only">
             <summary class="lib-mobile-services-trigger">Services
@@ -193,6 +201,8 @@ function nav(lang) {
               <a href="/socialmediamarketing">Social Media Marketing</a>
               <a href="/restaurant-advertising">Paid Media</a>
               <a href="/restaurant-website-design">Website</a>
+              <a href="/restaurant-seo">SEO &amp; Google Profile</a>
+              <a href="/case-studies">Case Studies</a>
             </div>
           </details>
           <a href="/social-media-website-grader" class="lib-mobile-menu-only lib-mobile-action --grader" target="_blank" rel="noopener" aria-label="Free Social &amp; Website Grader (opens in a new tab)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Free Social &amp; Website Grader</a>
@@ -221,14 +231,19 @@ function footer(lang) {
         <div class="footer-col">
           <h4>Servicios</h4>
           <a href="/es/marketing-redes-sociales">Marketing de Redes Sociales</a>
+          <a href="/es/publicidad-restaurantes">Publicidad Pagada</a>
           <a href="/es/diseno-web-restaurantes">Diseño Web</a>
+          <a href="/es/seo-restaurantes">SEO y Perfil de Google</a>
+          <a href="/es/casos-de-exito">Casos de Éxito</a>
         </div>
         <div class="footer-col">
-          <h4>Ubicaciones</h4>
-          <span class="footer-location">Miami</span>
-          <span class="footer-location">Fort Lauderdale</span>
-          <span class="footer-location">Orlando</span>
-          <span class="footer-location">Tampa</span>
+          <h4>Zonas que atendemos</h4>
+          <a href="/es/marketing-restaurantes-miami-beach">Miami Beach</a>
+          <a href="/es/marketing-restaurantes-brickell">Brickell y Downtown</a>
+          <a href="/es/marketing-restaurantes-wynwood">Wynwood</a>
+          <a href="/es/marketing-restaurantes-coral-gables">Coral Gables</a>
+          <a href="/es/marketing-restaurantes-doral">Doral</a>
+          <a href="/es/marketing-restaurantes-fort-lauderdale">Fort Lauderdale</a>
         </div>
         <div class="footer-col">
           <h4>Empresa</h4>
@@ -261,13 +276,17 @@ function footer(lang) {
           <a href="/socialmediamarketing">Social Media Marketing</a>
           <a href="/restaurant-advertising">Paid Media</a>
           <a href="/restaurant-website-design">Website</a>
+          <a href="/restaurant-seo">SEO &amp; Google Profile</a>
+          <a href="/case-studies">Case Studies</a>
         </div>
         <div class="footer-col">
-          <h4>Locations</h4>
-          <span class="footer-location">Miami</span>
-          <span class="footer-location">Fort Lauderdale</span>
-          <span class="footer-location">Orlando</span>
-          <span class="footer-location">Tampa</span>
+          <h4>Areas We Serve</h4>
+          <a href="/restaurant-marketing-miami-beach">Miami Beach</a>
+          <a href="/restaurant-marketing-brickell">Brickell &amp; Downtown</a>
+          <a href="/restaurant-marketing-wynwood">Wynwood</a>
+          <a href="/restaurant-marketing-coral-gables">Coral Gables</a>
+          <a href="/restaurant-marketing-doral">Doral</a>
+          <a href="/restaurant-marketing-fort-lauderdale">Fort Lauderdale</a>
         </div>
         <div class="footer-col">
           <h4>Company</h4>

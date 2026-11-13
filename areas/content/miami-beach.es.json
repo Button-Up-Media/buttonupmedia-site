@@ -1,0 +1,71 @@
+{
+  "id": "miami-beach",
+  "lang": "es",
+  "areaName": "Miami Beach",
+  "metaTitle": "Marketing para Restaurantes en Miami Beach | Button Up Media",
+  "metaDescription": "Marketing para restaurantes en Miami Beach, de South Beach a Sunset Harbour: videos con tu chef, Google, páginas web y anuncios para turistas y vecinos.",
+  "eyebrow": "Miami Beach, FL",
+  "h1": "Marketing para restaurantes en Miami Beach",
+  "answer": "Button Up Media es una agencia de marketing de Miami que ayuda a los restaurantes de Miami Beach a atraer turistas y vecinos con videos, Google, web y anuncios.",
+  "heroSub": "Creamos los videos para redes de Toni's Sushi Bar en Washington Ave, un clásico familiar de South Beach desde 1987. Así lo haríamos para tu restaurante.",
+  "market": {
+    "h2": "Una isla, dos públicos y un calendario que manda",
+    "paragraphsHtml": [
+      "Los restaurantes de Miami Beach atienden a dos clientes muy distintos. El turista elige desde el celular, muchas veces minutos antes de sentarse, según las fotos, las reseñas y lo que tiene cerca. El vecino ya conoce la zona y necesita una razón para volver: un plato nuevo, una cara conocida, una oferta entre semana.",
+      "Los barrios se dividen igual. South Beach, alrededor de Ocean Drive, Collins Avenue y Washington Avenue, vive del visitante. Sunset Harbour, Mid-Beach y North Beach son más de vecinos, con clientes fijos que viven a pocas cuadras.",
+      "El calendario lo define todo. El invierno y la primavera traen más visitantes, y semanas como la de Art Basel Miami Beach en diciembre llenan la isla. En los meses tranquilos son los vecinos quienes llenan el local, así que tu marketing tiene que funcionar en las dos temporadas."
+    ],
+    "facts": [
+      { "label": "Dos públicos", "value": "Turistas y vecinos de todo el año" },
+      { "label": "Zona turística", "value": "Ocean Drive, Collins Ave, Washington Ave" },
+      { "label": "Zonas de vecinos", "value": "Sunset Harbour, Mid-Beach, North Beach" },
+      { "label": "Temporada alta", "value": "Invierno y primavera, más la semana de Art Basel" }
+    ]
+  },
+  "needs": {
+    "h2": "Lo que funciona para un restaurante en Miami Beach",
+    "items": [
+      { "title": "Sé la opción obvia en el mapa", "body": "El turista que camina por Collins Ave está eligiendo en Google Maps. Tu perfil necesita fotos recientes, el horario al día, un menú que cargue y reseñas respondidas, en inglés y en español." },
+      { "title": "Que tu gente sea la marca", "body": "La gente recuerda una cara. Videos cortos con tu chef o tu bartender frente a la cámara, con cortes, emplatado y un gancho sencillo, le dan al turista una razón para entrar esta noche." },
+      { "title": "Planifica según la temporada", "body": "En temporada alta y en semanas de eventos, apuesta por contenido y anuncios para visitantes. En los meses tranquilos, enfócate en los vecinos con ofertas entre semana." },
+      { "title": "Dale al vecino una razón para volver", "body": "Tus clientes fijos de Sunset Harbour o North Beach no necesitan que les expliques el menú. Necesitan saber qué hay de nuevo y que la gente que les cae bien sigue detrás de la barra." }
+    ]
+  },
+  "proof": {
+    "h2": "Trabajo en la playa y muy cerca",
+    "items": [
+      { "client": "Toni's Sushi Bar", "where": "South Beach", "service": "Redes sociales", "result": "Unos 60M de vistas desde que empezamos", "body": "Un sushi bar familiar en Washington Ave desde 1987. Hacemos videos cortos alrededor del chef de sushi: cortes con cuchillo, primeros planos de nigiri y ganchos como \"POV: encuentras el mejor sushi de South Beach\". Un solo video pasó de unos 50M de vistas.", "href": "/es/casos-de-exito#tonis-sushi-bar", "reviewNote": "Confirmar las cifras que reportó el dueño antes de publicar: el total exacto de vistas (unos 60M), qué plataformas incluye, el mes en que empezamos con Toni's y el enlace al video de unos 50M de vistas." },
+      { "client": "Shimuja Ramen", "where": "Pop-up en Sunset Harbour", "service": "Redes sociales", "result": "15.4M de vistas en redes", "body": "Un ramen que hizo pop-ups en Sunset Harbour y en Baby Jane en Brickell antes de instalarse en el food hall Julia & Henry's, en Downtown Miami.", "href": "/es/casos-de-exito#shimuja-ramen" }
+    ]
+  },
+  "plan": {
+    "h2": "Lo que haríamos por un restaurante en Miami Beach",
+    "items": [
+      { "service": "social", "title": "Videos cortos con tu gente al frente", "bodyHtml": "Nuestro equipo graba en tu restaurante y publicamos reels y TikToks con tu chef, tu bartender o el dueño al frente, como hacemos con Toni's Sushi Bar. Aquí está nuestro <a href=\"/es/marketing-redes-sociales\">servicio de redes sociales y contenido</a>." },
+      { "service": "seo", "title": "Gana el momento \"cerca de mí\"", "bodyHtml": "Ajustamos tu perfil de Google, tus fotos y tus reseñas para que los visitantes cercanos te encuentren primero. Nuestro <a href=\"/es/seo-restaurantes\">servicio de SEO y perfil de Google para restaurantes</a> cubre los detalles." },
+      { "service": "web", "title": "Un menú y reservas que cargan rápido", "bodyHtml": "El turista no va a esperar a que abra un menú en PDF. Creamos <a href=\"/es/diseno-web-restaurantes\">páginas web para restaurantes</a> a la medida, pensadas para el celular, en español e inglés, con reservas y pedidos a un toque." },
+      { "service": "ads", "title": "Anuncios que siguen la temporada", "bodyHtml": "En temporada alta ponemos tu local frente a quienes buscan cerca en ese momento. En los meses tranquilos apuntamos a los vecinos. Nuestros <a href=\"/es/publicidad-restaurantes\">anuncios en Google y Meta</a> miden cada reserva y cada llamada." }
+    ]
+  },
+  "shoots": {
+    "h2": "Cómo son las grabaciones en la playa",
+    "body": "Vamos a tu local. Nuestro propio equipo graba fotos y videos en tu restaurante, y una sola sesión suele darnos de 4 a 6 semanas de contenido. Planificamos las tomas contigo con tiempo y trabajamos alrededor del servicio. Si estás en una zona concurrida como Ocean Drive o Washington Ave, dejamos las tomas de calle y fachada para las horas tranquilas."
+  },
+  "pricing": {
+    "h2": "Cuánto cuesta",
+    "bodyHtml": "La mayoría de los restaurantes invierte <strong>entre $1,500 y $5,000 al mes</strong> en un programa coordinado de redes, Google y anuncios. Las páginas web se pagan una sola vez: <strong>$1,500</strong> la Construcción del sitio web o <strong>$2,000</strong> la Construcción web integrada. El manejo de anuncios no tiene contratos a largo plazo. En una llamada gratis te decimos qué necesitas primero y cuándo conviene empezar."
+  },
+  "faqs": [
+    { "q": "¿Trabajan con restaurantes en Miami Beach?", "a": "Sí. Creamos los videos para redes de Toni's Sushi Bar en Washington Ave, en South Beach, y trabajamos con restaurantes, bares y cafés en todo Miami Beach." },
+    { "q": "¿Debo enfocarme en turistas o en vecinos?", "a": "Casi siempre en los dos, con mensajes distintos. El turista necesita encontrarte rápido en Google y en redes, y el vecino necesita una razón para volver. Armamos la mezcla según tu ubicación y la temporada." },
+    { "q": "¿Qué hacen en la temporada baja?", "a": "Cambiamos el enfoque hacia la gente que vive cerca: ofertas entre semana, platos nuevos y publicaciones que se sienten de barrio. Los anuncios hacen el mismo cambio, para no pagar por turistas que no están en la ciudad." },
+    { "q": "¿Pueden grabar a nuestro chef o a nuestro equipo?", "a": "Sí, y muchas veces es lo que mejor funciona. En Toni's Sushi Bar el chef de sushi es la estrella frente a la cámara. Planificamos la sesión con tu equipo alrededor del servicio." },
+    { "q": "¿Cuánto cuesta el marketing para restaurantes en Miami Beach?", "a": "La mayoría de los restaurantes invierte entre $1,500 y $5,000 al mes en un programa coordinado. Las páginas web cuestan un pago único de $1,500 o $2,000. En una llamada gratis te damos un número real para tu restaurante." }
+  ],
+  "nearby": ["brickell", "wynwood", "fort-lauderdale"],
+  "cta": {
+    "h2": "Hablemos de su restaurante en Miami Beach",
+    "body": "Cuéntenos a quién quiere atraer (turistas, vecinos o ambos) y en qué meses, y le mostramos por dónde empezaríamos. Gratis, en español o en inglés, sin compromiso.",
+    "button": "Agende una llamada estratégica gratis"
+  }
+}
