@@ -689,7 +689,7 @@ function renderPost(view, allViews) {
         inLanguage: lang, articleSection: catLabel, wordCount: content.wordCount || undefined,
         keywords: content.targetKeyword || undefined,
         author: { '@type': 'Person', name: author.name, jobTitle: role, url: author.linkedin, sameAs: [author.linkedin], image: `${BASE}${author.photo}`, worksFor: { '@type': 'Organization', name: 'Button Up Media', url: `${BASE}/` } },
-        publisher: { '@type': 'Organization', name: 'Button Up Media', url: `${BASE}/`, logo: { '@type': 'ImageObject', url: `${BASE}/favicon-bum.svg` } },
+        publisher: { '@type': 'Organization', '@id': `${BASE}/#organization`, name: 'Button Up Media', url: `${BASE}/`, logo: { '@type': 'ImageObject', url: `${BASE}/favicon-bum.svg` } },
       },
       {
         '@type': 'BreadcrumbList', itemListElement: [
@@ -859,7 +859,7 @@ function renderHub(lang, views) {
     '@context': 'https://schema.org',
     '@graph': [
       { '@type': 'Blog', '@id': `${hubUrl}#blog`, url: hubUrl, name: t.blogTitle, description: t.blogDesc, inLanguage: lang,
-        publisher: { '@type': 'Organization', name: 'Button Up Media', url: `${BASE}/`, logo: { '@type': 'ImageObject', url: `${BASE}/favicon-bum.svg` } },
+        publisher: { '@type': 'Organization', '@id': `${BASE}/#organization`, name: 'Button Up Media', url: `${BASE}/`, logo: { '@type': 'ImageObject', url: `${BASE}/favicon-bum.svg` } },
         blogPost: views.map((v) => ({ '@type': 'BlogPosting', headline: v.title, url: v.url, datePublished: `${v.date}${PUBLISH_TIME}`, image: `${BASE}${v.hero}`, author: { '@type': 'Person', name: v.author.name } })) },
       { '@type': 'BreadcrumbList', itemListElement: [
         { '@type': 'ListItem', position: 1, name: t.home, item: `${BASE}/` },
