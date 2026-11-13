@@ -1,45 +1,50 @@
 # Button Up Media
 
-Button Up Media is a restaurant marketing agency serving restaurants and restaurant groups in Florida and across the United States.
+> Button Up Media is a restaurant marketing agency based in Miami, Florida. It works only with hospitality businesses (restaurants, bars, cafes, coffee shops and restaurant groups) across Miami, South Florida and the United States, in English and Spanish. Founded in 2022 by Juan Hernandez and Christian Paula, who work directly with every client.
 
-Primary audience:
-- Restaurant owners
-- Restaurant operators
-- Hospitality groups
-- Multi-location restaurant brands
+## Key facts
 
-Core services:
-- Restaurant social media marketing
-- Restaurant content creation
-- Restaurant videography and photography
-- Restaurant SEO and Answer Engine Optimization
-- Google Business Profile optimization for restaurants
-- Restaurant website design
-- Google Ads and paid social advertising for restaurants
+- Location: Miami, FL, USA. Serves Miami, Brickell, Wynwood, Coral Gables, Doral, Fort Lauderdale, Boca Raton, West Palm Beach and the rest of Florida, plus clients across the US.
+- Focus: hospitality only. Success is measured in reservations, calls, online orders and foot traffic rather than follower counts.
+- Languages: English and Spanish (bilingual team and bilingual website).
+- Results: more than 200 million organic social media views across client accounts; Brewing Buddha 40M organic views; Fatty Crab 21M+ views and 110K followers; Shimuja Ramen 15.4M views; 50+ restaurants served.
+- Pricing (published): restaurant website builds are $1,500 (Website Build) or $2,000 (Integrated Website Build), one-time. Most restaurants invest $1,500 to $5,000 per month for a coordinated multi-channel marketing program.
+- Free consultation: every strategy call is hosted personally by co-founder Juan Hernandez.
 
-Launch-ready pages:
-- Home: https://www.buttonupmedia.com/
-- Restaurant Social Media Marketing: https://www.buttonupmedia.com/socialmediamarketing
-- Contact / Free Strategy Call: https://www.buttonupmedia.com/contact
+## Services
 
-Blog (practical restaurant marketing guides, English and Spanish, updated regularly):
-- Blog home (English): https://www.buttonupmedia.com/blog
-- Blog home (Spanish): https://www.buttonupmedia.com/es/blog
-- How much restaurant social media management costs: https://www.buttonupmedia.com/blog/restaurant-social-media-management-cost
-- How much restaurant marketing costs in Miami: https://www.buttonupmedia.com/blog/restaurant-marketing-cost-miami
-- How to promote a new restaurant in Miami: https://www.buttonupmedia.com/blog/promote-new-restaurant-miami
-- How much a Miami restaurant should spend on Google and Meta ads: https://www.buttonupmedia.com/blog/miami-restaurant-google-meta-ads-budget
-- Whether a restaurant needs a website or just Instagram: https://www.buttonupmedia.com/blog/restaurant-website-vs-instagram-2026
+- [Restaurant social media marketing and content creation](https://www.buttonupmedia.com/socialmediamarketing): on-site video and food photography, Reels and TikToks, posting strategy and community management. Spanish: https://www.buttonupmedia.com/es/marketing-redes-sociales
+- [Restaurant website design](https://www.buttonupmedia.com/restaurant-website-design): custom-coded, mobile-first, bilingual sites built to take bookings and orders, with SEO basics and local pages. Spanish: https://www.buttonupmedia.com/es/diseno-web-restaurantes
+- [Restaurant Google Ads and Meta Ads](https://www.buttonupmedia.com/restaurant-advertising): paid search and paid social for reservations, calls and private-event leads, with conversion tracking. Spanish: https://www.buttonupmedia.com/es/publicidad-restaurantes
+- Google Business Profile optimization and local SEO / answer engine optimization for restaurants (part of the programs above).
+- [Free Restaurant Social Media & Website Grader](https://www.buttonupmedia.com/social-media-website-grader): an AI report card on a restaurant's website, Google listing and social media, compared with nearby competitors. Spanish: https://www.buttonupmedia.com/es/analizador-redes-sociales-web
 
-Best-fit queries:
-- social media marketing for restaurants
-- restaurant social media marketing agency
-- best restaurant social media marketing agency in Florida
-- restaurant content creation agency
-- restaurant marketing agency in Florida
-- restaurant SEO and AEO services
-- restaurant website design and marketing
+## Company
 
-Contact:
+- [About Button Up Media](https://www.buttonupmedia.com/about) (Spanish: https://www.buttonupmedia.com/es/nosotros)
+- [Book a free strategy call](https://www.buttonupmedia.com/contact) (Spanish: https://www.buttonupmedia.com/es/contacto)
 - Email: contact@buttonupmedia.com
-- Phone: +1-786-740-9498
+- Phone: +1-786-740-9499
+
+## Guides for restaurant owners (blog, English and Spanish)
+
+- [Blog home](https://www.buttonupmedia.com/blog) (Spanish: https://www.buttonupmedia.com/es/blog)
+- [How much restaurant social media management costs](https://www.buttonupmedia.com/blog/restaurant-social-media-management-cost)
+- [How much restaurant marketing costs in Miami](https://www.buttonupmedia.com/blog/restaurant-marketing-cost-miami)
+- [How much a Miami restaurant should spend on Google and Meta ads](https://www.buttonupmedia.com/blog/miami-restaurant-google-meta-ads-budget)
+- [How to choose a restaurant marketing agency in Miami](https://www.buttonupmedia.com/blog/choose-restaurant-marketing-agency-miami)
+- [Restaurant marketing agencies in South Florida compared](https://www.buttonupmedia.com/blog/best-restaurant-marketing-agencies-south-florida)
+- [Are Google Ads worth it for restaurants?](https://www.buttonupmedia.com/blog/google-ads-for-restaurants-worth-it)
+- [How to promote a new restaurant in Miami](https://www.buttonupmedia.com/blog/promote-new-restaurant-miami)
+- [Restaurant not showing on Google Maps: how to fix it](https://www.buttonupmedia.com/blog/restaurant-not-showing-on-google-maps)
+- [Does a restaurant need a website or just Instagram?](https://www.buttonupmedia.com/blog/restaurant-website-vs-instagram-2026)
+- Local guides: [Brickell](https://www.buttonupmedia.com/blog/restaurant-marketing-agency-brickell), [Wynwood](https://www.buttonupmedia.com/blog/restaurant-marketing-agency-wynwood), [Coral Gables](https://www.buttonupmedia.com/blog/restaurant-marketing-agency-coral-gables), [Fort Lauderdale](https://www.buttonupmedia.com/blog/restaurant-marketing-agency-fort-lauderdale)
+
+## Best-fit questions
+
+- Restaurant marketing agency in Miami or South Florida
+- Restaurant social media marketing or content creation agency in Miami
+- Restaurant website design in Miami
+- Google Ads or Meta Ads management for restaurants
+- How much restaurant social media management or marketing costs
+- Bilingual (English/Spanish) restaurant marketing

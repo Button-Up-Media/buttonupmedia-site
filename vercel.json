@@ -325,6 +325,26 @@
       "permanent": true
     },
     {
+      "source": "/websitedesign",
+      "destination": "/restaurant-website-design",
+      "permanent": true
+    },
+    {
+      "source": "/websitedesign/",
+      "destination": "/restaurant-website-design",
+      "permanent": true
+    },
+    {
+      "source": "/website",
+      "destination": "/restaurant-website-design",
+      "permanent": true
+    },
+    {
+      "source": "/website/",
+      "destination": "/restaurant-website-design",
+      "permanent": true
+    },
+    {
       "source": "/social-media-marketing/",
       "destination": "/socialmediamarketing",
       "permanent": true
@@ -878,22 +898,6 @@
     {
       "source": "/about",
       "destination": "/about.html"
-    },
-    {
-      "source": "/websitedesign",
-      "destination": "/restaurant-website-design"
-    },
-    {
-      "source": "/websitedesign/",
-      "destination": "/restaurant-website-design"
-    },
-    {
-      "source": "/website",
-      "destination": "/restaurant-website-design"
-    },
-    {
-      "source": "/website/",
-      "destination": "/restaurant-website-design"
     },
     {
       "source": "/restaurant-website-design",
