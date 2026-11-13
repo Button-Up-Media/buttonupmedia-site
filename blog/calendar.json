@@ -891,7 +891,7 @@
     },
     {
       "id": "marketing-wynwood",
-      "status": "ready",
+      "status": "published",
       "category": "strategy",
       "author": "chris",
       "heroQuery": "trendy restaurant near colorful street art murals in Wynwood Miami",
@@ -915,7 +915,8 @@
           "https://www.buttonupmedia.com/es/blog/elegir-agencia-marketing-restaurantes-miami"
         ]
       },
-      "heroAlt": "Colorful street art in the Wynwood Arts District in Miami"
+      "heroAlt": "Colorful street art in the Wynwood Arts District in Miami",
+      "publishedDate": "2026-11-13"
     },
     {
       "id": "signs-you-need-help",

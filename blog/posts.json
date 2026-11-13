@@ -1,5 +1,19 @@
 [
   {
+    "id": "marketing-wynwood",
+    "category": "strategy",
+    "author": "chris",
+    "date": "2026-11-13",
+    "hero": "/images/blog/marketing-wynwood.jpg",
+    "heroAlt": "Colorful street art in the Wynwood Arts District in Miami",
+    "en": {
+      "slug": "restaurant-marketing-agency-wynwood"
+    },
+    "es": {
+      "slug": "agencia-marketing-restaurantes-wynwood"
+    }
+  },
+  {
     "id": "third-party-delivery",
     "category": "strategy",
     "author": "chris",
