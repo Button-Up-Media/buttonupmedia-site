@@ -617,7 +617,9 @@ function renderPost(view, allViews) {
   const bio = lang === 'es' ? author.bioEs : author.bioEn;
   const enUrl = `${BASE}/blog/${view.post.en.slug}`;
   const esUrl = `${BASE}/es/blog/${view.post.es.slug}`;
-  const metaTitle = `${content.metaTitle} | Button Up Media`;
+  // A few metaTitles already end in "| Button Up"; appending again produced
+  // "... | Button Up | Button Up Media". Only brand titles that lack it.
+  const metaTitle = /button up/i.test(content.metaTitle) ? content.metaTitle : `${content.metaTitle} | Button Up Media`;
 
   const takeaways = (content.keyTakeaways || []).length
     ? `<div class="bp-callout"><strong>${t.takeaways}</strong><ul>${content.keyTakeaways.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>`
@@ -639,7 +641,10 @@ function renderPost(view, allViews) {
   // Two inline CTAs spaced through the article: the founder (with photo) early,
   // a lighter text nudge later. Both stay out of the way but keep "work with us"
   // present. The big closing CTA still lives at the end of the page.
-  const lateIdx = secs.length >= 6 ? Math.min(secs.length - 2, Math.round(secs.length * 0.68)) : -1;
+  // Short posts (3-5 sections) still get the grader nudge, after their last
+  // section; the top commercial post (social media cost) has 5 and never showed it.
+  const lateIdx = secs.length >= 6 ? Math.min(secs.length - 2, Math.round(secs.length * 0.68))
+    : secs.length >= 3 ? secs.length - 1 : -1;
   const sections = secs.map((s, i) => {
     let block = `<h2 id="${ids[i]}">${esc(s.h2)}</h2>\n${s.html}`;
     if (i === 1) block += '\n' + founderCta(lang);
@@ -657,7 +662,12 @@ function renderPost(view, allViews) {
     ? `<h2 id="faq">${t.faq}</h2>\n${content.faqs.map((f) => `<h3>${esc(f.q)}</h3>\n<p>${f.a}</p>`).join('\n')}`
     : '';
 
-  const related = allViews.filter((v) => v.lang === lang && v.slug !== view.slug).slice(0, 3);
+  // Same-topic posts first (newest first within each group), so older posts that
+  // rank keep passing readers and link equity to related guides, not just to
+  // whatever was published this week.
+  const others = allViews.filter((v) => v.lang === lang && v.slug !== view.slug);
+  const sameCat = others.filter((v) => v.post.category === view.post.category);
+  const related = [...sameCat, ...others.filter((v) => v.post.category !== view.post.category)].slice(0, 3);
   const relatedHtml = related.length ? `
     <section class="bp-related"><div class="bp-wrap">
       <h2 class="bp-rise">${t.keepReading}</h2>
