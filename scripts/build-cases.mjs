@@ -57,6 +57,7 @@
 //   results: null | { h2?, explainHtml?, points?: [text],
 //     accounts?: [ { name, period, campaigns, roas, roasLabel?, roasNumber|null, conversions, value, costPer,
 //                    spend?, standout? } ],   // ads accounts: case scoreboard AND the hub Google Ads scoreboard
+//     timeline?: { h3?, items: [ { when, title, stat, kind?: "before"|"peak"|"now" } ] },   // growth milestones, oldest first
 //     disclaimer?: true } [note],
 //   quote: null | { h2?, text, name, role, source?, video?: { src, poster, width, height, playLabel } } [note],
 //   links: [ { href, text } ]                 // service pages etc.; the area page link is added automatically
@@ -489,6 +490,25 @@ const PAGE_CSS = `
     .cs-points { list-style: none; display: grid; gap: 10px; margin-top: 18px; }
     .cs-points li { position: relative; padding-left: 30px; max-width: 64ch; font-size: 1rem; line-height: 1.6; color: var(--text-dim); }
     .cs-points svg { position: absolute; left: 0; top: 3px; width: 20px; height: 20px; padding: 3px; border-radius: 50%; background: var(--gold-soft); color: var(--gold); }
+    .cs-growth { margin-top: 28px; }
+    .cs-growth-h { font-family: var(--font-display); font-size: 1.125rem; font-weight: 700; line-height: 1.3; color: var(--text-head); }
+    .cs-timeline { list-style: none; position: relative; margin-top: 12px; padding-left: 28px; max-width: 64ch; }
+    .cs-timeline::before { content: ""; position: absolute; left: 7px; top: 14px; bottom: 22px; width: 2px; border-radius: 2px; background: linear-gradient(180deg, rgba(255,248,235,0.16), var(--gold)); }
+    .cs-tl { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); row-gap: 3px; padding: 12px 0 13px; border-bottom: 1px solid var(--line-soft); }
+    .cs-tl:last-child { border-bottom: 0; }
+    .cs-tl::before { content: ""; position: absolute; left: -27px; top: 16px; width: 14px; height: 14px; box-sizing: border-box; border-radius: 50%; border: 2px solid var(--gold); background: var(--bg-1); }
+    .cs-tl-when { font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-soft); }
+    .cs-tl-what { font-size: 1rem; line-height: 1.5; color: var(--text); }
+    .cs-tl-stat { font-family: var(--font-hero); font-weight: 800; font-size: 1.25rem; line-height: 1.2; letter-spacing: -0.02em; color: var(--gold); }
+    .cs-tl.--before::before { border-color: var(--text-soft); }
+    .cs-tl.--before .cs-tl-stat { color: var(--text-dim); }
+    .cs-tl.--peak::before, .cs-tl.--now::before { background: var(--gold); box-shadow: 0 0 0 5px rgba(226,168,77,0.16); }
+    .cs-tl.--peak .cs-tl-stat, .cs-tl.--now .cs-tl-stat { font-size: 1.75rem; letter-spacing: -0.04em; }
+    @media (min-width: 560px) {
+      .cs-tl { grid-template-columns: minmax(0, 1fr) auto; column-gap: 18px; align-items: baseline; }
+      .cs-tl-when { grid-column: 1 / -1; }
+      .cs-tl-stat { text-align: right; white-space: nowrap; }
+    }
     .cs-sec .cs-board { margin-top: 18px; }
     .cs-sec > p.cs-explain { margin-top: 16px; font-size: 1rem; line-height: 1.6; }
     .cs-sec > p.cs-disclaimer { margin-top: 14px; font-size: 0.8125rem; line-height: 1.55; color: var(--text-soft); }
@@ -738,6 +758,10 @@ function validateCase(c, file) {
   arr(c.situation && c.situation.paragraphs, 'situation.paragraphs').forEach((p, i) => str(p, `situation.paragraphs[${i}]`));
   arr(c.steps && c.steps.items, 'steps.items').forEach((s, i) => { str(s && s.title, `steps.items[${i}].title`); str(s && s.bodyHtml, `steps.items[${i}].bodyHtml`); });
   if (c.results) (c.results.accounts || []).forEach((a, i) => ['name', 'period', 'campaigns', 'roas', 'conversions', 'value', 'costPer'].forEach((k) => str(a && a[k], `results.accounts[${i}].${k}`)));
+  if (c.results && c.results.timeline) arr(c.results.timeline.items, 'results.timeline.items').forEach((x, i) => {
+    ['when', 'title', 'stat'].forEach((k) => str(x && x[k], `results.timeline.items[${i}].${k}`));
+    if (x && x.kind && !['before', 'peak', 'now'].includes(x.kind)) errs.push(`results.timeline.items[${i}].kind must be before|peak|now`);
+  });
   if (c.quote) ['text', 'name', 'role'].forEach((k) => str(c.quote[k], `quote.${k}`));
   arr(c.links, 'links').forEach((l, i) => { str(l && l.href, `links[${i}].href`); str(l && l.text, `links[${i}].text`); });
   const expect = path.basename(file).match(/^([a-z0-9-]+)\.(en|es)\.json$/);
@@ -884,11 +908,12 @@ function pageTail(chrome, redirects) {
 }
 
 // Typographic card for a client with no media yet. compact = reel card version
-// (the card footer already shows the number, so only the name block renders).
+// (the card footer already shows the number and the place chip the location,
+// so only the name and sub render).
 function graphicCard(g, { compact = false } = {}) {
   return `<div class="cs-graphic" aria-hidden="true">
-              <div>
-                <span class="cs-graphic-kicker">${esc(g.kicker)}</span>
+              <div>${compact ? '' : `
+                <span class="cs-graphic-kicker">${esc(g.kicker)}</span>`}
                 <span class="cs-graphic-name">${esc(g.name)}</span>
                 <span class="cs-graphic-sub">${esc(g.sub)}</span>
               </div>${compact ? '' : `
@@ -1178,6 +1203,12 @@ function renderCase(c, all, hub, chrome, t, areaNames, alt) {
                 ${note(m)}
               </li>`).join('\n              ');
   const accounts = (r.accounts || []).length ? scoreboard(r.accounts.map((a) => ({ a })), t, false) : '';
+  const tl = r.timeline && (r.timeline.items || []).length ? `<div class="cs-growth">
+                ${r.timeline.h3 ? `<h3 class="cs-growth-h">${esc(r.timeline.h3)}</h3>` : ''}
+                <ol class="cs-timeline">
+                ${r.timeline.items.map((x) => `<li class="cs-tl${x.kind ? ` --${x.kind}` : ''}"><span class="cs-tl-when">${esc(x.when)}</span><span class="cs-tl-what">${esc(x.title)}</span><b class="cs-tl-stat">${esc(x.stat)}</b></li>`).join('\n                ')}
+                </ol>
+              </div>` : '';
   const points = (r.points || []).length
     ? `<ul class="cs-points">${r.points.map((p) => `<li>${ICON.check}${esc(p)}</li>`).join('')}</ul>`
     : '';
@@ -1305,6 +1336,7 @@ ${sec('steps', `              <ol class="cs-steps">
 ${sec('results', `              <ul class="cs-tiles">
               ${tiles}
               </ul>
+              ${tl}
               ${r.explainHtml ? `<p class="cs-explain">${r.explainHtml}</p>` : ''}
               ${accounts}
               ${points}

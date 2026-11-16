@@ -10,79 +10,126 @@
   "organizations": [
     "Toni's Sushi Bar"
   ],
-  "metaTitle": "Toni's Sushi Bar: caso de redes sociales | Button Up Media",
-  "metaDescription": "Cómo Button Up Media graba videos cortos con el chef de Toni's Sushi Bar, un sushi bar familiar en South Beach desde 1987, para Instagram y más en Miami Beach.",
-  "ldHeadline": "Toni's Sushi Bar: videos para redes sociales con el chef de un sushi bar de South Beach",
+  "metaTitle": "Toni's Sushi Bar: caso de Instagram | Button Up Media",
+  "metaDescription": "Cómo Button Up Media hizo crecer el Instagram de Toni's Sushi Bar de unos 4K a 80K seguidores en cinco meses, con reels del chef que suman 64M+ de vistas.",
+  "ldHeadline": "Toni's Sushi Bar: de unos 4K a 80K seguidores en Instagram en cinco meses",
   "h1": "Toni's Sushi Bar",
-  "h1Sub": "Videos cortos con el chef en South Beach",
-  "answer": "Toni's Sushi Bar es un negocio familiar en South Beach desde 1987. Convertimos a su chef de sushi en la estrella de videos cortos hechos para Instagram.",
+  "h1Sub": "De 4K a 80K seguidores en Instagram en cinco meses",
+  "answer": "Convertimos al chef de Toni's Sushi Bar en maestro en Instagram. En cinco meses pasó de unos 4K a 80K seguidores y nuestros 22 reels sumaron 64M+ de vistas.",
   "descriptor": "Sushi bar familiar desde 1987",
   "area": {
     "name": "South Beach, Miami Beach",
     "detail": "1208 Washington Ave",
     "page": "miami-beach"
   },
-  "timeframe": "Cliente reciente",
-  "timeframeReviewNote": "confirm the month Toni's started with us.",
+  "timeframe": "Instagram, desde junio de 2026",
   "hero": {
     "type": "graphic",
     "kicker": "South Beach · Desde 1987",
     "name": "Toni's",
     "sub": "Sushi Bar",
-    "big": "79.4K",
-    "bigLabel": "seguidores en Instagram",
+    "big": "80.1K",
+    "bigLabel": "seguidores en Instagram, desde unos 4K en junio",
     "handle": "@tonissushi",
-    "reviewNote": "Toni's has no photo or video in the repo yet. Send one vertical chef-led clip (MP4) to use here and on the case studies page."
+    "reviewNote": "Toni's has no video in the repo yet. Send the MP4 of the sushi etiquette Reel (52.5M views) or another chef clip to use here and on the case studies page."
   },
   "card": {
-    "value": "79.4K",
-    "label": "seguidores en Instagram",
+    "value": "4K → 80K",
+    "label": "seguidores en 5 meses",
     "place": "South Beach"
   },
   "metrics": [
     {
-      "value": "79.4K",
-      "label": "Seguidores en Instagram",
-      "meaning": "Esa es la gente que sigue a @tonissushi, así que cada video nuevo les llega a su feed. Contados el 13 de nov. de 2026."
+      "value": "80.1K",
+      "label": "Seguidores en Instagram, desde unos 4K",
+      "meaning": "Unas 4,000 personas seguían a @tonissushi cuando publicamos nuestro primer reel el 18 de junio de 2026. Cinco meses después, el 16 de nov. de 2026, eran 80,100: unas 20 veces más."
     },
     {
-      "value": "1.3M+",
-      "label": "Vistas en un solo Reel",
-      "meaning": "Un video corto se vio más de 1.3 millones de veces, mucho más allá de quienes ya siguen la cuenta.",
-      "reviewNote": "confirm the 1.3M+ Reel (and the 141K one mentioned below) are videos we made."
+      "value": "64M+",
+      "label": "Vistas de reels en cinco meses",
+      "meaning": "Sumamos las vistas que Instagram muestra en los 22 reels que publicamos del 18 de junio al 16 de nov. de 2026. También juntaron más de 1.9M de me gusta."
     },
     {
-      "value": "60M",
-      "label": "Vistas desde que empezamos, todas las plataformas (aprox.)",
-      "meaning": "Todas las plataformas donde corren los videos, sumadas. Incluye un video que llegó a unos 50M de vistas por sí solo.",
-      "reviewNote": "this is owner-reported. Confirm the exact all-platform total (about 60M), which platforms it covers, and send the link to the roughly 50M-view video and its platform."
+      "value": "52.5M",
+      "label": "Vistas en un solo reel",
+      "meaning": "La lección del chef sobre los modales del sushi, publicada el 19 de agosto de 2026. A 1.6M de personas les gustó, y hoy está fijada arriba del perfil."
     }
   ],
   "situation": {
     "paragraphs": [
-      "Toni's es un negocio familiar en South Beach desde 1987, cuando Hiromi “Toni” Takarada lo abrió, según Miami New Times.",
-      "Un lugar con esa trayectoria ya tiene la comida y una historia que contar. El reto es ponerlas frente a la gente que hoy decide dónde comer mientras desliza videos cortos."
+      "Toni's es un negocio familiar en South Beach desde 1987, cuando Hiromi “Toni” Takarada lo abrió, según Miami New Times. Su Instagram lo presenta como el sushi bar original de South Beach.",
+      "Esa historia no se veía donde hoy el turista elige dónde comer: en el celular. La cuenta tenía unos 4,000 seguidores, y sus últimas publicaciones antes de que empezáramos, en febrero de 2026, recibían entre 12 y 156 me gusta."
     ]
   },
   "steps": {
     "items": [
       {
-        "title": "Convertir al chef de sushi en la estrella",
-        "bodyHtml": "Él es la personalidad frente a la cámara, así que cada video se siente como sentarse en la barra."
+        "title": "Convertir al chef en maestro",
+        "bodyHtml": "El chef Toshiya es un sushiman de Japón, y frente a la cámara enseña la manera japonesa de comer sushi: la salsa de soya va en el pescado, no en el arroz; el jengibre va entre pieza y pieza, no en cada bocado; por qué no hace falta frotar los palillos.",
+        "reviewNote": "Instagram captions call him “Chef Tony”. Confirm the site should say Chef Toshiya, and whether to add his last name."
       },
       {
-        "title": "Grabar los primeros planos que abren el apetito",
-        "bodyHtml": "El trabajo con el cuchillo y el nigiri, bien de cerca."
+        "title": "Una lección por reel",
+        "bodyHtml": "Cada video responde una pregunta que la gente no sabía que tenía: wasabi de verdad contra la pasta verde, sashimi contra temaki contra nigiri, los tres cortes del atún rojo. Una lección corta se guarda y se manda a un amigo con facilidad, así que llega mucho más allá de quienes ya siguen la cuenta."
       },
       {
-        "title": "Escribir ganchos como la gente desliza",
-        "bodyHtml": "Frases como “POV: you find the best sushi spot on South Beach” (algo así como “POV: encuentras el mejor sushi de South Beach”) le dan a la gente una razón para detenerse y mirar."
+        "title": "Que las lecciones vendan solas",
+        "bodyHtml": "Ningún reel dice “ven a comer aquí”. Ver a un chef de Japón enseñar la forma correcta de comer sushi le dice al espectador, sin vender nada, que Toni's es auténtico y que vale la pena ir."
+      },
+      {
+        "title": "Convertir vistas en visitas",
+        "bodyHtml": "Cada reel lleva la dirección, 1208 Washington Ave, en los comentarios. En el reel de los modales, ese comentario solo tiene 2,624 me gusta. Las historias están hechas para convertir: llevan a quien acaba de ver el video hacia el restaurante y cómo llegar."
       }
     ]
   },
   "results": {
+    "timeline": {
+      "h3": "Cómo creció la cuenta",
+      "items": [
+        {
+          "when": "Antes de nosotros, feb. 2026",
+          "title": "Las últimas publicaciones recibían entre 12 y 156 me gusta",
+          "stat": "Unos 4K seguidores",
+          "kind": "before"
+        },
+        {
+          "when": "18 jun. 2026",
+          "title": "Primer reel: el sushi bar más antiguo de South Beach. 196K me gusta.",
+          "stat": "5.9M de vistas"
+        },
+        {
+          "when": "15 jul.",
+          "title": "¿Sashimi, temaki o nigiri? El chef explica la diferencia.",
+          "stat": "770K vistas"
+        },
+        {
+          "when": "19 ago.",
+          "title": "Los modales del sushi. 1.6M de me gusta, hoy fijado.",
+          "stat": "52.5M de vistas",
+          "kind": "peak"
+        },
+        {
+          "when": "6 oct.",
+          "title": "Wasabi de verdad contra el wasabi en polvo.",
+          "stat": "2.7M de vistas"
+        },
+        {
+          "when": "3 nov.",
+          "title": "Un error con los palillos que debes evitar en Japón.",
+          "stat": "1.3M de vistas"
+        },
+        {
+          "when": "16 nov. 2026",
+          "title": "Seguidores hoy, unas 20 veces más que al empezar",
+          "stat": "80.1K seguidores",
+          "kind": "now"
+        }
+      ]
+    },
+    "explainHtml": "<strong>De dónde salen estas cifras:</strong> las vistas y los me gusta que Instagram muestra en cada uno de los 22 reels que publicamos del 18 de junio al 16 de nov. de 2026, sumados el 16 de noviembre. La cifra de seguidores de junio es de nuestros propios registros.",
     "points": [
-      "Otro Reel de @tonissushi pasó de 141K vistas."
+      "4 de los 22 reels pasaron de 1 millón de vistas. Tres de ellos son el chef enseñando modales o ingredientes.",
+      "El primer reel que publicamos recibió 196K me gusta. Las publicaciones justo antes recibían entre 12 y 156."
     ]
   },
   "quote": null,

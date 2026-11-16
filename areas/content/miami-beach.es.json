@@ -9,7 +9,7 @@
   "answer": "Button Up Media es una agencia de marketing de Miami que ayuda a los restaurantes de Miami Beach a atraer turistas y vecinos con videos, Google, web y anuncios.",
   "card": {
     "insight": "Dos públicos en una isla: turistas que eligen desde el celular y vecinos que necesitan una razón para volver.",
-    "proofLine": "Aquí mismo: Toni's Sushi Bar en South Beach, 79.4K seguidores en Instagram"
+    "proofLine": "Aquí mismo: Toni's Sushi Bar en South Beach, de 4K a 80K seguidores en Instagram en cinco meses"
   },
   "heroMedia": {
     "type": "graphic",
@@ -19,14 +19,14 @@
     "graphic": {
       "handle": "@tonissushi",
       "hookLabel": "Un gancho de Toni's",
-      "hook": "POV: you find the best sushi spot on South Beach",
-      "big": "79.4K",
+      "hook": "If you're pouring soy sauce over the rice, we need to have a conversation",
+      "big": "80.1K",
       "bigLabel": "seguidores en Instagram",
       "rows": [
-        {"value": "478", "label": "publicaciones"},
-        {"value": "1.3M+", "label": "vistas en un solo reel"}
+        {"value": "4K", "label": "seguidores en junio de 2026"},
+        {"value": "52.5M", "label": "vistas en un solo reel"}
       ],
-      "asOf": "Instagram, consultado el 13 de noviembre de 2026"
+      "asOf": "Instagram, consultado el 16 de noviembre de 2026"
     },
     "reviewNote": "Pedirle al dueño un clip corto o una foto de Toni's para usar aquí en lugar de este gráfico (no tenemos material de Toni's en el repositorio)."
   },
@@ -49,11 +49,10 @@
     "client": "Toni's Sushi Bar",
     "where": "Washington Ave, South Beach",
     "service": "Redes sociales",
-    "stat": "Unos 60M",
-    "statLabel": "de vistas desde que empezamos",
-    "chips": ["79.4K seguidores en Instagram", "Negocio familiar desde 1987"],
-    "bodyHtml": "Hacemos videos cortos alrededor del chef de sushi: cortes con cuchillo, primeros planos de nigiri y ganchos como \"POV: encuentras el mejor sushi de South Beach\". Un solo video pasó de unos 50M de vistas.",
-    "reviewNote": "Confirmar las cifras que reportó el dueño antes de publicar: el total exacto de vistas (unos 60M), qué plataformas incluye, el mes en que empezamos con Toni's y el enlace al video de unos 50M de vistas."
+    "stat": "64M+",
+    "statLabel": "de vistas en reels en cinco meses",
+    "chips": ["De 4K a 80K seguidores", "Negocio familiar desde 1987"],
+    "bodyHtml": "El chef enseña frente a la cámara la manera japonesa de comer sushi: wasabi de verdad, la soya en el pescado, los modales con los palillos. Una sola lección de modales pasó de 52.5M de vistas, y cada reel lleva la dirección de Washington Ave en los comentarios."
   },
   "steps": {
     "h2": "Lo primero que haríamos en Miami Beach",

@@ -9,7 +9,7 @@
   "answer": "Button Up Media is a Miami restaurant marketing agency that helps Miami Beach restaurants reach visitors and locals with chef-led video, Google search, websites and ads.",
   "card": {
     "insight": "Two crowds on one island: visitors choosing from their phones, and locals who need a reason to come back.",
-    "proofLine": "Right here: Toni's Sushi Bar in South Beach, 79.4K Instagram followers"
+    "proofLine": "Right here: Toni's Sushi Bar in South Beach, 4K to 80K Instagram followers in five months"
   },
   "heroMedia": {
     "type": "graphic",
@@ -19,14 +19,14 @@
     "graphic": {
       "handle": "@tonissushi",
       "hookLabel": "A Toni's hook",
-      "hook": "POV: you find the best sushi spot on South Beach",
-      "big": "79.4K",
+      "hook": "If you're pouring soy sauce over the rice, we need to have a conversation",
+      "big": "80.1K",
       "bigLabel": "Instagram followers",
       "rows": [
-        {"value": "478", "label": "posts"},
-        {"value": "1.3M+", "label": "views on one Reel"}
+        {"value": "4K", "label": "followers in June 2026"},
+        {"value": "52.5M", "label": "views on one Reel"}
       ],
-      "asOf": "Instagram, checked Nov 13, 2026"
+      "asOf": "Instagram, checked Nov 16, 2026"
     },
     "reviewNote": "Ask the owner for a short Toni's clip or photo we can use here instead of this graphic (we have no Toni's media in the repo)."
   },
@@ -49,11 +49,10 @@
     "client": "Toni's Sushi Bar",
     "where": "Washington Ave, South Beach",
     "service": "Social media",
-    "stat": "About 60M",
-    "statLabel": "views since we started",
-    "chips": ["79.4K Instagram followers", "Family-run since 1987"],
-    "bodyHtml": "We build short videos around the sushi chef: knife work, nigiri close-ups and hooks like \"POV: you find the best sushi spot on South Beach.\" One video alone passed about 50M views.",
-    "reviewNote": "Confirm the owner-reported numbers before launch: the exact total views (about 60M), which platforms that covers, the month we started with Toni's, and the link to the single video at about 50M views."
+    "stat": "64M+",
+    "statLabel": "Reel views in five months",
+    "chips": ["4K to 80K followers", "Family-run since 1987"],
+    "bodyHtml": "The chef teaches the Japanese way to eat sushi on camera: real wasabi, soy sauce on the fish, chopstick manners. One etiquette lesson passed 52.5M views, and every Reel carries the Washington Ave address in the comments."
   },
   "steps": {
     "h2": "What we'd do first in Miami Beach",
