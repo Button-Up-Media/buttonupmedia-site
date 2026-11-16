@@ -1,4 +1,5 @@
 import { cp, mkdir, readdir, readFile, rm, writeFile } from 'fs/promises';
+import { createHash } from 'crypto';
 import path from 'path';
 import { transform } from 'esbuild';
 import { buildBlog } from './build-blog.mjs';
@@ -7,7 +8,8 @@ import { buildCases } from './build-cases.mjs';
 import { generateDemo } from './demo-mock.mjs';
 
 const root = process.cwd();
-const outDir = path.join(root, 'public');
+// BUILD_OUT lets parallel previews build into their own folder (default public/).
+const outDir = path.join(root, process.env.BUILD_OUT || 'public');
 
 const filesToCopy = [
   'index.html',
@@ -54,6 +56,8 @@ const filesToMinify = [
   { file: 'shared.css', loader: 'css' },
   { file: 'shared.js', loader: 'js' },
   { file: 'pixel-canvas.js', loader: 'js' },
+  { file: 'v3.css', loader: 'css' },
+  { file: 'v3.js', loader: 'js' },
 ];
 
 const dirsToCopy = ['images', 'videos', 'fonts', 'media'];
@@ -122,6 +126,44 @@ const caseSitemapEntries = await buildCases(root, outDir);
     throw new Error('sitemap.xml missing </urlset>');
   }
   await writeFile(path.join(outDir, 'sitemap.xml'), sitemapSrc.replace('</urlset>', `${blogSitemapEntries}\n${areaSitemapEntries}\n${caseSitemapEntries}\n</urlset>`));
+}
+
+// v3 design layer: loaded LAST on every indexable page so it wins the cascade.
+// Noindex ad landing pages and the self-themed grader tool keep their current look. Blog pages get the light
+// reading mode (html.v3-light). The version is a content hash, so a changed
+// v3.css/v3.js is never served stale from a browser or CDN cache.
+{
+  const v3Version = createHash('sha1')
+    .update(await readFile(path.join(root, 'v3.css')))
+    .update(await readFile(path.join(root, 'v3.js')))
+    .digest('hex').slice(0, 10);
+  const isBlog = (rel) => /^(blog|blog-es)(\/|\.html$)/.test(rel);
+  let injected = 0;
+  const walkHtml = async (dir) => {
+    for (const entry of await readdir(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) { await walkHtml(full); continue; }
+      if (!entry.name.endsWith('.html')) continue;
+      let html = await readFile(full, 'utf8');
+      if (!html.includes('</head>') || /<meta name="robots" content="noindex/i.test(html) || html.includes('/v3.css')) continue;
+      const rel = path.relative(outDir, full).split(path.sep).join('/');
+      // The grader tool pages ship their own light theme and nav; leave them as designed.
+      if (/^(website-grader|grader-demo)/.test(rel)) continue;
+      if (isBlog(rel)) html = html.replace(/<html lang="([^"]+)"/, '<html lang="$1" class="v3-light"');
+      // v3 sets every heading and paragraph in Figtree: don't spend the first
+      // round trips on the two retired faces, and make sure Figtree is warm.
+      html = html.replace(/\s*<link rel="preload" as="font" type="font\/woff2" href="\/fonts\/(?:plus-jakarta-sans|epilogue)-variable\.woff2"[^>]*>/g, '');
+      if (!html.includes('/fonts/figtree-variable.woff2" crossorigin')) {
+        html = html.replace('</head>', '  <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />\n</head>');
+      }
+      html = html.replace('</head>', `  <link rel="stylesheet" href="/v3.css?v=${v3Version}" />\n</head>`);
+      html = html.replace('</body>', `  <script src="/v3.js?v=${v3Version}" defer></script>\n</body>`);
+      await writeFile(full, html);
+      injected += 1;
+    }
+  };
+  await walkHtml(outDir);
+  console.log(`v3 design layer on ${injected} pages (v=${v3Version})`);
 }
 
 console.log(`Built static site into ${outDir}`);

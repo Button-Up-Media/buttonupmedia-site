@@ -62,7 +62,6 @@
   <link rel="preconnect" href="https://calendly.com" />
   <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-variable.woff2" crossorigin fetchpriority="high" />
   <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
-  <script defer src="https://unpkg.com/lucide@1.17.0/dist/umd/lucide.min.js"></script>
   <link rel="stylesheet" href="shared.css?v=site-fixes-1" />
   <!-- JSON-LD Schema -->
   <script type="application/ld+json">
@@ -160,597 +159,165 @@
   }
   </script>
   <style>
-    .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px; align-items: start; }
-    .contact-info-card { padding: 28px; margin-bottom: 16px; }
-    .contact-info-card h4 { font-size: 0.92rem; font-weight: 700; margin-bottom: 8px; }
-    .contact-info-card p { font-size: 0.84rem; color: var(--text-dim); line-height: 1.6; }
-    .contact-info-card a { color: var(--gold); transition: opacity 0.2s; }
-    .contact-info-card a:hover { opacity: 0.8; }
-    .contact-hero-title,
-    .contact-hero-title .accent-serif {
-      color: var(--text-head);
-      background: none;
-      -webkit-background-clip: initial;
-      background-clip: initial;
-      -webkit-text-fill-color: currentColor;
-      text-shadow: none;
-    }
-    .contact-hero-title .accent-serif {
-      color: var(--gold);
-    }
-    .contact-scheduler {
-      padding-top: 58px;
-    }
-    .contact-scheduler h2 {
-      color: var(--text-head);
-    }
-    .contact-calendly-shell {
-      position: relative;
-    }
-    .contact-calendly-stage {
-      position: relative;
-      min-height: 700px;
-      border-radius: var(--r-lg);
-      overflow: hidden;
-      border: 1px solid rgba(255,248,235,0.08);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015)),
-        radial-gradient(circle at top left, rgba(226,168,77,0.09), transparent 32%),
-        radial-gradient(circle at bottom right, rgba(69,176,140,0.06), transparent 34%),
-        rgba(10,10,10,0.78);
-      box-shadow: 0 18px 42px rgba(0,0,0,0.22);
-    }
-    .contact-calendly-skeleton,
-    .contact-calendly-loaded {
-      position: absolute;
-      inset: 0;
-      transition: opacity 0.35s ease, transform 0.35s ease;
-    }
-    .contact-calendly-skeleton {
-      padding: 22px;
-    }
-    .contact-calendly-skeleton::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.025) 20%, rgba(255,255,255,0.07) 38%, rgba(255,255,255,0.025) 56%, transparent 74%);
-      transform: translateX(-120%);
-      animation: calendlyShimmer 1.8s ease-in-out infinite;
-    }
-    @keyframes calendlyShimmer {
-      to { transform: translateX(120%); }
-    }
-    .contact-calendly-skeleton-inner {
-      position: relative;
-      z-index: 1;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .contact-calendly-skel-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 8px;
-    }
-    .contact-calendly-skel-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.76rem;
-      font-weight: 600;
-      color: var(--text-soft);
-      letter-spacing: 0.01em;
-      text-transform: uppercase;
-    }
-    .contact-calendly-skel-status::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--gold);
-      box-shadow: 0 0 0 0 rgba(226,168,77,0.45);
-      animation: calendlyPulse 1.5s ease-in-out infinite;
-    }
-    @keyframes calendlyPulse {
-      0%, 100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(226,168,77,0.35); }
-      50% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(226,168,77,0); }
-    }
-    .contact-calendly-skel-pill {
-      height: 18px;
-      width: 88px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-    }
-    .contact-calendly-skel-line {
-      height: 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.07);
-    }
+    /* ===== v3 contact: booking first, Juan front and center. Scoped under
+       .v3-contact; the Calendly shell/skeleton/loaded classes are what the
+       inline loader script toggles, so their names stay. ===== */
+    .v3-contact.page { padding-top: 0; }
+    html[lang] body { overflow-x: clip; } /* lets the calendar stick on desktop; shared "hidden" stays as the fallback */
+    .v3-contact .cv-top { padding: calc(var(--v3-bar-h) + 56px) 0 0; }
+    .v3-contact .cv-grid { display: grid; grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr); grid-template-areas: "intro sched" "more sched"; column-gap: clamp(32px, 5vw, 72px); align-items: start; }
+    .v3-contact .cv-intro { grid-area: intro; }
+    .v3-contact .cv-more { grid-area: more; }
+    .v3-contact .contact-scheduler { grid-area: sched; position: sticky; top: calc(var(--v3-bar-h) + 20px); }
+
+    .v3-contact .cv-kicker { font-size: 0.9375rem; font-weight: 600; color: var(--gold); }
+    .v3-contact .cv-title { margin-top: 12px; font-size: clamp(2.8rem, 5.4vw, 4.75rem); line-height: 0.96; font-weight: 800; letter-spacing: -0.05em; color: var(--text-head); }
+    .v3-contact .cv-title .accent-serif { font: inherit; letter-spacing: inherit; color: var(--gold); }
+    .v3-contact .cv-lede { margin-top: 20px; max-width: 46ch; font-size: clamp(1.0625rem, 1.3vw, 1.1875rem); line-height: 1.55; color: rgba(246,240,230,0.76); }
+    .v3-contact .cv-quick { display: none; align-items: flex-start; }
+
+    /* host: who you actually meet */
+    .v3-contact .cv-host { display: grid; grid-template-columns: 124px minmax(0, 1fr); gap: 20px; align-items: start; margin-top: 32px; padding: 18px; border-radius: var(--v3-r-card); background: var(--v3-elev-1); border: 1px solid var(--v3-hair); }
+    .v3-contact .cv-host-photo { aspect-ratio: 4 / 5; border-radius: 16px; overflow: hidden; background: var(--v3-elev-2); }
+    .v3-contact .cv-host-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 45% 18%; }
+    .v3-contact .cv-host h2 { font-size: clamp(1.25rem, 1.7vw, 1.5rem); line-height: 1.15; font-weight: 800; letter-spacing: -0.035em; color: var(--text-head); }
+    .v3-contact .cv-host-quote { margin-top: 10px; font-size: 1rem; line-height: 1.55; color: rgba(246,240,230,0.78); }
+    .v3-contact .cv-host-by { margin-top: 10px; font-size: 0.875rem; line-height: 1.4; color: rgba(246,240,230,0.56); }
+    .v3-contact .cv-host-by strong { color: var(--text-head); font-weight: 700; }
+    .v3-contact .cv-facts { list-style: none; display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 20px 0 0; padding: 0; }
+    .v3-contact .cv-facts li { display: inline-flex; align-items: center; gap: 8px; font-size: 0.9375rem; font-weight: 600; color: rgba(246,240,230,0.7); }
+    .v3-contact .cv-facts svg { width: 16px; height: 16px; flex: none; color: var(--gold); }
+
+    /* what happens + other ways */
+    .v3-contact .cv-block { margin-top: 56px; }
+    .v3-contact .cv-block > h2 { font-size: clamp(1.5rem, 2.2vw, 1.875rem); line-height: 1.1; font-weight: 800; letter-spacing: -0.035em; color: var(--text-head); }
+    .v3-contact .cv-steps { list-style: none; margin: 18px 0 0; padding: 0; border-top: 1px solid var(--v3-hair); }
+    .v3-contact .cv-steps li { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 10px; padding: 18px 0; border-bottom: 1px solid var(--v3-hair); }
+    .v3-contact .cv-steps .n { padding-top: 3px; font-size: 0.875rem; font-weight: 700; color: var(--gold); font-variant-numeric: tabular-nums; }
+    .v3-contact .cv-steps h3 { font-size: 1.125rem; font-weight: 750; letter-spacing: -0.02em; color: var(--text-head); }
+    .v3-contact .cv-steps p { margin-top: 4px; font-size: 1rem; line-height: 1.55; color: rgba(246,240,230,0.72); }
+    .v3-contact .cv-rows { list-style: none; margin: 18px 0 0; padding: 0; border-radius: var(--v3-r-card); background: var(--v3-elev-1); border: 1px solid var(--v3-hair); overflow: hidden; }
+    .v3-contact .cv-rows > li + li { border-top: 1px solid var(--v3-hair); }
+    .v3-contact .cv-row { display: grid; grid-template-columns: 36px minmax(0, 1fr) auto; align-items: center; gap: 14px; min-height: 64px; padding: 12px 18px; color: inherit; text-decoration: none; transition: background .18s ease; }
+    .v3-contact a.cv-row:hover { background: rgba(255,255,255,0.04); }
+    .v3-contact .cv-row-ic { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: rgba(255,255,255,0.06); color: var(--text-head); }
+    .v3-contact .cv-row-ic svg { width: 18px; height: 18px; }
+    .v3-contact .cv-row small { display: block; font-size: 0.8125rem; font-weight: 600; line-height: 1.3; color: rgba(246,240,230,0.56); }
+    .v3-contact .cv-row b { display: block; margin-top: 1px; font-size: 1.0625rem; font-weight: 650; line-height: 1.3; color: var(--text-head); overflow-wrap: anywhere; }
+    .v3-contact .cv-chev { width: 18px; height: 18px; color: rgba(246,240,230,0.45); transition: transform .3s var(--v3-ease); }
+    .v3-contact .cv-row.--static { grid-template-columns: 36px minmax(0, 1fr); align-items: start; padding-top: 16px; padding-bottom: 16px; }
+    .v3-contact .cv-row-area { display: block; margin-top: 4px; font-size: 1rem; line-height: 1.55; color: rgba(246,240,230,0.72); }
+
+    /* Calendly: calm static skeleton, same loader states */
+    .contact-calendly-shell { position: relative; display: flex; flex-direction: column; }
+    .contact-calendly-stage { position: relative; min-height: 700px; border-radius: var(--v3-r-card); overflow: hidden; border: 1px solid var(--v3-hair); background: #111111; }
+    .contact-calendly-skeleton, .contact-calendly-loaded { position: absolute; inset: 0; transition: opacity 0.35s ease, transform 0.35s var(--v3-ease); }
+    .contact-calendly-skeleton { padding: 24px; }
+    .contact-calendly-skeleton-inner { height: 100%; display: flex; flex-direction: column; gap: 14px; }
+    .contact-calendly-skel-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+    .contact-calendly-skel-status { font-size: 0.9375rem; font-weight: 600; color: rgba(246,240,230,0.56); }
+    .contact-calendly-skel-pill { height: 18px; width: 88px; border-radius: 999px; background: rgba(255,255,255,0.06); }
+    .contact-calendly-skel-line { height: 14px; border-radius: 999px; background: rgba(255,255,255,0.06); }
     .contact-calendly-skel-line.--short { width: 42%; }
     .contact-calendly-skel-line.--mid { width: 64%; }
     .contact-calendly-skel-line.--long { width: 86%; }
-    .contact-calendly-skel-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 8px;
-      flex: 1;
+    .contact-calendly-skel-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 8px; flex: 1; }
+    .contact-calendly-skel-card { min-height: 120px; border-radius: 16px; background: rgba(255,255,255,0.035); }
+    .contact-calendly-skel-footer { display: flex; align-items: center; gap: 12px; margin-top: auto; }
+    .contact-calendly-skel-avatar { width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.06); }
+    .contact-calendly-skel-copy { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .contact-calendly-loaded { opacity: 0; transform: translateY(8px); }
+    .contact-calendly-shell.is-loaded .contact-calendly-skeleton { opacity: 0; pointer-events: none; }
+    .contact-calendly-shell.is-loaded .contact-calendly-loaded { opacity: 1; transform: none; }
+    .contact-calendly-loaded .calendly-inline-widget { min-height: 700px; }
+    .calendly-inline-widget { border-radius: var(--v3-r-card); overflow: hidden; }
+    .cv-stage-tap { display: none; }
+    .contact-book-direct { align-self: center; display: inline-flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 8px; padding: 0 16px; border-radius: 999px; font-size: 0.9375rem; font-weight: 600; color: rgba(246,240,230,0.66); text-decoration: underline; text-decoration-color: rgba(246,240,230,0.25); text-underline-offset: 3px; transition: color 0.18s ease; }
+    .contact-book-direct:hover { color: var(--text-head); }
+
+    /* proof */
+    .v3-contact .cv-sec { padding: clamp(88px, 10vw, 128px) 0 0; }
+    .v3-contact .cv-head { max-width: 760px; }
+    .v3-contact .lib-section-label { margin-bottom: 0; }
+    .v3-contact .cv-head h2 { margin-top: 10px; font-size: clamp(2.1rem, 4.4vw, 3.5rem); line-height: 1.03; font-weight: 800; letter-spacing: -0.048em; color: var(--text-head); }
+    .v3-contact .cv-quotes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 40px; }
+    .v3-contact .cv-quote { display: flex; flex-direction: column; margin: 0; padding-top: 22px; border-top: 1px solid var(--v3-hair-2); }
+    .v3-contact .cv-quote blockquote { flex: 1; margin: 0; font-size: clamp(1.25rem, 1.7vw, 1.5rem); line-height: 1.3; font-weight: 700; letter-spacing: -0.025em; color: var(--text-head); }
+    .v3-contact .cv-quote figcaption { margin-top: 18px; font-size: 0.9375rem; line-height: 1.4; color: rgba(246,240,230,0.56); }
+    .v3-contact .cv-quote figcaption strong { display: block; font-size: 1rem; font-weight: 700; color: var(--text-head); }
+    .v3-contact .cv-reviews { margin-top: clamp(64px, 8vw, 96px); }
+    .v3-contact .bum-reviews__head { margin-bottom: 24px; }
+    .v3-contact .bum-reviews__head h3 { font-size: clamp(1.375rem, 2.2vw, 1.75rem); font-weight: 800; letter-spacing: -0.035em; }
+    .v3-contact .bum-reviews__grid { gap: 14px; }
+    .v3-contact .bum-review { gap: 14px; padding: 24px 24px 20px; border-radius: var(--v3-r-card); border: 1px solid var(--v3-hair); background: var(--v3-elev-1); }
+    .v3-contact .bum-review .bum-stars { font-size: 0.875rem; letter-spacing: 0.12em; color: var(--gold); }
+    .v3-contact .bum-review__quote p { font-size: 1.0625rem; line-height: 1.6; color: rgba(246,240,230,0.88); }
+    .v3-contact .bum-review__by { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 12px; align-items: center; padding-top: 16px; border-top: 1px solid var(--v3-hair); font-size: 0.9375rem; color: rgba(246,240,230,0.56); }
+    .v3-contact .bum-review__by > * { grid-column: 1; }
+    .v3-contact .bum-review__by strong { font-size: 1rem; }
+    .v3-contact .bum-review__src { grid-column: 2; grid-row: 1 / span 3; align-self: center; margin: 0; padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,0.06); font-size: 0.8125rem; font-weight: 600; color: rgba(246,240,230,0.72); }
+
+    /* close: see the work, or go back to the calendar */
+    .v3-contact .cv-end { padding: clamp(88px, 10vw, 128px) 0 clamp(56px, 8vw, 96px); }
+    .v3-contact .cv-end-card { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px 32px; padding: clamp(28px, 4.5vw, 52px); border-radius: var(--v3-r-panel); background: var(--v3-elev-1); border: 1px solid var(--v3-hair); }
+    .v3-contact .cv-end-card h2 { font-size: clamp(1.75rem, 3.2vw, 2.6rem); line-height: 1.05; font-weight: 800; letter-spacing: -0.045em; color: var(--text-head); }
+    .v3-contact .cv-end-card p { margin-top: 10px; max-width: 46ch; font-size: 1.0625rem; line-height: 1.55; color: rgba(246,240,230,0.72); }
+    .v3-contact .cv-end-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .v3-contact .cv-end-actions .btn, .v3-contact .cv-quick .btn { height: 54px; padding: 0 26px; font-size: 1rem; }
+
+    @media (hover: hover) {
+      .v3-contact a.cv-row:hover .cv-chev { transform: translateX(3px); }
     }
-    .contact-calendly-skel-card {
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.06);
-      background: rgba(255,255,255,0.035);
-      min-height: 120px;
-    }
-    .contact-calendly-skel-footer {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: auto;
-    }
-    .contact-calendly-skel-avatar {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: rgba(226,168,77,0.12);
-      border: 1px solid rgba(226,168,77,0.16);
-    }
-    .contact-calendly-skel-copy {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      flex: 1;
-    }
-    .contact-calendly-loaded {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-    .contact-calendly-shell.is-loaded .contact-calendly-skeleton {
-      opacity: 0;
-      transform: scale(0.99);
-      pointer-events: none;
-    }
-    .contact-calendly-shell.is-loaded .contact-calendly-loaded {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .contact-calendly-loaded .calendly-inline-widget {
-      border-radius: var(--r-lg);
-      overflow: hidden;
-      min-height: 700px;
-    }
-    .contact-book-direct {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 38px;
-      padding: 0 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,248,235,0.1);
-      background: rgba(255,255,255,0.02);
-      color: var(--text-dim);
-      font-size: 0.74rem;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-      margin-top: 14px;
-    }
-    .contact-book-direct:hover {
-      transform: translateY(-1px);
-      background: rgba(255,255,255,0.04);
-      border-color: rgba(255,248,235,0.16);
-      color: var(--text);
-    }
-    .contact-details {
-      margin-top: 32px;
-      gap: 12px;
-    }
-    .calendly-inline-widget { border-radius: var(--r-lg); overflow: hidden; }
-    .contact-footer.lib-section {
-      margin-left: 0;
-      margin-right: 0;
-      padding: 40px 0 36px;
-      background: transparent;
-    }
-    .contact-footer.lib-section::before {
-      display: none;
-    }
+
+    /* tablet + phone: intro, then the calendar, then the details */
     @media (max-width: 900px) {
-      .contact-page .card-overlay-spacer {
-        padding-top: 40px;
-        padding-bottom: 76px !important;
-      }
-      .contact-calendly-loaded .calendly-inline-widget iframe {
-        pointer-events: none;
-      }
-      .contact-calendly-loaded {
-        pointer-events: none;
-      }
-      .contact-book-direct {
-        pointer-events: auto;
-      }
-      .contact-calendly-stage {
-        touch-action: pan-y pinch-zoom;
-        overscroll-behavior: auto;
-      }
-      .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 26px;
-      }
-      .contact-intro {
-        display: contents;
-      }
-      .contact-intro-copy {
-        order: 1;
-      }
-      .contact-scheduler {
-        order: 2;
-        padding-top: 0;
-      }
-      .contact-details {
-        order: 3;
-        margin-top: 0;
-        gap: 10px !important;
-      }
-      .contact-info-card {
-        padding: 16px 0;
-        margin-bottom: 0;
-      }
-      .contact-info-card h4 {
-        margin-bottom: 6px;
-      }
-      .contact-info-card p {
-        line-height: 1.45;
-      }
-      .contact-book-direct { display: flex; width: 100%; }
-      .calendly-inline-widget {
-        height: 660px !important;
-      }
+      .v3-contact .cv-top { padding-top: calc(var(--v3-bar-h) + 40px); }
+      .v3-contact .cv-grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "intro" "sched" "more"; row-gap: 28px; }
+      .v3-contact .contact-scheduler { position: static; scroll-margin-top: calc(var(--v3-bar-h) + 12px); }
+      .v3-contact .cv-quick { display: flex; flex-direction: column; margin-top: 22px; }
+      .v3-contact .cv-quick .btn { min-width: min(100%, 360px); }
+      .v3-contact .cv-block:first-child { margin-top: 20px; }
+      /* The inline calendar stays a preview on touch screens (scrolling past it
+         must never get trapped in the iframe); a tap anywhere on it opens the
+         same booking page as the gold button. */
+      .contact-calendly-loaded .calendly-inline-widget iframe { pointer-events: none; }
+      .contact-calendly-loaded { pointer-events: none; }
+      .contact-book-direct { pointer-events: auto; }
+      .contact-calendly-stage { min-height: 660px; touch-action: pan-y pinch-zoom; overscroll-behavior: auto; }
+      .calendly-inline-widget { height: 660px !important; }
+      .cv-stage-tap { display: block; position: absolute; inset: 0; z-index: 3; -webkit-tap-highlight-color: transparent; }
+      .contact-book-direct { align-self: stretch; min-height: 48px; margin-top: 10px; border: 1px solid var(--v3-hair-2); background: rgba(255,255,255,0.04); text-decoration: none; color: var(--text-head); }
+      .v3-contact .cv-quotes { grid-template-columns: 1fr; gap: 0; margin-top: 28px; }
+      .v3-contact .cv-quote { padding: 22px 0; }
+      .v3-contact .cv-quote:last-child { border-bottom: 1px solid var(--v3-hair-2); }
     }
-    /* Hero + nav entrance run on the compositor so first paint never waits on
-       the main thread. The headline (h1) is the Largest Contentful Paint
-       element, and Chrome defers LCP until any opacity/transform animation on
-       that element finishes. So the headline paints immediately and stays
-       static, while everything around it keeps the same fade-up. The page
-       still feels alive (opacity 0 to 1, a small rise, power3.out / easeOutQuart)
-       and LCP lands at first paint instead of at the end of the animation. */
-    .lib-nav[data-shared-animations="off"] {
-      animation: contactNavIn 0.6s cubic-bezier(0.25, 1, 0.5, 1) 0.2s backwards;
-    }
-    .contact-page .hero-badge,
-    .contact-page .contact-intro-copy > .body-text,
-    .contact-page .contact-details,
-    .contact-page .contact-scheduler {
-      animation: contactHeroIn 0.7s cubic-bezier(0.25, 1, 0.5, 1) 0.4s backwards;
-    }
-    @keyframes contactNavIn {
-      /* nav now centers via auto margins (no translateX), so the entrance is
-         a pure vertical slide */
-      from { opacity: 0; transform: translateY(-20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes contactHeroIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
+    @media (max-width: 700px) {
+      .v3-contact .cv-top { padding-top: calc(var(--v3-bar-h) + 24px); }
+      .v3-contact .cv-kicker { font-size: 0.875rem; }
+      .v3-contact .cv-title { margin-top: 8px; font-size: clamp(2.4rem, 11vw, 3rem); line-height: 0.98; }
+      .v3-contact .cv-lede { margin-top: 12px; }
+      .v3-contact .cv-quick { margin-top: 18px; }
+      .v3-contact .cv-quick .btn { height: 54px; width: 100%; }
+      .v3-contact .cv-host { grid-template-columns: 72px minmax(0, 1fr); gap: 14px; margin-top: 18px; padding: 14px; }
+      .v3-contact .cv-host-photo { aspect-ratio: 1 / 1; border-radius: 14px; }
+      .v3-contact .cv-host h2 { font-size: 1.1875rem; }
+      .v3-contact .cv-host-quote { margin-top: 6px; }
+      .v3-contact .cv-facts { gap: 8px 18px; margin-top: 16px; }
+      .v3-contact .cv-block { margin-top: 44px; }
+      .v3-contact .cv-row { padding: 12px 14px; gap: 12px; }
+      .v3-contact .bum-reviews__grid { margin: 0 -16px; padding: 2px 16px 10px; scroll-padding-inline: 16px; }
+      .v3-contact .bum-review { flex-basis: 86%; padding: 22px 20px 18px; }
+      .v3-contact .cv-end { padding-top: 72px; }
+      .v3-contact .cv-end-card { border-radius: 28px; }
+      .v3-contact .cv-end-actions { width: 100%; }
+      .v3-contact .cv-end-actions .btn { flex: 1 1 100%; }
+      /* body copy reads at 16px+ on phones (beats the shared 15.5px floor) */
+      html[lang] body:not(#_) #v3-contact :is(.cv-lede, .cv-host-quote, .cv-steps p, .bum-review__quote p, .cv-end-card p) { font-size: 16px; line-height: 1.6; }
+      html[lang] body:not(#_) #v3-contact .cv-quote blockquote { font-size: 1.25rem; line-height: 1.32; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .lib-nav[data-shared-animations="off"],
-      .contact-page .hero-badge,
-      .contact-page .contact-intro-copy > .body-text,
-      .contact-page .contact-details,
-      .contact-page .contact-scheduler {
-        animation: none;
-      }
-    }
-
-    /* ===== CONTACT LEFT COLUMN: "Meet your host" (humanized) ===== */
-    /* Scoped .ci-* so nothing collides with the global .contact-info-card
-       base rules, the mobile reflow block, or the Calendly column. */
-    .ci-host {
-      margin-top: 34px;
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      padding: 20px;
-      border: 1px solid var(--line);
-      border-radius: var(--r-lg);
-      background: var(--surface);
-      box-shadow: 0 18px 42px rgba(0,0,0,0.22);
-    }
-    .ci-host-avatar { position: relative; flex: none; }
-    .ci-host-imgwrap {
-      display: block;
-      width: 84px; height: 84px;
-      border-radius: 18px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-    }
-    .ci-host-avatar img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      /* Square source in a square frame: object-position can't crop, so scale
-         up and anchor on Juan's face so he reads clearly at this small size. */
-      transform: scale(1.5);
-      transform-origin: 50% 58%;
-      display: block;
-    }
-    /* Static decorative dot only. No animation, no availability implication. */
-    .ci-host-dot {
-      position: absolute; right: -5px; bottom: -5px;
-      width: 18px; height: 18px;
-      border-radius: 50%;
-      background: var(--gold);
-      border: 3px solid var(--bg-0);
-    }
-    .ci-host-name {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 1.14rem;
-      color: var(--text-head);
-      line-height: 1.1;
-    }
-    .ci-host-role {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-top: 4px;
-    }
-    .ci-host-note {
-      margin-top: 8px;
-      font-size: 0.88rem;
-      line-height: 1.55;
-      color: var(--text-dim);
-    }
-
-    /* Qualitative trust pills (no invented numbers) */
-    .ci-trust {
-      list-style: none;
-      margin: 16px 0 0;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .ci-trust-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 13px;
-      border-radius: 999px;
-      border: 1px solid var(--line-soft);
-      background: var(--surface);
-      font-size: 0.76rem;
-      font-weight: 600;
-      color: var(--text-dim);
-    }
-    .ci-trust-pill svg {
-      width: 14px; height: 14px;
-      color: var(--gold);
-      flex: none;
-    }
-
-    /* What-to-expect steps */
-    .ci-expect {
-      margin-top: 26px;
-      padding: 22px 20px;
-      border: 1px solid var(--line-soft);
-      border-radius: var(--r-lg);
-      background: var(--surface);
-    }
-    .ci-steps {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-    .ci-step { display: flex; gap: 13px; align-items: flex-start; }
-    .ci-step-num {
-      flex: none;
-      width: 27px; height: 27px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: var(--gold-soft);
-      border: 1px solid rgba(226,168,77,0.28);
-      color: var(--gold);
-      font-family: var(--font-display);
-      font-size: 0.82rem;
-      font-weight: 700;
-      margin-top: 1px;
-    }
-    .ci-step-text {
-      font-size: 0.88rem;
-      line-height: 1.5;
-      color: var(--text-dim);
-    }
-    .ci-step-text strong {
-      display: block;
-      color: var(--text-head);
-      font-weight: 700;
-      font-size: 0.95rem;
-      margin-bottom: 2px;
-    }
-
-    /* Demoted contact rows: reaching a person, not a form. Always visible. */
-    .ci-details { margin-top: 34px; gap: 0 !important; }
-    .ci-details-eyebrow {
-      font-family: var(--font-display);
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-soft);
-      margin: 0 0 6px;
-    }
-    /* Override the global .contact-info-card padding/margin for these rows only */
-    .ci-reach {
-      display: flex !important;
-      align-items: center;
-      gap: 14px;
-      padding: 15px 6px !important;
-      margin-bottom: 0 !important;
-      border: 0;
-      border-top: 1px solid var(--line-soft);
-      border-radius: 0;
-      transition: background 0.2s ease, padding-left 0.2s ease;
-    }
-    .ci-reach:last-child { border-bottom: 1px solid var(--line-soft); }
-    a.ci-reach:hover {
-      background: rgba(255,255,255,0.02);
-      padding-left: 12px !important;
-    }
-    a.ci-reach:focus-visible {
-      outline: 2px solid var(--gold);
-      outline-offset: -2px;
-      border-radius: 6px;
-    }
-    .ci-reach-ic {
-      flex: none;
-      width: 36px; height: 36px;
-      border-radius: 11px;
-      display: grid;
-      place-items: center;
-      background: var(--gold-soft);
-      border: 1px solid rgba(226,168,77,0.28);
-      color: var(--gold);
-    }
-    .ci-reach-copy { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-    .ci-reach-label {
-      font-size: 0.72rem;
-      color: var(--text-soft);
-      font-weight: 600;
-    }
-    .ci-reach-value {
-      font-size: 0.92rem;
-      font-weight: 600;
-      color: var(--gold);
-    }
-    .ci-reach--static .ci-reach-value { color: var(--text); font-weight: 500; }
-    .ci-reach-value--area {
-      font-size: 0.82rem;
-      font-weight: 400;
-      line-height: 1.5;
-      color: var(--text-dim);
-    }
-
-    /* Entrance parity with the existing intro fade-up.
-       (The H1 deliberately stays static for LCP; these ride the same curve.) */
-    .contact-page .ci-host,
-    .contact-page .ci-trust,
-    .contact-page .ci-expect {
-      animation: contactHeroIn 0.7s cubic-bezier(0.25, 1, 0.5, 1) 0.4s backwards;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .contact-page .ci-host,
-      .contact-page .ci-trust,
-      .contact-page .ci-expect { animation: none; }
-    }
-
-    /* A little more top breathing room on desktop (mobile keeps its own value). */
-    @media (min-width: 901px) {
-      .contact-page .card-overlay-spacer { padding-top: 144px; }
-    }
-
-    @media (max-width: 900px) {
-      .ci-host { margin-top: 20px; padding: 16px; gap: 14px; }
-      .ci-host-imgwrap { width: 68px; height: 68px; border-radius: 15px; }
-      .ci-trust { margin-top: 14px; }
-      /* Reflow order on mobile: intro+host+pills, then the CALENDAR, then the
-         "what happens" explainer, then the other-ways-to-reach rows. Keeps the
-         booking widget reachable instead of buried under the explainer. Spacing
-         comes from the .contact-grid 26px row gap, so zero the margins. */
-      .ci-expect { order: 3; margin-top: 0; padding: 18px 16px; }
-      .ci-details { order: 4; margin-top: 0 !important; }
-      .ci-details-eyebrow { margin-top: 0; }
-      .ci-reach { padding: 14px 0 !important; }
-      a.ci-reach:hover { padding-left: 0 !important; }
-    }
-
-    /* ===== TESTIMONIALS / SOCIAL PROOF ===== */
-    .ci-proof-head { max-width: 38ch; }
-    .ci-proof-title {
-      font-family: var(--font-hero);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      font-size: clamp(1.6rem, 4.5vw, 2.3rem);
-      line-height: 1.1;
-      color: var(--text-head);
-      margin-top: 12px;
-    }
-    .ci-proof-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-      margin-top: 28px;
-    }
-    .ci-quote {
-      display: flex;
-      flex-direction: column;
-      padding: 24px 22px;
-      border: 1px solid var(--line-soft);
-      border-radius: var(--r-lg);
-      background: var(--surface);
-    }
-    .ci-quote-mark {
-      font-family: var(--font-hero);
-      font-size: 2.6rem;
-      line-height: 0.6;
-      height: 0.5em;
-      color: var(--gold);
-      opacity: 0.5;
-      margin-bottom: 10px;
-    }
-    .ci-quote blockquote {
-      margin: 0;
-      flex: 1;
-      font-size: 0.98rem;
-      line-height: 1.6;
-      color: var(--text);
-    }
-    .ci-quote figcaption {
-      margin-top: 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .ci-quote-avatar {
-      flex: none;
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: var(--gold-soft);
-      border: 1px solid rgba(226,168,77,0.28);
-      color: var(--gold);
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 0.82rem;
-      letter-spacing: 0.02em;
-    }
-    .ci-quote-who { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-    .ci-quote-name {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: var(--text-head);
-      line-height: 1.1;
-    }
-    .ci-quote-tag {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-    @media (min-width: 760px) {
-      .ci-proof-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
+      .contact-calendly-skeleton, .contact-calendly-loaded, .v3-contact .cv-chev { transition: none; }
+      .contact-calendly-loaded { transform: none; }
     }
   </style>
 </head>
@@ -759,11 +326,6 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WR9TZHT"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
-  <div class="depth-canvas" aria-hidden="true">
-    <div class="mesh-orb" style="--orb-color: var(--gold); width: 500px; height: 500px; top: 5%; left: -5%;"></div>
-    <div class="mesh-orb" style="--orb-color: var(--coral); width: 400px; height: 400px; bottom: 10%; right: 0%;"></div>
-  </div>
-  <div class="load-flash" aria-hidden="true"></div>
 
   <nav class="lib-nav" data-shared-animations="off">
     <a class="lib-nav-brand" href="/" aria-label="Button Up Media home">
@@ -803,110 +365,54 @@
         </div>
       </details>
       <a href="/social-media-website-grader" class="lib-nav-grader" target="_blank" rel="noopener" aria-label="Social &amp; Web Grader (opens in a new tab)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Social &amp; Web Grader</a>
-      <a href="/">Home</a>
+      <a href="/case-studies">Case Studies</a>
       <a href="/about">About</a>
       <a class="lib-nav-phone" href="tel:+17867409499">Call Us</a>
       <a href="/contact" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Book Free Strategy Call</a>
     </div>
   </nav>
 
-  <div class="page contact-page">
+  <div class="page contact-page v3-contact" id="v3-contact">
 
-    <!-- HERO + FORM -->
-    <section class="lib-section card-overlay-spacer" data-shared-animations="off">
-      <div class="contact-grid">
-        <div class="contact-intro">
-          <div class="contact-intro-copy">
-            <div class="hero-badge">Free Restaurant Growth Audit</div>
-            <h1 class="display-xl contact-hero-title" style="margin-top: 20px;">
-              Let&rsquo;s talk about <span class="accent-serif">your spot</span>.
-            </h1>
-            <p class="body-text" style="margin-top: 16px; max-width: 46ch;">
-              Not a form into a void. Pick a time on the right and you talk to a founder, not a sales rep. 30 minutes, no pressure, just a clear plan for your restaurant.
-            </p>
+    <!-- HERO + BOOKING -->
+    <section class="cv-top" data-shared-animations="off">
+      <div class="cv-grid">
+        <div class="cv-intro">
+          <p class="cv-kicker">Free restaurant growth audit</p>
+          <h1 class="cv-title">Let&rsquo;s talk about <span class="accent-serif">your spot</span>.</h1>
+          <p class="cv-lede">Not a form into a void. Pick a time and you talk to a founder, not a sales rep. 30 minutes, no pressure, just a clear plan for your restaurant.</p>
 
-            <!-- HOST CARD: who you actually meet on the call -->
-            <div class="ci-host">
-              <div class="ci-host-avatar">
-                <span class="ci-host-imgwrap">
-                  <img src="media/author-juan.webp" alt="Juan, co-founder of Button Up Media" width="512" height="512" loading="lazy" decoding="async" />
-                </span>
-                <span class="ci-host-dot" aria-hidden="true"></span>
-              </div>
-              <div class="ci-host-copy">
-                <div class="ci-host-name">Juan</div>
-                <div class="ci-host-role">Co-Founder, Button Up Media</div>
-                <p class="ci-host-note">&ldquo;Hey, I&rsquo;m Juan. When you book, it&rsquo;s me you&rsquo;ll be talking to. Tell me about your spot and I&rsquo;ll come ready with ideas. See you soon.&rdquo;</p>
-              </div>
+          <!-- phones: the booking button sits in the first screen -->
+          <div class="cv-quick">
+            <a class="btn btn-primary" href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" rel="noreferrer">Pick a time with Juan</a>
+          </div>
+
+          <!-- HOST: who you actually meet on the call -->
+          <div class="cv-host">
+            <div class="cv-host-photo">
+              <picture>
+                <source media="(max-width: 700px)" srcset="media/author-juan.webp" width="512" height="512" />
+                <img src="media/team-juan.webp?v=3" alt="Juan, co-founder of Button Up Media" width="760" height="950" decoding="async" />
+              </picture>
             </div>
-
-            <!-- TRUST PILLS: qualitative, no invented numbers -->
-            <ul class="ci-trust" aria-label="Why this call is worth your time">
-              <li class="ci-trust-pill"><i data-lucide="users" aria-hidden="true"></i><span>Small South Florida team</span></li>
-              <li class="ci-trust-pill"><i data-lucide="calendar-check" aria-hidden="true"></i><span>Helping restaurants since 2022</span></li>
-              <li class="ci-trust-pill"><i data-lucide="heart" aria-hidden="true"></i><span>Free, no-pressure call</span></li>
-            </ul>
-          </div>
-
-          <!-- WHAT TO EXPECT: reduce the unknown. On mobile this reflows
-               below the calendar so the booking widget stays reachable. -->
-          <div class="ci-expect">
-            <div class="lib-section-label">What happens on the call</div>
-            <ol class="ci-steps">
-              <li class="ci-step">
-                <span class="ci-step-num" aria-hidden="true">1</span>
-                <div class="ci-step-text">
-                  <strong>You talk, we listen.</strong>
-                  Tell us about your restaurant, your slow nights, and what you wish you had more of.
-                </div>
-              </li>
-              <li class="ci-step">
-                <span class="ci-step-num" aria-hidden="true">2</span>
-                <div class="ci-step-text">
-                  <strong>We map out a plan.</strong>
-                  Right there on the call, we walk through where you stand and the moves that actually fill seats.
-                </div>
-              </li>
-              <li class="ci-step">
-                <span class="ci-step-num" aria-hidden="true">3</span>
-                <div class="ci-step-text">
-                  <strong>You decide. No pressure.</strong>
-                  Keep the plan whether or not we ever work together. Worst case, you leave with a clearer next step.
-                </div>
-              </li>
-            </ol>
-          </div>
-
-          <div class="stack contact-details ci-details">
-            <p class="ci-details-eyebrow">Rather reach out another way?</p>
-            <a class="contact-info-card ci-reach" href="mailto:contact@buttonupmedia.com">
-              <span class="ci-reach-ic"><i data-lucide="mail" class="icon-sm" aria-hidden="true"></i></span>
-              <span class="ci-reach-copy">
-                <span class="ci-reach-label">Prefer to write?</span>
-                <span class="ci-reach-value">contact@buttonupmedia.com</span>
-              </span>
-            </a>
-            <a class="contact-info-card ci-reach" href="tel:+17867409499">
-              <span class="ci-reach-ic"><i data-lucide="phone" class="icon-sm" aria-hidden="true"></i></span>
-              <span class="ci-reach-copy">
-                <span class="ci-reach-label">Rather just call?</span>
-                <span class="ci-reach-value">(786) 740-9499</span>
-              </span>
-            </a>
-            <div class="contact-info-card ci-reach ci-reach--static">
-              <span class="ci-reach-ic"><i data-lucide="map-pin" class="icon-sm" aria-hidden="true"></i></span>
-              <span class="ci-reach-copy">
-                <span class="ci-reach-label">Where we work</span>
-                <span class="ci-reach-value ci-reach-value--area">South Florida: Miami, Brickell, Coral Gables, Doral, Fort Lauderdale, Hollywood, Boca Raton, Delray Beach, West Palm Beach, and nearby coastal markets. Nationwide support is available for corporate and enterprise restaurant groups.</span>
-              </span>
+            <div>
+              <h2>You talk to Juan, not a sales rep.</h2>
+              <p class="cv-host-quote">&ldquo;Hey, I&rsquo;m Juan. When you book, it&rsquo;s me you&rsquo;ll be talking to. Tell me about your spot and I&rsquo;ll come ready with ideas. See you soon.&rdquo;</p>
+              <p class="cv-host-by"><strong>Juan</strong> &middot; Co-founder, Button Up Media</p>
             </div>
           </div>
 
+          <ul class="cv-facts" aria-label="Why this call is worth your time">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Small South Florida team</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Helping restaurants since 2022</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Free, no-pressure call</li>
+          </ul>
         </div>
 
         <div class="contact-scheduler">
           <div class="contact-calendly-shell" id="contact-calendly-shell">
             <div class="contact-calendly-stage">
+              <a class="cv-stage-tap" href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" rel="noreferrer" tabindex="-1" aria-hidden="true" title="Open the booking calendar"></a>
               <div class="contact-calendly-skeleton" aria-hidden="true">
                 <div class="contact-calendly-skeleton-inner">
                   <div class="contact-calendly-skel-top">
@@ -939,51 +445,50 @@
             <a class="contact-book-direct" href="https://calendly.com/juanh-buttonupmedia/freeconsultation" target="_blank" rel="noreferrer">Open booking calendar in a new tab</a>
           </div>
         </div>
+
+        <div class="cv-more">
+          <div class="cv-block">
+            <h2>What happens on the call</h2>
+            <ol class="cv-steps">
+              <li><span class="n">01</span><div><h3>You talk, we listen.</h3><p>Tell us about your restaurant, your slow nights, and what you wish you had more of.</p></div></li>
+              <li><span class="n">02</span><div><h3>We map out a plan.</h3><p>Right there on the call, we walk through where you stand and the moves that actually fill seats.</p></div></li>
+              <li><span class="n">03</span><div><h3>You decide. No pressure.</h3><p>Keep the plan whether or not we ever work together. Worst case, you leave with a clearer next step.</p></div></li>
+            </ol>
+          </div>
+
+          <div class="cv-block">
+            <h2>Rather reach out another way?</h2>
+            <ul class="cv-rows">
+              <li><a class="cv-row" href="mailto:contact@buttonupmedia.com"><span class="cv-row-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span><span><small>Prefer to write?</small><b>contact@buttonupmedia.com</b></span><svg class="cv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 6 6 6-6 6"/></svg></a></li>
+              <li><a class="cv-row" href="tel:+17867409499"><span class="cv-row-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><span><small>Rather just call?</small><b>(786) 740-9499</b></span><svg class="cv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 6 6 6-6 6"/></svg></a></li>
+              <li><div class="cv-row --static"><span class="cv-row-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span><span><small>Where we work</small><span class="cv-row-area">South Florida: Miami, Brickell, Coral Gables, Doral, Fort Lauderdale, Hollywood, Boca Raton, Delray Beach, West Palm Beach, and nearby coastal markets. Nationwide support is available for corporate and enterprise restaurant groups.</span></span></div></li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- SOCIAL PROOF -->
-    <section class="lib-section ci-proof">
-      <div class="ci-proof-head">
+    <section class="cv-sec">
+      <div class="cv-head">
         <div class="lib-section-label">What owners say</div>
-        <h2 class="ci-proof-title">You&rsquo;d be in good company.</h2>
+        <h2>You&rsquo;d be in good company.</h2>
       </div>
-      <div class="ci-proof-grid">
-        <figure class="ci-quote">
-          <span class="ci-quote-mark" aria-hidden="true">&ldquo;</span>
-          <blockquote>Button Up Media has helped us grow our business a lot over the last three years with social media.</blockquote>
-          <figcaption>
-            <span class="ci-quote-avatar" aria-hidden="true">KM</span>
-            <span class="ci-quote-who">
-              <span class="ci-quote-name">Keiichi Maemura</span>
-              <span class="ci-quote-tag">Social media marketing</span>
-            </span>
-          </figcaption>
+      <div class="cv-quotes">
+        <figure class="cv-quote">
+          <blockquote>&ldquo;Button Up Media has helped us grow our business a lot over the last three years with social media.&rdquo;</blockquote>
+          <figcaption><strong>Keiichi Maemura</strong>Social media marketing</figcaption>
         </figure>
-        <figure class="ci-quote">
-          <span class="ci-quote-mark" aria-hidden="true">&ldquo;</span>
-          <blockquote>I needed a team to be creative that could match our creative energy, and Button Up Media was the team to get it done.</blockquote>
-          <figcaption>
-            <span class="ci-quote-avatar" aria-hidden="true">J</span>
-            <span class="ci-quote-who">
-              <span class="ci-quote-name">Jordan</span>
-              <span class="ci-quote-tag">Content &amp; creative</span>
-            </span>
-          </figcaption>
+        <figure class="cv-quote">
+          <blockquote>&ldquo;I needed a team to be creative that could match our creative energy, and Button Up Media was the team to get it done.&rdquo;</blockquote>
+          <figcaption><strong>Jordan</strong>Content &amp; creative</figcaption>
         </figure>
-        <figure class="ci-quote">
-          <span class="ci-quote-mark" aria-hidden="true">&ldquo;</span>
-          <blockquote>My website is fast, converts, and looks absolutely amazing, and it was made fast, just two weeks. I cannot recommend Button Up Media more.</blockquote>
-          <figcaption>
-            <span class="ci-quote-avatar" aria-hidden="true">F</span>
-            <span class="ci-quote-who">
-              <span class="ci-quote-name">Fabio</span>
-              <span class="ci-quote-tag">Website design</span>
-            </span>
-          </figcaption>
+        <figure class="cv-quote">
+          <blockquote>&ldquo;My website is fast, converts, and looks absolutely amazing, and it was made fast, just two weeks. I cannot recommend Button Up Media more.&rdquo;</blockquote>
+          <figcaption><strong>Fabio</strong>Website design</figcaption>
         </figure>
       </div>
-      <div class="bum-reviews">
+      <div class="bum-reviews cv-reviews">
         <div class="bum-reviews__head">
           <h3>More from restaurant owners on Google</h3>
           <a class="bum-grating" href="https://www.google.com/maps?cid=18420049328774985259" target="_blank" rel="noopener" aria-label="Rated 5.0 out of 5 on Google from 11 reviews (opens Google in a new tab)"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg><strong>5.0</strong><span class="bum-stars" aria-hidden="true">★★★★★</span><span class="bum-grating__text">on Google, 11 reviews</span></a>
@@ -1010,6 +515,20 @@
               <span class="bum-review__src"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google review</span>
             </figcaption>
           </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLOSE -->
+    <section class="cv-end">
+      <div class="cv-end-card">
+        <div>
+          <h2>Want to see the work first?</h2>
+          <p>Real restaurants, real numbers. Then come back and pick a time with Juan.</p>
+        </div>
+        <div class="cv-end-actions">
+          <a class="btn" href="/case-studies">See our work</a>
+          <a class="btn btn-primary" href="#contact-calendly-shell">Pick a time</a>
         </div>
       </div>
     </section>

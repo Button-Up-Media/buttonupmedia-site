@@ -137,192 +137,152 @@
   }
   </script>
   <style>
-    /* ============================================================
-       About / Team. MOBILE-FIRST. Base styles target phones;
-       min-width breakpoints scale up. Extends shared.css dark system.
-       ============================================================ */
-    .at-wrap { width: min(calc(100% - 36px), var(--max)); margin: 0 auto; }
+    /* ===== v3 about: same patterns as the v3 homepage (section heads,
+       hairline points, gold final card), scoped under .v3-about ===== */
+    .v3-about.page { padding-top: 0; }
+    .v3-about .ab-sec { padding: clamp(80px, 10vw, 128px) 0 0; scroll-margin-top: calc(var(--v3-bar-h) + 12px); }
+    .v3-about .ab-head { max-width: 760px; }
+    .v3-about .ab-head h2 { margin-top: 10px; font-size: clamp(2.1rem, 4.4vw, 3.5rem); line-height: 1.03; font-weight: 800; letter-spacing: -0.048em; color: var(--text-head); }
+    .v3-about .ab-head > p { margin-top: 16px; max-width: 54ch; font-size: clamp(1.0625rem, 1.3vw, 1.1875rem); line-height: 1.55; color: rgba(246,240,230,0.72); }
+    .v3-about .lib-section-label { margin-bottom: 0; }
+    .v3-about .ab-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .v3-about .ab-cta .btn { height: 54px; padding: 0 26px; font-size: 1rem; }
+    .v3-about .ab-photo { position: relative; margin: 0; border-radius: var(--v3-r-panel); overflow: hidden; background: var(--v3-elev-1); }
+    .v3-about .ab-photo picture { display: contents; }
+    .v3-about .ab-photo img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--v3-ease); }
+    .v3-about .ab-cap { position: absolute; left: 14px; bottom: 14px; display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border-radius: 999px; background: rgba(11,11,12,0.66); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: var(--text-head); font-size: 0.875rem; font-weight: 600; }
 
-    .at-eyebrow {
-      display: inline-flex; align-items: center; gap: 9px;
-      font-family: var(--font-display); font-size: 0.7rem; font-weight: 700;
-      letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold);
-    }
-    .at-eyebrow::before { content: ""; width: 20px; height: 1px; background: var(--gold); opacity: 0.7; }
+    /* hero */
+    .v3-about .ab-hero { padding: calc(var(--v3-bar-h) + 48px) 0 0; }
+    .v3-about .ab-hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+    .v3-about .ab-kicker { font-size: 0.9375rem; font-weight: 600; color: var(--gold); }
+    .v3-about .ab-hero h1 { margin-top: 14px; font-size: clamp(2.6rem, 4.8vw, 4.4rem); line-height: 0.98; font-weight: 800; letter-spacing: -0.05em; color: var(--text-head); }
+    .v3-about .ab-hero h1 .accent-serif { font: inherit; letter-spacing: inherit; color: var(--gold); }
+    .v3-about .ab-lede { margin-top: 22px; max-width: 50ch; font-size: clamp(1.0625rem, 1.3vw, 1.1875rem); line-height: 1.55; color: rgba(246,240,230,0.76); }
+    .v3-about .ab-hero .ab-photo { aspect-ratio: 1 / 1; }
+    .v3-about .ab-hero .ab-photo img { object-position: 50% 56%; }
 
-    /* Reveal: transform-only; opacity stays 1 so content can never be hidden. */
-    .at-rise { transform: translateY(18px); transition: transform .7s cubic-bezier(.22,1,.36,1); will-change: transform; }
-    .at-rise.is-in { transform: none; }
-    @media (prefers-reduced-motion: reduce) { .at-rise { transform: none; transition: none; } }
+    /* clients */
+    .v3-about .ab-trust { padding: clamp(56px, 7vw, 96px) 0 0; text-align: center; }
+    .v3-about .ab-trust-label { margin: 0 0 22px; font-size: 0.9375rem; font-weight: 600; color: rgba(246,240,230,0.56); }
+    .v3-about .ab-trust .bum-logos-also { font-size: 0.9375rem; }
+    .v3-about .ab-trust-rating { display: flex; justify-content: center; margin-top: 22px; }
 
-    /* ---------------- HERO ---------------- */
-    .at-hero { padding: clamp(72px, 9vw, 130px) 0 clamp(18px, 3vw, 44px); }
-    .at-hero-inner { display: flex; flex-direction: column; gap: 16px; }
-    /* meta pills sit under the photo on mobile */
-    .at-hero-meta { margin-top: 2px; }
-    .at-hero h1 {
-      font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.045em;
-      font-size: clamp(1.95rem, 7.2vw, 4.6rem); line-height: 1.0; margin-top: 12px;
-    }
-    .at-hero h1 .accent-serif { color: var(--gold); font-family: inherit; font-style: normal; font-weight: 800; letter-spacing: inherit; }
-    .at-hero h1 .tealword { color: var(--teal); }
-    .at-hero-sub { max-width: 52ch; margin-top: 13px; font-size: clamp(0.96rem, 3.6vw, 1.2rem); line-height: 1.55; color: var(--text-dim); }
-    .at-hero-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
-    .at-hero-meta span {
-      display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px;
-      border-radius: 999px; border: 1px solid var(--line-soft); background: var(--bg-1);
-      font-size: 0.76rem; font-weight: 600; color: var(--text-soft);
-    }
-    .at-hero-meta b { color: var(--gold); font-family: var(--font-display); font-weight: 700; }
-    .at-hero-photo {
-      position: relative; border-radius: var(--r-xl); overflow: hidden;
-      border: 1px solid var(--line-soft); box-shadow: 0 30px 70px rgba(0,0,0,0.5);
-      aspect-ratio: 5 / 4;
-    }
-    .at-hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%; display: block; }
-    .at-hero-photo picture { display: contents; }
-    .at-hero-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(8,8,8,0.55)); pointer-events: none; }
-    .at-hero-photo .at-photo-tag {
-      position: absolute; left: 14px; bottom: 13px; z-index: 2;
-      display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px;
-      border-radius: 999px; background: rgba(10,10,10,0.6); backdrop-filter: blur(8px);
-      border: 1px solid var(--line); font-size: 0.72rem; font-weight: 600; color: var(--text);
-    }
-    .at-photo-tag .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+    /* story */
+    .v3-about .ab-story { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+    .v3-about .ab-story .ab-photo { aspect-ratio: 1 / 1; }
+    .v3-about .ab-story .ab-photo img { object-position: 48% 40%; }
+    .v3-about .ab-mission { margin-top: 12px; font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.1; font-weight: 800; letter-spacing: -0.042em; color: var(--text-head); }
+    .v3-about .ab-body { margin-top: 18px; max-width: 58ch; font-size: 1.0625rem; line-height: 1.65; color: rgba(246,240,230,0.72); }
+    .v3-about .ab-since { display: inline-flex; align-items: center; gap: 16px; margin-top: 28px; padding: 18px 26px 18px 22px; border-radius: var(--v3-r-card); background: var(--v3-elev-1); border: 1px solid var(--v3-hair); }
+    .v3-about .ab-since b { font-size: clamp(2.6rem, 4vw, 3.25rem); font-weight: 800; line-height: 0.9; letter-spacing: -0.06em; color: var(--gold); }
+    .v3-about .ab-since span { max-width: 13ch; font-size: 1rem; font-weight: 650; line-height: 1.3; color: var(--text-head); }
 
-    /* ---------------- CLIENT MARQUEE (moved high) ---------------- */
-    .at-clients { position: relative; z-index: 3; padding: clamp(20px, 3vw, 30px) 0 clamp(122px, 17vw, 150px); }
-    .at-clients-label { text-align: center; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); }
-    .at-marquee { position: relative; width: min(calc(100% - 36px), var(--max)); margin: 16px auto 0; overflow: hidden; border-radius: 14px; }
-    .at-marquee-row { display: flex; gap: 12px; width: max-content; animation: atMarquee 40s linear infinite; }
-    .at-marquee:hover .at-marquee-row { animation-play-state: paused; }
-    .at-chip { display: inline-flex; align-items: center; gap: 9px; padding: 12px 22px; border-radius: 999px; border: 1px solid var(--line-soft); background: var(--bg-1); font-family: var(--font-display); font-weight: 700; font-size: 0.96rem; color: var(--text); white-space: nowrap; }
-    .at-chip .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex: none; }
-    @keyframes atMarquee { to { transform: translateX(-50%); } }
-    @media (prefers-reduced-motion: reduce) { .at-marquee-row { animation: none; flex-wrap: wrap; justify-content: center; } }
+    /* split head + hairline points */
+    .v3-about .ab-split { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+    .v3-about .ab-points { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--v3-hair); }
+    .v3-about .ab-points li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; padding: 22px 0; border-bottom: 1px solid var(--v3-hair); }
+    .v3-about .ab-points .n { padding-top: 4px; font-size: 0.875rem; font-weight: 700; color: var(--gold); font-variant-numeric: tabular-nums; }
+    .v3-about .ab-points h3 { font-size: clamp(1.1875rem, 1.6vw, 1.375rem); font-weight: 750; letter-spacing: -0.02em; color: var(--text-head); }
+    .v3-about .ab-points p { margin-top: 6px; font-size: 1.0625rem; line-height: 1.55; color: rgba(246,240,230,0.72); }
 
-    /* ---------------- FOUNDER SPOTLIGHT ---------------- */
-    .at-spot-grid { display: flex; flex-direction: column; gap: 24px; margin-top: 30px; }
-    .at-spot-photo {
-      position: relative; border-radius: var(--r-lg); overflow: hidden;
-      border: 1px solid var(--line-soft); box-shadow: 0 24px 56px rgba(0,0,0,0.45);
-      aspect-ratio: 16 / 11;
-    }
-    .at-spot-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 42% 30%; display: block; }
-    .at-spot-names { position: absolute; left: 16px; bottom: 14px; z-index: 2; display: flex; gap: 8px; }
-    .at-spot-names span { padding: 6px 13px; border-radius: 999px; background: rgba(10,10,10,0.62); backdrop-filter: blur(8px); border: 1px solid var(--line); font-size: 0.74rem; font-weight: 700; color: var(--text); }
-    .at-spot-names .role { color: var(--gold); font-weight: 600; }
-    .at-spot-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(8,8,8,0.6)); pointer-events: none; }
-    .at-spot-copy .at-mission {
-      font-family: var(--font-hero); font-weight: 600;
-      font-size: clamp(1.45rem, 5.4vw, 2.2rem); line-height: 1.22; letter-spacing: -0.025em;
-      margin-top: 16px; color: var(--text-head);
-    }
-    .at-spot-copy .at-mission .g { color: var(--gold); }
-    .at-spot-copy .at-mission .t { color: var(--teal); }
-    .at-spot-body { margin-top: 18px; color: var(--text-dim); font-size: 1rem; line-height: 1.7; }
-    .at-spot-since { margin-top: 18px; display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-display); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; color: var(--text-soft); }
-    .at-spot-since b { font-family: var(--font-hero); font-size: 1.5rem; color: var(--gold); letter-spacing: -0.02em; }
+    /* team */
+    .v3-about .ab-team { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 44px 20px; margin: 44px 0 0; padding: 0; }
+    .v3-about .ab-person-photo { aspect-ratio: 1 / 1; border-radius: var(--v3-r-card); }
+    .v3-about .ab-person-photo img { object-position: 50% 24%; }
+    .v3-about .ab-person h3 { margin-top: 16px; font-size: 1.3125rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text-head); }
+    .v3-about .ab-role { margin-top: 3px; font-size: 0.9375rem; font-weight: 600; color: rgba(246,240,230,0.56); }
+    .v3-about .ab-bio { margin-top: 10px; font-size: 1rem; line-height: 1.55; color: rgba(246,240,230,0.74); }
 
-    /* ---------------- SMALL-TEAM BAND (positive framing) ---------------- */
-    .at-band-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 28px; }
-    .at-band-item { padding: 22px 20px; border: 1px solid var(--line-soft); border-radius: var(--r-lg); background: var(--bg-1); }
-    .at-band-item .ic { width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center; background: var(--gold-soft); border: 1px solid rgba(226,168,77,0.28); color: var(--gold); margin-bottom: 13px; }
-    .at-band-item .ic svg { width: 20px; height: 20px; }
-    .at-band-item h3 { font-family: var(--font-display); font-size: 1.06rem; font-weight: 700; margin-bottom: 6px; }
-    .at-band-item p { font-size: 0.9rem; line-height: 1.6; color: var(--text-dim); }
+    /* Google reviews: native cards */
+    .v3-about .ab-reviews { margin-top: clamp(64px, 8vw, 104px); }
+    .v3-about .bum-reviews__head { margin-bottom: 24px; }
+    .v3-about .bum-reviews__head h3 { font-size: clamp(1.375rem, 2.2vw, 1.75rem); font-weight: 800; letter-spacing: -0.035em; }
+    .v3-about .bum-reviews__grid { gap: 14px; }
+    .v3-about .bum-review { gap: 14px; padding: 24px 24px 20px; border-radius: var(--v3-r-card); border: 1px solid var(--v3-hair); background: var(--v3-elev-1); }
+    .v3-about .bum-review .bum-stars { font-size: 0.875rem; letter-spacing: 0.12em; color: var(--gold); }
+    .v3-about .bum-review__quote p { font-size: 1.0625rem; line-height: 1.6; color: rgba(246,240,230,0.88); }
+    .v3-about .bum-review__by { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 12px; align-items: center; padding-top: 16px; border-top: 1px solid var(--v3-hair); font-size: 0.9375rem; color: rgba(246,240,230,0.56); }
+    .v3-about .bum-review__by > * { grid-column: 1; }
+    .v3-about .bum-review__by strong { font-size: 1rem; }
+    .v3-about .bum-review__src { grid-column: 2; grid-row: 1 / span 3; align-self: center; margin: 0; padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,0.06); font-size: 0.8125rem; font-weight: 600; color: rgba(246,240,230,0.72); }
 
-    /* ---------------- PEOPLE IN YOUR CORNER ---------------- */
-    .at-team-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 28px; }
-    .at-member {
-      position: relative; border-radius: var(--r-lg); overflow: hidden;
-      border: 1px solid var(--line-soft); background: var(--bg-2);
-      aspect-ratio: 4 / 5; display: block; width: 100%; max-width: 420px;
-    }
-    .at-member img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; display: block; }
-    .at-member::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 32%, rgba(8,8,8,0.55) 60%, rgba(8,8,8,0.95)); }
-    .at-member-info { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 16px 16px 15px; }
-    .at-member-info h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; letter-spacing: -0.01em; line-height: 1.1; }
-    .at-member-role { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--gold); margin-top: 4px; }
-    .at-member-bio { margin-top: 8px; font-size: 0.84rem; line-height: 1.5; color: var(--text-dim); }
-    .at-member.--founder { outline: 1px solid rgba(226,168,77,0.34); outline-offset: -1px; }
-    .at-member-flag { position: absolute; top: 12px; left: 12px; z-index: 3; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #2A1C06; background: var(--gold); border-radius: 999px; padding: 4px 9px; }
+    /* where we work */
+    .v3-about .ab-where { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+    .v3-about .ab-where .ab-photo { aspect-ratio: 4 / 5; }
+    .v3-about .ab-where .ab-photo img { object-position: 50% 55%; }
+    .v3-about .ab-rows { list-style: none; margin: 28px 0 0; padding: 0; border-radius: var(--v3-r-card); background: var(--v3-elev-1); border: 1px solid var(--v3-hair); overflow: hidden; }
+    .v3-about .ab-rows li + li { border-top: 1px solid var(--v3-hair); }
+    .v3-about .ab-rows a { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 60px; padding: 12px 20px; color: var(--text-head); font-size: 1.0625rem; font-weight: 650; letter-spacing: -0.01em; text-decoration: none; transition: background .18s ease; }
+    .v3-about .ab-rows a:hover { background: rgba(255,255,255,0.04); }
+    .v3-about .ab-rows svg { width: 18px; height: 18px; flex: none; color: rgba(246,240,230,0.45); transition: transform .3s var(--v3-ease); }
 
-    /* placeholder (no photo) */
-    .at-member.--placeholder { background: radial-gradient(circle at 50% 32%, rgba(226,168,77,0.18), transparent 60%), var(--bg-2); }
-    .at-member.--placeholder .at-monogram { position: absolute; left: 0; right: 0; top: 0; bottom: 34%; display: grid; place-items: center; }
-    .at-member.--placeholder .at-monogram span { font-family: var(--font-hero); font-weight: 800; font-size: 4rem; letter-spacing: -0.04em; color: transparent; -webkit-text-stroke: 1.4px rgba(226,168,77,0.55); }
-    .at-member.--placeholder::after { background: linear-gradient(180deg, transparent 40%, rgba(8,8,8,0.6) 66%, rgba(8,8,8,0.96)); }
+    /* final call */
+    .v3-about .ab-final { padding: clamp(80px, 10vw, 128px) 0 clamp(56px, 8vw, 96px); }
+    .v3-about .ab-final-card { padding: clamp(40px, 7vw, 88px) clamp(24px, 6vw, 80px); border-radius: 36px; background: var(--gold); color: var(--v3-ink-on-gold); text-align: center; }
+    .v3-about .ab-final-card h2 { font-size: clamp(2.3rem, 5.2vw, 4.25rem); line-height: 1; font-weight: 800; letter-spacing: -0.055em; color: var(--v3-ink-on-gold); }
+    .v3-about .ab-final-card p { margin: 18px auto 0; max-width: 52ch; font-size: clamp(1.0625rem, 1.4vw, 1.25rem); line-height: 1.5; color: rgba(20,14,4,0.78); }
+    .v3-about .ab-final-card .ab-cta { justify-content: center; }
+    html[lang] .v3-about .ab-final-card .btn-primary { background: var(--v3-ink-on-gold) !important; color: #f6f0e6 !important; }
+    html[lang] .v3-about .ab-final-card .btn-primary:hover { background: #2a1f0d !important; }
+    html[lang] .v3-about .ab-final-card .btn:not(.btn-primary) { background: rgba(20,14,4,0.08); border-color: rgba(20,14,4,0.22); color: var(--v3-ink-on-gold); }
+    .v3-about .ab-final-link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; margin-top: 14px; font-size: 1rem; font-weight: 700; color: var(--v3-ink-on-gold); text-decoration: underline; text-decoration-color: rgba(20,14,4,0.3); text-underline-offset: 4px; }
+    .v3-about .ab-final-link:hover { text-decoration-color: currentColor; }
 
-    /* Touch (no hover): photos in color, bios visible. */
-    .at-member img { filter: none; }
-
-    /* Desktop pointers: grayscale -> color + bio reveal on hover. */
-    @media (hover: hover) and (pointer: fine) {
-      .at-member img { filter: grayscale(1) contrast(1.02); transition: filter .45s ease, transform .5s ease; }
-      .at-member:hover img { filter: grayscale(0); transform: scale(1.04); }
-      .at-member { transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease; }
-      .at-member:hover { transform: translateY(-4px); border-color: rgba(226,168,77,0.34); box-shadow: 0 22px 46px rgba(0,0,0,0.45); }
-      .at-member-bio { max-height: 0; overflow: hidden; opacity: 0; margin-top: 0; transition: max-height .4s ease, opacity .35s ease, margin-top .4s ease; }
-      .at-member:hover .at-member-bio { max-height: 140px; opacity: 1; margin-top: 8px; }
+    @media (hover: hover) {
+      .v3-about .ab-person:hover .ab-person-photo img, .v3-about .ab-photo:hover img { transform: scale(1.03); }
+      .v3-about .ab-rows a:hover svg { transform: translateX(3px); }
     }
 
-    /* ---------------- HOW WE WORK ---------------- */
-    .at-values-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 28px; }
-    .at-value { padding: 24px 22px; border: 1px solid var(--line-soft); border-radius: var(--r-lg); background: var(--bg-1); }
-    .at-value-ic { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: var(--gold-soft); border: 1px solid rgba(226,168,77,0.28); color: var(--gold); margin-bottom: 14px; }
-    .at-value-ic svg { width: 21px; height: 21px; }
-    .at-value h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; margin-bottom: 7px; }
-    .at-value p { font-size: 0.9rem; line-height: 1.6; color: var(--text-dim); }
-
-    /* ---------------- COVERAGE MAP ---------------- */
-    .at-map-grid { display: flex; flex-direction: column; gap: 26px; margin-top: 30px; align-items: center; }
-    .at-map-fig { position: relative; width: 100%; max-width: 360px; margin: 0 auto; border-radius: var(--r-lg); overflow: hidden; border: 1.5px solid var(--gold); box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(226,168,77,0.15); }
-    .at-map-fig img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1) contrast(1.04) brightness(0.96); aspect-ratio: 4 / 5; }
-    .at-map-fig::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(8,8,8,0.55)); pointer-events: none; }
-    .at-map-pin { position: absolute; left: 50%; top: 44%; z-index: 2; transform: translate(-50%,-50%); }
-    .at-map-pin .pulse { position: absolute; left: 50%; top: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; background: var(--gold); opacity: 0.5; animation: atPulse 2.6s ease-out infinite; }
-    .at-map-pin .dot { position: relative; width: 14px; height: 14px; border-radius: 50%; background: var(--gold); border: 2px solid #14110B; box-shadow: 0 2px 8px rgba(0,0,0,0.5); }
-    .at-map-tag { position: absolute; left: 14px; bottom: 13px; z-index: 2; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: rgba(10,10,10,0.6); backdrop-filter: blur(8px); border: 1px solid var(--line); font-size: 0.74rem; font-weight: 700; color: var(--text); }
-    .at-map-tag .d { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); }
-    @keyframes atPulse { 0% { transform: scale(1); opacity: 0.5; } 70%,100% { transform: scale(3); opacity: 0; } }
-    @media (prefers-reduced-motion: reduce) { .at-map-pin .pulse { animation: none; opacity: 0; } }
-    .at-map-note { padding: 22px 22px; border: 1px solid var(--line-soft); border-radius: var(--r-lg); background: var(--bg-1); }
-    .at-map-note .at-eyebrow { margin-bottom: 10px; }
-    .at-map-note h2 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.03em; font-size: clamp(1.6rem, 5.4vw, 2.3rem); line-height: 1.12; }
-    .at-map-note h2 .g { color: var(--gold); }
-    .at-map-note p { margin-top: 14px; color: var(--text-dim); font-size: 1rem; line-height: 1.7; }
-    .at-map-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-    .at-map-tags span { font-size: 0.76rem; font-weight: 600; color: var(--text-soft); border: 1px solid var(--line-soft); border-radius: 999px; padding: 7px 13px; background: var(--bg-2); }
-
-    /* spacing helper for section titles */
-    .at-sec-head { max-width: 30ch; }
-    .at-sec-head .lib-section-title { margin-top: 10px; }
-    .at-sec-head .lib-section-sub { margin-top: 12px; }
-
-    /* Tighter vertical rhythm on mobile (hero keeps its own padding) */
+    /* tablet */
+    @media (max-width: 960px) {
+      .v3-about .ab-story, .v3-about .ab-split, .v3-about .ab-where { grid-template-columns: 1fr; }
+      .v3-about .ab-story .ab-photo { aspect-ratio: 16 / 11; }
+      .v3-about .ab-where .ab-photo { aspect-ratio: 4 / 3; }
+      .v3-about .ab-split { gap: 28px; }
+      .v3-about .ab-team { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; margin: 32px -24px 0; padding: 0 24px 8px; scroll-padding-inline: 24px; scrollbar-width: none; }
+      .v3-about .ab-team::-webkit-scrollbar { display: none; }
+      .v3-about .ab-team > li { flex: 0 0 min(300px, 70%); scroll-snap-align: start; }
+      .v3-about .ab-person-photo { aspect-ratio: 4 / 5; }
+    }
     @media (max-width: 719px) {
-      main.page .lib-section:not(.at-hero) { padding-top: 34px; padding-bottom: 34px; }
+      .v3-about .ab-hero-grid { grid-template-columns: 1fr; gap: 28px; }
+      .v3-about .ab-hero .ab-photo { aspect-ratio: 5 / 4; border-radius: 26px; }
+      .v3-about .ab-hero .ab-photo img { object-position: 50% 30%; }
     }
-
-    /* ===================== TABLET / DESKTOP ===================== */
-    @media (min-width: 720px) {
-      .at-wrap { width: min(calc(100% - 48px), var(--max)); }
-      .at-hero-inner { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: clamp(30px, 4vw, 56px); align-items: center; }
-      .at-hero-photo { aspect-ratio: 4 / 5; grid-column: 2; grid-row: 1 / 3; align-self: stretch; }
-      .at-hero-copy { grid-column: 1; grid-row: 1; }
-      .at-hero-meta { grid-column: 1; grid-row: 2; margin-top: 22px; }
-      .at-team-grid { gap: 16px; }
-      .at-member { width: calc(33.333% - 11px); max-width: none; }
-      .at-values-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
-      .at-band-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
-      .at-spot-grid { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: clamp(32px, 4vw, 60px); align-items: center; }
-      .at-spot-photo { aspect-ratio: 4 / 5; }
-      .at-map-grid { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
-      .at-map-fig { max-width: 420px; }
+    /* phones */
+    @media (max-width: 700px) {
+      .v3-about .ab-hero { padding: calc(var(--v3-bar-h) + 24px) 0 0; }
+      /* the lede already says "Miami, founded in 2022": drop the kicker so the
+         H1, answer line and booking button share the first phone screen */
+      .v3-about .ab-kicker { display: none; }
+      .v3-about .ab-hero h1 { margin-top: 0; font-size: clamp(1.9rem, 8.2vw, 2.5rem); line-height: 1.02; }
+      /* phones: headline, then the two actions, then the answer line, so
+         booking clears the cookie bar in both languages */
+      .v3-about .ab-hero-copy { display: flex; flex-direction: column; }
+      .v3-about .ab-hero-copy .ab-cta { order: 2; }
+      .v3-about .ab-hero-copy .ab-lede { order: 3; margin-top: 18px; }
+      .v3-about .ab-cta { margin-top: 18px; gap: 10px; }
+      .v3-about .ab-cta .btn { flex: 1 1 100%; height: 52px; }
+      .v3-about .ab-sec { padding-top: 72px; }
+      .v3-about .ab-head h2 { font-size: clamp(1.9rem, 8.4vw, 2.4rem); }
+      .v3-about .ab-photo:not(.ab-person-photo) { border-radius: 26px; }
+      .v3-about .ab-points li { grid-template-columns: 32px minmax(0, 1fr); padding: 18px 0; }
+      .v3-about .ab-team { margin: 28px -16px 0; padding: 0 16px 8px; scroll-padding-inline: 16px; }
+      .v3-about .ab-team > li { flex-basis: 74%; }
+      .v3-about .ab-since { display: flex; }
+      .v3-about .bum-reviews__grid { margin: 0 -16px; padding: 2px 16px 10px; scroll-padding-inline: 16px; }
+      .v3-about .bum-review { flex-basis: 86%; padding: 22px 20px 18px; }
+      .v3-about .ab-rows a { padding: 12px 16px; }
+      .v3-about .ab-final { padding-top: 72px; }
+      .v3-about .ab-final-card { border-radius: 30px; }
+      .v3-about .ab-final-card .btn { flex: 1 1 100%; }
+      /* body copy reads at 16px+ on phones (beats the shared 15.5px floor) */
+      html[lang] body:not(#_) #v3-about :is(.ab-lede, .ab-body, .ab-head > p, .ab-points p, .ab-bio, .bum-review__quote p, .ab-final-card p) { font-size: 16px; line-height: 1.6; }
     }
-    @media (min-width: 1000px) {
-      .at-hero h1 { font-size: clamp(3.4rem, 4.4vw, 4.8rem); }
+    @media (prefers-reduced-motion: reduce) {
+      .v3-about .ab-photo img, .v3-about .ab-rows svg { transition: none; }
+      .v3-about .ab-person:hover .ab-person-photo img, .v3-about .ab-photo:hover img { transform: none; }
     }
   </style>
 </head>
@@ -375,230 +335,161 @@
         </div>
       </details>
       <a href="/es/analizador-redes-sociales-web" class="lib-nav-grader" target="_blank" rel="noopener" aria-label="Analizador Gratis (se abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Analizador Gratis</a>
-      <a href="/es">Inicio</a>
+      <a href="/es/casos-de-exito">Casos de éxito</a>
       <a href="/es/nosotros">Nosotros</a>
       <a class="lib-nav-phone" href="tel:+17867409499">Llámanos</a>
       <a href="/es/contacto" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Agende su llamada de estrategia gratis</a>
     </div>
   </nav>
 
-  <main class="page">
+  <main class="page v3-about" id="v3-about">
 
     <!-- HERO -->
-    <section class="lib-section at-hero">
-      <div class="at-wrap">
-        <div class="at-hero-inner">
-          <div class="at-hero-copy">
-            <span class="at-eyebrow at-rise">Hecho en el Sur de Florida &middot; Est. 2022</span>
-            <h1 class="at-rise">El equipo local que hace que los restaurantes del <span class="accent-serif">Sur de Florida</span> sean <span class="accent-serif">imposibles de ignorar.</span></h1>
-            <p class="at-hero-sub at-rise">Button Up Media es un equipo de marketing pequeño, obsesionado con los restaurantes y de aquí mismo, de Miami, fundado en 2022. Nosotros nos encargamos del marketing, el contenido, los anuncios, las noches largas, para que tú te dediques a tu salón y a cocinar buena comida.</p>
+    <section class="at-hero ab-hero">
+      <div class="ab-hero-grid">
+        <div class="ab-hero-copy">
+          <p class="ab-kicker">Hecho en el Sur de Florida &middot; Est. 2022</p>
+          <h1>El equipo local que hace que los restaurantes del Sur de Florida sean <span class="accent-serif">imposibles de ignorar.</span></h1>
+          <p class="ab-lede">Button Up Media es un equipo de marketing pequeño, obsesionado con los restaurantes y de aquí mismo, de Miami, fundado en 2022. Nosotros nos encargamos del marketing, el contenido, los anuncios, las noches largas, para que tú te dediques a tu salón y a cocinar buena comida.</p>
+          <div class="ab-cta">
+            <a href="/es/contacto" class="btn btn-primary">Agende su llamada de estrategia gratis</a>
+            <a href="/es/casos-de-exito" class="btn">Vea nuestro trabajo</a>
           </div>
-          <div class="at-hero-photo at-rise">
-            <picture>
-              <source media="(max-width: 719px)" srcset="media/hero-team-m-800.webp 800w, media/hero-team-m-1200.webp 1200w" sizes="calc(100vw - 36px)" />
-              <img src="media/hero-team.webp?v=3" srcset="media/hero-team-600.webp?v=3 600w, media/hero-team-900.webp?v=3 900w, media/hero-team.webp?v=3 1200w" sizes="46vw" alt="El equipo de Button Up Media reunido en su oficina del Sur de Florida" width="1200" height="2132" fetchpriority="high" />
-            </picture>
-            <span class="at-photo-tag">Equipo de liderazgo de Button Up</span>
-          </div>
-          <div class="at-hero-meta at-rise">
-            <span><b>Est. 2022</b></span>
-            <span>Marketing de <b>restaurantes y hospitalidad</b></span>
-            <span>Con base en <b>Miami, FL</b></span>
-          </div>
+        </div>
+        <figure class="ab-photo">
+          <picture>
+            <source media="(max-width: 719px)" srcset="media/hero-team-m-800.webp 800w, media/hero-team-m-1200.webp 1200w" sizes="calc(100vw - 36px)" />
+            <img src="media/hero-team.webp?v=3" srcset="media/hero-team-600.webp?v=3 600w, media/hero-team-900.webp?v=3 900w, media/hero-team.webp?v=3 1200w" sizes="46vw" alt="El equipo de Button Up Media reunido en su oficina del Sur de Florida" width="1200" height="2132" fetchpriority="high" />
+          </picture>
+          <figcaption class="ab-cap">Equipo de liderazgo de Button Up</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- CLIENTES -->
+    <section class="ab-trust" aria-label="Clientes">
+      <p class="ab-trust-label">La confianza de los lugares favoritos del Sur de Florida</p>
+      <div class="bum-logos --on-dark">
+        <img src="/media/clients/rusty-pelican.webp" alt="Rusty Pelican" width="301" height="120" loading="lazy" decoding="async" />
+        <img src="/media/clients/the-odyssey.webp" alt="The Odyssey" width="533" height="120" loading="lazy" decoding="async" />
+        <img src="/media/clients/the-boathouse.webp" alt="The Boathouse" width="225" height="120" loading="lazy" decoding="async" />
+        <img src="/media/clients/castaway.webp" alt="Castaway" width="262" height="120" loading="lazy" decoding="async" />
+      </div>
+      <p class="bum-logos-also">También en nuestra lista de clientes: <strong>The Fatty Crab</strong>, <strong>Shimuja Ramen</strong>, <strong>Brewing Buddha</strong>, <strong>Gyu-Kaku</strong> y <strong>Rainy Days Wine Bar</strong>.</p>
+      <div class="ab-trust-rating"><a class="bum-grating" href="https://www.google.com/maps?cid=18420049328774985259" target="_blank" rel="noopener" aria-label="Calificación de 5,0 sobre 5 en Google con 11 reseñas (abre Google en una pestaña nueva)"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg><strong>5,0</strong><span class="bum-stars" aria-hidden="true">★★★★★</span><span class="bum-grating__text">en Google, 11 reseñas</span></a></div>
+    </section>
+
+    <!-- FUNDADORES: POR QUÉ EMPEZAMOS -->
+    <section class="ab-sec" id="historia">
+      <div class="ab-story">
+        <figure class="ab-photo">
+          <img src="media/founders-duo.webp" alt="Chris y Juan, cofundadores de Button Up Media" width="1280" height="721" loading="lazy" decoding="async" />
+          <figcaption class="ab-cap">Chris y Juan, cofundadores</figcaption>
+        </figure>
+        <div>
+          <div class="lib-section-label">Por qué empezamos</div>
+          <h2 class="ab-mission">Les damos a los negocios de hospitalidad una forma accesible de destacar, para que se concentren en su oficio mientras nosotros nos encargamos de venderlo.</h2>
+          <p class="ab-body">Chris y Juan fundaron Button Up Media en 2022 con una idea terca: que los grandes restaurantes, bares y cafeterías no deberían perderse en una de las competencias más reñidas del país solo porque no tienen tiempo de hacer su propio marketing. Por eso creamos la agencia para cargar con ese peso, con marketing accesible que te hace destacar mientras tú dedicas tu energía a tu producto, tu equipo y tus platos.</p>
+          <p class="ab-since"><b>2022</b><span>Dos fundadores, una misión.</span></p>
         </div>
       </div>
     </section>
 
-    <!-- CLIENT MARQUEE (moved up) -->
-    <section class="at-clients">
-      <div class="at-wrap">
-        <p class="at-clients-label at-rise">La confianza de los lugares favoritos del Sur de Florida</p>
-      </div>
-      <div class="at-marquee at-rise" aria-label="Lista de clientes">
-        <div class="at-marquee-row">
-          <span class="at-chip"><span class="dot"></span>The Fatty Crab</span>
-          <span class="at-chip"><span class="dot"></span>Rusty Pelican</span>
-          <span class="at-chip"><span class="dot"></span>Shimuja Ramen</span>
-          <span class="at-chip"><span class="dot"></span>Brewing Buddha</span>
-          <span class="at-chip"><span class="dot"></span>Gyu-Kaku</span>
-          <span class="at-chip"><span class="dot"></span>The Boathouse</span>
-          <span class="at-chip"><span class="dot"></span>The Odyssey</span>
-          <span class="at-chip"><span class="dot"></span>Castaway</span>
-          <span class="at-chip"><span class="dot"></span>Rainy Days Wine Bar</span>
-          <span class="at-chip"><span class="dot"></span>The Fatty Crab</span>
-          <span class="at-chip"><span class="dot"></span>Rusty Pelican</span>
-          <span class="at-chip"><span class="dot"></span>Shimuja Ramen</span>
-          <span class="at-chip"><span class="dot"></span>Brewing Buddha</span>
-          <span class="at-chip"><span class="dot"></span>Gyu-Kaku</span>
-          <span class="at-chip"><span class="dot"></span>The Boathouse</span>
-          <span class="at-chip"><span class="dot"></span>The Odyssey</span>
-          <span class="at-chip"><span class="dot"></span>Castaway</span>
-          <span class="at-chip"><span class="dot"></span>Rainy Days Wine Bar</span>
+    <!-- PEQUEÑOS A PROPÓSITO -->
+    <section class="ab-sec" id="equipo-pequeno">
+      <div class="ab-split">
+        <div class="ab-head">
+          <div class="lib-section-label">Pequeños a propósito</div>
+          <h2>Equipo pequeño. Gran obsesión con tus resultados.</h2>
+          <p>Nos mantenemos pequeños a propósito, para que las personas que te presentan la propuesta sean las mismas que hacen el trabajo.</p>
         </div>
-      </div>
-      <div class="at-wrap" style="display:flex;justify-content:center;margin-top:22px;"><a class="bum-grating" href="https://www.google.com/maps?cid=18420049328774985259" target="_blank" rel="noopener" aria-label="Calificación de 5,0 sobre 5 en Google con 11 reseñas (abre Google en una pestaña nueva)"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg><strong>5,0</strong><span class="bum-stars" aria-hidden="true">★★★★★</span><span class="bum-grating__text">en Google, 11 reseñas</span></a></div>
-    </section>
-
-    <!-- FOUNDER SPOTLIGHT + MISSION -->
-    <section class="card-overlay --dark lib-section">
-      <div class="at-wrap">
-        <div class="at-spot-grid">
-          <div class="at-spot-photo at-rise">
-            <img src="media/founders-duo.webp" alt="Chris y Juan, cofundadores de Button Up Media" width="1280" height="721" loading="lazy" />
-            <div class="at-spot-names">
-              <span>Chris y Juan <span class="role">&middot; Cofundadores</span></span>
-            </div>
-          </div>
-          <div class="at-spot-copy">
-            <span class="at-eyebrow at-rise">Por qué empezamos</span>
-            <p class="at-mission at-rise">Les damos a los negocios de hospitalidad una <span class="g">forma accesible de destacar</span>, para que se concentren en su <span class="t">oficio</span> mientras nosotros nos encargamos de venderlo.</p>
-            <p class="at-spot-body at-rise">Chris y Juan fundaron Button Up Media en 2022 con una idea terca: que los grandes restaurantes, bares y cafeterías no deberían perderse en una de las competencias más reñidas del país solo porque no tienen tiempo de hacer su propio marketing. Por eso creamos la agencia para cargar con ese peso, con marketing accesible que te hace destacar mientras tú dedicas tu energía a tu producto, tu equipo y tus platos.</p>
-            <div class="at-spot-since at-rise"><b>2022</b> Dos fundadores, una misión.</div>
-          </div>
-        </div>
+        <ul class="ab-points">
+          <li><span class="n">01</span><div><h3>Hablas con personas reales</h3><p>Nada de gerentes de cuenta enterrados tres niveles abajo. Trabajas directamente con los fundadores y el equipo que crea tu contenido.</p></div></li>
+          <li><span class="n">02</span><div><h3>Nos movemos rápido</h3><p>Una tendencia explota un martes y tu contenido sale el jueves. Ser pequeños nos hace ágiles, sin trámites entre la idea y la publicación.</p></div></li>
+          <li><span class="n">03</span><div><h3>De verdad nos importa</h3><p>Solo trabajamos con restaurantes donde comeríamos. Tus victorias se sienten como nuestras, porque con un equipo de este tamaño, lo son.</p></div></li>
+        </ul>
       </div>
     </section>
 
-    <!-- SMALL TEAM, FRAMED POSITIVELY -->
-    <section class="lib-section">
-      <div class="at-wrap">
-        <div class="at-sec-head at-rise">
-          <span class="at-eyebrow">Pequeños a propósito</span>
-          <h2 class="lib-section-title">Equipo pequeño. Gran obsesión con tus resultados.</h2>
-          <p class="lib-section-sub">Nos mantenemos pequeños a propósito, para que las personas que te presentan la propuesta sean las mismas que hacen el trabajo.</p>
-        </div>
-        <div class="at-band-grid">
-          <div class="at-band-item at-rise">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></svg></div>
-            <h3>Hablas con personas reales</h3>
-            <p>Nada de gerentes de cuenta enterrados tres niveles abajo. Trabajas directamente con los fundadores y el equipo que crea tu contenido.</p>
-          </div>
-          <div class="at-band-item at-rise">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-            <h3>Nos movemos rápido</h3>
-            <p>Una tendencia explota un martes y tu contenido sale el jueves. Ser pequeños nos hace ágiles, sin trámites entre la idea y la publicación.</p>
-          </div>
-          <div class="at-band-item at-rise">
-            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.6-9.5-9C1 9 2.5 5.5 6 5.5c2 0 3.2 1.2 4 2.3.8-1.1 2-2.3 4-2.3 3.5 0 5 3.5 3.5 6.5C19 16.4 12 21 12 21z"/></svg></div>
-            <h3>De verdad nos importa</h3>
-            <p>Solo trabajamos con restaurantes donde comeríamos. Tus victorias se sienten como nuestras, porque con un equipo de este tamaño, lo son.</p>
-          </div>
-        </div>
+    <!-- EL EQUIPO -->
+    <section class="ab-sec" id="equipo">
+      <div class="ab-head">
+        <div class="lib-section-label">El equipo</div>
+        <h2>Las personas de tu lado.</h2>
+        <p>Las caras detrás de tus grabaciones, tus ediciones y tu feed.</p>
       </div>
+      <ul class="ab-team">
+        <li class="ab-person">
+          <div class="ab-photo ab-person-photo"><img src="media/team-angie.webp?v=4" alt="Angie, Videógrafa y Líder Creativa" width="760" height="950" loading="lazy" decoding="async" /></div>
+          <h3>Angie</h3>
+          <p class="ab-role">Videógrafa y líder creativa</p>
+          <p class="ab-bio">El ojo detrás del lente. Hace que tu comida se vea tan bien en pantalla como sabe en el salón.</p>
+        </li>
+        <li class="ab-person">
+          <div class="ab-photo ab-person-photo"><img src="media/team-wesley.webp" alt="Wesley, Editor Principal de Video" width="760" height="950" loading="lazy" decoding="async" /></div>
+          <h3>Wesley</h3>
+          <p class="ab-role">Editor principal de video</p>
+          <p class="ab-bio">Donde el material en bruto se convierte en el reel. Cada corte, subtítulo y ritmo que hace que la gente deje de deslizar es suyo.</p>
+        </li>
+        <li class="ab-person">
+          <div class="ab-photo ab-person-photo"><img src="media/team-eddie.webp" alt="Eddie Tabada, Editor de Video" width="760" height="950" loading="lazy" decoding="async" /></div>
+          <h3>Eddie</h3>
+          <p class="ab-role">Editor de video</p>
+          <p class="ab-bio">Convierte un día de grabación en un mes de contenido. Manos rápidas, cortes limpios y buen ojo para la toma que merece ir primero.</p>
+        </li>
+        <li class="ab-person">
+          <div class="ab-photo ab-person-photo"><img src="media/team-fjell.webp" alt="Fjell Sandico, Editor de Video" width="760" height="950" loading="lazy" decoding="async" /></div>
+          <h3>Fjell</h3>
+          <p class="ab-role">Editor de video</p>
+          <p class="ab-bio">Vive en la línea de tiempo. El ritmo, el sonido y los pequeños detalles que hacen que un clip de 15 segundos se sienta terminado.</p>
+        </li>
+        <li class="ab-person">
+          <div class="ab-photo ab-person-photo"><img src="media/team-maria.webp" alt="Maria, Gerente Principal de Redes Sociales" width="760" height="950" loading="lazy" decoding="async" /></div>
+          <h3>Maria</h3>
+          <p class="ab-role">Gerente principal de redes sociales</p>
+          <p class="ab-bio">Lleva tu feed día a día, desde las publicaciones que suben hasta los comentarios que llegan, para que tu restaurante siempre suene como tú.</p>
+        </li>
+        <li class="ab-person">
+          <div class="ab-photo ab-person-photo"><img src="media/team-gio.webp?v=4" alt="Gio, Ventas y Director de Crecimiento" width="760" height="950" loading="lazy" decoding="async" /></div>
+          <h3>Gio</h3>
+          <p class="ab-role">Ventas y director de crecimiento</p>
+          <p class="ab-bio">Casi siempre tu primer apretón de manos con Button Up, y quien traza hacia dónde crece tu restaurante.</p>
+        </li>
+        <li class="ab-person">
+          <div class="ab-photo ab-person-photo"><img src="media/team-nayith.webp?v=3" alt="Nayith, Director de Proyectos / Programas" width="760" height="950" loading="lazy" decoding="async" /></div>
+          <h3>Nayith</h3>
+          <p class="ab-role">Director de proyectos y programas</p>
+          <p class="ab-bio">Mantiene cada pieza en marcha y a tiempo, para que nada se escape.</p>
+        </li>
+        <li class="ab-person">
+          <div class="ab-photo ab-person-photo"><img src="media/team-juan.webp?v=3" alt="Juan, Cofundador y Gerente de Cuentas" width="760" height="950" loading="lazy" decoding="async" /></div>
+          <h3>Juan</h3>
+          <p class="ab-role">Cofundador y gerente de cuentas</p>
+          <p class="ab-bio">Tu punto de contacto principal, el puente entre la estrategia general y lo que se entrega cada semana.</p>
+        </li>
+        <li class="ab-person">
+          <div class="ab-photo ab-person-photo"><img src="media/team-chris.webp?v=3" alt="Chris, Cofundador" width="760" height="950" loading="lazy" decoding="async" /></div>
+          <h3>Chris</h3>
+          <p class="ab-role">Cofundador</p>
+          <p class="ab-bio">Obsesionado con los sistemas, la estrategia y hacer que se vea a los restaurantes. El motor detrás de cómo escalamos cada cuenta.</p>
+        </li>
+      </ul>
     </section>
 
-    <!-- PEOPLE IN YOUR CORNER -->
-    <section class="card-overlay --dark lib-section">
-      <div class="at-wrap">
-        <div class="at-sec-head at-rise">
-          <span class="at-eyebrow">El equipo</span>
-          <h2 class="lib-section-title">Las personas de tu lado.</h2>
-          <p class="lib-section-sub">Toca o pasa el cursor sobre una cara para conocerla.</p>
+    <!-- CÓMO TRABAJAMOS + RESEÑAS DE GOOGLE -->
+    <section class="ab-sec" id="como-trabajamos">
+      <div class="ab-split">
+        <div class="ab-head">
+          <div class="lib-section-label">Cómo trabajamos</div>
+          <h2>Cómo se siente trabajar con nosotros.</h2>
         </div>
-        <div class="at-team-grid">
-          <div class="at-member at-rise">
-            <img src="media/team-angie.webp?v=4" alt="Angie, Videógrafa y Líder Creativa" loading="lazy" style="object-position: 50% 50%;" />
-            <div class="at-member-info">
-              <h3>Angie</h3>
-              <div class="at-member-role">Videógrafa y Líder Creativa</div>
-              <p class="at-member-bio">El ojo detrás del lente. Hace que tu comida se vea tan bien en pantalla como sabe en el salón.</p>
-            </div>
-          </div>
-          <div class="at-member at-rise">
-            <img src="media/team-wesley.webp" alt="Wesley, Editor Principal de Video" loading="lazy" style="object-position: 50% 50%;" />
-            <div class="at-member-info">
-              <h3>Wesley</h3>
-              <div class="at-member-role">Editor Principal de Video</div>
-              <p class="at-member-bio">Donde el material en bruto se convierte en el reel. Cada corte, subtítulo y ritmo que hace que la gente deje de deslizar es suyo.</p>
-            </div>
-          </div>
-          <div class="at-member at-rise">
-            <img src="media/team-eddie.webp" alt="Eddie Tabada, Editor de Video" loading="lazy" style="object-position: 50% 50%;" />
-            <div class="at-member-info">
-              <h3>Eddie</h3>
-              <div class="at-member-role">Editor de Video</div>
-              <p class="at-member-bio">Convierte un día de grabación en un mes de contenido. Manos rápidas, cortes limpios y buen ojo para la toma que merece ir primero.</p>
-            </div>
-          </div>
-          <div class="at-member at-rise">
-            <img src="media/team-fjell.webp" alt="Fjell Sandico, Editor de Video" loading="lazy" style="object-position: 50% 50%;" />
-            <div class="at-member-info">
-              <h3>Fjell</h3>
-              <div class="at-member-role">Editor de Video</div>
-              <p class="at-member-bio">Vive en la línea de tiempo. El ritmo, el sonido y los pequeños detalles que hacen que un clip de 15 segundos se sienta terminado.</p>
-            </div>
-          </div>
-          <div class="at-member at-rise">
-            <img src="media/team-maria.webp" alt="Maria, Gerente Principal de Redes Sociales" loading="lazy" style="object-position: 50% 50%;" />
-            <div class="at-member-info">
-              <h3>Maria</h3>
-              <div class="at-member-role">Gerente Principal de Redes Sociales</div>
-              <p class="at-member-bio">Lleva tu feed día a día, desde las publicaciones que suben hasta los comentarios que llegan, para que tu restaurante siempre suene como tú.</p>
-            </div>
-          </div>
-          <div class="at-member at-rise">
-            <img src="media/team-gio.webp?v=4" alt="Gio, Ventas y Director de Crecimiento" loading="lazy" style="object-position: 50% 50%;" />
-            <div class="at-member-info">
-              <h3>Gio</h3>
-              <div class="at-member-role">Ventas y Director de Crecimiento</div>
-              <p class="at-member-bio">Casi siempre tu primer apretón de manos con Button Up, y quien traza hacia dónde crece tu restaurante.</p>
-            </div>
-          </div>
-          <div class="at-member at-rise">
-            <img src="media/team-nayith.webp?v=3" alt="Nayith, Director de Proyectos / Programas" loading="lazy" style="object-position: 50% 50%;" />
-            <div class="at-member-info">
-              <h3>Nayith</h3>
-              <div class="at-member-role">Director de Proyectos / Programas</div>
-              <p class="at-member-bio">Mantiene cada pieza en marcha y a tiempo, para que nada se escape.</p>
-            </div>
-          </div>
-          <div class="at-member --founder at-rise">
-            <span class="at-member-flag">Fundador</span>
-            <img src="media/team-juan.webp?v=3" alt="Juan, Cofundador y Gerente de Cuentas" loading="lazy" style="object-position: 50% 50%;" />
-            <div class="at-member-info">
-              <h3>Juan</h3>
-              <div class="at-member-role">Cofundador y Gerente de Cuentas</div>
-              <p class="at-member-bio">Tu punto de contacto principal, el puente entre la estrategia general y lo que se entrega cada semana.</p>
-            </div>
-          </div>
-          <div class="at-member --founder at-rise">
-            <span class="at-member-flag">Fundador</span>
-            <img src="media/team-chris.webp?v=3" alt="Chris, Cofundador" loading="lazy" />
-            <div class="at-member-info">
-              <h3>Chris</h3>
-              <div class="at-member-role">Cofundador</div>
-              <p class="at-member-bio">Obsesionado con los sistemas, la estrategia y hacer que se vea a los restaurantes. El motor detrás de cómo escalamos cada cuenta.</p>
-            </div>
-          </div>
-        </div>
+        <ul class="ab-points">
+          <li><span class="n">01</span><div><h3>Igualamos tu energía</h3><p>No le entregas tu marca a una agencia sin rostro. Compartimos ideas como equipo y no tenemos miedo de arriesgar.</p></div></li>
+          <li><span class="n">02</span><div><h3>Nosotros vendemos, tú creas</h3><p>Tu trabajo es el producto y el salón. El nuestro es llenarlo. Cargamos con el marketing para que tus noches vuelvan a la cocina.</p></div></li>
+          <li><span class="n">03</span><div><h3>Lo mantenemos accesible</h3><p>Hecho para independientes, no solo para grandes grupos. Marketing que te hace destacar sin precio de empresa grande.</p></div></li>
+        </ul>
       </div>
-    </section>
-
-    <!-- HOW WE WORK -->
-    <section class="lib-section">
-      <div class="at-wrap">
-        <div class="at-sec-head at-rise">
-          <span class="at-eyebrow">Cómo trabajamos</span>
-          <h2 class="lib-section-title">Cómo se siente trabajar con nosotros.</h2>
-        </div>
-        <div class="at-values-grid">
-          <div class="at-value at-rise">
-            <div class="at-value-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-7 7c0 3 2 5 2 5h10s2-2 2-5a7 7 0 0 0-7-7z"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></div>
-            <h3>Igualamos tu energía</h3>
-            <p>No le entregas tu marca a una agencia sin rostro. Compartimos ideas como equipo y no tenemos miedo de arriesgar.</p>
-          </div>
-          <div class="at-value at-rise">
-            <div class="at-value-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
-            <h3>Nosotros vendemos, tú creas</h3>
-            <p>Tu trabajo es el producto y el salón. El nuestro es llenarlo. Cargamos con el marketing para que tus noches vuelvan a la cocina.</p>
-          </div>
-          <div class="at-value at-rise">
-            <div class="at-value-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
-            <h3>Lo mantenemos accesible</h3>
-            <p>Hecho para independientes, no solo para grandes grupos. Marketing que te hace destacar sin precio de empresa grande.</p>
-          </div>
-        </div>
-      <div class="bum-reviews">
+      <div class="bum-reviews ab-reviews">
         <div class="bum-reviews__head">
           <h3>En sus palabras, en Google</h3>
           <a class="bum-grating" href="https://www.google.com/maps?cid=18420049328774985259" target="_blank" rel="noopener" aria-label="Calificación de 5,0 sobre 5 en Google con 11 reseñas (abre Google en una pestaña nueva)"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg><strong>5,0</strong><span class="bum-stars" aria-hidden="true">★★★★★</span><span class="bum-grating__text">en Google, 11 reseñas</span></a>
@@ -630,46 +521,39 @@
           </figure>
         </div>
       </div>
-      </div>
     </section>
 
-    <!-- COVERAGE MAP -->
-    <section class="lib-section">
-      <div class="at-wrap">
-        <div class="at-map-grid">
-          <figure class="at-map-fig at-rise">
-            <img src="media/miami-map.webp" alt="Mapa estilizado de Miami, Florida" loading="lazy" width="480" height="640" />
-            <span class="at-map-tag"><span class="d"></span> Miami, FL &middot; Base de operaciones</span>
-          </figure>
-          <div class="at-map-note at-rise">
-            <span class="at-eyebrow">Dónde trabajamos</span>
-            <h2>Con base en el <span class="g">Sur de Florida</span>. Trabajando por todo el país.</h2>
-            <p>Miami, Orlando y Tampa son nuestra base, pero nuestro trabajo viaja. Manejamos marketing de redes sociales, Google Ads, publicidad pagada y diseño web para restaurantes y marcas de hospitalidad en todo Estados Unidos, no solo en el Sur de Florida.</p>
-            <div class="at-map-tags">
-              <span>Marketing de Redes Sociales</span>
-              <span>Google Ads</span>
-              <span>Publicidad Pagada</span>
-              <span>Diseño Web</span>
-              <span>Todo el país</span>
-            </div>
-          </div>
+    <!-- DÓNDE TRABAJAMOS -->
+    <section class="ab-sec" id="donde-trabajamos">
+      <div class="ab-where">
+        <figure class="ab-photo">
+          <img src="media/bts-shoot-optimized.avif" alt="El equipo de Button Up Media grabando contenido en un restaurante del sur de la Florida" width="1080" height="1440" loading="lazy" decoding="async" />
+          <figcaption class="ab-cap">Base de operaciones: Miami, FL</figcaption>
+        </figure>
+        <div class="ab-head">
+          <div class="lib-section-label">Dónde trabajamos</div>
+          <h2>Con base en el Sur de Florida. Trabajando por todo el país.</h2>
+          <p>Miami, Orlando y Tampa son nuestra base, pero nuestro trabajo viaja. Manejamos marketing de redes sociales, Google Ads, publicidad pagada y diseño web para restaurantes y marcas de hospitalidad en todo Estados Unidos, no solo en el Sur de Florida.</p>
+          <ul class="ab-rows">
+            <li><a href="/es/marketing-redes-sociales">Marketing de redes sociales<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 6 6 6-6 6"/></svg></a></li>
+            <li><a href="/es/publicidad-restaurantes">Google Ads y publicidad pagada<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 6 6 6-6 6"/></svg></a></li>
+            <li><a href="/es/diseno-web-restaurantes">Diseño web<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 6 6 6-6 6"/></svg></a></li>
+            <li><a href="/es/zonas-que-atendemos">Todas las zonas que atendemos<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 6 6 6-6 6"/></svg></a></li>
+          </ul>
         </div>
       </div>
     </section>
 
     <!-- CTA -->
-    <section class="card-overlay --dark lib-section">
-      <div class="at-wrap">
-        <div class="cta-banner">
-          <div class="cta-content">
-            <h3>¿Quiere este equipo de su lado?</h3>
-            <p>Agende una llamada de estrategia gratis. Hablaremos de su concepto, sus metas y exactamente cómo lo ayudaríamos a destacar. Sin presión y sin compromiso.</p>
-          </div>
-          <div class="cta-actions">
-            <a href="/es/contacto" class="btn btn-primary">Agende su llamada de estrategia gratis</a>
-            <a href="tel:+17867409499" class="btn">Llame al (786) 740-9499</a>
-          </div>
+    <section class="ab-final" id="cta">
+      <div class="ab-final-card">
+        <h2>¿Quiere este equipo de su lado?</h2>
+        <p>Agende una llamada de estrategia gratis. Hablaremos de su concepto, sus metas y exactamente cómo lo ayudaríamos a destacar. Sin presión y sin compromiso.</p>
+        <div class="ab-cta">
+          <a href="/es/contacto" class="btn btn-primary">Agende su llamada de estrategia gratis</a>
+          <a href="tel:+17867409499" class="btn">Llame al (786) 740-9499</a>
         </div>
+        <a class="ab-final-link" href="/es/casos-de-exito">O vea nuestro trabajo primero</a>
       </div>
     </section>
 
@@ -720,20 +604,6 @@
     </footer>
   </main>
 
-  <script>
-    (function () {
-      var els = [].slice.call(document.querySelectorAll('.at-rise'));
-      var inView = function (e) { var r = e.getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0; };
-      if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        els.forEach(function (e) { e.classList.add('is-in'); }); return;
-      }
-      var io = new IntersectionObserver(function (ents) {
-        ents.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });
-      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
-      els.forEach(function (e) { if (inView(e)) e.classList.add('is-in'); else io.observe(e); });
-      setTimeout(function () { els.forEach(function (e) { e.classList.add('is-in'); }); }, 1500);
-    })();
-  </script>
   <script src="shared.js?v=site-fixes-1" defer></script>
 </body>
 </html>

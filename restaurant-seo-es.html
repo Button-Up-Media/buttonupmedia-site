@@ -181,376 +181,297 @@
   </script>
   <style>
     /* ============================================================
-       Restaurant SEO, round 2: "how diners find you". MOBILE-FIRST.
-       Page classes use the .seo- prefix. shared.css supplies tokens,
-       nav, footer, buttons, card-overlay sections and the CTA banner.
+       Restaurant SEO, v3: "how diners find you". Patterns shared with
+       the v3 homepage (.h-sec, .h-head, .h-steps, .h-final). Page
+       classes use the .s- prefix; shared.css + v3.css supply tokens,
+       nav, buttons and footer.
        ============================================================ */
-    .seo-wrap { width: 100%; max-width: var(--max); margin: 0 auto; }
-    .seo-page section[id] { scroll-margin-top: 76px; }
-    .seo-eyebrow {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-family: var(--font-display); font-size: 0.8125rem; font-weight: 700;
-      letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
-    }
-    .seo-eyebrow::before { content: ""; width: 20px; height: 1px; background: var(--gold); opacity: 0.7; }
-    .seo-gold { color: var(--gold); }
-    /* Buttons may wrap to two lines (long Spanish labels) instead of overflowing a fixed height */
-    main.seo-page .btn { height: auto; min-height: 48px; padding: 12px 22px; font-size: 0.95rem; line-height: 1.3; text-align: center; }
-    .seo-more { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--gold); font-weight: 700; font-size: 1rem; line-height: 1.35; }
-    .seo-more svg { width: 17px; height: 17px; flex: none; transition: transform .2s; }
-    .seo-more:hover svg { transform: translateX(3px); }
+    html[lang] body { overflow-x: clip; } /* lets the section chips stick; falls back to shared "hidden" */
+    .v3-seo { --s-gut: max(24px, calc((100vw - var(--max)) / 2)); }
+    .v3-seo section[id] { scroll-margin-top: calc(var(--v3-bar-h) + 72px); }
+    .v3-seo .s-gold { color: var(--gold); }
 
     /* Owner review notes (stripped before launch) */
     .review-note { display: block; margin: 14px 0; padding: 10px 14px; border: 2px dashed #d4a64a; border-radius: 8px; font-size: 13px; line-height: 1.5; color: var(--text); background: rgba(212,166,74,0.06); }
 
-    /* Section rhythm: tighter than the shared 140/200 card padding, smaller radius on phones */
-    main.seo-page > .card-overlay { margin-top: -36px; padding-top: 52px; padding-bottom: 84px; border-radius: 32px 32px 0 0; }
-    main.seo-page > .card-overlay::after { border-radius: 32px 32px 0 0; }
-    .seo-h2 {
-      font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.03em;
-      font-size: clamp(1.7rem, 6.4vw, 2.75rem); line-height: 1.1; margin-top: 10px;
-      color: var(--text-head); text-wrap: balance;
-    }
-    .seo-lede { margin-top: 12px; max-width: 58ch; font-size: 1rem; line-height: 1.6; color: var(--text-dim); }
+    /* section heads */
+    .v3-seo .h-sec { padding: clamp(80px, 10vw, 128px) 0 0; }
+    .v3-seo .h-head { max-width: 780px; }
+    .v3-seo .h-head.--center { margin: 0 auto; text-align: center; }
+    .v3-seo .h-head h2 { margin-top: 10px; font-size: clamp(2.1rem, 4.6vw, 3.6rem); line-height: 1.03; font-weight: 800; letter-spacing: -0.048em; color: var(--text-head); }
+    .v3-seo .h-head p { margin-top: 16px; max-width: 58ch; font-size: clamp(1.0625rem, 1.3vw, 1.1875rem); line-height: 1.55; color: rgba(246,240,230,0.72); }
+    .v3-seo .h-head.--center p { margin-left: auto; margin-right: auto; }
+    .v3-seo .s-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 700; color: var(--text-head); text-decoration: none; }
+    .v3-seo .s-link svg { width: 18px; height: 18px; flex: none; transition: transform .3s var(--v3-ease); }
+    @media (hover: hover) { .v3-seo .s-link:hover svg { transform: translateX(3px); } }
+    /* Buttons may wrap to two lines (long Spanish labels) instead of overflowing a fixed height */
+    main.v3-seo .btn { height: auto; min-height: 48px; padding: 12px 22px; line-height: 1.3; text-align: center; }
 
-    /* ---------------- HERO ---------------- */
-    main.seo-page .seo-hero { padding: 14px 0 76px; }
-    .seo-hero-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 30px; }
-    .seo-hero h1 {
-      font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.045em;
-      font-size: clamp(2rem, 8.6vw, 4.1rem); line-height: 1.04; margin-top: 12px; color: var(--text-head);
-    }
-    html[lang="es"] .seo-hero h1 { font-size: clamp(1.85rem, 7.9vw, 3.6rem); }
-    .seo-answer { margin-top: 14px; max-width: 46ch; font-size: 1rem; line-height: 1.55; color: var(--text-dim); }
-    .seo-hero-ctas { display: grid; gap: 10px; margin-top: 20px; }
-    .seo-trust { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 14px; list-style: none; }
-    .seo-trust li { display: inline-flex; align-items: center; gap: 7px; font-size: 0.8125rem; font-weight: 600; line-height: 1.5; color: var(--text-soft); }
-    .seo-trust svg { width: 14px; height: 14px; color: var(--teal); flex: none; }
+    /* ---------------- hero ---------------- */
+    .v3-seo .s-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 64px); align-items: start; padding: calc(var(--v3-bar-h) + clamp(40px, 5vw, 64px)) 0 clamp(48px, 6vw, 72px); }
+    .v3-seo .s-hero-copy { padding-top: clamp(0px, 4vw, 56px); }
+    .v3-seo .s-hero h1 { margin-top: 12px; font-size: clamp(2.6rem, 4.5vw, 4.1rem); line-height: 1; font-weight: 800; letter-spacing: -0.05em; color: var(--text-head); }
+    .v3-seo .s-lede { margin-top: 22px; max-width: 46ch; font-size: clamp(1.0625rem, 1.3vw, 1.1875rem); line-height: 1.55; color: rgba(246,240,230,0.76); }
+    .v3-seo .s-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    main.v3-seo .s-cta .btn { min-height: 54px; padding: 12px 24px; font-size: 1rem; }
+    .v3-seo .s-ticks { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 22px 0 0; padding: 0; list-style: none; font-size: 0.9375rem; font-weight: 550; color: rgba(246,240,230,0.62); }
+    .v3-seo .s-ticks li { display: inline-flex; align-items: center; gap: 8px; }
+    .v3-seo .s-ticks svg { width: 16px; height: 16px; flex: none; color: rgba(246,240,230,0.85); }
 
-    /* Hero illustration: a phone showing the Google Maps 3-pack */
-    .seo-demo { position: relative; margin: 0; }
-    .seo-demo::before { content: ""; position: absolute; inset: 4% 6% 10%; background: radial-gradient(ellipse 60% 55% at 50% 45%, rgba(226,168,77,0.16), transparent 70%); filter: blur(20px); pointer-events: none; }
-    .seo-demo-stage { position: relative; display: flex; justify-content: center; }
-    .seo-phone {
-      position: relative; width: min(300px, 100%); padding: 8px; border-radius: 40px;
-      background: linear-gradient(155deg, #34312c, #141414 55%);
-      border: 1px solid rgba(255,248,235,0.16);
-      box-shadow: 0 34px 80px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(0,0,0,0.6);
-    }
-    .seo-demo-flag {
-      position: absolute; z-index: 3; top: -19px; left: 18px;
-      display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px;
-      background: var(--bg-0); border: 1px solid rgba(226,168,77,0.45); color: var(--gold);
-      font-family: var(--font-display); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-    }
-    .seo-screen {
-      position: relative; overflow: hidden; max-height: 372px; border-radius: 32px;
-      background: #1f2023; color: #e8eaed; font-family: var(--font-body); font-size: 13px; line-height: 1.35;
-    }
-    .seo-screen::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 40px; background: linear-gradient(180deg, rgba(31,32,35,0), #1f2023 80%); pointer-events: none; }
-    .seo-ph-status { position: relative; display: flex; align-items: center; justify-content: space-between; height: 30px; padding: 0 24px; font-size: 12px; font-weight: 700; color: #fff; }
-    .seo-ph-status::before { content: ""; position: absolute; left: 50%; top: 7px; width: 76px; height: 20px; margin-left: -38px; border-radius: 12px; background: #000; }
-    .seo-ph-batt { width: 22px; height: 11px; border-radius: 3px; border: 1.5px solid #e8eaed; position: relative; }
-    .seo-ph-batt::after { content: ""; position: absolute; inset: 1.5px 5px 1.5px 1.5px; border-radius: 1px; background: #e8eaed; }
-    .seo-ph-search { display: flex; align-items: center; gap: 9px; height: 38px; margin: 4px 10px 0; padding: 0 8px 0 13px; border-radius: 19px; background: #303134; font-size: 13.5px; color: #e8eaed; }
-    .seo-ph-search svg { width: 15px; height: 15px; color: #9aa0a6; flex: none; }
-    .seo-ph-av { margin-left: auto; width: 24px; height: 24px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--coral)); flex: none; }
-    .seo-ph-map {
-      position: relative; height: 58px; margin-top: 8px;
-      background:
-        linear-gradient(90deg, transparent 46%, #3b4049 46% 49.5%, transparent 49.5%),
-        linear-gradient(0deg, transparent 56%, #3b4049 56% 62%, transparent 62%),
-        linear-gradient(118deg, transparent 63%, #353a42 63% 65%, transparent 65%),
-        radial-gradient(ellipse 22% 40% at 84% 18%, #24402f 0 98%, transparent 100%),
-        radial-gradient(ellipse 18% 30% at 12% 86%, #1f3a4d 0 98%, transparent 100%),
-        #272b32;
-    }
-    .seo-pin { position: absolute; width: 18px; height: 18px; margin: -18px 0 0 -9px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: #ea4335; box-shadow: 0 2px 6px rgba(0,0,0,0.5); }
-    .seo-pin.--you { width: 24px; height: 24px; margin: -24px 0 0 -12px; background: var(--gold); z-index: 1; }
-    .seo-pin b { display: grid; place-items: center; width: 100%; height: 100%; transform: rotate(45deg); font: 800 10px/1 var(--font-hero); color: #fff; }
-    .seo-pin.--you b { font-size: 11.5px; color: #1a1206; }
-    .seo-pin.--you::after { content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid rgba(226,168,77,0.6); opacity: 0; }
-    @media (prefers-reduced-motion: no-preference) {
-      .seo-pin.--you::after { animation: seo-pulse 2.6s ease-out infinite; }
-    }
-    @keyframes seo-pulse { 0% { transform: scale(0.6); opacity: 0.9; } 70%, 100% { transform: scale(1.6); opacity: 0; } }
+    /* ---------------- the example Maps card (iOS, dark) ---------------- */
+    .v3-seo .s-demo { position: relative; margin: 0; display: flex; flex-direction: column; align-items: center; }
+    .v3-seo .s-demo-stage { position: relative; width: 300px; max-width: 100%; }
+    .v3-seo .s-flag { position: absolute; z-index: 3; top: -14px; left: -10px; display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: 999px; background: #2c2c30; border: 1px solid var(--v3-hair-2); color: var(--text-head); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.01em; }
+    .v3-seo .s-phone { position: relative; padding: 9px; border-radius: 48px; background: #0a0a0b; border: 1px solid rgba(255,255,255,0.16); box-shadow: 0 30px 70px rgba(0,0,0,0.5), inset 0 0 0 2px #1d1d20; }
+    .v3-seo .s-screen { position: relative; border-radius: 39px; background: #1c1c1e; color: #f2f2f7; font-size: 13px; line-height: 1.3; -webkit-font-smoothing: antialiased; }
+    .v3-seo .s-mapwrap { position: relative; height: 158px; overflow: hidden; border-radius: 39px 39px 0 0; background: #202225; }
+    .v3-seo .s-mapart { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .v3-seo .s-status { position: absolute; z-index: 2; left: 0; right: 0; top: 0; display: flex; align-items: center; justify-content: space-between; height: 44px; padding: 4px 26px 0 30px; font-size: 14px; font-weight: 700; letter-spacing: -0.01em; color: #fff; }
+    .v3-seo .s-island { position: absolute; left: 50%; top: 10px; width: 92px; height: 26px; margin-left: -46px; border-radius: 14px; background: #000; }
+    .v3-seo .s-sys { display: inline-flex; align-items: center; gap: 5px; }
+    .v3-seo .s-sys svg { display: block; height: 11px; width: auto; fill: #fff; }
+    .v3-seo .s-search { display: flex; align-items: center; gap: 7px; height: 38px; margin: 0 14px; padding: 0 10px; border-radius: 11px; background: #2c2c2e; font-size: 15px; color: #f2f2f7; }
+    .v3-seo .s-search svg { width: 15px; height: 15px; flex: none; color: #98989d; }
+    .v3-seo .s-clear { position: relative; margin-left: auto; width: 17px; height: 17px; flex: none; border-radius: 50%; background: #636366; }
+    .v3-seo .s-clear::before, .v3-seo .s-clear::after { content: ""; position: absolute; left: 4px; top: 7.5px; width: 9px; height: 2px; border-radius: 1px; background: #2c2c2e; transform: rotate(45deg); }
+    .v3-seo .s-clear::after { transform: rotate(-45deg); }
+    .v3-seo .s-pin { position: absolute; z-index: 1; display: grid; place-items: center; width: 24px; height: 24px; margin: -30px 0 0 -12px; border-radius: 50%; background: #e5484d; border: 2px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.45); font-size: 11px; font-weight: 800; color: #fff; }
+    .v3-seo .s-pin::after { content: ""; position: absolute; left: 50%; bottom: -7px; margin-left: -4px; border: 4px solid transparent; border-top: 5px solid #fff; }
+    .v3-seo .s-pin.--you { z-index: 2; width: 32px; height: 32px; margin: -40px 0 0 -16px; background: var(--gold); color: var(--v3-ink-on-gold); font-size: 13px; }
+    .v3-seo .s-pin-name { position: absolute; z-index: 2; margin: -2px 0 0 -40px; width: 80px; text-align: center; font-size: 10.5px; font-weight: 700; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.9); }
+    .v3-seo .s-me { position: absolute; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: #0a84ff; border: 2.5px solid #fff; box-shadow: 0 0 0 8px rgba(10,132,255,0.18); }
+    .v3-seo .s-sheet { position: relative; z-index: 2; margin-top: -18px; padding: 8px 0 14px; border-radius: 18px 18px 39px 39px; background: #1c1c1e; box-shadow: 0 -6px 18px rgba(0,0,0,0.35); }
+    .v3-seo .s-grab { display: block; width: 36px; height: 5px; margin: 0 auto 10px; border-radius: 3px; background: #48484a; }
+    .v3-seo .s-filters { display: flex; gap: 6px; padding: 10px 14px 6px; overflow: hidden; }
+    .v3-seo .s-filters span { display: inline-flex; align-items: center; height: 26px; padding: 0 10px; border-radius: 13px; background: #2c2c2e; font-size: 12px; font-weight: 600; color: #e5e5ea; white-space: nowrap; }
+    .v3-seo .s-filters .--on { background: #3a3a3c; color: #fff; }
+    .v3-seo .s-results { list-style: none; margin: 0; padding: 0 6px; }
+    .v3-seo .s-r { position: relative; padding: 11px 10px; }
+    .v3-seo .s-r + .s-r::before { content: ""; position: absolute; left: 10px; right: 10px; top: 0; border-top: 1px solid #38383a; }
+    .v3-seo .s-r.--you { border-radius: 14px; background: rgba(226,168,77,0.09); }
+    .v3-seo .s-r.--you + .s-r::before { display: none; }
+    .v3-seo .s-r.--other { display: grid; grid-template-columns: minmax(0, 1fr) 48px; gap: 10px; align-items: center; }
+    .v3-seo .s-r-name { display: block; font-size: 15.5px; font-weight: 700; letter-spacing: -0.01em; color: #fff; }
+    .v3-seo .s-row { position: relative; display: flex; align-items: center; flex-wrap: wrap; gap: 4px; margin-top: 3px; font-size: 12.5px; color: #98989d; }
+    .v3-seo .s-row b { font-weight: 600; color: #e5e5ea; }
+    .v3-seo .s-stars { display: inline-flex; gap: 1px; color: #f5b301; }
+    .v3-seo .s-stars svg { width: 11px; height: 11px; fill: currentColor; }
+    .v3-seo .s-stars .--off { color: #48484a; }
+    .v3-seo .s-open { color: #30d158; font-weight: 650; }
+    .v3-seo .s-warn { color: #ff9f0a; font-weight: 650; }
+    .v3-seo .s-bad { color: #ff453a; font-weight: 650; }
+    .v3-seo .s-photos { gap: 5px; margin-top: 9px; }
+    .v3-seo .s-ph { width: 60px; height: 46px; flex: none; border-radius: 9px; background: #2c2c2e; }
+    .v3-seo .s-ph.--a { background: radial-gradient(circle at 34% 46%, #f0845a 0 13%, transparent 14%), radial-gradient(circle at 58% 56%, #f5efe4 0 13%, transparent 14%), radial-gradient(circle at 66% 32%, #3f7d4f 0 8%, transparent 9%), radial-gradient(circle at 50% 50%, #262626 0 40%, #3b2a1d 41%); }
+    .v3-seo .s-ph.--b { background: radial-gradient(ellipse 30% 20% at 50% 52%, #e9774f 0 96%, transparent 100%), radial-gradient(ellipse 38% 26% at 50% 56%, #f4eee2 0 96%, transparent 100%), linear-gradient(160deg, #4a3322, #23170f); }
+    .v3-seo .s-ph.--c { background: radial-gradient(circle at 50% 46%, #d9b26a 0 18%, transparent 19%), radial-gradient(circle at 50% 50%, #1c1c1c 0 36%, transparent 37%), linear-gradient(200deg, #6b4a2d, #2b1d12); }
+    .v3-seo .s-ph.--dim { width: 48px; height: 48px; background: linear-gradient(160deg, #3a3a3c, #2c2c2e); }
+    .v3-seo .s-ph.--none { width: 48px; height: 48px; display: grid; place-items: center; border: 1px dashed #545458; background: transparent; color: #8e8e93; }
+    .v3-seo .s-ph.--none svg { width: 16px; height: 16px; }
+    .v3-seo .s-acts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: 10px; }
+    .v3-seo .s-act { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; height: 48px; padding: 0 4px; border-radius: 11px; background: #2c2c2e; color: #0a84ff; font-size: 11.5px; font-weight: 650; white-space: nowrap; }
+    .v3-seo .s-act svg { width: 16px; height: 16px; flex: none; }
+    .v3-seo .s-act.--go { background: #0a84ff; color: #fff; }
+    /* callouts: hang off the phone's right edge when there's room */
+    .v3-seo .s-call { display: none; }
+    .v3-seo .s-legend { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; margin: 20px 0 0; padding: 0; width: 300px; max-width: 100%; }
+    .v3-seo .s-legend li { display: flex; align-items: center; gap: 8px; font-size: 0.9375rem; font-weight: 600; color: var(--text-head); }
+    .v3-seo .s-legend li::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
+    .v3-seo .s-demo-cap { margin-top: 16px; width: 300px; max-width: 100%; font-size: 0.875rem; line-height: 1.5; color: rgba(246,240,230,0.56); text-align: center; }
 
-    .seo-ph-list { list-style: none; margin: 0; padding: 0; }
-    .seo-ph-item { position: relative; padding: 10px 14px; border-top: 1px solid #3c4043; }
-    .seo-ph-item.--you { background: linear-gradient(90deg, rgba(226,168,77,0.13), rgba(226,168,77,0.03)); box-shadow: inset 3px 0 0 var(--gold); }
-    .seo-ph-item.--other { display: grid; grid-template-columns: minmax(0, 1fr) 44px; gap: 10px; align-items: center; }
-    .seo-ph-name { display: block; font-size: 14.5px; font-weight: 700; color: #fff; }
-    .seo-ph-row { position: relative; display: flex; align-items: center; flex-wrap: wrap; gap: 5px; margin-top: 3px; font-size: 12.5px; color: #bdc1c6; }
-    .seo-ph-stars { display: inline-flex; gap: 1px; color: #fbbc04; }
-    .seo-ph-stars svg { width: 11px; height: 11px; fill: currentColor; }
-    .seo-ph-stars .--off { color: #5f6368; }
-    .seo-ph-open { color: #81c995; font-weight: 600; }
-    .seo-ph-warn { color: #fdd663; font-weight: 600; }
-    .seo-ph-bad { color: #f28b82; font-weight: 600; }
-    .seo-ph-photos { margin-top: 8px; }
-    .seo-ph-photo { width: 42px; height: 38px; border-radius: 8px; flex: none; background: #2d2e31; }
-    .seo-ph-photo.--a { background: radial-gradient(circle at 36% 44%, #f0845a 0 15%, transparent 16%), radial-gradient(circle at 60% 58%, #f5efe4 0 14%, transparent 15%), radial-gradient(circle at 64% 32%, #3f7d4f 0 9%, transparent 10%), radial-gradient(circle at 50% 50%, #262626 0 40%, #3b2a1d 41%); }
-    .seo-ph-photo.--b { background: radial-gradient(ellipse 34% 22% at 50% 52%, #e9774f 0 96%, transparent 100%), radial-gradient(ellipse 40% 28% at 50% 56%, #f4eee2 0 96%, transparent 100%), linear-gradient(160deg, #4a3322, #23170f); }
-    .seo-ph-photo.--c { background: radial-gradient(circle at 50% 46%, #d9b26a 0 20%, transparent 21%), radial-gradient(circle at 50% 50%, #1c1c1c 0 38%, transparent 39%), linear-gradient(200deg, #6b4a2d, #2b1d12); }
-    .seo-ph-photo.--dim { width: 44px; height: 44px; background: linear-gradient(160deg, #3a3b3e, #2a2b2e); }
-    .seo-ph-photo.--none { width: 44px; height: 44px; display: grid; place-items: center; border: 1px dashed #5f6368; background: transparent; color: #80868b; }
-    .seo-ph-photo.--none svg { width: 16px; height: 16px; }
-    .seo-ph-acts { margin-top: 8px; }
-    .seo-ph-act { display: inline-flex; align-items: center; gap: 5px; height: 28px; padding: 0 11px; border-radius: 14px; border: 1px solid #5f6368; color: #8ab4f8; font-size: 12px; font-weight: 600; }
-    .seo-ph-act svg { width: 12px; height: 12px; }
-    .seo-ph-act.--web { border-color: #8ab4f8; background: rgba(138,180,248,0.12); }
-    /* Callouts: inside each row on phones, hanging off the phone's right edge from 600px */
-    .seo-call {
-      margin-left: auto; display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 999px;
-      background: var(--gold); color: #1a1206; font: 800 12px/1 var(--font-display); letter-spacing: 0.01em; white-space: nowrap;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.35);
-    }
-    .seo-demo-cap { position: relative; margin-top: 16px; text-align: center; font-size: 0.8125rem; line-height: 1.5; color: var(--text-soft); }
+    /* sticky section chips */
+    .v3-seo .s-chips { position: sticky; top: var(--v3-bar-h); z-index: 40; margin: clamp(24px, 4vw, 48px) calc(50% - 50vw) 0; background: rgba(11,11,12,0.8); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid var(--v3-hair); }
+    .v3-seo .s-chips-in { position: relative; display: flex; gap: 4px; overflow-x: auto; padding: 8px var(--s-gut); scrollbar-width: none; }
+    .v3-seo .s-chips-in::-webkit-scrollbar { display: none; }
+    .v3-seo .s-chips a { flex: none; display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; font-size: 0.9375rem; font-weight: 600; color: rgba(246,240,230,0.66); text-decoration: none; -webkit-tap-highlight-color: transparent; transition: background .2s ease, color .2s ease, transform .18s var(--v3-ease); }
+    .v3-seo .s-chips a:hover { color: var(--text-head); background: rgba(255,255,255,0.06); }
+    .v3-seo .s-chips a:active { transform: scale(0.97); }
+    .v3-seo .s-chips a[aria-current="true"] { color: var(--gold); background: rgba(226,168,77,0.14); }
 
-    /* ---------------- THREE PLACES ---------------- */
-    .seo-where { list-style: none; margin-top: 26px; border: 1px solid var(--line); border-radius: var(--r-lg); background: linear-gradient(160deg, rgba(226,168,77,0.05), transparent 45%), var(--bg-1); }
-    .seo-where-item { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 16px; align-items: start; padding: 20px 16px; }
-    .seo-where-item + .seo-where-item { border-top: 1px solid var(--line-soft); }
-    .seo-where-art { position: relative; height: 72px; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: #1f2023; }
-    .seo-where-art.--maps { background: linear-gradient(90deg, transparent 54%, #3b4049 54% 59%, transparent 59%), linear-gradient(0deg, transparent 30%, #3b4049 30% 36%, transparent 36%), radial-gradient(ellipse 30% 26% at 18% 82%, #24402f 0 98%, transparent 100%), #272b32; }
-    .seo-where-art.--maps .seo-pin { width: 14px; height: 14px; margin: -14px 0 0 -7px; }
-    .seo-where-art.--maps .seo-pin b { font-size: 8px; }
-    .seo-where-art.--maps .seo-pin.--you { width: 20px; height: 20px; margin: -20px 0 0 -10px; }
-    .seo-where-art.--maps .seo-pin.--you b { font-size: 10px; }
-    .seo-art-bar { position: absolute; left: 8px; right: 8px; top: 9px; height: 18px; display: flex; align-items: center; gap: 5px; padding: 0 7px; border-radius: 9px; background: #303134; }
-    .seo-art-bar svg { width: 9px; height: 9px; color: #9aa0a6; flex: none; }
-    .seo-art-bar i { display: block; width: 58%; height: 4px; border-radius: 2px; background: #6b7077; }
-    .seo-art-lines { position: absolute; left: 10px; right: 10px; bottom: 10px; display: grid; gap: 5px; }
-    .seo-art-lines i { display: block; height: 5px; border-radius: 3px; background: #3c4043; }
-    .seo-art-lines i.--link { height: 6px; width: 80%; background: #8ab4f8; opacity: 0.85; }
-    .seo-art-lines i.--short { width: 58%; }
-    .seo-art-ask { position: absolute; right: 8px; top: 8px; width: 60%; display: grid; gap: 4px; padding: 6px 7px; border-radius: 9px 9px 2px 9px; background: #3c4043; }
-    .seo-art-ask i, .seo-art-reply i { display: block; height: 4px; border-radius: 2px; background: rgba(246,240,230,0.42); }
-    .seo-art-ask i.--short, .seo-art-reply i.--short { width: 58%; }
-    .seo-art-reply { position: absolute; left: 8px; bottom: 8px; width: 74%; display: grid; gap: 4px; padding: 6px 7px 6px 19px; border-radius: 9px 9px 9px 2px; background: rgba(226,168,77,0.14); border: 1px solid rgba(226,168,77,0.32); }
-    .seo-art-reply svg { position: absolute; left: 6px; top: 5px; width: 9px; height: 9px; color: var(--gold); }
-    .seo-where-copy h3 { font-family: var(--font-display); font-size: 1.125rem; font-weight: 800; line-height: 1.25; letter-spacing: -0.01em; color: var(--text-head); }
-    .seo-where-copy h3 small { display: block; margin-top: 2px; font-family: var(--font-body); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0; color: var(--text-soft); }
-    .seo-where-copy p { margin-top: 8px; font-size: 1rem; line-height: 1.55; color: var(--text-dim); }
-    .seo-where-copy p b { color: var(--gold); font-weight: 700; }
-    .seo-where-note { display: flex; gap: 12px; align-items: flex-start; margin-top: 18px; max-width: 72ch; font-size: 1rem; line-height: 1.6; color: var(--text-dim); }
-    .seo-where-note svg { width: 20px; height: 20px; flex: none; margin-top: 3px; color: var(--teal); }
+    /* ---------------- three places ---------------- */
+    .v3-seo .s-where { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 40px 0 0; padding: 0; }
+    .v3-seo .s-where > li { display: flex; flex-direction: column; padding: 14px 14px 26px; border-radius: 30px; background: var(--v3-elev-1); border: 1px solid var(--v3-hair); }
+    .v3-seo .s-art { position: relative; height: 150px; overflow: hidden; border-radius: 20px; background: #1c1c1e; }
+    .v3-seo .s-art .s-mapart { opacity: 0.9; }
+    .v3-seo .s-art .s-pin { width: 20px; height: 20px; margin: -26px 0 0 -10px; font-size: 10px; }
+    .v3-seo .s-art .s-pin.--you { width: 28px; height: 28px; margin: -35px 0 0 -14px; font-size: 12px; }
+    .v3-seo .s-art-bar { position: absolute; left: 18px; right: 18px; top: 20px; display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px; border-radius: 10px; background: #2c2c2e; }
+    .v3-seo .s-art-bar svg { width: 13px; height: 13px; flex: none; color: #98989d; }
+    .v3-seo .s-art-bar i { display: block; width: 52%; height: 6px; border-radius: 3px; background: #636366; }
+    .v3-seo .s-art-lines { position: absolute; left: 22px; right: 28%; top: 70px; display: grid; gap: 9px; }
+    .v3-seo .s-art-lines i { display: block; height: 6px; border-radius: 3px; background: #3a3a3c; }
+    .v3-seo .s-art-lines i.--link { height: 8px; width: 82%; background: #7aa7f7; }
+    .v3-seo .s-art-lines i.--short { width: 60%; }
+    .v3-seo .s-art-ask { position: absolute; right: 18px; top: 20px; width: 56%; display: grid; gap: 6px; padding: 10px 12px; border-radius: 16px 16px 4px 16px; background: #3a3a3c; }
+    .v3-seo .s-art-reply { position: absolute; left: 18px; bottom: 20px; width: 66%; display: grid; gap: 6px; padding: 10px 12px 10px 32px; border-radius: 16px 16px 16px 4px; background: rgba(226,168,77,0.16); }
+    .v3-seo .s-art-ask i, .v3-seo .s-art-reply i { display: block; height: 5px; border-radius: 3px; background: rgba(246,240,230,0.45); }
+    .v3-seo .s-art-ask i.--short, .v3-seo .s-art-reply i.--short { width: 58%; }
+    .v3-seo .s-art-reply svg { position: absolute; left: 11px; top: 10px; width: 13px; height: 13px; color: var(--gold); }
+    .v3-seo .s-where h3 { margin: 20px 10px 0; font-size: 1.375rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.03em; color: var(--text-head); }
+    .v3-seo .s-where h3 small { display: block; margin-top: 4px; font-size: 0.9375rem; font-weight: 550; line-height: 1.4; letter-spacing: 0; color: rgba(246,240,230,0.56); }
+    .v3-seo .s-where p { margin: 12px 10px 0; font-size: 1rem; line-height: 1.55; color: rgba(246,240,230,0.76); }
+    .v3-seo .s-where p b { color: var(--text-head); font-weight: 700; }
+    .v3-seo .s-note { max-width: 72ch; margin-top: 22px; font-size: 1.0625rem; line-height: 1.6; color: rgba(246,240,230,0.72); }
 
-    /* ---------------- WHAT WE FIX ---------------- */
-    .seo-fix-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
-    .seo-fix-list { border-top: 1px solid var(--line); }
-    .seo-fix { border-bottom: 1px solid var(--line); }
-    .seo-fix summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 40px minmax(0, 1fr) 32px; grid-template-areas: "ic t tg" "ic p tg"; column-gap: 14px; row-gap: 4px; align-items: center; min-height: 64px; padding: 16px 2px; }
-    .seo-fix summary::-webkit-details-marker { display: none; }
-    .seo-fix summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 10px; }
-    .seo-fix-ic { grid-area: ic; align-self: start; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--gold-soft); border: 1px solid rgba(226,168,77,0.28); color: var(--gold); }
-    .seo-fix-ic svg { width: 19px; height: 19px; }
-    .seo-fix summary h3 { grid-area: t; align-self: end; font-family: var(--font-display); font-size: 1.125rem; font-weight: 800; line-height: 1.25; letter-spacing: -0.01em; color: var(--text-head); }
-    .seo-fix-prob { grid-area: p; align-self: start; display: block; font-size: 0.9375rem; line-height: 1.5; color: var(--text-dim); }
-    .seo-fix-prob::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 8px; border-radius: 50%; background: var(--coral); vertical-align: 1px; }
-    .seo-fix-tg { grid-area: tg; width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(226,168,77,0.4); display: grid; place-items: center; color: var(--gold); transition: transform .3s, background .25s; }
-    .seo-fix-tg svg { width: 15px; height: 15px; }
-    .seo-fix[open] .seo-fix-tg { transform: rotate(45deg); background: var(--gold-soft); }
-    .seo-fix-body { padding: 0 2px 20px 56px; }
-    .seo-fix-lbl { font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); }
-    .seo-fix-body ul { list-style: none; margin-top: 8px; display: grid; gap: 8px; }
-    .seo-fix-body li { position: relative; padding-left: 26px; font-size: 1rem; line-height: 1.55; color: var(--text); }
-    .seo-fix-body li svg { position: absolute; left: 0; top: 4px; width: 17px; height: 17px; color: var(--teal); }
-    .seo-fix-note { margin-top: 10px; font-size: 1rem; line-height: 1.55; color: var(--text-soft); }
-    .seo-fix-body .seo-more { margin-top: 4px; font-size: 0.9375rem; }
-    .seo-fix-aside { margin-top: 4px; }
+    /* ---------------- what we fix ---------------- */
+    .v3-seo .s-fix-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
+    .v3-seo .s-fix-aside { position: sticky; top: calc(var(--v3-bar-h) + 96px); }
+    .v3-seo .s-fix-aside h2, .v3-seo .s-proof-side h2 { font-size: clamp(2rem, 3.4vw, 2.85rem); }
+    .v3-seo .s-fix-aside .s-link { margin-top: 18px; }
+    .v3-seo .s-fix-list { border-top: 1px solid var(--v3-hair); }
+    .v3-seo .s-fix { border-bottom: 1px solid var(--v3-hair); }
+    .v3-seo .s-fix summary { list-style: none; display: grid; grid-template-columns: minmax(0, 1fr) 20px; grid-template-areas: "t c" "p c"; column-gap: 18px; align-items: center; min-height: 76px; padding: 18px 2px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    .v3-seo .s-fix summary::-webkit-details-marker { display: none; }
+    .v3-seo .s-fix summary h3 { grid-area: t; font-size: clamp(1.1875rem, 1.6vw, 1.375rem); font-weight: 750; line-height: 1.25; letter-spacing: -0.025em; color: var(--text-head); }
+    .v3-seo .s-fix-prob { grid-area: p; display: block; margin-top: 4px; font-size: 1rem; line-height: 1.5; color: rgba(246,240,230,0.6); }
+    .v3-seo .s-chev { grid-area: c; width: 12px; height: 12px; justify-self: end; border-right: 2px solid rgba(246,240,230,0.5); border-bottom: 2px solid rgba(246,240,230,0.5); transform: translateY(-3px) rotate(45deg); transition: transform .3s var(--v3-ease); }
+    .v3-seo .s-fix[open] .s-chev, .v3-seo .s-faq details[open] summary::after { transform: translateY(3px) rotate(-135deg); }
+    .v3-seo .s-fix-body { padding: 0 2px 24px; }
+    .v3-seo .s-fix-lbl { font-size: 0.875rem; font-weight: 650; color: var(--gold); }
+    .v3-seo .s-checks { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 8px; }
+    .v3-seo .s-checks li { position: relative; padding-left: 28px; font-size: 1rem; line-height: 1.55; color: rgba(246,240,230,0.86); }
+    .v3-seo .s-checks li::before { content: ""; position: absolute; left: 4px; top: 7px; width: 11px; height: 6px; border-left: 2px solid var(--gold); border-bottom: 2px solid var(--gold); transform: rotate(-45deg); }
+    .v3-seo .s-fix-note { margin-top: 10px; font-size: 1rem; line-height: 1.55; color: rgba(246,240,230,0.6); }
+    .v3-seo .s-fix-body .s-link { margin-top: 6px; }
 
-    /* ---------------- HOW IT WORKS ---------------- */
-    .seo-steps { list-style: none; margin-top: 28px; display: grid; }
-    .seo-step { position: relative; padding: 0 0 26px 52px; }
-    .seo-step::before { content: ""; position: absolute; left: 17px; top: 38px; bottom: 2px; width: 2px; background: linear-gradient(180deg, rgba(226,168,77,0.6), rgba(226,168,77,0.08)); }
-    .seo-step:last-child { padding-bottom: 0; }
-    .seo-step:last-child::before { display: none; }
-    .seo-step-n { position: absolute; left: 0; top: 0; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font: 800 0.95rem/1 var(--font-hero); color: #1a1206; background: var(--gold); box-shadow: 0 0 0 5px var(--gold-soft); }
-    .seo-step-when { display: block; padding-top: 2px; font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
-    .seo-step h3 { margin-top: 3px; font-family: var(--font-display); font-size: 1.125rem; font-weight: 800; line-height: 1.25; color: var(--text-head); }
-    .seo-step p { margin-top: 5px; font-size: 1rem; line-height: 1.55; color: var(--text-dim); max-width: 46ch; }
-    .seo-timing { display: flex; gap: 14px; align-items: flex-start; margin-top: 28px; padding: 18px; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--bg-1); }
-    .seo-timing > svg { width: 22px; height: 22px; flex: none; margin-top: 2px; color: var(--teal); }
-    .seo-timing p { font-size: 1rem; line-height: 1.6; color: var(--text-dim); }
-    .seo-timing p b { color: var(--text-head); }
-    .seo-timing .review-note { margin-bottom: 0; }
+    /* ---------------- how it works ---------------- */
+    .v3-seo .h-steps { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 40px 0 0; padding: 0; }
+    .v3-seo .h-step { padding: 26px 24px; border-radius: 26px; background: var(--v3-elev-1); border: 1px solid var(--v3-hair); }
+    .v3-seo .h-step b { display: block; font-size: 0.875rem; font-weight: 700; color: var(--gold); }
+    .v3-seo .s-when { display: block; margin-top: 18px; font-size: 0.875rem; font-weight: 650; color: rgba(246,240,230,0.56); }
+    .v3-seo .h-step h3 { margin-top: 4px; font-size: 1.3125rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text-head); }
+    .v3-seo .h-step p { margin-top: 8px; font-size: 1rem; line-height: 1.55; color: rgba(246,240,230,0.72); }
+    .v3-seo .s-timing { margin-top: 14px; padding: 22px 24px; border-radius: 26px; border: 1px solid var(--v3-hair); }
+    .v3-seo .s-timing p { max-width: 80ch; font-size: 1.0625rem; line-height: 1.6; color: rgba(246,240,230,0.76); }
+    .v3-seo .s-timing p b { color: var(--text-head); }
+    .v3-seo .s-timing .review-note { margin-bottom: 0; }
 
-    /* ---------------- PROOF ---------------- */
-    .seo-proof { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; margin-top: 4px; }
-    .seo-serp { margin-top: 4px; }
-    .seo-serp-tabs { display: none; gap: 6px; padding: 4px; margin-bottom: 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg-1); }
-    .seo-serp.is-tabbed .seo-serp-tabs { display: flex; }
-    .seo-serp-tabs button { flex: 1; min-height: 44px; padding: 8px 12px; border: 0; border-radius: 10px; background: transparent; color: var(--text-dim); font: 700 0.9375rem/1.2 var(--font-display); cursor: pointer; transition: background .2s, color .2s; }
-    .seo-serp-tabs button[aria-selected="true"] { background: var(--gold-soft); color: var(--gold); box-shadow: inset 0 0 0 1px rgba(226,168,77,0.35); }
-    .seo-serp-tabs button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
-    .seo-serp-pan { display: block; margin: 0; border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; background: #202124; }
-    .seo-serp-pan[hidden] { display: none; }
-    .seo-serp-pan + .seo-serp-pan { margin-top: 12px; }
-    .seo-serp.is-tabbed .seo-serp-pan + .seo-serp-pan { margin-top: 0; }
-    .seo-serp-pan img { display: block; width: 100%; height: auto; aspect-ratio: 1.1; object-fit: cover; object-position: 60% 30%; }
-    .seo-serp-pan figcaption { padding: 11px 14px; border-top: 1px solid var(--line-soft); font-size: 0.8125rem; line-height: 1.45; color: var(--text-soft); background: var(--bg-1); }
-    .seo-quote { margin: 0; padding: 20px 18px; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--surface); }
-    .seo-stars { display: flex; gap: 3px; color: var(--gold); }
-    .seo-stars svg { width: 16px; height: 16px; fill: currentColor; }
-    .seo-quote blockquote { margin: 12px 0 0; font-size: 1.0625rem; line-height: 1.55; color: var(--text); }
-    .seo-quote figcaption { margin-top: 12px; font-size: 0.875rem; line-height: 1.45; color: var(--text-soft); }
-    .seo-quote figcaption b { display: block; font-family: var(--font-display); font-size: 0.95rem; color: var(--text-head); }
-    .seo-proof-more .seo-more { margin-top: 10px; }
+    /* ---------------- proof ---------------- */
+    .v3-seo .s-proof { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 20px clamp(32px, 5vw, 64px); align-items: start; }
+    .v3-seo .s-proof-side { grid-column: 1; grid-row: 1; }
+    .v3-seo .s-proof-more { grid-column: 1; grid-row: 2; }
+    .v3-seo .s-serp { grid-column: 2; grid-row: 1 / span 2; }
+    .v3-seo .s-seg { display: none; grid-template-columns: 1fr 1fr; margin-bottom: 12px; padding: 3px; border-radius: 13px; background: rgba(255,255,255,0.07); }
+    .v3-seo .s-serp.is-tabbed .s-seg { display: grid; }
+    .v3-seo .s-seg button { min-height: 44px; padding: 8px 14px; border: 0; border-radius: 10px; background: transparent; color: rgba(246,240,230,0.7); font: 650 0.9375rem/1.2 var(--font-body); cursor: pointer; -webkit-tap-highlight-color: transparent; transition: background .3s var(--v3-ease), color .2s ease; }
+    .v3-seo .s-seg button[aria-selected="true"] { background: #2e2e33; color: var(--text-head); box-shadow: 0 1px 4px rgba(0,0,0,0.4); }
+    .v3-seo .s-serp-pan { overflow: hidden; border-radius: 22px; background: #202124; border: 1px solid var(--v3-hair); }
+    .v3-seo .s-serp-pan[hidden] { display: none; }
+    .v3-seo .s-serp-pan + .s-serp-pan { margin-top: 12px; }
+    .v3-seo .s-serp.is-tabbed .s-serp-pan + .s-serp-pan { margin-top: 0; }
+    .v3-seo .s-serp-pan figure { margin: 0; }
+    .v3-seo .s-serp-pan img { display: block; width: 100%; height: auto; aspect-ratio: 1.35; object-fit: cover; object-position: 70% 30%; }
+    .v3-seo .s-serp-pan figcaption { padding: 13px 18px; border-top: 1px solid var(--v3-hair); background: var(--v3-elev-1); font-size: 0.875rem; line-height: 1.45; color: rgba(246,240,230,0.6); }
+    .v3-seo .s-quote { margin: 0; padding: 24px 24px 22px; border-radius: 26px; background: var(--v3-elev-1); border: 1px solid var(--v3-hair); }
+    .v3-seo .s-stars-row { display: flex; gap: 3px; color: var(--gold); }
+    .v3-seo .s-stars-row svg { width: 16px; height: 16px; fill: currentColor; }
+    .v3-seo .s-quote blockquote { margin: 12px 0 0; font-size: 1.125rem; line-height: 1.55; color: var(--text-head); }
+    .v3-seo .s-quote figcaption { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--v3-hair); font-size: 0.875rem; line-height: 1.45; color: rgba(246,240,230,0.56); }
+    .v3-seo .s-quote figcaption b { display: block; font-size: 0.9375rem; color: var(--text-head); }
+    .v3-seo .s-proof-more .btn { margin-top: 18px; gap: 8px; }
+    .v3-seo .s-proof-more .btn svg { width: 16px; height: 16px; }
 
-    /* ---------------- FIT ---------------- */
-    .seo-fit { display: grid; grid-template-columns: minmax(0, 1fr); margin-top: 24px; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--bg-1); }
-    .seo-fit-col { padding: 20px 18px; }
-    .seo-fit-col + .seo-fit-col { border-top: 1px solid var(--line); }
-    .seo-fit-col h3 { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-size: 1.125rem; font-weight: 800; color: var(--text-head); }
-    .seo-fit-col h3 svg { width: 22px; height: 22px; flex: none; }
-    .seo-fit-col.--yes h3 svg { color: var(--teal); }
-    .seo-fit-col.--no h3 svg { color: var(--coral); }
-    .seo-fit-col ul { list-style: none; margin-top: 12px; display: grid; gap: 10px; }
-    .seo-fit-col li { position: relative; padding-left: 20px; font-size: 1rem; line-height: 1.55; color: var(--text-dim); }
-    .seo-fit-col li::before { content: ""; position: absolute; left: 2px; top: 10px; width: 7px; height: 7px; border-radius: 50%; }
-    .seo-fit-col.--yes li::before { background: var(--teal); }
-    .seo-fit-col.--no li::before { background: var(--coral); }
-    .seo-fit-col li a { color: var(--gold); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(226,168,77,0.45); }
+    /* ---------------- fit ---------------- */
+    .v3-seo .s-fit { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 40px; }
+    .v3-seo .s-fit-col { padding: clamp(24px, 3vw, 34px); border-radius: 30px; background: var(--v3-elev-1); border: 1px solid var(--v3-hair); }
+    .v3-seo .s-fit-col h3 { display: flex; align-items: center; gap: 10px; font-size: 1.375rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text-head); }
+    .v3-seo .s-fit-col h3 svg { width: 22px; height: 22px; flex: none; }
+    .v3-seo .s-fit-col.--yes h3 svg { color: var(--gold); }
+    .v3-seo .s-fit-col.--no h3 svg { color: rgba(246,240,230,0.5); }
+    .v3-seo .s-fit-col ul { list-style: none; margin: 16px 0 0; padding: 0; border-top: 1px solid var(--v3-hair); }
+    .v3-seo .s-fit-col li { padding: 13px 0; border-bottom: 1px solid var(--v3-hair); font-size: 1rem; line-height: 1.55; color: rgba(246,240,230,0.8); }
+    .v3-seo .s-fit-col .s-link { margin-top: 10px; }
 
-    /* ---------------- FAQ ---------------- */
-    .seo-faq { margin-top: 24px; max-width: 860px; border-top: 1px solid var(--line-soft); }
-    .seo-faq details { border-bottom: 1px solid var(--line-soft); }
-    .seo-faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 14px; min-height: 56px; padding: 14px 2px; }
-    .seo-faq summary::-webkit-details-marker { display: none; }
-    .seo-faq summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 8px; }
-    .seo-faq summary h3 { flex: 1; font-family: var(--font-display); font-weight: 700; font-size: 1.0625rem; line-height: 1.35; color: var(--text-head); }
-    .seo-faq-ic { flex: none; width: 30px; height: 30px; border-radius: 50%; border: 1px solid rgba(226,168,77,0.4); display: grid; place-items: center; color: var(--gold); transition: transform .3s, background .25s; }
-    .seo-faq-ic svg { width: 15px; height: 15px; }
-    .seo-faq details[open] .seo-faq-ic { transform: rotate(45deg); background: var(--gold-soft); }
-    .seo-faq-a { padding: 0 2px 20px; max-width: 68ch; font-size: 1rem; line-height: 1.6; color: var(--text-dim); }
+    /* ---------------- FAQ: native list ---------------- */
+    .v3-seo .s-faq { max-width: 840px; margin: 40px auto 0; border-top: 1px solid var(--v3-hair); }
+    .v3-seo .s-faq details { border-bottom: 1px solid var(--v3-hair); }
+    .v3-seo .s-faq summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 68px; padding: 18px 2px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    .v3-seo .s-faq summary::-webkit-details-marker { display: none; }
+    .v3-seo .s-faq summary h3 { font-size: clamp(1.0625rem, 1.4vw, 1.1875rem); font-weight: 700; line-height: 1.35; letter-spacing: -0.015em; color: var(--text-head); }
+    .v3-seo .s-faq summary::after { content: ""; flex: none; width: 12px; height: 12px; margin-right: 4px; border-right: 2px solid rgba(246,240,230,0.5); border-bottom: 2px solid rgba(246,240,230,0.5); transform: translateY(-3px) rotate(45deg); transition: transform .3s var(--v3-ease); }
+    .v3-seo .s-faq-a { max-width: 70ch; padding: 0 2px 24px; }
+    .v3-seo .s-faq-a p { font-size: 1.0625rem; line-height: 1.65; color: rgba(246,240,230,0.74); }
 
-    /* ---------------- FINAL CTA ---------------- */
-    .seo-page .cta-content h2 { font-family: var(--font-hero); font-size: clamp(1.45rem, 5vw, 1.9rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 8px; color: var(--text-head); }
-    .seo-page .cta-content p { font-size: 1rem; line-height: 1.55; }
-    .seo-host { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
-    .seo-host img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(226,168,77,0.4); flex: none; }
-    .seo-host span { font-size: 0.9375rem; line-height: 1.45; color: var(--text-dim); }
-    .seo-host b { color: var(--text-head); }
-    .seo-cta-alt { margin-top: 14px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0 8px; font-size: 1rem; color: var(--text-soft); }
-    @media (max-width: 900px) {
-      .seo-host { justify-content: center; text-align: left; }
-      .seo-page .cta-actions { flex-wrap: wrap; justify-content: center; }
+    /* ---------------- final call (gold card) ---------------- */
+    .v3-seo .h-final { padding: clamp(80px, 10vw, 128px) 0 clamp(56px, 8vw, 96px); }
+    .v3-seo .h-final-card { padding: clamp(40px, 7vw, 88px) clamp(24px, 6vw, 80px); border-radius: 36px; background: var(--gold); color: var(--v3-ink-on-gold); text-align: center; }
+    .v3-seo .h-final-card h2 { font-size: clamp(2.3rem, 5.4vw, 4.4rem); line-height: 1; font-weight: 800; letter-spacing: -0.055em; color: var(--v3-ink-on-gold); }
+    .v3-seo .h-final-card > p { margin: 18px auto 0; max-width: 52ch; font-size: clamp(1.0625rem, 1.4vw, 1.25rem); line-height: 1.5; color: rgba(20,14,4,0.78); }
+    .v3-seo .s-host { display: inline-flex; align-items: center; gap: 12px; margin-top: 22px; padding: 8px 18px 8px 8px; border-radius: 999px; background: rgba(20,14,4,0.08); text-align: left; }
+    .v3-seo .s-host img { width: 44px; height: 44px; flex: none; border-radius: 50%; object-fit: cover; }
+    .v3-seo .s-host span { font-size: 0.9375rem; line-height: 1.4; color: rgba(20,14,4,0.8); }
+    .v3-seo .s-host b { color: var(--v3-ink-on-gold); }
+    .v3-seo .h-final-card .s-cta { justify-content: center; margin-top: 26px; }
+    html[lang] .v3-seo .h-final-card .btn-primary { background: var(--v3-ink-on-gold) !important; color: #f6f0e6 !important; }
+    html[lang] .v3-seo .h-final-card .btn-primary:hover { background: #2a1f0d !important; }
+    html[lang] .v3-seo .h-final-card .btn:not(.btn-primary) { background: rgba(20,14,4,0.08); border-color: rgba(20,14,4,0.22); color: var(--v3-ink-on-gold); }
+    .v3-seo .s-cta-alt { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0 8px; margin-top: 18px; font-size: 1rem; color: rgba(246,240,230,0.6); }
+
+    /* ===================== callouts with room to hang ===================== */
+    @media (min-width: 600px) {
+      .v3-seo .s-demo-stage { margin-right: 150px; }
+      html[lang="es"] .v3-seo .s-demo-stage { margin-right: 172px; }
+      .v3-seo .s-legend { display: none; }
+      .v3-seo .s-call { position: absolute; top: 50%; left: calc(100% + 54px); display: inline-flex; align-items: center; height: 26px; margin-top: -13px; padding: 0 10px; border-radius: 999px; background: #2a2418; color: var(--gold); font-size: 12.5px; font-weight: 700; white-space: nowrap; }
+      .v3-seo .s-call::before { content: ""; position: absolute; right: 100%; top: 50%; width: 44px; border-top: 1px solid rgba(226,168,77,0.6); }
+      .v3-seo .s-call::after { content: ""; position: absolute; right: calc(100% + 42px); top: 50%; width: 5px; height: 5px; margin-top: -2.5px; border-radius: 50%; background: var(--gold); }
+      .v3-seo .s-demo-cap { width: auto; max-width: 300px; margin-right: 150px; }
+      html[lang="es"] .v3-seo .s-demo-cap { margin-right: 172px; }
     }
 
-    /* ---------------- PHONES ---------------- */
-    @media (max-width: 599px) {
-      main.seo-page .cta-banner { padding: 30px 18px; }
-      .seo-page .cta-actions { flex-direction: column; width: 100%; }
-      .seo-page .cta-actions .btn { width: 100%; }
+    /* ===================== tablet ===================== */
+    @media (max-width: 1080px) {
+      .v3-seo .s-hero { grid-template-columns: 1fr; }
+      .v3-seo .s-hero-copy { max-width: 640px; padding-top: 0; }
     }
-    @media (max-width: 1160px) {
-      /* Shared footer links are 26px tall; give them a 44px tap area on touch-size screens */
-      .seo-page .footer-col a { padding: 12px 0; }
-      .seo-page .footer-links a { display: inline-flex; align-items: center; min-height: 44px; }
-      .seo-page .footer-links { flex-wrap: wrap; gap: 0 18px; }
+    @media (max-width: 960px) {
+      .v3-seo .s-where { grid-template-columns: 1fr; }
+      .v3-seo .s-where > li { display: grid; grid-template-columns: 200px minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: 20px; padding: 14px; }
+      .v3-seo .s-art { grid-row: 1 / span 2; height: 100%; min-height: 150px; }
+      .v3-seo .s-where h3 { margin: 8px 6px 0 0; }
+      .v3-seo .s-where p { margin: 8px 6px 4px 0; }
+      .v3-seo .s-fix-grid, .v3-seo .s-proof { grid-template-columns: 1fr; }
+      .v3-seo .s-fix-aside { position: static; }
+      .v3-seo .s-serp, .v3-seo .s-proof-side, .v3-seo .s-proof-more { grid-column: 1; grid-row: auto; }
+      .v3-seo .h-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
-    @media (max-width: 600px) {
-      .seo-page .footer-grid { grid-template-columns: 1fr 1fr; column-gap: 20px; }
-      .seo-page .footer-brand { grid-column: 1 / -1; }
-      .seo-page .footer-bottom { flex-direction: column; align-items: flex-start; gap: 4px; }
-    }
-    @media (max-width: 599px) {
-      /* Spanish labels run longer: keep each callout on the same row as what it points at */
-      html[lang="es"] .seo-ph-act:not(.--web) { display: none; }
+
+    /* ===================== phones ===================== */
+    @media (max-width: 700px) {
+      .v3-seo { --s-gut: 16px; }
+      html[lang] body:not(#_):not(#__) .v3-seo :is(p, li, dd) { font-size: 16px; line-height: 1.55; }
+      html[lang] body:not(#_):not(#__) .v3-seo :is(.h-head p) { font-size: 17px; }
+      html[lang] body:not(#_):not(#__) .v3-seo :is(.s-screen p, .s-screen li) { font-size: inherit; line-height: inherit; }
+      html[lang] body:not(#_):not(#__) .v3-seo .s-demo-cap { font-size: 14px; }
+      .v3-seo .s-hero { gap: 40px; padding: 4px 0 24px; }
+      .v3-seo .s-hero h1 { margin-top: 8px; font-size: clamp(2rem, 8.8vw, 2.45rem); line-height: 1.03; }
+      html[lang="es"] .v3-seo .s-hero h1 { font-size: clamp(1.9rem, 8.2vw, 2.3rem); }
+      .v3-seo .s-lede { margin-top: 14px; }
+      .v3-seo .s-cta { margin-top: 20px; gap: 10px; }
+      main.v3-seo .s-cta .btn { flex: 1 1 100%; min-height: 52px; }
+      .v3-seo .s-ticks { margin-top: 16px; }
+      .v3-seo .s-where > li { display: flex; padding: 12px 12px 22px; border-radius: 26px; }
+      .v3-seo .s-art { height: 132px; min-height: 0; }
+      .v3-seo .s-where h3 { margin: 18px 8px 0; }
+      .v3-seo .s-where p { margin: 10px 8px 0; }
+      .v3-seo .s-fix summary { min-height: 68px; padding: 16px 0; column-gap: 14px; }
+      .v3-seo .h-steps { grid-template-columns: 1fr; gap: 10px; }
+      .v3-seo .h-step { display: grid; grid-template-columns: 34px minmax(0, 1fr); column-gap: 10px; padding: 20px; }
+      .v3-seo .h-step b { grid-row: 1 / span 3; padding-top: 2px; }
+      .v3-seo .s-when { margin-top: 0; }
+      .v3-seo .s-timing { padding: 20px; }
+      .v3-seo .s-fit { grid-template-columns: 1fr; margin-top: 28px; }
+      .v3-seo .s-fit-col { border-radius: 26px; }
+      .v3-seo .s-proof-more .btn { width: 100%; }
+      .v3-seo .h-final-card { border-radius: 30px; }
+      main.v3-seo .h-final-card .btn { flex: 1 1 100%; }
+      .v3-seo .s-host { border-radius: 22px; }
     }
     @media (max-width: 359px) {
-      .seo-where-item { grid-template-columns: 88px minmax(0, 1fr); gap: 12px; }
-      .seo-where-art { height: 96px; }
+      .v3-seo .s-filters span:last-child { display: none; }
     }
-
-    /* ===================== 600px+ ===================== */
-    @media (min-width: 600px) {
-      .seo-hero-ctas { display: flex; flex-wrap: wrap; }
-      .seo-demo-stage { padding-right: 150px; }
-      html[lang="es"] .seo-demo-stage { padding-right: 178px; }
-      .seo-screen { max-height: none; overflow: visible; }
-      .seo-screen::after { display: none; }
-      .seo-ph-item.--you { border-radius: 0; }
-      .seo-ph-item:last-child { border-bottom-left-radius: 32px; border-bottom-right-radius: 32px; }
-      .seo-call { position: absolute; top: 50%; left: calc(100% + 46px); height: 24px; margin: -12px 0 0; }
-      .seo-ph-photo { width: 52px; height: 46px; }
-      .seo-ph-map { height: 66px; }
-      .seo-demo-cap { padding-right: 150px; }
-      html[lang="es"] .seo-demo-cap { padding-right: 178px; }
-      .seo-call::before { content: ""; position: absolute; right: 100%; top: 50%; width: 38px; border-top: 1.5px solid rgba(226,168,77,0.75); }
-      .seo-call::after { content: ""; position: absolute; right: calc(100% + 36px); top: 50%; width: 6px; height: 6px; margin-top: -2.5px; border-radius: 50%; background: var(--gold); }
-      .seo-fit { grid-template-columns: 1fr 1fr; }
-      .seo-fit-col + .seo-fit-col { border-top: 0; border-left: 1px solid var(--line); }
-      .seo-fit-col { padding: 26px 26px; }
-      main.seo-page .cta-banner { padding: 40px 32px; }
-    }
-
-    /* ===================== 600px to 899px: rows with a bigger art tile ===================== */
-    @media (min-width: 600px) {
-      .seo-where-item { grid-template-columns: 132px minmax(0, 1fr); gap: 22px; padding: 22px 22px; }
-      .seo-where-art { height: 100px; }
-      .seo-lede, .seo-where-note { font-size: 1.0625rem; }
-      .seo-serp-pan img { aspect-ratio: 1.35; object-position: 70% 30%; }
-    }
-    /* ===================== 900px+: three columns ===================== */
-    @media (min-width: 900px) {
-      .seo-where { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .seo-where-item { grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 22px 20px 24px; }
-      .seo-where-item + .seo-where-item { border-top: 0; border-left: 1px solid var(--line-soft); }
-      .seo-where-art { height: 120px; }
-    }
-    @media (min-width: 600px) {
-      .seo-art-bar { left: 14px; right: 14px; top: 16px; height: 26px; border-radius: 13px; padding: 0 10px; gap: 8px; }
-      .seo-art-bar svg { width: 12px; height: 12px; }
-      .seo-art-bar i { height: 6px; }
-      .seo-art-lines { left: 16px; right: 30%; bottom: 18px; gap: 8px; }
-      .seo-art-lines i { height: 6px; }
-      .seo-art-lines i.--link { height: 8px; }
-      .seo-art-ask { right: 14px; top: 14px; width: 54%; padding: 9px 10px; gap: 6px; }
-      .seo-art-reply { left: 14px; bottom: 14px; width: 62%; padding: 9px 10px 9px 28px; gap: 6px; }
-      .seo-art-ask i, .seo-art-reply i { height: 5px; }
-      .seo-art-reply svg { left: 9px; top: 8px; width: 12px; height: 12px; }
-      .seo-where-art.--maps .seo-pin { width: 18px; height: 18px; margin: -18px 0 0 -9px; }
-      .seo-where-art.--maps .seo-pin b { font-size: 10px; }
-      .seo-where-art.--maps .seo-pin.--you { width: 26px; height: 26px; margin: -26px 0 0 -13px; }
-      .seo-where-art.--maps .seo-pin.--you b { font-size: 12px; }
-    }
-
-    /* ===================== tablet / desktop ===================== */
-    @media (min-width: 701px) {
-      main.seo-page .seo-hero { padding: 124px 0 96px; }
-      main.seo-page > .card-overlay { margin-top: -56px; padding-top: 80px; padding-bottom: 112px; border-radius: 48px 48px 0 0; }
-      main.seo-page > .card-overlay::after { border-radius: 48px 48px 0 0; }
-      .seo-page section[id] { scroll-margin-top: 96px; }
-    }
-    @media (min-width: 900px) {
-      .seo-steps { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin-top: 40px; }
-      .seo-step { padding: 52px 0 0 0; }
-      .seo-step::before { left: 44px; right: -20px; top: 17px; bottom: auto; width: auto; height: 2px; background: linear-gradient(90deg, rgba(226,168,77,0.6), rgba(226,168,77,0.12)); }
-      .seo-step:last-child::before { display: none; }
-      .seo-step p { max-width: none; }
-      .seo-proof { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 40px; align-items: start; }
-      .seo-proof-side { grid-column: 1; grid-row: 1; }
-      .seo-proof-more { grid-column: 1; grid-row: 2; }
-      .seo-serp { grid-column: 2; grid-row: 1 / span 2; margin-top: 0; }
-    }
-    @media (min-width: 1080px) {
-      .seo-hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: center; }
-      .seo-demo-stage { justify-content: flex-start; padding-left: 8px; }
-      .seo-demo-cap { text-align: left; padding: 0 0 0 8px; max-width: 300px; }
-      html[lang="es"] .seo-demo-cap { padding-right: 0; }
-      .seo-hero h1 { text-wrap: balance; }
-    }
-    @media (min-width: 960px) {
-      .seo-fix-grid { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 56px; align-items: start; }
-      .seo-fix-aside { position: sticky; top: 110px; }
-      main.seo-page > .card-overlay { margin-top: -64px; padding-top: 96px; padding-bottom: 128px; border-radius: 60px 60px 0 0; }
-      main.seo-page > .card-overlay::after { border-radius: 60px 60px 0 0; }
-    }
-    @media (min-width: 1161px) {
-      main.seo-page .seo-hero { padding: 140px 0 110px; }
-      .seo-answer { font-size: 1.125rem; }
+    @media (prefers-reduced-motion: reduce) {
+      .v3-seo .s-chev, .v3-seo .s-faq summary::after, .v3-seo .s-seg button, .v3-seo .s-link svg, .v3-seo .s-chips a { transition: none; }
     }
   </style>
 </head>
@@ -560,10 +481,6 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <div class="depth-canvas" aria-hidden="true">
-    <div class="mesh-orb" style="--orb-color: var(--gold); width: 520px; height: 520px; top: -6%; right: 4%;"></div>
-    <div class="mesh-orb" style="--orb-color: var(--teal); width: 380px; height: 380px; bottom: 24%; left: -8%;"></div>
-  </div>
 
   <nav class="lib-nav" data-shared-animations="off">
     <a class="lib-nav-brand" href="/es" aria-label="Inicio de Button Up Media">
@@ -603,406 +520,347 @@
         </div>
       </details>
       <a href="/es/analizador-redes-sociales-web" class="lib-nav-grader" target="_blank" rel="noopener" aria-label="Analizador Gratis (se abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Analizador Gratis</a>
-      <a href="/es">Inicio</a>
+      <a href="/es/casos-de-exito">Casos de éxito</a>
       <a href="/es/nosotros">Nosotros</a>
       <a class="lib-nav-phone" href="tel:+17867409499">Llámanos</a>
       <a href="/es/contacto" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Agende su llamada de estrategia gratis</a>
     </div>
   </nav>
 
-  <main class="page seo-page">
+  <main class="page v3-seo">
 
-    <!-- HERO: respuesta primero, luego el map pack de ejemplo -->
-    <section class="lib-section seo-hero">
-      <div class="seo-wrap">
-        <div class="seo-hero-grid">
-          <div class="seo-hero-copy">
-            <span class="seo-eyebrow">SEO para restaurantes en Miami</span>
-            <h1>SEO para restaurantes que llena mesas, hasta un <span class="seo-gold">martes por la noche.</span></h1>
-            <p class="seo-answer">Button Up Media, agencia de SEO para restaurantes en Miami, optimiza tu perfil de Google, tu web y tus directorios para que te encuentren en Google Maps, en búsquedas y en la IA.</p>
-            <div class="seo-hero-ctas">
-              <a href="/es/contacto" class="btn btn-primary">Agende una llamada estratégica gratis</a>
-              <a href="/es/analizador-redes-sociales-web" class="btn">Analice su restaurante gratis</a>
+    <!-- HERO: answer first, then the example map pack -->
+    <section class="s-hero">
+      <div class="s-hero-copy">
+        <div class="lib-section-label">SEO para restaurantes en Miami</div>
+        <h1>SEO para restaurantes que llena mesas, hasta un <span class="s-gold">martes por la noche.</span></h1>
+        <p class="s-lede">Button Up Media, agencia de SEO para restaurantes en Miami, optimiza tu perfil de Google, tu web y tus directorios para que te encuentren en Google Maps, en búsquedas y en la IA.</p>
+        <div class="s-cta">
+          <a href="/es/contacto" class="btn btn-primary">Agende una llamada estratégica gratis</a>
+          <a href="/es/analizador-redes-sociales-web" class="btn">Analice su restaurante gratis</a>
+        </div>
+        <ul class="s-ticks">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Sin contratos a largo plazo</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Inglés y español</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Solo restaurantes, bares y cafés</li>
+        </ul>
+      </div>
+
+      <figure class="s-demo">
+        <div class="s-demo-stage">
+          <span class="s-flag">Ejemplo</span>
+          <div class="s-phone">
+            <div class="s-screen" role="img" aria-label="Ejemplo de pantalla de teléfono: una búsqueda en Google Maps de sushi cerca de mí. Tu Restaurante aparece primero, con reseñas al día, horario exacto, fotos nuevas y enlace a su web, por delante de dos competidores inventados.">
+              <div class="s-mapwrap">
+                <svg class="s-mapart" viewBox="0 0 282 196" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><symbol id="s-map-art" viewBox="0 0 282 196"><rect width="282" height="196" fill="#202225"/><g fill="#26282c"><rect x="6" y="100" width="54" height="32" rx="4"/><rect x="70" y="100" width="56" height="32" rx="4"/><rect x="6" y="142" width="54" height="54" rx="4"/><rect x="70" y="142" width="56" height="54" rx="4"/><rect x="136" y="100" width="40" height="96" rx="4"/><rect x="70" y="58" width="56" height="30" rx="4"/><rect x="136" y="58" width="40" height="30" rx="4"/></g><rect x="8" y="14" width="52" height="74" rx="10" fill="#1d2a21"/><path d="M206 0C214 36 226 66 214 102C204 132 212 166 230 196H282V0Z" fill="#152130"/><g stroke="#34373c" stroke-width="6" fill="none" stroke-linecap="round"><path d="M0 94H200"/><path d="M0 137H196"/><path d="M65 0V196"/><path d="M131 0V196"/></g><path d="M0 50C60 60 120 42 202 56" stroke="#4b4232" stroke-width="7" fill="none"/><path d="M184 0L196 196" stroke="#3d4046" stroke-width="8" fill="none"/><text x="232" y="126" fill="#4b6580" font-size="9" font-style="italic" font-weight="600">Biscayne</text><text x="240" y="137" fill="#4b6580" font-size="9" font-style="italic" font-weight="600">Bay</text></symbol><use href="#s-map-art"/></svg>
+                <div class="s-status"><span>9:41</span><span class="s-island"></span><span class="s-sys"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg viewBox="0 0 16 12"><path d="M8 2.4a9 9 0 0 1 6.2 2.5l1.3-1.4A11 11 0 0 0 8 .5 11 11 0 0 0 .5 3.5l1.3 1.4A9 9 0 0 1 8 2.4zm0 3.7a5.4 5.4 0 0 1 3.6 1.4L13 6.1A7.3 7.3 0 0 0 8 4.2a7.3 7.3 0 0 0-5 1.9l1.4 1.4A5.4 5.4 0 0 1 8 6.1zm0 3.7c.6 0 1.1.2 1.5.5L8 11.8l-1.5-1.5c.4-.3.9-.5 1.5-.5z"/></svg><svg viewBox="0 0 27 12"><rect x="0.5" y="0.5" width="23" height="11" rx="3.5" fill="none" stroke="#fff" stroke-opacity=".45"/><rect x="2" y="2" width="18" height="8" rx="2"/><path d="M25 4.2v3.6c.7-.3 1.2-1 1.2-1.8s-.5-1.5-1.2-1.8z" fill-opacity=".45"/></svg></span></div>
+                <span class="s-pin --you" style="left: 34%; top: 78%;">1</span>
+                <span class="s-pin-name" style="left: 34%; top: 78%;">Tu Restaurante</span>
+                <span class="s-pin" style="left: 64%; top: 56%;">2</span>
+                <span class="s-pin" style="left: 14%; top: 50%;">3</span>
+                <span class="s-me" style="left: 56%; top: 74%;"></span>
+              </div>
+              <div class="s-sheet">
+                <span class="s-grab"></span>
+                <div class="s-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>sushi cerca de mí<span class="s-clear"></span></div>
+                <div class="s-filters"><span class="--on">Relevancia</span><span>Calificación</span><span>Precio</span><span>Horario</span></div>
+                <ol class="s-results">
+                  <li class="s-r --you">
+                    <span class="s-r-name">Tu Restaurante</span>
+                    <div class="s-row"><b>4,8</b><span class="s-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></span><span>(320)</span><span class="s-call">Reseñas al día</span></div>
+                    <div class="s-row"><span>Sushi &middot; $$ &middot; 0,3 mi</span></div>
+                    <div class="s-row"><span class="s-open">Abierto</span><span>&middot; Cierra 11 p.m.</span><span class="s-call">Horario exacto</span></div>
+                    <div class="s-row s-photos"><span class="s-ph --a"></span><span class="s-ph --b"></span><span class="s-ph --c"></span><span class="s-call">Fotos nuevas</span></div>
+                    <div class="s-row s-acts"><span class="s-act --go"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.7 11.3 12.7 2.3a1 1 0 0 0-1.4 0l-9 9a1 1 0 0 0 0 1.4l9 9a1 1 0 0 0 1.4 0l9-9a1 1 0 0 0 0-1.4zM14 14.5V12h-4v3H8v-4a1 1 0 0 1 1-1h5V7.5l3.5 3.5z"/></svg>Cómo llegar</span><span class="s-act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>Llamar</span><span class="s-act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>Sitio web</span><span class="s-call">Enlace web</span></div>
+                  </li>
+                  <li class="s-r --other">
+                    <div>
+                      <span class="s-r-name">Sushi de la Esquina</span>
+                      <div class="s-row"><b>4,1</b><span class="s-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg class="--off" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></span><span>(86)</span></div>
+                      <div class="s-row"><span class="s-warn">Cierra pronto</span></div>
+                    </div>
+                    <span class="s-ph --dim"></span>
+                  </li>
+                  <li class="s-r --other">
+                    <div>
+                      <span class="s-r-name">Otro Sitio de Sushi</span>
+                      <div class="s-row"><b>3,9</b><span class="s-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg class="--off" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></span><span>(41)</span></div>
+                      <div class="s-row"><span class="s-bad">Sin horario publicado</span></div>
+                    </div>
+                    <span class="s-ph --none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="m3 16 5-5 4 4M3 3l18 18"/></svg></span>
+                  </li>
+                </ol>
+              </div>
             </div>
-            <ul class="seo-trust">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Sin contratos a largo plazo</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Inglés y español</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Solo restaurantes, bares y cafés</li>
+          </div>
+        </div>
+        <ul class="s-legend"><li>Reseñas al día</li><li>Horario exacto</li><li>Fotos nuevas</li><li>Enlace web</li></ul>
+        <figcaption class="s-demo-cap">Lo que podría ver un cliente al buscar &ldquo;sushi cerca de mí&rdquo;. Los nombres de los restaurantes son inventados.</figcaption>
+      </figure>
+    </section>
+
+    <nav class="s-chips" aria-label="En esta página">
+      <div class="s-chips-in">
+        <a href="#donde-te-encuentran">Dónde te buscan</a>
+        <a href="#lo-que-arreglamos">Lo que arreglamos</a>
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#pruebas">Pruebas</a>
+        <a href="#es-para-ti">¿Es para ti?</a>
+        <a href="#preguntas-frecuentes">Preguntas</a>
+      </div>
+    </nav>
+
+    <!-- THREE PLACES DINERS FIND YOU -->
+    <section class="h-sec" id="donde-te-encuentran">
+      <div class="h-head"><h2>Tres lugares donde los clientes encuentran un restaurante, y qué gana en cada uno.</h2></div>
+      <ol class="s-where">
+        <li>
+          <div class="s-art" aria-hidden="true">
+            <svg class="s-mapart" viewBox="0 0 282 196" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><use href="#s-map-art"/></svg>
+            <span class="s-pin --you" style="left: 30%; top: 74%;">1</span>
+            <span class="s-pin" style="left: 58%; top: 44%;">2</span>
+            <span class="s-pin" style="left: 16%; top: 40%;">3</span>
+          </div>
+          <h3>Google Maps<small>El &ldquo;map pack&rdquo; en búsquedas como &ldquo;sushi cerca de mí&rdquo;</small></h3>
+          <p><b>Qué gana:</b> un Perfil de Empresa en Google completo y activo, con fotos recientes, reseñas constantes y el horario correcto.</p>
+        </li>
+        <li>
+          <div class="s-art" aria-hidden="true">
+            <span class="s-art-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><i></i></span>
+            <span class="s-art-lines"><i class="--link"></i><i></i><i class="--short"></i><i class="--link"></i><i class="--short"></i></span>
+          </div>
+          <h3>Resultados de búsqueda de Google<small>Los enlaces debajo del mapa, en búsquedas como &ldquo;ramen Downtown Miami&rdquo;</small></h3>
+          <p><b>Qué gana:</b> una web rápida que dice claramente qué sirves y dónde, con una página de menú real.</p>
+        </li>
+        <li>
+          <div class="s-art" aria-hidden="true">
+            <span class="s-art-ask"><i></i><i class="--short"></i></span>
+            <span class="s-art-reply"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></svg><i></i><i></i><i class="--short"></i></span>
+          </div>
+          <h3>Respuestas de IA<small>ChatGPT y los AI Overviews de Google, cuando alguien pregunta &ldquo;¿dónde como esta noche?&rdquo;</small></h3>
+          <p><b>Qué gana:</b> los mismos datos en todas partes, y respuestas claras en tu web que la IA pueda repetir.</p>
+        </li>
+      </ol>
+      <p class="s-note">En Miami, las tres cosas pasan en inglés y en español. Lograr que la IA te describa bien se llama optimización para motores de respuesta (AEO).</p>
+    </section>
+
+    <!-- WHAT WE FIX -->
+    <section class="h-sec" id="lo-que-arreglamos">
+      <div class="s-fix-grid">
+        <div class="s-fix-aside h-head">
+          <h2>Lo que arreglamos: seis cosas que deciden si los clientes te encuentran.</h2>
+          <p>Cada una es una razón común por la que Google o la IA pasan por alto un restaurante. Abre cada una para ver el problema típico y lo que hacemos.</p>
+          <a class="s-link" href="/es/analizador-redes-sociales-web">Usar el analizador gratis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <div class="s-fix-list">
+        <details class="s-fix" name="seo-fix" open>
+          <summary><h3>Perfil de Empresa en Google</h3><span class="s-fix-prob">Se configuró una vez y se olvidó: categoría equivocada, horario viejo, fotos de la apertura.</span><span class="s-chev" aria-hidden="true"></span></summary>
+          <div class="s-fix-body">
+            <p class="s-fix-lbl">Lo que hacemos</p>
+            <ul class="s-checks">
+              <li>Arreglamos tus categorías, tu horario y los enlaces al menú y a reservas.</li>
+              <li>Subimos fotos y videos cortos recientes, y publicamos especiales y eventos cada semana.</li>
+              <li>Activamos los detalles que los clientes usan para filtrar, como terraza y happy hour.</li>
+            </ul>
+            <a class="s-link" href="/es/marketing-redes-sociales">Ver nuestro contenido para redes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </details>
+        <details class="s-fix" name="seo-fix">
+          <summary><h3>Palabras clave locales y páginas</h3><span class="s-fix-prob">Tu web nunca dice qué sirves ni dónde, así que Google no te puede conectar con las búsquedas.</span><span class="s-chev" aria-hidden="true"></span></summary>
+          <div class="s-fix-body">
+            <p class="s-fix-lbl">Lo que hacemos</p>
+            <ul class="s-checks">
+              <li>Encontramos las búsquedas que puedes ganar en inglés y en español, como &ldquo;ramen Downtown Miami&rdquo;.</li>
+              <li>Las ponemos en los títulos, los encabezados y el menú de tu web.</li>
+              <li>Agregamos páginas para brunch, happy hour, eventos privados y catering.</li>
             </ul>
           </div>
-
-          <figure class="seo-demo">
-            <div class="seo-demo-stage">
-              <div class="seo-phone">
-                <span class="seo-demo-flag">Ejemplo</span>
-                <div class="seo-screen" role="img" aria-label="Ejemplo de pantalla de teléfono: una búsqueda en Google Maps de sushi cerca de mí. Tu Restaurante aparece primero, con reseñas al día, horario exacto, fotos nuevas y enlace a su web, por delante de dos competidores inventados.">
-                  <div class="seo-ph-status"><span>7:42</span><span class="seo-ph-batt"></span></div>
-                  <div class="seo-ph-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>sushi cerca de mí<span class="seo-ph-av"></span></div>
-                  <div class="seo-ph-map">
-                    <span class="seo-pin --you" style="left: 36%; top: 74%;"><b>1</b></span>
-                    <span class="seo-pin" style="left: 64%; top: 46%;"><b>2</b></span>
-                    <span class="seo-pin" style="left: 84%; top: 86%;"><b>3</b></span>
-                  </div>
-                  <ol class="seo-ph-list">
-                    <li class="seo-ph-item --you">
-                      <span class="seo-ph-name">Tu Restaurante</span>
-                      <div class="seo-ph-row"><span>4,8</span><span class="seo-ph-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></span><span>(320)</span><span class="seo-call">Reseñas al día</span></div>
-                      <div class="seo-ph-row"><span>Sushi &middot; $$ &middot; 0,3 mi</span></div>
-                      <div class="seo-ph-row"><span class="seo-ph-open">Abierto</span><span>&middot; Cierra 11 p.m.</span><span class="seo-call">Horario exacto</span></div>
-                      <div class="seo-ph-row seo-ph-photos"><span class="seo-ph-photo --a"></span><span class="seo-ph-photo --b"></span><span class="seo-ph-photo --c"></span><span class="seo-call">Fotos nuevas</span></div>
-                      <div class="seo-ph-row seo-ph-acts"><span class="seo-ph-act --web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>Sitio web</span><span class="seo-ph-act"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>Llamar</span><span class="seo-call">Enlace web</span></div>
-                    </li>
-                    <li class="seo-ph-item --other">
-                      <div>
-                        <span class="seo-ph-name">Sushi de la Esquina</span>
-                        <div class="seo-ph-row"><span>4,1</span><span class="seo-ph-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg class="--off" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></span><span>(86)</span></div>
-                        <div class="seo-ph-row"><span class="seo-ph-warn">Cierra pronto</span></div>
-                      </div>
-                      <span class="seo-ph-photo --dim"></span>
-                    </li>
-                    <li class="seo-ph-item --other">
-                      <div>
-                        <span class="seo-ph-name">Otro Sitio de Sushi</span>
-                        <div class="seo-ph-row"><span>3,9</span><span class="seo-ph-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg class="--off" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></span><span>(41)</span></div>
-                        <div class="seo-ph-row"><span class="seo-ph-bad">Sin horario publicado</span></div>
-                      </div>
-                      <span class="seo-ph-photo --none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="m3 16 5-5 4 4M3 3l18 18"/></svg></span>
-                    </li>
-                  </ol>
-                </div>
-              </div>
-            </div>
-            <figcaption class="seo-demo-cap">Lo que podría ver un cliente al buscar &ldquo;sushi cerca de mí&rdquo;. Los nombres de los restaurantes son inventados.</figcaption>
-          </figure>
+        </details>
+        <details class="s-fix" name="seo-fix">
+          <summary><h3>Velocidad y estructura de la web</h3><span class="s-fix-prob">Una web lenta y un menú en PDF que los teléfonos y los buscadores leen mal.</span><span class="s-chev" aria-hidden="true"></span></summary>
+          <div class="s-fix-body">
+            <p class="s-fix-lbl">Lo que hacemos</p>
+            <ul class="s-checks">
+              <li>Aceleramos tu web en el teléfono y aligeramos las imágenes pesadas.</li>
+              <li>Convertimos tu menú en una página web real.</li>
+              <li>Agregamos schema markup, el código que le dice a Google &ldquo;esto es un restaurante y este es su horario&rdquo;.</li>
+            </ul>
+            <a class="s-link" href="/es/diseno-web-restaurantes">Ver diseño web para restaurantes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </details>
+        <details class="s-fix" name="seo-fix">
+          <summary><h3>Directorios consistentes</h3><span class="s-fix-prob">Yelp, Apple Maps y las apps de delivery muestran otro nombre, teléfono u horario.</span><span class="s-chev" aria-hidden="true"></span></summary>
+          <div class="s-fix-body">
+            <p class="s-fix-lbl">Lo que hacemos</p>
+            <ul class="s-checks">
+              <li>Igualamos tu nombre, dirección, teléfono y horario en todas partes.</li>
+              <li>Cubrimos Apple Maps, Bing, Yelp, TripAdvisor, OpenTable, Resy y las apps de delivery.</li>
+              <li>Eliminamos perfiles duplicados y de locales cerrados.</li>
+            </ul>
+          </div>
+        </details>
+        <details class="s-fix" name="seo-fix">
+          <summary><h3>Reseñas</h3><span class="s-fix-prob">Las reseñas llegan a cuentagotas y las malas se quedan sin respuesta.</span><span class="s-chev" aria-hidden="true"></span></summary>
+          <div class="s-fix-body">
+            <p class="s-fix-lbl">Lo que hacemos</p>
+            <ul class="s-checks">
+              <li>Facilitamos que los clientes contentos dejen su reseña. Google dice que la cantidad y la calificación de las reseñas influyen en el posicionamiento local.</li>
+              <li>Respondemos cada reseña, en inglés o en español.</li>
+              <li>Nunca compramos reseñas ni se las pedimos solo a los clientes contentos. Las políticas de Google prohíben ambas cosas.</li>
+            </ul>
+          </div>
+        </details>
+        <details class="s-fix" name="seo-fix">
+          <summary><h3>Preparación para respuestas de IA</h3><span class="s-fix-prob">ChatGPT y los AI Overviews de Google repiten datos viejos sobre ti, o no te mencionan.</span><span class="s-chev" aria-hidden="true"></span></summary>
+          <div class="s-fix-body">
+            <p class="s-fix-lbl">Lo que hacemos</p>
+            <ul class="s-checks">
+              <li>Mantenemos los mismos datos en todos los lugares que lee la IA.</li>
+              <li>Respondemos en tu web las preguntas comunes: parqueo, código de vestimenta, niños, salones privados.</li>
+              <li>Agregamos datos estructurados y ganamos menciones en sitios locales confiables.</li>
+            </ul>
+            <p class="s-fix-note">Nadie puede prometer que la IA te recomiende. Lo que hacemos es que sea fácil recomendarte con datos correctos.</p>
+          </div>
+        </details>
         </div>
       </div>
     </section>
 
-    <!-- TRES LUGARES DONDE TE ENCUENTRAN -->
-    <section class="card-overlay --dark lib-section" id="donde-te-encuentran">
-      <div class="seo-wrap">
-        <h2 class="seo-h2">Tres lugares donde los clientes encuentran un restaurante, y qué gana en cada uno.</h2>
-        <ol class="seo-where">
-          <li class="seo-where-item">
-            <div class="seo-where-art --maps" aria-hidden="true">
-              <span class="seo-pin --you" style="left: 30%; top: 70%;"><b>1</b></span>
-              <span class="seo-pin" style="left: 70%; top: 34%;"><b>2</b></span>
-              <span class="seo-pin" style="left: 80%; top: 80%;"><b>3</b></span>
-            </div>
-            <div class="seo-where-copy">
-              <h3>Google Maps<small>El &ldquo;map pack&rdquo; en búsquedas como &ldquo;sushi cerca de mí&rdquo;</small></h3>
-              <p><b>Qué gana:</b> un Perfil de Empresa en Google completo y activo, con fotos recientes, reseñas constantes y el horario correcto.</p>
-            </div>
-          </li>
-          <li class="seo-where-item">
-            <div class="seo-where-art --search" aria-hidden="true">
-              <span class="seo-art-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><i></i></span>
-              <span class="seo-art-lines"><i class="--link"></i><i></i><i class="--short"></i></span>
-            </div>
-            <div class="seo-where-copy">
-              <h3>Resultados de búsqueda de Google<small>Los enlaces debajo del mapa, en búsquedas como &ldquo;ramen Downtown Miami&rdquo;</small></h3>
-              <p><b>Qué gana:</b> una web rápida que dice claramente qué sirves y dónde, con una página de menú real.</p>
-            </div>
-          </li>
-          <li class="seo-where-item">
-            <div class="seo-where-art --ai" aria-hidden="true">
-              <span class="seo-art-ask"><i></i><i class="--short"></i></span>
-              <span class="seo-art-reply"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.6L21 11l-6.8 2.4L12 20l-2.2-6.6L3 11l6.8-2.4z"/></svg><i></i><i class="--short"></i></span>
-            </div>
-            <div class="seo-where-copy">
-              <h3>Respuestas de IA<small>ChatGPT y los AI Overviews de Google, cuando alguien pregunta &ldquo;¿dónde como esta noche?&rdquo;</small></h3>
-              <p><b>Qué gana:</b> los mismos datos en todas partes, y respuestas claras en tu web que la IA pueda repetir.</p>
-            </div>
-          </li>
-        </ol>
-        <p class="seo-where-note"><i data-lucide="languages"></i><span>En Miami, las tres cosas pasan en inglés y en español. Lograr que la IA te describa bien se llama optimización para motores de respuesta (AEO).</span></p>
+    <!-- HOW IT WORKS -->
+    <section class="h-sec" id="como-funciona">
+      <div class="h-head"><h2>Cómo funciona: cuatro pasos, de la auditoría al reporte mensual.</h2></div>
+      <ol class="h-steps">
+        <li class="h-step"><b aria-hidden="true">01</b><span class="s-when">Primeras semanas</span><h3>Auditoría</h3><p>Revisamos tu perfil, tu web, tus directorios y tus reseñas al lado de los restaurantes que se llevan tus mesas, y te damos la lista de qué arreglar primero.</p></li>
+        <li class="h-step"><b aria-hidden="true">02</b><span class="s-when">Primer mes</span><h3>Arreglar la base</h3><p>Limpieza del perfil, arreglos técnicos y de directorios, y medición de llamadas, solicitudes de cómo llegar y clics de reserva.</p></li>
+        <li class="h-step"><b aria-hidden="true">03</b><span class="s-when">Meses dos y tres</span><h3>Construir</h3><p>Páginas para las búsquedas que puedes ganar, una rutina de reseñas, y fotos y publicaciones nuevas cada semana.</p></li>
+        <li class="h-step"><b aria-hidden="true">04</b><span class="s-when">Cada mes después</span><h3>Reportar y ajustar</h3><p>Un reporte con números claros (llamadas, cómo llegar, clics, reservas, posiciones) y lo que vamos a cambiar.</p></li>
+      </ol>
+      <div class="s-timing">
+        <p><b>¿Cuándo vas a ver resultados?</b> Los arreglos del perfil y de los directorios suelen moverse primero, muchas veces en 60 a 90 días. El posicionamiento de la web se construye en tres a seis meses y sigue creciendo.</p>
+        <aside class="review-note">Review: confirm you're comfortable promising the 60 to 90 day and 3 to 6 month timeline (carried over from the old English draft), and the &ldquo;primeras semanas / primer mes / meses dos y tres&rdquo; phase labels above.</aside>
       </div>
     </section>
 
-    <!-- LO QUE ARREGLAMOS -->
-    <section class="card-overlay lib-section" id="lo-que-arreglamos">
-      <div class="seo-wrap">
-        <div class="seo-fix-grid">
-          <div class="seo-fix-aside">
-            <h2 class="seo-h2">Lo que arreglamos: seis cosas que deciden si los clientes te encuentran.</h2>
-            <p class="seo-lede">Cada una es una razón común por la que Google o la IA pasan por alto un restaurante. Abre cada una para ver el problema típico y lo que hacemos.</p>
-            <a class="seo-more" href="/es/analizador-redes-sociales-web">Usar el analizador gratis <i data-lucide="arrow-right"></i></a>
-          </div>
-          <div class="seo-fix-list">
-            <details class="seo-fix" name="seo-fix" open>
-              <summary>
-                <span class="seo-fix-ic" aria-hidden="true"><i data-lucide="map-pinned"></i></span>
-                <h3>Perfil de Empresa en Google</h3>
-                <span class="seo-fix-prob">Se configuró una vez y se olvidó: categoría equivocada, horario viejo, fotos de la apertura.</span>
-                <span class="seo-fix-tg" aria-hidden="true"><i data-lucide="plus"></i></span>
-              </summary>
-              <div class="seo-fix-body">
-                <p class="seo-fix-lbl">Lo que hacemos</p>
-                <ul>
-                  <li><i data-lucide="check"></i>Arreglamos tus categorías, tu horario y los enlaces al menú y a reservas.</li>
-                  <li><i data-lucide="check"></i>Subimos fotos y videos cortos recientes, y publicamos especiales y eventos cada semana.</li>
-                  <li><i data-lucide="check"></i>Activamos los detalles que los clientes usan para filtrar, como terraza y happy hour.</li>
-                </ul>
-                <a class="seo-more" href="/es/marketing-redes-sociales">Ver nuestro contenido para redes <i data-lucide="arrow-right"></i></a>
-              </div>
-            </details>
-            <details class="seo-fix" name="seo-fix">
-              <summary>
-                <span class="seo-fix-ic" aria-hidden="true"><i data-lucide="search"></i></span>
-                <h3>Palabras clave locales y páginas</h3>
-                <span class="seo-fix-prob">Tu web nunca dice qué sirves ni dónde, así que Google no te puede conectar con las búsquedas.</span>
-                <span class="seo-fix-tg" aria-hidden="true"><i data-lucide="plus"></i></span>
-              </summary>
-              <div class="seo-fix-body">
-                <p class="seo-fix-lbl">Lo que hacemos</p>
-                <ul>
-                  <li><i data-lucide="check"></i>Encontramos las búsquedas que puedes ganar en inglés y en español, como &ldquo;ramen Downtown Miami&rdquo;.</li>
-                  <li><i data-lucide="check"></i>Las ponemos en los títulos, los encabezados y el menú de tu web.</li>
-                  <li><i data-lucide="check"></i>Agregamos páginas para brunch, happy hour, eventos privados y catering.</li>
-                </ul>
-              </div>
-            </details>
-            <details class="seo-fix" name="seo-fix">
-              <summary>
-                <span class="seo-fix-ic" aria-hidden="true"><i data-lucide="gauge"></i></span>
-                <h3>Velocidad y estructura de la web</h3>
-                <span class="seo-fix-prob">Una web lenta y un menú en PDF que los teléfonos y los buscadores leen mal.</span>
-                <span class="seo-fix-tg" aria-hidden="true"><i data-lucide="plus"></i></span>
-              </summary>
-              <div class="seo-fix-body">
-                <p class="seo-fix-lbl">Lo que hacemos</p>
-                <ul>
-                  <li><i data-lucide="check"></i>Aceleramos tu web en el teléfono y aligeramos las imágenes pesadas.</li>
-                  <li><i data-lucide="check"></i>Convertimos tu menú en una página web real.</li>
-                  <li><i data-lucide="check"></i>Agregamos schema markup, el código que le dice a Google &ldquo;esto es un restaurante y este es su horario&rdquo;.</li>
-                </ul>
-                <a class="seo-more" href="/es/diseno-web-restaurantes">Ver diseño web para restaurantes <i data-lucide="arrow-right"></i></a>
-              </div>
-            </details>
-            <details class="seo-fix" name="seo-fix">
-              <summary>
-                <span class="seo-fix-ic" aria-hidden="true"><i data-lucide="list-checks"></i></span>
-                <h3>Directorios consistentes</h3>
-                <span class="seo-fix-prob">Yelp, Apple Maps y las apps de delivery muestran otro nombre, teléfono u horario.</span>
-                <span class="seo-fix-tg" aria-hidden="true"><i data-lucide="plus"></i></span>
-              </summary>
-              <div class="seo-fix-body">
-                <p class="seo-fix-lbl">Lo que hacemos</p>
-                <ul>
-                  <li><i data-lucide="check"></i>Igualamos tu nombre, dirección, teléfono y horario en todas partes.</li>
-                  <li><i data-lucide="check"></i>Cubrimos Apple Maps, Bing, Yelp, TripAdvisor, OpenTable, Resy y las apps de delivery.</li>
-                  <li><i data-lucide="check"></i>Eliminamos perfiles duplicados y de locales cerrados.</li>
-                </ul>
-              </div>
-            </details>
-            <details class="seo-fix" name="seo-fix">
-              <summary>
-                <span class="seo-fix-ic" aria-hidden="true"><i data-lucide="star"></i></span>
-                <h3>Reseñas</h3>
-                <span class="seo-fix-prob">Las reseñas llegan a cuentagotas y las malas se quedan sin respuesta.</span>
-                <span class="seo-fix-tg" aria-hidden="true"><i data-lucide="plus"></i></span>
-              </summary>
-              <div class="seo-fix-body">
-                <p class="seo-fix-lbl">Lo que hacemos</p>
-                <ul>
-                  <li><i data-lucide="check"></i>Facilitamos que los clientes contentos dejen su reseña. Google dice que la cantidad y la calificación de las reseñas influyen en el posicionamiento local.</li>
-                  <li><i data-lucide="check"></i>Respondemos cada reseña, en inglés o en español.</li>
-                  <li><i data-lucide="check"></i>Nunca compramos reseñas ni se las pedimos solo a los clientes contentos. Las políticas de Google prohíben ambas cosas.</li>
-                </ul>
-              </div>
-            </details>
-            <details class="seo-fix" name="seo-fix">
-              <summary>
-                <span class="seo-fix-ic" aria-hidden="true"><i data-lucide="sparkles"></i></span>
-                <h3>Preparación para respuestas de IA</h3>
-                <span class="seo-fix-prob">ChatGPT y los AI Overviews de Google repiten datos viejos sobre ti, o no te mencionan.</span>
-                <span class="seo-fix-tg" aria-hidden="true"><i data-lucide="plus"></i></span>
-              </summary>
-              <div class="seo-fix-body">
-                <p class="seo-fix-lbl">Lo que hacemos</p>
-                <ul>
-                  <li><i data-lucide="check"></i>Mantenemos los mismos datos en todos los lugares que lee la IA.</li>
-                  <li><i data-lucide="check"></i>Respondemos en tu web las preguntas comunes: parqueo, código de vestimenta, niños, salones privados.</li>
-                  <li><i data-lucide="check"></i>Agregamos datos estructurados y ganamos menciones en sitios locales confiables.</li>
-                </ul>
-                <p class="seo-fix-note">Nadie puede prometer que la IA te recomiende. Lo que hacemos es que sea fácil recomendarte con datos correctos.</p>
-              </div>
-            </details>
-          </div>
+    <!-- PROOF -->
+    <section class="h-sec" id="pruebas">
+      <div class="s-proof">
+        <div class="s-proof-side h-head">
+          <h2>Prueba: una web que Google encuentra en inglés y en español.</h2>
+          <p>Reconstruimos la web de WOA Cocktails, un bar móvil de lujo en Miami y Nueva York, con cada página en los dos idiomas. Google muestra cada idioma como su propio resultado, con enlaces de sitio incluidos.</p>
         </div>
-      </div>
-    </section>
-
-    <!-- CÓMO FUNCIONA -->
-    <section class="card-overlay --dark lib-section" id="como-funciona">
-      <div class="seo-wrap">
-        <h2 class="seo-h2">Cómo funciona: cuatro pasos, de la auditoría al reporte mensual.</h2>
-        <ol class="seo-steps">
-          <li class="seo-step">
-            <span class="seo-step-n" aria-hidden="true">1</span>
-            <span class="seo-step-when">Primeras semanas</span>
-            <h3>Auditoría</h3>
-            <p>Revisamos tu perfil, tu web, tus directorios y tus reseñas al lado de los restaurantes que se llevan tus mesas, y te damos la lista de qué arreglar primero.</p>
-          </li>
-          <li class="seo-step">
-            <span class="seo-step-n" aria-hidden="true">2</span>
-            <span class="seo-step-when">Primer mes</span>
-            <h3>Arreglar la base</h3>
-            <p>Limpieza del perfil, arreglos técnicos y de directorios, y medición de llamadas, solicitudes de cómo llegar y clics de reserva.</p>
-          </li>
-          <li class="seo-step">
-            <span class="seo-step-n" aria-hidden="true">3</span>
-            <span class="seo-step-when">Meses dos y tres</span>
-            <h3>Construir</h3>
-            <p>Páginas para las búsquedas que puedes ganar, una rutina de reseñas, y fotos y publicaciones nuevas cada semana.</p>
-          </li>
-          <li class="seo-step">
-            <span class="seo-step-n" aria-hidden="true">4</span>
-            <span class="seo-step-when">Cada mes después</span>
-            <h3>Reportar y ajustar</h3>
-            <p>Un reporte con números claros (llamadas, cómo llegar, clics, reservas, posiciones) y lo que vamos a cambiar.</p>
-          </li>
-        </ol>
-        <div class="seo-timing">
-          <i data-lucide="clock"></i>
-          <div>
-            <p><b>¿Cuándo vas a ver resultados?</b> Los arreglos del perfil y de los directorios suelen moverse primero, muchas veces en 60 a 90 días. El posicionamiento de la web se construye en tres a seis meses y sigue creciendo.</p>
-            <aside class="review-note">Review: confirm you're comfortable promising the 60 to 90 day and 3 to 6 month timeline (carried over from the old English draft), and the &ldquo;primeras semanas / primer mes / meses dos y tres&rdquo; phase labels above.</aside>
+        <div class="s-serp" data-seo-serp>
+          <div class="s-seg" role="tablist" aria-label="WOA Cocktails en Google">
+            <button type="button" role="tab" id="seo-tab-en" aria-controls="seo-pan-en" aria-selected="true">En inglés</button>
+            <button type="button" role="tab" id="seo-tab-es" aria-controls="seo-pan-es" aria-selected="false" tabindex="-1">En español</button>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PRUEBAS -->
-    <section class="card-overlay lib-section" id="pruebas">
-      <div class="seo-wrap">
-        <div class="seo-proof">
-          <div class="seo-proof-side">
-            <h2 class="seo-h2">Prueba: una web que Google encuentra en inglés y en español.</h2>
-            <p class="seo-lede">Reconstruimos la web de WOA Cocktails, un bar móvil de lujo en Miami y Nueva York, con cada página en los dos idiomas. Google muestra cada idioma como su propio resultado, con enlaces de sitio incluidos.</p>
-          </div>
-          <div class="seo-serp" data-seo-serp>
-            <div class="seo-serp-tabs" role="tablist" aria-label="WOA Cocktails en Google">
-              <button type="button" role="tab" id="seo-tab-en" aria-controls="seo-pan-en" aria-selected="true">En inglés</button>
-              <button type="button" role="tab" id="seo-tab-es" aria-controls="seo-pan-es" aria-selected="false" tabindex="-1">En español</button>
-            </div>
-            <div class="seo-serp-pan" id="seo-pan-en" role="tabpanel" aria-labelledby="seo-tab-en">
-              <figure>
-                <img src="/media/woa-serp-en-fit.png" alt="Resultado de WOA Cocktails en Google en inglés, con enlaces de sitio a Mobile Bar Experience, Events, Services y About" width="1500" height="885" loading="lazy" decoding="async" />
-                <figcaption>Resultado en inglés, con enlaces a Mobile Bar Experience, Events, Services y About.</figcaption>
-              </figure>
-            </div>
-            <div class="seo-serp-pan" id="seo-pan-es" role="tabpanel" aria-labelledby="seo-tab-es">
-              <figure>
-                <img src="/media/woa-serp-es-fit.png" alt="Resultado de WOA Cocktails en Google en español, con enlaces de sitio a Experiencia de bar móvil, Eventos, Servicios y Acerca de" width="1500" height="885" loading="lazy" decoding="async" />
-                <figcaption>Resultado en español, con sus propios enlaces en español.</figcaption>
-              </figure>
-            </div>
-          </div>
-          <div class="seo-proof-more">
-            <figure class="seo-quote">
-              <div class="seo-stars" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div>
-              <blockquote>&ldquo;Trabajar con Button Up Media ha sido una de las mejores inversiones que he hecho para mi negocio. Reconstruyeron por completo nuestra web para WOA Cocktails, y el resultado final superó mis expectativas.&rdquo;</blockquote>
-              <figcaption><b>Fabio Perez</b>Cofundador de WOA Cocktails, reseña en Google (traducida del inglés)</figcaption>
+          <div class="s-serp-pan" id="seo-pan-en" role="tabpanel" aria-labelledby="seo-tab-en">
+            <figure>
+              <img src="/media/woa-serp-en-fit.png" alt="Resultado de WOA Cocktails en Google en inglés, con enlaces de sitio a Mobile Bar Experience, Events, Services y About" width="1500" height="885" loading="lazy" decoding="async" />
+              <figcaption>Resultado en inglés, con enlaces a Mobile Bar Experience, Events, Services y About.</figcaption>
             </figure>
-            <aside class="review-note">Review: add one SEO-specific client result here if you have one you can share (for example map pack position, or Google profile calls and direction requests before and after). The page currently has no SEO numbers. Also confirm you're OK showing this Google review translated into Spanish (marked as translated).</aside>
-            <a class="seo-more" href="/es/casos-de-exito">Ver nuestros casos de éxito <i data-lucide="arrow-right"></i></a>
           </div>
+          <div class="s-serp-pan" id="seo-pan-es" role="tabpanel" aria-labelledby="seo-tab-es">
+            <figure>
+              <img src="/media/woa-serp-es-fit.png" alt="Resultado de WOA Cocktails en Google en español, con enlaces de sitio a Experiencia de bar móvil, Eventos, Servicios y Acerca de" width="1500" height="885" loading="lazy" decoding="async" />
+              <figcaption>Resultado en español, con sus propios enlaces en español.</figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="s-proof-more">
+          <figure class="s-quote">
+            <div class="s-stars-row" role="img" aria-label="5 de 5 estrellas"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div>
+            <blockquote>&ldquo;Trabajar con Button Up Media ha sido una de las mejores inversiones que he hecho para mi negocio. Reconstruyeron por completo nuestra web para WOA Cocktails, y el resultado final superó mis expectativas.&rdquo;</blockquote>
+            <figcaption><b>Fabio Perez</b>Cofundador de WOA Cocktails, reseña en Google (traducida del inglés)</figcaption>
+          </figure>
+          <aside class="review-note">Review: add one SEO-specific client result here if you have one you can share (for example map pack position, or Google profile calls and direction requests before and after). The page currently has no SEO numbers. Also confirm you're OK showing this Google review translated into Spanish (marked as translated).</aside>
+          <a class="btn" href="/es/casos-de-exito">Ver nuestros casos de éxito <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </div>
     </section>
 
-    <!-- ES PARA TI -->
-    <section class="card-overlay --dark lib-section" id="es-para-ti">
-      <div class="seo-wrap">
-        <h2 class="seo-h2">¿El SEO para restaurantes es para ti?</h2>
-        <div class="seo-fit">
-          <div class="seo-fit-col --yes">
-            <h3><i data-lucide="circle-check"></i>Es para ti si</h3>
-            <ul>
-              <li>Buscas tu tipo de cocina y tu vecindario y aparece primero la competencia.</li>
-              <li>Tu perfil de Google casi no ha cambiado desde que abriste.</li>
-              <li>Quieres reservas que no se acaben cuando paras los anuncios.</li>
-              <li>Tienes un restaurante, bar, café o un grupo con varios locales.</li>
-            </ul>
-          </div>
-          <div class="seo-fit-col --no">
-            <h3><i data-lucide="circle-x"></i>No es para ti si</h3>
-            <ul>
-              <li>Necesitas el local lleno este fin de semana. El SEO crece en meses; los anuncios son más rápidos.</li>
-              <li>Quieres configurarlo una vez y olvidarte.</li>
-              <li>No estás en hospitalidad. Solo trabajamos con restaurantes, bares y cafés.</li>
-            </ul>
-            <a class="seo-more" href="/es/publicidad-restaurantes">Ver publicidad para restaurantes <i data-lucide="arrow-right"></i></a>
-          </div>
+    <!-- IS THIS FOR YOU -->
+    <section class="h-sec" id="es-para-ti">
+      <div class="h-head"><h2>¿El SEO para restaurantes es para ti?</h2></div>
+      <div class="s-fit">
+        <div class="s-fit-col --yes">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg>Es para ti si</h3>
+          <ul>
+            <li>Buscas tu tipo de cocina y tu vecindario y aparece primero la competencia.</li>
+            <li>Tu perfil de Google casi no ha cambiado desde que abriste.</li>
+            <li>Quieres reservas que no se acaben cuando paras los anuncios.</li>
+            <li>Tienes un restaurante, bar, café o un grupo con varios locales.</li>
+          </ul>
+        </div>
+        <div class="s-fit-col --no">
+          <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></svg>No es para ti si</h3>
+          <ul>
+            <li>Necesitas el local lleno este fin de semana. El SEO crece en meses; los anuncios son más rápidos.</li>
+            <li>Quieres configurarlo una vez y olvidarte.</li>
+            <li>No estás en hospitalidad. Solo trabajamos con restaurantes, bares y cafés.</li>
+          </ul>
+          <a class="s-link" href="/es/publicidad-restaurantes">Ver publicidad para restaurantes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section class="card-overlay lib-section" id="preguntas-frecuentes">
-      <div class="seo-wrap">
-        <h2 class="seo-h2">Preguntas sobre SEO para restaurantes, respondidas.</h2>
-        <div class="seo-faq">
-          <details>
-            <summary><h3>¿Qué es el SEO para restaurantes?</h3><span class="seo-faq-ic" aria-hidden="true"><i data-lucide="plus"></i></span></summary>
-            <div class="seo-faq-a"><p>Es el trabajo que hace que tu restaurante aparezca cuando la gente cerca busca dónde comer en Google, Google Maps y herramientas de IA como ChatGPT. Incluye tu Perfil de Empresa en Google, tu web, tus directorios y tus reseñas.</p></div>
-          </details>
-          <details>
-            <summary><h3>¿Por qué importa tanto mi Perfil de Empresa en Google?</h3><span class="seo-faq-ic" aria-hidden="true"><i data-lucide="plus"></i></span></summary>
-            <div class="seo-faq-a"><p>Es la ficha que aparece en Google Maps y en el map pack, los tres restaurantes que Google muestra primero en búsquedas como “restaurantes cerca de mí”. Ahí los clientes revisan tu horario, tus fotos, tus estrellas y tu menú antes de abrir tu web.</p></div>
-          </details>
-          <details>
-            <summary><h3>¿Cuánto tarda en funcionar el SEO para restaurantes?</h3><span class="seo-faq-ic" aria-hidden="true"><i data-lucide="plus"></i></span></summary>
-            <div class="seo-faq-a"><p>Los arreglos del Perfil de Empresa en Google y de los directorios suelen moverse primero. El posicionamiento de la web crece mes a mes, así que piensa en trimestres, no en semanas.</p></div>
-          </details>
-          <details>
-            <summary><h3>¿Cuánto cuesta el SEO para restaurantes?</h3><span class="seo-faq-ic" aria-hidden="true"><i data-lucide="plus"></i></span></summary>
-            <div class="seo-faq-a"><p>Definimos el precio en la llamada estratégica, según tu mercado, cuántos locales tienes y lo que ya tienes funcionando. La mayoría de los restaurantes invierte de $1,500 a $5,000 al mes en un programa de marketing coordinado, sin contratos a largo plazo.</p></div>
-          </details>
-          <details>
-            <summary><h3>¿Hacen SEO en español?</h3><span class="seo-faq-ic" aria-hidden="true"><i data-lucide="plus"></i></span></summary>
-            <div class="seo-faq-a"><p>Sí. Nuestro equipo es bilingüe, así que investigamos búsquedas en español, escribimos páginas en español y respondemos en español las reseñas en español. En Miami esas búsquedas se pierden fácil cuando tu web solo habla inglés.</p></div>
-          </details>
-          <details>
-            <summary><h3>¿Pueden lograr que ChatGPT o la IA de Google recomienden mi restaurante?</h3><span class="seo-faq-ic" aria-hidden="true"><i data-lucide="plus"></i></span></summary>
-            <div class="seo-faq-a"><p>Nadie lo puede garantizar, así que desconfía de quien lo haga. Hacemos que tus datos coincidan en todos los lugares donde mira la IA, respondemos en tu web las preguntas comunes de los clientes y agregamos datos estructurados, para que sea más fácil recomendarte y describirte bien.</p></div>
-          </details>
-          <details>
-            <summary><h3>¿Necesito una web nueva para hacer SEO?</h3><span class="seo-faq-ic" aria-hidden="true"><i data-lucide="plus"></i></span></summary>
-            <div class="seo-faq-a"><p>No siempre. Empezamos con la web que tienes, y si tu plataforma bloquea lo básico (editar los títulos de página, una página de menú real, buena velocidad en el teléfono), te lo decimos claro.</p></div>
-          </details>
-          <details>
-            <summary><h3>¿Trabajan con grupos de restaurantes y varios locales?</h3><span class="seo-faq-ic" aria-hidden="true"><i data-lucide="plus"></i></span></summary>
-            <div class="seo-faq-a"><p>Sí. Cada local recibe su propio trabajo en el Perfil de Empresa en Google, su propia página en tu web, su propia limpieza de directorios y su propia línea en el reporte mensual.</p></div>
-          </details>
-          <details>
-            <summary><h3>¿Me quedo con todo si dejo de trabajar con ustedes?</h3><span class="seo-faq-ic" aria-hidden="true"><i data-lucide="plus"></i></span></summary>
-            <div class="seo-faq-a"><p>Sí. Tu Perfil de Empresa en Google, los cambios en tu web, tus directorios y tus reportes son tuyos.</p></div>
-          </details>
-        </div>
+    <section class="h-sec" id="preguntas-frecuentes">
+      <div class="h-head --center"><h2>Preguntas sobre SEO para restaurantes, respondidas.</h2></div>
+      <div class="s-faq">
+        <details>
+          <summary><h3>¿Qué es el SEO para restaurantes?</h3></summary>
+          <div class="s-faq-a"><p>Es el trabajo que hace que tu restaurante aparezca cuando la gente cerca busca dónde comer en Google, Google Maps y herramientas de IA como ChatGPT. Incluye tu Perfil de Empresa en Google, tu web, tus directorios y tus reseñas.</p></div>
+        </details>
+        <details>
+          <summary><h3>¿Por qué importa tanto mi Perfil de Empresa en Google?</h3></summary>
+          <div class="s-faq-a"><p>Es la ficha que aparece en Google Maps y en el map pack, los tres restaurantes que Google muestra primero en búsquedas como “restaurantes cerca de mí”. Ahí los clientes revisan tu horario, tus fotos, tus estrellas y tu menú antes de abrir tu web.</p></div>
+        </details>
+        <details>
+          <summary><h3>¿Cuánto tarda en funcionar el SEO para restaurantes?</h3></summary>
+          <div class="s-faq-a"><p>Los arreglos del Perfil de Empresa en Google y de los directorios suelen moverse primero. El posicionamiento de la web crece mes a mes, así que piensa en trimestres, no en semanas.</p></div>
+        </details>
+        <details>
+          <summary><h3>¿Cuánto cuesta el SEO para restaurantes?</h3></summary>
+          <div class="s-faq-a"><p>Definimos el precio en la llamada estratégica, según tu mercado, cuántos locales tienes y lo que ya tienes funcionando. La mayoría de los restaurantes invierte de $1,500 a $5,000 al mes en un programa de marketing coordinado, sin contratos a largo plazo.</p></div>
+        </details>
+        <details>
+          <summary><h3>¿Hacen SEO en español?</h3></summary>
+          <div class="s-faq-a"><p>Sí. Nuestro equipo es bilingüe, así que investigamos búsquedas en español, escribimos páginas en español y respondemos en español las reseñas en español. En Miami esas búsquedas se pierden fácil cuando tu web solo habla inglés.</p></div>
+        </details>
+        <details>
+          <summary><h3>¿Pueden lograr que ChatGPT o la IA de Google recomienden mi restaurante?</h3></summary>
+          <div class="s-faq-a"><p>Nadie lo puede garantizar, así que desconfía de quien lo haga. Hacemos que tus datos coincidan en todos los lugares donde mira la IA, respondemos en tu web las preguntas comunes de los clientes y agregamos datos estructurados, para que sea más fácil recomendarte y describirte bien.</p></div>
+        </details>
+        <details>
+          <summary><h3>¿Necesito una web nueva para hacer SEO?</h3></summary>
+          <div class="s-faq-a"><p>No siempre. Empezamos con la web que tienes, y si tu plataforma bloquea lo básico (editar los títulos de página, una página de menú real, buena velocidad en el teléfono), te lo decimos claro.</p></div>
+        </details>
+        <details>
+          <summary><h3>¿Trabajan con grupos de restaurantes y varios locales?</h3></summary>
+          <div class="s-faq-a"><p>Sí. Cada local recibe su propio trabajo en el Perfil de Empresa en Google, su propia página en tu web, su propia limpieza de directorios y su propia línea en el reporte mensual.</p></div>
+        </details>
+        <details>
+          <summary><h3>¿Me quedo con todo si dejo de trabajar con ustedes?</h3></summary>
+          <div class="s-faq-a"><p>Sí. Tu Perfil de Empresa en Google, los cambios en tu web, tus directorios y tus reportes son tuyos.</p></div>
+        </details>
       </div>
     </section>
 
     <!-- CTA -->
-    <section class="card-overlay --dark lib-section" id="agendar-llamada">
-      <div class="seo-wrap">
-        <div class="cta-banner">
-          <div class="cta-content">
-            <h2>Veamos lo que ve Google.</h2>
-            <p>En una llamada estratégica gratis revisaremos su perfil de Google y los restaurantes que aparecen por encima de usted, y le diremos qué arreglaríamos primero.</p>
-            <div class="seo-host">
-              <img src="/media/author-juan.webp" alt="Juan Hernandez, fundador de Button Up Media" width="512" height="512" loading="lazy" decoding="async" />
-              <span><b>Hablará con Juan,</b> nuestro fundador. Él atiende personalmente cada llamada estratégica.</span>
-            </div>
-          </div>
-          <div class="cta-actions">
-            <a href="/es/contacto" class="btn btn-primary">Agende una llamada estratégica gratis</a>
-            <a href="tel:+17867409499" class="btn">Llame al (786) 740-9499</a>
-          </div>
+    <section class="h-final" id="agendar-llamada">
+      <div class="h-final-card">
+        <h2>Veamos lo que ve Google.</h2>
+        <p>En una llamada estratégica gratis revisaremos su perfil de Google y los restaurantes que aparecen por encima de usted, y le diremos qué arreglaríamos primero.</p>
+        <div class="s-host">
+          <img src="/media/author-juan.webp" alt="Juan Hernandez, fundador de Button Up Media" width="512" height="512" loading="lazy" decoding="async" />
+          <span><b>Hablará con Juan,</b> nuestro fundador. Él atiende personalmente cada llamada estratégica.</span>
         </div>
-        <p class="seo-cta-alt">¿Todavía no quiere hablar? <a class="seo-more" href="/es/analizador-redes-sociales-web">Use el analizador gratis de redes y web <i data-lucide="arrow-right"></i></a></p>
+        <div class="s-cta">
+          <a href="/es/contacto" class="btn btn-primary">Agende una llamada estratégica gratis</a>
+          <a href="tel:+17867409499" class="btn">Llame al (786) 740-9499</a>
+        </div>
       </div>
+      <p class="s-cta-alt">¿Todavía no quiere hablar? <a class="s-link" href="/es/analizador-redes-sociales-web">Use el analizador gratis de redes y web <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
     </section>
 
     <!-- FOOTER -->
@@ -1053,34 +911,51 @@
   </main>
 
   <script>
-    /* Proof viewer: English / Spanish result tabs. Without JS both screenshots show stacked. */
+    /* Proof viewer (EN / ES result, a segmented control) + section chips. Without JS both screenshots show stacked. */
     (function () {
-      var box = document.querySelector('[data-seo-serp]');
-      if (!box) return;
-      var tabs = [].slice.call(box.querySelectorAll('[role="tab"]'));
-      var pans = tabs.map(function (t) { return document.getElementById(t.getAttribute('aria-controls')); });
-      function select(i, focus) {
-        tabs.forEach(function (t, j) {
-          var on = i === j;
-          t.setAttribute('aria-selected', on ? 'true' : 'false');
-          t.tabIndex = on ? 0 : -1;
-          pans[j].hidden = !on;
+      var d = document;
+      var box = d.querySelector('[data-seo-serp]');
+      if (box) {
+        var tabs = [].slice.call(box.querySelectorAll('[role="tab"]'));
+        var pans = tabs.map(function (t) { return d.getElementById(t.getAttribute('aria-controls')); });
+        var select = function (i, focus) {
+          tabs.forEach(function (t, j) {
+            var on = i === j;
+            t.setAttribute('aria-selected', on ? 'true' : 'false');
+            t.tabIndex = on ? 0 : -1;
+            pans[j].hidden = !on;
+          });
+          if (focus) tabs[i].focus();
+        };
+        tabs.forEach(function (t, i) {
+          t.addEventListener('click', function () { select(i); });
+          t.addEventListener('keydown', function (e) {
+            var n = tabs.length, to = null;
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') to = (i + 1) % n;
+            else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') to = (i - 1 + n) % n;
+            else if (e.key === 'Home') to = 0;
+            else if (e.key === 'End') to = n - 1;
+            if (to !== null) { e.preventDefault(); select(to, true); }
+          });
         });
-        if (focus) tabs[i].focus();
+        box.classList.add('is-tabbed');
+        select(0);
       }
-      tabs.forEach(function (t, i) {
-        t.addEventListener('click', function () { select(i); });
-        t.addEventListener('keydown', function (e) {
-          var n = tabs.length, to = null;
-          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') to = (i + 1) % n;
-          else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') to = (i - 1 + n) % n;
-          else if (e.key === 'Home') to = 0;
-          else if (e.key === 'End') to = n - 1;
-          if (to !== null) { e.preventDefault(); select(to, true); }
-        });
-      });
-      box.classList.add('is-tabbed');
-      select(0);
+      var chips = d.querySelector('.s-chips');
+      if (!chips || !('IntersectionObserver' in window)) return;
+      var strip = chips.firstElementChild;
+      var links = [].slice.call(chips.querySelectorAll('a[href^="#"]'));
+      var bySection = new Map();
+      links.forEach(function (a) { var s = d.getElementById(a.getAttribute('href').slice(1)); if (s) bySection.set(s, a); });
+      var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var setActive = function (a) {
+        links.forEach(function (l) { if (l === a) l.setAttribute('aria-current', 'true'); else l.removeAttribute('aria-current'); });
+        if (a && strip.scrollWidth > strip.clientWidth) strip.scrollTo({ left: a.offsetLeft - (strip.clientWidth - a.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
+      };
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { if (en.isIntersecting) setActive(bySection.get(en.target)); });
+      }, { rootMargin: '-35% 0px -60% 0px' });
+      bySection.forEach(function (a, s) { io.observe(s); });
     })();
   </script>
   <script src="/shared.js?v=site-fixes-1" defer></script>

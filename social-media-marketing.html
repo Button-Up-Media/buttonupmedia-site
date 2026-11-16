@@ -62,8 +62,6 @@
 
   <!-- Resource hints -->
   <link rel="preconnect" href="https://www.googletagmanager.com" />
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-  <link rel="preconnect" href="https://unpkg.com" crossorigin />
 
   <!-- Fonts -->
   <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-variable.woff2" crossorigin />
@@ -71,50 +69,6 @@
 
   <!-- Base styles -->
   <link rel="stylesheet" href="shared.css?v=site-fixes-1" />
-
-  <!-- Animation runtime (Lucide, GSAP, ScrollTrigger, pixel-canvas) loads after
-       the page is interactive so it never blocks the hero paint. The hero
-       entrance and the video-card reveal are CSS-driven and do not depend on it.
-       Mirrors the homepage deferred-runtime pattern. -->
-  <script>
-    (function () {
-      function queueIdle(cb, timeout) {
-        if ("requestIdleCallback" in window) { requestIdleCallback(cb, { timeout: timeout || 1500 }); return; }
-        setTimeout(cb, Math.min(timeout || 1500, 600));
-      }
-      function loadScript(src, key) {
-        window.__bumScriptPromises = window.__bumScriptPromises || {};
-        if (window.__bumScriptPromises[key]) return window.__bumScriptPromises[key];
-        window.__bumScriptPromises[key] = new Promise(function (resolve, reject) {
-          var s = document.createElement("script");
-          s.src = src; s.async = true; s.defer = true;
-          s.addEventListener("load", function () { resolve(s); }, { once: true });
-          s.addEventListener("error", reject, { once: true });
-          document.head.appendChild(s);
-        });
-        return window.__bumScriptPromises[key];
-      }
-      window.__bumLoadSmmRuntime = function () {
-        if (window.__bumSmmRuntimePromise) return window.__bumSmmRuntimePromise;
-        window.__bumSmmRuntimePromise = new Promise(function (resolve) {
-          var start = function () {
-            Promise.all([
-              loadScript("https://unpkg.com/lucide@1.17.0/dist/umd/lucide.min.js", "lucide"),
-              loadScript("https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js", "gsap"),
-              loadScript("https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js", "scrolltrigger"),
-              loadScript("pixel-canvas.js", "pixel-canvas")
-            ]).then(function () {
-              if (window.lucide && typeof window.lucide.createIcons === "function") window.lucide.createIcons();
-              resolve();
-            }).catch(function () { resolve(); });
-          };
-          if (document.readyState === "complete") { queueIdle(start, 1500); }
-          else { window.addEventListener("load", function () { queueIdle(start, 1500); }, { once: true }); }
-        });
-        return window.__bumSmmRuntimePromise;
-      };
-    })();
-  </script>
 
   <!-- JSON-LD Schema -->
   <script type="application/ld+json">
@@ -313,2308 +267,259 @@
   }
   </script>
 
-  <!-- ═══ SOCIAL MEDIA MARKETING — ALL CSS SELF-CONTAINED ═══ -->
   <style>
-    /* ── Global body text 17px ── */
-    .sm-body-text,
-    .sm-split-copy p,
-    #why-social p,
-    #approach p,
-    #who-its-for p {
-      font-size: 17px;
-      line-height: 1.75;
-    }
-
-    /* ── Nav: fixed ── */
-    .lib-nav {
-      position: fixed;
-      top: 16px;
-      left: 0;
-      right: 0;
-      z-index: 999;
-    }
-
-    /* ══════════════════════════════════════
-       1. HERO — Stacked Video Hero
-       ══════════════════════════════════════ */
-    .sm-hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      background: #050608;
-      width: 100vw;
-      margin-left: calc(50% - 50vw);
-      padding: 100px 48px 80px;
-    }
-    .sm-hero::before {
-      content: "";
-      position: absolute;
-      top: -15%; right: -8%;
-      width: 50%; height: 65%;
-      background: radial-gradient(ellipse, rgba(202,138,4,0.08) 0%, transparent 55%);
-      filter: blur(60px);
-      pointer-events: none;
-    }
-    .sm-hero-inner {
-      position: relative;
-      z-index: 1;
-      width: min(1200px, calc(100% - 48px));
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 56px;
-      align-items: center;
-    }
-    .sm-hero-copy .hero-badge {
-      display: inline-block;
-      margin-bottom: 20px;
-    }
-    .sm-hero-copy h1 {
-      font-family: var(--font-hero);
-      font-size: clamp(2.2rem, 4.2vw, 3.4rem);
-      line-height: 1.08;
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      margin-bottom: 20px;
-    }
-    .sm-hero-copy h1 .accent-serif {
-      font-family: var(--font-hero);
-      font-style: normal;
-      font-weight: 800;
-      color: var(--gold);
-    }
-    .sm-hero-copy > p {
-      font-size: 1.02rem;
-      color: var(--text-dim);
-      max-width: 44ch;
-      line-height: 1.7;
-      margin-bottom: 28px;
-    }
-    .sm-hero-cta {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    /* Hero entrance is CSS-driven so it never waits on GSAP. The headline stays
-       fully opaque (LCP-eligible, paints immediately) and only slides up; the
-       surrounding elements fade + slide. Mirrors the prior GSAP entrance feel. */
-    @keyframes smHeroIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes smHeroSlide {
-      from { transform: translateY(30px); }
-      to   { transform: translateY(0); }
-    }
-    .js .sm-hero-copy h1 {
-      animation: smHeroSlide 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
-      animation-delay: 0.42s;
-    }
-    .js .sm-hero-copy .hero-badge,
-    .js .sm-hero-copy > p,
-    .js .sm-hero-cta {
-      opacity: 0;
-      animation: smHeroIn 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
-    }
-    .js .sm-hero-copy .hero-badge { animation-delay: 0.30s; }
-    .js .sm-hero-copy > p         { animation-delay: 0.54s; }
-    .js .sm-hero-cta              { animation-delay: 0.66s; }
-    /* v-stack card entrance is CSS-driven (was GSAP) so the hero cards reveal
-       immediately and never wait on the deferred animation runtime. It animates
-       the individual translate/scale properties (not the transform shorthand),
-       so it composes with each card's nth-child fan transform instead of
-       clobbering it. Mirrors the prior GSAP y:50 / scale:0.9 / fade entrance. */
-    @keyframes smCardIn {
-      from { opacity: 0; translate: 0 50px; scale: 0.9; }
-      to   { opacity: 1; translate: 0 0;    scale: 1; }
-    }
-    .js .v-stack-card {
-      opacity: 0;
-      animation: smCardIn 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
-    }
-    .js .v-stack-card:nth-child(1) { animation-delay: 0.60s; }
-    .js .v-stack-card:nth-child(2) { animation-delay: 0.72s; }
-    .js .v-stack-card:nth-child(3) { animation-delay: 0.84s; }
-    @media (prefers-reduced-motion: reduce) {
-      .js .sm-hero-copy .hero-badge,
-      .js .sm-hero-copy h1,
-      .js .sm-hero-copy > p,
-      .js .sm-hero-cta,
-      .js .v-stack-card {
-        opacity: 1 !important;
-        animation: none !important;
-      }
-      .js .v-stack-card { translate: none !important; scale: none !important; }
-    }
-    .sm-hero-cta .flex-row { gap: 12px; }
-    .sm-hero-trust {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-top: 8px;
-    }
-    .sm-hero-trust span {
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--text-soft);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    /* ── Stacked Portrait Videos ── */
-    .v-stack-wrap {
-      position: relative;
-    }
-    .sm-audio-hint {
-      position: absolute;
-      top: -48px;
-      left: 50%;
-      z-index: 20;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      width: max-content;
-      max-width: calc(100vw - 48px);
-      padding: 9px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(226,168,77,0.35);
-      background: rgba(8,10,14,0.72);
-      color: rgba(255,248,235,0.88);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      box-shadow: 0 18px 45px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.08);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      transform: translateX(-50%);
-      transition: opacity 0.45s ease, transform 0.45s ease, visibility 0.45s ease;
-      pointer-events: none;
-    }
-    .sm-audio-hint.is-hidden {
-      opacity: 0;
-      visibility: hidden;
-      transform: translateX(-50%) translateY(-8px);
-    }
-    .sm-audio-hint i {
-      width: 15px;
-      height: 15px;
-      color: var(--gold);
-      flex: 0 0 auto;
-    }
-    .sm-audio-hint-mobile { display: none; }
-    .v-stack {
-      position: relative;
-      height: 460px;
-      perspective: 1200px;
-    }
-    .v-stack-card {
-      position: absolute;
-      width: 220px;
-      height: 390px;
-      border-radius: 24px;
-      border: 1px solid rgba(255,248,235,0.06);
-      overflow: hidden;
-      background: rgba(15,15,15,1);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,248,235,0.04);
-      cursor: pointer;
-      transition: all 0.55s cubic-bezier(0.22, 1, 0.36, 1);
-      will-change: transform, width, height, z-index;
-    }
-    .v-stack-card video {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 23px;
-      opacity: 0.7;
-      transition: opacity 0.4s ease;
-    }
-    .v-stack-card:hover video { opacity: 1; }
-    .v-stack-card:nth-child(1) {
-      top: 40px; left: 0; z-index: 1;
-      transform: rotate(-6deg) scale(0.92);
-    }
-    .v-stack-card:nth-child(2) {
-      top: 10px; left: 50%; margin-left: -110px;
-      transform: rotate(0deg) scale(1); z-index: 3;
-    }
-    .v-stack-card:nth-child(3) {
-      top: 40px; right: 0; z-index: 1;
-      transform: rotate(6deg) scale(0.92);
-    }
-    .v-stack-card:hover {
-      z-index: 10;
-      border-color: rgba(202,138,4,0.25);
-      box-shadow: 0 30px 70px rgba(0,0,0,0.6), 0 0 30px rgba(202,138,4,0.08);
-    }
-    .v-stack-card:nth-child(1):hover {
-      width: 260px; height: 430px;
-      transform: rotate(0deg) scale(1.04) translateY(-10px);
-    }
-    .v-stack-card:nth-child(3):hover {
-      width: 260px; height: 430px;
-      transform: rotate(0deg) scale(1.04) translateY(-10px);
-    }
-    .v-stack-card:nth-child(2):hover {
-      width: 280px; height: 450px;
-      margin-left: -140px;
-      transform: scale(1.08) translateY(-16px);
-    }
-    .v-stack:has(.v-stack-card:nth-child(1):hover) .v-stack-card:nth-child(2) {
-      transform: rotate(3deg) scale(0.9); opacity: 0.7;
-    }
-    .v-stack:has(.v-stack-card:nth-child(1):hover) .v-stack-card:nth-child(3) {
-      transform: rotate(8deg) scale(0.88); opacity: 0.6;
-    }
-    .v-stack:has(.v-stack-card:nth-child(3):hover) .v-stack-card:nth-child(2) {
-      transform: rotate(-3deg) scale(0.9); opacity: 0.7;
-    }
-    .v-stack:has(.v-stack-card:nth-child(3):hover) .v-stack-card:nth-child(1) {
-      transform: rotate(-8deg) scale(0.88); opacity: 0.6;
-    }
-    .v-stack:has(.v-stack-card:nth-child(2):hover) .v-stack-card:nth-child(1) {
-      transform: rotate(-9deg) scale(0.86) translateX(-20px); opacity: 0.65;
-    }
-    .v-stack:has(.v-stack-card:nth-child(2):hover) .v-stack-card:nth-child(3) {
-      transform: rotate(9deg) scale(0.86) translateX(20px); opacity: 0.65;
-    }
-    .v-stack-label {
-      position: absolute;
-      bottom: 16px; left: 16px; right: 16px;
-      z-index: 2;
-      padding: 10px 14px;
-      background: rgba(8,10,14,0.75);
-      backdrop-filter: blur(12px);
-      border-radius: 14px;
-      border: 1px solid rgba(255,248,235,0.06);
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: var(--text-dim);
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.35s ease, transform 0.35s ease;
-    }
-    .v-stack-label strong {
-      display: block;
-      font-size: 0.82rem;
-      color: var(--text);
-      margin-bottom: 2px;
-    }
-    .v-stack-card:hover .v-stack-label {
-      opacity: 1; transform: translateY(0);
-    }
-    .v-stack-play {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%) scale(0.8);
-      width: 48px; height: 48px;
-      border-radius: 50%;
-      background: rgba(202,138,4,0.2);
-      border: 1px solid rgba(202,138,4,0.3);
-      display: grid;
-      place-items: center;
-      color: var(--gold);
-      opacity: 0.8;
-      transition: all 0.35s ease;
-      pointer-events: none;
-    }
-    .v-stack-card:hover .v-stack-play {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-      background: rgba(202,138,4,0.34);
-      border-color: rgba(202,138,4,0.5);
-    }
-    .v-stack-card.is-active video {
-      opacity: 1;
-    }
-    .v-stack-card.is-active .v-stack-play {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0.5);
-    }
-    .v-stack-card.is-active .v-stack-label {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── Click-to-play button for standalone videos ── */
-    .sm-play-btn {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%) scale(1);
-      width: 62px; height: 62px;
-      border-radius: 50%;
-      background: rgba(202,138,4,0.26);
-      border: 1px solid rgba(202,138,4,0.42);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      display: grid;
-      place-items: center;
-      color: var(--gold);
-      opacity: 0.92;
-      transition: all 0.35s ease;
-      pointer-events: none;
-      z-index: 4;
-    }
-    .sm-play-btn i { width: 26px; height: 26px; margin-left: 2px; }
-    .sm-problem-accent:hover .sm-play-btn,
-    .sm-approach-video:hover .sm-play-btn,
-    .sm-proof-visual:hover .sm-play-btn {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1.08);
-      background: rgba(202,138,4,0.4);
-      border-color: rgba(202,138,4,0.55);
-    }
-    .sm-problem-accent.is-active .sm-play-btn,
-    .sm-approach-video.is-active .sm-play-btn,
-    .sm-proof-visual.is-active .sm-play-btn {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0.5);
-    }
-
-    /* ══════════════════════════════════════
-       2. WHY SOCIAL — Stat callout grid
-       ══════════════════════════════════════ */
-    .sm-stat-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      margin-top: 48px;
-      margin-bottom: 40px;
-    }
-    .sm-stat-card {
-      padding: 28px 20px;
-      background: rgba(10,10,10,0.6);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,248,235,0.06);
-      border-radius: 16px;
-      text-align: center;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .sm-stat-card:hover {
-      border-color: rgba(226,168,77,0.2);
-      transform: translateY(-2px);
-    }
-    .sm-stat-num {
-      font-family: var(--font-display);
-      font-size: 1.8rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.2;
-      margin-bottom: 6px;
-    }
-    .sm-stat-label {
-      font-size: 0.68rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-soft);
-      line-height: 1.3;
-    }
-
-    /* ── Tight section variant (for sections that only hold one focal element) ── */
-    .lib-section.--tight { padding: 72px 0; }
-
-    /* ══════════════════════════════════════
-       INFLUENCER TRAP — deep dive section
-       ══════════════════════════════════════ */
-    #influencer-trap { text-align: center; }
-    #influencer-trap .lib-section-label,
-    #influencer-trap .lib-section-title { margin-left: auto; margin-right: auto; }
-    #influencer-trap .lib-section-title {
-      font-size: clamp(2.4rem, 5.6vw, 4.6rem);
-      line-height: 1.04;
-      letter-spacing: -0.045em;
-      max-width: 22ch;
-      margin-bottom: 24px;
-    }
-
-    /* Expandable read-more wrapper */
-    .sm-it-readmore {
-      max-width: 720px;
-      margin: 0 auto 56px;
-      text-align: center;
-    }
-    .sm-it-readmore > summary {
-      list-style: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 22px;
-      background: rgba(255,248,235,0.04);
-      border: 1px solid rgba(255,248,235,0.12);
-      border-radius: 999px;
-      color: rgba(255,255,255,0.85);
-      font-size: 0.86rem;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      cursor: pointer;
-      transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
-      user-select: none;
-    }
-    .sm-it-readmore > summary::-webkit-details-marker { display: none; }
-    .sm-it-readmore > summary:hover {
-      border-color: rgba(202,138,4,0.4);
-      background: rgba(202,138,4,0.08);
-      color: #fff;
-    }
-    .sm-it-readmore > summary i[data-lucide],
-    .sm-it-readmore > summary svg {
-      width: 16px;
-      height: 16px;
-      display: inline-block;
-      transform-origin: 50% 50%;
-      transition: transform 0.35s ease;
-    }
-    .sm-it-readmore[open] > summary i[data-lucide],
-    .sm-it-readmore[open] > summary svg,
-    .sm-it-readmore[open] > summary .lucide {
-      transform: rotate(180deg);
-    }
-    .sm-it-readmore[open] > summary {
-      border-color: rgba(202,138,4,0.32);
-      background: rgba(202,138,4,0.06);
-      color: var(--gold);
-    }
-    .sm-it-copy {
-      max-width: 68ch;
-      margin: 28px auto 0;
-      text-align: left;
-      animation: itReadmoreFade 0.4s ease-out;
-    }
-    @keyframes itReadmoreFade {
-      from { opacity: 0; transform: translateY(-4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .sm-it-copy p {
-      font-size: 1.02rem;
-      line-height: 1.75;
-      color: rgba(255,255,255,0.9);
-      margin-bottom: 18px;
-    }
-    .sm-it-copy p:last-child { margin-bottom: 0; }
-    .sm-it-copy em {
-      color: var(--gold);
-      font-style: normal;
-      font-weight: 500;
-    }
-
-    .sm-it-comparison {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
-      margin-top: 16px;
-    }
-    .sm-it-panel {
-      position: relative;
-      padding: 36px 32px 40px;
-      background: linear-gradient(180deg, rgba(23,20,15,0.7) 0%, rgba(15,13,10,0.85) 100%);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,248,235,0.08);
-      border-radius: 24px;
-      overflow: hidden;
-      isolation: isolate;
-    }
-    .sm-it-panel-cycle { border-color: rgba(224,101,77,0.18); }
-    .sm-it-panel-owned {
-      border-color: rgba(74,222,128,0.32);
-      background: linear-gradient(180deg, rgba(20,30,22,0.78) 0%, rgba(12,20,14,0.9) 100%);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 30px rgba(74,222,128,0.06);
-    }
-    .sm-it-panel-owned::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 70% 0%, rgba(74,222,128,0.1) 0%, transparent 55%);
-      pointer-events: none;
-      z-index: 0;
-    }
-    .sm-it-panel-owned > * { position: relative; z-index: 1; }
-
-    .sm-it-panel-label {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      padding: 6px 12px;
-      border-radius: 999px;
-      margin-bottom: 14px;
-    }
-    .sm-it-panel-label-warn {
-      color: #f3a995;
-      background: rgba(224,101,77,0.12);
-      border: 1px solid rgba(224,101,77,0.3);
-    }
-    .sm-it-panel-label-good {
-      color: #86efac;
-      background: rgba(74,222,128,0.12);
-      border: 1px solid rgba(74,222,128,0.35);
-    }
-    .sm-it-panel-headline {
-      font-family: var(--font-hero);
-      font-size: clamp(1.4rem, 2.2vw, 1.75rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1.15;
-      margin-bottom: 8px;
-      color: var(--text);
-    }
-    .sm-it-panel-sub {
-      font-size: 0.92rem;
-      color: rgba(255,255,255,0.65);
-      margin-bottom: 28px;
-      letter-spacing: 0.01em;
-    }
-
-    /* ── Cycle diagram ── */
-    .sm-it-cycle-wrap {
-      position: relative;
-      width: 100%;
-      max-width: 360px;
-      aspect-ratio: 1;
-      margin: 20px auto 0;
-    }
-    .sm-it-cycle-svg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-    }
-    .sm-it-cycle-line {
-      stroke-dasharray: 6 6;
-      animation: itCycleFlow 1.6s linear infinite;
-    }
-    @keyframes itCycleFlow {
-      to { stroke-dashoffset: -24; }
-    }
-    .sm-it-cycle-node {
-      position: absolute;
-      width: 108px;
-      padding: 12px 8px;
-      text-align: center;
-      background: linear-gradient(180deg, rgba(40,22,18,0.92) 0%, rgba(25,14,11,0.95) 100%);
-      border: 1px solid rgba(224,101,77,0.35);
-      border-radius: 14px;
-      color: var(--text);
-      font-size: 0.72rem;
-      line-height: 1.3;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-      animation: itCycleNodePulse 6.4s ease-in-out infinite;
-    }
-    .sm-it-cycle-node i[data-lucide] {
-      width: 18px;
-      height: 18px;
-      color: #f3a995;
-      margin-bottom: 4px;
-      display: inline-block;
-    }
-    .sm-it-cycle-node strong {
-      display: block;
-      font-size: 0.82rem;
-      font-weight: 800;
-      color: #fff;
-      margin-top: 2px;
-    }
-    .sm-it-cycle-node[data-step="1"] { top: 0; left: 50%; transform: translateX(-50%); }
-    .sm-it-cycle-node[data-step="2"] { top: 50%; right: 0; transform: translateY(-50%); animation-delay: 1.6s; }
-    .sm-it-cycle-node[data-step="3"] { bottom: 0; left: 50%; transform: translateX(-50%); animation-delay: 3.2s; }
-    .sm-it-cycle-node[data-step="4"] { top: 50%; left: 0; transform: translateY(-50%); animation-delay: 4.8s; }
-    @keyframes itCycleNodePulse {
-      0%, 18%, 100% { border-color: rgba(224,101,77,0.35); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
-      6%, 12% {
-        border-color: rgba(224,101,77,0.85);
-        box-shadow: 0 8px 24px rgba(0,0,0,0.4), 0 0 24px rgba(224,101,77,0.55);
-      }
-    }
-    .sm-it-cycle-center {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 92px; height: 92px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: radial-gradient(circle at center, rgba(224,101,77,0.18) 0%, transparent 70%);
-      border: 1px dashed rgba(224,101,77,0.3);
-      font-size: 0.68rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: rgba(243,169,149,0.85);
-      text-align: center;
-      line-height: 1.3;
-    }
-
-    /* ── Growth diagram ── */
-    .sm-it-growth-wrap {
-      position: relative;
-      width: 100%;
-      max-width: 360px;
-      aspect-ratio: 1;
-      margin: 20px auto 0;
-    }
-    .sm-it-growth-svg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-    }
-    .sm-it-growth-line {
-      stroke-dasharray: 800;
-      stroke-dashoffset: 800;
-      animation: itGrowthDraw 2.4s ease-out 0.3s forwards;
-    }
-    @keyframes itGrowthDraw {
-      to { stroke-dashoffset: 0; }
-    }
-    .sm-it-growth-steps {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 4px 0;
-    }
-    .sm-it-growth-step {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 14px;
-      background: linear-gradient(180deg, rgba(18,28,20,0.92) 0%, rgba(10,18,12,0.95) 100%);
-      border: 1px solid rgba(74,222,128,0.38);
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.35), 0 0 16px rgba(74,222,128,0.08);
-      width: fit-content;
-      max-width: 80%;
-      opacity: 0;
-      animation: itGrowthFade 0.7s ease-out forwards;
-    }
-    .sm-it-growth-step i[data-lucide] {
-      width: 18px;
-      height: 18px;
-      color: #86efac;
-      flex-shrink: 0;
-    }
-    .sm-it-growth-step span {
-      font-size: 0.74rem;
-      line-height: 1.35;
-      color: var(--text);
-    }
-    .sm-it-growth-step[data-step="1"] {
-      align-self: flex-start;
-      animation-delay: 0.5s;
-    }
-    .sm-it-growth-step[data-step="2"] {
-      align-self: center;
-      animation-delay: 1.2s;
-    }
-    .sm-it-growth-step[data-step="3"] {
-      align-self: flex-end;
-      animation-delay: 1.9s;
-    }
-    @keyframes itGrowthFade {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .sm-it-closer {
-      max-width: 60ch;
-      margin: 48px auto 0;
-      text-align: center;
-      font-family: var(--font-hero);
-      font-weight: 700;
-      font-size: clamp(1.15rem, 2vw, 1.45rem);
-      line-height: 1.45;
-      color: var(--gold);
-      letter-spacing: -0.015em;
-    }
-
-    /* ══════════════════════════════════════
-       PROOF / RESULTS — 2-col image + copy
-       ══════════════════════════════════════ */
-    .sm-proof-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 1fr;
-      gap: 56px;
-      align-items: center;
-    }
-    .sm-proof-visual {
-      position: relative;
-      border-radius: 24px;
-      overflow: hidden;
-      border: 1px solid rgba(255,248,235,0.08);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.45);
-      aspect-ratio: 4 / 5;
-      max-height: 560px;
-    }
-    .sm-proof-visual img,
-    .sm-proof-visual video {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.8s cubic-bezier(0.22,1,0.36,1);
-    }
-    .sm-proof-visual:hover img,
-    .sm-proof-visual:hover video { transform: scale(1.03); }
-    .sm-proof-copy { text-align: left; }
-    .sm-proof-copy .lib-section-title { max-width: 22ch; }
-    .sm-proof-copy .lib-section-sub { max-width: 52ch; margin-bottom: 32px; }
-    .sm-proof-cta { display: inline-flex; }
-
-    /* ── Hero single-stat callout ── */
-    .sm-hero-stat {
-      margin: 0;
-      position: relative;
-      isolation: isolate;
-    }
-    .sm-hero-stat::before {
-      content: "";
-      position: absolute;
-      inset: -8% -4%;
-      background:
-        radial-gradient(ellipse at 50% 40%, rgba(202,138,4,0.18) 0%, rgba(202,138,4,0.06) 35%, transparent 65%),
-        radial-gradient(ellipse at 30% 60%, rgba(242,214,136,0.08) 0%, transparent 50%);
-      filter: blur(40px);
-      z-index: -1;
-      pointer-events: none;
-    }
-    .sm-hero-stat-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 56px 40px 48px;
-      text-align: center;
-      background: linear-gradient(180deg, rgba(23,20,15,0.72) 0%, rgba(15,13,10,0.85) 100%);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(202,138,4,0.18);
-      border-radius: 28px;
-      box-shadow:
-        inset 0 1px 1px 0 rgba(242,214,136,0.18),
-        inset 0 -1px 1px 0 rgba(0,0,0,0.2),
-        0 30px 80px rgba(0,0,0,0.45);
-      position: relative;
-      overflow: hidden;
-    }
-    .sm-hero-stat-inner::after {
-      content: "";
-      position: absolute;
-      top: -1px;
-      left: 25%;
-      right: 25%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(242,214,136,0.85), transparent);
-      box-shadow: 0 0 18px rgba(242,214,136,0.4);
-    }
-    .sm-hero-stat-eyebrow {
-      font-family: var(--font-body, "Plus Jakarta Sans"), system-ui, sans-serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: rgba(242,214,136,0.85);
-      margin-bottom: 18px;
-    }
-    .sm-hero-stat-num {
-      font-family: var(--font-display);
-      font-weight: 900;
-      font-size: clamp(6rem, 14vw, 11rem);
-      line-height: 0.95;
-      letter-spacing: -0.06em;
-      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin: 4px 0 18px;
-      text-shadow: 0 4px 40px rgba(202,138,4,0.15);
-    }
-    .sm-hero-stat-line {
-      font-family: var(--font-hero);
-      font-size: clamp(1.25rem, 2.2vw, 1.7rem);
-      line-height: 1.35;
-      font-weight: 500;
-      color: rgba(255,255,255,0.96);
-      letter-spacing: -0.015em;
-      max-width: 28ch;
-      margin: 0 auto 20px;
-    }
-    .sm-hero-stat-line strong {
-      font-weight: 700;
-      color: #fff;
-      background: linear-gradient(115deg, #F2D688 0%, #ffef9d 50%, #F2D688 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .sm-hero-stat-footnote {
-      font-size: 0.95rem;
-      color: rgba(255,255,255,0.7);
-      max-width: 48ch;
-      margin: 0 auto 24px;
-      line-height: 1.55;
-    }
-    .sm-hero-stat-source {
-      display: inline-block;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: rgba(255,255,255,0.4);
-      font-weight: 600;
-      padding-top: 14px;
-      border-top: 1px solid rgba(255,248,235,0.06);
-    }
-
-    /* ══════════════════════════════════════
-       3. THE PROBLEM — 4 glass cards 2x2
-       ══════════════════════════════════════ */
-    .sm-problem-head {
-      display: flex;
-      align-items: center;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-    .sm-problem-head-copy {
-      flex: 1 1 460px;
-      min-width: 0;
-    }
-    .sm-problem-head-copy .lib-section-sub {
-      margin-bottom: 0;
-      max-width: 62ch;
-    }
-    .sm-problem-head-copy .lib-section-title { font-size: clamp(2rem, 3.6vw, 2.9rem); line-height: 1.15; }
-    .sm-problem-accent {
-      position: relative;
-      flex: 0 0 300px;
-      width: 300px;
-      aspect-ratio: 9 / 16;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid rgba(255,248,235,0.06);
-      box-shadow: 0 18px 50px rgba(0,0,0,0.45);
-      cursor: pointer;
-      justify-self: end;
-      transition: transform 0.45s cubic-bezier(0.22,1,0.36,1), box-shadow 0.45s ease, border-color 0.45s ease;
-    }
-    .sm-problem-accent:hover {
-      transform: translateY(-4px) scale(1.02);
-      border-color: rgba(202,138,4,0.25);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 0 24px rgba(202,138,4,0.08);
-    }
-    .sm-problem-accent video {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .sm-problem-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      margin-top: 48px;
-    }
-    /* ── Problem accordion (compact expandable list) ── */
-    .sm-problem-accordion {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-top: 28px;
-      width: 100%;
-      max-width: 640px;
-    }
-    .sm-problem-item {
-      background: linear-gradient(180deg, rgba(23,23,23,0.55) 0%, rgba(17,17,17,0.72) 100%);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,248,235,0.08);
-      border-radius: 14px;
-      overflow: hidden;
-      transition: border-color 0.35s ease, background 0.35s ease;
-    }
-    .sm-problem-item:hover { border-color: rgba(202,138,4,0.18); }
-    .sm-problem-item[open] {
-      border-color: rgba(202,138,4,0.22);
-      background: linear-gradient(180deg, rgba(28,24,18,0.65) 0%, rgba(20,17,12,0.78) 100%);
-    }
-    .sm-problem-item > summary {
-      list-style: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      padding: 18px 22px;
-      font-size: 1.02rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      color: var(--text);
-      transition: color 0.3s ease;
-    }
-    .sm-problem-item > summary::-webkit-details-marker { display: none; }
-    .sm-problem-item > summary > i[data-lucide] {
-      flex-shrink: 0;
-      width: 22px;
-      height: 22px;
-      color: var(--gold);
-      opacity: 0.85;
-    }
-    .sm-problem-item > summary > span { flex: 1; }
-    .sm-problem-item > summary::after {
-      content: "";
-      flex-shrink: 0;
-      width: 12px;
-      height: 12px;
-      border-right: 2px solid rgba(255,248,235,0.5);
-      border-bottom: 2px solid rgba(255,248,235,0.5);
-      transform: rotate(45deg);
-      transition: transform 0.3s ease, border-color 0.3s ease;
-      margin-right: 4px;
-    }
-    .sm-problem-item[open] > summary::after {
-      transform: rotate(-135deg);
-      border-color: var(--gold);
-    }
-    .sm-problem-item .sm-problem-body {
-      padding: 0 22px 20px 62px;
-      font-size: 0.94rem;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.88);
-    }
-    .sm-problem-card {
-      padding: 36px 28px;
-      background: linear-gradient(180deg, rgba(23,23,23,0.65) 0%, rgba(17,17,17,0.82) 50%);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255,248,235,0.08);
-      border-radius: 20px;
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
-      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), border-color 0.4s ease;
-      box-shadow:
-        inset 0 1px 1px 0 rgba(202,138,4,0.12),
-        inset 0 -1px 1px 0 rgba(0,0,0,0.15);
-    }
-    .sm-problem-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(202,138,4,0.18);
-    }
-    .sm-problem-card .glass-toplight {
-      position: absolute;
-      top: -2px;
-      left: 20%;
-      right: 20%;
-      height: 3px;
-      border-radius: 10px;
-      background: rgba(255,252,240,0.8);
-      box-shadow:
-        0 0 1px 0 rgba(202,138,4,0.4),
-        0 1px 4px 0 rgba(202,138,4,0.25),
-        0 4px 16px 0 rgba(202,138,4,0.12);
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    .sm-problem-card:hover .glass-toplight { opacity: 1; }
-    .sm-problem-card .glass-accents {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-    .sm-problem-card .glass-acc {
-      position: absolute;
-      inset: -3px;
-      background: rgba(255,248,235,0.015);
-      border-radius: 20px;
-      border: 1px solid rgba(255,248,235,0.06);
-      transform-origin: 20% 80%;
-      opacity: 0.5;
-    }
-    .sm-problem-card .glass-acc:nth-child(1) { animation: smGlassWobble 20s ease-in-out infinite; }
-    .sm-problem-card .glass-acc:nth-child(2) { animation: smGlassWobble 26s ease-in-out -8s infinite reverse; }
-    @keyframes smGlassWobble {
-      0%   { transform: translateX(3px) translateY(6px) rotate(-1.5deg); }
-      25%  { transform: translateX(-10px) translateY(-3px) rotate(2deg); }
-      50%  { transform: translateX(8px) translateY(5px) rotate(-2.5deg); }
-      75%  { transform: translateX(-8px) translateY(-6px) rotate(3deg); }
-      100% { transform: translateX(3px) translateY(6px) rotate(-1.5deg); }
-    }
-    .sm-problem-card i {
-      color: var(--gold);
-      margin-bottom: 16px;
-      display: block;
-      position: relative;
-      z-index: 2;
-    }
-    .sm-problem-card h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      position: relative;
-      z-index: 2;
-    }
-    .sm-problem-card p {
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.88);
-      line-height: 1.65;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* ══════════════════════════════════════
-       4. APPROACH — Vertical timeline
-       ══════════════════════════════════════ */
-    .sm-timeline {
-      position: relative;
-      margin-top: 56px;
-      padding-left: 48px;
-    }
-    .sm-timeline::before {
-      content: "";
-      position: absolute;
-      left: 15px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: linear-gradient(180deg, var(--gold) 0%, rgba(202,138,4,0.2) 100%);
-    }
-    .sm-timeline-step {
-      position: relative;
-      padding: 0 0 56px 0;
-    }
-    .sm-timeline-step:last-child { padding-bottom: 0; }
-    .sm-timeline-marker {
-      position: absolute;
-      left: -48px;
-      top: 4px;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--gold);
-      display: grid;
-      place-items: center;
-      font-family: var(--font-display);
-      font-size: 0.72rem;
-      font-weight: 800;
-      color: #0A0A0A;
-      z-index: 2;
-      box-shadow: 0 0 0 6px #0A0A0A, 0 0 20px rgba(202,138,4,0.3);
-    }
-    .sm-timeline-step h3 {
-      font-size: 1.2rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 12px;
-    }
-    .sm-timeline-step p {
-      font-size: 0.92rem;
-      color: rgba(255,255,255,0.9);
-      line-height: 1.7;
-      max-width: 55ch;
-    }
-
-    /* ── Approach 2-col layout ── */
-    .sm-approach-layout {
-      display: grid;
-      grid-template-columns: 1fr 0.7fr;
-      gap: 48px;
-      align-items: start;
-      margin-top: 0;
-    }
-    .sm-approach-layout .sm-timeline { order: 1; }
-    .sm-approach-layout .sm-approach-video { order: 2; }
-    .sm-approach-video {
-      position: sticky;
-      top: 120px;
-      border-radius: 24px;
-      overflow: hidden;
-      border: 1px solid rgba(255,248,235,0.06);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-      cursor: pointer;
-      aspect-ratio: 9 / 16;
-      max-height: 520px;
-    }
-    .sm-approach-video video {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* ══════════════════════════════════════
-       5. SERVICES — Alternating split panels
-       ══════════════════════════════════════ */
-    .sm-services-panels {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      margin-top: 56px;
-    }
-    .sm-svc-panel {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      min-height: 440px;
-      border-top: 1px solid rgba(255,248,235,0.04);
-      position: relative;
-    }
-    .sm-svc-panel:last-child {
-      border-bottom: 1px solid rgba(255,248,235,0.04);
-    }
-    .sm-svc-panel.--reverse { direction: rtl; }
-    .sm-svc-panel.--reverse > * { direction: ltr; }
-    .sm-svc-copy {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 56px 48px;
-      position: relative;
-    }
-    .sm-svc-num {
-      font-family: var(--font-display);
-      font-size: 6rem;
-      font-weight: 900;
-      letter-spacing: -0.06em;
-      background: linear-gradient(115deg, rgba(198,148,58,0.12) 0%, rgba(242,214,136,0.08) 50%, rgba(198,148,58,0.05) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
-      position: absolute;
-      top: 32px;
-      right: 40px;
-      user-select: none;
-      pointer-events: none;
-    }
-    .sm-svc-panel.--reverse .sm-svc-num {
-      right: auto;
-      left: 40px;
-    }
-    .sm-svc-copy i {
-      color: var(--gold);
-      margin-bottom: 28px;
-      display: block;
-    }
-    .sm-svc-copy h3 {
-      font-size: 1.4rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      margin-bottom: 16px;
-      line-height: 1.15;
-    }
-    .sm-svc-copy > p {
-      font-size: 0.92rem;
-      color: rgba(255,255,255,0.9);
-      line-height: 1.7;
-      max-width: 42ch;
-      margin-bottom: 20px;
-    }
-    .sm-svc-visual {
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, rgba(15,15,15,1) 0%, rgba(10,10,10,1) 100%);
-      min-height: 0;
-    }
-    .sm-svc-visual img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .sm-svc-panel::after {
-      content: "";
-      position: absolute;
-      bottom: -1px;
-      left: 20%;
-      right: 20%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(202,138,4,0.15), transparent);
-      z-index: 1;
-    }
-
-    /* Bullet lists */
-    .sm-bullets {
-      list-style: none;
-      padding: 0;
-      margin: 16px 0;
-    }
-    .sm-bullets li {
-      position: relative;
-      padding-left: 20px;
-      margin-bottom: 10px;
-      font-size: 0.92rem;
-      line-height: 1.6;
-      color: rgba(255,255,255,0.92);
-    }
-    .sm-bullets li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 9px;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--gold);
-    }
-    .sm-bullets li strong {
-      color: var(--text, #fff);
-    }
-    .sm-bullets.--compact {
-      margin: 12px 0;
-    }
-    .sm-bullets.--compact li {
-      margin-bottom: 6px;
-      font-size: 0.88rem;
-    }
-
-    /* Limited availability callout */
-    .sm-limited-banner {
-      margin-top: 48px;
-      padding: 32px 36px;
-      background: rgba(226,168,77,0.04);
-      border: 1px solid rgba(226,168,77,0.15);
-      border-radius: 20px;
-      text-align: center;
-    }
-    .sm-limited-banner h3 {
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: var(--gold);
-      margin-bottom: 10px;
-    }
-    .sm-limited-banner p {
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.88);
-      line-height: 1.65;
-      max-width: 55ch;
-      margin: 0 auto 20px;
-    }
-
-    /* ══════════════════════════════════════
-       6. PLATFORMS — 3-col glass cards
-       ══════════════════════════════════════ */
-    .sm-platform-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 48px;
-    }
-    .sm-platform-card {
-      padding: 36px 28px;
-      background: linear-gradient(180deg, rgba(23,23,23,0.65) 0%, rgba(17,17,17,0.82) 50%);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255,248,235,0.08);
-      border-radius: 20px;
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
-      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), border-color 0.4s ease;
-      box-shadow:
-        inset 0 1px 1px 0 rgba(202,138,4,0.12),
-        inset 0 -1px 1px 0 rgba(0,0,0,0.15);
-    }
-    .sm-platform-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(202,138,4,0.18);
-    }
-    .sm-platform-card .glass-toplight {
-      position: absolute;
-      top: -2px;
-      left: 20%;
-      right: 20%;
-      height: 3px;
-      border-radius: 10px;
-      background: rgba(255,252,240,0.8);
-      box-shadow:
-        0 0 1px 0 rgba(202,138,4,0.4),
-        0 1px 4px 0 rgba(202,138,4,0.25),
-        0 4px 16px 0 rgba(202,138,4,0.12);
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    .sm-platform-card:hover .glass-toplight { opacity: 1; }
-    .sm-platform-card .glass-accents { position: absolute; inset: 0; pointer-events: none; }
-    .sm-platform-card .glass-acc {
-      position: absolute;
-      inset: -3px;
-      background: rgba(255,248,235,0.015);
-      border-radius: 20px;
-      border: 1px solid rgba(255,248,235,0.06);
-      transform-origin: 20% 80%;
-      opacity: 0.5;
-    }
-    .sm-platform-card .glass-acc:nth-child(1) { animation: smGlassWobble 20s ease-in-out infinite; }
-    .sm-platform-card .glass-acc:nth-child(2) { animation: smGlassWobble 26s ease-in-out -8s infinite reverse; }
-    .sm-platform-card i {
-      color: var(--gold);
-      margin-bottom: 16px;
-      display: block;
-      position: relative;
-      z-index: 2;
-    }
-    .sm-platform-card h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      position: relative;
-      z-index: 2;
-    }
-    .sm-platform-card p {
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.88);
-      line-height: 1.65;
-      position: relative;
-      z-index: 2;
-      margin-bottom: 16px;
-    }
-    .sm-platform-card .sm-platform-focus {
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--gold);
-      position: relative;
-      z-index: 2;
-    }
-
-    /* ══════════════════════════════════════
-       7. CONTENT TYPES — Image-backed cards
-       ══════════════════════════════════════ */
-    .sm-content-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      margin-top: 48px;
-    }
-    .sm-content-card {
-      position: relative;
-      min-height: 320px;
-      border-radius: 20px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 32px 28px;
-      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
-    }
-    .sm-content-card:hover { transform: translateY(-4px); }
-    .sm-content-card img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .sm-content-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(10,10,10,0.1) 0%, rgba(10,10,10,0.85) 70%, rgba(10,10,10,0.95) 100%);
-    }
-    .sm-content-card h3 {
-      position: relative;
-      z-index: 2;
-      font-size: 1.15rem;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-    .sm-content-card p {
-      position: relative;
-      z-index: 2;
-      font-size: 0.86rem;
-      color: rgba(255,255,255,0.88);
-      line-height: 1.6;
-    }
-
-    /* ══════════════════════════════════════
-       8. HOW TO — 4-step process grid
-       ══════════════════════════════════════ */
-    .sm-process-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      margin-top: 48px;
-      border: 1px solid rgba(255,248,235,0.06);
-      border-radius: 24px;
-      overflow: hidden;
-      background: rgba(255,255,255,0.01);
-    }
-    .sm-process-step {
-      padding: 48px 36px;
-      position: relative;
-      border-right: 1px solid rgba(255,248,235,0.04);
-      transition: background 0.4s;
-    }
-    .sm-process-step:last-child { border-right: none; }
-    .sm-process-step:hover { background: rgba(226,168,77,0.03); }
-    .sm-process-step::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--gold), rgba(202,138,4,0.5));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
-    }
-    .sm-process-step:hover::before { transform: scaleX(1); }
-    .sm-process-num {
-      font-family: var(--font-display);
-      font-size: 3.2rem;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.15;
-      margin-bottom: 20px;
-    }
-    .sm-process-step h3 { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 10px; }
-    .sm-process-step p { font-size: 0.86rem; color: var(--text-dim); line-height: 1.6; max-width: 30ch; }
-
-    /* ══════════════════════════════════════
-       9. STATS — Large hero stat block
-       ══════════════════════════════════════ */
-    .sm-stats-card {
-      padding: 64px 48px;
-      background: linear-gradient(180deg, rgba(23,23,23,0.65) 0%, rgba(10,10,10,0.9) 100%);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(202,138,4,0.2);
-      border-radius: 24px;
-      text-align: center;
-      margin-top: 48px;
-      position: relative;
-      overflow: hidden;
-    }
-    .sm-stats-card::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(202,138,4,0.08) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .sm-stats-subtitle {
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--gold);
-      margin-bottom: 24px;
-      position: relative;
-    }
-    .sm-stats-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 32px 48px;
-      margin-bottom: 32px;
-      position: relative;
-    }
-    .sm-stats-grid .sm-stat-block {
-      flex: 0 0 180px;
-      text-align: center;
-    }
-    .sm-stat-block .sm-stat-big {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 3.5vw, 3rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      background: linear-gradient(115deg, #C6943A 0%, #F2D688 25%, #ffef9d 45%, #F2D688 65%, #C6943A 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.2;
-      margin-bottom: 8px;
-    }
-    .sm-stat-block .sm-stat-desc {
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-soft);
-    }
-    .sm-stats-tagline {
-      font-size: 1.05rem;
-      color: var(--text-dim);
-      max-width: 60ch;
-      margin: 0 auto;
-      line-height: 1.65;
-      position: relative;
-    }
-    .sm-stats-tagline strong { color: var(--text); }
-
-    /* ══════════════════════════════════════
-       10. RESULTS — 3 case study cards
-       ══════════════════════════════════════ */
-    .sm-results-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 48px;
-    }
-    .sm-result-card {
-      padding: 36px 28px;
-      background: linear-gradient(180deg, rgba(23,23,23,0.65) 0%, rgba(17,17,17,0.82) 50%);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255,248,235,0.08);
-      border-radius: 20px;
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
-      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), border-color 0.4s ease;
-      box-shadow:
-        inset 0 1px 1px 0 rgba(202,138,4,0.12),
-        inset 0 -1px 1px 0 rgba(0,0,0,0.15);
-    }
-    .sm-result-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(202,138,4,0.18);
-    }
-    .sm-result-card .glass-toplight {
-      position: absolute;
-      top: -2px; left: 20%; right: 20%; height: 3px;
-      border-radius: 10px;
-      background: rgba(255,252,240,0.8);
-      box-shadow: 0 0 1px 0 rgba(202,138,4,0.4), 0 1px 4px 0 rgba(202,138,4,0.25), 0 4px 16px 0 rgba(202,138,4,0.12);
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-    .sm-result-card:hover .glass-toplight { opacity: 1; }
-    .sm-result-card .glass-accents { position: absolute; inset: 0; pointer-events: none; }
-    .sm-result-card .glass-acc {
-      position: absolute; inset: -3px;
-      background: rgba(255,248,235,0.015);
-      border-radius: 20px;
-      border: 1px solid rgba(255,248,235,0.06);
-      transform-origin: 20% 80%;
-      opacity: 0.5;
-    }
-    .sm-result-card .glass-acc:nth-child(1) { animation: smGlassWobble 20s ease-in-out infinite; }
-    .sm-result-card .glass-acc:nth-child(2) { animation: smGlassWobble 26s ease-in-out -8s infinite reverse; }
-    .sm-result-placeholder {
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--gold);
-      margin-bottom: 16px;
-      position: relative;
-      z-index: 2;
-    }
-    .sm-result-card h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      position: relative;
-      z-index: 2;
-    }
-    .sm-result-card p {
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.88);
-      line-height: 1.65;
-      position: relative;
-      z-index: 2;
-      margin-bottom: 12px;
-    }
-    .sm-result-card .btn {
-      position: relative;
-      z-index: 2;
-    }
-
-    /* ══════════════════════════════════════
-       11. WHO ITS FOR — 2-col check/x
-       ══════════════════════════════════════ */
-    .sm-fit-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-top: 48px;
-      align-items: start;
-    }
-    .sm-fit-col {
-      padding: 36px 32px;
-      border-radius: 20px;
-      border: 1px solid rgba(255,248,235,0.06);
-    }
-    .sm-fit-col.--yes {
-      background: linear-gradient(180deg, rgba(226,168,77,0.04) 0%, rgba(23,23,23,0.5) 100%);
-      border-color: rgba(226,168,77,0.12);
-    }
-    .sm-fit-col.--no {
-      background: linear-gradient(180deg, rgba(23,23,23,0.4) 0%, rgba(15,15,15,0.6) 100%);
-    }
-    .sm-fit-col h3 {
-      font-size: 1.1rem;
-      font-weight: 800;
-      margin-bottom: 24px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid rgba(255,248,235,0.06);
-    }
-    .sm-fit-col.--yes h3 { color: var(--gold); border-bottom-color: rgba(226,168,77,0.15); }
-    .sm-fit-col.--no h3 { color: rgba(255,255,255,0.8); }
-    .sm-fit-item {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      margin-bottom: 16px;
-    }
-    .sm-fit-item:last-child { margin-bottom: 0; }
-    .sm-fit-icon {
-      flex-shrink: 0;
-      width: 24px;
-      height: 24px;
-      display: grid;
-      place-items: center;
-      font-size: 0.88rem;
-      margin-top: 1px;
-    }
-    .sm-fit-col.--yes .sm-fit-icon { color: var(--gold); }
-    .sm-fit-col.--no .sm-fit-icon { color: rgba(255,255,255,0.5); }
-    .sm-fit-item p {
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.88);
-      line-height: 1.6;
-    }
-    .sm-fit-col.--no .sm-fit-item p { color: rgba(255,255,255,0.75); }
-
-    /* ══════════════════════════════════════
-       FAQ (reuse hp2 patterns)
-       ══════════════════════════════════════ */
-    .hp2-faq-header { text-align: center; margin-bottom: 64px; }
-    .hp2-faq-header .lib-section-title { margin-bottom: 12px; }
-    .hp2-faq-hero-heading {
-      font-family: var(--font-hero);
-      font-size: clamp(2.2rem, 5vw, 3.8rem);
-      font-weight: 800;
-      font-style: normal;
-      letter-spacing: -0.035em;
-      line-height: 1.1;
-      margin-bottom: 16px;
-      background: linear-gradient(135deg, var(--gold) 0%, #fff8eb 40%, var(--gold) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hp2-faq-subtitle {
-      font-size: 1rem;
-      color: var(--text-dim);
-      max-width: 480px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-    .hp2-faq-grid { display: block; max-width: 780px; margin: 0 auto; }
-    .hp2-faq-list { display: flex; flex-direction: column; gap: 0; }
-    .hp2-faq-item {
-      border: none;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      border-radius: 0;
-      overflow: hidden;
-      transition: background 0.4s ease;
-      background: transparent;
-      position: relative;
-    }
-    .hp2-faq-item:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
-    .hp2-faq-item:hover { background: rgba(226,168,77,0.02); }
-    .hp2-faq-item[open] { background: rgba(226,168,77,0.03); border-color: rgba(226,168,77,0.15); }
-    .hp2-faq-item::before {
-      content: "";
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 3px;
-      background: var(--gold);
-      transform: scaleY(0);
-      transform-origin: top;
-      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
-    }
-    .hp2-faq-item[open]::before { transform: scaleY(1); }
-    .hp2-faq-item summary {
-      list-style: none;
-      padding: 28px 32px 28px 24px;
-      font-family: var(--font-display);
-      font-size: 1.05rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      transition: color 0.3s, padding-left 0.3s;
-      letter-spacing: -0.01em;
-    }
-    .hp2-faq-item[open] summary { padding-left: 32px; color: #fff; }
-    .hp2-faq-item summary::-webkit-details-marker { display: none; }
-    .hp2-faq-item summary::after {
-      content: "";
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(226,168,77,0.3);
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='M7 1v12M1 7h12' stroke='%23E2A84D' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center;
-      flex-shrink: 0;
-      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), background-color 0.3s, border-color 0.3s;
-    }
-    .hp2-faq-item[open] summary::after {
-      transform: rotate(45deg);
-      background-color: rgba(226,168,77,0.1);
-      border-color: var(--gold);
-    }
-    .hp2-faq-item .hp2-faq-answer {
-      padding: 0 32px 28px 24px;
-      font-size: 0.92rem;
-      color: rgba(255,255,255,0.88);
-      line-height: 1.7;
-    }
-    .hp2-faq-item[open] .hp2-faq-answer { padding-left: 32px; }
-    .hp2-faq-count {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 24px;
-      color: rgba(226,168,77,0.55);
-      font-family: var(--font-display);
-      font-size: 0.78rem;
-      font-style: normal;
-      font-weight: 700;
-      letter-spacing: 0;
-      margin-right: 16px;
-      flex-shrink: 0;
-    }
-    .hp2-faq-item[open] .hp2-faq-count { color: var(--gold); }
-    .hp2-faq-bottom-cta { text-align: center; margin-top: 56px; }
-    .hp2-faq-bottom-cta p { font-size: 0.88rem; color: var(--text-dim); margin-bottom: 20px; }
-
-    /* CTA scene */
-    .hp2-cta-scene {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      position: relative;
-      padding: 120px 48px;
-      border-radius: var(--r-xl, 24px);
-      overflow: hidden;
-      text-align: center;
-      background: var(--bg-0, #0A0A0A);
-      border: 1px solid rgba(202,138,4,0.2);
-    }
-    .hp2-cta-orb {
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-      filter: blur(80px);
-      will-change: transform;
-    }
-    .hp2-cta-orb:nth-child(1) {
-      width: 500px; height: 500px;
-      top: -20%; left: -10%;
-      background: radial-gradient(circle, rgba(202,138,4,0.25), transparent 70%);
-      animation: ctaOrb1 8s ease-in-out infinite alternate;
-    }
-    .hp2-cta-orb:nth-child(2) {
-      width: 400px; height: 400px;
-      bottom: -15%; right: -5%;
-      background: radial-gradient(circle, rgba(242,214,136,0.2), transparent 70%);
-      animation: ctaOrb2 10s ease-in-out infinite alternate;
-    }
-    .hp2-cta-orb:nth-child(3) {
-      width: 350px; height: 350px;
-      top: 30%; left: 50%;
-      transform: translateX(-50%);
-      background: radial-gradient(circle, rgba(202,138,4,0.08), transparent 70%);
-      animation: ctaOrb3 12s ease-in-out infinite alternate;
-    }
-    @keyframes ctaOrb1 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(60px,40px) scale(1.2); } }
-    @keyframes ctaOrb2 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-50px,-30px) scale(1.15); } }
-    @keyframes ctaOrb3 { 0% { transform: translateX(-50%) scale(0.9); opacity:0.5; } 100% { transform: translateX(-30%) scale(1.3); opacity:1; } }
-    .hp2-cta-scene pixel-canvas {
-      position: absolute; inset: 0; z-index: 0; border-radius: var(--r-xl, 24px);
-    }
-    .hp2-cta-scene::after {
-      content: "";
-      position: absolute; inset: 0;
-      background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.4) 100%);
-      pointer-events: none; z-index: 1;
-    }
-    .hp2-cta-scene h2 {
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 14px;
-      position: relative; z-index: 2;
-    }
-    .hp2-cta-scene > p {
-      font-size: 1rem;
-      color: var(--text-dim);
-      max-width: 48ch;
-      margin: 0 auto 32px;
-      line-height: 1.6;
-      position: relative; z-index: 2;
-    }
-    .hp2-cta-scene .btn-primary {
-      box-shadow: 0 0 30px rgba(226,168,77,0.2), 0 0 60px rgba(226,168,77,0.08);
-      animation: sm-btn-glow 3s ease-in-out infinite alternate;
-    }
-    @keyframes sm-btn-glow {
-      0% { box-shadow: 0 0 20px rgba(226,168,77,0.15), 0 0 40px rgba(226,168,77,0.06); }
-      100% { box-shadow: 0 0 35px rgba(226,168,77,0.25), 0 0 70px rgba(226,168,77,0.1); }
-    }
-
-    /* ══════════════════════════════════════
-       RESPONSIVE
-       ══════════════════════════════════════ */
-    @media (max-width: 900px) {
-      .sm-hero {
-        min-height: auto;
-        padding: 76px 22px 46px;
-      }
-      .sm-hero-inner {
-        grid-template-columns: 1fr;
-        gap: 22px;
-      }
-      .sm-hero-copy .hero-badge { margin-bottom: 16px; }
-      .sm-hero-copy h1 {
-        font-size: clamp(2.65rem, 11vw, 4.1rem);
-        line-height: 1.02;
-        max-width: 9.5ch;
-        margin-bottom: 18px;
-      }
-      .sm-hero-copy > p {
-        font-size: 0.96rem;
-        line-height: 1.62;
-        max-width: 36ch;
-        margin-bottom: 22px;
-      }
-      .sm-hero-cta .flex-row {
-        flex-direction: column;
-        align-items: stretch;
-        width: min(100%, 320px);
-      }
-      .sm-hero-cta .btn {
-        width: 100%;
-      }
-      .sm-audio-hint {
-        top: -40px;
-        font-size: 0.68rem;
-      }
-      .sm-audio-hint-desktop { display: none; }
-      .sm-audio-hint-mobile { display: inline; }
-      .v-stack-wrap { max-width: 340px; margin: 46px auto 0; }
-      .v-stack { height: 380px; }
-      .v-stack-card { width: 170px; height: 300px; }
-      .v-stack-card:nth-child(2) { margin-left: -85px; }
-      .v-stack-card:nth-child(1):hover,
-      .v-stack-card:nth-child(3):hover {
-        width: 170px;
-        height: 300px;
-      }
-      .v-stack-card:nth-child(1):hover {
-        transform: rotate(-6deg) scale(0.92);
-      }
-      .v-stack-card:nth-child(2):hover {
-        width: 170px;
-        height: 300px;
-        margin-left: -85px;
-        transform: rotate(0deg) scale(1);
-      }
-      .v-stack-card:nth-child(3):hover {
-        transform: rotate(6deg) scale(0.92);
-      }
-      .v-stack:has(.v-stack-card:nth-child(1):hover) .v-stack-card:nth-child(2),
-      .v-stack:has(.v-stack-card:nth-child(3):hover) .v-stack-card:nth-child(2),
-      .v-stack:has(.v-stack-card:nth-child(2):hover) .v-stack-card:nth-child(1),
-      .v-stack:has(.v-stack-card:nth-child(2):hover) .v-stack-card:nth-child(3) {
-        opacity: 1;
-      }
-      .v-stack:has(.v-stack-card:nth-child(1):hover) .v-stack-card:nth-child(2),
-      .v-stack:has(.v-stack-card:nth-child(3):hover) .v-stack-card:nth-child(2) {
-        transform: rotate(0deg) scale(1);
-      }
-      .v-stack:has(.v-stack-card:nth-child(1):hover) .v-stack-card:nth-child(3),
-      .v-stack:has(.v-stack-card:nth-child(2):hover) .v-stack-card:nth-child(3) {
-        transform: rotate(6deg) scale(0.92);
-      }
-      .v-stack:has(.v-stack-card:nth-child(2):hover) .v-stack-card:nth-child(1),
-      .v-stack:has(.v-stack-card:nth-child(3):hover) .v-stack-card:nth-child(1) {
-        transform: rotate(-6deg) scale(0.92);
-      }
-      .v-stack-card.is-active {
-        top: 0;
-        left: 50%;
-        right: auto;
-        z-index: 20;
-        width: 190px;
-        height: 335px;
-        margin-left: -95px;
-        transform: rotate(0deg) scale(1);
-        border-color: rgba(202,138,4,0.32);
-        box-shadow: 0 28px 70px rgba(0,0,0,0.62), 0 0 32px rgba(202,138,4,0.1);
-      }
-      .v-stack-label {
-        display: none;
-      }
-      .sm-stat-grid { grid-template-columns: 1fr 1fr; }
-      .lib-section.--tight { padding: 48px 0; }
-      .sm-hero-stat { margin: 0; }
-      .sm-hero-stat-inner { padding: 40px 22px 32px; border-radius: 22px; }
-      .sm-hero-stat-eyebrow { font-size: 0.95rem; }
-      .sm-hero-stat-num { font-size: clamp(5rem, 22vw, 7rem); margin: 2px 0 14px; }
-      .sm-hero-stat-line { font-size: clamp(1.05rem, 4.8vw, 1.3rem); max-width: 22ch; }
-      .sm-hero-stat-footnote { font-size: 0.88rem; max-width: 36ch; }
-
-      #influencer-trap {
-        overflow: visible;
-        padding-top: 64px;
-        padding-bottom: 92px;
-        margin-bottom: 10px;
-      }
-      .sm-it-readmore { margin-bottom: 26px; }
-      .sm-it-copy { margin: 22px 0 10px; }
-      .sm-it-copy p { font-size: 0.96rem; }
-      .sm-it-comparison {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-      .sm-it-panel { padding: 24px 18px 28px; }
-      .sm-it-panel-headline { font-size: 1.35rem; }
-      .sm-it-cycle-wrap,
-      .sm-it-growth-wrap { max-width: 280px; }
-      .sm-it-cycle-node { width: 90px; font-size: 0.66rem; }
-      .sm-it-cycle-center { width: 78px; height: 78px; font-size: 0.62rem; }
-      .sm-it-growth-step { max-width: 88%; }
-      .sm-it-growth-step span { font-size: 0.72rem; }
-      .sm-it-closer {
-        position: relative;
-        z-index: 3;
-        font-size: 1.05rem;
-        margin-top: 26px;
-        margin-bottom: 18px;
-        padding: 0 8px;
-      }
-
-      .sm-proof-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
-      .sm-proof-visual {
-        aspect-ratio: 4 / 5;
-        max-height: 560px;
-      }
-      .sm-proof-copy .lib-section-title { max-width: 100%; }
-      .sm-proof-copy .lib-section-sub { margin-bottom: 24px; }
-
-      .sm-problem-head {
-        flex-direction: column;
-        gap: 22px;
-        align-items: stretch;
-        text-align: left;
-      }
-      .sm-problem-head-copy { order: 0; flex: 1 1 auto; max-width: 100%; }
-      .sm-problem-head-copy .lib-section-title {
-        max-width: 13.5ch;
-      }
-      .sm-problem-head-copy .lib-section-sub {
-        max-width: 34ch;
-      }
-      .sm-problem-accordion {
-        max-width: 100%;
-        margin-top: 22px;
-      }
-      .sm-problem-item > summary {
-        gap: 14px;
-        padding: 16px 18px;
-      }
-      .sm-problem-item .sm-problem-body {
-        padding: 0 18px 18px 54px;
-      }
-      .sm-problem-accent {
-        order: 1;
-        flex: 0 0 auto;
-        width: min(220px, 68vw);
-        align-self: center;
-      }
-      .sm-problem-grid { grid-template-columns: 1fr; }
-      #approach {
-        margin-top: 0;
-        padding-top: 64px;
-        padding-bottom: 64px;
-      }
-      #approach .lib-section-title { margin-bottom: 26px; }
-      .sm-approach-layout {
-        grid-template-columns: 1fr;
-        gap: 28px;
-      }
-      .sm-approach-layout .sm-approach-video { order: 1; }
-      .sm-approach-layout .sm-timeline { order: 2; }
-      .sm-approach-video { max-height: 380px; max-width: 280px; position: static; }
-      .sm-timeline { padding-left: 32px; }
-      .sm-timeline-step { padding-bottom: 28px; }
-      .sm-timeline-step p { line-height: 1.58; }
-      .sm-svc-panel { grid-template-columns: 1fr; min-height: auto; }
-      .sm-svc-panel.--reverse { direction: ltr; }
-      #content-types,
-      #how-to,
-      #services,
-      #who-its-for,
-      #faq,
-      #cta { padding-top: 64px; padding-bottom: 64px; }
-      #faq { padding-bottom: 112px; }
-      .sm-content-grid,
-      .sm-process-grid,
-      .sm-services-panels { margin-top: 34px; }
-      .sm-svc-copy { padding: 32px 22px; }
-      .sm-svc-num { font-size: 4rem; top: 20px; right: 20px; }
-      .sm-svc-panel.--reverse .sm-svc-num { left: 20px; }
-      .sm-svc-visual { min-height: 230px; }
-      .sm-limited-banner { margin-top: 36px; padding: 30px 22px; }
-      .sm-platform-grid { grid-template-columns: 1fr; }
-      .sm-content-grid { grid-template-columns: 1fr; }
-      .sm-process-grid { grid-template-columns: 1fr; }
-      .sm-process-step { border-right: none; border-bottom: 1px solid rgba(255,248,235,0.04); padding: 30px 22px; }
-      .sm-process-step:last-child { border-bottom: none; }
-      .sm-stats-grid .sm-stat-block { flex: 0 0 140px; }
-      .sm-results-grid { grid-template-columns: 1fr; }
-      .sm-fit-grid { grid-template-columns: 1fr; }
-      .hp2-faq-hero-heading { font-size: clamp(1.8rem, 6vw, 2.4rem); }
-      .hp2-faq-item summary { padding: 22px 16px; font-size: 0.95rem; }
-      .hp2-faq-item .hp2-faq-answer { padding: 0 16px 22px 16px; }
-      .hp2-faq-item[open] summary { padding-left: 20px; }
-      .hp2-faq-item[open] .hp2-faq-answer { padding-left: 20px; }
-      .hp2-faq-bottom-cta {
-        position: relative;
-        z-index: 4;
-        margin-bottom: 36px;
-      }
-      .hp2-faq-bottom-cta .btn {
-        width: min(100%, 420px);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .sm-hero-copy h1 { font-size: clamp(2.75rem, 12vw, 4.15rem); }
-      .v-stack { height: 330px; }
-      .v-stack-card { width: 140px; height: 250px; }
-      .v-stack-card:nth-child(2) { margin-left: -70px; }
-      .v-stack-card:nth-child(1):hover,
-      .v-stack-card:nth-child(3):hover {
-        width: 140px;
-        height: 250px;
-      }
-      .v-stack-card:nth-child(2):hover {
-        width: 140px;
-        height: 250px;
-        margin-left: -70px;
-      }
-      .v-stack-card.is-active {
-        width: 166px;
-        height: 292px;
-        margin-left: -83px;
-      }
-      .sm-stat-grid { grid-template-columns: 1fr 1fr; }
-      .sm-stats-grid { grid-template-columns: 1fr 1fr; }
-      .sm-process-step { padding: 28px 22px; }
-    }
-
-    @media (max-width: 900px) and (hover: none) {
-      .v-stack-card,
-      .v-stack-card:hover,
-      .v-stack-card:nth-child(1):hover,
-      .v-stack-card:nth-child(2):hover,
-      .v-stack-card:nth-child(3):hover {
-        transition: opacity 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
-      }
-      .v-stack-card:nth-child(1):hover {
-        top: 40px;
-        left: 0;
-        right: auto;
-        margin-left: 0;
-        transform: rotate(-6deg) scale(0.92);
-      }
-      .v-stack-card:nth-child(2):hover {
-        top: 10px;
-        left: 50%;
-        right: auto;
-        transform: rotate(0deg) scale(1);
-      }
-      .v-stack-card:nth-child(3):hover {
-        top: 40px;
-        left: auto;
-        right: 0;
-        margin-left: 0;
-        transform: rotate(6deg) scale(0.92);
-      }
-      .v-stack-card.is-active,
-      .v-stack-card:nth-child(1).is-active,
-      .v-stack-card:nth-child(2).is-active,
-      .v-stack-card:nth-child(3).is-active {
-        top: 0;
-        left: 50%;
-        right: auto;
-        z-index: 20;
-        width: 190px;
-        height: 335px;
-        margin-left: 0;
-        transform: translateX(-50%) rotate(0deg) scale(1);
-      }
-    }
-
-    @media (max-width: 600px) and (hover: none) {
-      .v-stack-card.is-active,
-      .v-stack-card:nth-child(1).is-active,
-      .v-stack-card:nth-child(2).is-active,
-      .v-stack-card:nth-child(3).is-active {
-        width: 166px;
-        height: 292px;
-        margin-left: 0;
-      }
-    }
-
-    /* ══════════════════════════════════════
-       MOBILE NAVIGATION POLISH (final pass)
-       ══════════════════════════════════════ */
-    /* Prevent any horizontal scroll on mobile (mobile nav drawer + decorative orbs
-       sit off-screen; clip them so users don't get phantom drag-scroll). */
+    /* ===== v3 social media marketing (patterns shared with the v3 homepage) ===== */
     html, body { overflow-x: clip; }
-    @supports not (overflow: clip) {
-      html, body { overflow-x: hidden; }
+    @supports not (overflow: clip) { html, body { overflow-x: hidden; } }
+
+    .v3-smm { overflow: visible; }
+    .v3-smm .h-wrap { width: 100%; margin: 0 auto; }
+
+    /* hero */
+    .v3-smm .sm-hero { padding: calc(var(--v3-bar-h) + 80px) 0 8px; }
+    .v3-smm .s-hero-inner { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); gap: clamp(36px, 5vw, 72px); align-items: center; }
+    .v3-smm .sm-hero h1 { margin-top: 14px; font-size: clamp(2.6rem, 5.3vw, 4.6rem); line-height: 0.99; font-weight: 800; letter-spacing: -0.05em; color: var(--text-head); }
+    .v3-smm .sm-hero h1 .accent-serif { font: inherit; letter-spacing: inherit; color: var(--gold); }
+    .v3-smm .h-lede { margin-top: 22px; max-width: 50ch; font-size: clamp(1.0625rem, 1.3vw, 1.1875rem); line-height: 1.55; color: rgba(246,240,230,0.78); }
+    .v3-smm .h-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .v3-smm .h-cta .btn { height: 54px; padding: 0 26px; font-size: 1rem; }
+
+    /* tap-to-play clips (click handling and one-at-a-time audio live in shared.js) */
+    .v3-smm .s-reels { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; }
+    .v3-smm .s-reels > li { min-width: 0; }
+    .v3-smm .hp2-vid-card { cursor: pointer; }
+    .v3-smm .hp2-vid-card-frame { position: relative; aspect-ratio: 9 / 16; overflow: hidden; border-radius: 22px; background: var(--v3-elev-1); border: 1px solid var(--v3-hair); transform: translateZ(0); }
+    .v3-smm .hp2-vid-card-frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .v3-smm .hp2-vid-card-play { position: absolute; left: 50%; top: 50%; z-index: 2; width: 56px; height: 56px; margin: -28px 0 0 -28px; padding: 0; border: 1px solid rgba(255,255,255,0.22); border-radius: 999px; background: rgba(11,11,12,0.42); -webkit-backdrop-filter: blur(14px) saturate(160%); backdrop-filter: blur(14px) saturate(160%); cursor: pointer; transition: transform .25s var(--v3-ease), opacity .25s ease; }
+    .v3-smm .hp2-vid-card-play::after { content: ""; position: absolute; left: 22px; top: 17px; border-left: 15px solid #fff; border-top: 10px solid transparent; border-bottom: 10px solid transparent; }
+    .v3-smm .hp2-vid-card.--playing .hp2-vid-card-play { opacity: 0; }
+    .v3-smm .s-cap { margin-top: 12px; font-size: 0.875rem; line-height: 1.35; color: rgba(246,240,230,0.6); }
+    .v3-smm .s-cap strong { display: block; margin-bottom: 2px; font-size: 0.9375rem; font-weight: 700; letter-spacing: -0.01em; color: var(--text-head); }
+    @media (hover: hover) {
+      .v3-smm .hp2-vid-card:hover .hp2-vid-card-play { transform: scale(1.06); }
     }
 
+    /* sticky section chips */
+    .v3-smm .s-chips { position: sticky; top: var(--v3-bar-h); z-index: 40; margin: 56px calc(50% - 50vw) 0; background: rgba(11,11,12,0.8); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid var(--v3-hair); }
+    .v3-smm .s-chips-row { position: relative; display: flex; gap: 2px; overflow-x: auto; padding: 2px max(24px, calc((100% - var(--max)) / 2)); scrollbar-width: none; }
+    .v3-smm .s-chips-row::-webkit-scrollbar { display: none; }
+    .v3-smm .s-chips a { flex: none; display: inline-flex; align-items: center; min-height: 44px; color: rgba(246,240,230,0.66); font-size: 0.9375rem; font-weight: 600; letter-spacing: -0.005em; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+    .v3-smm .s-chips a span { display: inline-flex; align-items: center; height: 34px; padding: 0 14px; border-radius: 999px; transition: background .2s ease, color .2s ease; }
+    .v3-smm .s-chips a:hover span { background: rgba(255,255,255,0.07); color: var(--text-head); }
+    .v3-smm .s-chips a[aria-current] span { background: var(--text-head); color: #0b0b0c; }
+    .v3-smm .s-chips a:active span { transform: scale(0.97); }
+    @media (min-width: 701px) { .v3-smm .s-chips a:first-child { margin-left: -14px; } }
+
+    /* section heads */
+    .v3-smm .h-sec { padding: clamp(80px, 10vw, 128px) 0 0; scroll-margin-top: calc(var(--v3-bar-h) + 56px); }
+    .v3-smm .h-head { max-width: 780px; }
+    .v3-smm .h-head.--center { margin: 0 auto; text-align: center; }
+    .v3-smm .h-head h2 { margin-top: 10px; font-size: clamp(2.1rem, 4.4vw, 3.5rem); line-height: 1.03; font-weight: 800; letter-spacing: -0.048em; color: var(--text-head); }
+    .v3-smm .h-head p { margin-top: 16px; max-width: 58ch; font-size: clamp(1.0625rem, 1.3vw, 1.1875rem); line-height: 1.55; color: rgba(246,240,230,0.72); }
+    .v3-smm .h-head.--center p { margin-left: auto; margin-right: auto; }
+    .v3-smm .h-head-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+
+    /* results, wrapped */
+    .v3-smm .h-deck-nav { display: flex; gap: 8px; flex: none; }
+    .v3-smm .h-deck-nav button { width: 48px; height: 48px; border-radius: 999px; border: 1px solid var(--v3-hair-2); background: rgba(255,255,255,0.04); color: var(--text-head); display: grid; place-items: center; cursor: pointer; transition: background .2s ease, transform .18s var(--v3-ease); }
+    .v3-smm .h-deck-nav button:hover { background: rgba(255,255,255,0.1); }
+    .v3-smm .h-deck-nav button:active { transform: scale(0.94); }
+    .v3-smm .h-deck-nav svg { width: 20px; height: 20px; }
+    .v3-smm .h-deck { list-style: none; display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; margin: 36px calc(50% - 50vw) 0; padding: 4px max(24px, calc((100vw - var(--max)) / 2)) 14px; scroll-padding-inline: max(24px, calc((100vw - var(--max)) / 2)); scrollbar-width: none; }
+    .v3-smm .h-deck::-webkit-scrollbar { display: none; }
+    .v3-smm .h-deck > li { flex: 0 0 clamp(264px, 25vw, 318px); scroll-snap-align: start; }
+    .v3-smm .h-card { position: relative; display: flex; flex-direction: column; height: 100%; min-height: 420px; padding: 22px; border-radius: 30px; overflow: hidden; text-decoration: none; transition: transform 0.35s var(--v3-ease); }
+    .v3-smm .h-card.--gold { background: var(--gold); color: var(--v3-ink-on-gold); }
+    .v3-smm .h-card.--light { background: #f6f0e6; color: var(--v3-ink-on-gold); }
+    .v3-smm .h-card.--dark { background: var(--v3-elev-1); color: var(--text-head); border: 1px solid var(--v3-hair); }
+    .v3-smm .h-card.--dark .h-card-num { color: var(--gold); }
+    .v3-smm .h-card-top { display: flex; align-items: center; gap: 12px; padding-right: 44px; }
+    .v3-smm .h-card-top img { width: 52px; height: 52px; flex: none; border-radius: 14px; object-fit: cover; }
+    .v3-smm .h-card-who { font-size: 0.9375rem; font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; }
+    .v3-smm .h-card-who small { display: block; margin-top: 2px; font-size: 0.8125rem; font-weight: 550; opacity: 0.68; }
+    .v3-smm .h-card-tag { display: inline-flex; align-self: flex-start; margin-top: 18px; padding: 5px 11px; border-radius: 999px; font-size: 0.8125rem; font-weight: 650; background: rgba(20,14,4,0.1); }
+    .v3-smm .h-card.--dark .h-card-tag { background: rgba(255,255,255,0.08); color: rgba(246,240,230,0.8); }
+    .v3-smm .h-card-num { margin-top: auto; font-size: clamp(4.2rem, 6.6vw, 5.4rem); font-weight: 800; line-height: 0.88; letter-spacing: -0.065em; }
+    .v3-smm .h-card-label { margin-top: 12px; font-size: 1.125rem; font-weight: 750; line-height: 1.22; letter-spacing: -0.02em; }
+    .v3-smm .h-card-foot { margin-top: 10px; font-size: 0.9375rem; line-height: 1.45; opacity: 0.74; }
+    .v3-smm .h-card-go { position: absolute; top: 18px; right: 18px; width: 38px; height: 38px; border-radius: 999px; display: grid; place-items: center; background: rgba(20,14,4,0.1); transition: transform .3s var(--v3-ease); }
+    .v3-smm .h-card.--dark .h-card-go { background: rgba(255,255,255,0.08); }
+    .v3-smm .h-card-go svg { width: 18px; height: 18px; }
+    .v3-smm .h-card.--more { justify-content: space-between; background: transparent; color: var(--text-head); border: 1px solid var(--v3-hair-2); }
+    .v3-smm .h-card.--more strong { font-size: 1.875rem; font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; }
+    @media (hover: hover) {
+      .v3-smm .h-card:hover { transform: translateY(-4px); }
+      .v3-smm .h-card:hover .h-card-go { transform: translateX(2px); }
+    }
+
+    /* what we do */
+    .v3-smm .s-svcs { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 40px 0 0; padding: 0; }
+    .v3-smm .s-svc { display: flex; flex-direction: column; overflow: hidden; border-radius: 30px; background: var(--v3-elev-1); border: 1px solid var(--v3-hair); }
+    .v3-smm .s-svc-media { aspect-ratio: 4 / 3; overflow: hidden; background: var(--v3-elev-2); }
+    .v3-smm .s-svc-media img { width: 100%; height: 100%; object-fit: cover; }
+    .v3-smm .s-svc-body { display: flex; flex-direction: column; flex: 1; padding: 26px 26px 24px; }
+    .v3-smm .s-svc-n { font-size: 0.875rem; font-weight: 700; color: var(--gold); }
+    .v3-smm .s-svc h3 { margin-top: 8px; font-size: clamp(1.375rem, 2vw, 1.625rem); font-weight: 800; line-height: 1.12; letter-spacing: -0.035em; color: var(--text-head); }
+    .v3-smm .s-svc-body > p { margin-top: 10px; font-size: 1rem; line-height: 1.6; color: rgba(246,240,230,0.72); }
+    .v3-smm .s-svc ul { list-style: none; margin: 18px 0 0; padding: 0; border-top: 1px solid var(--v3-hair); }
+    .v3-smm .s-svc li { padding: 11px 0; border-bottom: 1px solid var(--v3-hair); font-size: 1rem; line-height: 1.45; color: rgba(246,240,230,0.7); }
+    .v3-smm .s-svc li:last-child { border-bottom: 0; padding-bottom: 0; }
+    .v3-smm .s-svc li strong { font-weight: 650; color: var(--text-head); }
+    .v3-smm .s-note { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 14px; padding: 26px 28px; border-radius: 30px; border: 1px solid var(--v3-hair); }
+    .v3-smm .s-note h3 { font-size: 1.25rem; font-weight: 800; line-height: 1.2; letter-spacing: -0.03em; color: var(--text-head); }
+    .v3-smm .s-note p { margin-top: 6px; max-width: 64ch; font-size: 1rem; line-height: 1.55; color: rgba(246,240,230,0.72); }
+    .v3-smm .s-note .btn { flex: none; height: 52px; padding: 0 24px; font-size: 1rem; }
+
+    /* the problem */
+    .v3-smm .s-split { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+    .v3-smm .h-points { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--v3-hair); }
+    .v3-smm .h-points li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; padding: 20px 0; border-bottom: 1px solid var(--v3-hair); }
+    .v3-smm .h-points .n { padding-top: 3px; font-size: 0.875rem; font-weight: 700; color: var(--gold); }
+    .v3-smm .h-points h3 { font-size: 1.1875rem; font-weight: 750; letter-spacing: -0.02em; color: var(--text-head); }
+    .v3-smm .h-points p { margin-top: 6px; font-size: 1rem; line-height: 1.6; color: rgba(246,240,230,0.72); }
+    .v3-smm .h-points a { color: var(--text-head); text-decoration: underline; text-decoration-color: rgba(246,240,230,0.3); text-underline-offset: 3px; }
+
+    /* influencer cycle vs owned channel */
+    .v3-smm .s-vs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 40px; }
+    .v3-smm .s-vs-card { display: flex; flex-direction: column; padding: clamp(26px, 3.4vw, 40px); border-radius: 32px; }
+    .v3-smm .s-vs-card.--dark { background: var(--v3-elev-1); border: 1px solid var(--v3-hair); color: var(--text-head); }
+    .v3-smm .s-vs-card.--light { background: #f6f0e6; color: var(--v3-ink-on-gold); }
+    .v3-smm .s-vs-tag { align-self: flex-start; padding: 5px 11px; border-radius: 999px; font-size: 0.8125rem; font-weight: 650; background: rgba(255,255,255,0.08); color: rgba(246,240,230,0.8); }
+    .v3-smm .s-vs-card.--light .s-vs-tag { background: rgba(20,14,4,0.08); color: rgba(20,14,4,0.78); }
+    .v3-smm .s-vs-card h3 { margin-top: 18px; font-size: clamp(1.75rem, 3vw, 2.375rem); font-weight: 800; line-height: 1.04; letter-spacing: -0.045em; color: inherit; }
+    .v3-smm .s-vs-sub { margin-top: 10px; font-size: 1.0625rem; line-height: 1.5; opacity: 0.72; }
+    .v3-smm .s-vs-list { list-style: none; counter-reset: vs; margin: 26px 0 0; padding: 0; border-top: 1px solid var(--v3-hair); }
+    .v3-smm .s-vs-card.--light .s-vs-list, .v3-smm .s-vs-card.--light .s-vs-list li { border-color: rgba(20,14,4,0.12); }
+    .v3-smm .s-vs-list li { counter-increment: vs; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 10px; padding: 15px 0; border-bottom: 1px solid var(--v3-hair); font-size: 1.0625rem; font-weight: 650; line-height: 1.4; letter-spacing: -0.01em; }
+    .v3-smm .s-vs-list li::before { content: counter(vs, decimal-leading-zero); padding-top: 2px; font-size: 0.875rem; font-weight: 700; opacity: 0.5; }
+    .v3-smm .s-vs-card.--dark .s-vs-list li b { color: var(--gold); font-weight: 750; }
+    .v3-smm .s-vs-loop { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-size: 0.9375rem; font-weight: 650; color: rgba(246,240,230,0.6); }
+    .v3-smm .s-vs-loop svg { width: 18px; height: 18px; }
+    .v3-smm .s-closer { margin: clamp(40px, 6vw, 64px) auto 0; max-width: 24ch; text-align: center; font-size: clamp(1.75rem, 3.6vw, 2.75rem); font-weight: 800; line-height: 1.08; letter-spacing: -0.045em; color: var(--text-head); text-wrap: balance; }
+    .v3-smm .s-closer span { color: rgba(246,240,230,0.5); }
+    .v3-smm .s-more { max-width: 840px; margin: 36px auto 0; border-top: 1px solid var(--v3-hair); border-bottom: 1px solid var(--v3-hair); }
+    .v3-smm .s-more summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; cursor: pointer; font-size: 1.0625rem; font-weight: 700; letter-spacing: -0.015em; color: var(--text-head); }
+    .v3-smm .s-more summary::-webkit-details-marker { display: none; }
+    .v3-smm .s-more summary::after { content: ""; flex: none; width: 12px; height: 12px; border-right: 2px solid rgba(246,240,230,0.5); border-bottom: 2px solid rgba(246,240,230,0.5); transform: translateY(-3px) rotate(45deg); transition: transform .3s var(--v3-ease); }
+    .v3-smm .s-more[open] summary::after { transform: translateY(3px) rotate(-135deg); }
+    .v3-smm .s-more-body { padding: 0 0 24px; }
+    .v3-smm .s-more-body p { font-size: 1.0625rem; line-height: 1.7; color: rgba(246,240,230,0.74); }
+    .v3-smm .s-more-body p + p { margin-top: 14px; }
+
+    /* framework steps */
+    .v3-smm .h-steps { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 40px 0 0; padding: 0; }
+    .v3-smm .h-step { padding: 26px 24px; border-radius: 26px; background: var(--v3-elev-1); border: 1px solid var(--v3-hair); }
+    .v3-smm .h-step b { display: block; font-size: 0.875rem; font-weight: 700; color: var(--gold); }
+    .v3-smm .h-step h3 { margin-top: 18px; font-size: 1.3125rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.03em; color: var(--text-head); }
+    .v3-smm .h-step p { margin-top: 8px; font-size: 1rem; line-height: 1.55; color: rgba(246,240,230,0.72); }
+    .v3-smm .s-center { display: flex; justify-content: center; margin-top: 32px; }
+    .v3-smm .s-center .btn { height: 54px; padding: 0 26px; font-size: 1rem; }
+
+    /* proof */
+    .v3-smm .hp2-vid-showcase { display: grid; grid-template-columns: repeat(2, minmax(0, 280px)); justify-content: center; gap: 16px; margin-top: 40px; }
+    .v3-smm .hp2-vid-showcase .hp2-vid-card-frame { border-radius: 26px; }
+    .v3-smm .bum-reviews { margin-top: 64px; }
+
+    /* fit */
+    .v3-smm .s-fit { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: clamp(28px, 5vw, 72px); margin-top: 40px; }
+    .v3-smm .s-fit h3 { font-size: 1.1875rem; font-weight: 750; letter-spacing: -0.02em; color: var(--text-head); }
+    .v3-smm .s-fit ul { list-style: none; margin: 14px 0 0; padding: 0; border-top: 1px solid var(--v3-hair); }
+    .v3-smm .s-fit li { display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 10px; padding: 15px 0; border-bottom: 1px solid var(--v3-hair); font-size: 1.0625rem; line-height: 1.5; color: rgba(246,240,230,0.84); }
+    .v3-smm .s-fit li svg { width: 18px; height: 18px; margin-top: 4px; }
+    .v3-smm .s-fit .--yes svg { color: var(--gold); }
+    .v3-smm .s-fit .--no li { color: rgba(246,240,230,0.6); }
+    .v3-smm .s-fit .--no svg { color: rgba(246,240,230,0.4); }
+
+    /* FAQ (markup and answers kept verbatim) */
+    .v3-smm .hp2-faq-header { max-width: 780px; margin: 0 auto; text-align: center; }
+    .v3-smm .hp2-faq-hero-heading { margin-top: 10px; font-size: clamp(2.1rem, 4.4vw, 3.5rem); line-height: 1.03; font-weight: 800; letter-spacing: -0.048em; color: var(--text-head); }
+    .v3-smm .hp2-faq-subtitle { margin: 16px auto 0; max-width: 58ch; font-size: clamp(1.0625rem, 1.3vw, 1.1875rem); color: rgba(246,240,230,0.72); }
+    .v3-smm .hp2-faq-grid { max-width: 840px; margin: 40px auto 0; }
+    .v3-smm .hp2-faq-list { border-top: 1px solid var(--v3-hair); }
+    .v3-smm .hp2-faq-item { border-bottom: 1px solid var(--v3-hair); }
+    .v3-smm .hp2-faq-item summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 68px; padding: 18px 2px; cursor: pointer; font-size: clamp(1.0625rem, 1.4vw, 1.1875rem); font-weight: 700; line-height: 1.35; letter-spacing: -0.015em; color: var(--text-head); -webkit-tap-highlight-color: transparent; }
+    .v3-smm .hp2-faq-item summary::-webkit-details-marker { display: none; }
+    .v3-smm .hp2-faq-item summary::after { content: ""; flex: none; width: 12px; height: 12px; border-right: 2px solid rgba(246,240,230,0.5); border-bottom: 2px solid rgba(246,240,230,0.5); transform: translateY(-3px) rotate(45deg); transition: transform .3s var(--v3-ease); }
+    .v3-smm .hp2-faq-item[open] summary::after { transform: translateY(3px) rotate(-135deg); }
+    .v3-smm .hp2-faq-count { display: none; }
+    .v3-smm .hp2-faq-answer { padding: 0 2px 24px; max-width: 70ch; font-size: 1.0625rem; line-height: 1.65; color: rgba(246,240,230,0.74); }
+    .v3-smm .hp2-faq-answer strong { color: var(--text-head); font-weight: 650; }
+    .v3-smm .hp2-faq-bottom-cta { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; margin-top: 28px; padding: 22px 24px; border-radius: 24px; background: var(--v3-elev-1); border: 1px solid var(--v3-hair); }
+    .v3-smm .hp2-faq-bottom-cta p { font-size: 1.0625rem; font-weight: 650; color: var(--text-head); }
+
+    /* final call */
+    .v3-smm .h-final { padding: clamp(80px, 10vw, 128px) 0 clamp(56px, 8vw, 96px); }
+    .v3-smm .h-final-card { padding: clamp(40px, 7vw, 92px) clamp(24px, 6vw, 80px); border-radius: 36px; background: var(--gold); color: var(--v3-ink-on-gold); text-align: center; }
+    .v3-smm .h-final-card h2 { font-size: clamp(2.3rem, 5.4vw, 4.4rem); line-height: 1; font-weight: 800; letter-spacing: -0.055em; color: var(--v3-ink-on-gold); }
+    .v3-smm .h-final-card p { margin: 18px auto 0; max-width: 52ch; font-size: clamp(1.0625rem, 1.4vw, 1.25rem); line-height: 1.5; color: rgba(20,14,4,0.78); }
+    .v3-smm .h-final-card .h-cta { justify-content: center; }
+    html[lang] .v3-smm .h-final-card .btn-primary { background: var(--v3-ink-on-gold) !important; color: #f6f0e6 !important; }
+    html[lang] .v3-smm .h-final-card .btn-primary:hover { background: #2a1f0d !important; }
+    html[lang] .v3-smm .h-final-card .btn:not(.btn-primary) { background: rgba(20,14,4,0.08); border-color: rgba(20,14,4,0.22); color: var(--v3-ink-on-gold); }
+
+    /* responsive */
+    @media (max-width: 960px) {
+      .v3-smm .sm-hero { padding-top: calc(var(--v3-bar-h) + 48px); }
+      .v3-smm .s-hero-inner { grid-template-columns: 1fr; gap: 36px; }
+      .v3-smm .s-reels { max-width: 640px; }
+      .v3-smm .s-svcs { grid-template-columns: 1fr; }
+      .v3-smm .s-svc { flex-direction: row; }
+      .v3-smm .s-svc-media { flex: 0 0 36%; aspect-ratio: auto; }
+      .v3-smm .s-split { grid-template-columns: 1fr; gap: 28px; }
+      .v3-smm .h-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .v3-smm .s-fit { grid-template-columns: 1fr; gap: 36px; }
+    }
     @media (max-width: 700px) {
-      .lib-nav-dropdown-menu {
-        gap: 10px;
-      }
-      .lib-mobile-services {
-        padding-bottom: 12px;
-        margin-bottom: 8px;
-        border-bottom: 1px solid rgba(255,248,235,0.08);
-      }
-      .lib-mobile-services-trigger {
-        border-color: rgba(226,168,77,0.22);
-        background: rgba(226,168,77,0.06);
-      }
-      .lib-mobile-services-menu {
-        position: relative;
-        margin: 10px 8px 0;
-        padding: 28px 0 4px 14px;
-        border-left: 1px solid rgba(226,168,77,0.28);
-        background: linear-gradient(90deg, rgba(226,168,77,0.055), transparent 62%);
-        border-radius: 0 16px 16px 0;
-      }
-      .lib-mobile-services[open] .lib-mobile-services-menu {
-        display: flex !important;
-      }
-      .lib-mobile-services-menu::before {
-        content: "Service pages";
-        position: absolute;
-        top: 6px;
-        left: 14px;
-        font-size: 0.64rem;
-        font-weight: 800;
-        letter-spacing: 0.13em;
-        text-transform: uppercase;
-        color: rgba(226,168,77,0.78);
-      }
-      .lib-mobile-services-menu a {
-        position: relative;
-        min-height: 38px;
-        padding: 9px 12px 9px 24px;
-        border-radius: 12px;
-        color: rgba(255,248,235,0.86);
-        font-size: 0.82rem;
-      }
-      .lib-mobile-services-menu a::before {
-        content: "";
-        position: absolute;
-        left: 9px;
-        top: 50%;
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background: rgba(226,168,77,0.75);
-        transform: translateY(-50%);
-      }
-      .lib-mobile-services + .lib-mobile-menu-only {
-        position: relative;
-        margin-top: 18px;
-        padding-top: 28px;
-        border-top: 1px solid rgba(255,248,235,0.08);
-      }
-      .lib-mobile-services + .lib-mobile-menu-only::before {
-        content: "Main menu";
-        position: absolute;
-        top: 8px;
-        left: 12px;
-        font-size: 0.64rem;
-        font-weight: 800;
-        letter-spacing: 0.13em;
-        text-transform: uppercase;
-        color: rgba(255,248,235,0.42);
-      }
-      /* Influencer Trap heading: tighter on mobile so it doesn't run 5 lines */
-      #influencer-trap .lib-section-title {
-        font-size: clamp(1.8rem, 8vw, 2.4rem);
-        max-width: 18ch;
-        margin-bottom: 18px;
-      }
-      /* Drop the hard <br> in the heading on mobile so it wraps naturally */
-      #influencer-trap .lib-section-title br { display: none; }
-
-      /* Approach video: center under the timeline */
-      .sm-approach-video {
-        margin-left: auto;
-        margin-right: auto;
-        width: 240px;
-      }
-
-      /* Proof section: kill the hard line-break so the heading wraps naturally */
-      .sm-proof-copy .lib-section-title br { display: none; }
-      .sm-proof-copy .lib-section-title { font-size: clamp(1.7rem, 6.8vw, 2.2rem); }
-
-      #cta .hp2-cta-scene {
-        padding: 40px 20px;
-        border-radius: 22px;
-      }
-      #cta h2 {
-        font-size: clamp(1.8rem, 8vw, 2.6rem);
-        line-height: 1.12;
-      }
+      /* shared.css adds phone-only hero padding, a smaller H1 and a 74px page offset; this hero sizes itself */
+      html[lang] body .page.v3-smm { padding-top: 0; }
+      html[lang] body .v3-smm .sm-hero { padding: calc(var(--v3-bar-h) + 16px) 0 0; }
+      html[lang] body .v3-smm .sm-hero .lib-section-label { display: none; }
+      html[lang] body .v3-smm .sm-hero h1 { margin: 0; font-size: clamp(2.125rem, 9.4vw, 2.75rem); line-height: 1.02; }
+      .v3-smm .s-hero-inner { gap: 32px; }
+      .v3-smm .h-lede { margin-top: 14px; }
+      /* shared.css trims phone body copy to 15 to 15.5px; v3 keeps reading text at 16px or more */
+      html[lang] .v3-smm :is(.h-lede, .h-head p, .s-vs-sub, .s-vs-list li, .s-more-body p, .s-fit li, .hp2-faq-answer, .hp2-faq-subtitle, .hp2-faq-bottom-cta p, .h-final-card p) { font-size: 17px !important; line-height: 1.55 !important; }
+      html[lang] .v3-smm :is(.s-svc-body > p, .s-svc li, .h-points p, .h-step p, .s-note p, .bum-review__quote p) { font-size: 16px !important; line-height: 1.6 !important; }
+      html[lang] .v3-smm .s-closer { font-size: clamp(1.75rem, 8vw, 2.25rem) !important; line-height: 1.08 !important; }
+      html[lang] .v3-smm .s-cap { font-size: 15px !important; line-height: 1.35 !important; }
+      .v3-smm .h-cta { margin-top: 20px; gap: 10px; }
+      .v3-smm .h-cta .btn { flex: 1 1 100%; height: 52px; }
+      .v3-smm .s-reels { display: flex; gap: 10px; max-width: none; margin: 0 -16px; padding: 0 16px 4px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px; scrollbar-width: none; }
+      .v3-smm .s-reels::-webkit-scrollbar { display: none; }
+      .v3-smm .s-reels > li { flex: 0 0 62%; scroll-snap-align: start; }
+      .v3-smm .s-chips { margin-top: 40px; }
+      .v3-smm .s-chips-row { padding: 2px 12px; }
+      .v3-smm .h-sec { padding-top: 72px; }
+      .v3-smm .h-head-row { display: block; }
+      .v3-smm .h-deck-nav { display: none; }
+      .v3-smm .h-deck { margin: 28px -16px 0; padding: 4px 16px 14px; scroll-padding-inline: 16px; gap: 12px; }
+      .v3-smm .h-deck > li { flex-basis: 78%; }
+      .v3-smm .h-card { min-height: 380px; }
+      .v3-smm .s-svc { flex-direction: column; border-radius: 26px; }
+      .v3-smm .s-svc-media { flex: none; aspect-ratio: 16 / 11; }
+      .v3-smm .s-svc-body { padding: 22px 22px 20px; }
+      .v3-smm .s-note { flex-direction: column; align-items: stretch; padding: 22px; border-radius: 26px; }
+      .v3-smm .s-note .btn { width: 100%; }
+      .v3-smm .s-vs { grid-template-columns: 1fr; gap: 12px; }
+      .v3-smm .s-vs-card { border-radius: 28px; }
+      .v3-smm .h-steps { grid-template-columns: 1fr; gap: 10px; }
+      .v3-smm .h-step { display: grid; grid-template-columns: 34px minmax(0, 1fr); column-gap: 10px; padding: 20px; }
+      .v3-smm .h-step b { grid-row: 1 / span 2; padding-top: 4px; }
+      .v3-smm .h-step h3 { margin-top: 0; }
+      .v3-smm .s-center .btn { width: 100%; }
+      .v3-smm .hp2-vid-showcase { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .v3-smm .hp2-vid-showcase .hp2-vid-card-frame { border-radius: 20px; }
+      .v3-smm .hp2-vid-showcase .hp2-vid-card-play { width: 48px; height: 48px; margin: -24px 0 0 -24px; }
+      .v3-smm .hp2-vid-showcase .hp2-vid-card-play::after { left: 19px; top: 14px; border-left-width: 13px; border-top-width: 9px; border-bottom-width: 9px; }
+      .v3-smm .bum-reviews { margin-top: 48px; }
+      .v3-smm .hp2-faq-bottom-cta .btn { width: 100%; }
+      .v3-smm .h-final-card { border-radius: 30px; }
+      .v3-smm .h-final-card .btn { flex: 1 1 100%; }
     }
-
-    /* ══════════════════════════════════════
-       PREFERS-REDUCED-MOTION
-       ══════════════════════════════════════ */
     @media (prefers-reduced-motion: reduce) {
-      .sm-stat-card,
-      .sm-problem-card,
-      .sm-svc-panel,
-      .sm-timeline-step,
-      .sm-platform-card,
-      .sm-content-card,
-      .sm-process-step,
-      .sm-stats-card,
-      .sm-result-card,
-      .sm-fit-item,
-      .hp2-faq-item {
-        opacity: 1 !important;
-        transform: none !important;
-      }
-      .sm-problem-card .glass-acc,
-      .sm-platform-card .glass-acc,
-      .sm-result-card .glass-acc { animation: none !important; }
-      .hp2-cta-orb { animation: none !important; }
+      .v3-smm .h-deck { scroll-behavior: auto; }
+      .v3-smm .h-card, .v3-smm .hp2-vid-card-play, .v3-smm .s-chips a span, .v3-smm .s-more summary::after, .v3-smm .hp2-faq-item summary::after { transition: none; }
+      .v3-smm .h-card:hover, .v3-smm .hp2-vid-card:hover .hp2-vid-card-play { transform: none; }
     }
   </style>
 </head>
@@ -2663,547 +568,418 @@
         </div>
       </details>
       <a href="/social-media-website-grader" class="lib-nav-grader" target="_blank" rel="noopener" aria-label="Social &amp; Web Grader (opens in a new tab)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Social &amp; Web Grader</a>
-      <a href="/">Home</a>
+      <a href="/case-studies">Case Studies</a>
       <a href="/about">About</a>
       <a class="lib-nav-phone" href="tel:+17867409499">Call Us</a>
       <a href="/contact" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Book Free Strategy Call</a>
     </div>
   </nav>
 
-  <div class="page">
+  <div class="page v3-smm">
 
-    <!-- ═══ 1. HERO — Stacked Video ═══ -->
+    <!-- ═══ HERO ═══ -->
     <section class="sm-hero" id="hero">
-      <div class="sm-hero-inner">
-        <div class="sm-hero-copy">
-          <div class="hero-badge">Instagram &bull; TikTok &bull; Facebook</div>
-          <h1>Restaurant Social Media Marketing That Fills <span class="accent-serif">Seats.</span></h1>
-          <p>Button Up Media runs social media for restaurants in Miami and South Florida. We film on-site, post for you, and turn the people who&rsquo;d love your food into reservations.</p>
-          <div class="sm-hero-cta">
-            <div class="flex-row" style="gap: 12px;">
-              <a href="/contact" class="btn btn-primary">Get Your Free Strategy Call</a>
-            </div>
+      <div class="h-wrap s-hero-inner">
+        <div class="s-hero-copy">
+          <div class="lib-section-label">Instagram, TikTok and Facebook</div>
+          <h1>Restaurant social media marketing that fills <span class="accent-serif">seats.</span></h1>
+          <p class="h-lede">Button Up Media runs social media for restaurants in Miami and South Florida. We film on-site, post for you, and turn the people who&rsquo;d love your food into reservations.</p>
+          <div class="h-cta">
+            <a href="/contact" class="btn btn-primary">Get Your Free Strategy Call</a>
+            <a href="/case-studies" class="btn">See our work</a>
           </div>
         </div>
-        <div class="v-stack-wrap">
-          <div class="sm-audio-hint" data-audio-hint>
-            <i data-lucide="volume-2" aria-hidden="true"></i>
-            <span class="sm-audio-hint-desktop">Click any video to hear it</span>
-            <span class="sm-audio-hint-mobile">Tap any video to hear it</span>
-          </div>
-          <div class="v-stack">
-            <div class="v-stack-card" data-autoplay-hover data-audio-managed="true">
-              <video data-video-src="videos/sm-miami-local.mp4" muted loop playsinline preload="none" poster="images/sm-miami-local-poster.avif"></video>
-              <div class="v-stack-play"><i data-lucide="play" style="width:20px;height:20px"></i></div>
-              <div class="v-stack-label"><strong>Influencer Content</strong>Scroll-stopping food reels</div>
+        <ul class="s-reels" aria-label="Clips we shot for restaurants">
+          <li class="hp2-vid-card" data-audio-managed="true">
+            <div class="hp2-vid-card-frame">
+              <video data-video-src="videos/sm-miami-local.mp4" poster="images/sm-miami-local-poster.avif" width="480" height="854" playsinline preload="none"></video>
+              <button type="button" class="hp2-vid-card-play" aria-label="Play: Influencer content"></button>
             </div>
-            <div class="v-stack-card" data-autoplay-hover data-audio-managed="true">
-              <video data-video-src="videos/sm-rainy-days-sophisticated.mp4" muted loop playsinline preload="none" poster="images/sm-rainy-days-sophisticated-poster.avif"></video>
-              <div class="v-stack-play"><i data-lucide="play" style="width:20px;height:20px"></i></div>
-              <div class="v-stack-label"><strong>Branded Comedy Series</strong>Rainy Days Wine Bar</div>
+            <p class="s-cap"><strong>Influencer content</strong>Scroll-stopping food reels</p>
+          </li>
+          <li class="hp2-vid-card" data-audio-managed="true">
+            <div class="hp2-vid-card-frame">
+              <video data-video-src="videos/sm-rainy-days-sophisticated.mp4" poster="images/sm-rainy-days-sophisticated-poster.avif" width="480" height="854" playsinline preload="none"></video>
+              <button type="button" class="hp2-vid-card-play" aria-label="Play: Branded comedy series for Rainy Days Wine Bar"></button>
             </div>
-            <div class="v-stack-card" data-autoplay-hover data-audio-managed="true">
-              <video data-video-src="videos/sm-fattycrab-zackdfilms.mp4" muted loop playsinline preload="none" poster="images/sm-fattycrab-zackdfilms-poster.avif"></video>
-              <div class="v-stack-play"><i data-lucide="play" style="width:20px;height:20px"></i></div>
-              <div class="v-stack-label"><strong>Scroll-Stop Hook</strong>Fatty Crab x ZackDFilms</div>
+            <p class="s-cap"><strong>Branded comedy series</strong>Rainy Days Wine Bar</p>
+          </li>
+          <li class="hp2-vid-card" data-audio-managed="true">
+            <div class="hp2-vid-card-frame">
+              <video data-video-src="videos/sm-fattycrab-zackdfilms.mp4" poster="images/sm-fattycrab-zackdfilms-poster.avif" width="480" height="854" playsinline preload="none"></video>
+              <button type="button" class="hp2-vid-card-play" aria-label="Play: Scroll-stop hook for Fatty Crab with ZackDFilms"></button>
             </div>
-          </div>
-        </div>
+            <p class="s-cap"><strong>Scroll-stop hook</strong>Fatty Crab x ZackDFilms</p>
+          </li>
+        </ul>
       </div>
     </section>
 
-    <!-- ═══ 2. CLIENT RESULTS, right under the hero ═══ -->
-    <section class="card-overlay --dark lib-section --tight" id="client-results">
-      <div class="lib-section-label">Results</div>
-      <h2 class="lib-section-title">Restaurant social media results, in real numbers</h2>
-      <p class="lib-section-sub">Views and followers from restaurant accounts we run, counted on Instagram or in Sprout Social.</p>
-      <div class="bum-cases">
-        <a class="bum-case" href="/case-studies/tonis-sushi-bar">
-          <div class="bum-case__media"><img src="/media/tonis-etiquette-poster.webp" alt="Chef Toshiya at Toni's Sushi Bar in a Reel about sushi etiquette" width="540" height="960" loading="lazy" decoding="async" style="object-position:50% 18%"></div>
-          <div class="bum-case__body">
-            <span class="bum-case__tag">Organic social</span>
-            <strong class="bum-case__num">64M+</strong>
-            <span class="bum-case__label">Reel views in five months</span>
-            <span class="bum-case__name">Toni's Sushi Bar, South Beach</span>
-            <span class="bum-case__more">Instagram followers grew from about 4K to 80.1K. One Reel reached 52.5M views.</span>
-            <span class="bum-case__cta">Read the case study &rarr;</span>
-          </div>
-        </a>
-        <a class="bum-case" href="/case-studies/the-fatty-crab">
-          <div class="bum-case__media"><img src="images/fatty-crab-thumbnail-ayce.avif" alt="A guest eating crab at The Fatty Crab" width="540" height="960" loading="lazy" decoding="async" style="object-position:50% 30%"></div>
-          <div class="bum-case__body">
-            <span class="bum-case__tag">Organic social</span>
-            <strong class="bum-case__num">46M+</strong>
-            <span class="bum-case__label">video views</span>
-            <span class="bum-case__name">The Fatty Crab, Doral</span>
-            <span class="bum-case__more">350K+ followers and 7.3% engagement on Instagram.</span>
-            <span class="bum-case__cta">Read the case study &rarr;</span>
-          </div>
-        </a>
-        <a class="bum-case" href="/case-studies/brewing-buddha">
-          <div class="bum-case__media"><img src="/media/cs-brewing-buddha-jordan.webp" alt="Jordan Athos, owner of Brewing Buddha" width="540" height="960" loading="lazy" decoding="async" style="object-position:50% 25%"></div>
-          <div class="bum-case__body">
-            <span class="bum-case__tag">Organic social</span>
-            <strong class="bum-case__num">24M+</strong>
-            <span class="bum-case__label">video views</span>
-            <span class="bum-case__name">Brewing Buddha, Pinecrest</span>
-            <span class="bum-case__more">53K+ followers across Instagram, Facebook, TikTok and YouTube.</span>
-            <span class="bum-case__cta">Read the case study &rarr;</span>
-          </div>
-        </a>
-        <a class="bum-case" href="/case-studies/shimuja-ramen">
-          <div class="bum-case__media"><img src="/media/cs-shimuja-hero.webp" alt="Chef Kei, owner of Shimuja Ramen" width="540" height="960" loading="lazy" decoding="async" style="object-position:50% 25%"></div>
-          <div class="bum-case__body">
-            <span class="bum-case__tag">Organic social</span>
-            <strong class="bum-case__num">15.4M</strong>
-            <span class="bum-case__label">social media views</span>
-            <span class="bum-case__name">Shimuja Ramen, Downtown Miami</span>
-            <span class="bum-case__more">Short videos that put Chef Kei and his ramen in front of people nearby.</span>
-            <span class="bum-case__cta">Read the case study &rarr;</span>
-          </div>
-        </a>
+    <!-- ═══ ON THIS PAGE ═══ -->
+    <nav class="s-chips" aria-label="On this page">
+      <div class="s-chips-row">
+        <a href="#client-results"><span>Results</span></a>
+        <a href="#services"><span>What we do</span></a>
+        <a href="#the-problem"><span>The problem</span></a>
+        <a href="#how-to"><span>The framework</span></a>
+        <a href="#results"><span>Reviews</span></a>
+        <a href="#who-its-for"><span>Is it a fit</span></a>
+        <a href="#faq"><span>FAQ</span></a>
       </div>
-      <div class="bum-cases-foot"><a href="/case-studies#social">See every social media case study &rarr;</a></div>
-    </section>
+    </nav>
 
-    <!-- ═══ 3. THE PROBLEM ═══ -->
-    <section class="card-overlay lib-section" id="the-problem">
-      <div class="sm-problem-head">
-        <div class="sm-problem-head-copy">
-          <div class="lib-section-label">The Problem</div>
-          <h2 class="lib-section-title">Why Your Restaurant&rsquo;s Social Media Isn&rsquo;t Working</h2>
-          <p class="lib-section-sub">You know social media matters. You&rsquo;ve tried. But none of the usual approaches actually work.</p>
-
-          <div class="sm-problem-accordion">
-            <details class="sm-problem-item">
-              <summary>
-                <i data-lucide="smartphone"></i>
-                <span>The DIY Trap</span>
-              </summary>
-              <div class="sm-problem-body">You&rsquo;re managing food costs, staffing, vendor relationships, and a hundred daily fires. When social media gets squeezed into the margins of an already impossible day, the results reflect it. Inconsistent posting, low-quality photos, no strategy, no growth.</div>
-            </details>
-            <details class="sm-problem-item">
-              <summary>
-                <i data-lucide="palette"></i>
-                <span>The Generic Agency Problem</span>
-              </summary>
-              <div class="sm-problem-body">You hire a marketing agency and get recycled stock photos, generic Canva graphics, and captions that could apply to any business. They&rsquo;ve never set foot in your restaurant or captured the energy of your dining room.</div>
-            </details>
-            <details class="sm-problem-item">
-              <summary>
-                <i data-lucide="trending-up"></i>
-                <span>The Influencer Gamble</span>
-              </summary>
-              <div class="sm-problem-body">You pay an influencer to come in. They post one story, maybe a reel. You get a bump in followers for a week. Then nothing. No system. No consistency. No long-term growth. Just a one-time spike that fades as fast as it arrived. <em style="color:var(--gold); font-style:normal; font-weight:600;">(More on this below.)</em></div>
-            </details>
-            <details class="sm-problem-item">
-              <summary>
-                <i data-lucide="puzzle"></i>
-                <span>What&rsquo;s Actually Missing</span>
-              </summary>
-              <div class="sm-problem-body">It&rsquo;s not effort or budget. What&rsquo;s missing is a dedicated content partner who understands restaurants, physically creates the content, and builds a strategy to turn social media into a consistent customer acquisition channel.</div>
-            </details>
+    <!-- ═══ RESULTS ═══ -->
+    <section class="h-sec" id="client-results">
+      <div class="h-wrap">
+        <div class="h-head-row">
+          <div class="h-head">
+            <div class="lib-section-label">Results</div>
+            <h2>Restaurant social media results, in real numbers</h2>
+            <p>Views and followers from restaurant accounts we run, counted on Instagram or in Sprout Social.</p>
+          </div>
+          <div class="h-deck-nav">
+            <button type="button" data-deck="-1" aria-label="Previous results"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+            <button type="button" data-deck="1" aria-label="More results"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
           </div>
         </div>
-        <div class="sm-problem-accent" data-autoplay-hover data-audio-managed="true">
-          <video data-video-src="videos/sm-problem-accent.mp4" muted loop playsinline preload="none" poster="images/sm-problem-accent-poster.avif"></video>
-          <div class="sm-play-btn" aria-hidden="true"><i data-lucide="play"></i></div>
-        </div>
+        <ul class="h-deck" id="s-deck">
+          <li><a class="h-card --gold" href="/case-studies/tonis-sushi-bar">
+              <span class="h-card-top"><img src="/media/tonis-etiquette-poster.webp" alt="" width="104" height="104" loading="lazy" decoding="async" /><span class="h-card-who">Toni's Sushi Bar<small>South Beach</small></span></span>
+              <span class="h-card-tag">Organic social</span>
+              <span class="h-card-num">64M+</span>
+              <span class="h-card-label">Reel views in five months</span>
+              <span class="h-card-foot">Instagram followers grew from about 4K to 80.1K. One Reel reached 52.5M views.</span>
+              <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a></li>
+          <li><a class="h-card --light" href="/case-studies/the-fatty-crab">
+              <span class="h-card-top"><img src="images/fatty-crab-thumbnail-ayce.avif" alt="" width="104" height="104" loading="lazy" decoding="async" /><span class="h-card-who">The Fatty Crab<small>Doral</small></span></span>
+              <span class="h-card-tag">Organic social</span>
+              <span class="h-card-num">46M+</span>
+              <span class="h-card-label">video views</span>
+              <span class="h-card-foot">350K+ followers and 7.3% engagement on Instagram.</span>
+              <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a></li>
+          <li><a class="h-card --dark" href="/case-studies/brewing-buddha">
+              <span class="h-card-top"><img src="/media/cs-brewing-buddha-jordan.webp" alt="" width="104" height="104" loading="lazy" decoding="async" /><span class="h-card-who">Brewing Buddha<small>Pinecrest</small></span></span>
+              <span class="h-card-tag">Organic social</span>
+              <span class="h-card-num">24M+</span>
+              <span class="h-card-label">video views</span>
+              <span class="h-card-foot">53K+ followers across Instagram, Facebook, TikTok and YouTube.</span>
+              <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a></li>
+          <li><a class="h-card --light" href="/case-studies/shimuja-ramen">
+              <span class="h-card-top"><img src="/media/cs-shimuja-hero.webp" alt="" width="104" height="104" loading="lazy" decoding="async" /><span class="h-card-who">Shimuja Ramen<small>Downtown Miami</small></span></span>
+              <span class="h-card-tag">Organic social</span>
+              <span class="h-card-num">15.4M</span>
+              <span class="h-card-label">social media views</span>
+              <span class="h-card-foot">Short videos that put Chef Kei and his ramen in front of people nearby.</span>
+              <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a></li>
+          <li><a class="h-card --more" href="/case-studies#social"><strong>See every social media case study</strong><span class="h-card-foot">Full stories and real numbers</span><span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
+        </ul>
       </div>
     </section>
 
-    <!-- ═══ 3.5 INFLUENCER TRAP ═══ -->
-    <section class="card-overlay --dark lib-section" id="influencer-trap">
-      <div class="lib-section-label">A Closer Look</div>
-      <h2 class="lib-section-title">You&rsquo;re Renting Your Audience <br>Every Time You Pay an Influencer</h2>
-
-      <details class="sm-it-readmore">
-        <summary>
-          <span>Read the full breakdown</span>
-          <i data-lucide="chevron-down" aria-hidden="true"></i>
-        </summary>
-        <div class="sm-it-copy">
-          <p>Most restaurants run the same playbook when bookings slow down. They pay an influencer $500 to $2,000 to come in. The influencer posts a story, maybe a reel. For a week the room is packed. Then the influencer moves on to the next spot, and so does their audience.</p>
-          <p>That audience is the real problem. They follow influencers because they want to know the next best place to eat. Even if they loved your food, your social page isn&rsquo;t strong enough to give them a reason to follow you. So they don&rsquo;t. They forget you. When they want to go out again, they&rsquo;re back on the same influencer&rsquo;s feed waiting for the next recommendation. The only way back into their orbit is to pay another influencer. The cycle starts over.</p>
-          <p>Now picture the opposite. Your own social account, posting consistently, growing a following of people who actually want to hear what you have to say. When business slows, you don&rsquo;t write a check and hope. You post a story, run a promotion, fill the room. Paid ads and influencers still have a place. They work with a real social presence, not in place of one.</p>
+    <!-- ═══ WHAT WE DO ═══ -->
+    <section class="h-sec" id="services">
+      <div class="h-wrap">
+        <div class="h-head">
+          <div class="lib-section-label">What we do</div>
+          <h2>Restaurant social media marketing services</h2>
+          <p>We shoot it, plan it, post it and answer the comments. Every piece is made in-house by our own team.</p>
         </div>
-      </details>
-
-      <div class="sm-it-comparison">
-        <!-- LEFT: The Cycle -->
-        <div class="sm-it-panel sm-it-panel-cycle">
-          <div class="sm-it-panel-label sm-it-panel-label-warn">The Trap</div>
-          <h3 class="sm-it-panel-headline">The Influencer Cycle</h3>
-          <p class="sm-it-panel-sub">Pay. Spike. Forget. Pay again.</p>
-          <div class="sm-it-cycle-wrap" aria-hidden="true">
-            <svg class="sm-it-cycle-svg" viewBox="0 0 320 320">
-              <defs>
-                <marker id="itArrowHead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M0,0 L10,5 L0,10 z" fill="#e0654d"/>
-                </marker>
-              </defs>
-              <g fill="none" stroke="rgba(224,101,77,0.45)" stroke-width="2" stroke-dasharray="6 6" stroke-linecap="round">
-                <path d="M 215,55 A 120,120 0 0 1 265,160" marker-end="url(#itArrowHead)" class="sm-it-cycle-line" />
-                <path d="M 265,180 A 120,120 0 0 1 205,265" marker-end="url(#itArrowHead)" class="sm-it-cycle-line" />
-                <path d="M 105,265 A 120,120 0 0 1 55,180" marker-end="url(#itArrowHead)" class="sm-it-cycle-line" />
-                <path d="M 55,160 A 120,120 0 0 1 105,55" marker-end="url(#itArrowHead)" class="sm-it-cycle-line" />
-              </g>
-            </svg>
-            <div class="sm-it-cycle-node" data-step="1">
-              <i data-lucide="dollar-sign"></i>
-              <span>You Pay<br><strong>$500 to $2K</strong></span>
+        <ul class="s-svcs">
+          <li class="s-svc">
+            <div class="s-svc-media"><img src="/media/bts-shoot-optimized.avif" alt="The Button Up Media team filming a content shoot on location at a South Florida restaurant" width="1080" height="1440" loading="lazy" decoding="async" style="object-position:50% 40%" /></div>
+            <div class="s-svc-body">
+              <span class="s-svc-n">01</span>
+              <h3>In-house videography</h3>
+              <p>Great social content starts with great footage. Our videographers, editors, and creative leads all sit on our team, so the people shooting at your restaurant are the same people who built the strategy. One shoot typically produces 4 to 6 weeks of content across all platforms.</p>
+              <ul>
+                <li><strong>Signature dishes</strong> and new menu launches</li>
+                <li><strong>Cocktails, wine,</strong> and beverage programs</li>
+                <li><strong>Kitchen action</strong> and chef storylines</li>
+                <li><strong>Dining room</strong> atmosphere and ambiance</li>
+                <li><strong>Staff personality</strong> and hospitality culture</li>
+              </ul>
             </div>
-            <div class="sm-it-cycle-node" data-step="2">
-              <i data-lucide="trending-up"></i>
-              <span>Traffic<br><strong>Spikes</strong></span>
+          </li>
+          <li class="s-svc">
+            <div class="s-svc-media"><img src="images/sm-videography-hero.avif" alt="Button Up Media food photography" width="670" height="1200" loading="lazy" decoding="async" style="object-position:50% 45%" /></div>
+            <div class="s-svc-body">
+              <span class="s-svc-n">02</span>
+              <h3>Social media strategy &amp; content calendar</h3>
+              <p>Content without strategy is just noise. We build monthly content calendars around your goals: new menu launches, seasonal promotions, event pushes and slow-day campaigns.</p>
+              <ul>
+                <li><strong>Monthly content calendar</strong> with approved posts</li>
+                <li><strong>Platform-specific strategy</strong> (Instagram, TikTok, Facebook)</li>
+                <li><strong>Hashtag research</strong> and local discovery optimization</li>
+                <li><strong>Caption writing</strong> and brand voice development</li>
+                <li><strong>Posting schedule</strong> optimized for engagement timing</li>
+              </ul>
             </div>
-            <div class="sm-it-cycle-node" data-step="3">
-              <i data-lucide="user-x"></i>
-              <span>Audience<br><strong>Forgets</strong></span>
+          </li>
+          <li class="s-svc">
+            <div class="s-svc-media"><img src="/media/cs-brewing-buddha-guests.webp" alt="A guest at Brewing Buddha talking to the camera" width="406" height="720" loading="lazy" decoding="async" style="object-position:50% 30%" /></div>
+            <div class="s-svc-body">
+              <span class="s-svc-n">03</span>
+              <h3>Community management &amp; engagement</h3>
+              <p>Social media is a two-way conversation. Every interaction is a chance to deepen a relationship and turn a follower into a regular. We handle daily community management so nothing falls through the cracks.</p>
+              <ul>
+                <li><strong>Daily comment</strong> monitoring and response</li>
+                <li><strong>DM management</strong> and reservation inquiries</li>
+                <li><strong>Local community</strong> engagement and relationship building</li>
+                <li><strong>User-generated content</strong> reposting and curation</li>
+                <li><strong>Review response</strong> support across platforms</li>
+              </ul>
             </div>
-            <div class="sm-it-cycle-node" data-step="4">
-              <i data-lucide="trending-down"></i>
-              <span>Bookings<br><strong>Drop</strong></span>
-            </div>
-            <div class="sm-it-cycle-center">
-              <span>Repeat<br>Forever</span>
-            </div>
+          </li>
+        </ul>
+        <div class="s-note">
+          <div>
+            <h3>We only take on a limited number of new clients each month</h3>
+            <p>We produce all content in-house. We physically come to your restaurant, shoot your food, and build your content library from scratch. That level of hands-on service means limited availability.</p>
           </div>
-        </div>
-
-        <!-- RIGHT: Owned audience -->
-        <div class="sm-it-panel sm-it-panel-owned">
-          <div class="sm-it-panel-label sm-it-panel-label-good">The Way Out</div>
-          <h3 class="sm-it-panel-headline">A Channel You Actually Own</h3>
-          <p class="sm-it-panel-sub">Post. Grow. Fill the room on demand.</p>
-          <div class="sm-it-growth-wrap" aria-hidden="true">
-            <svg class="sm-it-growth-svg" viewBox="0 0 320 280" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="itGrowthFill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="rgba(74,222,128,0.32)"/>
-                  <stop offset="100%" stop-color="rgba(74,222,128,0)"/>
-                </linearGradient>
-                <linearGradient id="itGrowthStroke" x1="0" y1="1" x2="1" y2="0">
-                  <stop offset="0%" stop-color="#22c55e"/>
-                  <stop offset="100%" stop-color="#86efac"/>
-                </linearGradient>
-              </defs>
-              <path d="M 0,260 C 60,250 100,220 130,180 S 200,90 320,30 L 320,280 L 0,280 Z" fill="url(#itGrowthFill)"/>
-              <path d="M 0,260 C 60,250 100,220 130,180 S 200,90 320,30" stroke="url(#itGrowthStroke)" stroke-width="3" fill="none" stroke-linecap="round" class="sm-it-growth-line"/>
-            </svg>
-            <div class="sm-it-growth-steps">
-              <div class="sm-it-growth-step" data-step="1">
-                <i data-lucide="camera"></i>
-                <span>Post real content<br>consistently</span>
-              </div>
-              <div class="sm-it-growth-step" data-step="2">
-                <i data-lucide="users"></i>
-                <span>Build a following<br>that wants to hear from you</span>
-              </div>
-              <div class="sm-it-growth-step" data-step="3">
-                <i data-lucide="utensils"></i>
-                <span>Fill tables<br>on your own terms</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <p class="sm-it-closer">That&rsquo;s what we&rsquo;re really building with you. Not just content. A channel you actually own.</p>
-    </section>
-
-    <!-- ═══ 4. OUR APPROACH ═══ -->
-    <section class="card-overlay --dark lib-section" id="approach">
-      <div class="lib-section-label">Our Approach</div>
-      <h2 class="lib-section-title">How We Build Your Restaurant an Audience</h2>
-
-      <div class="sm-approach-layout">
-      <div class="sm-timeline">
-        <div class="sm-timeline-step">
-          <div class="sm-timeline-marker">1</div>
-          <h3>Content Production</h3>
-          <p>We schedule a content shoot at your restaurant. Our team captures professional food photography, short-form video, atmosphere shots, behind-the-scenes footage, and staff moments. One shoot typically produces 4 to 6 weeks of content across all platforms.</p>
-        </div>
-        <div class="sm-timeline-step">
-          <div class="sm-timeline-marker">2</div>
-          <h3>Strategy &amp; Posting</h3>
-          <p>We build your content calendar around your restaurant&rsquo;s goals: new menu launches, seasonal promotions, event pushes, slow-day campaigns. Every post is intentional. Every caption is written for engagement. Every piece of content serves the bigger strategy.</p>
-        </div>
-        <div class="sm-timeline-step">
-          <div class="sm-timeline-marker">3</div>
-          <h3>Community &amp; Growth</h3>
-          <p>We manage your accounts daily. Responding to comments, engaging with local food communities, building relationships with followers, and turning your social presence into a living, growing extension of your restaurant&rsquo;s hospitality.</p>
-        </div>
-      </div>
-      <div class="sm-approach-video" data-autoplay-hover data-audio-managed="true">
-        <video data-video-src="videos/sm-how-we-work.mp4" muted loop playsinline preload="none" poster="images/sm-how-we-work-poster.avif"></video>
-        <div class="sm-play-btn" aria-hidden="true"><i data-lucide="play"></i></div>
-      </div>
-      </div><!-- /.sm-approach-layout -->
-    </section>
-
-    <!-- ═══ 8. HOW TO PROMOTE ═══ -->
-    <section class="card-overlay --dark lib-section" id="how-to">
-      <div class="lib-section-label">The Framework</div>
-      <h2 class="lib-section-title">How to Promote a Restaurant on Social Media</h2>
-      <p class="lib-section-sub">Good restaurant marketing starts before the first post. The strongest campaigns are built around a clear offer, honest goals, and a plan that matches the restaurant you actually want to become.</p>
-
-      <div class="sm-process-grid">
-        <div class="sm-process-step">
-          <div class="sm-process-num">01</div>
-          <h3>Understand Your USP</h3>
-          <p>Know what makes your restaurant worth choosing. Marketing a business with a weak unique selling proposition is difficult. When the offer is strong, the content and messaging flow much easier.</p>
-        </div>
-        <div class="sm-process-step">
-          <div class="sm-process-num">02</div>
-          <h3>Clarify Your Marketing Goals</h3>
-          <p>Decide what growth actually means for you. Are you trying to grow your audience at all costs, or protect a strict brand identity while growing more carefully? Different goals require different strategies.</p>
-        </div>
-        <div class="sm-process-step">
-          <div class="sm-process-num">03</div>
-          <h3>Set Budget &amp; Targets</h3>
-          <p>Set a realistic budget, revenue goals, and softer goals too: growing your audience, making people care more, building trust, or increasing repeat visits. The clearer the target, the easier it is to choose the right moves.</p>
-        </div>
-        <div class="sm-process-step">
-          <div class="sm-process-num">04</div>
-          <h3>Build the Plan &amp; Execute</h3>
-          <p>Create a marketing plan that fits your budget, goals, and appetite for experimentation. That may mean organic content, paid social ads, or both. Then execute consistently and adjust based on what the market tells you.</p>
-        </div>
-      </div>
-
-      <div style="text-align:center; margin-top:40px;">
-        <a href="/contact" class="btn btn-primary">Get Your Free Strategy Call</a>
-      </div>
-    </section>
-
-    <!-- ═══ 5. SERVICES ═══ -->
-    <section class="card-overlay lib-section" id="services">
-      <div class="lib-section-label">What We Deliver</div>
-      <h2 class="lib-section-title">Restaurant Social Media Marketing Services</h2>
-
-      <div class="sm-services-panels">
-        <!-- Panel 1: Photo/Video -->
-        <div class="sm-svc-panel">
-          <div class="sm-svc-copy">
-            <span class="sm-svc-num">01</span>
-            <h3>In-House Videography</h3>
-            <p>Great social content starts with great footage. Our videographers, editors, and creative leads all sit on our team. When we plan a shoot with you, the people executing it are the same people who built the strategy. Nothing gets handed off to a contractor, nothing gets watered down in translation.</p>
-            <ul class="sm-bullets --compact">
-              <li><strong>Signature dishes</strong> and new menu launches</li>
-              <li><strong>Cocktails, wine,</strong> and beverage programs</li>
-              <li><strong>Kitchen action</strong> and chef storylines</li>
-              <li><strong>Dining room</strong> atmosphere and ambiance</li>
-              <li><strong>Staff personality</strong> and hospitality culture</li>
-            </ul>
-          </div>
-          <div class="sm-svc-visual">
-            <img src="images/sm-videography-hero.avif" alt="Button Up Media food photography" loading="lazy" />
-          </div>
-        </div>
-
-        <!-- Panel 2: Strategy (reversed) -->
-        <div class="sm-svc-panel --reverse">
-          <div class="sm-svc-copy">
-            <span class="sm-svc-num">02</span>
-            <h3>Social Media Strategy &amp; Content Calendar</h3>
-            <p>Content without strategy is just noise. We build monthly content calendars that align with your business goals, seasonal rhythms, and local market opportunities.</p>
-            <ul class="sm-bullets --compact">
-              <li><strong>Monthly content calendar</strong> with approved posts</li>
-              <li><strong>Platform-specific strategy</strong> (Instagram, TikTok, Facebook)</li>
-              <li><strong>Hashtag research</strong> and local discovery optimization</li>
-              <li><strong>Caption writing</strong> and brand voice development</li>
-              <li><strong>Posting schedule</strong> optimized for engagement timing</li>
-            </ul>
-          </div>
-          <div class="sm-svc-visual">
-            <img src="images/sm-restaurant-interior.avif" alt="Restaurant interior atmosphere" loading="lazy" />
-          </div>
-        </div>
-
-        <!-- Panel 3: Community Management -->
-        <div class="sm-svc-panel">
-          <div class="sm-svc-copy">
-            <span class="sm-svc-num">03</span>
-            <h3>Community Management &amp; Engagement</h3>
-            <p>Social media is a two-way conversation. Every interaction is a chance to deepen a relationship and turn a follower into a regular. We handle daily community management so nothing falls through the cracks.</p>
-            <ul class="sm-bullets --compact">
-              <li><strong>Daily comment</strong> monitoring and response</li>
-              <li><strong>DM management</strong> and reservation inquiries</li>
-              <li><strong>Local community</strong> engagement and relationship building</li>
-              <li><strong>User-generated content</strong> reposting and curation</li>
-              <li><strong>Review response</strong> support across platforms</li>
-            </ul>
-          </div>
-          <div class="sm-svc-visual">
-            <img src="images/sm-restaurant-exterior-night.avif" alt="Restaurant exterior at night" loading="lazy" />
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Limited Availability Callout -->
-      <div class="sm-limited-banner">
-        <h3>We Only Take On a Limited Number of New Clients Each Month</h3>
-        <p>We produce all content in-house. We physically come to your restaurant, shoot your food, and build your content library from scratch. That level of hands-on service means limited availability.</p>
-        <a href="/contact" class="btn btn-primary">Get Your Free Strategy Call</a>
-      </div>
-    </section>
-
-    <!-- ═══ 10. RESULTS ═══ -->
-    <section class="card-overlay --dark lib-section" id="results">
-      <div class="sm-proof-grid">
-        <div class="sm-proof-visual" data-autoplay-hover data-audio-managed="true">
-          <video data-video-src="videos/bts-behind-counter.mp4" poster="images/posters/bts-behind-counter.webp" muted loop playsinline preload="none" aria-label="Button Up Media behind-the-counter restaurant shoot video"></video>
-          <div class="sm-play-btn" aria-hidden="true"><i data-lucide="play"></i></div>
-        </div>
-        <div class="sm-proof-copy">
-          <div class="lib-section-label">Proof</div>
-          <h2 class="lib-section-title">See What Restaurant Social Media <br>Actually Looks Like When It Works</h2>
-          <p class="lib-section-sub">Real shoots, real content, real growth. Take a look and see what we could do for yours.</p>
-        </div>
-      </div>
-      <div class="bum-reviews">
-        <div class="bum-reviews__head">
-          <h3>What restaurant owners say on Google</h3>
-          <a class="bum-grating" href="https://www.google.com/maps?cid=18420049328774985259" target="_blank" rel="noopener" aria-label="Rated 5.0 out of 5 on Google from 11 reviews (opens Google in a new tab)"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg><strong>5.0</strong><span class="bum-stars" aria-hidden="true">★★★★★</span><span class="bum-grating__text">on Google, 11 reviews</span></a>
-        </div>
-        <div class="bum-reviews__grid">
-          <figure class="bum-review">
-            <div class="bum-stars" role="img" aria-label="Rated 5 out of 5 stars">★★★★★</div>
-            <blockquote class="bum-review__quote" lang="en"><p>“Button Up has completely exploded the success of my business socials. Between having several videos over a million views, and getting constant positive feedback from our customer base (including an influx of new customers), we couldnt be happier with their services. … We've been in contract with them for three years and the quality never drops. …”</p></blockquote>
-            <figcaption class="bum-review__by"><strong>Josh</strong><span>Manager, Brewing Buddha Cafe &amp; Arthouse</span>
-              <span class="bum-review__src"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google review</span>
-            </figcaption>
-          </figure>
-          <figure class="bum-review">
-            <div class="bum-stars" role="img" aria-label="Rated 5 out of 5 stars">★★★★★</div>
-            <blockquote class="bum-review__quote" lang="en"><p>“…They come in and take care of all our shooting, posting, and solid management. My favorite thing is having a point of contact I can just text instead of doing endless back and forth emails. … Their reports are super transparent, openly showing when we succeed and where they don't meet the mark, and they hold themselves accountable. …”</p></blockquote>
-            <figcaption class="bum-review__by"><strong>Gustavo A. Torres</strong><span>Restaurant owner</span>
-              <span class="bum-review__src"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google review</span>
-            </figcaption>
-          </figure>
-          <figure class="bum-review">
-            <div class="bum-stars" role="img" aria-label="Rated 5 out of 5 stars">★★★★★</div>
-            <blockquote class="bum-review__quote" lang="en"><p>“Button Up Media was awesome to work with. The shoot was organized, the team was easygoing, and they made everyone on set feel comfortable. You can tell they care about getting the best result while still keeping the process fun and professional.”</p></blockquote>
-            <figcaption class="bum-review__by"><strong>ThurmB</strong><span>On set for one of our shoots</span>
-              <span class="bum-review__src"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google review</span>
-            </figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ 11. WHO THIS IS FOR ═══ -->
-    <section class="card-overlay lib-section" id="who-its-for">
-      <div class="lib-section-label">Is This Right for You?</div>
-      <h2 class="lib-section-title">Is Button Up Media&rsquo;s Social Media Service Right for Your Restaurant?</h2>
-
-      <div class="sm-fit-grid">
-        <div class="sm-fit-col --yes">
-          <h3>This Is Built for You If:</h3>
-          <div class="sm-fit-item">
-            <div class="sm-fit-icon"><i data-lucide="check" width="18" height="18"></i></div>
-            <p>You know social media matters but don&rsquo;t have time to do it right</p>
-          </div>
-          <div class="sm-fit-item">
-            <div class="sm-fit-icon"><i data-lucide="check" width="18" height="18"></i></div>
-            <p>You&rsquo;ve tried managing it yourself and results have been inconsistent</p>
-          </div>
-          <div class="sm-fit-item">
-            <div class="sm-fit-icon"><i data-lucide="check" width="18" height="18"></i></div>
-            <p>You&rsquo;ve worked with a generic agency and content felt disconnected</p>
-          </div>
-          <div class="sm-fit-item">
-            <div class="sm-fit-icon"><i data-lucide="check" width="18" height="18"></i></div>
-            <p>You want professional food photography and video that stops the scroll</p>
-          </div>
-          <div class="sm-fit-item">
-            <div class="sm-fit-icon"><i data-lucide="check" width="18" height="18"></i></div>
-            <p>You want a partner who actually shows up and captures your restaurant</p>
-          </div>
-          <div class="sm-fit-item">
-            <div class="sm-fit-icon"><i data-lucide="check" width="18" height="18"></i></div>
-            <p>You&rsquo;re an independent restaurant, multi-location group, bar, or chef-driven concept</p>
-          </div>
-        </div>
-        <div class="sm-fit-col --no">
-          <h3>Probably Not for You If:</h3>
-          <div class="sm-fit-item">
-            <div class="sm-fit-icon"><i data-lucide="x" width="18" height="18"></i></div>
-            <p>You&rsquo;re looking for the cheapest option and don&rsquo;t care about content quality</p>
-          </div>
-          <div class="sm-fit-item">
-            <div class="sm-fit-icon"><i data-lucide="x" width="18" height="18"></i></div>
-            <p>You want to fully control every piece of content with no creative collaboration</p>
-          </div>
-          <div class="sm-fit-item">
-            <div class="sm-fit-icon"><i data-lucide="x" width="18" height="18"></i></div>
-            <p>You expect 10,000 followers in your first month (we build sustainable, real growth)</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ 12. FAQ ═══ -->
-    <section class="card-overlay --dark lib-section" id="faq">
-      <div class="hp2-faq-header">
-        <div class="lib-section-label">FAQ</div>
-        <h2 class="hp2-faq-hero-heading">Questions &amp; Answers</h2>
-        <p class="hp2-faq-subtitle">Everything you need to know about restaurant social media marketing.</p>
-      </div>
-      <div class="hp2-faq-grid">
-        <div class="hp2-faq-list">
-          <details class="hp2-faq-item">
-            <summary><span><span class="hp2-faq-count">01</span>How often should a restaurant post on social media?</span></summary>
-            <div class="hp2-faq-answer">&bull; <strong>Instagram:</strong> 3 to 5 times per week<br>&bull; <strong>TikTok:</strong> 3 to 7 times per week<br><br>Consistency matters more than frequency. A restaurant that posts 3 high-quality posts per week on a reliable schedule will outperform one that posts 10 times in one week and goes dark for two. We build content calendars that match your capacity and goals.</div>
-          </details>
-          <details class="hp2-faq-item">
-            <summary><span><span class="hp2-faq-count">02</span>What social media platforms are best for restaurants?</span></summary>
-            <div class="hp2-faq-answer">&bull; <strong>Instagram:</strong> Where customers evaluate your restaurant visually. Your digital storefront.<br>&bull; <strong>TikTok:</strong> Fastest-growing discovery platform, especially for younger diners<br>&bull; <strong>Facebook:</strong> Valuable primarily as a paid advertising platform for local targeting<br><br>Most restaurants should focus on Instagram and TikTok for organic growth while using Facebook for targeted ad campaigns.</div>
-          </details>
-          <details class="hp2-faq-item">
-            <summary><span><span class="hp2-faq-count">03</span>How much does restaurant social media management cost?</span></summary>
-            <div class="hp2-faq-answer">&bull; <strong>Basic posting/management</strong> (no content creation): $800 to $1,500/month<br>&bull; <strong>Full-service</strong> (content production + strategy + daily management): $2,000 to $5,000/month<br><br>At Button Up Media, we include content production because you can&rsquo;t separate strategy from content. Both have to work together.</div>
-          </details>
-          <details class="hp2-faq-item">
-            <summary><span><span class="hp2-faq-count">04</span>What type of content works best for restaurant social media?</span></summary>
-            <div class="hp2-faq-answer">&bull; <strong>Short-form video</strong> (Reels, TikToks, Shorts) consistently outperforms everything<br>&bull; <strong>High-quality food photography</strong> and carousel posts<br>&bull; <strong>Behind-the-scenes content</strong> that feels authentic<br><br>The key: content must be visually compelling and authentic to your specific restaurant, not generic stock-style content.</div>
-          </details>
-          <details class="hp2-faq-item">
-            <summary><span><span class="hp2-faq-count">05</span>Should restaurants use TikTok?</span></summary>
-            <div class="hp2-faq-answer">Yes. TikTok is now one of the most powerful discovery tools for restaurants, especially for reaching customers under 35.<br><br>&bull; Many younger diners search TikTok before they pick a place to eat<br>&bull; Content that works: raw, authentic, trend-driven<br>&bull; Behind-the-scenes clips, satisfying food prep, day-in-the-life<br><br>Restaurants investing in TikTok-native content reach audiences that traditional marketing cannot access.</div>
-          </details>
-          <details class="hp2-faq-item">
-            <summary><span><span class="hp2-faq-count">06</span>Can you handle social media for multiple restaurant locations?</span></summary>
-            <div class="hp2-faq-answer">Yes. We work with both independent restaurants and multi-location groups.<br><br>&bull; Centralized content strategy for brand consistency<br>&bull; Location-specific content, promotions, and community engagement<br>&bull; Each location gets content tailored to its market and customer base</div>
-          </details>
-          <details class="hp2-faq-item">
-            <summary><span><span class="hp2-faq-count">07</span>What is the difference between organic and paid social media?</span></summary>
-            <div class="hp2-faq-answer">&bull; <strong>Organic:</strong> Content on your profiles. Builds brand, engages community, creates long-term visibility.<br>&bull; <strong>Paid:</strong> Advertising. Targeted campaigns by location, interests, and behavior.<br><br>Both are essential. Organic builds the brand that makes people want to follow you. Paid ensures you reach customers who haven&rsquo;t discovered you yet. We integrate both into a single coordinated strategy.</div>
-          </details>
-          <details class="hp2-faq-item">
-            <summary><span><span class="hp2-faq-count">08</span>How is Button Up Media different from other social media agencies?</span></summary>
-            <div class="hp2-faq-answer">Most agencies manage accounts. They write captions, schedule posts, and report on metrics. But they don&rsquo;t make the content.<br><br>&bull; We physically produce content at your restaurant<br>&bull; We show up with cameras and capture your food, atmosphere, and team<br>&bull; We build your entire presence around real, authentic content<br><br>That&rsquo;s the difference between a social media manager and a <strong>restaurant content engine</strong>.</div>
-          </details>
-        </div>
-        <div class="hp2-faq-bottom-cta">
-          <p>Have a question we didn&rsquo;t cover?</p>
           <a href="/contact" class="btn btn-primary">Get Your Free Strategy Call</a>
         </div>
       </div>
     </section>
 
-    <!-- ═══ 13. CTA ═══ -->
-    <section class="card-overlay lib-section" id="cta">
-      <a class="hp2-cta-scene" href="/contact">
-        <div class="hp2-cta-orb"></div>
-        <div class="hp2-cta-orb"></div>
-        <div class="hp2-cta-orb"></div>
-        <pixel-canvas data-gap="10" data-speed="20" data-colors="#CA8A04, #A16207, #F2D688" data-no-focus></pixel-canvas>
-        <h2 class="hp2-word-reveal" style="position:relative; z-index:2;">Ready to Grow Your Restaurant?</h2>
-        <p style="position:relative; z-index:2;">Stop guessing. Start growing. Schedule a free consultation and let's build a marketing strategy that fills your restaurant with the customers you deserve.</p>
-      </a>
+    <!-- ═══ THE PROBLEM ═══ -->
+    <section class="h-sec" id="the-problem">
+      <div class="h-wrap s-split">
+        <div class="h-head">
+          <div class="lib-section-label">The problem</div>
+          <h2>Why your restaurant&rsquo;s social media isn&rsquo;t working</h2>
+          <p>You know social media matters. You&rsquo;ve tried. But none of the usual approaches actually work.</p>
+        </div>
+        <ol class="h-points">
+          <li><span class="n">01</span><div><h3>The DIY trap</h3><p>You&rsquo;re managing food costs, staffing, vendor relationships, and a hundred daily fires. When social media gets squeezed into the margins of an already impossible day, the results reflect it. Inconsistent posting, low-quality photos, no strategy, no growth.</p></div></li>
+          <li><span class="n">02</span><div><h3>The generic agency problem</h3><p>You hire a marketing agency and get recycled stock photos, generic Canva graphics, and captions that could apply to any business. They&rsquo;ve never set foot in your restaurant or captured the energy of your dining room.</p></div></li>
+          <li><span class="n">03</span><div><h3>The influencer gamble</h3><p>You pay an influencer to come in. They post one story, maybe a reel. You get a bump in followers for a week. Then nothing. No system. No consistency. No long-term growth. Just a one-time spike that fades as fast as it arrived. <a href="#influencer-trap">More on this below.</a></p></div></li>
+          <li><span class="n">04</span><div><h3>What&rsquo;s actually missing</h3><p>It&rsquo;s not effort or budget. What&rsquo;s missing is a dedicated content partner who understands restaurants, physically creates the content, and builds a strategy to turn social media into a consistent customer acquisition channel.</p></div></li>
+        </ol>
+      </div>
     </section>
+
+    <!-- ═══ INFLUENCER TRAP ═══ -->
+    <section class="h-sec" id="influencer-trap">
+      <div class="h-wrap">
+        <div class="h-head">
+          <div class="lib-section-label">A closer look</div>
+          <h2>You&rsquo;re renting your audience every time you pay an influencer</h2>
+        </div>
+        <div class="s-vs">
+          <div class="s-vs-card --dark">
+            <span class="s-vs-tag">The trap</span>
+            <h3>The influencer cycle</h3>
+            <p class="s-vs-sub">Pay. Spike. Forget. Pay again.</p>
+            <ol class="s-vs-list">
+              <li><span>You pay <b>$500 to $2K</b></span></li>
+              <li><span>Traffic spikes</span></li>
+              <li><span>Audience forgets</span></li>
+              <li><span>Bookings drop</span></li>
+            </ol>
+            <span class="s-vs-loop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/></svg>Repeat forever</span>
+          </div>
+          <div class="s-vs-card --light">
+            <span class="s-vs-tag">The way out</span>
+            <h3>A channel you actually own</h3>
+            <p class="s-vs-sub">Post. Grow. Fill the room on demand.</p>
+            <ol class="s-vs-list">
+              <li><span>Post real content consistently</span></li>
+              <li><span>Build a following that wants to hear from you</span></li>
+              <li><span>Fill tables on your own terms</span></li>
+            </ol>
+          </div>
+        </div>
+        <p class="s-closer">That&rsquo;s what we&rsquo;re really building with you. <span>Not just content.</span> A channel you actually own.</p>
+        <details class="s-more">
+          <summary>Read the full breakdown</summary>
+          <div class="s-more-body">
+            <p>Most restaurants run the same playbook when bookings slow down. They pay an influencer $500 to $2,000 to come in. The influencer posts a story, maybe a reel. For a week the room is packed. Then the influencer moves on to the next spot, and so does their audience.</p>
+            <p>That audience is the real problem. They follow influencers because they want to know the next best place to eat. Even if they loved your food, your social page isn&rsquo;t strong enough to give them a reason to follow you. So they don&rsquo;t. They forget you. When they want to go out again, they&rsquo;re back on the same influencer&rsquo;s feed waiting for the next recommendation. The only way back into their orbit is to pay another influencer. The cycle starts over.</p>
+            <p>Now picture the opposite. Your own social account, posting consistently, growing a following of people who actually want to hear what you have to say. When business slows, you don&rsquo;t write a check and hope. You post a story, run a promotion, fill the room. Paid ads and influencers still have a place. They work with a real social presence, not in place of one.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- ═══ HOW TO PROMOTE ═══ -->
+    <section class="h-sec" id="how-to">
+      <div class="h-wrap">
+        <div class="h-head">
+          <div class="lib-section-label">The framework</div>
+          <h2>How to promote a restaurant on social media</h2>
+          <p>Good restaurant marketing starts before the first post. The strongest campaigns are built around a clear offer, honest goals, and a plan that matches the restaurant you actually want to become.</p>
+        </div>
+        <ol class="h-steps">
+          <li class="h-step"><b>01</b><h3>Understand your USP</h3><p>Know what makes your restaurant worth choosing. Marketing a business with a weak unique selling proposition is difficult. When the offer is strong, the content and messaging flow much easier.</p></li>
+          <li class="h-step"><b>02</b><h3>Clarify your marketing goals</h3><p>Decide what growth actually means for you. Are you trying to grow your audience at all costs, or protect a strict brand identity while growing more carefully? Different goals require different strategies.</p></li>
+          <li class="h-step"><b>03</b><h3>Set budget &amp; targets</h3><p>Set a realistic budget, revenue goals, and softer goals too: growing your audience, making people care more, building trust, or increasing repeat visits. The clearer the target, the easier it is to choose the right moves.</p></li>
+          <li class="h-step"><b>04</b><h3>Build the plan &amp; execute</h3><p>Create a marketing plan that fits your budget, goals, and appetite for experimentation. That may mean organic content, paid social ads, or both. Then execute consistently and adjust based on what the market tells you.</p></li>
+        </ol>
+        <div class="s-center">
+          <a href="/contact" class="btn btn-primary">Get Your Free Strategy Call</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PROOF + REVIEWS ═══ -->
+    <section class="h-sec" id="results">
+      <div class="h-wrap">
+        <div class="h-head --center">
+          <div class="lib-section-label">Proof</div>
+          <h2>See what restaurant social media actually looks like when it works</h2>
+          <p>Real shoots, real content, real growth. Take a look and see what we could do for yours.</p>
+        </div>
+        <div class="hp2-vid-showcase">
+          <div class="hp2-vid-card" data-audio-managed="true">
+            <div class="hp2-vid-card-frame">
+              <video data-video-src="videos/bts-behind-counter.mp4" poster="images/posters/bts-behind-counter.webp" width="405" height="720" playsinline preload="none" aria-label="Button Up Media behind-the-counter restaurant shoot video"></video>
+              <button type="button" class="hp2-vid-card-play" aria-label="Play: Behind the counter on a shoot"></button>
+            </div>
+            <p class="s-cap"><strong>Behind the counter</strong>On set at a restaurant shoot</p>
+          </div>
+          <div class="hp2-vid-card" data-audio-managed="true">
+            <div class="hp2-vid-card-frame">
+              <video data-video-src="videos/sm-how-we-work.mp4" poster="images/sm-how-we-work-poster.avif" width="480" height="854" playsinline preload="none"></video>
+              <button type="button" class="hp2-vid-card-play" aria-label="Play: How we work"></button>
+            </div>
+            <p class="s-cap"><strong>How we work</strong>From the shoot to your feed</p>
+          </div>
+        </div>
+        <div class="s-center">
+          <a href="/case-studies" class="btn">See our work</a>
+        </div>
+      <div class="bum-reviews">
+          <div class="bum-reviews__head">
+            <h3>What restaurant owners say on Google</h3>
+            <a class="bum-grating" href="https://www.google.com/maps?cid=18420049328774985259" target="_blank" rel="noopener" aria-label="Rated 5.0 out of 5 on Google from 11 reviews (opens Google in a new tab)"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg><strong>5.0</strong><span class="bum-stars" aria-hidden="true">★★★★★</span><span class="bum-grating__text">on Google, 11 reviews</span></a>
+          </div>
+          <div class="bum-reviews__grid">
+            <figure class="bum-review">
+              <div class="bum-stars" role="img" aria-label="Rated 5 out of 5 stars">★★★★★</div>
+              <blockquote class="bum-review__quote" lang="en"><p>“Button Up has completely exploded the success of my business socials. Between having several videos over a million views, and getting constant positive feedback from our customer base (including an influx of new customers), we couldnt be happier with their services. … We've been in contract with them for three years and the quality never drops. …”</p></blockquote>
+              <figcaption class="bum-review__by"><strong>Josh</strong><span>Manager, Brewing Buddha Cafe &amp; Arthouse</span>
+                <span class="bum-review__src"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google review</span>
+              </figcaption>
+            </figure>
+            <figure class="bum-review">
+              <div class="bum-stars" role="img" aria-label="Rated 5 out of 5 stars">★★★★★</div>
+              <blockquote class="bum-review__quote" lang="en"><p>“…They come in and take care of all our shooting, posting, and solid management. My favorite thing is having a point of contact I can just text instead of doing endless back and forth emails. … Their reports are super transparent, openly showing when we succeed and where they don't meet the mark, and they hold themselves accountable. …”</p></blockquote>
+              <figcaption class="bum-review__by"><strong>Gustavo A. Torres</strong><span>Restaurant owner</span>
+                <span class="bum-review__src"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google review</span>
+              </figcaption>
+            </figure>
+            <figure class="bum-review">
+              <div class="bum-stars" role="img" aria-label="Rated 5 out of 5 stars">★★★★★</div>
+              <blockquote class="bum-review__quote" lang="en"><p>“Button Up Media was awesome to work with. The shoot was organized, the team was easygoing, and they made everyone on set feel comfortable. You can tell they care about getting the best result while still keeping the process fun and professional.”</p></blockquote>
+              <figcaption class="bum-review__by"><strong>ThurmB</strong><span>On set for one of our shoots</span>
+                <span class="bum-review__src"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google review</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ WHO THIS IS FOR ═══ -->
+    <section class="h-sec" id="who-its-for">
+      <div class="h-wrap">
+        <div class="h-head">
+          <div class="lib-section-label">Is this right for you?</div>
+          <h2>Is Button Up Media&rsquo;s social media service right for your restaurant?</h2>
+        </div>
+        <div class="s-fit">
+          <div class="--yes">
+            <h3>This is built for you if</h3>
+            <ul>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>You know social media matters but don&rsquo;t have time to do it right</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>You&rsquo;ve tried managing it yourself and results have been inconsistent</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>You&rsquo;ve worked with a generic agency and content felt disconnected</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>You want professional food photography and video that stops the scroll</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>You want a partner who actually shows up and captures your restaurant</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>You&rsquo;re an independent restaurant, multi-location group, bar, or chef-driven concept</span></li>
+            </ul>
+          </div>
+          <div class="--no">
+            <h3>Probably not for you if</h3>
+            <ul>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg><span>You&rsquo;re looking for the cheapest option and don&rsquo;t care about content quality</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg><span>You want to fully control every piece of content with no creative collaboration</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg><span>You expect 10,000 followers in your first month (we build sustainable, real growth)</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FAQ ═══ -->
+    <section class="h-sec" id="faq">
+      <div class="h-wrap">
+      <div class="hp2-faq-header">
+        <div class="lib-section-label">FAQ</div>
+        <h2 class="hp2-faq-hero-heading">Questions &amp; answers</h2>
+        <p class="hp2-faq-subtitle">Everything you need to know about restaurant social media marketing.</p>
+      </div>
+      <div class="hp2-faq-grid">
+          <div class="hp2-faq-list">
+            <details class="hp2-faq-item">
+              <summary><span><span class="hp2-faq-count">01</span>How often should a restaurant post on social media?</span></summary>
+              <div class="hp2-faq-answer">&bull; <strong>Instagram:</strong> 3 to 5 times per week<br>&bull; <strong>TikTok:</strong> 3 to 7 times per week<br><br>Consistency matters more than frequency. A restaurant that posts 3 high-quality posts per week on a reliable schedule will outperform one that posts 10 times in one week and goes dark for two. We build content calendars that match your capacity and goals.</div>
+            </details>
+            <details class="hp2-faq-item">
+              <summary><span><span class="hp2-faq-count">02</span>What social media platforms are best for restaurants?</span></summary>
+              <div class="hp2-faq-answer">&bull; <strong>Instagram:</strong> Where customers evaluate your restaurant visually. Your digital storefront.<br>&bull; <strong>TikTok:</strong> Fastest-growing discovery platform, especially for younger diners<br>&bull; <strong>Facebook:</strong> Valuable primarily as a paid advertising platform for local targeting<br><br>Most restaurants should focus on Instagram and TikTok for organic growth while using Facebook for targeted ad campaigns.</div>
+            </details>
+            <details class="hp2-faq-item">
+              <summary><span><span class="hp2-faq-count">03</span>How much does restaurant social media management cost?</span></summary>
+              <div class="hp2-faq-answer">&bull; <strong>Basic posting/management</strong> (no content creation): $800 to $1,500/month<br>&bull; <strong>Full-service</strong> (content production + strategy + daily management): $2,000 to $5,000/month<br><br>At Button Up Media, we include content production because you can&rsquo;t separate strategy from content. Both have to work together.</div>
+            </details>
+            <details class="hp2-faq-item">
+              <summary><span><span class="hp2-faq-count">04</span>What type of content works best for restaurant social media?</span></summary>
+              <div class="hp2-faq-answer">&bull; <strong>Short-form video</strong> (Reels, TikToks, Shorts) consistently outperforms everything<br>&bull; <strong>High-quality food photography</strong> and carousel posts<br>&bull; <strong>Behind-the-scenes content</strong> that feels authentic<br><br>The key: content must be visually compelling and authentic to your specific restaurant, not generic stock-style content.</div>
+            </details>
+            <details class="hp2-faq-item">
+              <summary><span><span class="hp2-faq-count">05</span>Should restaurants use TikTok?</span></summary>
+              <div class="hp2-faq-answer">Yes. TikTok is now one of the most powerful discovery tools for restaurants, especially for reaching customers under 35.<br><br>&bull; Many younger diners search TikTok before they pick a place to eat<br>&bull; Content that works: raw, authentic, trend-driven<br>&bull; Behind-the-scenes clips, satisfying food prep, day-in-the-life<br><br>Restaurants investing in TikTok-native content reach audiences that traditional marketing cannot access.</div>
+            </details>
+            <details class="hp2-faq-item">
+              <summary><span><span class="hp2-faq-count">06</span>Can you handle social media for multiple restaurant locations?</span></summary>
+              <div class="hp2-faq-answer">Yes. We work with both independent restaurants and multi-location groups.<br><br>&bull; Centralized content strategy for brand consistency<br>&bull; Location-specific content, promotions, and community engagement<br>&bull; Each location gets content tailored to its market and customer base</div>
+            </details>
+            <details class="hp2-faq-item">
+              <summary><span><span class="hp2-faq-count">07</span>What is the difference between organic and paid social media?</span></summary>
+              <div class="hp2-faq-answer">&bull; <strong>Organic:</strong> Content on your profiles. Builds brand, engages community, creates long-term visibility.<br>&bull; <strong>Paid:</strong> Advertising. Targeted campaigns by location, interests, and behavior.<br><br>Both are essential. Organic builds the brand that makes people want to follow you. Paid ensures you reach customers who haven&rsquo;t discovered you yet. We integrate both into a single coordinated strategy.</div>
+            </details>
+            <details class="hp2-faq-item">
+              <summary><span><span class="hp2-faq-count">08</span>How is Button Up Media different from other social media agencies?</span></summary>
+              <div class="hp2-faq-answer">Most agencies manage accounts. They write captions, schedule posts, and report on metrics. But they don&rsquo;t make the content.<br><br>&bull; We physically produce content at your restaurant<br>&bull; We show up with cameras and capture your food, atmosphere, and team<br>&bull; We build your entire presence around real, authentic content<br><br>That&rsquo;s the difference between a social media manager and a <strong>restaurant content engine</strong>.</div>
+            </details>
+          </div>
+          <div class="hp2-faq-bottom-cta">
+            <p>Have a question we didn&rsquo;t cover?</p>
+            <a href="/contact" class="btn btn-primary">Get Your Free Strategy Call</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CTA ═══ -->
+    <section class="h-final" id="cta">
+      <div class="h-wrap">
+        <div class="h-final-card">
+          <h2>Ready to grow your restaurant?</h2>
+          <p>Stop guessing. Start growing. Schedule a free consultation and let's build a marketing strategy that fills your restaurant with the customers you deserve.</p>
+          <div class="h-cta">
+            <a href="/contact" class="btn btn-primary">Get Your Free Strategy Call</a>
+            <a href="tel:+17867409499" class="btn">Call (786) 740-9499</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
 
     <!-- ═══ FOOTER ═══ -->
     <footer class="lib-section footer-demo">
@@ -3253,303 +1029,55 @@
 
   </div><!-- /.page -->
 
-  <!-- Base shared.js for nav, card-overlay stacking, etc. -->
+  <!-- Base shared.js: nav, lazy video, tap-to-play clips, lead tracking -->
   <script defer src="shared.js?v=site-fixes-1"></script>
 
-  <!-- ═══ SOCIAL MEDIA MARKETING — ALL ANIMATION JS ═══ -->
+  <!-- Page script: results arrows + the "on this page" chips. Clip playback is shared.js. -->
   <script>
-  (function() {
-    "use strict";
+  (function () {
+    var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    function initSMM() {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    // ── GSAP fallback: if the animation libs failed to load (e.g. CDN blocked),
-    //    drop the "js" gate so opacity-gated elements (hero copy, .v-stack-card)
-    //    stay visible instead of being stuck at opacity 0. ──
-    if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
-      document.documentElement.classList.remove("js");
-      if (typeof lucide !== "undefined") lucide.createIcons();
-      return;
+    var deck = document.getElementById("s-deck");
+    if (deck) {
+      [].forEach.call(document.querySelectorAll("[data-deck]"), function (b) {
+        b.addEventListener("click", function () {
+          var card = deck.querySelector("li");
+          var step = card ? card.getBoundingClientRect().width + 14 : 300;
+          deck.scrollBy({ left: step * Number(b.getAttribute("data-deck")), behavior: reduce ? "auto" : "smooth" });
+        });
+      });
     }
 
-    // ── SCROLL-DRIVEN COUNTERS (data-count-to) ──
-    document.querySelectorAll("[data-count-to]").forEach(el => {
-      const target = parseFloat(el.dataset.countTo);
-      const suffix = el.dataset.suffix || "";
-      const prefix = el.dataset.prefix || "";
-      const isDecimal = el.dataset.decimal === "1";
-      const counter = { val: 0 };
+    var bar = document.querySelector(".s-chips");
+    if (!bar) return;
+    var row = bar.querySelector(".s-chips-row");
+    var items = [].slice.call(bar.querySelectorAll('a[href^="#"]')).map(function (a) {
+      return { a: a, s: document.getElementById(a.getAttribute("href").slice(1)) };
+    }).filter(function (it) { return it.s; });
+    var current = null, ticking = false;
 
-      if (prefersReducedMotion) {
-        el.textContent = prefix + (isDecimal ? target.toFixed(1) : Math.round(target).toLocaleString()) + suffix;
-        return;
+    function setActive(a) {
+      if (a === current) return;
+      if (current) current.removeAttribute("aria-current");
+      current = a;
+      if (!a) return;
+      a.setAttribute("aria-current", "true");
+      var left = a.offsetLeft - (row.clientWidth - a.offsetWidth) / 2;
+      if (row.scrollWidth > row.clientWidth) row.scrollTo({ left: Math.max(0, left), behavior: reduce ? "auto" : "smooth" });
+    }
+    function update() {
+      ticking = false;
+      var line = (window.innerHeight || 800) * 0.35, hit = null;
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].s.getBoundingClientRect().top <= line) hit = items[i].a;
       }
-
-      gsap.to(counter, {
-        val: target,
-        duration: 2,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%",
-          toggleActions: "play none none none",
-        },
-        onUpdate: () => {
-          el.textContent = prefix + (isDecimal ? counter.val.toFixed(1) : Math.round(counter.val).toLocaleString()) + suffix;
-        },
-      });
-    });
-
-    // ── VIDEO AUTOPLAY ON HOVER / TAP ──
-    // Attached immediately (not inside fonts.ready) so the first hover after page-load works.
-    (function attachVideoHover() {
-      const audioHint = document.querySelector("[data-audio-hint]");
-      const useTapVideo = window.matchMedia("(hover: none), (pointer: coarse)");
-      const hideAudioHint = () => audioHint?.classList.add("is-hidden");
-      const resolveVideoSrc = (value) => {
-        if (!value) return "";
-        return value.startsWith("http") || value.startsWith("/") ? value : value;
-      };
-      const ensureVideoSource = (video) => {
-        if (!video) return;
-        const dataSrc = video.dataset.videoSrc || video.dataset.src;
-        if (dataSrc && !video.getAttribute("src")) {
-          video.src = resolveVideoSrc(dataSrc);
-        }
-        const sources = Array.from(video.querySelectorAll("source"));
-        if (sources.length) {
-          sources.forEach(source => {
-            const src = source.dataset.src || source.getAttribute("data-src");
-            if (src && !source.getAttribute("src")) source.src = resolveVideoSrc(src);
-          });
-        }
-        try { video.load(); } catch (err) {}
-      };
-      const muteVideo = video => {
-        video.muted = true;
-        video.pause();
-        video.currentTime = 0;
-      };
-      const deactivateCards = exceptCard => {
-        document.querySelectorAll("[data-autoplay-hover].is-active").forEach(activeCard => {
-          if (activeCard !== exceptCard) activeCard.classList.remove("is-active");
-        });
-      };
-      const stopOtherVideos = currentVideo => {
-        document.querySelectorAll("[data-autoplay-hover]").forEach(otherCard => {
-          const otherVideo = otherCard.querySelector("video");
-          if (otherVideo && otherVideo !== currentVideo) muteVideo(otherVideo);
-        });
-      };
-      const playWithAudio = video => {
-        ensureVideoSource(video);
-        video.defaultMuted = false;
-        video.removeAttribute("muted");
-        video.muted = false;
-        video.volume = 0.8;
-        video.play()
-          .then(() => {
-            video.muted = false;
-          })
-          .catch(() => {
-            video.muted = true;
-            video.play()
-              .then(() => {
-                const unmute = () => {
-                  video.defaultMuted = false;
-                  video.removeAttribute("muted");
-                  video.muted = false;
-                };
-                video.addEventListener("playing", unmute, { once: true });
-              })
-              .catch(() => {
-                try { video.pause(); } catch (err) {}
-                try { video.currentTime = 0; } catch (err) {}
-              });
-          });
-      };
-      let activeTouchCard = null;
-      let lastPointerTap = 0;
-      const toggleTapVideo = (card, video) => {
-        hideAudioHint();
-        document.querySelectorAll("[data-autoplay-hover]").forEach(otherCard => {
-          const otherVideo = otherCard.querySelector("video");
-          if (otherVideo && otherVideo !== video) muteVideo(otherVideo);
-          if (otherCard !== card) otherCard.classList.remove("is-active");
-        });
-        activeTouchCard = activeTouchCard === card ? null : card;
-        if (activeTouchCard) {
-          card.classList.add("is-active");
-          playWithAudio(video);
-        } else {
-          card.classList.remove("is-active");
-          muteVideo(video);
-        }
-      };
-
-      if (audioHint) setTimeout(hideAudioHint, 6000);
-
-      // Click (or tap) to play on every device — no hover-to-play. A visible
-      // play button invites the click; clicking again or clicking away stops it.
-      document.querySelectorAll("[data-autoplay-hover]").forEach(card => {
-        const video = card.querySelector("video");
-        if (!video) return;
-        card.addEventListener("pointerup", event => {
-          event.preventDefault();
-          event.stopPropagation();
-          lastPointerTap = Date.now();
-          toggleTapVideo(card, video);
-        });
-        card.addEventListener("click", event => {
-          if (Date.now() - lastPointerTap < 450) return;
-          event.preventDefault();
-          event.stopPropagation();
-          toggleTapVideo(card, video);
-        });
-      });
-
-      document.addEventListener("click", event => {
-        if (!activeTouchCard || activeTouchCard.contains(event.target)) return;
-        const video = activeTouchCard.querySelector("video");
-        if (video) muteVideo(video);
-        activeTouchCard.classList.remove("is-active");
-        activeTouchCard = null;
-      });
-    })();
-
-    // Keep touch-play videos from continuing once they leave the viewport.
-    if ("IntersectionObserver" in window) {
-      const activeVideoCards = Array.from(document.querySelectorAll("[data-autoplay-hover]"));
-      const activeVideoObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.35) return;
-          const card = entry.target;
-          const video = card.querySelector("video");
-          if (!video) return;
-          video.pause();
-          try { video.currentTime = 0; } catch (err) {}
-          card.classList.remove("is-active");
-        });
-      }, {
-        root: null,
-        rootMargin: "120px 0px",
-        threshold: [0, 0.35],
-      });
-      activeVideoCards.forEach(card => activeVideoObserver.observe(card));
+      setActive(hit);
     }
-
-    if (prefersReducedMotion) {
-      if (typeof lucide !== "undefined") lucide.createIcons();
-      return;
-    }
-
-    // ── HERO copy + video-stack entrance are both CSS-driven (see ".js .sm-hero-copy"
-    //    and ".js .v-stack-card") so they paint immediately and never wait on the
-    //    deferred animation runtime. ──
-    document.fonts.ready.then(() => { ScrollTrigger.refresh(); });
-
-    // ── Section fade-ups ──
-    const fadeUpSections = [
-      ".sm-stat-card",
-      ".sm-problem-item",
-      ".sm-approach-video",
-      ".sm-svc-panel",
-      ".sm-platform-card",
-      ".sm-content-card",
-      ".sm-process-step",
-      ".sm-stats-card",
-      ".sm-result-card",
-      ".sm-fit-col",
-      ".sm-limited-banner",
-      ".hp2-faq-item",
-    ];
-
-    fadeUpSections.forEach(selector => {
-      gsap.fromTo(selector,
-        { y: 30, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power3.out",
-          stagger: 0.08,
-          scrollTrigger: {
-            trigger: selector.split(",")[0],
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    });
-
-    document.querySelectorAll(".sm-timeline-step").forEach((step) => {
-      gsap.fromTo(step,
-        { y: 34, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.55,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: step,
-            start: "top 82%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    });
-
-    // ── Section labels + titles ──
-    document.querySelectorAll(".lib-section-label, .lib-section-title, .lib-section-sub").forEach(el => {
-      gsap.fromTo(el,
-        { y: 20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: el,
-            start: "top 88%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    });
-
-    // ── CTA scene ──
-    gsap.fromTo(".hp2-cta-scene h2, .hp2-cta-scene > p",
-      { y: 30, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.7,
-        ease: "power3.out",
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: ".hp2-cta-scene",
-          start: "top 80%",
-          toggleActions: "play none none none",
-        },
-      }
-    );
-
-    // ── Lucide icons ──
-    if (typeof lucide !== "undefined") lucide.createIcons();
-    }
-
-    // Run the animation init only after the deferred runtime (GSAP/ScrollTrigger/
-    // Lucide/pixel-canvas) has loaded, which happens after the page is interactive.
-    // This keeps GSAP setup and forced reflows off the critical hero-paint path.
-    // initSMM has its own guard that degrades gracefully if the runtime failed.
-    if (window.__bumLoadSmmRuntime) {
-      window.__bumLoadSmmRuntime().then(initSMM);
-    } else if (document.readyState === "complete") {
-      initSMM();
-    } else {
-      window.addEventListener("load", initSMM, { once: true });
-    }
+    window.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    window.addEventListener("resize", update, { passive: true });
+    update();
   })();
   </script>
 </body>
