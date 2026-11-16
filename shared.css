@@ -4783,3 +4783,18 @@ h1, h2, h3, h4, .display { font-family: var(--font-display); letter-spacing: -0.
      phones (the client results above already carry the visuals). */
   html[lang] body .sm-svc-visual { display: none; }
 }
+
+/* Phones: hero H1, answer line and first CTA fit above the cookie bar on a
+   375x667 first visit. Trims top padding and the H1 size only on phones. */
+@media (max-width: 700px) {
+  html[lang] body .hp2-hero-inner { padding-top: 100px; }
+  html[lang] body .hp2-hero-cta { margin-top: 24px; }
+  html[lang] body .sm-hero { padding-top: 52px; }
+  html[lang] body .sm-hero .hero-badge { display: none; }
+  html[lang] body .sm-hero h1 { font-size: clamp(2.1rem, 9.6vw, 2.5rem); margin-bottom: 14px; }
+  html[lang] body .sm-hero-copy > p { margin-bottom: 18px; }
+  html[lang] body .ws-hero { padding-top: 56px; }
+  html[lang] body .ws-hero h1 { font-size: clamp(2rem, 9vw, 2.3rem); margin-top: 12px; }
+  html[lang] body .ws-hero-sub { margin-top: 14px; }
+  html[lang] body .ws-hero-ctas { margin-top: 20px; }
+}
