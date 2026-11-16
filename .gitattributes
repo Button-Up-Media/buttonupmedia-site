@@ -8,6 +8,7 @@ videos/bts-behind-counter.mp4 -filter -diff -merge -text
 videos/compilation-best-shots.mp4 -filter -diff -merge -text
 videos/compilation-best-shots.optimized.mp4 -filter -diff -merge -text
 videos/compilation-best-shots-720.mp4 -filter -diff -merge -text
+videos/compilation-best-shots.optimized.web.mp4 -filter -diff -merge -text
 videos/fatty-crab-nola-flavors.mp4 -filter -diff -merge -text
 videos/fatty-crab-seafood-boil.mp4 -filter -diff -merge -text
 videos/sm-fattycrab-zackdfilms.mp4 -filter -diff -merge -text
