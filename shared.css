@@ -4778,3 +4778,8 @@ h1, h2, h3, h4, .display { font-family: var(--font-display); letter-spacing: -0.
   html[lang] body #pain .pain-item { padding: 14px 14px 14px 12px; gap: 12px; }
   html[lang] body #pain .pain-col-head { margin-bottom: 10px; }
 }
+@media (max-width: 700px) {
+  /* Social media page: the three service panels drop their mood photos on
+     phones (the client results above already carry the visuals). */
+  html[lang] body .sm-svc-visual { display: none; }
+}
