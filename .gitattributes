@@ -17,3 +17,6 @@ videos/sm-rainy-days-sophisticated.mp4 -filter -diff -merge -text
 videos/testimonial-brewing-buddha-v2.mp4 -filter -diff -merge -text
 videos/testimonial-ifc.mp4 -filter -diff -merge -text
 videos/testimonial-shimuja-short.mp4 -filter -diff -merge -text
+videos/compilation-best-shots.optimized.web.mp4 -filter -diff -merge -text
+videos/compilation-best-shots.mobile.web.mp4 -filter -diff -merge -text
+media/sm-fattycrab-seafood-boil.web.mp4 -filter -diff -merge -text
