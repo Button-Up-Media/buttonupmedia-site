@@ -4798,3 +4798,5 @@ h1, h2, h3, h4, .display { font-family: var(--font-display); letter-spacing: -0.
   html[lang] body .ws-hero-sub { margin-top: 14px; }
   html[lang] body .ws-hero-ctas { margin-top: 20px; }
 }
+/* Contact: the "open the booking calendar" fallback link gets a 44px hit area. */
+html[lang] body .contact-book-direct { display: inline-flex; align-items: center; min-height: 44px; }
