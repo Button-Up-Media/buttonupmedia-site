@@ -44,7 +44,9 @@
 //   area: { name, detail?, page? } | null,    // page = area id (miami-beach, brickell, ...) -> area page link
 //   timeframe: "Google Ads, 2025" | null, timeframeReviewNote?,
 //   hero: [note]                              // media-first hero, one of:
-//     { type: "video",   src: "videos/x.mp4", poster, width, height, alt, chip? }   muted loop, plays in view
+//     { type: "video",   src: "videos/x.mp4", poster, width, height, alt, chip?, jump? }   muted loop, plays in view;
+//                         jump: true adds a "Watch with sound" button that plays the first reel below;
+//                         views: "52.5M" shows an eye + view-count badge instead of the text chip
 //     { type: "image",   src, width, height, alt, chip? }
 //     { type: "graphic", kicker, name, sub, big, bigLabel, handle }                 typographic card (no media yet)
 //     { type: "logos",   big, bigLabel, logos: [{ src, width, height, alt }] }
@@ -60,6 +62,8 @@
 //     timeline?: { h3?, items: [ { when, title, stat, kind?: "before"|"peak"|"now" } ] },   // growth milestones, oldest first
 //     disclaimer?: true } [note],
 //   quote: null | { h2?, text, name, role, source?, video?: { src, poster, width, height, playLabel } } [note],
+//   reels?: { h2, intro, items: [ { src, poster, width, height, views, likes?, title, date, alt } ] },
+//                                             // full-width strip of the client's real videos, tap to play with sound
 //   links: [ { href, text } ]                 // service pages etc.; the area page link is added automatically
 // }
 //
@@ -121,8 +125,9 @@ const T = {
     contact: '/contact', grader: '/social-media-website-grader',
     primary: 'Book a free strategy call', graderBtn: 'Try the free grader',
     service: { social: 'Social media', ads: 'Google Ads', web: 'Website' },
-    nav: { situation: 'The situation', steps: 'What we did', results: 'Results', quote: 'In their words' },
-    ids: { situation: 'situation', steps: 'what-we-did', results: 'results', quote: 'in-their-words' },
+    nav: { reels: 'The Reels', situation: 'The situation', steps: 'What we did', results: 'Results', quote: 'In their words' },
+    ids: { reels: 'the-reels', situation: 'situation', steps: 'what-we-did', results: 'results', quote: 'in-their-words' },
+    views: 'views', likes: 'likes', watchSound: 'Watch with sound', playWith: (x) => `Play “${x}” with sound`,
     glance: 'At a glance', onPage: 'On this page', allCases: 'All case studies', back: 'Back to all case studies',
     more: 'More case studies', moreSub: 'Same playbook, different restaurants.',
     readCase: 'Read the case', plain: 'In plain English', standout: 'Standout:', spend: 'Ad spend',
@@ -139,8 +144,9 @@ const T = {
     contact: '/es/contacto', grader: '/es/analizador-redes-sociales-web',
     primary: 'Agende una llamada estratégica gratis', graderBtn: 'Pruebe el analizador gratis',
     service: { social: 'Redes sociales', ads: 'Google Ads', web: 'Sitio web' },
-    nav: { situation: 'La situación', steps: 'Lo que hicimos', results: 'Resultados', quote: 'En sus palabras' },
-    ids: { situation: 'situacion', steps: 'lo-que-hicimos', results: 'resultados', quote: 'en-sus-palabras' },
+    nav: { reels: 'Los reels', situation: 'La situación', steps: 'Lo que hicimos', results: 'Resultados', quote: 'En sus palabras' },
+    ids: { reels: 'los-reels', situation: 'situacion', steps: 'lo-que-hicimos', results: 'resultados', quote: 'en-sus-palabras' },
+    views: 'vistas', likes: 'me gusta', watchSound: 'Ver con sonido', playWith: (x) => `Reproducir “${x}” con sonido`,
     glance: 'De un vistazo', onPage: 'En esta página', allCases: 'Todos los casos', back: 'Volver a todos los casos de éxito',
     more: 'Más casos de éxito', moreSub: 'El mismo método, otros restaurantes.',
     readCase: 'Ver el caso', plain: 'En pocas palabras', standout: 'Lo más destacado:', spend: 'Inversión en anuncios',
@@ -167,6 +173,8 @@ const ICON = {
   cal: svg('<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>'),
   store: svg('<path d="M3 9l1.5-5h15L21 9"/><path d="M4 9v11h16V9"/><path d="M9 20v-6h6v6"/>'),
   check: svg('<polyline points="20 6 9 17 4 12"/>', 2.4),
+  eye: svg('<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>', 2.2),
+  sound: svg('<path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/>', 2.1),
 };
 const note = (o) => (o && typeof o.reviewNote === 'string' && o.reviewNote.trim()
   ? `<aside class="review-note">${/^review:/i.test(o.reviewNote.trim()) ? '' : 'Review: '}${esc(o.reviewNote.trim())}</aside>`
@@ -528,6 +536,61 @@ const PAGE_CSS = `
     .cs-vid-cap span { display: block; margin-top: 2px; font-size: 0.8125rem; color: var(--text-dim); }
     .cs-vid.--playing .cs-vid-play, .cs-vid.--playing .cs-vid-cap { opacity: 0; }
 
+    /* Reels strip: the client's real videos, tap to play with sound */
+    .cs-watch { position: relative; margin: 30px -16px 0; padding: 26px 0 22px; border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); background: radial-gradient(120% 70% at 88% 0%, rgba(226,168,77,0.14), transparent 62%), radial-gradient(90% 60% at 0% 100%, rgba(208,106,80,0.1), transparent 62%), var(--bg-1); scroll-margin-top: calc(var(--cs-top) + 8px); }
+    .cs-watch-head { padding: 0 16px; }
+    .cs-watch h2 { font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.55rem, 6vw, 2.4rem); line-height: 1.08; letter-spacing: -0.035em; color: var(--text-head); max-width: 20ch; text-wrap: balance; }
+    .cs-watch-head p { margin-top: 8px; max-width: 56ch; font-size: 1rem; line-height: 1.55; color: var(--text-dim); }
+    .cs-watch-row { list-style: none; display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; margin-top: 18px; padding: 2px 16px 4px; }
+    .cs-wcard { flex: 0 0 min(64%, 250px); min-width: 0; scroll-snap-align: start; }
+    .cs-wvid { cursor: pointer; background: #0d0d0d; box-shadow: 0 16px 40px rgba(0,0,0,0.45); }
+    .cs-wvid .cs-vid-play { width: 58px; height: 58px; }
+    .cs-wvid:hover .cs-vid-play { transform: translate(-50%, -50%) scale(1.06); }
+    .cs-wvid.--playing .cs-vid-play { opacity: 0; }
+    .cs-wviews { position: absolute; left: 8px; top: 8px; z-index: 2; display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px 5px 8px; border-radius: 999px; background: rgba(10,10,10,0.7); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border: 1px solid var(--line); font-size: 0.8125rem; line-height: 1.2; color: var(--text-dim); white-space: nowrap; pointer-events: none; }
+    .cs-wviews svg { width: 15px; height: 15px; flex: none; color: var(--gold); }
+    .cs-wviews b { font-family: var(--font-hero); font-size: 0.9375rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-head); }
+    .cs-wcard.--top .cs-wviews { background: rgba(226,168,77,0.94); border-color: transparent; color: #2a1d08; }
+    .cs-wcard.--top .cs-wviews svg, .cs-wcard.--top .cs-wviews b { color: #120d05; }
+    .cs-wbar { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; height: 3px; background: rgba(255,255,255,0.16); opacity: 0; transition: opacity .25s; pointer-events: none; }
+    .cs-wbar i { display: block; height: 100%; background: var(--gold); transform: scaleX(0); transform-origin: left center; }
+    .cs-wvid.--playing .cs-wbar { opacity: 1; }
+    .cs-wmeta { padding: 12px 2px 0; }
+    .cs-wmeta h3 { font-family: var(--font-display); font-size: 1.0625rem; font-weight: 700; line-height: 1.3; color: var(--text-head); }
+    .cs-wmeta p { margin-top: 3px; font-size: 0.875rem; line-height: 1.4; color: var(--text-soft); }
+
+    /* Hero video: view badge top-left, "watch with sound" bottom */
+    .cs-wviews.--hero { left: 6px; top: 6px; padding: 4px 8px 4px 6px; gap: 4px; }
+    .cs-wviews.--hero b { font-size: 0.875rem; }
+    .cs-wviews.--hero > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .cs-hero-sound { position: absolute; right: 6px; bottom: 6px; z-index: 3; display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 999px; background: rgba(226,168,77,0.95); color: #120d05; box-shadow: 0 8px 24px rgba(0,0,0,0.4); transition: transform .2s ease; }
+    .cs-hero-sound svg { width: 20px; height: 20px; }
+    .cs-hero-sound span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .cs-hero-sound:hover { transform: scale(1.05); }
+    @media (min-width: 600px) {
+      .cs-wviews.--hero { left: 10px; top: 10px; padding: 6px 11px 6px 9px; gap: 5px; }
+      .cs-wviews.--hero b { font-size: 1rem; }
+      .cs-wviews.--hero > span { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
+      .cs-hero-sound { left: 50%; right: auto; bottom: 14px; display: inline-flex; align-items: center; gap: 8px; width: auto; min-height: 44px; padding: 0 18px 0 15px; transform: translateX(-50%); font-size: 0.9375rem; font-weight: 700; white-space: nowrap; }
+      .cs-hero-sound span { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
+      .cs-hero-sound:hover { transform: translateX(-50%) scale(1.04); }
+    }
+    @media (min-width: 701px) and (max-width: 899px) {
+      .cs-watch { margin-left: -24px; margin-right: -24px; }
+      .cs-watch-head { padding: 0 24px; }
+      .cs-watch-row { padding: 2px 24px 4px; scroll-padding-left: 24px; }
+      .cs-wcard { flex-basis: 34%; }
+    }
+    @media (min-width: 900px) {
+      .cs-watch { margin: 52px 0 0; padding: 34px 32px 30px; border: 1px solid var(--line); border-radius: 28px; }
+      .cs-watch-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; padding: 0; }
+      .cs-watch-head p { margin: 0 0 4px; max-width: 36ch; }
+      .cs-watch-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; overflow: visible; margin-top: 26px; padding: 0; -webkit-mask-image: none !important; mask-image: none !important; }
+      .cs-wvid { transition: transform .3s ease, border-color .3s ease; }
+      .cs-wvid:hover { transform: translateY(-4px); border-color: rgba(226,168,77,0.45); }
+      .cs-wmeta { padding-top: 14px; }
+    }
+
     .cs-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 36px; }
     .cs-link { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 10px 16px; border-radius: 12px; border: 1px solid var(--line); background: rgba(255,255,255,0.03); font-size: 0.9375rem; font-weight: 600; line-height: 1.3; color: var(--text); transition: border-color .2s, transform .2s; }
     .cs-link:hover { border-color: rgba(226,168,77,0.4); transform: translateY(-1px); }
@@ -629,7 +692,8 @@ const PAGE_CSS = `
       .cs-close .cta-actions .btn { width: 100%; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .cs-clip, .cs-reel, .cs-site, .cs-mcard, .cs-link, .cs-tab, .cs-vid-play, .cs-toc ul a { transition: none; }
+      .cs-clip, .cs-reel, .cs-site, .cs-mcard, .cs-link, .cs-tab, .cs-vid-play, .cs-toc ul a, .cs-wvid, .cs-hero-sound { transition: none; }
+      .cs-wvid:hover { transform: none; }
       .cs-clip:hover, .cs-reel:hover, .cs-site:hover, .cs-mcard:hover, .cs-link:hover { transform: none; }
     }
 `;
@@ -735,6 +799,47 @@ const pageJs = (redirects) => `
         addEventListener('resize', spy);
         spy();
       }
+
+      // Reels strip: progress bar while a reel plays, stop a reel once it is
+      // scrolled away, and the hero button starts the first reel with sound.
+      var reels = [].slice.call(d.querySelectorAll('.cs-wvid'));
+      // A stopped reel goes back to its cover image. shared.js rewinds stopped
+      // videos, which would otherwise load and show the raw first frame.
+      var rest = function (card) {
+        var v = card.querySelector('video'), bar = card.querySelector('.cs-wbar i');
+        if (!v || !v.getAttribute('src') || card.classList.contains('--playing')) return;
+        v.removeAttribute('src'); v.load();
+        if (bar) bar.style.transform = 'scaleX(0)';
+      };
+      reels.forEach(function (card) {
+        var v = card.querySelector('video'), bar = card.querySelector('.cs-wbar i');
+        if (!v || !bar) return;
+        var paint = function () { bar.style.transform = 'scaleX(' + (v.duration ? Math.min(1, v.currentTime / v.duration) : 0) + ')'; };
+        v.addEventListener('timeupdate', paint);
+        v.addEventListener('seeked', paint);
+        v.addEventListener('play', function () { reels.forEach(function (o) { if (o !== card && o.querySelector('video').paused) rest(o); }); });
+        v.addEventListener('pause', function () { setTimeout(function () { rest(card); }, 0); });
+      });
+      if (reels.length && 'IntersectionObserver' in window) {
+        var away = new IntersectionObserver(function (es) {
+          es.forEach(function (e) {
+            var c = e.target, was = c._csIn;
+            c._csIn = e.intersectionRatio >= 0.2;
+            if (was && !c._csIn && c.classList.contains('--playing')) c.click();
+          });
+        }, { threshold: [0, 0.2] });
+        reels.forEach(function (c) { away.observe(c); });
+      }
+      var jump = d.querySelector('[data-cs-play-first]');
+      if (jump && reels.length) {
+        jump.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation(); // shared.js stops every reel on any click outside one
+          var first = reels[0], sec = d.getElementById(jump.getAttribute('href').slice(1));
+          if (!first.classList.contains('--playing')) first.click();
+          (sec || first).scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+        });
+      }
     })();
 `;
 
@@ -762,6 +867,11 @@ function validateCase(c, file) {
     ['when', 'title', 'stat'].forEach((k) => str(x && x[k], `results.timeline.items[${i}].${k}`));
     if (x && x.kind && !['before', 'peak', 'now'].includes(x.kind)) errs.push(`results.timeline.items[${i}].kind must be before|peak|now`);
   });
+  if (c.reels) {
+    str(c.reels.h2, 'reels.h2'); str(c.reels.intro, 'reels.intro');
+    arr(c.reels.items, 'reels.items').forEach((x, i) => ['src', 'poster', 'views', 'title', 'date', 'alt'].forEach((k) => str(x && x[k], `reels.items[${i}].${k}`)));
+  }
+  if (c.hero && c.hero.jump && !c.reels) errs.push('hero.jump needs a reels section to play');
   if (c.quote) ['text', 'name', 'role'].forEach((k) => str(c.quote[k], `quote.${k}`));
   arr(c.links, 'links').forEach((l, i) => { str(l && l.href, `links[${i}].href`); str(l && l.text, `links[${i}].text`); });
   const expect = path.basename(file).match(/^([a-z0-9-]+)\.(en|es)\.json$/);
@@ -1132,11 +1242,16 @@ ${pageTail(chrome, redirects)}`;
 // ---------- CASE PAGE ----------
 function heroMedia(c, t) {
   const h = c.hero;
-  const chip = h.chip ? `<span class="cs-chip">${esc(h.chip)}</span>` : '';
+  const chip = h.views
+    ? `<span class="cs-wviews --hero">${ICON.eye}<b>${esc(h.views)}</b><span>${esc(t.views)}</span></span>`
+    : h.chip ? `<span class="cs-chip">${esc(h.chip)}</span>` : '';
   if (h.type === 'video') {
-    return `<figure class="cs-frame cs-portrait">
+    const jump = h.jump && c.reels
+      ? `<a class="cs-hero-sound" href="#${t.ids.reels}" data-cs-play-first aria-label="${escAttr(t.playWith(c.reels.items[0].title))}">${ICON.sound}<span>${esc(t.watchSound)}</span></a>`
+      : '';
+    return `<figure class="cs-frame cs-portrait${jump ? ' --jump' : ''}">
               <video data-video-src="${videoSrc(h.src)}" poster="${h.poster}" ${dim(h)} muted loop playsinline preload="none" aria-label="${escAttr(h.alt)}"></video>
-              ${chip}
+              ${chip}${jump ? `\n              ${jump}` : ''}
             </figure>`;
   }
   if (h.type === 'image') {
@@ -1170,6 +1285,7 @@ function renderCase(c, all, hub, chrome, t, areaNames, alt) {
   const ids = t.ids;
   const hasResults = true; // metric tiles always render
   const sections = [
+    ['reels', !!c.reels],
     ['situation', true],
     ['steps', true],
     ['results', hasResults],
@@ -1226,6 +1342,29 @@ function renderCase(c, all, hub, chrome, t, areaNames, alt) {
                 ${note(q)}
               </figure>
             </div>` : '';
+
+  const reels = c.reels ? `
+    <section class="cs-watch" id="${ids.reels}" aria-labelledby="${ids.reels}-h">
+      <div class="cs-watch-head">
+        <h2 id="${ids.reels}-h">${esc(c.reels.h2)}</h2>
+        <p>${esc(c.reels.intro)}</p>
+      </div>
+      <ol class="cs-watch-row" data-cs-scroll>
+        ${c.reels.items.map((x, i) => `<li class="cs-wcard${i === 0 ? ' --top' : ''}">
+          <div class="cs-frame cs-portrait cs-wvid hp2-vid-card" data-audio-managed="true">
+            <video data-video-src="${videoSrc(x.src)}" poster="${x.poster}" ${dim(x)} playsinline preload="none" aria-label="${escAttr(x.alt)}"></video>
+            <span class="cs-wviews">${ICON.eye}<b>${esc(x.views)}</b><span>${esc(t.views)}</span></span>
+            <button type="button" class="cs-vid-play" aria-label="${escAttr(t.playWith(x.title))}"></button>
+            <span class="cs-wbar" aria-hidden="true"><i></i></span>
+          </div>
+          <div class="cs-wmeta">
+            <h3>${esc(x.title)}</h3>
+            <p>${esc(x.date)}${x.likes ? ` · ${esc(x.likes)} ${esc(t.likes)}` : ''}</p>
+          </div>
+        </li>`).join('\n        ')}
+      </ol>
+    </section>
+` : '';
 
   const aHref = areaHref(c);
   const links = [
@@ -1318,6 +1457,7 @@ ${inner}
       </dl>
     </section>
 
+${reels}
     <div class="cs-body">
       <nav class="cs-toc" aria-label="${escAttr(t.onPage)}">
         <p class="cs-toc-title">${esc(t.onPage)}</p>

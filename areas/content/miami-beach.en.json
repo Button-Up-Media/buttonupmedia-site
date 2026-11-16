@@ -12,23 +12,15 @@
     "proofLine": "Right here: Toni's Sushi Bar in South Beach, 4K to 80K Instagram followers in five months"
   },
   "heroMedia": {
-    "type": "graphic",
-    "alt": "Instagram numbers for Toni's Sushi Bar, a Button Up Media social media client in South Beach",
+    "type": "loop",
+    "video": "/media/tonis-hero-loop.mp4",
+    "poster": "/media/tonis-etiquette-poster.webp",
+    "width": 540,
+    "height": 960,
+    "focus": "50% 6%",
+    "alt": "Chef Toshiya at Toni's Sushi Bar in South Beach showing the right way to eat sushi, from a Reel we made with 52.5M views",
     "kicker": "Our work here",
-    "tag": "Toni's Sushi Bar, Washington Ave",
-    "graphic": {
-      "handle": "@tonissushi",
-      "hookLabel": "A Toni's hook",
-      "hook": "If you're pouring soy sauce over the rice, we need to have a conversation",
-      "big": "80.1K",
-      "bigLabel": "Instagram followers",
-      "rows": [
-        {"value": "4K", "label": "followers in June 2026"},
-        {"value": "52.5M", "label": "views on one Reel"}
-      ],
-      "asOf": "Instagram, checked Nov 16, 2026"
-    },
-    "reviewNote": "Ask the owner for a short Toni's clip or photo we can use here instead of this graphic (we have no Toni's media in the repo)."
+    "tag": "Toni's Sushi Bar, Washington Ave"
   },
   "snapshot": {
     "h2": "One island, two crowds, and a calendar that matters",

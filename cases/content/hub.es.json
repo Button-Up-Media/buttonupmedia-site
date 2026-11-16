@@ -12,6 +12,15 @@
   "wallLabel": "Videos de tres de nuestros clientes",
   "wall": [
     {
+      "slug": "tonis-sushi-bar",
+      "src": "media/tonis-hero-loop.mp4",
+      "poster": "/media/tonis-etiquette-poster.webp",
+      "width": 540,
+      "height": 960,
+      "chip": "52.5M de vistas",
+      "alt": "El chef Toshiya en Toni's Sushi Bar muestra cómo mojar el nigiri en la salsa de soya"
+    },
+    {
       "slug": "the-fatty-crab",
       "src": "videos/fatty-crab-social-reel.mp4",
       "poster": "/media/cs-fatty-crab-reel.webp",
@@ -28,15 +37,6 @@
       "height": 720,
       "chip": "24M+ vistas",
       "alt": "Clientes de Brewing Buddha hablan de la cafetería en un video corto para redes"
-    },
-    {
-      "slug": "shimuja-ramen",
-      "src": "videos/testimonial-shimuja-short.mp4",
-      "poster": "/media/cs-shimuja-chef-kei.webp",
-      "width": 540,
-      "height": 960,
-      "chip": "15.4M vistas",
-      "alt": "Chef Kei, dueño de Shimuja Ramen, hablando frente a la cámara en su restaurante"
     }
   ],
   "tabsLabel": "Casos de éxito por servicio",

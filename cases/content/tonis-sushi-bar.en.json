@@ -24,16 +24,20 @@
   },
   "timeframe": "Instagram, since June 2026",
   "hero": {
-    "type": "graphic",
-    "kicker": "South Beach · Since 1987",
-    "name": "Toni's",
-    "sub": "Sushi Bar",
-    "big": "80.1K",
-    "bigLabel": "Instagram followers, up from about 4K in June",
-    "handle": "@tonissushi",
-    "reviewNote": "Toni's has no video in the repo yet. Send the MP4 of the sushi etiquette Reel (52.5M views) or another chef clip to use here and on the case studies page."
+    "type": "video",
+    "src": "media/tonis-hero-loop.mp4",
+    "poster": "/media/tonis-etiquette-poster.webp",
+    "width": 540,
+    "height": 960,
+    "alt": "Chef Toshiya at Toni's Sushi Bar showing the right way to dip nigiri in soy sauce, from the Reel with 52.5M views",
+    "views": "52.5M",
+    "jump": true
   },
   "card": {
+    "src": "/media/tonis-etiquette-poster.webp",
+    "width": 540,
+    "height": 960,
+    "alt": "",
     "value": "4K → 80K",
     "label": "Instagram followers in 5 months",
     "place": "South Beach"
@@ -55,6 +59,56 @@
       "meaning": "The chef's sushi etiquette lesson, posted Aug 19, 2026. 1.6M people liked it, and it now sits pinned at the top of the profile."
     }
   ],
+  "reels": {
+    "h2": "The 4 Reels that passed 1 million views",
+    "intro": "Tap any Reel to watch it with sound. View counts are what Instagram showed on Nov 16, 2026.",
+    "items": [
+      {
+        "src": "media/tonis-etiquette.mp4",
+        "poster": "/media/tonis-etiquette-poster.webp",
+        "width": 720,
+        "height": 1280,
+        "views": "52.5M",
+        "likes": "1.6M",
+        "title": "Sushi etiquette check",
+        "date": "Aug 19, 2026",
+        "alt": "Chef Toshiya at Toni's Sushi Bar explains why the fish, not the rice, goes in the soy sauce"
+      },
+      {
+        "src": "media/tonis-salmon.mp4",
+        "poster": "/media/tonis-salmon-poster.webp",
+        "width": 720,
+        "height": 1280,
+        "views": "5.9M",
+        "likes": "196K",
+        "title": "Our first Reel: salmon, sound on",
+        "date": "Jun 18, 2026",
+        "alt": "Overhead shot of a chef at Toni's Sushi Bar filleting a whole salmon on an orange cutting board"
+      },
+      {
+        "src": "media/tonis-wasabi.mp4",
+        "poster": "/media/tonis-wasabi-poster.webp",
+        "width": 720,
+        "height": 1280,
+        "views": "2.7M",
+        "likes": "39.5K",
+        "title": "Real wasabi vs. the powder",
+        "date": "Oct 6, 2026",
+        "alt": "Chef Toshiya holds a fresh wasabi root and explains how it differs from powdered wasabi"
+      },
+      {
+        "src": "media/tonis-chopsticks.mp4",
+        "poster": "/media/tonis-chopsticks-poster.webp",
+        "width": 720,
+        "height": 1280,
+        "views": "1.3M",
+        "likes": "42.5K",
+        "title": "One chopstick mistake to avoid in Japan",
+        "date": "Nov 3, 2026",
+        "alt": "Chef Toshiya reacts as food is passed from chopsticks to chopsticks, a serious faux pas in Japan"
+      }
+    ]
+  },
   "situation": {
     "paragraphs": [
       "Toni's has been family-run on South Beach since 1987, when Hiromi “Toni” Takarada opened it, according to Miami New Times. Its Instagram calls it South Beach's original sushi bar.",

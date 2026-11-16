@@ -12,6 +12,15 @@
   "wallLabel": "Clips from three of our clients",
   "wall": [
     {
+      "slug": "tonis-sushi-bar",
+      "src": "media/tonis-hero-loop.mp4",
+      "poster": "/media/tonis-etiquette-poster.webp",
+      "width": 540,
+      "height": 960,
+      "chip": "52.5M views",
+      "alt": "Chef Toshiya at Toni's Sushi Bar showing the right way to dip nigiri in soy sauce"
+    },
+    {
       "slug": "the-fatty-crab",
       "src": "videos/fatty-crab-social-reel.mp4",
       "poster": "/media/cs-fatty-crab-reel.webp",
@@ -28,15 +37,6 @@
       "height": 720,
       "chip": "24M+ views",
       "alt": "Guests at Brewing Buddha talk about the cafe in a short social video"
-    },
-    {
-      "slug": "shimuja-ramen",
-      "src": "videos/testimonial-shimuja-short.mp4",
-      "poster": "/media/cs-shimuja-chef-kei.webp",
-      "width": 540,
-      "height": 960,
-      "chip": "15.4M views",
-      "alt": "Chef Kei, owner of Shimuja Ramen, talking on camera at his restaurant"
     }
   ],
   "tabsLabel": "Case studies by service",

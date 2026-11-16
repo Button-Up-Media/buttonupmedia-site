@@ -24,16 +24,20 @@
   },
   "timeframe": "Instagram, desde junio de 2026",
   "hero": {
-    "type": "graphic",
-    "kicker": "South Beach · Desde 1987",
-    "name": "Toni's",
-    "sub": "Sushi Bar",
-    "big": "80.1K",
-    "bigLabel": "seguidores en Instagram, desde unos 4K en junio",
-    "handle": "@tonissushi",
-    "reviewNote": "Toni's has no video in the repo yet. Send the MP4 of the sushi etiquette Reel (52.5M views) or another chef clip to use here and on the case studies page."
+    "type": "video",
+    "src": "media/tonis-hero-loop.mp4",
+    "poster": "/media/tonis-etiquette-poster.webp",
+    "width": 540,
+    "height": 960,
+    "alt": "El chef Toshiya en Toni's Sushi Bar muestra cómo mojar el nigiri en la salsa de soya, del reel con 52.5M de vistas",
+    "views": "52.5M",
+    "jump": true
   },
   "card": {
+    "src": "/media/tonis-etiquette-poster.webp",
+    "width": 540,
+    "height": 960,
+    "alt": "",
     "value": "4K → 80K",
     "label": "seguidores en 5 meses",
     "place": "South Beach"
@@ -55,6 +59,56 @@
       "meaning": "La lección del chef sobre los modales del sushi, publicada el 19 de agosto de 2026. A 1.6M de personas les gustó, y hoy está fijada arriba del perfil."
     }
   ],
+  "reels": {
+    "h2": "Los 4 reels que pasaron el millón de vistas",
+    "intro": "Toca cualquier reel para verlo con sonido. Las vistas son las que mostraba Instagram el 16 de nov. de 2026.",
+    "items": [
+      {
+        "src": "media/tonis-etiquette.mp4",
+        "poster": "/media/tonis-etiquette-poster.webp",
+        "width": 720,
+        "height": 1280,
+        "views": "52.5M",
+        "likes": "1.6M",
+        "title": "Los modales del sushi",
+        "date": "19 ago. 2026",
+        "alt": "El chef Toshiya en Toni's Sushi Bar explica por qué es el pescado, no el arroz, lo que va en la salsa de soya"
+      },
+      {
+        "src": "media/tonis-salmon.mp4",
+        "poster": "/media/tonis-salmon-poster.webp",
+        "width": 720,
+        "height": 1280,
+        "views": "5.9M",
+        "likes": "196K",
+        "title": "Nuestro primer reel: salmón, con sonido",
+        "date": "18 jun. 2026",
+        "alt": "Toma cenital de un chef de Toni's Sushi Bar fileteando un salmón entero sobre una tabla naranja"
+      },
+      {
+        "src": "media/tonis-wasabi.mp4",
+        "poster": "/media/tonis-wasabi-poster.webp",
+        "width": 720,
+        "height": 1280,
+        "views": "2.7M",
+        "likes": "39.5K",
+        "title": "Wasabi de verdad contra el de polvo",
+        "date": "6 oct. 2026",
+        "alt": "El chef Toshiya sostiene una raíz de wasabi fresca y explica en qué se diferencia del wasabi en polvo"
+      },
+      {
+        "src": "media/tonis-chopsticks.mp4",
+        "poster": "/media/tonis-chopsticks-poster.webp",
+        "width": 720,
+        "height": 1280,
+        "views": "1.3M",
+        "likes": "42.5K",
+        "title": "Un error con los palillos que debes evitar en Japón",
+        "date": "3 nov. 2026",
+        "alt": "El chef Toshiya reacciona cuando se pasan comida de palillo a palillo, una falta grave de modales en Japón"
+      }
+    ]
+  },
   "situation": {
     "paragraphs": [
       "Toni's es un negocio familiar en South Beach desde 1987, cuando Hiromi “Toni” Takarada lo abrió, según Miami New Times. Su Instagram lo presenta como el sushi bar original de South Beach.",
