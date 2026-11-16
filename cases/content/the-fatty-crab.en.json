@@ -25,18 +25,19 @@
   "timeframe": "Influencer campaign Jul 2023 to Mar 2024",
   "hero": {
     "type": "video",
-    "src": "videos/fatty-crab-nola-flavors.mp4",
-    "poster": "/media/cs-fatty-crab-boil.webp",
-    "width": 406,
-    "height": 720,
-    "alt": "A short video Button Up Media made for The Fatty Crab: a guest digging into a seafood boil",
-    "chip": "46M+ views"
-  },
-  "card": {
-    "src": "/images/fatty-crab-thumbnail-ayce.avif",
+    "src": "media/fc-hero-loop.mp4",
+    "poster": "/media/fc-hero-poster.webp",
     "width": 540,
     "height": 960,
-    "alt": "A guest eating crab at The Fatty Crab",
+    "alt": "A seafood boil poured out at The Fatty Crab, from a Reel we made with 2.6M views",
+    "views": "2.6M",
+    "jump": true
+  },
+  "card": {
+    "src": "/media/fc-friendship-boil-poster.webp",
+    "width": 540,
+    "height": 960,
+    "alt": "",
     "value": "46M+",
     "label": "video views"
   },
@@ -57,6 +58,64 @@
       "meaning": "How often people who see a post like, comment or share it. Across all three platforms it is 5.5%."
     }
   ],
+  "reels": {
+    "h2": "Four of the 11 Reels that passed 1 million views",
+    "intro": "Tap any Reel to watch it with sound. View counts are what Instagram showed on Nov 16, 2026.",
+    "items": [
+      {
+        "src": "media/fc-friendship-boil.mp4",
+        "poster": "/media/fc-friendship-boil-poster.webp",
+        "width": 540,
+        "height": 960,
+        "views": "2.6M",
+        "likes": "79.6K",
+        "title": "Your first @ owes you a seafood boil",
+        "date": "Sep 19, 2023",
+        "alt": "A Fatty Crab seafood boil poured out of the bag onto the table, with the hook “Your first @ owes you a seafood boil”",
+        "uploaded": "2023-09-19",
+        "duration": "PT15S"
+      },
+      {
+        "src": "media/fc-brunch-deal.mp4",
+        "poster": "/media/fc-brunch-deal-poster.webp",
+        "width": 540,
+        "height": 960,
+        "views": "2.6M",
+        "likes": "135K",
+        "title": "The best brunch deal in Doral",
+        "date": "Aug 1, 2023",
+        "alt": "A crab leg dipped in The Fatty Crab’s house sauce during weekend brunch in Doral",
+        "uploaded": "2023-08-01",
+        "duration": "PT19S"
+      },
+      {
+        "src": "media/fc-nola-brunch.mp4",
+        "poster": "/media/fc-nola-brunch-poster.webp",
+        "width": 540,
+        "height": 960,
+        "views": "2.1M",
+        "likes": "51.9K",
+        "title": "All-you-can-eat New Orleans brunch",
+        "date": "Nov 3, 2023",
+        "alt": "Local food creators digging into The Fatty Crab’s all-you-can-eat New Orleans brunch",
+        "uploaded": "2023-11-03",
+        "duration": "PT30S"
+      },
+      {
+        "src": "media/fc-bogo.mp4",
+        "poster": "/media/fc-bogo-poster.webp",
+        "width": 540,
+        "height": 960,
+        "views": "1.8M",
+        "likes": "77.1K",
+        "title": "BOGO shrimp boils on Uber Eats",
+        "date": "Oct 17, 2024",
+        "alt": "A creator holds two shrimp boils outside The Fatty Crab to announce buy one, get one on Uber Eats",
+        "uploaded": "2024-10-17",
+        "duration": "PT25S"
+      }
+    ]
+  },
   "situation": {
     "paragraphs": [
       "The feed was mostly static posts on an inconsistent schedule.",
@@ -91,9 +150,32 @@
       }
     ]
   },
+  "analysis": {
+    "items": [
+      {
+        "stat": "11",
+        "title": "Reels past 1 million views on Instagram",
+        "body": "Not one lucky video: 11 of the 393 Reels on @thefattycrab have passed a million views, and the top two reached 2.6M each."
+      },
+      {
+        "stat": "3 of 4",
+        "title": "top Reels sell a specific offer",
+        "body": "The Doral brunch deal, all-you-can-eat New Orleans brunch, and BOGO shrimp boils on Uber Eats. A clear offer gives people a reason to come this week, not someday."
+      },
+      {
+        "stat": "14.5K",
+        "title": "comments on one Reel, mostly friends tagging friends",
+        "body": "“Your first @ owes you a seafood boil” asks viewers to tag someone. Every tag puts the video in front of a new person, which is how it reached 2.6M views."
+      },
+      {
+        "stat": "2.1M",
+        "title": "views on a creator-led Reel",
+        "body": "During our influencer campaign, local food creators fronted the New Orleans brunch Reel and brought their own audiences to The Fatty Crab."
+      }
+    ]
+  },
   "results": {
     "points": [
-      "One of our Fatty Crab Reels, built on a scroll-stop hook, passed 1.2M views on its own.",
       "The influencer campaign brought a wave of new followers, and more guests mentioned the creator's videos when they came in."
     ]
   },

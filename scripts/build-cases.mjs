@@ -62,8 +62,10 @@
 //     timeline?: { h3?, items: [ { when, title, stat, kind?: "before"|"peak"|"now" } ] },   // growth milestones, oldest first
 //     disclaimer?: true } [note],
 //   quote: null | { h2?, text, name, role, source?, video?: { src, poster, width, height, playLabel } } [note],
-//   reels?: { h2, intro, items: [ { src, poster, width, height, views, likes?, title, date, alt } ] },
-//                                             // full-width strip of the client's real videos, tap to play with sound
+//   reels?: { h2, intro, items: [ { src, poster, width, height, views, likes?, title, date, alt, uploaded?, duration? } ] },
+//                                             // full-width strip of the client's real videos, tap to play with sound;
+//                                             // uploaded (YYYY-MM-DD) + duration (PT42S) also emit VideoObject JSON-LD
+//   analysis?: { h2?, intro?, items: [ { stat, title, body } ] },   // "What the numbers say": findings from the data
 //   links: [ { href, text } ]                 // service pages etc.; the area page link is added automatically
 // }
 //
@@ -125,8 +127,8 @@ const T = {
     contact: '/contact', grader: '/social-media-website-grader',
     primary: 'Book a free strategy call', graderBtn: 'Try the free grader',
     service: { social: 'Social media', ads: 'Google Ads', web: 'Website' },
-    nav: { reels: 'The Reels', situation: 'The situation', steps: 'What we did', results: 'Results', quote: 'In their words' },
-    ids: { reels: 'the-reels', situation: 'situation', steps: 'what-we-did', results: 'results', quote: 'in-their-words' },
+    nav: { reels: 'The Reels', situation: 'The situation', steps: 'What we did', analysis: 'What the numbers say', results: 'Results', quote: 'In their words' },
+    ids: { reels: 'the-reels', situation: 'situation', steps: 'what-we-did', analysis: 'what-the-numbers-say', results: 'results', quote: 'in-their-words' },
     views: 'views', likes: 'likes', watchSound: 'Watch with sound', playWith: (x) => `Play “${x}” with sound`,
     glance: 'At a glance', onPage: 'On this page', allCases: 'All case studies', back: 'Back to all case studies',
     more: 'More case studies', moreSub: 'Same playbook, different restaurants.',
@@ -144,8 +146,8 @@ const T = {
     contact: '/es/contacto', grader: '/es/analizador-redes-sociales-web',
     primary: 'Agende una llamada estratégica gratis', graderBtn: 'Pruebe el analizador gratis',
     service: { social: 'Redes sociales', ads: 'Google Ads', web: 'Sitio web' },
-    nav: { reels: 'Los reels', situation: 'La situación', steps: 'Lo que hicimos', results: 'Resultados', quote: 'En sus palabras' },
-    ids: { reels: 'los-reels', situation: 'situacion', steps: 'lo-que-hicimos', results: 'resultados', quote: 'en-sus-palabras' },
+    nav: { reels: 'Los reels', situation: 'La situación', steps: 'Lo que hicimos', analysis: 'Qué dicen los números', results: 'Resultados', quote: 'En sus palabras' },
+    ids: { reels: 'los-reels', situation: 'situacion', steps: 'lo-que-hicimos', analysis: 'que-dicen-los-numeros', results: 'resultados', quote: 'en-sus-palabras' },
     views: 'vistas', likes: 'me gusta', watchSound: 'Ver con sonido', playWith: (x) => `Reproducir “${x}” con sonido`,
     glance: 'De un vistazo', onPage: 'En esta página', allCases: 'Todos los casos', back: 'Volver a todos los casos de éxito',
     more: 'Más casos de éxito', moreSub: 'El mismo método, otros restaurantes.',
@@ -559,6 +561,17 @@ const PAGE_CSS = `
     .cs-wmeta h3 { font-family: var(--font-display); font-size: 1.0625rem; font-weight: 700; line-height: 1.3; color: var(--text-head); }
     .cs-wmeta p { margin-top: 3px; font-size: 0.875rem; line-height: 1.4; color: var(--text-soft); }
 
+    /* What the numbers say: one finding per row, the number leads */
+    .cs-findings { list-style: none; display: grid; gap: 12px; margin-top: 18px; counter-reset: f; }
+    .cs-finding { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; padding: 18px 18px 16px; border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(135deg, rgba(226,168,77,0.07), transparent 55%), var(--bg-1); }
+    .cs-finding-stat { font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.9rem, 8vw, 2.4rem); line-height: 1; letter-spacing: -0.045em; color: var(--gold); }
+    .cs-finding h3 { font-family: var(--font-display); font-size: 1.0625rem; font-weight: 700; line-height: 1.35; color: var(--text-head); }
+    .cs-finding p { margin-top: 6px; font-size: 1rem; line-height: 1.6; color: var(--text-dim); }
+    @media (min-width: 600px) {
+      .cs-finding { grid-template-columns: 136px minmax(0, 1fr); gap: 20px; align-items: start; padding: 20px 22px; }
+      .cs-finding-stat { font-size: 2.3rem; padding-top: 2px; }
+    }
+
     /* Hero video: view badge top-left, "watch with sound" bottom */
     .cs-wviews.--hero { left: 6px; top: 6px; padding: 4px 8px 4px 6px; gap: 4px; }
     .cs-wviews.--hero b { font-size: 0.875rem; }
@@ -800,6 +813,30 @@ const pageJs = (redirects) => `
         spy();
       }
 
+      // Muted loops (case hero, hub clip wall): poster first. Start only after
+      // the page has loaded and gone idle, never with reduced motion or data
+      // saver, and only while at least a quarter is on screen.
+      var loopVids = [].slice.call(d.querySelectorAll('video[data-cs-loop]'));
+      var conn = navigator.connection || navigator.webkitConnection;
+      var lite = conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || ''));
+      if (loopVids.length && !lite && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var armLoops = function () {
+          loopVids.forEach(function (v) {
+            var go = function () {
+              if (window.ensureLazyVideoSource) window.ensureLazyVideoSource(v);
+              else if (!v.getAttribute('src')) { v.src = v.getAttribute('data-video-src'); }
+              var p = v.play(); if (p && p.catch) p.catch(function () {});
+            };
+            if (!('IntersectionObserver' in window)) { go(); return; }
+            new IntersectionObserver(function (es) {
+              es.forEach(function (e) { if (e.intersectionRatio >= 0.25) go(); else if (!v.paused) v.pause(); });
+            }, { threshold: [0, 0.25] }).observe(v);
+          });
+        };
+        var idle = function () { if ('requestIdleCallback' in window) requestIdleCallback(armLoops, { timeout: 1500 }); else setTimeout(armLoops, 600); };
+        if (d.readyState === 'complete') idle(); else addEventListener('load', idle, { once: true });
+      }
+
       // Reels strip: progress bar while a reel plays, stop a reel once it is
       // scrolled away, and the hero button starts the first reel with sound.
       var reels = [].slice.call(d.querySelectorAll('.cs-wvid'));
@@ -872,6 +909,11 @@ function validateCase(c, file) {
     arr(c.reels.items, 'reels.items').forEach((x, i) => ['src', 'poster', 'views', 'title', 'date', 'alt'].forEach((k) => str(x && x[k], `reels.items[${i}].${k}`)));
   }
   if (c.hero && c.hero.jump && !c.reels) errs.push('hero.jump needs a reels section to play');
+  if (c.reels) c.reels.items.forEach((x, i) => {
+    if (x.uploaded && !/^\d{4}-\d{2}-\d{2}$/.test(x.uploaded)) errs.push(`reels.items[${i}].uploaded must be YYYY-MM-DD`);
+    if (x.duration && !/^PT\d+S$/.test(x.duration)) errs.push(`reels.items[${i}].duration must look like PT42S`);
+  });
+  if (c.analysis) arr(c.analysis.items, 'analysis.items').forEach((x, i) => ['stat', 'title', 'body'].forEach((k) => str(x && x[k], `analysis.items[${i}].${k}`)));
   if (c.quote) ['text', 'name', 'role'].forEach((k) => str(c.quote[k], `quote.${k}`));
   arr(c.links, 'links').forEach((l, i) => { str(l && l.href, `links[${i}].href`); str(l && l.text, `links[${i}].text`); });
   const expect = path.basename(file).match(/^([a-z0-9-]+)\.(en|es)\.json$/);
@@ -1087,8 +1129,8 @@ function renderHub(hub, cases, chrome, t, alt) {
 
   const wall = hub.wall.filter((w) => bySlug.has(w.slug)).map((w, i) => {
     const c = bySlug.get(w.slug);
-    return `<li><a class="cs-frame cs-portrait cs-clip" href="${casePath(w.slug, lang)}" aria-label="${escAttr(t.clipLabel(c.client, w.chip))}">
-              <video data-video-src="${videoSrc(w.src)}" poster="${w.poster}" ${dim(w)} muted loop playsinline preload="none" aria-hidden="true"></video>
+    return `<li><a class="cs-frame cs-portrait cs-clip" href="${casePath(w.slug, lang)}" aria-label="${escAttr(t.clipLabel(c.client, w.chip))}" data-audio-managed="true">
+              <video data-video-src="${videoSrc(w.src)}" data-cs-loop poster="${w.poster}" ${dim(w)} muted loop playsinline preload="none" aria-hidden="true"></video>
               <span class="cs-clip-meta" aria-hidden="true"><b>${esc(w.chip.split(' ')[0])}<small> ${esc(w.chip.split(' ').slice(1).join(' '))}</small></b><span>${esc(c.client)}</span></span>
             </a></li>`;
   }).join('\n            ');
@@ -1249,8 +1291,8 @@ function heroMedia(c, t) {
     const jump = h.jump && c.reels
       ? `<a class="cs-hero-sound" href="#${t.ids.reels}" data-cs-play-first aria-label="${escAttr(t.playWith(c.reels.items[0].title))}">${ICON.sound}<span>${esc(t.watchSound)}</span></a>`
       : '';
-    return `<figure class="cs-frame cs-portrait${jump ? ' --jump' : ''}">
-              <video data-video-src="${videoSrc(h.src)}" poster="${h.poster}" ${dim(h)} muted loop playsinline preload="none" aria-label="${escAttr(h.alt)}"></video>
+    return `<figure class="cs-frame cs-portrait${jump ? ' --jump' : ''}" data-audio-managed="true">
+              <video data-video-src="${videoSrc(h.src)}" data-cs-loop poster="${h.poster}" ${dim(h)} muted loop playsinline preload="none" aria-label="${escAttr(h.alt)}"></video>
               ${chip}${jump ? `\n              ${jump}` : ''}
             </figure>`;
   }
@@ -1288,6 +1330,7 @@ function renderCase(c, all, hub, chrome, t, areaNames, alt) {
     ['reels', !!c.reels],
     ['situation', true],
     ['steps', true],
+    ['analysis', !!c.analysis],
     ['results', hasResults],
     ['quote', !!c.quote],
   ].filter(([, on]) => on).map(([k]) => k);
@@ -1405,6 +1448,14 @@ function renderCase(c, all, hub, chrome, t, areaNames, alt) {
         isPartOf: { '@id': `${hubUrl}#webpage` },
         breadcrumb: { '@id': `${url}#breadcrumb` },
       },
+      ...(c.reels ? c.reels.items.filter((x) => x.uploaded).map((x, i) => ({
+        '@type': 'VideoObject', '@id': `${url}#video-${i + 1}`,
+        name: `${c.client}: ${x.title}`,
+        description: `${x.alt}. ${x.views} ${t.views} on Instagram${x.likes ? `, ${x.likes} ${t.likes}` : ''}.`,
+        thumbnailUrl: abs(x.poster), contentUrl: abs(`/${String(x.src).replace(/^(\.\.\/|\/)+/, '')}`),
+        uploadDate: x.uploaded, ...(x.duration ? { duration: x.duration } : {}),
+        inLanguage: lang, isPartOf: { '@id': `${url}#article` },
+      })) : []),
     ],
   };
 
@@ -1473,6 +1524,16 @@ ${sec('situation', `              <div class="cs-sit">${c.situation.paragraphs.m
 ${sec('steps', `              <ol class="cs-steps">
               ${steps}
               </ol>`)}
+${c.analysis ? sec('analysis', `              ${c.analysis.intro ? `<p>${esc(c.analysis.intro)}</p>` : ''}
+              <ol class="cs-findings">
+              ${c.analysis.items.map((x) => `<li class="cs-finding">
+                <b class="cs-finding-stat">${esc(x.stat)}</b>
+                <div>
+                  <h3>${esc(x.title)}</h3>
+                  <p>${esc(x.body)}</p>
+                </div>
+              </li>`).join('\n              ')}
+              </ol>`) : ''}
 ${sec('results', `              <ul class="cs-tiles">
               ${tiles}
               </ul>

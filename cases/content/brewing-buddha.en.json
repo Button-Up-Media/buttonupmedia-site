@@ -25,18 +25,19 @@
   "timeframe": null,
   "hero": {
     "type": "video",
-    "src": "videos/testimonial-brewing-buddha.mp4",
-    "poster": "/media/cs-brewing-buddha-guests.webp",
-    "width": 406,
-    "height": 720,
-    "alt": "Guests at Brewing Buddha talk about the cafe in a short social video",
-    "chip": "24M+ views"
-  },
-  "card": {
-    "src": "/media/cs-brewing-buddha-jordan.webp",
+    "src": "media/bb-hero-loop.mp4",
+    "poster": "/media/bb-hero-poster.webp",
     "width": 540,
     "height": 960,
-    "alt": "Jordan Athos, owner of Brewing Buddha",
+    "alt": "A Brewing Buddha barista reacts to a party-size Cookie Butter Latte order, from a Reel we made with 7.4M views",
+    "views": "7.4M",
+    "jump": true
+  },
+  "card": {
+    "src": "/media/bb-cookie-butter-latte-poster.webp",
+    "width": 540,
+    "height": 960,
+    "alt": "",
     "value": "24M+",
     "label": "video views"
   },
@@ -57,6 +58,64 @@
       "meaning": "How often people who see a post like, comment or share it. It shows the audience is paying attention, not just scrolling past."
     }
   ],
+  "reels": {
+    "h2": "The 4 most-watched Reels on @brewingbuddha",
+    "intro": "Tap any Reel to watch it with sound. View counts are what Instagram showed on Nov 16, 2026.",
+    "items": [
+      {
+        "src": "media/bb-cookie-butter-latte.mp4",
+        "poster": "/media/bb-cookie-butter-latte-poster.webp",
+        "width": 540,
+        "height": 960,
+        "views": "7.4M",
+        "likes": "576K",
+        "title": "The party-size Cookie Butter Latte",
+        "date": "Sep 8, 2026",
+        "alt": "A Brewing Buddha barista reads a Cookie Butter Latte order meant for 10 people and makes it anyway",
+        "uploaded": "2026-09-08",
+        "duration": "PT89S"
+      },
+      {
+        "src": "media/bb-sugar-scoops.mp4",
+        "poster": "/media/bb-sugar-scoops-poster.webp",
+        "width": 540,
+        "height": 960,
+        "views": "1.1M",
+        "likes": "47.2K",
+        "title": "16 scoops of sugar, coming up",
+        "date": "Aug 4, 2026",
+        "alt": "Filmed on smart glasses from behind the counter: a barista adds scoop after scoop of sugar to one coffee order",
+        "uploaded": "2026-08-04",
+        "duration": "PT55S"
+      },
+      {
+        "src": "media/bb-cream-cheese.mp4",
+        "poster": "/media/bb-cream-cheese-poster.webp",
+        "width": 540,
+        "height": 960,
+        "views": "950K",
+        "likes": "68.3K",
+        "title": "The cream cheese guy is back",
+        "date": "Jun 26, 2026",
+        "alt": "A Brewing Buddha staffer spreads a ridiculous amount of cream cheese on a bagel for a regular’s order",
+        "uploaded": "2026-06-26",
+        "duration": "PT41S"
+      },
+      {
+        "src": "media/bb-waffle-latte.mp4",
+        "poster": "/media/bb-waffle-latte-poster.webp",
+        "width": 540,
+        "height": 960,
+        "views": "418K",
+        "likes": "8K",
+        "title": "The maple waffle latte",
+        "date": "Jul 8, 2025",
+        "alt": "A Brewing Buddha team member tastes a new latte made with waffles, maple syrup and butter",
+        "uploaded": "2025-07-08",
+        "duration": "PT18S"
+      }
+    ]
+  },
   "situation": {
     "paragraphs": [
       "Brewing Buddha is a quirky coffee shop and art space known for its creative lattes.",
@@ -79,9 +138,32 @@
       }
     ]
   },
+  "analysis": {
+    "items": [
+      {
+        "stat": "7.4M",
+        "title": "views on one behind-the-counter skit",
+        "body": "A barista reacts to a party-size Cookie Butter Latte order meant for 10 people. It drew 7.4M views and 576K likes, more than half of all the views across the account's 261 Reels."
+      },
+      {
+        "stat": "76%",
+        "title": "of all Reel views came from three summer skits",
+        "body": "The top three Reels are all staff comedy about over-the-top orders, posted from June to September 2026. Together they drew about 9.4M of the 12.5M views on @brewingbuddha. When a format works, we turn it into a series."
+      },
+      {
+        "stat": "418K",
+        "title": "views on a Reel the audience asked for",
+        "body": "Viewers loved the butter latte video, so the team created a maple waffle latte as a follow-up. Making the next video from what people ask for keeps them coming back."
+      },
+      {
+        "stat": "3 years",
+        "title": "and, in the manager's words, “the quality never drops”",
+        "body": "In a November 2026 Google review, manager Josh wrote that the account has “several videos over a million views” and brought “an influx of new customers.”"
+      }
+    ]
+  },
   "results": {
     "points": [
-      "The butter coffee video (February 2025), one signature drink shot up close, became a standout for the account. Often one menu item is all a video needs.",
       "Owner Jordan Athos went on camera in August 2024 to talk about working with us. You can watch it on this page."
     ]
   },

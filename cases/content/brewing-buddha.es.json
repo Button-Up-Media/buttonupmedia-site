@@ -25,18 +25,19 @@
   "timeframe": null,
   "hero": {
     "type": "video",
-    "src": "videos/testimonial-brewing-buddha.mp4",
-    "poster": "/media/cs-brewing-buddha-guests.webp",
-    "width": 406,
-    "height": 720,
-    "alt": "Clientes de Brewing Buddha hablan de la cafetería en un video corto para redes",
-    "chip": "24M+ vistas"
-  },
-  "card": {
-    "src": "/media/cs-brewing-buddha-jordan.webp",
+    "src": "media/bb-hero-loop.mp4",
+    "poster": "/media/bb-hero-poster.webp",
     "width": 540,
     "height": 960,
-    "alt": "Jordan Athos, dueño de Brewing Buddha",
+    "alt": "Una barista de Brewing Buddha reacciona a un pedido de Cookie Butter Latte tamaño fiesta, de un reel nuestro con 7.4M de vistas",
+    "views": "7.4M",
+    "jump": true
+  },
+  "card": {
+    "src": "/media/bb-cookie-butter-latte-poster.webp",
+    "width": 540,
+    "height": 960,
+    "alt": "",
     "value": "24M+",
     "label": "vistas de video"
   },
@@ -57,6 +58,64 @@
       "meaning": "Qué tan seguido quien ve una publicación le da like, comenta o comparte. Muestra que el público presta atención y no solo pasa de largo."
     }
   ],
+  "reels": {
+    "h2": "Los 4 reels más vistos de @brewingbuddha",
+    "intro": "Toca cualquier reel para verlo con sonido. Las vistas son las que mostraba Instagram el 16 de nov. de 2026.",
+    "items": [
+      {
+        "src": "media/bb-cookie-butter-latte.mp4",
+        "poster": "/media/bb-cookie-butter-latte-poster.webp",
+        "width": 540,
+        "height": 960,
+        "views": "7.4M",
+        "likes": "576K",
+        "title": "El Cookie Butter Latte tamaño fiesta",
+        "date": "8 sept. 2026",
+        "alt": "Una barista de Brewing Buddha lee un pedido de Cookie Butter Latte para 10 personas y lo prepara igual",
+        "uploaded": "2026-09-08",
+        "duration": "PT89S"
+      },
+      {
+        "src": "media/bb-sugar-scoops.mp4",
+        "poster": "/media/bb-sugar-scoops-poster.webp",
+        "width": 540,
+        "height": 960,
+        "views": "1.1M",
+        "likes": "47.2K",
+        "title": "16 cucharadas de azúcar, marchando",
+        "date": "4 ago. 2026",
+        "alt": "Grabado con lentes inteligentes detrás del mostrador: un barista le echa cucharada tras cucharada de azúcar a un solo café",
+        "uploaded": "2026-08-04",
+        "duration": "PT55S"
+      },
+      {
+        "src": "media/bb-cream-cheese.mp4",
+        "poster": "/media/bb-cream-cheese-poster.webp",
+        "width": 540,
+        "height": 960,
+        "views": "950K",
+        "likes": "68.3K",
+        "title": "Volvió el señor del queso crema",
+        "date": "26 jun. 2026",
+        "alt": "Un empleado de Brewing Buddha le pone una cantidad ridícula de queso crema a un bagel para el pedido de un cliente fijo",
+        "uploaded": "2026-06-26",
+        "duration": "PT41S"
+      },
+      {
+        "src": "media/bb-waffle-latte.mp4",
+        "poster": "/media/bb-waffle-latte-poster.webp",
+        "width": 540,
+        "height": 960,
+        "views": "418K",
+        "likes": "8K",
+        "title": "El latte de waffle con maple",
+        "date": "8 jul. 2025",
+        "alt": "Un miembro del equipo de Brewing Buddha prueba un latte nuevo hecho con waffles, sirope de maple y mantequilla",
+        "uploaded": "2025-07-08",
+        "duration": "PT18S"
+      }
+    ]
+  },
   "situation": {
     "paragraphs": [
       "Brewing Buddha es una cafetería y espacio de arte bien original, conocida por sus lattes creativos.",
@@ -79,9 +138,32 @@
       }
     ]
   },
+  "analysis": {
+    "items": [
+      {
+        "stat": "7.4M",
+        "title": "vistas en un solo sketch detrás del mostrador",
+        "body": "Una barista reacciona a un pedido de Cookie Butter Latte tamaño fiesta para 10 personas. Sumó 7.4M de vistas y 576K me gusta, más de la mitad de todas las vistas de los 261 reels de la cuenta."
+      },
+      {
+        "stat": "76%",
+        "title": "de todas las vistas salió de tres sketches del verano",
+        "body": "Los tres reels más vistos son comedia del equipo sobre pedidos exagerados, publicados de junio a septiembre de 2026. Juntos sumaron unas 9.4M de las 12.5M de vistas de @brewingbuddha. Cuando un formato funciona, lo convertimos en serie."
+      },
+      {
+        "stat": "418K",
+        "title": "vistas en un reel que pidió el público",
+        "body": "Al público le encantó el video del butter latte, así que el equipo creó un latte de waffle con maple como continuación. Hacer el siguiente video con lo que la gente pide hace que vuelva."
+      },
+      {
+        "stat": "3 años",
+        "title": "y, en palabras del gerente, “the quality never drops”",
+        "body": "En una reseña de Google de noviembre de 2026, el gerente Josh escribió que la cuenta tiene “several videos over a million views” y trajo “an influx of new customers” (reseña original en inglés)."
+      }
+    ]
+  },
   "results": {
     "points": [
-      "El video del butter coffee (febrero de 2025), una bebida estrella grabada de cerca, se volvió de lo más visto en la cuenta. Muchas veces un solo producto del menú es todo lo que un video necesita.",
       "Su dueño, Jordan Athos, se puso frente a la cámara en agosto de 2024 para contar cómo es trabajar con nosotros. Puedes verlo en esta página."
     ]
   },

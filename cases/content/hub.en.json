@@ -22,19 +22,19 @@
     },
     {
       "slug": "the-fatty-crab",
-      "src": "videos/fatty-crab-social-reel.mp4",
-      "poster": "/media/cs-fatty-crab-reel.webp",
-      "width": 406,
-      "height": 720,
+      "src": "media/fc-hero-loop.mp4",
+      "poster": "/media/fc-hero-poster.webp",
+      "width": 540,
+      "height": 960,
       "chip": "46M+ views",
       "alt": "A short video Button Up Media made for The Fatty Crab: a crab leg dipped in sauce"
     },
     {
       "slug": "brewing-buddha",
-      "src": "videos/testimonial-brewing-buddha.mp4",
-      "poster": "/media/cs-brewing-buddha-guests.webp",
-      "width": 406,
-      "height": 720,
+      "src": "media/bb-hero-loop.mp4",
+      "poster": "/media/bb-hero-poster.webp",
+      "width": 540,
+      "height": 960,
       "chip": "24M+ views",
       "alt": "Guests at Brewing Buddha talk about the cafe in a short social video"
     }

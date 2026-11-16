@@ -22,19 +22,19 @@
     },
     {
       "slug": "the-fatty-crab",
-      "src": "videos/fatty-crab-social-reel.mp4",
-      "poster": "/media/cs-fatty-crab-reel.webp",
-      "width": 406,
-      "height": 720,
+      "src": "media/fc-hero-loop.mp4",
+      "poster": "/media/fc-hero-poster.webp",
+      "width": 540,
+      "height": 960,
       "chip": "46M+ vistas",
       "alt": "Un video corto que Button Up Media hizo para The Fatty Crab: una pata de cangrejo bañada en salsa"
     },
     {
       "slug": "brewing-buddha",
-      "src": "videos/testimonial-brewing-buddha.mp4",
-      "poster": "/media/cs-brewing-buddha-guests.webp",
-      "width": 406,
-      "height": 720,
+      "src": "media/bb-hero-loop.mp4",
+      "poster": "/media/bb-hero-poster.webp",
+      "width": 540,
+      "height": 960,
       "chip": "24M+ vistas",
       "alt": "Clientes de Brewing Buddha hablan de la cafetería en un video corto para redes"
     }

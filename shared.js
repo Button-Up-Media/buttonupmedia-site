@@ -2047,7 +2047,7 @@ document.querySelectorAll("[data-autoplay-hover]").forEach((container) => {
   if (conn && (conn.saveData || /^(slow-2g|2g)$/.test(conn.effectiveType || ""))) return;
 
   // Use the lighter mobile rendition instead of the desktop encode.
-  video.dataset.videoSrc = "videos/compilation-best-shots.mobile.mp4";
+  video.dataset.videoSrc = "videos/compilation-best-shots-720.mp4";
 
   const markLoaded = () => {
     video.classList.add("is-loaded");

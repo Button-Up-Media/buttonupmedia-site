@@ -25,18 +25,19 @@
   "timeframe": "Campaña con influencer de jul. 2023 a mar. 2024",
   "hero": {
     "type": "video",
-    "src": "videos/fatty-crab-nola-flavors.mp4",
-    "poster": "/media/cs-fatty-crab-boil.webp",
-    "width": 406,
-    "height": 720,
-    "alt": "Un video corto que Button Up Media hizo para The Fatty Crab: un cliente frente a un seafood boil",
-    "chip": "46M+ vistas"
-  },
-  "card": {
-    "src": "/images/fatty-crab-thumbnail-ayce.avif",
+    "src": "media/fc-hero-loop.mp4",
+    "poster": "/media/fc-hero-poster.webp",
     "width": 540,
     "height": 960,
-    "alt": "Un cliente comiendo cangrejo en The Fatty Crab",
+    "alt": "Un seafood boil servido sobre la mesa en The Fatty Crab, de un reel nuestro con 2.6M de vistas",
+    "views": "2.6M",
+    "jump": true
+  },
+  "card": {
+    "src": "/media/fc-friendship-boil-poster.webp",
+    "width": 540,
+    "height": 960,
+    "alt": "",
     "value": "46M+",
     "label": "vistas de video"
   },
@@ -57,6 +58,64 @@
       "meaning": "Qué tan seguido quien ve una publicación le da like, comenta o comparte. En las tres plataformas juntas es 5.5%."
     }
   ],
+  "reels": {
+    "h2": "Cuatro de los 11 reels que pasaron el millón de vistas",
+    "intro": "Toca cualquier reel para verlo con sonido. Las vistas son las que mostraba Instagram el 16 de nov. de 2026.",
+    "items": [
+      {
+        "src": "media/fc-friendship-boil.mp4",
+        "poster": "/media/fc-friendship-boil-poster.webp",
+        "width": 540,
+        "height": 960,
+        "views": "2.6M",
+        "likes": "79.6K",
+        "title": "Etiqueta a quien te debe un seafood boil",
+        "date": "19 sept. 2023",
+        "alt": "Un seafood boil de The Fatty Crab servido desde la bolsa sobre la mesa, con el gancho “Your first @ owes you a seafood boil”",
+        "uploaded": "2023-09-19",
+        "duration": "PT15S"
+      },
+      {
+        "src": "media/fc-brunch-deal.mp4",
+        "poster": "/media/fc-brunch-deal-poster.webp",
+        "width": 540,
+        "height": 960,
+        "views": "2.6M",
+        "likes": "135K",
+        "title": "La mejor oferta de brunch en Doral",
+        "date": "1 ago. 2023",
+        "alt": "Una pata de cangrejo mojada en la salsa de la casa de The Fatty Crab durante el brunch de fin de semana en Doral",
+        "uploaded": "2023-08-01",
+        "duration": "PT19S"
+      },
+      {
+        "src": "media/fc-nola-brunch.mp4",
+        "poster": "/media/fc-nola-brunch-poster.webp",
+        "width": 540,
+        "height": 960,
+        "views": "2.1M",
+        "likes": "51.9K",
+        "title": "Brunch libre con sabores de Nueva Orleans",
+        "date": "3 nov. 2023",
+        "alt": "Creadores de contenido locales probando el brunch libre con sabores de Nueva Orleans de The Fatty Crab",
+        "uploaded": "2023-11-03",
+        "duration": "PT30S"
+      },
+      {
+        "src": "media/fc-bogo.mp4",
+        "poster": "/media/fc-bogo-poster.webp",
+        "width": 540,
+        "height": 960,
+        "views": "1.8M",
+        "likes": "77.1K",
+        "title": "2x1 en shrimp boils por Uber Eats",
+        "date": "17 oct. 2024",
+        "alt": "Una creadora sostiene dos shrimp boils frente a The Fatty Crab para anunciar el 2x1 en Uber Eats",
+        "uploaded": "2024-10-17",
+        "duration": "PT25S"
+      }
+    ]
+  },
   "situation": {
     "paragraphs": [
       "El perfil tenía sobre todo publicaciones estáticas, sin un calendario constante.",
@@ -91,9 +150,32 @@
       }
     ]
   },
+  "analysis": {
+    "items": [
+      {
+        "stat": "11",
+        "title": "reels con más de 1 millón de vistas en Instagram",
+        "body": "No fue un video con suerte: 11 de los 393 reels de @thefattycrab pasaron el millón de vistas, y los dos primeros llegaron a 2.6M cada uno."
+      },
+      {
+        "stat": "3 de 4",
+        "title": "de los reels más vistos venden una oferta concreta",
+        "body": "La oferta de brunch en Doral, el brunch libre con sabores de Nueva Orleans y el 2x1 en shrimp boils por Uber Eats. Una oferta clara le da a la gente una razón para ir esta semana, no algún día."
+      },
+      {
+        "stat": "14.5K",
+        "title": "comentarios en un solo reel, casi todos amigos etiquetando amigos",
+        "body": "“Your first @ owes you a seafood boil” le pide al espectador que etiquete a alguien. Cada etiqueta pone el video frente a una persona nueva, y así llegó a 2.6M de vistas."
+      },
+      {
+        "stat": "2.1M",
+        "title": "vistas en un reel con creadores locales",
+        "body": "Durante nuestra campaña con influencers, creadores de comida locales protagonizaron el reel del brunch de Nueva Orleans y le trajeron su propio público a The Fatty Crab."
+      }
+    ]
+  },
   "results": {
     "points": [
-      "Uno de nuestros Reels de The Fatty Crab, armado alrededor de un gancho que detiene el scroll, pasó de 1.2M de vistas por sí solo.",
       "La campaña con influencer trajo una ola de seguidores nuevos, y más clientes mencionaban los videos del creador al llegar."
     ]
   },

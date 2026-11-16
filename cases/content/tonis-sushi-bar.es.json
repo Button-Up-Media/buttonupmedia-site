@@ -72,7 +72,9 @@
         "likes": "1.6M",
         "title": "Los modales del sushi",
         "date": "19 ago. 2026",
-        "alt": "El chef Toshiya en Toni's Sushi Bar explica por qué es el pescado, no el arroz, lo que va en la salsa de soya"
+        "alt": "El chef Toshiya en Toni's Sushi Bar explica por qué es el pescado, no el arroz, lo que va en la salsa de soya",
+        "uploaded": "2026-08-19",
+        "duration": "PT42S"
       },
       {
         "src": "media/tonis-salmon.mp4",
@@ -83,7 +85,9 @@
         "likes": "196K",
         "title": "Nuestro primer reel: salmón, con sonido",
         "date": "18 jun. 2026",
-        "alt": "Toma cenital de un chef de Toni's Sushi Bar fileteando un salmón entero sobre una tabla naranja"
+        "alt": "Toma cenital de un chef de Toni's Sushi Bar fileteando un salmón entero sobre una tabla naranja",
+        "uploaded": "2026-06-18",
+        "duration": "PT19S"
       },
       {
         "src": "media/tonis-wasabi.mp4",
@@ -94,7 +98,9 @@
         "likes": "39.5K",
         "title": "Wasabi de verdad contra el de polvo",
         "date": "6 oct. 2026",
-        "alt": "El chef Toshiya sostiene una raíz de wasabi fresca y explica en qué se diferencia del wasabi en polvo"
+        "alt": "El chef Toshiya sostiene una raíz de wasabi fresca y explica en qué se diferencia del wasabi en polvo",
+        "uploaded": "2026-10-06",
+        "duration": "PT35S"
       },
       {
         "src": "media/tonis-chopsticks.mp4",
@@ -105,7 +111,9 @@
         "likes": "42.5K",
         "title": "Un error con los palillos que debes evitar en Japón",
         "date": "3 nov. 2026",
-        "alt": "El chef Toshiya reacciona cuando se pasan comida de palillo a palillo, una falta grave de modales en Japón"
+        "alt": "El chef Toshiya reacciona cuando se pasan comida de palillo a palillo, una falta grave de modales en Japón",
+        "uploaded": "2026-11-03",
+        "duration": "PT36S"
       }
     ]
   },
@@ -132,6 +140,25 @@
       {
         "title": "Convertir vistas en visitas",
         "bodyHtml": "Cada reel lleva la dirección, 1208 Washington Ave, en los comentarios. En el reel de los modales, ese comentario solo tiene 2,624 me gusta. Las historias están hechas para convertir: llevan a quien acaba de ver el video hacia el restaurante y cómo llegar."
+      }
+    ]
+  },
+  "analysis": {
+    "items": [
+      {
+        "stat": "81%",
+        "title": "de todas las vistas salió de una sola lección",
+        "body": "El reel de los modales del sushi sumó 52.5M de las 64.7M de vistas de los 22 reels. Está fijado arriba del perfil, así que cada visitante nuevo empieza por ahí."
+      },
+      {
+        "stat": "3 de 4",
+        "title": "reels con más de 1M de vistas son el chef enseñando",
+        "body": "Modales con la salsa de soya, wasabi de verdad y modales con los palillos. Una lección se comparte con facilidad, y compartir es como un reel llega a gente que todavía no sigue la cuenta."
+      },
+      {
+        "stat": "1 por semana",
+        "title": "la constancia gana",
+        "body": "22 reels en 21 semanas, todos con el mismo formato: el chef enseñando una sola cosa. En ese tiempo la cuenta creció unas 20 veces."
       }
     ]
   },
@@ -181,7 +208,6 @@
     },
     "explainHtml": "<strong>De dónde salen estas cifras:</strong> las vistas y los me gusta que Instagram muestra en cada uno de los 22 reels que publicamos del 18 de junio al 16 de nov. de 2026, sumados el 16 de noviembre. La cifra de seguidores de junio es de nuestros propios registros.",
     "points": [
-      "4 de los 22 reels pasaron de 1 millón de vistas. Tres de ellos son el chef enseñando modales o ingredientes.",
       "El primer reel que publicamos recibió 196K me gusta. Las publicaciones justo antes recibían entre 12 y 156."
     ]
   },
