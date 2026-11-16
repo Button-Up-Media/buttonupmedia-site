@@ -4378,51 +4378,403 @@ h1, h2, h3, h4, .display { font-family: var(--font-display); letter-spacing: -0.
 .bum-consent__link:hover { color: #FBF5EA; }
 .bum-consent__button { color: #FBF5EA; }
 .bum-consent__button:hover { color: #FBF5EA; }
+.bum-consent__short { display: none; }
+/* Phones: a slim one-row bar (short line + two 44px buttons) so a first visit
+   never hides the hero CTA. Same buttons, same consent logic, shorter copy. */
 @media (max-width: 760px) {
   .bum-consent {
     left: 8px;
     right: 8px;
-    bottom: 8px;
+    bottom: max(8px, env(safe-area-inset-bottom));
   }
   .bum-consent__sheet {
     width: calc(100vw - 16px);
-    height: 176px;
-    padding: 14px 12px 12px;
-    border-radius: 18px;
-    grid-template-columns: 1fr;
-    gap: 10px;
+    height: auto;
+    padding: 7px 7px 7px 14px;
+    border-radius: 16px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
   }
-  .bum-consent__close {
-    top: 10px;
-    right: 10px;
-    width: 28px;
-    height: 28px;
+  .bum-consent__close,
+  .bum-consent__title,
+  .bum-consent__copy,
+  .bum-consent__policy { display: none; }
+  .bum-consent__short {
+    display: block;
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.35;
+    color: rgba(251,245,234,0.82);
   }
-  .bum-consent__title {
-    font-size: 0.88rem;
-    margin-bottom: 8px;
-  }
-  .bum-consent__copy {
-    font-size: 0.68rem;
-    line-height: 1.3;
+  .bum-consent__short a {
+    color: #FBF5EA;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    white-space: nowrap;
   }
   .bum-consent__actions {
-    gap: 8px;
+    gap: 2px;
     min-width: 0;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
-  .bum-consent__actions-group {
-    gap: 8px;
-  }
-  .bum-consent__policy {
-    font-size: 0.72rem;
+  .bum-consent__actions-group { gap: 0; flex-wrap: nowrap; }
+  .bum-consent__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 10px;
+    font-size: 13px;
+    white-space: nowrap;
   }
   .bum-consent__button {
-    min-height: 34px;
-    font-size: 0.72rem;
-    padding: 0 10px;
+    width: auto;
+    min-height: 44px;
+    padding: 0 16px;
+    font-size: 14px;
+    white-space: nowrap;
   }
-  .bum-consent__link {
-    font-size: 0.74rem;
+}
+
+/* ─── Phone readability + tap targets (2026-11) ───
+   Body copy on phones was 12-14px across most pages because each page sets
+   desktop-tuned rem sizes. This layer sets a floor for running text on phones
+   instead of chasing every class: paragraphs and list items read at 15.5px
+   (15px inside cards), line-height 1.6. `:not(#_)` lifts the selector above
+   page-level `#section p` rules; inline styles still win, so a page that sizes
+   a line inline keeps it. Labels, kickers, captions and stat text opt out by
+   class name. */
+@media (max-width: 700px) {
+  html[lang] body:not(#_) :is(p, li, dd, blockquote, .hp2-faq-answer, .faq-answer):not(:is(nav, footer, .lib-nav, .bum-consent, .lib-nav-dropdown-menu, button, .btn) *):not(:is([class*="label"], [class*="eyebrow"], [class*="kicker"], [class*="caption"], [class*="badge"], [class*="tag"], [class*="meta"], [class*="fine"], [class*="disclaimer"], [class*="legal"], [class*="count"], [class*="num"], [class*="stat"], [class*="pill"], [class*="chip"], [class*="note"], [class*="small"], [class*="micro"])) {
+    font-size: 15.5px;
+    line-height: 1.6;
   }
+  html[lang] body:not(#_) :is([class*="card"], [class*="item"], [class*="tile"], [class*="step"], [class*="block"]) :is(p, li):not(:is(nav, footer, .lib-nav, .bum-consent, button, .btn) *):not(:is([class*="label"], [class*="eyebrow"], [class*="kicker"], [class*="caption"], [class*="badge"], [class*="tag"], [class*="meta"], [class*="fine"], [class*="count"], [class*="num"], [class*="stat"], [class*="pill"], [class*="chip"], [class*="note"], [class*="small"], [class*="micro"])) {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  /* Section intros read as the lead paragraph. */
+  html[lang] body:not(#_) .lib-section-sub { font-size: 16px; line-height: 1.6; }
+}
+
+/* 44px tap targets: hamburger, language and call pills in the collapsed nav. */
+@media (max-width: 1160px) {
+  html[lang] .lib-nav-dropdown-trigger { width: 44px; height: 44px; }
+  html[lang] .lib-nav-links > .lib-lang-switch-mobile,
+  html[lang] .lib-nav-links > .lib-nav-call-mobile { height: 44px; }
+  html[lang] .lib-mobile-services-menu a { display: flex; align-items: center; min-height: 44px; }
+}
+@media (max-width: 600px) {
+  html[lang] .lib-nav { padding-top: 6px; padding-bottom: 6px; }
+  html[lang] .lib-nav-brand { min-height: 44px; }
+  html[lang] .lib-nav-dropdown-menu { top: 70px; max-height: calc(100vh - 86px); }
+}
+@media (max-width: 700px) {
+  .chip { min-height: 44px; }
+
+  /* Footer: two link columns side by side, every link a 44px row. */
+  .footer-demo { padding: 44px 0 32px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px 18px; margin-bottom: 30px; }
+  .footer-brand { grid-column: 1 / -1; }
+  .footer-brand p { max-width: none; font-size: 0.92rem; line-height: 1.6; }
+  .footer-col h4 { font-size: 0.92rem; margin-bottom: 4px; }
+  .footer-col a,
+  .footer-location {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0;
+    font-size: 0.92rem;
+    line-height: 1.3;
+  }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 10px; padding-top: 20px; }
+  .footer-bottom p { font-size: 0.82rem; }
+  .footer-links { flex-wrap: wrap; gap: 0 22px; }
+  .footer-links a { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.86rem; }
+}
+
+/* ─── Proof components: client logos, Google rating, Google review cards ───
+   Shared so every page shows the same rating and the same review styling.
+   Reviews are quoted verbatim (trimmed only at sentence breaks with an
+   ellipsis). No Review/AggregateRating JSON-LD on purpose: Google treats
+   self-serving review markup as spam. */
+.bum-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 18px clamp(26px, 5vw, 54px);
+}
+.bum-logos img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-height: 40px;
+  max-width: 150px;
+  object-fit: contain;
+}
+.bum-logos.--on-dark img { filter: brightness(0) invert(1); opacity: 0.72; }
+.bum-logos-also {
+  margin: 16px auto 0;
+  max-width: 62ch;
+  text-align: center;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--text-soft);
+}
+.bum-logos-also strong { color: var(--text-dim); font-weight: 600; }
+
+.bum-grating {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 10px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,248,235,0.14);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  font-size: 0.92rem;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.bum-grating:hover { border-color: rgba(226,168,77,0.45); background: rgba(226,168,77,0.08); }
+.bum-grating svg { width: 18px; height: 18px; flex: none; }
+.bum-grating strong { font-family: var(--font-hero); font-weight: 800; font-size: 1.05rem; }
+.bum-stars { color: #F4B63F; letter-spacing: 0.08em; font-size: 0.95rem; line-height: 1; }
+.bum-grating__text { color: var(--text-dim); text-decoration: underline; text-decoration-color: rgba(246,240,230,0.3); text-underline-offset: 3px; }
+
+.bum-reviews { margin-top: 40px; }
+.bum-reviews__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 24px;
+  margin-bottom: 22px;
+}
+.bum-reviews__head h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--text-head);
+  margin: 0;
+}
+.bum-reviews__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 18px;
+}
+.bum-review {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 24px 22px 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,248,235,0.12);
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  text-align: left;
+}
+.bum-review__quote { margin: 0; flex: 1 1 auto; }
+.bum-review__quote p {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+.bum-review__by {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,248,235,0.1);
+  font-size: 0.86rem;
+  line-height: 1.4;
+  color: var(--text-soft);
+}
+.bum-review__by strong { color: var(--text-head); font-size: 0.95rem; font-weight: 700; }
+.bum-review__src {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  color: var(--text-soft);
+  font-size: 0.8rem;
+}
+.bum-review__src svg { width: 14px; height: 14px; flex: none; }
+.bum-review__lang { display: block; font-size: 0.78rem; font-style: italic; color: var(--text-soft); }
+@media (max-width: 700px) {
+  .bum-logos { gap: 16px 28px; }
+  .bum-logos img { max-height: 34px; max-width: 128px; }
+  /* Phones: reviews become a swipeable row (one card plus a peek) instead of
+     a tall stack, so proof doesn't add three screens of scrolling. */
+  .bum-reviews__grid {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    margin: 0 -24px;
+    padding: 2px 24px 10px;
+    scroll-padding-inline: 24px;
+    scrollbar-width: none;
+  }
+  .bum-reviews__grid::-webkit-scrollbar { display: none; }
+  .bum-review { flex: 0 0 86%; scroll-snap-align: start; padding: 20px 18px 16px; }
+  html[lang] body:not(#_) .bum-review__quote p { font-size: 15.5px; line-height: 1.6; }
+}
+
+/* Compact case-study cards: one number, the client, a link to the full story.
+   Phones get a thumbnail-left row so four results fit in about one screen. */
+.bum-cases {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 32px;
+}
+.bum-cases.--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.bum-case {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255,248,235,0.12);
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  color: var(--text);
+  text-decoration: none;
+  text-align: left;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.bum-case:hover { border-color: rgba(226,168,77,0.45); transform: translateY(-2px); }
+.bum-case__media { position: relative; aspect-ratio: 4 / 3; background: #14110b; overflow: hidden; }
+.bum-case__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.bum-case__media.--logo { display: flex; align-items: center; justify-content: center; padding: 18px; background: #f6f0e6; }
+.bum-case__media.--logo img { position: static; width: auto; height: auto; max-width: 82%; max-height: 64%; object-fit: contain; }
+.bum-case__body { display: flex; flex-direction: column; gap: 3px; flex: 1 1 auto; padding: 16px 18px 18px; }
+.bum-case__tag { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
+.bum-case__num { font-family: var(--font-hero); font-weight: 800; font-size: 2rem; letter-spacing: -0.03em; line-height: 1.05; color: var(--text-head); margin-top: 4px; }
+.bum-case__label { font-size: 0.92rem; line-height: 1.4; color: var(--text-dim); }
+.bum-case__name { margin-top: 10px; font-family: var(--font-display); font-weight: 700; font-size: 1rem; line-height: 1.3; color: var(--text-head); }
+.bum-case__more { font-size: 0.9rem; line-height: 1.5; color: var(--text-dim); }
+.bum-case__cta { margin-top: auto; padding-top: 12px; font-size: 0.88rem; font-weight: 700; color: var(--gold); }
+.bum-cases-foot { margin-top: 22px; text-align: center; }
+.bum-cases-foot a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; color: var(--gold); text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 1000px) {
+  .bum-cases, .bum-cases.--3 { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 700px) {
+  .bum-cases, .bum-cases.--3 { grid-template-columns: 1fr; gap: 12px; margin-top: 24px; }
+  .bum-case { flex-direction: row; border-radius: 18px; }
+  .bum-case__media { flex: 0 0 104px; aspect-ratio: auto; }
+  .bum-case__media.--logo { padding: 10px; }
+  .bum-case__media.--logo img { max-width: 90%; max-height: 50%; }
+  .bum-case__body { padding: 14px 14px 14px 16px; }
+  .bum-case__num { font-size: 1.65rem; }
+  .bum-case__label, .bum-case__more { font-size: 14.5px; }
+  .bum-case__name { font-size: 15px; margin-top: 6px; }
+  .bum-case__cta { padding-top: 8px; font-size: 14.5px; }
+}
+
+/* Decorative or interactive pieces that only earn their space on wider screens. */
+@media (max-width: 700px) {
+  .bum-hide-phone { display: none !important; }
+}
+
+/* Plain link rows used where sections were merged (services, areas). */
+.bum-link-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 26px;
+}
+.bum-link-row a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,248,235,0.14);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.bum-link-row a:hover { border-color: rgba(226,168,77,0.45); background: rgba(226,168,77,0.08); color: var(--gold); }
+.bum-link-row a::after { content: "→"; color: var(--gold); }
+.bum-link-row.--center { justify-content: center; }
+.bum-subblock { margin-top: 44px; padding-top: 32px; border-top: 1px solid rgba(255,248,235,0.08); }
+.bum-subblock h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+  letter-spacing: -0.02em;
+  color: var(--text-head);
+  margin: 0 0 10px;
+}
+.bum-subblock > p { max-width: 64ch; color: var(--text-dim); line-height: 1.6; }
+@media (max-width: 700px) {
+  .bum-link-row a { flex: 1 1 calc(50% - 10px); justify-content: space-between; padding: 0 14px; font-size: 0.9rem; }
+  .bum-subblock { margin-top: 32px; padding-top: 24px; }
+}
+
+/* Phones: denser stacking sections and cards. The desktop layouts are
+   unchanged; these only trim padding and turn tall cards into rows. */
+@media (max-width: 700px) {
+  html[lang] body .page > .card-overlay { margin-top: -44px; padding-top: 68px; padding-bottom: 96px; }
+  html[lang] .footer-grid { grid-template-columns: 1fr 1fr; gap: 26px 18px; }
+  html[lang] .footer-bottom { text-align: left; align-items: flex-start; }
+  html[lang] .footer-links { justify-content: flex-start; }
+
+  /* Home: process steps and "why us" cards as compact numbered rows. */
+  html[lang] body .hp2-process-grid { margin-top: 28px; }
+  html[lang] body .hp2-process-step {
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr);
+    column-gap: 12px;
+    padding: 20px 16px;
+  }
+  html[lang] body .hp2-process-icon { display: none; }
+  html[lang] body .hp2-process-num { grid-row: 1 / span 2; font-size: 1.8rem; line-height: 1.05; margin: 0; }
+  html[lang] body .hp2-process-step h3 { grid-column: 2; font-size: 1.08rem; margin-bottom: 4px; }
+  html[lang] body .hp2-process-step p { grid-column: 2; max-width: none; }
+  html[lang] body .hp2-why-cards { margin-top: 28px; gap: 12px; }
+  html[lang] body .hp2-why-card {
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr);
+    column-gap: 12px;
+    padding: 20px 16px;
+    border-radius: 18px;
+  }
+  html[lang] body .hp2-why-card-num { grid-row: 1 / span 2; font-size: 1.8rem; margin: 0; opacity: 0.55; }
+  html[lang] body .hp2-why-card h3 { grid-column: 2; font-size: 1.08rem; margin-bottom: 6px; }
+  html[lang] body .hp2-why-card h3 br { display: none; }
+  html[lang] body .hp2-why-card p { grid-column: 2; }
+
+  /* Home: the two video testimonials side by side. */
+  html[lang] body .hp2-vid-showcase { grid-template-columns: 1fr 1fr; gap: 10px; }
+  html[lang] body .hp2-vid-card { max-width: none; margin: 0; }
+  html[lang] body .hp2-vid-card-frame { aspect-ratio: 9 / 14; }
+  html[lang] body .hp2-vid-card-overlay { padding: 10px; }
+  html[lang] body .hp2-vid-card-info h4 { font-size: 0.86rem; line-height: 1.25; }
+
+  /* Home: team photo card a little shorter. */
+  html[lang] body .hp2-faces-card { aspect-ratio: 5 / 4; margin-top: 22px; }
+}
+@media (max-width: 700px) {
+  /* Home "Sound familiar?": tighter problem/solution rows. */
+  html[lang] body #pain .pain-grid { gap: 26px; margin-top: 28px !important; }
+  html[lang] body #pain .stack { gap: 8px; }
+  html[lang] body #pain .pain-item { padding: 14px 14px 14px 12px; gap: 12px; }
+  html[lang] body #pain .pain-col-head { margin-bottom: 10px; }
 }
