@@ -4800,3 +4800,5 @@ h1, h2, h3, h4, .display { font-family: var(--font-display); letter-spacing: -0.
 }
 /* Contact: the "open the booking calendar" fallback link gets a 44px hit area. */
 html[lang] body .contact-book-direct { display: inline-flex; align-items: center; min-height: 44px; }
+/* Home service panels: "Explore ..." text links get a 44px hit area. */
+html[lang] body .hp2-hscroll-cta-link { display: inline-flex; align-items: center; min-height: 44px; }
