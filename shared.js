@@ -126,6 +126,8 @@ if (window.lucide && typeof lucide.createIcons === "function") {
           close: "Cerrar el aviso de cookies",
           title: "Tu privacidad nos importa",
           copy: 'Usamos cookies para mejorar tu experiencia de navegación, mostrar anuncios personalizados y analizar nuestro tráfico. Al seguir navegando, aceptas el uso de cookies. Elige "Rechazar" para desactivarlas.',
+          short: "Usamos cookies para analítica y anuncios.",
+          shortPolicy: "Privacidad",
           actions: "Acciones de consentimiento de cookies",
           policy: "Política de Privacidad",
           reject: "Rechazar",
@@ -135,6 +137,8 @@ if (window.lucide && typeof lucide.createIcons === "function") {
           close: "Close cookie banner",
           title: "We value your privacy",
           copy: 'We use cookies to enhance your browsing experience, serve personalized ads, and analyze our traffic. By continuing to browse, you consent to the use of cookies. Choose "Opt out" to disable them.',
+          short: "We use cookies for analytics and ads.",
+          shortPolicy: "Privacy",
           actions: "Cookie consent actions",
           policy: "Privacy Policy",
           reject: "Opt out",
@@ -151,6 +155,7 @@ if (window.lucide && typeof lucide.createIcons === "function") {
           <p class="bum-consent__copy" id="bum-consent-copy">
             ${t.copy}
           </p>
+          <p class="bum-consent__short">${t.short} <a href="/privacy">${t.shortPolicy}</a></p>
         </div>
         <div class="bum-consent__actions" aria-label="${t.actions}">
           <div class="bum-consent__actions-group">

@@ -42,7 +42,7 @@
   })(window,document,'script','dataLayer','GTM-WR9TZHT');</script>
   <!-- End Google Tag Manager -->
   <title>Restaurant Google Ads &amp; Meta Ads in Miami | Button Up Media</title>
-  <meta name="description" content="Restaurant paid media campaigns built to drive reservations, calls, and private-event leads. Google Ads, Meta Ads, retargeting, and local conquesting for Miami and South Florida restaurants." />
+  <meta name="description" content="Google Ads and Meta ads for Miami restaurants, built to drive reservations, calls and private-event leads. See results from live restaurant accounts." />
   <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg">
   <link rel="canonical" href="https://www.buttonupmedia.com/restaurant-advertising" />
   <link rel="alternate" hreflang="en" href="https://www.buttonupmedia.com/restaurant-advertising" />
@@ -55,7 +55,7 @@
   <!-- Mobile hero background (LCP on phones): self-hosted + preloaded for small viewports only -->
   <link rel="preload" as="image" href="/images/paid-hero-mobile-bg.avif" type="image/avif" media="(max-width:760px)" fetchpriority="high" />
 
-  <link rel="stylesheet" href="shared.css?v=nav-mobile-8" />
+  <link rel="stylesheet" href="shared.css?v=site-fixes-1" />
 
   <!-- Schema: BreadcrumbList -->
   <script type="application/ld+json">
@@ -151,6 +151,22 @@
         "@type": "Answer",
         "text": "Yes. We run multi-location groups with per-venue targeting, budgets, and reporting, while keeping brand consistency and a single strategy across markets."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "Paid media or organic: what does each channel do best?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Paid media brings traffic the day you launch and reaches people who are actively searching, so it is best for reservations, events, promos and fast revenue. You pay per click, and you control budget, targeting and timing. Organic (SEO and social media) builds over months, mixes discovery with brand affinity and compounds into long-term authority, loyalty and brand. The smartest plans use paid media for immediate revenue while organic channels build the foundation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is paid media right for my restaurant?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Paid media delivers the most when it has something to work with. You're a strong fit if you want more reservations, events or orders soon; you've tried boosting posts or DIY ads with disappointing results; you're spending on ads but don't know your return; you want a team that understands restaurant search behavior; you have seasonal events, private dining or promos to fill; or you're an independent restaurant, a multi-location group or an upscale venue."
+      }
     }
   ]
 }
@@ -176,8 +192,9 @@
     .hm{margin:22px 16px 0 !important;}
     .hfoot{margin:14px 16px 0 !important;}
     .hero-trust{display:none !important;}
-    .hero-cta{display:none !important;}
-    .hero-cta-m{display:flex !important;}
+    .hero-cta{display:flex !important;flex-direction:column;gap:11px !important;margin-bottom:0 !important;}
+    .hero-cta>a{width:100% !important;justify-content:center !important;}
+    .hero-cta-m{display:none !important;}
     .hero-cta-m>a{width:100% !important;justify-content:center !important;padding:13px 20px !important;font-size:0.92rem !important;border-radius:13px !important;}
     .hero-cta-m>a:last-child{padding:10px 20px !important;font-size:0.88rem !important;}
   }
@@ -211,6 +228,22 @@
   @media(max-width:560px){ .cmp-grid{font-size:0.78rem !important;} }
   .pm-fit:hover{border-color:rgba(226,168,77,0.35)!important;background:rgba(226,168,77,0.05)!important;}
   @media(max-width:760px){ #pm-hero{padding-top:92px !important;} }
+  /* Phones: readable running text (inline styles need !important), tighter
+     section padding, and the decorative service/dashboard images dropped. */
+  @media(max-width:700px){
+    #pm-root > section, #pm-root > div > section:not(#pm-hero) { padding-top:60px !important; padding-bottom:60px !important; }
+    #pm-root section:not(#pm-hero) p:not(.pm-big) { font-size:15.5px !important; line-height:1.6 !important; }
+    #pm-root .case-grid p, #pm-root .compact-grid p, #pm-root .svc-panel p, #pm-root .grid-3 p, #pm-root .grid-2 p, #pm-root .invest-3 p, #pm-root .proc-4 p { font-size:15px !important; }
+    #pm-root .svc-panel > :nth-child(2), #pm-root .pm-why-pic { display:none !important; }
+    #pm-root .bum-reviews, #pm-root .bum-logos-wrap { text-align:left; }
+    #pm-root section > div > div:first-child { margin-bottom:26px !important; }
+    #pm-root .grid-3, #pm-root .invest-3, #pm-root .proc-4, #pm-root .compact-grid { display:flex !important; gap:12px !important; overflow-x:auto; scroll-snap-type:x mandatory; overscroll-behavior-x:contain; margin-left:-24px !important; margin-right:-24px !important; padding:2px 24px 12px !important; scroll-padding-inline:24px; scrollbar-width:none; }
+    #pm-root .grid-3::-webkit-scrollbar, #pm-root .invest-3::-webkit-scrollbar, #pm-root .proc-4::-webkit-scrollbar, #pm-root .compact-grid::-webkit-scrollbar { display:none; }
+    #pm-root .grid-3 > *, #pm-root .invest-3 > *, #pm-root .proc-4 > *, #pm-root .compact-grid > * { flex:0 0 84%; min-width:0; scroll-snap-align:start; padding:20px 18px !important; }
+    #pm-root .case-grid { gap:12px !important; }
+    #pm-root .case-grid > div { padding:22px 18px !important; }
+    #pm-root div:has(> .svc-panel) { gap:28px !important; }
+  }
 </style>
 </head>
 <body>
@@ -317,8 +350,8 @@
           </div>
           <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;">
             <div style="flex:none;">
-              <div style="font-size:0.7rem;color:rgba(246,240,230,0.5);margin-bottom:2px;">Revenue Generated</div>
-              <div data-count-to="3.5" data-decimals="1" data-prefix="$" data-suffix="M" style="font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:-0.04em;color:#E2A84D;font-size:2rem;line-height:1;">$3.5M</div>
+              <div style="font-size:0.7rem;color:rgba(246,240,230,0.5);margin-bottom:2px;">Tracked Conversion Value</div>
+              <div data-count-to="1.1" data-decimals="1" data-prefix="$" data-suffix="M" style="font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:-0.04em;color:#E2A84D;font-size:2rem;line-height:1;">$1.1M</div>
             </div>
             <svg viewBox="0 0 240 70" preserveAspectRatio="none" style="flex:1;height:60px;display:block;">
               <defs><linearGradient id="gd2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(226,168,77,0.4)"/><stop offset="100%" stop-color="rgba(226,168,77,0)"/></linearGradient></defs>
@@ -327,9 +360,9 @@
             </svg>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,248,235,0.10);">
-            <div><div data-count-to="45000" data-comma="1" data-suffix="+" style="font-family:'Plus Jakarta Sans';font-weight:800;color:#f8f4ec;font-size:1.18rem;">45,000+</div><div style="font-size:0.61rem;color:rgba(246,240,230,0.44);margin-top:2px;">Reservations</div></div>
-            <div><div data-count-to="12" data-suffix="X" style="font-family:'Plus Jakarta Sans';font-weight:800;color:#f8f4ec;font-size:1.18rem;">12X</div><div style="font-size:0.61rem;color:rgba(246,240,230,0.44);margin-top:2px;">Avg. ROAS</div></div>
-            <div><div data-count-to="8" data-prefix="$" style="font-family:'Plus Jakarta Sans';font-weight:800;color:#f8f4ec;font-size:1.18rem;">$8</div><div style="font-size:0.61rem;color:rgba(246,240,230,0.44);margin-top:2px;">Avg. CPA</div></div>
+            <div><div data-count-to="2600" data-comma="1" data-suffix="+" style="font-family:'Plus Jakarta Sans';font-weight:800;color:#f8f4ec;font-size:1.18rem;">2,600+</div><div style="font-size:0.61rem;color:rgba(246,240,230,0.44);margin-top:2px;">Conversions</div></div>
+            <div><div style="font-family:'Plus Jakarta Sans';font-weight:800;color:#f8f4ec;font-size:1.18rem;">72:1</div><div style="font-size:0.61rem;color:rgba(246,240,230,0.44);margin-top:2px;">Top ROAS</div></div>
+            <div><div style="font-family:'Plus Jakarta Sans';font-weight:800;color:#f8f4ec;font-size:1.18rem;">$7.15</div><div style="font-size:0.61rem;color:rgba(246,240,230,0.44);margin-top:2px;">Best Cost / Conv.</div></div>
           </div>
         </div>
         <div class="hfoot" style="font-size:0.64rem;color:rgba(246,240,230,0.44);margin:14px 18px 0;text-align:center;">2025 Google Ads · 5 Restaurant Properties · &lt;$46K Total Spend</div>
@@ -344,6 +377,160 @@
     </section>
 
   </div>
+
+  <!-- ===================== PROOF SECTION ===================== -->
+  <section id="proof" style="position:relative;background:linear-gradient(180deg,#0A0A0A, #0d0c0a);border-top:1px solid rgba(255,248,235,0.08);padding:74px 0 80px;">
+    <div style="max-width:1180px;margin:0 auto;padding:0 24px;">
+      <div style="text-align:center;max-width:680px;margin:0 auto 44px;">
+        <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;color:#E2A84D;font-weight:600;margin-bottom:14px;">The Proof</div>
+        <h2 style="font-family:Epilogue;font-weight:800;letter-spacing:-0.04em;color:#f8f4ec;font-size:2.5rem;line-height:1.05;margin:0 0 16px;">Proof From Live Restaurant Accounts</h2>
+        <p style="color:rgba(246,240,230,0.72);font-size:1.04rem;line-height:1.6;margin:0;">These are real results from restaurant campaigns managed by Button Up Media in 2025.</p>
+      </div>
+
+      <div style="position:relative;border-radius:22px;overflow:hidden;border:1px solid rgba(226,168,77,0.22);background:linear-gradient(135deg, rgba(226,168,77,0.10), rgba(208,106,80,0.06));padding:34px 28px;margin-bottom:34px;">
+        <div style="position:absolute;top:-60px;left:30%;width:360px;height:240px;background:radial-gradient(circle, rgba(226,168,77,0.18), transparent 65%);filter:blur(24px);"></div>
+        <div style="position:relative;">
+          <div style="text-align:center;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.14em;color:#E2A84D;font-weight:600;margin-bottom:24px;">2025 Results Across 5 Restaurant Properties</div>
+          <div class="proof-stat4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;">
+            <div style="text-align:center;"><div data-count-to="1.1" data-decimals="1" data-prefix="$" data-suffix="M" style="font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:-0.04em;color:#f8f4ec;font-size:2.3rem;">$1.1M</div><div style="font-size:0.76rem;color:rgba(246,240,230,0.6);margin-top:5px;">Tracked conversion value</div></div>
+            <div style="text-align:center;"><div data-count-to="2600" data-comma="1" data-suffix="+" style="font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:-0.04em;color:#f8f4ec;font-size:2.3rem;">2,600+</div><div style="font-size:0.76rem;color:rgba(246,240,230,0.6);margin-top:5px;">Tracked conversions</div></div>
+            <div style="text-align:center;"><div data-count-to="24" data-suffix=":1" style="font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:-0.04em;color:#E2A84D;font-size:2.3rem;">24:1</div><div style="font-size:0.76rem;color:rgba(246,240,230,0.6);margin-top:5px;">Blended ROAS</div></div>
+            <div style="text-align:center;"><div style="font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:-0.04em;color:#f8f4ec;font-size:2.3rem;">&lt;$46K</div><div style="font-size:0.76rem;color:rgba(246,240,230,0.6);margin-top:5px;">Total ad spend</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bum-logos-wrap" style="margin:0 0 34px;">
+        <p style="text-align:center;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.14em;color:rgba(246,240,230,0.5);font-weight:600;margin:0 0 18px;">Some of the restaurants behind these numbers</p>
+        <div class="bum-logos --on-dark">
+          <img src="/media/clients/rusty-pelican.webp" alt="Rusty Pelican" width="301" height="120" loading="lazy" decoding="async" />
+          <img src="/media/clients/the-odyssey.webp" alt="The Odyssey" width="533" height="120" loading="lazy" decoding="async" />
+          <img src="/media/clients/the-boathouse.webp" alt="The Boathouse" width="225" height="120" loading="lazy" decoding="async" />
+          <img src="/media/clients/castaway.webp" alt="Castaway" width="262" height="120" loading="lazy" decoding="async" />
+        </div>
+      </div>
+
+      <div class="case-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:22px;">
+        <div style="position:relative;border-radius:22px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));border:1px solid rgba(255,248,235,0.12);padding:30px 28px;">
+          <div style="position:absolute;top:-10px;right:18px;font-family:'Plus Jakarta Sans';font-weight:800;font-size:7rem;line-height:1;color:rgba(226,168,77,0.08);letter-spacing:-0.05em;pointer-events:none;">72:1</div>
+          <div style="position:relative;">
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;"><span style="font-size:0.66rem;padding:4px 10px;border-radius:999px;background:rgba(226,168,77,0.12);border:1px solid rgba(226,168,77,0.25);color:#E2A84D;">Private Events</span><span style="font-size:0.66rem;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,248,235,0.10);color:rgba(246,240,230,0.6);">Branded Search</span></div>
+            <h3 style="font-family:Epilogue;font-weight:800;letter-spacing:-0.03em;color:#f8f4ec;font-size:1.5rem;margin:0 0 2px;">Landmark Waterfront Restaurant</h3>
+            <div style="font-size:0.78rem;color:rgba(246,240,230,0.44);margin-bottom:18px;">May to Dec 2025</div>
+            <div style="font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:-0.04em;color:#E2A84D;font-size:2.6rem;line-height:1;margin-bottom:18px;">72:1 <span style="font-size:1rem;color:rgba(246,240,230,0.6);font-weight:600;">ROAS</span></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 18px;padding-top:16px;border-top:1px solid rgba(255,248,235,0.10);">
+              <div><div style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.1rem;">234</div><div style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Conversions</div></div>
+              <div><div style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.1rem;">$520K</div><div style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Conv. Value</div></div>
+              <div><div style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.1rem;">$7,157</div><div style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Ad Spend</div></div>
+              <div><div style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.1rem;">$30.58</div><div style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Cost / Conv.</div></div>
+            </div>
+            <p style="color:rgba(246,240,230,0.72);font-size:0.9rem;line-height:1.6;margin:18px 0 0;">Highest ROAS in the portfolio. $30.58 per private-event lead is exceptional when each converted event generates thousands in revenue.</p>
+          </div>
+        </div>
+        <div style="position:relative;border-radius:22px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));border:1px solid rgba(255,248,235,0.12);padding:30px 28px;">
+          <div style="position:absolute;top:-10px;right:18px;font-family:'Plus Jakarta Sans';font-weight:800;font-size:7rem;line-height:1;color:rgba(69,176,140,0.08);letter-spacing:-0.05em;pointer-events:none;">49:1</div>
+          <div style="position:relative;">
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;"><span style="font-size:0.66rem;padding:4px 10px;border-radius:999px;background:rgba(69,176,140,0.12);border:1px solid rgba(69,176,140,0.25);color:#45B08C;">Dinner Reservations</span><span style="font-size:0.66rem;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,248,235,0.10);color:rgba(246,240,230,0.6);">Private Events</span></div>
+            <h3 style="font-family:Epilogue;font-weight:800;letter-spacing:-0.03em;color:#f8f4ec;font-size:1.5rem;margin:0 0 2px;">Upscale Fine-Dining Restaurant</h3>
+            <div style="font-size:0.78rem;color:rgba(246,240,230,0.44);margin-bottom:18px;">Jun to Dec 2025</div>
+            <div style="font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:-0.04em;color:#45B08C;font-size:2.6rem;line-height:1;margin-bottom:18px;">49:1 <span style="font-size:1rem;color:rgba(246,240,230,0.6);font-weight:600;">ROAS</span></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 18px;padding-top:16px;border-top:1px solid rgba(255,248,235,0.10);">
+              <div><div style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.1rem;">951</div><div style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Conversions</div></div>
+              <div><div style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.1rem;">$337K</div><div style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Conv. Value</div></div>
+              <div><div style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.1rem;">$6,802</div><div style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Ad Spend</div></div>
+              <div><div style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.1rem;">$7.15</div><div style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Cost / Conv.</div></div>
+            </div>
+            <p style="color:rgba(246,240,230,0.72);font-size:0.9rem;line-height:1.6;margin:18px 0 0;">$7.15 per conversion. Fully scalable. Targeting and optimization are dialed in.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="compact-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;">
+        <div style="border-radius:16px;background:rgba(255,255,255,0.035);border:1px solid rgba(255,248,235,0.10);padding:24px 22px;">
+          <h4 style="font-family:Epilogue;font-weight:700;color:#f8f4ec;font-size:1.12rem;margin:0 0 3px;">Large Waterfront Restaurant, Miami</h4>
+          <div style="font-size:0.72rem;color:rgba(246,240,230,0.44);margin-bottom:16px;">Reservations · Private Events · Seasonal · full year 2025</div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px 18px;margin-bottom:16px;">
+            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#E2A84D;font-size:1.2rem;">7:1</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">ROAS</span></div>
+            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.2rem;">1,007</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Conv.</span></div>
+            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.2rem;">$135K</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Value</span></div>
+            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.2rem;">$18.95</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Cost/Conv.</span></div>
+          </div>
+          <p style="color:rgba(246,240,230,0.6);font-size:0.84rem;line-height:1.55;margin:0;border-top:1px solid rgba(255,248,235,0.08);padding-top:14px;"><span style="color:#E2A84D;font-weight:600;">Standout:</span> Mother's Day delivered 155 conversions at $3.06. Thanksgiving delivered 252 at $3.70.</p>
+        </div>
+        <div style="border-radius:16px;background:rgba(255,255,255,0.035);border:1px solid rgba(255,248,235,0.10);padding:24px 22px;">
+          <h4 style="font-family:Epilogue;font-weight:700;color:#f8f4ec;font-size:1.12rem;margin:0 0 3px;">Large Waterfront Restaurant, Tampa</h4>
+          <div style="font-size:0.72rem;color:rgba(246,240,230,0.44);margin-bottom:16px;">Reservations · Private Events · Seasonal · Aug to Dec 2025</div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px 18px;margin-bottom:16px;">
+            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#E2A84D;font-size:1.2rem;">27:1</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Events ROAS</span></div>
+            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.2rem;">287</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Conv.</span></div>
+            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.2rem;">$87K</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Value</span></div>
+            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.2rem;">$23.64</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Cost/Conv.</span></div>
+          </div>
+          <p style="color:rgba(246,240,230,0.6);font-size:0.84rem;line-height:1.55;margin:0;border-top:1px solid rgba(255,248,235,0.08);padding-top:14px;"><span style="color:#E2A84D;font-weight:600;">Standout:</span> Christmas and Thanksgiving were top performers.</p>
+        </div>
+        <div style="border-radius:16px;background:rgba(255,255,255,0.035);border:1px solid rgba(255,248,235,0.10);padding:24px 22px;">
+          <h4 style="font-family:Epilogue;font-weight:700;color:#f8f4ec;font-size:1.12rem;margin:0 0 3px;">Large Bar &amp; Restaurant</h4>
+          <div style="font-size:0.72rem;color:rgba(246,240,230,0.44);margin-bottom:16px;">Reservations · Private Events · Mar to Dec 2025</div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px 18px;margin-bottom:16px;">
+            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.2rem;">140</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Conv.</span></div>
+            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.2rem;">$17K</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Value</span></div>
+            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.2rem;">$5,926</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Ad Spend</span></div>
+            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.2rem;">$42.34</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Cost/Conv.</span></div>
+          </div>
+          <p style="color:rgba(246,240,230,0.6);font-size:0.84rem;line-height:1.55;margin:0;border-top:1px solid rgba(255,248,235,0.08);padding-top:14px;"><span style="color:#E2A84D;font-weight:600;">Positive ROAS</span> on both campaigns. Private events are primed for scaling.</p>
+        </div>
+      </div>
+
+            <p style="text-align:center;color:rgba(246,240,230,0.72);margin:26px auto 0;max-width:640px;">Read the full stories: <a href="/case-studies/private-events" style="color:#E2A84D;text-decoration:underline;">private events at The Boathouse, The Odyssey and Castaway</a>, and <a href="/case-studies/rusty-pelican" style="color:#E2A84D;text-decoration:underline;">Rusty Pelican Miami and Tampa</a>.</p>
+
+      <div class="bum-reviews">
+        <div class="bum-reviews__head">
+          <h3>What restaurant owners say on Google</h3>
+          <a class="bum-grating" href="https://www.google.com/maps?cid=18420049328774985259" target="_blank" rel="noopener" aria-label="Rated 5.0 out of 5 on Google from 11 reviews (opens Google in a new tab)"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg><strong>5.0</strong><span class="bum-stars" aria-hidden="true">★★★★★</span><span class="bum-grating__text">on Google, 11 reviews</span></a>
+        </div>
+        <div class="bum-reviews__grid">
+          <figure class="bum-review">
+            <div class="bum-stars" role="img" aria-label="Rated 5 out of 5 stars">★★★★★</div>
+            <blockquote class="bum-review__quote" lang="en"><p>“…They helped me build a beautiful, easy-to-use website that truly represents my brand. They also got me started with social media, set up and managed my Google Ads, and gave me a solid foundation when I felt completely overwhelmed. … Thanks to their work, not only did my restaurant grow locally, but I was able to open a second location! …”</p></blockquote>
+            <figcaption class="bum-review__by"><strong>Carlos Rodriguez</strong><span>Restaurant owner</span>
+              <span class="bum-review__src"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google review</span>
+            </figcaption>
+          </figure>
+          <figure class="bum-review">
+            <div class="bum-stars" role="img" aria-label="Rated 5 out of 5 stars">★★★★★</div>
+            <blockquote class="bum-review__quote" lang="en"><p>“Working with Button Up Media has been one of the best investments I've made for my business. … On top of that, they're now managing our Google Ads campaign, and I'm excited to continue growing with their team. …”</p></blockquote>
+            <figcaption class="bum-review__by"><strong>Fabio Perez</strong><span>Founder, WOA Cocktails</span>
+              <span class="bum-review__src"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Google review</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:44px;">
+        <a href="/contact" class="btn btn-primary">Get Your Free Strategy Call</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 7b. ROAS HEADLINE ===================== -->
+  <section style="position:relative;overflow:hidden;background:#0A0A0A;padding:104px 0;border-top:1px solid rgba(255,248,235,0.08);">
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:760px;height:420px;background:radial-gradient(ellipse at center, rgba(226,168,77,0.16), transparent 66%);filter:blur(30px);pointer-events:none;"></div>
+    <div data-rv style="position:relative;max-width:980px;margin:0 auto;padding:0 24px;text-align:center;">
+      <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.14em;color:#E2A84D;font-weight:600;margin-bottom:26px;">Blended Return on Ad Spend, 2025</div>
+      <div style="display:inline-flex;align-items:center;justify-content:center;gap:clamp(20px,5vw,52px);flex-wrap:wrap;margin-bottom:30px;">
+        <div style="text-align:center;">
+          <div style="font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:-0.03em;color:rgba(246,240,230,0.62);font-size:clamp(2.6rem,7vw,3.6rem);line-height:1;">$1</div>
+          <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(246,240,230,0.44);font-weight:600;margin-top:10px;">Spent</div>
+        </div>
+        <svg width="56" height="34" viewBox="0 0 56 34" fill="none" stroke="#E2A84D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;opacity:0.85;"><path d="M2 17h48"/><path d="M38 5l13 12-13 12"/></svg>
+        <div style="text-align:center;">
+          <div data-count-to="24" data-prefix="$" style="font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:-0.05em;font-size:clamp(6rem,20vw,11rem);line-height:0.9;color:#E2A84D;filter:drop-shadow(0 6px 30px rgba(226,168,77,0.28));">$24</div>
+          <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:#E2A84D;font-weight:600;margin-top:6px;">Returned</div>
+        </div>
+      </div>
+      <p class="pm-big" style="color:#f8f4ec;font-family:Epilogue;font-weight:700;letter-spacing:-0.02em;font-size:clamp(1.3rem,3.4vw,1.7rem);line-height:1.35;max-width:760px;margin:0 auto;">Across the five accounts above, every <span style="color:#E2A84D;">$1</span> of Google Ads spend in 2025 came back as about <span style="color:#E2A84D;">$24</span> in tracked conversion value.</p>
+    </div>
+  </section>
 
   <!-- ===================== 2. THE OPPORTUNITY ===================== -->
   <section style="background:#0A0A0A;padding:88px 0;border-top:1px solid rgba(255,248,235,0.08);">
@@ -377,7 +564,7 @@
           </div>
           <p style="color:#f8f4ec;font-weight:600;font-size:1.05rem;line-height:1.5;margin:0;">That's not guesswork. That's a measurable revenue channel.</p>
         </div>
-        <div style="position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/3;border:1px solid rgba(255,248,235,0.10);">
+        <div class="pm-why-pic" style="position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/3;border:1px solid rgba(255,248,235,0.10);">
           <picture>
             <source type="image/avif" srcset="images/paid-dashboard-candid-800.avif 800w, images/paid-dashboard-candid-1280.avif 1280w" sizes="(max-width:900px) 100vw, 560px">
             <img src="images/paid-dashboard-candid-1280.jpg" alt="A laptop showing an analytics dashboard with revenue, conversions, and growth charts" width="1280" height="960" loading="lazy" decoding="async" style="display:block;width:100%;height:100%;object-fit:cover;">
@@ -584,125 +771,6 @@
     </div>
   </section>
 
-  <!-- ===================== PROOF SECTION ===================== -->
-  <section id="proof" style="position:relative;background:linear-gradient(180deg,#0A0A0A, #0d0c0a);border-top:1px solid rgba(255,248,235,0.08);padding:74px 0 80px;">
-    <div style="max-width:1180px;margin:0 auto;padding:0 24px;">
-      <div style="text-align:center;max-width:680px;margin:0 auto 44px;">
-        <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;color:#E2A84D;font-weight:600;margin-bottom:14px;">The Proof</div>
-        <h2 style="font-family:Epilogue;font-weight:800;letter-spacing:-0.04em;color:#f8f4ec;font-size:2.5rem;line-height:1.05;margin:0 0 16px;">Proof From Live Restaurant Accounts</h2>
-        <p style="color:rgba(246,240,230,0.72);font-size:1.04rem;line-height:1.6;margin:0;">These are real results from restaurant campaigns managed by Button Up Media in 2025.</p>
-      </div>
-
-      <div style="position:relative;border-radius:22px;overflow:hidden;border:1px solid rgba(226,168,77,0.22);background:linear-gradient(135deg, rgba(226,168,77,0.10), rgba(208,106,80,0.06));padding:34px 28px;margin-bottom:34px;">
-        <div style="position:absolute;top:-60px;left:30%;width:360px;height:240px;background:radial-gradient(circle, rgba(226,168,77,0.18), transparent 65%);filter:blur(24px);"></div>
-        <div style="position:relative;">
-          <div style="text-align:center;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.14em;color:#E2A84D;font-weight:600;margin-bottom:24px;">2025 Results Across 5 Restaurant Properties</div>
-          <div class="proof-stat4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;">
-            <div style="text-align:center;"><div data-count-to="3.5" data-decimals="1" data-prefix="$" data-suffix="M+" style="font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:-0.04em;color:#f8f4ec;font-size:2.3rem;">$3.5M+</div><div style="font-size:0.76rem;color:rgba(246,240,230,0.6);margin-top:5px;">Revenue</div></div>
-            <div style="text-align:center;"><div data-count-to="45000" data-comma="1" data-suffix="+" style="font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:-0.04em;color:#f8f4ec;font-size:2.3rem;">45,000+</div><div style="font-size:0.76rem;color:rgba(246,240,230,0.6);margin-top:5px;">Total Reservations</div></div>
-            <div style="text-align:center;"><div data-count-to="12" data-suffix="X" style="font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:-0.04em;color:#E2A84D;font-size:2.3rem;">12X</div><div style="font-size:0.76rem;color:rgba(246,240,230,0.6);margin-top:5px;">Average ROAS</div></div>
-            <div style="text-align:center;"><div data-count-to="8" data-prefix="$" style="font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:-0.04em;color:#f8f4ec;font-size:2.3rem;">$8</div><div style="font-size:0.76rem;color:rgba(246,240,230,0.6);margin-top:5px;">Avg. CPA</div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="case-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:22px;">
-        <div style="position:relative;border-radius:22px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));border:1px solid rgba(255,248,235,0.12);padding:30px 28px;">
-          <div style="position:absolute;top:-10px;right:18px;font-family:'Plus Jakarta Sans';font-weight:800;font-size:7rem;line-height:1;color:rgba(226,168,77,0.08);letter-spacing:-0.05em;pointer-events:none;">72:1</div>
-          <div style="position:relative;">
-            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;"><span style="font-size:0.66rem;padding:4px 10px;border-radius:999px;background:rgba(226,168,77,0.12);border:1px solid rgba(226,168,77,0.25);color:#E2A84D;">Private Events</span><span style="font-size:0.66rem;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,248,235,0.10);color:rgba(246,240,230,0.6);">Branded Search</span></div>
-            <h3 style="font-family:Epilogue;font-weight:800;letter-spacing:-0.03em;color:#f8f4ec;font-size:1.5rem;margin:0 0 2px;">Landmark Waterfront Restaurant</h3>
-            <div style="font-size:0.78rem;color:rgba(246,240,230,0.44);margin-bottom:18px;">May–Dec 2025</div>
-            <div style="font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:-0.04em;color:#E2A84D;font-size:2.6rem;line-height:1;margin-bottom:18px;">72:1 <span style="font-size:1rem;color:rgba(246,240,230,0.6);font-weight:600;">ROAS</span></div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 18px;padding-top:16px;border-top:1px solid rgba(255,248,235,0.10);">
-              <div><div style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.1rem;">234</div><div style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Conversions</div></div>
-              <div><div style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.1rem;">$520K</div><div style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Conv. Value</div></div>
-              <div><div style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.1rem;">$7,157</div><div style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Ad Spend</div></div>
-              <div><div style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.1rem;">$30.58</div><div style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Cost / Conv.</div></div>
-            </div>
-            <p style="color:rgba(246,240,230,0.72);font-size:0.9rem;line-height:1.6;margin:18px 0 0;">Highest ROAS in the portfolio. $30.58 per private-event lead is exceptional when each converted event generates thousands in revenue.</p>
-          </div>
-        </div>
-        <div style="position:relative;border-radius:22px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));border:1px solid rgba(255,248,235,0.12);padding:30px 28px;">
-          <div style="position:absolute;top:-10px;right:18px;font-family:'Plus Jakarta Sans';font-weight:800;font-size:7rem;line-height:1;color:rgba(69,176,140,0.08);letter-spacing:-0.05em;pointer-events:none;">49:1</div>
-          <div style="position:relative;">
-            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;"><span style="font-size:0.66rem;padding:4px 10px;border-radius:999px;background:rgba(69,176,140,0.12);border:1px solid rgba(69,176,140,0.25);color:#45B08C;">Dinner Reservations</span><span style="font-size:0.66rem;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,248,235,0.10);color:rgba(246,240,230,0.6);">Private Events</span></div>
-            <h3 style="font-family:Epilogue;font-weight:800;letter-spacing:-0.03em;color:#f8f4ec;font-size:1.5rem;margin:0 0 2px;">Upscale Fine-Dining Restaurant</h3>
-            <div style="font-size:0.78rem;color:rgba(246,240,230,0.44);margin-bottom:18px;">Jun–Dec 2025</div>
-            <div style="font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:-0.04em;color:#45B08C;font-size:2.6rem;line-height:1;margin-bottom:18px;">49:1 <span style="font-size:1rem;color:rgba(246,240,230,0.6);font-weight:600;">ROAS</span></div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 18px;padding-top:16px;border-top:1px solid rgba(255,248,235,0.10);">
-              <div><div style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.1rem;">951</div><div style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Conversions</div></div>
-              <div><div style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.1rem;">$337K</div><div style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Conv. Value</div></div>
-              <div><div style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.1rem;">$6,802</div><div style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Ad Spend</div></div>
-              <div><div style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.1rem;">$7.15</div><div style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Cost / Conv.</div></div>
-            </div>
-            <p style="color:rgba(246,240,230,0.72);font-size:0.9rem;line-height:1.6;margin:18px 0 0;">$7.15 per conversion. Fully scalable. Targeting and optimization are dialed in.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="compact-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;">
-        <div style="border-radius:16px;background:rgba(255,255,255,0.035);border:1px solid rgba(255,248,235,0.10);padding:24px 22px;">
-          <h4 style="font-family:Epilogue;font-weight:700;color:#f8f4ec;font-size:1.12rem;margin:0 0 3px;">Large Waterfront Restaurant, Miami</h4>
-          <div style="font-size:0.72rem;color:rgba(246,240,230,0.44);margin-bottom:16px;">Reservations · Private Events · Seasonal · full year 2025</div>
-          <div style="display:flex;flex-wrap:wrap;gap:10px 18px;margin-bottom:16px;">
-            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#E2A84D;font-size:1.2rem;">7:1</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">ROAS</span></div>
-            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.2rem;">1,007</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Conv.</span></div>
-            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.2rem;">$135K</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Value</span></div>
-            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.2rem;">$18.95</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Cost/Conv.</span></div>
-          </div>
-          <p style="color:rgba(246,240,230,0.6);font-size:0.84rem;line-height:1.55;margin:0;border-top:1px solid rgba(255,248,235,0.08);padding-top:14px;"><span style="color:#E2A84D;font-weight:600;">Standout:</span> Mother's Day delivered 155 conversions at $3.06. Thanksgiving delivered 252 at $3.70.</p>
-        </div>
-        <div style="border-radius:16px;background:rgba(255,255,255,0.035);border:1px solid rgba(255,248,235,0.10);padding:24px 22px;">
-          <h4 style="font-family:Epilogue;font-weight:700;color:#f8f4ec;font-size:1.12rem;margin:0 0 3px;">Large Waterfront Restaurant, Tampa</h4>
-          <div style="font-size:0.72rem;color:rgba(246,240,230,0.44);margin-bottom:16px;">Reservations · Private Events · Seasonal · Aug–Dec 2025</div>
-          <div style="display:flex;flex-wrap:wrap;gap:10px 18px;margin-bottom:16px;">
-            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#E2A84D;font-size:1.2rem;">27:1</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Events ROAS</span></div>
-            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.2rem;">287</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Conv.</span></div>
-            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.2rem;">$87K</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Value</span></div>
-            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.2rem;">$23.64</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Cost/Conv.</span></div>
-          </div>
-          <p style="color:rgba(246,240,230,0.6);font-size:0.84rem;line-height:1.55;margin:0;border-top:1px solid rgba(255,248,235,0.08);padding-top:14px;"><span style="color:#E2A84D;font-weight:600;">Standout:</span> Christmas and Thanksgiving were top performers.</p>
-        </div>
-        <div style="border-radius:16px;background:rgba(255,255,255,0.035);border:1px solid rgba(255,248,235,0.10);padding:24px 22px;">
-          <h4 style="font-family:Epilogue;font-weight:700;color:#f8f4ec;font-size:1.12rem;margin:0 0 3px;">Large Bar &amp; Restaurant</h4>
-          <div style="font-size:0.72rem;color:rgba(246,240,230,0.44);margin-bottom:16px;">Reservations · Private Events · Mar–Dec 2025</div>
-          <div style="display:flex;flex-wrap:wrap;gap:10px 18px;margin-bottom:16px;">
-            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.2rem;">140</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Conv.</span></div>
-            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.2rem;">$17K</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Value</span></div>
-            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.2rem;">$5,926</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Ad Spend</span></div>
-            <div><span style="font-family:'Plus Jakarta Sans';font-weight:700;color:#f8f4ec;font-size:1.2rem;">$42.34</span> <span style="font-size:0.7rem;color:rgba(246,240,230,0.44);">Cost/Conv.</span></div>
-          </div>
-          <p style="color:rgba(246,240,230,0.6);font-size:0.84rem;line-height:1.55;margin:0;border-top:1px solid rgba(255,248,235,0.08);padding-top:14px;"><span style="color:#E2A84D;font-weight:600;">Positive ROAS</span> on both campaigns. Private events are primed for scaling.</p>
-        </div>
-      </div>
-
-      <div style="text-align:center;margin-top:44px;">
-        <a href="/contact" class="btn btn-primary">Get Your Free Strategy Call</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== 7b. ROAS HEADLINE ===================== -->
-  <section style="position:relative;overflow:hidden;background:#0A0A0A;padding:104px 0;border-top:1px solid rgba(255,248,235,0.08);">
-    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:760px;height:420px;background:radial-gradient(ellipse at center, rgba(226,168,77,0.16), transparent 66%);filter:blur(30px);pointer-events:none;"></div>
-    <div data-rv style="position:relative;max-width:980px;margin:0 auto;padding:0 24px;text-align:center;">
-      <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.14em;color:#E2A84D;font-weight:600;margin-bottom:26px;">Average Return on Ad Spend</div>
-      <div style="display:inline-flex;align-items:center;justify-content:center;gap:clamp(20px,5vw,52px);flex-wrap:wrap;margin-bottom:30px;">
-        <div style="text-align:center;">
-          <div style="font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:-0.03em;color:rgba(246,240,230,0.62);font-size:clamp(2.6rem,7vw,3.6rem);line-height:1;">$1</div>
-          <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(246,240,230,0.44);font-weight:600;margin-top:10px;">Spent</div>
-        </div>
-        <svg width="56" height="34" viewBox="0 0 56 34" fill="none" stroke="#E2A84D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;opacity:0.85;"><path d="M2 17h48"/><path d="M38 5l13 12-13 12"/></svg>
-        <div style="text-align:center;">
-          <div data-count-to="12" data-suffix="X" style="font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:-0.05em;font-size:clamp(6rem,20vw,11rem);line-height:0.9;color:#E2A84D;filter:drop-shadow(0 6px 30px rgba(226,168,77,0.28));">12X</div>
-          <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:#E2A84D;font-weight:600;margin-top:6px;">Returned</div>
-        </div>
-      </div>
-      <p style="color:#f8f4ec;font-family:Epilogue;font-weight:700;letter-spacing:-0.02em;font-size:clamp(1.3rem,3.4vw,1.7rem);line-height:1.35;max-width:760px;margin:0 auto;">For every <span style="color:#E2A84D;">$1</span> our restaurant clients spent on advertising, they earned back an average of <span style="color:#E2A84D;">$12</span> in revenue.</p>
-    </div>
-  </section>
-
   <!-- ===================== 8. INVESTMENT ===================== -->
   <section style="background:#0d0c0a;padding:88px 0;border-top:1px solid rgba(255,248,235,0.08);">
     <div style="max-width:1180px;margin:0 auto;padding:0 24px;">
@@ -714,13 +782,13 @@
       <div class="invest-3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:start;">
         <div style="background:rgba(255,255,255,0.035);border:1px solid rgba(255,248,235,0.10);border-radius:18px;padding:30px 26px;">
           <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:rgba(246,240,230,0.5);font-weight:600;margin-bottom:14px;">Independent / Single Location</div>
-          <div style="font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:-0.03em;color:#f8f4ec;font-size:1.7rem;margin-bottom:4px;">$500–$2,000<span style="font-size:0.9rem;color:rgba(246,240,230,0.5);font-weight:600;">/mo</span></div>
+          <div style="font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:-0.03em;color:#f8f4ec;font-size:1.7rem;margin-bottom:4px;">$500 to $2,000<span style="font-size:0.9rem;color:rgba(246,240,230,0.5);font-weight:600;">/mo</span></div>
           <p style="color:rgba(246,240,230,0.68);font-size:0.92rem;line-height:1.58;margin:14px 0 0;border-top:1px solid rgba(255,248,235,0.08);padding-top:14px;">One location focused on reservations, local search, and a steady events pipeline.</p>
         </div>
         <div style="position:relative;background:linear-gradient(180deg, rgba(226,168,77,0.12), rgba(208,106,80,0.05));border:1px solid rgba(226,168,77,0.30);border-radius:18px;padding:30px 26px;">
           <div style="position:absolute;top:-11px;left:26px;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;color:#0A0A0A;background:#E2A84D;border-radius:999px;padding:4px 11px;">Most common</div>
           <div style="font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:#E2A84D;font-weight:600;margin-bottom:14px;">Multi-Location</div>
-          <div style="font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:-0.03em;color:#f8f4ec;font-size:1.7rem;margin-bottom:4px;">$2,000–$5,000<span style="font-size:0.9rem;color:rgba(246,240,230,0.5);font-weight:600;">/mo</span></div>
+          <div style="font-family:'Plus Jakarta Sans';font-weight:800;letter-spacing:-0.03em;color:#f8f4ec;font-size:1.7rem;margin-bottom:4px;">$2,000 to $5,000<span style="font-size:0.9rem;color:rgba(246,240,230,0.5);font-weight:600;">/mo</span></div>
           <p style="color:rgba(246,240,230,0.72);font-size:0.92rem;line-height:1.58;margin:14px 0 0;border-top:1px solid rgba(226,168,77,0.18);padding-top:14px;">Several venues with per-location targeting, budgets, and reporting under one strategy.</p>
         </div>
         <div style="background:rgba(255,255,255,0.035);border:1px solid rgba(255,248,235,0.10);border-radius:18px;padding:30px 26px;">
@@ -736,90 +804,6 @@
     </div>
   </section>
 
-  <!-- ===================== 9. STRATEGY ===================== -->
-  <section style="background:#0A0A0A;padding:88px 0;">
-    <div style="max-width:1180px;margin:0 auto;padding:0 24px;">
-      <div style="max-width:760px;margin:0 auto 44px;text-align:center;">
-        <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;color:#E2A84D;font-weight:600;margin-bottom:14px;">Strategy</div>
-        <h2 style="font-family:Epilogue;font-weight:800;letter-spacing:-0.04em;color:#f8f4ec;font-size:2.4rem;line-height:1.08;margin:0 0 16px;">Paid vs. Organic: What Each Channel Does Best</h2>
-        <p style="color:rgba(246,240,230,0.72);font-size:1.05rem;line-height:1.62;margin:0;">The smartest restaurant marketing strategy uses paid media for immediate revenue while organic channels build the foundation for long-term growth.</p>
-      </div>
-      <div style="border:1px solid rgba(255,248,235,0.12);border-radius:18px;overflow:hidden;">
-        <div class="cmp-grid" style="display:grid;grid-template-columns:0.9fr 1.25fr 1.25fr;font-size:0.92rem;">
-          <div style="padding:16px 18px;background:rgba(255,255,255,0.02);font-size:0.66rem;text-transform:uppercase;letter-spacing:0.1em;color:rgba(246,240,230,0.44);font-weight:600;"></div>
-          <div style="padding:16px 18px;background:rgba(226,168,77,0.10);font-family:Epilogue;font-weight:700;color:#E2A84D;border-left:1px solid rgba(255,248,235,0.08);">Paid Media</div>
-          <div style="padding:16px 18px;background:rgba(255,255,255,0.02);font-family:Epilogue;font-weight:700;color:#f8f4ec;border-left:1px solid rgba(255,248,235,0.08);">Organic (SEO + Social)</div>
-
-          <div style="padding:16px 18px;border-top:1px solid rgba(255,248,235,0.08);font-weight:600;color:rgba(246,240,230,0.6);">Speed</div>
-          <div style="padding:16px 18px;border-top:1px solid rgba(255,248,235,0.08);border-left:1px solid rgba(255,248,235,0.08);background:rgba(226,168,77,0.05);color:rgba(246,240,230,0.82);">Immediate, traffic the day you launch</div>
-          <div style="padding:16px 18px;border-top:1px solid rgba(255,248,235,0.08);border-left:1px solid rgba(255,248,235,0.08);color:rgba(246,240,230,0.72);">Gradual, builds over months</div>
-
-          <div style="padding:16px 18px;border-top:1px solid rgba(255,248,235,0.08);font-weight:600;color:rgba(246,240,230,0.6);">Intent</div>
-          <div style="padding:16px 18px;border-top:1px solid rgba(255,248,235,0.08);border-left:1px solid rgba(255,248,235,0.08);background:rgba(226,168,77,0.05);color:rgba(246,240,230,0.82);">High, reaches people actively searching</div>
-          <div style="padding:16px 18px;border-top:1px solid rgba(255,248,235,0.08);border-left:1px solid rgba(255,248,235,0.08);color:rgba(246,240,230,0.72);">Mixed, discovery and brand affinity</div>
-
-          <div style="padding:16px 18px;border-top:1px solid rgba(255,248,235,0.08);font-weight:600;color:rgba(246,240,230,0.6);">Cost</div>
-          <div style="padding:16px 18px;border-top:1px solid rgba(255,248,235,0.08);border-left:1px solid rgba(255,248,235,0.08);background:rgba(226,168,77,0.05);color:rgba(246,240,230,0.82);">Pay per click; scales with budget</div>
-          <div style="padding:16px 18px;border-top:1px solid rgba(255,248,235,0.08);border-left:1px solid rgba(255,248,235,0.08);color:rgba(246,240,230,0.72);">Time and content investment; compounds</div>
-
-          <div style="padding:16px 18px;border-top:1px solid rgba(255,248,235,0.08);font-weight:600;color:rgba(246,240,230,0.6);">Control</div>
-          <div style="padding:16px 18px;border-top:1px solid rgba(255,248,235,0.08);border-left:1px solid rgba(255,248,235,0.08);background:rgba(226,168,77,0.05);color:rgba(246,240,230,0.82);">Precise, budgets, targeting, timing</div>
-          <div style="padding:16px 18px;border-top:1px solid rgba(255,248,235,0.08);border-left:1px solid rgba(255,248,235,0.08);color:rgba(246,240,230,0.72);">Indirect, algorithms and rankings</div>
-
-          <div style="padding:16px 18px;border-top:1px solid rgba(255,248,235,0.08);font-weight:600;color:rgba(246,240,230,0.6);">Best For</div>
-          <div style="padding:16px 18px;border-top:1px solid rgba(255,248,235,0.08);border-left:1px solid rgba(255,248,235,0.08);background:rgba(226,168,77,0.05);color:rgba(246,240,230,0.82);">Reservations, events, promos, fast revenue</div>
-          <div style="padding:16px 18px;border-top:1px solid rgba(255,248,235,0.08);border-left:1px solid rgba(255,248,235,0.08);color:rgba(246,240,230,0.72);">Long-term authority, loyalty, brand</div>
-        </div>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:30px;">
-        <a href="/socialmediamarketing" class="btn btn-ghost">Explore Social Media Marketing</a>
-        <a href="/restaurant-website-design" class="btn btn-ghost">Explore Website Design</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== 10. FIT CHECK ===================== -->
-  <section style="background:#0d0c0a;padding:88px 0;border-top:1px solid rgba(255,248,235,0.08);">
-    <div style="max-width:1180px;margin:0 auto;padding:0 24px;">
-      <div style="max-width:760px;margin:0 auto 46px;text-align:center;">
-        <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;color:#E2A84D;font-weight:600;margin-bottom:14px;">Fit Check</div>
-        <h2 style="font-family:Epilogue;font-weight:800;letter-spacing:-0.04em;color:#f8f4ec;font-size:2.4rem;line-height:1.08;margin:0;">Is Paid Media Right for Your Restaurant?</h2>
-        <p style="color:rgba(246,240,230,0.72);font-size:1.05rem;line-height:1.6;margin:16px auto 0;max-width:600px;">Paid media delivers the most when it has something to work with. You're a strong fit if any of these sound familiar.</p>
-      </div>
-      <div style="max-width:960px;margin:0 auto;">
-        <div class="grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-          <div style="display:flex;gap:14px;align-items:center;padding:20px 22px;border:1px solid rgba(255,248,235,0.10);border-radius:14px;background:rgba(255,255,255,0.03);transition:border-color .3s ease, background .3s ease;" class="pm-fit">
-            <span style="flex:none;width:30px;height:30px;border-radius:9px;background:rgba(226,168,77,0.14);border:1px solid rgba(226,168,77,0.32);display:flex;align-items:center;justify-content:center;color:#E2A84D;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></span>
-            <span style="color:rgba(246,240,230,0.85);font-size:0.97rem;line-height:1.45;">You want more reservations, events, or orders soon</span>
-          </div>
-          <div style="display:flex;gap:14px;align-items:center;padding:20px 22px;border:1px solid rgba(255,248,235,0.10);border-radius:14px;background:rgba(255,255,255,0.03);transition:border-color .3s ease, background .3s ease;" class="pm-fit">
-            <span style="flex:none;width:30px;height:30px;border-radius:9px;background:rgba(226,168,77,0.14);border:1px solid rgba(226,168,77,0.32);display:flex;align-items:center;justify-content:center;color:#E2A84D;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></span>
-            <span style="color:rgba(246,240,230,0.85);font-size:0.97rem;line-height:1.45;">You've tried boosting posts or DIY ads with disappointing results</span>
-          </div>
-          <div style="display:flex;gap:14px;align-items:center;padding:20px 22px;border:1px solid rgba(255,248,235,0.10);border-radius:14px;background:rgba(255,255,255,0.03);transition:border-color .3s ease, background .3s ease;" class="pm-fit">
-            <span style="flex:none;width:30px;height:30px;border-radius:9px;background:rgba(226,168,77,0.14);border:1px solid rgba(226,168,77,0.32);display:flex;align-items:center;justify-content:center;color:#E2A84D;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></span>
-            <span style="color:rgba(246,240,230,0.85);font-size:0.97rem;line-height:1.45;">You're spending on ads but don't know your return</span>
-          </div>
-          <div style="display:flex;gap:14px;align-items:center;padding:20px 22px;border:1px solid rgba(255,248,235,0.10);border-radius:14px;background:rgba(255,255,255,0.03);transition:border-color .3s ease, background .3s ease;" class="pm-fit">
-            <span style="flex:none;width:30px;height:30px;border-radius:9px;background:rgba(226,168,77,0.14);border:1px solid rgba(226,168,77,0.32);display:flex;align-items:center;justify-content:center;color:#E2A84D;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></span>
-            <span style="color:rgba(246,240,230,0.85);font-size:0.97rem;line-height:1.45;">You want a team that understands restaurant search behavior</span>
-          </div>
-          <div style="display:flex;gap:14px;align-items:center;padding:20px 22px;border:1px solid rgba(255,248,235,0.10);border-radius:14px;background:rgba(255,255,255,0.03);transition:border-color .3s ease, background .3s ease;" class="pm-fit">
-            <span style="flex:none;width:30px;height:30px;border-radius:9px;background:rgba(226,168,77,0.14);border:1px solid rgba(226,168,77,0.32);display:flex;align-items:center;justify-content:center;color:#E2A84D;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></span>
-            <span style="color:rgba(246,240,230,0.85);font-size:0.97rem;line-height:1.45;">You have seasonal events, private dining, or promos to fill</span>
-          </div>
-          <div style="display:flex;gap:14px;align-items:center;padding:20px 22px;border:1px solid rgba(255,248,235,0.10);border-radius:14px;background:rgba(255,255,255,0.03);transition:border-color .3s ease, background .3s ease;" class="pm-fit">
-            <span style="flex:none;width:30px;height:30px;border-radius:9px;background:rgba(226,168,77,0.14);border:1px solid rgba(226,168,77,0.32);display:flex;align-items:center;justify-content:center;color:#E2A84D;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg></span>
-            <span style="color:rgba(246,240,230,0.85);font-size:0.97rem;line-height:1.45;">You're an independent, multi-location group, or upscale venue</span>
-          </div>
-        </div>
-        <div style="text-align:center;margin-top:38px;">
-          <a href="/contact" class="btn btn-primary">See If You're a Fit</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ===================== 11. FAQ ===================== -->
   <section style="background:#0A0A0A;padding:88px 0;">
     <div style="max-width:820px;margin:0 auto;padding:0 24px;">
@@ -830,13 +814,15 @@
       </div>
       <div style="border-top:1px solid rgba(255,248,235,0.10);">
         <details style="border-bottom:1px solid rgba(255,248,235,0.10);"><summary style="padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:Epilogue;font-weight:600;color:#f8f4ec;font-size:1.06rem;">Do Google Ads work for restaurants?<span class="faq-ic" style="color:#E2A84D;font-size:1.5rem;line-height:1;font-weight:400;">+</span></summary><p style="color:rgba(246,240,230,0.7);font-size:0.96rem;line-height:1.62;margin:0 0 22px;">Yes. They capture people who are actively searching for a place to eat or book right now. With proper conversion tracking and local targeting, Google Ads consistently deliver the highest-intent reservations and event leads of any channel.</p></details>
-        <details style="border-bottom:1px solid rgba(255,248,235,0.10);"><summary style="padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:Epilogue;font-weight:600;color:#f8f4ec;font-size:1.06rem;">How much should a restaurant spend on advertising?<span class="faq-ic" style="color:#E2A84D;font-size:1.5rem;line-height:1;font-weight:400;">+</span></summary><p style="color:rgba(246,240,230,0.7);font-size:0.96rem;line-height:1.62;margin:0 0 22px;">Most independents start at $500–$2,000/month, multi-location restaurants at $2,000–$5,000, and hospitality groups at $5,000+. Efficiency matters more than size: a well-optimized $1,500 budget can outperform a poorly managed $5,000 one.</p></details>
+        <details style="border-bottom:1px solid rgba(255,248,235,0.10);"><summary style="padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:Epilogue;font-weight:600;color:#f8f4ec;font-size:1.06rem;">How much should a restaurant spend on advertising?<span class="faq-ic" style="color:#E2A84D;font-size:1.5rem;line-height:1;font-weight:400;">+</span></summary><p style="color:rgba(246,240,230,0.7);font-size:0.96rem;line-height:1.62;margin:0 0 22px;">Most independents start at $500 to $2,000/month, multi-location restaurants at $2,000 to $5,000, and hospitality groups at $5,000+. Efficiency matters more than size: a well-optimized $1,500 budget can outperform a poorly managed $5,000 one.</p></details>
         <details style="border-bottom:1px solid rgba(255,248,235,0.10);"><summary style="padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:Epilogue;font-weight:600;color:#f8f4ec;font-size:1.06rem;">What is the best way to advertise a restaurant?<span class="faq-ic" style="color:#E2A84D;font-size:1.5rem;line-height:1;font-weight:400;">+</span></summary><p style="color:rgba(246,240,230,0.7);font-size:0.96rem;line-height:1.62;margin:0 0 22px;">A combination: Google Ads to capture ready-now diners, Maps to win local searches, and Meta plus retargeting to build demand and stay top of mind. The right mix depends on your goals, your market, and your seasonal calendar.</p></details>
         <details style="border-bottom:1px solid rgba(255,248,235,0.10);"><summary style="padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:Epilogue;font-weight:600;color:#f8f4ec;font-size:1.06rem;">Should restaurants use Facebook Ads or Google Ads?<span class="faq-ic" style="color:#E2A84D;font-size:1.5rem;line-height:1;font-weight:400;">+</span></summary><p style="color:rgba(246,240,230,0.7);font-size:0.96rem;line-height:1.62;margin:0 0 22px;">They do different jobs. Google captures existing demand from people already searching, while Meta creates demand by reaching locals before they search. Most restaurants benefit from both, weighted toward their primary goal.</p></details>
         <details style="border-bottom:1px solid rgba(255,248,235,0.10);"><summary style="padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:Epilogue;font-weight:600;color:#f8f4ec;font-size:1.06rem;">How do you track restaurant advertising ROI?<span class="faq-ic" style="color:#E2A84D;font-size:1.5rem;line-height:1;font-weight:400;">+</span></summary><p style="color:rgba(246,240,230,0.7);font-size:0.96rem;line-height:1.62;margin:0 0 22px;">We set up full conversion tracking for calls, reservations, form fills, and online orders, then report revenue against spend (ROAS) every month, not vanity metrics like impressions or likes.</p></details>
         <details style="border-bottom:1px solid rgba(255,248,235,0.10);"><summary style="padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:Epilogue;font-weight:600;color:#f8f4ec;font-size:1.06rem;">What makes restaurant advertising different from other industries?<span class="faq-ic" style="color:#E2A84D;font-size:1.5rem;line-height:1;font-weight:400;">+</span></summary><p style="color:rgba(246,240,230,0.7);font-size:0.96rem;line-height:1.62;margin:0 0 22px;">Dining decisions are fast, local, and highly seasonal. Campaigns have to be built around reservation and event demand, dayparting, and local search behavior, not the generic lead-gen tactics most agencies reuse across industries.</p></details>
-        <details style="border-bottom:1px solid rgba(255,248,235,0.10);"><summary style="padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:Epilogue;font-weight:600;color:#f8f4ec;font-size:1.06rem;">How quickly will I see results?<span class="faq-ic" style="color:#E2A84D;font-size:1.5rem;line-height:1;font-weight:400;">+</span></summary><p style="color:rgba(246,240,230,0.7);font-size:0.96rem;line-height:1.62;margin:0 0 22px;">Search campaigns can drive reservations within the first few weeks once tracking is verified. Performance compounds as we optimize over the first 60–90 days and learn what converts in your market.</p></details>
+        <details style="border-bottom:1px solid rgba(255,248,235,0.10);"><summary style="padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:Epilogue;font-weight:600;color:#f8f4ec;font-size:1.06rem;">How quickly will I see results?<span class="faq-ic" style="color:#E2A84D;font-size:1.5rem;line-height:1;font-weight:400;">+</span></summary><p style="color:rgba(246,240,230,0.7);font-size:0.96rem;line-height:1.62;margin:0 0 22px;">Search campaigns can drive reservations within the first few weeks once tracking is verified. Performance compounds as we optimize over the first 60 to 90 days and learn what converts in your market.</p></details>
         <details style="border-bottom:1px solid rgba(255,248,235,0.10);"><summary style="padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:Epilogue;font-weight:600;color:#f8f4ec;font-size:1.06rem;">Can you manage advertising for multiple locations?<span class="faq-ic" style="color:#E2A84D;font-size:1.5rem;line-height:1;font-weight:400;">+</span></summary><p style="color:rgba(246,240,230,0.7);font-size:0.96rem;line-height:1.62;margin:0 0 22px;">Yes. We run multi-location groups with per-venue targeting, budgets, and reporting, while keeping brand consistency and a single strategy across markets.</p></details>
+        <details style="border-bottom:1px solid rgba(255,248,235,0.10);"><summary style="padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:Epilogue;font-weight:600;color:#f8f4ec;font-size:1.06rem;">Paid media or organic: what does each channel do best?<span class="faq-ic" style="color:#E2A84D;font-size:1.5rem;line-height:1;font-weight:400;">+</span></summary><p style="color:rgba(246,240,230,0.7);font-size:0.96rem;line-height:1.62;margin:0 0 22px;">Paid media brings traffic the day you launch and reaches people who are actively searching, so it is best for reservations, events, promos and fast revenue. You pay per click, and you control budget, targeting and timing. Organic (SEO and social media) builds over months, mixes discovery with brand affinity and compounds into long-term authority, loyalty and brand. The smartest plans use paid media for immediate revenue while organic channels build the foundation. See our <a href="/socialmediamarketing" style="color:#E2A84D;text-decoration:underline;">social media marketing</a> and <a href="/restaurant-website-design" style="color:#E2A84D;text-decoration:underline;">website design</a> pages for the organic side.</p></details>
+        <details style="border-bottom:1px solid rgba(255,248,235,0.10);"><summary style="padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:Epilogue;font-weight:600;color:#f8f4ec;font-size:1.06rem;">Is paid media right for my restaurant?<span class="faq-ic" style="color:#E2A84D;font-size:1.5rem;line-height:1;font-weight:400;">+</span></summary><p style="color:rgba(246,240,230,0.7);font-size:0.96rem;line-height:1.62;margin:0 0 22px;">Paid media delivers the most when it has something to work with. You're a strong fit if you want more reservations, events or orders soon; you've tried boosting posts or DIY ads with disappointing results; you're spending on ads but don't know your return; you want a team that understands restaurant search behavior; you have seasonal events, private dining or promos to fill; or you're an independent restaurant, a multi-location group or an upscale venue.</p><a href="/contact" class="btn btn-primary" style="margin:0 0 22px;">See If You're a Fit</a></details>
       </div>
     </div>
   </section>
@@ -847,7 +833,7 @@
     <div style="position:absolute;bottom:-120px;right:-60px;width:420px;height:360px;background:radial-gradient(circle, rgba(208,106,80,0.16), transparent 64%);filter:blur(30px);pointer-events:none;"></div>
     <div style="position:relative;max-width:760px;margin:0 auto;padding:0 24px;text-align:center;">
       <h2 style="font-family:Epilogue;font-weight:800;letter-spacing:-0.04em;color:#f8f4ec;font-size:2.8rem;line-height:1.05;margin:0 0 18px;">Ready to Put More Guests on the Books?</h2>
-      <p style="color:rgba(246,240,230,0.78);font-size:1.1rem;line-height:1.6;margin:0 auto 32px;max-width:600px;">Our 2025 portfolio generated over $3.5 million in revenue across five properties. Schedule a free ads audit and we'll show you exactly where the opportunities are.</p>
+      <p style="color:rgba(246,240,230,0.78);font-size:1.1rem;line-height:1.6;margin:0 auto 32px;max-width:600px;">In 2025, five restaurant properties we manage brought in $1.1M in tracked conversion value on under $46K in ad spend. Schedule a free ads audit and we'll show you exactly where the opportunities are.</p>
       <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-bottom:28px;">
         <a href="/contact" class="btn btn-primary">Get Your Free Strategy Call</a>
         <a href="tel:+17867409499" class="btn btn-ghost">Call (786) 740-9499</a>
@@ -908,7 +894,7 @@
 
 
   <!-- Base shared.js for nav, cookie banner, etc. -->
-  <script src="shared.js?v=nav-mobile-8"></script>
+  <script src="shared.js?v=site-fixes-1"></script>
 
   <!-- Count-up + scroll reveals -->
   <script>
