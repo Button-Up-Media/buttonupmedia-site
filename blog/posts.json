@@ -1,5 +1,19 @@
 [
   {
+    "id": "signs-you-need-help",
+    "category": "strategy",
+    "author": "juan",
+    "date": "2026-11-17",
+    "hero": "/images/blog/signs-you-need-help.jpg",
+    "heroAlt": "A restaurant owner looking out the window during a slow shift",
+    "en": {
+      "slug": "signs-restaurant-marketing-needs-help"
+    },
+    "es": {
+      "slug": "senales-marketing-restaurante-necesita-ayuda"
+    }
+  },
+  {
     "id": "third-party-delivery",
     "category": "strategy",
     "author": "chris",

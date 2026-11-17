@@ -959,7 +959,7 @@
     },
     {
       "id": "signs-you-need-help",
-      "status": "ready",
+      "status": "published",
       "category": "strategy",
       "author": "juan",
       "heroQuery": "tired restaurant owner looking at a phone in an empty american restaurant",
@@ -981,7 +981,8 @@
           "https://www.buttonupmedia.com/es/marketing-redes-sociales"
         ]
       },
-      "heroAlt": "A restaurant owner looking out the window during a slow shift"
+      "heroAlt": "A restaurant owner looking out the window during a slow shift",
+      "publishedDate": "2026-11-17"
     },
     {
       "id": "marketing-west-palm-beach",
