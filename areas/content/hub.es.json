@@ -1,69 +1,49 @@
 {
   "id": "hub",
   "lang": "es",
-  "metaTitle": "Zonas que atendemos en Florida y EE. UU. | Button Up Media",
-  "metaDescription": "Button Up Media trabaja en persona con restaurantes en el sur de la Florida y maneja anuncios, páginas web, SEO y AEO para restaurantes en todo EE. UU.",
+  "metaTitle": "Dónde trabajamos: todo EE. UU. | Button Up Media",
+  "metaDescription": "Agencia de marketing para restaurantes con sede en Miami, FL. Trabajamos con restaurantes en todo EE. UU.: redes sociales, anuncios, páginas web, SEO y AEO.",
   "eyebrow": "Dónde trabajamos",
-  "h1": "Marketing para restaurantes en el sur de la Florida y todo EE. UU.",
-  "answer": "Button Up Media tiene sede en Miami, trabaja en persona en el sur de la Florida y maneja anuncios, páginas web, SEO y AEO para restaurantes en todo EE. UU.",
+  "h1": "Marketing para restaurantes en cualquier parte de EE. UU.",
+  "answer": "Button Up Media tiene sede en Miami, FL, y trabaja con restaurantes, bares y cafés en todo EE. UU. Cada cliente recibe el mismo servicio y la misma calidad.",
   "glance": {
-    "title": "Qué ofrecemos y dónde",
+    "title": "Lo que hacemos por los restaurantes",
     "cols": [
       "Servicio",
-      "Sur de la Florida",
-      "Resto de EE. UU."
+      "Lo que recibes"
     ],
     "rows": [
       {
         "service": "Contenido y manejo de redes sociales",
         "cells": [
-          "Nuestro equipo graba en persona",
-          "Lo graba nuestra red local"
+          "Grabamos en tu restaurante, publicamos y manejamos tus redes"
         ]
       },
       {
         "service": "Google Ads y anuncios en Meta",
         "cells": [
-          "Sí",
-          "Sí, a distancia"
+          "Campañas para reservas, eventos y pedidos, medidas en llamadas y reservas"
         ]
       },
       {
         "service": "Páginas web",
         "cells": [
-          "Sí",
-          "Sí, a distancia"
+          "Un sitio a la medida en inglés y español que es tuyo"
         ]
       },
       {
         "service": "SEO, AEO y Perfil de Empresa de Google",
         "cells": [
-          "Sí",
-          "Sí, a distancia"
+          "Aparecer en Google, Google Maps y en las respuestas de IA"
         ]
       }
     ],
-    "note": "Fuera del sur de la Florida, nuestro equipo en Miami sigue planificando y manejando tus redes sociales. Las fotos y los videos los graban videógrafos y fotógrafos con experiencia de nuestra red en tu zona."
+    "note": "El mismo servicio y la misma calidad de trabajo, esté donde esté tu restaurante."
   },
-  "listLabel": "Sur de la Florida",
-  "listH2": "Zonas donde trabajamos",
-  "listSub": "Nuestro equipo va a tu restaurante a grabar. Cada página muestra nuestro trabajo más cercano y por dónde empezaríamos.",
-  "alsoHtml": "También trabajamos con restaurantes en otras partes del sur de la Florida que todavía no tienen su propia página. <a href=\"/es/contacto\">Pregúntenos por su zona</a>.",
-  "remote": {
-    "label": "Fuera del sur de la Florida",
-    "h2": "Cómo trabajamos con restaurantes en otros estados",
-    "sub": "Nuestra sede está en Miami y también tenemos miembros del equipo cerca de restaurantes en varios otros estados.",
-    "items": [
-      {
-        "title": "Redes sociales",
-        "bodyHtml": "Nuestro equipo en Miami planifica tu contenido, lo publica y maneja tus redes. Videógrafos y fotógrafos con experiencia de nuestra red en tu zona hacen la grabación, para que la calidad se mantenga alta. <a href=\"/es/marketing-redes-sociales\">Cómo funciona nuestro servicio de redes sociales</a>."
-      },
-      {
-        "title": "Anuncios, páginas web, SEO y AEO",
-        "bodyHtml": "Estos servicios se hacen a distancia, así que podemos trabajarlos para un restaurante en cualquier parte de Estados Unidos. Por ejemplo, manejamos los Google Ads de Rusty Pelican en Tampa y también en Miami. Mira <a href=\"/es/publicidad-restaurantes\">publicidad pagada</a>, <a href=\"/es/diseno-web-restaurantes\">páginas web</a> y <a href=\"/es/seo-restaurantes\">SEO y AEO</a>."
-      }
-    ]
-  },
+  "listLabel": "Páginas locales",
+  "listH2": "Algunas de las zonas donde trabajamos",
+  "listSub": "Cada página muestra nuestro trabajo más cercano y cómo empezaríamos con un restaurante ahí.",
+  "alsoHtml": "¿No ves tu ciudad? Trabajamos con restaurantes en cualquier parte de EE. UU. <a href=\"/es/contacto\">Pregúntenos por su zona</a>.",
   "work": {
     "label": "Clientes",
     "h2": "Nuestros clientes, por zona",
@@ -108,25 +88,25 @@
   "faqH2": "Preguntas sobre dónde trabajamos",
   "faqs": [
     {
-      "q": "¿En qué zonas trabajan en persona?",
-      "a": "Nuestro equipo trabaja en persona con restaurantes en todo el sur de la Florida, incluyendo South Beach y Miami Beach, Brickell y Downtown Miami, Wynwood, Coral Gables, Doral, Kendall, Pinecrest y Fort Lauderdale."
+      "q": "¿En qué zonas trabajan?",
+      "a": "Trabajamos con restaurantes, bares y cafés en cualquier parte de EE. UU. Tenemos sede en Miami, FL, y entre nuestros clientes hay restaurantes en South Beach, Doral, Pinecrest, Downtown Miami, Key Biscayne y Tampa."
     },
     {
-      "q": "¿Trabajan con restaurantes fuera del sur de la Florida?",
-      "a": "Sí. Google Ads, los anuncios en Meta, las páginas web, el SEO y el AEO se hacen a distancia para restaurantes en cualquier parte de Estados Unidos. Para redes sociales, nuestro equipo en Miami planifica y maneja tu contenido, y la grabación la hace nuestra red de videógrafos y fotógrafos con experiencia en tu zona."
+      "q": "¿Trabajan con restaurantes fuera de Miami?",
+      "a": "Sí. Trabajamos con restaurantes en cualquier parte de EE. UU., con el mismo servicio y la misma calidad de trabajo. Por ejemplo, manejamos Google Ads para Rusty Pelican en Tampa y también en Miami."
     },
     {
-      "q": "¿Quién graba nuestro contenido si no estamos en el sur de la Florida?",
-      "a": "Un videógrafo o fotógrafo de nuestra red en tu zona. Nuestro equipo en Miami planifica qué grabar y se encarga de publicar y manejar tus redes."
+      "q": "¿Vienen a mi restaurante a grabar?",
+      "a": "Sí. Grabamos en tu restaurante, esté donde esté. Planificamos la sesión contigo, y una sola sesión suele producir de 4 a 6 semanas de contenido."
     },
     {
       "q": "¿Dónde está ubicada Button Up Media?",
-      "a": "Nuestra sede está en Miami, Florida. También tenemos miembros del equipo cerca de restaurantes en varios otros estados."
+      "a": "Tenemos sede en Miami, FL."
     }
   ],
   "cta": {
     "h2": "Pregúntenos por su zona",
-    "body": "Agende una llamada gratis de 30 minutos y cuéntenos dónde está su restaurante. Juan le explicará cómo funcionaría la grabación y qué servicios tienen sentido para usted.",
+    "body": "Agende una llamada gratis de 30 minutos con Juan, nuestro cofundador. Él revisará cómo aparece su restaurante en internet hoy y le dirá por dónde empezaría.",
     "button": "Agende una llamada estratégica gratis"
   }
 }

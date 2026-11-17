@@ -36,9 +36,9 @@
 //
 // Hub: areas/content/hub.{en|es}.json
 // { id: "hub", lang, metaTitle, metaDescription, eyebrow, h1, answer,
-//   glance: { title, cols: [service, southFlorida, elsewhere], rows: [{ service, cells: [x, x] }], note },
+//   glance: { title, cols: [service, ...detail], rows: [{ service, cells: [one per detail col] }], note },
 //   listLabel, listH2, listSub, alsoHtml?,      // South Florida neighborhood cards
-//   remote: { label, h2, sub?, items: [{ title, bodyHtml }] },   // outside South Florida
+//   remote?: { label, h2, sub?, items: [{ title, bodyHtml }] },  // optional extra section
 //   work: { label, h2, sub?, items: [{ case, name, where, service, line }] },
 //   faqH2?, faqs: [{ q, a }],
 //   cta: { h2, body, button } }
@@ -441,7 +441,7 @@ const HUB_CSS = `
     .ar-ac-link:hover svg { transform: translateX(3px); }
     .ar-also { margin-top: 18px; font-size: 1rem; line-height: 1.6; color: var(--text-dim); max-width: 62ch; }
 
-    /* ---------- OUTSIDE SOUTH FLORIDA ---------- */
+    /* ---------- OPTIONAL EXTRA SECTION (cards) ---------- */
     .ar-modes { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-top: 28px; }
     .ar-mode { padding: 24px 22px; border-radius: var(--r-lg); border: 1px solid var(--line); background: var(--bg-1); }
     .ar-mode-ic { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; background: var(--gold-soft); color: var(--gold); }
@@ -599,14 +599,17 @@ function validateHub(h) {
   const { errs, str, arr, obj } = checker();
   ['metaTitle', 'metaDescription', 'eyebrow', 'h1', 'answer', 'listH2', 'listSub'].forEach((k) => str(h[k], k));
   const g = obj(h.glance, 'glance'); str(g.title, 'glance.title'); str(g.note, 'glance.note');
-  if (arr(g.cols, 'glance.cols').length !== 3) errs.push('glance.cols must have 3 headings');
+  const nCols = arr(g.cols, 'glance.cols').length;
+  if (nCols < 2 || nCols > 3) errs.push('glance.cols must have 2 or 3 headings');
   arr(g.rows, 'glance.rows').forEach((r, i) => {
     str(r && r.service, `glance.rows[${i}].service`);
-    if (!r || !Array.isArray(r.cells) || r.cells.length !== 2) errs.push(`glance.rows[${i}].cells must have 2 entries`);
+    if (!r || !Array.isArray(r.cells) || r.cells.length !== nCols - 1) errs.push(`glance.rows[${i}].cells must have ${nCols - 1} entries`);
     else r.cells.forEach((x, j) => str(x, `glance.rows[${i}].cells[${j}]`));
   });
-  const rm = obj(h.remote, 'remote'); str(rm.label, 'remote.label'); str(rm.h2, 'remote.h2');
-  arr(rm.items, 'remote.items').forEach((it, i) => { str(it && it.title, `remote.items[${i}].title`); str(it && it.bodyHtml, `remote.items[${i}].bodyHtml`); });
+  if (h.remote !== undefined) {
+    const rm = obj(h.remote, 'remote'); str(rm.label, 'remote.label'); str(rm.h2, 'remote.h2');
+    arr(rm.items, 'remote.items').forEach((it, i) => { str(it && it.title, `remote.items[${i}].title`); str(it && it.bodyHtml, `remote.items[${i}].bodyHtml`); });
+  }
   const w = obj(h.work, 'work'); str(w.label, 'work.label'); str(w.h2, 'work.h2');
   arr(w.items, 'work.items').forEach((s, i) => {
     ['case', 'name', 'where', 'service', 'line'].forEach((k) => str(s && s[k], `work.items[${i}].${k}`));
@@ -1003,7 +1006,7 @@ function renderHub(h, chrome, available) {
           </a>`).join('\n          ');
 
   const modeIcons = [I.camera, I.globe];
-  const modes = h.remote.items.map((it, i) => `<article class="ar-mode ar-rise">
+  const modes = (h.remote ? h.remote.items : []).map((it, i) => `<article class="ar-mode ar-rise">
             <span class="ar-mode-ic">${modeIcons[i % modeIcons.length]}</span>
             <h3>${esc(it.title)}</h3>
             <p class="ar-rich">${it.bodyHtml}</p>
@@ -1093,7 +1096,7 @@ function renderHub(h, chrome, available) {
       </div>
     </section>
 
-    <!-- SOUTH FLORIDA NEIGHBORHOODS -->
+    <!-- NEIGHBORHOOD PAGES -->
 ${sec('card-overlay --dark lib-section --lap', 'areas', `        <p class="ar-label">${esc(h.listLabel || h.eyebrow)}</p>
         <h2 class="ar-h2">${esc(h.listH2)}</h2>
         <p class="ar-sub">${esc(h.listSub)}</p>
@@ -1102,13 +1105,12 @@ ${sec('card-overlay --dark lib-section --lap', 'areas', `        <p class="ar-la
         </div>
         ${h.alsoHtml ? `<p class="ar-also ar-rich">${h.alsoHtml}</p>` : ''}`)}
 
-    <!-- OUTSIDE SOUTH FLORIDA -->
-${sec('lib-section', 'outside', `        <p class="ar-label">${esc(h.remote.label)}</p>
+${h.remote ? sec('lib-section', 'outside', `        <p class="ar-label">${esc(h.remote.label)}</p>
         <h2 class="ar-h2">${esc(h.remote.h2)}</h2>
         ${h.remote.sub ? `<p class="ar-sub">${esc(h.remote.sub)}</p>` : ''}
         <div class="ar-modes">
           ${modes}
-        </div>`)}
+        </div>`) : ''}
 
     <!-- CLIENT WORK BY LOCATION -->
 ${sec('card-overlay --dark lib-section --lap', 'work', `        <p class="ar-label">${esc(h.work.label)}</p>

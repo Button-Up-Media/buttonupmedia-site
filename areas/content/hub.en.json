@@ -1,69 +1,49 @@
 {
   "id": "hub",
   "lang": "en",
-  "metaTitle": "Areas We Serve in South Florida and the US | Button Up Media",
-  "metaDescription": "Button Up Media works in person with restaurants across South Florida and runs ads, websites, SEO and AEO for restaurants anywhere in the United States.",
+  "metaTitle": "Where We Work: Restaurants Across the US | Button Up Media",
+  "metaDescription": "Button Up Media is a restaurant marketing agency headquartered in Miami, FL, working with restaurants anywhere in the US on social media, ads, websites and SEO.",
   "eyebrow": "Where we work",
-  "h1": "Restaurant marketing in South Florida and across the US",
-  "answer": "Button Up Media is headquartered in Miami. Our crew works in person across South Florida, and we run ads, websites, SEO and AEO for restaurants anywhere in the US.",
+  "h1": "Restaurant marketing anywhere in the US",
+  "answer": "Button Up Media is headquartered in Miami, FL, and works with restaurants, bars and cafes anywhere in the US. Every client gets the same service and quality of work.",
   "glance": {
-    "title": "What we offer where",
+    "title": "What we do for restaurants",
     "cols": [
       "Service",
-      "South Florida",
-      "Rest of the US"
+      "What you get"
     ],
     "rows": [
       {
         "service": "Social media content and management",
         "cells": [
-          "Our own crew films in person",
-          "Filmed by our local network"
+          "We film at your restaurant, then post and manage your pages"
         ]
       },
       {
         "service": "Google Ads and Meta ads",
         "cells": [
-          "Yes",
-          "Yes, managed remotely"
+          "Campaigns for reservations, events and orders, tracked to calls and bookings"
         ]
       },
       {
         "service": "Websites",
         "cells": [
-          "Yes",
-          "Yes, built remotely"
+          "A custom site in English and Spanish that you own"
         ]
       },
       {
         "service": "SEO, AEO and Google Business Profile",
         "cells": [
-          "Yes",
-          "Yes, done remotely"
+          "Show up on Google, Google Maps and AI answers"
         ]
       }
     ],
-    "note": "Outside South Florida, our Miami team still plans and manages your social media. The photos and video are shot by experienced videographers and photographers from our network in your area."
+    "note": "The same service and the same quality of work, wherever your restaurant is."
   },
-  "listLabel": "South Florida",
-  "listH2": "Neighborhoods we work in",
-  "listSub": "Our crew comes to your restaurant to film. Each page shows our closest client work and where we would start.",
-  "alsoHtml": "We also work with restaurants in other parts of South Florida that don't have their own page yet. <a href=\"/contact\">Ask us about your area</a>.",
-  "remote": {
-    "label": "Outside South Florida",
-    "h2": "How we work with restaurants in other states",
-    "sub": "Our headquarters is in Miami, and we also have team members local to restaurants in several other states.",
-    "items": [
-      {
-        "title": "Social media",
-        "bodyHtml": "Our Miami team plans your content, posts it and manages your pages. Experienced videographers and photographers from our network in your area do the shoot, so the quality stays high. <a href=\"/socialmediamarketing\">How our social media service works</a>."
-      },
-      {
-        "title": "Ads, websites, SEO and AEO",
-        "bodyHtml": "These are done remotely, so we can take them on for a restaurant anywhere in the US. For example, we run Google Ads for Rusty Pelican in Tampa as well as in Miami. See <a href=\"/restaurant-advertising\">paid media</a>, <a href=\"/restaurant-website-design\">websites</a> and <a href=\"/restaurant-seo\">SEO and AEO</a>."
-      }
-    ]
-  },
+  "listLabel": "Local pages",
+  "listH2": "Some of the neighborhoods we work in",
+  "listSub": "Each page shows our nearest client work and how we would start with a restaurant there.",
+  "alsoHtml": "Don’t see your city? We work with restaurants anywhere in the US. <a href=\"/contact\">Ask us about your area</a>.",
   "work": {
     "label": "Client work",
     "h2": "Our clients, by location",
@@ -108,25 +88,25 @@
   "faqH2": "Questions about where we work",
   "faqs": [
     {
-      "q": "Which areas do you serve in person?",
-      "a": "Our crew works in person with restaurants across South Florida, including South Beach and Miami Beach, Brickell and Downtown Miami, Wynwood, Coral Gables, Doral, Kendall, Pinecrest and Fort Lauderdale."
+      "q": "Which areas do you serve?",
+      "a": "We work with restaurants, bars and cafes anywhere in the US. We’re headquartered in Miami, FL, and our clients include restaurants in South Beach, Doral, Pinecrest, Downtown Miami, Key Biscayne and Tampa."
     },
     {
-      "q": "Do you work with restaurants outside South Florida?",
-      "a": "Yes. Google Ads, Meta ads, websites, SEO and AEO are done remotely for restaurants anywhere in the US. For social media, our Miami team plans and manages your content, and the filming is done by our network of experienced videographers and photographers in your area."
+      "q": "Do you work with restaurants outside Miami?",
+      "a": "Yes. We work with restaurants anywhere in the US, with the same service and the same quality of work. For example, we run Google Ads for Rusty Pelican in Tampa as well as in Miami."
     },
     {
-      "q": "Who films our content if we're not in South Florida?",
-      "a": "A videographer or photographer from our network in your area. Our Miami team plans what to shoot and handles posting and managing your pages."
+      "q": "Will you come to my restaurant to film?",
+      "a": "Yes. We film at your restaurant, wherever it is. We plan the shoot with you, and one shoot typically produces 4 to 6 weeks of content."
     },
     {
       "q": "Where is Button Up Media based?",
-      "a": "Our headquarters is in Miami, Florida. We also have team members local to restaurants in several other states."
+      "a": "We’re headquartered in Miami, FL."
     }
   ],
   "cta": {
     "h2": "Ask us about your area",
-    "body": "Book a free 30-minute call and tell us where your restaurant is. Juan will explain how filming would work for you and which services make sense.",
+    "body": "Book a free 30-minute call with Juan, our co-founder. He’ll look at how your restaurant shows up online today and tell you where he would start.",
     "button": "Book a free strategy call"
   }
 }
