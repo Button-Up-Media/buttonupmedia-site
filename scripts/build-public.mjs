@@ -22,7 +22,6 @@ const filesToCopy = [
   'restaurant-seo.html',
   'restaurant-seo-es.html',
   'restaurant-website-design.html',
-  'services.html',
   'social-media-marketing.html',
   'website-grader.html',
   'website-grader-report.html',

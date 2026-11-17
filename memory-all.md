@@ -107,8 +107,6 @@ Last updated:
   - Main homepage.
 - [`/Users/christianbusiness/buttonupmedia-site/about.html`](about.html)
   - About page.
-- [`/Users/christianbusiness/buttonupmedia-site/services.html`](services.html)
-  - Services hub / service overview page.
 - [`/Users/christianbusiness/buttonupmedia-site/contact.html`](contact.html)
   - Contact / booking page.
 - [`/Users/christianbusiness/buttonupmedia-site/case-studies.html`](case-studies.html)
@@ -155,7 +153,6 @@ Last updated:
 
 - Home: `index.html`
 - About: `about.html`
-- Services: `services.html`
 - Contact: `contact.html`
 - Case Studies: `case-studies.html`
 
