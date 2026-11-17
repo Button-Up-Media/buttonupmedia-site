@@ -23,6 +23,8 @@ const filesToCopy = [
   'restaurant-seo-es.html',
   'restaurant-website-design.html',
   'social-media-marketing.html',
+  'thank-you.html',
+  'thank-you-es.html',
   'website-grader.html',
   'website-grader-report.html',
   'website-grader-es.html',
@@ -139,7 +141,10 @@ const caseSitemapEntries = await buildCases(root, outDir);
       const rel = path.relative(outDir, full).split(path.sep).join('/');
       // grader-demo.html is the noindex demo copy of the grader landing; it must
       // look exactly like the real landing, so it gets v3 too.
-      const noindex = /<meta name="robots" content="noindex/i.test(html) && rel !== 'grader-demo.html';
+      // Noindex pages that are part of the regular site still get v3: the demo copy
+      // of the grader landing and the post-booking thank-you pages.
+      const V3_NOINDEX = ['grader-demo.html', 'thank-you.html', 'thank-you-es.html'];
+      const noindex = /<meta name="robots" content="noindex/i.test(html) && !V3_NOINDEX.includes(rel);
       if (!html.includes('</head>') || noindex || html.includes('/v3.css')) continue;
       // The grader reports (and their demo) ship their own focused tool layout and
       // theme. The grader landing pages are regular site pages and get v3.

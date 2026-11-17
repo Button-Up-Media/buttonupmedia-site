@@ -2334,3 +2334,34 @@ if (document.readyState === "loading") {
     }
   }, true);
 })();
+
+/* ===== After a booking: go to the thank-you page (Nov 2026) =====
+   Calendly's own "redirect after booking" is unreliable inside an embed, so
+   every page that embeds Calendly hands off here. The page's own listener
+   has already pushed booking_complete for GTM in the same message event; the
+   short delay lets that tag fire before we leave. Spanish pages go to the
+   Spanish thank-you page. The last page language is remembered so a booking
+   made on calendly.com itself (which lands on /thank-you) can switch to
+   Spanish too. */
+(function () {
+  if (window.__bumThanksRedirect) return;
+  window.__bumThanksRedirect = true;
+  var path = location.pathname;
+  var isThanks = /^\/(thank-you|es\/gracias)(\.html)?\/?$|^\/thank-you-es(\.html)?$/.test(path);
+  var lang = ((document.documentElement.getAttribute("lang") || "en").toLowerCase().indexOf("es") === 0) ? "es" : "en";
+  if (!isThanks) { try { localStorage.setItem("bum-lang", lang); } catch (e) {} }
+  if (isThanks) return;
+  var sent = false;
+  window.addEventListener("message", function (e) {
+    var host = "";
+    try { host = new URL(e.origin).hostname; } catch (err) { return; }
+    if (!/(^|\.)calendly\.com$/.test(host)) return;
+    if (!e.data || e.data.event !== "calendly.event_scheduled" || sent) return;
+    sent = true;
+    // From a grader report, let the thank-you page offer a way back to it.
+    try {
+      if (/grader-report|analizador-redes-sociales-web-reporte|grader-demo-report/.test(path)) sessionStorage.setItem("bum-last-report", location.href);
+    } catch (err) {}
+    setTimeout(function () { location.href = lang === "es" ? "/es/gracias" : "/thank-you"; }, 1200);
+  });
+})();

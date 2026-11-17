@@ -123,28 +123,6 @@
     .v3-grader .gv-talk:active { transform: scale(0.97); }
 
     /* sample report card (hero visual) */
-    .v3-grader .gv-sample { margin: 0; }
-    .v3-grader .gv-card { padding: clamp(22px, 2.6vw, 30px); border-radius: var(--v3-r-panel, 32px); background: var(--v3-elev-1, #141416); border: 1px solid var(--v3-hair, rgba(255,255,255,0.08)); }
-    .v3-grader .gv-card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-    .v3-grader .gv-card-biz { display: flex; align-items: center; gap: 12px; min-width: 0; }
-    .v3-grader .gv-card-ic { display: grid; place-items: center; width: 44px; height: 44px; flex: none; border-radius: 13px; background: rgba(255,255,255,0.06); color: rgba(246,240,230,0.78); }
-    .v3-grader .gv-card-ic svg { width: 22px; height: 22px; }
-    .v3-grader .gv-card-biz b { display: block; font-size: 1.0625rem; font-weight: 750; letter-spacing: -0.02em; line-height: 1.25; color: var(--text-head); }
-    .v3-grader .gv-card-biz small { display: block; font-size: 0.8125rem; color: rgba(246,240,230,0.56); }
-    .v3-grader .gv-tag { flex: none; padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,0.06); font-size: 0.8125rem; font-weight: 650; color: rgba(246,240,230,0.76); }
-    .v3-grader .gv-score { display: flex; align-items: flex-end; gap: 16px; margin-top: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--v3-hair, rgba(255,255,255,0.08)); }
-    .v3-grader .gv-score > b { font-size: clamp(4rem, 6.6vw, 5.25rem); font-weight: 800; line-height: 0.8; letter-spacing: -0.06em; color: var(--gold); font-variant-numeric: tabular-nums; }
-    .v3-grader .gv-score > span { padding-bottom: 2px; font-size: 0.9375rem; line-height: 1.4; color: rgba(246,240,230,0.66); }
-    .v3-grader .gv-score > span strong { display: block; font-weight: 650; color: var(--text-head); }
-    .v3-grader .gv-cats { list-style: none; margin: 6px 0 0; padding: 0; }
-    .v3-grader .gv-cats li { display: grid; grid-template-columns: minmax(0, 1fr) 88px 26px; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--v3-hair, rgba(255,255,255,0.08)); font-size: 0.9375rem; line-height: 1.3; color: rgba(246,240,230,0.82); }
-    .v3-grader .gv-cats i { position: relative; height: 6px; border-radius: 999px; background: rgba(255,255,255,0.08); overflow: hidden; }
-    .v3-grader .gv-cats i::after { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: calc(var(--v) * 1%); border-radius: inherit; background: rgba(246,240,230,0.8); }
-    .v3-grader .gv-cats b { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--text-head); }
-    .v3-grader .gv-fix { margin-top: 16px; padding: 14px 16px; border-radius: 16px; background: rgba(255,255,255,0.045); }
-    .v3-grader .gv-fix span { display: block; font-size: 0.8125rem; font-weight: 650; color: var(--gold); }
-    .v3-grader .gv-fix strong { display: block; margin-top: 2px; font-size: 1rem; font-weight: 650; line-height: 1.4; color: var(--text-head); }
-    .v3-grader .gv-sample figcaption { margin-top: 12px; text-align: center; font-size: 0.875rem; color: rgba(246,240,230,0.52); }
 
     /* ---------- what the report checks ---------- */
     .v3-grader .gv-split { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
@@ -232,7 +210,7 @@
     }
     @media (max-width: 880px) {
       .v3-grader .gv-hero-grid { grid-template-columns: 1fr; gap: 40px; }
-      .v3-grader .gv-sample { width: 100%; max-width: 520px; }
+      .v3-grader .gv-demo { max-width: 560px; margin: 0 auto; }
     }
     /* phones: H1, the answer line and the search share the first screen */
     @media (max-width: 700px) {
@@ -252,7 +230,6 @@
       .v3-grader .gv-quote { flex-direction: column; gap: 16px; }
       .v3-grader .gv-quote img { width: 56px; height: 56px; }
       .v3-grader .gv-cta .btn { flex: 1 1 100%; justify-content: center; }
-      .v3-grader .gv-cats li { grid-template-columns: minmax(0, 1fr) 64px 26px; gap: 12px; }
       .v3-grader .gr-cal-inline, .v3-grader .gr-cal-inline iframe { min-height: 680px; }
       .v3-grader .gv-faq-a p { padding-right: 0; }
       /* body copy reads at 16px+ on phones (beats the shared 15.5px floor) */
@@ -268,6 +245,194 @@
       .v3-grader .gr-search-btn, .v3-grader .gv-talk, .v3-grader .gv-more svg, .v3-grader .gv-faq summary::after { transition: none; }
       .v3-grader .gr-search-btn:active, .v3-grader .gv-talk:active { transform: none; }
       .v3-grader .gr-cal-spin { animation: none; }
+    }
+
+    /* ===== Hero: animated walkthrough of the grader (Nov 2026) =====
+       Five short scenes that loop: type a name, website checks, social,
+       Google, the score. Transform/opacity only; static under reduced motion. */
+    .v3-grader .gv-demo { margin: 0; width: 100%; }
+    .v3-grader .gd-win { --gd-good: #3fbf7f; --gd-fair: #e9a83b; --gd-poor: #ef6a5a; --gd-ease: cubic-bezier(.2,.8,.2,1);
+      position: relative; container-type: inline-size; border-radius: var(--v3-r-panel, 32px); background: var(--v3-elev-1, #141416); border: 1px solid var(--v3-hair, rgba(255,255,255,0.08)); overflow: hidden; }
+    .v3-grader .gd-top { display: flex; align-items: center; gap: 12px; height: 52px; padding: 0 18px; border-bottom: 1px solid var(--v3-hair, rgba(255,255,255,0.08)); }
+    .v3-grader .gd-dots { display: flex; gap: 6px; flex: none; }
+    .v3-grader .gd-dots i { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.14); }
+    .v3-grader .gd-label { flex: 1; min-width: 0; font-size: 0.875rem; font-weight: 650; color: rgba(246,240,230,0.78); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: opacity .25s; }
+    .v3-grader .gd-label.swap { opacity: 0; }
+    .v3-grader .gd-chip { flex: none; padding: 5px 11px; border-radius: 999px; background: rgba(255,255,255,0.06); font-size: 0.75rem; font-weight: 650; color: rgba(246,240,230,0.66); }
+    .v3-grader .gd-segs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; padding: 12px 18px 0; }
+    .v3-grader .gd-seg { height: 3px; border-radius: 3px; background: rgba(255,255,255,0.1); overflow: hidden; }
+    .v3-grader .gd-seg i { display: block; height: 100%; background: var(--gold, #E2A84D); transform: scaleX(0); transform-origin: left; }
+    .v3-grader .gd-seg.done i { transform: scaleX(1); }
+    .v3-grader .gd-stage { position: relative; height: 462px; }
+    .v3-grader .gd-scene > * { flex: none; }
+    .v3-grader .gd-scene { position: absolute; inset: 0; padding: 18px 20px 20px; display: flex; flex-direction: column; opacity: 0; transform: translateY(10px); transition: opacity .45s var(--gd-ease), transform .45s var(--gd-ease); pointer-events: none; }
+    .v3-grader .gd-scene.is-on { opacity: 1; transform: none; }
+    .v3-grader .gd-h { font-size: 1.375rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.035em; color: var(--text-head, #f6f0e6); }
+    .v3-grader .gd-sub { margin-top: 6px; font-size: 0.9375rem; line-height: 1.45; color: rgba(246,240,230,0.62); }
+    .v3-grader .gd-in { opacity: 0; transform: translateY(8px); transition: opacity .4s var(--gd-ease), transform .4s var(--gd-ease); }
+    .v3-grader .in > .gd-in, .v3-grader .gd-in.in { opacity: 1; transform: none; }
+
+    /* scene 1: type the name */
+    .v3-grader .gd-field { display: flex; align-items: center; gap: 10px; height: 56px; margin-top: 22px; padding: 0 18px; border-radius: 999px; background: #0b0b0c; border: 1px solid rgba(255,255,255,0.16); font-size: 1.0625rem; font-weight: 600; color: var(--text-head, #f6f0e6); }
+    .v3-grader .gd-field svg { width: 19px; height: 19px; flex: none; color: rgba(246,240,230,0.5); }
+    .v3-grader .gd-caret { width: 2px; height: 22px; margin-left: -8px; background: var(--gold, #E2A84D); animation: gdBlink 1s steps(1) infinite; }
+    @keyframes gdBlink { 50% { opacity: 0; } }
+    .v3-grader .gd-ac { margin-top: 10px; padding: 6px; border-radius: 20px; background: #1b1b1e; border: 1px solid rgba(255,255,255,0.08); }
+    .v3-grader .gd-ac-row { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 14px; transition: background .3s; }
+    .v3-grader .gd-ac.hl .gd-ac-row { background: rgba(255,255,255,0.07); }
+    .v3-grader .gd-ac-row svg { width: 18px; height: 18px; flex: none; color: var(--gold, #E2A84D); }
+    .v3-grader .gd-ac-row b { display: block; font-size: 0.9875rem; font-weight: 700; color: var(--text-head, #f6f0e6); }
+    .v3-grader .gd-ac-row small { display: block; font-size: 0.8125rem; color: rgba(246,240,230,0.56); }
+    .v3-grader .gd-go { display: flex; align-items: center; justify-content: center; gap: 8px; height: 54px; margin-top: auto; border-radius: 999px; background: var(--gold, #E2A84D); color: #140e04; font-size: 1rem; font-weight: 750; transition: transform .18s var(--gd-ease); }
+    .v3-grader .gd-go svg { width: 18px; height: 18px; }
+    .v3-grader .gd-go.press { transform: scale(.96); }
+
+    /* scene 2: website */
+    .v3-grader .gd-url { display: inline-flex; align-self: flex-start; align-items: center; gap: 7px; margin-top: 10px; padding: 5px 11px; border-radius: 999px; background: rgba(255,255,255,0.06); font-size: 0.8125rem; font-weight: 600; color: rgba(246,240,230,0.72); }
+    .v3-grader .gd-url svg { width: 13px; height: 13px; }
+    .v3-grader .gd-site { position: relative; height: 60px; margin-top: 14px; border-radius: 14px; background: #0b0b0c; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 6px; padding: 10px; }
+    .v3-grader .gd-site i { border-radius: 6px; background: #1f1f23; }
+    .v3-grader .gd-site i:first-child { grid-row: span 2; background: #26262a; }
+    .v3-grader .gd-scan { position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--gold, #E2A84D); opacity: 0; }
+    .v3-grader .gd-s1.is-on .gd-scan { animation: gdScan 1.6s var(--gd-ease) .2s 2 both; }
+    @keyframes gdScan { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: .9; } 85% { opacity: .9; } 100% { transform: translateY(58px); opacity: 0; } }
+    .v3-grader .gd-rows { list-style: none; margin: 8px 0 0; padding: 0; }
+    .v3-grader .gd-rows li { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 4px 12px; padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .v3-grader .gd-rows li:last-child { border-bottom: 0; }
+    .v3-grader .gd-rows span { font-size: 0.9375rem; font-weight: 650; color: var(--text-head, #f6f0e6); }
+    .v3-grader .gd-rows small { display: block; font-size: 0.78rem; font-weight: 500; color: rgba(246,240,230,0.52); }
+    .v3-grader .gd-rows b { font-size: 1.125rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .v3-grader .gd-bar { grid-column: 1 / -1; height: 5px; border-radius: 5px; background: rgba(255,255,255,0.08); overflow: hidden; }
+    .v3-grader .gd-bar u { display: block; height: 100%; border-radius: inherit; transform: scaleX(0); transform-origin: left; transition: transform 1s var(--gd-ease) .1s; }
+    .v3-grader .in .gd-bar u { transform: scaleX(var(--v)); }
+    .v3-grader .gd-tag { padding: 4px 10px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; white-space: nowrap; }
+    .v3-grader .--poor b, .v3-grader b.--poor { color: var(--gd-poor); } .v3-grader .--poor .gd-bar u { background: var(--gd-poor); }
+    .v3-grader .--fair b, .v3-grader b.--fair { color: var(--gd-fair); } .v3-grader .--fair .gd-bar u { background: var(--gd-fair); }
+    .v3-grader .--good b, .v3-grader b.--good { color: var(--gd-good); } .v3-grader .--good .gd-bar u { background: var(--gd-good); }
+    .v3-grader .gd-tag.--warn { background: rgba(233,168,59,0.14); color: #f0b85c; }
+    .v3-grader .gd-rows li { opacity: 0; transform: translateY(8px); transition: opacity .4s var(--gd-ease), transform .4s var(--gd-ease); }
+    .v3-grader .gd-rows li.in { opacity: 1; transform: none; }
+
+    /* scene 3: social */
+    .v3-grader .gd-social { display: grid; grid-template-columns: minmax(0, 0.82fr) minmax(0, 1fr); gap: 16px; margin-top: 14px; }
+    .v3-grader .gd-phone { position: relative; align-self: start; width: 100%; max-width: 186px; aspect-ratio: 9 / 17.5; border-radius: 26px; background: #0b0b0c; border: 1px solid rgba(255,255,255,0.16); padding: 10px 9px; overflow: hidden; transform: translateY(14px); opacity: 0; transition: transform .6s var(--gd-ease), opacity .5s var(--gd-ease); }
+    .v3-grader .gd-s2.is-on .gd-phone { transform: none; opacity: 1; }
+    .v3-grader .gd-notch { width: 34%; height: 6px; margin: 0 auto 10px; border-radius: 6px; background: #1f1f23; }
+    .v3-grader .gd-prof { display: flex; align-items: center; gap: 8px; }
+    .v3-grader .gd-av { flex: none; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: #f6f0e6; color: #140e04; font-weight: 800; font-size: 1rem; box-shadow: 0 0 0 2px #0b0b0c, 0 0 0 4px var(--gold, #E2A84D); }
+    .v3-grader .gd-pst { display: flex; gap: 10px; min-width: 0; }
+    .v3-grader .gd-pst div { text-align: center; }
+    .v3-grader .gd-pst b { display: block; font-size: 0.9375rem; font-weight: 800; color: var(--text-head, #f6f0e6); font-variant-numeric: tabular-nums; }
+    .v3-grader .gd-pst small { display: block; font-size: 0.625rem; color: rgba(246,240,230,0.56); }
+    .v3-grader .gd-handle { margin-top: 9px; font-size: 0.75rem; font-weight: 700; color: var(--text-head, #f6f0e6); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .v3-grader .gd-bio { display: flex; align-items: center; gap: 4px; margin-top: 3px; font-size: 0.6875rem; color: rgba(246,240,230,0.6); }
+    .v3-grader .gd-bio svg { width: 10px; height: 10px; color: var(--gold, #E2A84D); flex: none; }
+    .v3-grader .gd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-top: 10px; }
+    .v3-grader .gd-grid i { aspect-ratio: 3 / 4; border-radius: 3px; background: #1f1f23; }
+    .v3-grader .gd-grid i:nth-child(3n+1) { background: #2a2622; } .v3-grader .gd-grid i:nth-child(4n) { background: #24262a; }
+    .v3-grader .gd-checks { list-style: none; margin: 0; padding: 0; align-self: start; }
+    .v3-grader .gd-checks li { display: flex; align-items: flex-start; gap: 9px; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.07); font-size: 0.875rem; font-weight: 600; line-height: 1.35; color: var(--text-head, #f6f0e6); opacity: 0; transform: translateY(8px); transition: opacity .4s var(--gd-ease), transform .4s var(--gd-ease); }
+    .v3-grader .gd-checks li.in { opacity: 1; transform: none; }
+    .v3-grader .gd-checks li:last-child { border-bottom: 0; }
+    .v3-grader .gd-checks li small { display: block; font-size: 0.75rem; font-weight: 500; color: rgba(246,240,230,0.56); }
+    .v3-grader .gd-ic { flex: none; display: grid; place-items: center; width: 18px; height: 18px; margin-top: 1px; border-radius: 50%; font-size: 0.6875rem; font-weight: 800; }
+    .v3-grader .gd-ic svg { width: 11px; height: 11px; }
+    .v3-grader .gd-ic.--ok { background: rgba(63,191,127,0.16); color: var(--gd-good); }
+    .v3-grader .gd-ic.--no { background: rgba(239,106,90,0.16); color: var(--gd-poor); }
+    .v3-grader .gd-ic.--warn { background: rgba(233,168,59,0.16); color: var(--gd-fair); }
+    .v3-grader .gd-ic.--info { background: rgba(255,255,255,0.08); color: rgba(246,240,230,0.8); }
+    .v3-grader .gd-cmp { display: grid; gap: 5px; width: 100%; margin-top: 7px; }
+    .v3-grader .gd-cmp .r { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px; font-size: 0.6875rem; color: rgba(246,240,230,0.62); }
+    .v3-grader .gd-cmp i { grid-column: 1 / -1; display: block; height: 6px; border-radius: 6px; background: rgba(255,255,255,0.08); overflow: hidden; }
+    .v3-grader .gd-cmp u { display: block; height: 100%; border-radius: inherit; background: rgba(246,240,230,0.45); transform: scaleX(0); transform-origin: left; transition: transform 1s var(--gd-ease) .15s; }
+    .v3-grader .gd-cmp .--you u { background: var(--gold, #E2A84D); }
+    .v3-grader .in .gd-cmp u { transform: scaleX(var(--v)); }
+
+    /* scene 4: Google */
+    .v3-grader .gd-gcard { margin-top: 14px; padding: 14px 16px; border-radius: 18px; background: #1b1b1e; border: 1px solid rgba(255,255,255,0.08); }
+    .v3-grader .gd-gname { font-size: 1rem; font-weight: 750; color: var(--text-head, #f6f0e6); }
+    .v3-grader .gd-rate { display: flex; align-items: center; gap: 8px; margin-top: 4px; font-size: 0.875rem; color: rgba(246,240,230,0.62); }
+    .v3-grader .gd-rate b { font-size: 1.125rem; font-weight: 800; color: var(--text-head, #f6f0e6); font-variant-numeric: tabular-nums; }
+    .v3-grader .gd-stars { position: relative; display: inline-block; font-size: 1rem; letter-spacing: 1px; color: rgba(255,255,255,0.18); }
+    .v3-grader .gd-stars::after { content: "\2605\2605\2605\2605\2605"; position: absolute; inset: 0; width: 0; overflow: hidden; color: var(--gold, #E2A84D); transition: width 1s var(--gd-ease) .2s; }
+    .v3-grader .gd-s3.is-on .gd-stars::after { width: 78%; }
+    .v3-grader .gd-rank { margin-top: 14px; }
+    .v3-grader .gd-rank p { font-size: 0.875rem; font-weight: 650; color: var(--text-head, #f6f0e6); }
+    .v3-grader .gd-rank p b { color: var(--gold, #E2A84D); }
+    .v3-grader .gd-dotsrow { display: flex; gap: 6px; margin-top: 9px; }
+    .v3-grader .gd-dotsrow i { flex: 1; height: 8px; border-radius: 8px; background: rgba(255,255,255,0.12); transform: scaleY(.3); opacity: 0; transition: transform .35s var(--gd-ease), opacity .35s var(--gd-ease); }
+    .v3-grader .gd-dotsrow i.in { transform: none; opacity: 1; }
+    .v3-grader .gd-dotsrow i.--you { background: var(--gold, #E2A84D); }
+    .v3-grader .gd-s3 .gd-checks { margin-top: 10px; }
+
+    /* scene 5: the score */
+    .v3-grader .gd-res { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 20px; align-items: center; margin-top: 14px; }
+    .v3-grader .gd-gauge { position: relative; width: 132px; height: 132px; }
+    .v3-grader .gd-gauge svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .v3-grader .gd-gauge circle { fill: none; stroke-width: 11; }
+    .v3-grader .gd-gauge .tr { stroke: rgba(255,255,255,0.1); }
+    .v3-grader .gd-gauge .arc { stroke: var(--gd-fair); stroke-linecap: round; stroke-dasharray: 327; stroke-dashoffset: 327; transition: stroke-dashoffset 1.3s var(--gd-ease) .15s; }
+    .v3-grader .gd-s4.is-on .gd-gauge .arc { stroke-dashoffset: var(--off); }
+    .v3-grader .gd-gauge > div { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; }
+    .v3-grader .gd-gauge b { font-size: 2.5rem; font-weight: 800; line-height: 1; letter-spacing: -0.05em; color: var(--text-head, #f6f0e6); font-variant-numeric: tabular-nums; }
+    .v3-grader .gd-gauge small { font-size: 0.75rem; color: rgba(246,240,230,0.56); }
+    .v3-grader .gd-grade { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--gd-fair); }
+    .v3-grader .gd-gradesub { margin-top: 4px; font-size: 0.875rem; line-height: 1.45; color: rgba(246,240,230,0.62); }
+    .v3-grader .gd-cats { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px; margin: 18px 0 0; padding: 0; }
+    .v3-grader .gd-cats li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 5px 8px; align-items: center; font-size: 0.8125rem; font-weight: 600; color: rgba(246,240,230,0.78); }
+    .v3-grader .gd-cats li span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .v3-grader .gd-cats li b { font-size: 0.875rem; font-weight: 800; color: var(--text-head, #f6f0e6); font-variant-numeric: tabular-nums; }
+    .v3-grader .gd-cats .gd-bar { height: 4px; }
+    .v3-grader .gd-fix { margin-top: auto; padding: 12px 14px; border-radius: 16px; background: rgba(255,255,255,0.05); }
+    .v3-grader .gd-fix span { display: block; font-size: 0.75rem; font-weight: 700; color: var(--gold, #E2A84D); }
+    .v3-grader .gd-fix strong { display: block; margin-top: 2px; font-size: 0.9375rem; font-weight: 650; line-height: 1.35; color: var(--text-head, #f6f0e6); }
+    /* without JS: show the finished score scene */
+    .v3-grader .gd-win:not(.gd-js) .gd-s4 { opacity: 1; transform: none; }
+    .v3-grader .gd-win:not(.gd-js) .gd-s4 .gd-in { opacity: 1; transform: none; }
+    .v3-grader .gd-win:not(.gd-js) .gd-s4 .gd-bar u { transform: scaleX(var(--v)); }
+    .v3-grader .gd-win:not(.gd-js) .gd-s4 .gd-gauge .arc { stroke-dashoffset: var(--off); }
+    .v3-grader .gd-win:not(.gd-js) .gd-seg i { transform: scaleX(1); }
+    .v3-grader .gv-demo figcaption { margin-top: 12px; text-align: center; font-size: 0.875rem; color: rgba(246,240,230,0.52); }
+    .v3-grader .gd-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+    /* narrow card (phones): tighter type, stacked score */
+    @container (max-width: 420px) {
+      .v3-grader .gd-stage { height: 456px; }
+      .v3-grader .gd-scene { padding: 16px 16px 18px; }
+      .v3-grader .gd-h { font-size: 1.25rem; }
+      .v3-grader .gd-sub { font-size: 0.875rem; }
+      .v3-grader .gd-field { height: 52px; font-size: 1rem; }
+      .v3-grader .gd-social { grid-template-columns: 128px minmax(0, 1fr); gap: 12px; }
+      .v3-grader .gd-pst { gap: 6px; }
+      .v3-grader .gd-pst b { font-size: 0.8125rem; }
+      .v3-grader .gd-av { width: 30px; height: 30px; font-size: 0.8125rem; }
+      .v3-grader .gd-checks li { font-size: 0.8125rem; padding: 7px 0; }
+      .v3-grader .gd-res { grid-template-columns: 104px minmax(0, 1fr); gap: 14px; }
+      .v3-grader .gd-gauge { width: 104px; height: 104px; }
+      .v3-grader .gd-gauge b { font-size: 2rem; }
+      .v3-grader .gd-cats { gap: 9px 14px; }
+      .v3-grader .gd-cats li { font-size: 0.75rem; }
+    }
+    /* the shared phone text floor (15.5 to 16px on every p and li) is for running
+       text; the demo is a scaled-down picture of the report, so restore its sizes */
+    @media (max-width: 700px) {
+      html[lang] body:not(#_) #v3-grader .gd-win :is(p, li) { line-height: 1.35; }
+      html[lang] body:not(#_) #v3-grader .gd-win .gd-h { font-size: 1.25rem; line-height: 1.15; }
+      html[lang] body:not(#_) #v3-grader .gd-win .gd-sub { font-size: 0.875rem; line-height: 1.45; }
+      html[lang] body:not(#_) #v3-grader .gd-win .gd-handle { font-size: 0.6875rem; }
+      html[lang] body:not(#_) #v3-grader .gd-win .gd-bio { font-size: 0.6875rem; }
+      html[lang] body:not(#_) #v3-grader .gd-win .gd-rows li { font-size: 1rem; }
+      html[lang] body:not(#_) #v3-grader .gd-win .gd-checks li { font-size: 0.8125rem; }
+      html[lang] body:not(#_) #v3-grader .gd-win .gd-gname { font-size: 1rem; }
+      html[lang] body:not(#_) #v3-grader .gd-win .gd-rate, html[lang] body:not(#_) #v3-grader .gd-win .gd-rank p { font-size: 0.875rem; }
+      html[lang] body:not(#_) #v3-grader .gd-win .gd-grade { font-size: 1.375rem; line-height: 1.1; }
+      html[lang] body:not(#_) #v3-grader .gd-win .gd-gradesub { font-size: 0.8125rem; }
+      html[lang] body:not(#_) #v3-grader .gd-win .gd-cats li { font-size: 0.75rem; }
+      html[lang] body:not(#_) #v3-grader .gv-demo figcaption { font-size: 0.8125rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .v3-grader .gd-scene, .v3-grader .gd-in, .v3-grader .gd-rows li, .v3-grader .gd-checks li, .v3-grader .gd-phone, .v3-grader .gd-bar u, .v3-grader .gd-cmp u, .v3-grader .gd-dotsrow i, .v3-grader .gd-gauge .arc, .v3-grader .gd-stars::after { transition: none !important; animation: none !important; }
+      .v3-grader .gd-caret { animation: none; }
     }
   </style>
   <!-- Calendly assets load lazily (see the script at the end of the body) -->
@@ -520,30 +685,80 @@
           </a>
         </div>
 
-        <figure class="gv-sample">
-          <div class="gv-card">
-            <div class="gv-card-top">
-              <div class="gv-card-biz">
-                <span class="gv-card-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5 5 4h14l1.5 5.5"/><path d="M4.5 10.5V20h15v-9.5"/><path d="M3.5 9.5a2.8 2.8 0 0 0 5.6 0 2.8 2.8 0 0 0 5.8 0 2.8 2.8 0 0 0 5.6 0"/><path d="M10 20v-5h4v5"/></svg></span>
-                <div><b>Your restaurant</b><small>Report card</small></div>
-              </div>
-              <span class="gv-tag">Sample report</span>
-            </div>
-            <div class="gv-score">
-              <b>37</b>
-              <span><strong>out of 100</strong>You rank 6th of 9 restaurants nearby</span>
-            </div>
-            <ul class="gv-cats">
-              <li><span>Photos &amp; visual appeal</span><i style="--v:35" aria-hidden="true"></i><b>35</b></li>
-              <li><span>Google presence &amp; reviews</span><i style="--v:62" aria-hidden="true"></i><b>62</b></li>
-              <li><span>Mobile experience</span><i style="--v:24" aria-hidden="true"></i><b>24</b></li>
-              <li><span>Ordering &amp; booking</span><i style="--v:30" aria-hidden="true"></i><b>30</b></li>
-              <li><span>Social media</span><i style="--v:41" aria-hidden="true"></i><b>41</b></li>
-              <li><span>Getting found (SEO)</span><i style="--v:28" aria-hidden="true"></i><b>28</b></li>
+        <figure class="gv-demo" aria-labelledby="gd-cap">
+          <div class="gd-win" data-gd data-dec=".">
+            <p class="gd-sr">Example of how the grader works: you type your restaurant's name; it checks your website's speed on a phone, the Google search basics and what AI assistants can read; grades your Instagram and TikTok; checks your Google listing and how you rank nearby; then gives you a score out of 100 and the first thing to fix.</p>
+            <div aria-hidden="true">
+            <div class="gd-top"><span class="gd-dots"><i></i><i></i><i></i></span><span class="gd-label">Your report card</span><span class="gd-chip">Example</span></div>
+            <div class="gd-segs"><span class="gd-seg"><i></i></span><span class="gd-seg"><i></i></span><span class="gd-seg"><i></i></span><span class="gd-seg"><i></i></span><span class="gd-seg"><i></i></span></div>
+            <div class="gd-stage">
+          <section class="gd-scene gd-s0" data-label="Find your restaurant" data-dur="4300">
+            <p class="gd-h">Type your restaurant's name</p>
+            <p class="gd-sub">We find your Google listing, website and social pages from there.</p>
+            <div class="gd-field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><span class="gd-typed" data-text="June&rsquo;s Burger Joint"></span><span class="gd-caret"></span></div>
+            <div class="gd-ac gd-in"><div class="gd-ac-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12s-8-7-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><div><b>June&rsquo;s Burger Joint</b><small>58 Main St, Miami, FL</small></div></div></div>
+            <div class="gd-go">Get my AI report <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+          </section>
+          <section class="gd-scene gd-s1" data-label="Checking your website" data-dur="4700">
+            <p class="gd-h">Checking your website</p>
+            <span class="gd-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20"/></svg> junesburgerjoint.com</span>
+            <div class="gd-site"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span class="gd-scan"></span></div>
+            <ul class="gd-rows">
+              <li class="--poor"><span>Speed on a phone<small>Google PageSpeed</small></span><b data-to="41">41</b><i class="gd-bar"><u style="--v:.41"></u></i></li>
+              <li class="--fair"><span>Getting found on Google<small>Headline, description, photo text</small></span><b data-to="63">63</b><i class="gd-bar"><u style="--v:.63"></u></i></li>
+              <li><span>AI review of your site<small>Menu, photos, design</small></span><em class="gd-tag --warn">Menu hard to find</em></li>
+              <li><span>Ready for AI search<small>Hours, address, FAQ</small></span><em class="gd-tag --warn">No FAQ yet</em></li>
             </ul>
-            <div class="gv-fix"><span>Fix this first</span><strong>Show your menu and prices on your homepage</strong></div>
+          </section>
+          <section class="gd-scene gd-s2" data-label="Grading your social media" data-dur="5300">
+            <p class="gd-h">Grading your social media</p>
+            <div class="gd-social">
+              <div class="gd-phone">
+                <div class="gd-notch"></div>
+                <div class="gd-prof"><span class="gd-av">J</span><div class="gd-pst"><div><b data-to="212">212</b><small>posts</small></div><div><b data-to="3400" data-fmt="k">3.4K</b><small>followers</small></div></div></div>
+                <p class="gd-handle">@junesburgerjoint</p>
+                <p class="gd-bio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12s-8-7-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Miami, FL</p>
+                <div class="gd-grid"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              </div>
+              <ul class="gd-checks">
+                <li><span class="gd-ic --ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Location in your bio</span></li>
+                <li><span class="gd-ic --no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span><span>Order or menu link in bio</span></li>
+                <li><span class="gd-ic --warn">!</span><span>Last post 12 days ago</span></li>
+                <li><span class="gd-ic --info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span><span>TikTok<small>1.2K followers, 8.4K likes</small></span></li>
+                <li><span class="gd-ic --info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M6 20V10M12 20V4M18 20v-6"/></svg></span><span style="flex:1;min-width:0">Followers vs nearby spots<span class="gd-cmp"><span class="r --you"><span>You</span><span>3.4K</span><i><u style="--v:.28"></u></i></span><span class="r"><span>Top nearby</span><span>12K</span><i><u style="--v:1"></u></i></span></span></span></li>
+              </ul>
+            </div>
+          </section>
+          <section class="gd-scene gd-s3" data-label="Checking your Google listing" data-dur="4300">
+            <p class="gd-h">Checking your Google listing</p>
+            <div class="gd-gcard"><p class="gd-gname">June&rsquo;s Burger Joint</p><p class="gd-rate"><b data-to="3.9" data-fmt="d1">3.9</b><span class="gd-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span>34 reviews</span></p></div>
+            <div class="gd-rank"><p>You rank <b>6th</b> of 9 burger spots nearby</p><div class="gd-dotsrow"><i></i><i></i><i></i><i></i><i></i><i class="--you"></i><i></i><i></i><i></i></div></div>
+            <ul class="gd-checks">
+            <li><span class="gd-ic --warn">!</span><span>Fewer than 50 reviews</span></li>
+            <li><span class="gd-ic --warn">!</span><span>8 photos on your listing (aim for 10+)</span></li>
+            <li><span class="gd-ic --ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Opening hours are on Google</span></li>
+            </ul>
+          </section>
+          <section class="gd-scene gd-s4" data-label="Your report card" data-dur="5800">
+            <p class="gd-h">Your report card</p>
+            <div class="gd-res">
+              <div class="gd-gauge" style="--off:150.3"><svg viewBox="0 0 120 120"><circle class="tr" cx="60" cy="60" r="52"/><circle class="arc" cx="60" cy="60" r="52"/></svg><div><b data-to="54">54</b><small>of 100</small></div></div>
+              <div><p class="gd-grade">Fair</p><p class="gd-gradesub">You rank 6th of 9 nearby. Here's what to fix first.</p></div>
+            </div>
+            <ul class="gd-cats">
+            <li class="--fair"><span>Photos & visual appeal</span><b data-to="62">62</b><i class="gd-bar"><u style="--v:0.62"></u></i></li>
+            <li class="--fair"><span>Google presence & reviews</span><b data-to="55">55</b><i class="gd-bar"><u style="--v:0.55"></u></i></li>
+            <li class="--poor"><span>Mobile experience</span><b data-to="48">48</b><i class="gd-bar"><u style="--v:0.48"></u></i></li>
+            <li class="--poor"><span>Ordering & booking</span><b data-to="44">44</b><i class="gd-bar"><u style="--v:0.44"></u></i></li>
+            <li class="--fair"><span>Social media</span><b data-to="52">52</b><i class="gd-bar"><u style="--v:0.52"></u></i></li>
+            <li class="--fair"><span>Getting found (SEO)</span><b data-to="63">63</b><i class="gd-bar"><u style="--v:0.63"></u></i></li>
+            </ul>
+            <div class="gd-fix gd-in"><span>Fix this first</span><strong>Show your menu and prices on your homepage</strong></div>
+          </section>
+            </div>
+            </div>
           </div>
-          <figcaption>Example scores. Your report uses your restaurant&rsquo;s real data.</figcaption>
+          <figcaption id="gd-cap">Example restaurant. Your report uses your restaurant&rsquo;s real data.</figcaption>
         </figure>
       </div>
     </section>
@@ -982,6 +1197,118 @@
         }
       });
     })();
+  </script>
+  <script>
+  /* Hero walkthrough of the grader: five short scenes in a loop (type a name,
+     website checks, social, Google, the score). Runs only while on screen;
+     reduced motion shows the finished score scene. Numbers are an example. */
+  (function () {
+    var win = document.querySelector("[data-gd]");
+    if (!win) return;
+    win.classList.add("gd-js");
+    var scenes = [].slice.call(win.querySelectorAll(".gd-scene"));
+    var segs = [].slice.call(win.querySelectorAll(".gd-seg i"));
+    var label = win.querySelector(".gd-label");
+    var dec = win.getAttribute("data-dec") || ".";
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var timers = [], frames = [], cur = 0, playing = false, onScreen = false;
+
+    function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+    function stop() {
+      timers.forEach(clearTimeout); timers = [];
+      frames.forEach(cancelAnimationFrame); frames = [];
+      playing = false;
+    }
+    function fmt(v, f) {
+      if (f === "k") return (v >= 1000 ? (Math.round(v / 100) / 10).toFixed(1).replace(/\.0$/, "") + "K" : String(Math.round(v))).replace(".", dec);
+      if (f === "d1") return v.toFixed(1).replace(".", dec);
+      return String(Math.round(v));
+    }
+    function count(el, ms) {
+      if (!el) return;
+      var to = parseFloat(el.getAttribute("data-to")), f = el.getAttribute("data-fmt"), t0 = null;
+      if (reduce || !ms) { el.textContent = fmt(to, f); return; }
+      function step(t) {
+        if (t0 === null) t0 = t;
+        var p = Math.min(1, (t - t0) / ms), e = 1 - Math.pow(1 - p, 3);
+        el.textContent = fmt(to * e, f);
+        if (p < 1) frames.push(requestAnimationFrame(step));
+      }
+      frames.push(requestAnimationFrame(step));
+    }
+    function reset(s) {
+      [].forEach.call(s.querySelectorAll(".in"), function (n) { n.classList.remove("in"); });
+      [].forEach.call(s.querySelectorAll("[data-to]"), function (n) { n.textContent = fmt(0, n.getAttribute("data-fmt")); });
+      var typed = s.querySelector(".gd-typed"); if (typed) typed.textContent = "";
+      var ac = s.querySelector(".gd-ac"); if (ac) ac.classList.remove("hl");
+      var go = s.querySelector(".gd-go"); if (go) go.classList.remove("press");
+    }
+    function stagger(list, start, gap, also) {
+      [].forEach.call(list, function (n, i) {
+        later(function () { n.classList.add("in"); if (also) also(n); }, start + i * gap);
+      });
+    }
+    var SCENES = [
+      function (s) { // type the restaurant name, pick it, press the button
+        var typed = s.querySelector(".gd-typed"), text = typed.getAttribute("data-text");
+        var ac = s.querySelector(".gd-ac"), go = s.querySelector(".gd-go");
+        for (var k = 1; k <= text.length; k++) (function (k) { later(function () { typed.textContent = text.slice(0, k); }, 450 + k * 70); })(k);
+        var t = 450 + text.length * 70;
+        later(function () { ac.classList.add("in"); }, t + 250);
+        later(function () { ac.classList.add("hl"); }, t + 900);
+        later(function () { go.classList.add("press"); }, t + 1450);
+        later(function () { go.classList.remove("press"); }, t + 1650);
+      },
+      function (s) { // website checks
+        stagger(s.querySelectorAll(".gd-rows li"), 500, 560, function (n) { count(n.querySelector("[data-to]"), 900); });
+      },
+      function (s) { // social: profile numbers, then the checks
+        later(function () { [].forEach.call(s.querySelectorAll(".gd-pst [data-to]"), function (c) { count(c, 1100); }); }, 350);
+        stagger(s.querySelectorAll(".gd-checks li"), 750, 560);
+      },
+      function (s) { // Google listing
+        later(function () { count(s.querySelector(".gd-rate [data-to]"), 900); }, 250);
+        stagger(s.querySelectorAll(".gd-dotsrow i"), 500, 90);
+        stagger(s.querySelectorAll(".gd-checks li"), 1500, 450);
+      },
+      function (s) { // the score
+        later(function () { count(s.querySelector(".gd-gauge [data-to]"), 1300); }, 150);
+        stagger(s.querySelectorAll(".gd-cats li"), 700, 160, function (n) { count(n.querySelector("[data-to]"), 800); });
+        later(function () { s.querySelector(".gd-fix").classList.add("in"); }, 1900);
+      }
+    ];
+    function show(i) {
+      cur = i;
+      var s = scenes[i];
+      reset(s);
+      scenes.forEach(function (n, j) { n.classList.toggle("is-on", j === i); });
+      label.classList.add("swap");
+      later(function () { label.textContent = s.getAttribute("data-label"); label.classList.remove("swap"); }, 220);
+      var dur = parseInt(s.getAttribute("data-dur"), 10) || 4000;
+      segs.forEach(function (g, j) { g.style.transition = "none"; g.style.transform = j < i ? "scaleX(1)" : "scaleX(0)"; });
+      var g = segs[i]; void g.offsetWidth;
+      g.style.transition = "transform " + dur + "ms linear"; g.style.transform = "scaleX(1)";
+      SCENES[i](s);
+      later(function () { show((i + 1) % scenes.length); }, dur);
+    }
+    function play() { if (playing || reduce) return; playing = true; show(cur); }
+
+    if (reduce) {
+      var last = scenes.length - 1, s = scenes[last];
+      scenes.forEach(function (n, j) { n.classList.toggle("is-on", j === last); });
+      label.textContent = s.getAttribute("data-label");
+      segs.forEach(function (g) { g.style.transform = "scaleX(1)"; });
+      [].forEach.call(s.querySelectorAll(".gd-cats li, .gd-fix"), function (n) { n.classList.add("in"); });
+      [].forEach.call(s.querySelectorAll("[data-to]"), function (c) { count(c, 0); });
+      return;
+    }
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) { onScreen = e.isIntersecting; if (onScreen && !document.hidden) play(); else stop(); });
+      }, { threshold: 0.25 }).observe(win);
+    } else { onScreen = true; play(); }
+    document.addEventListener("visibilitychange", function () { if (document.hidden) stop(); else if (onScreen) play(); });
+  })();
   </script>
   <script defer src="shared.js?v=site-fixes-1"></script>
 </body>

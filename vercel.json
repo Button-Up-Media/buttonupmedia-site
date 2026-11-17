@@ -161,9 +161,52 @@
           "value": "SAMEORIGIN"
         }
       ]
+    },
+    {
+      "source": "/thank-you",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
+    },
+    {
+      "source": "/es/gracias",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, follow"
+        }
+      ]
     }
   ],
   "redirects": [
+    {
+      "source": "/thank-you/",
+      "destination": "/thank-you",
+      "permanent": true
+    },
+    {
+      "source": "/thank-you.html",
+      "destination": "/thank-you",
+      "permanent": true
+    },
+    {
+      "source": "/thank-you-es.html",
+      "destination": "/es/gracias",
+      "permanent": true
+    },
+    {
+      "source": "/thank-you-es",
+      "destination": "/es/gracias",
+      "permanent": true
+    },
+    {
+      "source": "/es/gracias/",
+      "destination": "/es/gracias",
+      "permanent": true
+    },
     {
       "source": "/:path*",
       "has": [
@@ -598,16 +641,6 @@
     {
       "source": "/contact-es.html",
       "destination": "/es/contacto",
-      "permanent": true
-    },
-    {
-      "source": "/thank-you",
-      "destination": "/contact",
-      "permanent": true
-    },
-    {
-      "source": "/thank-you/",
-      "destination": "/contact",
       "permanent": true
     },
     {
@@ -1125,6 +1158,14 @@
     {
       "source": "/data-privacy",
       "destination": "/privacy.html"
+    },
+    {
+      "source": "/thank-you",
+      "destination": "/thank-you.html"
+    },
+    {
+      "source": "/es/gracias",
+      "destination": "/thank-you-es.html"
     }
   ],
   "functions": {

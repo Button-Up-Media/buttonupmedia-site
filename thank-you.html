@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      var key = "bum-cookie-consent-v1";
+      var consent = {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: "denied",
+        functionality_storage: "granted",
+        personalization_storage: "denied",
+        security_storage: "granted",
+        wait_for_update: 500
+      };
+      try {
+        var saved = localStorage.getItem(key);
+        if (saved) {
+          var parsed = JSON.parse(saved);
+          if (parsed && parsed.analytics) consent.analytics_storage = "granted";
+          if (parsed && parsed.marketing && !(navigator && navigator.globalPrivacyControl)) {
+            consent.ad_storage = "granted";
+            consent.ad_user_data = "granted";
+            consent.ad_personalization = "granted";
+            consent.personalization_storage = "granted";
+          }
+        }
+      } catch (err) {}
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+      window.gtag("consent", "default", consent);
+    })();
+  </script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-WR9TZHT');</script>
+  <!-- End Google Tag Manager -->
+  <title>Thanks for booking | Button Up Media</title>
+  <meta name="description" content="Your free 30-minute call with Juan from Button Up Media is booked. Here is what happens next." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg" />
+  <link rel="canonical" href="https://www.buttonupmedia.com/thank-you" />
+  <link rel="alternate" hreflang="en" href="https://www.buttonupmedia.com/thank-you" />
+  <link rel="alternate" hreflang="es" href="https://www.buttonupmedia.com/es/gracias" />
+  <meta name="theme-color" content="#0b0b0c" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Thanks for booking | Button Up Media" />
+  <meta property="og:description" content="Your free 30-minute call with Juan from Button Up Media is booked. Here is what happens next." />
+  <meta property="og:url" content="https://www.buttonupmedia.com/thank-you" />
+  <meta property="og:image" content="https://www.buttonupmedia.com/media/founders-duo.webp" />
+  <script>
+    // A booking made on calendly.com lands here; send Spanish-speaking visitors to the Spanish page.
+    (function () { try { if (localStorage.getItem("bum-lang") === "es" && !/[?&]lang=en\b/.test(location.search)) location.replace("/es/gracias"); } catch (e) {} })();
+  </script>
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
+  <script defer src="https://unpkg.com/lucide@1.17.0/dist/umd/lucide.min.js"></script>
+  <link rel="stylesheet" href="shared.css?v=site-fixes-1" />
+  <style>
+    /* Thank-you page (after a Calendly booking). v3 look; v3.css loads after this. */
+    .v3-thanks { padding: calc(var(--v3-bar-h, 64px) + clamp(48px, 8vw, 96px)) 0 0; }
+    .v3-thanks .ty-wrap { width: min(calc(100% - 40px), 760px); margin: 0 auto; }
+    .v3-thanks .ty-hero { text-align: center; }
+    .v3-thanks .ty-done { width: 64px; height: 64px; margin: 0 auto; border-radius: 50%; display: grid; place-items: center; background: var(--gold, #E2A84D); color: #140e04; animation: tyPop .5s cubic-bezier(.34,1.4,.64,1) both; }
+    .v3-thanks .ty-done svg { width: 30px; height: 30px; }
+    @keyframes tyPop { from { transform: scale(.6); opacity: 0; } to { transform: none; opacity: 1; } }
+    .v3-thanks .ty-kicker { margin-top: 22px; font-size: 0.9375rem; font-weight: 600; color: var(--gold, #E2A84D); }
+    .v3-thanks h1 { margin-top: 10px; font-size: clamp(2.2rem, 5.4vw, 3.6rem); line-height: 1.04; font-weight: 800; letter-spacing: -0.05em; color: #f6f0e6; text-wrap: balance; }
+    .v3-thanks .ty-lede { margin: 18px auto 0; max-width: 56ch; font-size: clamp(1.0625rem, 1.4vw, 1.1875rem); line-height: 1.6; color: rgba(246,240,230,0.74); }
+    .v3-thanks .ty-back { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; margin-top: 22px; padding: 0 20px; border-radius: 999px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #f6f0e6; font-weight: 650; text-decoration: none; }
+    .v3-thanks .ty-back[hidden] { display: none; }
+    .v3-thanks .ty-back svg { width: 18px; height: 18px; transform: rotate(180deg); }
+    .v3-thanks .ty-sec { margin-top: clamp(56px, 8vw, 88px); }
+    .v3-thanks .ty-sec h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); line-height: 1.1; font-weight: 800; letter-spacing: -0.04em; color: #f6f0e6; }
+    .v3-thanks .ty-steps { list-style: none; margin: 18px 0 0; padding: 0; border-top: 1px solid rgba(255,255,255,0.08); counter-reset: ty; }
+    .v3-thanks .ty-steps li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,0.08); counter-increment: ty; }
+    .v3-thanks .ty-steps li::before { content: "0" counter(ty); padding-top: 3px; font-size: 0.875rem; font-weight: 700; color: var(--gold, #E2A84D); font-variant-numeric: tabular-nums; }
+    .v3-thanks .ty-steps h3 { font-size: 1.1875rem; font-weight: 750; letter-spacing: -0.02em; color: #f6f0e6; }
+    .v3-thanks .ty-steps p { margin-top: 6px; font-size: 1.0625rem; line-height: 1.6; color: rgba(246,240,230,0.72); }
+    .v3-thanks .ty-steps a, .v3-thanks .ty-note a { color: #f6f0e6; font-weight: 650; text-decoration: none; border-bottom: 1px solid rgba(246,240,230,0.35); }
+    .v3-thanks .ty-steps a:hover, .v3-thanks .ty-note a:hover { color: var(--gold, #E2A84D); border-bottom-color: var(--gold, #E2A84D); }
+    .v3-thanks .ty-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
+    .v3-thanks .ty-links a { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 64px; padding: 16px 20px; border-radius: 22px; background: #141416; border: 1px solid rgba(255,255,255,0.08); color: #f6f0e6; font-weight: 650; font-size: 1.0625rem; text-decoration: none; transition: border-color .2s, transform .18s; }
+    .v3-thanks .ty-links a svg { width: 18px; height: 18px; flex: none; color: var(--gold, #E2A84D); transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+    .v3-thanks .ty-links a:hover { border-color: rgba(255,255,255,0.2); }
+    .v3-thanks .ty-links a:hover svg { transform: translateX(3px); }
+    .v3-thanks .ty-links a:active { transform: scale(.98); }
+    .v3-thanks .ty-note { margin-top: 22px; font-size: 1rem; line-height: 1.6; color: rgba(246,240,230,0.66); }
+    .v3-thanks .ty-lang { margin-top: 28px; text-align: center; font-size: 0.9375rem; }
+    .v3-thanks .ty-lang a { color: rgba(246,240,230,0.66); text-decoration: underline; text-underline-offset: 3px; }
+    .v3-thanks .ty-foot { margin-top: clamp(72px, 10vw, 120px); }
+    @media (max-width: 560px) {
+      .v3-thanks .ty-wrap { width: calc(100% - 32px); }
+      .v3-thanks .ty-links { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) { .v3-thanks .ty-done { animation: none; } }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WR9TZHT"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <nav class="lib-nav" data-shared-animations="off">
+    <a class="lib-nav-brand" href="/" aria-label="Button Up Media home">
+      <img src="images/full-logo.svg" alt="Button Up Media" width="145" height="45" />
+    </a>
+    <div class="lib-nav-links">
+      <details class="lib-nav-dropdown">
+        <summary class="lib-nav-dropdown-trigger">
+          Services
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="lib-nav-dropdown-menu" role="menu" aria-label="Services">
+          <div class="lib-desktop-services">
+            <a href="/socialmediamarketing">Social Media Marketing</a>
+            <a href="/restaurant-advertising">Paid Media</a>
+            <a href="/restaurant-website-design">Website</a>
+            <a href="/restaurant-seo">SEO &amp; AEO</a>
+          </div>
+          <details class="lib-mobile-services lib-mobile-menu-only">
+            <summary class="lib-mobile-services-trigger">
+              Services
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="lib-mobile-services-menu" role="menu" aria-label="Services">
+              <a href="/socialmediamarketing">Social Media Marketing</a>
+              <a href="/restaurant-advertising">Paid Media</a>
+              <a href="/restaurant-website-design">Website</a>
+              <a href="/restaurant-seo">SEO &amp; AEO</a>
+            </div>
+          </details>
+          <a href="/social-media-website-grader" class="lib-mobile-menu-only lib-mobile-action --grader" target="_blank" rel="noopener" aria-label="Free Social &amp; Website Grader (opens in a new tab)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Free Social &amp; Website Grader</a>
+          <a href="/case-studies" class="lib-mobile-menu-only lib-mobile-action --ghost">Case Studies</a>
+          <a href="/about" class="lib-mobile-menu-only lib-mobile-action --ghost">About</a>
+          <a href="tel:+17867409499" class="lib-mobile-menu-only lib-mobile-action --ghost">Call Us</a>
+          <a href="/contact" class="lib-mobile-menu-only lib-mobile-action --primary">Book Free Strategy Call</a>
+        </div>
+      </details>
+      <a href="/case-studies">Case Studies</a>
+      <a href="/about">About</a>
+      <a href="/social-media-website-grader" class="lib-nav-grader" target="_blank" rel="noopener" aria-label="Social &amp; Web Grader (opens in a new tab)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Social &amp; Web Grader</a>
+      <a class="lib-nav-phone" href="tel:+17867409499">Call Us</a>
+      <a href="/contact" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Book Free Strategy Call</a>
+    </div>
+  </nav>
+
+  <main class="page v3-thanks" id="v3-thanks">
+    <div class="ty-wrap">
+      <section class="ty-hero">
+        <div class="ty-done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <p class="ty-kicker">You're booked</p>
+        <h1>Thanks, your call with Juan is booked</h1>
+        <p class="ty-lede">You'll get a confirmation email from Calendly with the time and how to join. If you chose Google Meet, the link is in that email. If you chose a phone call, Juan will call the number you gave.</p>
+        <a class="ty-back" id="ty-back" href="#" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg> Back to your report card</a>
+      </section>
+
+      <section class="ty-sec" aria-labelledby="ty-next">
+        <h2 id="ty-next">What happens next</h2>
+        <ol class="ty-steps">
+          <li><div><h3>Check your email</h3><p>The confirmation has the time, the Google Meet link or the call details, and a link to reschedule if something comes up.</p></div></li>
+          <li><div><h3>Before the call (optional)</h3><p>Run your restaurant through our free grader so you both have your scores in front of you. <a href="/social-media-website-grader">Get your free report card</a>.</p></div></li>
+          <li><div><h3>On the call</h3><p>In 30 minutes, Juan, our co-founder, goes through your Google Business Profile, website and social media with you and tells you what he would work on first. There's no pressure and no long-term contracts.</p></div></li>
+        </ol>
+      </section>
+
+      <section class="ty-sec" aria-labelledby="ty-wait">
+        <h2 id="ty-wait">While you wait</h2>
+        <div class="ty-links">
+          <a href="/case-studies">See our client results <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <a href="/blog">Read restaurant marketing tips <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </div>
+        <p class="ty-note">Need to change something? Use the link in your confirmation email, or call us at <a href="tel:+17867409499">(786) 740-9499</a>.</p>
+        <p class="ty-lang"><a href="/es/gracias">Ver esta página en español</a></p>
+      </section>
+    </div>
+
+    <div class="ty-foot">
+    <footer class="lib-section footer-demo">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <strong style="font-family: var(--font-display); font-size: 1rem;">Button Up Media</strong>
+          <p>Button Up Media is a restaurant marketing agency headquartered in Miami. We help restaurants grow with social media, websites, SEO and AEO, and advertising.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="/socialmediamarketing">Social Media Marketing</a>
+          <a href="/restaurant-advertising">Paid Media</a>
+          <a href="/restaurant-website-design">Website</a>
+          <a href="/restaurant-seo">SEO &amp; AEO</a>
+        </div>
+        <div class="footer-col">
+          <h4>Areas We Serve</h4>
+          <a href="/restaurant-marketing-miami-beach">Miami Beach</a>
+          <a href="/restaurant-marketing-brickell">Brickell &amp; Downtown</a>
+          <a href="/restaurant-marketing-wynwood">Wynwood</a>
+          <a href="/restaurant-marketing-coral-gables">Coral Gables</a>
+          <a href="/restaurant-marketing-kendall-pinecrest">Kendall &amp; Pinecrest</a>
+          <a href="/restaurant-marketing-doral">Doral</a>
+          <a href="/restaurant-marketing-fort-lauderdale">Fort Lauderdale</a>
+          <a href="/areas-we-serve">All areas</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="/blog">Blog</a>
+          <a href="/social-media-website-grader">Free Social &amp; Website Grader</a>
+          <a href="/">Home</a>
+          <a href="/case-studies">Case Studies</a>
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+          <a href="/contact">Free Strategy Call</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Button Up Media. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="mailto:contact@buttonupmedia.com">contact@buttonupmedia.com</a>
+          <a href="tel:+17867409499">(786) 740-9499</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
+    </div>
+  </main>
+
+  <script>
+    // Coming from a grader report: offer the way back to it.
+    (function () { try { var u = sessionStorage.getItem("bum-last-report"); var a = document.getElementById("ty-back"); if (u && a && /^https?:\/\/[^/]*buttonupmedia|^https?:\/\/localhost|vercel\.app/.test(u)) { a.href = u; a.hidden = false; } } catch (e) {} })();
+  </script>
+  <script src="shared.js?v=site-fixes-1" defer></script>
+</body>
+</html>
