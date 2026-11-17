@@ -61,23 +61,22 @@
         "h3": "Las cinco cuentas juntas, 2025",
         "items": [
           {
+            "value": "$1.1M",
+            "label": "Valor de conversiones medido"
+          },
+          {
+            "value": "2,600+",
+            "label": "Conversiones medidas (reservaciones, llamadas y solicitudes de eventos)"
+          },
+          {
+            "value": "24:1",
+            "label": "ROAS combinado"
+          },
+          {
             "value": "Menos de $46K",
             "label": "Inversión total en anuncios"
-          },
-          {
-            "value": "45,000+",
-            "label": "Reservaciones"
-          },
-          {
-            "value": "$8",
-            "label": "Costo promedio por reservación"
-          },
-          {
-            "value": "$3.5M",
-            "label": "En ingresos generados"
           }
-        ],
-        "reviewNote": "these portfolio totals do not reconcile with the five accounts above (together they add up to 2,619 conversions and about $1.1M in conversion value; under $46K of spend at $8 per booking would be about 5,750 bookings, not 45,000+). Confirm how 45,000+, $8 and $3.5M are counted before launch."
+        ]
       },
       "disclaimer": "Las cifras provienen de cuentas de anuncios de restaurantes que manejamos en 2025. Los resultados individuales varían y el rendimiento pasado no garantiza resultados futuros."
     },

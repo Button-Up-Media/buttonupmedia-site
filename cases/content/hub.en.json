@@ -61,23 +61,22 @@
         "h3": "All five accounts together, 2025",
         "items": [
           {
+            "value": "$1.1M",
+            "label": "Tracked conversion value"
+          },
+          {
+            "value": "2,600+",
+            "label": "Tracked conversions (reservations, calls and event inquiries)"
+          },
+          {
+            "value": "24:1",
+            "label": "Blended ROAS"
+          },
+          {
             "value": "Under $46K",
             "label": "Total ad spend"
-          },
-          {
-            "value": "45,000+",
-            "label": "Reservations"
-          },
-          {
-            "value": "$8",
-            "label": "Average cost per booking"
-          },
-          {
-            "value": "$3.5M",
-            "label": "Revenue generated"
           }
-        ],
-        "reviewNote": "these portfolio totals do not reconcile with the five accounts above (together they add up to 2,619 conversions and about $1.1M in conversion value; under $46K of spend at $8 per booking would be about 5,750 bookings, not 45,000+). Confirm how 45,000+, $8 and $3.5M are counted before launch."
+        ]
       },
       "disclaimer": "Figures are from restaurant ad accounts we managed in 2025. Individual results vary, and past performance does not guarantee future results."
     },
