@@ -79,7 +79,7 @@
         "email": "contact@buttonupmedia.com",
         "telephone": "+17867409499",
         "address": { "@type": "PostalAddress", "addressLocality": "Miami", "addressRegion": "FL", "addressCountry": "US" },
-        "description": "Button Up Media es una agencia de marketing para restaurantes en Florida que ayuda a los restaurantes a generar reservas, pedidos en línea, solicitudes de eventos privados y más clientes con contenido para redes sociales, diseño web, SEO y Google Ads.",
+        "description": "Button Up Media es una agencia de marketing para restaurantes con sede en Miami, Florida. Ayuda a restaurantes, bares y cafés a conseguir más reservas, pedidos en línea, solicitudes de eventos y clientes con contenido para redes sociales, páginas web, SEO y AEO, y anuncios en Google y Meta.",
         "slogan": "Marketing para restaurantes que llena mesas.",
         "priceRange": "$$",
         "contactPoint": {
@@ -101,16 +101,17 @@
         ],
         "hasMap": "https://www.google.com/maps?cid=18420049328774985259",
         "areaServed": [
-          { "@type": "State", "name": "Florida" },
-          { "@type": "City", "name": "Doral" },
+          { "@type": "Country", "name": "United States" },
           { "@type": "City", "name": "Miami" },
+          { "@type": "City", "name": "Miami Beach" },
+          { "@type": "City", "name": "Doral" },
           { "@type": "City", "name": "Coral Gables" },
-          { "@type": "City", "name": "Brickell" },
+          { "@type": "Place", "name": "Brickell" },
+          { "@type": "Place", "name": "Wynwood" },
+          { "@type": "Place", "name": "Kendall" },
+          { "@type": "City", "name": "Pinecrest" },
           { "@type": "City", "name": "Fort Lauderdale" },
-          { "@type": "City", "name": "Hollywood" },
-          { "@type": "City", "name": "Boca Raton" },
-          { "@type": "City", "name": "Delray Beach" },
-          { "@type": "City", "name": "West Palm Beach" }
+          { "@type": "City", "name": "Tampa" }
         ],
         "knowsAbout": [
           "restaurant marketing",
@@ -154,6 +155,65 @@
           { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.buttonupmedia.com/" },
           { "@type": "ListItem", "position": 2, "name": "Contacto", "item": "https://www.buttonupmedia.com/es/contacto" }
         ]
+      }
+    ]
+  }
+  </script>
+  <!-- FAQPage JSON-LD: mismas preguntas y respuestas que la sección visible -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": "https://www.buttonupmedia.com/es/contacto#preguntas",
+    "inLanguage": "es",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Qué pasa en la llamada de estrategia gratis?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nos cuentas de tu restaurante y de qué quieres más, y repasamos cómo está tu marketing hoy y qué haríamos primero. Te llevas un plan claro, y es tuyo, trabajes con nosotros o no."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Con quién voy a hablar en la llamada?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Vas a hablar con Juan, uno de los dos cofundadores de Button Up Media. Él atiende personalmente cada llamada de estrategia y también es el contacto principal de nuestros clientes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cuánto dura la llamada?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "La llamada dura 30 minutos. Es gratis y puedes agendarla en cualquier horario disponible del calendario de esta página."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Trabajan con restaurantes fuera de Miami?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. Tenemos sede en Miami, nuestro propio equipo cubre el Sur de Florida y tenemos miembros del equipo locales en varios otros estados. Fuera del Sur de Florida, nuestro equipo de Miami planifica y maneja tus redes sociales, y las fotos y videos los graba nuestra red de videógrafos y fotógrafos con experiencia en tu zona. Google Ads, los anuncios de Meta, los sitios web y el SEO / AEO se hacen a distancia, así que podemos hacer ese trabajo para restaurantes en cualquier parte de Estados Unidos."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Solo trabajan con restaurantes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí, solo trabajamos con restaurantes, bares y cafeterías. Ese ha sido nuestro enfoque desde que empezamos en 2022."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Podemos hablar en español?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. Trabajamos en español e inglés, así que toda la llamada puede ser en español, y cada página web que construimos está en los dos idiomas."
+        }
       }
     ]
   }
@@ -257,6 +317,17 @@
     .v3-contact .bum-review__by strong { font-size: 1rem; }
     .v3-contact .bum-review__src { grid-column: 2; grid-row: 1 / span 3; align-self: center; margin: 0; padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,0.06); font-size: 0.8125rem; font-weight: 600; color: rgba(246,240,230,0.72); }
 
+    /* FAQ: the homepage's native details list (.hp2-faq-*), scoped to contact */
+    .v3-contact .cv-faq .hp2-faq-list { max-width: 840px; margin-top: 36px; border-top: 1px solid var(--v3-hair); }
+    .v3-contact .hp2-faq-item { border-bottom: 1px solid var(--v3-hair); }
+    .v3-contact .hp2-faq-item summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 68px; padding: 18px 2px; cursor: pointer; font-size: clamp(1.0625rem, 1.4vw, 1.1875rem); font-weight: 700; line-height: 1.35; letter-spacing: -0.015em; color: var(--text-head); }
+    .v3-contact .hp2-faq-item summary::-webkit-details-marker { display: none; }
+    .v3-contact .hp2-faq-item summary::after { content: ""; flex: none; width: 14px; height: 14px; border-right: 2px solid rgba(246,240,230,0.5); border-bottom: 2px solid rgba(246,240,230,0.5); transform: translateY(-3px) rotate(45deg); transition: transform .3s var(--v3-ease); }
+    .v3-contact .hp2-faq-item[open] summary::after { transform: translateY(3px) rotate(-135deg); }
+    .v3-contact .hp2-faq-answer { padding: 0 2px 24px; max-width: 70ch; font-size: 1.0625rem; line-height: 1.65; color: rgba(246,240,230,0.74); }
+    .v3-contact .hp2-faq-answer a { color: var(--text-head); text-decoration: underline; text-decoration-color: rgba(246,240,230,0.35); text-underline-offset: 3px; }
+    .v3-contact .hp2-faq-answer a:hover { text-decoration-color: currentColor; }
+
     /* close: see the work, or go back to the calendar */
     .v3-contact .cv-end { padding: clamp(88px, 10vw, 128px) 0 clamp(56px, 8vw, 96px); }
     .v3-contact .cv-end-card { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px 32px; padding: clamp(28px, 4.5vw, 52px); border-radius: var(--v3-r-panel); background: var(--v3-elev-1); border: 1px solid var(--v3-hair); }
@@ -316,7 +387,7 @@
       html[lang] body:not(#_) #v3-contact .cv-quote blockquote { font-size: 1.25rem; line-height: 1.32; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .contact-calendly-skeleton, .contact-calendly-loaded, .v3-contact .cv-chev { transition: none; }
+      .contact-calendly-skeleton, .contact-calendly-loaded, .v3-contact .cv-chev, .v3-contact .hp2-faq-item summary::after { transition: none; }
       .contact-calendly-loaded { transform: none; }
     }
   </style>
@@ -342,8 +413,7 @@
             <a href="/es/marketing-redes-sociales">Marketing de Redes Sociales</a>
             <a href="/es/publicidad-restaurantes">Publicidad Pagada</a>
             <a href="/es/diseno-web-restaurantes">Diseño Web</a>
-            <a href="/es/seo-restaurantes">SEO y Perfil de Google</a>
-            <a href="/es/casos-de-exito">Casos de Éxito</a>
+            <a href="/es/seo-restaurantes">SEO y AEO</a>
           </div>
           <details class="lib-mobile-services lib-mobile-menu-only">
             <summary class="lib-mobile-services-trigger">
@@ -354,19 +424,19 @@
               <a href="/es/marketing-redes-sociales">Marketing de Redes Sociales</a>
               <a href="/es/publicidad-restaurantes">Publicidad Pagada</a>
               <a href="/es/diseno-web-restaurantes">Diseño Web</a>
-              <a href="/es/seo-restaurantes">SEO y Perfil de Google</a>
-              <a href="/es/casos-de-exito">Casos de Éxito</a>
+              <a href="/es/seo-restaurantes">SEO y AEO</a>
             </div>
           </details>
           <a href="/es/analizador-redes-sociales-web" class="lib-mobile-menu-only lib-mobile-action --grader" target="_blank" rel="noopener" aria-label="Analizador gratis de redes y web (se abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Analizador gratis de redes y web</a>
+          <a href="/es/casos-de-exito" class="lib-mobile-menu-only lib-mobile-action --ghost">Casos de éxito</a>
           <a href="/es/nosotros" class="lib-mobile-menu-only lib-mobile-action --ghost">Nosotros</a>
           <a href="tel:+17867409499" class="lib-mobile-menu-only lib-mobile-action --ghost">Llámanos</a>
           <a href="/es/contacto" class="lib-mobile-menu-only lib-mobile-action --primary">Agende su llamada de estrategia gratis</a>
         </div>
       </details>
-      <a href="/es/analizador-redes-sociales-web" class="lib-nav-grader" target="_blank" rel="noopener" aria-label="Analizador Gratis (se abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Analizador Gratis</a>
       <a href="/es/casos-de-exito">Casos de éxito</a>
       <a href="/es/nosotros">Nosotros</a>
+      <a href="/es/analizador-redes-sociales-web" class="lib-nav-grader" target="_blank" rel="noopener" aria-label="Analizador Gratis (se abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Analizador Gratis</a>
       <a class="lib-nav-phone" href="tel:+17867409499">Llámanos</a>
       <a href="/es/contacto" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Agende su llamada de estrategia gratis</a>
     </div>
@@ -378,9 +448,9 @@
     <section class="cv-top" data-shared-animations="off">
       <div class="cv-grid">
         <div class="cv-intro">
-          <p class="cv-kicker">Auditoría de crecimiento gratis para tu restaurante</p>
+          <p class="cv-kicker">Llamada de estrategia gratis de 30 minutos</p>
           <h1 class="cv-title">Hablemos de tu <span class="accent-serif">lugar</span>.</h1>
-          <p class="cv-lede">No es un formulario al vacío. Elija un horario y hablará con un fundador, no con un vendedor. 30 minutos, sin presión, solo un plan claro para su restaurante.</p>
+          <p class="cv-lede">Elige un horario en el calendario para una llamada gratis de 30 minutos. Vemos cómo está el marketing de tu restaurante y conversamos sobre un plan, sin ninguna obligación de contratarnos.</p>
 
           <!-- móvil: el botón de reserva queda en la primera pantalla -->
           <div class="cv-quick">
@@ -396,16 +466,16 @@
               </picture>
             </div>
             <div>
-              <h2>Hablas con Juan, no con un vendedor.</h2>
+              <h2>Tu llamada es con Juan, nuestro cofundador</h2>
               <p class="cv-host-quote">&ldquo;Hola, soy Juan. Cuando reserves, hablarás directamente conmigo. Cuéntame de tu lugar y llego con ideas listas. Nos vemos pronto.&rdquo;</p>
               <p class="cv-host-by"><strong>Juan</strong> &middot; Cofundador, Button Up Media</p>
             </div>
           </div>
 
-          <ul class="cv-facts" aria-label="Por qué vale la pena esta llamada">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Equipo pequeño del sur de la Florida</li>
+          <ul class="cv-facts" aria-label="Datos rápidos sobre Button Up Media">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Con sede en Miami</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Ayudando a restaurantes desde 2022</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Llamada gratis, sin presión</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Llamadas en español o inglés</li>
           </ul>
         </div>
 
@@ -450,18 +520,18 @@
           <div class="cv-block">
             <h2>Lo que pasa en la llamada</h2>
             <ol class="cv-steps">
-              <li><span class="n">01</span><div><h3>Tú hablas, nosotros escuchamos.</h3><p>Cuéntanos de tu restaurante, tus noches flojas y de lo que te gustaría tener más.</p></div></li>
-              <li><span class="n">02</span><div><h3>Trazamos un plan.</h3><p>Ahí mismo en la llamada, repasamos dónde estás y las jugadas que de verdad llenan mesas.</p></div></li>
-              <li><span class="n">03</span><div><h3>Tú decides. Sin presión.</h3><p>El plan es tuyo, trabajemos juntos o no. En el peor de los casos, te vas con un siguiente paso más claro.</p></div></li>
+              <li><span class="n">01</span><div><h3>Nos cuentas de tu restaurante</h3><p>Cuéntanos qué está funcionando, qué noches están flojas y de qué quieres más, ya sean reservas, pedidos en línea o eventos privados.</p></div></li>
+              <li><span class="n">02</span><div><h3>Revisamos dónde estás</h3><p>Repasamos cómo está tu marketing hoy y qué haríamos primero para traer más clientes.</p></div></li>
+              <li><span class="n">03</span><div><h3>Tú decides qué sigue</h3><p>El plan es tuyo, trabajes con nosotros o no.</p></div></li>
             </ol>
           </div>
 
           <div class="cv-block">
-            <h2>¿Prefieres contactarnos de otra forma?</h2>
+            <h2>Otras formas de contactarnos</h2>
             <ul class="cv-rows">
-              <li><a class="cv-row" href="mailto:contact@buttonupmedia.com"><span class="cv-row-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span><span><small>¿Prefieres escribir?</small><b>contact@buttonupmedia.com</b></span><svg class="cv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 6 6 6-6 6"/></svg></a></li>
-              <li><a class="cv-row" href="tel:+17867409499"><span class="cv-row-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><span><small>¿Prefieres llamar?</small><b>(786) 740-9499</b></span><svg class="cv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 6 6 6-6 6"/></svg></a></li>
-              <li><div class="cv-row --static"><span class="cv-row-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span><span><small>Dónde trabajamos</small><span class="cv-row-area">El sur de la Florida: Miami, Brickell, Coral Gables, Doral, Fort Lauderdale, Hollywood, Boca Raton, Delray Beach, West Palm Beach y mercados costeros cercanos. También ofrecemos cobertura a nivel nacional para grupos de restaurantes corporativos y de gran escala.</span></span></div></li>
+              <li><a class="cv-row" href="mailto:contact@buttonupmedia.com"><span class="cv-row-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span><span><small>Escríbenos</small><b>contact@buttonupmedia.com</b></span><svg class="cv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 6 6 6-6 6"/></svg></a></li>
+              <li><a class="cv-row" href="tel:+17867409499"><span class="cv-row-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><span><small>Llámanos</small><b>(786) 740-9499</b></span><svg class="cv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 6 6 6-6 6"/></svg></a></li>
+              <li><div class="cv-row --static"><span class="cv-row-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span><span><small>Dónde trabajamos</small><span class="cv-row-area">Nuestra sede está en Miami y nuestro propio equipo cubre el Sur de Florida, incluyendo South Beach, Miami Beach, Brickell, Downtown Miami, Wynwood, Coral Gables, Doral, Kendall, Pinecrest y Fort Lauderdale. También trabajamos con restaurantes en otros estados.</span></span></div></li>
             </ul>
           </div>
         </div>
@@ -471,8 +541,8 @@
     <!-- PRUEBA SOCIAL -->
     <section class="cv-sec">
       <div class="cv-head">
-        <div class="lib-section-label">Lo que dicen los dueños</div>
-        <h2>Estarías en buena compañía.</h2>
+        <div class="lib-section-label">Reseñas</div>
+        <h2>Lo que dicen nuestros clientes</h2>
       </div>
       <div class="cv-quotes">
         <figure class="cv-quote">
@@ -490,7 +560,7 @@
       </div>
       <div class="bum-reviews cv-reviews">
         <div class="bum-reviews__head">
-          <h3>Más de dueños de restaurantes en Google</h3>
+          <h3>Más reseñas en Google</h3>
           <a class="bum-grating" href="https://www.google.com/maps?cid=18420049328774985259" target="_blank" rel="noopener" aria-label="Calificación de 5,0 sobre 5 en Google con 11 reseñas (abre Google en una pestaña nueva)"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg><strong>5,0</strong><span class="bum-stars" aria-hidden="true">★★★★★</span><span class="bum-grating__text">en Google, 11 reseñas</span></a>
         </div>
         <div class="bum-reviews__grid">
@@ -522,12 +592,46 @@
       </div>
     </section>
 
+    <!-- PREGUNTAS FRECUENTES (sincronizadas con el FAQPage JSON-LD del head de la página) -->
+    <section class="cv-sec cv-faq" id="preguntas" data-shared-animations="off">
+      <div class="cv-head">
+        <div class="lib-section-label">Preguntas frecuentes</div>
+        <h2>Preguntas comunes antes de agendar una llamada</h2>
+      </div>
+      <div class="hp2-faq-list">
+        <details class="hp2-faq-item">
+          <summary><span>¿Qué pasa en la llamada de estrategia gratis?</span></summary>
+          <div class="hp2-faq-answer">Nos cuentas de tu restaurante y de qué quieres más, y repasamos cómo está tu marketing hoy y qué haríamos primero. Te llevas un plan claro, y es tuyo, trabajes con nosotros o no.</div>
+        </details>
+        <details class="hp2-faq-item">
+          <summary><span>¿Con quién voy a hablar en la llamada?</span></summary>
+          <div class="hp2-faq-answer">Vas a hablar con Juan, uno de los dos cofundadores de Button Up Media. Él atiende personalmente cada llamada de estrategia y también es el contacto principal de nuestros clientes.</div>
+        </details>
+        <details class="hp2-faq-item">
+          <summary><span>¿Cuánto dura la llamada?</span></summary>
+          <div class="hp2-faq-answer">La llamada dura 30 minutos. Es gratis y puedes agendarla en cualquier horario disponible del calendario de esta página.</div>
+        </details>
+        <details class="hp2-faq-item">
+          <summary><span>¿Trabajan con restaurantes fuera de Miami?</span></summary>
+          <div class="hp2-faq-answer">Sí. Tenemos sede en Miami, nuestro propio equipo cubre el Sur de Florida y tenemos miembros del equipo locales en varios otros estados. Fuera del Sur de Florida, nuestro equipo de Miami planifica y maneja tus redes sociales, y las fotos y videos los graba nuestra red de videógrafos y fotógrafos con experiencia en tu zona. Google Ads, los anuncios de Meta, los sitios web y el SEO / AEO se hacen a distancia, así que podemos hacer ese trabajo para restaurantes en cualquier parte de Estados Unidos.</div>
+        </details>
+        <details class="hp2-faq-item">
+          <summary><span>¿Solo trabajan con restaurantes?</span></summary>
+          <div class="hp2-faq-answer">Sí, solo trabajamos con restaurantes, bares y cafeterías. Ese ha sido nuestro enfoque desde que empezamos en 2022.</div>
+        </details>
+        <details class="hp2-faq-item">
+          <summary><span>¿Podemos hablar en español?</span></summary>
+          <div class="hp2-faq-answer">Sí. Trabajamos en español e inglés, así que toda la llamada puede ser en español, y cada página web que construimos está en los dos idiomas.</div>
+        </details>
+      </div>
+    </section>
+
     <!-- CIERRE -->
     <section class="cv-end">
       <div class="cv-end-card">
         <div>
-          <h2>¿Quiere ver nuestro trabajo primero?</h2>
-          <p>Restaurantes reales, números reales. Luego vuelva y elija un horario con Juan.</p>
+          <h2>Vea nuestro trabajo antes de agendar</h2>
+          <p>Nuestros casos de éxito muestran lo que hicimos para cada restaurante y los números que logramos. Cuando esté listo, vuelva aquí y elija un horario con Juan.</p>
         </div>
         <div class="cv-end-actions">
           <a class="btn" href="/es/casos-de-exito">Vea nuestro trabajo</a>
@@ -541,15 +645,14 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <strong style="font-family: var(--font-display); font-size: 1rem;">Button Up Media</strong>
-          <p>Button Up Media es una agencia de marketing para restaurantes en Florida. Ayudamos a los restaurantes a crecer con redes sociales, diseño web, SEO y publicidad.</p>
+          <p>Button Up Media es una agencia de marketing para restaurantes con sede en Miami. Ayudamos a los restaurantes a crecer con redes sociales, páginas web, SEO y AEO, y publicidad.</p>
         </div>
         <div class="footer-col">
           <h4>Servicios</h4>
           <a href="/es/marketing-redes-sociales">Marketing de Redes Sociales</a>
           <a href="/es/publicidad-restaurantes">Publicidad Pagada</a>
           <a href="/es/diseno-web-restaurantes">Diseño Web</a>
-          <a href="/es/seo-restaurantes">SEO y Perfil de Google</a>
-          <a href="/es/casos-de-exito">Casos de Éxito</a>
+          <a href="/es/seo-restaurantes">SEO y AEO</a>
         </div>
         <div class="footer-col">
           <h4>Zonas que atendemos</h4>
@@ -566,6 +669,7 @@
           <a href="/es/blog">Blog</a>
           <a href="/es/analizador-redes-sociales-web">Analizador gratis de redes y web</a>
           <a href="/es">Inicio</a>
+          <a href="/es/casos-de-exito">Casos de éxito</a>
           <a href="/es/nosotros">Nosotros</a>
           <a href="/es/contacto">Contacto</a>
           <a href="/es/contacto">Llamada de estrategia gratis</a>

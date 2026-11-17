@@ -14,7 +14,7 @@
     "Castaway"
   ],
   "metaTitle": "Private Event Ads Case Study: 72:1 ROAS | Button Up Media",
-  "metaDescription": "How Google Ads filled private events for The Boathouse (72:1 ROAS, $30.58 per lead) and The Odyssey (49:1 ROAS, 951 conversions), plus Castaway, in 2025.",
+  "metaDescription": "Our 2025 Google Ads for private events and reservations at The Boathouse (72:1 ROAS, $30.58 per lead), The Odyssey (49:1 ROAS, 951 conversions) and Castaway.",
   "ldHeadline": "Private event Google Ads for The Boathouse, The Odyssey and Castaway",
   "h1": "Private events",
   "h1Sub": "The Boathouse, The Odyssey and Castaway",
@@ -60,37 +60,37 @@
     {
       "value": "$30.58",
       "label": "Per private-event lead, The Boathouse",
-      "meaning": "What each event inquiry cost. A single booked event can bring in thousands."
+      "meaning": "This is what each event inquiry cost in ads. One booked event can be worth thousands of dollars."
     },
     {
       "value": "49:1",
       "label": "ROAS, The Odyssey",
-      "meaning": "Dinner reservations plus private events: about $49 back for every $1, Jun to Dec 2025."
+      "meaning": "Across dinner reservations and private events, about $49 came back for every $1 spent, Jun to Dec 2025."
     }
   ],
   "situation": {
     "paragraphs": [
-      "A private event is a big-ticket booking: each one that converts can bring in thousands.",
-      "The goal is to reach people who are already planning an event and turn their search into an inquiry, not to buy as many clicks as possible."
+      "A private event is a big booking, and each one that goes through can be worth thousands of dollars.",
+      "So we aimed the ads at people who were already planning an event and judged them on how many inquiries they brought in."
     ]
   },
   "steps": {
     "items": [
       {
         "title": "Show up when planners search by name",
-        "bodyHtml": "Branded search ads for The Boathouse's private events. Branded search means your ad shows when someone searches for the restaurant by name, so your own ad is the first thing a planner sees."
+        "bodyHtml": "We ran branded search ads for The Boathouse's private events. Branded search means the ad shows when someone searches for the restaurant by name, so the restaurant's own ad is the first thing an event planner sees."
       },
       {
-        "title": "Split events from dinner",
-        "bodyHtml": "Separate campaigns for dinner reservations and for private events at The Odyssey and at Castaway, so each goal has its own budget and its own numbers."
+        "title": "Keep events and dinner separate",
+        "bodyHtml": "At The Odyssey and at Castaway, we ran separate campaigns for dinner reservations and for private events, so each goal had its own budget and its own numbers."
       },
       {
         "title": "Track every inquiry and booking",
-        "bodyHtml": "So each campaign is judged on what it brings back, not on clicks."
+        "bodyHtml": "We tracked every inquiry and booking, so each campaign is judged by the value it brings back."
       },
       {
-        "title": "Report against spend every month",
-        "bodyHtml": "Conversions, cost per conversion, conversion value and ROAS, every month, in plain numbers."
+        "title": "Report the results every month",
+        "bodyHtml": "Every month we report conversions, cost per conversion, conversion value and ROAS in plain numbers."
       }
     ]
   },

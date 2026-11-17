@@ -15,7 +15,7 @@
   "ldHeadline": "Brewing Buddha Cafe & Arthouse: 24M+ vistas de video para una cafetería en Pinecrest",
   "h1": "Brewing Buddha",
   "h1Sub": "24M+ vistas de video para un café en Pinecrest",
-  "answer": "Brewing Buddha Cafe & Arthouse es una cafetería y espacio de arte en Pinecrest. Nuestros videos cortos sobre sus lattes creativos llegaron a 24M+ vistas en Instagram, YouTube, TikTok y Facebook.",
+  "answer": "Brewing Buddha Cafe & Arthouse es una cafetería y espacio de arte en Pinecrest. Nuestros videos sobre sus lattes creativos llegaron a 24M+ vistas en Instagram, YouTube, TikTok y Facebook.",
   "descriptor": "Cafetería y espacio de arte",
   "area": {
     "name": "Pinecrest",
@@ -50,12 +50,12 @@
     {
       "value": "53K+",
       "label": "Seguidores",
-      "meaning": "Entre Instagram, Facebook, TikTok y YouTube, con 33.8K ganados desde 2022."
+      "meaning": "Son seguidores en Instagram, Facebook, TikTok y YouTube, y 33.8K de ellos llegaron desde 2022."
     },
     {
       "value": "7.5%",
       "label": "Tasa de interacción",
-      "meaning": "Qué tan seguido quien ve una publicación le da like, comenta o comparte. Muestra que el público presta atención y no solo pasa de largo."
+      "meaning": "Es qué tan seguido la gente que ve una publicación le da like, la comenta o la comparte. Una tasa más alta significa que más gente reacciona a las publicaciones."
     }
   ],
   "reels": {
@@ -118,23 +118,23 @@
   },
   "situation": {
     "paragraphs": [
-      "Brewing Buddha es una cafetería y espacio de arte bien original, conocida por sus lattes creativos.",
-      "Un contenido de café genérico habría escondido justo lo que la hace diferente. En palabras de su dueño, Jordan Athos, necesitaban a alguien que igualara su energía."
+      "Brewing Buddha es una cafetería y espacio de arte conocida por sus lattes creativos.",
+      "En su testimonio en video, su dueño, Jordan Athos, dice que necesitaban a alguien que igualara su energía."
     ]
   },
   "steps": {
     "items": [
       {
-        "title": "Grabar lo que la gente viene a buscar",
-        "bodyHtml": "Videos cortos alrededor de los lattes creativos y el espacio de arte."
+        "title": "Grabar los lattes y el espacio de arte",
+        "bodyHtml": "Hacemos videos cortos sobre los lattes creativos y el espacio de arte."
       },
       {
-        "title": "Intercambiar ideas en ambas direcciones",
-        "bodyHtml": "Nosotros proponemos, ellos proponen, y los mejores conceptos llegan al feed."
+        "title": "Intercambiar ideas con su equipo",
+        "bodyHtml": "Tanto nuestro equipo como el de ellos propone ideas de videos, y hacemos las mejores."
       },
       {
-        "title": "Dejar que una bebida lleve la delantera",
-        "bodyHtml": "Nuestro video de febrero de 2025 sobre su butter coffee (café con mantequilla) fue de los más destacados."
+        "title": "Repetir lo que funciona",
+        "bodyHtml": "Nuestro video de febrero de 2025 sobre su butter coffee (café con mantequilla) funcionó muy bien, y después hicimos otro sobre un latte de waffle con maple."
       }
     ]
   },
@@ -143,21 +143,21 @@
       {
         "stat": "7.4M",
         "title": "vistas en un solo sketch detrás del mostrador",
-        "body": "Una barista reacciona a un pedido de Cookie Butter Latte tamaño fiesta para 10 personas. Sumó 7.4M de vistas y 576K me gusta, más de la mitad de todas las vistas de los 261 reels de la cuenta."
+        "body": "En este reel, una barista reacciona a un pedido de Cookie Butter Latte tamaño fiesta para 10 personas. Tiene 7.4M de vistas y 576K me gusta, más de la mitad de todas las vistas de los 261 reels de la cuenta."
       },
       {
         "stat": "76%",
-        "title": "de todas las vistas salió de tres sketches del verano",
-        "body": "Los tres reels más vistos son comedia del equipo sobre pedidos exagerados, publicados de junio a septiembre de 2026. Juntos sumaron unas 9.4M de las 12.5M de vistas de @brewingbuddha. Cuando un formato funciona, lo convertimos en serie."
+        "title": "de todas las vistas de reels salió de tres sketches del equipo",
+        "body": "Los tres reels más vistos son comedia del equipo sobre pedidos exagerados, publicados de junio a septiembre de 2026. Juntos tienen unas 9.4M de las 12.5M de vistas de @brewingbuddha. Cuando un formato así funciona, seguimos haciendo más videos con él."
       },
       {
         "stat": "418K",
-        "title": "vistas en un reel que pidió el público",
-        "body": "Al público le encantó el video del butter latte, así que el equipo creó un latte de waffle con maple como continuación. Hacer el siguiente video con lo que la gente pide hace que vuelva."
+        "title": "vistas en la continuación del video del butter coffee",
+        "body": "El video del butter coffee funcionó bien, así que el equipo creó un latte de waffle con maple y nosotros hicimos un video sobre él."
       },
       {
         "stat": "3 años",
-        "title": "y, en palabras del gerente, “the quality never drops”",
+        "title": "trabajando juntos, y el gerente dice que “the quality never drops”",
         "body": "En una reseña de Google de noviembre de 2026, el gerente Josh escribió que la cuenta tiene “several videos over a million views” y trajo “an influx of new customers” (reseña original en inglés)."
       }
     ]

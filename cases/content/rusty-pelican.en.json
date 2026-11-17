@@ -43,8 +43,8 @@
   },
   "webCard": {
     "kicker": "Rusty Pelican · Key Biscayne",
-    "title": "An editorial site for a waterfront icon",
-    "body": "Full-bleed photography, a menu by section, the chef's story and reservations wired right in.",
+    "title": "A new website for Rusty Pelican",
+    "body": "The site has full-width photos, a menu split into sections, the chef's story and built-in reservations.",
     "image": {
       "src": "/images/rusty-pelican-device-mockup-transparent.webp",
       "width": 1080,
@@ -71,31 +71,31 @@
   ],
   "situation": {
     "paragraphs": [
-      "Big waterfront rooms live on reservations, private events and holiday rushes.",
-      "In two very different markets, Miami and Tampa, every ad dollar has to show what it brought back."
+      "Rusty Pelican has restaurants on Key Biscayne in Miami and in Tampa. Both take reservations and host private events, and holidays like Mother's Day and Thanksgiving bring in a lot of bookings.",
+      "Our job was to bring in those bookings through Google Ads and show what every ad dollar brought back in each city."
     ]
   },
   "steps": {
     "items": [
       {
         "title": "Reach people who are already looking",
-        "bodyHtml": "Google search ads aimed at people already searching for a place to eat, with every click tracked through to the booking."
+        "bodyHtml": "We ran Google search ads aimed at people already searching for a place to eat, and tracked each click through to the booking."
       },
       {
-        "title": "Split the goals",
-        "bodyHtml": "Separate campaigns for reservations, private events and seasonal dates, with private events as the focus in Tampa."
+        "title": "Separate the campaigns by goal",
+        "bodyHtml": "We ran separate campaigns for reservations, private events and seasonal dates. In Tampa, private events were the focus."
       },
       {
         "title": "Plan around the big dates",
-        "bodyHtml": "Seasonal pushes for days like Mother's Day, Thanksgiving and Christmas, when people book ahead."
+        "bodyHtml": "We ran seasonal campaigns ahead of days like Mother's Day, Thanksgiving and Christmas, when people book ahead."
       },
       {
         "title": "Track every booking",
-        "bodyHtml": "Conversion tracking on calls, reservations and form fills, reported against spend every month."
+        "bodyHtml": "We set up conversion tracking on calls, reservations and form fills, and each month we report the results against what was spent."
       },
       {
         "title": "Build the website",
-        "bodyHtml": "We designed and built the Rusty Pelican site: full-bleed photography, a menu by section, the chef's story and reservations wired in. More on our <a href=\"/restaurant-website-design\">restaurant website design</a> page.",
+        "bodyHtml": "We also designed and built the Rusty Pelican website. It has full-width photos, a menu split into sections, the chef's story and built-in reservations. There's more on our <a href=\"/restaurant-website-design\">restaurant website design</a> page.",
         "figure": {
           "src": "/images/rusty-pelican-device-mockup-transparent.webp",
           "width": 1080,

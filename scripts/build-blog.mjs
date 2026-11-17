@@ -17,21 +17,21 @@ const PUBLISH_TIME = 'T09:00:00-04:00'; // 9am ET
 const AUTHORS = {
   chris: {
     name: 'Christian Paula',
-    jobTitleEn: 'Creative Director',
-    jobTitleEs: 'Director Creativo',
+    jobTitleEn: 'Co-founder & Creative Director',
+    jobTitleEs: 'Cofundador y Director Creativo',
     photo: '/media/author-chris.webp',
     linkedin: 'https://www.linkedin.com/in/christian-paula-48bb1a263/',
-    bioEn: 'Christian Paula is the Creative Director at Button Up Media, a restaurant-focused marketing agency based in Miami, Florida. He leads the content, video, and design work that helps restaurants, bars, and coffee shops stand out and fill seats.',
-    bioEs: 'Christian Paula es el Director Creativo de Button Up Media, una agencia de marketing enfocada en restaurantes con sede en Miami, Florida. Lidera el contenido, el video y el diseño que ayudan a restaurantes, bares y cafeterías a destacar y llenar mesas.',
+    bioEn: 'Christian Paula is a co-founder and the Creative Director of Button Up Media, a restaurant marketing agency headquartered in Miami. He leads the agency\'s content, video and design work for restaurants, bars and cafes.',
+    bioEs: 'Christian Paula es cofundador y Director Creativo de Button Up Media, una agencia de marketing para restaurantes con sede en Miami. Dirige el trabajo de contenido, video y diseño que la agencia hace para restaurantes, bares y cafeterías.',
   },
   juan: {
     name: 'Juan Hernandez',
-    jobTitleEn: 'Account Manager & Founder',
-    jobTitleEs: 'Account Manager y Fundador',
+    jobTitleEn: 'Co-founder & Account Manager',
+    jobTitleEs: 'Cofundador y Gerente de Cuentas',
     photo: '/media/author-juan.webp',
     linkedin: 'https://www.linkedin.com/in/onema/',
-    bioEn: 'Juan Hernandez is an Account Manager and Founder at Button Up Media, a restaurant-focused marketing agency based in Miami, Florida. He works directly with owners to turn marketing into reservations, orders, and foot traffic.',
-    bioEs: 'Juan Hernandez es Account Manager y Fundador de Button Up Media, una agencia de marketing enfocada en restaurantes con sede en Miami, Florida. Trabaja directamente con los dueños para convertir el marketing en reservas, pedidos y clientes.',
+    bioEn: 'Juan Hernandez is a co-founder and the account manager of Button Up Media, a restaurant marketing agency headquartered in Miami. He hosts the agency\'s free strategy calls and works directly with restaurant owners on their marketing.',
+    bioEs: 'Juan Hernandez es cofundador y gerente de cuentas de Button Up Media, una agencia de marketing para restaurantes con sede en Miami. Atiende las llamadas de estrategia gratis de la agencia y trabaja directamente con los dueños de restaurantes en su marketing.',
   },
 };
 
@@ -49,38 +49,38 @@ const MONTHS_ES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep'
 const T = {
   en: {
     home: 'Home', blog: 'Blog', faq: 'Frequently asked questions', takeaways: 'The short version',
-    tocTitle: 'Jump to what you need', tocAria: 'On this page',
-    fcStrong: 'Want a hand with this?', fcSpan: 'Juan, our founder, will walk you through it on a free 30-minute call. Real person, no jargon, no pressure.', fcBtn: 'Book a free call with Juan',
+    tocTitle: 'In this article', tocAria: 'On this page',
+    fcStrong: 'Talk to us about your restaurant', fcSpan: "Juan, our co-founder, can go over this with you on a free 30-minute call. There's no obligation to sign up.", fcBtn: 'Book a free call with Juan',
     keepReading: 'Keep reading', minRead: (n) => `${n} min read`, articles: (n) => `${n} ${n === 1 ? 'article' : 'articles'}`,
     all: 'All', latest: 'Latest articles', featured: 'Featured', latestStory: 'Latest story', read: 'Read the article',
     empty: 'No articles in this category yet. Check back soon.',
-    midStrong: 'Not sure where your restaurant stands online?', midSpan: 'Our free Social and Website Grader checks your website, Google, and social in about a minute and shows you what to fix first.', midBtn: 'Get your free report card', graderUrl: '/social-media-website-grader',
-    ctaEyebrow: 'Free, no pressure', call: `Call ${PHONE_DISPLAY}`,
-    bandEyebrow: 'Free, no pressure', bandH2: 'Want this handled for you?',
-    bandP: 'Book a free strategy call and we will map out exactly how we would help your restaurant stand out. No obligation.', bandBtn: 'Book a Free Strategy Call',
-    closing: (c) => `If this was useful and you would rather hand it off, <a href="${c}">book a free strategy call</a> and we will build a plan around your specific restaurant.`,
+    midStrong: 'See how your restaurant looks online', midSpan: 'Our free Social and Website Grader checks your website, your Google profile and your social media in about a minute, then shows you what to fix first.', midBtn: 'Get your free report card', graderUrl: '/social-media-website-grader',
+    ctaEyebrow: 'Free strategy call', call: `Call ${PHONE_DISPLAY}`,
+    bandEyebrow: 'Free strategy call', bandH2: "Get help with your restaurant's marketing",
+    bandP: "Book a free 30-minute call with Juan, our co-founder. Tell him about your restaurant and he'll walk you through what we would do. There's no obligation to sign up.", bandBtn: 'Book a Free Strategy Call',
+    closing: (c) => `If you'd rather have someone do this for you, <a href="${c}">book a free strategy call</a> and we'll talk through a plan for your restaurant.`,
     heroEyebrow: 'The Button Up Blog',
-    heroH1: 'Restaurant marketing that fills seats, <span class="bl-gold">explained.</span>',
-    heroSub: 'Playbooks, breakdowns, and honest numbers from the work we do every day for restaurants, bars, and coffee shops across Miami and beyond.',
+    heroH1: 'Marketing guides <span class="bl-gold">for restaurant owners</span>',
+    heroSub: 'Step-by-step guides on social media, Google, ads and websites from Button Up Media, a marketing agency headquartered in Miami that works only with restaurants, bars and cafes.',
     blogTitle: 'Blog | Button Up Media, Restaurant Marketing Insights',
     blogDesc: 'Practical restaurant marketing playbooks from Button Up Media: social media, paid ads, websites, and local SEO for restaurants, bars, and coffee shops in Miami and across the US.',
     lang: 'en', htmlLang: 'en', rssLang: 'en-US', contact: '/contact', hub: '/blog',
   },
   es: {
     home: 'Inicio', blog: 'Blog', faq: 'Preguntas frecuentes', takeaways: 'En resumen',
-    tocTitle: 'Vaya directo a lo que busca', tocAria: 'En esta página',
-    fcStrong: '¿Quiere ayuda con esto?', fcSpan: 'Juan, nuestro fundador, se lo explica en una llamada gratis de 30 minutos. Una persona real, sin tecnicismos y sin compromiso.', fcBtn: 'Agende una llamada gratis con Juan',
+    tocTitle: 'En este artículo', tocAria: 'En esta página',
+    fcStrong: 'Hable con nosotros sobre su restaurante', fcSpan: 'Juan, nuestro cofundador, puede revisar esto con usted en una llamada gratis de 30 minutos. No tiene ninguna obligación de contratarnos.', fcBtn: 'Agende una llamada gratis con Juan',
     keepReading: 'Sigue leyendo', minRead: (n) => `${n} min de lectura`, articles: (n) => `${n} ${n === 1 ? 'artículo' : 'artículos'}`,
     all: 'Todos', latest: 'Artículos recientes', featured: 'Destacado', latestStory: 'Lo más reciente', read: 'Leer el artículo',
     empty: 'Aún no hay artículos en esta categoría. Vuelva pronto.',
-    midStrong: '¿No sabe cómo está su restaurante en línea?', midSpan: 'Nuestro Analizador gratis de redes y web revisa su sitio, Google y redes en aproximadamente un minuto y le muestra qué arreglar primero.', midBtn: 'Reciba su reporte gratis', graderUrl: '/es/analizador-redes-sociales-web',
-    ctaEyebrow: 'Gratis, sin compromiso', call: `Llame al ${PHONE_DISPLAY}`,
-    bandEyebrow: 'Gratis, sin compromiso', bandH2: '¿Quiere que lo hagamos por usted?',
-    bandP: 'Reserve una llamada de estrategia gratis y le mostramos exactamente cómo ayudaríamos a su restaurante a destacar. Sin compromiso.', bandBtn: 'Reserve su llamada gratis',
-    closing: (c) => `Si esto le fue útil y prefiere delegarlo, <a href="${c}">reserve una llamada de estrategia gratis</a> y armamos un plan a la medida de su restaurante.`,
+    midStrong: 'Vea cómo se ve su restaurante en línea', midSpan: 'Nuestro Analizador gratis de redes y web revisa su sitio, su perfil de Google y sus redes sociales en aproximadamente un minuto, y después le muestra qué arreglar primero.', midBtn: 'Reciba su reporte gratis', graderUrl: '/es/analizador-redes-sociales-web',
+    ctaEyebrow: 'Llamada de estrategia gratis', call: `Llame al ${PHONE_DISPLAY}`,
+    bandEyebrow: 'Llamada de estrategia gratis', bandH2: 'Reciba ayuda con el marketing de su restaurante',
+    bandP: 'Agende una llamada gratis de 30 minutos con Juan, nuestro cofundador. Cuéntele sobre su restaurante y él le explica lo que haríamos. No tiene ninguna obligación de contratarnos.', bandBtn: 'Reserve su llamada gratis',
+    closing: (c) => `Si prefiere que alguien haga esto por usted, <a href="${c}">reserve una llamada de estrategia gratis</a> y hablamos de un plan para su restaurante.`,
     heroEyebrow: 'El Blog de Button Up',
-    heroH1: 'Marketing de restaurantes que llena mesas, <span class="bl-gold">explicado.</span>',
-    heroSub: 'Guías prácticas, análisis y números honestos del trabajo que hacemos cada día para restaurantes, bares y cafeterías en Miami y más allá.',
+    heroH1: 'Guías de marketing <span class="bl-gold">para dueños de restaurantes</span>',
+    heroSub: 'Guías paso a paso sobre redes sociales, Google, publicidad y sitios web de Button Up Media, una agencia de marketing con sede en Miami que solo trabaja con restaurantes, bares y cafeterías.',
     blogTitle: 'Blog | Button Up Media, Marketing para Restaurantes',
     blogDesc: 'Guías prácticas de marketing para restaurantes de Button Up Media: redes sociales, publicidad, páginas web y SEO local para restaurantes, bares y cafeterías en Miami y todo EE. UU.',
     lang: 'es', htmlLang: 'es', rssLang: 'es', contact: '/es/contacto', hub: '/es/blog',
@@ -147,8 +147,7 @@ function nav(lang) {
             <a href="/es/marketing-redes-sociales">Marketing de Redes Sociales</a>
             <a href="/es/publicidad-restaurantes">Publicidad Pagada</a>
             <a href="/es/diseno-web-restaurantes">Diseño Web</a>
-            <a href="/es/seo-restaurantes">SEO y Perfil de Google</a>
-            <a href="/es/casos-de-exito">Casos de Éxito</a>
+            <a href="/es/seo-restaurantes">SEO y AEO</a>
           </div>
           <details class="lib-mobile-services lib-mobile-menu-only">
             <summary class="lib-mobile-services-trigger">Servicios
@@ -158,19 +157,19 @@ function nav(lang) {
               <a href="/es/marketing-redes-sociales">Marketing de Redes Sociales</a>
               <a href="/es/publicidad-restaurantes">Publicidad Pagada</a>
               <a href="/es/diseno-web-restaurantes">Diseño Web</a>
-              <a href="/es/seo-restaurantes">SEO y Perfil de Google</a>
-              <a href="/es/casos-de-exito">Casos de Éxito</a>
+              <a href="/es/seo-restaurantes">SEO y AEO</a>
             </div>
           </details>
           <a href="/es/analizador-redes-sociales-web" class="lib-mobile-menu-only lib-mobile-action --grader" target="_blank" rel="noopener" aria-label="Analizador gratis de redes y web (se abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Analizador gratis de redes y web</a>
+          <a href="/es/casos-de-exito" class="lib-mobile-menu-only lib-mobile-action --ghost">Casos de éxito</a>
           <a href="/es/nosotros" class="lib-mobile-menu-only lib-mobile-action --ghost">Nosotros</a>
           <a href="tel:${PHONE}" class="lib-mobile-menu-only lib-mobile-action --ghost">Llámanos</a>
           <a href="/es/contacto" class="lib-mobile-menu-only lib-mobile-action --primary">Agende su llamada de estrategia gratis</a>
         </div>
       </details>
-      <a href="/es/analizador-redes-sociales-web" class="lib-nav-grader" target="_blank" rel="noopener" aria-label="Analizador Gratis (se abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Analizador Gratis</a>
       <a href="/es/casos-de-exito">Casos de éxito</a>
       <a href="/es/nosotros">Nosotros</a>
+      <a href="/es/analizador-redes-sociales-web" class="lib-nav-grader" target="_blank" rel="noopener" aria-label="Analizador Gratis (se abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Analizador Gratis</a>
       <a class="lib-nav-phone" href="tel:${PHONE}">Llámanos</a>
       <a href="/es/contacto" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Agende su llamada de estrategia gratis</a>
     </div>
@@ -190,8 +189,7 @@ function nav(lang) {
             <a href="/socialmediamarketing">Social Media Marketing</a>
             <a href="/restaurant-advertising">Paid Media</a>
             <a href="/restaurant-website-design">Website</a>
-            <a href="/restaurant-seo">SEO &amp; Google Profile</a>
-            <a href="/case-studies">Case Studies</a>
+            <a href="/restaurant-seo">SEO &amp; AEO</a>
           </div>
           <details class="lib-mobile-services lib-mobile-menu-only">
             <summary class="lib-mobile-services-trigger">Services
@@ -201,19 +199,19 @@ function nav(lang) {
               <a href="/socialmediamarketing">Social Media Marketing</a>
               <a href="/restaurant-advertising">Paid Media</a>
               <a href="/restaurant-website-design">Website</a>
-              <a href="/restaurant-seo">SEO &amp; Google Profile</a>
-              <a href="/case-studies">Case Studies</a>
+              <a href="/restaurant-seo">SEO &amp; AEO</a>
             </div>
           </details>
           <a href="/social-media-website-grader" class="lib-mobile-menu-only lib-mobile-action --grader" target="_blank" rel="noopener" aria-label="Free Social &amp; Website Grader (opens in a new tab)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Free Social &amp; Website Grader</a>
+          <a href="/case-studies" class="lib-mobile-menu-only lib-mobile-action --ghost">Case Studies</a>
           <a href="/about" class="lib-mobile-menu-only lib-mobile-action --ghost">About</a>
           <a href="tel:${PHONE}" class="lib-mobile-menu-only lib-mobile-action --ghost">Call Us</a>
           <a href="/contact" class="lib-mobile-menu-only lib-mobile-action --primary">Book Free Strategy Call</a>
         </div>
       </details>
-      <a href="/social-media-website-grader" class="lib-nav-grader" target="_blank" rel="noopener" aria-label="Social &amp; Web Grader (opens in a new tab)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Social &amp; Web Grader</a>
       <a href="/case-studies">Case Studies</a>
       <a href="/about">About</a>
+      <a href="/social-media-website-grader" class="lib-nav-grader" target="_blank" rel="noopener" aria-label="Social &amp; Web Grader (opens in a new tab)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Social &amp; Web Grader</a>
       <a class="lib-nav-phone" href="tel:${PHONE}">Call Us</a>
       <a href="/contact" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Book Free Strategy Call</a>
     </div>
@@ -226,15 +224,14 @@ function footer(lang) {
       <div class="footer-grid">
         <div class="footer-brand">
           <strong style="font-family: var(--font-display); font-size: 1rem;">Button Up Media</strong>
-          <p>Button Up Media es una agencia de marketing para restaurantes en Florida. Ayudamos a los restaurantes a crecer con redes sociales, diseño web, SEO y publicidad.</p>
+          <p>Button Up Media es una agencia de marketing para restaurantes con sede en Miami. Ayudamos a los restaurantes a crecer con redes sociales, páginas web, SEO y AEO, y publicidad.</p>
         </div>
         <div class="footer-col">
           <h4>Servicios</h4>
           <a href="/es/marketing-redes-sociales">Marketing de Redes Sociales</a>
           <a href="/es/publicidad-restaurantes">Publicidad Pagada</a>
           <a href="/es/diseno-web-restaurantes">Diseño Web</a>
-          <a href="/es/seo-restaurantes">SEO y Perfil de Google</a>
-          <a href="/es/casos-de-exito">Casos de Éxito</a>
+          <a href="/es/seo-restaurantes">SEO y AEO</a>
         </div>
         <div class="footer-col">
           <h4>Zonas que atendemos</h4>
@@ -249,6 +246,7 @@ function footer(lang) {
         <div class="footer-col">
           <h4>Empresa</h4>
           <a href="/es">Inicio</a>
+          <a href="/es/casos-de-exito">Casos de éxito</a>
           <a href="/es/nosotros">Nosotros</a>
           <a href="/es/blog">Blog</a>
           <a href="/es/analizador-redes-sociales-web">Analizador gratis de redes y web</a>
@@ -270,15 +268,14 @@ function footer(lang) {
       <div class="footer-grid">
         <div class="footer-brand">
           <strong style="font-family: var(--font-display); font-size: 1rem;">Button Up Media</strong>
-          <p>Button Up Media is a restaurant marketing agency in Florida. We help restaurants grow with social media, website design, SEO, and advertising.</p>
+          <p>Button Up Media is a restaurant marketing agency headquartered in Miami. We help restaurants grow with social media, websites, SEO and AEO, and advertising.</p>
         </div>
         <div class="footer-col">
           <h4>Services</h4>
           <a href="/socialmediamarketing">Social Media Marketing</a>
           <a href="/restaurant-advertising">Paid Media</a>
           <a href="/restaurant-website-design">Website</a>
-          <a href="/restaurant-seo">SEO &amp; Google Profile</a>
-          <a href="/case-studies">Case Studies</a>
+          <a href="/restaurant-seo">SEO &amp; AEO</a>
         </div>
         <div class="footer-col">
           <h4>Areas We Serve</h4>
@@ -293,6 +290,7 @@ function footer(lang) {
         <div class="footer-col">
           <h4>Company</h4>
           <a href="/">Home</a>
+          <a href="/case-studies">Case Studies</a>
           <a href="/about">About</a>
           <a href="/blog">Blog</a>
           <a href="/social-media-website-grader">Free Social &amp; Website Grader</a>
@@ -330,18 +328,18 @@ function founderCta(lang) {
 // dismissed with the X / backdrop / Esc and never shown again (localStorage).
 const POPUP_COPY = {
   en: {
-    seo: { h: "Want a hand getting found on Google?", p: "We will look at your Google profile and tell you exactly what is holding your ranking back. Free, no pressure." },
-    social: { h: "Want a hand with your social media?", p: "We make the content that actually fills tables. Tell us about your spot and we take it from there." },
-    ads: { h: "Want a hand making your ads pay off?", p: "We will find where your ad budget is leaking and what a smart first month looks like. Free." },
-    web: { h: "Want a hand with your website?", p: "We build restaurant sites that bring in orders and reservations, not just ones that look nice." },
-    strategy: { h: "Want a hand with your restaurant marketing?", p: "Tell us about your spot and we will map out what to do first. Free 30-minute call, no pressure." },
+    seo: { h: "We can help you show up on Google", p: "Book a free 30-minute call and we'll look at your Google profile with you and point out what to fix first." },
+    social: { h: "We can help with your social media", p: "Tell us about your restaurant on a free 30-minute call, and we'll walk you through how we would handle your social media." },
+    ads: { h: "We can help with your ads", p: "On a free 30-minute call, we'll look at how your ad budget is being spent and what we would change first." },
+    web: { h: "We can help with your website", p: "We build restaurant websites in English and Spanish, designed to bring in orders and reservations. Tell us about yours on a free 30-minute call." },
+    strategy: { h: "We can help with your restaurant's marketing", p: "Tell us about your restaurant and we'll walk you through what to do first. It's a free 30-minute call with no obligation." },
   },
   es: {
-    seo: { h: "¿Quiere ayuda para aparecer en Google?", p: "Revisamos su perfil de Google y le decimos qué está frenando su posición. Gratis, sin compromiso." },
-    social: { h: "¿Quiere ayuda con sus redes sociales?", p: "Hacemos el contenido que de verdad llena mesas. Cuéntenos de su local y nosotros nos encargamos." },
-    ads: { h: "¿Quiere que su publicidad por fin funcione?", p: "Encontramos dónde se fuga su presupuesto y cómo se ve un primer mes inteligente. Gratis." },
-    web: { h: "¿Quiere ayuda con su página web?", p: "Creamos sitios de restaurante que traen pedidos y reservas, no solo bonitos." },
-    strategy: { h: "¿Quiere ayuda con el marketing de su restaurante?", p: "Cuéntenos de su local y le decimos qué hacer primero. Llamada gratis de 30 minutos." },
+    seo: { h: "Le ayudamos a aparecer en Google", p: "Agende una llamada gratis de 30 minutos y revisamos con usted su perfil de Google para ver qué arreglar primero." },
+    social: { h: "Le ayudamos con sus redes sociales", p: "Cuéntenos sobre su restaurante en una llamada gratis de 30 minutos y le explicamos cómo manejaríamos sus redes." },
+    ads: { h: "Le ayudamos con su publicidad", p: "En una llamada gratis de 30 minutos revisamos cómo se está gastando su presupuesto de anuncios y qué cambiaríamos primero." },
+    web: { h: "Le ayudamos con su sitio web", p: "Hacemos sitios web para restaurantes en inglés y en español, pensados para traer pedidos y reservaciones. Cuéntenos del suyo en una llamada gratis de 30 minutos." },
+    strategy: { h: "Le ayudamos con el marketing de su restaurante", p: "Cuéntenos sobre su restaurante y le decimos qué hacer primero. Es una llamada gratis de 30 minutos, sin compromiso." },
   },
 };
 

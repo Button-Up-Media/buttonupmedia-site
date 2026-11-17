@@ -36,9 +36,11 @@
 //
 // Hub: areas/content/hub.{en|es}.json
 // { id: "hub", lang, metaTitle, metaDescription, eyebrow, h1, answer,
-//   mapAria, mapHint, legend: { area, stop, scale }, county: { north, south },
-//   listLabel?, listH2, listSub,
-//   stops: [{ case, name, mapLabel?, where, area, line }],
+//   glance: { title, cols: [service, southFlorida, elsewhere], rows: [{ service, cells: [x, x] }], note },
+//   listLabel, listH2, listSub, alsoHtml?,      // South Florida neighborhood cards
+//   remote: { label, h2, sub?, items: [{ title, bodyHtml }] },   // outside South Florida
+//   work: { label, h2, sub?, items: [{ case, name, where, service, line }] },
+//   faqH2?, faqs: [{ q, a }],
 //   cta: { h2, body, button } }
 //
 // "reviewNote": "what the owner must confirm" renders an
@@ -87,20 +89,21 @@ const T = {
     hubName: 'Areas we serve',
     primary: 'Book a free strategy call', graderBtn: 'Get a free report card',
     trust: ['Restaurants, bars and cafes only', 'English and Spanish', '5.0 stars on Google'],
-    label: { snapshot: 'Neighborhood snapshot', proof: 'Proof nearby', plan: 'The plan', faq: 'FAQ', others: 'Other areas' },
+    label: { snapshot: 'How we work here', proof: 'Our work nearby', plan: 'Where we would start', faq: 'FAQ', others: 'Other areas' },
     priceKey: 'What it costs',
     faqH2: (n) => `Questions ${n} owners ask`,
     caseLink: (c) => `Read ${/^the\s/i.test(c) ? '' : 'the '}${c} case study`,
     stepAria: (i) => `Step ${i}`,
-    host: 'Juan Hernandez, our founder, hosts every strategy call himself.',
-    hostAlt: 'Juan Hernandez, founder of Button Up Media',
+    host: 'Juan Hernandez, our co-founder, hosts every strategy call himself.',
+    hostAlt: 'Juan Hernandez, co-founder of Button Up Media',
     call: `Call ${PHONE_DISPLAY}`,
     othersAria: 'Other areas we serve',
-    allAreas: 'All areas we serve',
+    allAreas: 'Where we work',
     breadcrumbAria: 'Breadcrumb',
     serviceType: 'Restaurant marketing',
-    nearest: 'Nearest work', firstMove: 'First move',
-    readBrief: (n) => `Read the ${n} brief`,
+    nearest: 'Closest client',
+    readBrief: (n) => `Restaurant marketing in ${n}`,
+    caseShort: 'Read the case study',
     closestArea: 'Closest area',
     clientWhere: (w) => `Client, ${w}`,
     playing: 'Playing',
@@ -111,63 +114,26 @@ const T = {
     hubName: 'Zonas que atendemos',
     primary: 'Agende una llamada estratégica gratis', graderBtn: 'Reciba su reporte gratis',
     trust: ['Solo restaurantes, bares y cafés', 'Inglés y español', '5.0 estrellas en Google'],
-    label: { snapshot: 'El barrio de un vistazo', proof: 'Resultados cerca', plan: 'El plan', faq: 'Preguntas', others: 'Otras zonas' },
+    label: { snapshot: 'Cómo trabajamos aquí', proof: 'Nuestro trabajo cerca', plan: 'Por dónde empezaríamos', faq: 'Preguntas', others: 'Otras zonas' },
     priceKey: 'Cuánto cuesta',
     faqH2: (n) => `Preguntas de dueños en ${n}`,
     caseLink: (c) => `Ver el caso de ${c}`,
     stepAria: (i) => `Paso ${i}`,
-    host: 'Juan Hernandez, nuestro fundador, atiende personalmente cada llamada de estrategia.',
-    hostAlt: 'Juan Hernandez, fundador de Button Up Media',
+    host: 'Juan Hernandez, nuestro cofundador, atiende personalmente cada llamada de estrategia.',
+    hostAlt: 'Juan Hernandez, cofundador de Button Up Media',
     call: `Llame al ${PHONE_DISPLAY}`,
     othersAria: 'Otras zonas que atendemos',
-    allAreas: 'Todas las zonas que atendemos',
+    allAreas: 'Dónde trabajamos',
     breadcrumbAria: 'Ruta de navegación',
     serviceType: 'Marketing para restaurantes',
-    nearest: 'Trabajo más cercano', firstMove: 'Lo primero',
-    readBrief: (n) => `Ver el resumen de ${n}`,
+    nearest: 'Cliente más cercano',
+    readBrief: (n) => `Marketing para restaurantes en ${n}`,
+    caseShort: 'Ver el caso',
     closestArea: 'Zona más cercana',
     clientWhere: (w) => `Cliente, ${w}`,
     playing: 'Reproduciendo',
   },
 };
-
-// ---------- transit map geometry (design canvas 340 x 470, north up) ----------
-// Schematic, not to scale: relative positions only. Label side: r, l, t, b, tr, br.
-const MAP_W = 340;
-const MAP_H = 470;
-const MAP_AREAS = {
-  'fort-lauderdale': { x: 150, y: 36, side: 'r' },
-  wynwood: { x: 150, y: 160, side: 'br' },
-  doral: { x: 34, y: 160, side: 't' },
-  'miami-beach': { x: 282, y: 160, side: 't' },
-  brickell: { x: 150, y: 296, side: 'l', wrap: true },
-  'coral-gables': { x: 94, y: 374, side: 'l', wrap: true },
-};
-const MAP_STOPS = {
-  'the-fatty-crab': { x: 92, y: 160, side: 'b' },
-  'tonis-sushi-bar': { x: 282, y: 234, side: 'l', wrap: true },
-  'shimuja-ramen': { x: 150, y: 234, side: 'l' },
-  'rusty-pelican': { x: 226, y: 394, side: 'r' },
-  'brewing-buddha': { x: 94, y: 444, side: 'r' },
-};
-// Water (bay + ocean) fades out at the canvas edges; islands sit on top.
-const MAP_SVG = `<svg class="ar-map-svg" viewBox="0 0 ${MAP_W} ${MAP_H}" aria-hidden="true" focusable="false">
-            <defs>
-              <linearGradient id="ar-fade-y" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".14" stop-color="#fff"/><stop offset=".86" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
-              <linearGradient id="ar-fade-x" x1="0" y1="0" x2="1" y2="0"><stop offset=".78" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
-              <mask id="ar-mask-y" maskUnits="userSpaceOnUse" x="0" y="0" width="${MAP_W}" height="${MAP_H}"><rect width="${MAP_W}" height="${MAP_H}" fill="url(#ar-fade-y)"/></mask>
-              <mask id="ar-mask-x" maskUnits="userSpaceOnUse" x="0" y="0" width="${MAP_W}" height="${MAP_H}"><rect width="${MAP_W}" height="${MAP_H}" fill="url(#ar-fade-x)"/></mask>
-            </defs>
-            <g mask="url(#ar-mask-y)"><g mask="url(#ar-mask-x)">
-              <path class="ar-map-water" d="M214 0 L210 70 C206 104 190 118 186 140 L182 200 C180 250 186 290 176 330 C166 372 150 420 130 ${MAP_H} L${MAP_W} ${MAP_H} L${MAP_W} 0 Z"/>
-              <path class="ar-map-coast" d="M214 0 L210 70 C206 104 190 118 186 140 L182 200 C180 250 186 290 176 330 C166 372 150 420 130 ${MAP_H}"/>
-              <path class="ar-map-land" d="M268 0 H300 V196 C300 236 292 256 282 258 C272 256 266 236 266 196 Z"/>
-              <path class="ar-map-land" d="M222 388 C232 378 246 382 252 396 C260 416 258 442 248 454 C240 462 232 456 230 444 C228 428 216 402 222 388 Z"/>
-            </g></g>
-            <path class="ar-map-county" d="M0 98 H205"/>
-            <path class="ar-map-line" d="M150 36 V88 M150 108 V318 L94 374 V444 M34 160 H282 V234 M150 318 L226 394"/>
-            <path class="ar-map-break" d="M141 93 L159 85 M141 111 L159 103"/>
-          </svg>`;
 
 // ---------- escaping ----------
 const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -175,7 +141,6 @@ const escAttr = (s) => esc(s).replace(/"/g, '&quot;');
 const stripTags = (s) => String(s == null ? '' : s).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
 // JSON-LD lives inside <script>; keep "</script>" and friends from closing it early.
 const ldJson = (obj) => JSON.stringify(obj, null, 2).replace(/</g, '\\u003c').replace(/>/g, '\\u003e').replace(/&/g, '\\u0026');
-const pct = (v, total) => `${Math.round((v / total) * 10000) / 100}%`;
 
 // ---------- inline icons (no lucide dependency for page content) ----------
 const svg = (body, cls = '') => `<svg${cls ? ` class="${cls}"` : ''} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${body}</svg>`;
@@ -188,6 +153,8 @@ const I = {
   plus: svg('<path d="M12 5v14M5 12h14"/>'),
   play: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.2v13.6L19 12z" fill="currentColor"/></svg>',
   ig: svg('<rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.3"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/>'),
+  globe: svg('<circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.6 3.9 5.8 3.9 9.5s-1.3 6.9-3.9 9.5c-2.6-2.6-3.9-5.8-3.9-9.5s1.3-6.9 3.9-9.5Z"/>'),
+  camera: svg('<path d="M14.5 4h-5L7.5 6.5H4a1.5 1.5 0 0 0-1.5 1.5v10A1.5 1.5 0 0 0 4 19.5h16a1.5 1.5 0 0 0 1.5-1.5V8A1.5 1.5 0 0 0 20 6.5h-3.5Z"/><circle cx="12" cy="12.5" r="3.5"/>'),
   tap: svg('<path d="M9 9V4.5a1.5 1.5 0 0 1 3 0V12"/><path d="M12 11.5V10a1.5 1.5 0 0 1 3 0v2"/><path d="M15 12v-1a1.5 1.5 0 0 1 3 0v4.5a6 6 0 0 1-6 6h-.5a6 6 0 0 1-4.8-2.4L4.2 15a1.6 1.6 0 0 1 2.4-2.1L9 15V9"/>'),
 };
 
@@ -233,8 +200,7 @@ async function loadChrome(root) {
 const BASE_CSS = `
     /* ============================================================
        Areas hub + neighborhood briefs. Mobile-first, extends the
-       shared.css dark system. Transit-map motif: gold line, ring
-       stations. Sections keep left/right padding untouched so
+       shared.css dark system. Sections keep left/right padding untouched so
        even-numbered sections stay full-bleed.
        ============================================================ */
     .ar-wrap { width: 100%; max-width: var(--max); margin: 0 auto; }
@@ -289,6 +255,22 @@ const BASE_CSS = `
       .ar-host { justify-content: center; }
       .ar-cta .cta-content p { margin: 0 auto; }
     }
+`;
+
+const AREA_FAQ_CSS = `
+    /* ---------- FAQ ---------- */
+    .ar-faq { margin-top: 24px; max-width: 860px; border-top: 1px solid var(--line-soft); }
+    .ar-faq details { border-bottom: 1px solid var(--line-soft); }
+    .ar-faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 60px; padding: 14px 2px; }
+    .ar-faq summary::-webkit-details-marker { display: none; }
+    .ar-faq summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 8px; }
+    .ar-faq summary h3 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.02rem, 2vw, 1.14rem); line-height: 1.35; letter-spacing: -0.01em; color: var(--text-head); }
+    .ar-faq-ic { flex: none; width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(226,168,77,0.4); display: grid; place-items: center; color: var(--gold); transition: transform .3s, background .25s; }
+    .ar-faq-ic svg { width: 15px; height: 15px; }
+    .ar-faq details[open] .ar-faq-ic { transform: rotate(45deg); background: var(--gold-soft); }
+    .ar-faq-a { padding: 0 2px 20px; }
+    .ar-faq-a p { color: var(--text-dim); font-size: 1rem; line-height: 1.7; max-width: 66ch; }
+
 `;
 
 const AREA_CSS = `
@@ -376,19 +358,6 @@ const AREA_CSS = `
     .ar-price p { font-size: 1rem; line-height: 1.6; color: var(--text-dim); }
     .ar-price b { display: block; margin-bottom: 2px; font-family: var(--font-display); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
 
-    /* ---------- FAQ ---------- */
-    .ar-faq { margin-top: 24px; max-width: 860px; border-top: 1px solid var(--line-soft); }
-    .ar-faq details { border-bottom: 1px solid var(--line-soft); }
-    .ar-faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 60px; padding: 14px 2px; }
-    .ar-faq summary::-webkit-details-marker { display: none; }
-    .ar-faq summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 8px; }
-    .ar-faq summary h3 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.02rem, 2vw, 1.14rem); line-height: 1.35; letter-spacing: -0.01em; color: var(--text-head); }
-    .ar-faq-ic { flex: none; width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(226,168,77,0.4); display: grid; place-items: center; color: var(--gold); transition: transform .3s, background .25s; }
-    .ar-faq-ic svg { width: 15px; height: 15px; }
-    .ar-faq details[open] .ar-faq-ic { transform: rotate(45deg); background: var(--gold-soft); }
-    .ar-faq-a { padding: 0 2px 20px; }
-    .ar-faq-a p { color: var(--text-dim); font-size: 1rem; line-height: 1.7; max-width: 66ch; }
-
     /* ---------- OTHER AREAS ---------- */
     .ar-others { margin-top: 36px; text-align: center; }
     .ar-others-label { font-family: var(--font-display); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
@@ -440,86 +409,70 @@ const AREA_CSS = `
 `;
 
 const HUB_CSS = `
-    /* ---------- HUB HERO + MAP ---------- */
+    /* ---------- HUB HERO + AT-A-GLANCE TABLE ---------- */
     main.page .ar-hub-hero { padding-top: 124px; padding-bottom: calc(clamp(40px, 6vw, 72px) + 40px); }
-    .ar-hub-grid { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "copy" "map" "panel"; gap: 26px; }
-    .ar-hub-copy { grid-area: copy; }
-    .ar-hub-hero h1 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.045em; font-size: clamp(2.05rem, 5.4vw, 3.5rem); line-height: 1.03; margin-top: 12px; max-width: 17ch; text-wrap: balance; }
-    .ar-map { grid-area: map; margin: 0; width: 100%; max-width: 460px; justify-self: center; }
-    .ar-map-canvas { position: relative; width: 100%; aspect-ratio: ${MAP_W} / ${MAP_H}; }
-    .ar-map-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; overflow: visible; }
-    .ar-map-water { fill: rgba(69,176,140,0.085); }
-    .ar-map-coast { fill: none; stroke: rgba(69,176,140,0.3); stroke-width: 1.2; }
-    .ar-map-land { fill: #0d0d0d; stroke: rgba(69,176,140,0.22); stroke-width: 1; }
-    .ar-map-county { fill: none; stroke: rgba(246,240,230,0.2); stroke-width: 1.2; stroke-dasharray: 4 5; }
-    .ar-map-line { fill: none; stroke: var(--gold); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
-    .ar-map-break { fill: none; stroke: var(--gold); stroke-width: 2.5; stroke-linecap: round; }
-    .ar-map-cty { position: absolute; left: 0; transform: translateY(-50%); font-family: var(--font-display); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); pointer-events: none; }
-    .ar-st { position: absolute; z-index: 2; width: 44px; height: 44px; transform: translate(-50%, -50%); display: grid; place-items: center; border-radius: 50%; color: var(--text-head); -webkit-tap-highlight-color: transparent; }
-    .ar-st::before { content: ""; width: 20px; height: 20px; border-radius: 50%; background: var(--text-head); border: 4px solid var(--gold); box-sizing: border-box; box-shadow: 0 0 0 3px var(--bg-0); transition: transform .2s, box-shadow .2s; }
-    .ar-st.--stop::before { width: 13px; height: 13px; background: var(--gold); border: 3px solid var(--bg-0); box-shadow: 0 0 0 2px var(--gold); }
-    .ar-st-label { position: absolute; display: flex; align-items: center; min-height: 30px; padding: 3px 2px; font-family: var(--font-display); font-size: 0.875rem; font-weight: 700; line-height: 1.15; white-space: nowrap; color: var(--text-head); text-shadow: 0 1px 6px #000, 0 0 2px #000; }
-    .ar-st.--stop .ar-st-label { font-family: var(--font-body); font-size: 0.8125rem; font-weight: 600; color: var(--text); }
-    .ar-st.--r .ar-st-label { left: calc(100% - 8px); top: 50%; transform: translateY(-50%); }
-    .ar-st.--l .ar-st-label { right: calc(100% - 8px); top: 50%; transform: translateY(-50%); justify-content: flex-end; text-align: right; }
-    .ar-st.--t .ar-st-label { bottom: calc(100% - 12px); left: 50%; transform: translateX(-50%); }
-    .ar-st.--b .ar-st-label { top: 100%; min-height: 26px; left: 50%; transform: translateX(-50%); }
-    .ar-st.--tr .ar-st-label { bottom: calc(100% - 16px); left: calc(100% - 14px); }
-    .ar-st.--br .ar-st-label { top: calc(100% - 16px); left: calc(100% - 14px); }
-    .ar-st:hover::before, .ar-st:focus-visible::before { transform: scale(1.18); }
-    .ar-st:hover .ar-st-label { color: var(--gold); }
-    .ar-st:focus-visible { outline: 2px solid var(--gold); outline-offset: 0; }
-    .ar-st.is-on::before { transform: scale(1.25); box-shadow: 0 0 0 3px var(--bg-0), 0 0 0 7px rgba(226,168,77,0.5); }
-    .ar-st.--stop.is-on::before { box-shadow: 0 0 0 2px var(--gold), 0 0 0 7px rgba(226,168,77,0.45); }
-    .ar-st.is-on .ar-st-label { color: var(--gold); }
-    .ar-map-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; margin-top: 14px; font-size: 0.8125rem; color: var(--text-dim); }
-    .ar-map-legend span { display: inline-flex; align-items: center; gap: 8px; }
-    .ar-lg { width: 14px; height: 14px; border-radius: 50%; box-sizing: border-box; border: 3px solid var(--gold); background: var(--text-head); }
-    .ar-lg.--stop { width: 10px; height: 10px; border: 0; background: var(--gold); box-shadow: 0 0 0 2px var(--bg-0), 0 0 0 3px var(--gold); }
+    .ar-hub-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 30px; }
+    .ar-hub-hero h1 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.045em; font-size: clamp(2.05rem, 5.4vw, 3.4rem); line-height: 1.04; margin-top: 12px; max-width: 18ch; text-wrap: balance; }
+    .ar-glance { margin: 0; padding: 20px 18px 18px; border-radius: var(--r-xl); border: 1px solid var(--line); background: var(--bg-1); }
+    .ar-glance-title { font-family: var(--font-display); font-size: 1.06rem; font-weight: 800; letter-spacing: -0.01em; color: var(--text-head); }
+    .ar-gl { width: 100%; margin-top: 12px; border-collapse: collapse; table-layout: fixed; }
+    .ar-gl th, .ar-gl td { padding: 12px 6px; text-align: left; vertical-align: top; border-top: 1px solid var(--line-soft); font-size: 0.9375rem; line-height: 1.35; }
+    .ar-gl thead th { border-top: 0; padding-top: 4px; font-size: 0.8125rem; font-weight: 700; color: var(--text-dim); }
+    .ar-gl thead th:first-child { padding-left: 0; }
+    .ar-gl tbody th { width: 38%; padding-left: 0; font-weight: 700; color: var(--text-head); }
+    .ar-gl td { color: var(--text); }
+    .ar-gl td svg { display: block; width: 18px; height: 18px; margin-bottom: 4px; color: var(--gold); }
+    .ar-glance-note { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line-soft); font-size: 0.9375rem; line-height: 1.55; color: var(--text-dim); }
 
-    .ar-map-panel { grid-area: panel; display: none; }
-    .ar-js .ar-map-panel { display: block; }
-    .ar-map-panel { border-radius: var(--r-lg); border: 1px solid var(--line); background: var(--bg-1); padding: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.35); }
-    .ar-map-panel.is-on { border-color: rgba(226,168,77,0.45); }
-    .ar-map-hint { display: flex; align-items: flex-start; gap: 12px; font-size: 1rem; line-height: 1.55; color: var(--text-dim); }
-    .ar-map-hint svg { width: 24px; height: 24px; color: var(--gold); flex: none; }
-
-    /* ---------- AREA CARDS (also cloned into the map panel) ---------- */
+    /* ---------- NEIGHBORHOOD CARDS ---------- */
     .ar-acards { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-top: 28px; }
-    .ar-acard { position: relative; display: flex; flex-direction: column; padding: 22px 20px 14px; border-radius: var(--r-lg); border: 1px solid var(--line-soft); background: var(--surface); transition: border-color .25s, box-shadow .25s; }
-    .ar-acard:target, .ar-acard.is-on { border-color: rgba(226,168,77,0.5); box-shadow: 0 0 0 1px rgba(226,168,77,0.25); }
-    .ar-ac-where { font-family: var(--font-display); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
-    .ar-acard h3, .ar-panel-card h3 { margin-top: 6px; font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; letter-spacing: -0.02em; line-height: 1.2; color: var(--text-head); }
+    .ar-acard { position: relative; display: flex; flex-direction: column; padding: 22px 20px 12px; border-radius: var(--r-lg); border: 1px solid var(--line-soft); background: var(--surface); transition: border-color .25s; }
+    .ar-acard:hover { border-color: rgba(226,168,77,0.4); }
+    .ar-ac-where { font-size: 0.8125rem; font-weight: 600; color: var(--text-dim); }
+    .ar-acard h3 { margin-top: 4px; font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; letter-spacing: -0.02em; line-height: 1.2; color: var(--text-head); }
     .ar-ac-insight { margin-top: 8px; font-size: 1rem; line-height: 1.6; color: var(--text-dim); }
     .ar-ac-rows { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 12px; }
     .ar-ac-rows li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; font-size: 1rem; line-height: 1.5; color: var(--text); }
     .ar-ac-rows svg { width: 18px; height: 18px; color: var(--gold); margin-top: 3px; }
-    .ar-ac-rows b { display: block; font-family: var(--font-display); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
+    .ar-ac-rows b { display: block; font-size: 0.8125rem; font-weight: 600; color: var(--text-dim); }
     .ar-ac-links { margin-top: auto; padding-top: 10px; display: flex; flex-wrap: wrap; gap: 0 18px; }
     .ar-ac-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 0.95rem; font-weight: 700; color: var(--gold); }
     .ar-ac-link svg { width: 16px; height: 16px; transition: transform .2s; }
     .ar-ac-link:hover svg { transform: translateX(3px); }
-    .ar-ac-link.--quiet { color: var(--text); }
+    .ar-also { margin-top: 18px; font-size: 1rem; line-height: 1.6; color: var(--text-dim); max-width: 62ch; }
+
+    /* ---------- OUTSIDE SOUTH FLORIDA ---------- */
+    .ar-modes { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-top: 28px; }
+    .ar-mode { padding: 24px 22px; border-radius: var(--r-lg); border: 1px solid var(--line); background: var(--bg-1); }
+    .ar-mode-ic { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; background: var(--gold-soft); color: var(--gold); }
+    .ar-mode-ic svg { width: 22px; height: 22px; }
+    .ar-mode h3 { margin-top: 14px; font-family: var(--font-display); font-size: 1.2rem; font-weight: 800; letter-spacing: -0.015em; line-height: 1.25; color: var(--text-head); }
+    .ar-mode p { margin-top: 8px; font-size: 1rem; line-height: 1.65; color: var(--text-dim); }
+
+    /* ---------- CLIENT WORK BY LOCATION ---------- */
+    .ar-work { list-style: none; margin: 26px 0 0; padding: 0; border-top: 1px solid var(--line-soft); max-width: 900px; }
+    .ar-work li { border-bottom: 1px solid var(--line-soft); }
+    .ar-work a { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 4px 16px; padding: 16px 2px; color: inherit; text-decoration: none; }
+    .ar-work-name { font-family: var(--font-display); font-size: 1.06rem; font-weight: 800; letter-spacing: -0.01em; color: var(--text-head); }
+    .ar-work-meta { grid-column: 1; font-size: 0.875rem; font-weight: 600; color: var(--gold); }
+    .ar-work-line { grid-column: 1; font-size: 0.9375rem; line-height: 1.5; color: var(--text-dim); }
+    .ar-work-go { grid-column: 2; grid-row: 1 / span 3; width: 36px; height: 36px; border-radius: 999px; display: grid; place-items: center; background: rgba(255,255,255,0.06); color: var(--text-head); transition: transform .2s; }
+    .ar-work-go svg { width: 16px; height: 16px; }
+    .ar-work a:hover .ar-work-name { color: var(--gold); }
+    .ar-work a:hover .ar-work-go { transform: translateX(3px); }
 
     @media (max-width: 700px) {
       main.page .ar-hub-hero { padding-top: 16px; }
-    }
-    @media (max-width: 520px) {
-      .ar-st.--wrap .ar-st-label { white-space: normal; width: min-content; min-width: 4.6em; }
-    }
-    @media (max-width: 340px) {
-      .ar-st.--stop .ar-st-label { display: none; }
+      .ar-gl th, .ar-gl td { padding: 11px 4px; font-size: 0.875rem; }
+      .ar-gl tbody th { padding-left: 0; }
     }
     @media (min-width: 700px) {
-      .ar-acards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .ar-st-label { font-size: 0.95rem; }
-      .ar-st.--stop .ar-st-label { font-size: 0.875rem; }
+      .ar-acards, .ar-modes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (min-width: 960px) {
       main.page .ar-hub-hero { padding-top: 150px; }
-      .ar-hub-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 430px); grid-template-rows: auto 1fr; grid-template-areas: "copy map" "panel map"; column-gap: clamp(40px, 6vw, 88px); row-gap: 30px; align-items: start; }
-      .ar-map { max-width: none; }
-      .ar-map-panel { max-width: 560px; }
+      .ar-hub-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 480px); column-gap: clamp(40px, 6vw, 80px); align-items: center; }
+      .ar-glance { padding: 26px 24px 22px; }
     }
     @media (min-width: 1060px) {
       .ar-acards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -599,34 +552,6 @@ const MEDIA_JS = `
     })();
 `;
 
-const HUB_JS = `
-    (function () {
-      var panel = document.getElementById('ar-map-panel');
-      if (!panel) return;
-      var sts = [].slice.call(document.querySelectorAll('.ar-st'));
-      var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var show = function (st) {
-        var src = st.dataset.area ? document.getElementById('area-' + st.dataset.area) : document.getElementById('ar-stop-' + st.dataset.stop);
-        if (!src) return;
-        panel.innerHTML = '<div class="ar-panel-card">' + src.innerHTML + '</div>';
-        panel.classList.add('is-on');
-        sts.forEach(function (s) { var on = s === st; s.classList.toggle('is-on', on); s.setAttribute('aria-pressed', on ? 'true' : 'false'); });
-        [].slice.call(document.querySelectorAll('.ar-acard')).forEach(function (c) { c.classList.toggle('is-on', c.id === 'area-' + (st.dataset.area || st.dataset.near)); });
-        if (matchMedia('(max-width: 959px)').matches) {
-          var r = panel.getBoundingClientRect();
-          if (r.bottom > innerHeight || r.top < 70) panel.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest' });
-        }
-      };
-      sts.forEach(function (st) {
-        st.setAttribute('role', 'button');
-        st.setAttribute('aria-pressed', 'false');
-        st.setAttribute('aria-controls', 'ar-map-panel');
-        st.addEventListener('click', function (e) { e.preventDefault(); show(st); });
-        st.addEventListener('keydown', function (e) { if (e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); show(st); } });
-      });
-    })();
-`;
-
 // ---------- validation / lint ----------
 const DASH_RE = /[\u2013\u2014]|&mdash;|&ndash;|&#821[12];|&#x201[34];/i;
 
@@ -672,14 +597,22 @@ function validateArea(c) {
 
 function validateHub(h) {
   const { errs, str, arr, obj } = checker();
-  ['metaTitle', 'metaDescription', 'eyebrow', 'h1', 'answer', 'mapAria', 'mapHint', 'listH2', 'listSub'].forEach((k) => str(h[k], k));
-  const lg = obj(h.legend, 'legend'); ['area', 'stop', 'scale'].forEach((k) => str(lg[k], `legend.${k}`));
-  const co = obj(h.county, 'county'); ['north', 'south'].forEach((k) => str(co[k], `county.${k}`));
-  arr(h.stops, 'stops').forEach((s, i) => {
-    ['case', 'name', 'where', 'area', 'line'].forEach((k) => str(s && s[k], `stops[${i}].${k}`));
-    if (s && s.case && !MAP_STOPS[s.case]) errs.push(`stops[${i}].case "${s.case}" has no map position`);
-    if (s && s.area && !AREA_IDS.includes(s.area)) errs.push(`stops[${i}].area "${s.area}" is not an area id`);
+  ['metaTitle', 'metaDescription', 'eyebrow', 'h1', 'answer', 'listH2', 'listSub'].forEach((k) => str(h[k], k));
+  const g = obj(h.glance, 'glance'); str(g.title, 'glance.title'); str(g.note, 'glance.note');
+  if (arr(g.cols, 'glance.cols').length !== 3) errs.push('glance.cols must have 3 headings');
+  arr(g.rows, 'glance.rows').forEach((r, i) => {
+    str(r && r.service, `glance.rows[${i}].service`);
+    if (!r || !Array.isArray(r.cells) || r.cells.length !== 2) errs.push(`glance.rows[${i}].cells must have 2 entries`);
+    else r.cells.forEach((x, j) => str(x, `glance.rows[${i}].cells[${j}]`));
   });
+  const rm = obj(h.remote, 'remote'); str(rm.label, 'remote.label'); str(rm.h2, 'remote.h2');
+  arr(rm.items, 'remote.items').forEach((it, i) => { str(it && it.title, `remote.items[${i}].title`); str(it && it.bodyHtml, `remote.items[${i}].bodyHtml`); });
+  const w = obj(h.work, 'work'); str(w.label, 'work.label'); str(w.h2, 'work.h2');
+  arr(w.items, 'work.items').forEach((s, i) => {
+    ['case', 'name', 'where', 'service', 'line'].forEach((k) => str(s && s[k], `work.items[${i}].${k}`));
+    if (s && s.case && !CASE_SLUGS.includes(s.case)) errs.push(`work.items[${i}].case "${s.case}" is not a known case study`);
+  });
+  arr(h.faqs, 'faqs').forEach((f, i) => { str(f && f.q, `faqs[${i}].q`); str(f && f.a, `faqs[${i}].a`); });
   const ct = obj(h.cta, 'cta'); ['h2', 'body', 'button'].forEach((k) => str(ct[k], `cta.${k}`));
   return errs;
 }
@@ -727,11 +660,7 @@ function lint(c, root) {
   if (!/\| Button Up Media$/.test(c.metaTitle || '')) warn.push('metaTitle should end with "| Button Up Media"');
   const wantBtn = c.lang === 'es' ? 'Agende una llamada estratégica gratis' : 'Book a free strategy call';
   if (c.cta && c.cta.button !== wantBtn) warn.push(`cta.button should be "${wantBtn}"`);
-  if (c.id === 'hub') {
-    const missing = Object.keys(MAP_STOPS).filter((s) => !(c.stops || []).some((x) => x.case === s));
-    if (missing.length) warn.push(`stops is missing map clients: ${missing.join(', ')}`);
-    return warn;
-  }
+  if (c.id === 'hub') return warn;
   const n = (a) => (Array.isArray(a) ? a.length : 0);
   if (n(c.snapshot && c.snapshot.facts) !== 3) warn.push(`snapshot.facts has ${n(c.snapshot && c.snapshot.facts)} items (want 3)`);
   if (n(c.snapshot && c.snapshot.paragraphsHtml) !== 2) warn.push(`snapshot.paragraphsHtml has ${n(c.snapshot && c.snapshot.paragraphsHtml)} items (want 2)`);
@@ -944,7 +873,7 @@ function renderArea(c, chrome, available) {
     c, t, chrome, url,
     alternates: alternatesFor(areaUrl(c.id, 'en'), areaUrl(c.id, 'es'), enAvail, esAvail),
     hasAlt: c.lang === 'en' ? esAvail : enAvail,
-    schema, css: BASE_CSS + AREA_CSS + '\n    .ar-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }\n', preload: poster,
+    schema, css: BASE_CSS + AREA_FAQ_CSS + AREA_CSS + '\n    .ar-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }\n', preload: poster,
   });
 
   return `${head}
@@ -1050,38 +979,47 @@ function renderHub(h, chrome, available) {
   const t = T[h.lang];
   const url = hubUrl(h.lang);
   const areas = AREA_IDS.filter((id) => available.has(`${id}.${h.lang}`)).map((id) => available.get(`${id}.${h.lang}`));
-  const byId = new Map(areas.map((a) => [a.id, a]));
+  const g = h.glance;
 
-  const stations = areas.map((a) => {
-    const g = MAP_AREAS[a.id];
-    return `<a class="ar-st --area --${g.side}${g.wrap ? ' --wrap' : ''}" href="#area-${a.id}" data-area="${a.id}" style="left:${pct(g.x, MAP_W)};top:${pct(g.y, MAP_H)}"><span class="ar-st-label">${wrapLabel(shortOf(a), g.wrap)}</span></a>`;
-  });
-  const stops = (h.stops || []).filter((s) => MAP_STOPS[s.case]).map((s) => {
-    const g = MAP_STOPS[s.case];
-    return `<a class="ar-st --stop --${g.side}${g.wrap ? ' --wrap' : ''}" href="${casePath(s.case, h.lang)}" data-stop="${s.case}" data-near="${s.area}" style="left:${pct(g.x, MAP_W)};top:${pct(g.y, MAP_H)}"><span class="ar-st-label">${wrapLabel(s.mapLabel || s.name, g.wrap)}</span></a>`;
-  });
+  const glance = `<figure class="ar-glance ar-rise">
+          <figcaption class="ar-glance-title">${esc(g.title)}</figcaption>
+          <table class="ar-gl">
+            <thead><tr>${g.cols.map((c) => `<th scope="col">${esc(c)}</th>`).join('')}</tr></thead>
+            <tbody>
+              ${g.rows.map((r) => `<tr><th scope="row">${esc(r.service)}</th>${r.cells.map((x) => `<td>${I.check}${esc(x)}</td>`).join('')}</tr>`).join('\n              ')}
+            </tbody>
+          </table>
+          <p class="ar-glance-note">${esc(g.note)}</p>
+        </figure>`;
 
-  const cards = areas.map((a) => `<article class="ar-acard ar-rise" id="area-${a.id}">
+  const cards = areas.map((a) => `<a class="ar-acard ar-rise" id="area-${a.id}" href="${areaPath(a.id, h.lang)}">
             <p class="ar-ac-where">${esc(a.eyebrow)}</p>
             <h3>${esc(shortOf(a))}</h3>
             <p class="ar-ac-insight">${esc(a.card.insight)}</p>
             <ul class="ar-ac-rows">
               <li>${I.pin}<span><b>${esc(t.nearest)}</b>${esc(a.card.proofLine)}</span></li>
-              <li>${I.route}<span><b>${esc(t.firstMove)}</b>${esc(a.steps.items[0].title)}</span></li>
             </ul>
-            <div class="ar-ac-links"><a class="ar-ac-link" href="${areaPath(a.id, h.lang)}">${esc(t.readBrief(shortOf(a)))} ${I.arrow}</a></div>
+            <span class="ar-ac-links"><span class="ar-ac-link">${esc(t.readBrief(shortOf(a)))} ${I.arrow}</span></span>
+          </a>`).join('\n          ');
+
+  const modeIcons = [I.camera, I.globe];
+  const modes = h.remote.items.map((it, i) => `<article class="ar-mode ar-rise">
+            <span class="ar-mode-ic">${modeIcons[i % modeIcons.length]}</span>
+            <h3>${esc(it.title)}</h3>
+            <p class="ar-rich">${it.bodyHtml}</p>
           </article>`).join('\n          ');
 
-  const templates = (h.stops || []).filter((s) => MAP_STOPS[s.case]).map((s) => {
-    const near = byId.get(s.area);
-    return `<template id="ar-stop-${s.case}">
-    <p class="ar-ac-where">${esc(t.clientWhere(s.where))}</p>
-    <h3>${esc(s.name)}</h3>
-    <p class="ar-ac-insight">${esc(s.line)}</p>
-    ${near ? `<ul class="ar-ac-rows"><li>${I.pin}<span><b>${esc(t.closestArea)}</b>${esc(shortOf(near))}</span></li></ul>` : ''}
-    <div class="ar-ac-links"><a class="ar-ac-link" href="${casePath(s.case, h.lang)}">${esc(t.caseLink(s.mapLabel || s.name))} ${I.arrow}</a>${near ? `<a class="ar-ac-link --quiet" href="${areaPath(near.id, h.lang)}">${esc(t.readBrief(shortOf(near)))} ${I.arrow}</a>` : ''}</div>
-  </template>`;
-  }).join('\n  ');
+  const work = h.work.items.map((w) => `<li><a href="${casePath(w.case, h.lang)}">
+            <span class="ar-work-name">${esc(w.name)}</span>
+            <span class="ar-work-meta">${esc(w.where)} · ${esc(w.service)}</span>
+            <span class="ar-work-line">${esc(w.line)}</span>
+            <span class="ar-work-go" aria-hidden="true">${I.arrow}</span>
+          </a></li>`).join('\n          ');
+
+  const faqs = (h.faqs || []).map((f) => `<details>
+            <summary><h3>${esc(f.q)}</h3><span class="ar-faq-ic">${I.plus}</span></summary>
+            <div class="ar-faq-a"><p>${esc(f.a)}</p></div>
+          </details>`).join('\n          ');
 
   const schema = {
     '@context': 'https://schema.org',
@@ -1111,19 +1049,23 @@ function renderHub(h, chrome, available) {
         numberOfItems: areas.length,
         itemListElement: areas.map((a, i) => ({ '@type': 'ListItem', position: i + 1, name: a.h1, url: areaUrl(a.id, h.lang) })),
       },
-    ],
+      (h.faqs || []).length ? {
+        '@type': 'FAQPage',
+        '@id': `${url}#faq`,
+        mainEntity: h.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+      } : null,
+    ].filter(Boolean),
   };
 
   const head = renderHead({
     c: h, t, chrome, url,
     alternates: alternatesFor(hubUrl('en'), hubUrl('es'), available.has('hub.en'), available.has('hub.es')),
     hasAlt: available.has(h.lang === 'en' ? 'hub.es' : 'hub.en'),
-    schema, css: BASE_CSS + HUB_CSS,
+    schema, css: BASE_CSS + AREA_FAQ_CSS + HUB_CSS,
   });
 
   return `${head}
 <body>
-  <script>document.documentElement.classList.add('ar-js');</script>
   ${chrome.gtmNoscript}
 
   ${chrome.depth}
@@ -1132,7 +1074,7 @@ function renderHub(h, chrome, available) {
 
   <main class="page">
 
-    <!-- HERO + TRANSIT MAP -->
+    <!-- HERO + WHAT WE OFFER WHERE -->
     <section class="lib-section ar-hub-hero">
       <div class="ar-wrap ar-hub-grid">
         <div class="ar-hub-copy">
@@ -1143,44 +1085,54 @@ function renderHub(h, chrome, available) {
             <a href="${t.contact}" class="btn btn-primary ar-btn">${esc(t.primary)} ${I.arrow}</a>
             <a href="${t.grader}" class="btn ar-btn">${esc(t.graderBtn)}</a>
           </div>
+          <ul class="ar-trust">
+            ${t.trust.map((x) => `<li>${I.check}${esc(x)}</li>`).join('\n            ')}
+          </ul>
         </div>
-        <figure class="ar-map" role="group" aria-label="${escAttr(h.mapAria)}">
-          <div class="ar-map-canvas">
-          ${MAP_SVG}
-            <span class="ar-map-cty" style="top:${pct(84, MAP_H)}" aria-hidden="true">${esc(h.county.north)}</span>
-            <span class="ar-map-cty" style="top:${pct(113, MAP_H)}" aria-hidden="true">${esc(h.county.south)}</span>
-            ${stations.join('\n            ')}
-            ${stops.join('\n            ')}
-          </div>
-          <figcaption class="ar-map-legend"><span><i class="ar-lg" aria-hidden="true"></i>${esc(h.legend.area)}</span><span><i class="ar-lg --stop" aria-hidden="true"></i>${esc(h.legend.stop)}</span><span>${esc(h.legend.scale)}</span></figcaption>
-        </figure>
-        <div class="ar-map-panel" id="ar-map-panel" aria-live="polite">
-          <p class="ar-map-hint">${I.tap}<span>${esc(h.mapHint)}</span></p>
-        </div>
+        ${glance}
       </div>
     </section>
 
-    <!-- AREA CARDS -->
+    <!-- SOUTH FLORIDA NEIGHBORHOODS -->
 ${sec('card-overlay --dark lib-section --lap', 'areas', `        <p class="ar-label">${esc(h.listLabel || h.eyebrow)}</p>
         <h2 class="ar-h2">${esc(h.listH2)}</h2>
         <p class="ar-sub">${esc(h.listSub)}</p>
         <div class="ar-acards">
           ${cards}
+        </div>
+        ${h.alsoHtml ? `<p class="ar-also ar-rich">${h.alsoHtml}</p>` : ''}`)}
+
+    <!-- OUTSIDE SOUTH FLORIDA -->
+${sec('lib-section', 'outside', `        <p class="ar-label">${esc(h.remote.label)}</p>
+        <h2 class="ar-h2">${esc(h.remote.h2)}</h2>
+        ${h.remote.sub ? `<p class="ar-sub">${esc(h.remote.sub)}</p>` : ''}
+        <div class="ar-modes">
+          ${modes}
         </div>`)}
+
+    <!-- CLIENT WORK BY LOCATION -->
+${sec('card-overlay --dark lib-section --lap', 'work', `        <p class="ar-label">${esc(h.work.label)}</p>
+        <h2 class="ar-h2">${esc(h.work.h2)}</h2>
+        ${h.work.sub ? `<p class="ar-sub">${esc(h.work.sub)}</p>` : ''}
+        <ul class="ar-work">
+          ${work}
+        </ul>`)}
+
+    <!-- FAQ -->
+${faqs ? sec('lib-section', 'faq', `        <p class="ar-label">${esc(t.label.faq)}</p>
+        <h2 class="ar-h2">${esc(h.faqH2 || t.label.faq)}</h2>
+        <div class="ar-faq ar-rise">
+          ${faqs}
+        </div>`) : ''}
 
     <!-- CTA -->
 ${sec('lib-section --end', 'book', `        ${renderCta(h.cta, t)}`)}
-
-    <!-- map panel content for client stops (cloned by the script below) -->
-    <div class="ar-tpls" hidden>
-  ${templates}
-    </div>
 
     <!-- FOOTER -->
     ${chrome.footer}
   </main>
 
-  <script>${REVEAL_JS}${HUB_JS}  </script>
+  <script>${REVEAL_JS}  </script>
   <script src="/shared.js?v=${chrome.jsVer}" defer></script>
 </body>
 </html>
@@ -1200,7 +1152,7 @@ export function visibleWords(html) {
     .replace(/<template[\s\S]*?<\/template>/g, ' ')
     .replace(/<aside class="review-note">[\s\S]*?<\/aside>/g, ' ')
     .replace(/<span class="ar-sr">[\s\S]*?<\/span>/g, ' ')
-    .replace(/<span class="ar-map-cty"[\s\S]*?<\/span>/g, ' ');
+    ;
   return stripTags(main).replace(/&[a-z]+;|&#\d+;/g, ' ').split(/\s+/).filter((w) => /[\p{L}\p{N}]/u.test(w)).length;
 }
 

@@ -14,26 +14,26 @@
     sheetTitle: 'Servicios', close: 'Cerrar',
     cta: 'Agende una llamada estratégica gratis',
     items: [
-      ['/es/marketing-redes-sociales', 'Marketing en redes sociales', 'Videos cortos que llenan mesas'],
-      ['/es/publicidad-restaurantes', 'Publicidad pagada', 'Anuncios de Google y Meta que traen reservas'],
-      ['/es/diseno-web-restaurantes', 'Sitios web', 'Rápidos, bilingües y hechos para convertir'],
-      ['/es/seo-restaurantes', 'SEO y Perfil de Google', 'Aparezca en Google Maps y en las búsquedas'],
-      ['/es/casos-de-exito', 'Casos de éxito', 'Resultados reales de restaurantes reales'],
-      ['/es/analizador-redes-sociales-web', 'Analizador gratis', 'Califique sus redes y su sitio web']
-    ]
+      ['/es/marketing-redes-sociales', 'Marketing en redes sociales', 'Fotos, videos y manejo de sus redes'],
+      ['/es/publicidad-restaurantes', 'Publicidad pagada', 'Google Ads y anuncios en Instagram y Facebook'],
+      ['/es/diseno-web-restaurantes', 'Sitios web', 'Sitios a la medida, en inglés y español'],
+      ['/es/seo-restaurantes', 'SEO y AEO', 'Google, Google Maps y respuestas de IA']
+    ],
+    toolLabel: 'Herramienta gratis',
+    tool: ['/es/analizador-redes-sociales-web', 'Analizador de redes y sitio web', 'Califique su presencia en línea gratis']
   } : {
     home: 'Home', work: 'Work', services: 'Services', book: 'Book',
     homeHref: '/', workHref: '/case-studies', bookHref: '/contact',
     sheetTitle: 'Services', close: 'Close',
     cta: 'Book a free strategy call',
     items: [
-      ['/socialmediamarketing', 'Social media marketing', 'Short videos that fill seats'],
-      ['/restaurant-advertising', 'Paid media', 'Google and Meta ads that book tables'],
-      ['/restaurant-website-design', 'Websites', 'Fast, bilingual, built to convert'],
-      ['/restaurant-seo', 'SEO & Google Profile', 'Show up on Google Maps and Search'],
-      ['/case-studies', 'Case studies', 'Real results from real restaurants'],
-      ['/social-media-website-grader', 'Free grader', 'Score your social media and website']
-    ]
+      ['/socialmediamarketing', 'Social media marketing', 'Photos, videos and running your pages'],
+      ['/restaurant-advertising', 'Paid media', 'Google Ads plus Instagram and Facebook ads'],
+      ['/restaurant-website-design', 'Websites', 'Custom sites in English and Spanish'],
+      ['/restaurant-seo', 'SEO & AEO', 'Google, Google Maps and AI answers']
+    ],
+    toolLabel: 'Free tool',
+    tool: ['/social-media-website-grader', 'Social media and website grader', 'See how your restaurant shows up online']
   };
 
   var ICON = {
@@ -76,7 +76,8 @@
       T.items.map(function (it) {
         return '<li><a href="' + it[0] + '"><span>' + it[1] + '<small>' + it[2] + '</small></span>' + svg('chevron', 2) + '</a></li>';
       }).join('') +
-      '</ul><a class="btn btn-primary v3-sheet-cta" href="' + T.bookHref + '">' + T.cta + '</a>';
+      '</ul><p class="v3-sheet-sub">' + T.toolLabel + '</p><ul><li><a href="' + T.tool[0] + '"><span>' + T.tool[1] + '<small>' + T.tool[2] + '</small></span>' + svg('chevron', 2) + '</a></li></ul>' +
+      '<a class="btn btn-primary v3-sheet-cta" href="' + T.bookHref + '">' + T.cta + '</a>';
 
     d.body.appendChild(scrim);
     d.body.appendChild(sheet);

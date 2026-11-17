@@ -1,12 +1,12 @@
 {
   "lang": "en",
   "metaTitle": "Restaurant Marketing Case Studies, Miami | Button Up Media",
-  "metaDescription": "Real results Button Up Media produced for Miami and South Florida restaurants: 200M+ organic social views, Google Ads up to 72:1 ROAS and bilingual websites.",
+  "metaDescription": "Results Button Up Media got for restaurants in Miami and South Florida, including 200M+ organic social views, Google Ads up to 72:1 ROAS and bilingual websites.",
   "ogImage": "/media/cs-fatty-crab-reel.webp",
-  "eyebrow": "Results library",
+  "eyebrow": "Client results",
   "h1": "Restaurant marketing case studies",
   "h1Accent": "case studies",
-  "answer": "Button Up Media has driven 200M+ organic social views and up to 72:1 return on Google Ads for restaurants in Miami, South Florida and beyond.",
+  "answer": "Our work for restaurants has brought in 200M+ organic social media views, and in 2025 one Google Ads account returned about $72 for every $1 spent.",
   "primaryCta": "Book a free strategy call",
   "secondaryCta": "Try the free grader",
   "wallLabel": "Clips from three of our clients",
@@ -27,7 +27,7 @@
       "width": 540,
       "height": 960,
       "chip": "46M+ views",
-      "alt": "A short video Button Up Media made for The Fatty Crab: a crab leg dipped in sauce"
+      "alt": "A seafood boil poured out of the bag at The Fatty Crab, from a Reel we made"
     },
     {
       "slug": "brewing-buddha",
@@ -36,15 +36,15 @@
       "width": 540,
       "height": 960,
       "chip": "24M+ views",
-      "alt": "Guests at Brewing Buddha talk about the cafe in a short social video"
+      "alt": "A Brewing Buddha Reel we made about a customer ordering a party-size Cookie Butter Latte"
     }
   ],
   "tabsLabel": "Case studies by service",
   "sections": {
     "social": {
       "tab": "Social media",
-      "h2": "What short videos did for four restaurants",
-      "intro": "Organic means unpaid: nobody bought these views. Our crew shot, edited and posted the videos. Tap a restaurant to see how.",
+      "h2": "Social media results for four restaurants",
+      "intro": "These views are organic, which means no ad money was spent to get them. Our team made and posted the videos. Tap a restaurant to see what we did.",
       "order": [
         "tonis-sushi-bar",
         "the-fatty-crab",
@@ -54,9 +54,9 @@
     },
     "ads": {
       "tab": "Google Ads",
-      "h2": "Google Ads: what every $1 brought back",
-      "intro": "Five restaurant ad accounts we managed in 2025, best return first.",
-      "roasLineHtml": "<strong>How to read it:</strong> ROAS (return on ad spend) is what came back for every $1 of ads. 72:1 means about $72 in bookings and inquiries tracked by Google for each $1 spent. A conversion is one tracked action, like a reservation, a call or a private-event inquiry.",
+      "h2": "Google Ads results from five restaurant accounts",
+      "intro": "We managed these five restaurant Google Ads accounts in 2025. They're listed from the highest return to the lowest.",
+      "roasLineHtml": "<strong>How to read these numbers:</strong> ROAS (return on ad spend) is what came back for every $1 of ads. 72:1 means about $72 in bookings and inquiries tracked by Google for each $1 spent. A conversion is one tracked action, like a reservation, a call or a private-event inquiry.",
       "totals": {
         "h3": "All five accounts together, 2025",
         "items": [
@@ -83,7 +83,7 @@
     "web": {
       "tab": "Websites",
       "h2": "Websites we built from scratch",
-      "intro": "Custom-coded sites, designed for the phone first. No templates.",
+      "intro": "We code each site from scratch instead of using a template, and we design it for phones first.",
       "order": [
         "woa-cocktails",
         "rusty-pelican"
@@ -91,8 +91,8 @@
     }
   },
   "cta": {
-    "h2": "Want results like these?",
-    "body": "Book a free 30-minute strategy call. You talk to Juan, our founder, not a sales rep. We look at where your restaurant stands and the moves that fill seats, and you keep the plan either way.",
+    "h2": "Talk with us about your restaurant",
+    "body": "Book a free 30-minute strategy call. You'll talk with Juan, our co-founder, not a sales rep. Tell him about your restaurant and what you want more of, and he'll walk you through what we would do. There's no obligation to sign up.",
     "quote": {
       "text": "As a local restaurant owner with a few spots here I love supporting small businesses, and having used other marketing agencies before I can see the value right away.",
       "name": "Gustavo A. Torres",

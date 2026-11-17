@@ -1,35 +1,132 @@
 {
   "id": "hub",
   "lang": "es",
-  "metaTitle": "Zonas que Atendemos en Miami | Button Up Media",
-  "metaDescription": "Mira dónde hacemos marketing para restaurantes en Miami y el sur de la Florida, de Fort Lauderdale a Coral Gables, con nuestro trabajo más cercano en cada zona.",
-  "eyebrow": "Zonas que atendemos",
-  "h1": "Marketing para restaurantes en Miami y el sur de la Florida",
-  "answer": "Button Up Media es una agencia de Miami que trabaja con restaurantes, bares y cafés desde Fort Lauderdale hasta Pinecrest. Elige tu zona y mira nuestro trabajo más cercano.",
-  "mapAria": "Mapa tipo metro de las seis zonas del sur de la Florida que atendemos y de los restaurantes con los que trabajamos",
-  "mapHint": "Toca una parada del mapa para ver nuestro trabajo más cercano y lo primero que haríamos allí.",
-  "legend": {
-    "area": "Zona que atendemos",
-    "stop": "Cliente",
-    "scale": "Sin escala"
+  "metaTitle": "Zonas que atendemos en Florida y EE. UU. | Button Up Media",
+  "metaDescription": "Button Up Media trabaja en persona con restaurantes en el sur de la Florida y maneja anuncios, páginas web, SEO y AEO para restaurantes en todo EE. UU.",
+  "eyebrow": "Dónde trabajamos",
+  "h1": "Marketing para restaurantes en el sur de la Florida y todo EE. UU.",
+  "answer": "Button Up Media tiene sede en Miami, trabaja en persona en el sur de la Florida y maneja anuncios, páginas web, SEO y AEO para restaurantes en todo EE. UU.",
+  "glance": {
+    "title": "Qué ofrecemos y dónde",
+    "cols": [
+      "Servicio",
+      "Sur de la Florida",
+      "Resto de EE. UU."
+    ],
+    "rows": [
+      {
+        "service": "Contenido y manejo de redes sociales",
+        "cells": [
+          "Nuestro equipo graba en persona",
+          "Lo graba nuestra red local"
+        ]
+      },
+      {
+        "service": "Google Ads y anuncios en Meta",
+        "cells": [
+          "Sí",
+          "Sí, a distancia"
+        ]
+      },
+      {
+        "service": "Páginas web",
+        "cells": [
+          "Sí",
+          "Sí, a distancia"
+        ]
+      },
+      {
+        "service": "SEO, AEO y Perfil de Empresa de Google",
+        "cells": [
+          "Sí",
+          "Sí, a distancia"
+        ]
+      }
+    ],
+    "note": "Fuera del sur de la Florida, nuestro equipo en Miami sigue planificando y manejando tus redes sociales. Las fotos y los videos los graban videógrafos y fotógrafos con experiencia de nuestra red en tu zona."
   },
-  "county": {
-    "north": "Broward",
-    "south": "Miami-Dade"
+  "listLabel": "Sur de la Florida",
+  "listH2": "Zonas donde trabajamos",
+  "listSub": "Nuestro equipo va a tu restaurante a grabar. Cada página muestra nuestro trabajo más cercano y por dónde empezaríamos.",
+  "alsoHtml": "También trabajamos con restaurantes en Kendall, Pinecrest y otras partes del sur de la Florida que todavía no tienen su propia página. <a href=\"/es/contacto\">Pregúntenos por su zona</a>.",
+  "remote": {
+    "label": "Fuera del sur de la Florida",
+    "h2": "Cómo trabajamos con restaurantes en otros estados",
+    "sub": "Nuestra sede está en Miami y también tenemos miembros del equipo cerca de restaurantes en varios otros estados.",
+    "items": [
+      {
+        "title": "Redes sociales",
+        "bodyHtml": "Nuestro equipo en Miami planifica tu contenido, lo publica y maneja tus redes. Videógrafos y fotógrafos con experiencia de nuestra red en tu zona hacen la grabación, para que la calidad se mantenga alta. <a href=\"/es/marketing-redes-sociales\">Cómo funciona nuestro servicio de redes sociales</a>."
+      },
+      {
+        "title": "Anuncios, páginas web, SEO y AEO",
+        "bodyHtml": "Estos servicios se hacen a distancia, así que podemos trabajarlos para un restaurante en cualquier parte de Estados Unidos. Por ejemplo, manejamos los Google Ads de Rusty Pelican en Tampa y también en Miami. Mira <a href=\"/es/publicidad-restaurantes\">publicidad pagada</a>, <a href=\"/es/diseno-web-restaurantes\">páginas web</a> y <a href=\"/es/seo-restaurantes\">SEO y AEO</a>."
+      }
+    ]
   },
-  "listLabel": "Seis resúmenes por zona",
-  "listH2": "Elige tu barrio",
-  "listSub": "Cada zona tiene un resumen corto: cómo escogen restaurante allí, nuestro trabajo más cercano y lo primero que haríamos.",
-  "stops": [
-    {"case": "the-fatty-crab", "name": "The Fatty Crab", "where": "Doral", "area": "doral", "line": "Redes sociales en Instagram, Facebook y TikTok: 46M+ vistas de video y 350K+ seguidores."},
-    {"case": "tonis-sushi-bar", "name": "Toni's Sushi Bar", "where": "South Beach", "area": "miami-beach", "line": "Reels con el chef para un sushi bar familiar en Washington Ave: de unos 4K a 80K seguidores en Instagram en cinco meses."},
-    {"case": "shimuja-ramen", "name": "Shimuja Ramen", "where": "Downtown Miami", "area": "brickell", "line": "Redes sociales para un ramen que empezó en Southwest Ranches y hoy sirve en Julia & Henry's: 15.4M de vistas."},
-    {"case": "rusty-pelican", "name": "Rusty Pelican Miami", "mapLabel": "Rusty Pelican", "where": "Key Biscayne", "area": "brickell", "line": "Google Ads en 2025: un retorno de 7 a 1, es decir, unos $7 en valor de conversión medido por cada $1, en 1,007 conversiones."},
-    {"case": "brewing-buddha", "name": "Brewing Buddha", "where": "Pinecrest", "area": "coral-gables", "line": "Redes orgánicas para una cafetería y espacio de arte conocida por sus lattes creativos: 24M+ vistas de video."}
+  "work": {
+    "label": "Clientes",
+    "h2": "Nuestros clientes, por zona",
+    "items": [
+      {
+        "case": "tonis-sushi-bar",
+        "name": "Toni's Sushi Bar",
+        "where": "South Beach",
+        "service": "Redes sociales orgánicas",
+        "line": "64M+ vistas en Reels en cinco meses, y de unos 4K a 80.1K seguidores en Instagram."
+      },
+      {
+        "case": "the-fatty-crab",
+        "name": "The Fatty Crab",
+        "where": "Doral",
+        "service": "Redes sociales orgánicas",
+        "line": "46M+ vistas en video y 350K+ seguidores."
+      },
+      {
+        "case": "brewing-buddha",
+        "name": "Brewing Buddha",
+        "where": "Pinecrest",
+        "service": "Redes sociales orgánicas",
+        "line": "24M+ vistas en video, incluido un sketch con 7.4M."
+      },
+      {
+        "case": "shimuja-ramen",
+        "name": "Shimuja Ramen",
+        "where": "Downtown Miami",
+        "service": "Redes sociales orgánicas",
+        "line": "15.4M vistas en redes sociales."
+      },
+      {
+        "case": "rusty-pelican",
+        "name": "Rusty Pelican",
+        "where": "Key Biscayne y Tampa",
+        "service": "Google Ads y sitio web",
+        "line": "Un retorno de 7:1 sobre la inversión en anuncios en Miami en 2025, con 1,007 conversiones."
+      }
+    ]
+  },
+  "faqH2": "Preguntas sobre dónde trabajamos",
+  "faqs": [
+    {
+      "q": "¿En qué zonas trabajan en persona?",
+      "a": "Nuestro equipo trabaja en persona con restaurantes en todo el sur de la Florida, incluyendo South Beach y Miami Beach, Brickell y Downtown Miami, Wynwood, Coral Gables, Doral, Kendall, Pinecrest y Fort Lauderdale."
+    },
+    {
+      "q": "¿Trabajan con restaurantes fuera del sur de la Florida?",
+      "a": "Sí. Google Ads, los anuncios en Meta, las páginas web, el SEO y el AEO se hacen a distancia para restaurantes en cualquier parte de Estados Unidos. Para redes sociales, nuestro equipo en Miami planifica y maneja tu contenido, y la grabación la hace nuestra red de videógrafos y fotógrafos con experiencia en tu zona."
+    },
+    {
+      "q": "¿Quién graba nuestro contenido si no estamos en el sur de la Florida?",
+      "a": "Un videógrafo o fotógrafo de nuestra red en tu zona. Nuestro equipo en Miami planifica qué grabar y se encarga de publicar y manejar tus redes."
+    },
+    {
+      "q": "¿Dónde está ubicada Button Up Media?",
+      "a": "Nuestra sede está en Miami, Florida. También tenemos miembros del equipo cerca de restaurantes en varios otros estados."
+    }
   ],
   "cta": {
-    "h2": "¿Su zona no está entre estas seis?",
-    "body": "También trabajamos con restaurantes en todo el sur de la Florida y con clientes en todo Estados Unidos. Agende una llamada gratis y Juan le dirá qué haríamos en su zona.",
+    "h2": "Pregúntenos por su zona",
+    "body": "Agende una llamada gratis de 30 minutos y cuéntenos dónde está su restaurante. Juan le explicará cómo funcionaría la grabación y qué servicios tienen sentido para usted.",
     "button": "Agende una llamada estratégica gratis"
   }
 }

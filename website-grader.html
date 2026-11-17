@@ -1640,6 +1640,7 @@
           <div class="gr-footer-col">
             <h4>Company</h4>
             <a href="/">Home</a>
+            <a href="/case-studies">Case Studies</a>
             <a href="/about">About</a>
             <a href="/blog">Blog</a>
             <a href="/contact">Contact</a>
@@ -1722,7 +1723,7 @@
         var bs = brandStem(list);
         if (bs) {
           brandOpt = { name: bs.name, placeId: bs.placeId };
-          html += '<div class="gr-ac-item gr-ac-brand" data-act="brand"><span class="gr-ac-name">' + esc(bs.name) + ' &mdash; all locations</span><span class="gr-ac-addr">Grade the whole brand (' + bs.count + '+ nearby locations)</span></div>';
+          html += '<div class="gr-ac-item gr-ac-brand" data-act="brand"><span class="gr-ac-name">' + esc(bs.name) + ' (all locations)</span><span class="gr-ac-addr">Grade the whole brand (' + bs.count + '+ nearby locations)</span></div>';
         }
         html += list.map(function (r, i) {
           return '<div class="gr-ac-item" role="option" data-act="pick" data-i="' + i + '"><span class="gr-ac-name">' + esc(r.name) + '</span><span class="gr-ac-addr">' + esc(r.addr) + '</span></div>';

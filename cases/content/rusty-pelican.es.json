@@ -26,8 +26,8 @@
   "card": { "src": "/images/rusty-pelican-bar.avif", "width": 1080, "height": 1932, "alt": "La barra de Rusty Pelican Miami", "value": "7:1", "label": "de ROAS en Miami" },
   "webCard": {
     "kicker": "Rusty Pelican · Key Biscayne",
-    "title": "Un sitio editorial para un ícono frente al agua",
-    "body": "Fotografía a pantalla completa, un menú por secciones, la historia del chef y las reservaciones integradas.",
+    "title": "Un sitio web nuevo para Rusty Pelican",
+    "body": "El sitio tiene fotos a pantalla completa, un menú por secciones, la historia del chef y reservaciones integradas.",
     "image": { "src": "/images/rusty-pelican-device-mockup-transparent.webp", "width": 1080, "height": 746, "alt": "El sitio web de Rusty Pelican que construyó Button Up Media, en una laptop y un teléfono" }
   },
   "metrics": [
@@ -37,17 +37,17 @@
   ],
   "situation": {
     "paragraphs": [
-      "Los grandes restaurantes frente al agua viven de reservaciones, eventos privados y temporadas de fiestas.",
-      "En dos mercados muy distintos, Miami y Tampa, cada dólar en anuncios tiene que demostrar lo que trajo de vuelta."
+      "Rusty Pelican tiene restaurantes en Key Biscayne, en Miami, y en Tampa. Los dos reciben reservaciones y organizan eventos privados, y fechas como el Día de las Madres y Acción de Gracias traen muchas reservaciones.",
+      "Nuestro trabajo era traer esas reservaciones con Google Ads y mostrar lo que trajo de vuelta cada dólar en anuncios, en cada ciudad."
     ]
   },
   "steps": {
     "items": [
-      { "title": "Llegar a quien ya está buscando", "bodyHtml": "Anuncios de búsqueda en Google dirigidos a gente que ya está buscando dónde comer, con cada clic rastreado hasta la reservación." },
-      { "title": "Separar los objetivos", "bodyHtml": "Campañas separadas para reservaciones, eventos privados y fechas de temporada, con los eventos privados como prioridad en Tampa." },
-      { "title": "Planificar alrededor de las fechas grandes", "bodyHtml": "Empujes de temporada para días como el Día de las Madres, Acción de Gracias y Navidad, cuando la gente reserva con tiempo." },
-      { "title": "Rastrear cada reservación", "bodyHtml": "Seguimiento de conversiones en llamadas, reservaciones y formularios, reportado contra la inversión cada mes." },
-      { "title": "Construir el sitio web", "bodyHtml": "Diseñamos y construimos el sitio de Rusty Pelican: fotografía a pantalla completa, un menú por secciones, la historia del chef y las reservaciones integradas. Más detalles en nuestra página de <a href=\"/es/diseno-web-restaurantes\">diseño web para restaurantes</a>.", "figure": { "src": "/images/rusty-pelican-device-mockup-transparent.webp", "width": 1080, "height": 746, "alt": "El sitio web de Rusty Pelican que construyó Button Up Media, en una laptop y un teléfono", "caption": "El sitio de Rusty Pelican, en una laptop y en un teléfono." } }
+      { "title": "Llegar a quien ya está buscando", "bodyHtml": "Hicimos anuncios de búsqueda en Google dirigidos a gente que ya está buscando dónde comer, y rastreamos cada clic hasta la reservación." },
+      { "title": "Separar las campañas por objetivo", "bodyHtml": "Hicimos campañas separadas para reservaciones, eventos privados y fechas de temporada. En Tampa, los eventos privados fueron la prioridad." },
+      { "title": "Planificar alrededor de las fechas grandes", "bodyHtml": "Hicimos campañas de temporada antes de días como el Día de las Madres, Acción de Gracias y Navidad, cuando la gente reserva con tiempo." },
+      { "title": "Rastrear cada reservación", "bodyHtml": "Configuramos el seguimiento de conversiones en llamadas, reservaciones y formularios, y cada mes reportamos los resultados frente a lo invertido." },
+      { "title": "Construir el sitio web", "bodyHtml": "También diseñamos y construimos el sitio web de Rusty Pelican. Tiene fotos a pantalla completa, un menú por secciones, la historia del chef y reservaciones integradas. Hay más detalles en nuestra página de <a href=\"/es/diseno-web-restaurantes\">diseño web para restaurantes</a>.", "figure": { "src": "/images/rusty-pelican-device-mockup-transparent.webp", "width": 1080, "height": 746, "alt": "El sitio web de Rusty Pelican que construyó Button Up Media, en una laptop y un teléfono", "caption": "El sitio de Rusty Pelican, en una laptop y en un teléfono." } }
     ]
   },
   "results": {

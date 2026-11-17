@@ -7,7 +7,7 @@
   "client": "WOA Cocktails",
   "organizations": ["WOA Cocktails"],
   "metaTitle": "WOA Cocktails Bilingual Website Case Study | Button Up Media",
-  "metaDescription": "How Button Up Media rebuilt the WOA Cocktails website from scratch: custom, mobile-first, every page in English and Spanish, and both languages found on Google.",
+  "metaDescription": "How Button Up Media rebuilt the WOA Cocktails website from scratch, designed for phones first, with every page in English and Spanish and both found on Google.",
   "ldHeadline": "WOA Cocktails: a bilingual website rebuilt from scratch",
   "h1": "WOA Cocktails",
   "h1Sub": "A bilingual website, rebuilt from scratch",
@@ -24,26 +24,26 @@
   "card": { "src": "/media/woa-hero-mobile.webp", "width": 690, "height": 1484, "alt": "The WOA Cocktails website on a phone", "value": "EN + ES", "label": "every page" },
   "webCard": {
     "kicker": "WOA Cocktails · Miami and New York",
-    "title": "A bilingual site as premium as the pour",
-    "body": "Rebuilt from scratch, every page in English and Spanish, and both languages found on Google.",
+    "title": "A bilingual website for a mobile bar company",
+    "body": "We rebuilt the site from scratch in English and Spanish and set up both languages to show up on Google.",
     "device": true
   },
   "metrics": [
-    { "value": "2 weeks", "label": "To build, in Fabio Perez's words", "meaning": "From start to a finished, custom site in about two weeks.", "reviewNote": "“2 weeks” comes from the quote signed “Fabio, Website design” on the contact page. Confirm it is Fabio Perez talking about the WOA build." },
+    { "value": "2 weeks", "label": "To build, in Fabio Perez's words", "meaning": "The custom site took about two weeks from start to finish.", "reviewNote": "“2 weeks” comes from the quote signed “Fabio, Website design” on the contact page. Confirm it is Fabio Perez talking about the WOA build." },
     { "value": "EN + ES", "label": "Every page in both languages", "meaning": "One tap switches the whole site between English and Spanish." },
-    { "value": "2", "label": "Languages found on Google", "meaning": "Search in English or in Spanish and WOA comes up, with its main pages listed right under the result." }
+    { "value": "2", "label": "Languages that show up on Google", "meaning": "WOA shows up when people search in English or in Spanish, with its main pages listed under the result." }
   ],
   "situation": {
     "paragraphs": [
-      "WOA sells a premium experience, and the website needed to feel just as premium.",
-      "Customers and press needed a home online that matched the quality in the glass."
+      "WOA sells a high-end mobile bar experience, so it needed a website that looked just as polished.",
+      "The website is also where customers and the press go to learn about the company."
     ]
   },
   "steps": {
     "items": [
-      { "title": "Rebuild from scratch", "bodyHtml": "Fully custom and hand-coded, with immersive visuals, smooth motion and a mobile-first layout." },
-      { "title": "Build every page in two languages", "bodyHtml": "Every page in English and Spanish, with a one-tap language toggle in the menu.", "figure": { "src": "/media/woa-en-bar.jpg", "width": 1600, "height": 906, "alt": "A WOA Cocktails service page shown in English with a one-tap EN/ES language toggle in the navigation", "caption": "A WOA service page in English. One tap flips it to Spanish." } },
-      { "title": "Set it up for Google in both languages", "bodyHtml": "So WOA shows up whether someone searches in English or in Spanish.", "figure": { "src": "/media/woa-serp-en-fit.png", "width": 1500, "height": 885, "alt": "WOA Cocktails English result on Google, with sitelinks for Mobile Bar Experience, Events, Services, and About", "caption": "WOA on Google in English, with its main pages listed under the result." } }
+      { "title": "Rebuild from scratch", "bodyHtml": "We designed and coded the site ourselves instead of starting from a template. It has large visuals and smooth motion, and the layout was designed for phones first." },
+      { "title": "Build every page in two languages", "bodyHtml": "Every page is in English and Spanish, and a toggle in the menu switches languages with one tap.", "figure": { "src": "/media/woa-en-bar.jpg", "width": 1600, "height": 906, "alt": "A WOA Cocktails service page shown in English with a one-tap EN/ES language toggle in the navigation", "caption": "A WOA service page in English. One tap switches it to Spanish." } },
+      { "title": "Set it up for Google in both languages", "bodyHtml": "We set up both language versions for search, so WOA shows up whether someone searches in English or in Spanish.", "figure": { "src": "/media/woa-serp-en-fit.png", "width": 1500, "height": 885, "alt": "WOA Cocktails English result on Google, with sitelinks for Mobile Bar Experience, Events, Services, and About", "caption": "WOA on Google in English, with its main pages listed under the result." } }
     ]
   },
   "results": null,

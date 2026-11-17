@@ -15,7 +15,7 @@
   "ldHeadline": "Shimuja Ramen: 15.4M de vistas en redes sociales para un ramen en el downtown de Miami",
   "h1": "Shimuja Ramen",
   "h1Sub": "15.4M de vistas en el downtown de Miami",
-  "answer": "Shimuja Ramen sirve en el food hall Julia & Henry's, en el downtown de Miami. Nuestros videos cortos ponen el ramen primero y llegaron a 15.4M de vistas en redes.",
+  "answer": "Shimuja Ramen está en el food hall Julia & Henry's, en el downtown de Miami. Nuestros videos cortos se enfocan en el ramen y suman 15.4M de vistas en redes.",
   "descriptor": "Restaurante de ramen",
   "area": {
     "name": "Downtown Miami",
@@ -43,12 +43,12 @@
     {
       "value": "15.4M",
       "label": "Vistas en redes sociales",
-      "meaning": "Reels de Instagram 11.1M, TikTok 2.7M, Facebook 1.3M y YouTube, medido en Sprout Social de enero de 2022 a noviembre de 2026. Cada vista es una oportunidad de que alguien cerca descubra el lugar y venga a probar un tazón."
+      "meaning": "Reels de Instagram 11.1M, TikTok 2.7M, Facebook 1.3M y el resto en YouTube, medido en Sprout Social de enero de 2022 a noviembre de 2026."
     },
     {
       "value": "4 años",
       "label": "Trabajando juntos",
-      "meaning": "Según la cuenta de Chef Kei. Las redes dan resultado cuando se trabajan mes tras mes, no en un arranque corto."
+      "meaning": "Es el tiempo que Chef Kei dice que llevamos trabajando juntos, en su testimonio en video."
     },
     {
       "value": "4",
@@ -59,28 +59,28 @@
   "situation": {
     "paragraphs": [
       "Shimuja se ha mudado más de una vez. Empezó en Southwest Ranches, en Broward, hizo pop-ups en Baby Jane en Brickell y en Sunset Harbour en Miami Beach, y hoy sirve ramen en Julia & Henry's, en el downtown de Miami.",
-      "Cada mudanza significa avisarles a tus clientes fijos dónde encontrarte y ganarte un barrio nuevo."
+      "Cada mudanza implicaba avisarles a los clientes fijos dónde encontrar el local y darlo a conocer en una zona nueva."
     ]
   },
   "steps": {
     "items": [
       {
         "title": "Poner el ramen en primer plano",
-        "bodyHtml": "Videos cortos con los tazones como protagonistas."
+        "bodyHtml": "Grabamos videos cortos en los que los tazones de ramen son lo principal."
       },
       {
-        "title": "Que cada video lleve al mostrador",
-        "bodyHtml": "Un solo objetivo: llevar a la gente del feed a sentarse en Shimuja."
+        "title": "Darle un solo objetivo a cada video",
+        "bodyHtml": "Cada video busca que la gente vaya a comer a Shimuja."
       },
       {
-        "title": "Mantenerlo en el tiempo",
-        "bodyHtml": "Marketing de redes sociales a largo plazo, unos cuatro años según la cuenta de Chef Kei."
+        "title": "Seguir con el trabajo a largo plazo",
+        "bodyHtml": "Llevamos unos cuatro años manejando las redes de Shimuja, según la cuenta de Chef Kei."
       }
     ]
   },
   "results": {
     "points": [
-      "Chef Kei lo ve en el mostrador: en sus palabras, muchos de los clientes que vienen a probar su ramen llegan directamente por nuestro marketing en redes."
+      "En su testimonio en video, Chef Kei dice que muchos de los clientes que vienen a probar su ramen llegan directamente por nuestro marketing en redes."
     ]
   },
   "quote": {

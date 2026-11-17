@@ -3,10 +3,10 @@
   "metaTitle": "Casos de éxito: marketing de restaurantes | Button Up Media",
   "metaDescription": "Resultados de Button Up Media para restaurantes de Miami y el Sur de Florida: más de 200M de vistas orgánicas, Google Ads de hasta 72:1 y sitios web bilingües.",
   "ogImage": "/media/cs-fatty-crab-reel.webp",
-  "eyebrow": "Biblioteca de resultados",
+  "eyebrow": "Resultados de clientes",
   "h1": "Casos de éxito en marketing para restaurantes",
   "h1Accent": "marketing para restaurantes",
-  "answer": "Button Up Media ha logrado más de 200M de vistas orgánicas y retornos de hasta 72:1 en Google Ads para restaurantes de Miami, el Sur de Florida y más allá.",
+  "answer": "Nuestro trabajo para restaurantes ha sumado más de 200M de vistas orgánicas en redes sociales, y en 2025 una cuenta de Google Ads devolvió unos $72 por cada $1 invertido.",
   "primaryCta": "Agende una llamada estratégica gratis",
   "secondaryCta": "Pruebe el analizador gratis",
   "wallLabel": "Videos de tres de nuestros clientes",
@@ -27,7 +27,7 @@
       "width": 540,
       "height": 960,
       "chip": "46M+ vistas",
-      "alt": "Un video corto que Button Up Media hizo para The Fatty Crab: una pata de cangrejo bañada en salsa"
+      "alt": "Un seafood boil servido desde la bolsa en The Fatty Crab, de un reel que hicimos"
     },
     {
       "slug": "brewing-buddha",
@@ -36,15 +36,15 @@
       "width": 540,
       "height": 960,
       "chip": "24M+ vistas",
-      "alt": "Clientes de Brewing Buddha hablan de la cafetería en un video corto para redes"
+      "alt": "Un reel que hicimos para Brewing Buddha sobre un cliente que pide un Cookie Butter Latte tamaño fiesta"
     }
   ],
   "tabsLabel": "Casos de éxito por servicio",
   "sections": {
     "social": {
       "tab": "Redes sociales",
-      "h2": "Lo que los videos cortos lograron para cuatro restaurantes",
-      "intro": "Orgánico significa que nadie pagó por estas vistas. Nuestro equipo grabó, editó y publicó los videos. Toca un restaurante para ver cómo lo hicimos.",
+      "h2": "Resultados en redes sociales de cuatro restaurantes",
+      "intro": "Son vistas orgánicas, es decir, no se pagaron con anuncios. Nuestro equipo hizo y publicó los videos. Toca un restaurante para ver lo que hicimos.",
       "order": [
         "tonis-sushi-bar",
         "the-fatty-crab",
@@ -54,9 +54,9 @@
     },
     "ads": {
       "tab": "Google Ads",
-      "h2": "Google Ads: lo que trajo cada $1",
-      "intro": "Cinco cuentas de anuncios de restaurantes que manejamos en 2025, de mayor a menor retorno.",
-      "roasLineHtml": "<strong>Cómo leerlo:</strong> el ROAS (retorno sobre la inversión publicitaria) es lo que volvió por cada $1 invertido en anuncios. 72:1 significa unos $72 en reservaciones y solicitudes rastreadas por Google por cada $1. Una conversión es una acción rastreada, como una reservación, una llamada o una solicitud de evento privado.",
+      "h2": "Resultados de Google Ads de cinco cuentas de restaurantes",
+      "intro": "Manejamos estas cinco cuentas de Google Ads de restaurantes en 2025. Están ordenadas de mayor a menor retorno.",
+      "roasLineHtml": "<strong>Cómo leer estos números:</strong> el ROAS (retorno sobre la inversión publicitaria) es lo que volvió por cada $1 invertido en anuncios. 72:1 significa unos $72 en reservaciones y solicitudes rastreadas por Google por cada $1. Una conversión es una acción rastreada, como una reservación, una llamada o una solicitud de evento privado.",
       "totals": {
         "h3": "Las cinco cuentas juntas, 2025",
         "items": [
@@ -83,7 +83,7 @@
     "web": {
       "tab": "Sitios web",
       "h2": "Sitios web que construimos desde cero",
-      "intro": "Sitios programados a la medida y pensados primero para el celular. Sin plantillas.",
+      "intro": "Programamos cada sitio desde cero, sin usar plantillas, y lo diseñamos primero para el celular.",
       "order": [
         "woa-cocktails",
         "rusty-pelican"
@@ -91,8 +91,8 @@
     }
   },
   "cta": {
-    "h2": "¿Quiere resultados como estos?",
-    "body": "Reserva una llamada estratégica gratis de 30 minutos. Hablas con Juan, nuestro fundador, no con un vendedor. Revisamos dónde está tu restaurante y los pasos que llenan mesas, y te quedas con el plan, trabajes o no con nosotros.",
+    "h2": "Hable con nosotros sobre su restaurante",
+    "body": "Reserva una llamada estratégica gratis de 30 minutos. Hablarás con Juan, nuestro cofundador, no con un vendedor. Cuéntale de tu restaurante y lo que quieres lograr, y él te explica lo que haríamos. No tienes ninguna obligación de contratarnos.",
     "quote": {
       "text": "Como dueño de varios restaurantes locales, me encanta apoyar a los pequeños negocios, y como ya había trabajado con otras agencias de marketing, vi el valor enseguida.",
       "name": "Gustavo A. Torres",

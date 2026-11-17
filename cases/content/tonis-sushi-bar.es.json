@@ -15,7 +15,7 @@
   "ldHeadline": "Toni's Sushi Bar: de unos 4K a 80K seguidores en Instagram en cinco meses",
   "h1": "Toni's Sushi Bar",
   "h1Sub": "De 4K a 80K seguidores en Instagram en cinco meses",
-  "answer": "Convertimos al chef de Toni's Sushi Bar en maestro en Instagram. En cinco meses pasó de unos 4K a 80K seguidores y nuestros 22 reels sumaron 64M+ de vistas.",
+  "answer": "El chef de Toni's Sushi Bar enseña a comer sushi en nuestros reels. Los seguidores pasaron de unos 4K a 80K en cinco meses, y 22 reels sumaron 64M+ vistas.",
   "descriptor": "Sushi bar familiar desde 1987",
   "area": {
     "name": "South Beach, Miami Beach",
@@ -46,7 +46,7 @@
     {
       "value": "80.1K",
       "label": "Seguidores en Instagram, desde unos 4K",
-      "meaning": "Unas 4,000 personas seguían a @tonissushi cuando publicamos nuestro primer reel el 18 de junio de 2026. Cinco meses después, el 16 de nov. de 2026, eran 80,100: unas 20 veces más."
+      "meaning": "Unas 4,000 personas seguían a @tonissushi cuando publicamos nuestro primer reel el 18 de junio de 2026. Cinco meses después, el 16 de nov. de 2026, la cuenta tenía 80,100 seguidores, unas 20 veces más."
     },
     {
       "value": "64M+",
@@ -56,7 +56,7 @@
     {
       "value": "52.5M",
       "label": "Vistas en un solo reel",
-      "meaning": "La lección del chef sobre los modales del sushi, publicada el 19 de agosto de 2026. A 1.6M de personas les gustó, y hoy está fijada arriba del perfil."
+      "meaning": "Es la lección del chef sobre los modales del sushi, publicada el 19 de agosto de 2026. Tiene 1.6M de me gusta y está fijada arriba del perfil."
     }
   ],
   "reels": {
@@ -83,7 +83,7 @@
         "height": 1280,
         "views": "5.9M",
         "likes": "196K",
-        "title": "Nuestro primer reel: salmón, con sonido",
+        "title": "Nuestro primer reel: un salmón entero fileteado",
         "date": "18 jun. 2026",
         "alt": "Toma cenital de un chef de Toni's Sushi Bar fileteando un salmón entero sobre una tabla naranja",
         "uploaded": "2026-06-18",
@@ -120,26 +120,26 @@
   "situation": {
     "paragraphs": [
       "Toni's es un negocio familiar en South Beach desde 1987, cuando Hiromi “Toni” Takarada lo abrió, según Miami New Times. Su Instagram lo presenta como el sushi bar original de South Beach.",
-      "Esa historia no se veía donde hoy el turista elige dónde comer: en el celular. La cuenta tenía unos 4,000 seguidores, y sus últimas publicaciones antes de que empezáramos, en febrero de 2026, recibían entre 12 y 156 me gusta."
+      "Su Instagram no mostraba mucho de esa historia. La cuenta tenía unos 4,000 seguidores, y sus últimas publicaciones antes de que empezáramos, en febrero de 2026, recibían entre 12 y 156 me gusta."
     ]
   },
   "steps": {
     "items": [
       {
-        "title": "Convertir al chef en maestro",
-        "bodyHtml": "El chef Toshiya es un sushiman de Japón, y frente a la cámara enseña la manera japonesa de comer sushi: la salsa de soya va en el pescado, no en el arroz; el jengibre va entre pieza y pieza, no en cada bocado; por qué no hace falta frotar los palillos."
+        "title": "Poner al chef frente a la cámara",
+        "bodyHtml": "El chef Toshiya, un sushiman de Japón, explica frente a la cámara cómo se come el sushi en Japón. Por ejemplo, la salsa de soya va en el pescado y no en el arroz, el jengibre se come entre pieza y pieza, y no hace falta frotar los palillos."
       },
       {
         "title": "Una lección por reel",
-        "bodyHtml": "Cada video responde una pregunta que la gente no sabía que tenía: wasabi de verdad contra la pasta verde, sashimi contra temaki contra nigiri, los tres cortes del atún rojo. Una lección corta se guarda y se manda a un amigo con facilidad, así que llega mucho más allá de quienes ya siguen la cuenta."
+        "bodyHtml": "Cada video trata un solo tema, como el wasabi de verdad contra la pasta verde, la diferencia entre sashimi, temaki y nigiri, o los tres cortes del atún rojo. Una lección corta es fácil de guardar y mandarle a un amigo, y así llega a gente que todavía no sigue la cuenta."
       },
       {
-        "title": "Que las lecciones vendan solas",
-        "bodyHtml": "Ningún reel dice “ven a comer aquí”. Ver a un chef de Japón enseñar la forma correcta de comer sushi le dice al espectador, sin vender nada, que Toni's es auténtico y que vale la pena ir."
+        "title": "Dejar la venta fuera de los videos",
+        "bodyHtml": "Ningún reel le pide a la gente que venga a comer a Toni's. La idea es que ver a un chef de Japón enseñar la forma correcta de comer sushi le dé a cada quien su propia razón para ir."
       },
       {
-        "title": "Convertir vistas en visitas",
-        "bodyHtml": "Cada reel lleva la dirección, 1208 Washington Ave, en los comentarios. En el reel de los modales, ese comentario solo tiene 2,624 me gusta. Las historias están hechas para convertir: llevan a quien acaba de ver el video hacia el restaurante y cómo llegar."
+        "title": "Llevar a la gente al restaurante",
+        "bodyHtml": "Ponemos la dirección, 1208 Washington Ave, en los comentarios de cada reel. En el reel de los modales, ese comentario tiene 2,624 me gusta. Las historias de Instagram también llevan a quien acaba de ver un reel hacia el restaurante y le muestran cómo llegar."
       }
     ]
   },
@@ -147,18 +147,18 @@
     "items": [
       {
         "stat": "81%",
-        "title": "de todas las vistas salió de una sola lección",
-        "body": "El reel de los modales del sushi sumó 52.5M de las 64.7M de vistas de los 22 reels. Está fijado arriba del perfil, así que cada visitante nuevo empieza por ahí."
+        "title": "de todas las vistas de reels salió de la lección de modales",
+        "body": "El reel de los modales del sushi tiene 52.5M de las 64.7M de vistas de los 22 reels. Está fijado arriba del perfil, así que es la primera publicación que se ve al abrir la cuenta."
       },
       {
         "stat": "3 de 4",
-        "title": "reels con más de 1M de vistas son el chef enseñando",
-        "body": "Modales con la salsa de soya, wasabi de verdad y modales con los palillos. Una lección se comparte con facilidad, y compartir es como un reel llega a gente que todavía no sigue la cuenta."
+        "title": "reels con más de 1M de vistas muestran al chef enseñando",
+        "body": "Esos tres son el reel de los modales con la salsa de soya, el del wasabi de verdad y el de los palillos. Una lección así es fácil de compartir, y cuando se comparte, el reel llega a gente que todavía no sigue la cuenta."
       },
       {
         "stat": "1 por semana",
-        "title": "la constancia gana",
-        "body": "22 reels en 21 semanas, todos con el mismo formato: el chef enseñando una sola cosa. En ese tiempo la cuenta creció unas 20 veces."
+        "title": "es más o menos el ritmo al que publicamos reels nuevos",
+        "body": "Publicamos 22 reels en 21 semanas, casi todos con el chef enseñando una sola cosa. En ese tiempo la cuenta pasó de unos 4K seguidores a 80.1K."
       }
     ]
   },
@@ -167,30 +167,30 @@
       "h3": "Cómo creció la cuenta",
       "items": [
         {
-          "when": "Antes de nosotros, feb. 2026",
+          "when": "Antes de empezar, feb. 2026",
           "title": "Las últimas publicaciones recibían entre 12 y 156 me gusta",
           "stat": "Unos 4K seguidores",
           "kind": "before"
         },
         {
           "when": "18 jun. 2026",
-          "title": "Primer reel: el sushi bar más antiguo de South Beach. 196K me gusta.",
+          "title": "Nuestro primer reel, un salmón entero fileteado frente a la cámara, recibió 196K me gusta.",
           "stat": "5.9M de vistas"
         },
         {
           "when": "15 jul.",
-          "title": "¿Sashimi, temaki o nigiri? El chef explica la diferencia.",
+          "title": "El chef explica la diferencia entre sashimi, temaki y nigiri.",
           "stat": "770K vistas"
         },
         {
           "when": "19 ago.",
-          "title": "Los modales del sushi. 1.6M de me gusta, hoy fijado.",
+          "title": "El reel de los modales del sushi recibió 1.6M de me gusta y hoy está fijado.",
           "stat": "52.5M de vistas",
           "kind": "peak"
         },
         {
           "when": "6 oct.",
-          "title": "Wasabi de verdad contra el wasabi en polvo.",
+          "title": "El chef compara el wasabi de verdad con el wasabi en polvo.",
           "stat": "2.7M de vistas"
         },
         {

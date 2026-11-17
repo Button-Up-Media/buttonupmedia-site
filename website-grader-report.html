@@ -708,7 +708,7 @@
         var d = ig.latestPostAt ? Math.round((Date.now() - ig.latestPostAt) / 86400000) : null;
         if (d != null && d > 60) pushFind(ICON.clock, "Your last Instagram post was " + d + " days ago", "warn");
       } else if (s && s.maybe && s.maybe.found) {
-        pushFind(ICON.ig, "Found a possible Instagram: <b>@" + esc(s.maybe.handle) + "</b> &mdash; confirm it on your report", "warn");
+        pushFind(ICON.ig, "Found a possible Instagram: <b>@" + esc(s.maybe.handle) + "</b>. Confirm it on your report", "warn");
       } else {
         pushFind(ICON.ig, "No active Instagram we could confirm for you", "warn");
       }
