@@ -147,13 +147,17 @@
 
       var maybeLoadGtm = function () {
         if (!shouldLoadGtm()) return;
+        // Same timing as every other page (see build-public.mjs): 1.5s after
+        // load, then on idle, or straight away on the first tap or key press.
+        var later = function () { setTimeout(function () { queueIdle(window.__bumLoadGtm, 2000); }, 1500); };
         if (document.readyState === "complete") {
-          queueIdle(window.__bumLoadGtm, 2000);
+          later();
         } else {
-          window.addEventListener("load", function () {
-            queueIdle(window.__bumLoadGtm, 2000);
-          }, { once: true });
+          window.addEventListener("load", later, { once: true });
         }
+        ["pointerdown", "keydown", "touchstart"].forEach(function (ev) {
+          window.addEventListener(ev, function () { window.__bumLoadGtm(); }, { once: true, passive: true });
+        });
       };
 
       maybeLoadGtm();
