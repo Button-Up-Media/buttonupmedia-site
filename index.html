@@ -408,6 +408,29 @@
       .v3-home .h-card:hover .h-card-go { transform: translateX(2px); }
     }
 
+    /* results: one segmented control, one deck per channel, photo-free cards */
+    .v3-home .h-seg { display: inline-flex; gap: 4px; margin-top: 26px; padding: 4px; border-radius: 999px; background: rgba(255,255,255,0.06); border: 1px solid var(--v3-hair); }
+    .v3-home #case-studies:not(.is-tabbed) .h-seg { display: none; }
+    .v3-home .h-seg button { min-height: 44px; padding: 0 20px; border: 0; border-radius: 999px; background: transparent; color: rgba(246,240,230,0.72); font: 650 0.9375rem/1 var(--font-body); cursor: pointer; transition: background .2s ease, color .2s ease; -webkit-tap-highlight-color: transparent; }
+    .v3-home .h-seg button:hover { color: var(--text-head); }
+    .v3-home .h-seg button[aria-selected="true"] { background: #f6f0e6; color: var(--v3-ink-on-gold); }
+    .v3-home .h-panel[hidden] { display: none; }
+    .v3-home .h-panel-h { margin-top: 36px; font-size: 1.25rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text-head); }
+    .v3-home #case-studies.is-tabbed .h-panel-h { position: absolute; width: 1px; height: 1px; margin: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .v3-home #case-studies .h-deck { margin-top: 24px; }
+    .v3-home #case-studies .h-card { min-height: 360px; }
+    .v3-home #case-studies .h-card-top { padding-right: 48px; }
+    .v3-home .h-panel-foot { margin-top: 18px; }
+    .v3-home .h-panel-foot .btn { height: 50px; gap: 10px; white-space: nowrap; }
+    .v3-home .h-panel-foot .btn svg { width: 18px; height: 18px; flex: none; transition: transform .3s var(--v3-ease); }
+    @media (hover: hover) { .v3-home .h-panel-foot .btn:hover svg { transform: translateX(3px); } }
+    @media (max-width: 700px) {
+      .v3-home .h-seg { display: flex; width: 100%; }
+      .v3-home .h-seg button { flex: 1 1 0; padding: 0 12px; }
+      .v3-home #case-studies .h-card { min-height: 320px; }
+      .v3-home .h-panel-foot .btn { width: 100%; }
+    }
+
     /* services */
     .v3-home .h-services { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 40px 0 0; padding: 0; }
     .v3-home .h-svc { display: flex; flex-direction: column; height: 100%; padding: 30px; border-radius: 30px; background: var(--v3-elev-1); border: 1px solid var(--v3-hair); color: inherit; text-decoration: none; transition: transform .35s var(--v3-ease), border-color .25s ease; }
@@ -633,51 +656,75 @@
           <div class="h-head">
             <div class="lib-section-label">Results</div>
             <h2>Real restaurants. Real numbers.</h2>
-            <p>A few favorite results from restaurants we work with. Tap any card for the full story.</p>
+            <p>Pick a channel. Every card opens the full story.</p>
           </div>
           <div class="h-deck-nav">
             <button type="button" data-deck="-1" aria-label="Previous results"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
             <button type="button" data-deck="1" aria-label="More results"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
           </div>
         </div>
-        <ul class="h-deck" id="h-deck">
-          <li><a class="h-card --gold" href="/case-studies/tonis-sushi-bar">
-              <span class="h-card-top"><img src="/media/tonis-etiquette-poster.webp" alt="" width="104" height="104" loading="lazy" decoding="async" /><span class="h-card-who">Toni's Sushi Bar<small>South Beach</small></span></span>
-              <span class="h-card-tag">Organic social</span>
+        <div class="h-seg" role="tablist" aria-label="Results by channel"><button type="button" role="tab" id="h-tab-social" aria-controls="h-panel-social" aria-selected="true">Organic social</button><button type="button" role="tab" id="h-tab-ads" aria-controls="h-panel-ads" aria-selected="false">Google Ads</button></div>
+        <div class="h-panel" id="h-panel-social" role="tabpanel" aria-labelledby="h-tab-social">
+          <h3 class="h-panel-h">Organic social</h3>
+          <ul class="h-deck">
+            <li><a class="h-card --gold" href="/case-studies/tonis-sushi-bar">
+              <span class="h-card-top"><span class="h-card-who">Toni's Sushi Bar<small>South Beach</small></span></span>
               <span class="h-card-num">64M+</span>
               <span class="h-card-label">Reel views in five months</span>
               <span class="h-card-foot">Instagram followers grew from about 4K to 80.1K.</span>
               <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </a></li><li><a class="h-card --light" href="/case-studies/the-fatty-crab">
-              <span class="h-card-top"><img src="/media/fc-friendship-boil-poster.webp" alt="" width="104" height="104" loading="lazy" decoding="async" /><span class="h-card-who">The Fatty Crab<small>Doral</small></span></span>
-              <span class="h-card-tag">Organic social</span>
+              <span class="h-card-top"><span class="h-card-who">The Fatty Crab<small>Doral</small></span></span>
               <span class="h-card-num">46M+</span>
               <span class="h-card-label">video views</span>
               <span class="h-card-foot">350K+ followers across three platforms.</span>
               <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </a></li><li><a class="h-card --dark" href="/case-studies/brewing-buddha">
-              <span class="h-card-top"><img src="/media/bb-cookie-butter-latte-poster.webp" alt="" width="104" height="104" loading="lazy" decoding="async" /><span class="h-card-who">Brewing Buddha<small>Pinecrest</small></span></span>
-              <span class="h-card-tag">Organic social</span>
-              <span class="h-card-num">7.4M</span>
-              <span class="h-card-label">views on one Reel</span>
-              <span class="h-card-foot">576K likes on a single behind-the-counter skit.</span>
+              <span class="h-card-top"><span class="h-card-who">Brewing Buddha<small>Pinecrest</small></span></span>
+              <span class="h-card-num">24M+</span>
+              <span class="h-card-label">video views</span>
+              <span class="h-card-foot">One behind-the-counter skit alone reached 7.4M views.</span>
               <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a></li><li><a class="h-card --gold" href="/case-studies/private-events">
+            </a></li><li><a class="h-card --light" href="/case-studies/shimuja-ramen">
+              <span class="h-card-top"><span class="h-card-who">Shimuja Ramen<small>Downtown Miami</small></span></span>
+              <span class="h-card-num">15.4M</span>
+              <span class="h-card-label">social media views</span>
+              <span class="h-card-foot">Short videos that put Chef Kei and his ramen in front of people nearby.</span>
+              <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a></li>
+          </ul>
+          <div class="h-panel-foot"><a class="btn" href="/case-studies#social">See all social media results <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        </div><div class="h-panel" id="h-panel-ads" role="tabpanel" aria-labelledby="h-tab-ads">
+          <h3 class="h-panel-h">Google Ads</h3>
+          <ul class="h-deck">
+            <li><a class="h-card --gold" href="/case-studies/private-events">
               <span class="h-card-top"><span class="h-card-who">The Boathouse<small>Private events</small></span></span>
-              <span class="h-card-tag">Google Ads</span>
               <span class="h-card-num">72:1</span>
               <span class="h-card-label">return on ad spend</span>
               <span class="h-card-foot">234 event and reservation leads, May to Dec 2025.</span>
               <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a></li><li><a class="h-card --light" href="/case-studies/rusty-pelican">
-              <span class="h-card-top"><img src="/images/rusty-pelican-bar.avif" alt="" width="104" height="104" loading="lazy" decoding="async" /><span class="h-card-who">Rusty Pelican<small>Miami</small></span></span>
-              <span class="h-card-tag">Google Ads</span>
+            </a></li><li><a class="h-card --light" href="/case-studies/private-events">
+              <span class="h-card-top"><span class="h-card-who">The Odyssey<small>Fine dining</small></span></span>
+              <span class="h-card-num">49:1</span>
+              <span class="h-card-label">return on ad spend</span>
+              <span class="h-card-foot">951 conversions at $7.15 each, Jun to Dec 2025.</span>
+              <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a></li><li><a class="h-card --dark" href="/case-studies/rusty-pelican">
+              <span class="h-card-top"><span class="h-card-who">Rusty Pelican<small>Miami</small></span></span>
               <span class="h-card-num">7:1</span>
               <span class="h-card-label">return on ad spend in 2025</span>
               <span class="h-card-foot">1,007 tracked reservations, calls and event inquiries.</span>
               <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a></li><li><a class="h-card --more" href="/case-studies"><strong>See all case studies</strong><span class="h-card-foot">Social, Google Ads and websites</span><span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
-        </ul>
+            </a></li><li><a class="h-card --light" href="/case-studies#ads">
+              <span class="h-card-top"><span class="h-card-who">All five accounts<small>2025</small></span></span>
+              <span class="h-card-num">$1.1M</span>
+              <span class="h-card-label">in tracked conversion value</span>
+              <span class="h-card-foot">On under $46K in ad spend, a 24:1 blended return.</span>
+              <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a></li>
+          </ul>
+          <div class="h-panel-foot"><a class="btn" href="/case-studies#ads">See all Google Ads results <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        </div>
       </div>
     </section>
 
@@ -937,10 +984,35 @@
   <!-- ═══ HOMEPAGE 2.0, ALL ANIMATION JS SELF-CONTAINED ═══ -->
     <script>
     (function () {
-      var deck = document.getElementById("h-deck");
-      if (!deck) return;
-      [].forEach.call(document.querySelectorAll("[data-deck]"), function (b) {
+      var sec = document.getElementById("case-studies");
+      if (!sec) return;
+      var tabs = [].slice.call(sec.querySelectorAll('.h-seg [role="tab"]'));
+      var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute("aria-controls")); });
+      var select = function (i, focus) {
+        tabs.forEach(function (t, j) {
+          var on = i === j;
+          t.setAttribute("aria-selected", on ? "true" : "false");
+          t.tabIndex = on ? 0 : -1;
+          panels[j].hidden = !on;
+        });
+        if (focus) tabs[i].focus();
+      };
+      if (tabs.length) {
+        sec.classList.add("is-tabbed");
+        tabs.forEach(function (t, i) {
+          t.addEventListener("click", function () { select(i); });
+          t.addEventListener("keydown", function (e) {
+            if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+            e.preventDefault();
+            select((i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length, true);
+          });
+        });
+        select(0);
+      }
+      [].forEach.call(sec.querySelectorAll("[data-deck]"), function (b) {
         b.addEventListener("click", function () {
+          var deck = sec.querySelector(".h-panel:not([hidden]) .h-deck");
+          if (!deck) return;
           var card = deck.querySelector("li");
           var step = card ? card.getBoundingClientRect().width + 14 : 300;
           deck.scrollBy({ left: step * Number(b.getAttribute("data-deck")), behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
