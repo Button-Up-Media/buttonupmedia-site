@@ -19,8 +19,8 @@
   "descriptor": "Coffee shop and art space",
   "area": {
     "name": "Pinecrest",
-    "detail": "8219 SW 124th St, near Coral Gables",
-    "page": "coral-gables"
+    "detail": "8219 SW 124th St",
+    "page": "kendall-pinecrest"
   },
   "timeframe": null,
   "hero": {

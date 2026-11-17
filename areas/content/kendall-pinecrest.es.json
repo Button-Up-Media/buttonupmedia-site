@@ -1,0 +1,71 @@
+{
+  "id": "kendall-pinecrest",
+  "lang": "es",
+  "areaName": "Kendall y Pinecrest",
+  "metaTitle": "Marketing Restaurantes Kendall y Pinecrest | Button Up Media",
+  "metaDescription": "Marketing para restaurantes en Kendall y Pinecrest, de una agencia de Miami. Grabamos en persona en tu local. Cliente: Brewing Buddha, 24M+ vistas de video.",
+  "eyebrow": "Kendall y Pinecrest, Miami-Dade",
+  "h1": "Marketing para restaurantes en Kendall y Pinecrest",
+  "answer": "Button Up Media es una agencia de marketing para restaurantes con sede en Miami. Grabamos en persona en Kendall y Pinecrest, y hacemos páginas web, SEO, AEO y anuncios.",
+  "card": {
+    "insight": "Grabamos en persona en restaurantes de Kendall y Pinecrest, y Brewing Buddha, en la SW 124th St, es uno de nuestros clientes.",
+    "proofLine": "Aquí mismo: Brewing Buddha, 24M+ vistas de video"
+  },
+  "heroMedia": {
+    "type": "testimonial",
+    "video": "/videos/testimonial-brewing-buddha-v2.mp4",
+    "poster": "/media/area-poster-brewing-buddha-testimonial.webp",
+    "width": 540,
+    "height": 960,
+    "focus": "50% 20%",
+    "alt": "Jordan, dueño de Brewing Buddha en Pinecrest, habla de su trabajo con Button Up Media",
+    "kicker": "Nuestro cliente en Pinecrest",
+    "tag": "Jordan, Brewing Buddha Cafe & Arthouse",
+    "play": "Vea a Jordan (1 min)"
+  },
+  "snapshot": {
+    "h2": "Cómo trabajamos con restaurantes en Kendall y Pinecrest",
+    "facts": [
+      {"label": "Grabación", "value": "En persona, con nuestro propio equipo"},
+      {"label": "Cliente en Pinecrest", "value": "Brewing Buddha, 8219 SW 124th St"},
+      {"label": "Idiomas", "value": "Inglés y español"}
+    ],
+    "paragraphsHtml": [
+      "Kendall y Pinecrest son parte de nuestra base en el sur de la Florida, así que nuestro propio equipo va a tu restaurante a grabar. Planificamos cada sesión contigo, y una sola sesión suele producir de 4 a 6 semanas de contenido. Después lo publicamos y manejamos tus redes.",
+      "Brewing Buddha Cafe & Arthouse, una cafetería y espacio de arte en la SW 124th St de Pinecrest, es nuestro cliente aquí. Su equipo y el nuestro proponen ideas para videos, y hacemos las mejores. Su dueño, Jordan Athos, habla de su trabajo con nosotros en el video al principio de esta página."
+    ]
+  },
+  "proof": {
+    "h2": "Videos cortos para Brewing Buddha en Pinecrest",
+    "case": "brewing-buddha",
+    "relation": "Nuestro cliente en Pinecrest",
+    "client": "Brewing Buddha Cafe & Arthouse",
+    "where": "SW 124th St, Pinecrest",
+    "service": "Redes orgánicas",
+    "stat": "24M+",
+    "statLabel": "vistas de video en Instagram, YouTube, TikTok y Facebook",
+    "chips": ["53K+ seguidores", "Un sketch con 7.4M de vistas"],
+    "bodyHtml": "En Instagram, la mayoría de las vistas de Reels vienen de sketches cortos con el personal. El más visto, sobre un pedido de Cookie Butter Latte para 10 personas, tiene 7.4M de vistas por sí solo. Cuando un formato funciona así, hacemos más de ese tipo."
+  },
+  "steps": {
+    "h2": "Cómo empezaríamos con tu restaurante en Kendall o Pinecrest",
+    "items": [
+      {"title": "Una llamada gratis con Juan", "bodyHtml": "En 30 minutos, Juan, nuestro cofundador, revisa contigo tu Perfil de Empresa de Google, tu página web y tus redes, y te dice en qué trabajaría primero."},
+      {"title": "Un día de grabación en tu restaurante", "bodyHtml": "Nuestro equipo graba en tu restaurante el día que te convenga, y editamos el material en publicaciones para tus <a href=\"/es/marketing-redes-sociales\">redes sociales</a>."},
+      {"title": "Publicaciones, Google al día y un reporte mensual", "bodyHtml": "Publicamos el contenido y manejamos tus redes, mantenemos al día tu Perfil de Empresa de Google con nuestro servicio de <a href=\"/es/seo-restaurantes\">SEO y AEO para restaurantes</a>, y te enviamos un reporte mensual."}
+    ]
+  },
+  "pricingHtml": "La mayoría de los restaurantes invierte <strong>entre $1,500 y $5,000 al mes</strong> en un programa coordinado. Las páginas web son un pago único de <strong>$1,500 o $2,000</strong>.",
+  "faqs": [
+    {"q": "¿Trabajan con restaurantes en Kendall y Pinecrest?", "a": "Sí. Tenemos sede en Miami, y nuestro equipo trabaja en persona con restaurantes de Kendall y Pinecrest. Uno de nuestros clientes, Brewing Buddha Cafe & Arthouse, está en la 8219 SW 124th St de Pinecrest."},
+    {"q": "¿Su equipo viene a grabar a mi restaurante?", "a": "Sí. Kendall y Pinecrest están en el sur de la Florida, nuestra base, así que nuestro propio equipo graba en tu restaurante. Una sola sesión suele producir de 4 a 6 semanas de contenido."},
+    {"q": "¿Trabajan con cafeterías y cafés?", "a": "Sí. Solo trabajamos con restaurantes, bares y cafés. Brewing Buddha, una cafetería y espacio de arte en Pinecrest, ha llegado a 24M+ vistas de video con los videos cortos que hacemos juntos."},
+    {"q": "¿Quién propone las ideas para los videos?", "a": "Los dos. Nosotros proponemos ideas, tu equipo propone ideas, y hacemos las mejores. Así trabajamos con Brewing Buddha, donde los sketches cortos con el personal se volvieron los Reels más vistos de la cuenta."}
+  ],
+  "nearby": ["coral-gables", "doral"],
+  "cta": {
+    "h2": "Hablemos de su restaurante en Kendall o Pinecrest",
+    "body": "Agende una llamada gratis de 30 minutos con Juan. Él revisará cómo aparece su restaurante en internet hoy y le dirá por dónde empezaría. La llamada puede ser en español o en inglés.",
+    "button": "Agende una llamada estratégica gratis"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "id": "kendall-pinecrest",
+  "lang": "en",
+  "areaName": "Kendall & Pinecrest",
+  "metaTitle": "Kendall & Pinecrest Restaurant Marketing | Button Up Media",
+  "metaDescription": "Restaurant marketing in Kendall and Pinecrest from a Miami agency. Our crew films at your restaurant in person. Client: Brewing Buddha, 24M+ video views.",
+  "eyebrow": "Kendall & Pinecrest, Miami-Dade",
+  "h1": "Restaurant marketing in Kendall & Pinecrest",
+  "answer": "Button Up Media is a restaurant marketing agency headquartered in Miami. Our crew films at Kendall and Pinecrest restaurants in person, and we handle websites, SEO and AEO, and ads.",
+  "card": {
+    "insight": "Our crew films at restaurants in Kendall and Pinecrest in person, and Brewing Buddha on SW 124th St is one of our clients.",
+    "proofLine": "Right here: Brewing Buddha, 24M+ video views"
+  },
+  "heroMedia": {
+    "type": "testimonial",
+    "video": "/videos/testimonial-brewing-buddha-v2.mp4",
+    "poster": "/media/area-poster-brewing-buddha-testimonial.webp",
+    "width": 540,
+    "height": 960,
+    "focus": "50% 20%",
+    "alt": "Jordan, owner of Brewing Buddha in Pinecrest, talks about working with Button Up Media",
+    "kicker": "Our client in Pinecrest",
+    "tag": "Jordan, Brewing Buddha Cafe & Arthouse",
+    "play": "Watch Jordan (1 min)"
+  },
+  "snapshot": {
+    "h2": "How we work with restaurants in Kendall and Pinecrest",
+    "facts": [
+      {"label": "Filming", "value": "In person, by our own crew"},
+      {"label": "Client in Pinecrest", "value": "Brewing Buddha, 8219 SW 124th St"},
+      {"label": "Languages", "value": "English and Spanish"}
+    ],
+    "paragraphsHtml": [
+      "Kendall and Pinecrest are part of our South Florida home base, so our own crew comes to your restaurant to film. We plan each shoot with you, and one shoot typically produces 4 to 6 weeks of content. Then we post it and manage your pages.",
+      "Brewing Buddha Cafe & Arthouse, a coffee shop and art space on SW 124th St in Pinecrest, is our client here. It's known for its creative lattes. Our team and theirs both pitch video ideas, and we make the strongest ones. Owner Jordan Athos talks about working with us in the video at the top of this page."
+    ]
+  },
+  "proof": {
+    "h2": "Short videos for Brewing Buddha in Pinecrest",
+    "case": "brewing-buddha",
+    "relation": "Our client in Pinecrest",
+    "client": "Brewing Buddha Cafe & Arthouse",
+    "where": "SW 124th St, Pinecrest",
+    "service": "Organic social",
+    "stat": "24M+",
+    "statLabel": "video views on Instagram, YouTube, TikTok and Facebook",
+    "chips": ["53K+ followers", "One skit at 7.4M views"],
+    "bodyHtml": "On Instagram, most of the Reel views come from short skits with the staff. The most-watched one, about a Cookie Butter Latte order meant for 10 people, has 7.4M views on its own. When a format works like that, we make more of it."
+  },
+  "steps": {
+    "h2": "How we'd start with your restaurant in Kendall or Pinecrest",
+    "items": [
+      {"title": "A free call with Juan", "bodyHtml": "In 30 minutes, Juan, our co-founder, looks at your Google Business Profile, website and social pages with you and tells you what he would work on first."},
+      {"title": "A shoot day at your restaurant", "bodyHtml": "Our crew films at your restaurant on a day that works for you, and we edit the footage into posts for your <a href=\"/socialmediamarketing\">social media</a>."},
+      {"title": "Posting, Google updates and a monthly report", "bodyHtml": "We post the content and manage your pages, keep your Google Business Profile current through our <a href=\"/restaurant-seo\">restaurant SEO and AEO</a> service, and send you a monthly report."}
+    ]
+  },
+  "pricingHtml": "Most restaurants invest <strong>$1,500 to $5,000 a month</strong> for a coordinated program. Website builds are a one-time <strong>$1,500 or $2,000</strong>.",
+  "faqs": [
+    {"q": "Do you work with restaurants in Kendall and Pinecrest?", "a": "Yes. We're headquartered in Miami, and our crew works with restaurants in Kendall and Pinecrest in person. One of our clients, Brewing Buddha Cafe & Arthouse, is at 8219 SW 124th St in Pinecrest."},
+    {"q": "Will your team come to my restaurant to film?", "a": "Yes. Kendall and Pinecrest are in South Florida, our home base, so our own crew films at your restaurant. One shoot typically produces 4 to 6 weeks of content."},
+    {"q": "Do you work with coffee shops and cafes?", "a": "Yes. We only work with restaurants, bars and cafes. Brewing Buddha, a coffee shop and art space in Pinecrest, has reached 24M+ video views with the short videos we make together."},
+    {"q": "Who comes up with the video ideas?", "a": "Both of us. We pitch ideas, your team pitches ideas, and we make the strongest ones. That's how we work with Brewing Buddha, where short skits with the staff became the most-watched Reels on the account."}
+  ],
+  "nearby": ["coral-gables", "doral"],
+  "cta": {
+    "h2": "Let's talk about your restaurant in Kendall or Pinecrest",
+    "body": "Book a free 30-minute call with Juan. He'll look at how your restaurant shows up online today and tell you where he would start. The call can be in English or Spanish.",
+    "button": "Book a free strategy call"
+  }
+}

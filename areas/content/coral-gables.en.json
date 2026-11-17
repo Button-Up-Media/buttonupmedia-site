@@ -12,16 +12,15 @@
     "proofLine": "Nearby: Brewing Buddha in Pinecrest, 24M+ video views"
   },
   "heroMedia": {
-    "type": "testimonial",
-    "video": "/videos/testimonial-brewing-buddha-v2.mp4",
-    "poster": "/media/area-poster-brewing-buddha-testimonial.webp",
+    "type": "loop",
+    "video": "/media/bb-hero-loop.mp4",
+    "poster": "/media/bb-hero-poster.webp",
     "width": 540,
     "height": 960,
-    "focus": "50% 20%",
-    "alt": "Jordan, owner of Brewing Buddha in Pinecrest, talks about working with Button Up Media",
+    "focus": "50% 50%",
+    "alt": "A Brewing Buddha barista reacts to a party-size Cookie Butter Latte order, from a Reel we made in nearby Pinecrest",
     "kicker": "Nearby in Pinecrest",
-    "tag": "Jordan, Brewing Buddha Cafe & Arthouse",
-    "play": "Watch Jordan (1 min)"
+    "tag": "Brewing Buddha, 7.4M views"
   },
   "snapshot": {
     "h2": "What working with us looks like in Coral Gables",
@@ -32,7 +31,7 @@
     ],
     "paragraphsHtml": [
       "Coral Gables is part of our South Florida home base, so shoots happen at your restaurant with our own crew. We plan each shoot with you, and one shoot typically produces 4 to 6 weeks of content. After that, we post it and manage your pages.",
-      "Our nearby client is Brewing Buddha Cafe & Arthouse in Pinecrest, a coffee shop and art space known for its creative lattes. We make short videos with the team there: we pitch, they pitch, and the strongest ideas make the feed. Owner Jordan Athos talks about working with us in the video at the top of this page."
+      "Our nearby client is Brewing Buddha Cafe & Arthouse in Pinecrest, a coffee shop and art space known for its creative lattes. We make short videos with the team there: we pitch, they pitch, and the strongest ideas make the feed. The clip at the top of this page is from one of those videos, which has 7.4M views. You can see more on our <a href=\"/restaurant-marketing-kendall-pinecrest\">Kendall and Pinecrest page</a>."
     ]
   },
   "proof": {
@@ -62,7 +61,7 @@
     {"q": "Do you create content in Spanish?", "a": "Yes. We work in English and Spanish, so posts and captions can be in either language or both, and every website page we build comes in both."},
     {"q": "We have another location outside South Florida. Can you cover it?", "a": "Yes. Ads, websites, and SEO and AEO are done remotely, so they work anywhere in the US. For social media, our Miami team plans and manages the content, and a videographer or photographer from our network in that area does the shoot."}
   ],
-  "nearby": ["doral", "brickell"],
+  "nearby": ["kendall-pinecrest", "brickell"],
   "cta": {
     "h2": "Let's talk about your Coral Gables restaurant",
     "body": "On a free 30-minute call, Juan will go over how your restaurant shows up online today and tell you what he would fix first. The call can be in English or Spanish.",

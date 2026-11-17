@@ -766,6 +766,16 @@
       "permanent": true
     },
     {
+      "source": "/areas/kendall-pinecrest.html",
+      "destination": "/restaurant-marketing-kendall-pinecrest",
+      "permanent": true
+    },
+    {
+      "source": "/areas-es/kendall-pinecrest.html",
+      "destination": "/es/marketing-restaurantes-kendall-pinecrest",
+      "permanent": true
+    },
+    {
       "source": "/areas/doral.html",
       "destination": "/restaurant-marketing-doral",
       "permanent": true
@@ -941,6 +951,10 @@
       "destination": "/areas/coral-gables.html"
     },
     {
+      "source": "/restaurant-marketing-kendall-pinecrest",
+      "destination": "/areas/kendall-pinecrest.html"
+    },
+    {
       "source": "/restaurant-marketing-doral",
       "destination": "/areas/doral.html"
     },
@@ -963,6 +977,10 @@
     {
       "source": "/es/marketing-restaurantes-coral-gables",
       "destination": "/areas-es/coral-gables.html"
+    },
+    {
+      "source": "/es/marketing-restaurantes-kendall-pinecrest",
+      "destination": "/areas-es/kendall-pinecrest.html"
     },
     {
       "source": "/es/marketing-restaurantes-doral",

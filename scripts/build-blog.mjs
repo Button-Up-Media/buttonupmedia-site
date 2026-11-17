@@ -239,6 +239,7 @@ function footer(lang) {
           <a href="/es/marketing-restaurantes-brickell">Brickell y Downtown</a>
           <a href="/es/marketing-restaurantes-wynwood">Wynwood</a>
           <a href="/es/marketing-restaurantes-coral-gables">Coral Gables</a>
+          <a href="/es/marketing-restaurantes-kendall-pinecrest">Kendall y Pinecrest</a>
           <a href="/es/marketing-restaurantes-doral">Doral</a>
           <a href="/es/marketing-restaurantes-fort-lauderdale">Fort Lauderdale</a>
           <a href="/es/zonas-que-atendemos">Todas las zonas</a>
@@ -283,6 +284,7 @@ function footer(lang) {
           <a href="/restaurant-marketing-brickell">Brickell &amp; Downtown</a>
           <a href="/restaurant-marketing-wynwood">Wynwood</a>
           <a href="/restaurant-marketing-coral-gables">Coral Gables</a>
+          <a href="/restaurant-marketing-kendall-pinecrest">Kendall &amp; Pinecrest</a>
           <a href="/restaurant-marketing-doral">Doral</a>
           <a href="/restaurant-marketing-fort-lauderdale">Fort Lauderdale</a>
           <a href="/areas-we-serve">All areas</a>

@@ -88,7 +88,7 @@ const ORG_ID = `${BASE}/#organization`;
 const DEFAULT_OG = '/media/founders-duo.webp';
 const SLUGS = ['tonis-sushi-bar', 'the-fatty-crab', 'brewing-buddha', 'shimuja-ramen', 'rusty-pelican', 'private-events', 'woa-cocktails'];
 const SERVICES = ['social', 'ads', 'web'];
-const AREA_IDS = ['miami-beach', 'brickell', 'wynwood', 'coral-gables', 'doral', 'fort-lauderdale'];
+const AREA_IDS = ['miami-beach', 'brickell', 'wynwood', 'coral-gables', 'kendall-pinecrest', 'doral', 'fort-lauderdale'];
 
 export const hubPath = (lang) => (lang === 'es' ? '/es/casos-de-exito' : '/case-studies');
 export const casePath = (slug, lang) => `${hubPath(lang)}/${slug}`;
@@ -116,8 +116,8 @@ for (const id of AREA_IDS) { ALLOWED_PATHS.add(areaPath(id, 'en')); ALLOWED_PATH
 for (const s of SLUGS) { ALLOWED_PATHS.add(casePath(s, 'en')); ALLOWED_PATHS.add(casePath(s, 'es')); }
 
 const AREA_FALLBACK = {
-  en: { 'miami-beach': 'Miami Beach', brickell: 'Brickell & Downtown Miami', wynwood: 'Wynwood', 'coral-gables': 'Coral Gables', doral: 'Doral', 'fort-lauderdale': 'Fort Lauderdale & Broward' },
-  es: { 'miami-beach': 'Miami Beach', brickell: 'Brickell y Downtown Miami', wynwood: 'Wynwood', 'coral-gables': 'Coral Gables', doral: 'Doral', 'fort-lauderdale': 'Fort Lauderdale y Broward' },
+  en: { 'miami-beach': 'Miami Beach', brickell: 'Brickell & Downtown Miami', wynwood: 'Wynwood', 'coral-gables': 'Coral Gables', 'kendall-pinecrest': 'Kendall & Pinecrest', doral: 'Doral', 'fort-lauderdale': 'Fort Lauderdale & Broward' },
+  es: { 'miami-beach': 'Miami Beach', brickell: 'Brickell y Downtown Miami', wynwood: 'Wynwood', 'coral-gables': 'Coral Gables', 'kendall-pinecrest': 'Kendall y Pinecrest', doral: 'Doral', 'fort-lauderdale': 'Fort Lauderdale y Broward' },
 };
 
 const T = {

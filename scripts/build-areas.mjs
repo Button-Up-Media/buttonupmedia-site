@@ -59,7 +59,7 @@ const PHONE_DISPLAY = '(786) 740-9499';
 const OG_IMAGE = `${BASE}/media/founders-duo.webp`;
 const HOST_IMG = { src: '/media/author-juan.webp', width: 512, height: 512 };
 
-const AREA_IDS = ['fort-lauderdale', 'miami-beach', 'wynwood', 'doral', 'brickell', 'coral-gables']; // north to south
+const AREA_IDS = ['fort-lauderdale', 'miami-beach', 'wynwood', 'doral', 'brickell', 'coral-gables', 'kendall-pinecrest']; // north to south
 const CASE_SLUGS = ['tonis-sushi-bar', 'the-fatty-crab', 'brewing-buddha', 'shimuja-ramen', 'rusty-pelican'];
 
 export const areaPath = (id, lang) => (lang === 'es' ? `/es/marketing-restaurantes-${id}` : `/restaurant-marketing-${id}`);
@@ -390,7 +390,7 @@ const AREA_CSS = `
       .ar-snap-text { grid-template-columns: 1fr 1fr; gap: 40px; }
       .ar-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
       .ar-steps::before { content: ""; position: absolute; left: 22px; right: calc((100% - 56px) / 3 - 22px); top: 20px; height: 4px; border-radius: 2px; background: var(--gold); }
-      .ar-step { grid-template-columns: minmax(0, 1fr); gap: 6px; padding-bottom: 0; }
+      .ar-step { grid-template-columns: minmax(0, 1fr); gap: 6px; padding-bottom: 0; align-content: start; }
       .ar-step::before { display: none; }
       .ar-step h3 { margin-top: 12px; }
     }

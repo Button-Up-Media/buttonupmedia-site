@@ -12,16 +12,15 @@
     "proofLine": "Cerca: Brewing Buddha en Pinecrest, 24M+ vistas de video"
   },
   "heroMedia": {
-    "type": "testimonial",
-    "video": "/videos/testimonial-brewing-buddha-v2.mp4",
-    "poster": "/media/area-poster-brewing-buddha-testimonial.webp",
+    "type": "loop",
+    "video": "/media/bb-hero-loop.mp4",
+    "poster": "/media/bb-hero-poster.webp",
     "width": 540,
     "height": 960,
-    "focus": "50% 20%",
-    "alt": "Jordan, dueño de Brewing Buddha en Pinecrest, habla de su trabajo con Button Up Media",
+    "focus": "50% 50%",
+    "alt": "Un barista de Brewing Buddha reacciona a un pedido de Cookie Butter Latte tamaño fiesta, de un Reel que hicimos en la cercana Pinecrest",
     "kicker": "Cerca, en Pinecrest",
-    "tag": "Jordan, Brewing Buddha Cafe & Arthouse",
-    "play": "Vea a Jordan (1 min)"
+    "tag": "Brewing Buddha, 7.4M de vistas"
   },
   "snapshot": {
     "h2": "Cómo es trabajar con nosotros en Coral Gables",
@@ -32,7 +31,7 @@
     ],
     "paragraphsHtml": [
       "Coral Gables es parte de nuestra base en el sur de la Florida, así que las grabaciones se hacen en tu restaurante con nuestro propio equipo. Planificamos cada sesión contigo, y una sola sesión suele producir de 4 a 6 semanas de contenido. Después, lo publicamos y manejamos tus redes.",
-      "Nuestro cliente cercano es Brewing Buddha Cafe & Arthouse en Pinecrest, una cafetería y espacio de arte conocida por sus lattes creativos. Hacemos videos cortos junto con su equipo: nosotros proponemos, ellos proponen, y las mejores ideas llegan al feed. Su dueño, Jordan Athos, habla de su trabajo con nosotros en el video al principio de esta página."
+      "Nuestro cliente cercano es Brewing Buddha Cafe & Arthouse en Pinecrest, una cafetería y espacio de arte conocida por sus lattes creativos. Hacemos videos cortos junto con su equipo: nosotros proponemos, ellos proponen, y las mejores ideas llegan al feed. El video al principio de esta página es de uno de ellos, que tiene 7.4M de vistas. Puedes ver más en nuestra <a href=\"/es/marketing-restaurantes-kendall-pinecrest\">página de Kendall y Pinecrest</a>."
     ]
   },
   "proof": {
@@ -62,7 +61,7 @@
     {"q": "¿Crean contenido en español?", "a": "Sí. Trabajamos en inglés y en español, así que las publicaciones y los textos pueden ir en uno de los dos idiomas o en ambos, y cada página web que creamos viene en los dos."},
     {"q": "Tenemos otro local fuera del sur de la Florida. ¿Pueden atenderlo también?", "a": "Sí. Los anuncios, las páginas web y el SEO y AEO se hacen a distancia, así que funcionan en cualquier parte de Estados Unidos. Para redes sociales, nuestro equipo en Miami planifica y maneja el contenido, y un videógrafo o fotógrafo de nuestra red en esa zona hace la grabación."}
   ],
-  "nearby": ["doral", "brickell"],
+  "nearby": ["kendall-pinecrest", "brickell"],
   "cta": {
     "h2": "Hablemos de su restaurante en Coral Gables",
     "body": "En una llamada gratis de 30 minutos, Juan revisará cómo aparece su restaurante en internet hoy y le dirá qué arreglaría primero. La llamada puede ser en español o en inglés.",
