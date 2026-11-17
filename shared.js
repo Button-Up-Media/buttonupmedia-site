@@ -2220,9 +2220,9 @@ if (document.readyState === "loading") {
    post_lang on blog posts, which is what finally attributes a lead to the article
    that earned it. Blog posts declare their identity via data attributes on <body>.
 
-   The paid-ads and grader pages already push these events from their own inline
-   scripts. Running this there too would double-count, and several of them are live
-   ad destinations that must not be edited, so they are skipped by path instead. */
+   The grader pages already push some of these events from their own inline
+   scripts. Running this there too would double-count, so those events are
+   suppressed by path instead. */
 (function () {
   if (window.__bumSharedLeadTracking) return;
 
@@ -2234,15 +2234,14 @@ if (document.readyState === "loading") {
   // list, nine push nothing but a completed booking, so skipping them wholesale
   // discarded every phone tap and every booking click those pages produced.
   // Censused against the pages themselves: this tracker pushes only
-  // booking_cta_click, grader_cta_click and phone_call_click, and only the five
-  // pages below push any of those three on their own.
+  // booking_cta_click, grader_cta_click and phone_call_click, and only the grader
+  // pages below push any of those three on their own. (The paid-ads landing
+  // pages that also did were retired in Nov 2026 and now redirect.)
   //
   // Note website-grader-report-es is deliberately absent. Unlike its English
   // twin it pushes only report_unlocked, which this tracker never pushes, so it
   // needs no suppression at all and wants full coverage.
   var SELF_TRACKED = {
-    "/restaurant-paid-ads": ["booking_cta_click", "phone_call_click"],
-    "/restaurant-paid-ads-es": ["booking_cta_click", "phone_call_click"],
     "/social-media-website-grader": ["booking_cta_click", "phone_call_click"],
     "/es/analizador-redes-sociales-web": ["booking_cta_click", "phone_call_click"],
     // Source filenames too. Production reaches these by their clean URL, but a

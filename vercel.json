@@ -12,150 +12,6 @@
       ]
     },
     {
-      "source": "/smm-strategy-call",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
-        }
-      ]
-    },
-    {
-      "source": "/smm-strategy-call.html",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
-        }
-      ]
-    },
-    {
-      "source": "/smm-strategy-call-es",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
-        }
-      ]
-    },
-    {
-      "source": "/smm-strategy-call-es.html",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
-        }
-      ]
-    },
-    {
-      "source": "/restaurant-social-media",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
-        }
-      ]
-    },
-    {
-      "source": "/restaurant-social-media.html",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
-        }
-      ]
-    },
-    {
-      "source": "/restaurant-social-media-es.html",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
-        }
-      ]
-    },
-    {
-      "source": "/es/redes-sociales",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
-        }
-      ]
-    },
-    {
-      "source": "/restaurant-websites",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
-        }
-      ]
-    },
-    {
-      "source": "/restaurant-websites.html",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
-        }
-      ]
-    },
-    {
-      "source": "/restaurant-websites-es.html",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
-        }
-      ]
-    },
-    {
-      "source": "/es/sitios-web-restaurantes",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
-        }
-      ]
-    },
-    {
-      "source": "/restaurant-paid-ads",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
-        }
-      ]
-    },
-    {
-      "source": "/restaurant-paid-ads.html",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
-        }
-      ]
-    },
-    {
-      "source": "/restaurant-paid-ads-es",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
-        }
-      ]
-    },
-    {
-      "source": "/restaurant-paid-ads-es.html",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, follow"
-        }
-      ]
-    },
-    {
       "source": "/social-media-website-grader-report",
       "headers": [
         {
@@ -481,82 +337,142 @@
     },
     {
       "source": "/smm-strategy-call/",
-      "destination": "/smm-strategy-call",
+      "destination": "/socialmediamarketing",
       "permanent": true
     },
     {
       "source": "/smm-strategy-call.html",
-      "destination": "/smm-strategy-call",
+      "destination": "/socialmediamarketing",
       "permanent": true
     },
     {
       "source": "/smm-strategy-call-es/",
-      "destination": "/smm-strategy-call-es",
+      "destination": "/es/marketing-redes-sociales",
       "permanent": true
     },
     {
       "source": "/smm-strategy-call-es.html",
-      "destination": "/smm-strategy-call-es",
+      "destination": "/es/marketing-redes-sociales",
       "permanent": true
     },
     {
       "source": "/restaurant-social-media/",
-      "destination": "/restaurant-social-media",
+      "destination": "/socialmediamarketing",
       "permanent": true
     },
     {
       "source": "/restaurant-social-media.html",
-      "destination": "/restaurant-social-media",
+      "destination": "/socialmediamarketing",
       "permanent": true
     },
     {
       "source": "/restaurant-social-media-es.html",
-      "destination": "/es/redes-sociales",
+      "destination": "/es/marketing-redes-sociales",
       "permanent": true
     },
     {
       "source": "/es/redes-sociales/",
-      "destination": "/es/redes-sociales",
+      "destination": "/es/marketing-redes-sociales",
       "permanent": true
     },
     {
       "source": "/restaurant-websites/",
-      "destination": "/restaurant-websites",
+      "destination": "/restaurant-website-design",
       "permanent": true
     },
     {
       "source": "/restaurant-websites.html",
-      "destination": "/restaurant-websites",
+      "destination": "/restaurant-website-design",
       "permanent": true
     },
     {
       "source": "/restaurant-websites-es.html",
-      "destination": "/es/sitios-web-restaurantes",
+      "destination": "/es/diseno-web-restaurantes",
       "permanent": true
     },
     {
       "source": "/es/sitios-web-restaurantes/",
-      "destination": "/es/sitios-web-restaurantes",
+      "destination": "/es/diseno-web-restaurantes",
       "permanent": true
     },
     {
       "source": "/restaurant-paid-ads/",
-      "destination": "/restaurant-paid-ads",
+      "destination": "/restaurant-advertising",
       "permanent": true
     },
     {
       "source": "/restaurant-paid-ads.html",
-      "destination": "/restaurant-paid-ads",
+      "destination": "/restaurant-advertising",
       "permanent": true
     },
     {
       "source": "/restaurant-paid-ads-es/",
-      "destination": "/restaurant-paid-ads-es",
+      "destination": "/es/publicidad-restaurantes",
       "permanent": true
     },
     {
       "source": "/restaurant-paid-ads-es.html",
-      "destination": "/restaurant-paid-ads-es",
+      "destination": "/es/publicidad-restaurantes",
+      "permanent": true
+    },
+    {
+      "source": "/smm-strategy-call",
+      "destination": "/socialmediamarketing",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-social-media",
+      "destination": "/socialmediamarketing",
+      "permanent": true
+    },
+    {
+      "source": "/smm-strategy-call-es",
+      "destination": "/es/marketing-redes-sociales",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-social-media-es",
+      "destination": "/es/marketing-redes-sociales",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-social-media-es/",
+      "destination": "/es/marketing-redes-sociales",
+      "permanent": true
+    },
+    {
+      "source": "/es/redes-sociales",
+      "destination": "/es/marketing-redes-sociales",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-websites",
+      "destination": "/restaurant-website-design",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-websites-es",
+      "destination": "/es/diseno-web-restaurantes",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-websites-es/",
+      "destination": "/es/diseno-web-restaurantes",
+      "permanent": true
+    },
+    {
+      "source": "/es/sitios-web-restaurantes",
+      "destination": "/es/diseno-web-restaurantes",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-paid-ads",
+      "destination": "/restaurant-advertising",
+      "permanent": true
+    },
+    {
+      "source": "/restaurant-paid-ads-es",
+      "destination": "/es/publicidad-restaurantes",
       "permanent": true
     },
     {
@@ -1109,30 +1025,6 @@
       "destination": "/social-media-marketing.html"
     },
     {
-      "source": "/smm-strategy-call",
-      "destination": "/smm-strategy-call.html"
-    },
-    {
-      "source": "/smm-strategy-call-es",
-      "destination": "/smm-strategy-call-es.html"
-    },
-    {
-      "source": "/restaurant-social-media",
-      "destination": "/restaurant-social-media.html"
-    },
-    {
-      "source": "/restaurant-websites",
-      "destination": "/restaurant-websites.html"
-    },
-    {
-      "source": "/restaurant-paid-ads",
-      "destination": "/restaurant-paid-ads.html"
-    },
-    {
-      "source": "/restaurant-paid-ads-es",
-      "destination": "/restaurant-paid-ads-es.html"
-    },
-    {
       "source": "/social-media-website-grader",
       "destination": "/website-grader.html"
     },
@@ -1179,14 +1071,6 @@
     {
       "source": "/es/nosotros",
       "destination": "/about-es.html"
-    },
-    {
-      "source": "/es/redes-sociales",
-      "destination": "/restaurant-social-media-es.html"
-    },
-    {
-      "source": "/es/sitios-web-restaurantes",
-      "destination": "/restaurant-websites-es.html"
     },
     {
       "source": "/es/analizador-redes-sociales-web",
