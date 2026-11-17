@@ -427,6 +427,8 @@
     .v3-home #case-studies .h-card { min-height: 360px; }
     .v3-home #case-studies .h-card-top { padding-right: 48px; }
     .v3-home .h-panel-foot { margin-top: 18px; }
+    .v3-home .h-panel-note { margin-top: 18px; max-width: 62ch; font-size: 0.9375rem; line-height: 1.55; color: rgba(246,240,230,0.62); }
+    .v3-home .h-panel-note + .h-deck { margin-top: 14px; }
     .v3-home .h-panel-foot .btn { height: 50px; gap: 10px; white-space: nowrap; }
     .v3-home .h-panel-foot .btn svg { width: 18px; height: 18px; flex: none; transition: transform .3s var(--v3-ease); }
     @media (hover: hover) { .v3-home .h-panel-foot .btn:hover svg { transform: translateX(3px); } }
@@ -661,14 +663,14 @@
           <div class="h-head">
             <div class="lib-section-label">Resultados</div>
             <h2>Resultados de nuestros clientes</h2>
-            <p>Resultados en redes sociales orgánicas y en Google Ads de restaurantes con los que trabajamos. Toca una tarjeta para ver el caso completo.</p>
+            <p>Resultados en redes sociales orgánicas y en anuncios pagados de restaurantes con los que trabajamos. Toca una tarjeta para ver el caso completo.</p>
           </div>
           <div class="h-deck-nav">
             <button type="button" data-deck="-1" aria-label="Resultados anteriores"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
             <button type="button" data-deck="1" aria-label="Más resultados"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
           </div>
         </div>
-        <div class="h-seg" role="tablist" aria-label="Resultados por canal"><button type="button" role="tab" id="h-tab-social" aria-controls="h-panel-social" aria-selected="true">Redes orgánicas</button><button type="button" role="tab" id="h-tab-ads" aria-controls="h-panel-ads" aria-selected="false">Google Ads</button></div>
+        <div class="h-seg" role="tablist" aria-label="Resultados por canal"><button type="button" role="tab" id="h-tab-social" aria-controls="h-panel-social" aria-selected="true">Redes orgánicas</button><button type="button" role="tab" id="h-tab-ads" aria-controls="h-panel-ads" aria-selected="false">Anuncios pagados</button></div>
         <div class="h-panel" id="h-panel-social" role="tabpanel" aria-labelledby="h-tab-social">
           <h3 class="h-panel-h">Redes orgánicas</h3>
           <ul class="h-deck">
@@ -700,7 +702,8 @@
           </ul>
           <div class="h-panel-foot"><a class="btn" href="/es/casos-de-exito#social">Vea todos los resultados en redes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
         </div><div class="h-panel" id="h-panel-ads" role="tabpanel" aria-labelledby="h-tab-ads">
-          <h3 class="h-panel-h">Google Ads</h3>
+          <h3 class="h-panel-h">Anuncios pagados</h3>
+          <p class="h-panel-note">Anuncios pagados quiere decir Google Ads y anuncios en redes sociales, en Instagram y Facebook. Abajo hay ejemplos de clientes en Google Ads.</p>
           <ul class="h-deck">
             <li><a class="h-card --gold" href="/es/casos-de-exito/private-events">
               <span class="h-card-top"><span class="h-card-who">The Boathouse<small>Eventos privados</small></span></span>
@@ -721,14 +724,14 @@
               <span class="h-card-foot">1.007 reservas, llamadas y solicitudes de eventos medidas.</span>
               <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </a></li><li><a class="h-card --light" href="/es/casos-de-exito#ads">
-              <span class="h-card-top"><span class="h-card-who">Las cinco cuentas<small>2025</small></span></span>
+              <span class="h-card-top"><span class="h-card-who">Resultados combinados<small>Ejemplos de clientes, 2025</small></span></span>
               <span class="h-card-num">$1,1M</span>
               <span class="h-card-label">en valor de conversiones medido</span>
               <span class="h-card-foot">Con menos de $46K en anuncios, un retorno combinado de 24:1.</span>
               <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </a></li>
           </ul>
-          <div class="h-panel-foot"><a class="btn" href="/es/casos-de-exito#ads">Vea todos los resultados de Google Ads <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <div class="h-panel-foot"><a class="btn" href="/es/casos-de-exito#ads">Vea todos los resultados de anuncios pagados <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
         </div>
       </div>
     </section>

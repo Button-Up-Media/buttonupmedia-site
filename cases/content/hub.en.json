@@ -53,12 +53,12 @@
       ]
     },
     "ads": {
-      "tab": "Google Ads",
-      "h2": "Google Ads results from five restaurant accounts",
-      "intro": "We managed these five restaurant Google Ads accounts in 2025. They're listed from the highest return to the lowest.",
+      "tab": "Paid ads",
+      "h2": "Paid ads: client examples from Google Ads",
+      "intro": "Paid ads means Google Ads and social media ads on Instagram and Facebook. These client examples are from Google Ads accounts we managed in 2025, listed from the highest return to the lowest.",
       "roasLineHtml": "<strong>How to read these numbers:</strong> ROAS (return on ad spend) is what came back for every $1 of ads. 72:1 means about $72 in bookings and inquiries tracked by Google for each $1 spent. A conversion is one tracked action, like a reservation, a call or a private-event inquiry.",
       "totals": {
-        "h3": "All five accounts together, 2025",
+        "h3": "Combined, 2025",
         "items": [
           {
             "value": "$1.1M",

@@ -429,6 +429,8 @@
     .v3-home #case-studies .h-card { min-height: 360px; }
     .v3-home #case-studies .h-card-top { padding-right: 48px; }
     .v3-home .h-panel-foot { margin-top: 18px; }
+    .v3-home .h-panel-note { margin-top: 18px; max-width: 62ch; font-size: 0.9375rem; line-height: 1.55; color: rgba(246,240,230,0.62); }
+    .v3-home .h-panel-note + .h-deck { margin-top: 14px; }
     .v3-home .h-panel-foot .btn { height: 50px; gap: 10px; white-space: nowrap; }
     .v3-home .h-panel-foot .btn svg { width: 18px; height: 18px; flex: none; transition: transform .3s var(--v3-ease); }
     @media (hover: hover) { .v3-home .h-panel-foot .btn:hover svg { transform: translateX(3px); } }
@@ -663,14 +665,14 @@
           <div class="h-head">
             <div class="lib-section-label">Results</div>
             <h2>Results from our clients</h2>
-            <p>Organic social media and Google Ads results from restaurants we work with. Tap a card to read the full case study.</p>
+            <p>Organic social media and paid ads results from restaurants we work with. Tap a card to read the full case study.</p>
           </div>
           <div class="h-deck-nav">
             <button type="button" data-deck="-1" aria-label="Previous results"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
             <button type="button" data-deck="1" aria-label="More results"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
           </div>
         </div>
-        <div class="h-seg" role="tablist" aria-label="Results by channel"><button type="button" role="tab" id="h-tab-social" aria-controls="h-panel-social" aria-selected="true">Organic social</button><button type="button" role="tab" id="h-tab-ads" aria-controls="h-panel-ads" aria-selected="false">Google Ads</button></div>
+        <div class="h-seg" role="tablist" aria-label="Results by channel"><button type="button" role="tab" id="h-tab-social" aria-controls="h-panel-social" aria-selected="true">Organic social</button><button type="button" role="tab" id="h-tab-ads" aria-controls="h-panel-ads" aria-selected="false">Paid ads</button></div>
         <div class="h-panel" id="h-panel-social" role="tabpanel" aria-labelledby="h-tab-social">
           <h3 class="h-panel-h">Organic social</h3>
           <ul class="h-deck">
@@ -702,7 +704,8 @@
           </ul>
           <div class="h-panel-foot"><a class="btn" href="/case-studies#social">See all social media results <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
         </div><div class="h-panel" id="h-panel-ads" role="tabpanel" aria-labelledby="h-tab-ads">
-          <h3 class="h-panel-h">Google Ads</h3>
+          <h3 class="h-panel-h">Paid ads</h3>
+          <p class="h-panel-note">Paid ads means Google Ads and social media ads on Instagram and Facebook. Below are client examples from Google Ads.</p>
           <ul class="h-deck">
             <li><a class="h-card --gold" href="/case-studies/private-events">
               <span class="h-card-top"><span class="h-card-who">The Boathouse<small>Private events</small></span></span>
@@ -723,14 +726,14 @@
               <span class="h-card-foot">1,007 tracked reservations, calls and event inquiries.</span>
               <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </a></li><li><a class="h-card --light" href="/case-studies#ads">
-              <span class="h-card-top"><span class="h-card-who">All five accounts<small>2025</small></span></span>
+              <span class="h-card-top"><span class="h-card-who">Combined results<small>Client examples, 2025</small></span></span>
               <span class="h-card-num">$1.1M</span>
               <span class="h-card-label">in tracked conversion value</span>
               <span class="h-card-foot">On under $46K in ad spend, a 24:1 blended return.</span>
               <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </a></li>
           </ul>
-          <div class="h-panel-foot"><a class="btn" href="/case-studies#ads">See all Google Ads results <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          <div class="h-panel-foot"><a class="btn" href="/case-studies#ads">See all paid ads results <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
         </div>
       </div>
     </section>
