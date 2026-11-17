@@ -29,7 +29,7 @@
     "device": true
   },
   "metrics": [
-    { "value": "2 weeks", "label": "To build, in Fabio Perez's words", "meaning": "The custom site took about two weeks from start to finish.", "reviewNote": "“2 weeks” comes from the quote signed “Fabio, Website design” on the contact page. Confirm it is Fabio Perez talking about the WOA build." },
+    { "value": "2 weeks", "label": "To build, in Fabio Perez's words", "meaning": "The custom site took about two weeks from start to finish." },
     { "value": "EN + ES", "label": "Every page in both languages", "meaning": "One tap switches the whole site between English and Spanish." },
     { "value": "2", "label": "Languages that show up on Google", "meaning": "WOA shows up when people search in English or in Spanish, with its main pages listed under the result." }
   ],

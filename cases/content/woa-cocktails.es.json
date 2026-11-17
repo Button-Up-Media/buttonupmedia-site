@@ -29,7 +29,7 @@
     "device": true
   },
   "metrics": [
-    { "value": "2 semanas", "label": "Para construirlo, en palabras de Fabio Perez", "meaning": "El sitio a la medida tomó unas dos semanas de principio a fin.", "reviewNote": "“2 weeks” comes from the quote signed “Fabio, Website design” on the contact page. Confirm it is Fabio Perez talking about the WOA build." },
+    { "value": "2 semanas", "label": "Para construirlo, en palabras de Fabio Perez", "meaning": "El sitio a la medida tomó unas dos semanas de principio a fin." },
     { "value": "EN + ES", "label": "Cada página en los dos idiomas", "meaning": "Un toque cambia todo el sitio entre inglés y español." },
     { "value": "2", "label": "Idiomas que aparecen en Google", "meaning": "Si alguien busca en inglés o en español, WOA aparece, con sus páginas principales listadas justo debajo del resultado." }
   ],
