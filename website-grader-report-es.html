@@ -37,7 +37,7 @@
   <title>El Reporte de Visibilidad Digital de tu Restaurante | Button Up Media</title>
   <meta name="robots" content="noindex, nofollow" />
   <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg" />
-  <meta name="theme-color" content="#FBF8F2" />
+  <meta name="theme-color" content="#0b0b0c" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="El Reporte de Visibilidad Digital de tu Restaurante | Button Up Media" />
   <meta property="og:description" content="Una calificación gratis de tu sitio web, tu ficha de Google, tus redes sociales y tus reseñas, más cómo te comparas con la competencia cercana." />
@@ -52,184 +52,382 @@
   <link rel="preconnect" href="https://assets.calendly.com" />
   <link rel="preconnect" href="https://challenges.cloudflare.com" />
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
-  <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-variable.woff2" crossorigin fetchpriority="high" />
   <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
-  <link rel="preload" as="font" type="font/woff2" href="/fonts/epilogue-variable.woff2" crossorigin />
   <link rel="stylesheet" href="shared.css?v=site-fixes-1" />
   <style>
+    /* Grader report, v3 dark theme (Nov 2026). Same black, warm white and gold
+       as the rest of the site: flat surfaces, hairlines, gold only for the
+       booking action, key numbers and the active state. Every selector the
+       report script reads or writes is kept. */
     :root {
-      --bg-0: #FBF8F2; --bg-1: #F4EDE1; --bg-2: #ECE3D4;
-      --line: rgba(36,28,16,0.14); --line-soft: rgba(36,28,16,0.08);
-      --text: #2C261C; --text-head: #1C170F; --text-dim: rgba(44,38,28,0.74); --text-soft: rgba(44,38,28,0.52);
-      --gold: #B57E1E; --gold-soft: rgba(181,126,30,0.12); --teal: #1E7E54;
-      --good: #1E7E54; --fair: #C9820E; --poor: #CF4A3C; --ink: #1C170F;
+      --bg-0: #0b0b0c; --bg-1: #141416; --bg-2: #1b1b1e; --bg-3: #232327;
+      --line: rgba(255,255,255,0.14); --line-soft: rgba(255,255,255,0.08);
+      --text: rgba(246,240,230,0.86); --text-head: #f6f0e6; --text-dim: rgba(246,240,230,0.72); --text-soft: rgba(246,240,230,0.52);
+      --gold: #E2A84D; --gold-hover: #ecb764; --gold-soft: rgba(226,168,77,0.12); --gold-text: #E2A84D; --teal: #5fd39a;
+      --good: #3fbf7f; --fair: #e9a83b; --poor: #ef6a5a; --ink: #140e04;
+      --font-display: "Figtree", system-ui, -apple-system, sans-serif;
+      --font-hero: "Figtree", system-ui, -apple-system, sans-serif;
+      --font-body: "Figtree", system-ui, -apple-system, sans-serif;
+      --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+      --r-ctl: 14px; --r-card: 22px; --r-panel: 32px;
     }
-    body { background: var(--bg-0); color: var(--text); }
-    .btn-primary { border-color: rgba(181,126,30,0.45); background: linear-gradient(135deg, #E0A23C, #D08A34); color: #2A1C06; }
-    .btn { border-color: var(--line); color: var(--text); background: #FFFFFF; }
-    .sr-wrap { width: min(calc(100% - 32px), 1240px); margin: 0 auto; }
+    html { background: var(--bg-0); }
+    body { background: var(--bg-0); color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.6; padding-top: 64px; overflow-x: clip; }
+    h1, h2, h3 { font-family: var(--font-hero); color: var(--text-head); text-wrap: balance; }
+    .btn-primary { border-color: transparent; background: var(--gold); color: var(--ink); }
+    .btn { border-color: var(--line); color: var(--text-head); background: var(--bg-2); }
+    .sr-wrap { width: min(calc(100% - 40px), 1240px); margin: 0 auto; }
+    @media (max-width: 560px) { .sr-wrap { width: calc(100% - 32px); } }
 
-    /* ============ TOP BAR ============ */
-    /* header: the same liquid-glass floating pill as /es/analizador-redes-sociales-web + the landing */
-    body { padding-top: 90px; }
-    .gr-nav { position: fixed; top: 16px; left: 0; right: 0; z-index: 999; width: min(calc(100% - 48px), 1180px); margin: 16px auto 0; padding: 12px 20px; background: rgba(255,255,255,0.70); -webkit-backdrop-filter: blur(22px) saturate(1.5); backdrop-filter: blur(22px) saturate(1.5); border: 1px solid rgba(36,28,16,0.10); border-radius: 16px; box-shadow: 0 10px 34px rgba(40,30,12,0.12), inset 0 1px 0 rgba(255,255,255,0.6); }
-    .gr-nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; }
+    /* ============ TOP BAR (frosted, full width, like the rest of the site) ============ */
+    .gr-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 999; height: 64px; display: flex; align-items: center; background: rgba(11,11,12,0.78); -webkit-backdrop-filter: blur(20px) saturate(1.4); backdrop-filter: blur(20px) saturate(1.4); border-bottom: 1px solid var(--line-soft); }
+    .gr-nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: min(calc(100% - 40px), 1240px); margin: 0 auto; }
     .gr-nav-brand { display: inline-flex; align-items: center; flex-shrink: 0; }
-    .gr-logo { height: 46px; width: auto; display: block; }
-    .gr-nav-right { display: flex; align-items: center; gap: 16px; }
-    .gr-nav-phone { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--text-head); white-space: nowrap; text-decoration: none; }
-    .gr-nav-phone svg { width: 15px; height: 15px; color: var(--gold); }
-    .gr-nav-phone:hover { color: var(--gold); }
-    .gr-nav-cta { height: 42px; padding: 0 22px; display: inline-flex; align-items: center; justify-content: center; border: none; border-radius: 12px; background: #FFFFFF; color: var(--text); font-family: var(--font-display); font-weight: 700; font-size: 0.86rem; white-space: nowrap; text-decoration: none; box-shadow: 0 6px 18px rgba(36,24,4,0.26); cursor: pointer; transition: background .2s, color .2s, box-shadow .2s, transform .2s; }
-    .gr-nav-cta:hover { background: linear-gradient(135deg, #E8AC44, #D08A34); color: #241804; box-shadow: 0 12px 30px rgba(208,138,52,0.42); transform: translateY(-1px); }
-    @media (max-width: 700px) {
-      body { padding-top: 74px; }
-      .gr-nav { top: 8px; width: min(calc(100% - 20px), 1180px); margin: 0 auto; padding: 8px 10px 8px 14px; border-radius: 14px; }
-      .gr-nav-inner { gap: 12px; }
-      .gr-logo { height: 30px; }
-      .gr-nav-right { gap: 14px; }
-      .gr-nav-phone { width: 40px; height: 40px; padding: 0; border-radius: 50%; border: 1px solid var(--line); background: rgba(36,28,16,0.03); justify-content: center; gap: 0; }
-      .gr-nav-phone svg { width: 19px; height: 19px; }
+    .gr-logo { height: 34px; width: auto; display: block; }
+    .gr-nav-right { display: flex; align-items: center; gap: 10px; }
+    .gr-nav-phone { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border-radius: 999px; font-weight: 600; font-size: 0.9rem; color: var(--text-head); white-space: nowrap; text-decoration: none; transition: background .2s var(--ease); }
+    .gr-nav-phone svg { width: 16px; height: 16px; color: var(--gold); }
+    .gr-nav-phone:hover { background: var(--bg-2); }
+    .gr-nav-cta { height: 40px; padding: 0 18px; display: inline-flex; align-items: center; justify-content: center; border: none; border-radius: 999px; background: var(--gold); color: var(--ink); font-weight: 700; font-size: 0.9rem; white-space: nowrap; text-decoration: none; cursor: pointer; transition: background .2s var(--ease), transform .18s var(--ease); }
+    .gr-nav-cta:hover { background: var(--gold-hover); color: var(--ink); }
+    .gr-nav-cta:active { transform: scale(.97); }
+    @media (max-width: 560px) {
+      .gr-nav-inner { width: calc(100% - 32px); gap: 10px; }
+      .gr-logo { height: 28px; }
+      .gr-nav-phone { width: 44px; height: 44px; padding: 0; justify-content: center; border: 1px solid var(--line); }
       .gr-nav-phone span { display: none; }
-      .gr-nav-cta { height: 40px; padding: 0 18px; }
+      .gr-nav-cta { height: 44px; padding: 0 16px; }
     }
 
     /* ============ SCAN STATE ============ */
-    .sr-scan { min-height: calc(100vh - 60px); display: grid; grid-template-columns: 1fr; gap: 28px; align-items: start; padding: clamp(28px, 5vw, 56px) 0; }
-    .sr-scan-list h1 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.03em; font-size: clamp(1.5rem, 4vw, 2rem); margin-bottom: 26px; }
-    .sr-check { display: flex; align-items: center; gap: 14px; padding: 14px 0; color: var(--text-soft); font-size: 0.98rem; font-weight: 500; transition: color .3s; }
-    .sr-check.done { color: var(--text-head); font-weight: 600; }
-    .sr-check.active { color: var(--text-head); font-weight: 600; }
-    .sr-check .dot { flex: none; width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--line); display: grid; place-items: center; transition: all .3s; }
+    .sr-scan { min-height: calc(100vh - 64px); display: grid; grid-template-columns: 1fr; gap: 28px; align-items: start; padding: clamp(28px, 5vw, 64px) 0; }
+    .sr-scan-list h1 { font-weight: 800; letter-spacing: -0.04em; font-size: clamp(1.7rem, 4vw, 2.4rem); margin-bottom: 22px; }
+    .sr-check { display: flex; align-items: center; gap: 14px; padding: 13px 0; border-top: 1px solid var(--line-soft); color: var(--text-soft); font-size: 1rem; font-weight: 500; transition: color .3s var(--ease); }
+    .sr-check:first-of-type { border-top: none; }
+    .sr-check.done, .sr-check.active { color: var(--text-head); font-weight: 600; }
+    .sr-check .dot { flex: none; width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--line); display: grid; place-items: center; transition: background .3s var(--ease), border-color .3s var(--ease); }
     .sr-check .dot svg { display: none; width: 13px; height: 13px; }
-    .sr-check.done .dot { background: var(--ink); border-color: var(--ink); }
-    .sr-check.done .dot svg { display: block; color: #fff; }
+    .sr-check.done .dot { background: var(--gold); border-color: var(--gold); }
+    .sr-check.done .dot svg { display: block; color: var(--ink); }
     .sr-check.active .dot { border-color: var(--gold); border-top-color: transparent; animation: srSpin .8s linear infinite; }
     @keyframes srSpin { to { transform: rotate(360deg); } }
-    .sr-scan-card { border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line-soft); background: #FFFFFF; box-shadow: 0 20px 50px rgba(40,30,12,0.08); max-width: 520px; }
-    .sr-scan-card .img { height: 180px; background: linear-gradient(135deg, #cfe3d0, #aacbb0); display: grid; place-items: center; color: rgba(28,23,15,0.4); }
-    .sr-scan-card .img svg { width: 48px; height: 48px; }
+    .sr-scan-card { border-radius: var(--r-card); overflow: hidden; border: 1px solid var(--line-soft); background: var(--bg-1); max-width: 540px; width: 100%; }
+    /* animated "finding you on the map" opener */
+    .sr-map { position: relative; height: 210px; overflow: hidden; background: #17171a; }
+    .sr-map-view { position: absolute; inset: 0; transform-origin: 50% 46%; animation: srZoom 3.6s cubic-bezier(.4,0,.2,1) both; }
+    .sr-map-bg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .sr-youpin { position: absolute; left: 50%; top: 46%; width: 36px; height: 46px; margin: -46px 0 0 -18px; color: var(--gold); animation: srDrop .9s cubic-bezier(.3,1.5,.5,1) .25s both; z-index: 3; }
+    .sr-youpin svg { width: 100%; height: 100%; }
+    .sr-pulse { position: absolute; left: 50%; top: 46%; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%; background: rgba(226,168,77,0.45); animation: srPulse 1.8s ease-out 1s infinite; z-index: 2; }
+    .sr-cpin { position: absolute; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: rgba(246,240,230,0.55); box-shadow: 0 0 0 3px rgba(246,240,230,0.12); opacity: 0; animation: srPop .5s ease forwards; z-index: 1; }
+    .sr-map-cap { position: absolute; left: 14px; bottom: 12px; z-index: 4; font-weight: 600; font-size: 0.82rem; color: var(--text-head); background: rgba(11,11,12,0.82); border: 1px solid var(--line-soft); padding: 6px 12px; border-radius: 999px; }
+    @keyframes srZoom { 0%, 42% { transform: scale(1.32); } 100% { transform: scale(1); } }
+    @keyframes srDrop { 0% { transform: translateY(-150px) scale(.6); opacity: 0; } 55% { opacity: 1; } 78% { transform: translateY(8px) scale(1.06); } 100% { transform: translateY(0) scale(1); } }
+    @keyframes srPulse { 0% { transform: scale(.4); opacity: .55; } 100% { transform: scale(3.2); opacity: 0; } }
+    @keyframes srPop { 0% { transform: scale(0); opacity: 0; } 70% { transform: scale(1.25); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
     .sr-scan-card .body { padding: 22px 24px 26px; }
-    .sr-scan-card h2 { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; }
-    .sr-scan-card .meta { display: flex; align-items: center; gap: 10px; margin-top: 8px; font-size: 0.9rem; color: var(--text-dim); }
+    .sr-scan-card h2 { font-weight: 800; font-size: 1.45rem; letter-spacing: -0.03em; }
+    .sr-scan-card .meta { display: flex; align-items: center; gap: 10px; margin-top: 6px; font-size: 0.9rem; color: var(--text-dim); }
     .sr-scan-card .stars { color: var(--gold); }
-    .sr-scan-card p { margin-top: 12px; color: var(--text-dim); font-size: 0.94rem; line-height: 1.55; }
-    .sr-progress { margin-top: 28px; padding: 16px 18px; border-radius: 14px; background: #FFFFFF; border: 1px solid var(--line-soft); display: flex; align-items: center; gap: 12px; max-width: 360px; }
+    .sr-scan-card p { margin-top: 12px; color: var(--text-dim); font-size: 0.95rem; line-height: 1.6; }
+    /* live findings feed: real Google data streamed in while the scan runs */
+    .sr-findings { margin-top: 8px; }
+    .sr-find { display: flex; align-items: flex-start; gap: 11px; padding: 11px 0; border-top: 1px solid var(--line-soft); opacity: 0; transform: translateY(7px); transition: opacity .45s var(--ease), transform .45s var(--ease); }
+    .sr-find.in { opacity: 1; transform: none; }
+    .sr-find .fi { flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; margin-top: 1px; background: var(--bg-3); color: var(--text-soft); }
+    .sr-find .fi svg { width: 12px; height: 12px; }
+    .sr-find.good .fi { background: rgba(63,191,127,0.16); color: var(--good); }
+    .sr-find.warn .fi { background: rgba(233,168,59,0.16); color: var(--fair); }
+    .sr-find .ft { font-size: 0.92rem; color: var(--text-head); line-height: 1.45; }
+    .sr-find .ft b { font-weight: 700; }
+    .sr-find .ft.quote { font-style: italic; color: var(--text-dim); }
+    .sr-progress { margin-top: 26px; padding: 14px 18px; border-radius: var(--r-ctl); background: var(--bg-1); border: 1px solid var(--line-soft); display: flex; align-items: center; gap: 12px; max-width: 360px; }
     .sr-progress .sp { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--gold); border-top-color: transparent; animation: srSpin .8s linear infinite; flex: none; }
-    .sr-progress b { font-size: 0.92rem; color: var(--text-head); }
-    @media (min-width: 880px) { .sr-scan { grid-template-columns: 0.8fr 1.2fr; gap: 56px; place-items: start center; } .sr-scan-list { position: sticky; top: 90px; } }
+    .sr-progress b { font-size: 0.92rem; font-weight: 600; color: var(--text-head); }
+    @media (min-width: 880px) { .sr-scan { grid-template-columns: 0.8fr 1.2fr; gap: 56px; place-items: start center; } .sr-scan-list { position: sticky; top: 96px; width: 100%; } }
 
     /* ============ REPORT STATE ============ */
-    .sr-report { display: none; padding: clamp(20px, 3vw, 32px) 0 80px; }
+    .sr-report { display: none; padding: clamp(32px, 5vw, 64px) 0 96px; }
     .sr-report.show { display: block; }
     .sr-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-    @media (min-width: 980px) { .sr-grid { grid-template-columns: 320px 1fr; align-items: start; } }
+    @media (min-width: 980px) { .sr-grid { grid-template-columns: 320px 1fr; align-items: start; gap: 24px; } }
 
-    /* sidebar */
-    .sr-side { border-radius: var(--r-lg); background: linear-gradient(180deg, #FBEDE4, #FFFFFF 60%); border: 1px solid var(--line-soft); padding: clamp(24px, 3vw, 32px); text-align: center; }
-    @media (min-width: 980px) { .sr-side { position: sticky; top: 80px; } }
-    .sr-gauge { position: relative; width: 200px; height: 200px; margin: 0 auto; }
+    /* sidebar: the score, the six area grades and the booking card */
+    .sr-side { border-radius: var(--r-card); background: var(--bg-1); border: 1px solid var(--line-soft); padding: clamp(24px, 3vw, 30px); text-align: center; }
+    @media (min-width: 980px) { .sr-side { align-self: start; } }
+    .sr-gauge { position: relative; width: 196px; height: 196px; margin: 0 auto; }
     .sr-gauge svg { width: 100%; height: 100%; transform: rotate(-90deg); }
     .sr-gauge .val { position: absolute; inset: 0; display: grid; place-items: center; }
-    .sr-gauge .val b { grid-area: 1 / 1; font-family: var(--font-hero); font-weight: 800; font-size: 3.4rem; line-height: 1; color: var(--text-head); }
-    .sr-gauge .val span { grid-area: 1 / 1; transform: translateY(33px); font-size: 0.82rem; color: var(--text-soft); }
-    .sr-grade-lab { margin-top: 16px; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-soft); }
-    .sr-grade { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; color: var(--poor); }
-    .sr-grade-note { margin-top: 12px; font-size: 0.86rem; color: var(--text-dim); line-height: 1.5; }
-    .sr-subs { margin-top: 24px; text-align: left; display: grid; gap: 4px; }
+    .sr-gauge .val b { grid-area: 1 / 1; font-family: var(--font-hero); font-weight: 800; font-size: 3.6rem; line-height: 1; letter-spacing: -0.04em; color: var(--text-head); }
+    .sr-gauge .val span { grid-area: 1 / 1; transform: translateY(34px); font-size: 0.82rem; color: var(--text-soft); }
+    .sr-grade-lab { margin-top: 16px; font-size: 0.85rem; font-weight: 600; color: var(--text-soft); }
+    .sr-grade { font-weight: 800; font-size: 1.6rem; letter-spacing: -0.03em; color: var(--poor); }
+    .sr-grade-note { margin-top: 10px; font-size: 0.92rem; color: var(--text-dim); line-height: 1.55; }
+    .sr-subs { margin-top: 22px; text-align: left; display: grid; gap: 0; }
     .sr-sub { display: flex; align-items: center; gap: 13px; padding: 12px 0; border-top: 1px solid var(--line-soft); }
     .sr-sub .ring { flex: none; width: 34px; height: 34px; }
     .sr-sub .lbl { flex: 1; }
-    .sr-sub .lbl b { display: block; font-size: 0.92rem; font-weight: 700; color: var(--text-head); }
-    .sr-sub .lbl small { font-size: 0.78rem; font-weight: 700; }
-    .sr-sub .pts { font-size: 0.86rem; font-weight: 700; color: var(--text-soft); }
-    .sr-side-cta { margin-top: 24px; padding: 18px; border-radius: var(--r-md); background: var(--ink); text-align: left; }
-    .sr-side-cta b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: #FBF5EA; }
-    .sr-side-cta p { font-size: 0.84rem; color: rgba(244,236,221,0.7); margin-top: 4px; line-height: 1.45; }
-    .sr-side-cta a { display: flex; align-items: center; gap: 12px; margin-top: 14px; padding: 10px; border-radius: 12px; background: linear-gradient(135deg, #E0A23C, #D08A34); color: #2A1C06; font-family: var(--font-display); font-weight: 700; font-size: 0.92rem; }
-    .sr-side-cta a img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.5); }
-    .sr-side-cta a .arr { margin-left: auto; }
+    .sr-sub .lbl b { display: block; font-size: 0.94rem; font-weight: 700; color: var(--text-head); }
+    .sr-sub .lbl small { font-size: 0.8rem; font-weight: 700; }
+    .sr-sub .pts { font-size: 0.88rem; font-weight: 700; color: var(--text-dim); }
+    .sr-side-cta { margin-top: 22px; padding: 18px; border-radius: 18px; background: var(--bg-2); border: 1px solid var(--line-soft); text-align: left; }
+    .sr-side-cta b { display: block; font-weight: 800; font-size: 1.02rem; letter-spacing: -0.02em; color: var(--text-head); }
+    .sr-side-cta p { font-size: 0.88rem; color: var(--text-dim); margin-top: 6px; line-height: 1.5; }
+    .sr-side-cta a { display: flex; align-items: center; gap: 11px; margin-top: 14px; min-height: 48px; padding: 8px 16px 8px 8px; border-radius: 999px; background: var(--gold); color: var(--ink); font-weight: 700; font-size: 0.94rem; white-space: nowrap; text-decoration: none; transition: background .2s var(--ease), transform .18s var(--ease); }
+    .sr-side-cta a:hover { background: var(--gold-hover); }
+    .sr-side-cta a:active { transform: scale(.97); }
+    .sr-side-cta a img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; flex: none; }
+    .sr-side-cta a .arr { margin-left: auto; flex: none; }
 
     /* main column */
-    .sr-main { display: grid; gap: 20px; }
-    .sr-card { border-radius: var(--r-lg); border: 1px solid var(--line-soft); background: #FFFFFF; box-shadow: 0 14px 40px rgba(40,30,12,0.05); padding: clamp(22px, 3vw, 32px); }
-    .sr-card h3 { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.2rem, 2.4vw, 1.55rem); letter-spacing: -0.02em; line-height: 1.15; }
+    .sr-main { display: grid; gap: 20px; min-width: 0; }
+    .sr-card { border-radius: var(--r-card); border: 1px solid var(--line-soft); background: var(--bg-1); padding: clamp(22px, 3vw, 32px); min-width: 0; }
+    .sr-card h3 { font-weight: 800; font-size: clamp(1.25rem, 2.4vw, 1.6rem); letter-spacing: -0.03em; line-height: 1.15; color: var(--text-head); }
     .sr-card h3 .gold { color: var(--gold); }
     .sr-twocol { display: grid; grid-template-columns: 1fr; gap: 20px; }
-    @media (min-width: 720px) { .sr-twocol { grid-template-columns: 1fr 1fr; } }
+    .sr-jump { display: none !important; }
+    /* once-ever booking popup */
+    .sr-pop { position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(0,0,0,0.62); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); animation: srPopIn .3s var(--ease); }
+    .sr-pop-card { position: relative; width: min(400px, 100%); background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--r-card); padding: 30px 26px 22px; text-align: center; animation: srPopUp .35s var(--ease); }
+    .sr-pop-x { position: absolute; top: 8px; right: 10px; width: 44px; height: 44px; border: none; background: none; font-size: 1.7rem; line-height: 1; color: var(--text-soft); cursor: pointer; }
+    .sr-pop-face { width: 78px; height: 78px; border-radius: 50%; object-fit: cover; }
+    .sr-pop-card h3 { font-weight: 800; font-size: 1.35rem; letter-spacing: -0.03em; margin-top: 14px; }
+    .sr-pop-card p { font-size: 0.96rem; color: var(--text-dim); line-height: 1.55; margin-top: 8px; }
+    .sr-pop-cta { display: inline-flex; align-items: center; justify-content: center; gap: 9px; width: 100%; min-height: 52px; margin-top: 18px; padding: 12px; border-radius: 999px; background: var(--gold); color: var(--ink); font-weight: 800; font-size: 1rem; text-decoration: none; }
+    .sr-pop-cta:hover { background: var(--gold-hover); }
+    .sr-pop-dismiss { margin-top: 8px; min-height: 44px; border: none; background: none; font-size: 0.9rem; color: var(--text-soft); cursor: pointer; }
+    @keyframes srPopIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes srPopUp { from { opacity: 0; transform: translateY(20px) scale(.96); } to { opacity: 1; transform: none; } }
+    /* multi-location rows */
+    .sr-loc { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 0; border-top: 1px solid var(--line-soft); }
+    .sr-loc:first-child { border-top: none; }
+    .sr-loc-nm b { display: block; font-weight: 700; font-size: 0.96rem; color: var(--text-head); }
+    .sr-loc-nm span { font-size: 0.84rem; color: var(--text-dim); }
+    .sr-loc-rt { text-align: right; font-weight: 800; font-size: 1.04rem; white-space: nowrap; }
+    .sr-loc-rt small { display: block; font-weight: 600; font-size: 0.76rem; color: var(--text-dim); }
 
     .sr-biz { display: flex; align-items: center; gap: 13px; margin: 18px 0; padding-bottom: 18px; border-bottom: 1px solid var(--line-soft); }
-    .sr-biz .ic { width: 46px; height: 46px; border-radius: 11px; background: var(--bg-1); display: grid; place-items: center; color: var(--text-soft); flex: none; }
-    .sr-biz b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1rem; color: var(--text-head); }
-    .sr-biz span { font-size: 0.86rem; color: var(--text-soft); }
-    .sr-prob { display: flex; align-items: flex-start; gap: 11px; padding: 11px 0; }
-    .sr-prob svg { flex: none; width: 18px; height: 18px; color: var(--poor); margin-top: 1px; }
-    .sr-prob .pt { font-size: 0.92rem; color: var(--text-head); font-weight: 600; }
-    .sr-prob .im { font-size: 0.82rem; color: var(--text-soft); margin-top: 2px; line-height: 1.45; }
+    .sr-biz .ic { width: 46px; height: 46px; border-radius: 12px; background: var(--gold-soft); display: grid; place-items: center; color: var(--gold-text); font-weight: 800; font-size: 1.3rem; flex: none; }
+    .sr-biz b { display: block; font-weight: 700; font-size: 1rem; color: var(--text-head); }
+    .sr-biz span { font-size: 0.88rem; color: var(--text-soft); word-break: break-word; }
+    .sr-prob { display: flex; align-items: flex-start; gap: 11px; padding: 12px 0; border-top: 1px solid var(--line-soft); }
+    .sr-prob:first-child { border-top: none; }
+    .sr-prob svg { flex: none; width: 18px; height: 18px; color: var(--poor); margin-top: 2px; }
+    .sr-prob .pt { font-size: 0.96rem; color: var(--text-head); font-weight: 600; }
+    .sr-prob .im { font-size: 0.88rem; color: var(--text-dim); margin-top: 3px; line-height: 1.5; }
+    /* area tag on every finding (website / social / google...) */
+    .sr-tag { display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.03em; text-transform: uppercase; padding: 3px 8px; border-radius: 6px; margin-right: 8px; vertical-align: 1.5px; background: var(--bg-3); color: var(--text-dim); }
+    .sr-tag.tag-content, .sr-tag.tag-appearance, .sr-tag.tag-speed { background: rgba(226,168,77,0.14); color: var(--gold); }
+    .sr-tag.tag-local, .sr-tag.tag-seo { background: rgba(63,191,127,0.14); color: #5fd39a; }
+    .sr-tag.tag-social { background: rgba(239,106,90,0.14); color: #ff8a7a; }
+
+    /* detailed check rows */
+    .rc-sec { border-top: 1px solid var(--line-soft); padding: 20px 0 6px; }
+    .rc-sec:first-of-type { border-top: none; padding-top: 4px; }
+    .rc-sec-h { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+    .rc-sec-h b { font-weight: 800; font-size: 1.06rem; color: var(--text-head); letter-spacing: -0.02em; }
+    .rc-badge { font-weight: 800; font-size: 0.92rem; white-space: nowrap; }
+    .rc-intro { font-size: 0.88rem; color: var(--text-soft); line-height: 1.5; margin: 5px 0 12px; }
+    .rc-row { display: flex; align-items: flex-start; gap: 11px; padding: 10px 0; border-top: 1px solid var(--line-soft); }
+    .rc-row:first-child { border-top: none; }
+    .rc-ic { flex: none; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; margin-top: 1px; }
+    .rc-ic svg { width: 12px; height: 12px; stroke-width: 3; }
+    .rc-row.pass .rc-ic { background: rgba(63,191,127,0.16); color: var(--good); }
+    .rc-row.fail .rc-ic { background: rgba(239,106,90,0.16); color: var(--poor); }
+    .rc-txt b { font-size: 0.94rem; font-weight: 600; color: var(--text-head); display: block; line-height: 1.4; }
+    .rc-row.pass .rc-txt b { color: var(--text-soft); font-weight: 500; }
+    .rc-txt small { display: block; font-size: 0.86rem; color: var(--text-dim); margin-top: 3px; line-height: 1.5; }
 
     .sr-comp { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line-soft); }
     .sr-comp:first-of-type { border-top: none; }
-    .sr-comp .ic { width: 34px; height: 34px; border-radius: 9px; background: var(--bg-1); display: grid; place-items: center; color: var(--text-soft); flex: none; }
-    .sr-comp .ic svg { width: 17px; height: 17px; }
-    .sr-comp .nm { flex: 1; }
-    .sr-comp .nm b { display: block; font-size: 0.92rem; font-weight: 600; color: var(--text-head); }
-    .sr-comp .nm span { font-size: 0.78rem; color: var(--text-soft); }
-    .sr-comp .rk { font-size: 0.84rem; font-weight: 700; color: var(--text-soft); }
-    .sr-comp.--you { background: var(--gold-soft); border-radius: 12px; padding: 12px; margin-top: 6px; border: 1px solid rgba(181,126,30,0.2); }
+    .sr-comp .ic { width: 34px; height: 34px; border-radius: 10px; background: var(--bg-3); display: grid; place-items: center; color: var(--text-dim); font-weight: 800; font-size: 0.98rem; flex: none; }
+    .sr-comp.--you .ic { background: var(--gold-soft); color: var(--gold-text); }
+    .sr-comp .nm { flex: 1; min-width: 0; }
+    .sr-comp .nm b { display: block; font-size: 0.95rem; font-weight: 600; color: var(--text-head); }
+    .sr-comp .nm span { font-size: 0.82rem; color: var(--text-soft); }
+    .sr-comp .rk { font-size: 0.88rem; font-weight: 700; color: var(--text-soft); }
+    .sr-comp.--you { background: var(--gold-soft); border-radius: 14px; padding: 12px; margin-top: 6px; border: 1px solid rgba(226,168,77,0.24); }
     .sr-comp.--you .rk { color: var(--poor); }
 
-    /* pagespeed-style category gauges with mobile/desktop tabs */
-    .sr-cat-tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--bg-1); margin: 18px 0 4px; }
-    .sr-cat-tab { padding: 8px 20px; border: none; border-radius: 999px; background: none; font-family: var(--font-display); font-weight: 700; font-size: 0.88rem; color: var(--text-soft); cursor: pointer; transition: all .2s; }
-    .sr-cat-tab.is-active { background: #FFFFFF; color: var(--text-head); box-shadow: 0 2px 8px rgba(40,30,12,0.08); }
+    /* you vs nearby competitors scoreboard */
+    .sb-row { display: grid; grid-template-columns: 1fr 74px 74px 56px; gap: 8px; align-items: center; padding: 12px 10px; border-top: 1px solid var(--line-soft); font-size: 0.92rem; }
+    .sb-row.sb-head { border-top: none; color: var(--text-soft); font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 700; padding-bottom: 4px; }
+    .sb-name { font-weight: 600; color: var(--text-head); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .sb-col { text-align: right; color: var(--text-dim); }
+    .sb-col b { color: var(--text-head); font-weight: 800; }
+    .sb-row.sb-you { background: var(--gold-soft); border-radius: 12px; border: 1px solid rgba(226,168,77,0.24); margin: 4px 0; }
+    .sb-row.sb-you .sb-name { color: var(--gold); font-weight: 800; }
+    @media (max-width: 480px) {
+      .sb-row { grid-template-columns: 1fr 58px 52px 46px; gap: 6px; padding: 12px 6px; font-size: 0.84rem; }
+      .sb-row.sb-head { font-size: 0.64rem; letter-spacing: 0.02em; }
+    }
+
+    /* one-tap Instagram confirm */
+    .sr-igconfirm { margin-top: 14px; padding: 14px; border-radius: 14px; background: var(--gold-soft); border: 1px solid rgba(226,168,77,0.24); text-align: left; }
+    .sr-igconfirm p { font-size: 0.88rem; color: var(--text-dim); line-height: 1.5; }
+    .sr-igconfirm b { color: var(--gold); }
+    .sr-igc-btns { display: flex; gap: 8px; margin-top: 10px; }
+    .sr-igc-btns button { flex: 1; min-height: 44px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg-2); font-family: var(--font-body); font-weight: 700; font-size: 0.86rem; color: var(--text-head); cursor: pointer; }
+    .sr-igc-btns #sr-igc-yes { background: var(--gold); color: var(--ink); border: none; }
+
+    /* your own social media card */
+    .soc-block { padding: 16px 0; border-top: 1px solid var(--line-soft); }
+    .soc-block:first-child { border-top: none; padding-top: 4px; }
+    .soc-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+    .soc-head b { font-weight: 800; font-size: 1.06rem; color: var(--text-head); }
+    .soc-head span { color: var(--gold); font-weight: 700; font-size: 0.92rem; }
+    .soc-stats { display: flex; gap: 26px; margin-top: 12px; flex-wrap: wrap; }
+    .soc-stat span { display: block; font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-soft); }
+    .soc-stat b { font-weight: 800; font-size: 1.36rem; letter-spacing: -0.02em; color: var(--text-head); }
+    .soc-stat b.good { color: var(--good); } .soc-stat b.warn { color: var(--fair); } .soc-stat b.poor { color: var(--poor); }
+    .soc-checks { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; margin-top: 16px; }
+    .soc-chk { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-dim); }
+    .soc-chk .ci { width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; font-size: 0.66rem; font-weight: 800; flex: none; }
+    .soc-chk.ok .ci { background: rgba(63,191,127,0.16); color: var(--good); }
+    .soc-chk.no .ci { background: rgba(239,106,90,0.16); color: var(--poor); }
+    .soc-empty { color: var(--text-dim); font-size: 0.95rem; line-height: 1.6; padding: 6px 0; }
+    .soc-link { color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(226,168,77,0.4); }
+    .soc-link:hover { border-bottom-color: var(--gold); }
+    .soc-multi { margin-top: 16px; padding: 12px 14px; border-radius: 12px; background: rgba(239,106,90,0.08); border: 1px solid rgba(239,106,90,0.22); font-size: 0.9rem; color: var(--text-dim); line-height: 1.5; }
+    .soc-multi b { color: #ff8a7a; }
+    @media (max-width: 520px) { .soc-checks { grid-template-columns: 1fr; } }
+
+    /* first thing after unlock: the single biggest fix, with a call to Juan */
+    .sr-bigfix { display: flex; gap: 18px; align-items: flex-start; background: var(--bg-1); border: 1px solid var(--line-soft); border-radius: var(--r-card); padding: clamp(18px, 2.4vw, 26px); }
+    .bf-face { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex: none; }
+    .bf-lab { font-size: 0.85rem; font-weight: 700; color: var(--gold); }
+    .bf-body { min-width: 0; }
+    .bf-body h3 { font-weight: 800; font-size: clamp(1.15rem, 2vw, 1.4rem); color: var(--text-head); line-height: 1.2; margin-top: 4px; letter-spacing: -0.03em; }
+    .bf-body p { color: var(--text-dim); font-size: 0.96rem; line-height: 1.55; margin-top: 6px; }
+    .bf-actions { display: flex; align-items: center; gap: 8px 18px; flex-wrap: wrap; margin-top: 14px; }
+    .bf-cta { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 20px; border-radius: 999px; background: var(--gold); color: var(--ink); font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: background .2s var(--ease), transform .18s var(--ease); }
+    .bf-cta:hover { background: var(--gold-hover); }
+    .bf-cta:active { transform: scale(.97); }
+    .bf-more { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-weight: 600; font-size: 0.92rem; color: var(--text-head); text-decoration: none; border-bottom: 1px solid transparent; }
+    .bf-more:hover { color: var(--gold); }
+    .bf-more[hidden] { display: none; }
+    @media (max-width: 560px) { .sr-bigfix { flex-direction: column; gap: 12px; } .bf-cta { width: 100%; justify-content: center; } }
+
+    /* website score gauges with a mobile / desktop segmented control */
+    .sr-cat-tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--bg-2); border: 1px solid var(--line-soft); margin: 18px 0 4px; }
+    .sr-cat-tab { min-height: 38px; padding: 0 18px; border: none; border-radius: 999px; background: none; font-family: var(--font-body); font-weight: 700; font-size: 0.9rem; color: var(--text-dim); cursor: pointer; transition: background .2s var(--ease), color .2s var(--ease); }
+    .sr-cat-tab.is-active { background: var(--text-head); color: var(--bg-0); }
+
+    /* Website / Social / Google segmented control that groups the score cards */
+    .sr-scoretabs { position: sticky; top: 76px; z-index: 40; display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: rgba(20,20,22,0.88); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: 1px solid var(--line); }
+    .sr-stab { flex: 1; min-height: 44px; padding: 0 14px; border: none; border-radius: 999px; background: none; font-family: var(--font-body); font-weight: 700; font-size: 0.95rem; white-space: nowrap; color: var(--text-dim); cursor: pointer; transition: background .2s var(--ease), color .2s var(--ease); }
+    .sr-stab:hover { color: var(--text-head); }
+    .sr-stab.is-active { background: var(--text-head); color: var(--bg-0); }
+    .sr-panel { display: grid; gap: 20px; }
+    .sr-panel[hidden] { display: none; }
+
+    /* "we found N issues" card */
+    #sr-issues-card { border-top: 3px solid var(--poor); }
+    #sr-loss-h { font-size: clamp(1.7rem, 4.2vw, 2.6rem); line-height: 1.08; letter-spacing: -0.04em; }
+    .sr-loud-count { color: var(--poor); }
+    #sr-issues-card .sr-prob { padding: 14px 0; }
+    #sr-issues-card .sr-prob .pt { font-size: 1.02rem; }
+    #sr-issues-card .sr-prob svg { width: 20px; height: 20px; }
+    /* score-section header */
+    .sr-scorehead { text-align: center; margin: clamp(16px, 3vw, 28px) auto 0; max-width: 62ch; }
+    .sr-scorehead .sr-eyebrow { display: inline-block; font-size: 0.9rem; font-weight: 700; color: var(--gold); }
+    .sr-scorehead h2 { font-weight: 800; font-size: clamp(1.6rem, 3.4vw, 2.3rem); letter-spacing: -0.04em; color: var(--text-head); margin-top: 6px; line-height: 1.1; }
+    .sr-scorehead p { margin: 10px auto 0; color: var(--text-dim); font-size: 1rem; line-height: 1.6; }
+    .sr-checks:empty { display: none; }
+    #sr-tech-card .sr-checks { margin-top: 22px; padding-top: 6px; border-top: 1px solid var(--line-soft); }
+    .sr-cal { scroll-margin-top: 84px; }
+
+    @media (max-width: 560px) {
+      .sr-scoretabs { top: 72px; overflow-x: auto; scrollbar-width: none; }
+      .sr-scoretabs::-webkit-scrollbar { display: none; }
+      .sr-stab { flex: 0 0 auto; padding: 0 15px; font-size: 0.88rem; }
+    }
     .sr-cats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; }
     @media (min-width: 560px) { .sr-cats { grid-template-columns: repeat(4, 1fr); } }
     .sr-cat { text-align: center; }
     .sr-cat .ring { width: 84px; height: 84px; margin: 0 auto; position: relative; }
-    .sr-cat .ring b { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--font-hero); font-weight: 800; font-size: 1.4rem; }
-    .sr-cat .nm { margin-top: 10px; font-size: 0.82rem; font-weight: 700; color: var(--text-head); }
+    .sr-cat .ring b { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 800; font-size: 1.45rem; }
+    .sr-cat .nm { margin-top: 10px; font-size: 0.86rem; font-weight: 700; color: var(--text-head); }
 
-    /* keyword table (gated) */
+    /* keyword rows */
     .sr-kw { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line-soft); }
-    .sr-kw .g { flex: none; width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 1px solid var(--line); display: grid; place-items: center; font-weight: 800; font-size: 0.72rem; color: var(--text-soft); }
-    .sr-kw .q { flex: 1; font-size: 0.9rem; font-weight: 600; color: var(--text); }
+    .sr-kw .g { flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--bg-3); border: 1px solid var(--line); display: grid; place-items: center; font-weight: 800; font-size: 0.72rem; color: var(--text-soft); }
+    .sr-kw .q { flex: 1; font-size: 0.94rem; font-weight: 600; color: var(--text); }
     .sr-kw .tags { display: flex; gap: 8px; flex-wrap: wrap; }
-    .sr-kw .tag { font-size: 0.72rem; font-weight: 700; padding: 4px 9px; border-radius: 999px; background: rgba(207,74,60,0.1); color: var(--poor); }
-    .sr-kw .tag.--win { background: rgba(30,126,84,0.12); color: var(--good); }
+    .sr-kw .tag { font-size: 0.74rem; font-weight: 700; padding: 4px 9px; border-radius: 999px; background: rgba(239,106,90,0.14); color: #ff8a7a; }
+    .sr-kw .tag.--win { background: rgba(63,191,127,0.14); color: #5fd39a; }
 
-    /* gate */
+    /* unlock gate */
     .sr-gated { position: relative; }
     .sr-gated.locked .sr-blur { filter: blur(7px); pointer-events: none; user-select: none; }
     .sr-gate { position: absolute; inset: 0; display: grid; place-items: center; padding: 20px; z-index: 5; }
     .sr-gate.hidden { display: none; }
-    .sr-gate-card { width: min(440px, 100%); background: #FFFFFF; border: 1px solid var(--line-soft); border-radius: var(--r-lg); box-shadow: 0 30px 80px rgba(40,30,12,0.2); padding: clamp(26px, 4vw, 38px); text-align: center; }
-    .sr-gate-lock { width: 44px; height: 44px; border-radius: 50%; background: var(--gold-soft); display: grid; place-items: center; margin: 0 auto 16px; color: var(--gold); }
+    .sr-gate-card { width: min(460px, 100%); background: var(--bg-1); border: 1px solid var(--line); border-radius: var(--r-card); box-shadow: 0 24px 70px rgba(0,0,0,0.55); padding: clamp(26px, 4vw, 36px); text-align: center; }
+    .sr-gate-lock { width: 44px; height: 44px; border-radius: 50%; background: var(--gold-soft); display: grid; place-items: center; margin: 0 auto 14px; color: var(--gold); }
     .sr-gate-lock svg { width: 21px; height: 21px; }
-    .sr-gate-card h3 { font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.5rem, 3vw, 1.9rem); letter-spacing: -0.02em; }
-    .sr-gate-card .sub { margin-top: 10px; color: var(--text-dim); font-size: 0.94rem; line-height: 1.5; }
-    .sr-gate-step { margin-top: 22px; text-align: left; }
+    .sr-gate-card h3 { font-weight: 800; font-size: clamp(1.55rem, 3vw, 1.95rem); letter-spacing: -0.04em; }
+    .sr-gate-card .sub { margin-top: 8px; color: var(--text-dim); font-size: 0.98rem; line-height: 1.55; }
+    .sr-gate-step { margin-top: 20px; text-align: left; }
     .sr-gate-step.hidden { display: none; }
-    .sr-gate-label { font-size: 0.74rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 7px; display: block; }
-    .sr-input { width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--line); background: #FFF; font-family: var(--font-body); font-size: 1.05rem; color: var(--text); text-align: center; letter-spacing: 0.02em; }
-    .sr-input:focus { outline: none; border-color: var(--gold); }
+    .sr-gate-label { font-size: 0.85rem; font-weight: 600; color: var(--text-dim); margin-bottom: 7px; display: block; }
+    .sr-input { width: 100%; min-height: 52px; padding: 13px 16px; border-radius: var(--r-ctl); border: 1px solid var(--line); background: var(--bg-0); font-family: var(--font-body); font-size: 1.06rem; color: var(--text-head); text-align: center; letter-spacing: 0.02em; }
+    .sr-input::placeholder { color: var(--text-soft); }
+    .sr-input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(226,168,77,0.18); }
     .sr-input.code { letter-spacing: 0.5em; font-weight: 700; font-size: 1.3rem; padding-left: 0.5em; }
-    .sr-gate-btn { width: 100%; margin-top: 14px; height: 52px; border: none; border-radius: 12px; background: linear-gradient(135deg, #E0A23C, #D08A34); color: #2A1C06; font-family: var(--font-display); font-weight: 700; font-size: 1rem; cursor: pointer; transition: box-shadow .2s, transform .2s; }
-    .sr-gate-btn:hover { box-shadow: 0 10px 28px rgba(208,138,52,0.3); transform: translateY(-1px); }
-    .sr-gate-fine { margin-top: 14px; font-size: 0.74rem; color: var(--text-soft); line-height: 1.5; }
-    .sr-gate-back { background: none; border: none; color: var(--text-soft); font-size: 0.82rem; cursor: pointer; margin-top: 12px; text-decoration: underline; }
-    .sr-code-sent { font-size: 0.84rem; color: var(--teal); margin-top: 7px; font-weight: 600; }
+    .sr-gate-btn { width: 100%; margin-top: 14px; min-height: 52px; border: none; border-radius: 999px; background: var(--gold); color: var(--ink); font-family: var(--font-body); font-weight: 700; font-size: 1.02rem; cursor: pointer; transition: background .2s var(--ease), transform .18s var(--ease); }
+    .sr-gate-btn:hover { background: var(--gold-hover); }
+    .sr-gate-btn:active { transform: scale(.97); }
+    .sr-gate-fine { margin-top: 14px; font-size: 0.78rem; color: var(--text-soft); line-height: 1.5; }
+    .sr-gate-back { background: none; border: none; color: var(--text-soft); font-size: 0.86rem; cursor: pointer; margin-top: 12px; min-height: 44px; text-decoration: underline; }
+    .sr-code-sent { font-size: 0.88rem; color: var(--teal); margin-top: 7px; font-weight: 600; }
+    .sr-gate-resend { display: block; width: 100%; min-height: 44px; margin-top: 8px; border: none; background: none; font-family: var(--font-body); font-size: 0.9rem; font-weight: 700; color: var(--gold); cursor: pointer; text-align: center; }
+    .sr-gate-resend:disabled { color: var(--text-soft); cursor: default; }
     .sr-turnstile { margin: 6px 0 12px; min-height: 65px; display: flex; justify-content: center; }
 
-    /* unlocked final CTA */
-    .sr-final { margin-top: 4px; background: linear-gradient(135deg, #E0A23C, #C9820E); border-radius: var(--r-lg); padding: clamp(26px, 4vw, 40px); display: grid; grid-template-columns: 1fr; gap: 22px; align-items: center; }
-    .sr-final h3 { font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.5rem, 3vw, 2.1rem); letter-spacing: -0.02em; color: #2A1C06; line-height: 1.05; }
-    .sr-final p { margin-top: 10px; color: rgba(42,28,6,0.82); font-size: 0.98rem; line-height: 1.55; }
+    /* keep the score sharp, blur everything else until unlocked */
+    .sr-blurzone { transition: filter .45s var(--ease); }
+    #sr-blurmain { display: grid; gap: 20px; min-width: 0; }
+    .sr-report.locked .sr-blurzone { filter: blur(8px); pointer-events: none; user-select: none; }
+    .sr-gatetop { width: min(480px, 100%); max-width: 100%; margin: 0 auto 24px; }
+    .sr-gatetop.hidden { display: none; }
+    @media (min-width: 900px) { .sr-gatetop { margin-top: 4px; } }
+    /* phones: while locked hide the blurred sidebar breakdown so the gate sits right under the score */
+    @media (max-width: 979px) { .sr-report.locked .sr-side .sr-blurzone { display: none; } }
+
+    /* booking section at the end of the report */
+    .sr-final { margin-top: 8px; background: var(--bg-2); border: 1px solid var(--line-soft); border-radius: var(--r-panel); padding: clamp(22px, 4vw, 44px); overflow: hidden; scroll-margin-top: 84px; }
+    .sr-final h3 { font-weight: 800; font-size: clamp(1.6rem, 3.2vw, 2.3rem); letter-spacing: -0.04em; color: var(--text-head); line-height: 1.08; margin-top: 16px; max-width: 24ch; }
+    .sr-final p { margin-top: 10px; color: var(--text-dim); font-size: 1rem; line-height: 1.6; max-width: 56ch; }
     .sr-final-host { display: flex; align-items: center; gap: 14px; }
-    .sr-final-host img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.7); flex: none; }
-    .sr-final-host .lab { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(42,28,6,0.66); font-weight: 700; }
-    .sr-final-host .nm { font-family: var(--font-display); font-weight: 800; font-size: 1.02rem; color: #2A1C06; }
-    .sr-final .book { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 52px; padding: 0 26px; border-radius: 12px; background: #2A1C06; color: #FBF5EA; font-family: var(--font-display); font-weight: 700; font-size: 1rem; white-space: nowrap; }
-    @media (min-width: 720px) { .sr-final { grid-template-columns: 1.3fr auto; } }
+    .sr-final-host img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex: none; }
+    .sr-final-host .lab { font-size: 0.85rem; font-weight: 600; color: var(--text-soft); }
+    .sr-final-host .nm { font-weight: 800; font-size: 1.04rem; color: var(--text-head); }
+    .sr-final-facts { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; padding: 0; }
+    .sr-final-facts li { display: inline-flex; align-items: center; gap: 7px; min-height: 34px; padding: 0 13px; border-radius: 999px; background: var(--bg-3); border: 1px solid var(--line-soft); font-size: 0.88rem; font-weight: 600; color: var(--text-head); }
+    .sr-final-facts svg { width: 15px; height: 15px; color: var(--gold); flex: none; }
+    .sr-cal { margin-top: 22px; background: #ffffff; border-radius: 18px; overflow: hidden; }
+    .sr-cal-load { display: flex; align-items: center; justify-content: center; gap: 6px; height: 620px; color: rgba(20,14,4,0.6); font-size: 0.95rem; }
+    .sr-cal-load a { color: #8A5E12; font-weight: 700; }
+    .sr-cal .calendly-inline-widget { min-width: 320px; height: 680px; }
+    .sr-final-alt { margin-top: 14px; font-size: 0.92rem; color: var(--text-dim); }
+    .sr-final-alt a { color: var(--text-head); font-weight: 700; text-decoration: none; border-bottom: 1px solid var(--line); }
+    .sr-final-alt a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+
+    /* booking bar that follows the reader once the report is unlocked */
+    .sr-sticky { position: fixed; z-index: 900; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); display: flex; align-items: center; gap: 12px; padding: 8px 8px 8px 12px; border-radius: 999px; background: rgba(20,20,22,0.92); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); border: 1px solid var(--line); box-shadow: 0 16px 40px rgba(0,0,0,0.5); transform: translateY(140%); opacity: 0; pointer-events: none; transition: transform .4s var(--ease), opacity .3s var(--ease); }
+    .sr-sticky.show { transform: none; opacity: 1; pointer-events: auto; }
+    .sr-sticky img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; flex: none; }
+    .sr-sticky .tx { flex: 1; min-width: 0; font-size: 0.86rem; line-height: 1.3; color: var(--text-dim); }
+    .sr-sticky .tx b { display: block; color: var(--text-head); font-size: 0.92rem; }
+    .sr-sticky a { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 44px; padding: 0 18px; border-radius: 999px; background: var(--gold); color: var(--ink); font-weight: 700; font-size: 0.92rem; white-space: nowrap; text-decoration: none; flex: none; }
+    .sr-sticky a:hover { background: var(--gold-hover); }
+    @media (max-width: 380px) { .sr-sticky .tx { display: none; } .sr-sticky a { flex: 1; } }
+    @media (min-width: 980px) { .sr-sticky { left: auto; right: 24px; bottom: 24px; max-width: 420px; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sr-map-view, .sr-youpin, .sr-cpin, .sr-pulse { animation: none !important; opacity: 1 !important; transform: none !important; }
+      .sr-find, .sr-sticky, .sr-pop, .sr-pop-card { transition: none !important; animation: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -238,10 +436,10 @@
   <!-- End Google Tag Manager (noscript) -->
   <nav class="gr-nav">
     <div class="gr-nav-inner">
-      <a href="/" class="gr-nav-brand" aria-label="Button Up Media inicio"><img class="gr-logo" src="media/logo-cropped.webp" alt="Button Up Media" width="138" height="46" /></a>
+      <a href="/" class="gr-nav-brand" aria-label="Inicio de Button Up Media"><img class="gr-logo" src="/images/full-logo.svg" alt="Button Up Media" width="145" height="45" /></a>
       <div class="gr-nav-right">
-        <a class="gr-nav-phone" href="tel:+17867409499"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <span>Llámanos</span></a>
-        <a href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener" class="gr-nav-cta">Comenzar</a>
+        <a class="gr-nav-phone" href="tel:+17867409499"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <span>Llámenos</span></a>
+        <a href="https://calendly.com/juanh-buttonupmedia/free-food-beverage-marketing-consultation-clone" data-book-scroll data-cta-loc="nav" class="gr-nav-cta">Agende su llamada</a>
       </div>
     </div>
   </nav>
@@ -259,11 +457,40 @@
         <div class="sr-progress"><span class="sp"></span><b id="sr-progress-label">Faltan <span id="sr-secs">30</span> segundos</b></div>
       </div>
       <div class="sr-scan-card">
-        <div class="img"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-6 9 6v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21V12h6v9"/></svg></div>
+        <div class="sr-map" id="sr-map">
+          <div class="sr-map-view" id="sr-map-view">
+            <svg class="sr-map-bg" viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="400" height="210" fill="#17171a"/>
+              <rect x="26" y="128" width="96" height="62" rx="10" fill="rgba(63,191,127,0.10)"/>
+              <path d="M300 150 Q360 140 400 168 L400 210 L286 210 Z" fill="rgba(90,150,210,0.12)"/>
+              <g stroke="#27272b" stroke-linecap="round" fill="none">
+                <path d="M-10 58 H410" stroke-width="9"/>
+                <path d="M-10 150 H410" stroke-width="7"/>
+                <path d="M148 -10 V220" stroke-width="9"/>
+                <path d="M286 -10 V220" stroke-width="6"/>
+                <path d="M-10 205 L410 40" stroke-width="5"/>
+              </g>
+              <g stroke="#1f1f23" stroke-linecap="round" fill="none" stroke-width="3">
+                <path d="M-10 104 H410"/>
+                <path d="M70 -10 V220"/>
+                <path d="M350 -10 V220"/>
+              </g>
+            </svg>
+            <span class="sr-cpin" style="left:24%;top:30%;animation-delay:1.75s"></span>
+            <span class="sr-cpin" style="left:73%;top:26%;animation-delay:1.95s"></span>
+            <span class="sr-cpin" style="left:30%;top:76%;animation-delay:2.15s"></span>
+            <span class="sr-cpin" style="left:79%;top:70%;animation-delay:2.35s"></span>
+            <span class="sr-cpin" style="left:63%;top:52%;animation-delay:2.55s"></span>
+            <span class="sr-pulse"></span>
+            <span class="sr-youpin"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 4.5 7 13 7 13s7-8.5 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.6" fill="#140e04"/></svg></span>
+          </div>
+          <div class="sr-map-cap" id="sr-map-cap">Ubicando tu restaurante&hellip;</div>
+        </div>
         <div class="body">
           <h2 id="sr-scan-name">Tu restaurante</h2>
-          <div class="meta"><span>Haciendo una auditoría al nivel de Google&hellip;</span></div>
-          <p>Revisamos tu sitio web, tu presencia en Google y cómo te comparas con los restaurantes que compiten por tus clientes&hellip;</p>
+          <div class="meta"><span>Haciendo una auditoría completa de marketing con IA&hellip;</span></div>
+          <p id="sr-scan-lead">Nuestra IA está revisando tu sitio web, tu ficha de Google, tus reseñas y tus redes, y cómo te comparas con los restaurantes que compiten por tus clientes&hellip;</p>
+          <div class="sr-findings" id="sr-findings"></div>
         </div>
       </div>
     </div>
@@ -271,37 +498,80 @@
 
   <!-- ============ REPORT STATE ============ -->
   <div class="sr-wrap">
-    <div class="sr-report" id="sr-report">
+    <div class="sr-report locked" id="sr-report">
       <div class="sr-grid">
         <!-- SIDEBAR -->
         <aside class="sr-side">
           <div class="sr-gauge">
-            <svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="86" fill="none" stroke="rgba(44,38,28,0.1)" stroke-width="14"/><circle id="sr-gauge-arc" cx="100" cy="100" r="86" fill="none" stroke="#CF4A3C" stroke-width="14" stroke-linecap="round" stroke-dasharray="540" stroke-dashoffset="540"/></svg>
-            <div class="val"><b id="sr-score">0</b><span>of 100</span></div>
+            <svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="86" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="14"/><circle id="sr-gauge-arc" cx="100" cy="100" r="86" fill="none" stroke="#CF4A3C" stroke-width="14" stroke-linecap="round" stroke-dasharray="540" stroke-dashoffset="540"/></svg>
+            <div class="val"><b id="sr-score">0</b><span>de 100</span></div>
           </div>
-          <div class="sr-grade-lab">Calificación de salud online</div>
+          <div class="sr-grade-lab">Calificación de tu marketing</div>
           <div class="sr-grade" id="sr-grade">,</div>
           <div class="sr-grade-note" id="sr-grade-note"></div>
-          <div class="sr-subs" id="sr-subs"></div>
-          <div class="sr-side-cta">
-            <b>Arréglalo todo en semanas, no en meses</b>
-            <p>Deje que nuestro equipo le explique estos resultados y construya las soluciones por usted.</p>
-            <a href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener">
-              <img src="media/author-juan.webp" alt="Juan" />
-              Reserve una consulta con Juan
-              <span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
+          <!-- one-tap confirm for an unconfirmed Instagram guess (stays crisp, above the gate) -->
+          <div class="sr-igconfirm" id="sr-igconfirm" style="display:none;">
+            <p>¿Es <b id="sr-igc-handle">@handle</b> tu Instagram? Si lo confirmas, tu calificación de redes sale más precisa.</p>
+            <div class="sr-igc-btns"><button id="sr-igc-yes">Sí, somos nosotros</button><button id="sr-igc-no">No somos</button></div>
+          </div>
+          <div class="sr-blurzone">
+            <div class="sr-subs" id="sr-subs"></div>
+            <div class="sr-side-cta">
+              <b>¿Quiere ayuda para arreglar esto?</b>
+              <p>Agende una llamada gratis de 30 minutos con Juan, nuestro cofundador. Él revisa su reporte con usted y le dice qué arreglaría primero.</p>
+              <a href="https://calendly.com/juanh-buttonupmedia/free-food-beverage-marketing-consultation-clone" data-book-scroll data-cta-loc="sidebar">
+                <img src="media/author-juan.webp" alt="" width="32" height="32" />
+                Agende con Juan
+                <span class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </a>
+            </div>
           </div>
         </aside>
 
         <!-- MAIN -->
         <div class="sr-main">
+          <!-- UNLOCK GATE, stays sharp and sits above the fold; everything below is blurred until unlocked -->
+          <div class="sr-gate-card sr-gatetop" id="sr-gate">
+            <div class="sr-gate-lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            <h3>Desbloquee su reporte completo</h3>
+            <p class="sub" id="sr-gate-sub">Vea cada arreglo que lo hará subir en Google, y cómo abordarlos.</p>
+
+            <!-- step 1: phone -->
+            <div class="sr-gate-step" id="sr-step-phone">
+              <label class="sr-gate-label" for="sr-phone">Su número de teléfono</label>
+              <input class="sr-input" type="tel" id="sr-phone" placeholder="(305) 555-0199" autocomplete="tel" />
+              <div class="sr-turnstile" id="sr-turnstile"></div>
+              <button class="sr-gate-btn" id="sr-unlock">Desbloquear mi reporte</button>
+              <p class="sr-gate-fine">Usamos su número para enviarle su reporte y darle seguimiento sobre sus resultados. Al continuar, usted acepta que Button Up Media lo contacte por teléfono o mensaje de texto. Pueden aplicar tarifas de mensajes y datos. Responda STOP para cancelar.</p>
+            </div>
+          </div>
+
+          <!-- everything below stays blurred until the report is unlocked -->
+          <div class="sr-blurzone" id="sr-blurmain">
+          <!-- FOREFRONT: the single biggest thing to fix + a call with Juan -->
+          <div class="sr-bigfix" id="sr-bigfix" style="display:none;">
+            <img class="bf-face" src="media/author-juan.webp" alt="Juan, de Button Up Media" />
+            <div class="bf-body">
+              <div class="bf-lab">Lo que más necesita su atención</div>
+              <h3 id="sr-bigfix-h">Lo que más lo está frenando</h3>
+              <p id="sr-bigfix-p"></p>
+              <div class="bf-actions">
+              <a class="bf-cta" id="sr-bigfix-cta" href="https://calendly.com/juanh-buttonupmedia/free-food-beverage-marketing-consultation-clone" data-book-scroll data-cta-loc="bigfix">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><path d="M8 2v4M16 2v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2"/></svg>
+                  Agende una llamada gratis con Juan
+                </a>
+                <a class="bf-more" id="sr-bigfix-more" href="#" hidden></a>
+              </div>
+            </div>
+          </div>
+          <!-- jump-nav: labeled shortcuts to each part of the report -->
+          <nav class="sr-jump" id="sr-jump" style="display:none;"></nav>
           <div class="sr-twocol" id="sr-twocol">
             <!-- issues -->
-            <div class="sr-card">
+            <div class="sr-card" id="sr-issues-card">
               <h3 id="sr-loss-h">Revisando tus resultados</h3>
               <div class="sr-biz">
-                <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-6 9 6v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21V12h6v9"/></svg></div>
+                <div class="ic" id="sr-biz-ic"></div>
                 <div><b id="sr-biz-name">Tu restaurante</b><span id="sr-biz-url">tu sitio web</span></div>
               </div>
               <div id="sr-problems"></div>
@@ -315,57 +585,107 @@
             </div>
           </div>
 
+          <!-- score section: header + category tabs (cards relocated into panels by setupScoreTabs()) -->
+          <div class="sr-scorehead" id="sr-scorehead" style="display:none;">
+            <span class="sr-eyebrow">Tu calificación, por área</span>
+            <h2>Dónde estás, área por área</h2>
+            <p>Tu sitio web, tus redes y tu ficha de Google, cada uno comparado con los restaurantes cercanos con los que compites.</p>
+          </div>
+          <div class="sr-scoretabs" id="sr-scoretabs" role="tablist" style="display:none;">
+            <button class="sr-stab is-active" data-panel="website" role="tab" type="button">Sitio web</button>
+            <button class="sr-stab" data-panel="social" role="tab" type="button">Redes sociales</button>
+            <button class="sr-stab" data-panel="google" role="tab" type="button">Ficha de Google</button>
+          </div>
+          <div class="sr-panel" id="sr-panel-website" role="tabpanel"></div>
+          <div class="sr-panel" id="sr-panel-social" role="tabpanel" hidden></div>
+          <div class="sr-panel" id="sr-panel-google" role="tabpanel" hidden></div>
+
+          <!-- multi-location: each of the brand's Google listings (brand mode only) -->
+          <div class="sr-card" id="sr-locations-card" style="display:none;">
+            <h3 id="sr-loc-h">Tus locales en Google</h3>
+            <p style="color:var(--text-dim);font-size:0.9rem;margin:8px 0 14px;">Cómo está calificado cada uno de tus locales. Los de menor calificación son donde más clientes estás perdiendo, y los que más rápido puedes mejorar.</p>
+            <div id="sr-locations"></div>
+          </div>
+
+          <!-- Google My Business checks (relocated into the Google My Business tab) -->
+          <div class="sr-card" id="sr-gbp-checks-card" style="display:none;">
+            <h3>Tu ficha de Google, revisada</h3>
+            <p style="color:var(--text-dim);font-size:0.9rem;margin:8px 0 6px;">Lo que la gente de tu zona ve en Google antes de llegar a tu sitio web.</p>
+            <div class="sr-checks" id="sr-gbp-checks"></div>
+          </div>
+
+          <!-- your own social media stats -->
+          <div class="sr-card" id="sr-socialcard" style="display:none;">
+            <h3>Tus redes sociales</h3>
+            <div id="sr-social-body"></div>
+          </div>
+
+          <!-- social + presence scoreboard vs nearby same-cuisine competitors -->
+          <div class="sr-card" id="sr-scoreboard" style="display:none;">
+            <h3 id="sr-sb-h">Cómo te comparas con la competencia cercana</h3>
+            <p style="color:var(--text-dim);font-size:0.9rem;margin:8px 0 14px;">Tus seguidores en Instagram, tus reseñas y tu calificación al lado de los mejores lugares cercanos de tu categoría.</p>
+            <div id="sr-sb-body"></div>
+          </div>
+
           <!-- pagespeed-style categories -->
-          <div class="sr-card">
-            <h3>Tus puntajes técnicos</h3>
-            <p style="color:var(--text-dim);font-size:0.9rem;margin-top:8px;">Medido igual que lo mide Google, en celular y computadora.</p>
+          <div class="sr-card" id="sr-tech-card">
+            <h3>Puntajes de tu sitio web</h3>
+            <p style="color:var(--text-dim);font-size:0.9rem;margin-top:8px;">Tu sitio, medido igual que lo mide Google, en celular y en computadora.</p>
             <div class="sr-cat-tabs" role="tablist">
               <button class="sr-cat-tab is-active" data-dev="mobile">Celular</button>
               <button class="sr-cat-tab" data-dev="desktop">Computadora</button>
             </div>
             <div class="sr-cats" id="sr-cats"></div>
+            <div class="sr-checks" id="sr-web-checks"></div>
           </div>
 
-          <!-- GATED: the full prioritized fix list -->
-          <div class="sr-card sr-gated locked" id="sr-gated">
-            <div class="sr-blur">
-              <h3>Tu lista completa de arreglos</h3>
-              <p style="color:var(--text-dim);font-size:0.9rem;margin:8px 0 10px;">Cada problema que encontramos, en orden de prioridad, con lo que te está costando.</p>
-              <div id="sr-fulllist"></div>
-            </div>
-
-            <!-- phone + code gate -->
-            <div class="sr-gate" id="sr-gate">
-              <div class="sr-gate-card">
-                <div class="sr-gate-lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-                <h3>Desbloquee su reporte completo</h3>
-                <p class="sub" id="sr-gate-sub">Vea cada arreglo que lo hará subir en Google, y cómo abordarlos.</p>
-
-                <!-- step 1: phone + captcha -->
-                <div class="sr-gate-step" id="sr-step-phone">
-                  <label class="sr-gate-label" for="sr-phone">Su número de teléfono</label>
-                  <input class="sr-input" type="tel" id="sr-phone" placeholder="(305) 555-0199" autocomplete="tel" />
-                  <div class="sr-turnstile" id="sr-turnstile"></div>
-                  <button class="sr-gate-btn" id="sr-unlock">Desbloquear mi reporte</button>
-                  <p class="sr-gate-fine">Usamos su número para enviarle su reporte y darle seguimiento sobre sus resultados. Al continuar, usted acepta que Button Up Media lo contacte por teléfono o mensaje de texto. Pueden aplicar tarifas de mensajes y datos. Responda STOP para cancelar.</p>
-                </div>
+          <!-- final CTA (tailored to the single worst thing) -->
+          <div class="sr-final" id="sr-final">
+            <div class="sr-final-head">
+              <div class="sr-final-host">
+                <img src="media/author-juan.webp" alt="Juan" />
+                <div><div class="lab">Su llamada gratis es con</div><div class="nm">Juan Hernández, cofundador</div></div>
               </div>
+              <h3 id="sr-final-h">¿Quiere arreglar esto? Elija un horario con Juan.</h3>
+              <p id="sr-final-p">Elija un horario abajo. Juan revisa su reporte con usted y le dice exactamente qué arreglar primero, sin costo.</p>
+              <ul class="sr-final-facts">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Gratis</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>30 minutos</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Por Google Meet o por teléfono</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Sin contratos a largo plazo</li>
+              </ul>
             </div>
-          </div>
-
-          <!-- final CTA -->
-          <div class="sr-final">
-            <div>
-              <h3>¿Quieres que nuestro equipo arregle todo esto por ti?</h3>
-              <p>Reserve una consulta gratis con Juan. Él le explicará su reporte línea por línea y le mostrará exactamente qué cambiaría un sitio de Button Up.</p>
+            <!-- Calendly embed, loaded on scroll (not page load) so the report stays fast -->
+            <div class="sr-cal" id="sr-cal" data-cal="https://calendly.com/juanh-buttonupmedia/free-food-beverage-marketing-consultation-clone">
+              <div class="sr-cal-load">Cargando el calendario&hellip; <a href="https://calendly.com/juanh-buttonupmedia/free-food-beverage-marketing-consultation-clone" target="_blank" rel="noopener">o agende aquí</a></div>
             </div>
-            <a class="book" href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><path d="M8 2v4M16 2v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2"/></svg>
-              Reservar consulta
-            </a>
+            <p class="sr-final-alt">¿Prefiere hablar ahora? Llame al <a href="tel:+17867409499">(786) 740-9499</a>.</p>
           </div>
+          </div><!-- /sr-blurzone -->
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- booking bar: appears once the report is unlocked and hides at the calendar -->
+  <div class="sr-sticky" id="sr-sticky" aria-hidden="true">
+    <img src="media/author-juan.webp" alt="" width="36" height="36" />
+    <div class="tx"><b>Llamada gratis</b>30 minutos con Juan</div>
+    <a href="https://calendly.com/juanh-buttonupmedia/free-food-beverage-marketing-consultation-clone" data-book-scroll data-cta-loc="sticky" tabindex="-1">Agende su llamada</a>
+  </div>
+
+  <!-- once-ever booking popup (fires ~60s after the report renders) -->
+  <div class="sr-pop" id="sr-pop" style="display:none;">
+    <div class="sr-pop-card">
+      <button class="sr-pop-x" id="sr-pop-x" aria-label="Cerrar">&times;</button>
+      <img class="sr-pop-face" src="media/author-juan.webp" alt="Juan, de Button Up Media" />
+      <h3>¿Le ayudamos a arreglar esto?</h3>
+      <p>Soy Juan. Agende una llamada gratis de 30 minutos, por Google Meet o por teléfono, y le explico su reporte y qué arreglar primero, sin costo.</p>
+      <a class="sr-pop-cta" id="sr-pop-cta" href="https://calendly.com/juanh-buttonupmedia/free-food-beverage-marketing-consultation-clone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><path d="M8 2v4M16 2v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2"/></svg>
+        Agendar mi llamada gratis
+      </a>
+      <button class="sr-pop-dismiss" id="sr-pop-dismiss">No, gracias</button>
     </div>
   </div>
 
@@ -375,6 +695,7 @@
     var nameParam = (params.get("name") || "").trim();
     var urlParam = (params.get("url") || "").trim();
     var placeId = (params.get("placeId") || "").trim();
+    var brandMode = (params.get("brand") || "") === "1";
 
     var scanEl = document.getElementById("sr-scan");
     var reportEl = document.getElementById("sr-report");
@@ -382,11 +703,22 @@
     var secsEl = document.getElementById("sr-secs");
 
     var bizName = nameParam || "Tu restaurante";
-    var COLORS = { good: "#1E7E54", fair: "#C9820E", poor: "#CF4A3C", dim: "#9a8f7d" };
-    var lastScan = null, placeInfo = null, animDone = false;
+    var COLORS = { good: "#3fbf7f", fair: "#e9a83b", poor: "#ef6a5a", dim: "rgba(246,240,230,0.45)",
+      goodText: "#5fd39a", fairText: "#f0b85c", poorText: "#ff8a7a" };  /* lighter text tints stay AA-readable on the dark surfaces; the vivid ones are for rings/graphics */
+    var lastScan = null, placeInfo = null, animDone = false, lastUx = null, lastReport = null;
+    var socialPromise = null, socialInfo = null;
+    var compPromise = null, findQueue = [], findTimer = null;
 
     setText("sr-scan-name", bizName);
-    document.title = bizName + " - Reporte web | Button Up Media";
+    document.title = bizName + " - Reporte de marketing | Button Up Media";
+
+    /* narrate the map opener: pin drop -> zoom out to competitors -> the audit */
+    (function () {
+      var cap = document.getElementById("sr-map-cap");
+      if (!cap) return;
+      setTimeout(function () { cap.textContent = "Buscando competidores cercanos…"; }, 2100);
+      setTimeout(function () { cap.textContent = "Leyendo tu sitio web y tus reseñas…"; }, 4400);
+    })();
 
     /* ---- loading animation (visual only; real work runs in parallel) ---- */
     var step = 0, secs = 30;
@@ -400,26 +732,564 @@
     }, 1100);
     var guard = setTimeout(function () { finishScan(); renderError({ kind: "timeout" }); }, 140000);
 
+    /* ---- #4: stream the real Google data we find into the scan card so the
+       wait feels like a genuine, personalized audit (not a fake spinner) ---- */
+    var findEl = document.getElementById("sr-findings");
+    var ICON = {
+      star: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.8 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></svg>',
+      photo: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>',
+      clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+      trophy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h12v3a6 6 0 0 1-12 0z"/><path d="M6 5H4v2a3 3 0 0 0 3 3M18 5h2v2a3 3 0 0 1-3 3M9 20h6M12 15v5"/></svg>',
+      quote: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 7h4v6H8a2 2 0 0 1-2-2V8a1 1 0 0 1 1-1zm8 0h4v6h-3a2 2 0 0 1-2-2V8a1 1 0 0 1 1-1z"/></svg>',
+      ig: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>'
+    };
+    function pushSocialFindings(s) {
+      var ig = s && s.instagram;
+      if (ig && ig.found) {
+        pushFind(ICON.ig, "Instagram: <b>@" + esc(ig.handle) + "</b> &middot; " + fmtK(ig.followers) + " seguidores", ig.followers >= 1000 ? "good" : "warn");
+        var d = ig.latestPostAt ? Math.round((Date.now() - ig.latestPostAt) / 86400000) : null;
+        if (d != null && d > 60) pushFind(ICON.clock, "Tu última publicación en Instagram fue hace " + d + " días", "warn");
+      } else if (s && s.maybe && s.maybe.found) {
+        pushFind(ICON.ig, "Encontramos un posible Instagram: <b>@" + esc(s.maybe.handle) + "</b>. Confírmalo en tu reporte", "warn");
+      } else {
+        pushFind(ICON.ig, "No pudimos confirmar un Instagram activo tuyo", "warn");
+      }
+    }
+    function drainFind() {
+      if (animDone || !findEl) { clearInterval(findTimer); findTimer = null; return; }
+      if (!findQueue.length) return;
+      var f = findQueue.shift();
+      var row = document.createElement("div");
+      row.className = "sr-find " + f.tone;
+      row.innerHTML = '<span class="fi">' + f.icon + '</span><span class="ft' + (f.quote ? ' quote' : '') + '">' + f.html + '</span>';
+      findEl.appendChild(row);
+      requestAnimationFrame(function () { row.classList.add("in"); });
+    }
+    function pushFind(icon, html, tone, quote) {
+      findQueue.push({ icon: icon, html: html, tone: tone || "", quote: !!quote });
+      if (!findTimer) findTimer = setInterval(drainFind, 1300);
+    }
+    function getCompetitors() {
+      if (compPromise) return compPromise;
+      if (!placeId) { compPromise = Promise.resolve([]); return compPromise; }
+      compPromise = fetchJson("/api/places?action=competitors&placeId=" + encodeURIComponent(placeId))
+        .then(function (d) { return (d && d.ok && d.competitors) ? d.competitors : []; })
+        .catch(function () { return []; });
+      return compPromise;
+    }
+    function startFindings(place) {
+      if (!place) return;
+      if (place.rating != null) pushFind(ICON.star, "<b>" + place.rating.toFixed(1) + "&#9733;</b> de " + (place.reviews != null ? place.reviews.toLocaleString() : "tus") + " reseñas en Google", place.rating >= 4 ? "good" : "warn");
+      pushFind(ICON.photo, place.photosCount ? ("<b>" + place.photosCount + " foto" + (place.photosCount === 1 ? "" : "s") + "</b> en tu ficha de Google") : "Todavía no hay fotos en tu ficha de Google", place.photosCount >= 10 ? "good" : "warn");
+      pushFind(ICON.clock, place.hasHours ? "Tu horario aparece en Google" : "Tu ficha no tiene horario", place.hasHours ? "good" : "warn");
+      getCompetitors().then(function (comps) {
+        comps.slice(0, 3).forEach(function (c) { pushFind(ICON.trophy, "Competidor cercano: <b>" + esc(c.name) + "</b> &middot; " + c.rating + "&#9733;"); });
+        var revs = (place.sampleReviews || []).filter(function (r) { return r.text && r.text.length > 20; });
+        if (revs.length) { var t = revs[0].text.replace(/\s+/g, " ").trim(); pushFind(ICON.quote, "&ldquo;" + esc(t.slice(0, 90)) + (t.length > 90 ? "&hellip;" : "") + "&rdquo;", "", true); }
+      });
+    }
+
     /* ---- real work: resolve the place, then scan its website ---- */
     resolvePlace().then(function (place) {
       placeInfo = place;
+      startFindings(place);
+      // Kick off the social audit now, in parallel with the (slow) PageSpeed scan,
+      // so it is ready by the time we render instead of adding to the wait.
+      socialPromise = loadSocial(place, urlParam);
+      socialPromise.then(function (s) { pushSocialFindings(s); });
       var target = urlParam || (place && place.website) || "";
-      if (!target) throw { kind: "no_url" };
+      if (!target) {
+        // No website to grade. If we still resolved the Google listing, show a
+        // "no website" report (a serious problem, and our best sales moment)
+        // instead of dead-ending on a "what's your website?" form.
+        if (place) { finishScan(); renderNoWebsite(place); loadCompetitors(); wireGate(); return null; }
+        throw { kind: "no_url" };
+      }
       return scanWithRetry(target, 1);
     }).then(function (scan) {
+      if (!scan) return;
       lastScan = scan;
-      finishScan();
-      renderReport(scan, placeInfo);
-      loadCompetitors();
-      wireGate();
+      setProgress("Revisando tu diseño…");
+      return Promise.all([reviewUx(scan), socialPromise]).then(function (res) {
+        lastUx = res[0]; socialInfo = res[1];
+        finishScan();
+        renderReport(scan, placeInfo, res[0], res[1]);
+        loadCompetitors();
+        loadScoreboard();
+        wireGate();
+      });
     }).catch(function (e) {
       finishScan();
       renderError(e || {});
     });
 
-    /* Los sitios en plantillas (Wix/Squarespace) a menudo fallan en el primer
-       escaneo en frío de PageSpeed y funcionan al segundo intento. Reintentamos
-       en silencio antes de mostrar un error, para que esos sitios sí califiquen. */
+    /* ---- social audit: discover the handle (site link, else name guesses),
+       scrape the top few, and confirm the right one by its bio linking back to
+       the website. Returns { instagram, tiktok } profiles (or nulls). ---- */
+    function loadSocial(place, urlP) {
+      var website = (place && place.website) || urlP || "";
+      var name = (place && place.name) || bizName;
+      if (!website && !name) return Promise.resolve(null);
+      return fetchJson("/api/places?action=social&discover=1&website=" + encodeURIComponent(website) + "&name=" + encodeURIComponent(name))
+        .then(function (d) {
+          if (!d || !d.ok || !d.discover) return null;
+          var ig = d.discover.instagram || {}, tt = d.discover.tiktok || {};
+          var igCands = (ig.candidates || []).slice(0, ig.fromSite ? 3 : 4);
+          var ttHandle = tt.fromSite ? (tt.candidates || [])[0] : null;
+          var jobs = igCands.map(function (h) { return scrapeOne("ig", h, website); });
+          if (ttHandle) jobs.push(scrapeOne("tt", ttHandle, website).then(function (p) { return { tt: p }; }));
+          return Promise.all(jobs).then(function (out) {
+            var tiktok = null, igProfiles = [];
+            out.forEach(function (o) { if (o && o.tt) tiktok = o.tt; else if (o) igProfiles.push(o); });
+            // collect ALL accounts confidently this restaurant's (bio links back to
+            // the site, or the one linked FROM the site). 2+ = a real discoverability
+            // problem (customers do not know which to follow).
+            var linked = igProfiles.filter(function (p) { return p.linksToWebsite; });
+            // accounts linked ON the restaurant's own site are confident even if
+            // their bio omits the website URL, trust every site-linked profile
+            if (ig.fromSite) igProfiles.forEach(function (p) { if (linked.indexOf(p) < 0) linked.push(p); });
+            var seen = {}, accounts = [];
+            linked.forEach(function (p) { var k = (p.handle || "").toLowerCase(); if (!seen[k]) { seen[k] = 1; accounts.push(p); } });
+            accounts.sort(function (a, b) { return (b.followers || 0) - (a.followers || 0); });
+            var instagram = accounts[0] || null;
+            // a guess we can't confirm should not be scored or pitched -> stays "maybe"
+            var maybe = (!instagram && igProfiles.length === 1) ? igProfiles[0] : null;
+            return { instagram: instagram, igAccounts: accounts, tiktok: tiktok, confident: !!instagram, maybe: maybe, fromSite: !!ig.fromSite };
+          });
+        })
+        .catch(function () { return null; });
+    }
+    function scrapeOne(platform, handle, website) {
+      return fetchJson("/api/places?action=social&platform=" + platform + "&handle=" + encodeURIComponent(handle) + "&website=" + encodeURIComponent(website || ""))
+        .then(function (r) { return (r && r.ok && r.profile && r.profile.found) ? r.profile : null; })
+        .catch(function () { return null; });
+    }
+    /* Find the best-matching Instagram for a website+name: discover candidates,
+       scrape the top few, keep the one whose bio links back to the site. maxGuess
+       is kept low for competitors so the scoreboard stays cheap. */
+    function bestIG(website, name, maxGuess) {
+      if (!website && !name) return Promise.resolve(null);
+      return fetchJson("/api/places?action=social&discover=1&website=" + encodeURIComponent(website || "") + "&name=" + encodeURIComponent(name || ""))
+        .then(function (d) {
+          if (!d || !d.ok || !d.discover) return null;
+          var ig = d.discover.instagram || {};
+          var cands = (ig.candidates || []).slice(0, ig.fromSite ? 1 : (maxGuess || 4));
+          if (!cands.length) return null;
+          return Promise.all(cands.map(function (h) { return scrapeOne("ig", h, website); })).then(function (profiles) {
+            profiles = profiles.filter(Boolean);
+            if (ig.fromSite) return profiles[0] || null;
+            return profiles.filter(function (p) { return p.linksToWebsite; })[0] || null;
+          });
+        }).catch(function () { return null; });
+    }
+
+    /* AI design review: hand the screenshot the scan captured to /api/places
+       (POST) and get back a strict design/experience score + plain-language
+       findings. Degrades to null (PageSpeed-only report) on any failure. */
+    function reviewUx(scan) {
+      if (!scan || !scan.screenshot) return Promise.resolve(null);
+      var ctrl = ("AbortController" in window) ? new AbortController() : null;
+      var to = setTimeout(function () { if (ctrl) ctrl.abort(); }, 45000);
+      var website = (placeInfo && placeInfo.website) || urlParam || (scan && scan.url) || "";
+      var url = (scan && scan.url) || website;
+      return fetch("/api/places", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          screenshot: scan.screenshot, name: bizName, website: website, url: url, lang: "es",
+          reviews: (placeInfo && placeInfo.sampleReviews) || [],
+          photoRefs: (placeInfo && placeInfo.photoRefs) || []
+        }),
+        signal: ctrl ? ctrl.signal : undefined
+      }).then(function (r) { return r.json(); })
+        .then(function (d) { clearTimeout(to); return (d && d.ok && d.ux) ? d.ux : null; })
+        .catch(function () { clearTimeout(to); return null; });
+    }
+
+    /* ---- the owner.com-style report card: 49 explained checks in 5 sections.
+       Each check is graded by the AI (look + content), Google PageSpeed (speed),
+       or the Google listing (reviews/photos/hours), then scored by weight. ---- */
+    var RUBRIC = [
+      { key:"content", title:"Lo que tu sitio web le dice a un cliente con hambre", intro:"Revisa si tu sitio le da rápido a un visitante con hambre lo que vino a buscar: tu comida, tus precios y una forma fácil de pedir o reservar.", checks:[
+        {id:"menu-and-prices-visible",label:"Tu menú y tus precios son fáciles de encontrar",why:"Si la gente no ve qué sirves ni cuánto cuesta, se va y le pide a un lugar que sí se lo muestra.",detect:"ai-vision",w:5},
+        {id:"order-or-reserve-button",label:"Hay un botón claro de \"Pedir\" o \"Reservar mesa\" arriba de todo",why:"Si un cliente listo para comprar tiene que buscar cómo pedir, la mayoría se rinde en segundos y esa venta se pierde.",detect:"ai-vision",w:5},
+        {id:"order-on-own-site",label:"La gente puede pedir directo desde tu propio sitio",why:"Mandar cada pedido por una app externa significa pagar comisiones altas y dejarle tus mejores clientes a un intermediario.",detect:"html",w:4},
+        {id:"real-food-photos",label:"Tu página principal muestra fotos reales y apetitosas de tu comida",why:"La gente come primero con los ojos, y un sitio sin fotos que den antojo no convierte una visita en un pedido.",detect:"ai-vision",w:5},
+        {id:"phone-number-visible",label:"Tu número de teléfono se ve y se puede tocar para llamar",why:"Si el teléfono está escondido, alguien listo para hacer un pedido grande de catering o para llevar simplemente se rinde.",detect:"html",w:4},
+        {id:"address-on-site",label:"Tu dirección completa está en el sitio",why:"Si la gente no ve de inmediato dónde estás, no va a cruzar la ciudad a ciegas y pierdes esa visita.",detect:"html",w:4},
+        {id:"hours-on-site",label:"Tu horario aparece en el sitio",why:"Cuando la gente no sabe si estás abierto ahora mismo, asume que estás cerrado y se va a un lugar del que sí está segura.",detect:"html",w:4},
+        {id:"reviews-shown",label:"Hay reseñas o calificaciones reales de clientes a la vista",why:"Los visitantes nuevos confían más en otros comensales que en tu publicidad, y si no ven nada se van a un lugar que sí tiene reseñas.",detect:"places",w:3},
+        {id:"about-story",label:"Tienes una sección \"Sobre nosotros\" que le da a la gente una razón para escogerte",why:"Sin una historia de quién eres, te pareces a cualquier otro lugar de la ciudad y los clientes deciden solo por el precio.",detect:"html",w:3},
+        {id:"enough-real-text",label:"La página tiene suficiente texto, no solo imágenes",why:"Un sitio casi sin texto deja a los clientes y a Google adivinando qué ofreces, y te pasan por alto.",detect:"html",w:3},
+        {id:"social-links",label:"Hay enlaces a tu Instagram y tu Facebook en el sitio",why:"Sin enlaces fáciles a tus redes, a quienes les gusta tu comida no pueden seguirte y pierdes una forma gratis de hacer que vuelvan.",detect:"html",w:2},
+        {id:"faq-section",label:"Una sección de preguntas frecuentes responde lo que los clientes preguntan antes de comprar",why:"Cada pregunta sin respuesta sobre estacionamiento, alergias o reservas es un cliente que se convence de no escogerte.",detect:"html",w:2},
+      ]},
+      { key:"appearance", title:"Cómo se ve y se siente tu sitio web", intro:"Es la prueba de la primera impresión: si tu sitio parece un restaurante real y apetitoso en el que un desconocido confiaría en los primeros segundos, sobre todo en el celular.", checks:[
+        {id:"photos-are-your-own-food",label:"Las fotos de comida son tuyas, no imágenes genéricas de banco",why:"La gente con hambre pide con los ojos, y los platos de banco de imágenes se notan, así que se van al lugar que muestra la comida real.",detect:"ai-vision",w:5},
+        {id:"strong-hero",label:"Una primera pantalla fuerte que llama la atención",why:"Lo primero que ve un visitante decide en unos tres segundos si se queda o se va con la competencia.",detect:"ai-vision",w:5},
+        {id:"mobile-layout-looks-right",label:"El sitio se ve bien en el celular, sin cosas apretadas o cortadas",why:"La mayoría de los clientes te encuentra desde el celular, y si todo se ve apretado o tienen que hacer zoom, se van antes de pedir.",detect:"ai-vision",w:5},
+        {id:"appetizing-photo-quality",label:"Tus fotos de comida de verdad se ven apetitosas",why:"Las fotos oscuras o borrosas hacen que hasta la mejor comida se vea barata, y si tu sitio no le abre el apetito a nadie, nadie pide.",detect:"ai-vision",w:4},
+        {id:"modern-non-template-design",label:"El diseño se ve moderno, no como una plantilla barata",why:"Un diseño anticuado y genérico hace que la gente asuma, sin decirlo, que tu comida y tu limpieza están igual de anticuadas.",detect:"ai-vision",w:4},
+        {id:"readable-text",label:"El texto se lee fácil de un vistazo",why:"Las letras pequeñas y con poco contraste sobre fotos cargadas hacen que la gente tenga que forzar la vista y se rinda antes de encontrar tu menú.",detect:"ai-vision",w:4},
+        {id:"strong-branding",label:"Una marca clara que se ve como un restaurante real y confiable",why:"Un logo visible y un estilo consistente generan la confianza que convierte a un desconocido en cliente, y un sitio sin identidad da desconfianza.",detect:"ai-vision",w:3},
+        {id:"not-cluttered",label:"Un diseño limpio y ordenado, con espacio para respirar",why:"Un muro de texto apretado y ventanas emergentes abruma a los visitantes, y se van antes de encontrar el botón para pedir.",detect:"ai-vision",w:3},
+        {id:"enough-photos-shown",label:"Suficientes fotos para lucir tu lugar",why:"Un sitio casi vacío no le da al cliente nada que lo entusiasme, así que se va a ver al competidor con fotos irresistibles.",detect:"places",w:3},
+      ]},
+      { key:"local", title:"Tu ficha de Google y tus reseñas", intro:"Es tu perfil en Google Maps y en el buscador, que la mayoría de la gente de tu zona ve y juzga antes de llegar a tu sitio web.", checks:[
+        {id:"star-rating-strong",label:"Tu calificación en Google es de 4.0 estrellas o más",why:"La mayoría de la gente ni considera un lugar con menos de cuatro estrellas, así que una calificación baja manda a los clientes al lugar de al lado.",detect:"places",w:5},
+        {id:"enough-reviews",label:"Tienes al menos 50 reseñas en Google",why:"Con pocas reseñas la gente se pregunta si alguien come ahí de verdad, y escoge a un competidor que tiene cientos.",detect:"places",w:5},
+        {id:"listing-links-website",label:"Tu ficha de Google enlaza a un sitio web propio",why:"Sin enlace a tu sitio, o con un enlace a una página de terceros, le entregas a otro cada cliente curioso y su pedido.",detect:"places",w:5},
+        {id:"hours-on-listing",label:"Tu horario aparece en Google",why:"Si falta tu horario, la gente asume que puedes estar cerrado y se va a un lugar que sabe que está abierto.",detect:"places",w:5},
+        {id:"recent-review-sentiment",label:"Tus reseñas más recientes son positivas, no una lista de quejas",why:"Las reseñas recientes sobre comida fría o mal servicio son lo último que lee un cliente antes de decidir, y te cuestan el pedido.",detect:"places",w:4},
+        {id:"phone-on-listing",label:"Tu número de teléfono está en tu ficha de Google",why:"Sin teléfono, un cliente con una pregunta sobre reservas o comida para llevar no puede comunicarse contigo, y llama a un lugar que sí contesta.",detect:"places",w:4},
+        {id:"photos-on-listing",label:"Tu ficha tiene al menos 10 fotos",why:"La gente come primero con los ojos, y una ficha con pocas fotos se ve abandonada al lado de competidores que lucen su comida.",detect:"places",w:4},
+        {id:"listed-as-restaurant",label:"Google te tiene registrado correctamente como restaurante",why:"Si tu tipo de negocio está mal o es muy general, Google deja de mostrarte cuando la gente busca dónde comer cerca.",detect:"places",w:3},
+        {id:"price-level-set",label:"Tu rango de precios aparece en Google",why:"Sin un rango de precios, quien cuida su presupuesto no sabe si estás a su alcance y prefiere pasarte de largo antes que llevarse una sorpresa con la cuenta.",detect:"places",w:2},
+      ]},
+      { key:"seo", title:"Que te encuentren en Google", intro:"Revisa si Google puede encontrar tu sitio y si hace que alguien con hambre en tu zona haga clic en ti en vez de seguir de largo hacia la competencia.", checks:[
+        {id:"own-domain",label:"Tienes tu propia dirección web",why:"Una dirección gratis de un creador de sitios o una página de Facebook se ve temporal, así que los clientes confían en el competidor con un .com de verdad y le piden a él.",detect:"html",w:5},
+        {id:"crawlable",label:"Google tiene permiso para encontrar y mostrar tu sitio web",why:"Si tu sitio está escondido de Google por error, nunca apareces en las búsquedas, y todo el que te busca en tu zona encuentra a un competidor.",detect:"psi",w:5},
+        {id:"headline-food-town",label:"El título azul que muestra Google dice qué comida sirves y en qué ciudad",why:"Ese título es la razón principal por la que alguien de tu zona hace clic en ti, y si no dice tu comida y tu ciudad, sigue de largo.",detect:"html",w:5},
+        {id:"h1-city",label:"Tu título principal menciona tu ciudad o tu barrio",why:"Cuando alguien busca \"pizza cerca de mí\", Google busca tu ciudad en la página, y si no está, pierdes ese cliente.",detect:"html",w:5},
+        {id:"pages-load-without-errors",label:"Tu sitio web abre sin páginas de error",why:"Google saca por completo las páginas que dan error, así que una página rota es una página que ningún cliente va a encontrar.",detect:"psi",w:4},
+        {id:"meta-description",label:"Tienes una descripción corta que aparece debajo de tu nombre en Google",why:"Ese párrafo debajo de tu nombre es tu única oportunidad gratis de convencer, y si lo dejas vacío, el clic se lo lleva quien escribió uno más apetitoso.",detect:"html",w:4},
+        {id:"title-matches-listing",label:"El nombre de tu sitio web coincide con el de tu ficha de Google",why:"Cuando los dos nombres no coinciden, Google confía menos en ti y los clientes se preguntan si llegaron al lugar equivocado.",detect:"html",w:3},
+        {id:"alt-text",label:"Tus fotos de comida tienen descripciones que Google puede leer",why:"Google no puede ver una imagen, así que las fotos sin descripción nunca aparecen cuando la gente busca imágenes de comida en tu zona.",detect:"html",w:3},
+        {id:"og-tags",label:"Tu enlace muestra una foto y un título cuando se comparte en Facebook o por mensaje",why:"Cuando un enlace compartido aparece como un cuadro gris vacío, nadie lo abre y tu publicidad de boca en boca se pierde ahí mismo.",detect:"html",w:3},
+      ]},
+      { key:"speed", title:"Qué tan rápido carga tu sitio web", intro:"Mide si tu comida y tu menú aparecen rápido en el celular, porque una página lenta pierde pedidos antes de que el cliente vea un solo plato.", checks:[
+        {id:"food-photos-show-fast",label:"Tus fotos de comida y tu menú aparecen rápido",why:"Cuando una página es lenta en el celular, la gente se va antes de ver tu comida y tu menú, y eso son pedidos perdidos todas las noches.",detect:"psi",w:5},
+        {id:"overall-mobile-speed",label:"Tu sitio es rápido en el celular, que es donde la mayoría de los clientes te encuentra",why:"La mayoría de la gente busca restaurantes desde el celular, y una experiencia lenta manda a esos clientes al lugar de al lado sin que te des cuenta.",detect:"psi",w:5},
+        {id:"built-for-phone-screens",label:"Tu sitio está hecho para pantallas de celular, no es una página de computadora encogida",why:"Un sitio que no está hecho para el celular obliga a los clientes a hacer zoom solo para leer tu menú, y la mayoría se rinde antes de pedir.",detect:"psi",w:5},
+        {id:"something-appears-quickly",label:"Algo aparece enseguida en vez de una pantalla en blanco",why:"Si un cliente con hambre se queda viendo una pantalla en blanco un par de segundos, asume que tu sitio no funciona y se pasa a un competidor.",detect:"psi",w:4},
+        {id:"buttons-respond-fast",label:"Los botones responden en cuanto alguien los toca",why:"Cuando tu botón de Pedir o de Menú se queda congelado un momento, los clientes vuelven a tocar frustrados y se rinden antes de pagar.",detect:"psi",w:4},
+        {id:"real-world-phone-speed",label:"Los clientes reales, en sus celulares, sienten que tu sitio es rápido",why:"Google mide qué tan lento se siente tu sitio para los visitantes reales y pone a la competencia por delante cuando el tuyo va lento.",detect:"psi",w:4},
+        {id:"server-responds-quickly",label:"Tu sitio web empieza a cargar en cuanto alguien hace clic",why:"Una primera respuesta lenta retrasa todo lo demás, así que los clientes esperan más por tu menú que en el sitio de un competidor más rápido.",detect:"psi",w:3},
+        {id:"content-does-not-jump",label:"La página se queda quieta en vez de moverse mientras carga",why:"Cuando los botones se mueven bajo el dedo del cliente, toca lo que no era, se molesta y abandona el pedido.",detect:"psi",w:3},
+        {id:"buttons-big-enough-to-tap",label:"Los botones y enlaces son lo bastante grandes para tocarlos con el dedo",why:"Los botones pequeños y apretados hacen frustrante pedir desde el celular, y los clientes se rinden en vez de pelear con tu sitio.",detect:"psi",w:3},
+        {id:"photos-not-oversized",label:"Tus fotos tienen el tamaño correcto y no ponen lenta la página",why:"Las imágenes demasiado pesadas ponen tu página lentísima y gastan los datos del cliente antes de que aparezca tu comida.",detect:"psi",w:3},
+      ]},
+    ];
+
+    /* Grade every rubric check to true / false / null(not-applicable). */
+    function evalChecks(scan, place, ux) {
+      var out = {};
+      var uc = (ux && ux.checks) || {};
+      var m = (scan && scan.mobile) || {};
+      var met = m.metrics || {};
+      var cats = m.categories || {};
+      var failing = m.failing || [];
+      function failHas(id) { for (var i = 0; i < failing.length; i++) { if (failing[i].id === id) return true; } return false; }
+      function metOk(key, max) { var v = met[key]; if (!v || typeof v.value !== "number") return true; return v.value <= max; }
+      function fieldStr() { var f = scan && scan.report && scan.report.fieldData; if (f && typeof f === "object") f = f.overall_category || f.category || null; return (typeof f === "string") ? f : null; }
+      var pl = place || {};
+      var types = pl.types || [];
+      var sample = pl.sampleReviews || [];
+      function psi(id) {
+        switch (id) {
+          case "crawlable": return !failHas("is-crawlable");
+          case "pages-load-without-errors": return !failHas("http-status-code");
+          case "food-photos-show-fast": return metOk("lcp", 2500);
+          case "overall-mobile-speed": return cats.performance != null ? cats.performance >= 50 : true;
+          case "built-for-phone-screens": return !failHas("meta-viewport") && !failHas("viewport");
+          case "something-appears-quickly": return metOk("fcp", 1800);
+          case "buttons-respond-fast": return metOk("tbt", 200);
+          case "real-world-phone-speed": { var f = fieldStr(); return f ? f === "FAST" : (cats.performance != null ? cats.performance >= 50 : true); }
+          case "server-responds-quickly": return !failHas("server-response-time");
+          case "content-does-not-jump": return metOk("cls", 0.1);
+          case "buttons-big-enough-to-tap": return !failHas("tap-targets");
+          case "photos-not-oversized": return !failHas("uses-optimized-images") && !failHas("uses-responsive-images") && !failHas("modern-image-formats");
+          default: return true;
+        }
+      }
+      function places(id) {
+        var rating = pl.rating, reviews = pl.reviews;
+        switch (id) {
+          case "reviews-shown": return reviews != null && reviews > 0;
+          case "enough-photos-shown": return (pl.photosCount || 0) >= 5;
+          case "star-rating-strong": return rating != null && rating >= 4.0;
+          case "enough-reviews": return reviews != null && reviews >= 50;
+          case "listing-links-website": return !!pl.website;
+          case "hours-on-listing": return !!pl.hasHours;
+          case "recent-review-sentiment": { if (sample.length) { var s = 0, n = 0; sample.forEach(function (r) { if (r.rating != null) { s += r.rating; n++; } }); return n ? (s / n) >= 4.0 : (rating != null ? rating >= 4.0 : true); } return rating != null ? rating >= 4.0 : true; }
+          case "phone-on-listing": return !!pl.phone;
+          case "photos-on-listing": return (pl.photosCount || 0) >= 10;
+          case "listed-as-restaurant": return types.some(function (t) { return ["restaurant", "food", "meal_takeaway", "meal_delivery", "cafe", "bakery", "bar", "night_club"].indexOf(t) >= 0; });
+          case "price-level-set": return pl.priceLevel != null;
+          default: return false;
+        }
+      }
+      RUBRIC.forEach(function (sec) {
+        sec.checks.forEach(function (c) {
+          if (c.detect === "ai-vision" || c.detect === "html") out[c.id] = (c.id in uc) ? (uc[c.id] === true) : null;
+          else if (c.detect === "psi") out[c.id] = psi(c.id);
+          else if (c.detect === "places") out[c.id] = place ? places(c.id) : null;
+          else out[c.id] = null;
+        });
+      });
+      return out;
+    }
+
+    var SECT_LABELS = { content: "Menú, pedidos e información", appearance: "Diseño y primera impresión", local: "Tu presencia en Google", seo: "Que te encuentren en internet", speed: "Velocidad en el celular" };
+
+    /* Build the scored report from the 49 checks. The look-and-design section
+       gates the overall grade, so a fast site that looks like a cheap template
+       still cannot score "Excellent". Sub-scores add up to the overall. */
+    /* ===== whole-presence scoring model (photos-heavy, gated, tailored pitch) ,
+       the calibrated engines, ported straight from the validated prototypes. ===== */
+    var CAT_ORDER = ['photos', 'google', 'mobile', 'ordering', 'social', 'findability'];
+    var CAT_LABELS = { photos: 'Fotos y atractivo visual', google: 'Presencia en Google y reseñas', mobile: 'Experiencia en el celular', ordering: 'Pedidos y reservas', social: 'Redes sociales', findability: 'Que te encuentren (SEO)' };
+    var CAT_WEIGHTS = { photos: 22, google: 20, mobile: 18, ordering: 14, social: 12, findability: 14 };
+    function clampN(n, a, b) { return Math.max(a, Math.min(b, n)); }
+    function daysSinceMs(ms) { return ms == null ? null : Math.round((Date.now() - ms) / 86400000); }
+    function medianN(a) { if (!a.length) return null; var s = a.slice().sort(function (x, y) { return x - y; }); var m = Math.floor(s.length / 2); return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; }
+    function hostOfLink(u) { try { return new URL(/^https?:/.test(u) ? u : 'https://' + u).hostname.replace(/^www\./, '').toLowerCase(); } catch (e) { return ''; } }
+
+    function scoreSocialIG(ig, ctx) {
+      if (!ig || !ig.found) return null;
+      ctx = ctx || {};
+      var compMed = medianN((ctx.competitorFollowers || []).filter(function (n) { return n > 0; }));
+      var d = daysSinceMs(ig.latestPostAt);
+      var recent = d == null ? 9 : d <= 7 ? 30 : d <= 14 ? 25 : d <= 30 ? 17 : d <= 60 ? 9 : d <= 90 ? 4 : 0;
+      var content = compMed ? (ig.followers >= compMed ? 14 : ig.followers >= compMed * 0.5 ? 10 : ig.followers >= compMed * 0.25 ? 6 : 3)
+        : (ig.followers >= 5000 ? 14 : ig.followers >= 2000 ? 11 : ig.followers >= 1000 ? 8 : ig.followers >= 300 ? 5 : 2);
+      if ((ig.posts || 0) > 200 && ig.followers < 500) content -= 6;
+      else if (ig.followers / Math.max(ig.posts || 1, 1) > 30) content += 6; else content += 3;
+      content = clampN(content, 0, 20);
+      var B = ig.bio || '', L = ig.links || [], bio = 0;
+      bio += /📍|\bmiami|kendall|coral gables|brickell|doral|wynwood|fl\b|florida|ave|st\b|blvd|\d{3,}/i.test(B) ? 5 : 0;
+      bio += /\b(open|hours|am\b|pm\b|mon|tue|wed|thu|fri|sat|sun|daily|menu|order)\b/i.test(B) ? 5 : 0;
+      bio += L.some(function (u) { return /ubereats|doordash|toast|order|menu|opentable|resy|grubhub|appfront|chownow|linktr\.ee|linkin\.bio|beacons/i.test(u); }) ? 5 : 0;
+      bio += (ig.highlights || 0) >= 3 ? 5 : 0;
+      var cons = 0, w = ctx.website ? hostOfLink(ctx.website) : '';
+      var linksSite = w && L.some(function (u) { var h = hostOfLink(u), core = w.split('.')[0]; return h === w || (core.length > 4 && h.indexOf(core) !== -1); });
+      cons += ctx.website ? (linksSite ? 8 : 0) : 4;
+      var cityMatch = ctx.city ? new RegExp((ctx.city.split(',')[0] || '').trim().replace(/[^a-z0-9 ]/gi, '') || 'zzzz', 'i').test(B) : null;
+      cons += cityMatch === true ? 7 : cityMatch === null ? 4 : 0;
+      cons = clampN(cons, 0, 15);
+      var legit = 8 + (ig.isBusiness ? 4 : 0) + (ig.verified ? 3 : 0);
+      return clampN(Math.round(recent + content + bio + cons + legit), 0, 100);
+    }
+    function socialFindingsOf(ig) {
+      var out = []; if (!ig) return out;
+      var d = daysSinceMs(ig.latestPostAt);
+      if (d != null && d > 60) out.push({ pt: 'Tu Instagram está inactivo', im: 'Tu última publicación fue hace unos ' + d + ' días. Un cliente que revisa tu página ve una cuenta abandonada y se pregunta si todavía estás abierto.' });
+      if ((ig.posts || 0) > 150 && ig.followers < 500) out.push({ pt: 'Has publicado ' + ig.posts + ' veces pero solo tienes ' + (ig.followers || 0) + ' seguidores', im: 'El contenido no está atrayendo gente. Con la estrategia correcta, esas publicaciones se convierten en seguidores reales de tu zona.' });
+      else if (ig.followers != null && ig.followers < 300) out.push({ pt: 'Casi nadie te sigue en Instagram', im: 'Con ' + ig.followers + ' seguidores casi no se te ve donde la gente de tu zona descubre restaurantes.' });
+      return out.slice(0, 2);
+    }
+    function computeCategories(scan, place, ux, ev, socialScore) {
+      var m = (scan && scan.mobile) || {}, met = m.metrics || {}, cats = m.categories || {};
+      function metv(k) { return met[k] && typeof met[k].value === 'number' ? met[k].value : null; }
+      function chk(id) { return ev[id] === true; }
+      var lcp = metv('lcp'), perf = cats.performance;
+      var photos = (ux && ux.photoScore != null) ? ux.photoScore
+        : ((chk('real-food-photos') ? 40 : 0) + (chk('appetizing-photo-quality') ? 30 : 0) + (chk('photos-are-your-own-food') ? 30 : 0));
+      if ((place && place.photosCount || 0) < 5) photos = Math.round(photos * 0.9);
+      var google = null;
+      if (place) {
+        var g = 0, rt = place.rating, rv = place.reviews;
+        g += rt != null ? (rt >= 4.5 ? 30 : rt >= 4.2 ? 24 : rt >= 4.0 ? 18 : rt >= 3.7 ? 10 : 4) : 10;
+        g += rv != null ? (rv >= 500 ? 25 : rv >= 200 ? 20 : rv >= 100 ? 15 : rv >= 50 ? 10 : rv >= 25 ? 6 : 2) : 5;
+        g += place.hasHours ? 12 : 0;
+        g += (place.photosCount || 0) >= 10 ? 13 : (place.photosCount || 0) >= 5 ? 8 : (place.photosCount || 0) >= 1 ? 4 : 0;
+        g += place.phone ? 5 : 0;
+        if (ux && ux.reviewSentiment === 'negative') g -= 15; else if (ux && ux.reviewSentiment === 'mixed') g -= 7; else if (ux && ux.reviewSentiment === 'positive') g += 3;
+        g += place.website ? 12 : 0;
+        google = clampN(Math.round(g), 0, 100);
+      }
+      var mobile = null;
+      if (lcp != null || perf != null) {
+        var mo = 0;
+        mo += lcp != null ? (lcp <= 2500 ? 45 : lcp <= 4000 ? 28 : lcp <= 6000 ? 12 : 4) : (perf >= 50 ? 30 : 15);
+        mo += perf != null ? (perf >= 90 ? 30 : perf >= 70 ? 24 : perf >= 50 ? 16 : perf >= 30 ? 8 : 3) : 15;
+        mo += chk('mobile-layout-looks-right') ? 25 : 0;
+        mobile = clampN(Math.round(mo), 0, 100);
+      }
+      var ordering = 0, oMax = 0; function ao(c, p) { oMax += p; if (c) ordering += p; }
+      ao(chk('menu-and-prices-visible'), 30); ao(chk('order-or-reserve-button'), 25); ao(chk('order-on-own-site'), 20); ao(chk('phone-number-visible'), 10);
+      if (place && place.reservable === true) { oMax += 15; if (chk('order-or-reserve-button')) ordering += 15; }
+      ordering = oMax ? clampN(Math.round(ordering / oMax * 100), 0, 100) : null;
+      var find = 0, fMax = 0; function af(c, p) { fMax += p; if (c) find += p; }
+      af(chk('own-domain'), 18); af(chk('headline-food-town'), 16); af(chk('h1-city'), 14); af(chk('meta-description'), 12); af(chk('title-matches-listing'), 10); af(chk('alt-text'), 8); af(chk('og-tags'), 8); af(cats.seo != null && cats.seo >= 90, 14);
+      var findability = fMax ? clampN(Math.round(find / fMax * 100), 0, 100) : null;
+      return {
+        photos: photos, google: google, mobile: mobile, ordering: ordering, social: socialScore, findability: findability,
+        mobileLcpMs: lcp, designScore: ux && ux.score,
+        hasFoodPhotos: ux ? (chk('real-food-photos') || (ux.photoScore != null && ux.photoScore >= 35)) : null,
+        hasOrderOrMenu: chk('menu-and-prices-visible') || chk('order-or-reserve-button'),
+        rating: place && place.rating, reviews: place && place.reviews, hasWebsite: !!(scan && scan.url)
+      };
+    }
+    function overallEngine(cat) {
+      var ws = 0, ss = 0;
+      CAT_ORDER.forEach(function (k) { if (cat[k] != null) { ws += CAT_WEIGHTS[k]; ss += CAT_WEIGHTS[k] * cat[k]; } });
+      var s = ws ? ss / ws : 0, gates = [];
+      if (cat.mobileLcpMs != null && cat.mobileLcpMs > 4000) { s = Math.min(s, 74); gates.push('lento en el celular'); }
+      else if (cat.mobileLcpMs != null && cat.mobileLcpMs > 2500) { s = Math.min(s, 84); gates.push('algo lento en el celular'); }
+      if (cat.hasFoodPhotos === false) { s = Math.min(s, 60); gates.push('sin fotos reales de comida'); }
+      else if (cat.photos != null && cat.photos < 40) { s = Math.min(s, 68); gates.push('fotos débiles y poco apetitosas'); }
+      if (cat.designScore != null && cat.designScore < 40) { s = Math.min(s, 55); gates.push('el sitio se ve mal'); }
+      else if (cat.designScore != null && cat.designScore < 50) { s = Math.min(s, 64); gates.push('el sitio no atrae'); }
+      if (cat.hasOrderOrMenu === false) { s = Math.min(s, 70); gates.push('sin menú ni forma clara de pedir'); }
+      if (cat.rating != null && cat.rating < 4.0) { s = Math.min(s, 72); gates.push('calificación en Google menor de 4.0'); }
+      if (cat.reviews != null && cat.reviews < 25) { s = Math.min(s, 75); gates.push('menos de 25 reseñas'); }
+      return { score: clampN(Math.round(s), 0, 100), gates: gates };
+    }
+    function pickPitch(cat) {
+      var siteQ = Math.round(((cat.designScore || 0) * 0.5) + ((cat.photos || 0) * 0.5));
+      var p = [], verySlow = cat.mobileLcpMs != null && cat.mobileLcpMs > 4000, slightlySlow = cat.mobileLcpMs != null && cat.mobileLcpMs > 2500 && cat.mobileLcpMs <= 4000;
+      if (!cat.hasWebsite) p.push({ svc: 'website', v: 100, why: "no tiene un sitio web propio adonde mandar a los clientes con hambre" });
+      else if (siteQ < 55) p.push({ svc: 'website', v: 100 - siteQ, why: "su sitio web no le hace justicia a su comida" });
+      else if (verySlow) p.push({ svc: 'website', v: 60, why: "su sitio carga muy lento en el celular, que es donde casi todos lo encuentran" });
+      if (cat.hasWebsite && siteQ >= 55 && ((cat.findability != null && cat.findability < 62) || slightlySlow || (cat.google != null && cat.google < 55)))
+        p.push({ svc: 'seo', v: Math.max(62 - (cat.findability != null ? cat.findability : 60), slightlySlow ? 40 : 0, (cat.google != null && cat.google < 55) ? 35 : 0) + 8, why: "su sitio se ve bien, pero la gente no lo encuentra en Google" });
+      if (cat.social != null && cat.social < 55) p.push({ svc: 'social', v: 72 - cat.social, why: "sus redes sociales no están atrayendo clientes" });
+      var revBad = (cat.rating != null && cat.rating < 4.0) || (cat.reviews != null && cat.reviews < 25), lowEyes = (cat.reviews != null && cat.reviews < 60) || (cat.social != null && cat.social < 38);
+      if (revBad) p.push({ svc: 'ads', v: 62, why: "todavía no está entrando suficiente gente por la puerta" });
+      else if (lowEyes) p.push({ svc: 'ads', v: 44, why: "ahora mismo no lo está viendo suficiente gente" });
+      if (!p.length) return { svc: null, why: "está en muy buena forma" };
+      p.sort(function (a, b) { return b.v - a.v; });
+      return p[0];
+    }
+
+    function buildCard(scan, place, ux, social) {
+      var ev = evalChecks(scan, place, ux);   // keep the 49-check detail for the gated checklist
+      var igProfile = social && social.instagram;
+      var multiIg = !!(social && social.igAccounts && social.igAccounts.length >= 2);
+      var socialScore = igProfile ? scoreSocialIG(igProfile, { website: (place && place.website) || '', city: (place && place.address) || '', competitorFollowers: (window.__compFollowers || []) }) : null;
+      if (socialScore != null && multiIg) socialScore = Math.max(0, socialScore - 12);   // split-audience penalty
+      var cat = computeCategories(scan, place, ux, ev, socialScore);
+      var ov = overallEngine(cat);
+      var overall = ov.score, g = gradeFor(overall);
+      var present = CAT_ORDER.filter(function (k) { return cat[k] != null; });
+      var totW = present.reduce(function (a, k) { return a + CAT_WEIGHTS[k]; }, 0);
+      var subs = present.map(function (k) { return mkSub(k, CAT_LABELS[k], cat[k], totW ? Math.round(CAT_WEIGHTS[k] / totW * 100) : 20); });
+      var AREA = { content: ["Sitio web", "content"], appearance: ["Fotos y diseño", "appearance"], local: ["Ficha de Google", "local"], seo: ["Visibilidad", "seo"], speed: ["Velocidad", "speed"] };
+      var fails = [];
+      RUBRIC.forEach(function (sec) { var a = AREA[sec.key] || ["", ""]; sec.checks.forEach(function (c) { if (ev[c.id] === false) fails.push({ pt: c.label, im: c.why, w: c.w, area: a[0], areaClass: "tag-" + a[1] }); }); });
+      fails.sort(function (a, b) { return b.w - a.w; });
+      var socialFindings = socialFindingsOf(igProfile);
+      if (multiIg) socialFindings.unshift({ pt: "Tienes " + social.igAccounts.length + " cuentas de Instagram", im: "Tener varias cuentas para el mismo restaurante confunde a los clientes sobre cuál seguir y divide a tu público. Escoge una, hazla la oficial y cierra las demás." });
+      socialFindings.forEach(function (f) { f.area = "Redes sociales"; f.areaClass = "tag-social"; });
+      var issues = [], seen = {};
+      (ux.findings || []).map(function (f) { return { pt: f.pt || f.title, im: f.im || f.impact, area: "Sitio web", areaClass: "tag-content" }; }).concat(socialFindings).concat(fails).forEach(function (f) {
+        var k = (f.pt || "").toLowerCase().slice(0, 40); if (f.pt && !seen[k]) { seen[k] = 1; issues.push(f); }
+      });
+      return { overall: overall, grade: g.label, gradeColor: g.color, subs: subs, issues: issues, issueCount: fails.length + socialFindings.length, fieldData: scan.report.fieldData, ux: ux, ev: ev, cat: cat, gates: ov.gates, pitch: pickPitch(cat), social: social, socialScore: socialScore };
+    }
+
+    /* The gated detail: all 5 sections rendered as explained pass/fail lists. */
+    function renderChecklists(rep, keys) {
+      var ev = rep.ev || {};
+      var okIc = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+      var noIc = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>';
+      return RUBRIC.filter(function (sec) { return !keys || keys.indexOf(sec.key) >= 0; }).map(function (sec) {
+        var rows = sec.checks.filter(function (c) { return ev[c.id] === true || ev[c.id] === false; });
+        if (!rows.length) return "";
+        var pass = rows.filter(function (c) { return ev[c.id]; }).length;
+        var pct = Math.round(pass / rows.length * 100);
+        var col = pct >= 90 ? COLORS.good : pct >= 50 ? COLORS.fair : COLORS.poor;
+        var body = rows.map(function (c) {
+          var ok = ev[c.id];
+          return '<div class="rc-row ' + (ok ? 'pass' : 'fail') + '"><span class="rc-ic">' + (ok ? okIc : noIc) + '</span>' +
+            '<div class="rc-txt"><b>' + esc(c.label) + '</b>' + (ok ? '' : '<small>' + esc(c.why) + '</small>') + '</div></div>';
+        }).join("");
+        return '<div class="rc-sec"><div class="rc-sec-h"><b>' + esc(sec.title) + '</b>' +
+          '<span class="rc-badge" style="color:' + col + '">' + pass + '/' + rows.length + ' bien</span></div>' +
+          '<p class="rc-intro">' + esc(sec.intro) + '</p>' + body + '</div>';
+      }).join("");
+    }
+    function mkSub(key, label, pct, max) {
+      pct = Math.max(0, Math.min(100, pct || 0));
+      var r = ratingOf(pct);
+      return { key: key, label: label, points: Math.round(pct / 100 * max), max: max, percent: Math.round(pct), rating: r.label, color: r.color, textColor: r.textColor };
+    }
+    function ratingOf(p) { if (p >= 75) return { label: "Bueno", color: COLORS.good, textColor: COLORS.goodText }; if (p >= 50) return { label: "Regular", color: COLORS.fair, textColor: COLORS.fairText }; return { label: "Deficiente", color: COLORS.poor, textColor: COLORS.poorText }; }
+    function gradeFor(o) { if (o >= 85) return { label: "Excelente", color: COLORS.good }; if (o >= 70) return { label: "Bueno", color: COLORS.good }; if (o >= 50) return { label: "Regular", color: COLORS.fair }; return { label: "Deficiente", color: COLORS.poor }; }
+
+    /* No website found: still show the Google listing we did find, score the
+       missing site as the serious problem it is, and route them to a build. */
+    function renderNoWebsite(place) {
+      var name = (place && place.name) || bizName;
+      var rating = place && place.rating != null ? place.rating : null;
+      var reviews = place && place.reviews != null ? place.reviews : null;
+      var score = Math.max(10, Math.min(28, Math.round(10 + (rating ? (rating / 5) * 15 : 0))));
+      lastReport = { overall: score };
+
+      setText("sr-biz-name", name);
+      setText("sr-biz-url", "No encontramos sitio web");
+      setText("sr-grade", "Deficiente");
+      var gradeEl = document.getElementById("sr-grade");
+      if (gradeEl) gradeEl.style.color = COLORS.poor;
+      setText("sr-grade-note", "No encontramos un sitio web tuyo, y eso es un problema serio. La mayoría de los clientes revisa el sitio web antes de visitar o pedir, así que se los estás dejando a tu competencia.");
+
+      var arc = document.getElementById("sr-gauge-arc");
+      if (arc) {
+        var off = 540 * (1 - score / 100);
+        arc.setAttribute("stroke", COLORS.poor);
+        requestAnimationFrame(function () { arc.style.transition = "stroke-dashoffset 1.2s cubic-bezier(.22,1,.36,1)"; arc.style.strokeDashoffset = off; });
+      }
+      countUp(document.getElementById("sr-score"), score);
+
+      var subs = document.getElementById("sr-subs");
+      if (subs) {
+        var html = subRow("Sitio web", "No encontrado", 0, COLORS.poor);
+        if (rating != null) { var rp = Math.round(rating / 5 * 100); html += subRow("Calificación en Google", rating.toFixed(1) + " ★", rp, rp >= 90 ? COLORS.good : rp >= 70 ? COLORS.fair : COLORS.poor); }
+        subs.innerHTML = html;
+      }
+
+      var lossH = document.getElementById("sr-loss-h");
+      if (lossH) lossH.innerHTML = 'El <span class="gold">problema más grande</span>: no tienes sitio web';
+      document.getElementById("sr-problems").innerHTML =
+        probRow({ pt: "Los clientes no pueden ver tu menú, tus fotos ni cómo pedir", im: "La mayoría de la gente revisa un sitio web antes de ir. Si no encuentra nada, escoge a un competidor que le muestra la comida y le facilita pedir." }) +
+        probRow({ pt: "No apareces en las búsquedas “cerca de mí”", im: "Un sitio web es lo que te hace aparecer cuando la gente busca el mejor lugar cerca. Sin uno, esos clientes nuevos se van con los demás." }) +
+        probRow({ pt: "No hay pedidos ni reservas en línea", im: "Cada vez más clientes esperan pedir o reservar con un par de toques. Sin sitio web no hay una forma fácil de hacer ninguna de las dos cosas, y pierdes la venta." });
+
+      var tech = document.getElementById("sr-tech-card");
+      if (tech) {
+        var found = (rating != null || reviews != null)
+          ? ("pero sí encontramos tu ficha de Google" + (rating != null ? " (" + rating.toFixed(1) + " ★" + (reviews != null ? ", " + reviews.toLocaleString() + " reseñas" : "") + ")" : "") + ". Aun así, la ficha sola no basta, porque los clientes esperan un sitio web de verdad.")
+          : "y no encontramos casi nada tuyo en internet, así que los clientes nuevos casi no tienen forma de encontrarte.";
+        tech.innerHTML =
+          '<h3>No encontramos tu sitio web</h3>' +
+          '<p style="color:var(--text-dim);font-size:0.95rem;margin-top:10px;line-height:1.6;">Buscamos un sitio web de ' + esc(name) + ', ' + found + '</p>' +
+          '<form id="sr-nw-form" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;">' +
+            '<input class="sr-input" id="sr-nw-url" type="text" placeholder="turestaurante.com" style="flex:1;min-width:200px;text-align:left;" />' +
+            '<button class="sr-gate-btn" style="width:auto;margin-top:0;padding:0 22px;">Calificar mi sitio</button>' +
+          '</form>' +
+          '<p style="color:var(--text-soft);font-size:0.84rem;margin-top:10px;line-height:1.5;">¿Crees que se nos pasó? Pega tu sitio web arriba y lo calificamos. Si todavía no tienes uno, eso es lo que más te está frenando, y tiene arreglo.</p>' +
+          '<div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--line-soft);">' +
+            '<div style="font-family:var(--font-display);font-weight:800;font-size:1.05rem;color:var(--text-head);">Nosotros le hacemos uno</div>' +
+            '<p style="color:var(--text-dim);font-size:0.92rem;margin-top:6px;line-height:1.55;">Un sitio web a la medida de su restaurante, hecho desde cero y con cada página en inglés y en español. El sitio es suyo.</p>' +
+            '<a href="/es/diseno-web-restaurantes" target="_blank" rel="noopener" class="sr-gate-btn" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none;width:auto;padding:0 24px;margin-top:14px;">Vea cómo haríamos su sitio web &rarr;</a>' +
+          '</div>';
+        var f = document.getElementById("sr-nw-form");
+        if (f) f.addEventListener("submit", function (ev) {
+          ev.preventDefault();
+          var val = document.getElementById("sr-nw-url").value.trim();
+          if (!val) return;
+          var u = new URL(location.href); u.searchParams.set("url", val); u.searchParams.delete("placeId"); location.href = u.toString();
+        });
+      }
+
+      // no lead gate on the no-website path: unblur everything and hide the gate
+      var reportEl2 = document.getElementById("sr-report");
+      if (reportEl2) reportEl2.classList.remove("locked");
+      var gateEl = document.getElementById("sr-gate");
+      if (gateEl) gateEl.style.display = "none";
+    }
+    function subRow(label, ratingTxt, pct, color) {
+      pct = Math.max(0, Math.min(100, pct || 0));
+      var doff = 97 * (1 - pct / 100);
+      var tc = color === COLORS.fair ? COLORS.fairText : color === COLORS.poor ? COLORS.poorText : color === COLORS.good ? COLORS.goodText : color;  /* AA-safe caption text; ring keeps the vivid color */
+      return '<div class="sr-sub">' +
+        '<svg class="ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="4"/><circle cx="18" cy="18" r="15.5" fill="none" stroke="' + color + '" stroke-width="4" stroke-linecap="round" stroke-dasharray="97" stroke-dashoffset="' + doff.toFixed(1) + '" transform="rotate(-90 18 18)"/></svg>' +
+        '<div class="lbl"><b>' + esc(label) + '</b><small style="color:' + tc + ';">' + esc(ratingTxt) + '</small></div></div>';
+    }
+
+    /* Cold PageSpeed scans (especially Wix/Squarespace template sites) often
+       fail once then succeed on a warmer second request. Retry silently before
+       ever showing an error, so slow sites still grade. */
     function scanWithRetry(target, retries) {
       return fetchJson("/api/scan?url=" + encodeURIComponent(target) + "&lang=es").then(function (scan) {
         if (scan && scan.ok) return scan;
@@ -436,7 +1306,9 @@
 
     function resolvePlace() {
       if (!placeId) return Promise.resolve(null);
-      return fetchJson("/api/places?action=details&placeId=" + encodeURIComponent(placeId))
+      // brand mode aggregates the chain's Google presence across its locations
+      var act = brandMode ? ("action=brand&name=" + encodeURIComponent(nameParam) + "&placeId=") : "action=details&placeId=";
+      return fetchJson("/api/places?" + act + encodeURIComponent(placeId))
         .then(function (d) { return (d && d.ok && d.place) ? d.place : null; })
         .catch(function () { return null; });
     }
@@ -444,21 +1316,26 @@
     function finishScan() {
       if (animDone) return;
       animDone = true;
-      clearInterval(stepTimer); clearInterval(secTimer); clearTimeout(guard);
+      clearInterval(stepTimer); clearInterval(secTimer); clearTimeout(guard); clearInterval(findTimer);
       checks.forEach(function (c) { c.classList.remove("active"); c.classList.add("done"); });
       if (scanEl) scanEl.style.display = "none";
       reportEl.classList.add("show");
       window.scrollTo(0, 0);
+      renderTurnstile();   // widget is now visible; render it ahead of the user reaching the gate
     }
 
     /* ---- render the real report ---- */
-    function renderReport(scan, place) {
-      var rep = scan.report;
+    function renderReport(scan, place, ux, social) {
+      var rep = ux ? buildCard(scan, place, ux, social) : scan.report;
+      lastReport = rep;
       var name = (place && place.name) || bizName;
       var host = hostOf((place && place.website) || scan.url || urlParam);
 
       setText("sr-biz-name", name);
-      setText("sr-biz-url", host || "tu sitio web");
+      setText("sr-biz-ic", monoAvatar(name));
+      setText("sr-biz-url", (place && place.isBrand)
+        ? (place.locationsCount + " local" + (place.locationsCount === 1 ? "" : "es") + (host ? " · " + host : ""))
+        : (host || "tu sitio web"));
 
       setText("sr-grade", rep.grade);
       var gradeEl = document.getElementById("sr-grade");
@@ -476,8 +1353,8 @@
       document.getElementById("sr-subs").innerHTML = rep.subs.map(function (s) {
         var doff = 97 * (1 - s.points / s.max);
         return '<div class="sr-sub">' +
-          '<svg class="ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(44,38,28,0.1)" stroke-width="4"/><circle cx="18" cy="18" r="15.5" fill="none" stroke="' + s.color + '" stroke-width="4" stroke-linecap="round" stroke-dasharray="97" stroke-dashoffset="' + doff.toFixed(1) + '" transform="rotate(-90 18 18)"/></svg>' +
-          '<div class="lbl"><b>' + esc(s.label) + '</b><small style="color:' + s.color + ';">' + esc(s.rating) + '</small></div>' +
+          '<svg class="ring" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="4"/><circle cx="18" cy="18" r="15.5" fill="none" stroke="' + s.color + '" stroke-width="4" stroke-linecap="round" stroke-dasharray="97" stroke-dashoffset="' + doff.toFixed(1) + '" transform="rotate(-90 18 18)"/></svg>' +
+          '<div class="lbl"><b>' + esc(s.label) + '</b><small style="color:' + (s.textColor || s.color) + ';">' + esc(s.rating) + '</small></div>' +
           '<div class="pts">' + s.points + '/' + s.max + '</div></div>';
       }).join("");
 
@@ -485,18 +1362,304 @@
       var lossH = document.getElementById("sr-loss-h");
       if (lossH) {
         lossH.innerHTML = n
-          ? 'Encontramos <span class="gold">' + n + ' problema' + (n === 1 ? '' : 's') + ' por corregir</span> que frenan tus reservas'
+          ? 'Encontramos <span class="sr-loud-count">' + n + ' problema' + (n === 1 ? '' : 's') + ' por corregir</span> que te ' + (n === 1 ? 'está' : 'están') + ' costando clientes'
           : 'Tu sitio está en buena forma';
       }
+      // the gate is the only thing above the fold besides the score: make its promise concrete
+      var gsub = document.getElementById("sr-gate-sub");
+      if (gsub) gsub.textContent = n
+        ? (n === 1
+            ? 'Encontramos 1 problema que le está costando clientes. Ingrese su número para verlo y saber exactamente cómo arreglarlo.'
+            : 'Encontramos ' + n + ' problemas que le están costando clientes. Ingrese su número para verlos todos y saber exactamente cómo arreglarlos.')
+        : 'Ingrese su número para ver cada revisión que hicimos y cómo mantenerse por delante de los restaurantes cercanos.';
 
       document.getElementById("sr-problems").innerHTML =
-        rep.issues.length ? rep.issues.slice(0, 4).map(probRow).join("")
-                          : '<p style="color:var(--text-dim);font-size:0.92rem;padding:10px 0;">No hay problemas graves en lo básico. Reserve una llamada y encontraremos las mejoras más finas.</p>';
+        rep.issues.length ? rep.issues.slice(0, 3).map(probRow).join("")
+                          : '<p style="color:var(--text-dim);font-size:0.92rem;padding:10px 0;">No hay problemas graves en lo básico. Agende una llamada y le mostramos las mejoras más finas.</p>';
 
-      document.getElementById("sr-fulllist").innerHTML =
-        rep.issues.map(probRow).join("") + cwvBlock(scan);
+      // distribute the checklist into the tabs: website checks under Website scores,
+      // Google-listing checks under Google My Business (no more standalone "full report card")
+      var webChecks = document.getElementById("sr-web-checks");
+      var gbpChecks = document.getElementById("sr-gbp-checks");
+      var gbpCard = document.getElementById("sr-gbp-checks-card");
+      if (ux && rep.ev) {
+        if (webChecks) webChecks.innerHTML = renderChecklists(rep, ["content", "appearance", "seo", "speed"]);
+        var gbpHtml = renderChecklists(rep, ["local"]);
+        if (gbpChecks) gbpChecks.innerHTML = gbpHtml;
+        if (gbpCard) gbpCard.style.display = gbpHtml ? "" : "none";
+      } else {
+        if (webChecks) webChecks.innerHTML = rep.issues.map(probRow).join("") + cwvBlock(scan);
+        if (gbpCard) gbpCard.style.display = "none";
+      }
 
       setupCats(scan);
+      renderPitch(rep);
+      renderSocialConfirm(social);
+      renderSocialCard(social);
+      renderLocations(place);
+      setupScoreTabs();
+      armGraderPopup();
+      setupLazyCalendly();
+    }
+
+    /* Embed the Calendly booking calendar at the bottom, but only load its
+       iframe + script once the section scrolls near view, so it never slows the
+       initial report render. */
+    var calSetup = false;
+    // Shared so a CTA click can trigger the embed load immediately instead of
+    // waiting for the scroll observer.
+    var calLoadFn = null;
+    function setupLazyCalendly() {
+      if (calSetup) return;
+      var el = document.getElementById("sr-cal");
+      if (!el) return;
+      calSetup = true;
+      function load() {
+        if (el.dataset.loaded) return; el.dataset.loaded = "1";
+        var url = el.getAttribute("data-cal") + "?hide_gdpr_banner=1&primary_color=d08a34";
+        el.innerHTML = '<div class="calendly-inline-widget" data-url="' + url + '" style="min-width:320px;height:640px;"></div>';
+        var s = document.createElement("script");
+        s.src = "https://assets.calendly.com/assets/external/widget.js"; s.async = true;
+        document.body.appendChild(s);
+      }
+      calLoadFn = load;
+      if ("IntersectionObserver" in window) {
+        var obs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { load(); obs.disconnect(); } });
+        }, { rootMargin: "400px 0px" });
+        obs.observe(el);
+      } else { load(); }
+    }
+
+    /* CTA -> the on-page Calendly embed: trigger the load and smooth-scroll to it
+       instead of opening Calendly in a new tab (keeps them in context, which
+       converts better). Delegated so it covers the nav, sidebar + big-fix CTAs. */
+    function scrollToCal() {
+      var el = document.getElementById("sr-cal") || document.getElementById("sr-final");
+      if (!el) return false;
+      setupLazyCalendly();
+      if (calLoadFn) calLoadFn();
+      try { el.scrollIntoView({ behavior: "smooth", block: "start" }); }
+      catch (e) { el.scrollIntoView(); }
+      return true;
+    }
+    document.addEventListener("click", function (e) {
+      var t = e.target.closest ? e.target.closest("[data-book-scroll]") : null;
+      if (!t) return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; // let power-users open a tab
+      // Record the intent first. This push used to sit inside the scrollToCal()
+      // branch, so whenever the calendar was not on the page the click fell
+      // through to Calendly in a new tab and was never recorded at all.
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: "booking_cta_click", cta_location: t.getAttribute("data-cta-loc") || "report" });
+      if (scrollToCal()) e.preventDefault();
+    });
+
+    /* Multi-location: for a brand, show each of its Google listings with its own
+       rating + review count (best to worst), so the owner sees which locations
+       are dragging the brand down. Data comes from the brand aggregation. */
+    function renderLocations(place) {
+      var card = document.getElementById("sr-locations-card");
+      if (!card) return;
+      var locs = place && place.isBrand && place.locations;
+      if (!locs || locs.length < 2) { card.style.display = "none"; return; }
+      var sorted = locs.slice().sort(function (a, b) { return (b.rating || 0) - (a.rating || 0); });
+      document.getElementById("sr-locations").innerHTML = sorted.map(function (l) {
+        var rt = l.rating != null ? l.rating : null;
+        var col = rt == null ? COLORS.dim : rt >= 4.4 ? COLORS.goodText : rt >= 4.0 ? COLORS.fairText : COLORS.poorText;
+        return '<div class="sr-loc"><div class="sr-loc-nm"><b>' + esc(l.name) + '</b><span>' + esc(l.address || "") + '</span></div>' +
+          '<div class="sr-loc-rt" style="color:' + col + '">' + (rt != null ? rt.toFixed(1) + ' ★' : 'n/d') +
+          '<small>' + (l.reviews != null ? fmtK(l.reviews) + ' reseñas' : '') + '</small></div></div>';
+      }).join("");
+      var h = document.getElementById("sr-loc-h");
+      if (h) h.textContent = "Tus " + locs.length + " locales en Google";
+      card.style.display = "";
+    }
+
+    /* Once-ever booking popup: ~60s after the report renders, show Juan + a
+       booking button. A localStorage flag means a visitor only ever sees it once
+       (shown, dismissed, or booked all count). */
+    var popupArmed = false;
+    function armGraderPopup() {
+      if (popupArmed) return; popupArmed = true;
+      var KEY = "bum_grader_popup_seen";
+      var pop = document.getElementById("sr-pop");
+      if (!pop) return;
+      function seen() { try { return localStorage.getItem(KEY) === "1"; } catch (e) { return false; } }
+      if (seen()) return;
+      var closed = false;
+      function markSeen() { try { localStorage.setItem(KEY, "1"); } catch (e) {} }
+      function hide() { closed = true; pop.style.display = "none"; }
+      document.getElementById("sr-pop-x").addEventListener("click", hide);
+      document.getElementById("sr-pop-dismiss").addEventListener("click", hide);
+      pop.addEventListener("click", function (e) { if (e.target === pop) hide(); });
+      document.getElementById("sr-pop-cta").addEventListener("click", function (e) {
+        markSeen();
+        window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: "grader_popup_book" });
+        if (scrollToCal()) { e.preventDefault(); hide(); }
+      });
+      setTimeout(function () {
+        if (closed || seen()) return;
+        pop.style.display = "";
+        markSeen();
+        window.dataLayer = window.dataLayer || []; window.dataLayer.push({ event: "grader_popup_shown" });
+      }, 60000);
+    }
+
+    /* Sticky labeled shortcuts to each visible part of the report, so the long
+       single-column page is easy to navigate (Top fixes / Social / Competitors
+       / Speed / Full report). Rebuilt whenever async cards appear. */
+    var JUMP_SECTIONS = [
+      { id: "sr-issues-card", label: "Arreglos principales" },
+      { id: "sr-comp-card", label: "Competencia" },
+      { id: "sr-locations-card", label: "Locales" },
+      { id: "sr-socialcard", label: "Redes" },
+      { id: "sr-scoreboard", label: "Comparativa" },
+      { id: "sr-tech-card", label: "Velocidad" },
+      { id: "sr-reportcard", label: "Reporte completo" },
+    ];
+    var jumpObserver = null;
+    /* Group the score cards under Website / Social / Google Business tabs so the
+       report reads as three clear categories instead of one long scroll. Each
+       card keeps its own render logic; we just relocate it into the right panel.
+       Idempotent, so the async cards (competitors, scoreboard) land correctly. */
+    function setupScoreTabs() {
+      var tabs = document.getElementById("sr-scoretabs");
+      var pW = document.getElementById("sr-panel-website");
+      var pS = document.getElementById("sr-panel-social");
+      var pG = document.getElementById("sr-panel-google");
+      if (!tabs || !pW || !pS || !pG) return;
+      var MAP = { "sr-tech-card": pW, "sr-socialcard": pS, "sr-scoreboard": pS, "sr-comp-card": pG, "sr-locations-card": pG, "sr-gbp-checks-card": pG };
+      Object.keys(MAP).forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el && el.parentElement !== MAP[id]) MAP[id].appendChild(el);
+      });
+      var head = document.getElementById("sr-scorehead");
+      if (head) head.style.display = "";
+      tabs.style.display = "";
+      if (tabs.dataset.wired) return;
+      tabs.dataset.wired = "1";
+      [].forEach.call(tabs.querySelectorAll(".sr-stab"), function (btn) {
+        btn.addEventListener("click", function () {
+          var p = btn.getAttribute("data-panel");
+          [].forEach.call(tabs.querySelectorAll(".sr-stab"), function (b) { b.classList.toggle("is-active", b === btn); });
+          pW.hidden = p !== "website"; pS.hidden = p !== "social"; pG.hidden = p !== "google";
+        });
+      });
+    }
+
+    function buildJumpNav() {
+      var nav = document.getElementById("sr-jump");
+      if (!nav) return;
+      var visible = JUMP_SECTIONS.filter(function (s) {
+        var el = document.getElementById(s.id);
+        return el && getComputedStyle(el).display !== "none";
+      });
+      if (visible.length < 2) { nav.style.display = "none"; return; }
+      nav.innerHTML = visible.map(function (s) { return '<a href="#' + s.id + '" data-t="' + s.id + '">' + s.label + '</a>'; }).join("");
+      nav.style.display = "";
+      [].forEach.call(nav.querySelectorAll("a"), function (a) {
+        a.addEventListener("click", function (e) {
+          e.preventDefault();
+          var el = document.getElementById(a.dataset.t);
+          if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 150, behavior: "smooth" });
+        });
+      });
+      // highlight the section currently in view
+      if (jumpObserver) jumpObserver.disconnect();
+      if ("IntersectionObserver" in window) {
+        jumpObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (!en.isIntersecting) return;
+            var links = nav.querySelectorAll("a");
+            [].forEach.call(links, function (l) { l.classList.toggle("is-active", l.dataset.t === en.target.id); });
+          });
+        }, { rootMargin: "-160px 0px -55% 0px" });
+        visible.forEach(function (s) { var el = document.getElementById(s.id); if (el) jumpObserver.observe(el); });
+      }
+    }
+
+    /* If we found a likely-but-unconfirmed Instagram, ask the owner in one tap.
+       Lives in the crisp sidebar so it works even before the report is unlocked. */
+    function renderSocialConfirm(social) {
+      var el = document.getElementById("sr-igconfirm");
+      if (!el) return;
+      var maybe = social && !social.instagram && social.maybe;
+      if (!maybe || !maybe.found) { el.style.display = "none"; return; }
+      document.getElementById("sr-igc-handle").textContent = "@" + maybe.handle;
+      el.style.display = "";
+      document.getElementById("sr-igc-yes").onclick = function () {
+        socialInfo.instagram = maybe; socialInfo.confident = true; socialInfo.maybe = null;
+        el.style.display = "none";
+        renderReport(lastScan, placeInfo, lastUx, socialInfo);
+        loadScoreboard();
+      };
+      document.getElementById("sr-igc-no").onclick = function () {
+        socialInfo.maybe = null; el.style.display = "none";
+      };
+    }
+
+    /* Tailored conversion CTA: name the single worst thing and pitch the one
+       Button Up service that fixes it, with the tone scaled to the score. */
+    function cap1(s) { s = String(s || ""); return s.charAt(0).toUpperCase() + s.slice(1); }
+    /* The big-fix card hands off tactically: when the biggest fix is a service we
+       have a dedicated offer page for (website, social), route there to brief the
+       fix and book; otherwise (seo, ads, already-great) scroll to the on-page
+       Calendly. Every other CTA on the page still books directly. */
+    var OFFER_PAGE = {
+      website: { url: "/es/diseno-web-restaurantes", label: "Vea cómo haríamos su sitio web" },
+      social:  { url: "/es/marketing-redes-sociales", label: "Vea cómo manejaríamos sus redes" }
+    };
+    var CAL_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><path d="M8 2v4M16 2v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2"/></svg>';
+    var ARROW_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+    function setBigfixCta(svc) {
+      // Booking stays the primary action on every report. When the biggest fix
+      // is a service with its own offer page, link it underneath as a second
+      // option (new tab, so the report stays open).
+      var cta = document.getElementById("sr-bigfix-cta");
+      var more = document.getElementById("sr-bigfix-more");
+      if (cta) {
+        cta.href = "https://calendly.com/juanh-buttonupmedia/free-food-beverage-marketing-consultation-clone";
+        cta.setAttribute("data-book-scroll", ""); cta.setAttribute("data-cta-loc", "bigfix");
+        cta.removeAttribute("target"); cta.removeAttribute("rel");
+        cta.innerHTML = CAL_ICON + " Agende una llamada gratis con Juan";
+      }
+      if (!more) return;
+      var o = OFFER_PAGE[svc];
+      if (o) {
+        more.href = o.url; more.target = "_blank"; more.rel = "noopener";
+        more.innerHTML = o.label + " " + ARROW_ICON;
+        more.hidden = false;
+      } else {
+        more.hidden = true;
+      }
+    }
+    function renderPitch(rep) {
+      var pitch = rep && rep.pitch;
+      var bf = document.getElementById("sr-bigfix"), bfh = document.getElementById("sr-bigfix-h"), bfp = document.getElementById("sr-bigfix-p");
+      var fh = document.getElementById("sr-final-h"), fp = document.getElementById("sr-final-p");
+      var ACTION = { website: "rehacer su sitio web para que de verdad venda su comida", seo: "hacer que aparezca en Google cuando la gente de su zona lo busque", social: "manejar sus redes para que de verdad le traigan clientes", ads: "hacer anuncios pagados que lo pongan frente a la gente con hambre de su zona" };
+      if (!pitch) { if (bf) bf.style.display = "none"; return; }
+      if (!pitch.svc) {
+        // genuinely great across the board
+        if (bfh) bfh.textContent = "Está en muy buena forma";
+        if (bfp) bfp.textContent = "No hay nada urgente. Agende una llamada gratis de 30 minutos con Juan y él le señala las últimas mejoras que valen la pena.";
+        setBigfixCta(null);
+        if (bf) bf.style.display = "";
+        if (fh) fh.textContent = "Está en muy buena forma. ¿Quiere ver qué más se puede mejorar?";
+        if (fp) fp.textContent = "Elija un horario abajo. Juan revisa su reporte con usted y le señala las últimas mejoras.";
+        return;
+      }
+      var tone = rep.overall >= 78 ? "gentle" : rep.overall >= 55 ? "lever" : "urgent";
+      // forefront card: name the single biggest fix plainly
+      if (bfh) bfh.textContent = cap1(pitch.why) + ".";
+      if (bfp) bfp.textContent = (tone === "urgent" ? "Esto le está costando clientes ahora mismo. " : "") + "Es el tipo de cosa que arreglamos para restaurantes: podemos " + (ACTION[pitch.svc] || "ayudarle a arreglarlo") + ". Agende una llamada gratis de 30 minutos con Juan y él se lo explica paso a paso.";
+      setBigfixCta(pitch.svc);
+      if (bf) bf.style.display = "";
+      // bottom CTA stays as a lighter reminder
+      var lead = tone === "urgent" ? "Lo más urgente: " : tone === "gentle" ? "Va bien. La mejora que yo haría: " : "Lo que yo arreglaría primero: ";
+      if (fh) fh.textContent = lead + pitch.why + ".";
+      if (fp) fp.textContent = "Elija un horario abajo. Juan revisa su reporte con usted y le dice qué haría primero.";
     }
 
     /* ---- competitors (real Places data, or hide the card) ---- */
@@ -505,25 +1668,117 @@
       var twocol = document.getElementById("sr-twocol");
       function hide() { card.style.display = "none"; if (twocol) twocol.style.gridTemplateColumns = "1fr"; }
       if (!placeId) { hide(); return; }
-      fetchJson("/api/places?action=competitors&placeId=" + encodeURIComponent(placeId)).then(function (d) {
-        if (!d || !d.ok || !d.competitors || !d.competitors.length) { hide(); return; }
-        var comps = d.competitors;
+      // reuse the competitors we already fetched for the scan-screen findings feed
+      getCompetitors().then(function (comps) {
+        if (!comps || !comps.length) { hide(); return; }
         var youRating = placeInfo && placeInfo.rating != null ? placeInfo.rating : null;
         var better = youRating == null ? comps.length : comps.filter(function (c) { return c.rating > youRating; }).length;
         var youRank = better + 1;
-        var rows = comps.slice(0, 4).map(function (c, i) { return compRow(c.name, c.rating + " ★", '#' + (i + 1)); }).join("");
-        var youRow = compRow((placeInfo && placeInfo.name) || bizName, youRating != null ? youRating + " ★" : "Tu restaurante", '#' + youRank, true);
+        var rows = comps.slice(0, 4).map(function (c, i) { return compRow(c.name, c.rating + " ★", ord(i + 1)); }).join("");
+        var youRow = compRow((placeInfo && placeInfo.name) || bizName, youRating != null ? youRating + " ★" : "Tu restaurante", ord(youRank), true);
         document.getElementById("sr-comps").innerHTML = rows + youRow;
         var h = document.getElementById("sr-comp-h");
-        if (h) h.innerHTML = 'Estás en el puesto <span class="gold">#' + youRank + '</span> de ' + (comps.length + 1) + ' cercanos por calificación';
+        if (h) h.innerHTML = 'Quedas en <span class="gold">' + ord(youRank) + ' lugar</span> de ' + (comps.length + 1) + ' restaurantes cercanos según la calificación de los clientes';
         card.style.display = "";
         if (twocol) twocol.style.gridTemplateColumns = "";
+        setupScoreTabs();
       }).catch(hide);
+    }
+
+    /* ---- social scoreboard: your Instagram following, reviews and rating next
+       to the top nearby same-cuisine competitors. Loads after the report. ---- */
+    function fmtK(n) { if (n == null) return "n/d"; if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, "") + "M"; if (n >= 1e3) return (n / 1e3).toFixed(1).replace(/\.0$/, "") + "K"; return String(n); }
+    function loadScoreboard() {
+      if (!placeId) return;
+      getCompetitors().then(function (comps) {
+        if (!comps || !comps.length) return;
+        var top = comps.slice(0, 3);
+        return Promise.all(top.map(function (c) {
+          return fetchJson("/api/places?action=details&placeId=" + encodeURIComponent(c.placeId)).then(function (d) {
+            var pl = (d && d.place) || {};
+            var row = { name: c.name, rating: (pl.rating != null ? pl.rating : c.rating), reviews: (pl.reviews != null ? pl.reviews : c.reviews), photos: pl.photosCount, igFollowers: null };
+            if (!pl.website) return row;
+            return bestIG(pl.website, c.name, 2).then(function (ig) { if (ig) row.igFollowers = ig.followers; return row; });
+          }).catch(function () { return { name: c.name, rating: c.rating, reviews: c.reviews, igFollowers: null }; });
+        })).then(function (rows) {
+          rows = rows.filter(Boolean);
+          var youIg = socialInfo && socialInfo.instagram;
+          var you = { name: (placeInfo && placeInfo.name) || bizName, rating: (placeInfo && placeInfo.rating), reviews: (placeInfo && placeInfo.reviews), photos: (placeInfo && placeInfo.photosCount), igFollowers: youIg ? youIg.followers : null, you: true };
+          window.__compFollowers = rows.map(function (r) { return r.igFollowers; }).filter(function (n) { return n > 0; });
+          renderScoreboard(you, rows);
+        });
+      }).catch(function () {});
+    }
+    function renderScoreboard(you, comps) {
+      var body = document.getElementById("sr-sb-body"), card = document.getElementById("sr-scoreboard");
+      if (!body || !card) return;
+      var all = [you].concat(comps).sort(function (a, b) { return (b.igFollowers || -1) - (a.igFollowers || -1); });
+      var html = '<div class="sb-row sb-head"><span class="sb-name">Restaurante</span><span class="sb-col">Instagram</span><span class="sb-col">Reseñas</span><span class="sb-col">Calif.</span></div>';
+      html += all.map(function (r) {
+        return '<div class="sb-row' + (r.you ? ' sb-you' : '') + '">' +
+          '<span class="sb-name">' + esc(r.you ? "Tú" : r.name) + '</span>' +
+          '<span class="sb-col"><b>' + fmtK(r.igFollowers) + '</b></span>' +
+          '<span class="sb-col">' + (r.reviews != null ? r.reviews.toLocaleString() : "n/d") + '</span>' +
+          '<span class="sb-col">' + (r.rating != null ? r.rating.toFixed(1) + "★" : "n/d") + '</span></div>';
+      }).join("");
+      body.innerHTML = html;
+      // headline: the follower gap vs the strongest nearby account
+      var withIg = all.filter(function (r) { return r.igFollowers != null; });
+      var hEl = document.getElementById("sr-sb-h");
+      if (hEl && you.igFollowers != null && withIg.length > 1 && !withIg[0].you) {
+        hEl.innerHTML = 'En Instagram, <span class="gold">' + esc(withIg[0].name) + '</span> tiene ' + fmtK(withIg[0].igFollowers) + ' seguidores y tú tienes ' + fmtK(you.igFollowers);
+      }
+      card.style.display = "";
+      setupScoreTabs();
+    }
+
+    /* ---- your own social media stats (IG/TikTok + bio quality) ---- */
+    function igBioChecks(ig) {
+      var B = ig.bio || "", L = ig.links || [];
+      return [
+        { label: "Ubicación en tu bio", ok: /📍|\bmiami|kendall|coral gables|brickell|doral|wynwood|fl\b|florida|ave|st\b|blvd|\d{3,}/i.test(B) },
+        { label: "Enlace para pedir o ver el menú", ok: L.some(function (u) { return /ubereats|doordash|toast|order|menu|opentable|resy|grubhub|appfront|linktr\.ee|linkin\.bio|beacons/i.test(u); }) },
+        { label: "Historias destacadas", ok: (ig.highlights || 0) >= 3 },
+        { label: "Cuenta de empresa", ok: !!ig.isBusiness }
+      ];
+    }
+    function socBlock(platform, handle, url, stats, checks) {
+      var s = stats.map(function (x) { return '<div class="soc-stat"><span>' + esc(x[0]) + '</span><b' + (x[2] ? ' class="' + x[2] + '"' : '') + '>' + esc(x[1]) + '</b></div>'; }).join("");
+      var c = checks.length ? '<div class="soc-checks">' + checks.map(function (k) { return '<div class="soc-chk ' + (k.ok ? "ok" : "no") + '"><span class="ci">' + (k.ok ? "&#10003;" : "&#10005;") + '</span>' + esc(k.label) + '</div>'; }).join("") + '</div>' : "";
+      var htext = url ? '<a class="soc-link" href="' + url + '" target="_blank" rel="noopener">@' + esc(handle) + '</a>' : '@' + esc(handle);
+      return '<div class="soc-block"><div class="soc-head"><b>' + esc(platform) + '</b><span>' + htext + '</span></div><div class="soc-stats">' + s + '</div>' + c + '</div>';
+    }
+    function renderSocialCard(social) {
+      var card = document.getElementById("sr-socialcard"), body = document.getElementById("sr-social-body");
+      if (!card || !body) return;
+      var ig = social && social.instagram, tt = social && social.tiktok;
+      if ((!ig || !ig.found) && (!tt || !tt.found)) {
+        body.innerHTML = '<div class="soc-empty">No encontramos un Instagram ni un TikTok activo tuyo. En las plataformas donde la gente de tu zona descubre y compara restaurantes, ahora mismo no apareces, y es de lo que más rápido se arregla y más se nota.</div>';
+        card.style.display = "";
+        return;
+      }
+      var html = "";
+      if (ig && ig.found) {
+        var d = ig.latestPostAt ? Math.round((Date.now() - ig.latestPostAt) / 86400000) : null;
+        var recency = d == null ? "n/d" : d <= 1 ? "Hoy" : d < 365 ? "hace " + d + " días" : "hace " + Math.round(d / 365) + "+ años";
+        var recTone = d == null ? "" : d <= 14 ? "good" : d <= 60 ? "warn" : "poor";
+        html += socBlock("Instagram", ig.handle, "https://www.instagram.com/" + ig.handle, [["Seguidores", fmtK(ig.followers)], ["Publicaciones", ig.posts != null ? ig.posts.toLocaleString() : "n/d"], ["Última publicación", recency, recTone]], igBioChecks(ig));
+      }
+      if (tt && tt.found) {
+        html += socBlock("TikTok", tt.handle, "https://www.tiktok.com/@" + tt.handle, [["Seguidores", fmtK(tt.followers)], ["Videos", tt.videos != null ? tt.videos.toLocaleString() : "n/d"], ["Me gusta en total", fmtK(tt.likes)]], []);
+      }
+      // multiple accounts for the same restaurant = a discoverability problem
+      var accts = social && social.igAccounts;
+      if (accts && accts.length >= 2) {
+        html += '<div class="soc-multi">&#9888; Encontramos <b>' + accts.length + ' cuentas de Instagram</b> que enlazan a tu sitio (' + accts.map(function (a) { return "@" + esc(a.handle); }).join(", ") + '). Los clientes no saben cuál seguir, y eso divide a tu público. Escoge una y cierra las demás.</div>';
+      }
+      body.innerHTML = html;
+      card.style.display = "";
     }
 
     /* ---- technical category gauges (mobile / desktop tabs) ---- */
     function setupCats(scan) {
-      function row(cats) { return [["Rendimiento", cats.performance], ["Accesibilidad", cats.accessibility], ["Buenas prácticas", cats.bestPractices], ["SEO", cats.seo]]; }
+      function row(cats) { return [["Velocidad", cats.performance], ["Facilidad de uso", cats.accessibility], ["Confianza y seguridad", cats.bestPractices], ["Visibilidad en Google", cats.seo]]; }
       var DATA = { mobile: row(scan.mobile.categories), desktop: row(scan.desktop.categories) };
       var C = 2 * Math.PI * 30;
       var wrap = document.getElementById("sr-cats");
@@ -531,7 +1786,7 @@
       function render(dev) {
         wrap.innerHTML = DATA[dev].map(function (d) {
           var v = d[1] == null ? 0 : d[1], c = col(d[1]), off = C * (1 - v / 100);
-          return '<div class="sr-cat"><div class="ring"><svg viewBox="0 0 72 72"><circle cx="36" cy="36" r="30" fill="none" stroke="rgba(44,38,28,0.1)" stroke-width="6"/><circle cx="36" cy="36" r="30" fill="none" stroke="' + c + '" stroke-width="6" stroke-linecap="round" stroke-dasharray="' + C.toFixed(1) + '" stroke-dashoffset="' + C.toFixed(1) + '" transform="rotate(-90 36 36)"><animate attributeName="stroke-dashoffset" from="' + C.toFixed(1) + '" to="' + off.toFixed(1) + '" dur="1s" fill="freeze" calcMode="spline" keySplines="0.22 1 0.36 1" keyTimes="0;1"/></circle></svg><b style="color:' + c + '">' + (d[1] == null ? "-" : d[1]) + '</b></div><div class="nm">' + d[0] + '</div></div>';
+          return '<div class="sr-cat"><div class="ring"><svg viewBox="0 0 72 72"><circle cx="36" cy="36" r="30" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="6"/><circle cx="36" cy="36" r="30" fill="none" stroke="' + c + '" stroke-width="6" stroke-linecap="round" stroke-dasharray="' + C.toFixed(1) + '" stroke-dashoffset="' + C.toFixed(1) + '" transform="rotate(-90 36 36)"><animate attributeName="stroke-dashoffset" from="' + C.toFixed(1) + '" to="' + off.toFixed(1) + '" dur="1s" fill="freeze" calcMode="spline" keySplines="0.22 1 0.36 1" keyTimes="0;1"/></circle></svg><b style="color:' + c + '">' + (d[1] == null ? "-" : d[1]) + '</b></div><div class="nm">' + d[0] + '</div></div>';
         }).join("");
       }
       render("mobile");
@@ -546,9 +1801,11 @@
 
     /* ---- real SMS unlock gate (Twilio Verify via /api/sms) ---- */
     /* Cloudflare Turnstile: render the captcha widget once the API + gate are
-       ready. Ad/privacy blockers frequently block challenges.cloudflare.com, so
-       treat that as unavailable and let real visitors through. */
+       ready (poll until window.turnstile exists). Managed mode is near-invisible. */
     var tsWidgetId = null, tsToken = "", tsUnavailable = false, tsTries = 0;
+    // Ad blockers / privacy extensions frequently block challenges.cloudflare.com.
+    // When that happens the widget can never render, so treat it as unavailable
+    // and let real visitors through rather than trapping them at a blank box.
     function markTsUnavailable() {
       if (tsUnavailable) return;
       tsUnavailable = true;
@@ -565,7 +1822,8 @@
       try {
         tsWidgetId = window.turnstile.render(el, {
           sitekey: "0x4AAAAAAD1Jt-_pKepXpVoh",
-          theme: "light",
+          theme: "dark",
+          language: "es",
           callback: function (t) { tsToken = t || ""; },
           "expired-callback": function () { tsToken = ""; },
           "error-callback": function () { tsToken = ""; markTsUnavailable(); }
@@ -573,10 +1831,10 @@
       } catch (e) { markTsUnavailable(); }
     }
 
-    /* Unlock gate: phone number + captcha (no SMS code). Backend verifies the
-       token; a blocked/broken widget falls back so a real lead is never stuck. */
+    /* Unlock gate: phone number + captcha (no SMS code). The captcha stops bots;
+       we still collect + deliver the number. Backend verifies the token. */
     function wireGate() {
-      var gated = document.getElementById("sr-gated");
+      var report = document.getElementById("sr-report");
       var gate = document.getElementById("sr-gate");
       var phone = document.getElementById("sr-phone");
       var sub = document.getElementById("sr-gate-sub");
@@ -584,7 +1842,7 @@
 
       function unlock() {
         gate.classList.add("hidden");
-        if (gated) gated.classList.remove("locked");
+        if (report) report.classList.remove("locked");
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ event: "report_unlocked" });
       }
@@ -596,7 +1854,8 @@
         if (v.length < 10) { phone.style.borderColor = "var(--poor)"; phone.focus(); return; }
         var token = tsToken || (window.turnstile && tsWidgetId !== null ? (window.turnstile.getResponse(tsWidgetId) || "") : "");
         var tsBroken = tsUnavailable || !(window.turnstile && window.turnstile.render);
-        // Only hard-block when the captcha rendered and is working; otherwise fall back.
+        // Only hard-block when the captcha actually rendered and is working. If it
+        // is blocked/broken, fall back so a real lead is never locked out.
         if (!token && !tsBroken && tsWidgetId !== null) { sub.style.color = "var(--poor)"; sub.textContent = "Complete la verificación rápida de arriba."; return; }
         unlockBtn.disabled = true; unlockBtn.textContent = "Desbloqueando…";
         phone.style.borderColor = ""; sub.style.color = "";
@@ -604,16 +1863,19 @@
           action: "unlock", token: token, captchaUnavailable: (!token && tsBroken), phone: phone.value,
           restaurant: bizName,
           website: (placeInfo && placeInfo.website) || urlParam || (lastScan && lastScan.url) || "",
-          score: (lastScan && lastScan.report ? lastScan.report.overall : null)
+          score: lastReport ? lastReport.overall : (lastScan && lastScan.report ? lastScan.report.overall : null),
+          // the single biggest fix, so the outreach text can speak to their weak spot
+          focus: lastReport && lastReport.pitch ? (lastReport.pitch.svc || null) : null,
+          focusReason: lastReport && lastReport.pitch ? (lastReport.pitch.why || null) : null,
+          lang: "es"
         }).then(function (d) {
           unlockBtn.disabled = false; unlockBtn.textContent = "Desbloquear mi reporte";
           if (d && d.error === "not_configured") { unlock(); return; }
           if (d && d.ok && (d.verified || d.unlocked)) { unlock(); return; }
           if (window.turnstile && tsWidgetId !== null) { window.turnstile.reset(tsWidgetId); tsToken = ""; }
           sub.style.color = "var(--poor)";
-          sub.textContent = (d && d.error === "captcha_failed") ? "Esa verificación no pasó. Intente de nuevo."
-            : (d && d.error === "invalid_phone") ? "Ingrese un número de celular válido."
-            : "No se pudo completar. Intente de nuevo.";
+          var errEs = { captcha_failed: "Esa verificación no pasó. Intente de nuevo.", captcha_missing: "Complete la verificación rápida de arriba.", invalid_phone: "Ingrese un número de celular válido.", phone_unreachable: "Ese número no parece correcto. Revíselo, por favor." };
+          sub.textContent = (d && errEs[d.error]) || "No se pudo completar. Intente de nuevo.";
         }).catch(function () { unlockBtn.disabled = false; unlockBtn.textContent = "Desbloquear mi reporte"; unlock(); });
       });
     }
@@ -639,7 +1901,7 @@
         : kind === "timeout" ? "Ese análisis tardó demasiado. Intente de nuevo."
         : "Algo salió mal al hacer su análisis. Intente de nuevo.";
       reportEl.innerHTML = errorShell("Tuvimos un contratiempo", msg,
-        '<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:18px;"><button class="sr-gate-btn" style="width:auto;margin-top:0;padding:0 22px;" onclick="location.reload()">Intentar de nuevo</button><a class="sr-gate-btn" style="width:auto;margin-top:0;padding:0 22px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#2A1C06;color:#FBF5EA;" href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener">Mejor hablemos</a></div>');
+        '<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:18px;"><button class="sr-gate-btn" style="width:auto;margin-top:0;padding:0 22px;" onclick="location.reload()">Intentar de nuevo</button><a class="sr-gate-btn" style="width:auto;margin-top:0;padding:0 22px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#232327;color:#FBF5EA;" href="https://calendly.com/juanh-buttonupmedia/free-food-beverage-marketing-consultation-clone" target="_blank" rel="noopener">Mejor hablemos</a></div>');
     }
     function errorShell(title, sub, actions) {
       return '<div class="sr-wrap"><div class="sr-card" style="max-width:560px;margin:48px auto;text-align:center;"><h3 style="font-family:var(--font-hero);font-weight:800;font-size:clamp(1.4rem,3vw,1.9rem);">' + esc(title) + '</h3><p style="color:var(--text-dim);margin-top:10px;line-height:1.55;">' + sub + '</p>' + actions + '</div></div>';
@@ -660,7 +1922,7 @@
       var n = 0, stepv = Math.max(1, Math.round(target / 19));
       var t = setInterval(function () { n += stepv; if (n >= target) { n = target; clearInterval(t); } el.textContent = n; }, 28);
     }
-    function ord(n) { return '#' + n; }
+    function ord(n) { return n + ".º"; }
     function gradeNote(o) {
       if (o >= 90) return "Base sólida. Unos pocos ajustes lo dejarían de élite.";
       if (o >= 70) return "Bien, pero todavía queda dinero real sobre la mesa.";
@@ -669,19 +1931,66 @@
     }
     function homeSvg() { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-6 9 6v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg>'; }
     function probRow(it) {
-      return '<div class="sr-prob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.7 18-9-15a1.7 1.7 0 0 0-3 0l-9 15A1.7 1.7 0 0 0 3.2 20.5h17.6A1.7 1.7 0 0 0 21.7 18z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><div><div class="pt">' + esc(it.pt) + '</div><div class="im">' + esc(it.im) + '</div></div></div>';
+      var tag = it.area ? '<span class="sr-tag ' + (it.areaClass || '') + '">' + esc(it.area) + '</span>' : '';
+      return '<div class="sr-prob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg><div><div class="pt">' + tag + esc(it.pt) + '</div><div class="im">' + esc(it.im) + '</div></div></div>';
     }
+    function monoAvatar(name) { var m = (String(name || "").match(/[A-Za-z0-9À-ÖØ-öø-ÿ]/) || ["?"])[0]; return m.toUpperCase(); }
     function compRow(name, sub, rank, you) {
-      return '<div class="sr-comp' + (you ? ' --you' : '') + '"><div class="ic">' + homeSvg() + '</div><div class="nm"><b>' + esc(name) + '</b><span>' + esc(sub) + '</span></div><div class="rk">' + esc(rank) + '</div></div>';
+      return '<div class="sr-comp' + (you ? ' --you' : '') + '"><div class="ic">' + esc(monoAvatar(name)) + '</div><div class="nm"><b>' + esc(name) + '</b><span>' + esc(sub) + '</span></div><div class="rk">' + esc(rank) + '</div></div>';
     }
+    /* Plain-language speed section: no acronyms, each metric is what it means to
+       a hungry customer, with a "this is costing you" line when it is slow. */
     function cwvBlock(scan) {
-      var m = scan.mobile.metrics || {};
-      function r(label, met) { if (!met || met.display == null) return ""; return '<div style="display:flex;justify-content:space-between;padding:7px 0;font-size:0.86rem;border-top:1px solid var(--line-soft);"><span style="color:var(--text-dim);">' + label + '</span><b style="color:var(--text-head);">' + esc(met.display) + '</b></div>'; }
-      var rows = r("Largest Contentful Paint", m.lcp) + r("Total Blocking Time", m.tbt) + r("Cumulative Layout Shift", m.cls) + r("Speed Index", m.speedIndex);
+      var m = (scan.mobile && scan.mobile.metrics) || {};
+      var SPEED = [
+        { met: m.lcp, limit: 2500, label: "Tus fotos de comida y tu menú aparecen rápido", why: "Cuando una página es lenta en el celular, la gente se va antes de ver tu comida y tu menú, y eso son pedidos perdidos todas las noches." },
+        { met: m.fcp, limit: 1800, label: "Algo aparece enseguida, no una pantalla en blanco", why: "Si un cliente con hambre se queda viendo una pantalla en blanco un par de segundos, asume que tu sitio no funciona y se pasa a un competidor." },
+        { met: m.tbt, limit: 200, label: "Los botones responden en cuanto alguien los toca", why: "Cuando tu botón de Pedir o de Menú se queda congelado un momento, los clientes vuelven a tocar frustrados y se rinden antes de pagar." },
+        { met: m.cls, limit: 0.1, label: "La página se queda quieta mientras carga", why: "Cuando los botones se mueven bajo el dedo del cliente, toca lo que no era, se molesta y abandona el pedido." }
+      ];
+      var okSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="var(--good)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+      var badSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="var(--poor)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+      var rows = SPEED.map(function (s) {
+        if (!s.met || s.met.value == null) return "";
+        var ok = s.met.value <= s.limit;
+        var color = ok ? "var(--good)" : "var(--poor)";
+        return '<div style="display:flex;gap:11px;padding:12px 0;border-top:1px solid var(--line-soft);align-items:flex-start;">' +
+          '<span style="flex:none;width:18px;height:18px;margin-top:1px;">' + (ok ? okSvg : badSvg) + '</span>' +
+          '<div style="flex:1;min-width:0;"><div style="display:flex;justify-content:space-between;gap:10px;"><b style="font-size:0.9rem;color:var(--text-head);font-weight:600;">' + s.label + '</b><span style="font-size:0.82rem;color:' + color + ';font-weight:700;white-space:nowrap;">' + esc(s.met.display || "") + '</span></div>' +
+          (ok ? '' : '<div style="font-size:0.8rem;color:var(--text-soft);margin-top:3px;line-height:1.45;">' + s.why + '</div>') +
+          '</div></div>';
+      }).join("");
       if (!rows) return "";
-      return '<div style="margin-top:16px;"><div style="font-family:var(--font-display);font-weight:800;font-size:0.95rem;color:var(--text-head);margin-bottom:2px;">Core Web Vitals (móvil)</div>' + rows + '</div>';
+      return '<div style="margin-top:18px;"><div style="font-family:var(--font-display);font-weight:800;font-size:0.98rem;color:var(--text-head);">Qué tan rápido se siente tu sitio en el celular</div><p style="font-size:0.82rem;color:var(--text-soft);margin:3px 0 2px;line-height:1.4;">Una página lenta pierde pedidos antes de que el cliente vea un solo plato.</p>' + rows + '</div>';
     }
 
+  })();
+  </script>
+  <script>
+  /* Booking bar: shows once the report is unlocked and the reader has scrolled
+     past the score, hides while the calendar (or the popup) is on screen. */
+  (function () {
+    var bar = document.getElementById("sr-sticky");
+    var report = document.getElementById("sr-report");
+    if (!bar || !report) return;
+    var link = bar.querySelector("a");
+    var calInView = false, ticking = false;
+    var fin = document.getElementById("sr-final");
+    if (fin && "IntersectionObserver" in window) {
+      new IntersectionObserver(function (es) { es.forEach(function (e) { calInView = e.isIntersecting; }); update(); }, { threshold: 0.08 }).observe(fin);
+    }
+    function update() {
+      ticking = false;
+      var pop = document.getElementById("sr-pop");
+      var popOpen = pop && pop.style.display !== "none";
+      var on = report.classList.contains("show") && !report.classList.contains("locked") &&
+        window.scrollY > 520 && !calInView && !popOpen;
+      bar.classList.toggle("show", on);
+      bar.setAttribute("aria-hidden", on ? "false" : "true");
+      if (link) link.tabIndex = on ? 0 : -1;
+    }
+    window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    setInterval(update, 1200);
   })();
   </script>
   <script defer src="shared.js?v=site-fixes-1"></script>

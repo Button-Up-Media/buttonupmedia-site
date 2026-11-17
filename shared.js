@@ -2234,21 +2234,15 @@ if (document.readyState === "loading") {
   // list, nine push nothing but a completed booking, so skipping them wholesale
   // discarded every phone tap and every booking click those pages produced.
   // Censused against the pages themselves: this tracker pushes only
-  // booking_cta_click, grader_cta_click and phone_call_click, and only the grader
-  // pages below push any of those three on their own. (The paid-ads landing
-  // pages that also did were retired in Nov 2026 and now redirect.)
+  // booking_cta_click, grader_cta_click and phone_call_click. The English grader
+  // report marks its own booking links with data-book-scroll (handled below).
   //
-  // Note website-grader-report-es is deliberately absent. Unlike its English
-  // twin it pushes only report_unlocked, which this tracker never pushes, so it
-  // needs no suppression at all and wants full coverage.
-  var SELF_TRACKED = {
-    "/social-media-website-grader": ["booking_cta_click", "phone_call_click"],
-    "/es/analizador-redes-sociales-web": ["booking_cta_click", "phone_call_click"],
-    // Source filenames too. Production reaches these by their clean URL, but a
-    // direct .html hit or a local preview must suppress the same events.
-    "/website-grader": ["booking_cta_click", "phone_call_click"],
-    "/website-grader-es": ["booking_cta_click", "phone_call_click"]
-  };
+  // Both grader reports (EN and ES) mark their booking links with
+  // data-book-scroll and push booking_cta_click themselves; see below.
+  // Empty since the Nov 2026 redesign: the grader landing pages dropped their
+  // own click listeners and the paid-ads pages were retired, so this tracker
+  // covers every page. Keep the map for any future page that self-tracks.
+  var SELF_TRACKED = {};
 
   // Trailing slashes and the .html form both reach these pages, so normalize first.
   var path = location.pathname.replace(/\.html$/, "").replace(/\/+$/, "") || "/";

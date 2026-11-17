@@ -136,10 +136,14 @@ const caseSitemapEntries = await buildCases(root, outDir);
       if (entry.isDirectory()) { await walkHtml(full); continue; }
       if (!entry.name.endsWith('.html')) continue;
       let html = await readFile(full, 'utf8');
-      if (!html.includes('</head>') || /<meta name="robots" content="noindex/i.test(html) || html.includes('/v3.css')) continue;
       const rel = path.relative(outDir, full).split(path.sep).join('/');
-      // The grader tool pages ship their own light theme and nav; leave them as designed.
-      if (/^(website-grader|grader-demo)/.test(rel)) continue;
+      // grader-demo.html is the noindex demo copy of the grader landing; it must
+      // look exactly like the real landing, so it gets v3 too.
+      const noindex = /<meta name="robots" content="noindex/i.test(html) && rel !== 'grader-demo.html';
+      if (!html.includes('</head>') || noindex || html.includes('/v3.css')) continue;
+      // The grader reports (and their demo) ship their own focused tool layout and
+      // theme. The grader landing pages are regular site pages and get v3.
+      if (/^(website-grader-report|grader-demo-report)/.test(rel)) continue;
       if (isBlog(rel)) html = html.replace(/<html lang="([^"]+)"/, '<html lang="$1" class="v3-light"');
       // v3 sets every heading and paragraph in Figtree: don't spend the first
       // round trips on the two retired faces, and make sure Figtree is warm.

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <script>
     (function () {
       var key = "bum-cookie-consent-v1";
@@ -37,10 +37,10 @@
   <title>A custom restaurant website that sells your food | Button Up Media</title>
   <meta name="robots" content="noindex, nofollow" />
   <link rel="icon" type="image/svg+xml" href="/favicon-bum.svg" />
-  <meta name="theme-color" content="#FBF8F2" />
+  <meta name="theme-color" content="#0b0b0c" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="A custom restaurant website that sells your food | Button Up Media" />
-  <meta property="og:description" content="Fully custom, no templates. Built around your brand, menu and photos, live in about a week. Pay as we build, and you own it forever." />
+  <meta property="og:description" content="A custom website for your restaurant, designed and coded from scratch by our team, with every page in English and Spanish. You own everything, and builds start at $1,500." />
   <meta property="og:site_name" content="Button Up Media" />
   <meta property="og:image" content="https://www.buttonupmedia.com/media/og-offer.png" />
   <meta property="og:image:width" content="1200" />
@@ -50,98 +50,283 @@
   <meta name="twitter:image" content="https://www.buttonupmedia.com/media/og-offer.png" />
   <link rel="preconnect" href="https://assets.calendly.com" />
   <link rel="preconnect" href="https://calendly.com" />
-  <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-variable.woff2" crossorigin fetchpriority="high" />
-  <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
-  <link rel="preload" as="font" type="font/woff2" href="/fonts/epilogue-variable.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin fetchpriority="high" />
   <link rel="stylesheet" href="shared.css?v=site-fixes-1" />
+  <noscript><style>.of-skel { display: none; }</style></noscript>
   <style>
+    /* ===== v3 look, inline (noindex pages do not get v3.css) ===== */
     :root {
-      --bg-0: #FBF8F2; --bg-1: #F4EDE1; --bg-2: #ECE3D4;
-      --line: rgba(36,28,16,0.14); --line-soft: rgba(36,28,16,0.08);
-      --text: #2C261C; --text-head: #1C170F; --text-dim: rgba(44,38,28,0.74); --text-soft: rgba(44,38,28,0.52);
-      --gold: #B57E1E; --gold-soft: rgba(181,126,30,0.12); --teal: #1E7E54;
-      --good: #1E7E54; --fair: #C9820E; --poor: #CF4A3C; --ink: #1C170F;
+      --bg-0: #0b0b0c; --bg-1: #141416; --bg-2: #1b1b1e;
+      --of-elev-1: #141416; --of-elev-2: #1b1b1e;
+      --of-hair: rgba(255,255,255,0.08); --of-hair-2: rgba(255,255,255,0.14);
+      --line: var(--of-hair-2); --line-soft: var(--of-hair);
+      --text: #f6f0e6; --text-head: #f8f4ec; --text-dim: rgba(246,240,230,0.72); --text-soft: rgba(246,240,230,0.5);
+      --gold: #E2A84D; --of-gold-hover: #ecb764; --of-ink: #140e04;
+      --of-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+      --of-bar-h: 64px;
+      --font-body: "Figtree", system-ui, -apple-system, sans-serif;
+      --font-display: var(--font-body); --font-hero: var(--font-body);
     }
-    body { background: var(--bg-0); color: var(--text); }
-    .btn-primary { border: none; background: #241804; color: #FBF5EA; box-shadow: 0 6px 18px rgba(36,24,4,0.26); font-weight: 700; border-radius: 999px; }
-    .btn-primary:hover { background: linear-gradient(135deg, #E8AC44, #D08A34); color: #241804; box-shadow: 0 12px 30px rgba(208,138,52,0.42); transform: translateY(-1px); }
+    html[lang], html[lang] body { overflow-x: clip; }
+    html[lang] { background: #0b0b0c; scroll-padding-top: calc(var(--of-bar-h) + 12px); }
+    html[lang] body { background: #0b0b0c; color: var(--text); font-family: var(--font-body); font-size: 17px; line-height: 1.6; text-rendering: optimizeLegibility; }
+    ::selection { background: rgba(226,168,77,0.32); color: #fff; }
+    html[lang] :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+    h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.04em; text-wrap: balance; color: var(--text-head); }
+    main p { text-wrap: pretty; }
+    img { max-width: 100%; }
+    .of-wrap { width: min(calc(100% - 48px), 1180px); margin-left: auto; margin-right: auto; }
+    .of-gold { color: var(--gold); }
+    .nw { white-space: nowrap; }
 
-    /* ============ HEADER (liquid-glass floating pill) ============ */
-    .gr-nav {
-      position: fixed; top: 16px; left: 0; right: 0; z-index: 999;
-      width: min(calc(100% - 48px), 1180px); margin: 16px auto 0; padding: 12px 20px;
-      background: rgba(255,255,255,0.70);
-      -webkit-backdrop-filter: blur(22px) saturate(1.5); backdrop-filter: blur(22px) saturate(1.5);
-      border: 1px solid rgba(36,28,16,0.10); border-radius: 16px;
-      box-shadow: 0 10px 34px rgba(40,30,12,0.12), inset 0 1px 0 rgba(255,255,255,0.6);
-    }
-    .gr-nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; margin: 0; }
-    .gr-nav-brand { display: inline-flex; align-items: center; flex-shrink: 0; }
-    .gr-logo { height: 46px; width: auto; display: block; }
-    .gr-nav-right { display: flex; align-items: center; gap: 16px; }
-    .gr-nav-phone { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; color: var(--text-head); white-space: nowrap; }
-    .gr-nav-phone svg { width: 15px; height: 15px; color: var(--gold); }
-    .gr-nav-phone:hover { color: var(--gold); }
-    .gr-nav-cta { height: 42px; padding: 0 22px; font-size: 0.86rem; white-space: nowrap; display: inline-flex; align-items: center; }
-    @media (max-width: 700px) {
-      .gr-nav { top: 8px; width: min(calc(100% - 20px), 1180px); min-height: 56px; margin: 0 auto; padding: 8px 10px 8px 14px; border-radius: 14px; }
-      .gr-nav-inner { gap: 12px; }
-      .gr-logo { height: 30px; }
-      .gr-nav-right { gap: 14px; }
-      .gr-nav-phone { width: 40px; height: 40px; padding: 0; border-radius: 50%; border: 1px solid var(--line); background: rgba(36,28,16,0.03); justify-content: center; gap: 0; }
-      .gr-nav-phone svg { width: 19px; height: 19px; }
-      .gr-nav-phone span { display: none; }
-      .gr-nav-cta { height: 40px; padding: 0 18px; }
-    }
+    /* buttons: pills, gold only for booking */
+    .of-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 48px; padding: 0 22px; border-radius: 999px; border: 1px solid var(--of-hair-2); background: rgba(255,255,255,0.06); color: var(--text-head); font-family: var(--font-body); font-size: 0.9375rem; font-weight: 650; line-height: 1; letter-spacing: -0.005em; text-decoration: none; white-space: nowrap; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform 0.18s var(--of-ease), background 0.18s ease, border-color 0.18s ease; }
+    .of-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); }
+    .of-btn:active { transform: scale(0.97); }
+    .of-btn-gold { border-color: transparent; background: var(--gold); color: var(--of-ink); font-weight: 700; }
+    .of-btn-gold:hover { border-color: transparent; background: var(--of-gold-hover); }
+    .of-btn-lg { height: 54px; padding: 0 26px; font-size: 1rem; }
+    .of-btn svg { width: 17px; height: 17px; flex: none; }
 
-    .of-wrap { width: min(calc(100% - 32px), 1120px); margin: 0 auto; }
-    main { padding-top: clamp(96px, 13vw, 132px); padding-bottom: clamp(48px, 7vw, 80px); }
+    /* top bar: logo, call, book */
+    .of-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 900; height: var(--of-bar-h); background: rgba(11,11,12,0.72); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid var(--of-hair); }
+    .of-bar-in { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .of-logo { display: inline-flex; align-items: center; min-height: 44px; flex: none; }
+    .of-logo img { display: block; width: 132px; height: auto; }
+    .of-bar-actions { display: flex; align-items: center; gap: 6px; }
+    .of-call { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 44px; padding: 0 14px; border-radius: 999px; color: rgba(246,240,230,0.78); font-size: 0.9375rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: color 0.18s ease, background 0.18s ease, transform 0.18s var(--of-ease); }
+    .of-call:hover { color: var(--text-head); background: rgba(255,255,255,0.06); }
+    .of-call:active { transform: scale(0.97); }
+    .of-call svg { width: 17px; height: 17px; flex: none; }
+    .of-call .s { display: none; }
+    .of-bar .of-btn { height: 40px; padding: 0 18px; }
 
-    /* ============ SELLING POINTS (first thing they see) ============ */
-    .of-lead { text-align: center; margin-bottom: clamp(24px, 3.5vw, 40px); }
-    .of-lead .eye { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-display); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); }
-    .of-lead h1 { font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.035em; font-size: clamp(1.7rem, 4.4vw, 2.8rem); line-height: 1.05; margin: 12px auto 0; max-width: 20ch; text-wrap: balance; color: var(--text-head); }
-    .of-lead h1 .g { color: var(--gold); }
+    /* hero */
+    .of-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(32px, 5vw, 72px); align-items: center; padding: calc(var(--of-bar-h) + clamp(40px, 5vw, 72px)) 0 clamp(16px, 3vw, 32px); }
+    .of-label { display: inline-block; font-size: 0.9375rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.005em; color: var(--gold); }
+    .of-hero h1 { margin-top: 12px; font-size: clamp(2.6rem, 4.6vw, 4.1rem); line-height: 0.98; font-weight: 800; letter-spacing: -0.05em; }
+    .of-lede { margin-top: 22px; max-width: 46ch; font-size: clamp(1.0625rem, 1.3vw, 1.1875rem); line-height: 1.55; color: rgba(246,240,230,0.76); }
+    .of-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .of-with { display: flex; align-items: center; gap: 12px; margin-top: 20px; font-size: 0.9375rem; line-height: 1.4; color: var(--text-dim); }
+    .of-with img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; flex: none; border: 1px solid var(--of-hair-2); }
+    .of-with strong { color: var(--text-head); font-weight: 650; }
 
-    .of-points { display: grid; grid-template-columns: 1fr; gap: 16px; }
-    @media (min-width: 620px) { .of-points { grid-template-columns: 1fr 1fr; } }
-    .of-point { background: #FFFFFF; border: 1px solid var(--line-soft); border-radius: 18px; padding: clamp(20px, 2.6vw, 28px); box-shadow: 0 14px 40px rgba(40,30,12,0.05); display: flex; gap: 16px; align-items: flex-start; }
-    .of-point .ic { flex: none; width: 46px; height: 46px; border-radius: 13px; background: var(--gold-soft); border: 1px solid rgba(181,126,30,0.28); color: var(--gold); display: grid; place-items: center; }
-    .of-point .ic svg { width: 23px; height: 23px; }
-    .of-point b { display: block; font-family: var(--font-display); font-weight: 800; font-size: clamp(1.05rem, 2vw, 1.2rem); color: var(--text-head); letter-spacing: -0.01em; }
-    .of-point p { margin-top: 5px; font-size: 0.95rem; line-height: 1.55; color: var(--text-dim); }
+    /* hero visual: a plain browser window and a phone */
+    .of-devices { margin: 0; }
+    .of-devices-stage { position: relative; padding-bottom: 9%; }
+    .of-browser { overflow: hidden; border-radius: 16px; background: #161618; border: 1px solid var(--of-hair-2); box-shadow: 0 30px 70px rgba(0,0,0,0.45); }
+    .of-browser-bar { display: grid; grid-template-columns: 56px minmax(0, 1fr) 56px; align-items: center; height: 38px; padding: 0 12px; background: #1d1d20; border-bottom: 1px solid var(--of-hair); }
+    .of-dots { display: flex; gap: 6px; }
+    .of-dots i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.16); }
+    .of-url { justify-self: center; display: inline-flex; align-items: center; gap: 6px; max-width: 100%; height: 24px; padding: 0 12px; border-radius: 8px; background: rgba(255,255,255,0.06); font-size: 0.75rem; font-weight: 550; color: rgba(246,240,230,0.72); white-space: nowrap; overflow: hidden; }
+    .of-url svg { width: 11px; height: 11px; flex: none; opacity: 0.7; }
+    .of-browser img { display: block; width: 100%; height: auto; }
+    .of-phone { position: absolute; right: -1%; bottom: 0; width: 25%; padding: 5px; border-radius: 26px; background: #050505; border: 1px solid var(--of-hair-2); box-shadow: 0 24px 60px rgba(0,0,0,0.55); }
+    .of-phone-screen { overflow: hidden; aspect-ratio: 400 / 864; border-radius: 21px; background: #fff; }
+    .of-phone-screen img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+    .of-devices figcaption { margin-top: 14px; font-size: 0.875rem; line-height: 1.45; color: rgba(246,240,230,0.56); }
 
-    /* ============ OFFER + BOOKING ============ */
-    .of-book-row { display: grid; grid-template-columns: 1fr; gap: clamp(20px, 3vw, 26px); margin-top: clamp(20px, 3vw, 26px); align-items: stretch; }
-    @media (min-width: 900px) { .of-book-row { grid-template-columns: 0.82fr 1.18fr; } }
+    /* sections */
+    .of-sec { padding-top: clamp(80px, 10vw, 120px); }
+    .of-head { max-width: 760px; }
+    .of-head h2 { margin-top: 10px; font-size: clamp(2rem, 4.4vw, 3.4rem); line-height: 1.04; font-weight: 800; letter-spacing: -0.048em; }
+    .of-head p { margin-top: 16px; max-width: 58ch; font-size: clamp(1.0625rem, 1.3vw, 1.1875rem); line-height: 1.55; color: var(--text-dim); }
+    .of-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 700; color: var(--text-head); text-decoration: none; }
+    .of-link svg { width: 18px; height: 18px; flex: none; transition: transform 0.3s var(--of-ease); }
+    @media (hover: hover) { .of-link:hover svg { transform: translateX(3px); } }
 
-    /* price card */
-    .of-offer { background: linear-gradient(165deg, #2A1C06, #181004); color: #FBF5EA; border-radius: 24px; padding: clamp(28px, 3.4vw, 40px); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
-    .of-offer::after { content: ""; position: absolute; top: -30%; right: -12%; width: 320px; height: 320px; background: radial-gradient(circle, rgba(224,162,60,0.22), transparent 66%); pointer-events: none; }
-    .of-offer .lab { position: relative; font-family: var(--font-display); font-weight: 800; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(251,245,234,0.7); }
-    .of-offer .amt { position: relative; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-top: 12px; }
-    .of-offer .now { font-family: var(--font-hero); font-weight: 800; font-size: clamp(3.4rem, 9vw, 5rem); line-height: 0.86; letter-spacing: -0.045em; color: #FBF5EA; font-variant-numeric: tabular-nums; }
-    .of-offer .was { font-family: var(--font-display); font-size: 1.4rem; color: rgba(251,245,234,0.55); text-decoration: line-through; text-decoration-thickness: 2px; opacity: 0; transition: opacity .5s ease; }
-    .of-offer .was.show { opacity: 1; }
-    .of-offer .tag { position: relative; align-self: flex-start; margin-top: 16px; padding: 7px 14px; border-radius: 999px; background: rgba(232,172,68,0.18); color: #F0C069; font-family: var(--font-display); font-weight: 800; font-size: 0.74rem; letter-spacing: 0.05em; text-transform: uppercase; }
-    .of-offer .note { position: relative; margin-top: 18px; font-size: 1rem; line-height: 1.55; color: rgba(251,245,234,0.82); }
-    .of-offer .note b { color: #FBF5EA; }
-    .of-offer .inc { position: relative; margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(251,245,234,0.14); font-size: 0.9rem; line-height: 1.6; color: rgba(251,245,234,0.72); }
+    /* what we'd build: a list with hairlines */
+    .of-points { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(32px, 5vw, 72px); }
+    .of-points li { display: grid; grid-template-columns: 40px minmax(0, 1fr); column-gap: 12px; padding: 24px 0 26px; border-top: 1px solid var(--of-hair); }
+    .of-points .n { padding-top: 3px; font-size: 0.9375rem; font-weight: 700; color: rgba(246,240,230,0.4); font-variant-numeric: tabular-nums; }
+    .of-points h3 { font-size: 1.3125rem; font-weight: 750; line-height: 1.25; letter-spacing: -0.025em; }
+    .of-points p { margin-top: 6px; font-size: 1.0625rem; line-height: 1.6; color: var(--text-dim); }
 
-    /* booking: Juan + inline calendar */
-    .of-book { background: #FFFFFF; border: 1px solid var(--line-soft); border-radius: 24px; padding: clamp(20px, 2.6vw, 28px); box-shadow: 0 14px 40px rgba(40,30,12,0.06); }
-    .of-host { display: flex; align-items: center; gap: 14px; padding-bottom: 16px; margin-bottom: 8px; border-bottom: 1px solid var(--line-soft); }
-    .of-host-imgwrap { width: 60px; height: 60px; border-radius: 50%; overflow: hidden; flex: none; border: 3px solid #fff; box-shadow: 0 6px 18px rgba(40,28,10,0.18); }
-    .of-host-imgwrap img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.5); transform-origin: 50% 42%; }
-    .of-host .lab { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-soft); font-weight: 800; }
-    .of-host .nm { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--text-head); margin-top: 1px; }
-    .of-host .role { font-size: 0.85rem; color: var(--text-dim); }
-    .of-cal { border-radius: 14px; overflow: hidden; min-height: 640px; }
-    .of-cal .calendly-inline-widget { min-width: 300px; height: 660px; }
-    .of-cal-fallback { padding: 40px 20px; text-align: center; color: var(--text-soft); font-size: 0.9rem; }
+    /* proof: big published numbers on solid blocks */
+    .of-nums { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .of-nums li { display: flex; flex-direction: column; justify-content: flex-end; min-height: 196px; padding: 24px; border-radius: 26px; }
+    .of-nums b { font-size: clamp(3rem, 5.4vw, 4.5rem); font-weight: 800; line-height: 0.9; letter-spacing: -0.06em; font-variant-numeric: tabular-nums; }
+    .of-nums span { margin-top: 14px; font-size: 1rem; font-weight: 650; line-height: 1.35; letter-spacing: -0.01em; }
+    .of-nums .--gold { background: var(--gold); color: var(--of-ink); }
+    .of-nums .--light { background: #f6f0e6; color: var(--of-ink); }
+    .of-nums .--dark { background: var(--of-elev-1); border: 1px solid var(--of-hair); color: var(--text-head); }
+    .of-nums .--dark b { color: var(--gold); }
+    .of-nums .--dark span { color: var(--text-dim); }
+    .of-proof-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; margin-top: 18px; }
+    .of-fine { font-size: 0.9375rem; line-height: 1.5; color: rgba(246,240,230,0.56); }
+
+    /* one Google review */
+    .of-quote { margin: 40px 0 0; padding: clamp(24px, 3.4vw, 36px); border-radius: 26px; background: var(--of-elev-1); border: 1px solid var(--of-hair); }
+    .of-quote-stars { font-size: 1rem; letter-spacing: 2px; color: var(--gold); }
+    .of-quote blockquote { margin: 12px 0 0; }
+    .of-quote blockquote p { max-width: 62ch; font-size: clamp(1.125rem, 1.6vw, 1.3125rem); line-height: 1.5; font-weight: 550; letter-spacing: -0.01em; color: var(--text-head); }
+    .of-quote figcaption { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; margin-top: 16px; font-size: 0.9375rem; color: var(--text-dim); }
+    .of-quote figcaption strong { color: var(--text-head); font-weight: 700; }
+    .of-rating { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 0.9375rem; color: var(--text-dim); text-decoration: none; }
+    .of-rating svg { width: 18px; height: 18px; flex: none; }
+    .of-rating strong { color: var(--text-head); font-weight: 750; }
+    .of-rating .st { color: var(--gold); letter-spacing: 1px; }
+    .of-rating:hover { color: var(--text-head); }
+
+    /* pricing */
+    .of-plans { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 40px; }
+    .of-plan { display: flex; flex-direction: column; padding: clamp(26px, 3.4vw, 40px); border-radius: 32px; background: var(--of-elev-1); border: 1px solid var(--of-hair); color: var(--text); }
+    .of-plan.--feature { background: #f6f0e6; border-color: transparent; color: var(--of-ink); }
+    .of-plan-kick { font-size: 0.9375rem; font-weight: 650; color: rgba(246,240,230,0.6); }
+    .of-plan.--feature .of-plan-kick { color: rgba(20,14,4,0.6); }
+    .of-plan h3 { margin-top: 8px; font-size: clamp(1.5rem, 2.4vw, 1.9rem); line-height: 1.1; font-weight: 800; }
+    .of-plan.--feature h3 { color: var(--of-ink); }
+    .of-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin-top: 22px; }
+    .of-price b { font-size: clamp(3.2rem, 6vw, 4.5rem); line-height: 0.9; font-weight: 800; letter-spacing: -0.06em; color: var(--gold); }
+    .of-plan.--feature .of-price b { color: var(--of-ink); }
+    .of-price span { font-size: 0.9375rem; font-weight: 600; opacity: 0.66; }
+    .of-plan-desc { margin-top: 18px; font-size: 1.0625rem; line-height: 1.55; opacity: 0.82; }
+    .of-plan-incl { margin-top: 18px; font-size: 0.9375rem; font-weight: 700; }
+    .of-plan ul { list-style: none; margin: 16px 0 0; padding: 0; border-top: 1px solid var(--of-hair); }
+    .of-plan li { position: relative; padding: 11px 0 11px 28px; border-bottom: 1px solid var(--of-hair); font-size: 1rem; line-height: 1.45; }
+    .of-plan li::before { content: ""; position: absolute; left: 3px; top: 16px; width: 11px; height: 6px; border-left: 2px solid var(--gold); border-bottom: 2px solid var(--gold); transform: rotate(-45deg); }
+    .of-plan.--feature ul, .of-plan.--feature li { border-color: rgba(20,14,4,0.12); }
+    .of-plan.--feature li::before { border-color: var(--of-ink); }
+    .of-plans-after { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 32px; margin-top: 28px; }
+    .of-plans-after p { max-width: 62ch; font-size: 1.0625rem; line-height: 1.6; color: var(--text-dim); }
+
+    /* FAQ: native list */
+    .of-faq-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 24px clamp(32px, 5vw, 72px); align-items: start; }
+    .of-faq { border-top: 1px solid var(--of-hair); }
+    .of-faq details { border-bottom: 1px solid var(--of-hair); }
+    .of-faq summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 64px; padding: 18px 2px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    .of-faq summary::-webkit-details-marker { display: none; }
+    .of-faq summary h3 { font-size: clamp(1.0625rem, 1.4vw, 1.1875rem); font-weight: 700; line-height: 1.35; letter-spacing: -0.015em; }
+    .of-faq summary::after { content: ""; flex: none; width: 11px; height: 11px; margin-right: 4px; border-right: 2px solid rgba(246,240,230,0.5); border-bottom: 2px solid rgba(246,240,230,0.5); transform: translateY(-3px) rotate(45deg); transition: transform 0.3s var(--of-ease); }
+    .of-faq details[open] summary::after { transform: translateY(3px) rotate(-135deg); }
+    .of-faq-a { max-width: 66ch; padding: 0 2px 22px; font-size: 1.0625rem; line-height: 1.65; color: rgba(246,240,230,0.74); }
+
+    /* booking */
+    .of-book { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); grid-template-rows: auto 1fr; grid-template-areas: "info stage" "more stage"; column-gap: clamp(28px, 5vw, 64px); align-items: start; padding: clamp(80px, 10vw, 120px) 0 clamp(64px, 8vw, 96px); scroll-margin-top: var(--of-bar-h); }
+    .of-book-info { grid-area: info; }
+    .of-stage { grid-area: stage; }
+    .of-book-more { grid-area: more; }
+    .of-book h2 { margin-top: 10px; font-size: clamp(2rem, 4.4vw, 3.2rem); line-height: 1.04; font-weight: 800; letter-spacing: -0.048em; }
+    .of-book h2:focus { outline: none; }
+    .of-host { display: flex; align-items: center; gap: 16px; margin-top: 26px; }
+    .of-host img { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; flex: none; border: 1px solid var(--of-hair-2); }
+    .of-host-name { display: block; font-size: 1.1875rem; font-weight: 750; line-height: 1.3; letter-spacing: -0.02em; color: var(--text-head); }
+    .of-host-role { display: block; font-size: 0.9375rem; color: var(--text-dim); }
+    .of-book-copy { margin-top: 20px; max-width: 52ch; font-size: 1.0625rem; line-height: 1.6; color: var(--text-dim); }
+    .of-book-more { display: flex; flex-wrap: wrap; align-items: center; gap: 0 22px; margin-top: 18px; padding-top: 12px; border-top: 1px solid var(--of-hair); }
+    .of-tel { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.9375rem; font-weight: 600; color: var(--text-dim); text-decoration: none; }
+    .of-tel:hover { color: var(--text-head); }
+    .of-stage { position: relative; min-height: 700px; border-radius: 22px; overflow: hidden; border: 1px solid var(--of-hair); background: #141416; }
+    .of-cal { position: relative; z-index: 1; height: 700px; min-width: 300px; }
+    .of-skel { position: absolute; inset: 0; padding: 26px; display: flex; flex-direction: column; gap: 14px; transition: opacity 0.35s ease; }
+    .of-skel-status { font-size: 0.9375rem; font-weight: 600; color: rgba(246,240,230,0.56); }
+    .of-skel i { display: block; height: 14px; border-radius: 999px; background: rgba(255,255,255,0.06); }
+    .of-skel .w1 { width: 70%; } .of-skel .w2 { width: 46%; }
+    .of-skel-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-top: 18px; }
+    .of-skel-grid i { height: 36px; border-radius: 12px; }
+    .of-stage.is-loaded .of-skel { opacity: 0; pointer-events: none; }
+    .of-cal-fallback { position: relative; z-index: 2; padding: 40px 24px; text-align: center; font-size: 1rem; color: var(--text-dim); }
     .of-cal-fallback a { color: var(--gold); font-weight: 700; }
 
-    .of-foot { border-top: 1px solid var(--line-soft); padding: 24px 0 36px; text-align: center; font-size: 0.8rem; color: var(--text-soft); }
+    /* phones: slim booking bar */
+    .of-sticky { display: none; }
+
+    /* footer */
+    .of-foot { border-top: 1px solid var(--of-hair); padding: 20px 0 28px; }
+    .of-foot-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 24px; font-size: 0.9375rem; color: rgba(246,240,230,0.56); }
+    .of-foot ul { display: flex; flex-wrap: wrap; gap: 0 22px; list-style: none; margin: 0; padding: 0; }
+    .of-foot a { display: inline-flex; align-items: center; min-height: 44px; color: rgba(246,240,230,0.62); text-decoration: none; transition: color 0.15s ease; }
+    .of-foot a:hover { color: var(--text-head); }
+
+    /* cookie notice: the same compact v3 card */
+    html[lang] .bum-consent__button { border: 1px solid transparent !important; background: var(--gold) !important; color: var(--of-ink) !important; font-weight: 700; box-shadow: none !important; }
+    @media (min-width: 761px) {
+      html[lang] .bum-consent { left: 20px !important; right: auto !important; bottom: 20px !important; width: auto !important; }
+      html[lang] .bum-consent__sheet { width: min(400px, calc(100vw - 40px)) !important; height: auto !important; display: grid !important; grid-template-columns: minmax(0, 1fr); align-items: center; gap: 10px; padding: 16px 16px 12px 18px !important; border-radius: 20px !important; background: rgba(24,24,27,0.92) !important; -webkit-backdrop-filter: saturate(160%) blur(20px); backdrop-filter: saturate(160%) blur(20px); border: 1px solid var(--of-hair-2) !important; box-shadow: 0 20px 50px rgba(0,0,0,0.45) !important; }
+      html[lang] .bum-consent__sheet::before, html[lang] .bum-consent__sheet::after { display: none !important; }
+      html[lang] .bum-consent__close, html[lang] .bum-consent__title, html[lang] .bum-consent__copy, html[lang] .bum-consent__policy { display: none !important; }
+      html[lang] .bum-consent__short { display: block !important; margin: 0; font-size: 14px; line-height: 1.4; color: rgba(246,240,230,0.82); }
+      html[lang] .bum-consent__short a { color: var(--text-head); text-decoration: underline; text-underline-offset: 2px; }
+      html[lang] .bum-consent__actions, html[lang] .bum-consent__actions-group { display: flex; align-items: center; justify-content: flex-end; gap: 4px; flex-wrap: nowrap; }
+      html[lang] .bum-consent__link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 10px; font-size: 14px; white-space: nowrap; }
+      html[lang] .bum-consent__button { width: auto !important; min-height: 44px; padding: 0 18px !important; border-radius: 999px !important; font-size: 14px; white-space: nowrap; }
+    }
+
+    /* reveal (only when JS opted in, so no-JS never hides content) */
+    html.of-motion .of-rv { opacity: 0; transform: translateY(18px); transition: opacity 0.6s var(--of-ease), transform 0.6s var(--of-ease); }
+    html.of-motion .of-rv.is-in { opacity: 1; transform: none; }
+
+    @media (max-width: 960px) {
+      .of-hero { grid-template-columns: 1fr; }
+      .of-hero-copy { max-width: 640px; }
+      .of-points { grid-template-columns: 1fr; }
+      .of-plans { grid-template-columns: 1fr; }
+      .of-faq-grid { grid-template-columns: 1fr; }
+      .of-book { grid-template-columns: 1fr; grid-template-rows: none; grid-template-areas: "info" "stage" "more"; row-gap: 28px; }
+      .of-book-more { margin-top: 0; }
+    }
+    @media (max-width: 700px) {
+      .of-wrap { width: calc(100% - 32px); }
+      html[lang] body { font-size: 16px; }
+      /* running text floor: 16px (outranks the shared 15.5px phone rule) */
+      html[lang] body:not(#_):not(#__) main :is(p, li, dd) { font-size: 16px; line-height: 1.55; }
+      html[lang] body:not(#_):not(#__) main :is(.of-head p, .of-lede, .of-book-copy) { font-size: 17px; }
+      html[lang] body:not(#_):not(#__) main .of-quote blockquote p { font-size: 18px; line-height: 1.5; }
+      .of-logo img { width: 112px; }
+      .of-bar .of-call { background: rgba(255,255,255,0.06); }
+      .of-bar .of-call .l { display: none; }
+      .of-bar .of-call .s { display: inline; }
+      .of-bar .of-btn { height: 44px; padding: 0 16px; }
+      .of-hero { gap: 36px; padding: calc(var(--of-bar-h) + 22px) 0 8px; }
+      .of-hero h1 { margin-top: 8px; font-size: clamp(2.1rem, 9.4vw, 2.6rem); line-height: 1.02; }
+      .of-lede { margin-top: 14px; line-height: 1.55; }
+      .of-cta { margin-top: 20px; gap: 10px; }
+      .of-cta .of-btn { flex: 1 1 100%; height: 52px; }
+      .of-with { margin-top: 16px; font-size: 1rem; }
+      .of-browser { border-radius: 12px; }
+      .of-browser-bar { height: 30px; grid-template-columns: 40px minmax(0, 1fr) 40px; padding: 0 10px; }
+      .of-dots { gap: 5px; }
+      .of-dots i { width: 8px; height: 8px; }
+      .of-url { height: 20px; font-size: 0.6875rem; }
+      .of-phone { width: 29%; padding: 4px; border-radius: 20px; }
+      .of-phone-screen { border-radius: 16px; }
+      .of-sec { padding-top: 72px; }
+      .of-points { margin-top: 28px; }
+      .of-points li { grid-template-columns: 32px minmax(0, 1fr); padding: 20px 0 22px; }
+      .of-points h3 { font-size: 1.1875rem; }
+      .of-nums { grid-template-columns: 1fr; gap: 10px; margin-top: 28px; }
+      .of-nums li { min-height: 0; padding: 22px; border-radius: 22px; }
+      .of-nums b { font-size: 3.2rem; }
+      .of-quote { margin-top: 28px; border-radius: 22px; }
+      .of-plans { margin-top: 28px; }
+      .of-plan { border-radius: 26px; }
+      .of-plans-after .of-btn { width: 100%; height: 52px; }
+      .of-book { padding: 72px 0 48px; }
+      .of-book-more { border-top: 0; padding-top: 0; }
+      .of-host img { width: 72px; height: 72px; }
+      .of-stage { min-height: 700px; margin: 0 -16px; border-radius: 0; border-left: 0; border-right: 0; }
+      .of-skel-grid { grid-template-columns: repeat(5, 1fr); }
+      .of-foot { padding-bottom: 28px; }
+      .of-foot-in { display: block; }
+      .of-sticky { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 950; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); background: rgba(14,14,16,0.86); -webkit-backdrop-filter: saturate(180%) blur(22px); backdrop-filter: saturate(180%) blur(22px); border-top: 1px solid var(--of-hair); transform: translateY(110%); visibility: hidden; transition: transform 0.32s var(--of-ease), visibility 0s linear 0.32s; }
+      .of-sticky.is-on { transform: none; visibility: visible; transition: transform 0.32s var(--of-ease), visibility 0s linear 0s; }
+      .of-sticky-txt { min-width: 0; font-size: 0.875rem; line-height: 1.3; color: var(--text-dim); }
+      .of-sticky-txt strong { display: block; font-size: 0.9375rem; font-weight: 700; color: var(--text-head); }
+      .of-sticky .of-btn { flex: none; height: 46px; padding: 0 20px; }
+    }
+    @media (max-width: 400px) {
+      .of-bar .of-call { width: 44px; padding: 0; }
+      .of-bar .of-call .s { display: none; }
+    }
+    @media (max-width: 360px) {
+      .of-sticky-txt span { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html[lang] { scroll-behavior: auto; }
+      html.of-motion .of-rv { opacity: 1; transform: none; transition: none; }
+      .of-btn, .of-call, .of-link svg, .of-faq summary::after, .of-skel, .of-sticky, .of-sticky.is-on { transition: none; }
+      .of-btn:active, .of-call:active { transform: none; }
+    }
   </style>
 </head>
 <body>
@@ -149,144 +334,307 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WR9TZHT" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <nav class="gr-nav">
-    <div class="gr-nav-inner">
-      <a href="/" class="gr-nav-brand" aria-label="Button Up Media home"><img class="gr-logo" src="media/logo-cropped.webp" alt="Button Up Media" width="138" height="46" fetchpriority="high" /></a>
-      <div class="gr-nav-right">
-        <a class="gr-nav-phone" href="tel:+17867409499"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <span>Call us</span></a>
-        <a href="#book" class="btn btn-primary gr-nav-cta">Get started</a>
+  <header class="of-bar">
+    <nav class="of-wrap of-bar-in" aria-label="Button Up Media">
+      <a href="/" class="of-logo" aria-label="Button Up Media home"><img src="/images/full-logo.svg" alt="Button Up Media" width="132" height="44" /></a>
+      <div class="of-bar-actions">
+        <a class="of-call" href="tel:+17867409499" aria-label="Call (786) 740-9499"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="l">(786) 740-9499</span><span class="s">Call</span></a>
+        <a class="of-btn of-btn-gold" href="https://calendly.com/juanh-buttonupmedia/website-consultation" data-book>Book a free call</a>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </header>
 
   <main class="of-wrap">
-    <div class="of-lead">
-      <span class="eye">Your custom website</span>
-      <h1>Built from scratch to fill your <span class="g">tables</span>.</h1>
-    </div>
 
-    <!-- SELLING POINTS: first thing they see -->
-    <section class="of-points">
-      <div class="of-point">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 2.4 5.2 5.6.5-4.3 3.7 1.3 5.6L12 19.8 6.9 22.5 8.2 17 3.9 13.3l5.6-.5z"/></svg></div>
-        <div><b>No templates, fully custom built</b><p>Designed from scratch around your restaurant, not a cookie-cutter theme like everyone else uses.</p></div>
+    <!-- HERO -->
+    <header class="of-hero">
+      <div class="of-hero-copy">
+        <span class="of-label">How we'd build your new site</span>
+        <h1>Built from scratch to fill your <span class="of-gold">tables</span>.</h1>
+        <p class="of-lede">Here's what we'd build for your restaurant: a website designed and coded from scratch by our team, with every page in English and Spanish. You own all of it, and builds start at $1,500.</p>
+        <div class="of-cta" id="of-hero-cta">
+          <a class="of-btn of-btn-gold of-btn-lg" href="https://calendly.com/juanh-buttonupmedia/website-consultation" data-book>Book a free call</a>
+          <a class="of-btn of-btn-lg" href="#pricing">See pricing</a>
+        </div>
+        <div class="of-with">
+          <img src="/media/author-juan.webp" alt="" width="40" height="40" />
+          <span><strong>Free 15-minute call with Juan,</strong> our <span class="nw">co-founder</span>. He'll go through your report and tell you what he'd fix first.</span>
+        </div>
       </div>
-      <div class="of-point">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6v6c0 5 3.8 8.5 9 10 5.2-1.5 9-5 9-10V6z"/><path d="m9 12 2 2 4-4"/></svg></div>
-        <div><b>You own it forever</b><p>It is yours, no monthly rental, no getting locked into a platform you can never leave.</p></div>
+      <figure class="of-devices">
+        <div class="of-devices-stage">
+          <div class="of-browser">
+            <div class="of-browser-bar"><span class="of-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="of-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>rustypelican.com</span></div>
+            <img src="/images/website-design/rusty-pelican-desktop.avif" alt="The Rusty Pelican homepage that Button Up Media designed and built" width="1100" height="622" fetchpriority="high" />
+          </div>
+          <div class="of-phone">
+            <div class="of-phone-screen"><img src="/images/website-design/rusty-pelican-mobile.avif" alt="The Rusty Pelican menu page on a phone" width="400" height="864" decoding="async" /></div>
+          </div>
+        </div>
+        <figcaption>Rusty Pelican's website, designed and built by our team.</figcaption>
+      </figure>
+    </header>
+
+    <!-- WHAT WE'D BUILD -->
+    <section class="of-sec" id="build" aria-labelledby="build-title">
+      <div class="of-head of-rv">
+        <span class="of-label">What you get</span>
+        <h2 id="build-title">What we'd build for your restaurant</h2>
+        <p>Each site is designed to look good and to get visitors to book a table, order online or call. We build remotely, so this works for restaurants anywhere in the US.</p>
       </div>
-      <div class="of-point">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg></div>
-        <div><b>Translated pages included</b><p>English and Spanish built in, so every guest in your area feels at home.</p></div>
+      <ul class="of-points">
+        <li class="of-rv"><span class="n">01</span><div><h3>Custom design and code</h3><p>We design and build your site from scratch around your brand, without themes or drag-and-drop templates.</p></div></li>
+        <li class="of-rv"><span class="n">02</span><div><h3>Every page in English and Spanish</h3><p>A language toggle on every page lets guests switch with one tap. We write and set up both versions, and Google indexes each one separately.</p></div></li>
+        <li class="of-rv"><span class="n">03</span><div><h3>Designed for phones first</h3><p>Most of your visitors will be on a phone, so we design for the phone first and make sure pages load quickly.</p></div></li>
+        <li class="of-rv"><span class="n">04</span><div><h3>Built for Google and AI search</h3><p>SEO basics come with every build: menu pages, local pages, schema markup and copy that AI assistants like ChatGPT can read and describe correctly.</p></div></li>
+        <li class="of-rv"><span class="n">05</span><div><h3>Reservations and ordering connected</h3><p>We connect your POS, reservations and online ordering, including Toast, Square, Clover, OpenTable and others.</p></div></li>
+        <li class="of-rv"><span class="n">06</span><div><h3>You own everything</h3><p>From launch day, the domain, code, content and assets are yours, and you take all of it with you if you ever leave.</p></div></li>
+      </ul>
+    </section>
+
+    <!-- PROOF -->
+    <section class="of-sec" id="work" aria-labelledby="work-title">
+      <div class="of-head of-rv">
+        <span class="of-label">Our work</span>
+        <h2 id="work-title">The website we built for Rusty Pelican</h2>
+        <p>Rusty Pelican is a waterfront restaurant in Miami. We designed and built its website, with full-width photos, a menu split into sections, the chef's story and reservations built in. We also run its Google Ads, and these are the numbers for the Miami location in 2025.</p>
       </div>
-      <div class="of-point">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
-        <div><b>Pay as we build</b><p>Spread the cost across the build instead of paying it all at once.</p></div>
+      <ul class="of-nums">
+        <li class="--gold of-rv"><b>7:1</b><span>Return on ad spend: about $7 back for every $1 of Google Ads</span></li>
+        <li class="--light of-rv"><b>1,007</b><span>Tracked conversions, like reservations, calls and event inquiries</span></li>
+        <li class="--dark of-rv"><b>$135K</b><span>Tracked conversion value</span></li>
+      </ul>
+      <div class="of-proof-foot">
+        <p class="of-fine">Google Ads, Rusty Pelican Miami, full year 2025.</p>
+        <a class="of-link" href="/case-studies/rusty-pelican">Read the Rusty Pelican case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+
+      <figure class="of-quote of-rv">
+        <div class="of-quote-stars" role="img" aria-label="Rated 5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote lang="en"><p>&ldquo;&hellip;They completely rebuilt our website for WOA Cocktails, and the final result exceeded my expectations. The site looks modern, professional, and truly reflects our luxury brand. &hellip;&rdquo;</p></blockquote>
+        <figcaption><span><strong>Fabio Perez</strong>, Founder, WOA Cocktails, in a Google review</span><a class="of-rating" href="https://www.google.com/maps?cid=18420049328774985259" target="_blank" rel="noopener" aria-label="Rated 5.0 out of 5 on Google from 11 reviews (opens Google in a new tab)"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg><strong>5.0</strong><span class="st" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>on Google, 11 reviews</a></figcaption>
+      </figure>
+    </section>
+
+    <!-- PRICING -->
+    <section class="of-sec" id="pricing" aria-labelledby="pricing-title">
+      <div class="of-head of-rv">
+        <span class="of-label">Pricing</span>
+        <h2 id="pricing-title">What a website costs</h2>
+        <p>Both builds are one-time payments, and payment plans are available on both, so you don't have to pay in full upfront.</p>
+      </div>
+      <div class="of-plans">
+        <article class="of-plan of-rv">
+          <div class="of-plan-kick">Standard</div>
+          <h3>Website build</h3>
+          <div class="of-price"><b>$1,500</b><span>One-time build</span></div>
+          <p class="of-plan-desc">For restaurants that need a professional website and an easier way for guests to book.</p>
+          <ul>
+            <li>Custom site with copy written <span class="nw">in-house</span></li>
+            <li>SEO basics, local pages and clean metadata</li>
+            <li>Responsive layout built for phones first</li>
+            <li>Menu, booking and order links where needed</li>
+            <li>Launched and live</li>
+          </ul>
+        </article>
+        <article class="of-plan --feature of-rv">
+          <div class="of-plan-kick">Premium</div>
+          <h3>Integrated website build</h3>
+          <div class="of-price"><b>$2,000</b><span>One-time build</span></div>
+          <p class="of-plan-desc">For restaurants that want the menu, reservations and orders connected to the site and kept in sync.</p>
+          <p class="of-plan-incl">Everything in Standard, plus</p>
+          <ul>
+            <li>POS menu sync</li>
+            <li>Reservations integration</li>
+            <li>Ordering support</li>
+            <li>Reviews and analytics connected</li>
+          </ul>
+        </article>
+      </div>
+      <div class="of-plans-after">
+        <p>Optional add-ons: a content shoot for $750 ($500 when added to Premium) and a monthly care plan for $250 a month. Juan can tell you on the call which build fits your restaurant.</p>
+        <a class="of-btn of-btn-gold of-btn-lg" href="https://calendly.com/juanh-buttonupmedia/website-consultation" data-book>Book a free call</a>
       </div>
     </section>
 
-    <!-- OFFER + BOOKING -->
-    <section class="of-book-row" id="book">
-      <div class="of-offer">
-        <div class="lab">Your price</div>
-        <div class="amt"><span class="now" id="of-now">$1,500</span><span class="was" id="of-was">$2,250</span></div>
-        <span class="tag">Limited offer</span>
-        <p class="note"><b>Pay as we build.</b> No big bill up front.</p>
-        <p class="inc">Custom design, online ordering, mobile-first, and built for Google and AI search, all included.</p>
+    <!-- FAQ -->
+    <section class="of-sec" id="faq" aria-labelledby="faq-title">
+      <div class="of-faq-grid">
+        <div class="of-head">
+          <span class="of-label">FAQ</span>
+          <h2 id="faq-title">Common questions</h2>
+        </div>
+        <div class="of-faq">
+          <details>
+            <summary><h3>How much does a restaurant website cost?</h3></summary>
+            <p class="of-faq-a">Our Standard website build is $1,500 and the Premium integrated build is $2,000, both as one-time payments. Optional add-ons are a content shoot for $750 ($500 when added to Premium) and a monthly care plan for $250 a month. Payment plans are available on both builds.</p>
+          </details>
+          <details>
+            <summary><h3>What if I already have a website?</h3></summary>
+            <p class="of-faq-a">We'll usually recommend rebuilding it from scratch instead of reworking your current site. Reworking an old site tends to take longer and cost more, and the result is usually weaker. We'll look at your current site and talk it through on your free call.</p>
+          </details>
+          <details>
+            <summary><h3>Do I own the website when it's finished?</h3></summary>
+            <p class="of-faq-a">Yes. You own everything we build, including the domain, code, content and assets. If you ever stop working with us, you take all of it with you.</p>
+          </details>
+          <details>
+            <summary><h3>Can you build a website for a restaurant outside Miami or Florida?</h3></summary>
+            <p class="of-faq-a">Yes. We build websites remotely, so we can work with restaurants anywhere in the US. Our team is headquartered in Miami, and every step, from the kickoff call to launch, works the same wherever your restaurant is.</p>
+          </details>
+        </div>
       </div>
+    </section>
 
-      <div class="of-book">
+    <!-- BOOK -->
+    <section class="of-book" id="book" aria-labelledby="book-title">
+      <div class="of-book-info">
+        <span class="of-label">Free 15-minute call</span>
+        <h2 id="book-title" tabindex="-1">Book a free call with Juan</h2>
         <div class="of-host">
-          <div class="of-host-imgwrap"><img src="media/author-juan.webp" alt="Juan, Button Up Media" /></div>
-          <div>
-            <div class="lab">You'll meet with</div>
-            <div class="nm">Juan</div>
-            <div class="role">Pick a time below, it is free.</div>
-          </div>
+          <img src="/media/author-juan.webp" alt="Juan Hernandez, co-founder of Button Up Media" width="84" height="84" loading="lazy" decoding="async" />
+          <div><span class="of-host-name">Juan Hernandez</span><span class="of-host-role"><span class="nw">Co-founder</span>, Button Up Media</span></div>
         </div>
-        <div class="of-cal">
-          <div class="calendly-inline-widget" data-url="https://calendly.com/juanh-buttonupmedia/website-consultation?hide_gdpr_banner=1&primary_color=b57e1e"></div>
-          <noscript><div class="of-cal-fallback">Enable JavaScript to book, or <a href="https://calendly.com/juanh-buttonupmedia/website-consultation" target="_blank" rel="noopener">open the scheduler</a>.</div></noscript>
+        <p class="of-book-copy">Juan takes this call himself. He'll go through your report with you and tell you what he would fix first on your website. The call is free, takes 15 minutes, and can be on Google Meet or by phone, in English or Spanish.</p>
+      </div>
+      <div class="of-stage" id="of-stage">
+        <div class="of-skel" aria-hidden="true">
+          <div class="of-skel-status">Loading calendar</div>
+          <i class="w1"></i><i class="w2"></i>
+          <div class="of-skel-grid"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
         </div>
+        <div class="of-cal" id="of-cal"></div>
+        <noscript><div class="of-cal-fallback">Enable JavaScript to see the calendar, or <a href="https://calendly.com/juanh-buttonupmedia/website-consultation">open the booking page</a>.</div></noscript>
+      </div>
+      <div class="of-book-more">
+        <a class="of-rating" href="https://www.google.com/maps?cid=18420049328774985259" target="_blank" rel="noopener" aria-label="Rated 5.0 out of 5 on Google from 11 reviews (opens Google in a new tab)"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg><strong>5.0</strong><span class="st" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>on Google, 11 reviews</a>
+        <a class="of-tel" href="tel:+17867409499">Prefer to call? (786) 740-9499</a>
       </div>
     </section>
   </main>
 
   <footer class="of-foot">
-    <div class="of-wrap">&copy; 2026 Button Up Media. Restaurant marketing that fills tables.</div>
+    <div class="of-wrap of-foot-in">
+      <span>&copy; 2026 Button Up Media</span>
+      <ul>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/terms">Terms</a></li>
+        <li><a href="tel:+17867409499">(786) 740-9499</a></li>
+      </ul>
+    </div>
   </footer>
 
-  <script>
-    /* Price drops from 2,250 to 1,500 as an enhancement. The DOM already shows
-       the real price ($1,500), so if the animation cannot run (no JS, reduced
-       motion, throttled rAF) the visitor still sees the correct, lower price,
-       never the higher one. */
-    (function () {
-      var now = document.getElementById("of-now"), was = document.getElementById("of-was");
-      if (!now) return;
-      function fmt(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
-      var finished = false;
-      function finish() { if (finished) return; finished = true; now.textContent = fmt(1500); if (was) was.classList.add("show"); }
-      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      function animate() {
-        if (reduce || !("requestAnimationFrame" in window)) { finish(); return; }
-        now.textContent = fmt(2250);
-        var start = 2250, end = 1500, dur = 1300, t0 = null;
-        function step(ts) {
-          if (finished) return;
-          if (!t0) t0 = ts;
-          var p = Math.min(1, (ts - t0) / dur);
-          var e = 1 - Math.pow(1 - p, 3);
-          now.textContent = fmt(start + (end - start) * e);
-          if (p < 1) requestAnimationFrame(step); else finish();
-        }
-        requestAnimationFrame(step);
-        setTimeout(finish, 2600); // safety: never leave it stuck mid-count
-      }
-      function inView(el) { var r = el.getBoundingClientRect(); return r.top < (window.innerHeight || 0) && r.bottom > 0; }
-      var started = false;
-      function start() { if (started) return; started = true; animate(); }
-      if (reduce || !("IntersectionObserver" in window) || inView(now)) { finish(); }
-      else {
-        var io = new IntersectionObserver(function (es) {
-          es.forEach(function (en) { if (en.isIntersecting) { start(); io.disconnect(); } });
-        }, { threshold: 0.5 });
-        io.observe(now);
-      }
-    })();
+  <!-- phones: slim booking bar, hidden at the top and while the calendar is on screen -->
+  <div class="of-sticky" id="of-sticky">
+    <div class="of-sticky-txt"><strong>Free 15-minute call</strong><span>with Juan, our <span class="nw">co-founder</span></span></div>
+    <a class="of-btn of-btn-gold" href="https://calendly.com/juanh-buttonupmedia/website-consultation" data-book>Book a free call</a>
+  </div>
 
-    /* Calendly inline embed, loaded when it nears the viewport (keeps first paint fast). */
+  <script>
     (function () {
-      var host = document.querySelector(".of-cal .calendly-inline-widget");
-      if (!host) return;
-      var loaded = false;
-      function load() {
-        if (loaded) return; loaded = true;
-        var link = document.createElement("link");
-        link.rel = "stylesheet"; link.href = "https://assets.calendly.com/assets/external/widget.css";
-        document.head.appendChild(link);
-        var s = document.createElement("script");
+      var d = document;
+      var EVENT_URL = "https://calendly.com/juanh-buttonupmedia/website-consultation";
+      var THEME = "?hide_gdpr_banner=1&background_color=141416&text_color=f6f0e6&primary_color=e2a84d";
+      var reduce = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+      var book = d.getElementById("book");
+      var host = d.getElementById("of-cal");
+      var stage = d.getElementById("of-stage");
+
+      /* Calendly inline embed, loaded when the booking section nears the viewport
+         (keeps first paint fast). */
+      var started = false;
+      function loadCalendly() {
+        if (started || !host) return;
+        started = true;
+        var css = d.createElement("link");
+        css.rel = "stylesheet"; css.href = "https://assets.calendly.com/assets/external/widget.css";
+        d.head.appendChild(css);
+        var s = d.createElement("script");
         s.src = "https://assets.calendly.com/assets/external/widget.js"; s.async = true;
         s.onload = function () {
           if (window.Calendly && Calendly.initInlineWidget) {
-            Calendly.initInlineWidget({ url: host.getAttribute("data-url"), parentElement: host });
+            Calendly.initInlineWidget({ url: EVENT_URL + THEME, parentElement: host });
           }
         };
-        document.body.appendChild(s);
+        d.body.appendChild(s);
+        if ("MutationObserver" in window) {
+          var mo = new MutationObserver(function () {
+            if (host.querySelector("iframe")) { stage.classList.add("is-loaded"); mo.disconnect(); }
+          });
+          mo.observe(host, { childList: true, subtree: true });
+        }
       }
       if ("IntersectionObserver" in window) {
-        var io = new IntersectionObserver(function (es) {
-          es.forEach(function (en) { if (en.isIntersecting) { load(); io.disconnect(); } });
-        }, { rootMargin: "600px" });
-        io.observe(host);
-      } else { load(); }
+        var calIo = new IntersectionObserver(function (es) {
+          for (var i = 0; i < es.length; i++) if (es[i].isIntersecting) { loadCalendly(); calIo.disconnect(); return; }
+        }, { rootMargin: "600px 0px" });
+        calIo.observe(host);
+      } else { loadCalendly(); }
+
+      /* Every booking button: open the Calendly popup once Calendly has loaded,
+         otherwise scroll to the calendar and start loading it. shared.js records
+         the click (booking_cta_click) from the calendly.com href. */
+      d.addEventListener("click", function (e) {
+        var a = e.target && e.target.closest ? e.target.closest("a[data-book]") : null;
+        if (!a || e.defaultPrevented || e.button > 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        if (window.Calendly && Calendly.initPopupWidget) {
+          Calendly.initPopupWidget({ url: EVENT_URL + THEME });
+          return;
+        }
+        loadCalendly();
+        if (book) {
+          try { book.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }); }
+          catch (err) { book.scrollIntoView(); }
+          var title = d.getElementById("book-title");
+          if (title) { try { title.focus({ preventScroll: true }); } catch (err) {} }
+        }
+      });
+
+      /* Calendly announces a confirmed booking by postMessage. */
       window.addEventListener("message", function (e) {
         if (e.origin && e.origin.indexOf("calendly.com") === -1) return;
         if (e.data && e.data.event === "calendly.event_scheduled") {
           window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({ event: "booking_complete" });
+          // A completed booking belongs to no CTA, so clear the click parameters
+          // GTM would otherwise carry over from the last booking click.
+          window.dataLayer.push({ event: "booking_complete", cta_location: undefined, link_location: undefined });
         }
       });
+
+      if (!("IntersectionObserver" in window)) return;
+
+      /* Phones: the booking bar shows once the hero button has scrolled away and
+         hides while the calendar (or the footer) is on screen. */
+      var bar = d.getElementById("of-sticky");
+      var heroCta = d.getElementById("of-hero-cta");
+      var foot = d.querySelector(".of-foot");
+      if (bar && heroCta) {
+        var seen = { hero: true, book: false, foot: false };
+        var barIo = new IntersectionObserver(function (es) {
+          es.forEach(function (en) {
+            seen[en.target === heroCta ? "hero" : en.target === book ? "book" : "foot"] = en.isIntersecting;
+          });
+          bar.classList.toggle("is-on", !seen.hero && !seen.book && !seen.foot);
+        });
+        [heroCta, book, foot].forEach(function (el) { if (el) barIo.observe(el); });
+      }
+
+      /* Gentle reveals below the fold (transform/opacity only, off for reduced motion). */
+      if (!reduce) {
+        var items = d.querySelectorAll(".of-rv");
+        d.documentElement.classList.add("of-motion");
+        var rvIo = new IntersectionObserver(function (es) {
+          es.forEach(function (en) {
+            if (en.isIntersecting) { en.target.classList.add("is-in"); rvIo.unobserve(en.target); }
+          });
+        }, { rootMargin: "0px 0px -8% 0px" });
+        for (var i = 0; i < items.length; i++) {
+          // stagger siblings in a row a little (0, 60, 120ms)
+          var sib = items[i].parentNode ? [].indexOf.call(items[i].parentNode.children, items[i]) : 0;
+          items[i].style.transitionDelay = (items[i].matches("li, article") ? (sib % 3) * 60 : 0) + "ms";
+          rvIo.observe(items[i]);
+        }
+      }
     })();
   </script>
   <script defer src="shared.js?v=site-fixes-1"></script>
