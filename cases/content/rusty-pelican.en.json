@@ -4,8 +4,7 @@
   "order": 5,
   "service": "ads",
   "services": [
-    "ads",
-    "web"
+    "ads"
   ],
   "client": "Rusty Pelican",
   "organizations": [
@@ -13,11 +12,11 @@
     "The Rusty Pelican Tampa"
   ],
   "metaTitle": "Rusty Pelican Google Ads Case Study | Button Up Media",
-  "metaDescription": "Google Ads for Rusty Pelican Miami on Key Biscayne and Rusty Pelican Tampa: 7:1 ROAS, 1,007 conversions, 27:1 on private events, plus the website we built.",
-  "ldHeadline": "Rusty Pelican: Google Ads in Miami and Tampa, plus a new restaurant website",
+  "metaDescription": "Google Ads for Rusty Pelican Miami on Key Biscayne and Rusty Pelican Tampa in 2025: 7:1 ROAS, 1,007 conversions and 27:1 ROAS on private events in Tampa.",
+  "ldHeadline": "Rusty Pelican: Google Ads for reservations and private events in Miami and Tampa",
   "h1": "Rusty Pelican",
-  "h1Sub": "Google Ads in Miami and Tampa, plus the website",
-  "answer": "We run Google Ads for Rusty Pelican in Miami and Tampa and built its website. In 2025, every $1 of Miami ads brought back about $7 in tracked bookings.",
+  "h1Sub": "Google Ads in Miami and Tampa",
+  "answer": "We run Google Ads for Rusty Pelican in Miami and Tampa. In 2025, every $1 of Miami ads brought back about $7 in tracked bookings.",
   "descriptor": "Waterfront restaurant",
   "area": {
     "name": "Key Biscayne, Miami and Tampa",
@@ -26,31 +25,11 @@
   },
   "timeframe": "Google Ads, 2025",
   "hero": {
-    "type": "image",
-    "src": "/images/rusty-pelican-bar.avif",
-    "width": 1080,
-    "height": 1932,
-    "alt": "The bar at Rusty Pelican Miami, with a cocktail on the counter",
-    "chip": "7:1 ROAS"
+    "type": "numbers"
   },
   "card": {
-    "src": "/images/rusty-pelican-bar.avif",
-    "width": 1080,
-    "height": 1932,
-    "alt": "The bar at Rusty Pelican Miami",
     "value": "7:1",
     "label": "ROAS in Miami"
-  },
-  "webCard": {
-    "kicker": "Rusty Pelican · Key Biscayne",
-    "title": "A new website for Rusty Pelican",
-    "body": "The site has full-width photos, a menu split into sections, the chef's story and built-in reservations.",
-    "image": {
-      "src": "/images/rusty-pelican-device-mockup-transparent.webp",
-      "width": 1080,
-      "height": 746,
-      "alt": "The Rusty Pelican website Button Up Media built, shown on a laptop and a phone"
-    }
   },
   "metrics": [
     {
@@ -92,17 +71,6 @@
       {
         "title": "Track every booking",
         "bodyHtml": "We set up conversion tracking on calls, reservations and form fills, and each month we report the results against what was spent."
-      },
-      {
-        "title": "Build the website",
-        "bodyHtml": "We also designed and built the Rusty Pelican website. It has full-width photos, a menu split into sections, the chef's story and built-in reservations. There's more on our <a href=\"/restaurant-website-design\">restaurant website design</a> page.",
-        "figure": {
-          "src": "/images/rusty-pelican-device-mockup-transparent.webp",
-          "width": 1080,
-          "height": 746,
-          "alt": "The Rusty Pelican website Button Up Media built, shown on a laptop and a phone",
-          "caption": "The Rusty Pelican site, on a laptop and a phone."
-        }
       }
     ]
   },
@@ -139,11 +107,7 @@
   "links": [
     {
       "href": "/restaurant-advertising",
-      "text": "Google Ads for restaurants"
-    },
-    {
-      "href": "/restaurant-website-design",
-      "text": "Restaurant website design"
+      "text": "Paid ads for restaurants"
     }
   ]
 }

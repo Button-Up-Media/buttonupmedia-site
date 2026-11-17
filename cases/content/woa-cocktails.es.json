@@ -3,9 +3,13 @@
   "lang": "es",
   "order": 7,
   "service": "web",
-  "services": ["web"],
+  "services": [
+    "web"
+  ],
   "client": "WOA Cocktails",
-  "organizations": ["WOA Cocktails"],
+  "organizations": [
+    "WOA Cocktails"
+  ],
   "metaTitle": "WOA Cocktails: sitio web bilingüe | Button Up Media",
   "metaDescription": "Cómo Button Up Media reconstruyó desde cero el sitio de WOA Cocktails, pensado primero para el celular, con cada página en inglés y español y visible en Google.",
   "ldHeadline": "WOA Cocktails: un sitio web bilingüe reconstruido desde cero",
@@ -13,15 +17,36 @@
   "h1Sub": "Un sitio web bilingüe, reconstruido desde cero",
   "answer": "WOA Cocktails es un bar móvil de lujo que atiende Miami y Nueva York. Reconstruimos su sitio web desde cero, con cada página en inglés y en español.",
   "descriptor": "Bar móvil de lujo y empresa de bebidas",
-  "area": { "name": "Miami y Nueva York", "detail": null, "page": null },
+  "area": {
+    "name": "Miami y Nueva York",
+    "detail": null,
+    "page": null
+  },
   "timeframe": "Reconstrucción completa del sitio",
   "hero": {
     "type": "device",
     "url": "woacocktails.com",
-    "desktop": { "src": "/media/woa-hero-desktop.webp", "width": 1600, "height": 904, "alt": "La página de inicio de WOA Cocktails que diseñó y construyó Button Up Media" },
-    "mobile": { "src": "/media/woa-hero-mobile.webp", "width": 690, "height": 1484, "alt": "El sitio web de WOA Cocktails en un teléfono" }
+    "desktop": {
+      "src": "/media/woa-hero-desktop.webp",
+      "width": 1600,
+      "height": 904,
+      "alt": "La página de inicio de WOA Cocktails que diseñó y construyó Button Up Media"
+    },
+    "mobile": {
+      "src": "/media/woa-hero-mobile.webp",
+      "width": 690,
+      "height": 1484,
+      "alt": "El sitio web de WOA Cocktails en un teléfono"
+    }
   },
-  "card": { "src": "/media/woa-hero-mobile.webp", "width": 690, "height": 1484, "alt": "El sitio web de WOA Cocktails en un teléfono", "value": "EN + ES", "label": "en cada página" },
+  "card": {
+    "src": "/media/woa-hero-mobile.webp",
+    "width": 690,
+    "height": 1484,
+    "alt": "El sitio web de WOA Cocktails en un teléfono",
+    "value": "EN + ES",
+    "label": "en cada página"
+  },
   "webCard": {
     "kicker": "WOA Cocktails · Miami y Nueva York",
     "title": "Un sitio web bilingüe para una empresa de bar móvil",
@@ -29,9 +54,21 @@
     "device": true
   },
   "metrics": [
-    { "value": "2 semanas", "label": "Para construirlo, en palabras de Fabio Perez", "meaning": "El sitio a la medida tomó unas dos semanas de principio a fin." },
-    { "value": "EN + ES", "label": "Cada página en los dos idiomas", "meaning": "Un toque cambia todo el sitio entre inglés y español." },
-    { "value": "2", "label": "Idiomas que aparecen en Google", "meaning": "Si alguien busca en inglés o en español, WOA aparece, con sus páginas principales listadas justo debajo del resultado." }
+    {
+      "value": "2 semanas",
+      "label": "Para construirlo, en palabras de Fabio Perez",
+      "meaning": "El sitio a la medida tomó unas dos semanas de principio a fin."
+    },
+    {
+      "value": "EN + ES",
+      "label": "Cada página en los dos idiomas",
+      "meaning": "Un toque cambia todo el sitio entre inglés y español."
+    },
+    {
+      "value": "2",
+      "label": "Idiomas que aparecen en Google",
+      "meaning": "Si alguien busca en inglés o en español, WOA aparece, con sus páginas principales listadas justo debajo del resultado."
+    }
   ],
   "situation": {
     "paragraphs": [
@@ -41,9 +78,69 @@
   },
   "steps": {
     "items": [
-      { "title": "Reconstruir desde cero", "bodyHtml": "Diseñamos y programamos el sitio nosotros mismos, sin partir de una plantilla. Tiene imágenes grandes y movimiento suave, y el diseño se pensó primero para el celular." },
-      { "title": "Hacer cada página en dos idiomas", "bodyHtml": "Cada página está en inglés y en español, y un botón en el menú cambia de idioma con un toque.", "figure": { "src": "/media/woa-es-bar.jpg", "width": 1600, "height": 904, "alt": "La misma página de servicio de WOA Cocktails en español, con el botón EN/ES en la navegación", "caption": "Una página de servicio de WOA en español. Un toque la cambia a inglés." } },
-      { "title": "Prepararlo para Google en los dos idiomas", "bodyHtml": "Preparamos las dos versiones para los buscadores, así WOA aparece tanto si alguien busca en inglés como en español.", "figure": { "src": "/media/woa-serp-es-fit.png", "width": 1500, "height": 885, "alt": "Resultado de WOA Cocktails en Google en español, con enlaces a Experiencia de bar móvil, Eventos, Servicios y Acerca de", "caption": "WOA en Google en español, con sus páginas principales debajo del resultado." } }
+      {
+        "title": "Reconstruir desde cero",
+        "bodyHtml": "Diseñamos y programamos el sitio nosotros mismos, sin partir de una plantilla. Tiene imágenes grandes y movimiento suave, y el diseño se pensó primero para el celular."
+      },
+      {
+        "title": "Hacer cada página en dos idiomas",
+        "bodyHtml": "Cada página está en inglés y en español, y un botón en el menú cambia de idioma con un toque.",
+        "figure": {
+          "src": "/media/woa-es-bar.jpg",
+          "width": 1600,
+          "height": 904,
+          "alt": "La misma página de servicio de WOA Cocktails en español, con el botón EN/ES en la navegación",
+          "caption": "Una página de servicio de WOA en español. Un toque la cambia a inglés."
+        }
+      },
+      {
+        "title": "Prepararlo para Google en los dos idiomas",
+        "bodyHtml": "Preparamos las dos versiones para los buscadores, así WOA aparece tanto si alguien busca en inglés como en español.",
+        "figure": {
+          "src": "/media/woa-serp-es-fit.png",
+          "width": 1500,
+          "height": 885,
+          "alt": "Resultado de WOA Cocktails en Google en español, con enlaces a Experiencia de bar móvil, Eventos, Servicios y Acerca de",
+          "caption": "WOA en Google en español, con sus páginas principales debajo del resultado."
+        }
+      }
+    ]
+  },
+  "walkthrough": {
+    "intro": "Más del sitio, tal como se ve en una laptop.",
+    "items": [
+      {
+        "src": "/media/woa-walk-services.webp",
+        "width": 1200,
+        "height": 613,
+        "alt": "La sección de servicios del sitio de WOA Cocktails, con tres tarjetas de servicio y fotos",
+        "title": "Servicios",
+        "caption": "Los tres servicios, cada uno con una foto y un resumen corto."
+      },
+      {
+        "src": "/media/woa-walk-miami.webp",
+        "width": 1200,
+        "height": 613,
+        "alt": "La sección del sitio de WOA Cocktails sobre su llegada a Miami, con la foto de un evento en una azotea",
+        "title": "Ahora en Miami",
+        "caption": "Una sección sobre la llegada de WOA de Nueva York a Miami."
+      },
+      {
+        "src": "/media/woa-walk-reviews.webp",
+        "width": 1200,
+        "height": 613,
+        "alt": "La sección de reseñas del sitio de WOA Cocktails, con seis reseñas de clientes",
+        "title": "Reseñas",
+        "caption": "Reseñas de anfitriones de eventos pasados, desde bodas hasta eventos corporativos."
+      },
+      {
+        "src": "/media/woa-walk-inquiry.webp",
+        "width": 1200,
+        "height": 613,
+        "alt": "La sección final del sitio de WOA Cocktails, con un botón para empezar una solicitud",
+        "title": "Solicitudes",
+        "caption": "La sección final, con un botón para empezar una solicitud de evento."
+      }
     ]
   },
   "results": null,
@@ -54,7 +151,13 @@
     "source": "reseña en Google, traducida del inglés"
   },
   "links": [
-    { "href": "/es/diseno-web-restaurantes", "text": "Diseño web para restaurantes" },
-    { "href": "/es/analizador-redes-sociales-web", "text": "Analice su sitio web gratis" }
+    {
+      "href": "/es/diseno-web-restaurantes",
+      "text": "Diseño web para restaurantes"
+    },
+    {
+      "href": "/es/analizador-redes-sociales-web",
+      "text": "Analice su sitio web gratis"
+    }
   ]
 }

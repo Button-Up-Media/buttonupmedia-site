@@ -1,12 +1,12 @@
 {
   "lang": "es",
   "metaTitle": "Casos de éxito: marketing de restaurantes | Button Up Media",
-  "metaDescription": "Resultados de Button Up Media para restaurantes de Miami y el Sur de Florida: más de 200M de vistas orgánicas, Google Ads de hasta 72:1 y sitios web bilingües.",
+  "metaDescription": "Casos de éxito en marketing para restaurantes: más de 200M de vistas orgánicas combinadas en redes, Google Ads de hasta 72:1 y un sitio web bilingüe.",
   "ogImage": "/media/cs-fatty-crab-reel.webp",
   "eyebrow": "Resultados de clientes",
   "h1": "Casos de éxito en marketing para restaurantes",
   "h1Accent": "marketing para restaurantes",
-  "answer": "Nuestro trabajo para restaurantes ha sumado más de 200M de vistas orgánicas en redes sociales, y en 2025 una cuenta de Google Ads devolvió unos $72 por cada $1 invertido.",
+  "answer": "Nuestros clientes suman más de 200M de vistas orgánicas combinadas en redes, y en 2025 una cuenta de Google Ads devolvió unos $72 por cada $1 invertido.",
   "primaryCta": "Agende una llamada estratégica gratis",
   "secondaryCta": "Pruebe el analizador gratis",
   "wallLabel": "Videos de tres de nuestros clientes",
@@ -43,7 +43,7 @@
   "sections": {
     "social": {
       "tab": "Redes sociales",
-      "h2": "Resultados en redes sociales de cuatro restaurantes",
+      "h2": "Resultados en redes sociales de nuestros clientes",
       "intro": "Son vistas orgánicas, es decir, no se pagaron con anuncios. Nuestro equipo hizo y publicó los videos. Toca un restaurante para ver lo que hicimos.",
       "order": [
         "tonis-sushi-bar",
@@ -82,11 +82,10 @@
     },
     "web": {
       "tab": "Sitios web",
-      "h2": "Sitios web que construimos desde cero",
+      "h2": "Un sitio web que construimos desde cero",
       "intro": "Programamos cada sitio desde cero, sin usar plantillas, y lo diseñamos primero para el celular.",
       "order": [
-        "woa-cocktails",
-        "rusty-pelican"
+        "woa-cocktails"
       ]
     }
   },

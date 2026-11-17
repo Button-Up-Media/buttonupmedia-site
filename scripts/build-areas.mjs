@@ -179,7 +179,6 @@ function extractChrome(html, name) {
     gtm: pick(/<!-- Google Tag Manager -->[\s\S]*?<!-- End Google Tag Manager -->/, 'GTM snippet'),
     gtmNoscript: pick(/<!-- Google Tag Manager \(noscript\) -->[\s\S]*?<!-- End Google Tag Manager \(noscript\) -->/, 'GTM noscript'),
     fonts: fonts.map((l) => absolutize(l.trim())).join('\n  '),
-    lucide: pick(/<script defer src="https:\/\/unpkg\.com\/lucide@[^"]+"><\/script>/, 'lucide script'),
     depth: pick(/<div class="depth-canvas"[\s\S]*?<\/div>\s*<\/div>/, 'depth canvas'),
     nav: absolutize(pick(/<nav class="lib-nav"[\s\S]*?<\/nav>/, 'nav')),
     footer: absolutize(pick(/<footer class="lib-section footer-demo">[\s\S]*?<\/footer>/, 'footer')),
@@ -736,7 +735,6 @@ function renderHead({ c, t, chrome, url, alternates, hasAlt, schema, css, preloa
   <meta name="twitter:image" content="${OG_IMAGE}" />
   ${chrome.fonts}
   ${preload}
-  ${chrome.lucide}
   <link rel="stylesheet" href="/shared.css?v=${chrome.cssVer}" />
   <script type="application/ld+json">
 ${ldJson(schema)}

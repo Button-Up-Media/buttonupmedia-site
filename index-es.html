@@ -382,11 +382,6 @@
     .v3-home .h-head-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
 
     /* results, wrapped */
-    .v3-home .h-deck-nav { display: flex; gap: 8px; flex: none; }
-    .v3-home .h-deck-nav button { width: 48px; height: 48px; border-radius: 999px; border: 1px solid var(--v3-hair-2); background: rgba(255,255,255,0.04); color: var(--text-head); display: grid; place-items: center; cursor: pointer; transition: background .2s ease, transform .18s var(--v3-ease); }
-    .v3-home .h-deck-nav button:hover { background: rgba(255,255,255,0.1); }
-    .v3-home .h-deck-nav button:active { transform: scale(0.94); }
-    .v3-home .h-deck-nav svg { width: 20px; height: 20px; }
     .v3-home .h-deck { list-style: none; display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; margin: 36px calc(50% - 50vw) 0; padding: 4px max(24px, calc((100vw - var(--max)) / 2)) 14px; scroll-padding-inline: max(24px, calc((100vw - var(--max)) / 2)); scrollbar-width: none; }
     .v3-home .h-deck::-webkit-scrollbar { display: none; }
     .v3-home .h-deck > li { flex: 0 0 clamp(264px, 25vw, 318px); scroll-snap-align: start; }
@@ -492,7 +487,12 @@
     .v3-home .h-areas nav { display: flex; flex-wrap: wrap; gap: 8px; }
     .v3-home .h-areas nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; background: rgba(255,255,255,0.06); color: var(--text-head); font-size: 0.9375rem; font-weight: 600; transition: background .2s ease; }
     .v3-home .h-areas nav a:hover { background: rgba(255,255,255,0.12); }
-    .v3-home .h-areas nav a:last-child { background: transparent; border: 1px solid var(--v3-hair-2); }
+    .v3-home .h-areas nav a.--all { background: transparent; border: 1px solid var(--v3-hair-2); }
+    .v3-home .h-card.--shot { padding: 0; background: var(--v3-elev-1); border: 1px solid var(--v3-hair); color: var(--text-head); }
+    .v3-home .h-card.--shot .h-card-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .v3-home .h-card.--shot .h-card-top { position: relative; z-index: 1; margin: 14px; padding: 10px 14px; border-radius: 16px; background: rgba(11,11,12,0.8); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+    .v3-home .h-card.--shot .h-card-go { z-index: 2; top: 20px; right: 20px; background: rgba(11,11,12,0.7); color: #f6f0e6; }
+    .v3-home .h-areas-lab { flex-basis: 100%; margin-top: 6px; font-size: 0.8125rem; font-weight: 650; color: rgba(246,240,230,0.56); }
 
     /* FAQ (markup kept verbatim) */
     .v3-home #faq { padding: clamp(80px, 11vw, 136px) 0 0; }
@@ -542,7 +542,6 @@
       .v3-home .h-cta { margin-top: 22px; }
       .v3-home .h-cta .btn { flex: 1 1 100%; }
       .v3-home .h-head-row { display: block; }
-      .v3-home .h-deck-nav { display: none; }
       .v3-home .h-deck { margin: 28px -16px 0; padding: 4px 16px 14px; scroll-padding-inline: 16px; gap: 12px; }
       .v3-home .h-deck > li { flex-basis: 78%; }
       .v3-home .h-card { min-height: 380px; }
@@ -599,14 +598,14 @@
           <a href="/es/analizador-redes-sociales-web" class="lib-mobile-menu-only lib-mobile-action --grader" target="_blank" rel="noopener" aria-label="Analizador gratis de redes y web (se abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Analizador gratis de redes y web</a>
           <a href="/es/casos-de-exito" class="lib-mobile-menu-only lib-mobile-action --ghost">Casos de éxito</a>
           <a href="/es/nosotros" class="lib-mobile-menu-only lib-mobile-action --ghost">Nosotros</a>
-          <a href="tel:+17867409499" class="lib-mobile-menu-only lib-mobile-action --ghost">Llámanos</a>
+          <a href="tel:+17867409499" class="lib-mobile-menu-only lib-mobile-action --ghost">Llame al (786) 740-9499</a>
           <a href="/es/contacto" class="lib-mobile-menu-only lib-mobile-action --primary">Agende su llamada de estrategia gratis</a>
         </div>
       </details>
       <a href="/es/casos-de-exito">Casos de éxito</a>
       <a href="/es/nosotros">Nosotros</a>
       <a href="/es/analizador-redes-sociales-web" class="lib-nav-grader" target="_blank" rel="noopener" aria-label="Analizador Gratis (se abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Analizador Gratis</a>
-      <a class="lib-nav-phone" href="tel:+17867409499">Llámanos</a>
+      <a class="lib-nav-phone" href="tel:+17867409499">(786) 740-9499</a>
       <a href="/es/contacto" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Agende su llamada de estrategia gratis</a>
     </div>
   </nav>
@@ -663,14 +662,10 @@
           <div class="h-head">
             <div class="lib-section-label">Resultados</div>
             <h2>Resultados de nuestros clientes</h2>
-            <p>Resultados en redes sociales orgánicas y en anuncios pagados de restaurantes con los que trabajamos. Toca una tarjeta para ver el caso completo.</p>
-          </div>
-          <div class="h-deck-nav">
-            <button type="button" data-deck="-1" aria-label="Resultados anteriores"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
-            <button type="button" data-deck="1" aria-label="Más resultados"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+            <p>Resultados de restaurantes con los que trabajamos, en redes sociales orgánicas, anuncios pagados y sitios web. Toca una tarjeta para ver el caso completo.</p>
           </div>
         </div>
-        <div class="h-seg" role="tablist" aria-label="Resultados por canal"><button type="button" role="tab" id="h-tab-social" aria-controls="h-panel-social" aria-selected="true">Redes orgánicas</button><button type="button" role="tab" id="h-tab-ads" aria-controls="h-panel-ads" aria-selected="false">Anuncios pagados</button></div>
+        <div class="h-seg" role="tablist" aria-label="Resultados por canal"><button type="button" role="tab" id="h-tab-social" aria-controls="h-panel-social" aria-selected="true">Redes orgánicas</button><button type="button" role="tab" id="h-tab-ads" aria-controls="h-panel-ads" aria-selected="false">Anuncios pagados</button><button type="button" role="tab" id="h-tab-web" aria-controls="h-panel-web" aria-selected="false">Sitios web</button></div>
         <div class="h-panel" id="h-panel-social" role="tabpanel" aria-labelledby="h-tab-social">
           <h3 class="h-panel-h">Redes orgánicas</h3>
           <ul class="h-deck">
@@ -732,6 +727,35 @@
             </a></li>
           </ul>
           <div class="h-panel-foot"><a class="btn" href="/es/casos-de-exito#ads">Vea todos los resultados de anuncios pagados <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+        </div><div class="h-panel" id="h-panel-web" role="tabpanel" aria-labelledby="h-tab-web">
+          <h3 class="h-panel-h">Sitios web</h3>
+          <p class="h-panel-note">Diseñamos y construimos sitios web a la medida desde cero, con cada página en inglés y español. Este es un proyecto reciente para WOA Cocktails, un bar móvil de lujo y empresa de bebidas.</p>
+          <ul class="h-deck">
+            <li><a class="h-card --shot" href="/es/casos-de-exito/woa-cocktails">
+              <img class="h-card-img" src="/media/woa-hero-mobile.webp" alt="El sitio web de WOA Cocktails en un teléfono" width="690" height="1484" loading="lazy" decoding="async" />
+              <span class="h-card-top"><span class="h-card-who">WOA Cocktails<small>Sitio completo</small></span></span>
+              <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a></li><li><a class="h-card --gold" href="/es/casos-de-exito/woa-cocktails">
+              <span class="h-card-top"><span class="h-card-who">WOA Cocktails<small>Sitio a la medida</small></span></span>
+              <span class="h-card-num">2 semanas</span>
+              <span class="h-card-label">para construirlo, en palabras del fundador</span>
+              <span class="h-card-foot">Un sitio a la medida, hecho desde cero.</span>
+              <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a></li><li><a class="h-card --light" href="/es/casos-de-exito/woa-cocktails">
+              <span class="h-card-top"><span class="h-card-who">WOA Cocktails<small>Sitio bilingüe</small></span></span>
+              <span class="h-card-num">EN + ES</span>
+              <span class="h-card-label">cada página en los dos idiomas</span>
+              <span class="h-card-foot">Con un toque cambia todo el sitio de idioma.</span>
+              <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a></li><li><a class="h-card --dark" href="/es/casos-de-exito/woa-cocktails">
+              <span class="h-card-top"><span class="h-card-who">WOA Cocktails<small>Búsquedas en Google</small></span></span>
+              <span class="h-card-num">2</span>
+              <span class="h-card-label">idiomas que aparecen en Google</span>
+              <span class="h-card-foot">Aparece en búsquedas en inglés y en español.</span>
+              <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a></li>
+          </ul>
+          <div class="h-panel-foot"><a class="btn" href="/es/casos-de-exito/woa-cocktails">Vea el caso de WOA Cocktails <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
         </div>
       </div>
     </section>
@@ -867,8 +891,10 @@
         </div>
         <ol class="h-steps"><li class="h-step"><b>01</b><h3>Descubrimiento</h3><p>Conocemos tu concepto, tus clientes y tus metas, y revisamos cómo aparece hoy tu restaurante en línea: tu perfil de Google, tu página web y tus redes sociales.</p></li><li class="h-step"><b>02</b><h3>Plan</h3><p>Armamos un plan según lo que encontramos y lo que quieres conseguir, ya sean reservas, pedidos en línea, eventos privados o más clientes en el local.</p></li><li class="h-step"><b>03</b><h3>Lanzamiento</h3><p>Según los servicios que elijas, grabamos contenido, creamos o actualizamos tu página web, configuramos tu Perfil de Empresa de Google y lanzamos tus anuncios.</p></li><li class="h-step"><b>04</b><h3>Reportes mensuales</h3><p>Cada mes te mostramos qué funcionó y qué no, y ajustamos el plan para que más de tu presupuesto vaya a lo que trae clientes.</p></li></ol>
         <div class="h-areas">
-          <div><h3>Dónde trabajamos</h3><p>Tenemos nuestra sede en Miami, FL, y trabajamos con restaurantes en cualquier parte de Estados Unidos, con los mismos servicios y la misma calidad de trabajo estés donde estés. En los alrededores de Miami, eso incluye South Beach, Brickell, Wynwood, Coral Gables, Doral, Kendall, Pinecrest y Fort Lauderdale.</p></div>
+          <div><h3>Dónde trabajamos</h3><p>Tenemos nuestra sede en Miami, FL, y trabajamos con restaurantes en cualquier parte de Estados Unidos. Entre nuestros clientes hay restaurantes en Miami, Tampa y California, y todos reciben los mismos servicios y la misma calidad de trabajo.</p></div>
           <nav role="navigation" aria-label="Zonas que atendemos">
+        <a class="--all" href="/es/zonas-que-atendemos">En todo Estados Unidos</a>
+        <span class="h-areas-lab">Páginas locales</span>
         <a href="/es/marketing-restaurantes-miami-beach">Miami Beach</a>
         <a href="/es/marketing-restaurantes-brickell">Brickell y Downtown</a>
         <a href="/es/marketing-restaurantes-wynwood">Wynwood</a>
@@ -876,7 +902,6 @@
         <a href="/es/marketing-restaurantes-kendall-pinecrest">Kendall y Pinecrest</a>
         <a href="/es/marketing-restaurantes-doral">Doral</a>
         <a href="/es/marketing-restaurantes-fort-lauderdale">Fort Lauderdale</a>
-        <a href="/es/zonas-que-atendemos">Dónde trabajamos</a>
       </nav>
         </div>
       </div>
@@ -1046,15 +1071,6 @@
         });
         select(0);
       }
-      [].forEach.call(sec.querySelectorAll("[data-deck]"), function (b) {
-        b.addEventListener("click", function () {
-          var deck = sec.querySelector(".h-panel:not([hidden]) .h-deck");
-          if (!deck) return;
-          var card = deck.querySelector("li");
-          var step = card ? card.getBoundingClientRect().width + 14 : 300;
-          deck.scrollBy({ left: step * Number(b.getAttribute("data-deck")), behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
-        });
-      });
     })();
   </script>
 </body>

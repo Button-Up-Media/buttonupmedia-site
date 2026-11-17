@@ -14,10 +14,23 @@
 //   //   includeHubs -> false leaves the two hub URLs out of the returned sitemap
 //   //                  entries (sitemap.xml already lists them by hand)
 //
-// Page chrome (consent mode, GTM, fonts, lucide, nav, footer, shared.js) is read
-// from about.html / about-es.html at build time, the same way build-areas.mjs
-// does, so these pages always match the live site. Every asset path is absolute
-// because the pages are served at nested URLs.
+// Page chrome (consent mode, GTM, fonts, nav, footer, shared.js) is read from
+// about.html / about-es.html at build time, the same way build-areas.mjs does,
+// so these pages always match the live site. Every asset path is absolute
+// because the pages are served at nested URLs. No icon library: the few icons
+// are inline SVG.
+//
+// LAYOUT BY CASE TYPE (c.service). One family (same type, crumbs, label, H1,
+// sticky section chips, related cases, closing CTA), three different pages:
+//   social -> hero led by a real Reel (or the client's own video), the numbers
+//             beside it; then the Reel strip, what made them work, the starting
+//             point, what we did, where the numbers come from, the client's words.
+//   ads    -> data-led "Wrapped" hero (gold, warm-white and black number blocks
+//             from the 3 metrics); then what came back for every $1, a results
+//             table, the starting point and what we did.
+//   web    -> hero led by the site on a laptop and a phone, a spec row from the
+//             metrics; then a walk through the site, the starting point, what we
+//             built (steps with screenshots) and the client's words.
 //
 // ---------------------------------------------------------------------------
 // CONTENT SHAPE
@@ -30,8 +43,8 @@
 // cases/content/{slug}.{en|es}.json
 // {
 //   slug, lang: "en"|"es", order: 1,          // order = position in the library
-//   service: "social"|"ads"|"web",            // primary service (related cases match on it)
-//   services: ["ads", "web"],                 // every service tag shown, primary first
+//   service: "social"|"ads"|"web",            // case type: picks the layout; related cases match on it
+//   services: ["ads"],                        // every service this case covers, primary first
 //   client: "Rusty Pelican",                  // display name (cards, related links)
 //   crumb?: "Private events",                 // shorter breadcrumb name (defaults to client)
 //   organizations: ["Rusty Pelican Miami"],   // JSON-LD Article.about, one per business
@@ -43,34 +56,36 @@
 //   descriptor,                               // what the business is ("Cajun seafood boil")
 //   area: { name, detail?, page? } | null,    // page = area id (miami-beach, brickell, ...) -> area page link
 //   timeframe: "Google Ads, 2025" | null, timeframeReviewNote?,
-//   hero: [note]                              // media-first hero, one of:
-//     { type: "video",   src: "videos/x.mp4", poster, width, height, alt, chip?, jump? }   muted loop, plays in view;
-//                         jump: true adds a "Watch with sound" button that plays the first reel below;
-//                         views: "52.5M" shows an eye + view-count badge instead of the text chip
+//   hero: [note]                              // one of:
+//     { type: "video",   src: "media/x.mp4", poster, width, height, alt, views?, jump? }
+//                         muted loop that plays in view; views: "52.5M" adds a view-count badge;
+//                         jump: true adds a "Watch with sound" button that plays the first Reel below
+//     { type: "talk" }    the client's own video (quote.video) as the hero, tap to play with sound;
+//                         the quote section then shows the words only
 //     { type: "image",   src, width, height, alt, chip? }
-//     { type: "graphic", kicker, name, sub, big, bigLabel, handle }                 typographic card (no media yet)
-//     { type: "logos",   big, bigLabel, logos: [{ src, width, height, alt }] }
-//     { type: "device",  url, desktop: { src, width, height, alt }, mobile: { ... } } browser + phone mockup
-//   card: { src?, width?, height?, alt?, value, label, place? },   // hub reel card + related card (graphic when no src); place = short location chip
+//     { type: "numbers" } ads: the 3 metrics as gold / warm-white / black blocks
+//     { type: "device",  url, desktop: { src, width, height, alt }, mobile: { ... } }   laptop + phone
+//   card: { src?, width?, height?, alt?, value, label, place? },   // hub reel card + related card (number block when no src)
 //   webCard?: { kicker, title, body, device?: true, image?: { src, width, height, alt } }, // hub Websites card
-//   metrics: [ { value, label, meaning, reviewNote? } x3 ],   // "at a glance" + results tiles
+//   metrics: [ { value, label, meaning, reviewNote? } x3 ],   // hero numbers (social stats, ads blocks, web spec row)
 //   situation: { h2?, paragraphs: [] } [note],
 //   steps: { h2?, items: [ { title, bodyHtml, figure?: { src, width, height, alt, caption }, reviewNote? } ] },
 //   results: null | { h2?, explainHtml?, points?: [text],
 //     accounts?: [ { name, period, campaigns, roas, roasLabel?, roasNumber|null, conversions, value, costPer,
-//                    spend?, standout? } ],   // ads accounts: case scoreboard AND the hub Google Ads scoreboard
+//                    spend?, standout? } ],   // ads: the $1 bars + results table AND the hub Google Ads scoreboard
 //     timeline?: { h3?, items: [ { when, title, stat, kind?: "before"|"peak"|"now" } ] },   // growth milestones, oldest first
 //     disclaimer?: true } [note],
 //   quote: null | { h2?, text, name, role, source?, video?: { src, poster, width, height, playLabel } } [note],
 //   reels?: { h2, intro, items: [ { src, poster, width, height, views, likes?, title, date, alt, uploaded?, duration? } ] },
-//                                             // full-width strip of the client's real videos, tap to play with sound;
+//                                             // the client's real videos, tap to play with sound;
 //                                             // uploaded (YYYY-MM-DD) + duration (PT42S) also emit VideoObject JSON-LD
-//   analysis?: { h2?, intro?, items: [ { stat, title, body } ] },   // "What the numbers say": findings from the data
+//   analysis?: { h2?, intro?, items: [ { stat, title, body } ] },   // social: "What made them work"
+//   walkthrough?: { h2?, intro?, items: [ { src, width, height, alt, title, caption } ] },   // web: screens of the site
 //   links: [ { href, text } ]                 // service pages etc.; the area page link is added automatically
 // }
 //
 // cases/content/hub.{en|es}.json
-// { lang, metaTitle, metaDescription, ogImage, eyebrow, h1, h1Accent, answer, primaryCta, secondaryCta,
+// { lang, metaTitle, metaDescription, ogImage, eyebrow, h1, h1Accent?, answer, primaryCta, secondaryCta,
 //   wallLabel, wall: [ { slug, src, poster, width, height, chip, alt } ],      // 2-3 hero clips
 //   tabsLabel,
 //   sections: {
@@ -78,6 +93,7 @@
 //     ads:    { tab, h2, intro, roasLineHtml, totals: { h3, items: [{ value, label }] } [note], disclaimer },
 //     web:    { tab, h2, intro, order: [slug] } },
 //   cta: { h2, body, quote: { text, name, role }, rating } }
+// Never show how many clients or ad accounts there are: no counts on tabs or headings.
 // ---------------------------------------------------------------------------
 
 import { readFile, writeFile, mkdir, readdir, access } from 'fs/promises';
@@ -88,6 +104,7 @@ const ORG_ID = `${BASE}/#organization`;
 const DEFAULT_OG = '/media/founders-duo.webp';
 const SLUGS = ['tonis-sushi-bar', 'the-fatty-crab', 'brewing-buddha', 'shimuja-ramen', 'rusty-pelican', 'private-events', 'woa-cocktails'];
 const SERVICES = ['social', 'ads', 'web'];
+const HERO_TYPES = ['video', 'talk', 'image', 'numbers', 'device'];
 const AREA_IDS = ['miami-beach', 'brickell', 'wynwood', 'coral-gables', 'kendall-pinecrest', 'doral', 'fort-lauderdale'];
 
 export const hubPath = (lang) => (lang === 'es' ? '/es/casos-de-exito' : '/case-studies');
@@ -126,18 +143,26 @@ const T = {
     home: 'Home', homeUrl: `${BASE}/`, hubName: 'Case studies',
     contact: '/contact', grader: '/social-media-website-grader',
     primary: 'Book a free strategy call', graderBtn: 'Try the free grader',
-    service: { social: 'Social media', ads: 'Google Ads', web: 'Website' },
-    nav: { reels: 'The Reels', situation: 'The starting point', steps: 'What we did', analysis: 'What the numbers show', results: 'Results', quote: 'What the client says' },
-    ids: { reels: 'the-reels', situation: 'situation', steps: 'what-we-did', analysis: 'what-the-numbers-say', results: 'results', quote: 'in-their-words' },
+    service: { social: 'Social media', ads: 'Paid ads', web: 'Website' },
+    kind: { social: 'Social media case study', ads: 'Paid ads case study', web: 'Website case study' },
+    // chip labels in the sticky "On this page" bar
+    nav: { reels: 'The Reels', analysis: 'What worked', situation: 'The starting point', steps: 'What we did', results: 'The numbers', dollar: 'For every $1', table: 'Results', walk: 'The site', built: 'What we built', quote: 'In their words' },
+    // default section headings (a content file can override with its own h2)
+    h2: { analysis: 'What made them work', situation: 'The starting point', steps: 'What we did', results: 'Where the numbers come from', dollar: 'What came back for every $1', table: 'Results by restaurant', walk: 'A look through the site', built: 'What we built', quote: 'What the client says' },
+    ids: { reels: 'the-reels', analysis: 'what-the-numbers-say', situation: 'situation', steps: 'what-we-did', results: 'results', dollar: 'for-every-dollar', table: 'results', walk: 'the-site', built: 'what-we-built', quote: 'in-their-words' },
     views: 'views', likes: 'likes', watchSound: 'Watch with sound', playWith: (x) => `Play “${x}” with sound`,
-    glance: 'At a glance', onPage: 'On this page', allCases: 'All case studies', back: 'Back to all case studies',
+    onPage: 'On this page', allCases: 'All case studies', back: 'Back to all case studies',
     more: 'More case studies', moreSub: "Other restaurants we've worked with.",
-    readCase: 'Read the case', plain: 'What it means', standout: 'Highlights:', spend: 'Ad spend',
-    col: { account: 'Account', roas: 'ROAS', conversions: 'Conversions', costPer: 'Cost per conversion', value: 'Conversion value' },
-    count: { social: 'restaurants', ads: 'ad accounts', web: 'websites' },
+    readCase: 'Read the case', standout: 'Highlights:',
+    col: { account: 'Restaurant', roas: 'ROAS', conversions: 'Conversions', costPer: 'Cost per conversion', value: 'Conversion value', spend: 'Ad spend' },
+    tableCaption: (x) => `Google Ads results for ${x}, 2025`,
+    perDollar: {
+      base: 'Spent on ads', baseSub: 'The cost, as the starting point', backSr: 'came back in tracked value',
+      note: 'The first bar is $1 of ad spend. Each gold bar is the tracked value of the bookings, calls and inquiries that came back for that $1.',
+    },
     disclaimer: 'Figures are from restaurant ad accounts we managed in 2025. Individual results vary, and past performance does not guarantee future results.',
     areaLink: (n) => `Restaurant marketing in ${n}`,
-    crumbs: 'Breadcrumb', tapSound: 'Tap to play with sound', caseLabel: 'Case study',
+    crumbs: 'Breadcrumb', tapSound: 'Tap to play with sound',
     clipLabel: (client, chip) => `${client} case study, ${chip}`,
   },
   es: {
@@ -145,18 +170,24 @@ const T = {
     home: 'Inicio', homeUrl: `${BASE}/es`, hubName: 'Casos de éxito',
     contact: '/es/contacto', grader: '/es/analizador-redes-sociales-web',
     primary: 'Agende una llamada estratégica gratis', graderBtn: 'Pruebe el analizador gratis',
-    service: { social: 'Redes sociales', ads: 'Google Ads', web: 'Sitio web' },
-    nav: { reels: 'Los reels', situation: 'El punto de partida', steps: 'Lo que hicimos', analysis: 'Lo que muestran los números', results: 'Resultados', quote: 'Lo que dice el cliente' },
-    ids: { reels: 'los-reels', situation: 'situacion', steps: 'lo-que-hicimos', analysis: 'que-dicen-los-numeros', results: 'resultados', quote: 'en-sus-palabras' },
+    service: { social: 'Redes sociales', ads: 'Anuncios pagados', web: 'Sitio web' },
+    kind: { social: 'Caso de éxito en redes sociales', ads: 'Caso de éxito en anuncios pagados', web: 'Caso de éxito de sitio web' },
+    nav: { reels: 'Los reels', analysis: 'Lo que funcionó', situation: 'El punto de partida', steps: 'Lo que hicimos', results: 'Los números', dollar: 'Por cada $1', table: 'Resultados', walk: 'El sitio', built: 'Lo que construimos', quote: 'En sus palabras' },
+    h2: { analysis: 'Lo que los hizo funcionar', situation: 'El punto de partida', steps: 'Lo que hicimos', results: 'De dónde salen los números', dollar: 'Lo que volvió por cada $1', table: 'Resultados por restaurante', walk: 'Un recorrido por el sitio', built: 'Lo que construimos', quote: 'Lo que dice el cliente' },
+    ids: { reels: 'los-reels', analysis: 'que-dicen-los-numeros', situation: 'situacion', steps: 'lo-que-hicimos', results: 'resultados', dollar: 'por-cada-dolar', table: 'resultados', walk: 'el-sitio', built: 'lo-que-construimos', quote: 'en-sus-palabras' },
     views: 'vistas', likes: 'me gusta', watchSound: 'Ver con sonido', playWith: (x) => `Reproducir “${x}” con sonido`,
-    glance: 'De un vistazo', onPage: 'En esta página', allCases: 'Todos los casos', back: 'Volver a todos los casos de éxito',
+    onPage: 'En esta página', allCases: 'Todos los casos', back: 'Volver a todos los casos de éxito',
     more: 'Más casos de éxito', moreSub: 'Otros restaurantes con los que hemos trabajado.',
-    readCase: 'Ver el caso', plain: 'Qué significa', standout: 'Lo más destacado:', spend: 'Inversión en anuncios',
-    col: { account: 'Cuenta', roas: 'ROAS', conversions: 'Conversiones', costPer: 'Costo por conversión', value: 'Valor de conversión' },
-    count: { social: 'restaurantes', ads: 'cuentas de anuncios', web: 'sitios web' },
+    readCase: 'Ver el caso', standout: 'Lo más destacado:',
+    col: { account: 'Restaurante', roas: 'ROAS', conversions: 'Conversiones', costPer: 'Costo por conversión', value: 'Valor de conversión', spend: 'Inversión en anuncios' },
+    tableCaption: (x) => `Resultados de Google Ads de ${x}, 2025`,
+    perDollar: {
+      base: 'Invertido en anuncios', baseSub: 'El costo, como punto de partida', backSr: 'volvieron en valor rastreado',
+      note: 'La primera barra es $1 invertido en anuncios. Cada barra dorada es el valor rastreado de las reservaciones, llamadas y solicitudes que volvió por ese $1.',
+    },
     disclaimer: 'Las cifras provienen de cuentas de anuncios de restaurantes que manejamos en 2025. Los resultados individuales varían y el rendimiento pasado no garantiza resultados futuros.',
     areaLink: (n) => `Marketing para restaurantes en ${n}`,
-    crumbs: 'Ruta de navegación', tapSound: 'Toca para verlo con sonido', caseLabel: 'Caso de éxito',
+    crumbs: 'Ruta de navegación', tapSound: 'Toca para verlo con sonido',
     clipLabel: (client, chip) => `Caso de éxito de ${client}, ${chip}`,
   },
 };
@@ -171,10 +202,7 @@ const svg = (d, sw = 2) => `<svg viewBox="0 0 24 24" width="16" height="16" fill
 const ICON = {
   arrow: svg('<path d="M5 12h14M13 6l6 6-6 6"/>', 2.2),
   back: svg('<path d="M19 12H5M11 18l-6-6 6-6"/>', 2.2),
-  pin: svg('<path d="M20 10c0 5-8 12-8 12s-8-7-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>'),
-  cal: svg('<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>'),
-  store: svg('<path d="M3 9l1.5-5h15L21 9"/><path d="M4 9v11h16V9"/><path d="M9 20v-6h6v6"/>'),
-  check: svg('<polyline points="20 6 9 17 4 12"/>', 2.4),
+  chev: svg('<path d="M9 6l6 6-6 6"/>', 2.2),
   eye: svg('<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>', 2.2),
   sound: svg('<path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/>', 2.1),
 };
@@ -182,6 +210,7 @@ const note = (o) => (o && typeof o.reviewNote === 'string' && o.reviewNote.trim(
   ? `<aside class="review-note">${/^review:/i.test(o.reviewNote.trim()) ? '' : 'Review: '}${esc(o.reviewNote.trim())}</aside>`
   : '');
 const dim = (m) => `width="${m.width}" height="${m.height}"`;
+const pad2 = (i) => String(i + 1).padStart(2, '0');
 
 // ---------- chrome from about.html / about-es.html (same approach as build-areas.mjs) ----------
 function absolutize(html) {
@@ -203,7 +232,6 @@ function extractChrome(html, name) {
     gtm: pick(/<!-- Google Tag Manager -->[\s\S]*?<!-- End Google Tag Manager -->/, 'GTM snippet'),
     gtmNoscript: pick(/<!-- Google Tag Manager \(noscript\) -->[\s\S]*?<!-- End Google Tag Manager \(noscript\) -->/, 'GTM noscript'),
     fonts: fonts.map((l) => absolutize(l.trim())).join('\n  '),
-    lucide: pick(/<script defer src="https:\/\/unpkg\.com\/lucide@[^"]+"><\/script>/, 'lucide script'),
     depth: pick(/<div class="depth-canvas"[\s\S]*?<\/div>\s*<\/div>/, 'depth canvas'),
     nav: absolutize(pick(/<nav class="lib-nav"[\s\S]*?<\/nav>/, 'nav')),
     footer: absolutize(pick(/<footer class="lib-section footer-demo">[\s\S]*?<\/footer>/, 'footer')),
@@ -233,468 +261,541 @@ async function loadAreaNames(root) {
 }
 
 // ---------- page CSS (one block, .cs- prefixed) ----------
+// v3.css loads after this and supplies the tokens, Figtree, buttons, top bar,
+// phone tab bar and reveals. Rules here follow DESIGN-V3: flat surfaces with
+// hairlines, no glows or gradient washes (a scrim on a real video is the only
+// gradient), gold only for the booking button, key numbers and active states.
+// Note: v3.css forces p/li/dd/blockquote to 16px on phones unless the class
+// name contains stat/note/label/meta/caption...; big numbers in <dd> therefore
+// use a "-stat" class, and big quote/lead text sits in an inner <span>.
 const PAGE_CSS = `
     /* ============================================================
-       Case studies: results library (hub) + case files. MOBILE FIRST.
-       Extends the shared.css dark system. Page classes are prefixed .cs-
+       Case studies: hub + case pages. MOBILE FIRST. Classes are .cs-
        ============================================================ */
-    /* shared.css sets overflow-x:hidden on html and body, which turns body into a
-       scroll container and silently disables position:sticky. clip keeps the
-       no-sideways-scroll guarantee without that side effect. */
     html, body { overflow-x: clip; }
     @supports not (overflow: clip) { html, body { overflow-x: hidden; } }
-    :root { --cs-top: 68px; --cs-bar: 54px; }
-    @media (min-width: 701px) { :root { --cs-top: 116px; } }
+    :root {
+      --cs-top: 64px;
+      --cs-ink: #140e04;
+      --cs-warm: #f6f0e6;
+      --cs-dim: rgba(246,240,230,0.72);
+      --cs-soft: rgba(246,240,230,0.6);
+      --cs-hair: rgba(255,255,255,0.08);
+      --cs-hair-2: rgba(255,255,255,0.14);
+      --cs-e1: #141416;
+      --cs-e2: #1b1b1e;
+      --cs-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
 
     .cs-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-    .cs-gold { color: var(--gold); }
     .cs-page a:focus-visible, .cs-page button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
-    .cs-eyebrow { display: inline-flex; align-items: center; gap: 9px; font-family: var(--font-display); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
-    .cs-eyebrow::before { content: ""; width: 20px; height: 1px; background: var(--gold); opacity: 0.7; }
+    .review-note { display: block; margin: 12px 0 0; padding: 10px 14px; border: 2px dashed #d4a64a; border-radius: 8px; font-size: 13px; line-height: 1.5; color: var(--text); font-weight: 400; text-align: left; }
 
-    /* Review notes (stripped before launch) */
-    .review-note { display: block; margin: 12px 0 0; padding: 10px 14px; border: 2px dashed #d4a64a; border-radius: 8px; font-size: 13px; line-height: 1.5; color: var(--text); background: rgba(212,166,74,0.06); font-family: var(--font-body); font-weight: 400; letter-spacing: 0; text-transform: none; text-align: left; }
-
-    .cs-btn { height: 48px; padding: 0 20px; font-size: 0.9375rem; }
+    /* quiet label above a hero H1 (sentence case, no pill, no glow) */
+    .cs-kind { display: block; font-size: 0.9375rem; font-weight: 600; line-height: 1.3; letter-spacing: -0.005em; color: var(--cs-soft); }
+    .cs-btn { height: 48px; padding: 0 22px; font-size: 0.9375rem; }
     .cs-btn svg { width: 16px; height: 16px; }
-    .cs-cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
-    .cs-lede { margin-top: 12px; max-width: 56ch; font-size: 1.0625rem; line-height: 1.55; color: var(--text-dim); }
+    .cs-cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    .cs-lede { margin-top: 16px; max-width: 54ch; font-size: 1.0625rem; line-height: 1.6; color: rgba(246,240,230,0.86); }
+    .cs-meta { margin-top: 18px; font-size: 0.9375rem; line-height: 1.5; color: var(--cs-soft); }
 
-    .cs-tag { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 999px; background: var(--gold-soft); border: 1px solid rgba(226,168,77,0.3); color: var(--gold); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.04em; }
-    .cs-tag.--ads { background: rgba(69,176,140,0.12); border-color: rgba(69,176,140,0.32); color: #6DC4A6; }
-    .cs-tag.--web { background: rgba(208,106,80,0.12); border-color: rgba(208,106,80,0.34); color: #E8A08C; }
-
-    /* Sideways rows: edge fade only where there is more to see (JS toggles the classes) */
+    /* sideways rows: fade only the edge that has more to see (JS toggles the classes) */
     [data-cs-scroll] { scrollbar-width: none; -webkit-overflow-scrolling: touch; }
     [data-cs-scroll]::-webkit-scrollbar { display: none; }
-    [data-cs-scroll].--more-r { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 44px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 44px), transparent); }
-    [data-cs-scroll].--more-l { -webkit-mask-image: linear-gradient(90deg, transparent, #000 44px); mask-image: linear-gradient(90deg, transparent, #000 44px); }
-    [data-cs-scroll].--more-l.--more-r { -webkit-mask-image: linear-gradient(90deg, transparent, #000 44px, #000 calc(100% - 44px), transparent); mask-image: linear-gradient(90deg, transparent, #000 44px, #000 calc(100% - 44px), transparent); }
+    [data-cs-scroll].--more-r { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent); }
+    [data-cs-scroll].--more-l { -webkit-mask-image: linear-gradient(90deg, transparent, #000 40px); mask-image: linear-gradient(90deg, transparent, #000 40px); }
+    [data-cs-scroll].--more-l.--more-r { -webkit-mask-image: linear-gradient(90deg, transparent, #000 40px, #000 calc(100% - 40px), transparent); mask-image: linear-gradient(90deg, transparent, #000 40px, #000 calc(100% - 40px), transparent); }
 
-    /* Media frames */
-    .cs-frame { position: relative; margin: 0; overflow: hidden; border-radius: 18px; border: 1px solid var(--line); background: var(--bg-2); box-shadow: 0 22px 50px rgba(0,0,0,0.45); }
+    /* media frames */
+    .cs-frame { position: relative; margin: 0; overflow: hidden; border-radius: 18px; border: 1px solid var(--cs-hair); background: var(--cs-e2); }
     .cs-frame > img, .cs-frame > video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
     .cs-portrait { aspect-ratio: 9 / 16; }
-    .cs-chip { position: absolute; left: 8px; bottom: 8px; z-index: 2; display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px; background: rgba(10,10,10,0.72); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border: 1px solid var(--line); font-family: var(--font-hero); font-size: 0.8125rem; font-weight: 800; color: var(--text-head); white-space: nowrap; pointer-events: none; }
-    .cs-chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+    .cs-chip { position: absolute; left: 8px; bottom: 8px; z-index: 2; padding: 5px 10px; border-radius: 999px; background: rgba(12,12,14,0.7); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); font-size: 0.8125rem; font-weight: 700; color: var(--text-head); white-space: nowrap; pointer-events: none; }
 
-    /* Typographic card (client without media) */
-    .cs-frame > .cs-graphic { position: absolute; inset: 0; }
-    .cs-graphic { display: flex; flex-direction: column; justify-content: space-between; padding: 14px 12px; background: radial-gradient(circle at 80% 12%, rgba(226,168,77,0.26), transparent 58%), radial-gradient(circle at 0% 100%, rgba(208,106,80,0.18), transparent 55%), var(--bg-2); }
-    .cs-graphic-kicker { font-family: var(--font-display); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); line-height: 1.3; }
-    .cs-graphic-name { display: block; margin-top: 10px; font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.9rem, 9vw, 4.6rem); line-height: 0.9; letter-spacing: -0.05em; color: transparent; -webkit-text-stroke: 1.3px rgba(226,168,77,0.85); }
-    .cs-graphic-sub { display: block; margin-top: 4px; font-family: var(--font-hero); font-weight: 700; font-size: clamp(0.95rem, 3.6vw, 1.6rem); color: var(--text-head); letter-spacing: -0.02em; }
-    .cs-graphic-big { display: block; font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.6rem, 7vw, 3.4rem); line-height: 1; letter-spacing: -0.04em; color: var(--text-head); }
-    .cs-graphic-label, .cs-graphic-handle { display: block; font-size: 0.8125rem; line-height: 1.35; color: var(--text-dim); margin-top: 4px; }
-    .cs-graphic-handle { color: var(--text-soft); }
+    /* browser + phone frames (website case, hub website card, screenshots) */
+    .cs-browser { position: relative; overflow: hidden; border-radius: 12px; border: 1px solid var(--cs-hair-2); background: #0e0e10; box-shadow: 0 24px 60px rgba(0,0,0,0.45); }
+    .cs-browser-bar { display: flex; align-items: center; gap: 5px; height: 24px; padding: 0 10px; background: #18181b; border-bottom: 1px solid var(--cs-hair); }
+    .cs-browser-bar i { flex: none; width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.18); }
+    .cs-browser-url { margin: 0 auto; padding: 1px 12px; border-radius: 7px; background: rgba(255,255,255,0.06); font-size: 0.75rem; line-height: 1.5; color: var(--cs-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .cs-browser img { display: block; width: 100%; height: auto; }
+    .cs-show { position: relative; padding: 0 22% 8% 0; }
+    .cs-phone { position: absolute; right: 0; bottom: 0; width: 28%; aspect-ratio: 690 / 1484; overflow: hidden; border-radius: 16px; border: 3px solid #222226; background: #000; box-shadow: 0 24px 60px rgba(0,0,0,0.6); }
+    .cs-phone img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+    @media (min-width: 700px) {
+      .cs-browser { border-radius: 16px; }
+      .cs-browser-bar { height: 34px; gap: 7px; padding: 0 14px; }
+      .cs-browser-bar i { width: 10px; height: 10px; }
+      .cs-browser-url { font-size: 0.8125rem; padding: 3px 16px; }
+      .cs-browser.--sm .cs-browser-bar { height: 26px; gap: 6px; padding: 0 12px; }
+      .cs-browser.--sm .cs-browser-bar i { width: 8px; height: 8px; }
+      .cs-show { padding: 0 16% 6% 0; }
+      .cs-phone { width: 23%; border-radius: 28px; border-width: 6px; }
+    }
 
-    /* Logos card */
-    .cs-logos { display: flex; flex-direction: column; justify-content: space-between; padding: 14px 12px; background: radial-gradient(circle at 70% 10%, rgba(69,176,140,0.22), transparent 60%), var(--bg-2); }
-    .cs-logos-big { font-family: var(--font-hero); font-weight: 800; font-size: clamp(2rem, 9vw, 4.4rem); line-height: 0.95; letter-spacing: -0.05em; color: var(--text-head); }
-    .cs-logos-label { display: block; margin-top: 4px; font-size: 0.8125rem; line-height: 1.35; color: var(--text-dim); }
-    .cs-logos-wall { display: grid; gap: 8px; padding: 10px; border-radius: 12px; background: #f4eee3; }
-    .cs-logos-wall img { display: block; width: 100%; height: auto; max-height: 40px; object-fit: contain; }
-
-    /* Browser + phone mockup */
-    .cs-dev { position: relative; }
-    .cs-dev-browser { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: #111; box-shadow: 0 24px 56px rgba(0,0,0,0.5); }
-    .cs-dev-bar { display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px; background: #161616; border-bottom: 1px solid var(--line-soft); }
-    .cs-dev-bar i { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,248,235,0.18); }
-    .cs-dev-url { margin-left: 8px; padding: 2px 10px; border-radius: 6px; background: rgba(255,255,255,0.05); font-size: 0.8125rem; color: var(--text-soft); }
-    .cs-dev-browser img { display: block; width: 100%; height: auto; }
-    .cs-dev-phone { position: relative; overflow: hidden; aspect-ratio: 9 / 19.4; border-radius: 18px; border: 3px solid #262626; background: #000; box-shadow: 0 24px 56px rgba(0,0,0,0.55); }
-    .cs-dev-phone img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+    /* video cards: tap to play with sound (shared.js .hp2-vid-card) */
+    .cs-vid, .cs-wvid { cursor: pointer; background: #0d0d0d; }
+    .cs-vid > video, .cs-wvid > video { z-index: 1; }
+    .cs-vid-play { position: absolute; top: 50%; left: 50%; z-index: 3; display: grid; place-items: center; width: 60px; height: 60px; transform: translate(-50%, -50%); border: 0; border-radius: 50%; background: rgba(255,255,255,0.92); cursor: pointer; transition: transform .25s var(--cs-ease), opacity .25s ease; }
+    .cs-vid-play::after { content: ""; width: 0; height: 0; margin-left: 4px; border-left: 16px solid var(--cs-ink); border-top: 10px solid transparent; border-bottom: 10px solid transparent; }
+    .cs-vid-cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 48px 14px 14px; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.82)); pointer-events: none; transition: opacity .3s ease; }
+    .cs-vid-cap b { display: block; font-size: 0.9375rem; font-weight: 700; color: var(--text-head); }
+    .cs-vid-cap span { display: block; margin-top: 2px; font-size: 0.8125rem; color: var(--cs-dim); }
+    .cs-vid.--playing .cs-vid-play, .cs-vid.--playing .cs-vid-cap, .cs-wvid.--playing .cs-vid-play { opacity: 0; }
+    @media (hover: hover) {
+      .cs-vid:hover .cs-vid-play, .cs-wvid:hover .cs-vid-play { transform: translate(-50%, -50%) scale(1.06); }
+    }
+    .cs-wviews { position: absolute; left: 8px; top: 8px; z-index: 2; display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px 5px 8px; border-radius: 999px; background: rgba(12,12,14,0.68); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); font-size: 0.8125rem; line-height: 1.2; color: var(--cs-dim); white-space: nowrap; pointer-events: none; }
+    .cs-wviews svg { width: 15px; height: 15px; flex: none; color: var(--text); }
+    .cs-wviews b { font-size: 0.9375rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-head); }
+    .cs-wcard.--top .cs-wviews { background: var(--gold); color: rgba(20,14,4,0.78); }
+    .cs-wcard.--top .cs-wviews svg, .cs-wcard.--top .cs-wviews b { color: var(--cs-ink); }
+    .cs-wbar { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; height: 3px; background: rgba(255,255,255,0.16); opacity: 0; transition: opacity .25s ease; pointer-events: none; }
+    .cs-wbar i { display: block; height: 100%; background: var(--gold); transform: scaleX(0); transform-origin: left center; }
+    .cs-wvid.--playing .cs-wbar { opacity: 1; }
 
     /* =====================================================
        HUB
        ===================================================== */
-    .cs-hero { padding: 14px 0 26px; }
-    .cs-hero h1 { margin-top: 12px; font-family: var(--font-hero); font-weight: 800; font-size: clamp(2rem, 8.6vw, 4rem); line-height: 1.02; letter-spacing: -0.045em; color: var(--text-head); text-wrap: balance; }
-    .cs-hero h1 .cs-gold { display: block; }
-    .cs-wall { list-style: none; display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 18px -16px 0; padding: 0 16px; }
-    .cs-wall li { flex: 0 0 120px; scroll-snap-align: start; scroll-margin-left: 16px; }
-    .cs-clip { display: block; border-radius: 16px; transition: transform .25s ease, border-color .25s ease; }
-    .cs-clip:hover { transform: translateY(-3px); border-color: rgba(226,168,77,0.4); }
-    .cs-clip-meta { position: absolute; left: 8px; right: 8px; bottom: 8px; z-index: 2; padding: 7px 9px; border-radius: 11px; background: rgba(10,10,10,0.74); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border: 1px solid var(--line); }
-    .cs-clip-meta { left: 6px; right: 6px; bottom: 6px; padding: 6px 8px; }
-    .cs-clip-meta b { display: block; font-family: var(--font-hero); font-weight: 800; font-size: 1.0625rem; line-height: 1.15; color: var(--text-head); letter-spacing: -0.02em; }
-    .cs-clip-meta small { font-family: var(--font-body); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0; color: var(--text); }
-    .cs-clip-meta span { display: block; margin-top: 1px; font-size: 0.8125rem; line-height: 1.3; color: var(--text-dim); }
+    .cs-hero { padding: 8px 0 28px; }
+    .cs-hero h1 { margin-top: 10px; font-weight: 800; font-size: clamp(2.4rem, 9.4vw, 4.5rem); line-height: 1; letter-spacing: -0.045em; color: var(--text-head); text-wrap: balance; }
+    .cs-wall { list-style: none; display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 24px -16px 0; padding: 0 16px; }
+    .cs-wall li { flex: 0 0 132px; scroll-snap-align: start; scroll-margin-left: 16px; }
+    .cs-clip { display: block; border-radius: 18px; transition: transform .35s var(--cs-ease); }
+    .cs-clip-meta { position: absolute; left: 6px; right: 6px; bottom: 6px; z-index: 2; padding: 7px 9px; border-radius: 12px; background: rgba(12,12,14,0.72); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+    .cs-clip-meta b { display: block; font-weight: 800; font-size: 1.0625rem; line-height: 1.15; color: var(--text-head); letter-spacing: -0.02em; }
+    .cs-clip-meta small { font-size: 0.8125rem; font-weight: 600; color: var(--text); }
+    .cs-clip-meta span { display: block; margin-top: 1px; font-size: 0.8125rem; line-height: 1.3; color: var(--cs-dim); }
 
     .cs-lib { position: relative; }
-    .cs-tabs-bar { position: sticky; top: var(--cs-top); z-index: 60; margin: 4px -16px 0; padding: 5px 0; background: rgba(10,10,10,0.86); -webkit-backdrop-filter: blur(16px) saturate(1.3); backdrop-filter: blur(16px) saturate(1.3); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
+    .cs-tabs-bar { position: sticky; top: var(--cs-top); z-index: 60; margin: 4px -16px 0; padding: 6px 0; background: rgba(11,11,12,0.82); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); border-top: 1px solid var(--cs-hair); border-bottom: 1px solid var(--cs-hair); }
     html:not(.cs-js) .cs-tabs-bar { display: none; }
-    .cs-tabs { position: relative; display: flex; gap: 6px; overflow-x: auto; padding: 0 16px; }
-    .cs-tab { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px 0 16px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,0.03); color: var(--text-dim); font-family: var(--font-body); font-size: 0.9375rem; font-weight: 600; cursor: pointer; transition: background .2s, border-color .2s, color .2s; white-space: nowrap; }
-    .cs-tab:hover { color: var(--text); border-color: rgba(255,248,235,0.2); }
-    .cs-tab[aria-selected="true"] { background: var(--gold-soft); border-color: rgba(226,168,77,0.55); color: var(--text-head); }
-    .cs-tab-n { display: inline-grid; place-items: center; min-width: 24px; height: 24px; padding: 0 7px; border-radius: 999px; background: rgba(255,255,255,0.08); font-size: 0.8125rem; font-weight: 700; color: var(--text); }
-    .cs-tab[aria-selected="true"] .cs-tab-n { background: var(--gold); color: #120d05; }
+    .cs-tabs { position: relative; display: flex; gap: 4px; overflow-x: auto; padding: 0 16px; }
+    .cs-tab { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; border: 0; background: transparent; color: var(--cs-dim); font-family: var(--font-body); font-size: 0.9375rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background .18s ease, color .18s ease; }
+    .cs-tab:hover { color: var(--text-head); }
+    .cs-tab[aria-selected="true"] { background: rgba(255,255,255,0.12); color: var(--text-head); }
 
-    .cs-panel { padding: 30px 0 8px; scroll-margin-top: calc(var(--cs-top) + var(--cs-bar) + 8px); }
+    .cs-panel { padding: 40px 0 8px; scroll-margin-top: 64px; }
     .cs-panel:focus { outline: none; }
     .cs-js .cs-panel[hidden] { display: none; }
-    html:not(.cs-js) .cs-panel + .cs-panel { margin-top: 28px; border-top: 1px solid var(--line-soft); }
-    .cs-panel-kicker { font-family: var(--font-display); font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
-    .cs-panel.--ads .cs-panel-kicker { color: #6DC4A6; }
-    .cs-panel.--web .cs-panel-kicker { color: #E8A08C; }
-    .cs-panel h2 { margin-top: 8px; font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.6rem, 6.4vw, 2.7rem); line-height: 1.06; letter-spacing: -0.04em; color: var(--text-head); max-width: 22ch; }
-    .cs-panel-intro { margin-top: 10px; max-width: 60ch; font-size: 1rem; line-height: 1.6; color: var(--text-dim); }
+    html:not(.cs-js) .cs-panel + .cs-panel { margin-top: 28px; border-top: 1px solid var(--cs-hair); }
+    .cs-panel h2 { font-weight: 800; font-size: clamp(1.85rem, 6.6vw, 2.75rem); line-height: 1.05; letter-spacing: -0.04em; color: var(--text-head); max-width: 22ch; text-wrap: balance; }
+    .cs-panel-intro { margin-top: 12px; max-width: 60ch; font-size: 1.0625rem; line-height: 1.6; color: var(--cs-dim); }
 
-    /* Social: vertical reel cards */
-    .cs-reels { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
-    .cs-reel { position: relative; display: block; aspect-ratio: 9 / 16; overflow: hidden; border-radius: 18px; border: 1px solid var(--line); background: var(--bg-2); transition: transform .25s ease, border-color .25s ease; }
-    .cs-reel:hover { transform: translateY(-3px); border-color: rgba(226,168,77,0.42); }
+    /* social: vertical reel cards (real video covers carry a scrim for legibility) */
+    .cs-reels { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 24px; }
+    .cs-reel { position: relative; display: block; aspect-ratio: 9 / 16; overflow: hidden; border-radius: 22px; border: 1px solid var(--cs-hair); background: var(--cs-e2); }
     .cs-reel > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    .cs-reel::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(10,10,10,0.4) 0%, rgba(10,10,10,0) 18%, rgba(10,10,10,0) 36%, rgba(10,10,10,0.86) 58%, rgba(10,10,10,0.97) 74%); pointer-events: none; }
-    .cs-reel-area { position: absolute; top: 8px; left: 8px; z-index: 2; display: inline-flex; align-items: center; gap: 5px; max-width: calc(100% - 16px); padding: 4px 9px; border-radius: 999px; background: rgba(10,10,10,0.66); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); font-size: 0.8125rem; line-height: 1.3; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .cs-reel-area svg { width: 13px; height: 13px; color: var(--gold); flex: none; }
+    .cs-reel::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.78) 68%, rgba(0,0,0,0.92)); pointer-events: none; }
+    .cs-reel-area { position: absolute; top: 8px; left: 8px; z-index: 2; max-width: calc(100% - 16px); padding: 4px 10px; border-radius: 999px; background: rgba(12,12,14,0.66); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); font-size: 0.8125rem; line-height: 1.3; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .cs-reel-foot { position: absolute; left: 12px; right: 12px; bottom: 12px; z-index: 2; }
-    .cs-reel-num { display: block; font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.75rem, 8vw, 2.6rem); line-height: 1; letter-spacing: -0.045em; color: var(--gold); }
-    .cs-reel-label { display: block; margin-top: 3px; font-size: 0.8125rem; line-height: 1.3; color: var(--text-dim); }
-    .cs-reel-name { display: block; margin-top: 8px; font-family: var(--font-display); font-size: 1rem; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; color: var(--text-head); }
+    .cs-reel-num { display: block; font-weight: 800; font-size: clamp(1.75rem, 8vw, 2.6rem); line-height: 1; letter-spacing: -0.045em; color: var(--gold); }
+    .cs-reel-label { display: block; margin-top: 3px; font-size: 0.8125rem; line-height: 1.3; color: var(--cs-dim); }
+    .cs-reel-name { display: block; margin-top: 8px; font-size: 1rem; font-weight: 700; line-height: 1.25; color: var(--text-head); }
     .cs-reel-go { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 0.8125rem; font-weight: 700; color: var(--gold); }
     .cs-reel-go svg { width: 14px; height: 14px; }
-    .cs-reel .cs-graphic { position: absolute; inset: 0; justify-content: flex-start; padding: 44px 14px 14px; border: 0; }
-    .cs-reel .cs-graphic-name { font-size: clamp(2.4rem, 12vw, 4.2rem); }
 
-    /* Google Ads: scoreboard */
-    .cs-explain { margin-top: 16px; max-width: 70ch; padding: 14px 16px; border: 1px solid var(--line-soft); border-left: 3px solid #45B08C; border-radius: 0 14px 14px 0; background: rgba(69,176,140,0.06); font-size: 1rem; line-height: 1.6; color: var(--text-dim); }
+    /* paid ads: scoreboard */
+    .cs-explain { margin-top: 14px; max-width: 70ch; font-size: 1rem; line-height: 1.6; color: var(--cs-dim); }
     .cs-explain strong { color: var(--text-head); }
-    .cs-board { margin-top: 20px; --cols: minmax(0, 2.1fr) minmax(0, 1.9fr) repeat(3, minmax(0, 1fr)); }
+    .cs-board { margin-top: 24px; --cols: minmax(0, 2.1fr) minmax(0, 1.9fr) repeat(3, minmax(0, 1fr)); }
     .cs-board.--links { --cols: minmax(0, 2.1fr) minmax(0, 1.9fr) repeat(3, minmax(0, 1fr)) 132px; }
     .cs-board-head { display: none; }
-    .cs-rows { list-style: none; display: grid; gap: 12px; }
-    .cs-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 10px; padding: 16px; border: 1px solid var(--line); border-radius: 18px; background: var(--bg-1); }
+    .cs-rows { list-style: none; display: grid; gap: 0; border-top: 1px solid var(--cs-hair); }
+    .cs-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 10px; padding: 20px 0; border-bottom: 1px solid var(--cs-hair); }
     .cs-row-acct { grid-column: 1 / -1; }
-    .cs-row-acct h3 { font-family: var(--font-display); font-size: 1.125rem; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; color: var(--text-head); }
-    .cs-row-acct p { margin-top: 3px; font-size: 0.875rem; line-height: 1.45; color: var(--text-soft); }
+    .cs-row-acct h3 { font-size: 1.125rem; font-weight: 700; line-height: 1.25; letter-spacing: -0.015em; color: var(--text-head); }
+    .cs-row-acct p { margin-top: 3px; font-size: 0.875rem; line-height: 1.45; color: var(--cs-soft); }
     .cs-row-roas { grid-column: 1 / -1; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; column-gap: 14px; }
     .cs-row-roas .cs-k { grid-column: 1 / -1; }
-    .cs-row-roas b { font-family: var(--font-hero); font-size: 2.25rem; font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; color: var(--text-head); }
-    .cs-row-roas b.--word { font-size: 1.5rem; }
-    .cs-roas-note { grid-column: 1 / -1; font-size: 0.8125rem; line-height: 1.35; color: var(--text-dim); }
+    .cs-row-roas b { font-size: 2.25rem; font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; color: var(--gold); }
+    .cs-row-roas b.--word { font-size: 1.5rem; color: var(--text-head); }
+    .cs-roas-note { grid-column: 1 / -1; font-size: 0.8125rem; line-height: 1.35; color: var(--cs-soft); }
     .cs-bar { height: 8px; border-radius: 999px; background: rgba(255,255,255,0.07); overflow: hidden; }
-    .cs-bar i { display: block; height: 100%; width: var(--w, 0%); min-width: 6px; border-radius: 999px; background: linear-gradient(90deg, rgba(226,168,77,0.7), var(--gold)); }
-    .cs-k { display: block; font-size: 0.8125rem; line-height: 1.3; color: var(--text-soft); }
+    .cs-bar i { display: block; height: 100%; width: var(--w, 0%); min-width: 6px; border-radius: 999px; background: var(--gold); }
+    .cs-k { display: block; font-size: 0.8125rem; line-height: 1.3; color: var(--cs-soft); }
     .cs-row-stat { display: flex; flex-direction: column; justify-content: space-between; }
-    .cs-row-stat b { display: block; margin-top: 3px; font-family: var(--font-hero); font-size: 1.125rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-head); }
-    .cs-row-foot { grid-column: 1 / -1; font-size: 1rem; line-height: 1.55; color: var(--text-dim); padding-top: 10px; border-top: 1px solid var(--line-soft); }
-    .cs-row-foot b { color: var(--text-head); font-weight: 700; }
-    .cs-row-go { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; margin-top: -4px; padding-top: 8px; border-top: 1px solid var(--line-soft); font-size: 0.9375rem; font-weight: 700; color: var(--gold); }
-    .cs-totals { margin-top: 26px; padding: 18px 16px; border: 1px solid var(--line); border-radius: 20px; background: linear-gradient(135deg, rgba(69,176,140,0.07), transparent 60%), var(--bg-1); }
-    .cs-totals h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--text-head); }
-    .cs-totals ul { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 12px; margin-top: 14px; }
-    .cs-totals b { display: block; font-family: var(--font-hero); font-size: 1.6rem; font-weight: 800; line-height: 1.05; letter-spacing: -0.035em; color: var(--text-head); }
-    .cs-totals span { display: block; margin-top: 4px; font-size: 0.8125rem; line-height: 1.35; color: var(--text-dim); }
-    .cs-disclaimer { margin-top: 14px; max-width: 80ch; font-size: 0.8125rem; line-height: 1.55; color: var(--text-soft); }
+    .cs-row-stat b { display: block; margin-top: 3px; font-size: 1.125rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-head); font-variant-numeric: tabular-nums; }
+    .cs-row-go { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; font-size: 0.9375rem; font-weight: 700; color: var(--gold); }
+    .cs-disclaimer { margin-top: 16px; max-width: 80ch; font-size: 0.8125rem; line-height: 1.55; color: var(--cs-soft); }
+    .cs-totals { margin-top: 40px; }
+    .cs-totals h3 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text-head); }
 
-    /* Websites: device cards */
-    .cs-sites { list-style: none; display: grid; gap: 16px; margin-top: 22px; }
-    .cs-site { display: flex; flex-direction: column; height: 100%; overflow: hidden; border: 1px solid var(--line); border-radius: 22px; background: var(--bg-1); transition: transform .25s ease, border-color .25s ease; }
-    .cs-site:hover { transform: translateY(-3px); border-color: rgba(208,106,80,0.45); }
-    .cs-site-media { position: relative; display: grid; place-items: center; aspect-ratio: 16 / 11; padding: 18px 16px; background: radial-gradient(circle at 62% 38%, rgba(208,106,80,0.18), transparent 62%), var(--bg-2); border-bottom: 1px solid var(--line-soft); }
+    /* websites: one wide card */
+    .cs-sites { list-style: none; display: grid; gap: 16px; margin-top: 24px; }
+    .cs-site { display: grid; overflow: hidden; border: 1px solid var(--cs-hair); border-radius: 28px; background: var(--cs-e1); }
+    .cs-site-media { display: block; padding: 24px 18px 28px; background: var(--cs-e2); border-bottom: 1px solid var(--cs-hair); }
     .cs-site-media > img { width: 100%; height: auto; }
-    .cs-site-media .cs-dev { width: 100%; padding-right: 15%; }
-    .cs-site-media .cs-dev-phone { position: absolute; right: 0; bottom: -10%; width: 24%; border-radius: 12px; border-width: 2px; }
-    .cs-site-media .cs-dev-bar { height: 20px; padding: 0 8px; gap: 4px; }
-    .cs-site-media .cs-dev-bar i { width: 6px; height: 6px; }
-    .cs-site-copy { display: flex; flex-direction: column; gap: 6px; padding: 18px 18px 20px; }
-    .cs-site-kicker { font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #E8A08C; }
-    .cs-site-title { font-family: var(--font-hero); font-size: 1.35rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.03em; color: var(--text-head); }
-    .cs-site-body { font-size: 1rem; line-height: 1.55; color: var(--text-dim); }
-    .cs-site-go { display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 0.9375rem; font-weight: 700; color: var(--gold); }
+    .cs-site-copy { display: flex; flex-direction: column; gap: 8px; padding: 22px 22px 24px; }
+    .cs-site-kicker { font-size: 0.875rem; font-weight: 600; color: var(--cs-soft); }
+    .cs-site-title { font-size: 1.5rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.035em; color: var(--text-head); }
+    .cs-site-body { font-size: 1rem; line-height: 1.6; color: var(--cs-dim); }
+    .cs-site-go { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 0.9375rem; font-weight: 700; color: var(--gold); }
 
-    /* Closing CTA */
-    .cs-close { padding: 48px 0 64px; }
-    .cs-close .cta-banner { align-items: center; }
-    .cs-close h2 { font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.75rem, 6vw, 2.7rem); line-height: 1.06; letter-spacing: -0.035em; color: var(--text-head); }
+    /* closing CTA: flat panel (shared.css .cta-banner glows switched off) */
+    .cs-close { padding: 72px 0 72px; }
+    .cs-close .cta-banner { align-items: center; background: var(--cs-e1); border: 1px solid var(--cs-hair); border-radius: 32px; }
+    .cs-close .cta-banner::before, .cs-close .cta-banner::after { display: none; animation: none; }
+    .cs-close h2 { font-weight: 800; font-size: clamp(1.75rem, 6vw, 2.7rem); line-height: 1.06; letter-spacing: -0.04em; color: var(--text-head); }
     .cs-close .cta-content p { margin-top: 12px; max-width: 56ch; font-size: 1rem; line-height: 1.6; }
     .cs-close .cta-actions { flex-wrap: wrap; }
-    .cs-close-proof { font-size: 1rem !important; color: var(--text-dim); }
+    .cs-close-proof { color: var(--cs-dim); }
     .cs-close-proof b { color: var(--gold); }
-    .cs-close-proof cite { display: block; margin-top: 4px; font-style: normal; font-size: 0.875rem; color: var(--text-soft); }
-    /* The footer lands on an even child of main: keep shared.css's even-section
-       ::before from painting a solid box where the footer's soft glow should be. */
-    main.page > footer.footer-demo::before { background: radial-gradient(ellipse, rgba(226,168,77,0.04), transparent 70%); opacity: 1; }
+    .cs-close-proof cite { display: block; margin-top: 4px; font-style: normal; font-size: 0.875rem; color: var(--cs-soft); }
+    main.page > footer.footer-demo::before { display: none; }
     @media (max-width: 600px) {
       .cs-page .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
       .cs-page .footer-links { flex-wrap: wrap; gap: 4px 18px; }
     }
 
     /* =====================================================
-       CASE FILE
+       CASE PAGE: shared parts
        ===================================================== */
-    .cs-crumbs ol { list-style: none; display: flex; align-items: center; font-size: 0.875rem; color: var(--text-soft); }
+    .cs-crumbs ol { list-style: none; display: flex; align-items: center; font-size: 0.875rem; color: var(--cs-soft); }
     .cs-crumbs li { display: inline-flex; align-items: center; flex: none; }
     .cs-crumbs li:last-child { flex: 1 1 auto; min-width: 0; }
-    .cs-crumbs li + li::before { content: "/"; margin: 0 8px; color: var(--text-soft); }
-    .cs-crumbs a { display: inline-flex; align-items: center; min-height: 44px; color: var(--text-dim); text-decoration: underline; text-decoration-color: rgba(226,168,77,0.45); text-underline-offset: 3px; }
+    .cs-crumbs li + li::before { content: "/"; margin: 0 8px; }
+    .cs-crumbs a { display: inline-flex; align-items: center; min-height: 44px; color: var(--cs-dim); text-decoration: underline; text-decoration-color: rgba(246,240,230,0.3); text-underline-offset: 3px; }
     .cs-crumbs [aria-current] { color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-    .cs-chero { padding: 0 0 8px; }
-    .cs-chero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 124px; grid-template-areas: "copy media" "meta meta" "lede lede" "cta cta"; column-gap: 16px; align-items: start; margin-top: 4px; }
-    .cs-chero-copy { grid-area: copy; min-width: 0; padding-top: 4px; }
-    .cs-chero-media { grid-area: media; min-width: 0; }
-    .cs-chero .cs-meta { grid-area: meta; }
-    .cs-chero .cs-lede { grid-area: lede; }
-    .cs-chero .cs-cta-row { grid-area: cta; }
-    .cs-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
-    .cs-chero h1 { margin-top: 12px; font-family: var(--font-hero); font-weight: 800; letter-spacing: -0.045em; color: var(--text-head); }
-    .cs-h1-name { display: block; font-size: clamp(1.9rem, 8.4vw, 4.4rem); line-height: 0.98; }
-    .cs-h1-sub { display: block; margin-top: 10px; font-family: var(--font-display); font-weight: 600; font-size: clamp(1.0625rem, 4.4vw, 1.6rem); line-height: 1.3; letter-spacing: -0.02em; color: var(--text-dim); }
-    .cs-meta { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 16px; font-size: 0.875rem; line-height: 1.45; color: var(--text-dim); }
-    .cs-meta li { display: inline-flex; align-items: flex-start; gap: 7px; }
-    .cs-meta svg { width: 15px; height: 15px; margin-top: 2px; color: var(--gold); flex: none; }
-    .cs-meta .review-note { margin-top: 6px; }
-    .cs-chero-media .cs-dev-browser { display: none; }
-    .cs-hero-notes { grid-column: 1 / -1; }
-    @media (max-width: 599px) {
-      .cs-chero-media .cs-graphic { padding: 12px 10px; }
-      .cs-chero-media .cs-graphic-kicker, .cs-chero-media .cs-graphic-handle { display: none; }
-      .cs-chero-media .cs-graphic-name { margin-top: 0; font-size: 2.1rem; }
-      .cs-chero-media .cs-graphic-sub { font-size: 0.9375rem; }
-      .cs-chero-media .cs-graphic-big { font-size: 1.6rem; }
-    }
+    .cs-chero { padding-top: 4px; }
+    .cs-chero h1 { margin-top: 10px; font-weight: 800; letter-spacing: -0.045em; color: var(--text-head); }
+    .cs-h1-name { display: block; font-size: clamp(2.5rem, 10.5vw, 5.25rem); line-height: 0.96; }
+    .cs-h1-sub { display: block; margin-top: 12px; font-weight: 650; font-size: clamp(1.125rem, 4.4vw, 1.625rem); line-height: 1.25; letter-spacing: -0.025em; color: var(--cs-dim); text-wrap: balance; }
+    .cs-hero-notes { margin-top: 12px; }
 
-    .cs-glance { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 24px 0 0; border: 1px solid var(--line); border-radius: 18px; background: var(--bg-1); overflow: hidden; }
-    .cs-glance > div { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 6px; padding: 14px 10px 14px 12px; border-left: 1px solid var(--line-soft); min-width: 0; }
-    .cs-glance > div:first-child { border-left: 0; }
-    .cs-glance dd { margin: 0; font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.25rem, 5.6vw, 2.5rem); line-height: 1.02; letter-spacing: -0.04em; color: var(--gold); overflow-wrap: anywhere; }
-    .cs-glance dt { font-size: 0.8125rem; line-height: 1.35; color: var(--text-dim); }
-
-    .cs-body { position: relative; margin-top: 8px; }
-    .cs-toc { position: sticky; top: var(--cs-top); z-index: 60; margin: 22px -16px 0; padding: 5px 0; background: rgba(10,10,10,0.86); -webkit-backdrop-filter: blur(16px) saturate(1.3); backdrop-filter: blur(16px) saturate(1.3); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
-    .cs-toc-title, .cs-toc-all { display: none; }
-    .cs-toc ul { position: relative; list-style: none; display: flex; gap: 6px; overflow-x: auto; padding: 0 16px; }
+    /* sticky section chips: a full-width bar on phones, a floating pill on desktop */
+    .cs-toc { position: sticky; top: var(--cs-top); z-index: 60; margin: 48px -16px 0; padding: 6px 0; background: rgba(11,11,12,0.82); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); border-top: 1px solid var(--cs-hair); border-bottom: 1px solid var(--cs-hair); }
+    .cs-toc ul { list-style: none; display: flex; gap: 4px; overflow-x: auto; padding: 0 16px; }
     .cs-toc li { flex: 0 0 auto; }
-    .cs-toc ul a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 15px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,0.03); font-size: 0.9375rem; font-weight: 600; color: var(--text-dim); white-space: nowrap; transition: color .2s, border-color .2s, background .2s; }
-    .cs-toc ul a.--on { background: var(--gold-soft); border-color: rgba(226,168,77,0.55); color: var(--text-head); }
+    .cs-toc a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; font-size: 0.9375rem; font-weight: 600; color: var(--cs-dim); white-space: nowrap; transition: background .18s ease, color .18s ease; }
+    .cs-toc a:hover { color: var(--text-head); }
+    .cs-toc a.--on { background: rgba(255,255,255,0.12); color: var(--text-head); }
 
-    .cs-sec { padding-top: 40px; scroll-margin-top: calc(var(--cs-top) + var(--cs-bar) + 10px); }
-    .cs-sec h2 { font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.55rem, 6vw, 2.25rem); line-height: 1.08; letter-spacing: -0.035em; color: var(--text-head); }
-    .cs-sec > p, .cs-sit p { margin-top: 12px; max-width: 64ch; font-size: 1.0625rem; line-height: 1.65; color: var(--text-dim); }
-    .cs-sit p:first-of-type { color: var(--text); }
-    .cs-sec a:not(.cs-link):not(.btn) { padding: 13px 0; margin: -13px 0; color: var(--text-head); text-decoration: underline; text-decoration-color: rgba(226,168,77,0.5); text-underline-offset: 3px; }
+    /* margin (not padding) so a section starts at its heading: a chip tap lands the
+       heading just under the chips (html already has scroll-padding for the top bar) */
+    .cs-sec { margin-top: 72px; scroll-margin-top: 72px; }
+    .cs-sec-head h2 { font-weight: 800; font-size: clamp(1.85rem, 6.8vw, 3rem); line-height: 1.04; letter-spacing: -0.04em; color: var(--text-head); max-width: 20ch; text-wrap: balance; }
+    .cs-sec-head p { margin-top: 12px; max-width: 60ch; font-size: 1.0625rem; line-height: 1.6; color: var(--cs-dim); }
+    .cs-sec-head p strong { color: var(--text-head); }
+    .cs-sec a:not(.cs-link):not(.btn) { color: var(--text-head); text-decoration: underline; text-decoration-color: rgba(226,168,77,0.6); text-underline-offset: 3px; }
+    .cs-note { margin-top: 22px; max-width: 70ch; font-size: 0.9375rem; line-height: 1.55; color: var(--cs-soft); }
+    .cs-note strong { color: var(--text); }
 
-    .cs-steps { list-style: none; margin-top: 18px; }
-    .cs-step { position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr); column-gap: 14px; padding-bottom: 24px; }
-    .cs-step::before { content: ""; position: absolute; left: 21px; top: 50px; bottom: 6px; width: 2px; border-radius: 2px; background: linear-gradient(180deg, rgba(226,168,77,0.45), rgba(226,168,77,0.06)); }
-    .cs-step:last-child { padding-bottom: 0; }
-    .cs-step:last-child::before { display: none; }
-    .cs-step-n { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(226,168,77,0.45); background: var(--gold-soft); font-family: var(--font-hero); font-size: 0.9375rem; font-weight: 800; color: var(--gold); }
-    .cs-step h3 { padding-top: 9px; font-family: var(--font-display); font-size: 1.125rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.015em; color: var(--text-head); }
-    .cs-step p { margin-top: 6px; max-width: 62ch; font-size: 1rem; line-height: 1.6; color: var(--text-dim); }
-    .cs-fig { margin: 14px 0 0; max-width: 560px; }
-    .cs-fig img { display: block; width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line-soft); background: var(--bg-2); }
-    .cs-fig.--mock img { border: 0; background: radial-gradient(circle at 55% 45%, rgba(226,168,77,0.12), transparent 62%), var(--bg-1); padding: 10px; }
-    .cs-fig figcaption { margin-top: 8px; font-size: 0.8125rem; line-height: 1.45; color: var(--text-soft); }
+    /* the starting point: a lead line, then plain paragraphs */
+    .cs-story { margin-top: 22px; max-width: 62ch; }
+    .cs-story p { margin-top: 14px; font-size: 1.0625rem; line-height: 1.65; color: var(--cs-dim); }
+    .cs-story p:first-child { margin-top: 0; }
+    .cs-story-lead > span { display: block; font-size: clamp(1.25rem, 2.6vw, 1.625rem); line-height: 1.45; font-weight: 600; letter-spacing: -0.015em; color: var(--text-head); }
 
-    .cs-tiles { list-style: none; display: grid; gap: 12px; margin-top: 18px; }
-    .cs-tile { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; column-gap: 14px; padding: 16px 16px 14px; border: 1px solid var(--line); border-radius: 18px; background: var(--bg-1); }
-    .cs-tile > p, .cs-tile > .review-note { grid-column: 1 / -1; }
-    .cs-tile b { display: block; font-family: var(--font-hero); font-weight: 800; font-size: clamp(2rem, 9vw, 2.6rem); line-height: 1; letter-spacing: -0.045em; color: var(--gold); }
-    .cs-tile-label { display: block; font-family: var(--font-display); font-size: 1rem; font-weight: 700; line-height: 1.35; color: var(--text-head); }
-    .cs-tile p { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line-soft); font-size: 1rem; line-height: 1.55; color: var(--text-dim); }
-    .cs-plain { display: block; margin-bottom: 3px; font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-soft); }
-    .cs-points { list-style: none; display: grid; gap: 10px; margin-top: 18px; }
-    .cs-points li { position: relative; padding-left: 30px; max-width: 64ch; font-size: 1rem; line-height: 1.6; color: var(--text-dim); }
-    .cs-points svg { position: absolute; left: 0; top: 3px; width: 20px; height: 20px; padding: 3px; border-radius: 50%; background: var(--gold-soft); color: var(--gold); }
-    .cs-growth { margin-top: 28px; }
-    .cs-growth-h { font-family: var(--font-display); font-size: 1.125rem; font-weight: 700; line-height: 1.3; color: var(--text-head); }
-    .cs-timeline { list-style: none; position: relative; margin-top: 12px; padding-left: 28px; max-width: 64ch; }
-    .cs-timeline::before { content: ""; position: absolute; left: 7px; top: 14px; bottom: 22px; width: 2px; border-radius: 2px; background: linear-gradient(180deg, rgba(255,248,235,0.16), var(--gold)); }
-    .cs-tl { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); row-gap: 3px; padding: 12px 0 13px; border-bottom: 1px solid var(--line-soft); }
-    .cs-tl:last-child { border-bottom: 0; }
-    .cs-tl::before { content: ""; position: absolute; left: -27px; top: 16px; width: 14px; height: 14px; box-sizing: border-box; border-radius: 50%; border: 2px solid var(--gold); background: var(--bg-1); }
-    .cs-tl-when { font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-soft); }
-    .cs-tl-what { font-size: 1rem; line-height: 1.5; color: var(--text); }
-    .cs-tl-stat { font-family: var(--font-hero); font-weight: 800; font-size: 1.25rem; line-height: 1.2; letter-spacing: -0.02em; color: var(--gold); }
-    .cs-tl.--before::before { border-color: var(--text-soft); }
-    .cs-tl.--before .cs-tl-stat { color: var(--text-dim); }
-    .cs-tl.--peak::before, .cs-tl.--now::before { background: var(--gold); box-shadow: 0 0 0 5px rgba(226,168,77,0.16); }
-    .cs-tl.--peak .cs-tl-stat, .cs-tl.--now .cs-tl-stat { font-size: 1.75rem; letter-spacing: -0.04em; }
-    @media (min-width: 560px) {
-      .cs-tl { grid-template-columns: minmax(0, 1fr) auto; column-gap: 18px; align-items: baseline; }
-      .cs-tl-when { grid-column: 1 / -1; }
-      .cs-tl-stat { text-align: right; white-space: nowrap; }
-    }
-    .cs-sec .cs-board { margin-top: 18px; }
-    .cs-sec > p.cs-explain { margin-top: 16px; font-size: 1rem; line-height: 1.6; }
-    .cs-sec > p.cs-disclaimer { margin-top: 14px; font-size: 0.8125rem; line-height: 1.55; color: var(--text-soft); }
+    /* what we did: a list with hairline dividers */
+    .cs-steps { list-style: none; margin-top: 28px; border-top: 1px solid var(--cs-hair); }
+    .cs-step { display: grid; grid-template-columns: 34px minmax(0, 1fr); column-gap: 10px; padding: 22px 0; border-bottom: 1px solid var(--cs-hair); }
+    .cs-step-n { font-size: 0.9375rem; font-weight: 700; line-height: 1.45; color: var(--cs-soft); font-variant-numeric: tabular-nums; }
+    .cs-step h3 { font-size: 1.125rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.015em; color: var(--text-head); }
+    .cs-step-body { grid-column: 2; }
+    .cs-step-body > p { margin-top: 6px; max-width: 60ch; font-size: 1rem; line-height: 1.6; color: var(--cs-dim); }
+    .cs-fig { margin: 16px 0 0; max-width: 560px; }
+    .cs-fig img { display: block; width: 100%; height: auto; border-radius: 18px; border: 1px solid var(--cs-hair); background: var(--cs-e2); }
+    .cs-fig.--portrait { max-width: 240px; }
+    .cs-fig figcaption { margin-top: 8px; font-size: 0.875rem; line-height: 1.45; color: var(--cs-soft); }
 
-    .cs-words { display: grid; gap: 18px; margin-top: 18px; }
-    .cs-quote { margin: 0; padding: 20px 20px 18px; border-left: 3px solid var(--gold); border-radius: 0 18px 18px 0; background: linear-gradient(90deg, rgba(226,168,77,0.1), rgba(226,168,77,0.015)); }
-    .cs-quote blockquote p { font-family: var(--font-display); font-size: clamp(1.125rem, 4.4vw, 1.35rem); font-weight: 500; line-height: 1.55; letter-spacing: -0.01em; color: var(--text-head); }
-    .cs-quote figcaption { margin-top: 12px; font-size: 0.9375rem; line-height: 1.45; color: var(--text-soft); }
-    .cs-quote figcaption b { color: var(--text); font-weight: 700; }
-    .cs-vid { width: 100%; max-width: 210px; margin: 0 auto; cursor: pointer; background: radial-gradient(circle at 50% 30%, rgba(226,168,77,0.16), transparent 62%), #0d0d0d; }
-    .cs-vid > video { z-index: 1; }
-    .cs-vid-play { position: absolute; top: 50%; left: 50%; z-index: 3; display: grid; place-items: center; width: 64px; height: 64px; transform: translate(-50%, -50%); border: 0; border-radius: 50%; background: rgba(226,168,77,0.94); box-shadow: 0 8px 32px rgba(202,138,4,0.3); cursor: pointer; transition: transform .25s, opacity .25s; }
-    .cs-vid-play::after { content: ""; width: 0; height: 0; margin-left: 4px; border-left: 17px solid #050608; border-top: 11px solid transparent; border-bottom: 11px solid transparent; }
-    .cs-vid:hover .cs-vid-play { transform: translate(-50%, -50%) scale(1.06); }
-    .cs-vid-cap { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 44px 14px 14px; background: linear-gradient(180deg, transparent, rgba(10,10,10,0.92)); pointer-events: none; transition: opacity .3s; }
-    .cs-vid-cap b { display: block; font-family: var(--font-display); font-size: 0.9375rem; color: var(--text-head); }
-    .cs-vid-cap span { display: block; margin-top: 2px; font-size: 0.8125rem; color: var(--text-dim); }
-    .cs-vid.--playing .cs-vid-play, .cs-vid.--playing .cs-vid-cap { opacity: 0; }
+    /* links to service pages */
+    .cs-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 64px; }
+    .cs-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 18px; border-radius: 999px; border: 1px solid var(--cs-hair-2); background: rgba(255,255,255,0.04); font-size: 0.9375rem; font-weight: 600; line-height: 1.3; color: var(--text); transition: background .18s ease; }
+    .cs-link:hover { background: rgba(255,255,255,0.08); }
+    .cs-link svg { flex: none; color: var(--cs-soft); }
 
-    /* Reels strip: the client's real videos, tap to play with sound */
-    .cs-watch { position: relative; margin: 30px -16px 0; padding: 26px 0 22px; border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); background: radial-gradient(120% 70% at 88% 0%, rgba(226,168,77,0.14), transparent 62%), radial-gradient(90% 60% at 0% 100%, rgba(208,106,80,0.1), transparent 62%), var(--bg-1); scroll-margin-top: calc(var(--cs-top) + 8px); }
-    .cs-watch-head { padding: 0 16px; }
-    .cs-watch h2 { font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.55rem, 6vw, 2.4rem); line-height: 1.08; letter-spacing: -0.035em; color: var(--text-head); max-width: 20ch; text-wrap: balance; }
-    .cs-watch-head p { margin-top: 8px; max-width: 56ch; font-size: 1rem; line-height: 1.55; color: var(--text-dim); }
-    .cs-watch-row { list-style: none; display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; margin-top: 18px; padding: 2px 16px 4px; }
-    .cs-wcard { flex: 0 0 min(64%, 250px); min-width: 0; scroll-snap-align: start; }
-    .cs-wvid { cursor: pointer; background: #0d0d0d; box-shadow: 0 16px 40px rgba(0,0,0,0.45); }
-    .cs-wvid .cs-vid-play { width: 58px; height: 58px; }
-    .cs-wvid:hover .cs-vid-play { transform: translate(-50%, -50%) scale(1.06); }
-    .cs-wvid.--playing .cs-vid-play { opacity: 0; }
-    .cs-wviews { position: absolute; left: 8px; top: 8px; z-index: 2; display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px 5px 8px; border-radius: 999px; background: rgba(10,10,10,0.7); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border: 1px solid var(--line); font-size: 0.8125rem; line-height: 1.2; color: var(--text-dim); white-space: nowrap; pointer-events: none; }
-    .cs-wviews svg { width: 15px; height: 15px; flex: none; color: var(--gold); }
-    .cs-wviews b { font-family: var(--font-hero); font-size: 0.9375rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-head); }
-    .cs-wcard.--top .cs-wviews { background: rgba(226,168,77,0.94); border-color: transparent; color: #2a1d08; }
-    .cs-wcard.--top .cs-wviews svg, .cs-wcard.--top .cs-wviews b { color: #120d05; }
-    .cs-wbar { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; height: 3px; background: rgba(255,255,255,0.16); opacity: 0; transition: opacity .25s; pointer-events: none; }
-    .cs-wbar i { display: block; height: 100%; background: var(--gold); transform: scaleX(0); transform-origin: left center; }
-    .cs-wvid.--playing .cs-wbar { opacity: 1; }
-    .cs-wmeta { padding: 12px 2px 0; }
-    .cs-wmeta h3 { font-family: var(--font-display); font-size: 1.0625rem; font-weight: 700; line-height: 1.3; color: var(--text-head); }
-    .cs-wmeta p { margin-top: 3px; font-size: 0.875rem; line-height: 1.4; color: var(--text-soft); }
+    /* the client's words */
+    .cs-say { display: grid; gap: 28px; margin-top: 28px; }
+    .cs-pull { margin: 0; max-width: 46ch; }
+    .cs-pull blockquote { margin: 0; }
+    .cs-pull-text { display: block; font-size: clamp(1.3rem, 4.8vw, 2rem); line-height: 1.38; font-weight: 600; letter-spacing: -0.02em; color: var(--text-head); text-wrap: pretty; }
+    .cs-pull figcaption { margin-top: 18px; font-size: 0.9375rem; line-height: 1.5; color: var(--cs-soft); }
+    .cs-pull figcaption b { color: var(--text); font-weight: 700; }
+    .cs-say .cs-vid { width: 100%; max-width: 260px; }
+    .cs-say:not(.--video) .cs-pull { max-width: 860px; }
 
-    /* What the numbers say: one finding per row, the number leads */
-    .cs-findings { list-style: none; display: grid; gap: 12px; margin-top: 18px; counter-reset: f; }
-    .cs-finding { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; padding: 18px 18px 16px; border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(135deg, rgba(226,168,77,0.07), transparent 55%), var(--bg-1); }
-    .cs-finding-stat { font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.9rem, 8vw, 2.4rem); line-height: 1; letter-spacing: -0.045em; color: var(--gold); }
-    .cs-finding h3 { font-family: var(--font-display); font-size: 1.0625rem; font-weight: 700; line-height: 1.35; color: var(--text-head); }
-    .cs-finding p { margin-top: 6px; font-size: 1rem; line-height: 1.6; color: var(--text-dim); }
-    @media (min-width: 600px) {
-      .cs-finding { grid-template-columns: 136px minmax(0, 1fr); gap: 20px; align-items: start; padding: 20px 22px; }
-      .cs-finding-stat { font-size: 2.3rem; padding-top: 2px; }
-    }
+    /* related cases: list rows with a chevron */
+    .cs-more { margin-top: 96px; padding-top: 56px; border-top: 1px solid var(--cs-hair); }
+    .cs-more h2 { font-weight: 800; font-size: clamp(1.6rem, 5.6vw, 2.25rem); line-height: 1.1; letter-spacing: -0.04em; color: var(--text-head); }
+    .cs-more > p { margin-top: 6px; font-size: 1rem; color: var(--cs-dim); }
+    .cs-more-grid { list-style: none; display: grid; gap: 12px; margin-top: 22px; }
+    .cs-mcard { display: grid; grid-template-columns: 72px minmax(0, 1fr) auto; gap: 16px; align-items: center; height: 100%; padding: 12px 18px 12px 12px; border: 1px solid var(--cs-hair); border-radius: 22px; background: var(--cs-e1); transition: transform .35s var(--cs-ease), border-color .25s ease; }
+    .cs-mcard-thumb { position: relative; display: grid; place-items: center; aspect-ratio: 9 / 16; overflow: hidden; border-radius: 14px; background: var(--cs-e2); }
+    .cs-mcard-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .cs-mcard-thumb.--num { background: var(--gold); color: var(--cs-ink); }
+    .cs-mcard-thumb.--num b { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+    .cs-mcard-tag { display: block; font-size: 0.8125rem; font-weight: 600; color: var(--cs-soft); }
+    .cs-mcard-name { display: block; margin-top: 2px; font-size: 1.0625rem; font-weight: 700; line-height: 1.25; color: var(--text-head); }
+    .cs-mcard-num { display: block; margin-top: 4px; font-size: 0.9375rem; line-height: 1.4; color: var(--cs-dim); }
+    .cs-mcard-num strong { color: var(--text-head); }
+    .cs-mcard > svg { width: 18px; height: 18px; color: var(--cs-soft); }
+    .cs-back { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 16px; font-size: 0.9375rem; font-weight: 700; color: var(--text); }
+    .cs-back svg { color: var(--cs-soft); }
 
-    /* Hero video: view badge top-left, "watch with sound" bottom */
+    /* =====================================================
+       SOCIAL: led by the real Reels
+       ===================================================== */
+    .cs-sh { display: grid; grid-template-columns: minmax(0, 44fr) minmax(0, 56fr); grid-template-areas: "copy copy" "media stats"; column-gap: 16px; }
+    .cs-sh-copy { grid-area: copy; min-width: 0; }
+    .cs-sh-media { grid-area: media; min-width: 0; margin-top: 30px; }
+    .cs-sh-media .cs-frame { box-shadow: 0 24px 60px rgba(0,0,0,0.45); }
+    .cs-sh-stats { grid-area: stats; display: flex; flex-direction: column; justify-content: space-between; margin: 30px 0 0; }
+    .cs-sh-stats > div { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 4px; padding: 12px 0; border-top: 1px solid var(--cs-hair); }
+    .cs-sh-stats > div:first-child { padding-top: 0; border-top: 0; }
+    .cs-sh-stats dt { font-size: 0.875rem; line-height: 1.35; color: var(--cs-dim); }
+    .cs-sh-stat { margin: 0; font-weight: 800; font-size: clamp(1.6rem, 7.4vw, 2.1rem); line-height: 1; letter-spacing: -0.045em; color: var(--gold); }
     .cs-wviews.--hero { left: 6px; top: 6px; padding: 4px 8px 4px 6px; gap: 4px; }
     .cs-wviews.--hero b { font-size: 0.875rem; }
     .cs-wviews.--hero > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-    .cs-hero-sound { position: absolute; right: 6px; bottom: 6px; z-index: 3; display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 999px; background: rgba(226,168,77,0.95); color: #120d05; box-shadow: 0 8px 24px rgba(0,0,0,0.4); transition: transform .2s ease; }
+    .cs-hero-sound { position: absolute; right: 8px; bottom: 8px; z-index: 3; display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18); background: rgba(16,16,18,0.7); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: var(--text-head); transition: transform .2s var(--cs-ease); }
     .cs-hero-sound svg { width: 20px; height: 20px; }
     .cs-hero-sound span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-    .cs-hero-sound:hover { transform: scale(1.05); }
-    @media (min-width: 600px) {
-      .cs-wviews.--hero { left: 10px; top: 10px; padding: 6px 11px 6px 9px; gap: 5px; }
-      .cs-wviews.--hero b { font-size: 1rem; }
-      .cs-wviews.--hero > span { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
-      .cs-hero-sound { left: 50%; right: auto; bottom: 14px; display: inline-flex; align-items: center; gap: 8px; width: auto; min-height: 44px; padding: 0 18px 0 15px; transform: translateX(-50%); font-size: 0.9375rem; font-weight: 700; white-space: nowrap; }
-      .cs-hero-sound span { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
-      .cs-hero-sound:hover { transform: translateX(-50%) scale(1.04); }
-    }
-    @media (min-width: 701px) and (max-width: 899px) {
-      .cs-watch { margin-left: -24px; margin-right: -24px; }
-      .cs-watch-head { padding: 0 24px; }
-      .cs-watch-row { padding: 2px 24px 4px; scroll-padding-left: 24px; }
-      .cs-wcard { flex-basis: 34%; }
-    }
-    @media (min-width: 900px) {
-      .cs-watch { margin: 52px 0 0; padding: 34px 32px 30px; border: 1px solid var(--line); border-radius: 28px; }
-      .cs-watch-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; padding: 0; }
-      .cs-watch-head p { margin: 0 0 4px; max-width: 36ch; }
-      .cs-watch-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; overflow: visible; margin-top: 26px; padding: 0; -webkit-mask-image: none !important; mask-image: none !important; }
-      .cs-wvid { transition: transform .3s ease, border-color .3s ease; }
-      .cs-wvid:hover { transform: translateY(-4px); border-color: rgba(226,168,77,0.45); }
-      .cs-wmeta { padding-top: 14px; }
+    .cs-hero-sound:active { transform: scale(0.97); }
+    @media (max-width: 599px) {
+      .cs-sh-media .cs-vid-cap { padding: 32px 10px 10px; }
+      .cs-sh-media .cs-vid-cap b { font-size: 0.8125rem; line-height: 1.3; }
+      .cs-sh-media .cs-vid-cap span { display: none; }
+      .cs-sh-media .cs-vid-play { width: 52px; height: 52px; }
     }
 
-    .cs-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 36px; }
-    .cs-link { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 10px 16px; border-radius: 12px; border: 1px solid var(--line); background: rgba(255,255,255,0.03); font-size: 0.9375rem; font-weight: 600; line-height: 1.3; color: var(--text); transition: border-color .2s, transform .2s; }
-    .cs-link:hover { border-color: rgba(226,168,77,0.4); transform: translateY(-1px); }
-    .cs-link svg { color: var(--gold); flex: none; }
+    .cs-sec.--split .cs-sec-head p { max-width: 52ch; }
+    .cs-reel-row { list-style: none; display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; margin: 26px -16px 0; padding: 0 16px 4px; }
+    .cs-wcard { flex: 0 0 min(62%, 250px); min-width: 0; scroll-snap-align: start; }
+    .cs-wmeta { padding: 12px 2px 0; }
+    .cs-wmeta h3 { font-size: 1.0625rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.015em; color: var(--text-head); }
+    .cs-wmeta-note { margin-top: 3px; font-size: 0.875rem; line-height: 1.4; color: var(--cs-soft); }
 
-    .cs-more { margin-top: 56px; padding-top: 40px; border-top: 1px solid var(--line-soft); }
-    .cs-more h2 { font-family: var(--font-hero); font-weight: 800; font-size: clamp(1.5rem, 5.6vw, 2.1rem); line-height: 1.1; letter-spacing: -0.035em; color: var(--text-head); }
-    .cs-more > p { margin-top: 6px; font-size: 1rem; color: var(--text-dim); }
-    .cs-more-grid { list-style: none; display: grid; gap: 12px; margin-top: 18px; }
-    .cs-mcard { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 14px; align-items: center; height: 100%; padding: 12px 14px 12px 12px; border: 1px solid var(--line); border-radius: 18px; background: var(--bg-1); transition: transform .25s, border-color .25s; }
-    .cs-mcard:hover { transform: translateY(-2px); border-color: rgba(226,168,77,0.4); }
-    .cs-mcard-thumb { position: relative; aspect-ratio: 9 / 16; overflow: hidden; border-radius: 12px; background: radial-gradient(circle at 70% 18%, rgba(226,168,77,0.28), transparent 60%), var(--bg-2); display: grid; place-items: center; }
-    .cs-mcard-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    .cs-mcard-thumb b { padding: 0 6px; font-family: var(--font-hero); font-size: 1.15rem; font-weight: 800; letter-spacing: -0.04em; color: var(--text-head); text-align: center; line-height: 1.05; }
-    .cs-mcard-tag { font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold); }
-    .cs-mcard-name { display: block; margin-top: 4px; font-family: var(--font-display); font-size: 1.0625rem; font-weight: 700; line-height: 1.25; color: var(--text-head); }
-    .cs-mcard-num { display: block; margin-top: 4px; font-size: 0.9375rem; line-height: 1.4; color: var(--text-dim); }
-    .cs-mcard-num strong { font-family: var(--font-hero); color: var(--text-head); }
-    .cs-mcard-go { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 0.875rem; font-weight: 700; color: var(--gold); }
-    .cs-back { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 14px; font-size: 0.9375rem; font-weight: 700; color: var(--text); }
-    .cs-back svg { color: var(--gold); }
+    .cs-why { list-style: none; margin-top: 28px; border-top: 1px solid var(--cs-hair); }
+    .cs-why li { display: grid; gap: 8px; padding: 24px 0; border-bottom: 1px solid var(--cs-hair); }
+    .cs-why-stat { font-weight: 800; font-size: clamp(2.4rem, 11vw, 3.5rem); line-height: 1; letter-spacing: -0.05em; color: var(--gold); }
+    .cs-why h3 { font-size: 1.1875rem; font-weight: 700; line-height: 1.35; letter-spacing: -0.015em; color: var(--text-head); }
+    .cs-why li p { margin-top: 6px; max-width: 62ch; font-size: 1rem; line-height: 1.6; color: var(--cs-dim); }
+
+    .cs-facts { margin: 28px 0 0; border-top: 1px solid var(--cs-hair); }
+    .cs-fact { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "stat" "label" "note"; row-gap: 4px; padding: 22px 0; border-bottom: 1px solid var(--cs-hair); }
+    .cs-fact dt { grid-area: label; margin-top: 6px; font-size: 1.0625rem; font-weight: 700; line-height: 1.35; color: var(--text-head); }
+    .cs-fact-stat { grid-area: stat; margin: 0; font-weight: 800; font-size: clamp(2.2rem, 10vw, 3.25rem); line-height: 1; letter-spacing: -0.05em; color: var(--text-head); }
+    .cs-fact-note { grid-area: note; margin: 0; max-width: 62ch; font-size: 1rem; line-height: 1.6; color: var(--cs-dim); }
+    .cs-growth { margin-top: 56px; }
+    .cs-growth-h { font-size: 1.375rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.025em; color: var(--text-head); }
+    .cs-timeline { list-style: none; position: relative; margin-top: 16px; padding-left: 26px; max-width: 760px; }
+    .cs-timeline::before { content: ""; position: absolute; left: 5px; top: 22px; bottom: 26px; width: 1px; background: var(--cs-hair-2); }
+    .cs-tl { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); row-gap: 2px; padding: 14px 0; border-bottom: 1px solid var(--cs-hair); }
+    .cs-tl:last-child { border-bottom: 0; }
+    .cs-tl::before { content: ""; position: absolute; left: -26px; top: 19px; width: 11px; height: 11px; box-sizing: border-box; border-radius: 50%; border: 2px solid rgba(246,240,230,0.5); background: #0b0b0c; }
+    .cs-tl.--peak::before, .cs-tl.--now::before { background: var(--gold); border-color: var(--gold); }
+    .cs-tl-when { font-size: 0.875rem; font-weight: 600; color: var(--cs-soft); }
+    .cs-tl-what { font-size: 1rem; line-height: 1.5; color: var(--text); }
+    .cs-tl-stat { font-weight: 800; font-size: 1.25rem; line-height: 1.2; letter-spacing: -0.02em; color: var(--text-head); }
+    .cs-tl.--peak .cs-tl-stat, .cs-tl.--now .cs-tl-stat { font-size: 1.625rem; letter-spacing: -0.035em; color: var(--gold); }
+    .cs-points { list-style: none; margin-top: 28px; max-width: 64ch; }
+    .cs-points li { position: relative; padding-left: 20px; font-size: 1.0625rem; line-height: 1.6; color: var(--text); }
+    .cs-points li + li { margin-top: 10px; }
+    .cs-points li::before { content: ""; position: absolute; left: 2px; top: 0.68em; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+    /* =====================================================
+       PAID ADS: data first ("Wrapped" number blocks)
+       ===================================================== */
+    .cs-wr { display: grid; gap: 12px; margin: 36px 0 0; }
+    .cs-wr-block { display: flex; flex-direction: column; min-height: 220px; padding: 24px 22px 24px; border-radius: 28px; }
+    .cs-wr-block > dt { order: 2; margin-top: auto; padding-top: 24px; font-size: 1.0625rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+    .cs-wr-stat { order: 1; margin: 0; font-weight: 800; font-size: clamp(3.5rem, 17vw, 5.25rem); line-height: 0.9; letter-spacing: -0.06em; font-variant-numeric: tabular-nums; }
+    .cs-wr-note { order: 3; margin: 6px 0 0; max-width: 46ch; font-size: 0.9375rem; line-height: 1.5; }
+    .cs-wr-block.--gold { min-height: 300px; background: var(--gold); color: var(--cs-ink); }
+    .cs-wr-block.--gold .cs-wr-stat { font-size: clamp(5.5rem, 31vw, 12rem); }
+    .cs-wr-block.--warm { background: var(--cs-warm); color: var(--cs-ink); }
+    .cs-wr-block.--gold .cs-wr-note, .cs-wr-block.--warm .cs-wr-note { color: rgba(20,14,4,0.74); }
+    .cs-wr-block.--black { background: #000; color: var(--text-head); box-shadow: inset 0 0 0 1px var(--cs-hair-2); }
+    .cs-wr-block.--black .cs-wr-stat { color: var(--gold); }
+    .cs-wr-block.--black .cs-wr-note { color: var(--cs-dim); }
+    .cs-ah-side { min-width: 0; }
+    /* hub: the combined totals as four smaller blocks */
+    .cs-wr.--totals { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 18px; }
+    .cs-wr.--totals .cs-wr-block { min-height: 168px; padding: 18px 16px; border-radius: 22px; }
+    .cs-wr.--totals .cs-wr-stat, .cs-wr.--totals .cs-wr-block.--gold .cs-wr-stat { font-size: clamp(1.9rem, 8.6vw, 3.25rem); }
+    .cs-wr.--totals .cs-wr-block > dt { padding-top: 16px; font-size: 0.9375rem; font-weight: 600; }
+
+    .cs-dollar { list-style: none; display: grid; gap: 22px; margin-top: 32px; max-width: 980px; }
+    .cs-dl { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "name val" "bar bar"; gap: 10px 16px; align-items: end; }
+    .cs-dl-name { grid-area: name; font-size: 1.0625rem; font-weight: 700; line-height: 1.3; color: var(--text-head); }
+    .cs-dl-name small { display: block; margin-top: 2px; font-size: 0.875rem; font-weight: 500; color: var(--cs-soft); }
+    .cs-dl-val { grid-area: val; font-weight: 800; font-size: clamp(1.9rem, 8vw, 2.75rem); line-height: 1; letter-spacing: -0.045em; color: var(--gold); font-variant-numeric: tabular-nums; }
+    .cs-dl-bar { grid-area: bar; display: block; height: 14px; border-radius: 999px; background: rgba(255,255,255,0.06); overflow: hidden; }
+    .cs-dl-bar i { display: block; height: 100%; width: var(--w); min-width: 10px; border-radius: 999px; background: var(--gold); }
+    .cs-dl.--base .cs-dl-val { color: var(--text-head); }
+    .cs-dl.--base .cs-dl-bar i { background: var(--cs-warm); }
+
+    .cs-table { width: 100%; margin-top: 28px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    .cs-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .cs-table tbody { display: block; border-top: 1px solid var(--cs-hair); }
+    .cs-tr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding: 22px 0 20px; border-bottom: 1px solid var(--cs-hair); }
+    .cs-tr > th, .cs-tr > td { display: block; padding: 0; text-align: left; font-size: 1.125rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-head); }
+    .cs-tr > td::before { content: attr(data-label); display: block; margin-bottom: 3px; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0; color: var(--cs-soft); }
+    .cs-tr > .cs-td-acct, .cs-tr > .cs-td-roas { grid-column: 1 / -1; }
+    .cs-td-acct { font-size: 1.1875rem !important; font-weight: 700 !important; }
+    .cs-td-acct small, .cs-td-roas small { display: block; margin-top: 3px; font-size: 0.875rem; font-weight: 500; letter-spacing: 0; color: var(--cs-soft); }
+    .cs-td-roas b { font-size: 2.5rem; font-weight: 800; line-height: 1; letter-spacing: -0.045em; color: var(--gold); }
+    .cs-td-roas b.--word { font-size: 1.5rem; color: var(--text-head); }
+    .cs-tr-note { display: block; padding: 0 0 20px; border-bottom: 1px solid var(--cs-hair); }
+    .cs-tr-note td { display: block; font-size: 1rem; line-height: 1.55; color: var(--cs-dim); }
+    .cs-tr-note b { color: var(--text-head); }
+    .cs-tr.--has-note { border-bottom: 0; }
+
+    /* =====================================================
+       WEBSITE: led by the site itself
+       ===================================================== */
+    .cs-chero.--web .cs-show { margin-top: 36px; }
+    .cs-spec { margin: 40px 0 0; border-top: 1px solid var(--cs-hair); }
+    .cs-spec > div { display: grid; grid-template-columns: 8rem minmax(0, 1fr); grid-template-areas: "stat label" "stat note"; column-gap: 16px; row-gap: 2px; padding: 18px 0; border-bottom: 1px solid var(--cs-hair); }
+    .cs-spec dt { grid-area: label; font-size: 1rem; font-weight: 700; line-height: 1.35; color: var(--text-head); }
+    .cs-spec-stat { grid-area: stat; margin: 0; font-weight: 800; font-size: 1.9rem; line-height: 1; letter-spacing: -0.045em; color: var(--text-head); white-space: nowrap; }
+    .cs-spec-note { grid-area: note; margin: 0; font-size: 0.9375rem; line-height: 1.5; color: var(--cs-dim); }
+
+    .cs-walk { list-style: none; display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 16px; margin: 28px -16px 0; padding: 0 16px 6px; }
+    .cs-walk > li { flex: 0 0 86%; min-width: 0; scroll-snap-align: start; }
+    .cs-walk figure { margin: 0; }
+    .cs-walk .cs-browser { box-shadow: none; }
+    .cs-walk figcaption { margin-top: 12px; font-size: 0.9375rem; line-height: 1.5; color: var(--cs-dim); }
+    .cs-walk figcaption b { display: block; font-size: 1rem; font-weight: 700; color: var(--text-head); }
+
+    .cs-built { list-style: none; display: grid; gap: 44px; margin-top: 32px; }
+    .cs-built-item { display: grid; gap: 18px; }
+    .cs-built-text { max-width: 56ch; }
+    .cs-built-text h3 { margin-top: 4px; font-size: 1.3125rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.02em; color: var(--text-head); }
+    .cs-built-text > p { margin-top: 8px; font-size: 1.0625rem; line-height: 1.6; color: var(--cs-dim); }
+    .cs-built-fig { margin: 0; min-width: 0; }
+    .cs-built-fig .cs-browser { box-shadow: none; }
+    .cs-built-fig figcaption { margin-top: 10px; font-size: 0.875rem; line-height: 1.45; color: var(--cs-soft); }
 
     /* ===================== TABLET / DESKTOP ===================== */
     @media (min-width: 600px) {
       .cs-wall li { flex-basis: 164px; }
-      .cs-totals ul { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-      .cs-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .cs-tile { display: block; padding: 18px 18px 16px; }
-      .cs-tile-label { margin-top: 8px; }
       .cs-more-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .cs-chero-grid { grid-template-columns: minmax(0, 1fr) 200px; column-gap: 28px; }
-      .cs-words.--video { grid-template-columns: 230px minmax(0, 1fr); align-items: center; }
-      .cs-words.--video .cs-vid { margin: 0; }
+      .cs-sh { grid-template-columns: minmax(0, 220px) minmax(0, 1fr); column-gap: 28px; }
+      .cs-sh-stats { justify-content: center; }
+      .cs-wviews.--hero { left: 10px; top: 10px; padding: 6px 11px 6px 9px; gap: 5px; }
+      .cs-wviews.--hero b { font-size: 1rem; }
+      .cs-wviews.--hero > span { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
+      .cs-hero-sound { left: 50%; right: auto; bottom: 14px; display: inline-flex; align-items: center; gap: 8px; width: auto; min-height: 44px; height: auto; padding: 0 18px 0 15px; transform: translateX(-50%); font-size: 0.9375rem; font-weight: 650; white-space: nowrap; }
+      .cs-hero-sound span { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
+      .cs-hero-sound:active { transform: translateX(-50%) scale(0.97); }
+      .cs-wr-block.--warm, .cs-wr-block.--black { min-height: 240px; }
     }
-    @media (min-width: 720px) {
+    @media (min-width: 700px) {
       .cs-reels { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     }
     @media (min-width: 701px) {
-      .cs-hero { padding-top: 132px; }
-      .cs-crumbs { padding-top: 112px; }
-      .cs-tabs-bar { margin: 8px 0 0; padding: 0; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; border: 0; display: flex; justify-content: center; }
-      .cs-tabs { display: inline-flex; padding: 5px; border-radius: 999px; border: 1px solid var(--line); background: rgba(17,17,17,0.86); -webkit-backdrop-filter: blur(16px) saturate(1.3); backdrop-filter: blur(16px) saturate(1.3); box-shadow: 0 14px 40px rgba(0,0,0,0.45); }
-      .cs-tab { border-color: transparent; background: transparent; }
-      .cs-panel { padding-top: 44px; }
+      .cs-hero { padding-top: 112px; }
+      .cs-crumbs { padding-top: 88px; }
+      .cs-tabs-bar { margin: 8px 0 0; padding: 0; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; border: 0; display: flex; justify-content: center; top: calc(var(--cs-top) + 12px); pointer-events: none; }
+      .cs-tabs { pointer-events: auto; display: inline-flex; padding: 5px; border-radius: 999px; border: 1px solid var(--cs-hair-2); background: rgba(24,24,27,0.88); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); }
+      .cs-panel { padding-top: 56px; }
+    }
+    @media (min-width: 701px) and (max-width: 899px) {
+      .cs-toc { margin-left: -24px; margin-right: -24px; }
+      .cs-toc ul { padding: 0 24px; }
+      .cs-reel-row, .cs-walk { margin-left: -24px; margin-right: -24px; padding-left: 24px; padding-right: 24px; scroll-padding-left: 24px; }
+      .cs-wcard { flex-basis: 34%; }
+      .cs-walk > li { flex-basis: 70%; }
+    }
+    @media (min-width: 760px) {
+      .cs-say.--video { grid-template-columns: 260px minmax(0, 1fr); gap: 56px; align-items: center; }
+      .cs-why li { grid-template-columns: 220px minmax(0, 1fr); gap: 32px; padding: 30px 0; align-items: baseline; }
+      .cs-fact { grid-template-columns: 220px minmax(0, 1fr); grid-template-areas: "stat label" "stat note"; column-gap: 32px; padding: 28px 0; }
+      .cs-fact dt { margin-top: 0; }
+      .cs-table { display: table; }
+      .cs-table thead { position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; display: table-header-group; }
+      .cs-table tbody { display: table-row-group; border: 0; }
+      .cs-table thead th { padding: 0 14px 12px 0; border-bottom: 1px solid var(--cs-hair-2); text-align: left; font-size: 0.8125rem; font-weight: 650; line-height: 1.3; color: var(--cs-soft); vertical-align: bottom; }
+      .cs-tr { display: table-row; padding: 0; border: 0; }
+      .cs-tr > th, .cs-tr > td { display: table-cell; padding: 22px 14px 22px 0; border-bottom: 1px solid var(--cs-hair); vertical-align: top; }
+      .cs-tr > td::before { content: none; }
+      .cs-tr.--has-note > th, .cs-tr.--has-note > td { border-bottom: 0; padding-bottom: 10px; }
+      .cs-tr-note { display: table-row; padding: 0; border: 0; }
+      .cs-tr-note td { display: table-cell; padding: 0 0 22px; border-bottom: 1px solid var(--cs-hair); }
+      .cs-td-roas b { font-size: 2rem; }
+      .cs-dl { grid-template-columns: 260px minmax(0, 1fr) 96px; grid-template-areas: "name bar val"; gap: 24px; align-items: center; }
+      .cs-dl-val { text-align: right; font-size: 2.25rem; }
     }
     @media (min-width: 900px) {
       .cs-hero { padding-bottom: 40px; }
-      .cs-hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 48px; align-items: center; }
-      .cs-wall { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; overflow: visible; margin: 0; padding: 0 0 26px; -webkit-mask-image: none !important; mask-image: none !important; }
-      .cs-wall li:nth-child(2) { transform: translateY(26px); }
-      .cs-wall li:nth-child(3) { transform: translateY(-10px); }
+      .cs-hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 56px; align-items: center; }
+      .cs-wall { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; overflow: visible; margin: 0; padding: 0; -webkit-mask-image: none !important; mask-image: none !important; }
       .cs-clip-meta { left: 8px; right: 8px; bottom: 8px; padding: 8px 10px; }
       .cs-clip-meta b { font-size: 1.25rem; }
-      .cs-reels { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+      .cs-reels { gap: 16px; }
       .cs-reel-name { font-size: 1.125rem; }
-      .cs-board-head { display: grid; grid-template-columns: var(--cols); gap: 14px; padding: 0 22px 10px; font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-soft); }
-      .cs-rows { gap: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: var(--bg-1); }
-      .cs-row { grid-template-columns: var(--cols); gap: 6px 14px; align-items: center; padding: 18px 22px; border: 0; border-top: 1px solid var(--line-soft); border-radius: 0; background: transparent; }
-      .cs-row:first-child { border-top: 0; }
+      .cs-board-head { display: grid; grid-template-columns: var(--cols); gap: 14px; padding: 0 0 12px; font-size: 0.8125rem; font-weight: 650; color: var(--cs-soft); }
+      .cs-rows { border-top: 1px solid var(--cs-hair-2); }
+      .cs-row { grid-template-columns: var(--cols); gap: 6px 14px; align-items: center; padding: 22px 0; }
       .cs-row-acct, .cs-row-roas { grid-column: auto; }
       .cs-row-roas { grid-template-columns: 76px minmax(0, 1fr); }
       .cs-row .cs-k { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
       .cs-row-roas b { font-size: 1.9rem; }
-      .cs-row-stat b { margin-top: 0; font-size: 1.125rem; }
-      .cs-row-go { grid-column: auto; justify-content: flex-end; margin: 0; padding: 0; border: 0; }
-      .cs-row-foot { grid-column: 1 / -1; padding-top: 8px; border-top: 0; }
-      .cs-totals { padding: 22px 24px; }
-      .cs-sites { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+      .cs-row-stat b { margin-top: 0; }
+      .cs-row-go { grid-column: auto; justify-content: flex-end; }
+      .cs-site { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+      .cs-site-media { padding: 40px 36px; border-bottom: 0; border-right: 1px solid var(--cs-hair); }
+      .cs-site-copy { justify-content: center; padding: 40px; }
+      .cs-site-title { font-size: 2rem; }
 
-      .cs-chero-grid { grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); grid-template-rows: 1fr auto auto auto auto auto 1fr; grid-template-areas: ". media" "copy media" "meta media" "lede media" "cta media" "notes media" ". media"; column-gap: 56px; }
-      .cs-hero-notes { grid-area: notes; }
-      .cs-chero-media { justify-self: center; width: 100%; max-width: 320px; }
-      .cs-chero.--wide .cs-chero-media { max-width: none; }
-      .cs-chero-media .--card { aspect-ratio: 4 / 5; }
-      .cs-chero-media .cs-dev { padding-right: 16%; padding-bottom: 8%; }
-      .cs-chero-media .cs-dev-browser { display: block; }
-      .cs-chero-media .cs-dev-phone { position: absolute; right: 0; bottom: 0; width: 27%; }
-      .cs-chero-copy { padding-top: 0; }
-      .cs-glance { margin-top: 40px; }
-      .cs-glance > div { padding: 20px 22px; gap: 8px; }
-      .cs-glance dt { font-size: 0.9375rem; }
+      .cs-sec { margin-top: 112px; scroll-margin-top: 84px; }
+      .cs-sec.--split .cs-sec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 48px; }
+      .cs-sec.--split .cs-sec-head p { max-width: 40ch; margin: 0 0 6px; }
+      .cs-toc { top: calc(var(--cs-top) + 12px); margin: 72px 0 0; padding: 0; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; border: 0; display: flex; justify-content: center; pointer-events: none; }
+      .cs-toc ul { pointer-events: auto; display: inline-flex; padding: 5px; border-radius: 999px; border: 1px solid var(--cs-hair-2); background: rgba(24,24,27,0.88); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); overflow: visible; -webkit-mask-image: none !important; mask-image: none !important; }
+      .cs-step { grid-template-columns: 56px minmax(0, 5fr) minmax(0, 7fr); column-gap: 24px; padding: 28px 0; }
+      .cs-step-body { grid-column: 3; }
+      .cs-step-body > p { margin-top: 0; }
+      .cs-close { padding: 112px 0 96px; }
+      .cs-more { margin-top: 120px; padding-top: 72px; }
 
-      .cs-body { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 56px; align-items: start; margin-top: 16px; }
-      .cs-toc { top: calc(var(--cs-top) + 16px); margin: 40px 0 0; padding: 0; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; border: 0; }
-      .cs-toc-title { display: block; margin-bottom: 10px; font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-soft); }
-      .cs-toc ul { flex-direction: column; gap: 0; overflow: visible; padding: 0; border-left: 1px solid var(--line); -webkit-mask-image: none !important; mask-image: none !important; }
-      .cs-toc ul a { width: 100%; margin-left: -1px; padding: 0 16px; border: 0; border-left: 2px solid transparent; border-radius: 0; background: none; font-size: 0.9375rem; }
-      .cs-toc ul a.--on { background: none; border-left-color: var(--gold); color: var(--text-head); }
-      .cs-toc-all { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 16px; font-size: 0.9375rem; font-weight: 700; color: var(--gold); }
-      .cs-sec { padding-top: 44px; scroll-margin-top: calc(var(--cs-top) + 20px); }
-      .cs-close { padding: 72px 0 88px; }
+      /* social hero: copy and numbers beside the Reel */
+      .cs-sh { grid-template-columns: minmax(0, 1fr) 340px; grid-template-rows: minmax(0, 1fr) auto; grid-template-areas: "copy media" "stats media"; column-gap: 80px; }
+      .cs-sh-copy { align-self: center; padding-top: 12px; }
+      .cs-sh-media { margin-top: 0; }
+      .cs-sh-media .cs-frame { border-radius: 28px; }
+      .cs-sh-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 44px; border-top: 1px solid var(--cs-hair); }
+      .cs-sh-stats > div, .cs-sh-stats > div:first-child { justify-content: flex-end; padding: 22px 20px 0 0; border-top: 0; }
+      .cs-sh-stats > div + div { padding-left: 22px; border-left: 1px solid var(--cs-hair); }
+      .cs-sh-stats dt { font-size: 0.9375rem; }
+      .cs-sh-stat { font-size: 2.75rem; }
+      .cs-reel-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; overflow: visible; margin: 40px 0 0; padding: 0; -webkit-mask-image: none !important; mask-image: none !important; }
+
+      /* ads hero: an editorial header, then the number blocks */
+      .cs-ah { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 64px; align-items: end; }
+      .cs-ah-side .cs-lede { margin-top: 0; }
+      .cs-wr { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 16px; margin-top: 56px; }
+      .cs-wr-block { min-height: 250px; padding: 30px 32px; border-radius: 32px; }
+      .cs-wr-block.--gold { grid-row: 1 / span 2; min-height: 516px; padding: 40px; }
+      .cs-wr-block.--gold .cs-wr-stat { font-size: clamp(8rem, 15vw, 13rem); }
+      .cs-wr-stat { font-size: 5rem; }
+      .cs-wr-block.--gold > dt { font-size: 1.25rem; }
+      .cs-wr-block.--gold .cs-wr-note { font-size: 1.0625rem; }
+      .cs-wr.--totals { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 20px; }
+      .cs-wr.--totals .cs-wr-block, .cs-wr.--totals .cs-wr-block.--gold { grid-row: auto; min-height: 200px; padding: 24px; border-radius: 26px; }
+      .cs-wr.--totals .cs-wr-stat, .cs-wr.--totals .cs-wr-block.--gold .cs-wr-stat { font-size: 3.25rem; }
+      .cs-wr.--totals .cs-wr-block.--gold > dt { font-size: 0.9375rem; }
+
+      /* website hero: centered copy, the site below it */
+      .cs-wh-copy { max-width: 860px; margin: 0 auto; text-align: center; }
+      .cs-wh-copy .cs-lede { margin-left: auto; margin-right: auto; }
+      .cs-wh-copy .cs-cta-row { justify-content: center; }
+      .cs-chero.--web .cs-show { max-width: 1080px; margin: 64px auto 0; }
+      .cs-spec { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 72px; border-bottom: 1px solid var(--cs-hair); }
+      .cs-spec > div { display: flex; flex-direction: column; gap: 6px; padding: 28px 32px 30px 0; border-bottom: 0; }
+      .cs-spec > div + div { padding-left: 32px; border-left: 1px solid var(--cs-hair); }
+      .cs-spec-stat { order: -1; margin-bottom: 10px; font-size: 3.25rem; }
+      .cs-walk { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 44px 28px; overflow: visible; margin: 40px 0 0; padding: 0; -webkit-mask-image: none !important; mask-image: none !important; }
+      .cs-built { gap: 80px; margin-top: 48px; }
+      .cs-built-item.--fig { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: center; }
+      .cs-built-item.--fig.--flip { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+      .cs-built-item.--fig.--flip .cs-built-text { order: 2; }
+    }
+    @media (hover: hover) {
+      .cs-clip:hover, .cs-mcard:hover { transform: translateY(-3px); }
+      .cs-mcard:hover { border-color: var(--cs-hair-2); }
     }
     @media (max-width: 899px) {
       .cs-close .cta-content p { margin-left: auto; margin-right: auto; }
@@ -702,16 +803,15 @@ const PAGE_CSS = `
     @media (max-width: 600px) {
       .cs-close .cta-banner { padding: 30px 20px; border-radius: 24px; }
       .cs-close .cta-actions { width: 100%; flex-direction: column; }
-      .cs-close .cta-actions .btn { width: 100%; }
+      .cs-close .cta-actions .btn { width: 100%; height: auto; min-height: 52px; padding-top: 10px; padding-bottom: 10px; text-align: center; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .cs-clip, .cs-reel, .cs-site, .cs-mcard, .cs-link, .cs-tab, .cs-vid-play, .cs-toc ul a, .cs-wvid, .cs-hero-sound { transition: none; }
-      .cs-wvid:hover { transform: none; }
-      .cs-clip:hover, .cs-reel:hover, .cs-site:hover, .cs-mcard:hover, .cs-link:hover { transform: none; }
+      .cs-clip, .cs-mcard, .cs-link, .cs-tab, .cs-vid-play, .cs-toc a, .cs-hero-sound { transition: none; }
+      .cs-clip:hover, .cs-mcard:hover { transform: none; }
     }
 `;
 
-// ---------- page JS (tabs, in-page nav, sideways rows) ----------
+// ---------- page JS (tabs, section chips, sideways rows, videos) ----------
 const pageJs = (redirects) => `
     (function () {
       var d = document;
@@ -783,18 +883,17 @@ const pageJs = (redirects) => `
         if (ids.indexOf(h) >= 0) addEventListener('load', function () { panels[ids.indexOf(h)].scrollIntoView({ block: 'start', behavior: 'instant' }); });
       }
 
-      // Case page: in-page nav highlights the section you are reading.
+      // Case page: the sticky section chips highlight the section you are reading.
       var toc = d.querySelector('.cs-toc');
       if (toc) {
-        var links = [].slice.call(toc.querySelectorAll('ul a[href^="#"]'));
-        var secs = links.map(function (a) { return d.getElementById(a.getAttribute('href').slice(1)); });
         var row = toc.querySelector('ul');
-        var cur = -1, ticking = false;
+        var links = [].slice.call(row.querySelectorAll('a[href^="#"]'));
+        var secs = links.map(function (a) { return d.getElementById(a.getAttribute('href').slice(1)); });
+        var cur = -2, ticking = false;
         var spy = function () {
           ticking = false;
-          var line = toc.getBoundingClientRect().bottom + 40;
-          if (innerWidth >= 900) line = innerHeight * 0.35;
-          var k = 0;
+          var line = row.getBoundingClientRect().bottom + 48;
+          var k = -1;
           secs.forEach(function (s, i) { if (s && s.getBoundingClientRect().top <= line) k = i; });
           if (innerHeight + scrollY >= d.documentElement.scrollHeight - 4) {
             var last = secs[secs.length - 1];
@@ -806,14 +905,14 @@ const pageJs = (redirects) => `
             a.classList.toggle('--on', i === k);
             if (i === k) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
           });
-          reveal(row, links[k].parentNode);
+          if (k >= 0) reveal(row, links[k].parentNode);
         };
         addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(spy); } }, { passive: true });
         addEventListener('resize', spy);
         spy();
       }
 
-      // Muted loops (case hero, hub clip wall): poster first. Start only after
+      // Muted loops (social hero, hub clip wall): poster first. Start only after
       // the page has loaded and gone idle, never with reduced motion or data
       // saver, and only while at least a quarter is on screen.
       var loopVids = [].slice.call(d.querySelectorAll('video[data-cs-loop]'));
@@ -892,7 +991,9 @@ function validateCase(c, file) {
   if (!SERVICES.includes(c.service)) errs.push('service must be social|ads|web');
   arr(c.services, 'services').forEach((s, i) => { if (!SERVICES.includes(s)) errs.push(`services[${i}] must be social|ads|web`); });
   arr(c.organizations, 'organizations').forEach((s, i) => str(s, `organizations[${i}]`));
-  if (!c.hero || !['video', 'image', 'graphic', 'logos', 'device'].includes(c.hero.type)) errs.push('hero.type must be video|image|graphic|logos|device');
+  if (!c.hero || !HERO_TYPES.includes(c.hero.type)) errs.push(`hero.type must be ${HERO_TYPES.join('|')}`);
+  if (c.hero && c.hero.type === 'talk' && !(c.quote && c.quote.video)) errs.push('hero.type "talk" needs quote.video');
+  if (c.hero && c.hero.type === 'device') ['desktop', 'mobile'].forEach((k) => { if (!c.hero[k] || !c.hero[k].src) errs.push(`hero.${k}.src is required`); });
   if (!c.card || typeof c.card.value !== 'string') errs.push('card.value is required');
   const m = arr(c.metrics, 'metrics');
   if (m.length !== 3) errs.push('metrics must have exactly 3 items');
@@ -914,6 +1015,10 @@ function validateCase(c, file) {
     if (x.duration && !/^PT\d+S$/.test(x.duration)) errs.push(`reels.items[${i}].duration must look like PT42S`);
   });
   if (c.analysis) arr(c.analysis.items, 'analysis.items').forEach((x, i) => ['stat', 'title', 'body'].forEach((k) => str(x && x[k], `analysis.items[${i}].${k}`)));
+  if (c.walkthrough) arr(c.walkthrough.items, 'walkthrough.items').forEach((x, i) => {
+    ['src', 'alt', 'title', 'caption'].forEach((k) => str(x && x[k], `walkthrough.items[${i}].${k}`));
+    if (!x || !x.width || !x.height) errs.push(`walkthrough.items[${i}] needs width and height`);
+  });
   if (c.quote) ['text', 'name', 'role'].forEach((k) => str(c.quote[k], `quote.${k}`));
   arr(c.links, 'links').forEach((l, i) => { str(l && l.href, `links[${i}].href`); str(l && l.text, `links[${i}].text`); });
   const expect = path.basename(file).match(/^([a-z0-9-]+)\.(en|es)\.json$/);
@@ -952,6 +1057,7 @@ function lintCase(c) {
   if (c.metaDescription.length < 140 || c.metaDescription.length > 160) warn.push(`metaDescription is ${c.metaDescription.length} chars (want 140-160)`);
   if (c.metaTitle.length > 60) warn.push(`metaTitle is ${c.metaTitle.length} chars (want <= 60)`);
   if (!/\| Button Up Media$/.test(c.metaTitle)) warn.push('metaTitle should end with "| Button Up Media"');
+  if (c.service === 'ads' && c.services.some((s) => s !== 'ads')) warn.push('an ads case lists services other than ads: only show work we actually do for this client');
   // Unconfirmed numbers stay out of JSON-LD (ldHeadline, metaDescription, organizations).
   const ld = [c.ldHeadline, c.metaDescription, ...(c.organizations || [])].join(' ');
   (c.metrics || []).forEach((m, i) => { if (m && m.reviewNote && ld.includes(m.value)) warn.push(`metrics[${i}].value "${m.value}" has a review note but appears in JSON-LD text`); });
@@ -971,8 +1077,8 @@ function lintHub(h) {
 // Every local /media, /images, /videos path a content file names must exist.
 async function lintAssets(root, obj, label, warn) {
   const paths = new Set();
-  const walk = (v, k) => {
-    if (typeof v === 'string' && /^(\/|videos\/)(media|images|videos)?/.test(v) && /\.(avif|webp|png|jpe?g|svg|mp4)$/i.test(v)) paths.add(v);
+  const walk = (v) => {
+    if (typeof v === 'string' && /^(\/|videos\/|media\/)(media|images|videos)?/.test(v) && /\.(avif|webp|png|jpe?g|svg|mp4)$/i.test(v)) paths.add(v);
     else if (Array.isArray(v)) v.forEach((x) => walk(x));
     else if (v && typeof v === 'object') Object.values(v).forEach((x) => walk(x));
   };
@@ -983,7 +1089,6 @@ async function lintAssets(root, obj, label, warn) {
 }
 
 // ---------- shared render helpers ----------
-const tagClass = (s) => (s === 'social' ? '' : ` --${s}`);
 const areaHref = (c) => (c.area && c.area.page ? areaPath(c.area.page, c.lang) : null);
 
 function headHtml({ t, chrome, title, description, url, enUrl, esUrl, ogImage, schema, preload }) {
@@ -1020,7 +1125,6 @@ function headHtml({ t, chrome, title, description, url, enUrl, esUrl, ogImage, s
   <meta name="twitter:image" content="${og}" />
   ${chrome.fonts}
   ${preload ? `<link rel="preload" as="image" href="${preload}" fetchpriority="high" />` : ''}
-  ${chrome.lucide}
   <link rel="stylesheet" href="/shared.css?v=${chrome.cssVer}" />
   <script type="application/ld+json">
 ${ldJson(schema)}
@@ -1059,40 +1163,37 @@ function pageTail(chrome, redirects) {
 `;
 }
 
-// Typographic card for a client with no media yet. compact = reel card version
-// (the card footer already shows the number and the place chip the location,
-// so only the name and sub render).
-function graphicCard(g, { compact = false } = {}) {
-  return `<div class="cs-graphic" aria-hidden="true">
-              <div>${compact ? '' : `
-                <span class="cs-graphic-kicker">${esc(g.kicker)}</span>`}
-                <span class="cs-graphic-name">${esc(g.name)}</span>
-                <span class="cs-graphic-sub">${esc(g.sub)}</span>
-              </div>${compact ? '' : `
-              <div>
-                <span class="cs-graphic-big">${esc(g.big)}</span>
-                <span class="cs-graphic-label">${esc(g.bigLabel)}</span>
-                <span class="cs-graphic-handle">${esc(g.handle)}</span>
-              </div>`}
+// A browser window (and optionally a phone) around real screenshots of a site.
+function browserFrame(img, { url = '', lazy = true, small = false } = {}) {
+  const load = lazy ? ' loading="lazy" decoding="async"' : ' fetchpriority="high" decoding="async"';
+  return `<div class="cs-browser${small ? ' --sm' : ''}">
+                <div class="cs-browser-bar" aria-hidden="true"><i></i><i></i><i></i>${url ? `<span class="cs-browser-url">${esc(url)}</span>` : ''}</div>
+                <img src="${img.src}" alt="${escAttr(img.alt)}" ${dim(img)}${load} />
+              </div>`;
+}
+function deviceShow(h, { url = true, lazy = true } = {}) {
+  return `<div class="cs-show">
+              ${browserFrame(h.desktop, { url: url ? h.url : '', lazy })}
+              <div class="cs-phone"><img src="${h.mobile.src}" alt="${escAttr(h.mobile.alt)}" ${dim(h.mobile)} loading="${lazy ? 'lazy' : 'eager'}" decoding="async" /></div>
             </div>`;
 }
 
-function deviceMock(h, { url = true, lazy = true } = {}) {
-  const load = lazy ? ' loading="lazy" decoding="async"' : ' fetchpriority="high"';
-  return `<div class="cs-dev">
-              <div class="cs-dev-browser">
-                <div class="cs-dev-bar" aria-hidden="true"><i></i><i></i><i></i>${url && h.url ? `<span class="cs-dev-url">${esc(h.url)}</span>` : ''}</div>
-                <img src="${h.desktop.src}" alt="${escAttr(h.desktop.alt)}" ${dim(h.desktop)}${load} />
-              </div>
-              <div class="cs-dev-phone"><img src="${h.mobile.src}" alt="${escAttr(h.mobile.alt)}" ${dim(h.mobile)}${load} /></div>
-            </div>`;
+// Number blocks: gold with ink, warm white with ink, black with gold.
+const WR = ['--gold', '--warm', '--black', '--black'];
+function wrapped(items, { cls = '', label = '' } = {}) {
+  return `<dl class="cs-wr${cls ? ` ${cls}` : ''}"${label ? ` aria-label="${escAttr(label)}"` : ''}>
+          ${items.map((m, i) => `<div class="cs-wr-block ${WR[i] || '--black'}">
+            <dt>${esc(m.label)}</dt>
+            <dd class="cs-wr-stat">${esc(m.value)}</dd>${m.meaning ? `
+            <dd class="cs-wr-note">${esc(m.meaning)}</dd>` : ''}${note(m)}
+          </div>`).join('\n          ')}
+        </dl>`;
 }
 
-// One scoreboard row; used on the hub (with a case link) and on ads case pages.
+// One scoreboard row; used on the hub (with a case link).
 function scoreRow(a, t, link, max) {
   const pct = typeof a.roasNumber === 'number' && max ? Math.max(4, Math.round((a.roasNumber / max) * 100)) : 0;
   const word = typeof a.roasNumber !== 'number';
-  const foot = [a.spend ? `<b>${esc(t.spend)}:</b> ${esc(a.spend)}.` : '', a.standout ? `<b>${esc(t.standout)}</b> ${esc(a.standout)}` : ''].filter(Boolean).join(' ');
   return `<li class="cs-row">
               <div class="cs-row-acct"><h3>${esc(a.name)}</h3><p>${esc(a.campaigns)} · ${esc(a.period)}</p></div>
               <div class="cs-row-roas"><span class="cs-k">${esc(t.col.roas)}</span><b${word ? ' class="--word"' : ''}>${esc(a.roas)}</b>${pct ? `<span class="cs-bar" aria-hidden="true"><i style="--w:${pct}%"></i></span>` : '<span></span>'}${a.roasLabel ? `<span class="cs-roas-note">${esc(a.roasLabel)}</span>` : ''}</div>
@@ -1100,7 +1201,6 @@ function scoreRow(a, t, link, max) {
               <div class="cs-row-stat"><span class="cs-k">${esc(t.col.costPer)}</span><b>${esc(a.costPer)}</b></div>
               <div class="cs-row-stat"><span class="cs-k">${esc(t.col.value)}</span><b>${esc(a.value)}</b></div>
               ${link ? `<a class="cs-row-go" href="${link.href}">${esc(t.readCase)}<span class="cs-sr">: ${esc(link.client)}</span> ${ICON.arrow}</a>` : ''}
-              ${!link && foot ? `<p class="cs-row-foot">${foot}</p>` : ''}
             </li>`;
 }
 
@@ -1121,13 +1221,7 @@ function renderHub(hub, cases, chrome, t, alt) {
   const bySlug = new Map(cases.map((c) => [c.slug, c]));
   const S = hub.sections;
 
-  const h1 = (() => {
-    const e = esc(hub.h1); const a = esc(hub.h1Accent || '');
-    const i = a ? e.lastIndexOf(a) : -1;
-    return i < 0 ? e : `${e.slice(0, i)}<span class="cs-gold">${a}</span>${e.slice(i + a.length)}`;
-  })();
-
-  const wall = hub.wall.filter((w) => bySlug.has(w.slug)).map((w, i) => {
+  const wall = hub.wall.filter((w) => bySlug.has(w.slug)).map((w) => {
     const c = bySlug.get(w.slug);
     return `<li><a class="cs-frame cs-portrait cs-clip" href="${casePath(w.slug, lang)}" aria-label="${escAttr(t.clipLabel(c.client, w.chip))}" data-audio-managed="true">
               <video data-video-src="${videoSrc(w.src)}" data-cs-loop poster="${w.poster}" ${dim(w)} muted loop playsinline preload="none" aria-hidden="true"></video>
@@ -1135,16 +1229,14 @@ function renderHub(hub, cases, chrome, t, alt) {
             </a></li>`;
   }).join('\n            ');
 
-  // Social reel cards
+  // Social reel cards (real video covers)
   const social = (S.social.order || []).filter((s) => bySlug.has(s)).map((s) => {
     const c = bySlug.get(s);
     const k = c.card;
-    const media = k.src
-      ? `<img src="${k.src}" alt="" ${dim(k)} loading="lazy" decoding="async" />`
-      : (c.hero.type === 'graphic' ? graphicCard(c.hero, { compact: true }) : '');
+    const media = k.src ? `<img src="${k.src}" alt="" ${dim(k)} loading="lazy" decoding="async" />` : '';
     return `<li><a class="cs-reel" href="${casePath(s, lang)}">
               ${media}
-              <span class="cs-reel-area">${ICON.pin}${esc(k.place || (c.area ? c.area.name : c.descriptor))}</span>
+              <span class="cs-reel-area">${esc(k.place || (c.area ? c.area.name : c.descriptor))}</span>
               <span class="cs-reel-foot">
                 <b class="cs-reel-num">${esc(k.value)}</b>
                 <span class="cs-reel-label">${esc(k.label)}</span>
@@ -1156,19 +1248,19 @@ function renderHub(hub, cases, chrome, t, alt) {
 
   // Ads scoreboard: every account from every ads case, best ROAS first
   const adRows = cases
-    .filter((c) => c.services.includes('ads') && c.results && c.results.accounts)
+    .filter((c) => c.service === 'ads' && c.results && c.results.accounts)
     .flatMap((c) => c.results.accounts.map((a) => ({ a, link: { href: casePath(c.slug, lang), client: c.client } })))
     .sort((x, y) => (typeof y.a.roasNumber === 'number' ? y.a.roasNumber : -1) - (typeof x.a.roasNumber === 'number' ? x.a.roasNumber : -1));
 
-  // Website device cards
-  const web = (S.web.order || []).filter((s) => bySlug.has(s) && bySlug.get(s).webCard).map((s) => {
+  // Website cards (only real website work)
+  const web = (S.web.order || []).filter((s) => bySlug.has(s) && bySlug.get(s).webCard && bySlug.get(s).services.includes('web')).map((s) => {
     const c = bySlug.get(s);
     const w = c.webCard;
     const media = w.device && c.hero.type === 'device'
-      ? deviceMock(c.hero, { url: false })
+      ? deviceShow(c.hero, { url: true })
       : `<img src="${w.image.src}" alt="${escAttr(w.image.alt)}" ${dim(w.image)} loading="lazy" decoding="async" />`;
     return `<li><a class="cs-site" href="${casePath(s, lang)}">
-              <span class="cs-site-media">${media}</span>
+              <div class="cs-site-media">${media}</div>
               <span class="cs-site-copy">
                 <span class="cs-site-kicker">${esc(w.kicker)}</span>
                 <strong class="cs-site-title">${esc(w.title)}</strong>
@@ -1178,9 +1270,8 @@ function renderHub(hub, cases, chrome, t, alt) {
             </a></li>`;
   }).join('\n            ');
 
-  const counts = { social: (S.social.order || []).filter((s) => bySlug.has(s)).length, ads: adRows.length, web: (S.web.order || []).filter((s) => bySlug.has(s) && bySlug.get(s).webCard).length };
-  const tab = (id) => `<button type="button" class="cs-tab" role="tab" id="tab-${id}" aria-controls="${id}" aria-selected="${id === 'social' ? 'true' : 'false'}"${id === 'social' ? '' : ' tabindex="-1"'}><span>${esc(S[id].tab)}</span><span class="cs-tab-n">${counts[id]}<span class="cs-sr"> ${esc(t.count[id])}</span></span></button>`;
-  const kicker = (id) => `<p class="cs-panel-kicker">${counts[id]} ${esc(t.count[id])}</p>`;
+  // No counts on tabs: never show how many clients or ad accounts there are.
+  const tab = (id) => `<button type="button" class="cs-tab" role="tab" id="tab-${id}" aria-controls="${id}" aria-selected="${id === 'social' ? 'true' : 'false'}"${id === 'social' ? '' : ' tabindex="-1"'}>${esc(S[id].tab)}</button>`;
 
   const ordered = [...cases].sort((a, b) => (a.order || 99) - (b.order || 99));
   const schema = {
@@ -1219,8 +1310,8 @@ function renderHub(hub, cases, chrome, t, alt) {
     <section class="cs-hero">
       <div class="cs-hero-grid">
         <div class="cs-hero-copy">
-          <p class="cs-eyebrow">${esc(hub.eyebrow)}</p>
-          <h1>${h1}</h1>
+          <p class="cs-kind">${esc(hub.eyebrow)}</p>
+          <h1>${esc(hub.h1)}</h1>
           <p class="cs-lede">${esc(hub.answer)}</p>
           <div class="cs-cta-row">
             <a href="${t.contact}" class="btn btn-primary cs-btn">${esc(hub.primaryCta)} ${ICON.arrow}</a>
@@ -1242,7 +1333,6 @@ function renderHub(hub, cases, chrome, t, alt) {
       </div>
 
       <div class="cs-panel --social" id="social">
-        ${kicker('social')}
         <h2>${esc(S.social.h2)}</h2>
         <p class="cs-panel-intro">${esc(S.social.intro)}</p>
         <ul class="cs-reels">
@@ -1251,23 +1341,19 @@ function renderHub(hub, cases, chrome, t, alt) {
       </div>
 
       <div class="cs-panel --ads" id="ads">
-        ${kicker('ads')}
         <h2>${esc(S.ads.h2)}</h2>
         <p class="cs-panel-intro">${esc(S.ads.intro)}</p>
         <p class="cs-explain">${S.ads.roasLineHtml}</p>
         ${scoreboard(adRows, t, true)}
         <div class="cs-totals">
           <h3>${esc(S.ads.totals.h3)}</h3>
-          <ul>
-            ${S.ads.totals.items.map((x) => `<li><b>${esc(x.value)}</b><span>${esc(x.label)}</span></li>`).join('\n            ')}
-          </ul>
+          ${wrapped(S.ads.totals.items, { cls: '--totals' })}
           ${note(S.ads.totals)}
         </div>
         <p class="cs-disclaimer">${esc(S.ads.disclaimer)}</p>
       </div>
 
       <div class="cs-panel --web" id="web">
-        ${kicker('web')}
         <h2>${esc(S.web.h2)}</h2>
         <p class="cs-panel-intro">${esc(S.web.intro)}</p>
         <ul class="cs-sites">
@@ -1282,42 +1368,122 @@ ${pageTail(chrome, redirects)}`;
 }
 
 // ---------- CASE PAGE ----------
-function heroMedia(c, t) {
+function relatedCases(c, all) {
+  const others = all.filter((x) => x.slug !== c.slug).sort((a, b) => (a.order || 99) - (b.order || 99));
+  const same = others.filter((x) => x.service === c.service || x.services.includes(c.service));
+  return [...same, ...others.filter((x) => !same.includes(x))].slice(0, 2);
+}
+
+// Hero pieces every case type shares.
+function heroCopy(c, t, { meta = true } = {}) {
+  const items = [
+    c.area ? `${esc(c.area.name)}${c.area.detail ? ` (${esc(c.area.detail)})` : ''}` : '',
+    esc(c.descriptor),
+    c.timeframe ? esc(c.timeframe) : '',
+  ].filter(Boolean);
+  return {
+    label: `<p class="cs-kind">${esc(t.kind[c.service])}</p>`,
+    h1: `<h1><span class="cs-h1-name">${esc(c.h1)}</span><span class="cs-sr">: </span><span class="cs-h1-sub">${esc(c.h1Sub)}</span></h1>`,
+    lede: `<p class="cs-lede">${esc(c.answer)}</p>`,
+    cta: `<div class="cs-cta-row">
+            <a href="${t.contact}" class="btn btn-primary cs-btn">${esc(t.primary)} ${ICON.arrow}</a>
+          </div>`,
+    // the dot stays on the line of the item before it, so a wrap never starts with a dot
+    meta: meta ? `<p class="cs-meta">${items.join('&nbsp;&nbsp;&middot;&nbsp; ')}</p>` : '',
+  };
+}
+
+// The hero video for social cases: a muted loop of a real Reel, or the
+// client's own video (talk) that plays with sound on tap.
+function socialMedia(c, t) {
   const h = c.hero;
-  const chip = h.views
-    ? `<span class="cs-wviews --hero">${ICON.eye}<b>${esc(h.views)}</b><span>${esc(t.views)}</span></span>`
-    : h.chip ? `<span class="cs-chip">${esc(h.chip)}</span>` : '';
-  if (h.type === 'video') {
-    const jump = h.jump && c.reels
-      ? `<a class="cs-hero-sound" href="#${t.ids.reels}" data-cs-play-first aria-label="${escAttr(t.playWith(c.reels.items[0].title))}">${ICON.sound}<span>${esc(t.watchSound)}</span></a>`
-      : '';
-    return `<figure class="cs-frame cs-portrait${jump ? ' --jump' : ''}" data-audio-managed="true">
-              <video data-video-src="${videoSrc(h.src)}" data-cs-loop poster="${h.poster}" ${dim(h)} muted loop playsinline preload="none" aria-label="${escAttr(h.alt)}"></video>
-              ${chip}${jump ? `\n              ${jump}` : ''}
+  if (h.type === 'talk') {
+    const v = c.quote.video;
+    return `<figure class="cs-frame cs-portrait cs-vid hp2-vid-card" data-audio-managed="true">
+              <video data-video-src="${videoSrc(v.src)}" poster="${v.poster}" ${dim(v)} playsinline preload="none"></video>
+              <button type="button" class="cs-vid-play" aria-label="${escAttr(v.playLabel)}"></button>
+              <figcaption class="cs-vid-cap"><b>${esc(c.quote.name)}</b><span>${esc(t.tapSound)}</span></figcaption>
             </figure>`;
   }
   if (h.type === 'image') {
     return `<figure class="cs-frame cs-portrait">
               <img src="${h.src}" alt="${escAttr(h.alt)}" ${dim(h)} fetchpriority="high" decoding="async" />
-              ${chip}
+              ${h.chip ? `<span class="cs-chip">${esc(h.chip)}</span>` : ''}
             </figure>`;
   }
-  if (h.type === 'graphic') return `<div class="cs-frame cs-portrait --card" role="img" aria-label="${escAttr(`${h.name} ${h.sub}: ${h.big} ${h.bigLabel}, ${h.handle}`)}">${graphicCard(h)}</div>`;
-  if (h.type === 'logos') {
-    return `<div class="cs-frame cs-portrait --card cs-logos">
-              <div><span class="cs-logos-big">${esc(h.big)}</span><span class="cs-logos-label">${esc(h.bigLabel)}</span></div>
-              <div class="cs-logos-wall">
-                ${h.logos.map((l) => `<img src="${l.src}" alt="${escAttr(l.alt)}" ${dim(l)} decoding="async" />`).join('\n                ')}
-              </div>
-            </div>`;
-  }
-  return deviceMock(h, { lazy: false });
+  const badge = h.views ? `<span class="cs-wviews --hero">${ICON.eye}<b>${esc(h.views)}</b><span>${esc(t.views)}</span></span>` : '';
+  const jump = h.jump && c.reels
+    ? `<a class="cs-hero-sound" href="#${t.ids.reels}" data-cs-play-first aria-label="${escAttr(t.playWith(c.reels.items[0].title))}">${ICON.sound}<span>${esc(t.watchSound)}</span></a>`
+    : '';
+  return `<figure class="cs-frame cs-portrait" data-audio-managed="true">
+              <video data-video-src="${videoSrc(h.src)}" data-cs-loop poster="${h.poster}" ${dim(h)} muted loop playsinline preload="none" aria-label="${escAttr(h.alt)}"></video>
+              ${badge}${jump ? `\n              ${jump}` : ''}
+            </figure>`;
 }
 
-function relatedCases(c, all) {
-  const others = all.filter((x) => x.slug !== c.slug).sort((a, b) => (a.order || 99) - (b.order || 99));
-  const same = others.filter((x) => x.service === c.service || x.services.includes(c.service));
-  return [...same, ...others.filter((x) => !same.includes(x))].slice(0, 2);
+function renderHero(c, t) {
+  const k = heroCopy(c, t);
+  const notes = [note(c.hero), c.timeframeReviewNote ? note({ reviewNote: `${c.timeframe}: ${c.timeframeReviewNote}` }) : ''].join('');
+  const notesHtml = notes ? `\n      <div class="cs-hero-notes">${notes}</div>` : '';
+
+  if (c.service === 'ads') {
+    return `    <section class="cs-chero --ads">
+      <div class="cs-ah">
+        <div class="cs-ah-main">
+          ${k.label}
+          ${k.h1}
+        </div>
+        <div class="cs-ah-side">
+          ${k.lede}
+          ${k.cta}
+          ${k.meta}
+        </div>
+      </div>
+      ${wrapped(c.metrics)}${notesHtml}
+    </section>`;
+  }
+
+  if (c.service === 'web') {
+    const h = c.hero;
+    const show = h.type === 'device'
+      ? deviceShow(h, { lazy: false })
+      : `<figure class="cs-frame"><img src="${h.src}" alt="${escAttr(h.alt)}" ${dim(h)} fetchpriority="high" decoding="async" /></figure>`;
+    return `    <section class="cs-chero --web">
+      <div class="cs-wh-copy">
+        ${k.label}
+        ${k.h1}
+        ${k.lede}
+        ${k.cta}
+        ${k.meta}
+      </div>
+      ${show}
+      <dl class="cs-spec">
+        ${c.metrics.map((m) => `<div>
+          <dt>${esc(m.label)}</dt>
+          <dd class="cs-spec-stat">${esc(m.value)}</dd>
+          <dd class="cs-spec-note">${esc(m.meaning)}</dd>${note(m)}
+        </div>`).join('\n        ')}
+      </dl>${notesHtml}
+    </section>`;
+  }
+
+  return `    <section class="cs-chero --social">
+      <div class="cs-sh">
+        <div class="cs-sh-copy">
+          ${k.label}
+          ${k.h1}
+          ${k.lede}
+          ${k.cta}
+          ${k.meta}
+        </div>
+        <div class="cs-sh-media">
+            ${socialMedia(c, t)}
+        </div>
+        <dl class="cs-sh-stats">
+          ${c.metrics.map((m) => `<div><dt>${esc(m.label)}</dt><dd class="cs-sh-stat">${esc(m.value)}</dd></div>`).join('\n          ')}
+        </dl>
+      </div>${notesHtml}
+    </section>`;
 }
 
 function renderCase(c, all, hub, chrome, t, areaNames, alt) {
@@ -1325,74 +1491,25 @@ function renderCase(c, all, hub, chrome, t, areaNames, alt) {
   const url = abs(casePath(c.slug, lang));
   const hubUrl = abs(hubPath(lang));
   const ids = t.ids;
-  const hasResults = true; // metric tiles always render
-  const sections = [
-    ['reels', !!c.reels],
-    ['situation', true],
-    ['steps', true],
-    ['analysis', !!c.analysis],
-    ['results', hasResults],
-    ['quote', !!c.quote],
-  ].filter(([, on]) => on).map(([k]) => k);
-
-  const tags = c.services.map((s) => `<li class="cs-tag${tagClass(s)}">${esc(t.service[s])}</li>`).join('');
-  const meta = [
-    c.area ? `<li>${ICON.pin}<span>${esc(c.area.name)}${c.area.detail ? ` (${esc(c.area.detail)})` : ''}</span></li>` : '',
-    `<li>${ICON.store}<span>${esc(c.descriptor)}</span></li>`,
-    c.timeframe ? `<li>${ICON.cal}<span>${esc(c.timeframe)}</span></li>` : '',
-  ].filter(Boolean).join('\n            ');
-
-  const glance = c.metrics.map((m) => `<div><dt>${esc(m.label)}</dt><dd>${esc(m.value)}</dd></div>`).join('\n          ');
-
-  const steps = c.steps.items.map((s, i) => `<li class="cs-step">
-                <span class="cs-step-n" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
-                <div>
-                  <h3>${esc(s.title)}</h3>
-                  <p>${s.bodyHtml}</p>
-                  ${s.figure ? `<figure class="cs-fig${/mockup/.test(s.figure.src) ? ' --mock' : ''}"><img src="${s.figure.src}" alt="${escAttr(s.figure.alt)}" ${dim(s.figure)} loading="lazy" decoding="async" />${s.figure.caption ? `<figcaption>${esc(s.figure.caption)}</figcaption>` : ''}</figure>` : ''}
-                  ${note(s)}
-                </div>
-              </li>`).join('\n              ');
-
+  const type = c.service;
   const r = c.results || {};
-  const tiles = c.metrics.map((m) => `<li class="cs-tile">
-                <b>${esc(m.value)}</b>
-                <span class="cs-tile-label">${esc(m.label)}</span>
-                <p><span class="cs-plain">${esc(t.plain)}</span>${esc(m.meaning)}</p>
-                ${note(m)}
-              </li>`).join('\n              ');
-  const accounts = (r.accounts || []).length ? scoreboard(r.accounts.map((a) => ({ a })), t, false) : '';
-  const tl = r.timeline && (r.timeline.items || []).length ? `<div class="cs-growth">
-                ${r.timeline.h3 ? `<h3 class="cs-growth-h">${esc(r.timeline.h3)}</h3>` : ''}
-                <ol class="cs-timeline">
-                ${r.timeline.items.map((x) => `<li class="cs-tl${x.kind ? ` --${x.kind}` : ''}"><span class="cs-tl-when">${esc(x.when)}</span><span class="cs-tl-what">${esc(x.title)}</span><b class="cs-tl-stat">${esc(x.stat)}</b></li>`).join('\n                ')}
-                </ol>
-              </div>` : '';
-  const points = (r.points || []).length
-    ? `<ul class="cs-points">${r.points.map((p) => `<li>${ICON.check}${esc(p)}</li>`).join('')}</ul>`
-    : '';
-
+  const accounts = r.accounts || [];
+  const numeric = accounts.filter((a) => typeof a.roasNumber === 'number');
   const q = c.quote;
-  const quote = q ? `<div class="cs-words${q.video ? ' --video' : ''}">
-              ${q.video ? `<div class="cs-frame cs-portrait cs-vid hp2-vid-card" data-audio-managed="true">
-                <video data-video-src="${videoSrc(q.video.src)}" poster="${q.video.poster}" ${dim(q.video)} playsinline preload="none"></video>
-                <button type="button" class="cs-vid-play" aria-label="${escAttr(q.video.playLabel)}"></button>
-                <div class="cs-vid-cap"><b>${esc(q.name)}</b><span>${esc(t.tapSound)}</span></div>
-              </div>` : ''}
-              <figure class="cs-quote">
-                <blockquote><p>“${esc(q.text)}”</p></blockquote>
-                <figcaption><b>${esc(q.name)}</b>, ${esc(q.role)}${q.source ? ` (${esc(q.source)})` : ''}</figcaption>
-                ${note(q)}
-              </figure>
-            </div>` : '';
 
-  const reels = c.reels ? `
-    <section class="cs-watch" id="${ids.reels}" aria-labelledby="${ids.reels}-h">
-      <div class="cs-watch-head">
-        <h2 id="${ids.reels}-h">${esc(c.reels.h2)}</h2>
-        <p>${esc(c.reels.intro)}</p>
+  // ----- section builders -----
+  const own = { analysis: c.analysis, situation: c.situation, steps: c.steps, built: c.steps, results: c.results, quote: c.quote, walk: c.walkthrough };
+  const h2 = (k) => esc((own[k] && own[k].h2) || (k === 'reels' ? c.reels.h2 : t.h2[k]));
+  const sec = (k, inner, { intro = '', cls = '' } = {}) => `
+    <section class="cs-sec${cls ? ` ${cls}` : ''}" id="${ids[k]}" aria-labelledby="${ids[k]}-h">
+      <div class="cs-sec-head">
+        <h2 id="${ids[k]}-h">${h2(k)}</h2>${intro ? `
+        <p>${intro}</p>` : ''}
       </div>
-      <ol class="cs-watch-row" data-cs-scroll>
+${inner}
+    </section>`;
+
+  const reelsSec = () => sec('reels', `      <ol class="cs-reel-row" data-cs-scroll>
         ${c.reels.items.map((x, i) => `<li class="cs-wcard${i === 0 ? ' --top' : ''}">
           <div class="cs-frame cs-portrait cs-wvid hp2-vid-card" data-audio-managed="true">
             <video data-video-src="${videoSrc(x.src)}" poster="${x.poster}" ${dim(x)} playsinline preload="none" aria-label="${escAttr(x.alt)}"></video>
@@ -1402,35 +1519,194 @@ function renderCase(c, all, hub, chrome, t, areaNames, alt) {
           </div>
           <div class="cs-wmeta">
             <h3>${esc(x.title)}</h3>
-            <p>${esc(x.date)}${x.likes ? ` · ${esc(x.likes)} ${esc(t.likes)}` : ''}</p>
+            <p class="cs-wmeta-note">${esc(x.date)}${x.likes ? ` · ${esc(x.likes)} ${esc(t.likes)}` : ''}</p>
           </div>
         </li>`).join('\n        ')}
-      </ol>
-    </section>
-` : '';
+      </ol>`, { intro: esc(c.reels.intro), cls: '--split' });
+
+  const analysisSec = () => sec('analysis', `      <ol class="cs-why">
+        ${c.analysis.items.map((x) => `<li>
+          <b class="cs-why-stat">${esc(x.stat)}</b>
+          <div>
+            <h3>${esc(x.title)}</h3>
+            <p>${esc(x.body)}</p>
+          </div>
+        </li>`).join('\n        ')}
+      </ol>`, { intro: c.analysis.intro ? esc(c.analysis.intro) : '' });
+
+  const situationSec = () => {
+    const [first, ...rest] = c.situation.paragraphs;
+    return sec('situation', `      <div class="cs-story">
+        <p class="cs-story-lead"><span>${esc(first)}</span></p>${rest.map((p) => `
+        <p>${esc(p)}</p>`).join('')}
+      </div>
+      ${note(c.situation)}`);
+  };
+
+  const fig = (f, cls = 'cs-fig') => `<figure class="${cls}${f.height > f.width ? ' --portrait' : ''}"><img src="${f.src}" alt="${escAttr(f.alt)}" ${dim(f)} loading="lazy" decoding="async" />${f.caption ? `<figcaption>${esc(f.caption)}</figcaption>` : ''}</figure>`;
+  const stepsSec = () => sec('steps', `      <ol class="cs-steps">
+        ${c.steps.items.map((s, i) => `<li class="cs-step">
+          <span class="cs-step-n" aria-hidden="true">${pad2(i)}</span>
+          <h3>${esc(s.title)}</h3>
+          <div class="cs-step-body">
+            <p>${s.bodyHtml}</p>${s.figure ? `
+            ${fig(s.figure)}` : ''}${note(s)}
+          </div>
+        </li>`).join('\n        ')}
+      </ol>`);
+
+  const builtSec = () => {
+    let figs = 0;
+    return sec('built', `      <ol class="cs-built">
+        ${c.steps.items.map((s, i) => {
+          const f = s.figure;
+          const flip = f ? figs++ % 2 === 1 : false;
+          return `<li class="cs-built-item${f ? ' --fig' : ''}${flip ? ' --flip' : ''}">
+          <div class="cs-built-text">
+            <span class="cs-step-n" aria-hidden="true">${pad2(i)}</span>
+            <h3>${esc(s.title)}</h3>
+            <p>${s.bodyHtml}</p>${note(s)}
+          </div>${f ? `
+          <figure class="cs-built-fig">
+            ${browserFrame(f, { small: true })}${f.caption ? `
+            <figcaption>${esc(f.caption)}</figcaption>` : ''}
+          </figure>` : ''}
+        </li>`;
+        }).join('\n        ')}
+      </ol>`);
+  };
+
+  const walkSec = () => sec('walk', `      <ul class="cs-walk" data-cs-scroll>
+        ${c.walkthrough.items.map((x) => `<li>
+          <figure>
+            ${browserFrame(x, { small: true })}
+            <figcaption><b>${esc(x.title)}</b>${esc(x.caption)}</figcaption>
+          </figure>
+        </li>`).join('\n        ')}
+      </ul>`, { intro: c.walkthrough.intro ? esc(c.walkthrough.intro) : '' });
+
+  const resultsSec = () => {
+    const tl = r.timeline && (r.timeline.items || []).length ? `
+      <div class="cs-growth">
+        ${r.timeline.h3 ? `<h3 class="cs-growth-h">${esc(r.timeline.h3)}</h3>` : ''}
+        <ol class="cs-timeline">
+          ${r.timeline.items.map((x) => `<li class="cs-tl${x.kind ? ` --${x.kind}` : ''}"><span class="cs-tl-when">${esc(x.when)}</span><span class="cs-tl-what">${esc(x.title)}</span><b class="cs-tl-stat">${esc(x.stat)}</b></li>`).join('\n          ')}
+        </ol>
+      </div>` : '';
+    const points = (r.points || []).length ? `
+      <ul class="cs-points">${r.points.map((p) => `<li>${esc(p)}</li>`).join('')}</ul>` : '';
+    return sec('results', `      <dl class="cs-facts">
+        ${c.metrics.map((m) => `<div class="cs-fact">
+          <dt>${esc(m.label)}</dt>
+          <dd class="cs-fact-stat">${esc(m.value)}</dd>
+          <dd class="cs-fact-note">${esc(m.meaning)}</dd>${note(m)}
+        </div>`).join('\n        ')}
+      </dl>${tl}${points}${r.explainHtml ? `
+      <p class="cs-note">${r.explainHtml}</p>` : ''}
+      ${note(r)}`);
+  };
+
+  const dollarSec = () => {
+    const max = Math.max(...numeric.map((a) => a.roasNumber));
+    const w = (n) => `${Math.max(0.5, (n / max) * 100).toFixed(2)}%`;
+    return sec('dollar', `      <ul class="cs-dollar">
+        <li class="cs-dl --base">
+          <span class="cs-dl-name">${esc(t.perDollar.base)}<small>${esc(t.perDollar.baseSub)}</small></span>
+          <span class="cs-dl-bar" aria-hidden="true"><i style="--w:${w(1)}"></i></span>
+          <b class="cs-dl-val">$1</b>
+        </li>
+        ${numeric.map((a) => `<li class="cs-dl">
+          <span class="cs-dl-name">${esc(a.name)}<small>${esc(a.roasLabel || a.campaigns)} · ${esc(a.period)}</small></span>
+          <span class="cs-dl-bar" aria-hidden="true"><i style="--w:${w(a.roasNumber)}"></i></span>
+          <b class="cs-dl-val">$${a.roasNumber}<span class="cs-sr"> ${esc(t.perDollar.backSr)}</span></b>
+        </li>`).join('\n        ')}
+      </ul>
+      <p class="cs-note">${esc(t.perDollar.note)}</p>`, { intro: r.explainHtml || '' });
+  };
+
+  const tableSec = () => {
+    const hasSpend = accounts.some((a) => a.spend);
+    const cols = 5 + (hasSpend ? 1 : 0);
+    const rows = accounts.map((a) => {
+      const word = typeof a.roasNumber !== 'number';
+      const cell = (k, v) => `<td data-label="${escAttr(t.col[k])}">${esc(v)}</td>`;
+      return `<tr class="cs-tr${a.standout ? ' --has-note' : ''}">
+            <th scope="row" class="cs-td-acct">${esc(a.name)}<small>${esc(a.campaigns)} · ${esc(a.period)}</small></th>
+            <td class="cs-td-roas" data-label="${escAttr(t.col.roas)}"><b${word ? ' class="--word"' : ''}>${esc(a.roas)}</b>${a.roasLabel ? `<small>${esc(a.roasLabel)}</small>` : ''}</td>
+            ${cell('conversions', a.conversions)}
+            ${cell('costPer', a.costPer)}
+            ${cell('value', a.value)}${hasSpend ? `
+            ${cell('spend', a.spend || '')}` : ''}
+          </tr>${a.standout ? `
+          <tr class="cs-tr-note"><td colspan="${cols}"><b>${esc(t.standout)}</b> ${esc(a.standout)}</td></tr>` : ''}`;
+    }).join('\n          ');
+    return sec('table', `      <table class="cs-table">
+        <caption class="cs-sr">${esc(t.tableCaption(c.crumb || c.client))}</caption>
+        <thead>
+          <tr><th scope="col">${esc(t.col.account)}</th><th scope="col">${esc(t.col.roas)}</th><th scope="col">${esc(t.col.conversions)}</th><th scope="col">${esc(t.col.costPer)}</th><th scope="col">${esc(t.col.value)}</th>${hasSpend ? `<th scope="col">${esc(t.col.spend)}</th>` : ''}</tr>
+        </thead>
+        <tbody>
+          ${rows}
+        </tbody>
+      </table>
+      ${r.disclaimer ? `<p class="cs-disclaimer">${esc(t.disclaimer)}</p>` : ''}
+      ${note(r)}`);
+  };
+
+  const quoteSec = () => {
+    const showVideo = q.video && c.hero.type !== 'talk';
+    return sec('quote', `      <div class="cs-say${showVideo ? ' --video' : ''}">${showVideo ? `
+        <div class="cs-frame cs-portrait cs-vid hp2-vid-card" data-audio-managed="true">
+          <video data-video-src="${videoSrc(q.video.src)}" poster="${q.video.poster}" ${dim(q.video)} playsinline preload="none"></video>
+          <button type="button" class="cs-vid-play" aria-label="${escAttr(q.video.playLabel)}"></button>
+          <div class="cs-vid-cap"><b>${esc(q.name)}</b><span>${esc(t.tapSound)}</span></div>
+        </div>` : ''}
+        <figure class="cs-pull">
+          <blockquote><span class="cs-pull-text">“${esc(q.text)}”</span></blockquote>
+          <figcaption><b>${esc(q.name)}</b>, ${esc(q.role)}${q.source ? ` (${esc(q.source)})` : ''}</figcaption>
+          ${note(q)}
+        </figure>
+      </div>`);
+  };
+
+  // ----- order of sections by case type -----
+  const plan = type === 'ads'
+    ? [['dollar', numeric.length > 0, dollarSec], ['table', accounts.length > 0, tableSec], ['situation', true, situationSec], ['steps', true, stepsSec]]
+    : type === 'web'
+      ? [['walk', !!c.walkthrough, walkSec], ['situation', true, situationSec], ['built', true, builtSec], ['quote', !!q, quoteSec]]
+      : [['reels', !!c.reels, reelsSec], ['analysis', !!c.analysis, analysisSec], ['situation', true, situationSec], ['steps', true, stepsSec], ['results', true, resultsSec], ['quote', !!q, quoteSec]];
+  const sections = plan.filter(([, on]) => on);
 
   const aHref = areaHref(c);
   const links = [
     ...c.links,
     ...(aHref ? [{ href: aHref, text: t.areaLink(areaNames[lang][c.area.page] || c.area.name) }] : []),
-  ].map((l) => `<a class="cs-link" href="${l.href}">${esc(l.text)} ${ICON.arrow}</a>`).join('\n            ');
+  ].map((l) => `<a class="cs-link" href="${l.href}">${esc(l.text)} ${ICON.arrow}</a>`).join('\n      ');
 
   const related = relatedCases(c, all).map((x) => {
     const k = x.card;
-    const thumb = k.src ? `<img src="${k.src}" alt="" ${dim(k)} loading="lazy" decoding="async" />` : `<b>${esc(k.value)}</b>`;
+    const thumb = k.src && x.service !== 'ads'
+      ? `<span class="cs-mcard-thumb"><img src="${k.src}" alt="" ${dim(k)} loading="lazy" decoding="async" /></span>`
+      : `<span class="cs-mcard-thumb --num"><b>${esc(k.value)}</b></span>`;
     return `<li><a class="cs-mcard" href="${casePath(x.slug, lang)}">
-              <span class="cs-mcard-thumb">${thumb}</span>
-              <span>
-                <span class="cs-mcard-tag">${esc(t.service[x.service])}</span>
-                <span class="cs-mcard-name">${esc(x.client)}</span>
-                <span class="cs-mcard-num"><strong>${esc(k.value)}</strong> ${esc(k.label)}</span>
-                <span class="cs-mcard-go">${esc(t.readCase)} ${ICON.arrow}</span>
-              </span>
-            </a></li>`;
-  }).join('\n          ');
+            ${thumb}
+            <span>
+              <span class="cs-mcard-tag">${esc(t.service[x.service])}</span>
+              <span class="cs-mcard-name">${esc(x.client)}</span>
+              <span class="cs-mcard-num"><strong>${esc(k.value)}</strong> ${esc(k.label)}</span>
+            </span>
+            ${ICON.chev}
+          </a></li>`;
+  }).join('\n        ');
 
+  const h = c.hero;
   const orgs = c.organizations.map((n) => ({ '@type': 'Organization', name: n }));
-  const ogImage = c.ogImage || (c.hero.type === 'video' ? c.hero.poster : c.hero.type === 'image' && !/\.avif$/.test(c.hero.src) ? c.hero.src : c.hero.type === 'device' ? c.hero.desktop.src : (c.card && c.card.src && !/\.avif$/.test(c.card.src) ? c.card.src : DEFAULT_OG));
+  const ogImage = c.ogImage || (
+    h.type === 'video' ? h.poster
+      : h.type === 'talk' ? c.quote.video.poster
+        : h.type === 'image' && !/\.avif$/.test(h.src) ? h.src
+          : h.type === 'device' ? h.desktop.src
+            : (c.card && c.card.src && !/\.avif$/.test(c.card.src) && type !== 'ads' ? c.card.src : DEFAULT_OG));
   const schema = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -1459,13 +1735,7 @@ function renderCase(c, all, hub, chrome, t, areaNames, alt) {
     ],
   };
 
-  const preload = c.hero.type === 'video' ? c.hero.poster : null;
-  const heroNotes = [note(c.hero), c.timeframeReviewNote ? note({ reviewNote: `${c.timeframe}: ${c.timeframeReviewNote}` }) : ''].join('');
-  const wide = c.hero.type === 'device';
-  const sec = (k, inner) => `            <section class="cs-sec" id="${ids[k]}" aria-labelledby="${ids[k]}-h">
-              <h2 id="${ids[k]}-h">${esc((c[k] && c[k].h2) || t.nav[k])}</h2>
-${inner}
-            </section>`;
+  const preload = h.type === 'video' ? h.poster : h.type === 'talk' ? c.quote.video.poster : h.type === 'device' ? h.desktop.src : h.type === 'image' ? h.src : null;
 
   return `${headHtml({ t, chrome, title: c.metaTitle, description: c.metaDescription, url, enUrl: lang === 'en' ? url : alt ? abs(casePath(c.slug, 'en')) : null, esUrl: lang === 'es' ? url : alt ? abs(casePath(c.slug, 'es')) : null, ogImage, schema, preload })}
 <body>
@@ -1475,7 +1745,7 @@ ${inner}
 
   ${chrome.nav}
 
-  <main class="page cs-page cs-casepage">
+  <main class="page cs-page cs-casepage cs-type-${type}">
 
     <nav class="cs-crumbs" aria-label="${escAttr(t.crumbs)}">
       <ol>
@@ -1484,77 +1754,25 @@ ${inner}
       </ol>
     </nav>
 
-    <!-- HERO: the case file -->
-    <section class="cs-chero${wide ? ' --wide' : ''}">
-      <div class="cs-chero-grid">
-        <div class="cs-chero-copy">
-          <ul class="cs-tags" aria-label="${escAttr(t.caseLabel)}">${tags}</ul>
-          <h1><span class="cs-h1-name">${esc(c.h1)}</span><span class="cs-sr">: </span><span class="cs-h1-sub">${esc(c.h1Sub)}</span></h1>
-        </div>
-        <div class="cs-chero-media">
-            ${heroMedia(c, t)}
-        </div>
-        <ul class="cs-meta">
-            ${meta}
-        </ul>
-        <p class="cs-lede">${esc(c.answer)}</p>
-        <div class="cs-cta-row">
-          <a href="${t.contact}" class="btn btn-primary cs-btn">${esc(t.primary)} ${ICON.arrow}</a>
-        </div>${heroNotes ? `
-        <div class="cs-hero-notes">${heroNotes}</div>` : ''}
-      </div>
-      <dl class="cs-glance" aria-label="${escAttr(t.glance)}">
-          ${glance}
-      </dl>
-    </section>
+    <!-- HERO (${type}) -->
+${renderHero(c, t)}
 
-${reels}
-    <div class="cs-body">
-      <nav class="cs-toc" aria-label="${escAttr(t.onPage)}">
-        <p class="cs-toc-title">${esc(t.onPage)}</p>
-        <ul data-cs-scroll>
-          ${sections.map((k) => `<li><a href="#${ids[k]}">${esc(t.nav[k])}</a></li>`).join('\n          ')}
-        </ul>
-        <a class="cs-toc-all" href="${hubPath(lang)}">${ICON.back} ${esc(t.allCases)}</a>
-      </nav>
+    <nav class="cs-toc" aria-label="${escAttr(t.onPage)}">
+      <ul data-cs-scroll>
+        ${sections.map(([k]) => `<li><a href="#${ids[k]}">${esc(t.nav[k])}</a></li>`).join('\n        ')}
+      </ul>
+    </nav>
+${sections.map(([, , fn]) => fn()).join('\n')}
 
-      <div class="cs-content">
-${sec('situation', `              <div class="cs-sit">${c.situation.paragraphs.map((p) => `<p>${esc(p)}</p>`).join('')}</div>
-              ${note(c.situation)}`)}
-${sec('steps', `              <ol class="cs-steps">
-              ${steps}
-              </ol>`)}
-${c.analysis ? sec('analysis', `              ${c.analysis.intro ? `<p>${esc(c.analysis.intro)}</p>` : ''}
-              <ol class="cs-findings">
-              ${c.analysis.items.map((x) => `<li class="cs-finding">
-                <b class="cs-finding-stat">${esc(x.stat)}</b>
-                <div>
-                  <h3>${esc(x.title)}</h3>
-                  <p>${esc(x.body)}</p>
-                </div>
-              </li>`).join('\n              ')}
-              </ol>`) : ''}
-${sec('results', `              <ul class="cs-tiles">
-              ${tiles}
-              </ul>
-              ${tl}
-              ${r.explainHtml ? `<p class="cs-explain">${r.explainHtml}</p>` : ''}
-              ${accounts}
-              ${points}
-              ${note(r)}
-              ${r.disclaimer ? `<p class="cs-disclaimer">${esc(t.disclaimer)}</p>` : ''}`)}
-${q ? sec('quote', `              ${quote}`) : ''}
-          <div class="cs-links">
-            ${links}
-          </div>
-      </div>
+    <div class="cs-links">
+      ${links}
     </div>
 
     <section class="cs-more" aria-labelledby="cs-more-h">
       <h2 id="cs-more-h">${esc(t.more)}</h2>
       <p>${esc(t.moreSub)}</p>
       <ul class="cs-more-grid">
-          ${related}
+        ${related}
       </ul>
       <a class="cs-back" href="${hubPath(lang)}">${ICON.back} ${esc(t.back)}</a>
     </section>

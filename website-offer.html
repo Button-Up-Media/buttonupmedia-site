@@ -42,12 +42,12 @@
   <meta property="og:title" content="A custom restaurant website that sells your food | Button Up Media" />
   <meta property="og:description" content="A custom website for your restaurant, designed and coded from scratch by our team, with every page in English and Spanish. You own everything, and builds start at $1,500." />
   <meta property="og:site_name" content="Button Up Media" />
-  <meta property="og:image" content="https://www.buttonupmedia.com/media/og-offer.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
+  <meta property="og:image" content="https://www.buttonupmedia.com/media/founders-duo.webp" />
+  <meta property="og:image:width" content="1280" />
+  <meta property="og:image:height" content="721" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="A custom restaurant website that sells your food | Button Up Media" />
-  <meta name="twitter:image" content="https://www.buttonupmedia.com/media/og-offer.png" />
+  <meta name="twitter:image" content="https://www.buttonupmedia.com/media/founders-duo.webp" />
   <link rel="preconnect" href="https://assets.calendly.com" />
   <link rel="preconnect" href="https://calendly.com" />
   <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin fetchpriority="high" />
@@ -122,7 +122,7 @@
     .of-url svg { width: 11px; height: 11px; flex: none; opacity: 0.7; }
     .of-browser img { display: block; width: 100%; height: auto; }
     .of-phone { position: absolute; right: -1%; bottom: 0; width: 25%; padding: 5px; border-radius: 26px; background: #050505; border: 1px solid var(--of-hair-2); box-shadow: 0 24px 60px rgba(0,0,0,0.55); }
-    .of-phone-screen { overflow: hidden; aspect-ratio: 400 / 864; border-radius: 21px; background: #fff; }
+    .of-phone-screen { overflow: hidden; aspect-ratio: 690 / 1484; border-radius: 21px; background: #0c0c0d; }
     .of-phone-screen img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
     .of-devices figcaption { margin-top: 14px; font-size: 0.875rem; line-height: 1.45; color: rgba(246,240,230,0.56); }
 
@@ -142,18 +142,16 @@
     .of-points h3 { font-size: 1.3125rem; font-weight: 750; line-height: 1.25; letter-spacing: -0.025em; }
     .of-points p { margin-top: 6px; font-size: 1.0625rem; line-height: 1.6; color: var(--text-dim); }
 
-    /* proof: big published numbers on solid blocks */
-    .of-nums { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-    .of-nums li { display: flex; flex-direction: column; justify-content: flex-end; min-height: 196px; padding: 24px; border-radius: 26px; }
-    .of-nums b { font-size: clamp(3rem, 5.4vw, 4.5rem); font-weight: 800; line-height: 0.9; letter-spacing: -0.06em; font-variant-numeric: tabular-nums; }
-    .of-nums span { margin-top: 14px; font-size: 1rem; font-weight: 650; line-height: 1.35; letter-spacing: -0.01em; }
-    .of-nums .--gold { background: var(--gold); color: var(--of-ink); }
-    .of-nums .--light { background: #f6f0e6; color: var(--of-ink); }
-    .of-nums .--dark { background: var(--of-elev-1); border: 1px solid var(--of-hair); color: var(--text-head); }
-    .of-nums .--dark b { color: var(--gold); }
-    .of-nums .--dark span { color: var(--text-dim); }
+    /* proof: one real number on a solid block, plus the two Google results */
+    .of-work { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr) minmax(0, 1fr); gap: 12px; margin-top: 40px; }
+    .of-work-num { display: flex; flex-direction: column; justify-content: flex-end; min-height: 196px; padding: 24px; border-radius: 26px; background: var(--gold); color: var(--of-ink); }
+    .of-work-num b { font-size: clamp(3rem, 5.4vw, 4.5rem); font-weight: 800; line-height: 0.9; letter-spacing: -0.06em; }
+    .of-work-num span { margin-top: 14px; font-size: 1rem; font-weight: 650; line-height: 1.35; letter-spacing: -0.01em; }
+    .of-serp { display: flex; flex-direction: column; margin: 0; overflow: hidden; border-radius: 26px; background: var(--of-elev-1); border: 1px solid var(--of-hair); }
+    .of-serp img { display: block; width: 100%; height: auto; }
+    .of-serp figcaption { display: flex; align-items: center; gap: 10px; margin-top: auto; padding: 14px 18px; border-top: 1px solid var(--of-hair); font-size: 0.9375rem; font-weight: 650; color: var(--text-head); }
+    .of-flag { flex: none; display: inline-grid; place-items: center; min-width: 32px; height: 24px; padding: 0 8px; border-radius: 7px; background: rgba(226,168,77,0.14); color: var(--gold); font-size: 0.75rem; font-weight: 800; letter-spacing: 0.02em; }
     .of-proof-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; margin-top: 18px; }
-    .of-fine { font-size: 0.9375rem; line-height: 1.5; color: rgba(246,240,230,0.56); }
 
     /* one Google review */
     .of-quote { margin: 40px 0 0; padding: clamp(24px, 3.4vw, 36px); border-radius: 26px; background: var(--of-elev-1); border: 1px solid var(--of-hair); }
@@ -260,6 +258,8 @@
       .of-hero { grid-template-columns: 1fr; }
       .of-hero-copy { max-width: 640px; }
       .of-points { grid-template-columns: 1fr; }
+      .of-work { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .of-work-num { grid-column: 1 / -1; min-height: 0; }
       .of-plans { grid-template-columns: 1fr; }
       .of-faq-grid { grid-template-columns: 1fr; }
       .of-book { grid-template-columns: 1fr; grid-template-rows: none; grid-template-areas: "info" "stage" "more"; row-gap: 28px; }
@@ -294,9 +294,10 @@
       .of-points { margin-top: 28px; }
       .of-points li { grid-template-columns: 32px minmax(0, 1fr); padding: 20px 0 22px; }
       .of-points h3 { font-size: 1.1875rem; }
-      .of-nums { grid-template-columns: 1fr; gap: 10px; margin-top: 28px; }
-      .of-nums li { min-height: 0; padding: 22px; border-radius: 22px; }
-      .of-nums b { font-size: 3.2rem; }
+      .of-work { grid-template-columns: 1fr; gap: 10px; margin-top: 28px; }
+      .of-work-num { padding: 22px; border-radius: 22px; }
+      .of-work-num b { font-size: 3.2rem; }
+      .of-serp { border-radius: 22px; }
       .of-quote { margin-top: 28px; border-radius: 22px; }
       .of-plans { margin-top: 28px; }
       .of-plan { border-radius: 26px; }
@@ -364,14 +365,14 @@
       <figure class="of-devices">
         <div class="of-devices-stage">
           <div class="of-browser">
-            <div class="of-browser-bar"><span class="of-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="of-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>rustypelican.com</span></div>
-            <img src="/images/website-design/rusty-pelican-desktop.avif" alt="The Rusty Pelican homepage that Button Up Media designed and built" width="1100" height="622" fetchpriority="high" />
+            <div class="of-browser-bar"><span class="of-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="of-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>woacocktails.com</span></div>
+            <img src="/media/woa-hero-desktop.webp" srcset="/media/woa-hero-desktop-800.webp 800w, /media/woa-hero-desktop.webp 1600w" sizes="(max-width: 960px) calc(100vw - 32px), 580px" alt="The WOA Cocktails homepage that Button Up Media designed and built" width="1600" height="904" fetchpriority="high" />
           </div>
           <div class="of-phone">
-            <div class="of-phone-screen"><img src="/images/website-design/rusty-pelican-mobile.avif" alt="The Rusty Pelican menu page on a phone" width="400" height="864" decoding="async" /></div>
+            <div class="of-phone-screen"><img src="/media/woa-hero-mobile.webp" srcset="/media/woa-hero-mobile-360.webp 360w, /media/woa-hero-mobile.webp 690w" sizes="(max-width: 960px) 29vw, 150px" alt="The WOA Cocktails homepage on a phone" width="690" height="1484" decoding="async" /></div>
           </div>
         </div>
-        <figcaption>Rusty Pelican's website, designed and built by our team.</figcaption>
+        <figcaption>The WOA Cocktails website, which our team rebuilt from scratch.</figcaption>
       </figure>
     </header>
 
@@ -396,17 +397,22 @@
     <section class="of-sec" id="work" aria-labelledby="work-title">
       <div class="of-head of-rv">
         <span class="of-label">Our work</span>
-        <h2 id="work-title">The website we built for Rusty Pelican</h2>
-        <p>Rusty Pelican is a waterfront restaurant in Miami. We designed and built its website, with full-width photos, a menu split into sections, the chef's story and reservations built in. We also run its Google Ads, and these are the numbers for the Miami location in 2025.</p>
+        <h2 id="work-title">The website we built for WOA Cocktails</h2>
+        <p>WOA Cocktails is a luxury mobile bar company. We rebuilt its website from scratch, with every page in English and Spanish, and set up both languages so WOA shows up on Google whether someone searches in English or in Spanish.</p>
       </div>
-      <ul class="of-nums">
-        <li class="--gold of-rv"><b>7:1</b><span>Return on ad spend: about $7 back for every $1 of Google Ads</span></li>
-        <li class="--light of-rv"><b>1,007</b><span>Tracked conversions, like reservations, calls and event inquiries</span></li>
-        <li class="--dark of-rv"><b>$135K</b><span>Tracked conversion value</span></li>
-      </ul>
+      <div class="of-work">
+        <div class="of-work-num of-rv"><b>2 weeks</b><span>To build the site, according to Fabio Perez, WOA's founder</span></div>
+        <figure class="of-serp of-rv">
+          <img src="/media/woa-serp-en-1200.webp" alt="WOA Cocktails English result on Google, with sitelinks for Mobile Bar Experience, Events, Services, and About" width="1200" height="708" loading="lazy" decoding="async" />
+          <figcaption><span class="of-flag">EN</span>On Google in English</figcaption>
+        </figure>
+        <figure class="of-serp of-rv">
+          <img src="/media/woa-serp-es-1200.webp" alt="WOA Cocktails Spanish result on Google, with sitelinks in Spanish for Experiencia de bar movil, Eventos, Servicios, and Acerca de" width="1200" height="708" loading="lazy" decoding="async" />
+          <figcaption><span class="of-flag">ES</span>On Google in Spanish</figcaption>
+        </figure>
+      </div>
       <div class="of-proof-foot">
-        <p class="of-fine">Google Ads, Rusty Pelican Miami, full year 2025.</p>
-        <a class="of-link" href="/case-studies/rusty-pelican">Read the Rusty Pelican case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="of-link" href="/case-studies/woa-cocktails">Read the WOA Cocktails case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
 
       <figure class="of-quote of-rv">

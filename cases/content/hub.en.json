@@ -1,12 +1,12 @@
 {
   "lang": "en",
   "metaTitle": "Restaurant Marketing Case Studies, Miami | Button Up Media",
-  "metaDescription": "Results Button Up Media got for restaurants in Miami and South Florida, including 200M+ organic social views, Google Ads up to 72:1 ROAS and bilingual websites.",
+  "metaDescription": "Restaurant marketing results from Button Up Media clients: 200M+ combined organic social views, Google Ads up to 72:1 ROAS and a bilingual website.",
   "ogImage": "/media/cs-fatty-crab-reel.webp",
   "eyebrow": "Client results",
   "h1": "Restaurant marketing case studies",
   "h1Accent": "case studies",
-  "answer": "Our work for restaurants has brought in 200M+ organic social media views, and in 2025 one Google Ads account returned about $72 for every $1 spent.",
+  "answer": "Our work has brought our clients 200M+ combined organic social media views, and in 2025 one Google Ads account returned about $72 for every $1 spent.",
   "primaryCta": "Book a free strategy call",
   "secondaryCta": "Try the free grader",
   "wallLabel": "Clips from three of our clients",
@@ -43,7 +43,7 @@
   "sections": {
     "social": {
       "tab": "Social media",
-      "h2": "Social media results for four restaurants",
+      "h2": "Social media results from our clients",
       "intro": "These views are organic, which means no ad money was spent to get them. Our team made and posted the videos. Tap a restaurant to see what we did.",
       "order": [
         "tonis-sushi-bar",
@@ -82,11 +82,10 @@
     },
     "web": {
       "tab": "Websites",
-      "h2": "Websites we built from scratch",
+      "h2": "A website we built from scratch",
       "intro": "We code each site from scratch instead of using a template, and we design it for phones first.",
       "order": [
-        "woa-cocktails",
-        "rusty-pelican"
+        "woa-cocktails"
       ]
     }
   },

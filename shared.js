@@ -148,7 +148,7 @@ if (window.lucide && typeof lucide.createIcons === "function") {
     banner.innerHTML = `
       <div class="bum-consent__sheet" id="bum-consent-panel">
         <button type="button" class="bum-consent__close" data-bum-consent-action="accept" aria-label="${t.close}">
-          <i data-lucide="x" aria-hidden="true"></i>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
         </button>
         <div class="bum-consent__sheet-copy">
           <h2 class="bum-consent__title" id="bum-consent-title">${t.title}</h2>

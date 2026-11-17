@@ -577,3 +577,14 @@ html.v3-light .bum-consent__short a { color: #14110c !important; }
     line-height: 1.55;
   }
 }
+
+/* Narrow desktops (just above the 1160px hamburger breakpoint): the header
+   shows the full phone number, and the Spanish CTA is long, so tighten the
+   bar a little instead of letting the CTA clip. */
+@media (min-width: 1161px) and (max-width: 1260px) {
+  html[lang] .lib-nav-links a,
+  html[lang] .lib-nav-links summary { font-size: 0.8125rem; }
+  html[lang] .lib-nav-phone { margin-left: 0; }
+  html[lang] .lib-nav-links > .btn-primary,
+  html[lang] .lib-nav-links .btn-primary { padding: 0 14px !important; font-size: 0.8125rem !important; }
+}

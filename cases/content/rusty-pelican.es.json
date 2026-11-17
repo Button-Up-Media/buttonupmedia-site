@@ -3,37 +3,50 @@
   "lang": "es",
   "order": 5,
   "service": "ads",
-  "services": ["ads", "web"],
+  "services": [
+    "ads"
+  ],
   "client": "Rusty Pelican",
-  "organizations": ["Rusty Pelican Miami", "The Rusty Pelican Tampa"],
+  "organizations": [
+    "Rusty Pelican Miami",
+    "The Rusty Pelican Tampa"
+  ],
   "metaTitle": "Rusty Pelican: caso de Google Ads | Button Up Media",
-  "metaDescription": "Google Ads para Rusty Pelican Miami, en Key Biscayne, y Rusty Pelican Tampa: ROAS de 7:1, 1,007 conversiones y 27:1 en eventos privados, más el sitio web nuevo.",
-  "ldHeadline": "Rusty Pelican: Google Ads en Miami y Tampa, más un sitio web nuevo para el restaurante",
+  "metaDescription": "Google Ads para Rusty Pelican Miami, en Key Biscayne, y Rusty Pelican Tampa en 2025: ROAS de 7:1, 1,007 conversiones y 27:1 en eventos privados en Tampa.",
+  "ldHeadline": "Rusty Pelican: Google Ads para reservaciones y eventos privados en Miami y Tampa",
   "h1": "Rusty Pelican",
-  "h1Sub": "Google Ads en Miami y Tampa, y también el sitio web",
-  "answer": "Manejamos los Google Ads de Rusty Pelican en Miami y Tampa, y construimos su sitio web. En 2025, cada $1 en anuncios en Miami trajo unos $7 en reservaciones rastreadas.",
+  "h1Sub": "Google Ads en Miami y Tampa",
+  "answer": "Manejamos los Google Ads de Rusty Pelican en Miami y Tampa. En 2025, cada $1 en anuncios en Miami trajo unos $7 en reservaciones rastreadas.",
   "descriptor": "Restaurante frente al agua",
-  "area": { "name": "Key Biscayne, Miami y Tampa", "detail": null, "page": "brickell" },
+  "area": {
+    "name": "Key Biscayne, Miami y Tampa",
+    "detail": null,
+    "page": "brickell"
+  },
   "timeframe": "Google Ads, 2025",
   "hero": {
-    "type": "image",
-    "src": "/images/rusty-pelican-bar.avif",
-    "width": 1080,
-    "height": 1932,
-    "alt": "La barra de Rusty Pelican Miami, con un cóctel sobre el mostrador",
-    "chip": "ROAS 7:1"
+    "type": "numbers"
   },
-  "card": { "src": "/images/rusty-pelican-bar.avif", "width": 1080, "height": 1932, "alt": "La barra de Rusty Pelican Miami", "value": "7:1", "label": "de ROAS en Miami" },
-  "webCard": {
-    "kicker": "Rusty Pelican · Key Biscayne",
-    "title": "Un sitio web nuevo para Rusty Pelican",
-    "body": "El sitio tiene fotos a pantalla completa, un menú por secciones, la historia del chef y reservaciones integradas.",
-    "image": { "src": "/images/rusty-pelican-device-mockup-transparent.webp", "width": 1080, "height": 746, "alt": "El sitio web de Rusty Pelican que construyó Button Up Media, en una laptop y un teléfono" }
+  "card": {
+    "value": "7:1",
+    "label": "de ROAS en Miami"
   },
   "metrics": [
-    { "value": "7:1", "label": "ROAS en Miami, todo 2025", "meaning": "Cada $1 en Google Ads trajo unos $7 en reservaciones y solicitudes rastreadas por Google." },
-    { "value": "27:1", "label": "ROAS en eventos privados, Tampa", "meaning": "En los eventos privados de Tampa, cada $1 en anuncios trajo unos $27 en valor rastreado." },
-    { "value": "$3.06", "label": "Por conversión el Día de las Madres", "meaning": "155 reservaciones, llamadas y solicitudes del Día de las Madres en Miami, a unos tres dólares cada una." }
+    {
+      "value": "7:1",
+      "label": "ROAS en Miami, todo 2025",
+      "meaning": "Cada $1 en Google Ads trajo unos $7 en reservaciones y solicitudes rastreadas por Google."
+    },
+    {
+      "value": "27:1",
+      "label": "ROAS en eventos privados, Tampa",
+      "meaning": "En los eventos privados de Tampa, cada $1 en anuncios trajo unos $27 en valor rastreado."
+    },
+    {
+      "value": "$3.06",
+      "label": "Por conversión el Día de las Madres",
+      "meaning": "155 reservaciones, llamadas y solicitudes del Día de las Madres en Miami, a unos tres dólares cada una."
+    }
   ],
   "situation": {
     "paragraphs": [
@@ -43,24 +56,58 @@
   },
   "steps": {
     "items": [
-      { "title": "Llegar a quien ya está buscando", "bodyHtml": "Hicimos anuncios de búsqueda en Google dirigidos a gente que ya está buscando dónde comer, y rastreamos cada clic hasta la reservación." },
-      { "title": "Separar las campañas por objetivo", "bodyHtml": "Hicimos campañas separadas para reservaciones, eventos privados y fechas de temporada. En Tampa, los eventos privados fueron la prioridad." },
-      { "title": "Planificar alrededor de las fechas grandes", "bodyHtml": "Hicimos campañas de temporada antes de días como el Día de las Madres, Acción de Gracias y Navidad, cuando la gente reserva con tiempo." },
-      { "title": "Rastrear cada reservación", "bodyHtml": "Configuramos el seguimiento de conversiones en llamadas, reservaciones y formularios, y cada mes reportamos los resultados frente a lo invertido." },
-      { "title": "Construir el sitio web", "bodyHtml": "También diseñamos y construimos el sitio web de Rusty Pelican. Tiene fotos a pantalla completa, un menú por secciones, la historia del chef y reservaciones integradas. Hay más detalles en nuestra página de <a href=\"/es/diseno-web-restaurantes\">diseño web para restaurantes</a>.", "figure": { "src": "/images/rusty-pelican-device-mockup-transparent.webp", "width": 1080, "height": 746, "alt": "El sitio web de Rusty Pelican que construyó Button Up Media, en una laptop y un teléfono", "caption": "El sitio de Rusty Pelican, en una laptop y en un teléfono." } }
+      {
+        "title": "Llegar a quien ya está buscando",
+        "bodyHtml": "Hicimos anuncios de búsqueda en Google dirigidos a gente que ya está buscando dónde comer, y rastreamos cada clic hasta la reservación."
+      },
+      {
+        "title": "Separar las campañas por objetivo",
+        "bodyHtml": "Hicimos campañas separadas para reservaciones, eventos privados y fechas de temporada. En Tampa, los eventos privados fueron la prioridad."
+      },
+      {
+        "title": "Planificar alrededor de las fechas grandes",
+        "bodyHtml": "Hicimos campañas de temporada antes de días como el Día de las Madres, Acción de Gracias y Navidad, cuando la gente reserva con tiempo."
+      },
+      {
+        "title": "Rastrear cada reservación",
+        "bodyHtml": "Configuramos el seguimiento de conversiones en llamadas, reservaciones y formularios, y cada mes reportamos los resultados frente a lo invertido."
+      }
     ]
   },
   "results": {
     "explainHtml": "<strong>Cómo leer estos números:</strong> una conversión es una acción rastreada, como una reservación, una llamada o una solicitud de evento privado. El ROAS (retorno sobre la inversión publicitaria) compara el valor rastreado de esas conversiones con lo que costaron los anuncios.",
     "accounts": [
-      { "name": "Rusty Pelican Miami", "period": "Todo 2025", "campaigns": "Reservaciones, eventos privados y temporada", "roas": "7:1", "roasNumber": 7, "conversions": "1,007", "value": "$135K", "costPer": "$18.95", "standout": "El Día de las Madres trajo 155 conversiones a $3.06 cada una. Acción de Gracias trajo 252 a $3.70 cada una." },
-      { "name": "Rusty Pelican Tampa", "period": "Ago. a dic. 2025", "campaigns": "Reservaciones, eventos privados y temporada", "roas": "27:1", "roasLabel": "ROAS en eventos privados", "roasNumber": 27, "conversions": "287", "value": "$87K", "costPer": "$23.64", "standout": "Navidad y Acción de Gracias fueron las fechas de mejor rendimiento." }
+      {
+        "name": "Rusty Pelican Miami",
+        "period": "Todo 2025",
+        "campaigns": "Reservaciones, eventos privados y temporada",
+        "roas": "7:1",
+        "roasNumber": 7,
+        "conversions": "1,007",
+        "value": "$135K",
+        "costPer": "$18.95",
+        "standout": "El Día de las Madres trajo 155 conversiones a $3.06 cada una. Acción de Gracias trajo 252 a $3.70 cada una."
+      },
+      {
+        "name": "Rusty Pelican Tampa",
+        "period": "Ago. a dic. 2025",
+        "campaigns": "Reservaciones, eventos privados y temporada",
+        "roas": "27:1",
+        "roasLabel": "ROAS en eventos privados",
+        "roasNumber": 27,
+        "conversions": "287",
+        "value": "$87K",
+        "costPer": "$23.64",
+        "standout": "Navidad y Acción de Gracias fueron las fechas de mejor rendimiento."
+      }
     ],
     "disclaimer": true
   },
   "quote": null,
   "links": [
-    { "href": "/es/publicidad-restaurantes", "text": "Google Ads para restaurantes" },
-    { "href": "/es/diseno-web-restaurantes", "text": "Diseño web para restaurantes" }
+    {
+      "href": "/es/publicidad-restaurantes",
+      "text": "Anuncios pagados para restaurantes"
+    }
   ]
 }

@@ -3,9 +3,13 @@
   "lang": "en",
   "order": 7,
   "service": "web",
-  "services": ["web"],
+  "services": [
+    "web"
+  ],
   "client": "WOA Cocktails",
-  "organizations": ["WOA Cocktails"],
+  "organizations": [
+    "WOA Cocktails"
+  ],
   "metaTitle": "WOA Cocktails Bilingual Website Case Study | Button Up Media",
   "metaDescription": "How Button Up Media rebuilt the WOA Cocktails website from scratch, designed for phones first, with every page in English and Spanish and both found on Google.",
   "ldHeadline": "WOA Cocktails: a bilingual website rebuilt from scratch",
@@ -13,15 +17,36 @@
   "h1Sub": "A bilingual website, rebuilt from scratch",
   "answer": "WOA Cocktails is a luxury mobile bar serving Miami and New York. We rebuilt its website from scratch, with every page in English and Spanish.",
   "descriptor": "Luxury mobile bar and beverage company",
-  "area": { "name": "Miami and New York", "detail": null, "page": null },
+  "area": {
+    "name": "Miami and New York",
+    "detail": null,
+    "page": null
+  },
   "timeframe": "Full website rebuild",
   "hero": {
     "type": "device",
     "url": "woacocktails.com",
-    "desktop": { "src": "/media/woa-hero-desktop.webp", "width": 1600, "height": 904, "alt": "The WOA Cocktails homepage Button Up Media designed and built" },
-    "mobile": { "src": "/media/woa-hero-mobile.webp", "width": 690, "height": 1484, "alt": "The WOA Cocktails website on a phone" }
+    "desktop": {
+      "src": "/media/woa-hero-desktop.webp",
+      "width": 1600,
+      "height": 904,
+      "alt": "The WOA Cocktails homepage Button Up Media designed and built"
+    },
+    "mobile": {
+      "src": "/media/woa-hero-mobile.webp",
+      "width": 690,
+      "height": 1484,
+      "alt": "The WOA Cocktails website on a phone"
+    }
   },
-  "card": { "src": "/media/woa-hero-mobile.webp", "width": 690, "height": 1484, "alt": "The WOA Cocktails website on a phone", "value": "EN + ES", "label": "every page" },
+  "card": {
+    "src": "/media/woa-hero-mobile.webp",
+    "width": 690,
+    "height": 1484,
+    "alt": "The WOA Cocktails website on a phone",
+    "value": "EN + ES",
+    "label": "every page"
+  },
   "webCard": {
     "kicker": "WOA Cocktails · Miami and New York",
     "title": "A bilingual website for a mobile bar company",
@@ -29,9 +54,21 @@
     "device": true
   },
   "metrics": [
-    { "value": "2 weeks", "label": "To build, in Fabio Perez's words", "meaning": "The custom site took about two weeks from start to finish." },
-    { "value": "EN + ES", "label": "Every page in both languages", "meaning": "One tap switches the whole site between English and Spanish." },
-    { "value": "2", "label": "Languages that show up on Google", "meaning": "WOA shows up when people search in English or in Spanish, with its main pages listed under the result." }
+    {
+      "value": "2 weeks",
+      "label": "To build, in Fabio Perez's words",
+      "meaning": "The custom site took about two weeks from start to finish."
+    },
+    {
+      "value": "EN + ES",
+      "label": "Every page in both languages",
+      "meaning": "One tap switches the whole site between English and Spanish."
+    },
+    {
+      "value": "2",
+      "label": "Languages that show up on Google",
+      "meaning": "WOA shows up when people search in English or in Spanish, with its main pages listed under the result."
+    }
   ],
   "situation": {
     "paragraphs": [
@@ -41,9 +78,69 @@
   },
   "steps": {
     "items": [
-      { "title": "Rebuild from scratch", "bodyHtml": "We designed and coded the site ourselves instead of starting from a template. It has large visuals and smooth motion, and the layout was designed for phones first." },
-      { "title": "Build every page in two languages", "bodyHtml": "Every page is in English and Spanish, and a toggle in the menu switches languages with one tap.", "figure": { "src": "/media/woa-en-bar.jpg", "width": 1600, "height": 906, "alt": "A WOA Cocktails service page shown in English with a one-tap EN/ES language toggle in the navigation", "caption": "A WOA service page in English. One tap switches it to Spanish." } },
-      { "title": "Set it up for Google in both languages", "bodyHtml": "We set up both language versions for search, so WOA shows up whether someone searches in English or in Spanish.", "figure": { "src": "/media/woa-serp-en-fit.png", "width": 1500, "height": 885, "alt": "WOA Cocktails English result on Google, with sitelinks for Mobile Bar Experience, Events, Services, and About", "caption": "WOA on Google in English, with its main pages listed under the result." } }
+      {
+        "title": "Rebuild from scratch",
+        "bodyHtml": "We designed and coded the site ourselves instead of starting from a template. It has large visuals and smooth motion, and the layout was designed for phones first."
+      },
+      {
+        "title": "Build every page in two languages",
+        "bodyHtml": "Every page is in English and Spanish, and a toggle in the menu switches languages with one tap.",
+        "figure": {
+          "src": "/media/woa-en-bar.jpg",
+          "width": 1600,
+          "height": 906,
+          "alt": "A WOA Cocktails service page shown in English with a one-tap EN/ES language toggle in the navigation",
+          "caption": "A WOA service page in English. One tap switches it to Spanish."
+        }
+      },
+      {
+        "title": "Set it up for Google in both languages",
+        "bodyHtml": "We set up both language versions for search, so WOA shows up whether someone searches in English or in Spanish.",
+        "figure": {
+          "src": "/media/woa-serp-en-fit.png",
+          "width": 1500,
+          "height": 885,
+          "alt": "WOA Cocktails English result on Google, with sitelinks for Mobile Bar Experience, Events, Services, and About",
+          "caption": "WOA on Google in English, with its main pages listed under the result."
+        }
+      }
+    ]
+  },
+  "walkthrough": {
+    "intro": "More of the site, as it looks on a laptop.",
+    "items": [
+      {
+        "src": "/media/woa-walk-services.webp",
+        "width": 1200,
+        "height": 613,
+        "alt": "The WOA Cocktails services section, with three service cards and photos",
+        "title": "Services",
+        "caption": "The three services, each with a photo and a short summary."
+      },
+      {
+        "src": "/media/woa-walk-miami.webp",
+        "width": 1200,
+        "height": 613,
+        "alt": "The WOA Cocktails section about its expansion to Miami, with a photo of a rooftop event",
+        "title": "Now in Miami",
+        "caption": "A section on WOA's move from New York into Miami."
+      },
+      {
+        "src": "/media/woa-walk-reviews.webp",
+        "width": 1200,
+        "height": 613,
+        "alt": "The reviews section of the WOA Cocktails website, with six client reviews",
+        "title": "Reviews",
+        "caption": "Reviews from hosts of past events, from weddings to corporate events."
+      },
+      {
+        "src": "/media/woa-walk-inquiry.webp",
+        "width": 1200,
+        "height": 613,
+        "alt": "The closing section of the WOA Cocktails website, with a button to begin an inquiry",
+        "title": "Inquiries",
+        "caption": "The closing section, with a button to start an event inquiry."
+      }
     ]
   },
   "results": null,
@@ -54,7 +151,13 @@
     "source": "Google review"
   },
   "links": [
-    { "href": "/restaurant-website-design", "text": "Restaurant website design" },
-    { "href": "/social-media-website-grader", "text": "Grade your current website free" }
+    {
+      "href": "/restaurant-website-design",
+      "text": "Restaurant website design"
+    },
+    {
+      "href": "/social-media-website-grader",
+      "text": "Grade your current website free"
+    }
   ]
 }

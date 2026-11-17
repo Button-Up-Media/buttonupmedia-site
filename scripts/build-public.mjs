@@ -166,6 +166,64 @@ const caseSitemapEntries = await buildCases(root, outDir);
   console.log(`v3 design layer on ${injected} pages (v=${v3Version})`);
 }
 
+// Page speed: blog hero images ship as 1600px JPGs (up to ~360KB). When the
+// WebP copies from scripts/optimize-blog-images.mjs exist, serve those instead
+// with an 800px phone size (og:image keeps the JPG). Posts published before the
+// script runs again just keep their JPG.
+{
+  const blogImgDir = path.join(root, 'images', 'blog');
+  const have = new Set((await readdir(blogImgDir)).filter((n) => n.endsWith('.webp')));
+  const ok = (name) => have.has(`${name}.webp`) && have.has(`${name}-800.webp`);
+  const SIZES = '(max-width: 860px) 100vw, 1100px';
+  const set = (name) => `/images/blog/${name}-800.webp 800w, /images/blog/${name}.webp 1600w`;
+  const IMG_RE = /<img([^>]*?)\ssrc="\/images\/blog\/([a-z0-9-]+)\.(?:jpe?g|png)"([^>]*)>/g;
+  const PRE_RE = /<link rel="preload" as="image" href="\/images\/blog\/([a-z0-9-]+)\.(?:jpe?g|png)"([^>]*)>/g;
+  let swapped = 0;
+  const walkImg = async (dir) => {
+    for (const entry of await readdir(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) { await walkImg(full); continue; }
+      if (!entry.name.endsWith('.html')) continue;
+      const html = await readFile(full, 'utf8');
+      if (!html.includes('/images/blog/')) continue;
+      const out = html
+        .replace(IMG_RE, (m, pre, name, post) => (ok(name) && !/srcset=/.test(m)
+          ? `<img${pre} src="/images/blog/${name}.webp" srcset="${set(name)}" sizes="${SIZES}"${post}>` : m))
+        .replace(PRE_RE, (m, name, rest) => (ok(name)
+          ? `<link rel="preload" as="image" href="/images/blog/${name}.webp" imagesrcset="${set(name)}" imagesizes="${SIZES}"${rest}>` : m));
+      if (out !== html) { await writeFile(full, out); swapped += 1; }
+    }
+  };
+  await walkImg(outDir);
+  console.log(`blog images served as WebP on ${swapped} pages`);
+}
+
+// Page speed: load Google Tag Manager after the page has rendered (or on the
+// first tap or key press), the way the homepage already does. Its tags (GA4,
+// Google Ads, call tracking) are ~400KB of script that otherwise competes with
+// the hero image on slow phones; that alone put mobile LCP at 6 to 8 seconds.
+// Anything pushed to dataLayer before it loads (booking clicks, scan starts)
+// is queued and processed when GTM starts.
+{
+  const GTM_RE = /<script>\(function\(w,d,s,l,i\)\{w\[l\]=w\[l\]\|\|\[\];w\[l\]\.push\(\{'gtm\.start':\s*new Date\(\)\.getTime\(\),event:'gtm\.js'\}\);var f=d\.getElementsByTagName\(s\)\[0\],\s*j=d\.createElement\(s\),dl=l!='dataLayer'\?'&l='\+l:'';j\.async=true;j\.src=\s*'https:\/\/www\.googletagmanager\.com\/gtm\.js\?id='\+i\+dl;f\.parentNode\.insertBefore\(j,f\);\s*\}\)\(window,document,'script','dataLayer','(GTM-[A-Z0-9]+)'\);<\/script>/;
+  const delayed = (id) => `<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});function go(){if(w.__bumGtmLoaded)return;w.__bumGtmLoaded=true;var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}function later(){setTimeout(function(){if('requestIdleCallback' in w)requestIdleCallback(go,{timeout:2000});else go();},1500);}if(d.readyState==='complete')later();else w.addEventListener('load',later,{once:true});['pointerdown','keydown','touchstart'].forEach(function(e){w.addEventListener(e,go,{once:true,passive:true});});})(window,document,'script','dataLayer','${id}');</script>`;
+  let swapped = 0;
+  const walkGtm = async (dir) => {
+    for (const entry of await readdir(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) { await walkGtm(full); continue; }
+      if (!entry.name.endsWith('.html')) continue;
+      const html = await readFile(full, 'utf8');
+      const m = html.match(GTM_RE);
+      if (!m) continue;
+      await writeFile(full, html.replace(GTM_RE, () => delayed(m[1])));
+      swapped += 1;
+    }
+  };
+  await walkGtm(outDir);
+  console.log(`GTM deferred until after load on ${swapped} pages`);
+}
+
 console.log(`Built static site into ${outDir}`);
 
 async function copyVideos(sourceDir, targetDir) {

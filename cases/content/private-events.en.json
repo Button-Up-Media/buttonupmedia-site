@@ -18,34 +18,12 @@
   "ldHeadline": "Private event Google Ads for The Boathouse, The Odyssey and Castaway",
   "h1": "Private events",
   "h1Sub": "The Boathouse, The Odyssey and Castaway",
-  "answer": "We ran Google Ads for private events and reservations at three restaurants in 2025. At The Boathouse, every $1 of ads brought back about $72 in tracked value.",
+  "answer": "In 2025 we ran Google Ads for private events and reservations at The Boathouse, The Odyssey and Castaway. At The Boathouse, each $1 brought back about $72 in tracked value.",
   "descriptor": "Private events and dinner reservations",
   "area": null,
   "timeframe": "Google Ads, 2025",
   "hero": {
-    "type": "logos",
-    "big": "72:1",
-    "bigLabel": "ROAS for The Boathouse",
-    "logos": [
-      {
-        "src": "/media/clients/the-boathouse.webp",
-        "width": 225,
-        "height": 120,
-        "alt": "The Boathouse logo"
-      },
-      {
-        "src": "/media/clients/the-odyssey.webp",
-        "width": 533,
-        "height": 120,
-        "alt": "The Odyssey logo"
-      },
-      {
-        "src": "/media/clients/castaway.webp",
-        "width": 262,
-        "height": 120,
-        "alt": "Castaway logo"
-      }
-    ]
+    "type": "numbers"
   },
   "card": {
     "value": "72:1",
@@ -138,7 +116,7 @@
   "links": [
     {
       "href": "/restaurant-advertising",
-      "text": "Google Ads for restaurants"
+      "text": "Paid ads for restaurants"
     },
     {
       "href": "/contact",

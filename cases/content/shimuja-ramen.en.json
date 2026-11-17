@@ -24,18 +24,13 @@
   },
   "timeframe": "About 4 years, by Chef Kei's count",
   "hero": {
-    "type": "image",
-    "src": "/media/cs-shimuja-hero.webp",
-    "width": 540,
-    "height": 960,
-    "alt": "Chef Kei, owner of Shimuja Ramen, at his restaurant",
-    "chip": "15.4M views"
+    "type": "talk"
   },
   "card": {
-    "src": "/media/cs-shimuja-hero.webp",
+    "src": "/media/cs-shimuja-ramen.webp",
     "width": 540,
     "height": 960,
-    "alt": "Chef Kei, owner of Shimuja Ramen",
+    "alt": "A bowl of Shimuja ramen with the noodles lifted toward the camera, outside the shop",
     "value": "15.4M",
     "label": "social views"
   },
@@ -66,7 +61,14 @@
     "items": [
       {
         "title": "Make the ramen the focus",
-        "bodyHtml": "We shoot short videos with the bowls of ramen as the main subject."
+        "bodyHtml": "We shoot short videos with the bowls of ramen as the main subject.",
+        "figure": {
+          "src": "/media/cs-shimuja-ramen.webp",
+          "width": 540,
+          "height": 960,
+          "alt": "A bowl of Shimuja ramen with the noodles lifted toward the camera, outside the shop",
+          "caption": "The cover of one of our Shimuja Reels, with the ramen up front."
+        }
       },
       {
         "title": "Give every video one goal",

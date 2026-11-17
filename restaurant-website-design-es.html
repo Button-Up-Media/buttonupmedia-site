@@ -59,18 +59,12 @@
   <meta name="twitter:description" content="Páginas web a medida para restaurantes, hechas desde cero con cada página en inglés y español. El sitio es tuyo y cuesta desde $1,500. Agende una llamada." />
   <meta name="twitter:image" content="https://www.buttonupmedia.com/media/woa-hero-desktop.webp" />
 
-  <!-- Resource hints -->
-  <link rel="preconnect" href="https://unpkg.com" crossorigin />
-
   <!-- Fonts -->
   <link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-variable.woff2" crossorigin fetchpriority="high" />
   <link rel="preload" as="font" type="font/woff2" href="/fonts/figtree-variable.woff2" crossorigin />
 
   <!-- Base styles -->
   <link rel="stylesheet" href="shared.css?v=site-fixes-1" />
-
-  <!-- Lucide (icons used by the shared cookie banner). Deferred so it never blocks the hero paint. -->
-  <script defer src="https://unpkg.com/lucide@1.17.0/dist/umd/lucide.min.js"></script>
 
   <!-- Schema: BreadcrumbList -->
   <script type="application/ld+json">
@@ -315,6 +309,12 @@
     .v3-web .w-facts dt { font-size: 0.875rem; font-weight: 650; color: rgba(246,240,230,0.52); }
     .v3-web .w-facts dd { margin: 4px 0 0; font-size: 1rem; line-height: 1.55; color: rgba(246,240,230,0.82); }
     .v3-web .w-case-copy .w-link { margin-top: 14px; }
+    .v3-web .w-case-nums { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 22px 0 0; padding: 0; }
+    .v3-web .w-case-nums li { display: flex; flex-direction: column; justify-content: flex-end; min-height: 128px; padding: 18px 20px; border-radius: 22px; color: var(--v3-ink-on-gold); }
+    .v3-web .w-case-nums .--gold { background: var(--gold); }
+    .v3-web .w-case-nums .--light { background: #f6f0e6; }
+    .v3-web .w-case-nums b { font-size: clamp(2rem, 3.2vw, 2.6rem); font-weight: 800; line-height: 0.95; letter-spacing: -0.055em; }
+    .v3-web .w-case-nums span { margin-top: 10px; font-size: 1rem; font-weight: 650; line-height: 1.3; letter-spacing: -0.01em; }
 
     /* reviews (shared markup, flatter cards) */
     .v3-web .bum-reviews { margin-top: clamp(64px, 8vw, 104px); }
@@ -326,10 +326,8 @@
     .v3-web .w-get { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); grid-template-areas: "vis head" "vis list"; column-gap: clamp(32px, 6vw, 88px); align-items: start; }
     .v3-web .w-get > .h-head { grid-area: head; }
     .v3-web .w-get > .h-points { grid-area: list; }
-    .v3-web .w-get-vis { grid-area: vis; align-self: center; display: flex; flex-direction: column; align-items: center; margin: 0; padding: clamp(32px, 4vw, 48px) 20px 24px; border-radius: 32px; background: var(--v3-elev-1); border: 1px solid var(--v3-hair); }
-    .v3-web .w-get-vis .w-phone { position: relative; right: auto; bottom: auto; width: min(260px, 76%); }
-    .v3-web .w-get-vis .w-phone-screen { aspect-ratio: 400 / 864; }
-    .v3-web .w-get-vis figcaption { margin-top: 18px; font-size: 0.875rem; color: rgba(246,240,230,0.56); text-align: center; }
+    .v3-web .w-get-vis { grid-area: vis; align-self: center; margin: 0; }
+    .v3-web .w-get-vis figcaption { margin-top: 14px; font-size: 0.9375rem; line-height: 1.5; color: rgba(246,240,230,0.62); }
     .v3-web .h-points { list-style: none; margin: 28px 0 0; padding: 0; border-top: 1px solid var(--v3-hair); }
     .v3-web .h-points li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; padding: 18px 0; border-bottom: 1px solid var(--v3-hair); }
     .v3-web .h-points .n { padding-top: 3px; font-size: 0.875rem; font-weight: 700; color: var(--gold); }
@@ -490,9 +488,10 @@
       .v3-web .h-head-row { display: block; }
       .v3-web .w-head-link { margin-top: 8px; }
       .v3-web .w-case { margin-top: 32px; gap: 22px; }
+      .v3-web .w-case-nums li { min-height: 112px; padding: 16px; border-radius: 20px; }
+      .v3-web .w-case-nums b { font-size: 2rem; }
       .v3-web .w-scroll { --fh: 460px; }
       .v3-web .bum-reviews__grid { margin: 0 -16px; padding: 2px 16px 10px; scroll-padding-inline: 16px; }
-      .v3-web .w-get-vis { border-radius: 26px; }
       .v3-web .w-grid3 { grid-template-columns: 1fr; margin-top: 28px; }
       .v3-web .w-grid3 li { padding: 18px 0 20px; }
       .v3-web .w-incl { border-radius: 26px; padding: 26px 22px; }
@@ -557,14 +556,14 @@
           <a href="/es/analizador-redes-sociales-web" class="lib-mobile-menu-only lib-mobile-action --grader" target="_blank" rel="noopener" aria-label="Analizador gratis de redes y web (se abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Analizador gratis de redes y web</a>
           <a href="/es/casos-de-exito" class="lib-mobile-menu-only lib-mobile-action --ghost">Casos de éxito</a>
           <a href="/es/nosotros" class="lib-mobile-menu-only lib-mobile-action --ghost">Nosotros</a>
-          <a href="tel:+17867409499" class="lib-mobile-menu-only lib-mobile-action --ghost">Llámanos</a>
+          <a href="tel:+17867409499" class="lib-mobile-menu-only lib-mobile-action --ghost">Llame al (786) 740-9499</a>
           <a href="/es/contacto" class="lib-mobile-menu-only lib-mobile-action --primary">Agende su llamada de estrategia gratis</a>
         </div>
       </details>
       <a href="/es/casos-de-exito">Casos de éxito</a>
       <a href="/es/nosotros">Nosotros</a>
       <a href="/es/analizador-redes-sociales-web" class="lib-nav-grader" target="_blank" rel="noopener" aria-label="Analizador Gratis (se abre en una pestaña nueva)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20a8 8 0 1 0-8-8"/><path d="M4 12H2"/><path d="m6.3 6.3-1.4-1.4"/><path d="M12 4V2"/><path d="m17.7 6.3 1.4-1.4"/><path d="M20 12h2"/><path d="m12 12 4.5-3"/></svg>Analizador Gratis</a>
-      <a class="lib-nav-phone" href="tel:+17867409499">Llámanos</a>
+      <a class="lib-nav-phone" href="tel:+17867409499">(786) 740-9499</a>
       <a href="/es/contacto" class="btn btn-primary" style="padding: 0 16px; height: 36px; font-size: 0.76rem;">Agende su llamada de estrategia gratis</a>
     </div>
   </nav>
@@ -590,12 +589,12 @@
         <div class="w-browser" id="ws-browser">
           <div class="w-bar"><span class="w-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="w-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>woacocktails.com</span></div>
           <div class="w-view">
-            <img src="media/woa-hero-desktop.webp" alt="La página de inicio del sitio web del restaurante WOA Cocktails, diseñada y construida por Button Up Media" width="1600" height="904" fetchpriority="high" />
+            <img src="media/woa-hero-desktop.webp" srcset="media/woa-hero-desktop-800.webp 800w, media/woa-hero-desktop.webp 1600w" sizes="(max-width: 960px) calc(100vw - 32px), 600px" alt="La página de inicio de WOA Cocktails, un sitio web a medida diseñado y construido por Button Up Media" width="1600" height="904" fetchpriority="high" />
           </div>
         </div>
         <div class="w-phone">
           <div class="w-phone-screen">
-            <img src="media/woa-hero-mobile.webp" alt="El sitio web de WOA Cocktails en un teléfono móvil" loading="lazy" width="690" height="1484" />
+            <img src="media/woa-hero-mobile.webp" srcset="media/woa-hero-mobile-360.webp 360w, media/woa-hero-mobile.webp 690w" sizes="(max-width: 960px) 30vw, 160px" alt="El sitio web de WOA Cocktails en un teléfono móvil" decoding="async" width="690" height="1484" />
           </div>
         </div>
       </figure>
@@ -627,9 +626,9 @@
     <section class="h-sec" id="work">
       <div class="h-head-row">
         <div class="h-head">
-          <div class="lib-section-label">Trabajo reciente</div>
-          <h2>Sitios web recientes que hemos construido</h2>
-          <p>Estos son dos de nuestros proyectos recientes: WOA Cocktails, una marca premium de cócteles, y Rusty Pelican, un restaurante frente al mar en Miami.</p>
+          <div class="lib-section-label">Nuestro trabajo</div>
+          <h2>La página web que hicimos para WOA Cocktails</h2>
+          <p>WOA Cocktails es una empresa de barras móviles de lujo. Rehicimos su sitio web desde cero, con cada página en inglés y español, y configuramos los dos idiomas para que aparezcan en Google.</p>
         </div>
         <a class="w-link w-head-link" href="/es/casos-de-exito">Vea todos los casos de éxito <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
@@ -639,41 +638,24 @@
           <div class="w-browser w-scroll" id="ws-browser-2">
             <div class="w-bar"><span class="w-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="w-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>woacocktails.com</span></div>
             <div class="w-view">
-              <img src="media/woa-full.webp" alt="La página de inicio completa de WOA Cocktails diseñada y construida por Button Up Media" loading="lazy" width="2938" height="9671" />
+              <picture><source media="(max-width: 859px)" srcset="media/woa-full-peek-1000.webp" width="1000" height="1400" /><img src="media/woa-full-1400.webp" alt="La página de inicio completa de WOA Cocktails diseñada y construida por Button Up Media" loading="lazy" decoding="async" width="1400" height="4608" /></picture>
               <span class="w-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>Pasa el cursor para explorar todo el sitio</span>
             </div>
           </div>
         </div>
         <div class="w-case-copy">
           <div class="w-case-tag">WOA Cocktails &middot; Sitio completo</div>
-          <h3>Un sitio web para una marca premium de cócteles</h3>
+          <h3>Un sitio bilingüe, rehecho desde cero</h3>
+          <ul class="w-case-nums">
+            <li class="--gold"><b>2 semanas</b><span>Para construirlo, según el fundador de WOA</span></li>
+            <li class="--light"><b>EN + ES</b><span>Cada página, y en Google en los dos idiomas</span></li>
+          </ul>
           <dl class="w-facts">
-            <div><dt>El reto</dt><dd>WOA Cocktails no tenía un sitio web a la altura de sus cócteles, así que no había un buen lugar a dónde enviar a clientes, prensa o distribuidores.</dd></div>
-            <div><dt>Lo que construimos</dt><dd>Un sitio a medida, programado a mano, con visuales grandes, animaciones suaves y un diseño pensado primero para el teléfono, para que cada cóctel se vea lo mejor posible.</dd></div>
-            <div><dt>El resultado</dt><dd>Un sitio que se ve y se siente como la marca y les da a los nuevos clientes una gran primera impresión.</dd></div>
+            <div><dt>Lo que WOA necesitaba</dt><dd>Un sitio web tan cuidado como la experiencia de barra móvil que vende, y un buen lugar a dónde enviar a clientes y prensa.</dd></div>
+            <div><dt>Lo que construimos</dt><dd>Un sitio a medida, diseñado y programado primero para el teléfono, con fotos grandes, animaciones suaves y cada página en inglés y español.</dd></div>
+            <div><dt>En Google</dt><dd>Las dos versiones están configuradas para búsqueda, así que WOA aparece cuando alguien busca en inglés o en español.</dd></div>
           </dl>
           <a class="w-link" href="/es/casos-de-exito/woa-cocktails">Vea el caso de WOA Cocktails <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        </div>
-      </div>
-
-      <div class="w-case">
-        <div class="w-case-copy">
-          <div class="w-case-tag">Rusty Pelican &middot; Sitio completo</div>
-          <h3>Un sitio web para un clásico frente al mar en Miami</h3>
-          <dl class="w-facts">
-            <div><dt>El reto</dt><dd>Rusty Pelican, un restaurante frente al mar en Miami fundado en 1972 y con más de 56 mil reseñas de cinco estrellas, necesitaba un sitio tan memorable como su vista de la bahía y el skyline.</dd></div>
-            <div><dt>Lo que construimos</dt><dd>Un sitio de estilo editorial con fotos a todo lo ancho, un menú organizado por secciones, la historia del chef y reservas integradas.</dd></div>
-            <div><dt>El resultado</dt><dd>Los clientes conocen el restaurante antes de llegar y pueden reservar una mesa directamente en el sitio.</dd></div>
-          </dl>
-        </div>
-        <div class="w-case-media">
-          <div class="w-browser w-scroll" id="ws-browser-3">
-            <div class="w-bar"><span class="w-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="w-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>rustypelican.com</span></div>
-            <div class="w-view">
-              <img src="media/rp-full.webp" alt="La página de inicio completa de Rusty Pelican diseñada y construida por Button Up Media" loading="lazy" width="2940" height="4994" />
-              <span class="w-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>Pasa el cursor para explorar todo el sitio</span>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -712,12 +694,16 @@
           <p>Cada sitio está diseñado para verse bien y para que los visitantes reserven una mesa, pidan en línea o llamen.</p>
         </div>
         <figure class="w-get-vis">
-          <div class="w-phone">
-            <div class="w-phone-screen">
-              <img src="images/website-design/rusty-pelican-mobile.avif" alt="La página del menú de Rusty Pelican en un teléfono, con platos, fotos y precios" loading="lazy" decoding="async" width="400" height="864" />
+          <div class="w-browser">
+            <div class="w-bar"><span class="w-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="w-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>woacocktails.com</span></div>
+            <div class="w-view">
+              <picture>
+                <source type="image/avif" srcset="media/woa-home-story.avif" />
+                <img src="media/woa-home-story.webp" alt="Las secciones de los fundadores y de reseñas de clientes en la página de inicio de WOA Cocktails" loading="lazy" decoding="async" width="1000" height="914" />
+              </picture>
             </div>
           </div>
-          <figcaption>El menú de Rusty Pelican, en el teléfono donde lo ve la mayoría de los clientes.</figcaption>
+          <figcaption>Parte de la página de inicio de WOA Cocktails, que diseñamos y programamos desde cero.</figcaption>
         </figure>
         <ul class="h-points">
           <li><span class="n">01</span><div><h3>Diseño y código a medida</h3><p>Diseñamos y construimos cada sitio desde cero alrededor de tu marca, sin temas ni plantillas de arrastrar y soltar.</p></div></li>
@@ -775,8 +761,8 @@
           <div class="w-browser is-es" id="ws-lang-browser">
             <div class="w-bar"><span class="w-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="w-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>woacocktails.com<span class="w-url-lang"></span></span></div>
             <div class="w-view w-langview">
-              <img class="lf-en" src="media/woa-en-bar.jpg" alt="Una página de servicio de WOA Cocktails en inglés con un botón de idioma EN/ES de un toque en la navegación" loading="lazy" width="1600" height="907" />
-              <img class="lf-es" src="media/woa-es-bar.jpg" alt="La misma página de servicio de WOA Cocktails mostrada en español" loading="lazy" width="1600" height="905" />
+              <img class="lf-en" src="media/woa-en-bar-1400.webp" alt="Una página de servicio de WOA Cocktails en inglés con un botón de idioma EN/ES de un toque en la navegación" loading="lazy" decoding="async" width="1400" height="793" />
+              <img class="lf-es" src="media/woa-es-bar-1400.webp" alt="La misma página de servicio de WOA Cocktails mostrada en español" loading="lazy" decoding="async" width="1400" height="791" />
             </div>
           </div>
           <p class="w-shot-cap"><span class="w-flag">EN&nbsp;/&nbsp;ES</span> La misma página de WOA Cocktails en los dos idiomas. Usa el botón para cambiar toda la página entre inglés y español.</p>
@@ -799,11 +785,11 @@
       </div>
       <div class="w-serps">
         <figure>
-          <img src="media/woa-serp-en-fit.png" alt="Resultado de WOA Cocktails en inglés en Google, con enlaces a Mobile Bar Experience, Events, Services y About" loading="lazy" width="1500" height="885" />
+          <img src="media/woa-serp-en-1200.webp" alt="Resultado de WOA Cocktails en inglés en Google, con enlaces a Mobile Bar Experience, Events, Services y About" loading="lazy" decoding="async" width="1200" height="708" />
           <figcaption><span class="w-flag">EN</span> Posiciona en búsquedas en inglés</figcaption>
         </figure>
         <figure>
-          <img src="media/woa-serp-es-fit.png" alt="Resultado de WOA Cocktails en español en Google, con enlaces en español a Experiencia de bar móvil, Eventos, Servicios y Acerca de" loading="lazy" width="1500" height="885" />
+          <img src="media/woa-serp-es-1200.webp" alt="Resultado de WOA Cocktails en español en Google, con enlaces en español a Experiencia de bar móvil, Eventos, Servicios y Acerca de" loading="lazy" decoding="async" width="1200" height="708" />
           <figcaption><span class="w-flag">ES</span> Posiciona en búsquedas en español</figcaption>
         </figure>
       </div>
@@ -943,8 +929,8 @@
     <section class="h-sec" id="team">
       <div class="h-why">
         <div class="w-team-photos">
-          <figure><img src="media/team-deal.webp" alt="El equipo de Button Up Media cerrando un proyecto con un apretón de manos en la mesa" loading="lazy" decoding="async" width="2000" height="1125" /></figure>
-          <figure><img src="media/team-deal-handshake.webp" alt="El equipo de Button Up Media cerrando un proyecto con un apretón de manos sobre la laptop" loading="lazy" decoding="async" width="1081" height="1351" /></figure>
+          <figure><img src="media/team-deal-640.webp" alt="El equipo de Button Up Media cerrando un proyecto con un apretón de manos en la mesa" loading="lazy" decoding="async" width="640" height="800" /></figure>
+          <figure><img src="media/team-deal-handshake-640.webp" alt="El equipo de Button Up Media cerrando un proyecto con un apretón de manos sobre la laptop" loading="lazy" decoding="async" width="640" height="800" /></figure>
         </div>
         <div>
           <div class="h-head">

@@ -24,18 +24,13 @@
   },
   "timeframe": "Unos 4 años, según Chef Kei",
   "hero": {
-    "type": "image",
-    "src": "/media/cs-shimuja-hero.webp",
-    "width": 540,
-    "height": 960,
-    "alt": "Chef Kei, dueño de Shimuja Ramen, en su restaurante",
-    "chip": "15.4M de vistas"
+    "type": "talk"
   },
   "card": {
-    "src": "/media/cs-shimuja-hero.webp",
+    "src": "/media/cs-shimuja-ramen.webp",
     "width": 540,
     "height": 960,
-    "alt": "Chef Kei, dueño de Shimuja Ramen",
+    "alt": "Un tazón de ramen de Shimuja con los fideos levantados hacia la cámara, afuera del local",
     "value": "15.4M",
     "label": "vistas en redes"
   },
@@ -66,7 +61,14 @@
     "items": [
       {
         "title": "Poner el ramen en primer plano",
-        "bodyHtml": "Grabamos videos cortos en los que los tazones de ramen son lo principal."
+        "bodyHtml": "Grabamos videos cortos en los que los tazones de ramen son lo principal.",
+        "figure": {
+          "src": "/media/cs-shimuja-ramen.webp",
+          "width": 540,
+          "height": 960,
+          "alt": "Un tazón de ramen de Shimuja con los fideos levantados hacia la cámara, afuera del local",
+          "caption": "La portada de uno de nuestros reels de Shimuja, con el ramen al frente."
+        }
       },
       {
         "title": "Darle un solo objetivo a cada video",
