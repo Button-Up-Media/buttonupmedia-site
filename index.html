@@ -363,6 +363,26 @@
     .v3-home .hp2-hero-media.is-video-loaded video, .v3-home .hp2-hero-media video.is-loaded { opacity: 1; }
     .v3-home .hp2-hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,11,12,0.55) 0%, rgba(11,11,12,0.12) 34%, rgba(11,11,12,0.7) 72%, #0b0b0c 100%), linear-gradient(90deg, rgba(11,11,12,0.78) 0%, rgba(11,11,12,0.05) 64%); }
     .v3-home .h-hero-inner { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); gap: 48px; align-items: end; }
+    /* Desktop: the hero clip is vertical (720x1280). Stretched across the full
+       width it was blown up about 2x and looked soft, so on wide screens it
+       plays in a right-hand panel near its native size, with its left and
+       bottom edges fading into the hero. Once it plays, the still photo behind
+       it blurs and dims so the clip reads as the focus. Phones keep the
+       full-bleed clip (a vertical video fits a phone screen). */
+    @media (min-width: 901px) {
+      .v3-home .hp2-hero-media img { transition: filter 0.9s ease, transform 0.9s ease; }
+      .v3-home .hp2-hero-media.is-video-loaded img { filter: blur(18px) brightness(0.5) saturate(1.15); transform: scale(1.08); }
+      .v3-home .hp2-hero-media video {
+        left: auto; right: 0; width: clamp(560px, 50vw, 860px); height: 100%; object-position: 50% 42%;
+        -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.5) 18%, #000 42%), linear-gradient(180deg, #000 64%, transparent 100%);
+        -webkit-mask-composite: source-in;
+        mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.5) 18%, #000 42%), linear-gradient(180deg, #000 64%, transparent 100%);
+        mask-composite: intersect;
+      }
+    }
+    @media (min-width: 901px) and (prefers-reduced-motion: reduce) {
+      .v3-home .hp2-hero-media img { transition: none; }
+    }
     .v3-home .h-hero h1 { font-size: clamp(2.6rem, 6.2vw, 5.5rem); line-height: 0.98; font-weight: 800; letter-spacing: -0.05em; color: var(--text-head); }
     .v3-home .h-hero h1 .accent-serif { font: inherit; letter-spacing: inherit; color: var(--gold); }
     .v3-home .h-lede { margin-top: 22px; max-width: 54ch; font-size: clamp(1.0625rem, 1.3vw, 1.1875rem); line-height: 1.55; color: rgba(246,240,230,0.8); }
@@ -634,6 +654,18 @@
         />
         <!-- Hero video is lazy-loaded and paused offscreen by shared.js. -->
         <video class="hp2-hero-bg-video" data-video-src="videos/compilation-best-shots.optimized.web.mp4" poster="images/homepage-hero-bg-1200.avif" muted loop playsinline preload="none" aria-hidden="true"></video>
+        <script>
+          /* High-resolution desktop screens: use the sharper 960px encode of the
+             hero clip (the default 720px one looks soft at 2x). Phones,
+             data-saver and slow connections keep the lighter file. */
+          (function () {
+            var v = document.querySelector(".hp2-hero-bg-video");
+            if (!v || !window.matchMedia("(min-width: 901px)").matches || (window.devicePixelRatio || 1) < 1.5) return;
+            var c = navigator.connection || navigator.webkitConnection;
+            if (c && (c.saveData || /^(slow-2g|2g|3g)$/.test(c.effectiveType || ""))) return;
+            v.dataset.videoSrc = "videos/compilation-best-shots.optimized.mp4";
+          })();
+        </script>
       </div>
       <div class="h-wrap h-hero-inner">
         <div class="h-hero-copy">
