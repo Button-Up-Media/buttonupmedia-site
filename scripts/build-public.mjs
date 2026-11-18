@@ -6,10 +6,16 @@ import { buildBlog } from './build-blog.mjs';
 import { buildAreas } from './build-areas.mjs';
 import { buildCases } from './build-cases.mjs';
 import { generateDemo } from './demo-mock.mjs';
+import { optimizeBlogImages } from './optimize-blog-images.mjs';
 
 const root = process.cwd();
 // BUILD_OUT lets parallel previews build into their own folder (default public/).
 const outDir = path.join(root, process.env.BUILD_OUT || 'public');
+
+// Blog hero WebP copies (full + 800px phone size) for any post that doesn't
+// have them yet. Runs before images/ is copied into the output. Skips quietly
+// if sharp isn't installed; those posts keep their JPG.
+await optimizeBlogImages(root);
 
 const filesToCopy = [
   'index.html',

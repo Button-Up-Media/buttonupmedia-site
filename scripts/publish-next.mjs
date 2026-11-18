@@ -59,8 +59,12 @@ await writeFile('blog/calendar.json', JSON.stringify(cal, null, 2));
 
 // Build, then commit ONLY the two manifest files (leaves any unrelated working-tree changes alone).
 try {
+  // The build makes the WebP copies of the hero (images/blog/<id>.webp and
+  // <id>-800.webp); commit them with the post so the live site serves them.
   execSync('npm run build', { cwd: root, stdio: 'inherit' });
-  execSync('git add blog/posts.json blog/calendar.json', { cwd: root, stdio: 'inherit' });
+  const webps = [`images/blog/${next.id}.webp`, `images/blog/${next.id}-800.webp`];
+  const haveWebps = (await Promise.all(webps.map(exists))).every(Boolean);
+  execSync('git add blog/posts.json blog/calendar.json' + (haveWebps ? ' ' + webps.join(' ') : ''), { cwd: root, stdio: 'inherit' });
   execSync(`git commit -q -m ${JSON.stringify('Publish blog post: ' + next.id)}`, { cwd: root, stdio: 'inherit' });
   execSync('git push origin main', { cwd: root, stdio: 'inherit' });
 } catch (e) {
