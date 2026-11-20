@@ -1,5 +1,19 @@
 [
   {
+    "id": "marketing-west-palm-beach",
+    "category": "strategy",
+    "author": "chris",
+    "date": "2026-11-20",
+    "hero": "/images/blog/marketing-west-palm-beach.jpg",
+    "heroAlt": "A warm outdoor restaurant glowing at night in downtown South Florida",
+    "en": {
+      "slug": "restaurant-marketing-agency-west-palm-beach"
+    },
+    "es": {
+      "slug": "agencia-marketing-restaurantes-west-palm-beach"
+    }
+  },
+  {
     "id": "signs-you-need-help",
     "category": "strategy",
     "author": "juan",
