@@ -2139,7 +2139,13 @@ if (document.readyState === "loading") {
     if (!target) return;
     var label = targetLang === "es" ? "Español" : "English";
     var aria = targetLang === "es" ? "Ver esta página en español" : "View this page in English";
-    var globe = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="vertical-align:-2px;margin-right:5px;"><circle cx="12" cy="12" r="9"/><path d="M3 12h18" stroke-linecap="round"/><path d="M12 3c2.6 2.8 2.6 15.2 0 18M12 3c-2.6 2.8-2.6 15.2 0 18" stroke-linecap="round"/></svg>';
+    // Small flag for the language the link switches TO (Spain for Spanish,
+    // United States for English), so the switch is easy to spot.
+    var flags = {
+      es: '<svg viewBox="0 0 30 20" width="20" height="14" preserveAspectRatio="none" aria-hidden="true"><rect width="30" height="20" fill="#AA151B"/><rect y="5" width="30" height="10" fill="#F1BF00"/></svg>',
+      en: '<svg viewBox="0 0 38 20" width="20" height="14" preserveAspectRatio="none" aria-hidden="true"><rect width="38" height="20" fill="#B22234"/><path d="M0 2.3h38M0 5.4h38M0 8.5h38M0 11.5h38M0 14.6h38M0 17.7h38" stroke="#fff" stroke-width="1.54"/><rect width="15.2" height="10.8" fill="#3C3B6E"/><g fill="#fff"><circle cx="2.5" cy="2" r=".6"/><circle cx="6.3" cy="2" r=".6"/><circle cx="10.1" cy="2" r=".6"/><circle cx="13.2" cy="2" r=".6"/><circle cx="4.4" cy="4.2" r=".6"/><circle cx="8.2" cy="4.2" r=".6"/><circle cx="12" cy="4.2" r=".6"/><circle cx="2.5" cy="6.4" r=".6"/><circle cx="6.3" cy="6.4" r=".6"/><circle cx="10.1" cy="6.4" r=".6"/><circle cx="13.2" cy="6.4" r=".6"/><circle cx="4.4" cy="8.6" r=".6"/><circle cx="8.2" cy="8.6" r=".6"/><circle cx="12" cy="8.6" r=".6"/></g></svg>'
+    };
+    var globe = '<span class="lang-flag" style="display:inline-block;width:20px;height:14px;border-radius:3px;overflow:hidden;line-height:0;vertical-align:-2px;margin-right:7px;box-shadow:0 0 0 1px rgba(127,127,127,.35);flex:none;">' + (flags[targetLang] || flags.en) + '</span>';
 
     var desktop = document.createElement("a");
     desktop.className = "lib-lang-switch";

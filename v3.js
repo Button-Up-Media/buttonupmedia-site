@@ -9,7 +9,7 @@
 
   // ---------- copy ----------
   var T = es ? {
-    home: 'Inicio', work: 'Casos', services: 'Servicios', book: 'Agendar',
+    home: 'Inicio', work: 'Casos', services: 'Servicios', book: 'Agendar llamada',
     homeHref: '/es', workHref: '/es/casos-de-exito', bookHref: '/es/contacto',
     sheetTitle: 'Servicios', close: 'Cerrar',
     cta: 'Agende una llamada estratégica gratis',
@@ -22,7 +22,7 @@
     toolLabel: 'Herramienta gratis',
     tool: ['/es/analizador-redes-sociales-web', 'Analizador de redes y sitio web', 'Califique su presencia en línea gratis']
   } : {
-    home: 'Home', work: 'Work', services: 'Services', book: 'Book',
+    home: 'Home', work: 'Work', services: 'Services', book: 'Book a call',
     homeHref: '/', workHref: '/case-studies', bookHref: '/contact',
     sheetTitle: 'Services', close: 'Close',
     cta: 'Book a free strategy call',
@@ -62,7 +62,7 @@
       '<a class="v3-tab" href="' + T.homeHref + '"' + (isHome ? ' aria-current="page"' : '') + '>' + svg('home') + '<span>' + T.home + '</span></a>' +
       '<a class="v3-tab" href="' + T.workHref + '"' + (isWork ? ' aria-current="page"' : '') + '>' + svg('work') + '<span>' + T.work + '</span></a>' +
       '<button type="button" class="v3-tab" aria-expanded="false" aria-controls="v3-sheet">' + svg('services') + '<span>' + T.services + '</span></button>' +
-      '<a class="v3-tab --book" href="' + T.bookHref + '"' + (isBook ? ' aria-current="page"' : '') + '><span class="v3-tab-pill">' + svg('book', 2.1) + '</span><span>' + T.book + '</span></a>';
+      '<a class="v3-tab --book" href="' + T.bookHref + '"' + (isBook ? ' aria-current="page"' : '') + '><span class="v3-tab-pill">' + svg('book', 2.2) + '<span>' + T.book + '</span></span></a>';
 
     var scrim = d.createElement('div');
     scrim.className = 'v3-scrim';

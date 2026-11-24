@@ -382,6 +382,33 @@
       .v3-smm .hp2-vid-card:hover .hp2-vid-card-play { transform: scale(1.06); }
     }
 
+    /* reels wall: tap to play with sound (shared.js .hp2-vid-card), cover image lazy-loads */
+    .v3-smm .s-wall { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px 16px; margin: 40px 0 0; padding: 0; }
+    .v3-smm .s-wall > li { min-width: 0; }
+    .v3-smm .s-wvid { position: relative; aspect-ratio: 9 / 16; overflow: hidden; border-radius: 22px; background: var(--v3-elev-1); border: 1px solid var(--v3-hair); transform: translateZ(0); cursor: pointer; }
+    .v3-smm .s-wvid video, .v3-smm .s-wcover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .v3-smm .s-wcover { z-index: 1; pointer-events: none; transition: opacity .3s ease; }
+    .v3-smm .s-wvid.--playing .s-wcover { opacity: 0; }
+    .v3-smm .s-wvid .hp2-vid-card-play { z-index: 3; }
+    .v3-smm .s-wviews { position: absolute; left: 10px; top: 10px; z-index: 2; display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px 5px 8px; border-radius: 999px; background: rgba(12,12,14,0.68); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); font-size: 0.8125rem; line-height: 1.2; color: rgba(246,240,230,0.8); white-space: nowrap; pointer-events: none; }
+    .v3-smm .s-wviews svg { width: 15px; height: 15px; flex: none; }
+    .v3-smm .s-wviews b { font-size: 0.9375rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-head); }
+    .v3-smm .s-wcard.--top .s-wviews { background: var(--gold); color: rgba(20,14,4,0.78); }
+    .v3-smm .s-wcard.--top .s-wviews b { color: var(--v3-ink-on-gold); }
+    .v3-smm .s-wbar { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; height: 3px; background: rgba(255,255,255,0.16); opacity: 0; transition: opacity .25s ease; pointer-events: none; }
+    .v3-smm .s-wbar i { display: block; height: 100%; background: var(--gold); transform: scaleX(0); transform-origin: left center; }
+    .v3-smm .s-wvid.--playing .s-wbar { opacity: 1; }
+    .v3-smm .s-wmeta { margin-top: 12px; }
+    .v3-smm .s-wmeta h3 { font-size: 1rem; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; color: var(--text-head); }
+    .v3-smm .s-wmeta p { margin-top: 2px; font-size: 0.9375rem; line-height: 1.4; color: rgba(246,240,230,0.66); }
+    .v3-smm .s-wcase { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; white-space: nowrap; font-size: 0.9375rem; font-weight: 700; color: var(--gold); text-decoration: none; -webkit-tap-highlight-color: transparent; }
+    .v3-smm .s-wcase svg { width: 15px; height: 15px; transition: transform .25s var(--v3-ease); }
+    .v3-smm .s-wnote { margin-top: 24px; font-size: 0.875rem; line-height: 1.5; color: rgba(246,240,230,0.56); }
+    @media (hover: hover) {
+      .v3-smm .s-wvid:hover .hp2-vid-card-play { transform: scale(1.06); }
+      .v3-smm .s-wcase:hover svg { transform: translateX(3px); }
+    }
+
     /* sticky section chips */
     .v3-smm .s-chips { position: sticky; top: var(--v3-bar-h); z-index: 40; margin: 56px calc(50% - 50vw) 0; background: rgba(11,11,12,0.8); -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid var(--v3-hair); }
     .v3-smm .s-chips-row { position: relative; display: flex; gap: 2px; overflow-x: auto; padding: 2px max(24px, calc((100% - var(--max)) / 2)); scrollbar-width: none; }
@@ -556,6 +583,7 @@
       .v3-smm .sm-hero { padding-top: calc(var(--v3-bar-h) + 48px); }
       .v3-smm .s-hero-inner { grid-template-columns: 1fr; gap: 36px; }
       .v3-smm .s-reels { max-width: 640px; }
+      .v3-smm .s-wall { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .v3-smm .s-svcs { grid-template-columns: 1fr; }
       .v3-smm .s-svc { flex-direction: row; }
       .v3-smm .s-svc-media { flex: 0 0 36%; aspect-ratio: auto; }
@@ -583,6 +611,16 @@
       .v3-smm .s-reels { display: flex; gap: 10px; max-width: none; margin: 0 -16px; padding: 0 16px 4px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px; scrollbar-width: none; }
       .v3-smm .s-reels::-webkit-scrollbar { display: none; }
       .v3-smm .s-reels > li { flex: 0 0 62%; scroll-snap-align: start; }
+      .v3-smm .s-wall { display: flex; gap: 10px; margin: 28px -16px 0; padding: 0 16px 4px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px; scrollbar-width: none; }
+      .v3-smm .s-wall::-webkit-scrollbar { display: none; }
+      .v3-smm .s-wall > li { flex: 0 0 42%; scroll-snap-align: start; }
+      .v3-smm .s-wvid { border-radius: 20px; }
+      .v3-smm .s-wvid .hp2-vid-card-play { width: 48px; height: 48px; margin: -24px 0 0 -24px; }
+      .v3-smm .s-wvid .hp2-vid-card-play::after { left: 19px; top: 14px; border-left-width: 13px; border-top-width: 9px; border-bottom-width: 9px; }
+      .v3-smm .s-wviews { left: 8px; top: 8px; padding: 4px 8px 4px 6px; font-size: 0.75rem; }
+      .v3-smm .s-wviews b { font-size: 0.875rem; }
+      html[lang] .v3-smm .s-wmeta p { font-size: 15px !important; line-height: 1.4 !important; }
+      .v3-smm .s-wnote { margin-top: 16px; }
       .v3-smm .s-chips { margin-top: 40px; }
       .v3-smm .s-chips-row { padding: 2px 12px; }
       .v3-smm .h-sec { padding-top: 72px; }
@@ -615,8 +653,8 @@
     }
     @media (prefers-reduced-motion: reduce) {
       .v3-smm .h-deck { scroll-behavior: auto; }
-      .v3-smm .h-card, .v3-smm .hp2-vid-card-play, .v3-smm .s-chips a span, .v3-smm .s-more summary::after, .v3-smm .hp2-faq-item summary::after { transition: none; }
-      .v3-smm .h-card:hover, .v3-smm .hp2-vid-card:hover .hp2-vid-card-play { transform: none; }
+      .v3-smm .h-card, .v3-smm .hp2-vid-card-play, .v3-smm .s-wcover, .v3-smm .s-wbar, .v3-smm .s-wcase svg, .v3-smm .s-chips a span, .v3-smm .s-more summary::after, .v3-smm .hp2-faq-item summary::after { transition: none; }
+      .v3-smm .h-card:hover, .v3-smm .hp2-vid-card:hover .hp2-vid-card-play, .v3-smm .s-wcase:hover svg { transform: none; }
     }
   </style>
 </head>
@@ -715,6 +753,7 @@
     <nav class="s-chips" aria-label="En esta página">
       <div class="s-chips-row">
         <a href="#client-results"><span>Resultados</span></a>
+        <a href="#reels"><span>Reels</span></a>
         <a href="#services"><span>Qué hacemos</span></a>
         <a href="#where-we-film"><span>Dónde grabamos</span></a>
         <a href="#the-problem"><span>El problema</span></a>
@@ -774,6 +813,179 @@
             </a></li>
           <li><a class="h-card --more" href="/es/casos-de-exito#social"><strong>Vea todos los casos de redes sociales</strong><span class="h-card-foot">Lee la historia completa de cada cuenta</span><span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a></li>
         </ul>
+      </div>
+    </section>
+
+    <!-- ═══ REELS ═══ -->
+    <section class="h-sec" id="reels">
+      <div class="h-wrap">
+        <div class="h-head">
+          <div class="lib-section-label">Reels</div>
+          <h2>Reels de restaurantes con los que trabajamos</h2>
+          <p>Toca un video para verlo con sonido. Cada reel se publicó en la cuenta de Instagram del restaurante.</p>
+        </div>
+        <ul class="s-wall" aria-label="Reels de cuentas de restaurantes con los que trabajamos">
+          <li class="s-wcard --top">
+            <div class="s-wvid hp2-vid-card" data-audio-managed="true">
+              <video data-video-src="media/tonis-etiquette.mp4" width="720" height="1280" playsinline preload="none" aria-label="El chef Toshiya en Toni&#39;s Sushi Bar explica por qué es el pescado, no el arroz, lo que va en la salsa de soya"></video>
+              <img class="s-wcover" src="/media/tonis-etiquette-poster.webp" alt="" width="540" height="960" loading="lazy" decoding="async" />
+              <span class="s-wviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><b>52,6M</b> vistas</span>
+              <button type="button" class="hp2-vid-card-play" aria-label="Reproducir “Los modales del sushi” de Toni&#39;s Sushi Bar, con sonido"></button>
+              <span class="s-wbar" aria-hidden="true"><i></i></span>
+            </div>
+            <div class="s-wmeta">
+              <h3>Toni&#39;s Sushi Bar</h3>
+              <p>Los modales del sushi</p>
+              <a class="s-wcase" href="/es/casos-de-exito/tonis-sushi-bar">Caso de éxito <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </li>
+          <li class="s-wcard">
+            <div class="s-wvid hp2-vid-card" data-audio-managed="true">
+              <video data-video-src="media/bb-cookie-butter-latte.mp4" width="540" height="960" playsinline preload="none" aria-label="Una barista de Brewing Buddha lee un pedido de Cookie Butter Latte para 10 personas y lo prepara de todos modos"></video>
+              <img class="s-wcover" src="/media/bb-cookie-butter-latte-poster.webp" alt="" width="540" height="960" loading="lazy" decoding="async" />
+              <span class="s-wviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><b>7,4M</b> vistas</span>
+              <button type="button" class="hp2-vid-card-play" aria-label="Reproducir “El Cookie Butter Latte tamaño fiesta” de Brewing Buddha, con sonido"></button>
+              <span class="s-wbar" aria-hidden="true"><i></i></span>
+            </div>
+            <div class="s-wmeta">
+              <h3>Brewing Buddha</h3>
+              <p>El Cookie Butter Latte tamaño fiesta</p>
+              <a class="s-wcase" href="/es/casos-de-exito/brewing-buddha">Caso de éxito <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </li>
+          <li class="s-wcard">
+            <div class="s-wvid hp2-vid-card" data-audio-managed="true">
+              <video data-video-src="media/fc-friendship-boil.mp4" width="540" height="960" playsinline preload="none" aria-label="Un seafood boil de The Fatty Crab servido desde la bolsa sobre la mesa"></video>
+              <img class="s-wcover" src="/media/fc-friendship-boil-poster.webp" alt="" width="540" height="960" loading="lazy" decoding="async" />
+              <span class="s-wviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><b>2,6M</b> vistas</span>
+              <button type="button" class="hp2-vid-card-play" aria-label="Reproducir “Etiqueta a quien te debe un seafood boil” de The Fatty Crab, con sonido"></button>
+              <span class="s-wbar" aria-hidden="true"><i></i></span>
+            </div>
+            <div class="s-wmeta">
+              <h3>The Fatty Crab</h3>
+              <p>Etiqueta a quien te debe un seafood boil</p>
+              <a class="s-wcase" href="/es/casos-de-exito/the-fatty-crab">Caso de éxito <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </li>
+          <li class="s-wcard">
+            <div class="s-wvid hp2-vid-card" data-audio-managed="true">
+              <video data-video-src="media/smm-ifc-pizza.mp4" width="540" height="960" playsinline preload="none" aria-label="Un chef de The Italian Food Company estira la masa, la hornea y le pone burrata, tomates y rúcula"></video>
+              <img class="s-wcover" src="/media/smm-ifc-pizza-poster.webp" alt="" width="540" height="960" loading="lazy" decoding="async" />
+              <span class="s-wviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><b>328K</b> vistas</span>
+              <button type="button" class="hp2-vid-card-play" aria-label="Reproducir “De la masa a la pizza terminada” de The Italian Food Company, con sonido"></button>
+              <span class="s-wbar" aria-hidden="true"><i></i></span>
+            </div>
+            <div class="s-wmeta">
+              <h3>The Italian Food Company</h3>
+              <p>De la masa a la pizza terminada</p>
+            </div>
+          </li>
+          <li class="s-wcard">
+            <div class="s-wvid hp2-vid-card" data-audio-managed="true">
+              <video data-video-src="media/tonis-salmon.mp4" width="720" height="1280" playsinline preload="none" aria-label="Toma cenital de un chef de Toni&#39;s Sushi Bar fileteando un salmón entero sobre una tabla naranja"></video>
+              <img class="s-wcover" src="/media/tonis-salmon-poster.webp" alt="" width="540" height="960" loading="lazy" decoding="async" />
+              <span class="s-wviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><b>5,9M</b> vistas</span>
+              <button type="button" class="hp2-vid-card-play" aria-label="Reproducir “Un salmón entero fileteado” de Toni&#39;s Sushi Bar, con sonido"></button>
+              <span class="s-wbar" aria-hidden="true"><i></i></span>
+            </div>
+            <div class="s-wmeta">
+              <h3>Toni&#39;s Sushi Bar</h3>
+              <p>Un salmón entero fileteado</p>
+              <a class="s-wcase" href="/es/casos-de-exito/tonis-sushi-bar">Caso de éxito <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </li>
+          <li class="s-wcard">
+            <div class="s-wvid hp2-vid-card" data-audio-managed="true">
+              <video data-video-src="media/fc-brunch-deal.mp4" width="540" height="960" playsinline preload="none" aria-label="Una pata de cangrejo mojada en la salsa de la casa de The Fatty Crab durante el brunch del fin de semana en Doral"></video>
+              <img class="s-wcover" src="/media/fc-brunch-deal-poster.webp" alt="" width="540" height="960" loading="lazy" decoding="async" />
+              <span class="s-wviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><b>2,6M</b> vistas</span>
+              <button type="button" class="hp2-vid-card-play" aria-label="Reproducir “La mejor oferta de brunch en Doral” de The Fatty Crab, con sonido"></button>
+              <span class="s-wbar" aria-hidden="true"><i></i></span>
+            </div>
+            <div class="s-wmeta">
+              <h3>The Fatty Crab</h3>
+              <p>La mejor oferta de brunch en Doral</p>
+              <a class="s-wcase" href="/es/casos-de-exito/the-fatty-crab">Caso de éxito <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </li>
+          <li class="s-wcard">
+            <div class="s-wvid hp2-vid-card" data-audio-managed="true">
+              <video data-video-src="media/bb-sugar-scoops.mp4" width="540" height="960" playsinline preload="none" aria-label="Grabado detrás del mostrador: un barista le echa cucharada tras cucharada de azúcar a un solo café"></video>
+              <img class="s-wcover" src="/media/bb-sugar-scoops-poster.webp" alt="" width="540" height="960" loading="lazy" decoding="async" />
+              <span class="s-wviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><b>1,1M</b> vistas</span>
+              <button type="button" class="hp2-vid-card-play" aria-label="Reproducir “16 cucharadas de azúcar, marchando” de Brewing Buddha, con sonido"></button>
+              <span class="s-wbar" aria-hidden="true"><i></i></span>
+            </div>
+            <div class="s-wmeta">
+              <h3>Brewing Buddha</h3>
+              <p>16 cucharadas de azúcar, marchando</p>
+              <a class="s-wcase" href="/es/casos-de-exito/brewing-buddha">Caso de éxito <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </li>
+          <li class="s-wcard">
+            <div class="s-wvid hp2-vid-card" data-audio-managed="true">
+              <video data-video-src="media/smm-ifc-waterfront.mp4" width="540" height="960" playsinline preload="none" aria-label="Mesas frente al agua, botes en el canal y un plato de ravioles en The Italian Food Company"></video>
+              <img class="s-wcover" src="/media/smm-ifc-waterfront-poster.webp" alt="" width="540" height="960" loading="lazy" decoding="async" />
+              <span class="s-wviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><b>126K</b> vistas</span>
+              <button type="button" class="hp2-vid-card-play" aria-label="Reproducir “Comida italiana frente al agua” de The Italian Food Company, con sonido"></button>
+              <span class="s-wbar" aria-hidden="true"><i></i></span>
+            </div>
+            <div class="s-wmeta">
+              <h3>The Italian Food Company</h3>
+              <p>Comida italiana frente al agua</p>
+            </div>
+          </li>
+          <li class="s-wcard">
+            <div class="s-wvid hp2-vid-card" data-audio-managed="true">
+              <video data-video-src="media/smm-mestizo-pan-de-jamon.mp4" width="720" height="1280" playsinline preload="none" aria-label="Pan de jamón en rebanadas y hallacas abiertas en hojas de plátano en Mestizo, Key Biscayne"></video>
+              <img class="s-wcover" src="/media/smm-mestizo-pan-de-jamon-poster.webp" alt="" width="540" height="960" loading="lazy" decoding="async" />
+              <span class="s-wviews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><b>108K</b> vistas</span>
+              <button type="button" class="hp2-vid-card-play" aria-label="Reproducir “Pan de jamón y hallacas” de Mestizo, con sonido"></button>
+              <span class="s-wbar" aria-hidden="true"><i></i></span>
+            </div>
+            <div class="s-wmeta">
+              <h3>Mestizo</h3>
+              <p>Pan de jamón y hallacas</p>
+            </div>
+          </li>
+          <li class="s-wcard">
+            <div class="s-wvid hp2-vid-card" data-audio-managed="true">
+              <video data-video-src="media/smm-gyukaku-bbq.mp4" width="720" height="1280" playsinline preload="none" aria-label="Carne marinada que sale de una olla y se asa en la mesa de Gyu-Kaku Miami, con salsas para mojar"></video>
+              <img class="s-wcover" src="/media/smm-gyukaku-bbq-poster.webp" alt="" width="540" height="960" loading="lazy" decoding="async" />
+              <button type="button" class="hp2-vid-card-play" aria-label="Reproducir “Barbacoa japonesa, todo lo que puedas comer” de Gyu-Kaku Miami, con sonido"></button>
+              <span class="s-wbar" aria-hidden="true"><i></i></span>
+            </div>
+            <div class="s-wmeta">
+              <h3>Gyu-Kaku Miami</h3>
+              <p>Barbacoa japonesa, todo lo que puedas comer</p>
+            </div>
+          </li>
+          <li class="s-wcard">
+            <div class="s-wvid hp2-vid-card" data-audio-managed="true">
+              <video data-video-src="media/smm-sandwicherie-boss.mp4" width="540" height="960" playsinline preload="none" aria-label="El jefe recorre La Sandwicherie Wynwood en su día libre"></video>
+              <img class="s-wcover" src="/media/smm-sandwicherie-boss-poster.webp" alt="" width="540" height="960" loading="lazy" decoding="async" />
+              <button type="button" class="hp2-vid-card-play" aria-label="Reproducir “Cuando el jefe llega en su día libre” de La Sandwicherie Wynwood, con sonido"></button>
+              <span class="s-wbar" aria-hidden="true"><i></i></span>
+            </div>
+            <div class="s-wmeta">
+              <h3>La Sandwicherie Wynwood</h3>
+              <p>Cuando el jefe llega en su día libre</p>
+            </div>
+          </li>
+          <li class="s-wcard">
+            <div class="s-wvid hp2-vid-card" data-audio-managed="true">
+              <video data-video-src="media/smm-sushitaxi-sneak-peek.mp4" width="720" height="1280" playsinline preload="none" aria-label="La gente se detiene a mirar por una mirilla en la pared de Coming Soon de un nuevo Sushi Taxi"></video>
+              <img class="s-wcover" src="/media/smm-sushitaxi-sneak-peek-poster.webp" alt="" width="540" height="960" loading="lazy" decoding="async" />
+              <button type="button" class="hp2-vid-card-play" aria-label="Reproducir “Un adelanto del nuevo restaurante” de Sushi Taxi, con sonido"></button>
+              <span class="s-wbar" aria-hidden="true"><i></i></span>
+            </div>
+            <div class="s-wmeta">
+              <h3>Sushi Taxi</h3>
+              <p>Un adelanto del nuevo restaurante</p>
+            </div>
+          </li>
+        </ul>
+        <p class="s-wnote">Vistas según Instagram, noviembre de 2026.</p>
       </div>
     </section>
 
@@ -1184,6 +1396,34 @@
           deck.scrollBy({ left: step * Number(b.getAttribute("data-deck")), behavior: reduce ? "auto" : "smooth" });
         });
       });
+    }
+
+    // Reels wall: a stopped reel goes back to its cover image (shared.js rewinds
+    // stopped videos, which would otherwise show the raw first frame), a thin
+    // progress bar while one plays, and a reel stops once it is scrolled away.
+    var wall = [].slice.call(document.querySelectorAll(".s-wvid"));
+    var rest = function (card) {
+      var v = card.querySelector("video"), bar = card.querySelector(".s-wbar i");
+      if (!v || !v.paused || !v.getAttribute("src") || card.classList.contains("--playing")) return;
+      v.removeAttribute("src"); v.load();
+      if (bar) bar.style.transform = "scaleX(0)";
+    };
+    wall.forEach(function (card) {
+      var v = card.querySelector("video"), bar = card.querySelector(".s-wbar i");
+      if (!v) return;
+      var paint = function () { if (bar) bar.style.transform = "scaleX(" + (v.duration ? Math.min(1, v.currentTime / v.duration) : 0) + ")"; };
+      v.addEventListener("timeupdate", paint);
+      v.addEventListener("pause", function () { setTimeout(function () { rest(card); }, 300); });
+    });
+    if (wall.length && "IntersectionObserver" in window) {
+      var away = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          var c = e.target, was = c._sIn;
+          c._sIn = e.intersectionRatio >= 0.2;
+          if (was && !c._sIn && c.classList.contains("--playing")) c.click();
+        });
+      }, { threshold: [0, 0.2] });
+      wall.forEach(function (c) { away.observe(c); });
     }
 
     var bar = document.querySelector(".s-chips");

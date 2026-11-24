@@ -219,162 +219,170 @@
   }
   </script>
   <style>
-    /* ===== v3 contact: booking first, Juan front and center. Scoped under
-       .v3-contact; the Calendly shell/skeleton/loaded classes are what the
-       inline loader script toggles, so their names stay. ===== */
+    /* ===== v3 contact: the calendar is the page. A short pitch and small trust
+       sit beside it (desktop) or just above it (phones); everything else is
+       below it. Scoped under .v3-contact; the Calendly shell/skeleton/loaded
+       class names are what the loader script at the bottom toggles. ===== */
     .v3-contact.page { padding-top: 0; }
-    html[lang] body { overflow-x: clip; } /* lets the calendar stick on desktop; shared "hidden" stays as the fallback */
-    .v3-contact .cv-top { padding: calc(var(--v3-bar-h) + 56px) 0 0; }
-    .v3-contact .cv-grid { display: grid; grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr); grid-template-areas: "intro sched" "more sched"; column-gap: clamp(32px, 5vw, 72px); align-items: start; }
-    .v3-contact .cv-intro { grid-area: intro; }
-    .v3-contact .cv-more { grid-area: more; }
-    .v3-contact .contact-scheduler { grid-area: sched; position: sticky; top: calc(var(--v3-bar-h) + 20px); }
+    html[lang] body { overflow-x: clip; } /* lets the intro stick on desktop; shared "hidden" stays as the fallback */
+    .v3-contact .cv-top { padding: calc(var(--v3-bar-h) + 44px) 0 0; }
+    .v3-contact .cv-grid { display: grid; grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr); column-gap: clamp(40px, 5.5vw, 88px); align-items: start; }
+    .v3-contact .cv-intro { position: sticky; top: calc(var(--v3-bar-h) + 44px); padding-top: 18px; }
+    .v3-contact .cv-title { font-size: clamp(2.5rem, 4.3vw, 3.75rem); line-height: 1.02; font-weight: 800; letter-spacing: -0.045em; color: var(--text-head); text-wrap: balance; }
+    .v3-contact .cv-lede { margin-top: 18px; max-width: 42ch; font-size: clamp(1.0625rem, 1.3vw, 1.1875rem); line-height: 1.55; color: rgba(246,240,230,0.74); }
 
-    .v3-contact .cv-kicker { font-size: 0.9375rem; font-weight: 600; color: var(--gold); }
-    .v3-contact .cv-title { margin-top: 12px; font-size: clamp(2.8rem, 5.4vw, 4.75rem); line-height: 0.96; font-weight: 800; letter-spacing: -0.05em; color: var(--text-head); }
-    .v3-contact .cv-title .accent-serif { font: inherit; letter-spacing: inherit; color: var(--gold); }
-    .v3-contact .cv-lede { margin-top: 20px; max-width: 46ch; font-size: clamp(1.0625rem, 1.3vw, 1.1875rem); line-height: 1.55; color: rgba(246,240,230,0.76); }
-    .v3-contact .cv-quick { display: none; align-items: flex-start; }
+    /* trust: Juan's face and name, the Google rating, no contracts */
+    .v3-contact .cv-trust { display: flex; align-items: center; gap: 14px; margin-top: 28px; }
+    .v3-contact .cv-face { flex: none; width: 56px; height: 56px; border-radius: 50%; overflow: hidden; background: var(--v3-elev-2); }
+    .v3-contact .cv-face img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.7); transform-origin: 52% 44%; }
+    .v3-contact .cv-trust-who { font-size: 1rem; line-height: 1.35; color: rgba(246,240,230,0.66); }
+    .v3-contact .cv-trust-who strong { font-weight: 700; color: var(--text-head); }
+    .v3-contact .cv-nw { white-space: nowrap; }
+    .v3-contact .cv-proof { list-style: none; display: flex; flex-wrap: wrap; gap: 2px 16px; margin: 4px 0 0; padding: 0; }
+    .v3-contact .cv-proof li { display: inline-flex; align-items: center; gap: 7px; font-size: 0.9375rem; font-weight: 600; line-height: 1.5; color: rgba(246,240,230,0.82); white-space: nowrap; }
+    .v3-contact .cv-stars { font-size: 0.8125rem; letter-spacing: 0.06em; color: var(--gold); }
+    .v3-contact .cv-proof svg { width: 15px; height: 15px; flex: none; color: var(--gold); }
 
-    /* host: who you actually meet */
-    .v3-contact .cv-host { display: grid; grid-template-columns: 124px minmax(0, 1fr); gap: 20px; align-items: start; margin-top: 32px; padding: 18px; border-radius: var(--v3-r-card); background: var(--v3-elev-1); border: 1px solid var(--v3-hair); }
+    /* actions: on phones a gold "Pick a time" jumps to the calendar */
+    .v3-contact .cv-pick { display: none; }
+    .v3-contact .cv-pick svg { width: 18px; height: 18px; }
+    .v3-contact .cv-call { margin-top: 18px; font-size: 1rem; line-height: 1.4; color: rgba(246,240,230,0.62); }
+    .v3-contact .cv-call a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; color: var(--text-head); text-decoration: underline; text-decoration-color: rgba(246,240,230,0.3); text-underline-offset: 4px; }
+    .v3-contact .cv-call a:hover { text-decoration-color: currentColor; }
+
+    /* Calendly: the inline widget sizes itself to each step (data-resize), so it
+       never scrolls inside itself. The skeleton covers it until it has drawn. */
+    .contact-calendly-shell { position: relative; display: flex; flex-direction: column; } /* html scroll-padding (v3.css) keeps it clear of the top bar */
+    .contact-calendly-stage { position: relative; border-radius: var(--v3-r-card); overflow: hidden; border: 1px solid var(--v3-hair); background: #111111; }
+    .contact-calendly-skeleton { position: absolute; inset: 0; z-index: 2; padding: 40px 24px; background: #111111; transition: opacity 0.35s ease; }
+    .contact-calendly-skeleton-inner { display: flex; flex-direction: column; align-items: center; gap: 22px; max-width: 330px; margin: 0 auto; }
+    .contact-calendly-skel-status { font-size: 1.1875rem; font-weight: 700; color: rgba(246,240,230,0.5); }
+    .contact-calendly-skel-status .--failed { display: none; }
+    .contact-calendly-shell.is-failed .contact-calendly-skel-status .--loading { display: none; }
+    .contact-calendly-shell.is-failed .contact-calendly-skel-status .--failed { display: inline; }
+    .contact-calendly-skel-line { height: 12px; border-radius: 999px; background: rgba(255,255,255,0.06); }
+    .contact-calendly-skel-line.--mid { width: 44%; }
+    .contact-calendly-skel-line.--short { width: 72%; align-self: flex-start; margin-top: 8px; }
+    .contact-calendly-skel-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px 6px; width: 100%; margin-top: 10px; }
+    .contact-calendly-skel-days i { aspect-ratio: 1; border-radius: 50%; background: rgba(255,255,255,0.045); }
+    .contact-calendly-loaded { position: relative; opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease, transform 0.35s var(--v3-ease); }
+    .contact-calendly-shell.is-loaded .contact-calendly-skeleton { opacity: 0; pointer-events: none; }
+    .contact-calendly-shell.is-loaded .contact-calendly-loaded { opacity: 1; transform: none; }
+    .calendly-inline-widget { height: 602px; min-height: 520px; }
+    .calendly-inline-widget iframe { display: block; }
+    .contact-book-direct { align-self: center; display: inline-flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 8px; padding: 0 16px; border-radius: 999px; font-size: 0.9375rem; font-weight: 600; color: rgba(246,240,230,0.6); text-decoration: underline; text-decoration-color: rgba(246,240,230,0.25); text-underline-offset: 3px; transition: color 0.18s ease; }
+    .contact-book-direct:hover { color: var(--text-head); }
+    .contact-calendly-shell.is-failed .contact-book-direct { align-self: stretch; min-height: 52px; margin-top: 12px; background: var(--gold); color: var(--v3-ink-on-gold); text-decoration: none; font-weight: 700; }
+
+    /* ===== below the calendar: the detail, kept calm ===== */
+    .v3-contact .cv-sec { padding: clamp(80px, 9vw, 112px) 0 0; }
+    .v3-contact .cv-head { max-width: 760px; }
+    .v3-contact .lib-section-label { margin-bottom: 0; }
+    .v3-contact .cv-head h2, .v3-contact .cv-block > h2 { font-size: clamp(1.625rem, 2.6vw, 2.25rem); line-height: 1.08; font-weight: 800; letter-spacing: -0.04em; color: var(--text-head); text-wrap: balance; }
+    .v3-contact .cv-head h2 { margin-top: 10px; }
+
+    /* about the call: steps on the left, Juan's note on the right */
+    .v3-contact .cv-about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px clamp(40px, 5.5vw, 88px); align-items: start; }
+    .v3-contact .cv-about .cv-wide { grid-column: 1 / -1; }
+    .v3-contact .cv-steps { list-style: none; margin: 18px 0 0; padding: 0; border-top: 1px solid var(--v3-hair); }
+    .v3-contact .cv-steps li { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 10px; padding: 18px 0; border-bottom: 1px solid var(--v3-hair); }
+    .v3-contact .cv-steps .n { padding-top: 3px; font-size: 0.875rem; font-weight: 700; color: var(--gold); font-variant-numeric: tabular-nums; }
+    .v3-contact .cv-steps h3 { font-size: 1.125rem; font-weight: 750; letter-spacing: -0.02em; color: var(--text-head); }
+    .v3-contact .cv-steps p { margin-top: 4px; font-size: 1rem; line-height: 1.55; color: rgba(246,240,230,0.7); }
+    .v3-contact .cv-host { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 20px; align-items: start; padding: 18px; border-radius: var(--v3-r-card); background: var(--v3-elev-1); border: 1px solid var(--v3-hair); }
     .v3-contact .cv-host-photo { aspect-ratio: 4 / 5; border-radius: 16px; overflow: hidden; background: var(--v3-elev-2); }
     .v3-contact .cv-host-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 45% 18%; }
-    .v3-contact .cv-host h2 { font-size: clamp(1.25rem, 1.7vw, 1.5rem); line-height: 1.15; font-weight: 800; letter-spacing: -0.035em; color: var(--text-head); }
-    .v3-contact .cv-host-quote { margin-top: 10px; font-size: 1rem; line-height: 1.55; color: rgba(246,240,230,0.78); }
+    .v3-contact .cv-host h2 { font-size: clamp(1.1875rem, 1.6vw, 1.375rem); line-height: 1.2; font-weight: 800; letter-spacing: -0.03em; color: var(--text-head); }
+    .v3-contact .cv-host-quote { margin-top: 10px; font-size: 1rem; line-height: 1.55; color: rgba(246,240,230,0.76); }
     .v3-contact .cv-host-by { margin-top: 10px; font-size: 0.875rem; line-height: 1.4; color: rgba(246,240,230,0.56); }
     .v3-contact .cv-host-by strong { color: var(--text-head); font-weight: 700; }
     .v3-contact .cv-facts { list-style: none; display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 20px 0 0; padding: 0; }
     .v3-contact .cv-facts li { display: inline-flex; align-items: center; gap: 8px; font-size: 0.9375rem; font-weight: 600; color: rgba(246,240,230,0.7); }
     .v3-contact .cv-facts svg { width: 16px; height: 16px; flex: none; color: var(--gold); }
-
-    /* what happens + other ways */
-    .v3-contact .cv-block { margin-top: 56px; }
-    .v3-contact .cv-block > h2 { font-size: clamp(1.5rem, 2.2vw, 1.875rem); line-height: 1.1; font-weight: 800; letter-spacing: -0.035em; color: var(--text-head); }
-    .v3-contact .cv-steps { list-style: none; margin: 18px 0 0; padding: 0; border-top: 1px solid var(--v3-hair); }
-    .v3-contact .cv-steps li { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 10px; padding: 18px 0; border-bottom: 1px solid var(--v3-hair); }
-    .v3-contact .cv-steps .n { padding-top: 3px; font-size: 0.875rem; font-weight: 700; color: var(--gold); font-variant-numeric: tabular-nums; }
-    .v3-contact .cv-steps h3 { font-size: 1.125rem; font-weight: 750; letter-spacing: -0.02em; color: var(--text-head); }
-    .v3-contact .cv-steps p { margin-top: 4px; font-size: 1rem; line-height: 1.55; color: rgba(246,240,230,0.72); }
-    .v3-contact .cv-rows { list-style: none; margin: 18px 0 0; padding: 0; border-radius: var(--v3-r-card); background: var(--v3-elev-1); border: 1px solid var(--v3-hair); overflow: hidden; }
-    .v3-contact .cv-rows > li + li { border-top: 1px solid var(--v3-hair); }
-    .v3-contact .cv-row { display: grid; grid-template-columns: 36px minmax(0, 1fr) auto; align-items: center; gap: 14px; min-height: 64px; padding: 12px 18px; color: inherit; text-decoration: none; transition: background .18s ease; }
+    .v3-contact .cv-rows { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 18px 0 0; padding: 0; border-radius: var(--v3-r-card); background: var(--v3-elev-1); border: 1px solid var(--v3-hair); overflow: hidden; }
+    .v3-contact .cv-rows > li + li { border-left: 1px solid var(--v3-hair); }
+    .v3-contact .cv-rows > li:nth-child(3) { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--v3-hair); }
+    .v3-contact .cv-row { display: grid; grid-template-columns: 36px minmax(0, 1fr) auto; align-items: center; gap: 14px; min-height: 64px; height: 100%; padding: 14px 18px; color: inherit; text-decoration: none; transition: background .18s ease; }
     .v3-contact a.cv-row:hover { background: rgba(255,255,255,0.04); }
     .v3-contact .cv-row-ic { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: rgba(255,255,255,0.06); color: var(--text-head); }
     .v3-contact .cv-row-ic svg { width: 18px; height: 18px; }
     .v3-contact .cv-row small { display: block; font-size: 0.8125rem; font-weight: 600; line-height: 1.3; color: rgba(246,240,230,0.56); }
     .v3-contact .cv-row b { display: block; margin-top: 1px; font-size: 1.0625rem; font-weight: 650; line-height: 1.3; color: var(--text-head); overflow-wrap: anywhere; }
     .v3-contact .cv-chev { width: 18px; height: 18px; color: rgba(246,240,230,0.45); transition: transform .3s var(--v3-ease); }
-    .v3-contact .cv-row.--static { grid-template-columns: 36px minmax(0, 1fr); align-items: start; padding-top: 16px; padding-bottom: 16px; }
-    .v3-contact .cv-row-area { display: block; margin-top: 4px; font-size: 1rem; line-height: 1.55; color: rgba(246,240,230,0.72); }
-
-    /* Calendly: calm static skeleton, same loader states */
-    .contact-calendly-shell { position: relative; display: flex; flex-direction: column; }
-    .contact-calendly-stage { position: relative; min-height: 700px; border-radius: var(--v3-r-card); overflow: hidden; border: 1px solid var(--v3-hair); background: #111111; }
-    .contact-calendly-skeleton, .contact-calendly-loaded { position: absolute; inset: 0; transition: opacity 0.35s ease, transform 0.35s var(--v3-ease); }
-    .contact-calendly-skeleton { padding: 24px; }
-    .contact-calendly-skeleton-inner { height: 100%; display: flex; flex-direction: column; gap: 14px; }
-    .contact-calendly-skel-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
-    .contact-calendly-skel-status { font-size: 0.9375rem; font-weight: 600; color: rgba(246,240,230,0.56); }
-    .contact-calendly-skel-pill { height: 18px; width: 88px; border-radius: 999px; background: rgba(255,255,255,0.06); }
-    .contact-calendly-skel-line { height: 14px; border-radius: 999px; background: rgba(255,255,255,0.06); }
-    .contact-calendly-skel-line.--short { width: 42%; }
-    .contact-calendly-skel-line.--mid { width: 64%; }
-    .contact-calendly-skel-line.--long { width: 86%; }
-    .contact-calendly-skel-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 8px; flex: 1; }
-    .contact-calendly-skel-card { min-height: 120px; border-radius: 16px; background: rgba(255,255,255,0.035); }
-    .contact-calendly-skel-footer { display: flex; align-items: center; gap: 12px; margin-top: auto; }
-    .contact-calendly-skel-avatar { width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.06); }
-    .contact-calendly-skel-copy { display: flex; flex-direction: column; gap: 8px; flex: 1; }
-    .contact-calendly-loaded { opacity: 0; transform: translateY(8px); }
-    .contact-calendly-shell.is-loaded .contact-calendly-skeleton { opacity: 0; pointer-events: none; }
-    .contact-calendly-shell.is-loaded .contact-calendly-loaded { opacity: 1; transform: none; }
-    .contact-calendly-loaded .calendly-inline-widget { min-height: 700px; }
-    .calendly-inline-widget { border-radius: var(--v3-r-card); overflow: hidden; }
-    .cv-stage-tap { display: none; }
-    .contact-book-direct { align-self: center; display: inline-flex; align-items: center; justify-content: center; min-height: 44px; margin-top: 8px; padding: 0 16px; border-radius: 999px; font-size: 0.9375rem; font-weight: 600; color: rgba(246,240,230,0.66); text-decoration: underline; text-decoration-color: rgba(246,240,230,0.25); text-underline-offset: 3px; transition: color 0.18s ease; }
-    .contact-book-direct:hover { color: var(--text-head); }
+    .v3-contact .cv-row.--static { grid-template-columns: 36px minmax(0, 1fr); align-items: start; }
+    .v3-contact .cv-row-area { display: block; max-width: 84ch; margin-top: 4px; font-size: 0.9375rem; line-height: 1.55; color: rgba(246,240,230,0.7); }
 
     /* proof */
-    .v3-contact .cv-sec { padding: clamp(88px, 10vw, 128px) 0 0; }
-    .v3-contact .cv-head { max-width: 760px; }
-    .v3-contact .lib-section-label { margin-bottom: 0; }
-    .v3-contact .cv-head h2 { margin-top: 10px; font-size: clamp(2.1rem, 4.4vw, 3.5rem); line-height: 1.03; font-weight: 800; letter-spacing: -0.048em; color: var(--text-head); }
-    .v3-contact .cv-quotes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 40px; }
-    .v3-contact .cv-quote { display: flex; flex-direction: column; margin: 0; padding-top: 22px; border-top: 1px solid var(--v3-hair-2); }
-    .v3-contact .cv-quote blockquote { flex: 1; margin: 0; font-size: clamp(1.25rem, 1.7vw, 1.5rem); line-height: 1.3; font-weight: 700; letter-spacing: -0.025em; color: var(--text-head); }
-    .v3-contact .cv-quote figcaption { margin-top: 18px; font-size: 0.9375rem; line-height: 1.4; color: rgba(246,240,230,0.56); }
+    .v3-contact .cv-quotes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 32px; }
+    .v3-contact .cv-quote { display: flex; flex-direction: column; margin: 0; padding-top: 20px; border-top: 1px solid var(--v3-hair-2); }
+    .v3-contact .cv-quote blockquote { flex: 1; margin: 0; font-size: clamp(1.125rem, 1.4vw, 1.25rem); line-height: 1.4; font-weight: 650; letter-spacing: -0.015em; color: var(--text-head); }
+    .v3-contact .cv-quote figcaption { margin-top: 16px; font-size: 0.9375rem; line-height: 1.4; color: rgba(246,240,230,0.56); }
     .v3-contact .cv-quote figcaption strong { display: block; font-size: 1rem; font-weight: 700; color: var(--text-head); }
-    .v3-contact .cv-reviews { margin-top: clamp(64px, 8vw, 96px); }
+    .v3-contact .cv-reviews { margin-top: clamp(56px, 7vw, 80px); }
     .v3-contact .bum-reviews__head { margin-bottom: 24px; }
-    .v3-contact .bum-reviews__head h3 { font-size: clamp(1.375rem, 2.2vw, 1.75rem); font-weight: 800; letter-spacing: -0.035em; }
+    .v3-contact .bum-reviews__head h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 800; letter-spacing: -0.03em; }
     .v3-contact .bum-reviews__grid { gap: 14px; }
     .v3-contact .bum-review { gap: 14px; padding: 24px 24px 20px; border-radius: var(--v3-r-card); border: 1px solid var(--v3-hair); background: var(--v3-elev-1); }
     .v3-contact .bum-review .bum-stars { font-size: 0.875rem; letter-spacing: 0.12em; color: var(--gold); }
-    .v3-contact .bum-review__quote p { font-size: 1.0625rem; line-height: 1.6; color: rgba(246,240,230,0.88); }
+    .v3-contact .bum-review__quote p { font-size: 1rem; line-height: 1.6; color: rgba(246,240,230,0.84); }
     .v3-contact .bum-review__by { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 12px; align-items: center; padding-top: 16px; border-top: 1px solid var(--v3-hair); font-size: 0.9375rem; color: rgba(246,240,230,0.56); }
     .v3-contact .bum-review__by > * { grid-column: 1; }
     .v3-contact .bum-review__by strong { font-size: 1rem; }
     .v3-contact .bum-review__src { grid-column: 2; grid-row: 1 / span 3; align-self: center; margin: 0; padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,0.06); font-size: 0.8125rem; font-weight: 600; color: rgba(246,240,230,0.72); }
 
     /* FAQ: the homepage's native details list (.hp2-faq-*), scoped to contact */
-    .v3-contact .cv-faq .hp2-faq-list { max-width: 840px; margin-top: 36px; border-top: 1px solid var(--v3-hair); }
+    .v3-contact .cv-faq .hp2-faq-list { max-width: 840px; margin-top: 32px; border-top: 1px solid var(--v3-hair); }
     .v3-contact .hp2-faq-item { border-bottom: 1px solid var(--v3-hair); }
-    .v3-contact .hp2-faq-item summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 68px; padding: 18px 2px; cursor: pointer; font-size: clamp(1.0625rem, 1.4vw, 1.1875rem); font-weight: 700; line-height: 1.35; letter-spacing: -0.015em; color: var(--text-head); }
+    .v3-contact .hp2-faq-item summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 64px; padding: 16px 2px; cursor: pointer; font-size: clamp(1.0625rem, 1.3vw, 1.125rem); font-weight: 650; line-height: 1.35; letter-spacing: -0.015em; color: var(--text-head); }
     .v3-contact .hp2-faq-item summary::-webkit-details-marker { display: none; }
-    .v3-contact .hp2-faq-item summary::after { content: ""; flex: none; width: 14px; height: 14px; border-right: 2px solid rgba(246,240,230,0.5); border-bottom: 2px solid rgba(246,240,230,0.5); transform: translateY(-3px) rotate(45deg); transition: transform .3s var(--v3-ease); }
+    .v3-contact .hp2-faq-item summary::after { content: ""; flex: none; width: 12px; height: 12px; border-right: 2px solid rgba(246,240,230,0.5); border-bottom: 2px solid rgba(246,240,230,0.5); transform: translateY(-3px) rotate(45deg); transition: transform .3s var(--v3-ease); }
     .v3-contact .hp2-faq-item[open] summary::after { transform: translateY(3px) rotate(-135deg); }
-    .v3-contact .hp2-faq-answer { padding: 0 2px 24px; max-width: 70ch; font-size: 1.0625rem; line-height: 1.65; color: rgba(246,240,230,0.74); }
+    .v3-contact .hp2-faq-answer { padding: 0 2px 22px; max-width: 70ch; font-size: 1.0625rem; line-height: 1.65; color: rgba(246,240,230,0.72); }
     .v3-contact .hp2-faq-answer a { color: var(--text-head); text-decoration: underline; text-decoration-color: rgba(246,240,230,0.35); text-underline-offset: 3px; }
     .v3-contact .hp2-faq-answer a:hover { text-decoration-color: currentColor; }
 
     /* close: see the work, or go back to the calendar */
-    .v3-contact .cv-end { padding: clamp(88px, 10vw, 128px) 0 clamp(56px, 8vw, 96px); }
-    .v3-contact .cv-end-card { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px 32px; padding: clamp(28px, 4.5vw, 52px); border-radius: var(--v3-r-panel); background: var(--v3-elev-1); border: 1px solid var(--v3-hair); }
-    .v3-contact .cv-end-card h2 { font-size: clamp(1.75rem, 3.2vw, 2.6rem); line-height: 1.05; font-weight: 800; letter-spacing: -0.045em; color: var(--text-head); }
+    .v3-contact .cv-end { padding: clamp(80px, 9vw, 112px) 0 clamp(56px, 8vw, 96px); }
+    .v3-contact .cv-end-card { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px 32px; padding: clamp(28px, 4.5vw, 48px); border-radius: var(--v3-r-panel); background: var(--v3-elev-1); border: 1px solid var(--v3-hair); }
+    .v3-contact .cv-end-card h2 { font-size: clamp(1.625rem, 2.8vw, 2.25rem); line-height: 1.08; font-weight: 800; letter-spacing: -0.04em; color: var(--text-head); }
     .v3-contact .cv-end-card p { margin-top: 10px; max-width: 46ch; font-size: 1.0625rem; line-height: 1.55; color: rgba(246,240,230,0.72); }
     .v3-contact .cv-end-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-    .v3-contact .cv-end-actions .btn, .v3-contact .cv-quick .btn { height: 54px; padding: 0 26px; font-size: 1rem; }
+    .v3-contact .cv-end-actions .btn { height: 54px; padding: 0 26px; font-size: 1rem; }
 
     @media (hover: hover) {
       .v3-contact a.cv-row:hover .cv-chev { transform: translateX(3px); }
     }
 
-    /* tablet + phone: intro, then the calendar, then the details */
+    /* tablet + phone: pitch, the gold button, then the calendar, then the rest */
     @media (max-width: 900px) {
-      .v3-contact .cv-top { padding-top: calc(var(--v3-bar-h) + 40px); }
-      .v3-contact .cv-grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "intro" "sched" "more"; row-gap: 28px; }
-      .v3-contact .contact-scheduler { position: static; scroll-margin-top: calc(var(--v3-bar-h) + 12px); }
-      .v3-contact .cv-quick { display: flex; flex-direction: column; margin-top: 22px; }
-      .v3-contact .cv-quick .btn { min-width: min(100%, 360px); }
-      .v3-contact .cv-block:first-child { margin-top: 20px; }
-      /* The inline calendar stays a preview on touch screens (scrolling past it
-         must never get trapped in the iframe); a tap anywhere on it opens the
-         same booking page as the gold button. */
-      .contact-calendly-loaded .calendly-inline-widget iframe { pointer-events: none; }
-      .contact-calendly-loaded { pointer-events: none; }
-      .contact-book-direct { pointer-events: auto; }
-      .contact-calendly-stage { min-height: 660px; touch-action: pan-y pinch-zoom; overscroll-behavior: auto; }
-      .calendly-inline-widget { height: 660px !important; }
-      .cv-stage-tap { display: block; position: absolute; inset: 0; z-index: 3; -webkit-tap-highlight-color: transparent; }
-      .contact-book-direct { align-self: stretch; min-height: 48px; margin-top: 10px; border: 1px solid var(--v3-hair-2); background: rgba(255,255,255,0.04); text-decoration: none; color: var(--text-head); }
-      .v3-contact .cv-quotes { grid-template-columns: 1fr; gap: 0; margin-top: 28px; }
-      .v3-contact .cv-quote { padding: 22px 0; }
+      .v3-contact .cv-top { padding-top: calc(var(--v3-bar-h) + 32px); }
+      .v3-contact .cv-grid { grid-template-columns: minmax(0, 1fr); row-gap: 28px; }
+      .v3-contact .cv-intro { position: static; padding-top: 0; max-width: 620px; }
+      .v3-contact .cv-pick { display: flex; gap: 10px; width: 100%; max-width: 420px; height: 54px; margin-top: 22px; font-size: 1.0625rem; }
+      .v3-contact .cv-call { max-width: 420px; margin-top: 4px; text-align: center; }
+      .v3-contact .cv-about { grid-template-columns: minmax(0, 1fr); gap: 56px; }
+      .v3-contact .cv-rows { grid-template-columns: minmax(0, 1fr); }
+      .v3-contact .cv-rows > li + li { border-left: 0; border-top: 1px solid var(--v3-hair); }
+      .v3-contact .cv-quotes { grid-template-columns: 1fr; gap: 0; margin-top: 24px; }
+      .v3-contact .cv-quote { padding: 20px 0; }
       .v3-contact .cv-quote:last-child { border-bottom: 1px solid var(--v3-hair-2); }
     }
     @media (max-width: 700px) {
-      .v3-contact .cv-top { padding-top: calc(var(--v3-bar-h) + 24px); }
-      .v3-contact .cv-kicker { font-size: 0.875rem; }
-      .v3-contact .cv-title { margin-top: 8px; font-size: clamp(2.4rem, 11vw, 3rem); line-height: 0.98; }
+      .v3-contact .cv-top { padding-top: calc(var(--v3-bar-h) + 22px); }
+      .v3-contact .cv-title { font-size: clamp(2rem, 8.6vw, 2.5rem); line-height: 1.04; }
       .v3-contact .cv-lede { margin-top: 12px; }
-      .v3-contact .cv-quick { margin-top: 18px; }
-      .v3-contact .cv-quick .btn { height: 54px; width: 100%; }
-      .v3-contact .cv-host { grid-template-columns: 72px minmax(0, 1fr); gap: 14px; margin-top: 18px; padding: 14px; }
+      .v3-contact .cv-trust { gap: 12px; margin-top: 18px; }
+      .v3-contact .cv-face { width: 52px; height: 52px; }
+      .v3-contact .cv-pick { max-width: none; margin-top: 18px; }
+      .v3-contact .cv-call { max-width: none; margin-top: 2px; }
+      .v3-contact .cv-grid { row-gap: 18px; }
+      .contact-calendly-skeleton { padding: 34px 18px; }
+      .v3-contact .cv-sec { padding-top: 72px; }
+      .v3-contact .cv-host { grid-template-columns: 72px minmax(0, 1fr); gap: 14px; padding: 14px; }
       .v3-contact .cv-host-photo { aspect-ratio: 1 / 1; border-radius: 14px; }
       .v3-contact .cv-host h2 { font-size: 1.1875rem; }
       .v3-contact .cv-host-quote { margin-top: 6px; }
       .v3-contact .cv-facts { gap: 8px 18px; margin-top: 16px; }
-      .v3-contact .cv-block { margin-top: 44px; }
       .v3-contact .cv-row { padding: 12px 14px; gap: 12px; }
       .v3-contact .bum-reviews__grid { margin: 0 -16px; padding: 2px 16px 10px; scroll-padding-inline: 16px; }
       .v3-contact .bum-review { flex-basis: 86%; padding: 22px 20px 18px; }
@@ -383,8 +391,9 @@
       .v3-contact .cv-end-actions { width: 100%; }
       .v3-contact .cv-end-actions .btn { flex: 1 1 100%; }
       /* body copy reads at 16px+ on phones (beats the shared 15.5px floor) */
-      html[lang] body:not(#_) #v3-contact :is(.cv-lede, .cv-host-quote, .cv-steps p, .bum-review__quote p, .cv-end-card p) { font-size: 16px; line-height: 1.6; }
-      html[lang] body:not(#_) #v3-contact .cv-quote blockquote { font-size: 1.25rem; line-height: 1.32; }
+      html[lang] body:not(#_) #v3-contact :is(.cv-lede, .cv-trust-who, .cv-call, .cv-host-quote, .cv-steps p, .cv-row-area, .bum-review__quote p, .cv-end-card p) { font-size: 16px; line-height: 1.6; }
+      html[lang] body:not(#_) #v3-contact :is(.cv-trust-who, .cv-call) { line-height: 1.4; }
+      html[lang] body:not(#_) #v3-contact .cv-quote blockquote { font-size: 1.125rem; line-height: 1.4; }
     }
     @media (prefers-reduced-motion: reduce) {
       .contact-calendly-skeleton, .contact-calendly-loaded, .v3-contact .cv-chev, .v3-contact .hp2-faq-item summary::after { transition: none; }
@@ -444,34 +453,80 @@
 
   <div class="page contact-page v3-contact" id="v3-contact">
 
-    <!-- HERO + RESERVA -->
+    <!-- RESERVA: texto corto + confianza junto al calendario (móvil: texto, un botón
+         dorado que baja al calendario y luego el calendario) -->
     <section class="cv-top" data-shared-animations="off">
       <div class="cv-grid">
         <div class="cv-intro">
-          <p class="cv-kicker">Llamada de estrategia gratis de 30 minutos</p>
-          <h1 class="cv-title">Hablemos de tu <span class="accent-serif">lugar</span>.</h1>
-          <p class="cv-lede">Elige un horario en el calendario para una llamada gratis de 30 minutos. Vemos cómo está el marketing de tu restaurante y conversamos sobre un plan, sin ninguna obligación de contratarnos.</p>
+          <h1 class="cv-title">Agende su llamada de estrategia gratis</h1>
+          <p class="cv-lede">Es una llamada de 30 minutos por Google Meet o por teléfono. Revisamos tu marketing y te llevas un plan de qué hacer primero.</p>
 
-          <!-- móvil: el botón de reserva queda en la primera pantalla -->
-          <div class="cv-quick">
-            <a class="btn btn-primary" href="https://calendly.com/juanh-buttonupmedia/free-food-beverage-marketing-consultation-clone" target="_blank" rel="noreferrer">Elija un horario con Juan</a>
+          <div class="cv-trust">
+            <span class="cv-face"><img src="media/author-juan.webp" alt="Juan Hernandez, cofundador de Button Up Media" width="512" height="512" decoding="async" /></span>
+            <div>
+              <p class="cv-trust-who">Tu llamada es con <span class="cv-nw"><strong>Juan Hernandez</strong>, cofundador</span></p>
+              <ul class="cv-proof">
+                <li><span class="cv-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>5,0 en Google, 11 reseñas</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Sin contratos a largo plazo</li>
+              </ul>
+            </div>
           </div>
 
-          <!-- ANFITRIÓN: con quién hablas en la llamada -->
+          <!-- móvil: baja al calendario (sin JS abre Calendly) -->
+          <a class="btn btn-primary cv-pick" href="https://calendly.com/juanh-buttonupmedia/free-food-beverage-marketing-consultation-clone" target="_blank" rel="noreferrer" data-cal-jump>Elija un horario con Juan<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></a>
+          <p class="cv-call">&iquest;Prefiere llamar? <a href="tel:+17867409499">(786) 740-9499</a></p>
+        </div>
+
+        <div class="contact-scheduler" aria-label="Elija un horario para su llamada gratis">
+          <div class="contact-calendly-shell" id="contact-calendly-shell">
+            <div class="contact-calendly-stage">
+              <div class="contact-calendly-skeleton" aria-hidden="true">
+                <div class="contact-calendly-skeleton-inner">
+                  <div class="contact-calendly-skel-status"><span class="--loading">Cargando calendario</span><span class="--failed">El calendario no cargó aquí</span></div>
+                  <div class="contact-calendly-skel-line --mid"></div>
+                  <div class="contact-calendly-skel-days"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                  <div class="contact-calendly-skel-line --short"></div>
+                </div>
+              </div>
+              <div class="contact-calendly-loaded">
+                <div class="calendly-inline-widget"
+                     data-url="https://calendly.com/juanh-buttonupmedia/free-food-beverage-marketing-consultation-clone?hide_event_type_details=1&hide_gdpr_banner=1&background_color=111111&text_color=f6f0e6&primary_color=e2a84d"
+                     data-resize="true"
+                     style="min-width:320px;"></div>
+              </div>
+            </div>
+            <a class="contact-book-direct" href="https://calendly.com/juanh-buttonupmedia/free-food-beverage-marketing-consultation-clone" target="_blank" rel="noreferrer">Abrir el calendario de reservas en una pestaña nueva</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE LA LLAMADA -->
+    <section class="cv-sec">
+      <div class="cv-about">
+        <div class="cv-block">
+          <h2>Lo que pasa en la llamada</h2>
+          <ol class="cv-steps">
+              <li><span class="n">01</span><div><h3>Nos cuentas de tu restaurante</h3><p>Cuéntanos qué está funcionando, qué noches están flojas y de qué quieres más, ya sean reservas, pedidos en línea o eventos privados.</p></div></li>
+              <li><span class="n">02</span><div><h3>Revisamos dónde estás</h3><p>Repasamos cómo está tu marketing hoy y qué haríamos primero para traer más clientes.</p></div></li>
+              <li><span class="n">03</span><div><h3>Tú decides qué sigue</h3><p>El plan es tuyo, trabajes con nosotros o no.</p></div></li>
+            </ol>
+        </div>
+
+        <div class="cv-block">
           <div class="cv-host">
             <div class="cv-host-photo">
               <picture>
                 <source media="(max-width: 700px)" srcset="media/author-juan.webp" width="512" height="512" />
-                <img src="media/team-juan.webp?v=3" alt="Juan, cofundador de Button Up Media" width="760" height="950" decoding="async" />
+                <img src="media/team-juan.webp?v=3" alt="Juan, cofundador de Button Up Media" width="760" height="950" loading="lazy" decoding="async" />
               </picture>
             </div>
             <div>
-              <h2>Tu llamada es con Juan, nuestro cofundador</h2>
+              <h2>Una nota de Juan</h2>
               <p class="cv-host-quote">&ldquo;Hola, soy Juan. Cuando reserves, hablarás directamente conmigo. Cuéntame de tu lugar y llego con ideas listas. Nos vemos pronto.&rdquo;</p>
               <p class="cv-host-by"><strong>Juan</strong> &middot; Cofundador, Button Up Media</p>
             </div>
           </div>
-
           <ul class="cv-facts" aria-label="Datos rápidos sobre Button Up Media">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Con sede en Miami</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg>Ayudando a restaurantes desde 2022</li>
@@ -479,61 +534,13 @@
           </ul>
         </div>
 
-        <div class="contact-scheduler">
-          <div class="contact-calendly-shell" id="contact-calendly-shell">
-            <div class="contact-calendly-stage">
-              <a class="cv-stage-tap" href="https://calendly.com/juanh-buttonupmedia/free-food-beverage-marketing-consultation-clone" target="_blank" rel="noreferrer" tabindex="-1" aria-hidden="true" title="Abrir el calendario de reservas"></a>
-              <div class="contact-calendly-skeleton" aria-hidden="true">
-                <div class="contact-calendly-skeleton-inner">
-                  <div class="contact-calendly-skel-top">
-                    <div class="contact-calendly-skel-status">Cargando calendario</div>
-                    <div class="contact-calendly-skel-pill" style="width: 64px;"></div>
-                  </div>
-                  <div class="contact-calendly-skel-line --long"></div>
-                  <div class="contact-calendly-skel-line --mid"></div>
-                  <div class="contact-calendly-skel-grid">
-                    <div class="contact-calendly-skel-card"></div>
-                    <div class="contact-calendly-skel-card"></div>
-                    <div class="contact-calendly-skel-card"></div>
-                    <div class="contact-calendly-skel-card"></div>
-                  </div>
-                  <div class="contact-calendly-skel-footer">
-                    <div class="contact-calendly-skel-avatar"></div>
-                    <div class="contact-calendly-skel-copy">
-                      <div class="contact-calendly-skel-line --short"></div>
-                      <div class="contact-calendly-skel-line --mid"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="contact-calendly-loaded">
-                <div class="calendly-inline-widget"
-                     data-url="https://calendly.com/juanh-buttonupmedia/free-food-beverage-marketing-consultation-clone?hide_gdpr_banner=1&background_color=111111&text_color=f6f0e6&primary_color=e2a84d"
-                     style="min-width:320px;height:700px;"></div>
-              </div>
-            </div>
-            <a class="contact-book-direct" href="https://calendly.com/juanh-buttonupmedia/free-food-beverage-marketing-consultation-clone" target="_blank" rel="noreferrer">Abrir el calendario de reservas en una pestaña nueva</a>
-          </div>
-        </div>
-
-        <div class="cv-more">
-          <div class="cv-block">
-            <h2>Lo que pasa en la llamada</h2>
-            <ol class="cv-steps">
-              <li><span class="n">01</span><div><h3>Nos cuentas de tu restaurante</h3><p>Cuéntanos qué está funcionando, qué noches están flojas y de qué quieres más, ya sean reservas, pedidos en línea o eventos privados.</p></div></li>
-              <li><span class="n">02</span><div><h3>Revisamos dónde estás</h3><p>Repasamos cómo está tu marketing hoy y qué haríamos primero para traer más clientes.</p></div></li>
-              <li><span class="n">03</span><div><h3>Tú decides qué sigue</h3><p>El plan es tuyo, trabajes con nosotros o no.</p></div></li>
-            </ol>
-          </div>
-
-          <div class="cv-block">
-            <h2>Otras formas de contactarnos</h2>
-            <ul class="cv-rows">
+        <div class="cv-block cv-wide">
+          <h2>Otras formas de contactarnos</h2>
+          <ul class="cv-rows">
               <li><a class="cv-row" href="mailto:contact@buttonupmedia.com"><span class="cv-row-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span><span><small>Escríbenos</small><b>contact@buttonupmedia.com</b></span><svg class="cv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 6 6 6-6 6"/></svg></a></li>
               <li><a class="cv-row" href="tel:+17867409499"><span class="cv-row-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><span><small>Llámanos</small><b>(786) 740-9499</b></span><svg class="cv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 6 6 6-6 6"/></svg></a></li>
               <li><div class="cv-row --static"><span class="cv-row-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span><span><small>Dónde trabajamos</small><span class="cv-row-area">Tenemos sede en Miami, FL, y trabajamos con restaurantes en cualquier parte de Estados Unidos, con la misma calidad de trabajo estés donde estés. En los alrededores de Miami, eso incluye South Beach, Miami Beach, Brickell, Downtown Miami, Wynwood, Coral Gables, Doral, Kendall, Pinecrest y Fort Lauderdale.</span></span></div></li>
             </ul>
-          </div>
         </div>
       </div>
     </section>
@@ -694,56 +701,74 @@
       const shell = document.querySelector("#contact-calendly-shell");
       const widget = shell?.querySelector(".calendly-inline-widget");
       if (!shell || !widget) return;
+      const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const isCalendly = (origin) => {
+        try { return /(^|\.)calendly\.com$/.test(new URL(origin).hostname); } catch (err) { return false; }
+      };
 
-      const loadCalendly = () => {
-        if (document.querySelector('script[data-calendly-loader]')) return;
+      const markLoaded = () => shell.classList.add("is-loaded");
+      const markFailed = () => { if (!shell.classList.contains("is-loaded")) shell.classList.add("is-failed"); };
+
+      // The calendar is the reason this page exists, so it loads as soon as the
+      // page itself has finished loading (or on the first scroll, tap or key
+      // press, if that comes first). Calendly's script builds the iframe inside
+      // .calendly-inline-widget; data-resize makes it match each step's height.
+      let started = false;
+      const engageEvents = ["pointerdown", "touchstart", "wheel", "keydown", "scroll"];
+      const listenerOpts = { passive: true };
+      const startCalendly = () => {
+        if (started) return;
+        started = true;
+        engageEvents.forEach((evt) => window.removeEventListener(evt, startCalendly, listenerOpts));
+        if (document.querySelector("script[data-calendly-loader]")) return;
         const script = document.createElement("script");
         script.src = "https://assets.calendly.com/assets/external/widget.js";
         script.async = true;
         script.dataset.calendlyLoader = "1";
+        script.onerror = markFailed;
         document.head.appendChild(script);
-      };
-
-      let fallbackLoaded;
-      const markLoaded = () => {
-        shell.classList.add("is-loaded");
-        if (fallbackLoaded) clearInterval(fallbackLoaded);
-      };
-
-      const observer = new MutationObserver(() => {
-        if (widget.querySelector("iframe")) {
-          markLoaded();
-          observer.disconnect();
-        }
-      });
-
-      observer.observe(widget, { childList: true, subtree: true });
-
-      fallbackLoaded = setInterval(() => {
-        if (widget.querySelector("iframe")) {
-          markLoaded();
-        }
-      }, 250);
-
-      // The Calendly embed is by far the heaviest thing on this page (roughly
-      // 2.5MB and several seconds of third-party JS). On mobile it sits high in
-      // the layout, so a plain "scrolled into view" check still fires during an
-      // automated audit that never scrolls. Instead we load it on the visitor's
-      // first real engagement (scroll, touch, pointer, wheel, or key press).
-      // Automated audits do none of those, so they skip the weight entirely;
-      // real visitors trigger it the moment they interact, with the skeleton and
-      // the direct booking link covering the brief gap. loadCalendly itself
-      // guards against double-injection.
-      let calendlyStarted = false;
-      const engageEvents = ["pointerdown", "touchstart", "wheel", "keydown", "scroll", "mousemove"];
-      const listenerOpts = { passive: true };
-      const startCalendly = () => {
-        if (calendlyStarted) return;
-        calendlyStarted = true;
-        engageEvents.forEach((evt) => window.removeEventListener(evt, startCalendly, listenerOpts));
-        loadCalendly();
+        // Never leave the skeleton up for good: show the widget if it exists,
+        // otherwise point people to the direct link under the calendar.
+        setTimeout(() => (widget.querySelector("iframe") ? markLoaded() : markFailed()), 15000);
       };
       engageEvents.forEach((evt) => window.addEventListener(evt, startCalendly, listenerOpts));
+      const soon = () => ("requestIdleCallback" in window ? requestIdleCallback(startCalendly, { timeout: 1200 }) : setTimeout(startCalendly, 200));
+      if (document.readyState === "complete") soon();
+      else window.addEventListener("load", soon, { once: true });
+
+      // Bring the top of the calendar into view (below the fixed top bar).
+      const showCalendar = () => shell.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+
+      // Calendly tells the page when it has drawn and how tall each step is.
+      // The skeleton stays up until the first real height arrives. When a later
+      // step (the times, then the form) changes the height and the visitor is
+      // partway down the calendar, its top is brought back into view so the new
+      // step starts where they can see it.
+      let lastHeight = 0;
+      window.addEventListener("message", (e) => {
+        if (!isCalendly(e.origin) || !e.data || typeof e.data.event !== "string") return;
+        if (e.data.event !== "calendly.page_height") return;
+        const h = parseInt(e.data.payload && e.data.payload.height, 10) || 0;
+        if (h < 300) return;
+        markLoaded();
+        const changed = lastHeight && Math.abs(h - lastHeight) > 40;
+        lastHeight = h;
+        if (!changed) return;
+        const r = shell.getBoundingClientRect();
+        const bar = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--v3-bar-h")) || 64;
+        if (r.top < bar - 4 && r.bottom > window.innerHeight * 0.4) showCalendar();
+      });
+
+      // "Pick a time" buttons scroll to the calendar on this page. Their href
+      // still points at Calendly, so shared.js reports the click as before and
+      // the link still works without JavaScript.
+      document.addEventListener("click", (e) => {
+        const a = e.target && e.target.closest ? e.target.closest("a[data-cal-jump], a[href='#contact-calendly-shell']") : null;
+        if (!a || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        startCalendly();
+        showCalendar();
+      });
     })();
   </script>
 <script>

@@ -1111,6 +1111,12 @@
       [].forEach.call(document.querySelectorAll("[data-focus-search]"), function (el) {
         el.addEventListener("click", function (e) { e.preventDefault(); focusSearch(); });
       });
+      // Arriving from the homepage box (?restaurant=Name): fill in the name and
+      // show the matching restaurants so the visitor only has to tap theirs.
+      try {
+        var pre = new URLSearchParams(location.search).get("restaurant");
+        if (pre && pre.trim()) { input.value = pre.trim().slice(0, 80); fetchSuggest(); }
+      } catch (e) {}
     })();
     /* ===== Calendly: lazy-loaded off the critical path. The inline calendar in
        #book mounts when that section nears the viewport. Booking links open the

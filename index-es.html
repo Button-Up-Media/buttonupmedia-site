@@ -505,18 +505,150 @@
     .v3-home .h-step b { display: block; font-size: 0.875rem; font-weight: 700; color: var(--gold); }
     .v3-home .h-step h3 { margin-top: 18px; font-size: 1.3125rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text-head); }
     .v3-home .h-step p { margin-top: 8px; font-size: 0.9375rem; line-height: 1.55; color: rgba(246,240,230,0.72); }
-    .v3-home .h-areas { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 28px; align-items: center; margin-top: 14px; padding: 30px; border-radius: 30px; border: 1px solid var(--v3-hair); }
-    .v3-home .h-areas h3 { font-size: 1.375rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text-head); }
-    .v3-home .h-areas p { margin-top: 8px; font-size: 1rem; line-height: 1.55; color: rgba(246,240,230,0.72); }
-    .v3-home .h-areas nav { display: flex; flex-wrap: wrap; gap: 8px; }
-    .v3-home .h-areas nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; background: rgba(255,255,255,0.06); color: var(--text-head); font-size: 0.9375rem; font-weight: 600; transition: background .2s ease; }
-    .v3-home .h-areas nav a:hover { background: rgba(255,255,255,0.12); }
-    .v3-home .h-areas nav a.--all { background: transparent; border: 1px solid var(--v3-hair-2); }
-    .v3-home .h-card.--shot { padding: 0; background: var(--v3-elev-1); border: 1px solid var(--v3-hair); color: var(--text-head); }
-    .v3-home .h-card.--shot .h-card-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
-    .v3-home .h-card.--shot .h-card-top { position: relative; z-index: 1; margin: 14px; padding: 10px 14px; border-radius: 16px; background: rgba(11,11,12,0.8); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
-    .v3-home .h-card.--shot .h-card-go { z-index: 2; top: 20px; right: 20px; background: rgba(11,11,12,0.7); color: #f6f0e6; }
-    .v3-home .h-areas-lab { flex-basis: 100%; margin-top: 6px; font-size: 0.8125rem; font-weight: 650; color: rgba(246,240,230,0.56); }
+
+    /* Google reviews ticker (trust strip) */
+    .v3-home .h-rv { margin-top: 26px; }
+    .v3-home .h-rv-head { display: flex; justify-content: center; }
+    .v3-home .h-rv-viewport { margin: 16px -16px 0; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%); }
+    .v3-home .h-rv-track { display: flex; width: max-content; padding: 2px 0; animation: h-rv-scroll 62s linear infinite; animation-play-state: paused; }
+    .v3-home .h-rv.is-on .h-rv-track { animation-play-state: running; }
+    .v3-home .h-rv.is-on .h-rv-viewport:hover .h-rv-track, .v3-home .h-rv.is-held .h-rv-track { animation-play-state: paused; }
+    @keyframes h-rv-scroll { to { transform: translate3d(-50%, 0, 0); } }
+    .v3-home .h-rv-card { flex: none; display: flex; flex-direction: column; width: 300px; margin: 0 12px 0 0; padding: 18px 20px; border-radius: 22px; background: var(--v3-elev-1); border: 1px solid var(--v3-hair); text-align: left; }
+    .v3-home .h-rv-card blockquote { margin: 10px 0 0; font-size: 0.96875rem; line-height: 1.5; color: rgba(246,240,230,0.88); }
+    .v3-home .h-rv-card figcaption { display: flex; align-items: center; gap: 10px; margin-top: auto; padding-top: 14px; font-size: 0.8125rem; line-height: 1.35; color: rgba(246,240,230,0.58); }
+    .v3-home .h-rv-card figcaption svg { width: 18px; height: 18px; flex: none; }
+    .v3-home .h-rv-card figcaption strong { display: block; font-size: 0.9375rem; font-weight: 700; color: var(--text-head); }
+    @media (min-width: 701px) {
+      .v3-home .h-rv-viewport { margin-inline: 0; }
+      .v3-home .h-rv-card { width: 340px; }
+      .v3-home .h-rv-track { animation-duration: 70s; }
+    }
+
+    /* Websites tab: WOA on a laptop and a phone, a short click-through */
+    .v3-home .wd { position: relative; max-width: 900px; margin: 26px auto 0; }
+    .v3-home .wd-link { position: relative; display: block; padding-top: 4px; color: inherit; text-decoration: none; }
+    .v3-home .wd-laptop { width: 82%; }
+    .v3-home .wd-lid { padding: 1.7% 1.7% 0; border-radius: 16px 16px 0 0; background: #1c1c1f; border: 1px solid rgba(255,255,255,0.1); border-bottom: 0; }
+    .v3-home .wd-screen { overflow: hidden; border-radius: 6px 6px 0 0; background: #0b0b0c; }
+    .v3-home .wd-bar { display: flex; align-items: center; gap: 0.45em; height: 2.4em; padding: 0 0.9em; background: #242427; font-size: clamp(7px, 1.2vw, 11px); }
+    .v3-home .wd-bar > i { width: 0.8em; height: 0.8em; border-radius: 50%; background: rgba(255,255,255,0.2); }
+    .v3-home .wd-url { position: relative; flex: 1; max-width: 30em; height: 1.7em; margin: 0 auto; border-radius: 999px; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.72); line-height: 1.7em; text-align: center; white-space: nowrap; overflow: hidden; }
+    .v3-home .wd-url span { position: absolute; inset: 0; }
+    .v3-home .wd-url .--es { opacity: 0; }
+    .v3-home .wd-view { position: relative; overflow: hidden; background: #0b0b0c; }
+    .v3-home .wd-laptop .wd-view { aspect-ratio: 16 / 10; }
+    .v3-home .wd-page { position: absolute; left: 0; top: 0; width: 100%; height: auto; max-width: none; }
+    .v3-home .wd-page.--es { opacity: 0; }
+    .v3-home .wd-base { position: relative; width: 108%; height: clamp(8px, 1.5vw, 15px); margin-left: -4%; border-radius: 0 0 14px 14px / 0 0 9px 9px; background: linear-gradient(180deg, #2e2e32, #161618); box-shadow: 0 22px 40px rgba(0,0,0,0.45); }
+    .v3-home .wd-base::before { content: ""; position: absolute; left: 42%; top: 0; width: 16%; height: 42%; border-radius: 0 0 8px 8px; background: #111113; }
+    .v3-home .wd-phone { position: absolute; right: 0; bottom: 0; width: 23%; padding: 2.1%; border-radius: 16% / 7.5%; background: #121214; border: 1px solid rgba(255,255,255,0.16); box-shadow: 0 26px 50px rgba(0,0,0,0.6); }
+    .v3-home .wd-phone .wd-view { aspect-ratio: 390 / 844; border-radius: 12% / 5.6%; }
+    .v3-home .wd-ptr { position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: 0; }
+    .v3-home .wd-ptr > i { position: absolute; left: 0; top: 0; display: block; }
+    .v3-home .wd-laptop .wd-ptr > i { width: clamp(10px, 1.9vw, 18px); height: auto; margin: -2px 0 0 -2px; transform-origin: 0 0; }
+    .v3-home .wd-laptop .wd-ptr > i svg { display: block; width: 100%; height: auto; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.6)); }
+    .v3-home .wd-phone .wd-ptr > i { width: clamp(16px, 3.4vw, 30px); height: clamp(16px, 3.4vw, 30px); margin: calc(clamp(16px, 3.4vw, 30px) / -2) 0 0 calc(clamp(16px, 3.4vw, 30px) / -2); border-radius: 50%; background: rgba(255,255,255,0.5); border: 2px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+    .v3-home .wd-ptr > b { position: absolute; left: 0; top: 0; width: clamp(22px, 4vw, 40px); height: clamp(22px, 4vw, 40px); margin: calc(clamp(22px, 4vw, 40px) / -2) 0 0 calc(clamp(22px, 4vw, 40px) / -2); border-radius: 50%; border: 2px solid #fff; opacity: 0; }
+    .v3-home .wd-lang { position: absolute; left: 0; top: 0; z-index: 4; display: inline-grid; padding: 7px 14px; border-radius: 999px; background: rgba(11,11,12,0.82); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid var(--v3-hair-2); font-size: 0.8125rem; font-weight: 700; color: var(--text-head); }
+    .v3-home .wd-lang span { grid-area: 1 / 1; }
+    .v3-home .wd-lang .--es { opacity: 0; }
+    .v3-home .wd-facts { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 10px; margin: 26px 0 0; padding: 0; }
+    .v3-home .wd-facts li { display: inline-flex; align-items: center; gap: 9px; min-height: 38px; padding: 0 15px; border-radius: 999px; background: rgba(255,255,255,0.06); font-size: 0.875rem; font-weight: 600; color: rgba(246,240,230,0.88); }
+    .v3-home .wd-facts li::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); }
+    .v3-home .wd .wd-a { animation-duration: 16s; animation-iteration-count: infinite; animation-timing-function: ease-in-out; animation-fill-mode: both; animation-play-state: paused; }
+    .v3-home .wd.is-on .wd-a { animation-play-state: running; }
+    .v3-home .wd-laptop .wd-page.--en { animation-name: wd-l-en; }
+    .v3-home .wd-laptop .wd-page.--es { animation-name: wd-l-es; }
+    .v3-home .wd-phone .wd-page.--en { animation-name: wd-p-en; }
+    .v3-home .wd-phone .wd-page.--es { animation-name: wd-p-es; }
+    .v3-home .wd-laptop .wd-ptr { animation-name: wd-l-ptr; }
+    .v3-home .wd-phone .wd-ptr { animation-name: wd-p-ptr; }
+    .v3-home .wd-laptop .wd-ptr > i { animation-name: wd-click; }
+    .v3-home .wd-ptr > b { animation-name: wd-ripple; animation-timing-function: ease-out; }
+    .v3-home .wd-url .--en, .v3-home .wd-lang .--en { animation-name: wd-show-en; }
+    .v3-home .wd-url .--es, .v3-home .wd-lang .--es { animation-name: wd-show-es; }
+    @keyframes wd-l-en { 0%, 8% { transform: translate3d(0,0,0); opacity: 1; } 36%, 44% { transform: translate3d(0,-60%,0); } 56%, 69% { transform: translate3d(0,0,0); opacity: 1; } 73%, 96% { transform: translate3d(0,0,0); opacity: 0; } 100% { transform: translate3d(0,0,0); opacity: 1; } }
+    @keyframes wd-l-es { 0%, 69% { transform: translate3d(0,0,0); opacity: 0; } 73%, 78% { transform: translate3d(0,0,0); opacity: 1; } 94% { transform: translate3d(0,-22%,0); opacity: 1; } 100% { transform: translate3d(0,-22%,0); opacity: 0; } }
+    @keyframes wd-p-en { 0%, 10% { transform: translate3d(0,0,0); opacity: 1; } 38%, 44% { transform: translate3d(0,-58%,0); } 56%, 69% { transform: translate3d(0,0,0); opacity: 1; } 73%, 96% { transform: translate3d(0,0,0); opacity: 0; } 100% { transform: translate3d(0,0,0); opacity: 1; } }
+    @keyframes wd-p-es { 0%, 69% { transform: translate3d(0,0,0); opacity: 0; } 73%, 78% { transform: translate3d(0,0,0); opacity: 1; } 94% { transform: translate3d(0,-22%,0); opacity: 1; } 100% { transform: translate3d(0,-22%,0); opacity: 0; } }
+    @keyframes wd-l-ptr { 0% { transform: translate(58%, 72%); opacity: 0; } 6% { opacity: 1; } 44% { transform: translate(62%, 60%); } 56% { transform: translate(56%, 46%); } 64%, 70% { transform: translate(83.7%, 4.6%); } 84% { transform: translate(70%, 42%); opacity: 1; } 94%, 100% { transform: translate(58%, 72%); opacity: 0; } }
+    @keyframes wd-p-ptr { 0%, 57% { transform: translate(52%, 34%); opacity: 0; } 60% { transform: translate(52%, 16%); opacity: 1; } 64%, 69% { transform: translate(52%, 4.5%); opacity: 1; } 73%, 100% { transform: translate(52%, 4.5%); opacity: 0; } }
+    @keyframes wd-click { 0%, 64.5% { transform: scale(1); } 66% { transform: scale(0.8); } 67.5%, 100% { transform: scale(1); } }
+    @keyframes wd-ripple { 0%, 65.5% { transform: scale(0.2); opacity: 0; } 66.5% { transform: scale(0.4); opacity: 0.9; } 71%, 100% { transform: scale(1.7); opacity: 0; } }
+    @keyframes wd-show-en { 0%, 70% { opacity: 1; } 72%, 96% { opacity: 0; } 100% { opacity: 1; } }
+    @keyframes wd-show-es { 0%, 70% { opacity: 0; } 72%, 96% { opacity: 1; } 100% { opacity: 0; } }
+
+    /* free grader */
+    .v3-home .h-gr { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); gap: clamp(28px, 5vw, 64px); align-items: center; padding: clamp(26px, 5vw, 56px); border-radius: 34px; background: radial-gradient(120% 120% at 100% 0%, rgba(226,168,77,0.14), transparent 55%), var(--v3-elev-1); border: 1px solid var(--v3-hair); }
+    .v3-home .h-gr h2 { margin-top: 10px; font-size: clamp(2rem, 4.2vw, 3.2rem); line-height: 1.04; font-weight: 800; letter-spacing: -0.048em; color: var(--text-head); }
+    .v3-home .h-gr-copy > p { margin-top: 14px; max-width: 52ch; font-size: clamp(1.0625rem, 1.3vw, 1.1875rem); line-height: 1.55; color: rgba(246,240,230,0.74); }
+    .v3-home .h-gr-form { display: flex; gap: 8px; max-width: 560px; margin-top: 24px; padding: 6px; border-radius: 999px; background: #f6f0e6; }
+    .v3-home .h-gr-form:focus-within { box-shadow: 0 0 0 3px rgba(226,168,77,0.55); }
+    .v3-home .h-gr-form input { flex: 1; min-width: 0; height: 52px; padding: 0 8px 0 18px; border: 0; background: transparent; color: #140e04; font: 500 1.0625rem/1 var(--font-body); outline: none; }
+    .v3-home .h-gr-form input::placeholder { color: rgba(20,14,4,0.52); }
+    .v3-home .h-gr-form .btn { flex: none; height: 52px; }
+    .v3-home .h-gr-fine { margin-top: 12px; font-size: 0.875rem; color: rgba(246,240,230,0.58); }
+    .v3-home .h-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .v3-home .h-gr-card { display: block; padding: 22px; border-radius: 26px; background: #0f0f11; border: 1px solid var(--v3-hair); box-shadow: 0 30px 60px rgba(0,0,0,0.35); color: inherit; text-decoration: none; }
+    .v3-home .h-gr-top { display: flex; align-items: center; gap: 16px; }
+    .v3-home .h-gr-ring { position: relative; display: grid; place-items: center; flex: none; width: 80px; height: 80px; border-radius: 50%; background: conic-gradient(var(--gold) 0 64%, rgba(255,255,255,0.09) 0); }
+    .v3-home .h-gr-ring::before { content: ""; position: absolute; inset: 8px; border-radius: 50%; background: #0f0f11; }
+    .v3-home .h-gr-ring b { position: relative; font-size: 1.625rem; font-weight: 800; letter-spacing: -0.04em; color: var(--text-head); }
+    .v3-home .h-gr-top strong { display: block; font-size: 1.0625rem; font-weight: 750; color: var(--text-head); }
+    .v3-home .h-gr-top small { font-size: 0.875rem; color: rgba(246,240,230,0.58); }
+    .v3-home .h-gr-chip { align-self: flex-start; margin-left: auto; padding: 5px 10px; border-radius: 999px; background: rgba(255,255,255,0.08); font-size: 0.75rem; font-weight: 700; color: rgba(246,240,230,0.72); }
+    .v3-home .h-gr-rows { list-style: none; display: grid; gap: 12px; margin: 20px 0 0; padding: 0; }
+    .v3-home .h-gr-rows li { display: grid; grid-template-columns: minmax(0, 1fr) 30px; gap: 6px 12px; align-items: center; font-size: 0.9375rem; color: rgba(246,240,230,0.86); }
+    .v3-home .h-gr-rows b { text-align: right; font-weight: 750; color: var(--text-head); }
+    .v3-home .h-gr-rows i { grid-column: 1 / -1; height: 6px; border-radius: 999px; background: rgba(255,255,255,0.08); overflow: hidden; }
+    .v3-home .h-gr-rows i::before { content: ""; display: block; width: var(--v); height: 100%; border-radius: inherit; background: var(--c); }
+    .v3-home .h-gr-fix { margin-top: 18px; padding: 12px 14px; border-radius: 16px; background: rgba(226,168,77,0.1); font-size: 0.9375rem; line-height: 1.45; color: rgba(246,240,230,0.88); }
+    .v3-home .h-gr-fix b { color: var(--gold); }
+
+    /* where we work: one clear card */
+    .v3-home a.h-areas { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px 32px; align-items: center; margin-top: 14px; padding: 30px; border-radius: 30px; border: 1px solid var(--v3-hair); background: var(--v3-elev-1); color: inherit; text-decoration: none; transition: border-color .25s ease, transform .35s var(--v3-ease); }
+    .v3-home .h-areas-k { font-size: 0.875rem; font-weight: 700; color: var(--gold); }
+    .v3-home a.h-areas h3 { margin-top: 6px; font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.04em; color: var(--text-head); }
+    .v3-home a.h-areas p { margin-top: 8px; max-width: 64ch; font-size: 1rem; line-height: 1.55; color: rgba(246,240,230,0.72); }
+    .v3-home .h-areas-go { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 24px; border-radius: 999px; background: #f6f0e6; color: var(--v3-ink-on-gold); font-weight: 700; white-space: nowrap; }
+    .v3-home .h-areas-go svg { width: 18px; height: 18px; flex: none; transition: transform .3s var(--v3-ease); }
+    @media (hover: hover) {
+      .v3-home a.h-areas:hover { border-color: var(--v3-hair-2); transform: translateY(-2px); }
+      .v3-home a.h-areas:hover .h-areas-go svg { transform: translateX(3px); }
+    }
+
+    @media (max-width: 960px) {
+      .v3-home .h-gr { grid-template-columns: 1fr; }
+      .v3-home a.h-areas { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 700px) {
+      .v3-home .wd-link { padding-bottom: 8%; }
+      .v3-home .wd-laptop { width: 88%; }
+      .v3-home .wd-phone { width: 25%; }
+      .v3-home .wd-lang { padding: 5px 11px; font-size: 0.75rem; }
+      .v3-home .wd-facts { justify-content: flex-start; gap: 6px; }
+      .v3-home .wd-facts li { min-height: 34px; padding: 6px 13px; font-size: 0.8125rem; line-height: 1.35; }
+      .v3-home .h-gr { border-radius: 28px; }
+      .v3-home .h-gr-card { padding: 18px; }
+      .v3-home .h-gr-ring { width: 64px; height: 64px; }
+      .v3-home .h-gr-ring::before { inset: 7px; }
+      .v3-home .h-gr-ring b { font-size: 1.375rem; }
+      .v3-home .h-gr-chip { display: none; }
+      .v3-home .h-gr-form { flex-direction: column; border-radius: 22px; }
+      .v3-home .h-gr-form input { height: 50px; padding: 0 12px; }
+      .v3-home .h-gr-form .btn { width: 100%; }
+      .v3-home a.h-areas { padding: 22px; }
+      .v3-home .h-areas-go { width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .v3-home .h-rv-viewport { overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px; -webkit-mask-image: none; mask-image: none; padding: 0 16px; }
+      .v3-home .h-rv-track { animation: none; }
+      .v3-home .h-rv-card { scroll-snap-align: start; }
+      .v3-home .h-rv-card[aria-hidden="true"] { display: none; }
+      .v3-home .wd .wd-a { animation: none; }
+      .v3-home .wd-ptr { display: none; }
+    }
 
     /* FAQ (markup kept verbatim) */
     .v3-home #faq { padding: clamp(80px, 11vw, 136px) 0 0; }
@@ -532,8 +664,6 @@
     .v3-home .hp2-faq-item[open] summary::after { transform: translateY(3px) rotate(-135deg); }
     .v3-home .hp2-faq-count { display: none; }
     .v3-home .hp2-faq-answer { padding: 0 2px 24px; max-width: 70ch; font-size: 1.0625rem; line-height: 1.65; color: rgba(246,240,230,0.74); }
-    .v3-home .hp2-faq-bottom-cta { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; margin-top: 28px; padding: 22px 24px; border-radius: 24px; background: var(--v3-elev-1); border: 1px solid var(--v3-hair); }
-    .v3-home .hp2-faq-bottom-cta p { font-size: 1.0625rem; font-weight: 650; color: var(--text-head); }
 
     /* final call */
     .v3-home .h-final { padding: clamp(80px, 11vw, 136px) 0 clamp(56px, 8vw, 96px); }
@@ -556,7 +686,6 @@
       .v3-home .h-why { grid-template-columns: 1fr; }
       .v3-home .h-why-photo { aspect-ratio: 16 / 11; }
       .v3-home .h-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .v3-home .h-areas { grid-template-columns: 1fr; }
     }
     @media (max-width: 700px) {
       .v3-home .h-hero { min-height: 0; align-items: flex-start; padding: calc(var(--v3-bar-h) + 36px) 0 28px; }
@@ -574,10 +703,8 @@
       .v3-home .h-step { display: grid; grid-template-columns: 34px minmax(0, 1fr); column-gap: 10px; padding: 20px; }
       .v3-home .h-step b { grid-row: 1 / span 2; padding-top: 4px; }
       .v3-home .h-step h3 { margin-top: 0; }
-      .v3-home .h-areas { padding: 22px; }
       .v3-home .hp2-vid-showcase { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
       .v3-home .hp2-vid-card-frame { border-radius: 20px; }
-      .v3-home .hp2-faq-bottom-cta .btn { width: 100%; }
       .v3-home .h-final-card { border-radius: 30px; }
       .v3-home .h-final-card .btn { flex: 1 1 100%; }
     }
@@ -688,7 +815,25 @@
         <img src="/media/clients/castaway.webp" alt="Castaway" width="262" height="120" loading="lazy" decoding="async" />
       </div>
         <p class="bum-logos-also">También en nuestra lista de clientes: <strong>The Fatty Crab</strong>, <strong>Toni's Sushi Bar</strong>, <strong>Shimuja Ramen</strong>, <strong>Brewing Buddha</strong> y <strong>Gyu-Kaku</strong>.</p>
-        <div style="display:flex; justify-content:center; margin-top:22px;"><a class="bum-grating" href="https://www.google.com/maps?cid=18420049328774985259" target="_blank" rel="noopener" aria-label="Calificación de 5,0 sobre 5 en Google con 11 reseñas (abre Google en una pestaña nueva)"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg><strong>5,0</strong><span class="bum-stars" aria-hidden="true">★★★★★</span><span class="bum-grating__text">en Google, 11 reseñas</span></a></div>
+        <div class="h-rv" role="region" aria-label="Reseñas de Google"><svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="h-g" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></symbol></svg>
+          <div class="h-rv-head"><a class="bum-grating" href="https://www.google.com/maps?cid=18420049328774985259" target="_blank" rel="noopener" aria-label="Calificación de 5,0 sobre 5 en Google con 11 reseñas (abre Google en una pestaña nueva)"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg><strong>5,0</strong><span class="bum-stars" aria-hidden="true">★★★★★</span><span class="bum-grating__text">en Google, 11 reseñas</span></a></div>
+          <div class="h-rv-viewport"><div class="h-rv-track">
+            <figure class="h-rv-card"><div class="bum-stars" role="img" aria-label="Calificación de 5 de 5 estrellas">★★★★★</div><blockquote lang="en">&ldquo;Thanks to their work, not only did my restaurant grow locally, but I was able to open a second location!&rdquo;</blockquote><figcaption><svg aria-hidden="true" focusable="false"><use href="#h-g"/></svg><span><strong>Carlos Rodriguez</strong>Dueño de restaurante</span></figcaption></figure>
+            <figure class="h-rv-card"><div class="bum-stars" role="img" aria-label="Calificación de 5 de 5 estrellas">★★★★★</div><blockquote lang="en">&ldquo;Button Up has completely exploded the success of my business socials. &hellip; We&rsquo;ve been in contract with them for three years and the quality never drops.&rdquo;</blockquote><figcaption><svg aria-hidden="true" focusable="false"><use href="#h-g"/></svg><span><strong>Josh</strong>Gerente, Brewing Buddha</span></figcaption></figure>
+            <figure class="h-rv-card"><div class="bum-stars" role="img" aria-label="Calificación de 5 de 5 estrellas">★★★★★</div><blockquote lang="en">&ldquo;Juan and Christian have been super responsive, I can call them at 11pm and I know they&rsquo;ll answer me.&rdquo;</blockquote><figcaption><svg aria-hidden="true" focusable="false"><use href="#h-g"/></svg><span><strong>Mellanie Ruiz</strong>Dueña de restaurante</span></figcaption></figure>
+            <figure class="h-rv-card"><div class="bum-stars" role="img" aria-label="Calificación de 5 de 5 estrellas">★★★★★</div><blockquote lang="en">&ldquo;Their reports are super transparent, openly showing when we succeed and where they don&rsquo;t meet the mark, and they hold themselves accountable.&rdquo;</blockquote><figcaption><svg aria-hidden="true" focusable="false"><use href="#h-g"/></svg><span><strong>Gustavo A. Torres</strong>Dueño de restaurantes</span></figcaption></figure>
+            <figure class="h-rv-card"><div class="bum-stars" role="img" aria-label="Calificación de 5 de 5 estrellas">★★★★★</div><blockquote lang="en">&ldquo;Working with Button Up Media has been one of the best investments I&rsquo;ve made for my business.&rdquo;</blockquote><figcaption><svg aria-hidden="true" focusable="false"><use href="#h-g"/></svg><span><strong>Fabio Perez</strong>Fundador, WOA Cocktails</span></figcaption></figure>
+            <figure class="h-rv-card"><div class="bum-stars" role="img" aria-label="Calificación de 5 de 5 estrellas">★★★★★</div><blockquote lang="en">&ldquo;They&rsquo;re professional, responsive, and really took the time to understand Puffles&rsquo; brand.&rdquo;</blockquote><figcaption><svg aria-hidden="true" focusable="false"><use href="#h-g"/></svg><span><strong>Caleb Deng</strong>Puffles</span></figcaption></figure>
+            <figure class="h-rv-card"><div class="bum-stars" role="img" aria-label="Calificación de 5 de 5 estrellas">★★★★★</div><blockquote lang="en">&ldquo;They were professional, easy to communicate with, and really understood how to help improve the business&rsquo;s online presence.&rdquo;</blockquote><figcaption><svg aria-hidden="true" focusable="false"><use href="#h-g"/></svg><span><strong>Anthony Karim</strong>Nos recomendó con un dueño de negocio</span></figcaption></figure>
+            <figure class="h-rv-card" aria-hidden="true"><div class="bum-stars" aria-hidden="true">★★★★★</div><blockquote lang="en">&ldquo;Thanks to their work, not only did my restaurant grow locally, but I was able to open a second location!&rdquo;</blockquote><figcaption><svg aria-hidden="true" focusable="false"><use href="#h-g"/></svg><span><strong>Carlos Rodriguez</strong>Dueño de restaurante</span></figcaption></figure>
+            <figure class="h-rv-card" aria-hidden="true"><div class="bum-stars" aria-hidden="true">★★★★★</div><blockquote lang="en">&ldquo;Button Up has completely exploded the success of my business socials. &hellip; We&rsquo;ve been in contract with them for three years and the quality never drops.&rdquo;</blockquote><figcaption><svg aria-hidden="true" focusable="false"><use href="#h-g"/></svg><span><strong>Josh</strong>Gerente, Brewing Buddha</span></figcaption></figure>
+            <figure class="h-rv-card" aria-hidden="true"><div class="bum-stars" aria-hidden="true">★★★★★</div><blockquote lang="en">&ldquo;Juan and Christian have been super responsive, I can call them at 11pm and I know they&rsquo;ll answer me.&rdquo;</blockquote><figcaption><svg aria-hidden="true" focusable="false"><use href="#h-g"/></svg><span><strong>Mellanie Ruiz</strong>Dueña de restaurante</span></figcaption></figure>
+            <figure class="h-rv-card" aria-hidden="true"><div class="bum-stars" aria-hidden="true">★★★★★</div><blockquote lang="en">&ldquo;Their reports are super transparent, openly showing when we succeed and where they don&rsquo;t meet the mark, and they hold themselves accountable.&rdquo;</blockquote><figcaption><svg aria-hidden="true" focusable="false"><use href="#h-g"/></svg><span><strong>Gustavo A. Torres</strong>Dueño de restaurantes</span></figcaption></figure>
+            <figure class="h-rv-card" aria-hidden="true"><div class="bum-stars" aria-hidden="true">★★★★★</div><blockquote lang="en">&ldquo;Working with Button Up Media has been one of the best investments I&rsquo;ve made for my business.&rdquo;</blockquote><figcaption><svg aria-hidden="true" focusable="false"><use href="#h-g"/></svg><span><strong>Fabio Perez</strong>Fundador, WOA Cocktails</span></figcaption></figure>
+            <figure class="h-rv-card" aria-hidden="true"><div class="bum-stars" aria-hidden="true">★★★★★</div><blockquote lang="en">&ldquo;They&rsquo;re professional, responsive, and really took the time to understand Puffles&rsquo; brand.&rdquo;</blockquote><figcaption><svg aria-hidden="true" focusable="false"><use href="#h-g"/></svg><span><strong>Caleb Deng</strong>Puffles</span></figcaption></figure>
+            <figure class="h-rv-card" aria-hidden="true"><div class="bum-stars" aria-hidden="true">★★★★★</div><blockquote lang="en">&ldquo;They were professional, easy to communicate with, and really understood how to help improve the business&rsquo;s online presence.&rdquo;</blockquote><figcaption><svg aria-hidden="true" focusable="false"><use href="#h-g"/></svg><span><strong>Anthony Karim</strong>Nos recomendó con un dueño de negocio</span></figcaption></figure>
+          </div></div>
+        </div>
       </div>
     </section>
 
@@ -766,31 +911,30 @@
         </div><div class="h-panel" id="h-panel-web" role="tabpanel" aria-labelledby="h-tab-web">
           <h3 class="h-panel-h">Sitios web</h3>
           <p class="h-panel-note">Diseñamos y construimos sitios web a la medida desde cero, con cada página en inglés y español. Este es un proyecto reciente para WOA Cocktails, un bar móvil de lujo y empresa de bebidas.</p>
-          <ul class="h-deck">
-            <li><a class="h-card --shot" href="/es/casos-de-exito/woa-cocktails">
-              <img class="h-card-img" src="/media/woa-hero-mobile.webp" alt="El sitio web de WOA Cocktails en un teléfono" width="690" height="1484" loading="lazy" decoding="async" />
-              <span class="h-card-top"><span class="h-card-who">WOA Cocktails<small>Sitio completo</small></span></span>
-              <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a></li><li><a class="h-card --gold" href="/es/casos-de-exito/woa-cocktails">
-              <span class="h-card-top"><span class="h-card-who">WOA Cocktails<small>Sitio a la medida</small></span></span>
-              <span class="h-card-num">2 semanas</span>
-              <span class="h-card-label">para construirlo, en palabras del fundador</span>
-              <span class="h-card-foot">Un sitio a la medida, hecho desde cero.</span>
-              <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a></li><li><a class="h-card --light" href="/es/casos-de-exito/woa-cocktails">
-              <span class="h-card-top"><span class="h-card-who">WOA Cocktails<small>Sitio bilingüe</small></span></span>
-              <span class="h-card-num">EN + ES</span>
-              <span class="h-card-label">cada página en los dos idiomas</span>
-              <span class="h-card-foot">Con un toque cambia todo el sitio de idioma.</span>
-              <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a></li><li><a class="h-card --dark" href="/es/casos-de-exito/woa-cocktails">
-              <span class="h-card-top"><span class="h-card-who">WOA Cocktails<small>Búsquedas en Google</small></span></span>
-              <span class="h-card-num">2</span>
-              <span class="h-card-label">idiomas que aparecen en Google</span>
-              <span class="h-card-foot">Aparece en búsquedas en inglés y en español.</span>
-              <span class="h-card-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a></li>
-          </ul>
+          <div class="wd">
+            <a class="wd-link" href="/es/casos-de-exito/woa-cocktails">
+              <span class="wd-lang" aria-hidden="true"><span class="wd-a --en">English</span><span class="wd-a --es">Español</span></span>
+              <div class="wd-laptop">
+                <div class="wd-lid"><div class="wd-screen">
+                  <div class="wd-bar" aria-hidden="true"><i></i><i></i><i></i><span class="wd-url"><span class="wd-a --en">woacocktails.com</span><span class="wd-a --es">woacocktails.com/es</span></span></div>
+                  <div class="wd-view">
+                    <img class="wd-page wd-a --en" src="/media/woa-demo-desktop-en.webp" alt="La página de inicio de WOA Cocktails en una laptop" width="1100" height="2475" loading="lazy" decoding="async" />
+                    <img class="wd-page wd-a --es" src="/media/woa-demo-desktop-es.webp" alt="La misma página en español en una laptop" width="1100" height="993" loading="lazy" decoding="async" />
+                    <span class="wd-ptr wd-a" aria-hidden="true"><b class="wd-a"></b><i class="wd-a"><svg viewBox="0 0 16 22" aria-hidden="true"><path d="M1 1v17.5l4.6-4.3 3 6.8 3-1.3-3-6.6h6.3z" fill="#fff" stroke="#111" stroke-width="1.3" stroke-linejoin="round"/></svg></i></span>
+                  </div>
+                </div></div>
+                <div class="wd-base" aria-hidden="true"></div>
+              </div>
+              <div class="wd-phone">
+                <div class="wd-view">
+                  <img class="wd-page wd-a --en" src="/media/woa-demo-phone-en.webp" alt="La página de inicio de WOA Cocktails en un teléfono" width="420" height="2727" loading="lazy" decoding="async" />
+                  <img class="wd-page wd-a --es" src="/media/woa-demo-phone-es.webp" alt="La misma página en español en un teléfono" width="420" height="1292" loading="lazy" decoding="async" />
+                  <span class="wd-ptr wd-a" aria-hidden="true"><b class="wd-a"></b><i></i></span>
+                </div>
+              </div>
+            </a>
+            <ul class="wd-facts"><li>Hecho en 2 semanas, en palabras del fundador</li><li>Cada página en inglés y español</li><li>Aparece en búsquedas de Google en inglés y en español</li></ul>
+          </div>
           <div class="h-panel-foot"><a class="btn" href="/es/casos-de-exito/woa-cocktails">Vea el caso de WOA Cocktails <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
         </div>
       </div>
@@ -828,6 +972,29 @@
               <span class="h-svc-proof">ROAS de 72:1 en nuestra cuenta líder de 2025</span>
               <span class="h-svc-go">Ver publicidad <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
             </a></li></ul>
+      </div>
+    </section>
+
+    <section class="h-sec" id="grader">
+      <div class="h-wrap">
+        <div class="h-gr">
+          <div class="h-gr-copy">
+            <div class="lib-section-label">Herramienta gratis</div>
+            <h2>¿Qué calificación tiene tu restaurante en línea?</h2>
+            <p>Escribe el nombre de tu restaurante y recibe gratis una calificación de tu sitio web, tu Perfil de Empresa de Google y tus redes sociales en más o menos un minuto, con lo primero que conviene arreglar.</p>
+            <form class="h-gr-form" action="/es/analizador-redes-sociales-web" method="get" role="search">
+              <label class="h-sr" for="h-gr-q">Nombre de su restaurante</label>
+              <input id="h-gr-q" name="restaurant" type="text" placeholder="Nombre de su restaurante" autocomplete="off" maxlength="80" enterkeyhint="go" required />
+              <button type="submit" class="btn btn-primary">Calificar mi restaurante</button>
+            </form>
+            <p class="h-gr-fine">Gratis, sin registrarse y sin tarjeta.</p>
+          </div>
+          <a class="h-gr-card" href="/es/analizador-redes-sociales-web" tabindex="-1" aria-hidden="true">
+            <div class="h-gr-top"><span class="h-gr-ring"><b>64</b></span><span><strong>Su calificación</strong><small>Restaurante de ejemplo</small></span><span class="h-gr-chip">Ejemplo</span></div>
+            <ul class="h-gr-rows"><li>Velocidad del sitio en celulares<b>48</b><i style="--v:48%;--c:#e07a5f"></i></li><li>Lo básico para Google<b>72</b><i style="--v:72%;--c:#5fbf7f"></i></li><li>Lo que leen los asistentes de IA<b>41</b><i style="--v:41%;--c:#e07a5f"></i></li><li>Instagram<b>78</b><i style="--v:78%;--c:#5fbf7f"></i></li><li>TikTok<b>35</b><i style="--v:35%;--c:#e07a5f"></i></li><li>Perfil de Empresa de Google y reseñas<b>86</b><i style="--v:86%;--c:#5fbf7f"></i></li></ul>
+            <p class="h-gr-fix"><b>Lo primero:</b> que su sitio web cargue más rápido en celulares.</p>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -926,20 +1093,10 @@
           <p>Todo empieza con una llamada de estrategia gratis de 30 minutos con Juan, nuestro cofundador. No pedimos contratos a largo plazo y cada propuesta está escrita en palabras sencillas.</p>
         </div>
         <ol class="h-steps"><li class="h-step"><b>01</b><h3>Descubrimiento</h3><p>Conocemos tu concepto, tus clientes y tus metas, y revisamos cómo aparece hoy tu restaurante en línea: tu perfil de Google, tu página web y tus redes sociales.</p></li><li class="h-step"><b>02</b><h3>Plan</h3><p>Armamos un plan según lo que encontramos y lo que quieres conseguir, ya sean reservas, pedidos en línea, eventos privados o más clientes en el local.</p></li><li class="h-step"><b>03</b><h3>Lanzamiento</h3><p>Según los servicios que elijas, grabamos contenido, creamos o actualizamos tu página web, configuramos tu Perfil de Empresa de Google y lanzamos tus anuncios.</p></li><li class="h-step"><b>04</b><h3>Reportes mensuales</h3><p>Cada mes te mostramos qué funcionó y qué no, y ajustamos el plan para que más de tu presupuesto vaya a lo que trae clientes.</p></li></ol>
-        <div class="h-areas">
-          <div><h3>Dónde trabajamos</h3><p>Tenemos nuestra sede en Miami, FL, y trabajamos con restaurantes en cualquier parte de Estados Unidos. Entre nuestros clientes hay restaurantes en Miami, Tampa y California, y todos reciben los mismos servicios y la misma calidad de trabajo.</p></div>
-          <nav role="navigation" aria-label="Zonas que atendemos">
-        <a class="--all" href="/es/zonas-que-atendemos">En todo Estados Unidos</a>
-        <span class="h-areas-lab">Páginas locales</span>
-        <a href="/es/marketing-restaurantes-miami-beach">Miami Beach</a>
-        <a href="/es/marketing-restaurantes-brickell">Brickell y Downtown</a>
-        <a href="/es/marketing-restaurantes-wynwood">Wynwood</a>
-        <a href="/es/marketing-restaurantes-coral-gables">Coral Gables</a>
-        <a href="/es/marketing-restaurantes-kendall-pinecrest">Kendall y Pinecrest</a>
-        <a href="/es/marketing-restaurantes-doral">Doral</a>
-        <a href="/es/marketing-restaurantes-fort-lauderdale">Fort Lauderdale</a>
-      </nav>
-        </div>
+        <a class="h-areas" href="/es/zonas-que-atendemos">
+          <div><div class="h-areas-k">Dónde trabajamos</div><h3>En todo Estados Unidos</h3><p>Tenemos nuestra sede en Miami, FL, y trabajamos con restaurantes en cualquier parte de Estados Unidos. Entre nuestros clientes hay restaurantes en Miami, Tampa y California, y todos reciben los mismos servicios y la misma calidad de trabajo.</p></div>
+          <span class="h-areas-go">Vea dónde trabajamos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
       </div>
     </section>
 
@@ -1004,10 +1161,6 @@
             <summary><span><span class="hp2-faq-count">13</span>¿Qué pasa en la llamada de estrategia gratis?</span></summary>
             <div class="hp2-faq-answer">Es una llamada de 30 minutos con Juan, nuestro cofundador, no con un vendedor. Te pregunta sobre tu restaurante y tus metas, revisa cómo apareces hoy en línea y te dice en qué se enfocaría primero. La llamada es gratis.</div>
           </details>
-        </div>
-        <div class="hp2-faq-bottom-cta">
-          <p>¿No encuentras lo que buscas?</p>
-          <a href="/es/contacto" class="btn btn-primary">Agende su llamada de estrategia gratis</a>
         </div>
       </div>
     </section>
@@ -1109,5 +1262,21 @@
       }
     })();
   </script>
+    <script>
+      /* Reviews ticker and the website demo only animate while on screen.
+         A touch on the reviews holds them still for a moment so they can be read. */
+      (function () {
+        var els = document.querySelectorAll(".h-rv, .wd");
+        [].forEach.call(els, function (el) {
+          if (!("IntersectionObserver" in window)) { el.classList.add("is-on"); return; }
+          new IntersectionObserver(function (es) { es.forEach(function (e) { el.classList.toggle("is-on", e.isIntersecting); }); }, { threshold: 0.15 }).observe(el);
+        });
+        var rv = document.querySelector(".h-rv"), t;
+        if (rv) {
+          rv.addEventListener("touchstart", function () { clearTimeout(t); rv.classList.add("is-held"); }, { passive: true });
+          rv.addEventListener("touchend", function () { clearTimeout(t); t = setTimeout(function () { rv.classList.remove("is-held"); }, 2500); }, { passive: true });
+        }
+      })();
+    </script>
 </body>
 </html>
