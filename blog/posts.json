@@ -1,5 +1,19 @@
 [
   {
+    "id": "claim-restaurant-google",
+    "category": "seo",
+    "author": "juan",
+    "date": "2026-11-24",
+    "hero": "/images/blog/claim-restaurant-google.jpg",
+    "heroAlt": "A restaurant owner and team updating their Google listing on a laptop",
+    "en": {
+      "slug": "claim-restaurant-google-listing"
+    },
+    "es": {
+      "slug": "reclamar-ficha-google-restaurante"
+    }
+  },
+  {
     "id": "marketing-west-palm-beach",
     "category": "strategy",
     "author": "chris",

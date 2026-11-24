@@ -1021,7 +1021,7 @@
     },
     {
       "id": "claim-restaurant-google",
-      "status": "ready",
+      "status": "published",
       "category": "seo",
       "author": "juan",
       "heroQuery": "restaurant owner working on a laptop at a table in an american restaurant",
@@ -1043,7 +1043,8 @@
           "https://www.buttonupmedia.com/es/blog/restaurante-no-aparece-en-google-maps"
         ]
       },
-      "heroAlt": "A restaurant owner and team updating their Google listing on a laptop"
+      "heroAlt": "A restaurant owner and team updating their Google listing on a laptop",
+      "publishedDate": "2026-11-24"
     },
     {
       "id": "near-me-searches",
